@@ -1,0 +1,41 @@
+appId: com.zyraxon.code
+productName: "ZYRAXON Code"
+copyright: "Copyright (C) 2026 Zyraxon Corporation. All rights reserved."
+
+directories:
+  output: dist
+  app: dist/app
+  buildResources: resources/win32
+
+files:
+  - "**/*"
+
+extraResources: []
+
+win:
+  icon: resources/win32/zyraxon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  installerIcon: zyraxon.ico
+  installerHeaderIcon: zyraxon.ico
+  artifactName: "ZYRAXON-Code-Setup-${version}.${ext}"
+  shortcutName: "ZYRAXON Code"
+
+linux:
+  target:
+    - AppImage
+    - deb
+  icon: resources/linux
+  category: Development
+
+mac:
+  target:
+    - dmg
+  icon: resources/darwin/code.icns
+  category: public.app-category.developer-tools

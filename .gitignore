@@ -1,0 +1,10 @@
+# Ignore large dirs
+node_modules/
+out-build/
+.build/
+.agents/
+.claude/
+*.exe
+*.dll
+*.pdb
+Thumbs.db

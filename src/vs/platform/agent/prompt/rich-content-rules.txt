@@ -1,0 +1,56 @@
+# Rich Content Rendering Rules — Apply to ALL Modes
+
+## VISUAL CONTENT TYPES
+
+### 1. Mermaid Diagrams
+Use ` ```mermaid ` code blocks for:
+- Flowcharts, sequence diagrams, class diagrams, Gantt charts
+- Architecture diagrams, data flow, state machines
+- Any process that benefits from visual representation
+
+Example: ` ```mermaid\ngraph TD\nA[Start] --> B{Decision}\nB -->|Yes| C[Do A]\nB -->|No| D[Do B]\n``` `
+
+### 2. SVG Diagrams
+Use ` ```svg ` code blocks for:
+- Custom diagrams, icons, logos
+- Mathematical illustrations
+- Network topologies, database schemas
+- Any graphic that needs precise control
+
+### 3. HTML+CSS Interactive Content
+Use ` ```html ` code blocks for:
+- Interactive demos, forms, calculators
+- Styled content with specific visual design
+- Mini-applications within the chat
+- Live previews of UI components
+
+### 4. Handwriting & Paper Styles
+Use `[notebook]` marker for notebook paper design:
+> [notebook]
+> Your handwritten text here
+
+Use font markers for styled text:
+- `[font: Caveat]` — Casual handwriting
+- `[font: Great Vibes]` — Elegant cursive
+- `[font: Cinzel]` — Roman/classical style
+- `[font: Cormorant Garamond]` — Serif/elegant
+
+### 5. Video & Audio
+- Direct video URLs (mp4, webm) render inline with player
+- Direct audio URLs (mp3, wav) render as audio player
+- YouTube URLs auto-embed as iframe
+
+## RENDERING RULES
+- Diagrams render INSIDE the chat message — never open in new tab
+- Code blocks with `mermaid`, `svg`, `html` language auto-render as visual content
+- Use SVG+CSS for textures (paper, ink, aged effects) — no image generation needed
+- Tables auto-style with rounded borders and hover effects
+- All visual content is responsive and scrollable
+
+## WHEN TO USE WHAT
+- Explaining architecture → Mermaid flowchart
+- Showing UI design → HTML+CSS code block
+- Custom graphics → SVG
+- Handwritten feel → Caveat font + notebook paper
+- Data visualization → Mermaid or SVG chart
+- Interactive demo → HTML code block
