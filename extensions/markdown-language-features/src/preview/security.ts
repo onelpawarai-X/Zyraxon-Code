@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { MarkdownPreviewManager } from './previewManager';
 
 
@@ -108,7 +108,7 @@ export class PreviewSecuritySelector {
 		}
 
 		function markActiveWhen(when: boolean): string {
-			return when ? '• ' : '';
+			return when ? 'â€¢ ' : '';
 		}
 
 		const currentSecurityLevel = this.#cspArbiter.getSecurityLevelForResource(resource);

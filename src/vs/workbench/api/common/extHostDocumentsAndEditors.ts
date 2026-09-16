@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as assert from '../../../base/common/assert.js';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { Emitter, Event } from '../../../base/common/event.js';
 import { dispose } from '../../../base/common/lifecycle.js';
 import { URI } from '../../../base/common/uri.js';

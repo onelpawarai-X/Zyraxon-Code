@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OpenAI, Raw } from '@zyraxoncode/prompt-tsx';
+import { OpenAI, Raw } from '@vscode/prompt-tsx';
 import { assertNever } from '../../../util/vs/base/common/assert';
 
 /**

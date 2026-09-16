@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { isGpt55 } from '../../../platform/endpoint/common/chatModelCapabilities';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -187,7 +187,7 @@ export class ToolsService extends BaseToolsService {
 				if (subAgentInvocationId) {
 					this._otelService.storeTraceContext(`subagent:invocation:${subAgentInvocationId}`, traceCtx);
 				}
-				// Store by request ID — re-store each time so parallel tool calls
+				// Store by request ID â€” re-store each time so parallel tool calls
 				// all have their parent's context available (getStoredTraceContext auto-deletes)
 				if (chatRequestId) {
 					this._otelService.storeTraceContext(`subagent:request:${chatRequestId}`, traceCtx);

@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
-import type { CancellationToken, OpenDialogOptions, QuickPickItem, QuickPickOptions, Selection, TextEditor, Uri } from 'zyraxoncode';
+import type { CancellationToken, OpenDialogOptions, QuickPickItem, QuickPickOptions, Selection, TextEditor, Uri } from 'vscode';
 import { IInstantiationServiceBuilder, ServiceIdentifier } from '../../../util/common/services';
 import { DisposableStore, IDisposable } from '../../../util/vs/base/common/lifecycle';
 import { SyncDescriptor } from '../../../util/vs/platform/instantiation/common/descriptors';

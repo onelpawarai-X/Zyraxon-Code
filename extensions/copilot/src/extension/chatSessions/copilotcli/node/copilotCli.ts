@@ -1,13 +1,13 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IEnvService } from '../../../../platform/env/common/envService';
@@ -314,7 +314,7 @@ function buildConfigurationSchema(modelInfo: CopilotCLIModelInfo, isReasoningEff
 		}
 	}
 
-	// Context size config — only when CAPI provides a default context max,
+	// Context size config â€” only when CAPI provides a default context max,
 	// indicating a meaningful distinction between default and long context tiers.
 	const defaultContextMax = modelInfo.defaultContextMax;
 	const fullMax = modelInfo.maxInputTokens ?? modelInfo.maxContextWindowTokens;
@@ -335,7 +335,7 @@ function buildConfigurationSchema(modelInfo: CopilotCLIModelInfo, isReasoningEff
 				group: 'tokens',
 			};
 		} else {
-			// No surcharge and the user prefers long context — show only the long context option as a non-switchable indicator. See zyraxon/zyraxoncode#322950, zyraxon/zyraxoncode#323116.
+			// No surcharge and the user prefers long context â€” show only the long context option as a non-switchable indicator. See zyraxon/zyraxoncode#322950, zyraxon/zyraxoncode#323116.
 			properties[COPILOT_CLI_CONTEXT_SIZE_PROPERTY] = {
 				type: 'number',
 				title: l10n.t('Context Size'),
@@ -469,7 +469,7 @@ export class CopilotCLIAgents extends Disposable implements ICopilotCLIAgents {
 				hiddenOrInvalidAgentUris.add(customAgent.uri);
 				return false;
 			}
-			// Skip legacy .chatmode.md files — they are a deprecated format
+			// Skip legacy .chatmode.md files â€” they are a deprecated format
 			// and should not appear in the Copilot CLI agent list.
 			if (customAgent.uri.path.toLowerCase().endsWith('.chatmode.md')) {
 				hiddenOrInvalidAgentUris.add(customAgent.uri);
@@ -608,7 +608,7 @@ export class CopilotCLISDK implements ICopilotCLISDK {
 			// spawn shell backend (`SHELL_SPAWN_BACKEND`), which runs each command as
 			// a one-shot child process and works correctly under bubblewrap. The SDK
 			// runs in-process here, so we set the flag via the environment variable it
-			// reads (`COPILOT_CLI_ENABLED_FEATURE_FLAGS`) — mirroring the agent host's
+			// reads (`COPILOT_CLI_ENABLED_FEATURE_FLAGS`) â€” mirroring the agent host's
 			// CopilotAgent. This becomes a no-op once the bundled CLI defaults the
 			// spawn backend on for all of Linux.
 			if (process.platform === 'linux') {
@@ -666,7 +666,7 @@ export class CopilotCLISDK implements ICopilotCLISDK {
 		const overrideProxyUrl = this.configurationService.getConfig(ConfigKey.Shared.DebugOverrideProxyUrl);
 
 		if (overrideProxyUrl) {
-			// Only respect this from user (global) settings — a malicious workspace
+			// Only respect this from user (global) settings â€” a malicious workspace
 			// setting could downgrade auth from HMAC to token.
 			const authTypeInspect = this.configurationService.inspectConfig(ConfigKey.Shared.DebugOverrideAuthType);
 			const authType = authTypeInspect?.globalValue ?? 'hmac';

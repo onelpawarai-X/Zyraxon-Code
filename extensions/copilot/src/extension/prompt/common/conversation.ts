@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptReference, Raw } from '@zyraxoncode/prompt-tsx';
-import type { ChatLanguageModelToolReference, ChatRequest, ChatRequestEditedFileEvent, ChatResponseStream, ChatResult, LanguageModelToolResult } from 'zyraxoncode';
+import { PromptReference, Raw } from '@vscode/prompt-tsx';
+import type { ChatLanguageModelToolReference, ChatRequest, ChatRequestEditedFileEvent, ChatResponseStream, ChatResult, LanguageModelToolResult } from 'vscode';
 import { FilterReason } from '../../../platform/networking/common/openai';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { isLocation, toLocation } from '../../../util/common/types';
@@ -18,7 +18,7 @@ import { InternalToolReference, IToolCallRound } from '../common/intents';
 import { ChatVariablesCollection } from './chatVariablesCollection';
 import { isContinueOnError, isSwitchToAutoOnRateLimit, isToolCallLimitAcceptance } from './specialRequestTypes';
 import { ToolCallRound } from './toolCallRound';
-export { PromptReference } from '@zyraxoncode/prompt-tsx';
+export { PromptReference } from '@vscode/prompt-tsx';
 
 export enum TurnStatus {
 	InProgress = 'in-progress',
@@ -455,7 +455,7 @@ export class GlobalContextMessageMetadata {
  * the user opened a different workspace mid-conversation).
  *
  * The {@link toolReferences} carry byte offsets into {@link value} and must
- * be captured together — current-turn references built against current-turn
+ * be captured together â€” current-turn references built against current-turn
  * text would mis-slice the frozen value.
  */
 export class CustomizationsIndexMetadata {
@@ -470,7 +470,7 @@ export class CustomizationsIndexMetadata {
  * Captures `prompt_tokens` and `completion_tokens` from the most recent
  * successful fetch on a turn. All providers return these values in their
  * `usage` payload, so this metadata is the authoritative source for
- * "how many tokens did we actually send last turn" — used by the agent
+ * "how many tokens did we actually send last turn" â€” used by the agent
  * loop to floor its local context-size estimate when deciding whether to
  * trigger summarization.
  */

@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestMetadata } from '@zyraxoncode/copilot-api';
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import type { CancellationToken } from 'zyraxoncode';
+import { RequestMetadata } from '@vscode/copilot-api';
+import { Raw } from '@vscode/prompt-tsx';
+import type { CancellationToken } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { ITokenizer, TokenizerType } from '../../../util/common/tokenizer';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
@@ -243,11 +243,11 @@ export interface IMakeChatRequestOptions {
 	/**
 	 * Override for the `X-Interaction-Type` header (and matching `requestKind`
 	 * telemetry value). When unset, the value is derived from {@link ChatLocation}
-	 * via `locationToIntent` (e.g. panel → `conversation-panel`).
+	 * via `locationToIntent` (e.g. panel â†’ `conversation-panel`).
 	 *
 	 * Set this for callers whose surface isn't captured by the location alone:
-	 * - `'conversation-subagent'` — search/exec subagents inside an agent turn.
-	 * - `'conversation-background'` — utility calls not tied to an active user
+	 * - `'conversation-subagent'` â€” search/exec subagents inside an agent turn.
+	 * - `'conversation-background'` â€” utility calls not tied to an active user
 	 *   turn (e.g. chat title generation, conversation summarization, branch
 	 *   name suggestion, prompt categorization).
 	 */
@@ -362,7 +362,7 @@ export interface IChatEndpoint extends IEndpoint {
 	 * (e.g. a BYOK target with a user-supplied `api-key`, `x-api-key`, or `Authorization`) and
 	 * the chat fetcher must not fall back to the CAPI Copilot token for the `Authorization`
 	 * header. Prevents leaking the user's CAPI bearer token to third-party endpoints, and
-	 * avoids over-sending an unintended `Authorization: Bearer …` to gateways (strict
+	 * avoids over-sending an unintended `Authorization: Bearer â€¦` to gateways (strict
 	 * APIM policies, etc.) that validate the header.
 	 */
 	readonly ownsAuthorization?: boolean;
@@ -461,12 +461,12 @@ export interface INetworkRequestOptions {
  * telemetry value). Mirrors the server's documented vocabulary; only used when the
  * location-derived intent isn't accurate.
  *
- * - `'conversation-subagent'` — nested LLM calls made by a subagent inside an
+ * - `'conversation-subagent'` â€” nested LLM calls made by a subagent inside an
  *   agent turn (search/exec subagents).
- * - `'conversation-compaction'` — mid-agent-turn history compaction (user is
+ * - `'conversation-compaction'` â€” mid-agent-turn history compaction (user is
  *   waiting; runs on the same model as the agent loop). Distinct from background
  *   summarization, which uses a cheap model and is not tied to an active turn.
- * - `'conversation-background'` — utility calls not tied to an active user turn
+ * - `'conversation-background'` â€” utility calls not tied to an active user turn
  *   (e.g. chat title generation, conversation summarization, prompt categorization,
  *   branch name suggestion, background todo processing).
  */

@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import { homedir } from 'os';
-import { CancellationToken, FileType, Range, Terminal, TerminalLink, TerminalLinkContext, TerminalLinkProvider, Uri, window, workspace } from 'zyraxoncode';
+import { CancellationToken, FileType, Range, Terminal, TerminalLink, TerminalLinkContext, TerminalLinkProvider, Uri, window, workspace } from 'vscode';
 import { ILogService } from '../../../platform/log/common/logService';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { extUriBiasedIgnorePathCase } from '../../../util/vs/base/common/resources';
@@ -235,7 +235,7 @@ export class CopilotCLITerminalLinkProvider implements TerminalLinkProvider<Copi
 	 * Returns candidate session directories for a terminal.
 	 *
 	 * Resolver results (from active sessions) are tried first because the
-	 * resolver can order them by terminal affinity — sessions that belong to
+	 * resolver can order them by terminal affinity â€” sessions that belong to
 	 * THIS terminal come before unrelated sessions. A cached dir from
 	 * {@link setSessionDir} is appended only as a last-resort fallback when it
 	 * is no longer among the active sessions (i.e. the session ended but its

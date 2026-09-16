@@ -1,4 +1,4 @@
-{
+﻿{
 	"registrations": [
 		{
 			"component": {
@@ -645,7 +645,7 @@
 			"version": "13.0.0"
 		},
 		{
-			"name": "@zyraxoncode/win32-app-container-tokens",
+			"name": "@vscode/win32-app-container-tokens",
 			"component": {
 				"type": "git",
 				"git": {

@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "mermaid-markdown-features",
   "displayName": "%displayName%",
   "description": "%description%",
@@ -252,7 +252,7 @@
     "@types/markdown-it": "^14.1.0",
     "@types/node": "24.x",
     "@types/zyraxoncode-notebook-renderer": "^1.72.0",
-    "@zyraxoncode/codicons": "^0.0.36"
+    "@vscode/codicons": "^0.0.36"
   },
   "dependencies": {
     "@iconify-json/logos": "^1.2.0",

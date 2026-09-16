@@ -1,14 +1,14 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 
 export function fileTreePartToMarkdown(fileTree: zyraxoncode.ChatResponseFileTreePart) {
 	const printTree = (node: zyraxoncode.ChatResponseFileTree, depth: number, isLastChild: boolean): string => {
 		let output: string = '';
-		const indent = isLastChild ? '└── ' : '├── ';
+		const indent = isLastChild ? 'â””â”€â”€ ' : 'â”œâ”€â”€ ';
 		if (depth === 1) {
 			output = `${indent}${node.name}\n`;
 		} else if (depth > 1) {

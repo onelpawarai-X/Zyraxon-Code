@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import * as yaml from 'js-yaml';
-import type { LanguageModelToolInformation, Uri } from 'zyraxoncode';
+import type { LanguageModelToolInformation, Uri } from 'vscode';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { ILogService } from '../../../platform/log/common/logService';
 import { URI } from '../../../util/vs/base/common/uri';

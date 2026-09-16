@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { FetchOptions, RequestMetadata } from '@zyraxoncode/copilot-api';
+import type { FetchOptions, RequestMetadata } from '@vscode/copilot-api';
 import { HeadersImpl, Response } from '../../../networking/common/fetcherService';
 
 /** Shape of the content exclusion payload the endpoint returns for a single repo. */

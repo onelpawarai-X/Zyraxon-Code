@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
-import TelemetryReporter from '@zyraxoncode/extension-telemetry';
+import * as zyraxoncode from 'vscode';
+import TelemetryReporter from '@vscode/extension-telemetry';
 import { getExperimentationService, IExperimentationService, IExperimentationTelemetry, TargetPopulation } from 'zyraxoncode-tas-client';
 
 export class ExperimentationTelemetry implements IExperimentationTelemetry {

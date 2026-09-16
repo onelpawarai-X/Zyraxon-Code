@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import type { IChatDebugFileLoggerService, IDebugLogEntry } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import type { ISessionStore, SessionRow, TurnRow, FileRow, RefRow } from '../../../platform/chronicle/common/sessionStore';
 import type { CancellationToken } from '../../../util/vs/base/common/cancellation';
@@ -98,7 +98,7 @@ export async function reindexSessions(
 			await reindexOneSession(store, debugLogService, sessionId);
 			processed++;
 		} catch {
-			// Non-fatal — skip corrupt/unreadable sessions
+			// Non-fatal â€” skip corrupt/unreadable sessions
 			skipped++;
 		}
 
@@ -125,7 +125,7 @@ async function reindexOneSession(
 		refs: [],
 	};
 
-	// State for turn pairing — tracks the pending user message to pair with next assistant response.
+	// State for turn pairing â€” tracks the pending user message to pair with next assistant response.
 	let pendingUserMessage: string | undefined;
 	let pendingUserTimestamp: string | undefined;
 	let turnIndex = 0;
@@ -171,7 +171,7 @@ async function reindexOneSession(
 		}
 	});
 
-	// Help GC by clearing references — buffer is a local variable so this
+	// Help GC by clearing references â€” buffer is a local variable so this
 	// is defensive; it becomes unreachable when the function returns.
 	buffer.turns.length = 0;
 	buffer.files.length = 0;
@@ -186,7 +186,7 @@ interface TurnPairingState {
 
 /**
  * Process a single JSONL entry and update the per-session buffer.
- * This is the streaming callback — called once per line, no accumulation.
+ * This is the streaming callback â€” called once per line, no accumulation.
  */
 function processEntry(
 	entry: IDebugLogEntry,
@@ -325,7 +325,7 @@ function processToolCall(
 	}
 }
 
-// ── Cloud reindex ────────────────────────────────────────────────────────────────
+// â”€â”€ Cloud reindex â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /** Max events per upload batch. */
 const MAX_EVENTS_PER_UPLOAD = 500;

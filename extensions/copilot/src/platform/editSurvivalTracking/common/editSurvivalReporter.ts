@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type zyraxoncode from 'zyraxoncode';
+import type zyraxoncode from 'vscode';
 import { IGitService } from '../../../platform/git/common/gitService';
 import { resolveWorkspaceOTelMetadata, type WorkspaceOTelMetadata } from '../../../platform/otel/common/workspaceOTelMetadata';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';

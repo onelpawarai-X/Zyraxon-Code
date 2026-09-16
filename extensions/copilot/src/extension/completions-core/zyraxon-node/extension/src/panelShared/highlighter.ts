@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import { getSingletonHighlighterCore, HighlighterCore, ThemeRegistration, ThemeR
 import * as langs from 'shiki/langs';
 import { BundledLanguage } from 'shiki/langs';
 import getWasmInlined from 'shiki/wasm';
-import { ColorThemeKind, window, workspace } from 'zyraxoncode';
+import { ColorThemeKind, window, workspace } from 'vscode';
 import * as languages from './languages';
 import * as themes from './themes';
 

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Uri } from 'zyraxoncode';
+import type { Uri } from 'vscode';
 import { IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { INativeEnvService } from '../../../../platform/env/common/envService';
 import { IPromptsService } from '../../../../platform/promptFiles/common/promptsService';
@@ -17,7 +17,7 @@ import { dirname } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { resolveSkillConfigLocations } from '../../common/skillConfigLocations';
 
-/** The Claude SDK loads `.claude` directories automatically — skip them to avoid duplicates. */
+/** The Claude SDK loads `.claude` directories automatically â€” skip them to avoid duplicates. */
 function isClaudeDirectory(uri: URI): boolean {
 	return uri.path.split('/').includes('.claude');
 }
@@ -28,10 +28,10 @@ export interface IClaudePluginService {
 	 * Returns plugin root directories suitable for the Claude SDK's `plugins` option.
 	 *
 	 * Combines two sources:
-	 * 1. **Skills** — discovered as directories containing `SKILL.md` files, but the Claude SDK
+	 * 1. **Skills** â€” discovered as directories containing `SKILL.md` files, but the Claude SDK
 	 *    plugin loader expects the *parent* of the `skills/` directory (the plugin root),
 	 *    so we walk one level up from each skill location.
-	 * 2. **Plugins** — returned directly by the prompts service as actual plugin root directories.
+	 * 2. **Plugins** â€” returned directly by the prompts service as actual plugin root directories.
 	 */
 	getPluginLocations(token: CancellationToken): Promise<Uri[]>;
 }

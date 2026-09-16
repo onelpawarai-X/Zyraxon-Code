@@ -1,14 +1,14 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { internal, LocalSessionMetadata, SessionContext, SessionEvent, SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import { createReadStream } from 'node:fs';
 import { devNull } from 'node:os';
 import { createInterface } from 'node:readline';
-import type { ChatCustomAgent, ChatRequest, ChatSessionItem } from 'zyraxoncode';
+import type { ChatCustomAgent, ChatRequest, ChatSessionItem } from 'vscode';
 import { IChatDebugFileLoggerService } from '../../../../platform/chat/common/chatDebugFileLoggerService';
 import { ModelDetailsInfo } from '../../../../platform/chat/common/chatModelDetails';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
@@ -454,7 +454,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 	 * `_getAllSessions()` (sidebar list) so the two surfaces never diverge.
 	 *
 	 * Precedence:
-	 *   1. Explicit renamed title — active wrapper title, SDK `name`, or legacy custom title.
+	 *   1. Explicit renamed title â€” active wrapper title, SDK `name`, or legacy custom title.
 	 *   2. Cached derived label in `_sessionLabels` (from a previous history scan).
 	 *   3. Clean metadata `summary` (rejected if it looks truncated).
 	 *   4. First user message from session history (cached on success).
@@ -687,7 +687,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 			await Promise.all(promises);
 
 			if (sessionOptions.copilotUrl) {
-				// Only respect this from user (global) settings — a malicious workspace
+				// Only respect this from user (global) settings â€” a malicious workspace
 				// setting could downgrade auth from HMAC to token.
 				const authTypeInspect = this.configurationService.inspectConfig(ConfigKey.Shared.DebugOverrideAuthType);
 				const authType = authTypeInspect?.globalValue ?? 'hmac';
@@ -737,11 +737,11 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 			const api = require('@opentelemetry/api') as typeof import('@opentelemetry/api');
 			const globalProvider = api.trace.getTracerProvider();
 
-			// Navigate: ProxyTracerProvider._delegate → BasicTracerProvider._activeSpanProcessor → MultiSpanProcessor._spanProcessors
+			// Navigate: ProxyTracerProvider._delegate â†’ BasicTracerProvider._activeSpanProcessor â†’ MultiSpanProcessor._spanProcessors
 			const delegate = (globalProvider as unknown as Record<string, unknown>)._delegate ?? globalProvider;
 
 			// The in-process Copilot CLI SDK does not register its own JS OTel
-			// provider — its tracing is emitted by a native runtime. As a result the global provider
+			// provider â€” its tracing is emitted by a native runtime. As a result the global provider
 			// resolves to the extension's own provider. Attaching the bridge there would re-forward
 			// the extension's own spans and produce duplicate entries in the chat debug logs view.
 			// In this case we skip the bridge entirely: native CLI tool calls and agent responses are
@@ -759,7 +759,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 				processorArray.push(this._bridgeProcessor);
 				this.logService.info('[CopilotCLISession] Bridge SpanProcessor installed on SDK TracerProvider');
 			} else {
-				this.logService.warn('[CopilotCLISession] Could not access SDK TracerProvider internals — debug panel will not show SDK spans');
+				this.logService.warn('[CopilotCLISession] Could not access SDK TracerProvider internals â€” debug panel will not show SDK spans');
 			}
 		} catch (err) {
 			this.logService.warn(`[CopilotCLISession] Failed to install bridge SpanProcessor: ${err}`);
@@ -988,7 +988,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 
 		const [agentId, storedDetails] = await Promise.all([agentIdPromise, requestDetailsPromise]);
 
-		// Build lookup from copilotRequestId → RequestDetails for the callback
+		// Build lookup from copilotRequestId â†’ RequestDetails for the callback
 		const legacyMappings: RequestDetails[] = [];
 		const detailsByCopilotId = new Map<string, RequestIdDetails>();
 		const defaultModeInstructions = agentId ? await this.resolveAgentModeInstructions(agentId) : undefined;
@@ -1221,7 +1221,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 				this.logService.error('[CopilotCLISession] Failed to end debug log session', err);
 			});
 		}));
-		// Wire the bridge processor so the session can register traceId → sessionId mappings
+		// Wire the bridge processor so the session can register traceId â†’ sessionId mappings
 		session.setBridgeProcessor(this._bridgeProcessor);
 		// Wire SDK trace context updater so the session can propagate traceparent to SDK spans
 		const otelLifecycle = sessionManager.otel;
@@ -1568,7 +1568,7 @@ export function buildSandboxConfigForCLI(
 	// deny-list-only configuration still permits non-denied domains.
 	//
 	// Host lists are currently disabled on all platforms: the runtime does not yet enforce them
-	// reliably everywhere, so we fail closed — keep outbound off and drop the host lists — to avoid
+	// reliably everywhere, so we fail closed â€” keep outbound off and drop the host lists â€” to avoid
 	// surprising the user with unrestricted access when they explicitly configured host rules.
 	const allowAllNetwork = sandboxSetting === 'allowNetwork';
 	const hostListsEnforceable = false;

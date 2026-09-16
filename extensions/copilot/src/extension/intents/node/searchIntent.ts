@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import { parse } from 'jsonc-parser';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';

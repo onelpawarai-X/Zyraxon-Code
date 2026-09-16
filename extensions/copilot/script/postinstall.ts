@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -234,8 +234,8 @@ async function copyCopilotCLIFolders(sourceDir: string, targetDir: string) {
 
 /**
  * Creates symlinks so that `.claude/` mirrors canonical locations (for testing Claude Agent harness):
- *   .claude/CLAUDE.md  →  .github/copilot-instructions.md
- *   .claude/skills     →  .agents/skills
+ *   .claude/CLAUDE.md  â†’  .github/copilot-instructions.md
+ *   .claude/skills     â†’  .agents/skills
  */
 async function createClaudeSymlinks() {
 	if (process.platform === 'win32') {
@@ -273,8 +273,8 @@ async function main() {
 
 	// copy static assets to dist
 	await copyStaticAssets([
-		...treeSitterGrammars.map(grammar => `node_modules/@zyraxoncode/tree-sitter-wasm/wasm/${grammar.name}.wasm`),
-		'node_modules/@zyraxoncode/tree-sitter-wasm/wasm/tree-sitter.wasm',
+		...treeSitterGrammars.map(grammar => `node_modules/@vscode/tree-sitter-wasm/wasm/${grammar.name}.wasm`),
+		'node_modules/@vscode/tree-sitter-wasm/wasm/tree-sitter.wasm',
 		'node_modules/@github/blackbird-external-ingest-utils/pkg/nodejs/external_ingest_utils_bg.wasm',
 	], 'dist');
 

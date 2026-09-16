@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { LogOutputChannel, window } from 'zyraxoncode';
+import { LogOutputChannel, window } from 'vscode';
 import { IHooksOutputChannel } from '../../../platform/chat/common/hooksOutputChannel';
 
 export class HooksOutputChannel implements IHooksOutputChannel {

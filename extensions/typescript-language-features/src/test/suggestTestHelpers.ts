@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import 'mocha';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { onChangedDocument, retryUntilDocumentChanges, wait } from './testUtils';
 
 export async function acceptFirstSuggestion(uri: zyraxoncode.Uri, _disposables: zyraxoncode.Disposable[]) {

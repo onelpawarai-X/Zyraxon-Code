@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { type LanguageModelChatInformation } from 'zyraxoncode';
+import { type LanguageModelChatInformation } from 'vscode';
 import { BYOKKnownModels, BYOKModelCapabilities, byokKnownModelToAPIInfo } from '../common/byokProvider';
 import { buildReasoningEffortSchemaProperty } from '../../conversation/common/languageModelAccess';
 

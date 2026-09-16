@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import type { Selection, TextEditor, Uri } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { Selection, TextEditor, Uri } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ICustomInstructionsService } from '../../../platform/customInstructions/common/customInstructionsService';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
@@ -381,7 +381,7 @@ async function review(
 /**
  * Runs a code review on file URI pairs and returns structured results.
  * This is the handler for the `github.copilot.chat.codeReview.run` command.
- * It bypasses the comment controller — results are returned directly to the caller.
+ * It bypasses the comment controller â€” results are returned directly to the caller.
  */
 export async function reviewFileChanges(
 	accessor: ServicesAccessor,

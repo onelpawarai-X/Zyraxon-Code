@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { coalesce } from './arrays';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 
 function splitUriList(str: string): string[] {
 	return str.split('\r\n');

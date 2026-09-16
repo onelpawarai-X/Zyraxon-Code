@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import { IExtHostRpcService } from './extHostRpcService.js';
 import { WorkspaceEdit } from './extHostTypeConverters.js';
 import { SerializableObjectWithBuffers } from '../../services/extensions/common/proxyIdentifier.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 
 export class ExtHostBulkEdits {
 

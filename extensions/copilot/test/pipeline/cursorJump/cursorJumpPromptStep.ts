@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import { IChatMLFetcher } from '../../../src/platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatResponse, ChatResponses } from '../../../src/platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../src/platform/configuration/common/configurationService';
@@ -41,7 +41,7 @@ function extractTextContent(message: Raw.ChatMessage): string {
  * A mock fetcher that returns an empty Success response on every call. The
  * empty xtab response yields `NoSuggestions`, which the production
  * `XtabProvider` then funnels into the cursor-jump path. The cursor-jump
- * fetch also returns empty — we don't care about the response, only the
+ * fetch also returns empty â€” we don't care about the response, only the
  * prompt captured via the telemetry builder before the fetch fires.
  */
 class CursorJumpCapturingFetcher implements IChatMLFetcher {

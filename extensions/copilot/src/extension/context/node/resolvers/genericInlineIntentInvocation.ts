@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
-import { BasePromptElementProps } from '@zyraxoncode/prompt-tsx';
-import type { CancellationToken, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, Progress } from 'zyraxoncode';
+import { BasePromptElementProps } from '@vscode/prompt-tsx';
+import type { CancellationToken, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, Progress } from 'vscode';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';

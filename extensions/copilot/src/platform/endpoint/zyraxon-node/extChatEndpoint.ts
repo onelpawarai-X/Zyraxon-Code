@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import type { CancellationToken } from 'zyraxoncode';
-import * as zyraxoncode from 'zyraxoncode';
+import { Raw } from '@vscode/prompt-tsx';
+import type { CancellationToken } from 'vscode';
+import * as zyraxoncode from 'vscode';
 import { FetchStreamRecorder } from '../../../platform/chat/common/chatMLFetcher';
 import { toErrorMessage } from '../../../util/common/errorMessage';
 import { ITokenizer, TokenizerType } from '../../../util/common/tokenizer';
@@ -180,7 +180,7 @@ export class ExtensionContributedChatEndpoint implements IChatEndpoint {
 
 		// Capture active OTel trace context to propagate through IPC to the BYOK provider.
 		// Each provider creates its own chat span with full usage data:
-		// - OpenAI-compatible (Azure, OpenAI, etc.): via CopilotLanguageModelWrapper → chatMLFetcher
+		// - OpenAI-compatible (Azure, OpenAI, etc.): via CopilotLanguageModelWrapper â†’ chatMLFetcher
 		// - Anthropic: inside AnthropicLMProvider
 		// - Gemini: inside GeminiNativeBYOKLMProvider
 		const activeTraceCtx = this._otelService.getActiveTraceContext();

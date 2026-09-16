@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
 import { PullRequestSearchItem } from '../../../platform/github/common/githubAPI';
 import { IOctoKitService, PullRequestFile } from '../../../platform/github/common/githubService';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -77,7 +77,7 @@ export class PullRequestFileChangesService implements IPullRequestFileChangesSer
 	}
 
 	/**
-	 * Builds the changed-file list for a branch comparison (`base...head`) — used to surface
+	 * Builds the changed-file list for a branch comparison (`base...head`) â€” used to surface
 	 * file changes for cloud tasks that pushed a branch but have no pull request yet. Mirrors
 	 * the PR path, but sources the file list (and the bounding commit SHAs) from the GitHub
 	 * compare API instead of a pull request.

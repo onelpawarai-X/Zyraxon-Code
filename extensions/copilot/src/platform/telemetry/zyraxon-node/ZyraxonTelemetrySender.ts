@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CustomFetcher, TelemetryReporter } from '@zyraxoncode/extension-telemetry';
+import { CustomFetcher, TelemetryReporter } from '@vscode/extension-telemetry';
 import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStore';
 import { BaseMsftTelemetrySender } from '../common/msftTelemetrySender';
 

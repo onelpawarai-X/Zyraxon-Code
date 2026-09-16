@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import { modelSupportsToolSearch } from '../../common/chatModelCapabilities';
 import { ITokenizer, TokenizerType } from '../../../../util/common/tokenizer';
 import { AsyncIterableObject } from '../../../../util/vs/base/common/async';

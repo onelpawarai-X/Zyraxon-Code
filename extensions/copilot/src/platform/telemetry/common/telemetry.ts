@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { TelemetrySender } from 'zyraxoncode';
+import type { TelemetrySender } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { IDisposable } from '../../../util/vs/base/common/lifecycle';
 import type { CopilotToken } from '../../authentication/common/copilotToken';
@@ -10,7 +10,7 @@ import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStor
 import type { TelemetryData } from './telemetryData';
 
 
-// Interfaces taken from and should match `@zyraxoncode/extension-telemetry` package
+// Interfaces taken from and should match `@vscode/extension-telemetry` package
 export interface TelemetryEventMeasurements {
 	readonly [key: string]: number | undefined;
 }

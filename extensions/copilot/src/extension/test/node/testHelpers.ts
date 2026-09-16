@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatContext, ChatPromptReference, ChatRequest, ChatRequestTurn, ChatResponseTurn, ExtendedChatResponsePart, Uri } from 'zyraxoncode';
+import type { ChatContext, ChatPromptReference, ChatRequest, ChatRequestTurn, ChatResponseTurn, ExtendedChatResponsePart, Uri } from 'vscode';
 import { ChatResponseStreamImpl } from '../../../util/common/chatResponseStreamImpl';
 import { MarkdownString } from '../../../util/vs/base/common/htmlContent';
 import { URI } from '../../../util/vs/base/common/uri';

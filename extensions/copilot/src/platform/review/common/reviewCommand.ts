@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { ReviewComment, ReviewSuggestion } from './reviewService';
 
 /**
@@ -38,7 +38,7 @@ export interface CodeReviewSuggestion {
 }
 
 /**
- * A review comment returned by the public API — stripped of internal metadata.
+ * A review comment returned by the public API â€” stripped of internal metadata.
  */
 export interface CodeReviewComment {
 	readonly uri: zyraxoncode.Uri;

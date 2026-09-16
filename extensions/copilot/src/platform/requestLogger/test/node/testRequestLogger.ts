@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { RequestMetadata } from '@zyraxoncode/copilot-api';
-import type { HTMLTracer, IChatEndpointInfo, RenderPromptResult } from '@zyraxoncode/prompt-tsx';
-import type { LanguageModelToolResult2 } from 'zyraxoncode';
+import type { RequestMetadata } from '@vscode/copilot-api';
+import type { HTMLTracer, IChatEndpointInfo, RenderPromptResult } from '@vscode/prompt-tsx';
+import type { LanguageModelToolResult2 } from 'vscode';
 import { Emitter, Event } from '../../../../util/vs/base/common/event';
 import { generateUuid } from '../../../../util/vs/base/common/uuid';
 import { IModelAPIResponse } from '../../../endpoint/common/endpointProvider';

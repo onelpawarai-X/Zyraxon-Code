@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { IChatSessionMetadataStore, RepositoryProperties, RequestDetails, WorkspaceFolderEntry } from '../chatSessionMetadataStore';
 import { ChatSessionWorktreeProperties } from '../chatSessionWorktreeService';
 import { IWorkspaceInfo } from '../workspaceInfo';
@@ -32,7 +32,7 @@ export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
 	}
 
 	async refresh(): Promise<void> {
-		// no-op in mock — there is no on-disk state to reload.
+		// no-op in mock â€” there is no on-disk state to reload.
 	}
 
 	async storeWorktreeInfo(sessionId: string, properties: ChatSessionWorktreeProperties): Promise<void> {

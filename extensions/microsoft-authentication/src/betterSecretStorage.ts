@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import Logger from './logger';
-import { Event, EventEmitter, ExtensionContext, SecretStorage, SecretStorageChangeEvent } from 'zyraxoncode';
+import { Event, EventEmitter, ExtensionContext, SecretStorage, SecretStorageChangeEvent } from 'vscode';
 
 export interface IDidChangeInOtherWindowEvent<T> {
 	added: string[];

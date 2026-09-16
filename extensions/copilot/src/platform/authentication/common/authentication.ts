@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { AuthenticationGetSessionOptions, AuthenticationGetSessionPresentationOptions, AuthenticationSession } from 'zyraxoncode';
+import type { AuthenticationGetSessionOptions, AuthenticationGetSessionPresentationOptions, AuthenticationSession } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 /**
@@ -298,7 +298,7 @@ export abstract class BaseAuthenticationService extends Disposable implements IA
 			const beforeError = this._copilotTokenError;
 			this._copilotTokenError = afterError;
 			if (tokenBefore) {
-				// Had a valid token before, now errored — token value changed to undefined
+				// Had a valid token before, now errored â€” token value changed to undefined
 				this.fireCopilotTokenChange('getCopilotToken token lost');
 			} else if (beforeError && afterError && beforeError.message !== afterError.message) {
 				// Still can't get a Copilot Token, but the error has changed.

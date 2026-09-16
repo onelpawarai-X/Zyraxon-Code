@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { CancellationToken, NotebookCell, NotebookDocument, Uri } from 'zyraxoncode';
+import type { CancellationToken, NotebookCell, NotebookDocument, Uri } from 'vscode';
 import { getLanguage } from '../../../util/common/languages';
 import { isUri } from '../../../util/common/types';
 import { findLast } from '../../../util/vs/base/common/arraysFind';

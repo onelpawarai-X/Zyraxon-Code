@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { RequestMetadata, RequestType } from '@zyraxoncode/copilot-api';
-import { OpenAI, Raw } from '@zyraxoncode/prompt-tsx';
-import type { CancellationToken } from 'zyraxoncode';
+import { RequestMetadata, RequestType } from '@vscode/copilot-api';
+import { OpenAI, Raw } from '@vscode/prompt-tsx';
+import type { CancellationToken } from 'vscode';
 import { ITokenizer, TokenizerType } from '../../../util/common/tokenizer';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
 import { deepClone, mixin } from '../../../util/vs/base/common/objects';

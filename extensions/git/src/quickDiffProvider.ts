@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { FileType, l10n, LogOutputChannel, QuickDiffProvider, Uri, workspace } from 'zyraxoncode';
+import { FileType, l10n, LogOutputChannel, QuickDiffProvider, Uri, workspace } from 'vscode';
 import { IRepositoryResolver, Repository } from './repository';
 import { isDescendant, pathEquals } from './util';
 import { toGitUri } from './uri';

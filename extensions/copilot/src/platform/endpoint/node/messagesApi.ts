@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { ContentBlockParam, DocumentBlockParam, ImageBlockParam, MessageParam, RedactedThinkingBlockParam, TextBlockParam, ThinkingBlockParam, ToolReferenceBlockParam, ToolResultBlockParam } from '@anthropic-ai/sdk/resources';
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import { Response } from '../../../platform/networking/common/fetcherService';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
 import { SSEParser } from '../../../util/vs/base/common/sseParser';
@@ -252,7 +252,7 @@ export function createMessagesRequestBody(accessor: ServicesAccessor, options: I
 	const validToolNames = finalTools.length > 0 ? new Set(finalTools.map(t => t.name)) : undefined;
 	const messagesResult = rawMessagesToMessagesAPI(options.messages, toolSearchEnabled ? validToolNames : undefined);
 
-	// Subagent requests are out of scope for the extended cache TTL — their
+	// Subagent requests are out of scope for the extended cache TTL â€” their
 	// context is short-lived. The three subagent call sites (search loop,
 	// execution loop, Task-tool-spawned agent) all set
 	// `interactionTypeOverride: 'conversation-subagent'`, which is also the
@@ -260,7 +260,7 @@ export function createMessagesRequestBody(accessor: ServicesAccessor, options: I
 	//
 	// The rolling message breakpoints default to the 5m TTL and only upgrade to
 	// 1h when the `extendedTtlMessages` sub-toggle is on (which itself requires
-	// the parent `extendedTtl` to be on — see `isExtendedCacheTtlMessagesEnabled`).
+	// the parent `extendedTtl` to be on â€” see `isExtendedCacheTtlMessagesEnabled`).
 	const isSubagent = options.interactionTypeOverride === 'conversation-subagent';
 	const useExtendedCacheTtl = isExtendedCacheTtlEnabled(endpoint, configurationService, experimentationService, options.location, isSubagent);
 	const cacheTtl = useExtendedCacheTtl ? '1h' : undefined;
@@ -277,7 +277,7 @@ export function createMessagesRequestBody(accessor: ServicesAccessor, options: I
 	// skips the UserMessage or validateToolMessages drops trailing tool messages.
 	const lastMessage = messagesResult.messages.at(-1);
 	if (lastMessage && lastMessage.role === 'assistant') {
-		logService.warn(`[messagesAPI] Trailing assistant message detected — appending synthetic user message to prevent prefill error. Total messages: ${messagesResult.messages.length}`);
+		logService.warn(`[messagesAPI] Trailing assistant message detected â€” appending synthetic user message to prevent prefill error. Total messages: ${messagesResult.messages.length}`);
 
 		/* __GDPR__
 			"messagesApi.trailingAssistantGuard" : {
@@ -512,7 +512,7 @@ function rawContentToAnthropicContent(content: readonly Raw.ChatCompletionConten
 				if (previousBlock && contentBlockSupportsCacheControl(previousBlock)) {
 					previousBlock.cache_control = { type: 'ephemeral' };
 				} else {
-					// No preceding block to attach to — defer until the next
+					// No preceding block to attach to â€” defer until the next
 					// cacheable content block is added, or silently drop it.
 					// Previously this created a whitespace-only text block which
 					// the Anthropic API rejects with "text content block must
@@ -607,7 +607,7 @@ export function clearAllCacheControl(
  *
  * When {@link cacheTtl} is `'1h'`, the breakpoints request the extended cache
  * TTL. Sending this requires the `extended-cache-ttl-2025-04-11` Anthropic
- * beta header — see {@link IChatEndpoint.getExtraHeaders}. When omitted, the
+ * beta header â€” see {@link IChatEndpoint.getExtraHeaders}. When omitted, the
  * default 5 minute TTL is used.
  */
 export function addToolsAndSystemCacheControl(
@@ -939,7 +939,7 @@ export async function processNonStreamingResponseFromMessagesEndpoint(
 			return;
 		}
 
-		// Extract content blocks — guard against missing content array
+		// Extract content blocks â€” guard against missing content array
 		// (shouldn't happen for type=message, but be defensive).
 		let textContent = '';
 		const toolCalls: { id: string; name: string; arguments: string }[] = [];
@@ -957,7 +957,7 @@ export async function processNonStreamingResponseFromMessagesEndpoint(
 					break;
 				case 'thinking':
 				case 'redacted_thinking':
-					// Intentionally not surfaced — see function JSDoc.
+					// Intentionally not surfaced â€” see function JSDoc.
 					break;
 				default: {
 					// Parity with streaming path: log + emit telemetry for unknown block types
@@ -984,7 +984,7 @@ export async function processNonStreamingResponseFromMessagesEndpoint(
 
 		// Report text and tool calls to finishedCb so callers that rely on
 		// the callback (e.g. for OTEL tracing, progress, langModelServer SSE
-		// forwarding) see the complete response — matching the streaming path.
+		// forwarding) see the complete response â€” matching the streaming path.
 		const delta: IResponseDelta = {
 			text: textContent,
 			...(toolCalls.length > 0 ? {

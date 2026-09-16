@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as interfaces from './interfaces';
-import * as zyraxoncode from 'zyraxoncode';
-import type TelemetryReporter from '@zyraxoncode/extension-telemetry';
+import * as zyraxoncode from 'vscode';
+import type TelemetryReporter from '@vscode/extension-telemetry';
 
 export class DocumentMergeConflict implements interfaces.IDocumentMergeConflict {
 

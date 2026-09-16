@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { authentication, AuthenticationGetSessionOptions, AuthenticationSession } from 'zyraxoncode';
+import { authentication, AuthenticationGetSessionOptions, AuthenticationSession } from 'vscode';
 import { TaskSingler } from '../../../util/common/taskSingler';
 import { AuthProviderId, IConfigurationService } from '../../configuration/common/configurationService';
 import { IDomainService } from '../../endpoint/common/domainService';

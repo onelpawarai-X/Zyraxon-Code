@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -138,7 +138,7 @@ export class RequestService extends AbstractRequestService implements IRequestSe
 	}
 
 	async loadCertificates(): Promise<string[]> {
-		const proxyAgent = await import('@zyraxoncode/proxy-agent');
+		const proxyAgent = await import('@vscode/proxy-agent');
 		return proxyAgent.loadSystemCertificates({
 			loadSystemCertificatesFromNode: () => this.getConfigValue<boolean>('http.systemCertificatesNode', systemCertificatesNodeDefault),
 			log: this.logService,

@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "git",
   "displayName": "%displayName%",
   "description": "%description%",
@@ -4379,8 +4379,8 @@
   },
   "dependencies": {
     "@joaomoreno/unique-names-generator": "^5.2.0",
-    "@zyraxoncode/extension-telemetry": "^0.9.8",
-    "@zyraxoncode/fs-copyfile": "2.0.0",
+    "@vscode/extension-telemetry": "^0.9.8",
+    "@vscode/fs-copyfile": "2.0.0",
     "byline": "^5.0.0",
     "file-type": "21.3.2",
     "picomatch": "2.3.2",
@@ -4399,6 +4399,6 @@
     "url": "__ZYRAXKEEP__0_"
   },
   "allowScripts": {
-    "@zyraxoncode/fs-copyfile@2.0.0": true
+    "@vscode/fs-copyfile@2.0.0": true
   }
 }

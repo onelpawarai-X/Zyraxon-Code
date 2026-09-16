@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Command, Disposable } from 'zyraxoncode';
+import { Command, Disposable } from 'vscode';
 import type { AvatarQuery, SourceControlHistoryItemDetailsProvider } from './api/git';
 import { Repository } from './repository';
 import { ApiRepository } from './api/api1';

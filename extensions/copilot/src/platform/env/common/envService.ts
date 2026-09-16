@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Event, WindowState } from 'zyraxoncode';
+import type { Event, WindowState } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { env } from '../../../util/vs/base/common/process';
 import { URI } from '../../../util/vs/base/common/uri';

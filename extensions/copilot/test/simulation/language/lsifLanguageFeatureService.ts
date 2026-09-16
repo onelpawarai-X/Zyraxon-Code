@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as scip from '@c4312/scip';
-import * as LSIF from '@zyraxoncode/lsif-language-service';
+import * as LSIF from '@vscode/lsif-language-service';
 import * as fs from 'fs/promises';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { ILanguageFeaturesService } from '../../../src/platform/languages/common/languageFeaturesService';
 import { SimulationWorkspace } from '../../../src/platform/test/node/simulationWorkspace';
 import { escapeRegExpCharacters } from '../../../src/util/vs/base/common/strings';

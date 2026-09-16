@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { INativeEnvService } from '../../../../../platform/env/common/envService';
 import { createDirectoryIfNotExists, IFileSystemService } from '../../../../../platform/filesystem/common/fileSystemService';
 import { ILogService } from '../../../../../platform/log/common/logService';
@@ -244,7 +244,7 @@ export class AgentsSlashCommand implements IClaudeSlashCommandHandler {
 			for (const agent of projectAgents) {
 				items.push({
 					label: agent.config.name,
-					description: `· ${agent.config.model}`,
+					description: `Â· ${agent.config.model}`,
 					action: 'select',
 					agent,
 				});
@@ -261,7 +261,7 @@ export class AgentsSlashCommand implements IClaudeSlashCommandHandler {
 			for (const agent of userAgents) {
 				items.push({
 					label: agent.config.name,
-					description: `· ${agent.config.model}`,
+					description: `Â· ${agent.config.model}`,
 					action: 'select',
 					agent,
 				});

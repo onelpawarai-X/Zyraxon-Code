@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { execFile } from 'child_process';
-import { l10n, Terminal, window } from 'zyraxoncode';
+import { l10n, Terminal, window } from 'vscode';
 import { Disposable, IDisposable } from '../../../../util/vs/base/common/lifecycle';
 import { isWindows } from '../../../../util/vs/base/common/platform';
 import { createDecorator } from '../../../../util/vs/platform/instantiation/common/instantiation';

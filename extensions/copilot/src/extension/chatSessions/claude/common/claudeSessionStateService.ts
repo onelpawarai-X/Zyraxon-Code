@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { EffortLevel, PermissionMode } from '@anthropic-ai/claude-agent-sdk';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { CapturingToken } from '../../../../platform/requestLogger/common/capturingToken';
 import type { TraceContext } from '../../../../platform/otel/common/otelService';
 import { createServiceIdentifier } from '../../../../util/common/services';

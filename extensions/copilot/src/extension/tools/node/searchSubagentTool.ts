@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import { BudgetExceededError } from '@zyraxoncode/prompt-tsx/dist/base/materialized';
+import * as l10n from '@vscode/l10n';
+import { BudgetExceededError } from '@vscode/prompt-tsx/dist/base/materialized';
 import * as path from 'path';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { ChatFetchResponseType } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
@@ -40,8 +40,8 @@ export interface ISearchSubagentParams {
 	details: string;
 	/**
 	 * Optional thoroughness level that controls how many tool-call turns the subagent is allowed.
-	 * - 'normal' → base limit × 1    (quick & balanced; sufficient for most cases)
-	 * - 'deep'   → base limit × 2    (broader exploration; only use when normal is not enough)
+	 * - 'normal' â†’ base limit Ã— 1    (quick & balanced; sufficient for most cases)
+	 * - 'deep'   â†’ base limit Ã— 2    (broader exploration; only use when normal is not enough)
 	 * Only active when config.github.copilot.chat.searchSubagent.thoroughnessEnabled is true.
 	 */
 	thoroughness?: 'normal' | 'deep';
@@ -91,7 +91,7 @@ class SearchSubagentTool implements ICopilotTool<ISearchSubagentParams> {
 		return {
 			...tool,
 			description: tool.description
-				+ '\n- thoroughness (optional): Search thoroughness — \'normal\' (balanced and quick, sufficient for most cases) or \'deep\' (more turns, broader exploration; only use when normal is clearly not enough).',
+				+ '\n- thoroughness (optional): Search thoroughness â€” \'normal\' (balanced and quick, sufficient for most cases) or \'deep\' (more turns, broader exploration; only use when normal is clearly not enough).',
 			inputSchema: {
 				...tool.inputSchema as Record<string, unknown>,
 				properties: {
@@ -106,7 +106,7 @@ class SearchSubagentTool implements ICopilotTool<ISearchSubagentParams> {
 		};
 	}
 	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<ISearchSubagentParams>, token: zyraxoncode.CancellationToken) {
-		// Get the current working directory — prefer the session's working directory
+		// Get the current working directory â€” prefer the session's working directory
 		// (agents window) over the first workspace folder.
 		const workingDir = new WorkingDirectory(options.workingDirectory, this.workspaceService);
 		const cwd = workingDir.getFolders()[0]?.fsPath;

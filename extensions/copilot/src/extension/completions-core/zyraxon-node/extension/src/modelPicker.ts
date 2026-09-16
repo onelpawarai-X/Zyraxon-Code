@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { commands, env, QuickPick, QuickPickItem, QuickPickItemKind, Uri, window, workspace } from 'zyraxoncode';
+import { commands, env, QuickPick, QuickPickItem, QuickPickItemKind, Uri, window, workspace } from 'vscode';
 import { IInstantiationService } from '../../../../../util/vs/platform/instantiation/common/instantiation';
 import { ConfigKey } from '../../lib/src/config';
 import { CopilotConfigPrefix } from '../../lib/src/constants';

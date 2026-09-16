@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -23,7 +23,7 @@ declare module 'zyraxoncode' {
 		 *
 		 * @return Thenable indicating that the webview editor has been moved.
 		 */
-		// eslint-disable-next-line local/zyraxoncode-dts-provider-naming
+		// eslint-disable-next-line local/vscode-dts-provider-naming
 		moveCustomTextEditor?(newDocument: TextDocument, existingWebviewPanel: WebviewPanel, token: CancellationToken): Thenable<void>;
 	}
 }

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { default as ZyraxonCodeTelemetryReporter } from '@zyraxoncode/extension-telemetry';
-import * as zyraxoncode from 'zyraxoncode';
+import { default as ZyraxonCodeTelemetryReporter } from '@vscode/extension-telemetry';
+import * as zyraxoncode from 'vscode';
 
 interface IPackageInfo {
 	name: string;

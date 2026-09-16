@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Cancellation } from '@zyraxoncode/sync-api-common/lib/common/messageCancellation';
-import * as zyraxoncode from 'zyraxoncode';
+import { Cancellation } from '@vscode/sync-api-common/lib/common/messageCancellation';
+import * as zyraxoncode from 'vscode';
 import { RequestArgs } from '../commands/tsserverRequests';
 import { TypeScriptServiceConfiguration } from '../configuration/configuration';
 import { TelemetryReporter } from '../logging/telemetry';

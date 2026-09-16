@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { join } from 'path';
-import * as zyraxoncode from 'zyraxoncode';
-import { InlineCompletionModelInfo, InlineCompletionProviderOption } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { InlineCompletionModelInfo, InlineCompletionProviderOption } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IEnvService } from '../../../platform/env/common/envService';

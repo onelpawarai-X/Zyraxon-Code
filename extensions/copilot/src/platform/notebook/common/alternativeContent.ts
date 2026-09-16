@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelChat, NotebookDocument, Uri } from 'zyraxoncode';
+import type { LanguageModelChat, NotebookDocument, Uri } from 'vscode';
 import { findCell } from '../../../util/common/notebooks';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Range } from '../../../zyraxoncodeTypes';

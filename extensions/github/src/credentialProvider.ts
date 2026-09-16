@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { CredentialsProvider, Credentials, API as GitAPI } from './typings/git.d.ts';
-import { workspace, Uri, Disposable } from 'zyraxoncode';
+import { workspace, Uri, Disposable } from 'vscode';
 import { getSession } from './auth.js';
 
 const EmptyDisposable: Disposable = { dispose() { } };

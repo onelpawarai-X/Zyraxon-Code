@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as os from 'os';
 import * as path from 'path';
-import { ExtensionContext, ExtensionMode, env, workspace } from 'zyraxoncode';
+import { ExtensionContext, ExtensionMode, env, workspace } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ICopilotTokenManager } from '../../../platform/authentication/common/copilotTokenManager';
 import { StaticGitHubAuthenticationService } from '../../../platform/authentication/common/staticGitHubAuthenticationService';
@@ -270,7 +270,7 @@ export function registerServices(builder: IInstantiationServiceBuilder, extensio
 	builder.define(IGitHubOrgChatResourcesService, new SyncDescriptor(GitHubOrgChatResourcesService));
 	builder.define(IToolResultContentRenderer, new SyncDescriptor(ToolResultContentRenderer));
 
-	// Chronicle session store — tracks sessions, turns, files, and refs for /standup
+	// Chronicle session store â€” tracks sessions, turns, files, and refs for /standup
 	const sessionStoreDbPath = extensionContext.globalStorageUri
 		? path.join(extensionContext.globalStorageUri.fsPath, 'session-store.db')
 		: path.join(os.tmpdir(), 'copilot-session-store.db');
@@ -280,14 +280,14 @@ export function registerServices(builder: IInstantiationServiceBuilder, extensio
 	const sessionStore = new SessionStore(sessionStoreDbPath, { remote: !!env.remoteName });
 	builder.define(ISessionStore, sessionStore);
 
-	// OTel SQLite store — created lazily, DB file only appears when dbSpanExporter.enabled is true
+	// OTel SQLite store â€” created lazily, DB file only appears when dbSpanExporter.enabled is true
 	const otelDbPath = extensionContext.globalStorageUri
 		? path.join(extensionContext.globalStorageUri.fsPath, 'agent-traces.db')
 		: path.join(os.tmpdir(), 'copilot-agent-traces.db');
 	const otelSqliteStore = new OTelSqliteStore(otelDbPath);
 	builder.define(IOTelSqliteStore, otelSqliteStore);
 
-	// OTel service — resolve config from env + settings, create appropriate impl
+	// OTel service â€” resolve config from env + settings, create appropriate impl
 	const otelSettings = workspace.getConfiguration('github.copilot.chat.otel');
 	const policyValue = <T>(key: string): T | undefined => (otelSettings.inspect<T>(key) as { policyValue?: T } | undefined)?.policyValue;
 	const otelConfig = resolveOTelConfig({

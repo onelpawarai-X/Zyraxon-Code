@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -2344,14 +2344,14 @@ declare module 'zyraxoncode' {
 
 	/**
 	 * A file glob pattern to match file paths against. This can either be a glob pattern string
-	 * (like `**​/*.{ts,js}` or `*.{ts,js}`) or a {@link RelativePattern relative pattern}.
+	 * (like `**â€‹/*.{ts,js}` or `*.{ts,js}`) or a {@link RelativePattern relative pattern}.
 	 *
 	 * Glob patterns can have the following syntax:
 	 * * `*` to match zero or more characters in a path segment
 	 * * `?` to match on one character in a path segment
 	 * * `**` to match any number of path segments, including none
-	 * * `{}` to group conditions (e.g. `**​/*.{ts,js}` matches all TypeScript and JavaScript files)
-	 * * `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, …)
+	 * * `{}` to group conditions (e.g. `**â€‹/*.{ts,js}` matches all TypeScript and JavaScript files)
+	 * * `[]` to declare a range of characters to match in a path segment (e.g., `example.[0-9]` to match on `example.0`, `example.1`, â€¦)
 	 * * `[!...]` to negate a range of characters to match in a path segment (e.g., `example.[!0-9]` to match on `example.a`, `example.b`, but not `example.0`)
 	 *
 	 * Note: a backslash (`\`) is not valid within a glob pattern. If you have an existing file
@@ -2370,7 +2370,7 @@ declare module 'zyraxoncode' {
 	 * { language: 'typescript', scheme: 'file' }
 	 *
 	 * @example <caption>A language filter that applies to all package.json paths</caption>
-	 * { language: 'json', pattern: '**​/package.json' }
+	 * { language: 'json', pattern: '**â€‹/package.json' }
 	 */
 	export interface DocumentFilter {
 
@@ -9622,7 +9622,7 @@ declare module 'zyraxoncode' {
 		 * is configurable by the user. Each entry can be be:
 		 * - the absolute path to exclude
 		 * - a relative path to exclude (for example `build/output`)
-		 * - a simple glob pattern (for example `**​/build`, `output/**`)
+		 * - a simple glob pattern (for example `**â€‹/build`, `output/**`)
 		 *
 		 * *Note* that case-sensitivity of the {@link excludes} patterns for built-in file system providers
 		 * will depend on the underlying file system: on Windows and macOS the matching will be case-insensitive and
@@ -10911,7 +10911,7 @@ declare module 'zyraxoncode' {
 		 * ```
 		 *
 		 * *Note* that extensions should not cache the result of `asExternalUri` as the resolved uri may become invalid due to
-		 * a system or user action — for example, in remote cases, a user may close a port forwarding tunnel that was opened by
+		 * a system or user action â€” for example, in remote cases, a user may close a port forwarding tunnel that was opened by
 		 * `asExternalUri`.
 		 *
 		 * #### Any other scheme
@@ -12018,7 +12018,7 @@ declare module 'zyraxoncode' {
 		 * Mimes type look ups are case-insensitive.
 		 *
 		 * Special mime types:
-		 * - `text/uri-list` — A string with `toString()`ed Uris separated by `\r\n`. To specify a cursor position in the file,
+		 * - `text/uri-list` â€”Â A string with `toString()`ed Uris separated by `\r\n`. To specify a cursor position in the file,
 		 * set the Uri's fragment to `L3,5`, where 3 is the line number and 5 is the column number.
 		 */
 		get(mimeType: string): DataTransferItem | undefined;
@@ -14035,13 +14035,13 @@ declare module 'zyraxoncode' {
 		 * If you only care about file events in a specific workspace folder:
 		 *
 		 * ```ts
-		 * zyraxoncode.workspace.createFileSystemWatcher(new zyraxoncode.RelativePattern(zyraxoncode.workspace.workspaceFolders[0], '**​/*.js'));
+		 * zyraxoncode.workspace.createFileSystemWatcher(new zyraxoncode.RelativePattern(zyraxoncode.workspace.workspaceFolders[0], '**â€‹/*.js'));
 		 * ```
 		 *
 		 * If you want to monitor file events across all opened workspace folders:
 		 *
 		 * ```ts
-		 * zyraxoncode.workspace.createFileSystemWatcher('**​/*.js');
+		 * zyraxoncode.workspace.createFileSystemWatcher('**â€‹/*.js');
 		 * ```
 		 *
 		 * *Note:* the array of workspace folders can be empty if no workspace is opened (empty window).
@@ -14058,7 +14058,7 @@ declare module 'zyraxoncode' {
 		 * And use a complex glob pattern to watch recursively:
 		 *
 		 * ```ts
-		 * zyraxoncode.workspace.createFileSystemWatcher(new zyraxoncode.RelativePattern(zyraxoncode.Uri.file(<path to folder outside workspace>), '**​/*.js'));
+		 * zyraxoncode.workspace.createFileSystemWatcher(new zyraxoncode.RelativePattern(zyraxoncode.Uri.file(<path to folder outside workspace>), '**â€‹/*.js'));
 		 * ```
 		 *
 		 * Here is an example for watching the active editor for file changes:
@@ -14079,7 +14079,7 @@ declare module 'zyraxoncode' {
 		 * Find files across all {@link workspace.workspaceFolders workspace folders} in the workspace.
 		 *
 		 * @example
-		 * findFiles('**​/*.js', '**​/node_modules/**', 10)
+		 * findFiles('**â€‹/*.js', '**â€‹/node_modules/**', 10)
 		 *
 		 * @param include A {@link GlobPattern glob pattern} that defines the files to search for. The glob pattern
 		 * will be matched against the file paths of resulting matches relative to their workspace. Use a {@link RelativePattern relative pattern}
@@ -20792,7 +20792,7 @@ declare module 'zyraxoncode' {
 		 * correct conversation.
 		 *
 		 * A tool {@link LanguageModelToolResult result} is an array of {@link LanguageModelTextPart text-} and
-		 * {@link LanguageModelPromptTsxPart prompt-tsx}-parts. If the tool caller is using `@zyraxoncode/prompt-tsx`, it can
+		 * {@link LanguageModelPromptTsxPart prompt-tsx}-parts. If the tool caller is using `@vscode/prompt-tsx`, it can
 		 * incorporate the response parts into its prompt using a `ToolResult`. If not, the parts can be passed along to the
 		 * {@link LanguageModelChat} via a user message with a {@link LanguageModelToolResultPart}.
 		 *
@@ -20977,7 +20977,7 @@ declare module 'zyraxoncode' {
 	}
 
 	/**
-	 * A language model response part containing a PromptElementJSON from `@zyraxoncode/prompt-tsx`.
+	 * A language model response part containing a PromptElementJSON from `@vscode/prompt-tsx`.
 	 * @see {@link LanguageModelToolResult}
 	 */
 	export class LanguageModelPromptTsxPart {
@@ -20988,13 +20988,13 @@ declare module 'zyraxoncode' {
 
 		/**
 		 * Construct a prompt-tsx part with the given content.
-		 * @param value The value of the part, the result of `renderElementJSON` from `@zyraxoncode/prompt-tsx`.
+		 * @param value The value of the part, the result of `renderElementJSON` from `@vscode/prompt-tsx`.
 		 */
 		constructor(value: unknown);
 	}
 
 	/**
-	 * A result returned from a tool invocation. If using `@zyraxoncode/prompt-tsx`, this result may be rendered using a `ToolResult`.
+	 * A result returned from a tool invocation. If using `@vscode/prompt-tsx`, this result may be rendered using a `ToolResult`.
 	 */
 	export class LanguageModelToolResult {
 		/**

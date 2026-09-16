@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { UriHandler, Uri, window, Disposable, commands, LogOutputChannel, l10n } from 'zyraxoncode';
+import { UriHandler, Uri, window, Disposable, commands, LogOutputChannel, l10n } from 'vscode';
 import { dispose, isWindows } from './util';
 import * as querystring from 'querystring';
 

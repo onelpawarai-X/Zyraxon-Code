@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { commands, MarkdownString, StatusBarAlignment, StatusBarItem, ThemeColor, Uri, window, workspace } from 'zyraxoncode';
+import { commands, MarkdownString, StatusBarAlignment, StatusBarItem, ThemeColor, Uri, window, workspace } from 'vscode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { DocumentId } from '../../../../platform/inlineEdits/common/dataTypes/documentId';
@@ -231,11 +231,11 @@ export class ExpectedEditCaptureController extends Disposable {
 		// Rich markdown tooltip
 		const ctrlOrCmd = process.platform === 'darwin' ? 'Cmd' : 'Ctrl';
 		const tooltip = new MarkdownString();
-		tooltip.appendMarkdown('### 🔴 NES CAPTURE MODE ACTIVE\n\n');
+		tooltip.appendMarkdown('### ðŸ”´ NES CAPTURE MODE ACTIVE\n\n');
 		tooltip.appendMarkdown('Type your expected edit, then:\n\n');
-		tooltip.appendMarkdown(`- **${ctrlOrCmd}+Enter** — Save your edits\n`);
-		tooltip.appendMarkdown(`- **${ctrlOrCmd}+Enter (empty)** — No edit expected\n`);
-		tooltip.appendMarkdown('- **Esc** — Cancel capture\n');
+		tooltip.appendMarkdown(`- **${ctrlOrCmd}+Enter** â€” Save your edits\n`);
+		tooltip.appendMarkdown(`- **${ctrlOrCmd}+Enter (empty)** â€” No edit expected\n`);
+		tooltip.appendMarkdown('- **Esc** â€” Cancel capture\n');
 		tooltip.isTrusted = true;
 		this._statusBarItem.tooltip = tooltip;
 

@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import type { InlineCompletionContext } from 'zyraxoncode';
+import { Raw } from '@vscode/prompt-tsx';
+import type { InlineCompletionContext } from 'vscode';
 import * as yaml from 'yaml';
 import { ErrorUtils } from '../../../util/common/errors';
 import { isCancellationError } from '../../../util/vs/base/common/errors';
@@ -88,10 +88,10 @@ export class InlineEditRequestLogContext {
 		lines.push('# ' + this.getMarkdownTitle() + ` (Request #${this.requestId})`);
 
 		if (!this._isCompleted) {
-			lines.push('\n⏳ **In progress…**\n');
+			lines.push('\nâ³ **In progressâ€¦**\n');
 		}
 
-		lines.push('💡 Tip: double-click anywhere to open this file as text to copy-paste content into an issue.\n');
+		lines.push('ðŸ’¡ Tip: double-click anywhere to open this file as text to copy-paste content into an issue.\n');
 
 		lines.push('<details><summary>Explanation for icons</summary>\n');
 		lines.push(`- ${Icon.lightbulbFull.svg} - model had suggestions\n`);
@@ -183,14 +183,14 @@ export class InlineEditRequestLogContext {
 			lines.push(`## Prompt section tokens ${fromCacheStatus}`);
 			lines.push('<details><summary>Click to view</summary>\n');
 			lines.push('Approximate (char/4) token counts per prompt section.\n');
-			lines.push('Indented `↳` rows break down `recently_viewed_code_snippets` by source; they do not sum exactly to the section total (section tags and inter-snippet newline glue are excluded).\n');
+			lines.push('Indented `â†³` rows break down `recently_viewed_code_snippets` by source; they do not sum exactly to the section total (section tags and inter-snippet newline glue are excluded).\n');
 			lines.push('| Section | Tokens |');
 			lines.push('| --- | --- |');
 			lines.push(`| system_prompt | ${t.systemPrompt} |`);
 			lines.push(`| recently_viewed_code_snippets | ${t.recentlyViewed} |`);
-			lines.push(`| &nbsp;&nbsp;↳ recently viewed files (xtab history) | ${t.recentlyViewedSubsections.recentlyViewedFiles} |`);
-			lines.push(`| &nbsp;&nbsp;↳ language context | ${t.recentlyViewedSubsections.languageContext} |`);
-			lines.push(`| &nbsp;&nbsp;↳ neighbor files | ${t.recentlyViewedSubsections.neighborFiles} |`);
+			lines.push(`| &nbsp;&nbsp;â†³ recently viewed files (xtab history) | ${t.recentlyViewedSubsections.recentlyViewedFiles} |`);
+			lines.push(`| &nbsp;&nbsp;â†³ language context | ${t.recentlyViewedSubsections.languageContext} |`);
+			lines.push(`| &nbsp;&nbsp;â†³ neighbor files | ${t.recentlyViewedSubsections.neighborFiles} |`);
 			lines.push(`| current_file_content | ${t.currentFile} |`);
 			lines.push(`| lint_errors | ${t.lintErrors} |`);
 			lines.push(`| edit_diff_history | ${t.editHistory} |`);
@@ -316,7 +316,7 @@ export class InlineEditRequestLogContext {
 	setIsCachedResult(logContextOfCachedEdit: InlineEditRequestLogContext): void {
 		this._logContextOfCachedEdit = logContextOfCachedEdit;
 
-		// Direct field copy — avoids triggering outcome transitions from the
+		// Direct field copy â€” avoids triggering outcome transitions from the
 		// public setters (e.g. setResponseResults -> succeeded, setError -> errored).
 		// The final outcome is always 'cached'.
 		this.recordingBookmark = logContextOfCachedEdit.recordingBookmark;
@@ -424,7 +424,7 @@ export class InlineEditRequestLogContext {
 	 * prediction) prompt, and the document-line offset range the model can
 	 * reference in its response. Stored here so in-process debug / datagen
 	 * tooling can read them back via the same log-context vehicle as the
-	 * xtab prompt (`rawMessages`). Never emitted to telemetry sinks — the
+	 * xtab prompt (`rawMessages`). Never emitted to telemetry sinks â€” the
 	 * `rawMessages` can contain full prompt content (source code).
 	 */
 	private _cursorJumpRawMessages: Raw.ChatMessage[] | undefined = undefined;
@@ -684,15 +684,15 @@ export class InlineEditRequestLogContext {
 		// Render timeline header
 		lines.push('');
 		lines.push('Timeline (nested call hierarchy):');
-		lines.push('─'.repeat(60));
+		lines.push('â”€'.repeat(60));
 
 		// Track what's currently shown at each depth to avoid redundant output
 		const currentAtDepth: string[] = [];
 
 		for (const trace of parsedTraces) {
 			const timeStr = `[${String(trace.timestamp).padStart(timeWidth - 3)}ms]`;
-			const indentUnit = '│   ';
-			const newBranchUnit = '├── ';
+			const indentUnit = 'â”‚   ';
+			const newBranchUnit = 'â”œâ”€â”€ ';
 
 			// Determine which segments are new vs continuing
 			let indent = '';
@@ -720,16 +720,16 @@ export class InlineEditRequestLogContext {
 				lines.push(`${timeStr} ${prefix}[${displaySegment}]`);
 				if (trace.message) {
 					const msgIndent = indentUnit.repeat(trace.segments.length);
-					lines.push(`${' '.repeat(timeWidth + 1)} ${msgIndent}↳ ${trace.message}`);
+					lines.push(`${' '.repeat(timeWidth + 1)} ${msgIndent}â†³ ${trace.message}`);
 				}
 			} else if (trace.message) {
 				// Just a message at the current depth
 				const msgIndent = indentUnit.repeat(trace.segments.length);
-				lines.push(`${timeStr} ${msgIndent}↳ ${trace.message}`);
+				lines.push(`${timeStr} ${msgIndent}â†³ ${trace.message}`);
 			}
 		}
 
-		lines.push('─'.repeat(60));
+		lines.push('â”€'.repeat(60));
 		lines.push('```');
 		lines.push('\n</details>\n');
 

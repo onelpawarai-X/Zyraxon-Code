@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'zyraxoncode';
+import type { LanguageModelToolInformation } from 'vscode';
 import { Embedding, EmbeddingType } from '../../../../platform/embeddings/common/embeddingsComputer';
 import { packEmbedding, unpackEmbedding } from '../../../../platform/embeddings/common/embeddingsStorage';
 import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';

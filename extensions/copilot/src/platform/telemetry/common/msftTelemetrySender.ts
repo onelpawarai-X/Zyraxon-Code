@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ import { CopilotToken } from '../../authentication/common/copilotToken';
 import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStore';
 import { IMSFTTelemetrySender, ITelemetrySender, TelemetryEventMeasurements, TelemetryEventProperties } from './telemetry';
 
-// This type aims to mirror the `TelemetryReporter` exposed by `@zyraxoncode/extension-telemetry`
+// This type aims to mirror the `TelemetryReporter` exposed by `@vscode/extension-telemetry`
 // It has a few more methods than just the base sender
 export interface ITelemetryReporter extends ITelemetrySender {
 	sendRawTelemetryEvent(eventName: string, properties?: TelemetryEventProperties, measurements?: TelemetryEventMeasurements): void;

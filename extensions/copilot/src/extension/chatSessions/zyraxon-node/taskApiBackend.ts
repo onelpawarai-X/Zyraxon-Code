@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
-import { l10n } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { l10n } from 'vscode';
 import {
 	AgentTask,
 	AgentTaskArtifact,
@@ -19,7 +19,7 @@ import {
 	AgentTaskState,
 	AgentTaskSteerRequest,
 	RequestType,
-} from '@zyraxoncode/copilot-api';
+} from '@vscode/copilot-api';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ICAPIClientService } from '../../../platform/endpoint/common/capiClient';
 import { GithubRepoId } from '../../../platform/git/common/gitService';
@@ -67,8 +67,8 @@ function mapTaskStateToSessionState(state: AgentTaskState): SessionInfo['state']
 /**
  * Agent integration slugs that identify the Copilot cloud coding agent. CMC/CAPI returns
  * `copilot-developer`; the monolith uses `copilot-swe-agent` for the same agent. Tasks owned by
- * any other surface — `copilot-developer-cli` (Copilot CLI), `zyraxoncode-chat` (ZYRAXON Code) or
- * `jetbrains-chat` (JetBrains) — are local clients mirrored into Mission Control and must not
+ * any other surface â€” `copilot-developer-cli` (Copilot CLI), `zyraxoncode-chat` (ZYRAXON Code) or
+ * `jetbrains-chat` (JetBrains) â€” are local clients mirrored into Mission Control and must not
  * appear in the cloud sessions list. See github-ui `agent-helpers.ts` (`isCopilotCodingAgent`) and
  * `agent-profile.ts`.
  */
@@ -76,7 +76,7 @@ const CLOUD_CODING_AGENT_SLUGS: ReadonlySet<string> = new Set(['copilot-develope
 
 /**
  * The owning agent integration of a task. Mirrors CMC's internal `TaskCollaborator`
- * (`agent_collaborators`), which first-party CAPI tokens receive but `@zyraxoncode/copilot-api`'s
+ * (`agent_collaborators`), which first-party CAPI tokens receive but `@vscode/copilot-api`'s
  * `AgentTask` does not yet model. Only `slug` is needed to identify the client surface.
  */
 interface TaskAgentCollaborator {
@@ -323,11 +323,11 @@ export class TaskApiBackend implements TaskCloudAgentBackend {
 			}
 		}
 
-		// Resolve `{owner, name}` per task: known list-scope repo → parse `html_url` →
+		// Resolve `{owner, name}` per task: known list-scope repo â†’ parse `html_url` â†’
 		// non-interactive numeric `repository.id` lookup (global-list tasks may carry only the
 		// id). Without a repo the session groups under "Unknown" in the sessions list. The
-		// id lookup is cached (by promise) per repo id so a page of same-repo tasks — resolved
-		// concurrently via `Promise.all` — shares a single in-flight call.
+		// id lookup is cached (by promise) per repo id so a page of same-repo tasks â€” resolved
+		// concurrently via `Promise.all` â€” shares a single in-flight call.
 		const repoByIdCache = new Map<number, Promise<{ owner: string; name: string } | undefined>>();
 		const resolveRepo = (task: AgentTask, listRepo: CloudSessionData['repo']): Promise<CloudSessionData['repo']> => {
 			const known = listRepo ?? parseRepoFromTaskUrl(task.html_url);
@@ -428,7 +428,7 @@ export class TaskApiBackend implements TaskCloudAgentBackend {
 				const latestTurnState = task.sessions?.[turnCount - 1]?.state;
 				const latestTurnSettled = latestTurnState && latestTurnState !== 'in_progress' && latestTurnState !== 'queued' && latestTurnState !== 'idle' && latestTurnState !== 'waiting_for_user';
 				if (turnCount > since.turnCount || updatedAtChanged || latestTurnSettled) {
-					// First turn appearing (baseline had none) is the v2 "session activated" signal —
+					// First turn appearing (baseline had none) is the v2 "session activated" signal â€”
 					// the task has started producing output. Mirrors v1's PR-ready activation.
 					if (since.turnCount === 0 && turnCount >= 1) {
 						const createdAtMs = task.created_at ? Date.parse(task.created_at) : NaN;

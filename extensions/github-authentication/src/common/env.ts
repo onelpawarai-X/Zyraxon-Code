@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { Uri } from 'zyraxoncode';
+import { Uri } from 'vscode';
 import { AuthProviderType } from '../github';
 
 const VALID_DESKTOP_CALLBACK_SCHEMES = [

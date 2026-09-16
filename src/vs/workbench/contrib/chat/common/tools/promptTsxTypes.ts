@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 /**
- * This is a subset of the types export from jsonTypes.d.ts in @zyraxoncode/prompt-tsx.
+ * This is a subset of the types export from jsonTypes.d.ts in @vscode/prompt-tsx.
  * It's just the types needed to stringify prompt-tsx tool results.
  * It should be kept in sync with the types in that file.
  *

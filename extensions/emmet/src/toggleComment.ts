@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { getNodesInBetween, getFlatNode, getHtmlFlatNode, sameNodes, isStyleSheet, validate, offsetRangeToVsRange, offsetRangeToSelection } from './util';
 import { Node, Stylesheet, Rule } from 'EmmetFlatNode';
 import parseStylesheet from '@emmetio/css-parser';

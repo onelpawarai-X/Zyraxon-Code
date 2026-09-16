@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatRequestModeInstructions, TextDocument } from 'zyraxoncode';
+import type { ChatRequestModeInstructions, TextDocument } from 'vscode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { ITelemetryService, TelemetryProperties } from '../../../platform/telemetry/common/telemetry';

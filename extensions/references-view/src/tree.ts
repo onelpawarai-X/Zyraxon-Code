@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { EditorHighlights } from './highlights';
 import { Navigation } from './navigation';
 import { SymbolItemDragAndDrop, SymbolTreeInput } from './references-view';
@@ -233,7 +233,7 @@ class HistoryItem {
 		readonly anchor: WordAnchor,
 		readonly input: SymbolTreeInput<unknown>,
 	) {
-		this.description = `${zyraxoncode.workspace.asRelativePath(input.location.uri)} • ${input.title.toLocaleLowerCase()}`;
+		this.description = `${zyraxoncode.workspace.asRelativePath(input.location.uri)} â€¢ ${input.title.toLocaleLowerCase()}`;
 	}
 }
 

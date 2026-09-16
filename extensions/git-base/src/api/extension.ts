@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { Model } from '../model';
 import { GitBaseExtension, API } from './git-base';
-import { Event, EventEmitter } from 'zyraxoncode';
+import { Event, EventEmitter } from 'vscode';
 import { ApiImpl } from './api1';
 
 export class GitBaseExtensionImpl implements GitBaseExtension {

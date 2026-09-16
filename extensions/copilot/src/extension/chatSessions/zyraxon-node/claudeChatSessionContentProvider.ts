@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
-import { ChatExtendedRequestHandler } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { ChatExtendedRequestHandler } from 'vscode';
 import type { PermissionMode } from '@anthropic-ai/claude-agent-sdk';
 import { CLAUDE_SDK_EXTENSION_ID, IClaudeAgentSdkLoaderService } from '../claude/common/claudeAgentSdkLoaderService';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
@@ -185,7 +185,7 @@ export class ClaudeChatSessionContentProvider extends Disposable implements zyra
 			this.sessionStateService.setFolderInfoForSession(effectiveSessionId, folderInfo);
 
 			// Resolve the endpoint once and reuse it for both reasoning effort
-			// and the response footer details — they otherwise both call
+			// and the response footer details â€” they otherwise both call
 			// `resolveEndpoint` (which hits the cached endpoint list, then
 			// re-filters), which is wasted work and risks divergence.
 			const endpoint = await this.claudeModels.resolveEndpoint(modelId.toEndpointModelId(), undefined);
@@ -244,7 +244,7 @@ export class ClaudeChatSessionContentProvider extends Disposable implements zyra
 		const groups = context?.inputState.groups ?? [];
 		for (const group of groups) {
 			if (group.selected) {
-				// Only lock the folder group — permission mode must stay editable
+				// Only lock the folder group â€” permission mode must stay editable
 				const locked = group.id === FOLDER_OPTION_ID;
 				options[group.id] = locked
 					? { ...group.selected, locked: true }
@@ -265,7 +265,7 @@ export class ClaudeChatSessionContentProvider extends Disposable implements zyra
 	 * Resolves model info for each unique non-synthetic model id observed in the
 	 * session's assistant messages. Returns `undefined` (not an empty map) when no model
 	 * ids are present, when the caller has cancelled, or when no ids resolve to known
-	 * endpoints — so callers can skip the per-turn details work entirely.
+	 * endpoints â€” so callers can skip the per-turn details work entirely.
 	 */
 	private async _buildModelDetailsLookup(session: IClaudeCodeSession, token: zyraxoncode.CancellationToken): Promise<Map<string, string> | undefined> {
 		if (token.isCancellationRequested) {
@@ -316,11 +316,11 @@ export class ClaudeChatSessionItemController extends Disposable {
 
 	// #region Shared Observable State
 
-	/** Whether the "bypass permissions" config is enabled — controls permission mode items. */
+	/** Whether the "bypass permissions" config is enabled â€” controls permission mode items. */
 	private readonly _bypassPermissionsEnabled: IObservable<boolean>;
 	private readonly _autoPermissionsEnabled: IObservable<boolean>;
 
-	/** Current workspace folders — controls folder group items and visibility. */
+	/** Current workspace folders â€” controls folder group items and visibility. */
 	private readonly _workspaceFolders: IObservable<URI[]>;
 
 
@@ -364,7 +364,7 @@ export class ClaudeChatSessionItemController extends Disposable {
 				&& (_authenticationService.copilotToken?.isEditorPreviewFeaturesEnabled() ?? true),
 		);
 
-		// Bridge zyraxoncode.Event → internal Event for workspace folder changes
+		// Bridge zyraxoncode.Event â†’ internal Event for workspace folder changes
 		const workspaceFoldersEmitter = this._register(new Emitter<void>());
 		const workspaceFoldersSubscription = _workspaceService.onDidChangeWorkspaceFolders(() => workspaceFoldersEmitter.fire());
 		this._register({ dispose: () => workspaceFoldersSubscription.dispose() });
@@ -627,11 +627,11 @@ export class ClaudeChatSessionItemController extends Disposable {
 
 	/**
 	 * Extracts seed values for the per-state observables from the input groups.
-	 * Pure and synchronous — runs before any autoruns are attached so the first
+	 * Pure and synchronous â€” runs before any autoruns are attached so the first
 	 * autorun pass observes fully-seeded values and does not overwrite the
 	 * carefully-constructed initial groups.
 	 *
-	 * Also recovers the `isSessionStarted` signal from `locked` items — required to
+	 * Also recovers the `isSessionStarted` signal from `locked` items â€” required to
 	 * preserve lock state when restoring a previously-started session.
 	 */
 	private _computeSeedValues(groups: readonly zyraxoncode.ChatSessionProviderOptionGroup[]): {
@@ -731,7 +731,7 @@ export class ClaudeChatSessionItemController extends Disposable {
 			};
 		}
 
-		// No folder available at all — fall back to the user's home directory
+		// No folder available at all â€” fall back to the user's home directory
 		return {
 			cwd: this._envService.userHome.fsPath,
 			additionalDirectories: [],

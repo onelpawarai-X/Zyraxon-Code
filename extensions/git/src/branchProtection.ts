@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, Event, EventEmitter, LogOutputChannel, Uri, workspace } from 'zyraxoncode';
+import { Disposable, Event, EventEmitter, LogOutputChannel, Uri, workspace } from 'vscode';
 import type { BranchProtection, BranchProtectionProvider } from './api/git';
 import { dispose, filterEvent } from './util';
 

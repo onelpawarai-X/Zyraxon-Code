@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Diagnostic, DiagnosticChangeEvent, Uri } from 'zyraxoncode';
+import type { Diagnostic, DiagnosticChangeEvent, Uri } from 'vscode';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { ResourceMap } from '../../../util/vs/base/common/map';
 import { AbstractLanguageDiagnosticsService } from './languageDiagnosticsService';

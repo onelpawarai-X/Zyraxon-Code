@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type * as zyraxoncode from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ICopilotTokenManager } from '../../../platform/authentication/common/copilotTokenManager';
 import { IChatDebugFileLoggerService } from '../../../platform/chat/common/chatDebugFileLoggerService';
@@ -34,9 +34,9 @@ const BLOCKED_PATTERNS = [
 	/\bVACUUM\b/i,
 	/\bREINDEX\b/i,
 	/\bANALYZE\b/i,
-	// Native-code load via SQL function — would be RCE if SQLite is built with extension loading
+	// Native-code load via SQL function â€” would be RCE if SQLite is built with extension loading
 	/\bLOAD_EXTENSION\b/i,
-	// Transaction control — meaningless via prepare().all() but reject for clarity
+	// Transaction control â€” meaningless via prepare().all() but reject for clarity
 	/\b(BEGIN|COMMIT|ROLLBACK|SAVEPOINT|RELEASE)\b/i,
 ];
 
@@ -62,8 +62,8 @@ export interface SessionStoreSqlParams {
 	readonly subcommand?: 'standup' | 'tips' | 'cost-tips' | 'search' | 'improve' | 'reindex';
 }
 
-/** Model description when cloud sync is enabled — uses DuckDB SQL syntax. */
-const CLOUD_MODEL_DESCRIPTION = `Query the cloud session store containing ALL past coding sessions across devices and agents. Uses DuckDB syntax (NOT SQLite). SQL queries are read-only — only SELECT and WITH are allowed. Use \`now() - INTERVAL '1 day'\` for date math (NOT \`datetime('now', '-1 day')\` — that's SQLite-only), \`ILIKE\` for text search (no FTS5/MATCH).
+/** Model description when cloud sync is enabled â€” uses DuckDB SQL syntax. */
+const CLOUD_MODEL_DESCRIPTION = `Query the cloud session store containing ALL past coding sessions across devices and agents. Uses DuckDB syntax (NOT SQLite). SQL queries are read-only â€” only SELECT and WITH are allowed. Use \`now() - INTERVAL '1 day'\` for date math (NOT \`datetime('now', '-1 day')\` â€” that's SQLite-only), \`ILIKE\` for text search (no FTS5/MATCH).
 
 Tables: \`sessions\`, \`turns\`, \`session_files\`, \`session_refs\`, \`checkpoints\`, \`events\`, \`tool_requests\`. For column details and query patterns, use the **chronicle** skill.
 
@@ -103,7 +103,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 		}
 	}
 	private async _invokeQuery(rawQuery: string, subcommand: SessionStoreSqlParams['subcommand'], token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
-		// Strip trailing semicolons — models often append them
+		// Strip trailing semicolons â€” models often append them
 		const sql = rawQuery.trim().replace(/;+\s*$/, '');
 
 		if (!sql) {
@@ -130,7 +130,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 			]);
 		}
 
-		// Block multiple statements — only one query per call
+		// Block multiple statements â€” only one query per call
 		if (sql.includes(';')) {
 			this._sendTelemetry({ command: 'query', subcommand, target: 'local', blocked: true, rowCount: 0, durationMs: 0, success: false, error: 'multiple_statements' });
 			return new LanguageModelToolResult([
@@ -150,18 +150,18 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 			let truncated = false;
 
 			if (hasCloud) {
-				// Cloud is enabled — model receives DuckDB description via alternativeDefinition
+				// Cloud is enabled â€” model receives DuckDB description via alternativeDefinition
 				const client = new CloudSessionStoreClient(this._tokenManager, this._authService, this._fetcherService);
 				const cloudResult = await client.executeQuery(sql);
 
 				if (cloudResult && 'error' in cloudResult) {
-					// Cloud query failed — surface the error so model can fix its query
+					// Cloud query failed â€” surface the error so model can fix its query
 					this._sendTelemetry({ command: 'query', subcommand, target: 'cloud', rowCount: 0, durationMs: Date.now() - startTime, success: false, error: cloudResult.error.substring(0, 100) });
 					return new LanguageModelToolResult([new LanguageModelTextPart(
 						`Error from cloud: ${cloudResult.error}\n\nReminder: Cloud uses DuckDB SQL syntax. Use \`now() - INTERVAL '1 day'\` for date math, \`ILIKE\` for text search (no FTS5/MATCH).`
 					)]);
 				} else if (!cloudResult) {
-					// Auth/network failure — fall back to local
+					// Auth/network failure â€” fall back to local
 					source = 'local_fallback';
 					target = 'local';
 					fallback = true;
@@ -240,7 +240,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 			lines.push('');
 			lines.push(`${result.processed} session(s) processed, ${result.skipped} skipped.`);
 
-			// Cloud reindex phase — gated by cloud sync settings in RemoteSessionExporter
+			// Cloud reindex phase â€” gated by cloud sync settings in RemoteSessionExporter
 			if (!result.cancelled && !token.isCancellationRequested) {
 				try {
 					const cloudResult = await this._runCommandService.executeCommand(
@@ -252,7 +252,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 						lines.push(`${cloudResult.created} session(s) synced to cloud.`);
 					}
 				} catch {
-					// Cloud phase failure is non-fatal — local reindex already succeeded
+					// Cloud phase failure is non-fatal â€” local reindex already succeeded
 				}
 			}
 
@@ -350,7 +350,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 				...(tool.inputSchema as Record<string, unknown>).properties as Record<string, unknown>,
 				query: {
 					type: 'string',
-					description: 'A single DuckDB SQL query to execute. Required when action is \'query\'. Read-only queries only (SELECT, WITH). Use now() - INTERVAL for date math, ILIKE for text search. Only one statement per call — do not combine multiple queries with semicolons.',
+					description: 'A single DuckDB SQL query to execute. Required when action is \'query\'. Read-only queries only (SELECT, WITH). Use now() - INTERVAL for date math, ILIKE for text search. Only one statement per call â€” do not combine multiple queries with semicolons.',
 				},
 			},
 		};
@@ -396,14 +396,14 @@ function formatSqlResult(rows: Record<string, unknown>[], truncated: boolean, so
 
 	if (truncated) {
 		lines.push('');
-		lines.push('⚠️ Results were truncated. Add a LIMIT clause or narrow your query.');
+		lines.push('âš ï¸ Results were truncated. Add a LIMIT clause or narrow your query.');
 	}
 
 	let result = lines.join('\n');
 
-	// Hard budget enforcement — truncate the entire output if it still exceeds the budget
+	// Hard budget enforcement â€” truncate the entire output if it still exceeds the budget
 	if (result.length > TOTAL_FORMAT_BUDGET) {
-		result = result.slice(0, TOTAL_FORMAT_BUDGET) + '\n\n⚠️ Output truncated to stay within context budget.';
+		result = result.slice(0, TOTAL_FORMAT_BUDGET) + '\n\nâš ï¸ Output truncated to stay within context budget.';
 	}
 
 	return result;

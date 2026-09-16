@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { languages, workspace } from 'zyraxoncode';
+import { languages, workspace } from 'vscode';
 import { DocumentSelector } from 'zyraxoncode-languageserver-protocol';
 import { IInstantiationService } from '../../../../../util/vs/platform/instantiation/common/instantiation';
 import { isDocumentValid } from '../../lib/src/util/documentEvaluation';

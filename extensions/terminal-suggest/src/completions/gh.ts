@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 /* eslint-disable local/code-no-unexternalized-strings */
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { filepaths } from '../helpers/filepaths';
 import { keyValue } from '../helpers/keyvalue';
 
@@ -39,7 +39,7 @@ const postProcessRemoteBranches: Fig.Generator["postProcess"] = (out) => {
 					description: "Current branch",
 					priority: 100,
 					// allow-any-unicode-next-line
-					icon: "⭐️",
+					icon: "â­ï¸",
 				};
 			} else if (parts[0] === "+") {
 				// Branch checked out in another worktree.
@@ -67,7 +67,7 @@ const listRepoMapFunction = (repo: RepoDataType) => ({
 	description: repo.description ?? undefined,
 	//be able to see if the repo is private at a glance
 	// allow-any-unicode-next-line
-	icon: repo.isPrivate ? "🔒" : "👀",
+	icon: repo.isPrivate ? "ðŸ”’" : "ðŸ‘€",
 });
 
 const ghGenerators: Record<string, Fig.Generator> = {

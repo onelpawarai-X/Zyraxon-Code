@@ -1,4 +1,4 @@
-{
+﻿{
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
 		"rootDir": ".",
@@ -18,11 +18,11 @@
 		],
 		"preserveSymlinks": true,
 		"paths": {
-			"@zyraxoncode/markdown-editor": [
-				"../node_modules/@zyraxoncode/markdown-editor/dist/index.d.ts"
+			"@vscode/markdown-editor": [
+				"../node_modules/@vscode/markdown-editor/dist/index.d.ts"
 			],
-			"@zyraxoncode/markdown-editor/observables": [
-				"../node_modules/@zyraxoncode/markdown-editor/dist/observables.d.ts"
+			"@vscode/markdown-editor/observables": [
+				"../node_modules/@vscode/markdown-editor/dist/observables.d.ts"
 			]
 		},
 		"skipLibCheck": true,

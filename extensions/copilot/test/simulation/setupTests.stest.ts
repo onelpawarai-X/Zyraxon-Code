@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as assert from 'assert';
 import * as path from 'path';
-import type { ChatResponseFileTree } from 'zyraxoncode';
+import type { ChatResponseFileTree } from 'vscode';
 import { createTextDocumentData } from '../../src/util/common/test/shims/textDocument';
 import { URI } from '../../src/util/vs/base/common/uri';
 import { rubric } from '../base/rubric';

@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as assert from 'assert';
 import { outdent } from 'outdent';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { guessNamingConvention, NamingConvention } from '../../src/extension/renameSuggestions/common/namingConvention';
 import { RenameSuggestionsProvider } from '../../src/extension/renameSuggestions/node/renameSuggestionsProvider';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';

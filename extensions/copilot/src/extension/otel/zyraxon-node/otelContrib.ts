@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as os from 'os';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey } from '../../../platform/configuration/common/configurationService';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -37,7 +37,7 @@ export class OTelContrib extends Disposable implements IExtensionContribution {
 	) {
 		super();
 		if (this._otelService.config.enabled) {
-			this._logService.info(`[OTel] Instrumentation enabled — exporter=${this._otelService.config.exporterType} endpoint=${this._otelService.config.otlpEndpoint} captureContent=${this._otelService.config.captureContent}`);
+			this._logService.info(`[OTel] Instrumentation enabled â€” exporter=${this._otelService.config.exporterType} endpoint=${this._otelService.config.otlpEndpoint} captureContent=${this._otelService.config.captureContent}`);
 		} else {
 			this._logService.trace('[OTel] Instrumentation disabled');
 		}
@@ -52,17 +52,17 @@ export class OTelContrib extends Disposable implements IExtensionContribution {
 			if (!this._otelService.config.enabled) {
 				return;
 			}
-			this._logService.info('[OTel] Flush requested — exporting pending traces, metrics, and events');
+			this._logService.info('[OTel] Flush requested â€” exporting pending traces, metrics, and events');
 			await this._otelService.flush();
 			this._logService.info('[OTel] Flush complete');
 		}));
 
-		// Prompt for reload when OTel settings change — these are read once at
+		// Prompt for reload when OTel settings change â€” these are read once at
 		// activation and the OTel SDK cannot be reconfigured at runtime.
 		this._watchForReloadRequiredChanges();
 
 		// Export the agent-traces.db file.
-		// Programmatic (eval harness): called with savePath URI or string → copies DB there.
+		// Programmatic (eval harness): called with savePath URI or string â†’ copies DB there.
 		// Interactive (command palette): shows save dialog with default filename.
 		this._register(zyraxoncode.commands.registerCommand('github.copilot.chat.otel.exportAgentTracesDB', async (savePath?: zyraxoncode.Uri | string) => {
 			const dbPath = this._sqliteStore.dbPath;
@@ -303,7 +303,7 @@ export class OTelContrib extends Disposable implements IExtensionContribution {
 		// Close SQLite store before OTel shutdown
 		this._sqliteStore.close();
 		if (this._otelService.config.enabled) {
-			this._logService.info('[OTel] Shutting down — flushing pending traces, metrics, and events');
+			this._logService.info('[OTel] Shutting down â€” flushing pending traces, metrics, and events');
 		}
 		this._otelService.shutdown().catch((err: Error) => {
 			this._logService.error('[OTel] Error during shutdown:', String(err));

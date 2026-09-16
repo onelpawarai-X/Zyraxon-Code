@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { TelemetrySender } from 'zyraxoncode';
+import type { TelemetrySender } from 'vscode';
 
 export class FailingTelemetryReporter implements TelemetrySender {
 	sendEventData(eventName: string, data?: Record<string, any> | undefined): void {

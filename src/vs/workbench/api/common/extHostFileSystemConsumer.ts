@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { MainContext, MainThreadFileSystemShape } from './extHost.protocol.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import * as files from '../../../platform/files/common/files.js';
 import { FileSystemError } from './extHostTypes.js';
 import { VSBuffer } from '../../../base/common/buffer.js';

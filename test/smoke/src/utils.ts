@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as sqlite3 from '@zyraxoncode/sqlite3';
+import * as sqlite3 from '@vscode/sqlite3';
 import * as fs from 'fs';
 import { Suite, Context } from 'mocha';
 import { dirname, join } from 'path';
@@ -214,7 +214,7 @@ export function getCopilotSmokeTestEnv(mockServer?: MockLlmServer, opts?: { user
 		try {
 			fs.mkdirSync(copilotHome, { recursive: true });
 		} catch {
-			// best effort — the dir will be created by the extension on first
+			// best effort â€” the dir will be created by the extension on first
 			// write if mkdir fails here (e.g. due to a race with a sibling
 			// suite). The env vars are still honoured.
 		}
@@ -248,7 +248,7 @@ export function getCopilotSmokeTestEnv(mockServer?: MockLlmServer, opts?: { user
  * `userDataDir`: `createApp` appends a random suffix to `userDataDir` *after*
  * the env is computed, so a path derived from `app.userDataPath` would not match
  * where the runtime actually wrote. There is deliberately no fall back to the
- * ambient `~/.copilot/logs` — on a reused CI agent that could surface an
+ * ambient `~/.copilot/logs` â€” on a reused CI agent that could surface an
  * unrelated session's trace log (session/model/auth diagnostics), which we must
  * never copy into an uploaded artifact.
  */
@@ -342,10 +342,10 @@ export async function retry<T>(task: ITask<Promise<T>>, delay: number, retries: 
  *    most recent are copied into `<logsPath>/copilot-runtime-logs/` (so they
  *    ship in the published `logs-*` artifact that the SDK-integration canary
  *    and bump workflows consume) and their tail is written into the runner
- *    log. These are the SDK/CLI's own diagnostics — the key signal when an
+ *    log. These are the SDK/CLI's own diagnostics â€” the key signal when an
  *    SDK-backed session hangs and the test only reports a timeout.
  *
- * All steps are wrapped in try/catch — this helper must never throw, since
+ * All steps are wrapped in try/catch â€” this helper must never throw, since
  * it runs inside a test's `catch` block right before re-throwing the
  * original error.
  */
@@ -412,7 +412,7 @@ export async function dumpFailureDiagnostics(
 				logger.log(`[${label}] --- END ${w}/GitHub Copilot Chat.log ---`);
 			} catch {
 				// File does not exist for this window (e.g. windows without the
-				// Copilot Chat extension activated). That's expected — skip.
+				// Copilot Chat extension activated). That's expected â€” skip.
 			}
 		}
 	} catch (err) {
@@ -420,7 +420,7 @@ export async function dumpFailureDiagnostics(
 	}
 
 	// 4. Capture the Copilot runtime (`@github/copilot` CLI) process logs.
-	//    These are the SDK/CLI's OWN diagnostics — the single most useful
+	//    These are the SDK/CLI's OWN diagnostics â€” the single most useful
 	//    signal when a Copilot-runtime session hangs or times out, which the
 	//    mocha "Timed out waiting for response" failure on its own does not
 	//    explain. The runtime writes `process-*.log` files to `${COPILOT_HOME}/logs`;
@@ -432,7 +432,7 @@ export async function dumpFailureDiagnostics(
 	//    CLI / Claude) and Local sessions run the SDK in-process and install their
 	//    own log writer that routes the detailed model/turn diagnostics to
 	//    `logService` (the `GitHub Copilot Chat.log` tailed in step 3), so their
-	//    `process-*.log` is usually just the runtime's startup/lifecycle — enough
+	//    `process-*.log` is usually just the runtime's startup/lifecycle â€” enough
 	//    to tell whether the runtime came up (if it did but the turn never
 	//    completed, the stall is renderer/extension-side, not the CLI). We copy
 	//    the most recent log(s) into the suite `logsPath` so they ship in the
@@ -461,7 +461,7 @@ export async function dumpFailureDiagnostics(
 				const stat = await fs.promises.stat(full);
 				collected.push({ path: full, mtimeMs: stat.mtimeMs });
 			} catch {
-				// racing cleanup — skip
+				// racing cleanup â€” skip
 			}
 		}
 		if (collected.length === 0) {
@@ -474,7 +474,7 @@ export async function dumpFailureDiagnostics(
 			try {
 				await fs.promises.mkdir(runtimeLogsDest, { recursive: true });
 			} catch {
-				// best effort — copy below still logs on failure
+				// best effort â€” copy below still logs on failure
 			}
 			for (const { path: logPath } of collected.slice(0, 2)) {
 				try {

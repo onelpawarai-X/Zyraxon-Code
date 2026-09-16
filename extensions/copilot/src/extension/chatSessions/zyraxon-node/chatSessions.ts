@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IEnvService, INativeEnvService } from '../../../platform/env/common/envService';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
@@ -314,7 +314,7 @@ export class ChatSessionsContrib extends Disposable implements IExtensionContrib
 			this._register(onDidChangeChatSessionItemState(async (item) => {
 				const sessionId = SessionIdForCLI.parse(item.resource);
 				// Persist archived state first so worktree-sharing checks (delete/archive)
-				// can ignore archived siblings — their worktrees are reconstructed on
+				// can ignore archived siblings â€” their worktrees are reconstructed on
 				// un-archive via `recreateWorktreeOnUnarchive`.
 				try {
 					await copilotCLIMetadataStore.setSessionArchived(sessionId, !!item.archived);

@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import { commands, env, ExtensionContext, ExtensionMode, l10n as zyraxoncodeL10n } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import { commands, env, ExtensionContext, ExtensionMode, l10n as zyraxoncodeL10n } from 'vscode';
 import { isScenarioAutomation } from '../../../platform/env/common/envService';
 import { isProduction } from '../../../platform/env/common/packagejson';
 import { IIgnoreService } from '../../../platform/ignore/common/ignoreService';

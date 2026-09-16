@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as l10n from '@zyraxoncode/l10n';
-import { ChatResponseFileTreePart, Disposable, MarkdownString, ProgressLocation, SaveDialogOptions, Tab, TabInputText, Uri, commands, env, interactive, window, workspace } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import { ChatResponseFileTreePart, Disposable, MarkdownString, ProgressLocation, SaveDialogOptions, Tab, TabInputText, Uri, commands, env, interactive, window, workspace } from 'vscode';
 import { IConversationOptions } from '../../../platform/chat/common/conversationOptions';
 import { ILogService } from '../../../platform/log/common/logService';
 import * as path from '../../../util/vs/base/common/path';

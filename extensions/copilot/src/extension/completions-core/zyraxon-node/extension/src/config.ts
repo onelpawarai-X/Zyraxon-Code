@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { WorkspaceConfiguration } from 'zyraxoncode';
-import * as zyraxoncode from 'zyraxoncode';
+import type { WorkspaceConfiguration } from 'vscode';
+import * as zyraxoncode from 'vscode';
 import { DisposableStore, IDisposable } from '../../../../../util/vs/base/common/lifecycle';
 import { IInstantiationService, ServicesAccessor } from '../../../../../util/vs/platform/instantiation/common/instantiation';
 import {

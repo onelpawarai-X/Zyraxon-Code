@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,7 +6,7 @@
 import assert from 'assert';
 import * as fs from 'fs';
 import path from 'path';
-import type { ChatParticipantDetectionResult, ChatParticipantMetadata } from 'zyraxoncode';
+import type { ChatParticipantDetectionResult, ChatParticipantMetadata } from 'vscode';
 import '../../src/extension/intents/node/allIntents';
 import { IIntentService } from '../../src/extension/intents/node/intentService';
 import { ChatVariablesCollection } from '../../src/extension/prompt/common/chatVariablesCollection';

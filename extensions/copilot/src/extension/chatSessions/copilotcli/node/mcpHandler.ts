@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import type { CancellationToken } from 'zyraxoncode';
+import type { CancellationToken } from 'vscode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -216,7 +216,7 @@ export function buildMcpServerMappings(tools: ReadonlyMap<LanguageModelToolInfor
  * server config.
  *
  * @param customAgents The list of custom agents whose tools will be remapped in place.
- * @param mcpServerMappings Maps friendly server names (from agent files) → ZYRAXON Code MCP display labels.
+ * @param mcpServerMappings Maps friendly server names (from agent files) â†’ ZYRAXON Code MCP display labels.
  * @param mcpServers The MCP server config, keyed by gateway name.
  * @param selectedAgent Optional selected agent to also remap.
  */
@@ -229,7 +229,7 @@ export function remapCustomAgentTools(
 	if (!mcpServerMappings.size || !mcpServers) {
 		return;
 	}
-	// Build a map from display name → gateway name (the Record key in mcpServers).
+	// Build a map from display name â†’ gateway name (the Record key in mcpServers).
 	const displayNameToGatewayName = new Map<string, string>();
 	for (const [gatewayName, config] of Object.entries(mcpServers)) {
 		if (config.displayName) {
@@ -253,7 +253,7 @@ export function remapCustomAgentTools(
 			if (!serverName || !toolName) {
 				continue;
 			}
-			// First try: map through mcpServerMappings (friendly name → display name) then to gateway name.
+			// First try: map through mcpServerMappings (friendly name â†’ display name) then to gateway name.
 			const displayName = mcpServerMappings.get(serverName);
 			// Also try to look up the server name directly as a display name in the gateway map.
 			const gatewayName = displayName ? displayNameToGatewayName.get(displayName) : displayNameToGatewayName.get(serverName);

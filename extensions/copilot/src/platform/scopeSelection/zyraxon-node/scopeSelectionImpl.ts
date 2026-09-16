@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DocumentSymbol, Position, Range, Selection, TextEditor, ThemeIcon, l10n } from 'zyraxoncode';
+import { DocumentSymbol, Position, Range, Selection, TextEditor, ThemeIcon, l10n } from 'vscode';
 import { Codicon } from '../../../util/vs/base/common/codicons';
 import { CancellationError } from '../../../util/vs/base/common/errors';
 import { SymbolKind } from '../../../util/vs/workbench/api/common/extHostTypes/symbolInformation';

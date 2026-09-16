@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { SweCustomAgent } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IPromptsService, ParsedPromptFile } from '../../../../platform/promptFiles/common/promptsService';

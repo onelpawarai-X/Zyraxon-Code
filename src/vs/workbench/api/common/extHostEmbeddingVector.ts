@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { ExtHostAiEmbeddingVectorShape, IMainContext, MainContext, MainThreadAiEmbeddingVectorShape } from './extHost.protocol.js';
-import type { CancellationToken, EmbeddingVectorProvider } from 'zyraxoncode';
+import type { CancellationToken, EmbeddingVectorProvider } from 'vscode';
 import { Disposable } from './extHostTypes.js';
 
 export class ExtHostAiEmbeddingVector implements ExtHostAiEmbeddingVectorShape {

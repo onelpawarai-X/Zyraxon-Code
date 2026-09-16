@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import type { Uri } from 'zyraxoncode';
+import { Raw } from '@vscode/prompt-tsx';
+import type { Uri } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { VSBuffer } from '../../../util/vs/base/common/buffer';
 import { URI } from '../../../util/vs/base/common/uri';

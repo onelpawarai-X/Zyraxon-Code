@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import * as nls from '../../../nls.js';
 import { Emitter, Event } from '../../../base/common/event.js';
 import { MainContext, MainThreadAuthenticationShape, ExtHostAuthenticationShape } from './extHost.protocol.js';
@@ -351,7 +351,7 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 		initialTokens: IAuthorizationToken[] | undefined
 	): Promise<string> {
 		const issuer = URI.revive(issuerComponents);
-		// XAA does not use Dynamic Client Registration — the IdP must already trust the requesting
+		// XAA does not use Dynamic Client Registration â€” the IdP must already trust the requesting
 		// app for the target audience(s). Always require an admin-provisioned client_id (and
 		// typically client_secret).
 		if (!clientId) {

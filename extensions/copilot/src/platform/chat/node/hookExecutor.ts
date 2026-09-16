@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { spawn } from 'child_process';
 import { homedir } from 'os';
-import type { CancellationToken, ChatHookCommand, Uri } from 'zyraxoncode';
+import type { CancellationToken, ChatHookCommand, Uri } from 'vscode';
 import { join, win32 } from '../../../util/vs/base/common/path';
 import { isWindows } from '../../../util/vs/base/common/platform';
 import { removeAnsiEscapeCodes } from '../../../util/vs/base/common/strings';

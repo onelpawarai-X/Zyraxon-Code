@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { downloadAndUnzipZyraxonCode } from '@zyraxoncode/test-electron';
-import { createVSIX } from '@zyraxoncode/vsce';
+import { downloadAndUnzipZyraxonCode } from '@vscode/test-electron';
+import { createVSIX } from '@vscode/vsce';
 import { ChildProcess, spawn } from 'child_process';
 import { AddressInfo, createServer, Socket } from 'net';
 import * as fs from 'node:fs/promises';
@@ -293,7 +293,7 @@ export class TestExecutionInExtension {
 		const rpc = new SimpleRPC(socket);
 
 		rpc.registerMethod('deviceCodeCallback', ({ url }) => {
-			logger.warn(`⚠️ \x1b[31mAuth Required!\x1b[0m Please open the link: ${url}`);
+			logger.warn(`âš ï¸ \x1b[31mAuth Required!\x1b[0m Please open the link: ${url}`);
 		});
 
 		rpc.registerMethod('init', async (params: IInitParams): Promise<IInitResult> => {

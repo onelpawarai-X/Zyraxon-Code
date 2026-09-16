@@ -1,15 +1,15 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import DocumentTracker from './documentTracker';
 import CodeLensProvider from './codelensProvider';
 import CommandHandler from './commandHandler';
 import ContentProvider from './contentProvider';
 import Decorator from './mergeDecorator';
 import * as interfaces from './interfaces';
-import TelemetryReporter from '@zyraxoncode/extension-telemetry';
+import TelemetryReporter from '@vscode/extension-telemetry';
 
 const ConfigurationSectionName = 'merge-conflict';
 

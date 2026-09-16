@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import { disableErrorLogging, parse as parsePartialJson } from 'best-effort-json-parser';
-import type { ChatResponseStream, ChatVulnerability } from 'zyraxoncode';
+import type { ChatResponseStream, ChatVulnerability } from 'vscode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { IResponseDelta } from '../../../platform/networking/common/fetch';
 import { FilterReason } from '../../../platform/networking/common/openai';

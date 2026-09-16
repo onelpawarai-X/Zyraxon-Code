@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -104,7 +104,7 @@ async function getMacMachineId(errorLogger: (error: Error) => void): Promise<str
 const SQM_KEY: string = 'Software\\Zyraxon\\SQMClient';
 export async function getSqmMachineId(errorLogger: (error: Error) => void): Promise<string> {
 	if (isWindows) {
-		const Registry = await import('@zyraxoncode/windows-registry');
+		const Registry = await import('@vscode/windows-registry');
 		try {
 			return Registry.GetStringRegKey('HKEY_LOCAL_MACHINE', SQM_KEY, 'MachineId') || '';
 		} catch (err) {

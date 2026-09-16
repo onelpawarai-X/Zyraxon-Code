@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ import { Emitter, Event } from '../../../base/common/event.js';
 import { Disposable, IDisposable } from '../../../base/common/lifecycle.js';
 import { isWindows, platform } from '../../../base/common/platform.js';
 import { GeneralShellType, TerminalShellType, WindowsShellType } from '../common/terminal.js';
-import type * as WindowsProcessTreeType from '@zyraxoncode/windows-process-tree';
+import type * as WindowsProcessTreeType from '@vscode/windows-process-tree';
 
 export interface IWindowsShellHelper extends IDisposable {
 	readonly onShellNameChanged: Event<string>;
@@ -156,7 +156,7 @@ export class WindowsShellHelper extends Disposable implements IWindowsShellHelpe
 			return this._currentRequest;
 		}
 		if (!windowsProcessTree) {
-			windowsProcessTree = await import('@zyraxoncode/windows-process-tree');
+			windowsProcessTree = await import('@vscode/windows-process-tree');
 		}
 		this._currentRequest = new Promise<string>(resolve => {
 			windowsProcessTree.getProcessTree(this._rootProcessId, tree => {

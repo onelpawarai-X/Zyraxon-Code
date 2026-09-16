@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import type { CancellationToken, ChatContext, ChatPromptReference, ChatSummarizer, Uri } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { CancellationToken, ChatContext, ChatPromptReference, ChatSummarizer, Uri } from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { createServiceIdentifier } from '../../../../util/common/services';
 import { Sequencer } from '../../../../util/vs/base/common/async';

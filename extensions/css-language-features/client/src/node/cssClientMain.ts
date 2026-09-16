@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ExtensionContext, extensions, l10n } from 'zyraxoncode';
+import { ExtensionContext, extensions, l10n } from 'vscode';
 import { BaseLanguageClient, LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from 'zyraxoncode-languageclient/node';
 import { LanguageClientConstructor, startClient } from '../cssClient';
 import { getNodeFSRequestService } from './nodeFs';

@@ -1,16 +1,16 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CommentModeController, CommentsModel, EditorController, EditorModel, EditorView, GutterMarker, OffsetRange, Selection, StringEdit, StringValue, VsCodeV2CommentsView, findNodeOffsetById, taskCheckboxRange } from '@zyraxoncode/markdown-editor';
-import { Disposable, autorun, observableValue } from '@zyraxoncode/markdown-editor/observables';
+import { CommentModeController, CommentsModel, EditorController, EditorModel, EditorView, GutterMarker, OffsetRange, Selection, StringEdit, StringValue, VsCodeV2CommentsView, findNodeOffsetById, taskCheckboxRange } from '@vscode/markdown-editor';
+import { Disposable, autorun, observableValue } from '@vscode/markdown-editor/observables';
 import mermaid from 'mermaid';
 import 'katex/dist/katex.min.css';
-import '@zyraxoncode/markdown-editor/editor.css';
-import '@zyraxoncode/markdown-editor/themes/zyraxoncode-default.css';
-import '@zyraxoncode/markdown-editor/commentInput.css';
-import '@zyraxoncode/markdown-editor/zyraxoncodeCommentWidgetV2.css';
+import '@vscode/markdown-editor/editor.css';
+import '@vscode/markdown-editor/themes/zyraxoncode-default.css';
+import '@vscode/markdown-editor/commentInput.css';
+import '@vscode/markdown-editor/zyraxoncodeCommentWidgetV2.css';
 import './markdownEditor.css';
 import { WebviewSyntaxHighlighter } from './syntaxHighlighter';
 

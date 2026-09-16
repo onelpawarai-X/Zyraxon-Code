@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { ChatErrorDetails, Diagnostic, FormattingOptions, Uri, WorkspaceEdit } from 'zyraxoncode';
+import type { ChatErrorDetails, Diagnostic, FormattingOptions, Uri, WorkspaceEdit } from 'vscode';
 import { IDeserializedWorkspaceState } from '../../src/platform/test/node/promptContextModel';
 import { ITestingServicesAccessor } from '../../src/platform/test/node/services';
 import { IFile, SimulationWorkspace } from '../../src/platform/test/node/simulationWorkspace';

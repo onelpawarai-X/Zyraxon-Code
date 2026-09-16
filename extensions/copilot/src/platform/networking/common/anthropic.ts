@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
 import { getModelId, modelSupportsContextEditing } from '../../endpoint/common/chatModelCapabilities';
-import type { LanguageModelChat } from 'zyraxoncode';
+import type { LanguageModelChat } from 'vscode';
 import { IExperimentationService } from '../../telemetry/common/nullExperimentationService';
 import { ChatLocation } from '../../chat/common/commonTypes';
 import { IChatEndpoint } from './networking';
@@ -31,7 +31,7 @@ export interface AnthropicMessagesTool {
 	cache_control?: { type: 'ephemeral'; ttl?: '5m' | '1h' };
 }
 
-/** Name for the custom client-side embeddings-based tool search tool. Must not use copilot_/zyraxoncode_ prefix — those are reserved for static package.json declarations and will be rejected by zyraxoncode.lm.registerToolDefinition. */
+/** Name for the custom client-side embeddings-based tool search tool. Must not use copilot_/zyraxoncode_ prefix â€” those are reserved for static package.json declarations and will be rejected by zyraxoncode.lm.registerToolDefinition. */
 export const CUSTOM_TOOL_SEARCH_NAME = 'tool_search';
 
 /**
@@ -109,7 +109,7 @@ export function modelSupportsInterleavedThinking(modelId: string): boolean {
  * - Claude Opus 4 / 4.1 / 4.5 / 4.6 / 4.7 / 4.8
  *
  * Accepts either an id string, a {@link LanguageModelChat}, or an
- * {@link IChatEndpoint} — when given an endpoint/chat the model **family**
+ * {@link IChatEndpoint} â€” when given an endpoint/chat the model **family**
  * is also checked, so a per-model family override lights this up
  * automatically.
  */
@@ -157,7 +157,7 @@ export function isAnthropicContextEditingEnabled(
  * - Claude Haiku 4.5
  *
  * Accepts either an id string, a {@link LanguageModelChat}, or an
- * {@link IChatEndpoint} — when given an endpoint/chat the model **family**
+ * {@link IChatEndpoint} â€” when given an endpoint/chat the model **family**
  * is also checked, so a per-model family override lights this up
  * automatically.
  */
@@ -184,7 +184,7 @@ export function modelSupportsExtendedCacheTtl(model: LanguageModelChat | IChatEn
  * model (see {@link modelSupportsExtendedCacheTtl}), the experiment-based setting, the chat
  * location (must be exactly {@link ChatLocation.Agent}), and the subagent flag.
  *
- * {@link ChatLocation.MessagesProxy} is intentionally out of scope — extended
+ * {@link ChatLocation.MessagesProxy} is intentionally out of scope â€” extended
  * TTL is only meant for the main agent conversation, not for the Claude CLI
  * passthrough.
  *
@@ -227,7 +227,7 @@ export function isExtendedCacheTtlEnabled(
  *
  * Nested rather than orthogonal because:
  * - Anthropic requires longer-TTL breakpoints to appear before shorter ones
- *   in the `tools → system → messages` prefix order, so `messages=1h` while
+ *   in the `tools â†’ system â†’ messages` prefix order, so `messages=1h` while
  *   `tools/system=5m` would be invalid.
  * - The interesting experiment is "does extending 1h to messages help *on
  *   top of* tools+system?", not in isolation.

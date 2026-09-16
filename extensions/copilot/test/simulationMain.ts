@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -10,13 +10,13 @@ dotenv.config();
 import 'source-map-support/register';
 
 // Load other imports
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import * as fs from 'fs';
 import minimist from 'minimist';
 import { createConnection } from 'net';
 import * as path from 'path';
 import * as v8 from 'v8';
-import type * as zyraxoncodeType from 'zyraxoncode';
+import type * as zyraxoncodeType from 'vscode';
 import { SimpleRPC } from '../src/extension/onboardDebug/node/copilotDebugWorker/rpc';
 import { ChatMLFetcherImpl } from '../src/extension/prompt/node/chatMLFetcher';
 import { ISimulationModelConfig, createExtensionUnitTestingServices } from '../src/extension/test/node/services';
@@ -91,7 +91,7 @@ async function main() {
 	}
 
 	if (errors.length > 0) {
-		console.error(`\n${red('⚠️⚠️⚠️  Command failed with:')}\n\n`);
+		console.error(`\n${red('âš ï¸âš ï¸âš ï¸  Command failed with:')}\n\n`);
 
 		for (let i = 0; i < errors.length; i++) {
 			const idx = `Error${errors.length === 1 ? '' : ` ${i + 1})`} `;
@@ -179,7 +179,7 @@ async function runInExtensionHost() {
 		socket.on('error', reject);
 	});
 
-	const zyraxoncode: typeof zyraxoncodeType = require('zyraxoncode');
+	const zyraxoncode: typeof zyraxoncodeType = require('vscode');
 	const folder = zyraxoncode.workspace.workspaceFolders![0];
 
 	Cache.Instance.on('deviceCodeCallback', (url: string) => {
@@ -310,7 +310,7 @@ async function runTests(opts: SimulationOptions, jsonOutputPrinter: IJSONOutputP
 		if (opts.jsonOutput) {
 			jsonOutputPrinter.print({ type: OutputType.deviceCodeCallback, url });
 		} else {
-			console.log(`⚠️ \x1b[31mAuth Required!\x1b[0m Please open the link: ${url}`);
+			console.log(`âš ï¸ \x1b[31mAuth Required!\x1b[0m Please open the link: ${url}`);
 		}
 	});
 
@@ -676,7 +676,7 @@ function createSimulationTestContext(
 	let createNesFetchCache: ((info: CurrentTestRunInfo) => ICompletionsCache) | undefined;
 
 	if (opts.lmCacheMode === CacheMode.Disable) {
-		console.warn('❗ Not using any cache');
+		console.warn('â— Not using any cache');
 		createChatMLCache = undefined;
 		createNesFetchCache = undefined;
 	} else {
@@ -807,10 +807,10 @@ function printOutcome(
 			console.log(`Overall Score: ${baseline.overallScore.toFixed(2)}%`);
 		}
 		if (changeStats.nImproved > 0) {
-			console.log(`${green('▲')} - Score improved in ${changeStats.nImproved} scenarios`);
+			console.log(`${green('â–²')} - Score improved in ${changeStats.nImproved} scenarios`);
 		}
 		if (changeStats.nWorsened > 0) {
-			console.log(`${red('▼')} - Score decreased in ${changeStats.nWorsened} scenarios`);
+			console.log(`${red('â–¼')} - Score decreased in ${changeStats.nWorsened} scenarios`);
 		}
 	} else {
 		if (!shouldBeBrief) {
@@ -819,23 +819,23 @@ function printOutcome(
 			console.log(`Overall Approximate Score: ${(score / testsToRun.length * 100).toFixed(2)} / 100`);
 		}
 		if (changeStats.nImproved > 0) {
-			console.log(`${green('▲')} - Score clearly improved in ${changeStats.nImproved} scenarios`);
+			console.log(`${green('â–²')} - Score clearly improved in ${changeStats.nImproved} scenarios`);
 		}
 		if (changeStats.nWorsened > 0) {
-			console.log(`${red('▼')} - Score clearly decreased in ${changeStats.nWorsened} scenarios`);
+			console.log(`${red('â–¼')} - Score clearly decreased in ${changeStats.nWorsened} scenarios`);
 		}
 	}
 	if (changeStats.nUnchanged > 0) {
 		console.log(`= - Score unchanged in ${changeStats.nUnchanged} scenarios`);
 	}
 	if (changeStats.addedScenarios > 0) {
-		console.log(`${violet('◆')} - New scenarios count - ${changeStats.addedScenarios}`);
+		console.log(`${violet('â—†')} - New scenarios count - ${changeStats.addedScenarios}`);
 	}
 	if (changeStats.removedScenarios > 0) {
-		console.log(`${orange('●')} - Missing ${changeStats.removedScenarios} scenarios.`);
+		console.log(`${orange('â—')} - Missing ${changeStats.removedScenarios} scenarios.`);
 	}
 	if (changeStats.skippedScenarios > 0) {
-		console.log(`${yellow('●')} - Skipped ${changeStats.skippedScenarios} scenarios.`);
+		console.log(`${yellow('â—')} - Skipped ${changeStats.skippedScenarios} scenarios.`);
 	}
 
 	if (changeStats.improvedScenarios.length > 0 || changeStats.worsenedScenarios.length > 0) {

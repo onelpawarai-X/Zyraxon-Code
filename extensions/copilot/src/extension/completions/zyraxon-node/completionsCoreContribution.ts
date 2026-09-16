@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { commands, languages } from 'zyraxoncode';
+import { commands, languages } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IExperimentationService } from '../../../platform/telemetry/common/nullExperimentationService';
@@ -35,7 +35,7 @@ export class CompletionsCoreContribution extends Disposable {
 
 			let hasInstantiatedProvider = false;
 			// Completions require a Copilot token to call the completions endpoint, so don't
-			// register the provider in air-gapped / signed-out scenarios — it would just fail
+			// register the provider in air-gapped / signed-out scenarios â€” it would just fail
 			// with GitHubLoginFailedError on every keystroke.
 			const wantsProvider = unificationStateValue?.codeUnification || extensionUnification || configEnabled || copilotToken?.isNoAuthUser;
 			if (wantsProvider && copilotToken) {

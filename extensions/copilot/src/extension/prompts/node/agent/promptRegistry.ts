@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement } from '@zyraxoncode/prompt-tsx';
+import { BasePromptElementProps, PromptElement } from '@vscode/prompt-tsx';
 import type { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
 import { CopilotIdentityRules } from '../base/copilotIdentity';

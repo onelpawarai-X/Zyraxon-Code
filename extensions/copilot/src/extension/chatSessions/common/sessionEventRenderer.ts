@@ -1,14 +1,14 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionEvent, ToolExecutionCompleteEvent, ToolExecutionStartEvent } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import { ILogger } from '../../../platform/log/common/logService';
 import { URI } from '../../../util/vs/base/common/uri';
 import { ChatResponseCodeblockUriPart, ChatResponseMarkdownPart, ChatResponsePullRequestPart, ChatResponseTextEditPart, ChatResponseThinkingProgressPart, ChatToolInvocationPart, MarkdownString } from '../../../zyraxoncodeTypes';
-import type { ExtendedChatResponsePart } from 'zyraxoncode';
+import type { ExtendedChatResponsePart } from 'vscode';
 
 /**
  * A tool invocation entry tracked between `tool.execution_start` and
@@ -161,7 +161,7 @@ function extractPRMetadata(content: string): { cleanedContent: string; prPart?: 
  * themselves to manage turn boundaries.
  *
  * Callers driving CMC Task API events (`custom_agent.*`) should remap them to
- * the equivalent `subagent.*` SDK types before invoking — both follow the same
+ * the equivalent `subagent.*` SDK types before invoking â€” both follow the same
  * CMC OpenAPI schema, only the event-type names differ.
  */
 export function appendResponsePartsForEvent<TToolCall>(event: SessionEvent, ctx: ResponseEventRenderContext<TToolCall>): boolean {
@@ -171,7 +171,7 @@ export function appendResponsePartsForEvent<TToolCall>(event: SessionEvent, ctx:
 
 	switch (event.type) {
 		case 'session.error': {
-			ctx.currentResponseParts.push(new ChatResponseMarkdownPart(`\n\n❌ Error: (${event.data.errorType}) ${event.data.message}`));
+			ctx.currentResponseParts.push(new ChatResponseMarkdownPart(`\n\nâŒ Error: (${event.data.errorType}) ${event.data.message}`));
 			return true;
 		}
 		case 'assistant.message_delta': {

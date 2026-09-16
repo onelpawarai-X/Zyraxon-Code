@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, ExtensionContext, Uri, l10n, window } from 'zyraxoncode';
+import { Disposable, ExtensionContext, Uri, l10n, window } from 'vscode';
 import { LanguageClientOptions } from 'zyraxoncode-languageclient';
 import { startClient, LanguageClientConstructor, SchemaRequestService, AsyncDisposable, languageServerDescription } from '../jsonClient';
 import { LanguageClient } from 'zyraxoncode-languageclient/browser';

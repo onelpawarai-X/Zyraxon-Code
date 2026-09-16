@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Command, commands, Disposable, Event, EventEmitter, Memento, Uri, workspace, l10n } from 'zyraxoncode';
+import { Command, commands, Disposable, Event, EventEmitter, Memento, Uri, workspace, l10n } from 'vscode';
 import type { PostCommitCommandsProvider } from './api/git';
 import { IRepositoryResolver, Repository } from './repository';
 import { ApiRepository } from './api/api1';

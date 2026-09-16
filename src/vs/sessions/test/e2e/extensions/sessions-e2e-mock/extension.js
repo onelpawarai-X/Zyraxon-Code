@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -26,7 +26,7 @@
  * @param {import('zyraxoncode').ExtensionContext} context
  */
 function activate(context) {
-	const zyraxoncode = require('zyraxoncode');
+	const zyraxoncode = require('vscode');
 
 	console.log('[sessions-e2e-mock] Activating mock extension');
 
@@ -37,9 +37,9 @@ function activate(context) {
 	context.subscriptions.push(...registerMockCommands(zyraxoncode));
 
 	// Note: The mock-fs:// FileSystemProvider is registered directly in the
-	// workbench (web.test.ts → registerMockFileSystemProvider) so it is
+	// workbench (web.test.ts â†’ registerMockFileSystemProvider) so it is
 	// available before any service tries to resolve workspace files.
-	// Do NOT register it here — it would cause a duplicate provider error.
+	// Do NOT register it here â€” it would cause a duplicate provider error.
 
 	console.log('[sessions-e2e-mock] All mocks registered');
 }
@@ -102,7 +102,7 @@ function registerMockAuth(zyraxoncode) {
 function registerMockCommands(zyraxoncode) {
 	const disposables = [];
 
-	// Mock create PR — simulates successful PR creation
+	// Mock create PR â€” simulates successful PR creation
 	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.createPullRequestCopilotCLIAgentSession.createPR',
 		() => {
@@ -111,7 +111,7 @@ function registerMockCommands(zyraxoncode) {
 		}
 	));
 
-	// Mock open PR — simulates opening a PR URL
+	// Mock open PR â€” simulates opening a PR URL
 	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.openPullRequestCopilotCLIAgentSession.openPR',
 		() => {
@@ -120,7 +120,7 @@ function registerMockCommands(zyraxoncode) {
 		}
 	));
 
-	// Mock merge — simulates merging changes
+	// Mock merge â€” simulates merging changes
 	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.mergeCopilotCLIAgentSessionChanges.merge',
 		() => {
@@ -129,7 +129,7 @@ function registerMockCommands(zyraxoncode) {
 		}
 	));
 
-	// Mock merge and sync — simulates merging and syncing
+	// Mock merge and sync â€” simulates merging and syncing
 	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.mergeCopilotCLIAgentSessionChanges.mergeAndSync',
 		() => {
@@ -138,7 +138,7 @@ function registerMockCommands(zyraxoncode) {
 		}
 	));
 
-	// Mock apply changes — simulates applying session changes
+	// Mock apply changes â€” simulates applying session changes
 	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.applyCopilotCLIAgentSessionChanges.apply',
 		() => {
@@ -147,7 +147,7 @@ function registerMockCommands(zyraxoncode) {
 		}
 	));
 
-	// Mock checkout PR reroute — simulates checkout PR flow
+	// Mock checkout PR reroute â€” simulates checkout PR flow
 	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.checkoutPullRequestReroute',
 		() => {
@@ -156,7 +156,7 @@ function registerMockCommands(zyraxoncode) {
 		}
 	));
 
-	// Mock update changes — simulates updating session changes
+	// Mock update changes â€” simulates updating session changes
 	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.updateCopilotCLIAgentSessionChanges.update',
 		() => {

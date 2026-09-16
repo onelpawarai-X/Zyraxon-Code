@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Diagnostic } from 'zyraxoncode';
+import { Diagnostic } from 'vscode';
 import { URI } from '../../../../../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../../../../../util/vs/base/common/uuid';
 import { ServicesAccessor } from '../../../../../../../util/vs/platform/instantiation/common/instantiation';

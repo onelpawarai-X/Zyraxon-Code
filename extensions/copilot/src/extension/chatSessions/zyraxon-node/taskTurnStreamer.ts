@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { AgentTaskGetResponse, AgentTaskSessionEvent } from '@zyraxoncode/copilot-api';
-import * as zyraxoncode from 'zyraxoncode';
+import type { AgentTaskGetResponse, AgentTaskSessionEvent } from '@vscode/copilot-api';
+import * as zyraxoncode from 'vscode';
 import { ILogService } from '../../../platform/log/common/logService';
 import { CLI_TOOL_EVENT_HANDLERS } from '../copilotcli/common/copilotCLITools';
 import {
@@ -29,10 +29,10 @@ function isActiveState(state: AgentTaskGetResponse['state'] | undefined): boolea
 /**
  * Describes what the caller already knows about the task when streaming begins.
  *
- * - `mode: 'current'` — the latest turn in `task.sessions[]` is already active. Used
+ * - `mode: 'current'` â€” the latest turn in `task.sessions[]` is already active. Used
  *   by the chat session's `activeResponseCallback` when the view is opened on an
  *   in-progress task.
- * - `mode: 'next'` — the caller just sent a steer (`sendFollowUpToTask`); the new
+ * - `mode: 'next'` â€” the caller just sent a steer (`sendFollowUpToTask`); the new
  *   turn may or may not be visible in `task.sessions[]` yet. We must wait for it
  *   to appear (or for any new events) before applying the settle check, otherwise
  *   we'd see the previous, already-completed turn and exit immediately.
@@ -59,7 +59,7 @@ export type StreamBaseline =
  *   arrives at all) is deduplicated against the rendered-tool-call-id set.
  * - **isWorking + currentIntent.** `assistant.turn_start` / `assistant.intent` /
  *   `session.idle` / `abort` drive a progress label pushed via `stream.progress`
- *   so the user sees "Thinking…" (or the latest intent) even when no renderable
+ *   so the user sees "Thinkingâ€¦" (or the latest intent) even when no renderable
  *   content has arrived yet.
  * - **Two-phase lifecycle** keyed off {@link StreamBaseline.mode}:
  *     1. (`mode: 'next'` only) wait for the new turn to start, signalled by
@@ -125,7 +125,7 @@ export class TaskTurnStreamer {
 				const observed = await this._waitForTurnStart(taskId, baseline.priorTurnCount, state.seen, token);
 				if (!observed) {
 					// Server never produced the new turn within the wait budget. Bail without
-					// emitting anything; the caller's `stream.markdown('begun work…')` stays.
+					// emitting anything; the caller's `stream.markdown('begun workâ€¦')` stays.
 					return;
 				}
 				this._ingestBatch(observed.events, ctx, state);
@@ -172,7 +172,7 @@ export class TaskTurnStreamer {
 					state.isWorking = false;
 					return;
 				}
-				// Defensive: missing task with no sessions and no events → nothing to wait for.
+				// Defensive: missing task with no sessions and no events â†’ nothing to wait for.
 				if (!latestTurn && events.length === 0) {
 					return;
 				}
@@ -264,7 +264,7 @@ export class TaskTurnStreamer {
 		}
 
 		// Skip `tool.execution_complete` for tool calls we already rendered eagerly
-		// from `assistant.message.toolRequests` — otherwise the same tool card appears
+		// from `assistant.message.toolRequests` â€” otherwise the same tool card appears
 		// twice. The complete event's result payload is lost here; that's the trade-off
 		// for showing tools as soon as they're requested rather than when they finish.
 		if (event.type === 'tool.execution_complete') {
@@ -280,8 +280,8 @@ export class TaskTurnStreamer {
 		// `assistant.message` needs special handling: the Task API emits the same
 		// `messageId` multiple times with progressively-longer `content` snapshots
 		// (no `assistant.message_delta` events). The default helper path would render
-		// each snapshot as a new markdown part, duplicating earlier prefixes — see
-		// the "Exploring codebase…" duplication bug. Instead we synthesize deltas
+		// each snapshot as a new markdown part, duplicating earlier prefixes â€” see
+		// the "Exploring codebaseâ€¦" duplication bug. Instead we synthesize deltas
 		// ourselves so the helper accumulates chunks like a real streaming message.
 		// Other event types go through the default path unchanged.
 		if (event.type === 'assistant.message') {
@@ -302,12 +302,12 @@ export class TaskTurnStreamer {
 		this._logService.trace(`[TaskTurnStreamer] assistant.message messageId=${data.messageId?.slice(0, 12)} parentToolCallId=${data.parentToolCallId ? 'yes' : 'no'} contentLen=${data.content?.length ?? 0} toolRequests=${data.toolRequests?.length ?? 0}`);
 
 		if (data.parentToolCallId) {
-			// Child message of a tool call — render via default path (tool result text).
+			// Child message of a tool call â€” render via default path (tool result text).
 			ChatSessionContentBuilder.appendTaskEventToContext(event, ctx);
 			return;
 		}
 
-		// 1. Content. Only render when the message has NO toolRequests — those messages
+		// 1. Content. Only render when the message has NO toolRequests â€” those messages
 		//    carry intermediate narration alongside the tools (e.g. the model dumping a
 		//    raw diff next to an `edit` request, or "Committed and pushed:" next to a
 		//    `report_progress`). Rendering that narration as markdown produces the

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { CancellationToken, Progress, SettingsSearchProviderOptions, SettingsSearchResult, SettingsSearchResultKind } from 'zyraxoncode';
+import { CancellationToken, Progress, SettingsSearchProviderOptions, SettingsSearchResult, SettingsSearchResultKind } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { Embeddings, EmbeddingType, IEmbeddingsComputer } from '../../../platform/embeddings/common/embeddingsComputer';
 import { ICombinedEmbeddingIndex, SettingListItem } from '../../../platform/embeddings/common/zyraxoncodeIndex';

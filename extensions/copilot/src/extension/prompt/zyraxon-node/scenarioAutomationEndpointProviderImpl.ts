@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ChatRequest, LanguageModelChat, lm } from 'zyraxoncode';
+import { ChatRequest, LanguageModelChat, lm } from 'vscode';
 import { ConfigKey } from '../../../platform/configuration/common/configurationService';
 import { ChatEndpointFamily } from '../../../platform/endpoint/common/endpointProvider';
 import { ExtensionContributedChatEndpoint } from '../../../platform/endpoint/zyraxoncode-node/extChatEndpoint';
@@ -16,7 +16,7 @@ export class ScenarioAutomationEndpointProviderImpl extends ProductionEndpointPr
 	/**
 	 * Cached first-non-copilot model. Resolved lazily on first use and invalidated when the
 	 * registered chat-model set changes. Without this cache, `getChatEndpoint` would call
-	 * `lm.selectChatModels()` (empty selector) on every invocation — which fans out across
+	 * `lm.selectChatModels()` (empty selector) on every invocation â€” which fans out across
 	 * all registered vendors and re-resolves each one. In long automation runs that run at
 	 * several Hz for the entire turn, this can dominate renderer/CDP traffic.
 	 */
@@ -56,7 +56,7 @@ export class ScenarioAutomationEndpointProviderImpl extends ProductionEndpointPr
 		try {
 			return await super.getChatEndpoint(requestOrFamilyOrModel);
 		} catch (error) {
-			// In scenario automation, some model families (e.g. copilot-utility-small → gpt-4o-mini) may
+			// In scenario automation, some model families (e.g. copilot-utility-small â†’ gpt-4o-mini) may
 			// not be available via the capi proxy. Fall back to copilot-utility.
 			if (typeof requestOrFamilyOrModel === 'string') {
 				this._logService.warn(`ScenarioAutomation: failed to resolve model family '${requestOrFamilyOrModel}', falling back to copilot-utility: ${error}`);

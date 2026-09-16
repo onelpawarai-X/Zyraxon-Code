@@ -1,4 +1,4 @@
-{
+﻿{
 	"compilerOptions": {
 		"noEmit": true,
 		"module": "preserve",
@@ -17,6 +17,6 @@
 		],
 	},
 	"include": [
-		"zyraxoncode-dts/zyraxoncode.d.ts"
+		"vscode-dts/zyraxoncode.d.ts"
 	]
 }

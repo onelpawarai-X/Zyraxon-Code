@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import { mapFindFirst } from '../../../util/vs/base/common/arraysFind';
 import { roleToString } from '../../chat/common/globalStringUtils';
 import { rawPartAsStatefulMarker } from '../../endpoint/common/statefulMarkerContainer';
@@ -14,7 +14,7 @@ export function messageToMarkdown(message: Raw.ChatMessage, ignoreStatefulMarker
 	const capitalizedRole = role.charAt(0).toUpperCase() + role.slice(1);
 	let str = skipFencing ? `### ${capitalizedRole}\n` : `### ${capitalizedRole}\n~~~md\n`;
 	if (message.role === Raw.ChatRole.Tool) {
-		str += `🛠️ ${message.toolCallId}`;
+		str += `ðŸ› ï¸ ${message.toolCallId}`;
 		if (message.content) {
 			str += '\n';
 		}
@@ -60,7 +60,7 @@ export function messageToMarkdown(message: Raw.ChatMessage, ignoreStatefulMarker
 					.replace(/(?<!\\)\\n/g, '\n')
 					.replace(/(?<!\\)\\t/g, '\t');
 			} catch (e) { }
-			return `🛠️ ${c.function.name} (${c.id}) ${argsStr}`;
+			return `ðŸ› ï¸ ${c.function.name} (${c.id}) ${argsStr}`;
 		}).join('\n');
 	}
 

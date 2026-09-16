@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { shouldInclude } from '../../../util/common/glob';
 import { Result } from '../../../util/common/result';
 import { TelemetryCorrelationId } from '../../../util/common/telemetryCorrelationId';
@@ -206,7 +206,7 @@ export class ScenarioAutomationWorkspaceChunkSearchService implements IWorkspace
 	}
 
 	async *getDiagnosticsDump(): AsyncIterable<string> {
-		yield 'Scenario automation mode — no diagnostics available.';
+		yield 'Scenario automation mode â€” no diagnostics available.';
 	}
 
 	dispose(): void {

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { CancellationToken } from 'zyraxoncode';
+import type { CancellationToken } from 'vscode';
 import { IChatMLFetcher } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatResponse } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -383,7 +383,7 @@ export class OpenAIEndpoint extends ChatEndpoint {
 				delete body.temperature;
 				if (!this.useMessagesApi && !this.useResponsesApi) {
 					// OpenAI Chat Completions thinking models (e.g. o1/o3) require `max_completion_tokens` instead of `max_tokens`.
-					// Responses bodies use `max_output_tokens` natively, and Messages requires `max_tokens` — neither needs this rename.
+					// Responses bodies use `max_output_tokens` natively, and Messages requires `max_tokens` â€” neither needs this rename.
 					body['max_completion_tokens'] = body.max_tokens;
 					delete body.max_tokens;
 				}

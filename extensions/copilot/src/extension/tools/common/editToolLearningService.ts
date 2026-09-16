@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelChat } from 'zyraxoncode';
+import type { LanguageModelChat } from 'vscode';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';

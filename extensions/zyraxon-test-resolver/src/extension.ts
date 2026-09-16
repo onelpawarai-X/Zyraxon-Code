@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import * as cp from 'child_process';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -170,7 +170,7 @@ export function activate(context: zyraxoncode.ExtensionContext) {
 			) {
 				// `agentHostPort` spawns an agent host inside the server;
 				// `agentHostBridgePort` bridges the renderer to an
-				// externally-running one. They contradict each other —
+				// externally-running one. They contradict each other â€”
 				// reject up front so the user notices instead of getting
 				// two agent hosts and silently confusing failure modes.
 				throw new Error(
@@ -184,7 +184,7 @@ export function activate(context: zyraxoncode.ExtensionContext) {
 
 			// Bridge to an externally-running agent host (e.g. one started
 			// by `code agent host`). Mutually exclusive with `agentHostPort`
-			// — that one spawns its own agent host.
+			// â€” that one spawns its own agent host.
 			if (typeof agentHostBridgePort === 'number' && agentHostBridgePort > 0) {
 				commandArgs.push('--agent-host-bridge-port', String(agentHostBridgePort));
 			}

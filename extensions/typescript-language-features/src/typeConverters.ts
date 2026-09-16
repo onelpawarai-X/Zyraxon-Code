@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@
  * Helpers for converting FROM zyraxoncode types TO ts types
  */
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import type * as Proto from './tsServer/protocol/protocol';
 import * as PConst from './tsServer/protocol/protocol.const';
 import { ITypeScriptServiceClient } from './typescriptService';

@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import type { OpenAI } from 'openai';
-import type { CancellationToken } from 'zyraxoncode';
+import type { CancellationToken } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { CopilotToken } from '../../../platform/authentication/common/copilotToken';
 import { FetchStreamRecorder, IChatMLFetcher, IFetchMLOptions, Source } from '../../../platform/chat/common/chatMLFetcher';
@@ -396,7 +396,7 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 					// Record OTel token usage metrics if available
 					if (result.type === ChatFetchResponseType.Success && result.usage) {
 						// Store copilot_usage for per-request credits display, scoped to the turn.
-						// Skip background requests — they are not part of an active user turn.
+						// Skip background requests â€” they are not part of an active user turn.
 						if (typeof result.usage.copilot_usage?.total_nano_aiu === 'number' && turnId && interactionType !== 'conversation-background') {
 							this._chatQuotaService.setLastCopilotUsage(result.usage.copilot_usage.total_nano_aiu, topLevelTurnId ?? turnId);
 						}
@@ -1067,7 +1067,7 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 			// BYOK endpoints that own their `Authorization` (see IChatEndpoint.ownsAuthorization)
 			// opt out of the CAPI Copilot-token fallback to avoid leaking the user's bearer to a
 			// third-party URL and to keep the wire request from carrying an unintended
-			// `Authorization: Bearer …` alongside their own auth header.
+			// `Authorization: Bearer â€¦` alongside their own auth header.
 			if (!chatEndpointInfo.ownsAuthorization) {
 				secretKey ??= copilotToken?.token;
 			}
@@ -1139,7 +1139,7 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 				providerName: GenAiProviderName.GITHUB,
 				requestModel: chatEndpointInfo.model,
 			});
-			// Span is NOT ended here — caller (fetchMany) will set token attributes and end it
+			// Span is NOT ended here â€” caller (fetchMany) will set token attributes and end it
 		}
 	}
 
@@ -1237,7 +1237,7 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 		const processor = this._instantiationService.createInstance(OpenAIResponsesProcessor, extendedBaseTelemetryData, this._telemetryService, modelRequestId.headerRequestId, modelRequestId.gitHubRequestId, modelRequestId.serverExperiments, getResponsesApiCompactionThresholdFromBody(request));
 
 		// Set up streaming first so event listeners are registered before we
-		// await the first event — AsyncIterableObject runs its executor eagerly.
+		// await the first event â€” AsyncIterableObject runs its executor eagerly.
 		const chatCompletions = new AsyncIterableObject<ChatCompletion>(async emitter => {
 			try {
 				await new Promise<void>((resolve, reject) => {
@@ -1257,7 +1257,7 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 					});
 
 					handle.onCAPIError(event => {
-						// Mid-stream CAPI error — throw so the caller can handle it
+						// Mid-stream CAPI error â€” throw so the caller can handle it
 						const error = new Error(`${event.error.message} (${event.error.code})`);
 						(error as any).gitHubRequestId = modelRequestId.gitHubRequestId;
 						(error as any).capiWebSocketError = event;
@@ -1314,7 +1314,7 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 			return { result: { type: FetchResponseKind.Canceled, reason: 'after first WebSocket event' } };
 		}
 
-		// CAPI error before any stream events — return Failed like HTTP non-200
+		// CAPI error before any stream events â€” return Failed like HTTP non-200
 		if (isCAPIWebSocketError(firstEvent)) {
 			const totalTimeMs = Date.now() - requestStart;
 			telemetryData.measurements.totalTimeMs = totalTimeMs;

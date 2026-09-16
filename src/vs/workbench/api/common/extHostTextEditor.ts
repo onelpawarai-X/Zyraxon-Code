@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -12,7 +12,7 @@ import { ISingleEditOperation } from '../../../editor/common/core/editOperation.
 import { IResolvedTextEditorConfiguration, ITextEditorConfigurationUpdate, MainThreadTextEditorsShape } from './extHost.protocol.js';
 import * as TypeConverters from './extHostTypeConverters.js';
 import { EndOfLine, Position, Range, Selection, SnippetString, TextEditorLineNumbersStyle, TextEditorRevealType } from './extHostTypes.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { ILogService } from '../../../platform/log/common/log.js';
 import { Lazy } from '../../../base/common/lazy.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';

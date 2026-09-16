@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelChat } from 'zyraxoncode';
+import type { LanguageModelChat } from 'vscode';
 import { getCachedSha256Hash } from '../../../util/common/crypto';
 import { ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
 import type { IChatEndpoint } from '../../networking/common/networking';
@@ -80,7 +80,7 @@ const HIDDEN_FAMILY_H_HASHES: string[] = [
  * `chat.modelCapabilityOverrides` setting; the aliased family flows through
  * every family-prefix-based heuristic (Anthropic family detection, prompt
  * resolver, multi-replace tools, tool search, context editing, extended
- * cache TTL, memory, PDF support, …).
+ * cache TTL, memory, PDF support, â€¦).
  *
  * The model id on the wire is unaffected; only our local capability layer
  * sees the alias.
@@ -452,7 +452,7 @@ export function getVerbosityForModelSync(model: IChatEndpoint, responsesApiVerbo
  * - OpenAI gpt-5.4 and gpt-5.5 (via Responses API client-side tool search)
  *
  * Accepts either an id string, a {@link LanguageModelChat}, or an
- * {@link IChatEndpoint} — when given an endpoint/chat the model **family**
+ * {@link IChatEndpoint} â€” when given an endpoint/chat the model **family**
  * is also checked, so a per-model family override (see
  * {@link IModelCapabilityOverride}) lights this up automatically.
  */
@@ -492,7 +492,7 @@ export function modelSupportsToolSearch(model: LanguageModelChat | IChatEndpoint
  * - Claude Opus 4 / 4.1 / 4.5 / 4.6 / 4.7 / 4.8
  *
  * Accepts either an id string, a {@link LanguageModelChat}, or an
- * {@link IChatEndpoint} — when given an endpoint/chat the model **family**
+ * {@link IChatEndpoint} â€” when given an endpoint/chat the model **family**
  * is also checked, so a per-model family override (see
  * {@link IModelCapabilityOverride}) lights this up automatically.
  *

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import { URL } from 'url';
 import * as fs from 'fs';
 import * as path from 'path';
 import { randomBytes } from 'crypto';
-import { env } from 'zyraxoncode';
+import { env } from 'vscode';
 
 function sendFile(res: http.ServerResponse, filepath: string) {
 	const isSvg = filepath.endsWith('.svg');

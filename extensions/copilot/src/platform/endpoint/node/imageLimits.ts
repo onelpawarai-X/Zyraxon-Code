@@ -1,13 +1,13 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as l10n from '@zyraxoncode/l10n';
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import * as l10n from '@vscode/l10n';
+import { Raw } from '@vscode/prompt-tsx';
 
 /**
  * Model-facing placeholder substituted for dropped history images.
- * Intentionally not localized — this text is sent to the model, not the user.
+ * Intentionally not localized â€” this text is sent to the model, not the user.
  */
 const IMAGE_PLACEHOLDER_TEXT = '[Image omitted from conversation history due to model limit.]';
 
@@ -71,7 +71,7 @@ export function filterHistoryImages(messages: Raw.ChatMessage[], maxImages: numb
 	}
 
 	// Fail fast with a clear, localized error when the current turn alone exceeds
-	// the limit — otherwise we'd send a request the server will reject with an
+	// the limit â€” otherwise we'd send a request the server will reject with an
 	// opaque error. Silent history filtering is only safe when dropping history
 	// images can bring the total down to the limit.
 	if (currentTurnImages > maxImages) {

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@ import { DiagnosticsSupport, registerDiagnosticsPullSupport, registerDiagnostics
 import { TextDocument, JSONDocument, JSONSchema, getLanguageService, DocumentLanguageSettings, SchemaConfiguration, ClientCapabilities, Range, Position, SortOptions, SeverityLevel } from 'zyraxoncode-json-languageservice';
 import { getLanguageModelCache } from './languageModelCache.js';
 import { Utils, URI } from 'zyraxoncode-uri';
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 
 type ISchemaAssociations = Record<string, string[]>;
 

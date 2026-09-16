@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ export default new class implements eslint.Rule.RuleModule {
 
 	readonly meta: eslint.Rule.RuleMetaData = {
 		messages: {
-			noNlsLocalize: 'Do not import localize from nls. Use zyraxoncode.l10n.t or import l10n from @zyraxoncode/l10n instead.'
+			noNlsLocalize: 'Do not import localize from nls. Use zyraxoncode.l10n.t or import l10n from @vscode/l10n instead.'
 		},
 		docs: {
 			description: 'Disallow importing localize from nls files',

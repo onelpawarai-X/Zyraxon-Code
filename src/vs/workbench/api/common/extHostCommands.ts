@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ import { cloneAndChange } from '../../../base/common/objects.js';
 import { MainContext, MainThreadCommandsShape, ExtHostCommandsShape, ICommandDto, ICommandMetadataDto, MainThreadTelemetryShape } from './extHost.protocol.js';
 import { isNonEmptyArray } from '../../../base/common/arrays.js';
 import * as languages from '../../../editor/common/languages.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { ILogService } from '../../../platform/log/common/log.js';
 import { revive } from '../../../base/common/marshalling.js';
 import { IRange, Range } from '../../../editor/common/core/range.js';

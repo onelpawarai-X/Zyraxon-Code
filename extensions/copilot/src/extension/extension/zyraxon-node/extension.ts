@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,7 +6,7 @@
 // Must be the first import to ensure it evaluates before other imports.
 import './disableProcessReport';
 
-import { ExtensionContext } from 'zyraxoncode';
+import { ExtensionContext } from 'vscode';
 import { resolve } from '../../../util/vs/base/common/path';
 import { baseActivate } from '../zyraxoncode/extension';
 import { zyraxoncodeNodeContributions } from './contributions';

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { CancellationToken, EventEmitter, TextDocumentContentProvider, Uri, workspace } from 'zyraxoncode';
+import { CancellationToken, EventEmitter, TextDocumentContentProvider, Uri, workspace } from 'vscode';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { CopilotFileScheme, INewWorkspacePreviewContentManager } from '../node/newIntent';
 

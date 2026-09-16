@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 // Based on @sergeche's work on the emmet plugin for atom
 
-import { TextEditor, Position, window, TextEdit } from 'zyraxoncode';
+import { TextEditor, Position, window, TextEdit } from 'vscode';
 import * as path from 'path';
 import { getImageSize, ImageInfoWithScale } from './imageSizeHelper';
 import { getFlatNode, iterateCSSToken, getCssPropertyFromRule, isStyleSheet, validate, offsetRangeToVsRange } from './util';

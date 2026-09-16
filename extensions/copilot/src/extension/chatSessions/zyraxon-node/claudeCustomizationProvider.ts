@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { INativeEnvService } from '../../../platform/env/common/envService';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -96,12 +96,12 @@ export class ClaudeCustomizationProvider extends Disposable implements zyraxonco
 	async provideChatSessionCustomizations(_sessionResource: zyraxoncode.Uri, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.ChatSessionCustomizationItem[]> {
 		const items: zyraxoncode.ChatSessionCustomizationItem[] = [];
 
-		// Agents: hybrid approach — file-based .claude/ agents merged with SDK-provided agents.
+		// Agents: hybrid approach â€” file-based .claude/ agents merged with SDK-provided agents.
 		// File-based agents are available immediately; SDK agents appear once a session starts.
 		const sdkAgents = this.runtimeDataService.getAgents();
 		const sdkAgentNames = new Set(sdkAgents.map(a => a.name.toLowerCase()));
 
-		// SDK agents (built-in subagents like "Explore") — preferred when available
+		// SDK agents (built-in subagents like "Explore") â€” preferred when available
 		for (const agent of sdkAgents) {
 			items.push({
 				uri: URI.from({ scheme: ClaudeSessionUri.scheme, path: `/agents/${agent.name}` }),
@@ -111,11 +111,11 @@ export class ClaudeCustomizationProvider extends Disposable implements zyraxonco
 				extensionId: undefined,
 				pluginUri: undefined,
 				source: 'builtin'
-				// No groupKey — zyraxoncode infers Built-in from non-file: scheme
+				// No groupKey â€” zyraxoncode infers Built-in from non-file: scheme
 			});
 		}
 
-		// File-based agents from .claude/ paths — shown pre-session, deduplicated with SDK
+		// File-based agents from .claude/ paths â€” shown pre-session, deduplicated with SDK
 		for (const agent of await this.promptsService.getCustomAgents(token)) {
 			if (agent.enabled && isEnabledForClaudeCode(agent) && this.isClaudePath(agent.uri)) {
 				const name = agent.name;
@@ -273,7 +273,7 @@ export class ClaudeCustomizationProvider extends Disposable implements zyraxonco
 					}
 				}
 			} catch {
-				// Settings file doesn't exist or is invalid — skip
+				// Settings file doesn't exist or is invalid â€” skip
 			}
 		}
 

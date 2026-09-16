@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { createDecorator } from '../../../platform/instantiation/common/instantiation.js';
 import { Event, Emitter } from '../../../base/common/event.js';
 import { ExtHostTelemetryShape } from './extHost.protocol.js';

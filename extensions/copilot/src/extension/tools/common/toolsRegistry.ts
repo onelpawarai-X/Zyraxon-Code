@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { IDisposable } from '../../../util/vs/base/common/lifecycle';
 import { ObservableMap } from '../../../util/vs/base/common/observable';
@@ -53,7 +53,7 @@ export interface ICopilotToolExtension<T> {
 	/**
 	 * Optionally get a programmatic override for the LM tool information. This
 	 * can be driven by EXP for example, or customized based on the current model.
-	 * ⚠️ A tool using an alternative definition MUST still accept its default
+	 * âš ï¸ A tool using an alternative definition MUST still accept its default
 	 * parameters because the alternative definition will only be applied within
 	 * the Copilot extension, not other extensions' usages via `zyraxoncode.lm.tools`.
 	 *

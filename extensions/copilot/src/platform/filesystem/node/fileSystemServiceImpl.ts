@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs';
-import type { FileStat, FileSystemWatcher, RelativePattern, Uri } from 'zyraxoncode';
+import type { FileStat, FileSystemWatcher, RelativePattern, Uri } from 'vscode';
 import { Event } from '../../../util/vs/base/common/event';
 import { dirname, isEqual } from '../../../util/vs/base/common/resources';
 import { URI } from '../../../util/vs/base/common/uri';

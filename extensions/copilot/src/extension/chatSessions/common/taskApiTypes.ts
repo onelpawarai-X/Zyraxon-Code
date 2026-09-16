@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,7 +6,7 @@
 /**
  * Local helpers for the Mission Control Task API: the option bags used at call sites and
  * the {@link ITaskApiClient} abstraction. The wire-format types themselves live in
- * `@zyraxoncode/copilot-api` (`AgentTask*`).
+ * `@vscode/copilot-api` (`AgentTask*`).
  */
 
 import type {
@@ -17,7 +17,7 @@ import type {
 	AgentTaskListEventsResponse,
 	AgentTaskListResponse,
 	AgentTaskSteerRequest,
-} from '@zyraxoncode/copilot-api';
+} from '@vscode/copilot-api';
 
 export interface ListTasksOptions {
 	readonly page?: number;

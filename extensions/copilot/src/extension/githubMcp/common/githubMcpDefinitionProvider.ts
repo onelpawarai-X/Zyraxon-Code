@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import type { CancellationToken, McpHttpServerDefinition, McpServerDefinitionProvider } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { CancellationToken, McpHttpServerDefinition, McpServerDefinitionProvider } from 'vscode';
 import { authProviderId, IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { AuthProviderId, ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { ILogService } from '../../../platform/log/common/logService';

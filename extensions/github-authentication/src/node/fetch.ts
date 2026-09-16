@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as http from 'http';
 import * as https from 'https';
-import { workspace } from 'zyraxoncode';
+import { workspace } from 'vscode';
 import { Log } from '../common/logger';
 import { Readable } from 'stream';
 

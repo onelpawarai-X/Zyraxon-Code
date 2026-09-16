@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -32,7 +32,7 @@ const MetaModulesToLookFor = [
 const ModulesToLookFor = [
 	// Platform-related type definition packages
 	'@types/zyraxoncode',
-	'@zyraxoncode/dts',
+	'@vscode/dts',
 	'@types/node',
 	'@types/bun',
 	'bun-types',
@@ -685,7 +685,7 @@ export class WorkspaceTagsService implements IWorkspaceTagsService {
 			"workspace.npm.webdriverio" : { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true },
 			"workspace.npm.gherkin" : { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true },
 			"workspace.npm.@types/zyraxoncode" : { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true },
-			"workspace.npm.@zyraxoncode/dts" : { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true },
+			"workspace.npm.@vscode/dts" : { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true },
 			"workspace.npm.@types/node" : { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true },
 			"workspace.npm.@types/bun" : { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true },
 			"workspace.npm.bun-types" : { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true },

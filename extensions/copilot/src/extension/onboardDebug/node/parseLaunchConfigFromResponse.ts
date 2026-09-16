@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as jsonc from 'jsonc-parser';
-import type { DebugConfiguration } from 'zyraxoncode';
+import type { DebugConfiguration } from 'vscode';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { IDebugConfigSchema, IPackageJson } from '../../../platform/extensions/common/packageJson';
 import { extractCodeBlocks } from '../../../util/common/markdown';

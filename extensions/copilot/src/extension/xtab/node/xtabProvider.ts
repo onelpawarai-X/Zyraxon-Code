@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import { FetchStreamSource } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchError, ChatFetchResponseType, ChatLocation, RESPONSE_CONTAINED_NO_CHOICES } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService, XTabProviderId } from '../../../platform/configuration/common/configurationService';
@@ -316,7 +316,7 @@ export class XtabProvider implements IStatelessNextEditProvider {
 			const { clippedTaggedCurrentDoc, areaAroundCodeToEdit } = taggedCurrentFileContentResult.val;
 			// Record the clipped line count BEFORE the context-gathering awaits so it is
 			// still emitted when the request is cancelled mid-gathering (matches the
-			// legacy prod timing — the cancellation path below also reports telemetry).
+			// legacy prod timing â€” the cancellation path below also reports telemetry).
 			telemetry.setNLinesOfCurrentFileInPrompt(clippedTaggedCurrentDoc.lines.length);
 
 			const langCtx = await gatherLanguageContext();
@@ -1005,7 +1005,7 @@ export class XtabProvider implements IStatelessNextEditProvider {
 
 		const targetDocument = request.getActiveDocument().id;
 
-		// Phase 1: Fetch lifecycle — initiate HTTP request and produce a clean line stream
+		// Phase 1: Fetch lifecycle â€” initiate HTTP request and produce a clean line stream
 		const fetchResult = await this._performFetch(
 			endpoint, messages, prediction, request.headerRequestId,
 			fetchMetadata, responseOpts.shouldRemoveCursorTagFromResponse,
@@ -1103,7 +1103,7 @@ export class XtabProvider implements IStatelessNextEditProvider {
 				return yield* parseResult.stream;
 			}
 
-			// parseResult is EditWindowLines — log edit-intent telemetry and apply aggressiveness filter
+			// parseResult is EditWindowLines â€” log edit-intent telemetry and apply aggressiveness filter
 			if (parseResult.editIntentMetadata) {
 				const { intent, parseError } = parseResult.editIntentMetadata;
 				telemetry.setEditIntent(intent);
@@ -1583,7 +1583,7 @@ export class XtabProvider implements IStatelessNextEditProvider {
 	/**
 	 * Resolve the opt-in global budget from its single experiment-driven JSON
 	 * config string (mirrors `modelConfigurationString`). Returns `undefined`
-	 * — disabling the global budget, identical to prod — when the string is
+	 * â€” disabling the global budget, identical to prod â€” when the string is
 	 * unset, empty, or fails to parse/validate. Parse failures are reported via
 	 * telemetry so misconfigured experiments are observable.
 	 */

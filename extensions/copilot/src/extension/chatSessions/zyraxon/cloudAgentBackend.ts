@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
-import { AgentTaskCreatePullRequestResponse, AgentTaskGetResponse, AgentTaskSessionEvent, AgentTaskState } from '@zyraxoncode/copilot-api';
+import * as zyraxoncode from 'vscode';
+import { AgentTaskCreatePullRequestResponse, AgentTaskGetResponse, AgentTaskSessionEvent, AgentTaskState } from '@vscode/copilot-api';
 import { GithubRepoId } from '../../../platform/git/common/gitService';
 import { PullRequestSearchItem, SessionInfo } from '../../../platform/github/common/githubAPI';
 
@@ -20,7 +20,7 @@ export type CloudSessionIdentity =
  * Raw reference to a pull request artifact attached to a task. Carries the ids/refs
  * the Task API exposes (internal db id + optional GraphQL global id + branch fallback)
  * so the provider can resolve to a full {@link PullRequestSearchItem} when needed
- * for display. The Jobs API path doesn't use this — it returns pre-resolved PRs.
+ * for display. The Jobs API path doesn't use this â€” it returns pre-resolved PRs.
  *
  * See `pullArtifactResolver.ts` (`resolvePullArtifact`).
  */
@@ -76,7 +76,7 @@ export interface FollowUpResult {
  * `pullRequest` is the pre-resolved PR for rendering (Jobs API populates it directly).
  * `pullArtifact` is a raw artifact reference (Task API populates it for tasks with a
  * `pull` artifact); the provider resolves it lazily to a `pullRequest` for display.
- * Either, both, or neither may be present — PR-less tasks (Task API) have neither.
+ * Either, both, or neither may be present â€” PR-less tasks (Task API) have neither.
  */
 export interface CloudSessionData {
 	readonly latestSession: SessionInfo;
@@ -101,14 +101,14 @@ export interface CloudSessionData {
 	/**
 	 * Raw Task API lifecycle state for Task-backed entries (v2). The provider maps this directly
 	 * to a `ChatSessionStatus` so it can keep the non-terminal "agent handed the turn back" states
-	 * (`idle`, `waiting_for_user`) distinct from active work — they must not render as InProgress.
+	 * (`idle`, `waiting_for_user`) distinct from active work â€” they must not render as InProgress.
 	 * Absent for Jobs API (v1) entries, whose status is derived from `latestSession.state`.
 	 */
 	readonly taskState?: AgentTaskState;
 }
 
 /**
- * Content of a single cloud session — initial prompt extracted from API-specific
+ * Content of a single cloud session â€” initial prompt extracted from API-specific
  * places (Jobs API `problem_statement` field; Task API first `user.message` event).
  */
 export interface CloudSessionContent {
@@ -119,7 +119,7 @@ export interface CloudSessionContent {
  * Full content payload for a Task API task (v2). The task itself plus the ordered
  * turn sessions inside it (`task.sessions[]`) and the optional pull artifact for
  * decoration. The provider renders one `turns[]` entry as one (request, response)
- * pair — there is no PR-thread concept at the task level.
+ * pair â€” there is no PR-thread concept at the task level.
  */
 export interface TaskContent {
 	readonly task: AgentTaskGetResponse;
@@ -131,8 +131,8 @@ export interface TaskContent {
  * Cloud agent backend abstraction.
  *
  * Two concrete backends exist, discriminated by `kind`:
- * - {@link PrCloudAgentBackend} (`kind: 'pr'`) — implemented by `JobsApiBackend` (v1).
- * - {@link TaskCloudAgentBackend} (`kind: 'task'`) — implemented by `TaskApiBackend` (v2).
+ * - {@link PrCloudAgentBackend} (`kind: 'pr'`) â€” implemented by `JobsApiBackend` (v1).
+ * - {@link TaskCloudAgentBackend} (`kind: 'task'`) â€” implemented by `TaskApiBackend` (v2).
  *
  * Both share the identity-agnostic surface in {@link CloudAgentBackendCommon}. The
  * domain-specific surfaces are non-overlapping, so callers narrow via `kind` (or hold a
@@ -233,7 +233,7 @@ export interface TaskCloudAgentBackend extends CloudAgentBackendCommon {
 	/**
 	 * Reverse lookup: find the most recent task associated with the given pull request.
 	 * Used by the PR-URI compatibility shim so the provider can keep emitting `/<prNumber>`
-	 * URIs on v2 (preserving archive state across the v1→v2 flip) while still routing
+	 * URIs on v2 (preserving archive state across the v1â†’v2 flip) while still routing
 	 * content/follow-up/openInBrowser through the task endpoints.
 	 * TODO: remove this when the PR-URI shim is removed and the provider emits explicit `task/<taskId>` URIs.
 	 */

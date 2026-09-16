@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { promises as fs } from 'fs';
 
-import { Uri } from 'zyraxoncode';
+import { Uri } from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IGitService, RepoContext } from '../../../platform/git/common/gitService';
 import { ILogService } from '../../../platform/log/common/logService';

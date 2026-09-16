@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, Disposable, Uri } from 'zyraxoncode';
+import type { CancellationToken, Disposable, Uri } from 'vscode';
 
 export interface TitleAndDescriptionProvider {
 	provideTitleAndDescription(context: { commitMessages: string[]; patches: string[] | { patch: string; fileUri: string; previousFileUri?: string }[]; issues?: { reference: string; content: string }[]; template?: string; compareBranch?: string }, token: CancellationToken): Promise<{ title: string; description?: string } | undefined>;

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { NotebookCell, NotebookDocument, TextLine } from 'zyraxoncode';
+import type { NotebookCell, NotebookDocument, TextLine } from 'vscode';
 import { DEFAULT_WORD_REGEXP, getWordAtText } from '../../../util/vs/editor/common/core/wordHelper';
 import { Position, Range } from '../../../zyraxoncodeTypes';
 import { PositionOffsetTransformer } from '../../editing/common/positionOffsetTransformer';

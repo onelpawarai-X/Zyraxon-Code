@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { QueryCapture } from '@zyraxoncode/tree-sitter-wasm';
+import type { QueryCapture } from '@vscode/tree-sitter-wasm';
 import { Disposable } from '../../../../../../../base/common/lifecycle.js';
 import { isPowerShell } from '../../runInTerminalHelpers.js';
 import type { TreeSitterCommandParser } from '../../treeSitterCommandParser.js';

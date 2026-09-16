@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 /* eslint-disable local/code-no-unexternalized-strings */
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 
 function ai(...args: any[]): undefined { return undefined; }
 
@@ -124,7 +124,7 @@ const postProcessBranches =
 					const subject = parts[3].trim();
 					const timeAgo = parts[4].trim();
 
-					const description = `${timeAgo} • ${author} • ${hash} • ${subject}`;
+					const description = `${timeAgo} â€¢ ${author} â€¢ ${hash} â€¢ ${subject}`;
 					const priority = 75;
 
 					if (insertWithoutRemotes && name.startsWith("remotes/")) {
@@ -3996,7 +3996,7 @@ const addOptions: Fig.Option[] = [
 const headSuggestions = [
 	{
 		name: "HEAD",
-		icon: "🔻", // allow-any-unicode-next-line
+		icon: "ðŸ”»", // allow-any-unicode-next-line
 		description: "The most recent commit",
 	},
 	{
@@ -4962,7 +4962,7 @@ const completionSpec: Fig.Spec = {
 					suggestCurrentToken: true,
 					suggestions: configSuggestions.map((suggestion) => ({
 						...suggestion,
-						icon: "⚙️", // allow-any-unicode-next-line
+						icon: "âš™ï¸", // allow-any-unicode-next-line
 					})),
 					generators: {
 						script: ["git", "config", "--get-regexp", ".*"],
@@ -4981,7 +4981,7 @@ const completionSpec: Fig.Spec = {
 										line.startsWith("remote.") ||
 										!configSuggestions.find(({ name }) => line === name)
 								)
-								.map((name) => ({ name, icon: "⚙️" })), // allow-any-unicode-next-line
+								.map((name) => ({ name, icon: "âš™ï¸" })), // allow-any-unicode-next-line
 					},
 				},
 				{
@@ -6241,7 +6241,7 @@ const completionSpec: Fig.Spec = {
 				{
 					name: "--hard",
 					description:
-						"⚠️WARNING: you will lose all uncommitted changes in addition to the changes introduced in the last commit",
+						"âš ï¸WARNING: you will lose all uncommitted changes in addition to the changes introduced in the last commit",
 				},
 				{
 					name: "--mixed",

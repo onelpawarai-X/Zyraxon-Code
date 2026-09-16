@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionEvent, ToolExecutionCompleteEvent, ToolExecutionStartEvent } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import type { CancellationToken, ChatParticipantToolToken, ChatPromptReference, ChatSimpleToolResultData, ChatTerminalToolInvocationData, LanguageModelToolDefinition, LanguageModelToolInformation, LanguageModelToolInvocationOptions, LanguageModelToolResult2 } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { CancellationToken, ChatParticipantToolToken, ChatPromptReference, ChatSimpleToolResultData, ChatTerminalToolInvocationData, LanguageModelToolDefinition, LanguageModelToolInformation, LanguageModelToolInvocationOptions, LanguageModelToolResult2 } from 'vscode';
 import { ILogger } from '../../../../platform/log/common/logService';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { isLocation } from '../../../../util/common/types';
@@ -851,7 +851,7 @@ export function processToolExecutionStart(event: ToolExecutionStartEvent, pendin
 			// top-level subagent container instead of creating intermediate containers.
 			toolInvocation.subAgentInvocationId = resolveRootSubagentId(event.data.parentToolCallId, pendingToolInvocations);
 
-			// Nested task tools should not create their own subagent container —
+			// Nested task tools should not create their own subagent container â€”
 			// clear ChatSubagentToolInvocationData so the widget treats them as
 			// regular child tool invocations within the parent container.
 			if (toolInvocation.toolSpecificData instanceof ChatSubagentToolInvocationData) {
@@ -881,7 +881,7 @@ function resolveRootSubagentId(
 		visited.add(currentId);
 		const parent = pendingToolInvocations.get(currentId);
 		if (!parent || !parent[2]) {
-			break; // No further parent — currentId is the root
+			break; // No further parent â€” currentId is the root
 		}
 		currentId = parent[2];
 	}

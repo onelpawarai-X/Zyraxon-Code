@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IChatDebugFileLoggerService, IDebugLogEntry, sessionResourceToId } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IEnvService } from '../../../platform/env/common/envService';
@@ -81,9 +81,9 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 	readonly onDidEmitEntry = this._onDidEmitEntry.event;
 
 	private readonly _activeSessions = new Map<string, IActiveLogSession>();
-	/** Maps child session ID → { parentSessionId, label } for child session routing */
+	/** Maps child session ID â†’ { parentSessionId, label } for child session routing */
 	private readonly _childSessionMap = new Map<string, { parentSessionId: string; label: string; parentToolSpanId?: string }>();
-	/** Maps spanId → resolved session ID for parent-span inheritance */
+	/** Maps spanId â†’ resolved session ID for parent-span inheritance */
 	private readonly _spanSessionIndex = new Map<string, string>();
 	private readonly _pendingCoreEvents: IDebugLogEntry[] = [];
 	private _modelSnapshot: readonly unknown[] | undefined;
@@ -205,7 +205,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 	 * resolved by {@link _getDebugLogsDir} (workspace storage when a workspace is
 	 * open, otherwise global storage). When resolving a *historical* session we
 	 * also consider the other root, because a session may have been written in a
-	 * different window context than the current one — e.g. logged with no
+	 * different window context than the current one â€” e.g. logged with no
 	 * workspace open (global storage) and later reopened from the session history
 	 * in a window that has a workspace (or vice versa).
 	 */
@@ -243,7 +243,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 					return candidate;
 				}
 			} catch {
-				// Not under this root — try the next one.
+				// Not under this root â€” try the next one.
 			}
 		}
 		return undefined;
@@ -326,7 +326,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 			// so promote it with hasOwnSpans = true.
 			this._ensureSession(childInfo.parentSessionId, /* hasOwnSpans */ true);
 
-			// Child session — write under the parent's *actual* directory, which may
+			// Child session â€” write under the parent's *actual* directory, which may
 			// live under a different storage root than the current write root when
 			// the parent was resumed from history.
 			sessionDir = this._resolveParentSessionDir(childInfo.parentSessionId, dir);
@@ -351,7 +351,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 				},
 			});
 		} else {
-			// Parent session — write as main.jsonl in its own directory. When the
+			// Parent session â€” write as main.jsonl in its own directory. When the
 			// session was previously written under a different storage root (e.g.
 			// logged with no workspace open, then resumed in a workspace window),
 			// continue in that existing directory instead of starting a fresh file
@@ -424,7 +424,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 		}
 		this._activeSessions.delete(sessionId);
 
-		// Clean up span→session mappings for this session
+		// Clean up spanâ†’session mappings for this session
 		for (const [spanId, sid] of this._spanSessionIndex) {
 			if (sid === sessionId) {
 				this._spanSessionIndex.delete(spanId);
@@ -497,7 +497,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 			const dir = this._getDebugLogsDir();
 			return dir ? this._resolveParentSessionDir(childInfo.parentSessionId, dir) : undefined;
 		}
-		// Unknown session — likely historical (resumed after restart). It may have
+		// Unknown session â€” likely historical (resumed after restart). It may have
 		// been written under a different storage root than the current window uses
 		// (e.g. a no-workspace session reopened in a workspace window), so probe
 		// disk and prefer the root that actually contains it.
@@ -505,7 +505,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 		if (existing) {
 			return existing;
 		}
-		// Not found on disk — fall back to the active write root (where it would
+		// Not found on disk â€” fall back to the active write root (where it would
 		// be created), so callers still get a well-formed path.
 		const dir = this._getDebugLogsDir();
 		return dir ? URI.joinPath(dir, sessionId) : undefined;
@@ -622,7 +622,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 		}
 	}
 
-	// ── OTel span handling ──
+	// â”€â”€ OTel span handling â”€â”€
 
 	private _onSpanCompleted(span: ICompletedSpanData): void {
 		const sessionId = this._extractSessionId(span);
@@ -630,7 +630,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 			return;
 		}
 
-		// Record the span→session mapping so child spans can inherit it
+		// Record the spanâ†’session mapping so child spans can inherit it
 		this._spanSessionIndex.set(span.spanId, sessionId);
 		if (this._spanSessionIndex.size > MAX_SPAN_SESSION_INDEX) {
 			// Evict oldest entries (Map iterates in insertion order)
@@ -675,7 +675,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 			const mainJsonl = URI.joinPath(session.sessionDir, 'main.jsonl');
 			try {
 				fs.accessSync(mainJsonl.fsPath);
-				// Directory exists from a previous run — this is a resumed session
+				// Directory exists from a previous run â€” this is a resumed session
 				session.hasOwnSpans = true;
 				session.dirEnsured = true;
 
@@ -693,7 +693,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 						} catch { /* skip malformed lines */ }
 					}
 					session.runIndex = maxRIdx + 1;
-				} catch { /* file read failed — runIndex stays at 0, but that's safe since this is a back-compat path */ }
+				} catch { /* file read failed â€” runIndex stays at 0, but that's safe since this is a back-compat path */ }
 
 				// Find the next available indices for companion files to avoid
 				// overwriting ones from the previous run. Single readdir + scan.
@@ -704,9 +704,9 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 						const tIdx = f.startsWith('tools_') ? parseInt(f.slice(6), 10) : -1;
 						if (tIdx >= session.toolsIndex) { session.toolsIndex = tIdx + 1; }
 					}
-				} catch { /* readdir failed — indices stay at 0 */ }
+				} catch { /* readdir failed â€” indices stay at 0 */ }
 			} catch {
-				// No existing directory — leave as is
+				// No existing directory â€” leave as is
 			}
 		}
 
@@ -831,7 +831,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 			return;
 		}
 
-		// Last resort: span events without chat_session_id — write to parent sessions that have their own spans
+		// Last resort: span events without chat_session_id â€” write to parent sessions that have their own spans
 		const parentSessions = [...this._activeSessions.entries()]
 			.filter(([, session]) => !session.parentSessionId && session.hasOwnSpans)
 			.map(([id]) => id);
@@ -893,7 +893,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 			return;
 		}
 
-		// Do NOT create sessions from tools_available events — they can carry tool call IDs
+		// Do NOT create sessions from tools_available events â€” they can carry tool call IDs
 		// (e.g., toolu_xxx, call_xxx) as conversation IDs, which are not valid session IDs.
 		const session = this._activeSessions.get(sessionId);
 		if (!session || session.parentSessionId) {
@@ -916,7 +916,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 
 		// Use the content length to detect changes. Different tool sets (from model
 		// or mode switches) will have different lengths. A false negative (same length,
-		// different content) just means we skip writing a redundant file — harmless.
+		// different content) just means we skip writing a redundant file â€” harmless.
 		const key = `tools:${toolDefs.length}`;
 		if (key !== session.toolsKey) {
 			const fileName = `tools_${session.toolsIndex}.json`;
@@ -927,10 +927,10 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 		}
 	}
 
-	// ── Core debug event handling (discovery, skill loading, etc.) ──
+	// â”€â”€ Core debug event handling (discovery, skill loading, etc.) â”€â”€
 
 	private _onCoreDebugEvent(event: zyraxoncode.ChatDebugEvent): void {
-		// Only capture discovery/generic events from core — tool calls, model turns,
+		// Only capture discovery/generic events from core â€” tool calls, model turns,
 		// and subagent invocations come from OTel spans which are the source of truth.
 		if (!(event instanceof zyraxoncode.ChatDebugGenericEvent)) {
 			return;
@@ -956,7 +956,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 			},
 		};
 
-		// Core events may arrive before any session exists — cache and replay.
+		// Core events may arrive before any session exists â€” cache and replay.
 		// Cap the buffer to avoid unbounded growth over long-running sessions.
 		if (this._pendingCoreEvents.length >= MAX_PENDING_CORE_EVENTS) {
 			this._pendingCoreEvents.shift();
@@ -970,7 +970,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 		}
 	}
 
-	// ── Span to entry conversion ──
+	// â”€â”€ Span to entry conversion â”€â”€
 
 	private _spanToEntry(span: ICompletedSpanData, sessionId: string): IDebugLogEntry | undefined {
 		const opName = asString(span.attributes[GenAiAttr.OPERATION_NAME]);
@@ -1144,7 +1144,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 		}
 	}
 
-	// ── Helpers ──
+	// â”€â”€ Helpers â”€â”€
 
 	/**
 	 * Read the last `byteCount` bytes of a file synchronously.
@@ -1238,7 +1238,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 					entries = entries.slice(-count);
 				}
 			} catch {
-				// File may not exist — that's fine
+				// File may not exist â€” that's fine
 			}
 		}
 
@@ -1272,7 +1272,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 						const text = typeof chunk === 'string' ? chunk : chunk.toString('utf-8');
 						partial += text;
 						const lines = partial.split('\n');
-						// Last element may be a partial line — keep it for next chunk
+						// Last element may be a partial line â€” keep it for next chunk
 						partial = lines.pop() ?? '';
 						for (const line of lines) {
 							if (!line) { continue; }
@@ -1293,7 +1293,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 					stream.on('error', reject);
 				});
 			} catch {
-				// File may not exist — that's fine
+				// File may not exist â€” that's fine
 			}
 		}
 
@@ -1429,7 +1429,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 						const stat = await this._fileSystemService.stat(URI.joinPath(dir, name));
 						mtime = stat.mtime;
 					} catch {
-						// Stat failed — treat as oldest.
+						// Stat failed â€” treat as oldest.
 					}
 					const existing = byName.get(name);
 					if (existing === undefined || mtime > existing) {
@@ -1437,7 +1437,7 @@ export class ChatDebugFileLoggerService extends Disposable implements IChatDebug
 					}
 				}));
 			} catch {
-				// Directory may not exist yet — skip this root.
+				// Directory may not exist yet â€” skip this root.
 			}
 		}));
 		return [...byName.entries()]

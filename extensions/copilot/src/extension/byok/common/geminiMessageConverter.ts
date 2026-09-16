@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import type { Content, FunctionCall, FunctionResponse, Part } from '@google/genai';
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import type { LanguageModelChatMessage, LanguageModelChatMessage2 } from 'zyraxoncode';
+import { Raw } from '@vscode/prompt-tsx';
+import type { LanguageModelChatMessage, LanguageModelChatMessage2 } from 'vscode';
 import { CustomDataPartMimeTypes } from '../../../platform/endpoint/common/endpointTypes';
 import { LanguageModelChatMessageRole, LanguageModelDataPart, LanguageModelTextPart, LanguageModelThinkingPart, LanguageModelToolCallPart, LanguageModelToolResultPart, LanguageModelToolResultPart2 } from '../../../zyraxoncodeTypes';
 

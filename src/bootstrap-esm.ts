@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -35,7 +35,7 @@ globalThis._VSCODE_FILE_ROOT = import.meta.dirname;
 // default resolution first: an importer that ships its own dependencies (e.g. a
 // built-in extension under `${appRoot}/extensions/<ext>` that bundles a
 // different copy of a package) must resolve against its own, closer
-// `node_modules` — exactly as it would without the archive. Only when the
+// `node_modules` â€” exactly as it would without the archive. Only when the
 // default resolution finds nothing do we consult the archive.
 function enableASARSupport(): void {
 	if (!process.env['ELECTRON_RUN_AS_NODE'] && !process.versions['electron']) {
@@ -63,7 +63,7 @@ function enableASARSupport(): void {
 		trace('tracing enabled (node ' + process.versions.node + '); resourcesPath=' + resourcesPath);
 	}
 
-	// True only for *bare package specifiers* — the exact inputs Node routes to
+	// True only for *bare package specifiers* â€” the exact inputs Node routes to
 	// its PACKAGE_RESOLVE (node_modules walk / self-reference / 'exports'/'main').
 	//  - relative ('./', '../') and absolute ('/') paths -> new URL(specifier, base)
 	//  - '#name' subpath imports                         -> PACKAGE_IMPORTS_RESOLVE
@@ -154,7 +154,7 @@ function enableASARSupport(): void {
 				// tree (a closer copy under 'resources/app', e.g. one bundled by a
 				// built-in extension). A resolution ABOVE the app root must not win
 				// over the archive: when the app is nested inside a larger tree (e.g.
-				// '@zyraxoncode/test-electron' downloads the packaged app under the repo's
+				// '@vscode/test-electron' downloads the packaged app under the repo's
 				// own 'node_modules'), the default node_modules walk can escape the app
 				// and find a stale / ABI-mismatched copy. The archive stands in for the
 				// application's own 'node_modules' and must take precedence over

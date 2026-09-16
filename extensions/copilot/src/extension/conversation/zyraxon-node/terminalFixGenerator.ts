@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
-import { Uri } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
+import { Uri } from 'vscode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -83,7 +83,7 @@ export async function generateTerminalFixes(instantiationService: IInstantiation
 		}, err => {
 			// Generating terminal fixes is best-effort: a failed model request rejects here.
 			// Surface it as "No fixes found" instead of leaving an unhandled rejection that
-			// also strands the quick pick on "Generating…".
+			// also strands the quick pick on "Generatingâ€¦".
 			instantiationService.invokeFunction(accessor => accessor.get(ILogService)).error(err);
 			r([]);
 		});

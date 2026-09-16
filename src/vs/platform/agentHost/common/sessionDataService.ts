@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -78,7 +78,7 @@ export interface IReviewedFileRecord {
 
 /**
  * A host-injected ("local") turn: a completed protocol `Turn` the agent SDK
- * never saw — e.g. the `/rename` acknowledgement or a `!command` terminal run.
+ * never saw â€” e.g. the `/rename` acknowledgement or a `!command` terminal run.
  * These are persisted separately from SDK turns so they survive reload, and are
  * interleaved back into the SDK-derived turns on restore.
  */
@@ -101,7 +101,7 @@ export interface ILocalTurnRecord {
 
 /**
  * A disposable handle to a per-session SQLite database backed by
- * `@zyraxoncode/sqlite3`.
+ * `@vscode/sqlite3`.
  *
  * Callers obtain an instance via {@link ISessionDataService.openDatabase} and
  * **must** dispose it when finished to close the underlying database connection.
@@ -145,7 +145,7 @@ export interface ISessionDatabase extends IDisposable {
 
 	/**
 	 * Persists the JSON-serialized {@link UsageInfo} reported for a turn.
-	 * Idempotent — last writer wins per turn.
+	 * Idempotent â€” last writer wins per turn.
 	 *
 	 * Providers do not durably record token/credit usage themselves (the
 	 * Copilot SDK's `assistant.usage` event is explicitly ephemeral), so the
@@ -156,14 +156,14 @@ export interface ISessionDatabase extends IDisposable {
 
 	/**
 	 * Returns every persisted turn usage, keyed by both the turn's own id and
-	 * its SDK event id (when known) so restored turns — which are keyed by the
-	 * SDK envelope id — resolve as well as live ones.
+	 * its SDK event id (when known) so restored turns â€” which are keyed by the
+	 * SDK envelope id â€” resolve as well as live ones.
 	 */
 	getTurnUsages(): Promise<Map<string, string>>;
 
 	/**
 	 * Associates a git checkpoint ref (e.g. `refs/agents/<sid>/checkpoints/turn/N`)
-	 * with a turn. Idempotent — last writer wins per turn.
+	 * with a turn. Idempotent â€” last writer wins per turn.
 	 */
 	setTurnCheckpointRef(turnId: string, ref: string): Promise<void>;
 
@@ -235,21 +235,21 @@ export interface ISessionDatabase extends IDisposable {
 
 	/**
 	 * Retrieve file-edit metadata for the given tool call IDs.
-	 * Content blobs are **not** included — use {@link readFileEditContent}
+	 * Content blobs are **not** included â€” use {@link readFileEditContent}
 	 * to fetch them on demand. Results are returned in insertion order.
 	 */
 	getFileEdits(toolCallIds: string[]): Promise<IFileEditRecord[]>;
 
 	/**
 	 * Retrieve file-edit metadata for all edits in this session.
-	 * Content blobs are **not** included — use {@link readFileEditContent}
+	 * Content blobs are **not** included â€” use {@link readFileEditContent}
 	 * to fetch them on demand. Results are returned in insertion order.
 	 */
 	getAllFileEdits(): Promise<IFileEditRecord[]>;
 
 	/**
 	 * Retrieve file-edit metadata for all edits belonging to a specific turn.
-	 * Content blobs are **not** included — use {@link readFileEditContent}
+	 * Content blobs are **not** included â€” use {@link readFileEditContent}
 	 * to fetch them on demand. Results are returned in insertion order.
 	 */
 	getFileEditsByTurn(turnId: string): Promise<IFileEditRecord[]>;
@@ -289,7 +289,7 @@ export interface ISessionDatabase extends IDisposable {
 	getChatDraft(chat: URI): Promise<Message | undefined>;
 
 	/**
-	 * Bulk-remaps turn IDs using the provided old→new mapping.
+	 * Bulk-remaps turn IDs using the provided oldâ†’new mapping.
 	 * Used after copying a database file for a forked session.
 	 */
 	remapTurnIds(mapping: ReadonlyMap<string, string>): Promise<void>;
@@ -298,7 +298,7 @@ export interface ISessionDatabase extends IDisposable {
 
 	/**
 	 * Mark a file (identified by URI + content nonce) as reviewed by the user.
-	 * Idempotent — re-marking the same `(uri, nonce)` pair is a no-op.
+	 * Idempotent â€” re-marking the same `(uri, nonce)` pair is a no-op.
 	 */
 	markFileReviewed(uri: URI, nonce: string): Promise<void>;
 
@@ -350,7 +350,7 @@ export interface ISessionDatabase extends IDisposable {
  * Each session gets a directory under `{userDataPath}/agentSessionData/{sessionId}/`
  * where internal agent-host code can store arbitrary files (e.g. file snapshots).
  *
- * Directories are created lazily — callers should use {@link IFileService.createFolder}
+ * Directories are created lazily â€” callers should use {@link IFileService.createFolder}
  * before writing files. Cleanup happens eagerly on session removal and via startup
  * garbage collection for orphaned directories.
  */
@@ -415,7 +415,7 @@ export interface ISessionDataService {
 	 * {@link IWillDeleteSessionDataEvent.workingDirectories}, which the
 	 * caller resolves before tearing down live session state.
 	 *
-	 * Subscribers must own their own error handling — exceptions
+	 * Subscribers must own their own error handling â€” exceptions
 	 * propagated out of `waitUntil` promises are logged and ignored;
 	 * deletion proceeds regardless.
 	 */
@@ -430,7 +430,7 @@ export interface ISessionDataService {
 	/**
 	 * Resolves once all in-flight write operations across every currently
 	 * open per-session database have settled. Intended for graceful
-	 * shutdown — fire-and-forget writes (e.g. metadata persistence) would
+	 * shutdown â€” fire-and-forget writes (e.g. metadata persistence) would
 	 * otherwise be lost when the process exits.
 	 */
 	whenIdle(): Promise<void>;

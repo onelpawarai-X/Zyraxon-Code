@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { JSONVisitor, visit } from 'jsonc-parser';
-import { Location, Position, Range, TextDocument } from 'zyraxoncode';
+import { Location, Position, Range, TextDocument } from 'vscode';
 
 export interface INpmScriptReference {
 	name: string;

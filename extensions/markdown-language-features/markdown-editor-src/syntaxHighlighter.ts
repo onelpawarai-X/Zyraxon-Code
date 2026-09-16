@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { LengthEdit, OffsetRange, StringEdit } from '@zyraxoncode/markdown-editor';
-import { ISettableObservable, ITransaction, observableValue } from '@zyraxoncode/markdown-editor/observables';
+import { LengthEdit, OffsetRange, StringEdit } from '@vscode/markdown-editor';
+import { ISettableObservable, ITransaction, observableValue } from '@vscode/markdown-editor/observables';
 
 /**
  * A single coloured run as returned by the `documentSyntaxHighlighting`
@@ -22,7 +22,7 @@ interface IHighlightResult {
 	readonly colorMap: readonly string[];
 }
 
-/** A `Token` as consumed by `@zyraxoncode/markdown-editor`'s code block view. */
+/** A `Token` as consumed by `@vscode/markdown-editor`'s code block view. */
 interface IRenderToken {
 	readonly length: number;
 	readonly className: string | undefined;
@@ -37,7 +37,7 @@ interface ISnapshot {
  * The bit values mirror the `SyntaxHighlightingTokenFontStyle` enum from the
  * `documentSyntaxHighlighting` proposed API (Italic = 1, Bold = 2, Underline = 4,
  * Strikethrough = 8), defined in
- * `../../../src/zyraxoncode-dts/zyraxoncode.proposed.documentSyntaxHighlighting.d.ts`.
+ * `../../../src/vscode-dts/zyraxoncode.proposed.documentSyntaxHighlighting.d.ts`.
  * They cannot be imported here because this module is bundled into the webview.
  */
 function fontStyleRules(): string {
@@ -147,7 +147,7 @@ class HighlighterDocument {
 }
 
 /**
- * Bridges `@zyraxoncode/markdown-editor`'s `ISyntaxHighlighter` contract to the
+ * Bridges `@vscode/markdown-editor`'s `ISyntaxHighlighter` contract to the
  * extension host's `documentSyntaxHighlighting` proposed API over the webview
  * message channel. The webview cannot call the proposed API directly, so each
  * highlight request is proxied to the host and the themed result posted back.

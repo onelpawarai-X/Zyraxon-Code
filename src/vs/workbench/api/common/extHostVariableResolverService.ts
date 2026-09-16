@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -16,7 +16,7 @@ import { CustomEditorTabInput, NotebookDiffEditorTabInput, NotebookEditorTabInpu
 import { IExtHostWorkspace } from './extHostWorkspace.js';
 import { IConfigurationResolverService } from '../../services/configurationResolver/common/configurationResolver.js';
 import { AbstractVariableResolverService } from '../../services/configurationResolver/common/variableResolver.js';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ExtHostConfigProvider, IExtHostConfiguration } from './extHostConfiguration.js';
 
 export interface IExtHostVariableResolverProvider {

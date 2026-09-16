@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { NotebookCell, NotebookDocument } from 'zyraxoncode';
+import { NotebookCell, NotebookDocument } from 'vscode';
 import { ILogService } from '../../../platform/log/common/logService';
 import { CellIdPatternRe, getCellIdMap } from '../../../platform/notebook/common/helpers';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';

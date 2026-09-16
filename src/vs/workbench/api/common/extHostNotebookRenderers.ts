@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ import { IExtensionDescription } from '../../../platform/extensions/common/exten
 import { ExtHostNotebookRenderersShape, IMainContext, MainContext, MainThreadNotebookRenderersShape } from './extHost.protocol.js';
 import { ExtHostNotebookController } from './extHostNotebook.js';
 import { ExtHostNotebookEditor } from './extHostNotebookEditor.js';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 
 
 export class ExtHostNotebookRenderers implements ExtHostNotebookRenderersShape {

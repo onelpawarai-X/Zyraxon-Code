@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -773,7 +773,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 	}
 
 	async writeElevated(windowId: number | undefined, source: URI, target: URI, options?: { unlock?: boolean }): Promise<void> {
-		const sudoPrompt = await import('@zyraxoncode/sudo-prompt');
+		const sudoPrompt = await import('@vscode/sudo-prompt');
 
 		const argsFile = randomPath(this.environmentMainService.userDataPath, 'code-elevated');
 		await Promises.writeFile(argsFile, JSON.stringify({ source: source.fsPath, target: target.fsPath }));
@@ -1147,12 +1147,12 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 	}
 
 	async resolveProxyWithPackage(_windowId: number | undefined, url: string): Promise<IOSProxy[]> {
-		const { resolveProxy } = await import('@zyraxoncode/os-proxy-resolver');
+		const { resolveProxy } = await import('@vscode/os-proxy-resolver');
 		return resolveProxy(url);
 	}
 
 	async readProxyConfigWithPackage(_windowId: number | undefined): Promise<IOSProxyConfig> {
-		const { readProxyConfig } = await import('@zyraxoncode/os-proxy-resolver');
+		const { readProxyConfig } = await import('@vscode/os-proxy-resolver');
 		return readProxyConfig();
 	}
 
@@ -1410,7 +1410,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 			return undefined;
 		}
 
-		const Registry = await import('@zyraxoncode/windows-registry');
+		const Registry = await import('@vscode/windows-registry');
 		try {
 			return Registry.GetStringRegKey(hive, path, name);
 		} catch {

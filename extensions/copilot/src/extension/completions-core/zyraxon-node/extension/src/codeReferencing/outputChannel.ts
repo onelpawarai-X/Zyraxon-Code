@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { window, type OutputChannel } from 'zyraxoncode';
+import { window, type OutputChannel } from 'vscode';
 import { IAuthenticationService } from '../../../../../../platform/authentication/common/authentication';
 import { Disposable, IDisposable, MutableDisposable } from '../../../../../../util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../../../../../util/vs/platform/instantiation/common/instantiation';

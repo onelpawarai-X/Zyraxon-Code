@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { FileSystem, NotebookData, NotebookDocument, ResourceTrustRequestOptions, TextDocument, Uri, window, workspace, WorkspaceFolder, WorkspaceTrustRequestOptions, type WorkspaceEdit } from 'zyraxoncode';
+import { FileSystem, NotebookData, NotebookDocument, ResourceTrustRequestOptions, TextDocument, Uri, window, workspace, WorkspaceFolder, WorkspaceTrustRequestOptions, type WorkspaceEdit } from 'vscode';
 import { findNotebook } from '../../../util/common/notebooks';
 import { URI } from '../../../util/vs/base/common/uri';
 import { ILogService } from '../../log/common/logService';

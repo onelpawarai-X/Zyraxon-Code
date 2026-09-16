@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@zyraxoncode/copilot-api';
-import type { ChatRequest } from 'zyraxoncode';
+import { RequestType } from '@vscode/copilot-api';
+import type { ChatRequest } from 'vscode';
 import { FetchedValue } from '../../../shared-fetch-utils/common/fetchedValue';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Disposable, DisposableMap } from '../../../util/vs/base/common/lifecycle';
@@ -359,7 +359,7 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 			return { lastRoutedPrompt, fallbackReason: 'emptyPrompt' };
 		}
 
-		// Prompt hasn't changed since last decision — skip router but allow endpoint refresh
+		// Prompt hasn't changed since last decision â€” skip router but allow endpoint refresh
 		if (entry && entry.lastRoutedPrompt === prompt) {
 			return { lastRoutedPrompt };
 		}
@@ -404,12 +404,12 @@ export class AutomodeService extends Disposable implements IAutomodeService {
 				return { lastRoutedPrompt: prompt, fallbackReason: 'emptyCandidateList' };
 			}
 
-			// Prefer chosen_model — it is the router's authoritative pick after any
+			// Prefer chosen_model â€” it is the router's authoritative pick after any
 			// server-side re-ranking (e.g. Cost Sorting experiments). candidate_models
 			// is the ordered fallback list per the auto-intent-service contract
 			// (docs/integrators_onboarding.md: "Use chosen_model for the upcoming chat
 			// call, and use candidate_models as the ordered fallback list").
-			// Same-provider preference is intentionally NOT applied here — the router
+			// Same-provider preference is intentionally NOT applied here â€” the router
 			// already accounts for available models and re-runs after /compact, so
 			// overriding its pick with same-provider negates cost-saving decisions.
 			// Same-provider is still used in _selectDefaultModel (the non-router fallback).

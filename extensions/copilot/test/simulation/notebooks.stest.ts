@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import assert from 'assert';
 import * as fs from 'fs';
 import { EOL } from 'os';
 import * as path from 'path';
-import type { NotebookDocument } from 'zyraxoncode';
+import type { NotebookDocument } from 'vscode';
 import { Intent } from '../../src/extension/common/constants';
 import { IDiffService } from '../../src/platform/diff/common/diffService';
 import { DiffServiceImpl } from '../../src/platform/diff/node/diffServiceImpl';

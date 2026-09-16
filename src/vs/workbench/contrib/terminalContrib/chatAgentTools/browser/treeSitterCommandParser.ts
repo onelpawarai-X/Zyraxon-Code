@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Parser, Query, QueryCapture, Tree } from '@zyraxoncode/tree-sitter-wasm';
+import type { Parser, Query, QueryCapture, Tree } from '@vscode/tree-sitter-wasm';
 import { RunOnceScheduler } from '../../../../../base/common/async.js';
 import { BugIndicatingError, ErrorNoTelemetry } from '../../../../../base/common/errors.js';
 import { Lazy } from '../../../../../base/common/lazy.js';

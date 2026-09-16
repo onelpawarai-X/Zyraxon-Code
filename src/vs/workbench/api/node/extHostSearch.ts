@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -19,7 +19,7 @@ import { SearchService } from '../../services/search/node/rawSearchService.js';
 import { RipgrepSearchProvider } from '../../services/search/node/ripgrepSearchProvider.js';
 import { OutputChannel } from '../../services/search/node/ripgrepSearchUtils.js';
 import { NativeTextSearchManager } from '../../services/search/node/textSearchManager.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 
 export class NativeExtHostSearch extends ExtHostSearch implements IDisposable {
 

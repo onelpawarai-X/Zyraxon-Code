@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -13,7 +13,7 @@
  * - Subagent loading via `listSubagents()` + `getSubagentMessages()`
  */
 
-import type { CancellationToken } from 'zyraxoncode';
+import type { CancellationToken } from 'vscode';
 import { ILogService } from '../../../../../platform/log/common/logService';
 import { IWorkspaceService } from '../../../../../platform/workspace/common/workspaceService';
 import { createServiceIdentifier } from '../../../../../util/common/services';

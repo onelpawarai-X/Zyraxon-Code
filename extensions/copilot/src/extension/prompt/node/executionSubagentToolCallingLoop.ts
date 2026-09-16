@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { randomUUID } from 'crypto';
-import type { CancellationToken, ChatRequest, ChatResponseStream, LanguageModelToolInformation, Progress } from 'zyraxoncode';
+import type { CancellationToken, ChatRequest, ChatResponseStream, LanguageModelToolInformation, Progress } from 'vscode';
 import { IAuthenticationChatUpgradeService } from '../../../platform/authentication/common/authenticationUpgrade';
 import { IChatHookService } from '../../../platform/chat/common/chatHookService';
 import { ChatLocation, ChatResponse } from '../../../platform/chat/common/commonTypes';
@@ -48,7 +48,7 @@ export interface IExecutionSubagentToolCallingLoopOptions extends IToolCallingLo
 	topLevelTurnId?: string;
 }
 
-/** A terminal command that is no longer being awaited by the subagent — either
+/** A terminal command that is no longer being awaited by the subagent â€” either
  * it timed out and was moved to the background, or the model invoked it in
  * async/background mode from the start. */
 export interface IBackgroundCommand {

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -18,7 +18,7 @@ import { deserializeEnvironmentDescriptionMap, deserializeEnvironmentVariableCol
 import { IStartExtensionTerminalRequest, ITerminalProcessExtHostProxy, ITerminalProfileResolverService, ITerminalProfileService } from '../../contrib/terminal/common/terminal.js';
 import { IRemoteAgentService } from '../../services/remote/common/remoteAgentService.js';
 import { OperatingSystem, OS } from '../../../base/common/platform.js';
-import { TerminalEditorLocationOptions } from 'zyraxoncode';
+import { TerminalEditorLocationOptions } from 'vscode';
 import { Promises } from '../../../base/common/async.js';
 import { ISerializableEnvironmentDescriptionMap, ISerializableEnvironmentVariableCollection } from '../../../platform/terminal/common/environmentVariable.js';
 import { ITerminalLinkProviderService } from '../../contrib/terminalContrib/links/browser/links.js';

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Extension, Memento, Uri } from 'zyraxoncode';
+import type { Extension, Memento, Uri } from 'vscode';
 import { sanitizeZyraxonCodeVersion } from '../../../util/common/zyraxoncodeVersion';
 import { isCI } from '../../../util/vs/base/common/platform';
 import { URI } from '../../../util/vs/base/common/uri';

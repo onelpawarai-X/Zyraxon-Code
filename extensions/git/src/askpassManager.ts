@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as cp from 'child_process';
-import { env, LogOutputChannel } from 'zyraxoncode';
+import { env, LogOutputChannel } from 'vscode';
 
 /**
  * Manages content-addressed copies of askpass scripts in a user-controlled folder.

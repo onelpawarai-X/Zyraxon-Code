@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { TextEditor, window } from 'zyraxoncode';
+import { TextEditor, window } from 'vscode';
 import { Copilot } from '../../../platform/inlineCompletions/common/api';
 import { ILanguageContextProviderService } from '../../../platform/languageContextProvider/common/languageContextProviderService';
 import { IScopeSelector } from '../../../platform/scopeSelection/common/scopeSelection';

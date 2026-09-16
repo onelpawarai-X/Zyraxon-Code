@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { Range } from '../../../../util/vs/editor/common/core/range';
 import { Position } from '../../../../util/vs/editor/common/core/position';
 import { TextReplacement } from '../../../../util/vs/editor/common/core/edits/textEdit';

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@
  *  - Recording {@link IClaudeAgentSdkService} that, on `startup()`,
  *    performs a real HTTP round-trip against the proxy using the
  *    `Options.settings.env.ANTHROPIC_BASE_URL` /
- *    `Options.settings.env.ANTHROPIC_AUTH_TOKEN` it received — exactly
+ *    `Options.settings.env.ANTHROPIC_AUTH_TOKEN` it received â€” exactly
  *    what the real Claude SDK subprocess would do when forked.
  *
  * The test does NOT fork the bundled `@anthropic-ai/claude-agent-sdk`
@@ -35,7 +35,7 @@
 
 import type Anthropic from '@anthropic-ai/sdk';
 import type { GetSessionMessagesOptions, Options, PermissionResult, Query, SDKControlInterruptResponse, SDKMessage, SDKResultSuccess, SDKSessionInfo, SDKSystemMessage, SDKUserMessage, SessionMessage, WarmQuery } from '@anthropic-ai/claude-agent-sdk';
-import type { CCAModel } from '@zyraxoncode/copilot-api';
+import type { CCAModel } from '@vscode/copilot-api';
 import assert from 'assert';
 import type * as http from 'http';
 import { DeferredPromise } from '../../../../base/common/async.js';
@@ -97,7 +97,7 @@ const noopOTelService: IAgentHostOTelService = {
  * The {@link IFileService} + {@link INativeEnvironmentService} pair the
  * Phase 16 customization disk scan / watcher needs at session construction
  * time. Nothing is seeded under `userHome`, so the scan is deterministically
- * empty — these only exist so `new ClaudeAgentSession` can read `userHome`
+ * empty â€” these only exist so `new ClaudeAgentSession` can read `userHome`
  * and start its watcher without throwing.
  */
 function claudeFileEnvServices(disposables: Pick<DisposableStore, 'add'>): [typeof IFileService | typeof INativeEnvironmentService, IFileService | INativeEnvironmentService][] {
@@ -327,7 +327,7 @@ interface IProxyRoundTripResult {
  * When {@link RoundTripQuery.next} encounters a marker, it invokes the
  * captured {@link Options.canUseTool} closure and waits for it to
  * resolve before proceeding to the next entry, mirroring the real SDK
- * subprocess's behaviour around an assistant `tool_use` → synthetic
+ * subprocess's behaviour around an assistant `tool_use` â†’ synthetic
  * user `tool_result` round-trip.
  */
 interface CanUseToolMarker {
@@ -357,7 +357,7 @@ function isElicitationMarker(item: QueryStreamItem): item is ElicitationMarker {
  * a real HTTP `POST /v1/messages` against the proxy URL the agent passed
  * via `Options.settings.env`, using the bearer the agent constructed.
  * This stands in for the SDK subprocess's first model call so we can
- * assert the agent → proxy → CAPI round-trip works without forking
+ * assert the agent â†’ proxy â†’ CAPI round-trip works without forking
  * `@anthropic-ai/claude-agent-sdk`'s bundled CLI.
  */
 class ProxyRoundTripSdkService implements IClaudeAgentSdkService {
@@ -639,14 +639,14 @@ suite('ClaudeAgent integration (proxy-backed)', function () {
 
 	const disposables = ensureNoDisposablesAreLeakedInTestSuite();
 
-	test('agent → proxy → CAPI → SSE → agent: end-to-end pipeline with real proxy and stubbed CAPI', async () => {
-		// This is the Phase 6 §5.2 integration test: real ClaudeProxyService
+	test('agent â†’ proxy â†’ CAPI â†’ SSE â†’ agent: end-to-end pipeline with real proxy and stubbed CAPI', async () => {
+		// This is the Phase 6 Â§5.2 integration test: real ClaudeProxyService
 		// + real ClaudeAgent + stubbed ICopilotApiService + recording SDK
 		// service that performs a real HTTP round-trip on the proxy from
 		// inside `startup()`. Catches regressions in any of:
 		//   - Agent's `Options.settings.env` wiring (BASE_URL / AUTH_TOKEN).
 		//   - Proxy's `Bearer <nonce>.<sessionId>` parser.
-		//   - Proxy's model-id rewrite (SDK ↔ endpoint format).
+		//   - Proxy's model-id rewrite (SDK â†” endpoint format).
 		//   - Proxy's SSE frame encoding.
 		//   - Agent's `Options.env` strip contract.
 		const capi = new StubCopilotApiService();
@@ -679,11 +679,11 @@ suite('ClaudeAgent integration (proxy-backed)', function () {
 		const instantiationService = disposables.add(new InstantiationService(services));
 		const agent = disposables.add(instantiationService.createInstance(ClaudeAgent));
 
-		// Authenticate — boots the proxy and snapshots the model list.
+		// Authenticate â€” boots the proxy and snapshots the model list.
 		const accepted = await agent.authenticate(GITHUB_COPILOT_PROTECTED_RESOURCE.resource, 'gh-int-test-token');
 		assert.strictEqual(accepted, true);
 
-		// Create a provisional session — no SDK contact yet.
+		// Create a provisional session â€” no SDK contact yet.
 		const created = await agent.createSession({ workingDirectories: [URI.file('/integration-cwd')] });
 		assert.strictEqual(sdk.capturedStartupOptions.length, 0, 'createSession does not touch the SDK');
 
@@ -691,7 +691,7 @@ suite('ClaudeAgent integration (proxy-backed)', function () {
 		const sessionId = created.session.path.replace(/^\//, '');
 		sdk.queryMessages = [makeSystemInitMessage(sessionId), makeResultSuccess(sessionId)];
 
-		// First send materializes — drives `startup()`, which performs
+		// First send materializes â€” drives `startup()`, which performs
 		// the real HTTP round-trip on the real proxy.
 		await agent.chats.sendMessage(created.session, 'hi', undefined, undefined, 'turn-1');
 
@@ -753,7 +753,7 @@ suite('ClaudeAgent integration (proxy-backed)', function () {
 		// Companion test that locks the proxy's auth contract from
 		// outside the agent. If the agent ever drifts away from
 		// `Bearer <nonce>.<sessionId>`, the round-trip in the test
-		// above fails — but this test guarantees the proxy itself
+		// above fails â€” but this test guarantees the proxy itself
 		// rejects forged bearers regardless of the agent.
 		const capi = new StubCopilotApiService();
 		const realProxy = disposables.add(new ClaudeProxyService(new NullLogService(), capi));
@@ -771,17 +771,17 @@ suite('ClaudeAgent integration (proxy-backed)', function () {
 		}
 	});
 
-	test('Phase 7 §5.3 — canUseTool / onElicitation closures wired through to Options on materialize', async () => {
-		// Phase 7 §5.3. The Phase-6 round-trip above exercised the
+	test('Phase 7 Â§5.3 â€” canUseTool / onElicitation closures wired through to Options on materialize', async () => {
+		// Phase 7 Â§5.3. The Phase-6 round-trip above exercised the
 		// proxy / CAPI / settings-env wiring; this test pins the
-		// Phase-7 callback surface — `canUseTool` and `onElicitation`
+		// Phase-7 callback surface â€” `canUseTool` and `onElicitation`
 		// must both be present in the Options the SDK service receives
-		// from `_materializeProvisional` and behave per §3.4 / §3.7.
+		// from `_materializeProvisional` and behave per Â§3.4 / Â§3.7.
 		// We don't need a full SDK message stream with tool_use blocks
-		// to validate the wiring — the unit suites in
+		// to validate the wiring â€” the unit suites in
 		// `claudeAgent.test.ts` cover the in-process tool round-trip
 		// exhaustively. What this integration adds: the closures
-		// survive the materialize → SDK boundary intact when the real
+		// survive the materialize â†’ SDK boundary intact when the real
 		// proxy is in the loop.
 		const capi = new StubCopilotApiService();
 		capi.streamEvents = makeCannedStream('claude-opus-4.6');
@@ -852,12 +852,12 @@ suite('ClaudeAgent integration (proxy-backed)', function () {
 		});
 	});
 
-	test('Phase 7 §5.3 — Read tool round-trip: SDK tool_use → pending_confirmation → respondToPermissionRequest(true) → tool_result → continuation', async () => {
-		// §5.3 of the Phase-7 plan: drive a one-tool round-trip end-to-end
+	test('Phase 7 Â§5.3 â€” Read tool round-trip: SDK tool_use â†’ pending_confirmation â†’ respondToPermissionRequest(true) â†’ tool_result â†’ continuation', async () => {
+		// Â§5.3 of the Phase-7 plan: drive a one-tool round-trip end-to-end
 		// through a materialized agent backed by the real proxy. Unit
 		// tests in `claudeAgent.test.ts` already cover the in-process
 		// `_handleCanUseTool` mechanics; what this test pins is the
-		// agent → mapper → progress-event ordering when the SDK fixture
+		// agent â†’ mapper â†’ progress-event ordering when the SDK fixture
 		// invokes the captured `Options.canUseTool` mid-stream the same
 		// way the real subprocess would.
 		const capi = new StubCopilotApiService();
@@ -972,7 +972,7 @@ suite('ClaudeAgent integration (proxy-backed)', function () {
 				{ kind: 'action', type: ActionType.ChatDelta, content: 'reading' },
 				{ kind: 'action', type: ActionType.ChatToolCallStart, toolCallId: TOOL_USE_ID, toolName: 'Read' },
 				{ kind: 'action', type: ActionType.ChatToolCallDelta, toolCallId: TOOL_USE_ID, content: '{"file_path":"/tmp/x"}' },
-				// Phase 8.5 — mapper emits `ChatToolCallReady` at
+				// Phase 8.5 â€” mapper emits `ChatToolCallReady` at
 				// `content_block_stop` so auto-allowed tools transition out of
 				// `Streaming`; `sessionPermissions` then emits a second Ready
 				// for the pending_confirmation card below.

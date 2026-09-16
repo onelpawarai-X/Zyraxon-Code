@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -17,7 +17,7 @@ import {
 	Position,
 	TextDocument,
 	workspace
-} from 'zyraxoncode';
+} from 'vscode';
 import { ILogger, ILogService, LogTarget } from '../../../../../platform/log/common/logService';
 import { CapturingToken } from '../../../../../platform/requestLogger/common/capturingToken';
 import { IRequestLogger } from '../../../../../platform/requestLogger/common/requestLogger';

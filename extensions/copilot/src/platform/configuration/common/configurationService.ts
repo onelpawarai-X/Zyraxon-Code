@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ConfigurationChangeEvent, ConfigurationScope } from 'zyraxoncode';
+import type { ConfigurationChangeEvent, ConfigurationScope } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { BugIndicatingError } from '../../../util/vs/base/common/errors';
 import { Emitter, Event } from '../../../util/vs/base/common/event';
@@ -723,7 +723,7 @@ export namespace ConfigKey {
 		/** Simulate GitHub authentication failures for testing. Can't be TeamInternal because we lose these flags as part of testing. */
 		export const DebugGitHubAuthFailWith = defineSetting<'NotAuthorized' | 'RequestFailed' | 'ParseFailed' | 'HTTP401' | 'RateLimited' | 'GitHubLoginFailed' | null>('chat.debug.githubAuthFailWith', ConfigType.Simple, null);
 
-		// Agent debug logging settings — fileLogging.enabled is the canonical toggle
+		// Agent debug logging settings â€” fileLogging.enabled is the canonical toggle
 		/** @deprecated Use ChatDebugFileLogging instead. Kept during experiment transition. */
 		export const AgentDebugLogEnabled = defineAndMigrateExpSetting<boolean>('agentDebugLog.enabled', 'chat.agentDebugLog.enabled', false);
 		export const ChatDebugFileLogging = defineAndMigrateExpSetting<boolean>('chat.chatDebug.fileLogging.enabled', 'chat.agentDebugLog.fileLogging.enabled', false);
@@ -803,7 +803,7 @@ export namespace ConfigKey {
 		 * When enabled, a cached NES suggestion that was once rendered as an inline
 		 * (ghost text at cursor) suggestion will not be re-served from cache unless
 		 * it can again be rendered as an inline suggestion. The cache entry is not
-		 * evicted — it is simply gated until the cursor returns to an
+		 * evicted â€” it is simply gated until the cursor returns to an
 		 * inline-renderable position.
 		 */
 		export const InlineEditsNesMimicGhostTextBehavior = defineTeamInternalSetting<boolean>('chat.advanced.inlineEdits.nesMimicGhostTextBehavior', ConfigType.ExperimentBased, false, vBoolean());
@@ -939,7 +939,7 @@ export namespace ConfigKey {
 		export const ResponsesApiWebSocketEnabled = defineTeamInternalSetting<boolean>('chat.advanced.responsesApi.webSocket.enabled', ConfigType.ExperimentBased, true);
 		export const DebugSimulateWebSocketResponse = defineTeamInternalSetting<string>('chat.advanced.debug.simulateWebSocketResponse', ConfigType.Simple, '');
 
-		/** Max events per cloud session sync flush request — also acts as a buffer-size flush trigger. */
+		/** Max events per cloud session sync flush request â€” also acts as a buffer-size flush trigger. */
 		export const SessionSyncMaxEventsPerFlush = defineTeamInternalSetting<number>('chat.advanced.sessionSync.maxEventsPerFlush', ConfigType.ExperimentBased, 500);
 
 		/** Safety-net interval (ms) for buffered cloud session sync events that did not trigger a terminal flush. */
@@ -950,7 +950,7 @@ export namespace ConfigKey {
 	 * Deprecated settings that are no longer in use.
 	 */
 	export namespace Deprecated {
-		/** Model override for Plan agent — migrated to core `chat.planAgent.defaultModel` */
+		/** Model override for Plan agent â€” migrated to core `chat.planAgent.defaultModel` */
 		export const PlanAgentModel = defineSetting<string>('chat.planAgent.model', ConfigType.Simple, '');
 		export const OllamaEndpoint = defineSetting<string>('chat.byok.ollamaEndpoint', ConfigType.Simple, '__ZYRAXKEEP__2_');
 		export const AzureModels = defineSetting<Record<string, { name: string; url: string; toolCalling: boolean; vision: boolean; maxInputTokens: number; maxOutputTokens: number; requiresAPIKey?: boolean; thinking?: boolean; streaming?: boolean; zeroDataRetentionEnabled?: boolean }>>('chat.azureModels', ConfigType.Simple, {});
@@ -1100,12 +1100,12 @@ export namespace ConfigKey {
 
 	/** Whether the Explore (Code Research) subagent is enabled */
 	export const ExploreAgentEnabled = defineSetting<boolean>('chat.exploreAgent.enabled', ConfigType.ExperimentBased, true);
-	/** Model override for Explore (Code Research) agent — reads from core `chat.exploreAgent.defaultModel` */
+	/** Model override for Explore (Code Research) agent â€” reads from core `chat.exploreAgent.defaultModel` */
 	export const ExploreAgentModel = defineSetting<string>('chat.exploreAgent.model', ConfigType.Simple, '');
 
 	export const ViewImageToolEnabled = defineSetting<boolean>('chat.tools.viewImage.enabled', ConfigType.ExperimentBased, true);
 
-	/** Enable local session search index — tracks sessions locally and enables chronicle commands.*/
+	/** Enable local session search index â€” tracks sessions locally and enables chronicle commands.*/
 	export const LocalIndexEnabled = defineSetting<boolean>('chat.localIndex.enabled', ConfigType.ExperimentBased, true);
 
 	/** grep_search configs */

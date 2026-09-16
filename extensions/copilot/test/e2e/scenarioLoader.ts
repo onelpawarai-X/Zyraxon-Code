@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import assert from 'assert';
 import * as fs from 'fs';
 import * as jsoncParser from 'jsonc-parser';
 import * as path from 'path';
-import type { ChatResponseFileTreePart, Command } from 'zyraxoncode';
+import type { ChatResponseFileTreePart, Command } from 'vscode';
 import { Turn } from '../../src/extension/prompt/common/conversation';
 import { deserializeWorkbenchState, IDeserializedWorkspaceState } from '../../src/platform/test/node/promptContextModel';
 import { ITestingServicesAccessor } from '../../src/platform/test/node/services';

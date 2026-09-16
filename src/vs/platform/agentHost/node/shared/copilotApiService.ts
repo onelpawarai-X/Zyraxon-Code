@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type Anthropic from '@anthropic-ai/sdk';
-import { CAPIClient, RequestType, type CCAModel, type IExtensionInformation } from '@zyraxoncode/copilot-api';
+import { CAPIClient, RequestType, type CCAModel, type IExtensionInformation } from '@vscode/copilot-api';
 import { generateUuid } from '../../../../base/common/uuid.js';
 import { getDevDeviceId, getMachineId } from '../../../../base/node/id.js';
 import { createDecorator } from '../../../instantiation/common/instantiation.js';
@@ -34,7 +34,7 @@ export interface ICopilotApiServiceRequestOptions {
 	/**
 	 * Suppress the `Copilot-Integration-Id` header on this request.
 	 *
-	 * When unset, `@zyraxoncode/copilot-api` derives the integration id from the
+	 * When unset, `@vscode/copilot-api` derives the integration id from the
 	 * discovered Copilot SKU: a `no_auth_limited_copilot` SKU maps to
 	 * `zyraxoncode-nl`, which the CAPI backend treats as the limited/no-auth
 	 * integration and refuses premium models such as `claude-opus-4.7`.
@@ -57,7 +57,7 @@ export interface ICopilotUtilityChatMessage {
 /**
  * Inputs for {@link ICopilotApiService.utilityChatCompletion}.
  *
- * Callers own prompt construction — typically a `'system'` rules message
+ * Callers own prompt construction â€” typically a `'system'` rules message
  * followed by one or more `'user'` messages, matching the Copilot Chat
  * extension's `copilot-utility-small` prompts (see
  * `GitCommitMessagePrompt`'s `SystemMessage` + `UserMessage` pair). This
@@ -166,7 +166,7 @@ const USER_API_VERSION = '2025-04-01';
  * Test/debug override for the CAPI base URL. When set to a **loopback** URL,
  * {@link CopilotApiService} skips the `api.github.com/copilot_internal/user`
  * endpoint-discovery round-trip (which requires a real GitHub token) and routes
- * every CAPI request — `models`, `responses`, `messages` — straight at this URL
+ * every CAPI request â€” `models`, `responses`, `messages` â€” straight at this URL
  * instead. Only ever set by the smoke-test harness (see `setupAgentHostSuite`)
  * so the agent host's shared CAPI client can talk to the mock LLM server; never
  * set in production, so normal per-token discovery is unchanged.
@@ -255,12 +255,12 @@ const VSCODE_COPILOT_ORGANIZATIONS = new Set(['551cca60ce19654d894e786220822482'
 
 /**
  * Thrown by {@link ICopilotApiService} when CAPI returns an Anthropic-format
- * API error — either as a non-2xx HTTP response or as a mid-stream
+ * API error â€” either as a non-2xx HTTP response or as a mid-stream
  * `event: error` SSE frame. Carries enough information for the Phase 2
  * Claude proxy to re-emit the error passthrough without re-mapping.
  *
  * Network/transport failures (connection reset, DNS failure, etc.) are
- * **not** wrapped as `CopilotApiError` — they propagate as raw `fetch`
+ * **not** wrapped as `CopilotApiError` â€” they propagate as raw `fetch`
  * rejections so consumers can distinguish API errors from transport errors.
  */
 export class CopilotApiError extends Error {
@@ -315,7 +315,7 @@ function buildCopilotApiHttpError(status: number, statusText: string, bodyText: 
 				}
 			}
 		} catch {
-			// non-JSON body — fall through to synthesis
+			// non-JSON body â€” fall through to synthesis
 		}
 	}
 	if (!envelope) {
@@ -388,7 +388,7 @@ export const ICopilotApiService = createDecorator<ICopilotApiService>('copilotAp
  *
  * - Each cached entry is a **distinct {@link CAPIClient} instance** with its
  *   own discovered domain state. Concurrent in-flight requests for two
- *   different GitHub tokens cannot trample each other's `endpoints.api` —
+ *   different GitHub tokens cannot trample each other's `endpoints.api` â€”
  *   token A's request will always route through the client built for A.
  * - Multiple in-flight requests for the **same** GitHub token share a single
  *   endpoint-discovery call via the per-token cache map (no thundering herd
@@ -413,7 +413,7 @@ export const ICopilotApiService = createDecorator<ICopilotApiService>('copilotAp
  *   error envelope preserved verbatim.
  * - Failures of the `/copilot_internal/user` discovery call throw plain
  *   `Error` (not `CopilotApiError`) with a `"Copilot endpoint discovery
- *   failed: ..."` prefix — it is an implementation detail of this service
+ *   failed: ..."` prefix â€” it is an implementation detail of this service
  *   and is not part of the Anthropic-shaped CAPI surface.
  * - Malformed JSON in an SSE `data:` line is logged and skipped, not thrown.
  */
@@ -472,7 +472,7 @@ export interface ICopilotApiService {
 	/**
 	 * Count tokens for a hypothetical request.
 	 *
-	 * @throws always — `countTokens` is not supported by CAPI in Phase 1.5.
+	 * @throws always â€” `countTokens` is not supported by CAPI in Phase 1.5.
 	 * Phase 2 proxy maps this to HTTP 501.
 	 */
 	countTokens(
@@ -514,7 +514,7 @@ export interface ICopilotApiService {
 	 * endpoint and return the assistant text.
 	 *
 	 * Internally mints (and caches) a Copilot session token from the
-	 * supplied GitHub token — the same flow the Copilot Chat extension
+	 * supplied GitHub token â€” the same flow the Copilot Chat extension
 	 * uses for its `copilot-utility-small` endpoint (PR title/description,
 	 * commit messages, branch names, chat titles, etc.). Uses the
 	 * `gpt-4o-mini` model family with `top_p = 1` and `temperature = 0.1`
@@ -534,8 +534,8 @@ export interface ICopilotApiService {
 	): Promise<string>;
 
 	/**
-	 * Resolve this user's restricted-telemetry context from the minted CAPI Copilot session token —
-	 * the `rt` opt-in and `tid` tracking id — plus the CAPI `endpoints.telemetry` host. The GitHub
+	 * Resolve this user's restricted-telemetry context from the minted CAPI Copilot session token â€”
+	 * the `rt` opt-in and `tid` tracking id â€” plus the CAPI `endpoints.telemetry` host. The GitHub
 	 * token itself carries none of these claims; they live in the Copilot session token (minted via
 	 * `RequestType.CopilotToken`), exactly as the Copilot extension reads them off its `CopilotToken`.
 	 * The telemetry endpoint is resolved only when enabled, so public users incur no extra discovery.
@@ -547,7 +547,7 @@ export interface ICopilotApiService {
 	 * (or the loopback test override), or `undefined` when discovery hasn't run
 	 * or failed. The effective CAPI host varies by account (consumer
 	 * `api.githubcopilot.com` vs. Enterprise / proxy), so callers that need the
-	 * real host — e.g. to resolve the correct proxy — should prefer this over the
+	 * real host â€” e.g. to resolve the correct proxy â€” should prefer this over the
 	 * hardcoded default.
 	 */
 	resolveApiEndpoint(githubToken: string): Promise<string | undefined>;
@@ -617,7 +617,7 @@ export class CopilotApiService implements ICopilotApiService {
 					...options?.headers,
 					'Authorization': `Bearer ${githubToken}`,
 				},
-				// Opt-in per request — see
+				// Opt-in per request â€” see
 				// `ICopilotApiServiceRequestOptions.suppressIntegrationId`.
 				suppressIntegrationId: options?.suppressIntegrationId,
 				signal: options?.signal,
@@ -646,7 +646,7 @@ export class CopilotApiService implements ICopilotApiService {
 		const requestId = generateUuid();
 
 		// Parse the request body to log the model being sent (debug aid; failures
-		// are non-fatal — the body is forwarded byte-for-byte regardless).
+		// are non-fatal â€” the body is forwarded byte-for-byte regardless).
 		let requestModel = '<unknown>';
 		try {
 			const parsed = JSON.parse(body);
@@ -664,7 +664,7 @@ export class CopilotApiService implements ICopilotApiService {
 					'X-Request-Id': requestId,
 					'OpenAI-Intent': 'conversation',
 				},
-				// Opt-in per request — see
+				// Opt-in per request â€” see
 				// `ICopilotApiServiceRequestOptions.suppressIntegrationId`.
 				suppressIntegrationId: options?.suppressIntegrationId,
 				body,
@@ -930,7 +930,7 @@ export class CopilotApiService implements ICopilotApiService {
 				if (entry.expiresAt - nowSeconds > CAPI_CONTEXT_REFRESH_BUFFER_SECONDS) {
 					return entry;
 				}
-				// Stale — evict and recurse to build a fresh entry.
+				// Stale â€” evict and recurse to build a fresh entry.
 				this._clientsByToken.delete(githubToken);
 				return this._getEntryForToken(githubToken);
 			}).catch(err => {
@@ -997,7 +997,7 @@ export class CopilotApiService implements ICopilotApiService {
 
 		if (!response.ok) {
 			const text = await response.text().catch(() => '');
-			throw new Error(`Copilot endpoint discovery failed: ${response.status} ${response.statusText} — ${text}`);
+			throw new Error(`Copilot endpoint discovery failed: ${response.status} ${response.statusText} â€” ${text}`);
 		}
 
 		const envelope: ICopilotUserResponse = await response.json();
@@ -1047,7 +1047,7 @@ export class CopilotApiService implements ICopilotApiService {
 				if (entry.expiresAt - nowSeconds > COPILOT_TOKEN_REFRESH_BUFFER_SECONDS) {
 					return entry;
 				}
-				// Stale — evict only if the map still points at this
+				// Stale â€” evict only if the map still points at this
 				// promise. A concurrent caller may already have raced ahead
 				// and minted a fresh token; deleting unconditionally would
 				// evict that newer entry and cause a redundant re-mint.
@@ -1200,7 +1200,7 @@ export class CopilotApiService implements ICopilotApiService {
 			try {
 				await reader.cancel();
 			} catch {
-				// ignore — cancellation is best-effort cleanup
+				// ignore â€” cancellation is best-effort cleanup
 			}
 			reader.releaseLock();
 		}

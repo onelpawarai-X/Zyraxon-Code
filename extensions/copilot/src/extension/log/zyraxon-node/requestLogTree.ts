@@ -1,15 +1,15 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { IHTMLRouter } from '@zyraxoncode/prompt-tsx';
+import { IHTMLRouter } from '@vscode/prompt-tsx';
 import { createServer } from 'http';
 import { AddressInfo } from 'net';
 import * as os from 'os';
 import * as path from 'path';
 import * as tar from 'tar';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { outputChannel } from '../../../platform/log/zyraxoncode/outputChannelLogTarget';
 import type { APIUsage } from '../../../platform/networking/common/openai';
@@ -629,7 +629,7 @@ class ChatRequestProvider extends Disposable implements zyraxoncode.TreeDataProv
 
 				// If this entry is the main entry for the group (a MarkdownContentRequest
 				// whose debugName matches the token label), associate it directly with the
-				// parent ChatPromptItem — don't add it as a child. The entry stays in the
+				// parent ChatPromptItem â€” don't add it as a child. The entry stays in the
 				// request logger for virtual document serving; only tree nesting changes.
 				// Always wire the main entry so the parent node is clickable and shows the
 				// current icon (e.g. loading, lightbulb, skipped, circleSlash, etc.).
@@ -719,7 +719,7 @@ class ChatPromptItem extends zyraxoncode.TreeItem {
 	/**
 	 * Associate a main entry directly with this parent item.
 	 * The main entry's icon and click command are shown on the parent node.
-	 * The entry is NOT added as a child — it stays in the request logger
+	 * The entry is NOT added as a child â€” it stays in the request logger
 	 * for virtual document serving only.
 	 */
 	public setMainEntry(info: ILoggedRequestInfo): void {

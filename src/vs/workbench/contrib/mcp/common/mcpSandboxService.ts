@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -264,7 +264,7 @@ export class McpSandboxService extends Disposable implements IMcpSandboxService 
 		const execPath = await this._getExecPath(os, appRoot, remoteAuthority);
 		const tempDir = await this._getTempDir(remoteAuthority);
 		const srtPath = this._pathJoin(os, appRoot, 'node_modules', '@zyraxoncode', 'sandbox-runtime', 'dist', 'cli.js');
-		// @zyraxoncode/ripgrep-universal ships per-platform-arch binaries under bin/{platform}-{arch}/{rg|rg.exe}
+		// @vscode/ripgrep-universal ships per-platform-arch binaries under bin/{platform}-{arch}/{rg|rg.exe}
 		// Windows is handled by the early return above, so os is narrowed to Mac/Linux here.
 		const rgPlatform = os === OperatingSystem.Macintosh ? 'darwin' : 'linux';
 		const rgPath = this._pathJoin(os, appRoot, 'node_modules', '@zyraxoncode', 'ripgrep-universal', 'bin', `${rgPlatform}-${arch}`, 'rg');

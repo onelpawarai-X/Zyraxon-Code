@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Uri } from 'zyraxoncode';
+import type { Uri } from 'vscode';
 import { IDocumentEventDataSetChangeReason } from '../../../platform/workspaceRecorder/common/workspaceLog';
 import { Event } from '../../../util/vs/base/common/event';
 import { createDecorator as createServiceIdentifier } from '../../../util/vs/platform/instantiation/common/instantiation';

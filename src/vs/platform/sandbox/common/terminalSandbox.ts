@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 /**
  * Local type definition for sandbox runtime configuration to avoid importing external package
- * in the common layer. The actual type should match @zyraxoncode/sandbox-runtime.
+ * in the common layer. The actual type should match @vscode/sandbox-runtime.
  */
 export interface ITerminalSandboxRuntimeConfig {
 	network?: {

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -18,7 +18,7 @@ declare module 'zyraxoncode' {
 	 * @deprecated Part of MappedEditsProvider, use `MappedEditsProvider2` instead.
 	 */
 	export interface ConversationRequest {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		readonly type: 'request';
 		readonly message: string;
 	}
@@ -27,7 +27,7 @@ declare module 'zyraxoncode' {
 	 * @deprecated Part of MappedEditsProvider, use `MappedEditsProvider2` instead.
 	 */
 	export interface ConversationResponse {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		readonly type: 'response';
 		readonly message: string;
 		readonly result?: ChatResult;

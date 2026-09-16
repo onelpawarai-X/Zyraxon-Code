@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { EndOfLine, TextDocument, TextLine, Uri } from 'zyraxoncode';
+import type { EndOfLine, TextDocument, TextLine, Uri } from 'vscode';
 import { isNumber, isString } from '../../../util/vs/base/common/types';
 import { isUriComponents, URI, UriComponents } from '../../../util/vs/base/common/uri';
 import { DEFAULT_WORD_REGEXP, getWordAtText } from '../../../util/vs/editor/common/core/wordHelper';

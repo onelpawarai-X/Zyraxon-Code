@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ApiClient, FileStat, FileType, Requests } from '@zyraxoncode/sync-api-client';
-import { ClientConnection } from '@zyraxoncode/sync-api-common/browser';
+import { ApiClient, FileStat, FileType, Requests } from '@vscode/sync-api-client';
+import { ClientConnection } from '@vscode/sync-api-common/browser';
 import { basename } from 'path';
 import type * as ts from 'typescript/lib/tsserverlibrary';
 import { FileWatcherManager } from './fileWatcherManager';

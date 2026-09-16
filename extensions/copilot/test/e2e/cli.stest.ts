@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ import assert from 'assert';
 import * as fs from 'fs/promises';
 import { platform, tmpdir } from 'os';
 import * as path from 'path';
-import type { ChatParticipantToolToken, ChatPromptReference } from 'zyraxoncode';
+import type { ChatParticipantToolToken, ChatPromptReference } from 'vscode';
 import { IAgentSessionsWorkspace } from '../../src/extension/chatSessions/common/agentSessionsWorkspace';
 import { IChatSessionMetadataStore } from '../../src/extension/chatSessions/common/chatSessionMetadataStore';
 import { IChatSessionWorkspaceFolderService } from '../../src/extension/chatSessions/common/chatSessionWorkspaceFolderService';
@@ -323,7 +323,7 @@ function assertStreamContains(stream: MockChatResponseStream, expectedContent: s
 
 function assertNoErrorsInStream(stream: MockChatResponseStream) {
 	const output = stream.output.join('');
-	assert.ok(!output.includes('❌'), `Expected no errors in stream, actual output: ${output}`);
+	assert.ok(!output.includes('âŒ'), `Expected no errors in stream, actual output: ${output}`);
 	assert.ok(!output.includes('Error'), `Expected no errors in stream, actual output: ${output}`);
 }
 

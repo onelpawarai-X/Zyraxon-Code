@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { Attachment, PermissionRequestedEvent } from '@github/copilot/sdk';
 import { platform } from 'node:os';
-import type { CancellationToken, ChatParticipantToolToken, ChatResponseStream } from 'zyraxoncode';
+import type { CancellationToken, ChatParticipantToolToken, ChatResponseStream } from 'vscode';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { extUriBiasedIgnorePathCase, isEqual } from '../../../../util/vs/base/common/resources';
@@ -43,7 +43,7 @@ type CoreConfirmationToolParams = {
 };
 
 /**
- * The result of requesting permissions — the full union accepted by `Session.respondToPermission`.
+ * The result of requesting permissions â€” the full union accepted by `Session.respondToPermission`.
  * Extracted from the SDK's second parameter type to stay in sync automatically.
  */
 export type PermissionRequestResult = Parameters<Session['respondToPermission']>[1];
@@ -173,7 +173,7 @@ export async function handleWritePermission(
 	}
 	const toolParams = await getFileEditConfirmationToolParams(instantiationService, permissionRequest, toolCall, workspaceFolderForFile);
 	if (!toolParams) {
-		// No confirmation needed (e.g. no file to edit) — auto-approve.
+		// No confirmation needed (e.g. no file to edit) â€” auto-approve.
 		if (editFile) {
 			await trackEditIfNeeded(editTracker, toolCall, editFile, stream, logService);
 		}
@@ -206,7 +206,7 @@ export async function handleShellPermission(
 
 /**
  * Builds the terminal confirmation tool params for a shell permission request.
- * Pure function — no side effects, easy to test.
+ * Pure function â€” no side effects, easy to test.
  */
 export function buildShellConfirmationParams(
 	permissionRequest: Extract<PermissionRequest, { kind: 'shell' }>,
@@ -256,7 +256,7 @@ export async function handleMcpPermission(
 
 /**
  * Builds the confirmation tool params for an MCP permission request.
- * Pure function — no side effects, easy to test.
+ * Pure function â€” no side effects, easy to test.
  */
 export function buildMcpConfirmationParams(
 	permissionRequest: Extract<PermissionRequest, { kind: 'mcp' }>,

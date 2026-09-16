@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Position, Range, TextDocument } from 'zyraxoncode';
+import { Position, Range, TextDocument } from 'vscode';
 
 export interface InlineSuggestionEdit {
 	readonly range: Range;
@@ -83,7 +83,7 @@ function tryRebaseAsCursorEdit(cursorPos: Position, doc: TextDocument, range: Ra
  * The line terminator between the cursor and `range.start` (`lineBreak`) lives in
  * the document, not in the edit, so a cursor insertion always leaves it *after*
  * the inserted text. Inserting `N` at the start of the next line therefore equals
- * inserting `lineBreak + N'` at the cursor iff `N === N' + lineBreak` — i.e. `N`
+ * inserting `lineBreak + N'` at the cursor iff `N === N' + lineBreak` â€” i.e. `N`
  * must end with the document's own line break (then `N'` is `N` with that break
  * dropped). Requiring the document break (not merely '\n') keeps this exact for
  * CRLF documents. Otherwise a pure cursor insertion cannot reproduce the edit

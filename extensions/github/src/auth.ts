@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AuthenticationSession, EventEmitter, authentication, window } from 'zyraxoncode';
+import { AuthenticationSession, EventEmitter, authentication, window } from 'vscode';
 import { Agent, globalAgent } from 'https';
 import { graphql } from '@octokit/graphql/types';
 import { Octokit } from '@octokit/rest';

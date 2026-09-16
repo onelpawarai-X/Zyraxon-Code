@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatCustomAgent, ChatHook, ChatInstruction, ChatPlugin, ChatSkill, ChatSlashCommand } from 'zyraxoncode';
+import type { ChatCustomAgent, ChatHook, ChatInstruction, ChatPlugin, ChatSkill, ChatSlashCommand } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Event } from '../../../util/vs/base/common/event';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
@@ -30,7 +30,7 @@ export enum AgentInstructionFileType {
 }
 
 export namespace PromptConfig {
-	// Configuration keys (non-extension settings — read via getNonExtensionConfig).
+	// Configuration keys (non-extension settings â€” read via getNonExtensionConfig).
 	export const USE_AGENT_MD = 'chat.useAgentsMdFile';
 	export const USE_NESTED_AGENT_MD = 'chat.useNestedAgentsMdFiles';
 	export const USE_CLAUDE_MD = 'chat.useClaudeMdFile';

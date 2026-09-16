@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { commands, Disposable, languages, LanguageStatusItem, LanguageStatusSeverity, window, workspace } from 'zyraxoncode';
+import { commands, Disposable, languages, LanguageStatusItem, LanguageStatusSeverity, window, workspace } from 'vscode';
 import { IDisposable } from '../../../../../util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../../../../util/vs/platform/instantiation/common/instantiation';
 import { CopilotConfigPrefix } from '../../lib/src/constants';

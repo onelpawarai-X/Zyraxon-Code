@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { AgentTaskState } from '@zyraxoncode/copilot-api';
-import * as zyraxoncode from 'zyraxoncode';
+import type { AgentTaskState } from '@vscode/copilot-api';
+import * as zyraxoncode from 'vscode';
 import { getGithubRepoIdFromFetchUrl, GithubRepoId, IGitService } from '../../../platform/git/common/gitService';
 import { ILogService } from '../../../platform/log/common/logService';
 import { UriHandlerPaths, UriHandlers } from './chatSessionsUriHandler';
@@ -30,10 +30,10 @@ export function isActiveTaskState(state: AgentTaskState): boolean {
 			return false;
 		default:
 			// Forward-compat: an unknown state added server-side is treated as active, matching
-			// `taskStateToChatSessionStatus` (unknown → InProgress). Returning `false` here would
+			// `taskStateToChatSessionStatus` (unknown â†’ InProgress). Returning `false` here would
 			// let the detail view settle while the session state still reads `in_progress`, which
-			// reintroduces the stuck "Session is in progress…" spinner with no live callback to
-			// recover — so keep streaming until the state resolves to a known terminal one.
+			// reintroduces the stuck "Session is in progressâ€¦" spinner with no live callback to
+			// recover â€” so keep streaming until the state resolves to a known terminal one.
 			return true;
 	}
 }
@@ -42,7 +42,7 @@ export function isActiveTaskState(state: AgentTaskState): boolean {
  * Task (v2) lifecycle states that represent an unsuccessful terminal outcome. Used to render a
  * failure notice in the detail view when the task ended without emitting any events (e.g.
  * "Failed to launch agent"), which otherwise leaves the latest turn's session state stuck at
- * `in_progress`/`queued` and shows a perpetual "Session is in progress…" spinner.
+ * `in_progress`/`queued` and shows a perpetual "Session is in progressâ€¦" spinner.
  */
 export function isFailedTaskState(state: AgentTaskState): boolean {
 	return state === 'failed' || state === 'timed_out' || state === 'cancelled';

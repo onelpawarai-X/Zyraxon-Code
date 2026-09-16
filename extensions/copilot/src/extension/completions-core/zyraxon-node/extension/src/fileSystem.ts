@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { FileType, Uri, workspace } from 'zyraxoncode';
+import { FileType, Uri, workspace } from 'vscode';
 import { FileIdentifier, FileStat, ICompletionsFileSystemService } from '../../lib/src/fileSystem';
 
 class ExtensionFileSystem implements ICompletionsFileSystemService {

@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
-import { Uri } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { Uri } from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { createDirectoryIfNotExists, IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -46,9 +46,9 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 	 */
 	private _cache: Record<string, ChatSessionMetadataFile> = {};
 
-	/** Session ID → indexed path and kind, for reverse-lookup cleanup. */
+	/** Session ID â†’ indexed path and kind, for reverse-lookup cleanup. */
 	private readonly _sessionFolderEntry = new Map<string, { path: string; kind: 'worktree' | 'folder' }>();
-	/** Folder path → set of session IDs (worktree path or workspace folder path). */
+	/** Folder path â†’ set of session IDs (worktree path or workspace folder path). */
 	private readonly _folderToSessions = new Map<string, Set<string>>();
 
 	/** Path of the shared bulk metadata cache file in `~/.copilot/`. */
@@ -89,7 +89,7 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 	}
 
 	public refresh(): Promise<void> {
-		// Chain onto the existing `_ready` — concurrent calls collapse to at most one
+		// Chain onto the existing `_ready` â€” concurrent calls collapse to at most one
 		// in-flight + one pending. `.catch(() => undefined)` ensures a failed prior
 		// step does not poison subsequent reads/writes.
 		this._ready = this._ready.catch(() => undefined).then(() => this.reloadBulkFromDisk());
@@ -218,7 +218,7 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 		await this._ready;
 		// Optimistically update in-memory cache so callers in the same process observe
 		// the change immediately. We pass only the partial `fields` to
-		// `updateSessionMetadata` — that method reads fresh from disk and merges, so it
+		// `updateSessionMetadata` â€” that method reads fresh from disk and merges, so it
 		// cannot stomp fields written by other processes (Step 3b: stale-cache fix).
 		const existing = this._cache[sessionId] ?? {};
 		this._cache[sessionId] = { ...existing, ...fields };
@@ -511,7 +511,7 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 				existing = JSON.parse(new TextDecoder().decode(rawContent));
 			} catch {
 				diskFileExisted = false;
-				// File doesn't exist yet — check if the directory exists.
+				// File doesn't exist yet â€” check if the directory exists.
 				try {
 					await this.fileSystemService.stat(dirUri);
 				} catch {
@@ -527,8 +527,8 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 			}
 
 			// Merge order: cache (locally-known fields not yet flushed to disk)
-			//             → disk existing (cross-process writes win over stale cache, Step 3b)
-			//             → explicit `metadata` fields from this call (caller wins).
+			//             â†’ disk existing (cross-process writes win over stale cache, Step 3b)
+			//             â†’ explicit `metadata` fields from this call (caller wins).
 			// `undefined` values in `metadata` delete the corresponding key.
 			const cacheExisting = diskFileExisted ? {} : (this._cache[sessionId] ?? {});
 			const merged: ChatSessionMetadataFile = { ...cacheExisting, ...existing };
@@ -604,7 +604,7 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 
 	private async writeToGlobalStorage(allMetadata: Record<string, ChatSessionMetadataFile>): Promise<void> {
 		// Make a shallow copy and trim to the top MAX_BULK_STORAGE_ENTRIES by `modified` desc.
-		// The in-memory `_cache` is unaffected — only the on-disk file is bounded.
+		// The in-memory `_cache` is unaffected â€” only the on-disk file is bounded.
 		// Per-session files in `~/.copilot/session-state/{id}/zyraxoncode.metadata.json` remain
 		// the source of truth for evicted entries.
 		const entries = Object.entries(allMetadata);
@@ -658,10 +658,10 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 	}
 
 	/**
-	 * Merges the per-install legacy bulk file (`globalStorageUri/copilotcli/…`) into
+	 * Merges the per-install legacy bulk file (`globalStorageUri/copilotcli/â€¦`) into
 	 * the shared `~/.copilot/` bulk file using last-modified-wins. This handles:
-	 *   - First-run: shared file missing → copy legacy content into the shared file.
-	 *   - Late-joiner: Process A already created the shared file → merge so entries
+	 *   - First-run: shared file missing â†’ copy legacy content into the shared file.
+	 *   - Late-joiner: Process A already created the shared file â†’ merge so entries
 	 *     unique to this install are not lost.
 	 *   - No legacy file: nothing to do.
 	 */
@@ -677,7 +677,7 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 			const raw = await this.fileSystemService.readFile(legacyCacheFile);
 			legacyData = JSON.parse(new TextDecoder().decode(raw));
 		} catch {
-			// No legacy file — mark as migrated so we don't retry.
+			// No legacy file â€” mark as migrated so we don't retry.
 			await this.extensionContext.globalState.update(LEGACY_BULK_MIGRATED_KEY, true);
 			return;
 		}
@@ -691,7 +691,7 @@ export class ChatSessionMetadataStore extends Disposable implements IChatSession
 				const raw = await this.fileSystemService.readFile(this._cacheFile);
 				sharedData = JSON.parse(new TextDecoder().decode(raw));
 			} catch {
-				// Shared file doesn't exist yet — start empty.
+				// Shared file doesn't exist yet â€” start empty.
 			}
 
 			// Merge legacy into shared using last-modified-wins.

@@ -1,4 +1,4 @@
-{
+﻿{
 	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
 		"rootDir": "./src",
@@ -15,10 +15,10 @@
 	},
 	"include": [
 		"src/**/*",
-		"../../src/zyraxoncode-dts/zyraxoncode.d.ts",
-		"../../src/zyraxoncode-dts/zyraxoncode.proposed.canonicalUriProvider.d.ts",
-		"../../src/zyraxoncode-dts/zyraxoncode.proposed.scmHistoryProvider.d.ts",
-		"../../src/zyraxoncode-dts/zyraxoncode.proposed.shareProvider.d.ts",
-		"../../src/zyraxoncode-dts/zyraxoncode.proposed.timeline.d.ts"
+		"../../src/vscode-dts/zyraxoncode.d.ts",
+		"../../src/vscode-dts/zyraxoncode.proposed.canonicalUriProvider.d.ts",
+		"../../src/vscode-dts/zyraxoncode.proposed.scmHistoryProvider.d.ts",
+		"../../src/vscode-dts/zyraxoncode.proposed.shareProvider.d.ts",
+		"../../src/vscode-dts/zyraxoncode.proposed.timeline.d.ts"
 	]
 }

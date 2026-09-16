@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import { getDevElectronPath, Quality, ConsoleLogger, FileLogger, Logger, MultiLo
 import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
-import * as zyraxoncodetest from '@zyraxoncode/test-electron';
+import * as zyraxoncodetest from '@vscode/test-electron';
 import { createApp, retry, parseVersion } from './utils';
 import { opts } from './options';
 

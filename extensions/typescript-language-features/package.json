@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "typescript-language-features",
   "description": "%description%",
   "displayName": "%displayName%",
@@ -32,11 +32,11 @@
     "Programming Languages"
   ],
   "dependencies": {
-    "@zyraxoncode/extension-telemetry": "^0.9.8",
-    "@zyraxoncode/sync-api-client": "^0.7.2",
-    "@zyraxoncode/sync-api-common": "^0.7.2",
-    "@zyraxoncode/sync-api-service": "^0.7.3",
-    "@zyraxoncode/ts-package-manager": "^0.0.2",
+    "@vscode/extension-telemetry": "^0.9.8",
+    "@vscode/sync-api-client": "^0.7.2",
+    "@vscode/sync-api-common": "^0.7.2",
+    "@vscode/sync-api-service": "^0.7.3",
+    "@vscode/ts-package-manager": "^0.0.2",
     "jsonc-parser": "^3.2.0",
     "semver": "7.5.2",
     "zyraxoncode-tas-client": "^0.1.84",
@@ -207,15 +207,15 @@
             "enumDescriptions": [
               "%typescript.locale.auto%",
               "Deutsch",
-              "español",
+              "espaÃ±ol",
               "English",
-              "français",
+              "franÃ§ais",
               "italiano",
-              "日本語",
-              "한국어",
-              "русский",
-              "中文(简体)",
-              "中文(繁體)"
+              "æ—¥æœ¬èªž",
+              "í•œêµ­ì–´",
+              "Ñ€ÑƒÑÑÐºÐ¸Ð¹",
+              "ä¸­æ–‡(ç®€ä½“)",
+              "ä¸­æ–‡(ç¹é«”)"
             ],
             "markdownDescription": "%typescript.locale%",
             "scope": "window",
@@ -243,15 +243,15 @@
             "enumDescriptions": [
               "%typescript.locale.auto%",
               "Deutsch",
-              "español",
+              "espaÃ±ol",
               "English",
-              "français",
+              "franÃ§ais",
               "italiano",
-              "日本語",
-              "한국어",
-              "русский",
-              "中文(简体)",
-              "中文(繁體)"
+              "æ—¥æœ¬èªž",
+              "í•œêµ­ì–´",
+              "Ñ€ÑƒÑÑÐºÐ¸Ð¹",
+              "ä¸­æ–‡(ç®€ä½“)",
+              "ä¸­æ–‡(ç¹é«”)"
             ],
             "markdownDescription": "%typescript.locale%",
             "markdownDeprecationMessage": "%typescript.locale.unifiedDeprecationMessage%",
@@ -3116,10 +3116,10 @@
         "background": {
           "activeOnStart": true,
           "beginsPattern": {
-            "regexp": "^\\s*(?:message TS6032:|\\[?\\D*.{1,2}[:.].{1,2}[:.].{1,2}\\D*(├\\D*\\d{1,2}\\D+┤)?(?:\\]| -)) (Starting compilation in watch mode|File change detected\\. Starting incremental compilation)\\.\\.\\."
+            "regexp": "^\\s*(?:message TS6032:|\\[?\\D*.{1,2}[:.].{1,2}[:.].{1,2}\\D*(â”œ\\D*\\d{1,2}\\D+â”¤)?(?:\\]| -)) (Starting compilation in watch mode|File change detected\\. Starting incremental compilation)\\.\\.\\."
           },
           "endsPattern": {
-            "regexp": "^\\s*(?:message TS6042:|\\[?\\D*.{1,2}[:.].{1,2}[:.].{1,2}\\D*(├\\D*\\d{1,2}\\D+┤)?(?:\\]| -)) (?:Compilation complete\\.|Found \\d+ errors?\\.) Watching for file changes\\."
+            "regexp": "^\\s*(?:message TS6042:|\\[?\\D*.{1,2}[:.].{1,2}[:.].{1,2}\\D*(â”œ\\D*\\d{1,2}\\D+â”¤)?(?:\\]| -)) (?:Compilation complete\\.|Found \\d+ errors?\\.) Watching for file changes\\."
           }
         }
       }

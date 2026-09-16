@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptReference, Raw } from '@zyraxoncode/prompt-tsx';
-import type * as zyraxoncode from 'zyraxoncode';
+import { PromptReference, Raw } from '@vscode/prompt-tsx';
+import type * as zyraxoncode from 'vscode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { getTextPart, roleToString } from '../../../platform/chat/common/globalStringUtils';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -229,7 +229,7 @@ function getSlashCommandForTelemetry(request: zyraxoncode.ChatRequest, extension
 		return match.command;
 	}
 
-	// User-defined prompt file slash commands may contain PII — hash them
+	// User-defined prompt file slash commands may contain PII â€” hash them
 	return getCachedSha256Hash(match.command);
 }
 

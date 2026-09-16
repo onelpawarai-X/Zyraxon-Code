@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import { Uri } from 'zyraxoncode';
+import { Uri } from 'vscode';
 import { Change, DiffChange } from '../zyraxoncode/git';
 import { RepoContext } from '../common/gitService';
 import { coalesce } from '../../../util/vs/base/common/arrays';

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AgentTaskSession } from '@zyraxoncode/copilot-api';
+import { AgentTaskSession } from '@vscode/copilot-api';
 import { PullRequestSearchItem } from '../../../platform/github/common/githubAPI';
 import { IOctoKitService } from '../../../platform/github/common/githubService';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -35,7 +35,7 @@ export async function resolvePullArtifact(
 	telemetry?: ITelemetryService,
 ): Promise<PullRequestSearchItem | undefined> {
 	// Records which strategy (primary or a specific fallback) resolved the PR, so we can see how
-	// often — and via which path — resolution degrades past the direct global-id lookup.
+	// often â€” and via which path â€” resolution degrades past the direct global-id lookup.
 	const reportResolved = (resolvedVia: 'preResolved' | 'globalId' | 'sessionGlobalId' | 'openPrDatabaseId' | 'openPrHeadRef' | 'unresolved') => {
 		/* __GDPR__
 			"copilotcloud.pullArtifactResolve" : {

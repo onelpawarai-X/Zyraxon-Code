@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "emmet",
   "displayName": "Emmet",
   "description": "%description%",
@@ -482,7 +482,7 @@
     "watch-web": "npm-run-all2 -lp watch-bundle-web watch-typecheck-web",
     "watch-bundle-web": "node ./esbuild.browser.mts --watch",
     "watch-typecheck-web": "node ../../node_modules/@typescript/native/lib/tsc.js --project ./tsconfig.browser.json --noEmit --watch",
-    "deps": "npm install @zyraxoncode/emmet-helper"
+    "deps": "npm install @vscode/emmet-helper"
   },
   "devDependencies": {
     "@types/node": "24.x"
@@ -491,7 +491,7 @@
     "@emmetio/css-parser": "^0.4.1",
     "@emmetio/html-matcher": "^0.3.3",
     "@emmetio/math-expression": "^1.0.5",
-    "@zyraxoncode/emmet-helper": "^2.8.8",
+    "@vscode/emmet-helper": "^2.8.8",
     "image-size": "~1.0.0",
     "zyraxoncode-languageserver-textdocument": "^1.0.1"
   },

@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { PermissionMode } from '@anthropic-ai/claude-agent-sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IExperimentationService } from '../../../platform/telemetry/common/nullExperimentationService';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
@@ -27,7 +27,7 @@ const MAX_MRU_ENTRIES = 10;
 
 /**
  * Builds and reads chat session option groups (permission mode, folder picker).
- * Pure construction logic with no metadata or session-state dependencies — the
+ * Pure construction logic with no metadata or session-state dependencies â€” the
  * controller resolves session-specific values and delegates here.
  */
 export class ClaudeSessionOptionBuilder {
@@ -165,7 +165,7 @@ export class ClaudeSessionOptionBuilder {
 
 /**
  * Build the permission mode option group from explicit inputs.
- * Pure and synchronous — suitable for use in `derived` computations.
+ * Pure and synchronous â€” suitable for use in `derived` computations.
  */
 export function buildPermissionModeItems(bypassEnabled: boolean, autoEnabled: boolean = false): zyraxoncode.ChatSessionProviderOptionGroup {
 	const items: zyraxoncode.ChatSessionProviderOptionItem[] = [

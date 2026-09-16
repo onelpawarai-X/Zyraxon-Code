@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import type { Attachment, SendOptions, SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
-import { ChatExtendedRequestHandler, ChatRequestTurn2, Uri } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
+import { ChatExtendedRequestHandler, ChatRequestTurn2, Uri } from 'vscode';
 import { IRunCommandExecutionService } from '../../../platform/commands/common/runCommandExecutionService';
 import { IChatQuotaService } from '../../../platform/chat/common/chatQuotaService';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -261,7 +261,7 @@ export class CopilotCLIChatSessionContentProvider extends Disposable implements 
 			this._register(controller.onDidChangeChatSessionItemState(async (item) => {
 				const sessionId = SessionIdForCLI.parse(item.resource);
 				// Persist archived state first so worktree-sharing checks (delete/archive)
-				// can ignore archived siblings — their worktrees are reconstructed on
+				// can ignore archived siblings â€” their worktrees are reconstructed on
 				// un-archive via `recreateWorktreeOnUnarchive`.
 				try {
 					await this._metadataStore.setSessionArchived(sessionId, !!item.archived);
@@ -308,7 +308,7 @@ export class CopilotCLIChatSessionContentProvider extends Disposable implements 
 				const groups = await this._optionGroupBuilder.provideChatSessionProviderOptionGroups(context.previousInputState);
 				const state = controller.createChatSessionInputState(groups);
 				// Only wire dynamic updates for new sessions (existing sessions are fully locked).
-				// Note: don't use the getChatSessionInputState token here — it's a one-shot token
+				// Note: don't use the getChatSessionInputState token here â€” it's a one-shot token
 				// that may be disposed by the time the user interacts with the dropdowns.
 				newInputStates.push(new WeakRef(state));
 				state.onDidChange(() => {
@@ -356,7 +356,7 @@ export class CopilotCLIChatSessionContentProvider extends Disposable implements 
 			await Promise.allSettled(refreshOptions.sessionIds.map(async sessionId => {
 				const item = await this.sessionService.getSessionItem(sessionId, CancellationToken.None);
 				if (item) {
-					// Push path — include changes eagerly (see `onDidChangeSession`).
+					// Push path â€” include changes eagerly (see `onDidChangeSession`).
 					const chatSessionItem = await this.toChatSessionItem(item, { includeChanges: true });
 					this.controller.items.add(chatSessionItem);
 				}
@@ -364,7 +364,7 @@ export class CopilotCLIChatSessionContentProvider extends Disposable implements 
 		} else {
 			const item = await this.sessionService.getSessionItem(refreshOptions.sessionId, CancellationToken.None);
 			if (item) {
-				// Push path — include changes eagerly (see `onDidChangeSession`).
+				// Push path â€” include changes eagerly (see `onDidChangeSession`).
 				const chatSessionItem = await this.toChatSessionItem(item, { includeChanges: true });
 				this.controller.items.add(chatSessionItem);
 			}
@@ -717,7 +717,7 @@ export class CopilotCLIChatSessionParticipant extends Disposable {
 	 *    the outer `Promise.race` resolves, returning control to ZYRAXON Code so it
 	 *    can dispatch the new (steering) request.
 	 * 4. Crucially, the inner `handleRequestImpl` promise is **not** cancelled
-	 *    or disposed – the original SDK session continues running in the
+	 *    or disposed â€“ the original SDK session continues running in the
 	 *    background.
 	 * 5. When the new request arrives, `handleRequest` on the underlying
 	 *    {@link CopilotCLISession} detects the session is still busy and routes
@@ -1521,7 +1521,7 @@ export function registerCLIChatCommands(
 				id: 'git-merge-changes',
 				value: contextValueSegments.join('\n'),
 				icon: new zyraxoncode.ThemeIcon('git-merge'),
-				fullName: `${branchName} → ${baseBranchName}`,
+				fullName: `${branchName} â†’ ${baseBranchName}`,
 				kind: 'generic'
 			}]
 		});
@@ -1948,7 +1948,7 @@ export function registerCLIChatCommands(
 			}
 
 			logService.error('[commitToRepository] Error:', error);
-			zyraxoncode.window.showErrorMessage(l10n.t("Could not save your customization to the default branch — this can happen when the worktree and the base repository have conflicting changes. Your change is still saved in this session's worktree."));
+			zyraxoncode.window.showErrorMessage(l10n.t("Could not save your customization to the default branch â€” this can happen when the worktree and the base repository have conflicting changes. Your change is still saved in this session's worktree."));
 		}
 	}));
 

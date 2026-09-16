@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@ import { TextDocumentSaveReason, WorkspaceEdit as WorksapceEditConverter } from 
 import { WorkspaceEdit } from './extHostTypes.js';
 import { SaveReason } from '../../common/editor.js';
 import { SerializableObjectWithBuffers } from '../../services/extensions/common/proxyIdentifier.js';
-import { NotebookDocumentWillSaveEvent } from 'zyraxoncode';
+import { NotebookDocumentWillSaveEvent } from 'vscode';
 
 interface IExtensionListener<E> {
 	extension: IExtensionDescription;

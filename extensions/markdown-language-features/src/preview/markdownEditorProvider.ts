@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { Disposable } from '../util/dispose';
 import { MdLinkOpener } from '../util/openDocumentLink';
 import { getMarkdownLocalResourceRoots } from '../util/resources';
@@ -11,7 +11,7 @@ import { ChangedLineRange, MarkdownPreviewLineDiffProvider } from './lineDiff';
 
 /**
  * Experimental hybrid (WYSIWYG) Markdown editor backed by the
- * `@zyraxoncode/markdown-editor` component. The {@link zyraxoncode.TextDocument} remains
+ * `@vscode/markdown-editor` component. The {@link zyraxoncode.TextDocument} remains
  * the single source of truth, so native undo/redo, dirty state and hot-exit are
  * preserved.
  */

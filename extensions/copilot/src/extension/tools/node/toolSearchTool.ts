@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
-import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'vscode';
+import * as l10n from '@vscode/l10n';
 import { ILogService } from '../../../platform/log/common/logService';
 import { CUSTOM_TOOL_SEARCH_NAME } from '../../../platform/networking/common/anthropic';
 import { IToolDeferralService } from '../../../platform/networking/common/toolDeferralService';
@@ -65,7 +65,7 @@ export class ToolSearchTool implements ICopilotModelSpecificTool<IToolSearchPara
 		this._logService.trace(`[custom-tool-search] Query "${query}" matched ${matchedToolNames.length} tools: ${JSON.stringify(matchedToolNames)}`);
 
 		// Return matched tool names as a JSON array. messagesApi.ts identifies results
-		// from this tool via the toolCallId→name map and converts them into
+		// from this tool via the toolCallIdâ†’name map and converts them into
 		// tool_reference content blocks for the Anthropic API.
 		return new LanguageModelToolResult([
 			new LanguageModelTextPart(JSON.stringify(matchedToolNames)),

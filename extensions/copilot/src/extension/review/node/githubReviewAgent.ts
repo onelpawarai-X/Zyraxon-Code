@@ -1,13 +1,13 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@zyraxoncode/copilot-api';
-import * as l10n from '@zyraxoncode/l10n';
+import { RequestType } from '@vscode/copilot-api';
+import * as l10n from '@vscode/l10n';
 import * as readline from 'readline';
 import { Readable } from 'stream';
-import type { Selection, TextDocument, TextEditor } from 'zyraxoncode';
+import type { Selection, TextDocument, TextEditor } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ConfigKey } from '../../../platform/configuration/common/configurationService';
 import { ICustomInstructionsService } from '../../../platform/customInstructions/common/customInstructionsService';

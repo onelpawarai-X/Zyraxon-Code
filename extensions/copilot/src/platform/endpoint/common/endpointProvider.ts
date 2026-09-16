@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
-import { RequestMetadata } from '@zyraxoncode/copilot-api';
-import type { LanguageModelChat } from 'zyraxoncode';
+import { RequestMetadata } from '@vscode/copilot-api';
+import type { LanguageModelChat } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { TokenizerType } from '../../../util/common/tokenizer';
 import { Event } from '../../../util/vs/base/common/event';
@@ -145,8 +145,8 @@ export type IChatModelInformation = IModelAPIResponse & {
 	zeroDataRetentionEnabled?: boolean;
 	/**
 	 * BYOK-only override that forces the body shape used when forwarding the reasoning effort to the model.
-	 * Honored by `OpenAIEndpoint`. Unset — the body shape follows the API path (Responses API → nested `reasoning.effort`,
-	 * Anthropic Messages API → `output_config.effort`, Chat Completions → top-level `reasoning_effort`).
+	 * Honored by `OpenAIEndpoint`. Unset â€” the body shape follows the API path (Responses API â†’ nested `reasoning.effort`,
+	 * Anthropic Messages API â†’ `output_config.effort`, Chat Completions â†’ top-level `reasoning_effort`).
 	 */
 	reasoningEffortFormat?: 'chat-completions' | 'responses' | 'messages';
 };

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@zyraxoncode/copilot-api';
+import { RequestType } from '@vscode/copilot-api';
 import { URI } from '../../../util/vs/base/common/uri';
 import { ICAPIClientService } from '../../endpoint/common/capiClient';
 import { IImageService } from '../common/imageService';

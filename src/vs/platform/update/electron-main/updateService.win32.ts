@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -75,8 +75,8 @@ export class Win32UpdateService extends AbstractUpdateService implements IRelaun
 	}
 
 	@memoize
-	private get mutex(): Promise<typeof import('@zyraxoncode/windows-mutex')> {
-		return import('@zyraxoncode/windows-mutex');
+	private get mutex(): Promise<typeof import('@vscode/windows-mutex')> {
+		return import('@vscode/windows-mutex');
 	}
 
 	constructor(
@@ -668,7 +668,7 @@ export class Win32UpdateService extends AbstractUpdateService implements IRelaun
 		}
 	}
 
-	private isInstallerActive(mutex: typeof import('@zyraxoncode/windows-mutex')): boolean {
+	private isInstallerActive(mutex: typeof import('@vscode/windows-mutex')): boolean {
 		return mutex.isActive(this.updatingMutexName) || mutex.isActive(this.setupMutexName);
 	}
 

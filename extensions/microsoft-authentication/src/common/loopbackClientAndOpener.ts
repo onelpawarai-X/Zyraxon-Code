@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { ILoopbackClient, AuthorizeResponse } from '@azure/msal-node';
 import type { UriEventHandler } from '../UriEventHandler';
-import { env, LogOutputChannel, Uri } from 'zyraxoncode';
+import { env, LogOutputChannel, Uri } from 'vscode';
 import { toPromise } from './async';
 
 export interface ILoopbackClientAndOpener extends ILoopbackClient {

@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type Anthropic from '@anthropic-ai/sdk';
-import type { CCAModel } from '@zyraxoncode/copilot-api';
+import type { CCAModel } from '@vscode/copilot-api';
 import type * as http from 'http';
 import { once } from 'events';
 import { Emitter, Event } from '../../../../base/common/event.js';
@@ -44,12 +44,12 @@ import { parseProxyBearer } from './claudeProxyAuth.js';
  *
  * **Subprocess ownership invariant.** Callers that hand `baseUrl` /
  * `nonce` to a Claude SDK subprocess MUST kill that subprocess before
- * calling `dispose()`. The subprocess cannot outlive the handle —
+ * calling `dispose()`. The subprocess cannot outlive the handle â€”
  * after `dispose()` the proxy may rebind on a different port and the
  * subprocess would silently lose its endpoint.
  */
 export interface IClaudeProxyHandle extends ILoopbackProxyHandle {
-	/** e.g. `__ZYRAXKEEP__0_` — no trailing slash. */
+	/** e.g. `__ZYRAXKEEP__0_` â€” no trailing slash. */
 	readonly baseUrl: string;
 	/** 256-bit hex string. Combine with a session id as `Bearer <nonce>.<sessionId>`. */
 	readonly nonce: string;
@@ -61,7 +61,7 @@ export interface IClaudeProxyHandle extends ILoopbackProxyHandle {
  * `buildOptions` / `buildSubprocessEnv`.
  *
  * - `proxy`: Copilot-routed Claude (the default). All `messages` traffic goes
- *   through the local {@link IClaudeProxyHandle} → Copilot CAPI.
+ *   through the local {@link IClaudeProxyHandle} â†’ Copilot CAPI.
  * - `native`: BYO-Anthropic (Phase 19). The SDK talks to Anthropic directly on
  *   the user's own credentials (`ANTHROPIC_API_KEY`, or a subscription OAuth
  *   token in `CLAUDE_CODE_OAUTH_TOKEN` from `claude setup-token`); no proxy is
@@ -75,7 +75,7 @@ export type ClaudeTransport =
  * A per-request credits report. CAPI returns the actual billed credits
  * for a `/v1/messages` request as `copilot_usage.total_nano_aiu` on the
  * Anthropic SSE stream. The Claude SDK subprocess strips this field from
- * its `result` message, so the proxy — which sees the raw CAPI response —
+ * its `result` message, so the proxy â€” which sees the raw CAPI response â€”
  * is the only place the real billed amount survives. `sessionId` is
  * decoded from the proxy Bearer token (`<nonce>.<sessionId>`) so consumers
  * can attribute credits to the originating session/turn.
@@ -187,7 +187,7 @@ export class ClaudeProxyService extends LoopbackProxyServer<IClaudeProxyState, s
 	async start(githubToken: string): Promise<IClaudeProxyHandle> {
 		const { runtime, release } = await this.acquire(githubToken);
 		// Late-binding token update covers the case where multiple
-		// concurrent callers awaited the same bind — last caller's token
+		// concurrent callers awaited the same bind â€” last caller's token
 		// wins, matching the single-tenant contract.
 		runtime.state.githubToken = githubToken;
 		return {
@@ -448,7 +448,7 @@ export class ClaudeProxyService extends LoopbackProxyServer<IClaudeProxyState, s
 		try {
 			stream = this._copilotApiService.messages(runtime.state.githubToken, body, options);
 		} catch (err) {
-			// Synchronous throws from the generator factory (rare —
+			// Synchronous throws from the generator factory (rare â€”
 			// CAPI errors come from the first iteration).
 			if (entry.ac.signal.aborted) {
 				if (!entry.clientGone && !res.writableEnded) {
@@ -493,7 +493,7 @@ export class ClaudeProxyService extends LoopbackProxyServer<IClaudeProxyState, s
 				try {
 					await once(res, 'drain', { signal: entry.ac.signal });
 				} catch {
-					// signal aborted while waiting on drain — bail out
+					// signal aborted while waiting on drain â€” bail out
 					return false;
 				}
 			}
@@ -557,7 +557,7 @@ export class ClaudeProxyService extends LoopbackProxyServer<IClaudeProxyState, s
 			// for a request the client abandoned mid-stream.
 			this._reportCredits(sessionId, reportedNanoAiu);
 		} catch (err) {
-			// Defense in depth — should not be reached.
+			// Defense in depth â€” should not be reached.
 			this._logService.warn(`[${PROXY_USER_FACING_NAME}] stream loop unexpected error: ${stringifyError(err)}`);
 			if (!res.writableEnded) {
 				try { res.end(); } catch { /* ignore */ }
@@ -579,7 +579,7 @@ export class ClaudeProxyService extends LoopbackProxyServer<IClaudeProxyState, s
 	 */
 	private _writeUpstreamErrorResponse(res: http.ServerResponse, err: unknown, embedChatError = false): void {
 		if (res.headersSent) {
-			// Headers are already sent — caller should have routed to
+			// Headers are already sent â€” caller should have routed to
 			// the SSE error path. This is a defensive log.
 			this._logService.warn(`[${PROXY_USER_FACING_NAME}] cannot write upstream error after headers sent: ${stringifyError(err)}`);
 			if (!res.writableEnded) {
@@ -679,9 +679,9 @@ function buildOutboundHeaders(inbound: http.IncomingHttpHeaders): Record<string,
  * prefix for server-side identification.
  *
  * Examples:
- * - `claude-code/1.2.3` → `zyraxoncode_claude_code/1.2.3`
- * - `Anthropic/Python/1.0` → `zyraxoncode_claude_code/Python/1.0`
- * - `unknown` → `zyraxoncode_claude_code/unknown`
+ * - `claude-code/1.2.3` â†’ `zyraxoncode_claude_code/1.2.3`
+ * - `Anthropic/Python/1.0` â†’ `zyraxoncode_claude_code/Python/1.0`
+ * - `unknown` â†’ `zyraxoncode_claude_code/unknown`
  */
 function transformUserAgent(userAgent: string): string {
 	const slashIndex = userAgent.indexOf('/');

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 export const IChatHookService = createServiceIdentifier<IChatHookService>('IChatHookService');
@@ -29,7 +29,7 @@ export interface IChatHookService {
 	 * @param hookType The type of hook to execute.
 	 * @param hooks The resolved hook commands for the session (from request.hooks).
 	 * @param input Input data to pass to the hook via stdin (will be JSON-serialized).
-	 * @param sessionId Optional session ID — when provided the transcript is flushed first.
+	 * @param sessionId Optional session ID â€” when provided the transcript is flushed first.
 	 * @param token Optional cancellation token.
 	 * @returns A promise that resolves to an array of hook execution results.
 	 */
@@ -45,7 +45,7 @@ export interface IChatHookService {
 	 * @param toolInput The input parameters for the tool.
 	 * @param toolCallId The unique ID for this tool call.
 	 * @param hooks The resolved hook commands for the session (from request.hooks).
-	 * @param sessionId Optional session ID — when provided the transcript is flushed first.
+	 * @param sessionId Optional session ID â€” when provided the transcript is flushed first.
 	 * @param token Optional cancellation token.
 	 * @param outputStream Optional output stream for displaying hook warnings/errors.
 	 * @returns The collapsed hook result, or undefined if no hooks are registered or none returned a result.
@@ -63,7 +63,7 @@ export interface IChatHookService {
 	 * @param toolResponseText The text representation of the tool's output.
 	 * @param toolCallId The unique ID for this tool call.
 	 * @param hooks The resolved hook commands for the session (from request.hooks).
-	 * @param sessionId Optional session ID — when provided the transcript is flushed first.
+	 * @param sessionId Optional session ID â€” when provided the transcript is flushed first.
 	 * @param token Optional cancellation token.
 	 * @param outputStream Optional output stream for displaying hook warnings/errors.
 	 * @returns The collapsed hook result, or undefined if no hooks are registered or none returned a result.

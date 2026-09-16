@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { commands, MessageOptions, Progress, ProgressOptions, window } from 'zyraxoncode';
+import { commands, MessageOptions, Progress, ProgressOptions, window } from 'vscode';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { INotificationService } from '../common/notificationService';
 

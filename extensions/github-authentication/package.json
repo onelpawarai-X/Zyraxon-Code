@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "github-authentication",
   "displayName": "%displayName%",
   "description": "%description%",
@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "node-fetch": "2.6.7",
-    "@zyraxoncode/extension-telemetry": "^0.9.8",
+    "@vscode/extension-telemetry": "^0.9.8",
     "zyraxoncode-tas-client": "^0.1.84"
   },
   "devDependencies": {

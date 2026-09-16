@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
-import type { Parser, Language, Query } from '@zyraxoncode/tree-sitter-wasm';
+import type { Parser, Language, Query } from '@vscode/tree-sitter-wasm';
 import { IReader, ObservablePromise } from '../../../../base/common/observable.js';
 import { ITreeSitterLibraryService } from '../../../../editor/common/services/treeSitter/treeSitterLibraryService.js';
 import { importAMDNodeModule } from '../../../../amdX.js';
@@ -22,7 +22,7 @@ import { URI } from '../../../../base/common/uri.js';
 export const EDITOR_EXPERIMENTAL_PREFER_TREESITTER = 'editor.experimental.preferTreeSitter';
 export const TREESITTER_ALLOWED_SUPPORT = ['css', 'typescript', 'ini', 'regex'];
 
-const MODULE_LOCATION_SUBPATH = `@zyraxoncode/tree-sitter-wasm/wasm`;
+const MODULE_LOCATION_SUBPATH = `@vscode/tree-sitter-wasm/wasm`;
 const FILENAME_TREESITTER_WASM = `tree-sitter.wasm`;
 
 export function getModuleLocation(environmentService: IEnvironmentService): AppResourcePath {
@@ -35,7 +35,7 @@ export class TreeSitterLibraryService extends Disposable implements ITreeSitterL
 	isTest: boolean = false;
 
 	private readonly _treeSitterImport = new Lazy(async () => {
-		const TreeSitter = await importAMDNodeModule<typeof import('@zyraxoncode/tree-sitter-wasm')>('@zyraxoncode/tree-sitter-wasm', 'wasm/tree-sitter.js');
+		const TreeSitter = await importAMDNodeModule<typeof import('@vscode/tree-sitter-wasm')>('@vscode/tree-sitter-wasm', 'wasm/tree-sitter.js');
 		const environmentService = this._environmentService;
 		const isTest = this.isTest;
 		await TreeSitter.Parser.init({

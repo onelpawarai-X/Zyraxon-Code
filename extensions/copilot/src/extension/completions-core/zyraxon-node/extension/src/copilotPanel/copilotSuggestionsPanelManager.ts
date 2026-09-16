@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { TextDocument, WebviewPanel } from 'zyraxoncode';
+import { TextDocument, WebviewPanel } from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../../../../platform/extContext/common/extensionContext';
 import { IInstantiationService } from '../../../../../../util/vs/platform/instantiation/common/instantiation';
 import { IPosition, ITextDocument } from '../../../lib/src/textDocument';

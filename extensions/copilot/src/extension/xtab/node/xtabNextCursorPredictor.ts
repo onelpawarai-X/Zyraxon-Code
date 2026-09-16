@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import { RequestType } from '@zyraxoncode/copilot-api';
+import { Raw } from '@vscode/prompt-tsx';
+import { RequestType } from '@vscode/copilot-api';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -40,7 +40,7 @@ const DEFAULT_CURSOR_JUMP_MODEL_NAME = 'copilot-suggestions-himalia-001';
 /**
  * System prompt used for the cursor-jump (next-cursor-line) prediction model.
  * Kept as an exported constant so that training-data generation can mirror it
- * verbatim — drift between this string and the datagen prompt would corrupt
+ * verbatim â€” drift between this string and the datagen prompt would corrupt
  * the training distribution.
  */
 export const NEXT_CURSOR_PREDICTION_SYSTEM_MESSAGE = `Your task is to predict the line number where the developer is most likely to make their next edit. If you jump in the current file, just output the line number. If you want to jump to another file, output the filepath (relative to workspace root), colon, then line number. If you don't think anywhere is a good next line jump target, just output the current line number of the cursor. Make sure to output no explanation, reasoning, extra spaces, etc.`;

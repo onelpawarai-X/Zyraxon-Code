@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
-import type { Memento, Uri } from 'zyraxoncode';
+import type { Memento, Uri } from 'vscode';
 import { ExtensionMode } from '../../../util/common/test/shims/enums';
 import { dirname } from '../../../util/vs/base/common/path';
 import { URI } from '../../../util/vs/base/common/uri';

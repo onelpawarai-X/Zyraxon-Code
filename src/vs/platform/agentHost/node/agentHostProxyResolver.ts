@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { LogLevel as ProxyLogLevel, ProxyAgentParams, ProxySupportSetting, createFetchPatch, createProxyAuthorizationLookup, createProxyResolver, loadSystemCertificates } from '@zyraxoncode/proxy-agent';
+import { LogLevel as ProxyLogLevel, ProxyAgentParams, ProxySupportSetting, createFetchPatch, createProxyAuthorizationLookup, createProxyResolver, loadSystemCertificates } from '@vscode/proxy-agent';
 import { IDisposable, toDisposable } from '../../../base/common/lifecycle.js';
 import { IConfigurationService } from '../../configuration/common/configuration.js';
 import { createDecorator } from '../../instantiation/common/instantiation.js';
@@ -31,9 +31,9 @@ export interface IAgentHostProxyResolver {
 
 	/**
 	 * Resolve the proxy URL for `url` (e.g. `__ZYRAXKEEP__0_`), or `undefined`
-	 * for a direct connection. Reuses `@zyraxoncode/proxy-agent`'s `resolveProxyURL`
-	 * so the same precedence as the rest of ZYRAXON Code applies: `http.noProxy` →
-	 * `http.proxy` setting → `HTTP(S)_PROXY` env vars → the host proxy resolution
+	 * for a direct connection. Reuses `@vscode/proxy-agent`'s `resolveProxyURL`
+	 * so the same precedence as the rest of ZYRAXON Code applies: `http.noProxy` â†’
+	 * `http.proxy` setting â†’ `HTTP(S)_PROXY` env vars â†’ the host proxy resolution
 	 * that runs in ZYRAXON Code (Electron session) via the reverse channel.
 	 */
 	resolveProxy(url: string): Promise<string | undefined>;

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { chat, commands, env, Uri } from 'zyraxoncode';
+import { chat, commands, env, Uri } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { IChatQuotaService } from '../../../platform/chat/common/chatQuotaService';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
@@ -23,7 +23,7 @@ export class ChatQuotaContribution extends Disposable implements IExtensionContr
 			env.openExternal(Uri.parse('__ZYRAXKEEP__0_'));
 		}));
 
-		// Extension → Core: push updated quota state to core whenever it changes
+		// Extension â†’ Core: push updated quota state to core whenever it changes
 		// (e.g. from response headers, quota snapshots, or copilot token refresh).
 		this._register(chatQuotaService.onDidChange(() => {
 			const info = chatQuotaService.quotaInfo;

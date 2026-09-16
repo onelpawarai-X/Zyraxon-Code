@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,7 +6,7 @@
 import { Model } from '../model';
 import type { GitExtension, Repository, API } from './git';
 import { ApiRepository, ApiImpl } from './api1';
-import { Event, EventEmitter } from 'zyraxoncode';
+import { Event, EventEmitter } from 'vscode';
 import { CloneManager } from '../cloneManager';
 
 function deprecated(_target: unknown, key: string | symbol, descriptor: PropertyDescriptor): void {

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import type { AccountInfo, AuthenticationResult, InteractiveRequest, RefreshTokenRequest, SilentFlowRequest, DeviceCodeRequest } from '@azure/msal-node';
-import type { Disposable, Event } from 'zyraxoncode';
+import type { Disposable, Event } from 'vscode';
 
 export interface ICachedPublicClientApplication {
 	onDidAccountsChange: Event<{ added: AccountInfo[]; changed: AccountInfo[]; deleted: AccountInfo[] }>;

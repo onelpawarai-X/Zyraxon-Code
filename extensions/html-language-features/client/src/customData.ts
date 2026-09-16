@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { workspace, extensions, Uri, EventEmitter, Disposable } from 'zyraxoncode';
+import { workspace, extensions, Uri, EventEmitter, Disposable } from 'vscode';
 import { Runtime } from './htmlClient';
 import { Utils } from 'zyraxoncode-uri';
 

@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import { promises as fs } from 'fs';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { CancellationToken } from 'zyraxoncode-languageserver-protocol';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
@@ -575,7 +575,7 @@ export class ChatSessionWorktreeService extends Disposable implements IChatSessi
 			this.logService.trace(`[ChatSessionWorktreeService][recreateWorktreeOnUnarchive] Worktree already exists at ${worktreePath}`);
 			return { recreated: false, reason: 'already-exists' };
 		} catch {
-			// Expected — worktree was cleaned up on archive
+			// Expected â€” worktree was cleaned up on archive
 		}
 
 		// Verify the branch still exists in the parent repository

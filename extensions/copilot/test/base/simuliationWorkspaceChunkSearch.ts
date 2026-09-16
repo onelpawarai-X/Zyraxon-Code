@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { ChatResponsePart, Progress } from 'zyraxoncode';
+import type { ChatResponsePart, Progress } from 'vscode';
 import { EmbeddingType } from '../../src/platform/embeddings/common/embeddingsComputer';
 import { GithubRepoId } from '../../src/platform/git/common/gitService';
 import { IIgnoreService } from '../../src/platform/ignore/common/ignoreService';
@@ -132,6 +132,6 @@ export class SimulationCodeSearchChunkSearchService extends Disposable implement
 	}
 
 	async *getDiagnosticsDump(): AsyncIterable<string> {
-		yield 'Simulation mode — no diagnostics available.';
+		yield 'Simulation mode â€” no diagnostics available.';
 	}
 }

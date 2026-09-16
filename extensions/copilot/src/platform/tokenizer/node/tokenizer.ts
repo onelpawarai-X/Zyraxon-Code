@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OutputMode, Raw, toMode } from '@zyraxoncode/prompt-tsx';
-import type { LanguageModelChatTool } from 'zyraxoncode';
+import { OutputMode, Raw, toMode } from '@vscode/prompt-tsx';
+import type { LanguageModelChatTool } from 'vscode';
 import { LRUCache } from '../../../util/common/cache';
 import { getImageDimensions } from '../../../util/common/imageUtils';
 import { createServiceIdentifier } from '../../../util/common/services';

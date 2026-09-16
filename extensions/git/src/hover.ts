@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Command, l10n, MarkdownString, Uri } from 'zyraxoncode';
+import { Command, l10n, MarkdownString, Uri } from 'vscode';
 import { fromNow, getCommitShortHash } from './util';
 import { emojify } from './emoji';
 import { CoAuthor, CommitShortStat } from './git';

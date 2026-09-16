@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { SettingsSearchProvider, SettingsSearchResult } from 'zyraxoncode';
+import type { SettingsSearchProvider, SettingsSearchResult } from 'vscode';
 import { CancellationToken } from '../../../base/common/cancellation.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { AiSettingsSearchProviderOptions } from '../../services/aiSettingsSearch/common/aiSettingsSearch.js';

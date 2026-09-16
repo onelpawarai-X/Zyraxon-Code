@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { FileChunk } from '../../../platform/chunking/common/chunk';
 import { IRunCommandExecutionService } from '../../../platform/commands/common/runCommandExecutionService';
@@ -82,7 +82,7 @@ export class SemanticSearchTextSearchProvider extends Disposable implements zyra
 	) {
 		super();
 		// Drop the cached utility endpoint whenever the endpoint provider
-		// reports a model refresh — for example because the user changed the
+		// reports a model refresh â€” for example because the user changed the
 		// `chat.utilitySmallModel` override. The next call to `getEndpoint`
 		// will re-resolve through the provider.
 		this._register(this._endpointProvider.onDidModelsRefresh(() => {

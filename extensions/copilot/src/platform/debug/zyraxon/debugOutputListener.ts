@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DebugAdapterTracker, DebugAdapterTrackerFactory, DebugSession, Disposable, ProviderResult, debug } from 'zyraxoncode';
+import { DebugAdapterTracker, DebugAdapterTrackerFactory, DebugSession, Disposable, ProviderResult, debug } from 'vscode';
 
 const debugOutput: string[] = [];
 

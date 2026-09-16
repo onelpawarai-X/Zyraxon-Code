@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CancellationError } from 'zyraxoncode';
+import { CancellationError } from 'vscode';
 
 export function deepClone<T>(obj: T): T {
 	if (obj === null || typeof obj !== 'object') {

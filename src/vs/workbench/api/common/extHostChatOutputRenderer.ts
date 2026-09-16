@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { CancellationToken } from '../../../base/common/cancellation.js';
 import { ExtHostChatOutputRendererShape, type IChatOutputRenderContextDto, IMainContext, MainContext, MainThreadChatOutputRendererShape } from './extHost.protocol.js';
 import { Disposable } from './extHostTypes.js';

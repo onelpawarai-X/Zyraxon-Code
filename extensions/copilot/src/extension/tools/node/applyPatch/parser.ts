@@ -1,4 +1,4 @@
-// Copyright 2025 OpenAI
+﻿// Copyright 2025 OpenAI
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 // __ZYRAXKEEP__1_
 
 // eslint-disable-next-line header/header
-import type { TextDocument } from 'zyraxoncode';
+import type { TextDocument } from 'vscode';
 import { AbstractDocumentWithLanguageId } from '../../../../platform/editing/common/abstractText';
 import { getFilepathComment } from '../../../../util/common/markdown';
 import { computeLevenshteinDistance } from '../../../../util/vs/base/common/diff/diff';
@@ -131,7 +131,7 @@ export function assemble_changes(
 }
 
 // -----------------------------------------------------------------------------
-// Patch‑related structures
+// Patchâ€‘related structures
 // -----------------------------------------------------------------------------
 
 export interface Chunk {
@@ -480,18 +480,18 @@ function find_context_core(
 	start: number,
 ): { line: number; fuzz: Fuzz; indent?: string } | undefined {
 	// ---------------------------------------------------------------------------
-	// Helpers – Unicode punctuation normalisation
+	// Helpers â€“ Unicode punctuation normalisation
 	// ---------------------------------------------------------------------------
 
 	/*
 	 * The patch-matching algorithm originally required **exact** string equality
 	 * for non-whitespace characters.  That breaks when the file on disk contains
-	 * visually identical but different Unicode code-points (e.g. “EN DASH” vs
+	 * visually identical but different Unicode code-points (e.g. â€œEN DASHâ€ vs
 	 * ASCII "-"), because models almost always emit the ASCII variant.  To make
 	 * apply_patch resilient we canonicalise a handful of common punctuation
 	 * look-alikes before doing comparisons.
 	 *
-	 * We purposefully keep the mapping *small* – only characters that routinely
+	 * We purposefully keep the mapping *small* â€“ only characters that routinely
 	 * appear in source files and are highly unlikely to introduce ambiguity are
 	 * included.  Each entry is written using the corresponding Unicode escape so
 	 * that the file remains ASCII-only even after transpilation.
@@ -536,7 +536,7 @@ function find_context_core(
 	}
 
 
-	// Pass 1 – exact equality after canonicalisation ---------------------------
+	// Pass 1 â€“ exact equality after canonicalisation ---------------------------
 	const ctxPass1 = canon(context.join('\n'));
 	const workingLines = lines.map(canon);
 	for (let i = start; i < workingLines.length; i++) {
@@ -546,7 +546,7 @@ function find_context_core(
 		}
 	}
 
-	// Pass 2 – ignore trailing whitespace -------------------------------------
+	// Pass 2 â€“ ignore trailing whitespace -------------------------------------
 	const ctxPass2 = ctxPass1.split('\n').map(l => l.trimEnd()).join('\n');
 	let fuzz = Fuzz.IgnoredTrailingWhitespace;
 	for (let i = start; i < workingLines.length; i++) {
@@ -558,7 +558,7 @@ function find_context_core(
 		}
 	}
 
-	// Pass 3 – normalize explicit \\t tab chars --------------------------------
+	// Pass 3 â€“ normalize explicit \\t tab chars --------------------------------
 	const ctxPass3 = replace_explicit_tabs(ctxPass2);
 	if (ctxPass3 !== ctxPass2) {
 		fuzz |= Fuzz.NormalizedExplicitTab;
@@ -582,7 +582,7 @@ function find_context_core(
 		}
 	}
 
-	// Pass 5 – ignore all surrounding whitespace ------------------------------
+	// Pass 5 â€“ ignore all surrounding whitespace ------------------------------
 	const ctxPass5 = ctxPass3.split('\n').map(l => l.trim()).join('\n');
 	fuzz |= Fuzz.IgnoredWhitespace;
 	for (let i = start; i < workingLines.length; i++) {
@@ -766,7 +766,7 @@ function peek_next_section(
 }
 
 // -----------------------------------------------------------------------------
-// High‑level helpers
+// Highâ€‘level helpers
 // -----------------------------------------------------------------------------
 
 export function text_to_patch(

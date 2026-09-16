@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, TextDocumentContentProvider, Uri, workspace } from 'zyraxoncode';
+import { Disposable, TextDocumentContentProvider, Uri, workspace } from 'vscode';
 
 export const READONLY_SCHEME = 'copilot-cli-readonly';
 

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { EventEmitter, Uri, commands, workspace } from 'zyraxoncode';
+import { EventEmitter, Uri, commands, workspace } from 'vscode';
 import { Disposable } from '../../../../util/vs/base/common/lifecycle';
 
 export class VirtualTextDocumentProvider extends Disposable {

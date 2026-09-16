@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatRequest, NotebookCell, NotebookDocument, TextDocument, Uri } from 'zyraxoncode';
+import type { ChatRequest, NotebookCell, NotebookDocument, TextDocument, Uri } from 'vscode';
 import { isLocation, isUri } from '../../../util/common/types';
 import { StringSHA1 } from '../../../util/vs/base/common/hash';
 import { removeAnsiEscapeCodes } from '../../../util/vs/base/common/strings';

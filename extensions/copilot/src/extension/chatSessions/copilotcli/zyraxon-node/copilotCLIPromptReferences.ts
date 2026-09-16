@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { Attachment } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import type { ChatPromptReference } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { ChatPromptReference } from 'vscode';
 import { isLocation } from '../../../../util/common/types';
 import { coalesce } from '../../../../util/vs/base/common/arrays';
 import { Codicon } from '../../../../util/vs/base/common/codicons';
@@ -169,9 +169,9 @@ namespace IDiagnosticVariableEntryFilterData {
 			// data (MaxSpaceLookback) or just blindly otherwise.
 			const lastSpace = data.problemMessage.lastIndexOf(' ', TrimThreshold.MaxChars);
 			if (lastSpace === -1 || lastSpace + TrimThreshold.MaxSpaceLookback < TrimThreshold.MaxChars) {
-				return data.problemMessage.substring(0, TrimThreshold.MaxChars) + '…';
+				return data.problemMessage.substring(0, TrimThreshold.MaxChars) + 'â€¦';
 			}
-			return data.problemMessage.substring(0, lastSpace) + '…';
+			return data.problemMessage.substring(0, lastSpace) + 'â€¦';
 		}
 		let labelStr = l10n.t("All Problems");
 		if (data.filterUri) {

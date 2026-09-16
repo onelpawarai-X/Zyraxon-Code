@@ -1,15 +1,15 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { TextDecoder } from 'util';
-import { commands, env, ProgressLocation, Uri, window, workspace, QuickPickOptions, FileType, l10n, Disposable, TextDocumentContentProvider } from 'zyraxoncode';
+import { commands, env, ProgressLocation, Uri, window, workspace, QuickPickOptions, FileType, l10n, Disposable, TextDocumentContentProvider } from 'vscode';
 import { getOctokit } from './auth.js';
 import { GitErrorCodes } from './typings/git.constants.js';
 import type { PushErrorHandler, Remote, Repository } from './typings/git.d.ts';
 import * as path from 'path';
-import { TelemetryReporter } from '@zyraxoncode/extension-telemetry';
+import { TelemetryReporter } from '@vscode/extension-telemetry';
 
 
 

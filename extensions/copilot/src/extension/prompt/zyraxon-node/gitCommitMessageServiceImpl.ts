@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import { ProgressLocation, Uri, window, workspace } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import { ProgressLocation, Uri, window, workspace } from 'vscode';
 import { compute4GramTextSimilarity } from '../../../platform/editSurvivalTracking/common/editSurvivalTracker';
 import { IGitCommitMessageService } from '../../../platform/git/common/gitCommitMessageService';
 import { IGitDiffService } from '../../../platform/git/common/gitDiffService';

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import * as interfaces from './interfaces';
 import ContentProvider from './contentProvider';
 
@@ -132,7 +132,7 @@ export default class CommandHandler implements zyraxoncode.Disposable {
 
 		const docPath = editor.document.uri.path;
 		const fileName = docPath.substring(docPath.lastIndexOf('/') + 1); // avoid NodeJS path to keep browser webpack small
-		const title = zyraxoncode.l10n.t("{0}: Current Changes ↔ Incoming Changes", fileName);
+		const title = zyraxoncode.l10n.t("{0}: Current Changes â†” Incoming Changes", fileName);
 		const mergeConflictConfig = zyraxoncode.workspace.getConfiguration('merge-conflict');
 		const openToTheSide = mergeConflictConfig.get<string>('diffViewPosition');
 		const opts: zyraxoncode.TextDocumentShowOptions = {

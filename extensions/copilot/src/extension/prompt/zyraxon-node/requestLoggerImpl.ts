@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestMetadata, RequestType } from '@zyraxoncode/copilot-api';
-import { HTMLTracer, IChatEndpointInfo, RenderPromptResult } from '@zyraxoncode/prompt-tsx';
-import { CancellationToken, DocumentLink, DocumentLinkProvider, ExtendedLanguageModelToolResult, LanguageModelDataPart, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult2, languages, Range, TextDocument, Uri, workspace } from 'zyraxoncode';
+import { RequestMetadata, RequestType } from '@vscode/copilot-api';
+import { HTMLTracer, IChatEndpointInfo, RenderPromptResult } from '@vscode/prompt-tsx';
+import { CancellationToken, DocumentLink, DocumentLinkProvider, ExtendedLanguageModelToolResult, LanguageModelDataPart, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult2, languages, Range, TextDocument, Uri, workspace } from 'vscode';
 import { IChatDebugFileLoggerService } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { ChatFetchResponseType } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService, XTabProviderId } from '../../../platform/configuration/common/configurationService';
@@ -53,7 +53,7 @@ function processDeltasToMessage(deltas: IResponseDelta[]): string {
 						.replace(/(?<!\\)\\n/g, '\n')
 						.replace(/(?<!\\)\\t/g, '\t');
 				} catch (e) { }
-				return `🛠️ ${c.name} (${c.id}) ${argsStr}`;
+				return `ðŸ› ï¸ ${c.name} (${c.id}) ${argsStr}`;
 			}).join('\n');
 		}
 
@@ -88,7 +88,7 @@ function processDeltasToMessage(deltas: IResponseDelta[]): string {
 			}
 
 			if (details.length > 0) {
-				text += `🧹 Context cleared: ${details.join(', ')}`;
+				text += `ðŸ§¹ Context cleared: ${details.join(', ')}`;
 			}
 		}
 
@@ -598,7 +598,7 @@ export class RequestLogger extends AbstractRequestLogger {
 		}
 
 		const result: string[] = [];
-		result.push(`> 🚨 Note: This log may contain personal information such as the contents of your files or terminal output. Please review the contents carefully before sharing.`);
+		result.push(`> ðŸš¨ Note: This log may contain personal information such as the contents of your files or terminal output. Please review the contents carefully before sharing.`);
 		result.push(`# ${entry.debugName} - ${id}`);
 		result.push(``);
 

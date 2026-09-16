@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { mkdir, rename } from 'fs/promises';
-import { env } from 'zyraxoncode';
+import { env } from 'vscode';
 import { IChangedMetadata, LogDocumentId, LogEntry, serializeEdit, serializeOffsetRange } from '../../../platform/workspaceRecorder/common/workspaceLog';
 import { TaskQueue } from '../../../util/common/async';
 import { timeout } from '../../../util/vs/base/common/async';

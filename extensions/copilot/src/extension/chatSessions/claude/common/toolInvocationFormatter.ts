@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { AgentInput, BashInput, FileReadInput, GlobInput, GrepInput } from '@anthropic-ai/claude-agent-sdk/sdk-tools';
 import Anthropic from '@anthropic-ai/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import type { ChatSimpleToolResultData, ChatTerminalToolInvocationData } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { ChatSimpleToolResultData, ChatTerminalToolInvocationData } from 'vscode';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { ChatSubagentToolInvocationData, ChatToolInvocationPart, MarkdownString } from '../../../../zyraxoncodeTypes';
 import { ClaudeToolNames, ExitPlanModeInput, LSInput } from './claudeTools';

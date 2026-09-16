@@ -1,16 +1,16 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { cp } from '@zyraxoncode/fs-copyfile';
-import TelemetryReporter from '@zyraxoncode/extension-telemetry';
+import { cp } from '@vscode/fs-copyfile';
+import TelemetryReporter from '@vscode/extension-telemetry';
 import { uniqueNamesGenerator, adjectives, animals, colors, NumberDictionary } from '@joaomoreno/unique-names-generator';
 import * as fs from 'fs';
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
 import picomatch from 'picomatch';
-import { CancellationError, CancellationToken, CancellationTokenSource, Command, commands, CustomExecution, Disposable, Event, EventEmitter, ExcludeSettingOptions, FileDecoration, l10n, LogLevel, LogOutputChannel, Memento, ProcessExecution, ProgressLocation, ProgressOptions, RelativePattern, scm, ShellExecution, SourceControl, SourceControlInputBox, SourceControlInputBoxValidation, SourceControlInputBoxValidationType, SourceControlResourceDecorations, SourceControlResourceGroup, SourceControlResourceState, TabInputNotebookDiff, TabInputTextDiff, TabInputTextMultiDiff, Task, TaskPanelKind, TaskRevealKind, TaskRunOn, tasks, ThemeColor, ThemeIcon, Uri, window, workspace, WorkspaceEdit, WorkspaceFolder } from 'zyraxoncode';
+import { CancellationError, CancellationToken, CancellationTokenSource, Command, commands, CustomExecution, Disposable, Event, EventEmitter, ExcludeSettingOptions, FileDecoration, l10n, LogLevel, LogOutputChannel, Memento, ProcessExecution, ProgressLocation, ProgressOptions, RelativePattern, scm, ShellExecution, SourceControl, SourceControlInputBox, SourceControlInputBoxValidation, SourceControlInputBoxValidationType, SourceControlResourceDecorations, SourceControlResourceGroup, SourceControlResourceState, TabInputNotebookDiff, TabInputTextDiff, TabInputTextMultiDiff, Task, TaskPanelKind, TaskRevealKind, TaskRunOn, tasks, ThemeColor, ThemeIcon, Uri, window, workspace, WorkspaceEdit, WorkspaceFolder } from 'vscode';
 import { ActionButton } from './actionButton';
 import { ApiRepository } from './api/api1';
 import type { Branch, BranchQuery, Change, CommitOptions, DiffChange, FetchOptions, LogOptions, Ref, Remote, RepositoryKind } from './api/git';
@@ -84,7 +84,7 @@ export class Resource implements SourceControlResourceState {
 			case Status.DELETED_BY_US:
 			case Status.BOTH_ADDED:
 			case Status.BOTH_MODIFIED:
-				return '!'; // Using ! instead of ⚠, because the latter looks really bad on windows
+				return '!'; // Using ! instead of âš , because the latter looks really bad on windows
 			default:
 				throw new Error('Unknown git status: ' + type);
 		}
@@ -2073,7 +2073,7 @@ export class Repository implements Disposable {
 		}
 
 		// Find minimal set of paths (folders and files) to copy. Keep only topmost
-		// paths — if a directory is already in the set, all its descendants are
+		// paths â€” if a directory is already in the set, all its descendants are
 		// implicitly included and don't need separate entries.
 		let lastTopmost: string | undefined;
 		const pathsToCopy = new Set<string>();
@@ -3253,10 +3253,10 @@ export class Repository implements Disposable {
 		const remote = this.remotes.find(r => r.name === remoteName);
 
 		if (remote && remote.isReadOnly) {
-			return `${this.HEAD.behind}↓`;
+			return `${this.HEAD.behind}â†“`;
 		}
 
-		return `${this.HEAD.behind}↓ ${this.HEAD.ahead}↑`;
+		return `${this.HEAD.behind}â†“ ${this.HEAD.ahead}â†‘`;
 	}
 
 	get syncTooltip(): string {

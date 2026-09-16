@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@
 /**
  * Shared utilities for chat performance benchmarks and leak checks.
  *
- * Platform: macOS and Linux only. Windows is not supported — several
+ * Platform: macOS and Linux only. Windows is not supported â€” several
  * utilities (`sqlite3`, `sleep`, `pkill`) are Unix-specific.
  * CI runs on ubuntu-latest.
  */
@@ -100,7 +100,7 @@ function getBuiltinExtensionsDir(exePath) {
 
 /**
  * Resolve a build arg to an executable path.
- * Version strings are downloaded via @zyraxoncode/test-electron.
+ * Version strings are downloaded via @vscode/test-electron.
  * @param {string | undefined} buildArg
  * @returns {Promise<string>}
  */
@@ -110,7 +110,7 @@ async function resolveBuild(buildArg) {
 	}
 	if (isVersionString(buildArg)) {
 		console.log(`[chat-simulation] Downloading ZYRAXON Code ${buildArg}...`);
-		const { downloadAndUnzipZyraxonCode, resolveCliArgsFromZyraxonCodeExecutablePath } = require('@zyraxoncode/test-electron');
+		const { downloadAndUnzipZyraxonCode, resolveCliArgsFromZyraxonCodeExecutablePath } = require('@vscode/test-electron');
 		const exePath = await downloadAndUnzipZyraxonCode(buildArg);
 		console.log(`[chat-simulation] Downloaded: ${exePath}`);
 
@@ -199,7 +199,7 @@ function buildEnv(mockServer, { isDevBuild = true } = {}) {
 			endpoints: { api: mockServer.url, proxy: mockServer.url },
 		})).toString('base64'),
 	};
-	// Dev-only flags — these tell Electron to load the app from source (out/)
+	// Dev-only flags â€” these tell Electron to load the app from source (out/)
 	// instead of the packaged app. Setting them on a stable build causes it
 	// to fail to show a window.
 	if (isDevBuild) {
@@ -218,7 +218,7 @@ function buildEnv(mockServer, { isDevBuild = true } = {}) {
  * @returns {string[]}
  */
 function buildArgs(userDataDir, extDir, logsDir, { isDevBuild = true, extHostInspectPort = 0, traceFile = '', appRoot = ROOT, gcObjectStats = false } = {}) {
-	// Chromium switches must come BEFORE the app path (ROOT) — Chromium
+	// Chromium switches must come BEFORE the app path (ROOT) â€” Chromium
 	// only processes switches that precede the first non-switch argument.
 	const chromiumFlags = [];
 	if (traceFile) {
@@ -281,7 +281,7 @@ function writeSettings(userDataDir, mockServer, overrides) {
 		'github.copilot.advanced.debug.overrideProxyUrl': mockServer.url,
 		'github.copilot.advanced.debug.overrideCapiUrl': mockServer.url,
 		'chat.allowAnonymousAccess': true,
-		// Disable MCP servers — they start async and add unpredictable
+		// Disable MCP servers â€” they start async and add unpredictable
 		// delay that pollutes perf measurements.
 		'chat.mcp.discovery.enabled': false,
 		'chat.mcp.enabled': false,
@@ -579,7 +579,7 @@ async function launchZyraxonCode(executable, launchArgs, env, opts = {}) {
 			});
 			// Disconnect CDP after the process has exited
 			await browser.close().catch(() => { });
-			// Kill crashpad handler — it self-daemonizes and outlives the
+			// Kill crashpad handler â€” it self-daemonizes and outlives the
 			// parent. Wait briefly for it to detach, then kill by pattern.
 			await new Promise(r => setTimeout(r, 500));
 			try { execSync('pkill -9 -f crashpad_handler.*zyraxoncode-chat-simulation', { stdio: 'ignore' }); }
@@ -772,7 +772,7 @@ function linearRegressionSlope(values) {
 function summarize(values, label, unit) {
 	const s = robustStats(values);
 	if (!s) { return `  ${label}: (no data)`; }
-	const cv = s.cv > 0.15 ? ` cv=${(s.cv * 100).toFixed(0)}%⚠` : ` cv=${(s.cv * 100).toFixed(0)}%`;
+	const cv = s.cv > 0.15 ? ` cv=${(s.cv * 100).toFixed(0)}%âš ` : ` cv=${(s.cv * 100).toFixed(0)}%`;
 	const outliers = s.nOutliers > 0 ? ` (${s.nOutliers} outlier${s.nOutliers > 1 ? 's' : ''} removed)` : '';
 	return `  ${label}: median=${s.median}${unit}, p95=${s.p95}${unit},${cv}${outliers} [n=${s.n}]`;
 }

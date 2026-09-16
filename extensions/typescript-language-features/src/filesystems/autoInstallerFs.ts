@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PackageManager, ResolvedProject } from '@zyraxoncode/ts-package-manager';
+import { PackageManager, ResolvedProject } from '@vscode/ts-package-manager';
 import { basename, join } from 'path';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { URI } from 'zyraxoncode-uri';
 import { Disposable } from '../utils/dispose';
 import { MemFs } from './memFs';

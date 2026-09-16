@@ -1,13 +1,13 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as pathLib from 'path';
-import { AgentTaskGetResponse, AgentTaskSession, AgentTaskSessionEvent, AgentTaskState } from '@zyraxoncode/copilot-api';
+import { AgentTaskGetResponse, AgentTaskSession, AgentTaskSessionEvent, AgentTaskState } from '@vscode/copilot-api';
 import type { SessionEvent } from '@github/copilot/sdk';
-import * as zyraxoncode from 'zyraxoncode';
-import { ChatRequestTurn, ChatRequestTurn2, ChatResponseMarkdownPart, ChatResponseMultiDiffPart, ChatResponseProgressPart, ChatResponseThinkingProgressPart, ChatResponseTurn2, ChatResult, ChatToolInvocationPart, MarkdownString, Uri } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { ChatRequestTurn, ChatRequestTurn2, ChatResponseMarkdownPart, ChatResponseMultiDiffPart, ChatResponseProgressPart, ChatResponseThinkingProgressPart, ChatResponseTurn2, ChatResult, ChatToolInvocationPart, MarkdownString, Uri } from 'vscode';
 import { IGitService } from '../../../platform/git/common/gitService';
 import { PullRequestSearchItem, SessionInfo } from '../../../platform/github/common/githubAPI';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -104,7 +104,7 @@ export interface ParsedToolCallDetails {
 /**
  * Best-effort human-readable error detail for a terminally-failed task (v2). Prefers the last
  * non-dismissed `session.error` event (`(errorType) message`), falling back to a `session.shutdown`
- * event's `errorReason`. Returns undefined when no detail is available — e.g. an agent that failed
+ * event's `errorReason`. Returns undefined when no detail is available â€” e.g. an agent that failed
  * to launch before emitting any error event, where the failure is only reflected in the task state.
  * Scans the full event list because a `session.error` emitted during bootstrap (before the first
  * user message) is suppressed from the rendered turn history.
@@ -132,7 +132,7 @@ export function extractTaskErrorDetail(events: readonly AgentTaskSessionEvent[])
 /**
  * The notice shown for a terminally-stopped task (v2): `Copilot stopped: <reason>`. The reason is
  * the concrete error detail when one is available (`session.error`/`session.shutdown`), otherwise a
- * word derived from the terminal task state — "cancelled" for a user/agent cancellation and "timed
+ * word derived from the terminal task state â€” "cancelled" for a user/agent cancellation and "timed
  * out" for a timeout, neither of which emits an error event. Failed tasks with no detail fall back
  * to a generic "an error occurred".
  */
@@ -219,7 +219,7 @@ export class ChatSessionContentBuilder {
 	/**
 	 * Render a Task API task as chat history. Each entry in `task.sessions[]` is one turn
 	 * (request = the turn prompt; response = a markdown summary derived from events scoped
-	 * to that turn). This does NOT call the SSE log parser — events are typed.
+	 * to that turn). This does NOT call the SSE log parser â€” events are typed.
 	 *
 	 * `pullRequest` is shown as a header card only when the task happens to have a PR.
 	 */
@@ -292,7 +292,7 @@ export class ChatSessionContentBuilder {
 				}
 
 				// Only the latest turn can still be in-progress. When the task terminally stopped,
-				// surface a "Copilot stopped: <reason>" notice instead of a stuck progress spinner —
+				// surface a "Copilot stopped: <reason>" notice instead of a stuck progress spinner â€”
 				// the latest session state can still read as active (e.g. "Failed to launch agent"
 				// or a cancelled turn). Detail is extracted from the full event list because a
 				// bootstrap `session.error` is suppressed from the rendered turns above; a cancelled
@@ -627,7 +627,7 @@ export class ChatSessionContentBuilder {
 	 * - Jobs API (v1): `/home/runner/work/<owner>/<repo>/<path>`
 	 * - Task API (v2): `/tmp/workspace/<owner>/<repo>/<path>` (or `/workspace/...`)
 	 *
-	 * If none of the known roots match, fall back to the basename — better to show
+	 * If none of the known roots match, fall back to the basename â€” better to show
 	 * just the filename than to render a bare "Edit"/"Read" card.
 	 */
 	private toFileLabel(file: string): string {
@@ -881,7 +881,7 @@ export class ChatSessionContentBuilder {
 			case 'run_custom_setup_step': {
 				const stepName = (args as unknown as { name?: string; details?: { name?: string } }).name
 					?? (args as unknown as { details?: { name?: string } }).details?.name;
-				const label = stepName ? `Setting up environment — ${stepName}` : 'Setting up environment';
+				const label = stepName ? `Setting up environment â€” ${stepName}` : 'Setting up environment';
 				return { toolName: 'Setting up environment', invocationMessage: label, pastTenseMessage: label };
 			}
 			case 'report_intent': {

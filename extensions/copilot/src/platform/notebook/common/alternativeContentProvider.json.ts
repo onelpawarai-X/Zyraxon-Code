@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { visit } from 'jsonc-parser';
-import type { CancellationToken, NotebookCell, NotebookDocument, TextDocument } from 'zyraxoncode';
+import type { CancellationToken, NotebookCell, NotebookDocument, TextDocument } from 'vscode';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
 import { URI } from '../../../util/vs/base/common/uri';
 import { NotebookCellKind, Position, Range, Uri } from '../../../zyraxoncodeTypes';

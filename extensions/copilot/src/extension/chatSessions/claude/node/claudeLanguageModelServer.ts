@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { MessageParam } from '@anthropic-ai/sdk/resources';
-import { RequestMetadata, RequestType } from '@zyraxoncode/copilot-api';
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { RequestMetadata, RequestType } from '@vscode/copilot-api';
+import { Raw } from '@vscode/prompt-tsx';
 import * as http from 'http';
 import { IChatMLFetcher, Source } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatLocation, ChatResponse } from '../../../../platform/chat/common/commonTypes';
@@ -179,7 +179,7 @@ export class ClaudeLanguageModelServer extends Disposable {
 			// Response headers are written by ClaudeStreamingPassThroughEndpoint
 			// once the upstream response arrives, so we can mirror the upstream
 			// Content-Type (text/event-stream for stream: true, application/json
-			// for stream: false — used by `auto` permission mode classifier calls).
+			// for stream: false â€” used by `auto` permission mode classifier calls).
 
 			// Handle client disconnect
 			let requestComplete = false;
@@ -400,7 +400,7 @@ export function extractSessionId(headers: http.IncomingHttpHeaders, expectedNonc
 	// Parse `nonce.sessionId` format
 	const dotIndex = apiKey.indexOf('.');
 	if (dotIndex === -1) {
-		// Legacy format without session ID — validate nonce only
+		// Legacy format without session ID â€” validate nonce only
 		return { valid: apiKey === expectedNonce, sessionId: undefined };
 	}
 

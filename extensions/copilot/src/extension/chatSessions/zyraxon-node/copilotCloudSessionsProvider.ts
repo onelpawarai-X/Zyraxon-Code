@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as pathLib from 'path';
-import * as zyraxoncode from 'zyraxoncode';
-import type { AgentTaskSessionEvent, AgentTaskState } from '@zyraxoncode/copilot-api';
-import { l10n, Uri } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import type { AgentTaskSessionEvent, AgentTaskState } from '@vscode/copilot-api';
+import { l10n, Uri } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IDomainService } from '../../../platform/endpoint/common/domainService';
@@ -89,7 +89,7 @@ function describeRuntimeValue(value: unknown): string {
 
 	if (typeof value === 'object') {
 		const keys = Object.keys(value);
-		return `object(keys=${keys.slice(0, 5).join(',')}${keys.length > 5 ? ',…' : ''})`;
+		return `object(keys=${keys.slice(0, 5).join(',')}${keys.length > 5 ? ',â€¦' : ''})`;
 	}
 
 	return typeof value;
@@ -167,7 +167,7 @@ export function parseSessionLogChunksSafely(rawText: string, logService: ILogSer
  * PR-derived status (which routes through the lossy `SessionInfo['state']`), this keeps the
  * non-terminal "agent handed the turn back" states distinct from active work: `idle` (agent
  * finished its turn, nothing pending) renders as Completed and `waiting_for_user` (agent paused for
- * input) renders as NeedsInput. Only `queued`/`in_progress` are genuinely InProgress — collapsing
+ * input) renders as NeedsInput. Only `queued`/`in_progress` are genuinely InProgress â€” collapsing
  * `idle`/`waiting_for_user` into InProgress made settled tasks look like they were still running.
  */
 export function taskStateToChatSessionStatus(state: AgentTaskState): zyraxoncode.ChatSessionStatus {
@@ -187,7 +187,7 @@ export function taskStateToChatSessionStatus(state: AgentTaskState): zyraxoncode
 		default:
 			// Forward-compat fallback: a state outside the known union (e.g. a state added
 			// server-side after this build) must not yield an invalid `undefined` status. Treat
-			// unknowns as InProgress — the conservative "agent may still own the turn" assumption.
+			// unknowns as InProgress â€” the conservative "agent may still own the turn" assumption.
 			return zyraxoncode.ChatSessionStatus.InProgress;
 	}
 }
@@ -317,7 +317,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 	/**
 	 * Reverse map from PR number to the most recently observed task id. Populated by
 	 * `_listSessions` for Task API (v2) entries whose PR is resolvable so the provider can
-	 * keep emitting `/<prNumber>` URIs (stable across the v1→v2 backend flip — preserves
+	 * keep emitting `/<prNumber>` URIs (stable across the v1â†’v2 backend flip â€” preserves
 	 * archive state) while still routing content/follow-up/openInBrowser through task
 	 * endpoints. On cache miss, `resolveTaskIdForPrNumber` falls back to a backend lookup.
 	 */
@@ -345,7 +345,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 	private readonly _createPullRequestInFlightTaskIds = new Set<string>();
 	// Task ids with a live {@link TaskTurnStreamer} (activeResponseCallback or follow-up).
 	// When a stream is already active for a task, a mid-turn steering follow-up only needs to
-	// POST /steer — the running stream renders the injected result, so we skip starting a
+	// POST /steer â€” the running stream renders the injected result, so we skip starting a
 	// second streamer.
 	private readonly _activeTaskStreams = new Set<string>();
 	// Task id whose content currently drives the chat-input pull-request toolbar gates
@@ -385,7 +385,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 
 	// Backend abstraction for Jobs API / Task API migration. Selection happens in the constructor.
 	// The discriminated union is narrowed per-method via local `const backend = this._backend`
-	// after a `kind` guard — there are no instance fields for each backend kind, and no
+	// after a `kind` guard â€” there are no instance fields for each backend kind, and no
 	// runtime "not supported" throws on the type surface.
 	private readonly _backend: CloudAgentBackend;
 
@@ -417,11 +417,11 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 		// experiment-based setting, so the rollout can be ramped and instantly rolled back remotely via
 		// ExP without shipping a build. Default 'v1' keeps existing Jobs API behavior; 'v2' opts in to
 		// the Task API backend.
-		// Note: read once at construction — changes to the setting require an extension host reload to take effect.
+		// Note: read once at construction â€” changes to the setting require an extension host reload to take effect.
 		const backendVersion = configurationService.getExperimentBasedConfig(ConfigKey.CloudAgentBackendVersion, this._experimentationService);
 		this._backendVersion = backendVersion;
 		// Shared, version-tagged telemetry/OTel surface so v1 and v2 emit identical funnel and guardrail
-		// signals — this is what makes the rollout observable and comparable apples-to-apples.
+		// signals â€” this is what makes the rollout observable and comparable apples-to-apples.
 		const instrumentation = new CloudBackendInstrumentation(backendVersion, this.telemetry, this._otelService);
 		if (backendVersion === 'v2') {
 			const taskApiClient = new TaskApiHttpClient(capiClientService, this._authenticationService, this.logService);
@@ -1275,7 +1275,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 			this.cachedSessionsSize = sessionList.length;
 
 			// Track active sessions for background polling. Only PR-keyed (Jobs API) entries
-			// participate — task-keyed entries (v2) have their own active-response callback path
+			// participate â€” task-keyed entries (v2) have their own active-response callback path
 			// via `createTaskActiveResponseCallback`, which live-streams events through
 			// `runTaskLiveStream`. Polling task ids through `getSessionInfo` would throw on the
 			// Task backend.
@@ -1312,7 +1312,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 
 			// Create session items from grouped entries. Two shapes:
 			// - PR-backed: full PR badge + file changes (Jobs API path or Task API path with resolved PR).
-			// - Task-only (v2): task card with no PR data — only appears when the backend emitted
+			// - Task-only (v2): task card with no PR data â€” only appears when the backend emitted
 			//   `pullArtifact` (so we know it's a Task API entry); PR-less Jobs entries are skipped.
 			const sessionItems = await Promise.all(sessionList.map(async entry => {
 				const pr = entry.pullRequest
@@ -1330,13 +1330,13 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 				// Task-shaped card path (v2 with no resolvable PR yet, or PR-less by design).
 				if (!pr) {
 					if (!entry.pullArtifact && entry.latestSession.resource_type !== 'task') {
-						// Jobs-API entry with no PR — legacy behavior is to skip these.
+						// Jobs-API entry with no PR â€” legacy behavior is to skip these.
 						return undefined;
 					}
 					const taskId = entry.latestSession.id;
 					// For a settled, PR-less task that pushed a branch, surface its changed files
-					// (base...head compare) so the changed-files toolbar — and the inline "Create
-					// pull request" action contributed to it — can render.
+					// (base...head compare) so the changed-files toolbar â€” and the inline "Create
+					// pull request" action contributed to it â€” can render.
 					const changes = entry.diffRefs
 						? await this._prFileChangesService.getComparisonChangedFiles(entry.diffRefs)
 						: undefined;
@@ -1375,7 +1375,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 				} satisfies { readonly [key: string]: unknown };
 
 				const resource = zyraxoncode.Uri.from({ scheme: CopilotCloudSessionsProvider.TYPE, path: '/' + pr.number });
-				// Record the PR→task mapping so v2 consumers can reverse-resolve a
+				// Record the PRâ†’task mapping so v2 consumers can reverse-resolve a
 				// PR-shaped URI back to the underlying task without a network round trip.
 				if (entry.pullArtifact) {
 					this._taskIdByPrNumber.set(pr.number, entry.latestSession.id);
@@ -1456,7 +1456,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 		}
 
 		// PR-keyed URI on v2: reverse-resolve to the underlying task and route to the task
-		// content path. Keeps `/<prNumber>` URIs stable across the v1→v2 flip.
+		// content path. Keeps `/<prNumber>` URIs stable across the v1â†’v2 flip.
 		if (this._backend.kind === 'task' && identity?.type === 'pr') {
 			const taskId = await this.resolveTaskIdForPrNumber(identity.prNumber);
 			if (taskId) {
@@ -1467,7 +1467,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 		}
 
 		// PR-keyed flow requires the Jobs backend. If we're on v2, a legacy PR URI is unreachable
-		// content under this provider — render an empty session rather than throwing.
+		// content under this provider â€” render an empty session rather than throwing.
 		const backend = this._backend;
 		if (backend.kind !== 'pr') {
 			this.logService.warn(`PR-keyed session ${resource} opened while Task backend is active; returning empty session.`);
@@ -1617,7 +1617,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 		// Only stream a live response when the task itself is still running. A terminally-failed
 		// task (e.g. "Failed to launch agent") can leave its latest turn's session state stuck at
 		// `in_progress`/`queued`; without the task-level guard the streamer would poll forever and
-		// the view would show a perpetual "Session is in progress…" spinner.
+		// the view would show a perpetual "Session is in progressâ€¦" spinner.
 		const activeResponseCallback = isActiveTaskState(taskContent.task.state)
 			&& latestTurn && (latestTurn.state === 'in_progress' || latestTurn.state === 'queued')
 			? this._createTaskStreamCallback(taskId, { mode: 'current', seedEventIds: new Set(events.map(e => e.id)) })
@@ -2250,7 +2250,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 					await this._waitForTaskPullRequestReflected(backend, taskId);
 				},
 			);
-			// Cache the PR→task mapping so a PR-keyed session re-render can reverse-resolve to this
+			// Cache the PRâ†’task mapping so a PR-keyed session re-render can reverse-resolve to this
 			// task immediately while the new PR is still propagating through the list/index.
 			if (typeof createdPrNumber === 'number') {
 				this._taskIdByPrNumber.set(createdPrNumber, taskId);
@@ -2262,7 +2262,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 			});
 			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t('Failed to create pull request: {0}', error instanceof Error ? error.message : String(error)));
 			// The task is still settled and PR-less, so re-enable the toolbar action for a retry
-			// (only when it still drives the toolbar — the user may have navigated away).
+			// (only when it still drives the toolbar â€” the user may have navigated away).
 			if (this._activeToolbarTaskId === taskId) {
 				this.setCanCreatePullRequestContext(true);
 			}
@@ -2273,8 +2273,8 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 		// NOTE: intentionally NOT calling refresh() here. Refreshing rebuilds the session list, which
 		// flips this task's item from task-keyed (`/task/<id>`, carrying compare-based `changes`) to
 		// PR-keyed (`/<prNumber>`). The still-open task editor keeps its `/task/<id>` resource, so
-		// after the flip its session model has no changes and the changed-files widget — which HOSTS
-		// this toolbar — unmounts (the toolbar vanishes). Instead we re-apply the gates so the
+		// after the flip its session model has no changes and the changed-files widget â€” which HOSTS
+		// this toolbar â€” unmounts (the toolbar vanishes). Instead we re-apply the gates so the
 		// "Open pull request" action replaces "Create" in place; the list reconciles on the next
 		// background refresh.
 		await this.updatePullRequestToolbarContext(taskId);
@@ -2285,7 +2285,7 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 	 * with the task. Poll the task until its `pull` artifact appears so the subsequent
 	 * {@link refresh} resolves the PR and computes its file-change diff in the same paint. Bounded;
 	 * resolves once the artifact is reflected or the attempts are exhausted (the refresh happens
-	 * either way — the task still surfaces its compare-based changes in the meantime).
+	 * either way â€” the task still surfaces its compare-based changes in the meantime).
 	 */
 	private async _waitForTaskPullRequestReflected(backend: TaskCloudAgentBackend, taskId: string): Promise<void> {
 		const maxAttempts = 10;
@@ -3175,9 +3175,9 @@ export class CopilotCloudSessionsProvider extends Disposable implements zyraxonc
 			}
 			return commentResult.url
 				// allow-any-unicode-next-line
-				? zyraxoncode.l10n.t('🚀 Follow-up comment added to [#{0}]({1})', pullRequestNumber, commentResult.url)
+				? zyraxoncode.l10n.t('ðŸš€ Follow-up comment added to [#{0}]({1})', pullRequestNumber, commentResult.url)
 				// allow-any-unicode-next-line
-				: zyraxoncode.l10n.t('🚀 Follow-up comment added to #{0}', pullRequestNumber);
+				: zyraxoncode.l10n.t('ðŸš€ Follow-up comment added to #{0}', pullRequestNumber);
 		} catch (err) {
 			this.logService.error(`Failed to add follow-up comment to PR #${pullRequestNumber}: ${err}`);
 			return;

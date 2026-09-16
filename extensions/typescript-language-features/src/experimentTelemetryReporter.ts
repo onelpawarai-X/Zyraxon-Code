@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import VsCodeTelemetryReporter from '@zyraxoncode/extension-telemetry';
-import * as zyraxoncode from 'zyraxoncode';
+import VsCodeTelemetryReporter from '@vscode/extension-telemetry';
+import * as zyraxoncode from 'vscode';
 import * as tas from 'zyraxoncode-tas-client';
 
 export interface IExperimentationTelemetryReporter extends tas.IExperimentationTelemetry, zyraxoncode.Disposable {

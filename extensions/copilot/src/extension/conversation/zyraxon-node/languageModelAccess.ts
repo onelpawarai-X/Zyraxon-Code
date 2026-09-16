@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import * as zyraxoncode from 'zyraxoncode';
+import { Raw } from '@vscode/prompt-tsx';
+import * as zyraxoncode from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { CopilotToken } from '../../../platform/authentication/common/copilotToken';
 import { IBlockedExtensionService } from '../../../platform/chat/common/blockedExtensionService';
@@ -611,7 +611,7 @@ class LanguageModelAccessPromptBaseCountCache {
 		try {
 			await this._extensionContext.globalState.update(key, { extensionVersion: this._envService.getVersion(), baseCount });
 		} catch (err) {
-			// Best-effort cache update — don't fail the caller if persisting the
+			// Best-effort cache update â€” don't fail the caller if persisting the
 			// cache entry fails for any reason.
 		}
 

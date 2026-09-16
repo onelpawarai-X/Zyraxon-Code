@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import { Environment, EnvironmentParameters } from '@azure/ms-rest-azure-env';
 import Logger from './logger';
 import { MsalAuthProvider } from './node/authProvider';
 import { UriEventHandler } from './UriEventHandler';
-import { authentication, commands, ExtensionContext, l10n, window, workspace, Disposable, Uri } from 'zyraxoncode';
+import { authentication, commands, ExtensionContext, l10n, window, workspace, Disposable, Uri } from 'vscode';
 import { ZyraxonAuthenticationTelemetryReporter, ZyraxonSovereignCloudAuthenticationTelemetryReporter } from './common/telemetryReporter';
 
 let implementation: 'msal' | 'msal-no-broker' = 'msal';

@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 
 export import Position = zyraxoncode.Position;
 export import Range = zyraxoncode.Range;
@@ -118,7 +118,7 @@ export import ThemeIcon = zyraxoncode.ThemeIcon;
 export const l10n = {
 	/**
 	 * @deprecated Only use this import in tests. For the actual extension,
-	 * use `import { l10n } from 'zyraxoncode'` or `import * as l10n from '@zyraxoncode/l10n'`.
+	 * use `import { l10n } from 'vscode'` or `import * as l10n from '@vscode/l10n'`.
 	 */
 	t: zyraxoncode.l10n.t
 };

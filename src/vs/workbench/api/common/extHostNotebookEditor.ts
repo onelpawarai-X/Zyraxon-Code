@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import { illegalArgument } from '../../../base/common/errors.js';
 import { MainThreadNotebookEditorsShape } from './extHost.protocol.js';
 import * as extHostConverter from './extHostTypeConverters.js';
 import * as extHostTypes from './extHostTypes.js';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ExtHostNotebookDocument } from './extHostNotebookDocument.js';
 import { NotebookRange } from './extHostTypes.js';
 

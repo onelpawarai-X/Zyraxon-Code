@@ -1,14 +1,14 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import * as pathUtils from 'path';
 
 const FILE_LINE_REGEX = /^(\S.*):$/;
 const RESULT_LINE_REGEX = /^(\s+)(\d+)(: |  )(\s*)(.*)$/;
-const ELISION_REGEX = /⟪ ([0-9]+) characters skipped ⟫/g;
+const ELISION_REGEX = /âŸª ([0-9]+) characters skipped âŸ«/g;
 const SEARCH_RESULT_SELECTOR = { language: 'search-result', exclusive: true };
 const DIRECTIVES = ['# Query:', '# Flags:', '# Including:', '# Excluding:', '# ContextLines:'];
 const FLAGS = ['RegExp', 'CaseSensitive', 'IgnoreExcludeSettings', 'WordMatch'];
@@ -150,7 +150,7 @@ function relativePathToUri(path: string, resultsUri: zyraxoncode.Uri): zyraxonco
 		zyraxoncode.Uri.joinPath(folder.uri, path);
 
 	if (zyraxoncode.workspace.workspaceFolders) {
-		const multiRootFormattedPath = /^(.*) • (.*)$/.exec(path);
+		const multiRootFormattedPath = /^(.*) â€¢ (.*)$/.exec(path);
 		if (multiRootFormattedPath) {
 			const [, workspaceName, workspacePath] = multiRootFormattedPath;
 			const folder = zyraxoncode.workspace.workspaceFolders.filter(wf => wf.name === workspaceName)[0];

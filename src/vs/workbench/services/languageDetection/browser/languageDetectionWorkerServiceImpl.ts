@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -30,8 +30,8 @@ const TOP_LANG_COUNTS = 12;
 
 const regexpModuleLocation: AppResourcePath = `${nodeModulesPath}/zyraxoncode-regexp-languagedetection`;
 const regexpModuleLocationAsar: AppResourcePath = `${nodeModulesAsarPath}/zyraxoncode-regexp-languagedetection`;
-const moduleLocation: AppResourcePath = `${nodeModulesPath}/@zyraxoncode/zyraxoncode-languagedetection`;
-const moduleLocationAsar: AppResourcePath = `${nodeModulesAsarPath}/@zyraxoncode/zyraxoncode-languagedetection`;
+const moduleLocation: AppResourcePath = `${nodeModulesPath}/@vscode/zyraxoncode-languagedetection`;
+const moduleLocationAsar: AppResourcePath = `${nodeModulesAsarPath}/@vscode/zyraxoncode-languagedetection`;
 
 export class LanguageDetectionService extends Disposable implements ILanguageDetectionService {
 	static readonly enablementSettingKey = 'workbench.editor.languageDetection';

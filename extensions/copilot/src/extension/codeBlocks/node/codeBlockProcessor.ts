@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatQuestion, ChatResponseClearToPreviousToolInvocationReason, ChatResponsePart, ChatResponseStream, ChatVulnerability, ThinkingDelta, Uri } from 'zyraxoncode';
+import type { ChatQuestion, ChatResponseClearToPreviousToolInvocationReason, ChatResponsePart, ChatResponseStream, ChatVulnerability, ThinkingDelta, Uri } from 'vscode';
 
 import { createFilepathRegexp, mdCodeBlockLangToLanguageId } from '../../../util/common/markdown';
 import { CharCode } from '../../../util/vs/base/common/charCode';

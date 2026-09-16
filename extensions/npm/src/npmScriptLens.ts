@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@ import {
 	Uri,
 	workspace,
 	l10n
-} from 'zyraxoncode';
+} from 'vscode';
 import { readScripts } from './readScripts';
 import { getRunScriptCommand } from './tasks';
 

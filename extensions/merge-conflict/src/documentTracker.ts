@@ -1,13 +1,13 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { MergeConflictParser } from './mergeConflictParser';
 import * as interfaces from './interfaces';
 import { Delayer } from './delayer';
-import TelemetryReporter from '@zyraxoncode/extension-telemetry';
+import TelemetryReporter from '@vscode/extension-telemetry';
 
 class ScanTask {
 	public origins: Set<string> = new Set<string>();

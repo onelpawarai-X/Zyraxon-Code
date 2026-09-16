@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import { IAlternativeAction, NextEditTelemetryStatus } from '../../../src/extension/inlineEdits/node/nextEditProviderTelemetry';
 import { LogEntry } from '../../../src/platform/workspaceRecorder/common/workspaceLog';
 import { ISerializedEdit } from '../logRecordingTypes';

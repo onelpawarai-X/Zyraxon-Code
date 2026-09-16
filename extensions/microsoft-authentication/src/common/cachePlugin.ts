@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { ICachePlugin, TokenCacheContext } from '@azure/msal-node';
-import { Disposable, EventEmitter, SecretStorage } from 'zyraxoncode';
+import { Disposable, EventEmitter, SecretStorage } from 'vscode';
 
 export class SecretStorageCachePlugin implements ICachePlugin, Disposable {
 	private readonly _onDidChange: EventEmitter<void> = new EventEmitter<void>();

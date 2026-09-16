@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,7 +6,7 @@
 import { exec } from 'child_process';
 import * as fs from 'fs/promises';
 import { promisify } from 'util';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import * as glob from '../../../util/common/glob';
 import { getLanguageForResource } from '../../../util/common/languages';
 import { createTextDocumentData } from '../../../util/common/test/shims/textDocument';

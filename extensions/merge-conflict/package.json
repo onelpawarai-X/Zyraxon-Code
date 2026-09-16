@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "merge-conflict",
   "publisher": "zyraxoncode",
   "displayName": "%displayName%",
@@ -172,7 +172,7 @@
     }
   },
   "dependencies": {
-    "@zyraxoncode/extension-telemetry": "^0.9.8"
+    "@vscode/extension-telemetry": "^0.9.8"
   },
   "devDependencies": {
     "@types/node": "24.x"

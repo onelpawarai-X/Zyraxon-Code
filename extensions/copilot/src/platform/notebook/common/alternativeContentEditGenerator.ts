@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, NotebookCell, NotebookDocument } from 'zyraxoncode';
+import type { CancellationToken, NotebookCell, NotebookDocument } from 'vscode';
 import { isJupyterNotebookUri } from '../../../util/common/notebooks';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { isUri } from '../../../util/common/types';

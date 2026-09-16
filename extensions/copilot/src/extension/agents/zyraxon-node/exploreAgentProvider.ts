@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { AGENT_FILE_EXTENSION } from '../../../platform/customInstructions/common/promptTypes';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
@@ -116,7 +116,7 @@ export class ExploreAgentProvider extends Disposable implements zyraxoncode.Chat
 
 Adapt search strategy based on the requested thoroughness level.
 
-**Bias for speed** — return findings as quickly as possible:
+**Bias for speed** â€” return findings as quickly as possible:
 - Parallelize independent tool calls (multiple greps, multiple reads)
 - Stop searching once you have sufficient context
 - Make targeted searches, not exhaustive sweeps

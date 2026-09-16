@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { ChatSessionWorktreeProperties } from './chatSessionWorktreeService';
 import type { IWorkspaceInfo } from './workspaceInfo';
@@ -39,9 +39,9 @@ export interface StoredModeInstructions {
 }
 
 export interface RequestDetails {
-	/** ZYRAXON Code request ID — always available, serves as primary key. */
+	/** ZYRAXON Code request ID â€” always available, serves as primary key. */
 	readonly zyraxoncodeRequestId: string;
-	/** Copilot SDK request ID — may not be available until the request completes. */
+	/** Copilot SDK request ID â€” may not be available until the request completes. */
 	copilotRequestId?: string;
 	/**
 	 * Map of tool call id to ZYRAXON Code edit id, used to correlate edits to the tool call that created them.
@@ -122,7 +122,7 @@ export interface ChatSessionMetadataFile {
 
 /**
  * One line in `~/.copilot/zyraxoncode.session.worktree.jsonl`. Maps a session id
- * to the path of its worktree so folder → session lookups work even when the
+ * to the path of its worktree so folder â†’ session lookups work even when the
  * session has been evicted from the bulk metadata cache.
  */
 export interface WorktreeSessionEntry {

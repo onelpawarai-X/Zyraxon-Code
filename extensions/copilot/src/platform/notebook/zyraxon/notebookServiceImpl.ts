@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { commands, DocumentSymbol, extensions, NotebookCell, Uri, window, workspace } from 'zyraxoncode';
+import { commands, DocumentSymbol, extensions, NotebookCell, Uri, window, workspace } from 'vscode';
 import { _hasSupportedNotebooks, EditorAssociation, extractEditorAssociation as extractEditorAssociations, findNotebook, INotebookEditorContribution, isNotebookEditorContribution } from '../../../util/common/notebooks';
 import { IDisposable } from '../../../util/vs/base/common/lifecycle';
 import { ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';

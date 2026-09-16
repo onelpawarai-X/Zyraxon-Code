@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -62,8 +62,8 @@ export interface ILocalTranscriptionResult {
 	 * The leading portion of `text` that Foundry has already finalized (its
 	 * endpointed segments). The remainder of `text` is the still-in-progress
 	 * interim tail. Lets the renderer stop shimmering finalized text as soon as
-	 * a segment is endpointed — including the last one during a trailing silence
-	 * — instead of waiting for a later interim to confirm it stopped changing.
+	 * a segment is endpointed â€” including the last one during a trailing silence
+	 * â€” instead of waiting for a later interim to confirm it stopped changing.
 	 */
 	readonly finalizedText?: string;
 }
@@ -87,7 +87,7 @@ export interface ILocalTranscriptionService {
 	/**
 	 * Whether on-device transcription can run in this environment. False on web
 	 * (no utility process) and on desktop platforms/architectures without a
-	 * Foundry Local native runtime. When false, dictation is unavailable — there
+	 * Foundry Local native runtime. When false, dictation is unavailable â€” there
 	 * is no cloud fallback.
 	 */
 	readonly isSupported: boolean;
@@ -115,9 +115,9 @@ export interface ILocalTranscriptionService {
 	 *
 	 * `proxyUrl`/`noProxy` bridge ZYRAXON Code's `http.proxy`/`http.noProxy` settings
 	 * into this utility process: when set, they are applied as the standard proxy
-	 * environment variables before any download, so all provisioning legs — the
+	 * environment variables before any download, so all provisioning legs â€” the
 	 * addon tarball and NuGet core libraries (our own fetches) and the native
-	 * Foundry Local *model* download — route through the proxy. When they are
+	 * Foundry Local *model* download â€” route through the proxy. When they are
 	 * omitted, the process's inherited OS environment proxy vars still apply.
 	 *
 	 * `proxyStrictSSL === false` (ZYRAXON Code's `http.proxyStrictSSL`) disables TLS
@@ -125,7 +125,7 @@ export interface ILocalTranscriptionService {
 	 * (ZYRAXON Code's `http.proxyAuthorization`, a `Basic <base64>` value) is folded into
 	 * the proxy URL's credentials so both our fetches and the native model download
 	 * authenticate to the proxy. TLS-intercepting proxies otherwise rely on the CA
-	 * being in the OS trust store (matching `@zyraxoncode/proxy-agent` and the desktop
+	 * being in the OS trust store (matching `@vscode/proxy-agent` and the desktop
 	 * app).
 	 *
 	 * `runtimeUrlTemplate`/`runtimeVersion` come from `product.dictationRuntime`

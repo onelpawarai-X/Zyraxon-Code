@@ -1,14 +1,14 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { getNodeFileFS } from './nodeFs';
-import { Disposable, ExtensionContext, l10n } from 'zyraxoncode';
+import { Disposable, ExtensionContext, l10n } from 'vscode';
 import { startClient, LanguageClientConstructor, AsyncDisposable } from '../htmlClient';
 import { ServerOptions, TransportKind, LanguageClientOptions, LanguageClient } from 'zyraxoncode-languageclient/node';
 import * as fs from 'fs';
-import TelemetryReporter from '@zyraxoncode/extension-telemetry';
+import TelemetryReporter from '@vscode/extension-telemetry';
 
 
 let telemetry: TelemetryReporter | undefined;

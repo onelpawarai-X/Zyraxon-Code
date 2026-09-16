@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { promises as fs } from 'fs';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { getGitHubRepoInfoFromContext, IGitService } from '../../../platform/git/common/gitService';
 import { buildTempIndexEnv, getUncommittedFilePaths, parseGitChangesRaw } from '../../../platform/git/zyraxoncode-node/utils';
@@ -150,7 +150,7 @@ export class ChatSessionWorkspaceFolderService extends Disposable implements ICh
 			this.sessionRepoKeys.set(sessionId, repoKey);
 
 			return this.repoChangesSequencer.queue(repoKey, async () => {
-				// Check cache again — another session may have computed it while we waited in the repo sequencer
+				// Check cache again â€” another session may have computed it while we waited in the repo sequencer
 				const cachedChanges = this.workspaceFolderChanges.get(repoKey);
 				if (cachedChanges) {
 					return cachedChanges;

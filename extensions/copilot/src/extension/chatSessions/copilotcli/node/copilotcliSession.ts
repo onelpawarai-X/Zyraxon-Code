@@ -1,14 +1,14 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { Attachment, SendOptions, SessionOptions, ToolExecutionCompleteEvent, ToolExecutionStartEvent } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import * as cp from 'child_process';
 import * as crypto from 'crypto';
-import type * as zyraxoncode from 'zyraxoncode';
-import type { ChatParticipantToolToken } from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
+import type { ChatParticipantToolToken } from 'vscode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { IChatQuotaService, QuotaSnapshot, QuotaSnapshots } from '../../../../platform/chat/common/chatQuotaService';
 import { getQuotaMessageForPlan } from '../../../../platform/chat/common/commonTypes';
@@ -946,7 +946,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 
 	/**
 	 * Whether the session was configured with the sandbox enabled. The sandbox
-	 * only actually applies to requests that run with default permissions — see
+	 * only actually applies to requests that run with default permissions â€” see
 	 * {@link _applyEffectiveSandboxConfig}.
 	 */
 	private get _sandboxEnabled(): boolean {
@@ -1257,9 +1257,9 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 		const assistantMessageChunks: string[] = [];
 		// Tracks the `messageId` of the last assistant text we forwarded to
 		// the stream (via `assistant.message_delta` or `assistant.message`).
-		// When the next text emission carries a different `messageId` — i.e.
+		// When the next text emission carries a different `messageId` â€” i.e.
 		// the model emitted a new assistant message in the same turn (e.g.
-		// after a tool call, or as a second phase) — we prepend `\n\n` so the
+		// after a tool call, or as a second phase) â€” we prepend `\n\n` so the
 		// two messages don't fuse into a single run-on paragraph
 		// (e.g. `"...wiring:Now add..."`). Only triggers when both sides have
 		// a defined messageId, so message emissions without an id (rare /
@@ -1505,7 +1505,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 				if (typeof event.data.deltaContent === 'string' && event.data.deltaContent.length) {
 					// Ensure pending invocation messages are flushed even if we skip sub-agent markdown
 					flushPendingInvocationMessages();
-					// Skip sub-agent markdown — it will be captured in the subagent tool's result
+					// Skip sub-agent markdown â€” it will be captured in the subagent tool's result
 					if (event.data.parentToolCallId) {
 						return;
 					}
@@ -1518,7 +1518,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 			})));
 			disposables.add(toDisposable(this._sdkSession.on('assistant.message', (event) => {
 				if (typeof event.data.content === 'string' && event.data.content.length && !chunkMessageIds.has(event.data.messageId)) {
-					// Skip sub-agent markdown — it will be captured in the subagent tool's result
+					// Skip sub-agent markdown â€” it will be captured in the subagent tool's result
 					if (event.data.parentToolCallId) {
 						return;
 					}
@@ -1889,7 +1889,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 			} else {
 				this._sdkSession.currentMode = 'interactive';
 			}
-			// The sandbox only applies under default permissions — disable it for
+			// The sandbox only applies under default permissions â€” disable it for
 			// this request when running in a bypass-approvals mode.
 			const bypassApprovals = remoteMode
 				? remoteMode === 'autopilot'
@@ -1932,7 +1932,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 			} else {
 				this._sdkSession.currentMode = 'interactive';
 			}
-			// The sandbox only applies under default permissions — disable it when
+			// The sandbox only applies under default permissions â€” disable it when
 			// fleet runs in autopilot (a bypass-approvals mode).
 			this._applyEffectiveSandboxConfig(this._permissionLevel === 'autopilot');
 			const result = await this._sdkSession.fleet.start({ prompt });
@@ -1947,7 +1947,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 	}
 
 	/**
-	 * Handle `/remote` command — prints status or enables/disables Mission
+	 * Handle `/remote` command â€” prints status or enables/disables Mission
 	 * Control remote control for this session by calling the Copilot API directly.
 	 */
 	private async _handleRemoteControl(input: CopilotCLISessionInput): Promise<void> {
@@ -2053,7 +2053,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 			mcStateBySessionId.set(this.sessionId, sharedState);
 			this.logService.trace(`[CopilotCLISession] Set shared MC state for session ${this.sessionId}, mcSessionId=${mcData.id}`);
 
-			// Step 6: Send the initial session.start event — MC requires this to
+			// Step 6: Send the initial session.start event â€” MC requires this to
 			// transition out of "Fueling the runtime engines..." loading state.
 			const sessionStartEvent = this._createMcEvent('session.start', {
 				sessionId: sharedState.mcSessionId,
@@ -2085,7 +2085,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 
 			// Step 7b: Replay existing conversation history so the MC web UI
 			// shows all messages that occurred before /remote was invoked.
-			// Only replay conversation-content events — skip session lifecycle
+			// Only replay conversation-content events â€” skip session lifecycle
 			// events that would override the remoteSteerable state we just set.
 			const replayableTypes = new Set([
 				'user.message', 'assistant.message', 'assistant.turn_start',
@@ -2574,7 +2574,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 		const state = this._mcState;
 		if (!state) { return; }
 
-		// Capture sessionId for use in the closure — avoid relying on `this`
+		// Capture sessionId for use in the closure â€” avoid relying on `this`
 		// which may be a stale CopilotCLISession instance.
 		const sessionId = this.sessionId;
 		const logService = this.logService;
@@ -2690,7 +2690,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 					default: {
 						// Route steering messages through the ZYRAXON Code chat UI so
 						// they appear in the chat panel with proper rendering.
-						const vsCodeApi = require('zyraxoncode') as typeof import('zyraxoncode');
+						const vsCodeApi = require('vscode') as typeof import('zyraxoncode');
 						getMissionControlPendingCommandCompletionIds(state).add(cmd.id);
 						setPendingCopilotCLIRequestContext(sessionId, {
 							prompt: cmd.content,
@@ -3051,7 +3051,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 	 */
 	private _injectModelTurnSpans(turns: readonly IModelTurnUsage[], responseText: string, fallbackModelId: string | undefined, rootTraceContext: TraceContext | undefined): void {
 		if (turns.length === 0) {
-			// No usage events were reported — still surface the response if we have one.
+			// No usage events were reported â€” still surface the response if we have one.
 			if (responseText) {
 				this._emitChatSpan({}, responseText, fallbackModelId, rootTraceContext);
 			}
@@ -3326,5 +3326,5 @@ function truncateForLog(value: unknown, maxLen = 2000): string {
 	if (text.length <= maxLen) {
 		return text;
 	}
-	return text.slice(0, maxLen) + `… [truncated, ${text.length - maxLen} more chars]`;
+	return text.slice(0, maxLen) + `â€¦ [truncated, ${text.length - maxLen} more chars]`;
 }

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { NotebookDocument } from 'zyraxoncode';
+import { NotebookDocument } from 'vscode';
 import { DisposableStore } from '../../../util/vs/base/common/lifecycle';
 import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { IWorkspaceService } from '../../workspace/common/workspaceService';

@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OpenAI, OutputMode, Raw, toMode } from '@zyraxoncode/prompt-tsx';
-import { ChatCompletionContentPartImage } from '@zyraxoncode/prompt-tsx/dist/base/output/openaiTypes';
-import { ChatCompletionContentPartKind } from '@zyraxoncode/prompt-tsx/dist/base/output/rawTypes';
+import { OpenAI, OutputMode, Raw, toMode } from '@vscode/prompt-tsx';
+import { ChatCompletionContentPartImage } from '@vscode/prompt-tsx/dist/base/output/openaiTypes';
+import { ChatCompletionContentPartKind } from '@vscode/prompt-tsx/dist/base/output/rawTypes';
 import { rawPartAsThinkingData } from '../../endpoint/common/thinkingDataContainer';
 import { TelemetryData } from '../../telemetry/common/telemetryData';
 import { ThinkingData, ThinkingDataInMessage } from '../../thinking/common/thinking';
@@ -51,9 +51,9 @@ export interface APIUsage {
 		 * Anthropic responses that don't include the breakdown.
 		 */
 		anthropic_cache_creation?: {
-			/** Cache-creation tokens written with the 1h (extended) TTL — billed at 2x base input rate. */
+			/** Cache-creation tokens written with the 1h (extended) TTL â€” billed at 2x base input rate. */
 			ephemeral_1h_input_tokens?: number;
-			/** Cache-creation tokens written with the default 5m TTL — billed at 1.25x base input rate. */
+			/** Cache-creation tokens written with the default 5m TTL â€” billed at 1.25x base input rate. */
 			ephemeral_5m_input_tokens?: number;
 		};
 	};

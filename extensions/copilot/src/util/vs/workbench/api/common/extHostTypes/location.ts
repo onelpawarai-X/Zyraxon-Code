@@ -1,11 +1,11 @@
-//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
+﻿//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { URI } from '../../../../base/common/uri';
 import { es5ClassCompat } from './es5ClassCompat';
 import { Position } from './position';

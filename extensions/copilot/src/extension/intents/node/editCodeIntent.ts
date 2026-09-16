@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import { ChatResponseReferencePartStatusKind, MetadataMap, PromptReference, Raw } from '@zyraxoncode/prompt-tsx';
-import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import { ChatResponseReferencePartStatusKind, MetadataMap, PromptReference, Raw } from '@vscode/prompt-tsx';
+import type * as zyraxoncode from 'vscode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';

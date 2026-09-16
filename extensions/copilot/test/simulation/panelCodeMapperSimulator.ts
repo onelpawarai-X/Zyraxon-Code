@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { ChatPromptReference, ChatResponseStream } from 'zyraxoncode';
+import type { ChatPromptReference, ChatResponseStream } from 'vscode';
 import { isCodeBlockWithResource } from '../../src/extension/codeBlocks/node/codeBlockProcessor';
 import { ITabsAndEditorsService } from '../../src/platform/tabs/common/tabsAndEditorsService';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';

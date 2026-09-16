@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -31,7 +31,7 @@ export async function initWindowsVersionInfo() {
 	let buildNumber: number | undefined;
 	let release: string | undefined;
 	try {
-		const Registry = await import('@zyraxoncode/windows-registry');
+		const Registry = await import('@vscode/windows-registry');
 		const versionKey = 'SOFTWARE\\Zyraxon\\Windows NT\\CurrentVersion';
 
 		const build = Registry.GetStringRegKey('HKEY_LOCAL_MACHINE', versionKey, 'CurrentBuild');

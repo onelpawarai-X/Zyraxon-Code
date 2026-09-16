@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -34,7 +34,7 @@ async function main() {
 	const HOST = args['host'] ?? 'localhost';
 	const PORT = parseInt(args['port'] ?? '8081', 10);
 
-	// Collect CSS module paths from the compiled output (same as @zyraxoncode/test-web does).
+	// Collect CSS module paths from the compiled output (same as @vscode/test-web does).
 	// These are turned into an import map so the browser can load `import './foo.css'`
 	// statements as JavaScript shims that inject the CSS via `_VSCODE_CSS_LOAD`.
 	let cssModules = [];

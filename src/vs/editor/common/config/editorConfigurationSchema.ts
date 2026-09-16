@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -266,8 +266,8 @@ const editorConfiguration: IConfigurationNode = {
 			markdownEnumDescriptions: [
 				nls.localize('diffAlgorithm.legacy', "Uses the legacy diffing algorithm."),
 				nls.localize('diffAlgorithm.advanced', "Uses the advanced diffing algorithm."),
-				nls.localize('diffAlgorithm.advancedExternal', "Uses the advanced diffing algorithm from the external `@zyraxoncode/diff` package (pure JavaScript)."),
-				nls.localize('diffAlgorithm.advancedWasm', "Uses the advanced diffing algorithm from the external `@zyraxoncode/diff` package (WebAssembly)."),
+				nls.localize('diffAlgorithm.advancedExternal', "Uses the advanced diffing algorithm from the external `@vscode/diff` package (pure JavaScript)."),
+				nls.localize('diffAlgorithm.advancedWasm', "Uses the advanced diffing algorithm from the external `@vscode/diff` package (WebAssembly)."),
 			]
 		},
 		'diffEditor.hideUnchangedRegions.enabled': {

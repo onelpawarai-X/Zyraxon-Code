@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { splitLines } from '../../../vs/base/common/strings';
 import { URI as Uri, UriComponents } from '../../../vs/base/common/uri';
 import { IModelChangedEvent } from '../../../vs/editor/common/model/mirrorTextModel';

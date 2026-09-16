@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import { BudgetExceededError } from '@zyraxoncode/prompt-tsx/dist/base/materialized';
-import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import { Raw } from '@vscode/prompt-tsx';
+import { BudgetExceededError } from '@vscode/prompt-tsx/dist/base/materialized';
+import type * as zyraxoncode from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { CanceledResult, ChatFetchResponseType, ChatLocation, ChatResponse, getErrorDetailsFromChatFetchError } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';

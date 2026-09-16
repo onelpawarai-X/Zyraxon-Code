@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import * as cp from 'child_process';
 import * as fs from 'fs';
 import path from 'path';
 import ts from 'typescript/lib/tsserverlibrary';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { DeferredPromise } from '../../../src/util/vs/base/common/async';
 import { Range } from '../../../src/zyraxoncodeTypes';
 import { REPO_ROOT } from '../../base/stest';

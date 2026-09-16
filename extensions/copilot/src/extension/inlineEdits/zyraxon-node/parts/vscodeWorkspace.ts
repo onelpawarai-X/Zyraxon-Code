@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CancellationToken, CodeAction, CodeActionKind, commands, Diagnostic, DiagnosticSeverity, languages, NotebookCell, NotebookCellKind, NotebookDocument, Range, TextDocument, TextEditor, Uri, window, workspace } from 'zyraxoncode';
+import { CancellationToken, CodeAction, CodeActionKind, commands, Diagnostic, DiagnosticSeverity, languages, NotebookCell, NotebookCellKind, NotebookDocument, Range, TextDocument, TextEditor, Uri, window, workspace } from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { CodeActionData } from '../../../../platform/inlineEdits/common/dataTypes/codeActionData';
 import { DiagnosticData } from '../../../../platform/inlineEdits/common/dataTypes/diagnosticData';

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 /// <reference types="@types/zyraxoncode-webview" />
-import { provideZyraxonCodeDesignSystem, vsCodeButton } from '@zyraxoncode/webview-ui-toolkit';
+import { provideZyraxonCodeDesignSystem, vsCodeButton } from '@vscode/webview-ui-toolkit';
 
 interface SanitizableHTMLElement extends HTMLElement {
 	setHTML(html: string, options: { readonly sanitizer: Sanitizer | SanitizerConfig | SanitizerPresets }): void;

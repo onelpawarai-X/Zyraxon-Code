@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import ingestUtils = require('@github/blackbird-external-ingest-utils');
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import * as fs from 'node:fs';
 import sql from 'node:sqlite';
 import { toErrorMessage } from '../../../../util/common/errorMessage';
@@ -341,7 +341,7 @@ export class ExternalIngestIndex extends Disposable {
 		}
 
 		// If there is a running operation with the same checkpoint hash,
-		// the workspace state has not changed — reuse the existing operation.
+		// the workspace state has not changed â€” reuse the existing operation.
 		if (this._currentIngestOperation && !this._currentIngestOperation.completed && this._currentIngestOperation.checkpointHash === checkpointHash) {
 			this._logService.info('ExternalIngestIndex::doIngest(): Workspace state unchanged, reusing existing ingest operation');
 			return this._currentIngestOperation.promise;

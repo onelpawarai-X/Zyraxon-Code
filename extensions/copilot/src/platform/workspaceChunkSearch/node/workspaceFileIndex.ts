@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as nodeFs from 'fs';
 import { isBinaryFile, isBinaryFileSync } from 'isbinaryfile';
-import type zyraxoncode from 'zyraxoncode';
+import type zyraxoncode from 'vscode';
 import { GlobIncludeOptions, shouldInclude } from '../../../util/common/glob';
 import { getLanguageForResource } from '../../../util/common/languages';
 import { createServiceIdentifier } from '../../../util/common/services';

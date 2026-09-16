@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,7 +6,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { TextDecoder } from 'util';
-import type { ChatResponseFileTree } from 'zyraxoncode';
+import type { ChatResponseFileTree } from 'vscode';
 import { INewWorkspacePreviewContentManager } from '../../src/extension/intents/node/newIntent';
 import { ITestingServicesAccessor } from '../../src/platform/test/node/services';
 import { IQualifiedFile, getLanguageForFile } from '../../src/platform/test/node/simulationWorkspace';

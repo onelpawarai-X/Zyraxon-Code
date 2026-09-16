@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,8 +6,8 @@
 import type { SDKAssistantMessage, SDKCompactBoundaryMessage, SDKHookProgressMessage, SDKHookResponseMessage, SDKHookStartedMessage, SDKMessage, SDKResultMessage, SDKUserMessage, SDKUserMessageReplay } from '@anthropic-ai/claude-agent-sdk';
 import type { TodoWriteInput } from '@anthropic-ai/claude-agent-sdk/sdk-tools';
 import type Anthropic from '@anthropic-ai/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type * as zyraxoncode from 'vscode';
 import type { ChatFetchError } from '../../../../platform/chat/common/commonTypes';
 import { vBoolean, vLiteral, vObj, vString, type ValidatorType } from '../../../../platform/configuration/common/validator';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -89,34 +89,34 @@ export const ALL_KNOWN_MESSAGE_KEYS = new Set([
 	'user',
 	'result',
 	'stream_event',
-	// TODO: Show `tool_progress` — has `tool_name` and `elapsed_time_seconds` for live tool status
+	// TODO: Show `tool_progress` â€” has `tool_name` and `elapsed_time_seconds` for live tool status
 	// low pri, where would we show this?
 	'tool_progress',
-	// TODO: Show `tool_use_summary` — has `summary` text describing tool execution results
+	// TODO: Show `tool_use_summary` â€” has `summary` text describing tool execution results
 	// low pri, where would we show this?
 	'tool_use_summary',
-	// TODO: Show `auth_status` — has `output` lines and `error` for auth failures
+	// TODO: Show `auth_status` â€” has `output` lines and `error` for auth failures
 	'auth_status',
-	// TODO: Show `rate_limit_event` — has `rate_limit_info.status` (allowed_warning | rejected) and reset time
+	// TODO: Show `rate_limit_event` â€” has `rate_limit_info.status` (allowed_warning | rejected) and reset time
 	'rate_limit_event',
-	// TODO: Show `prompt_suggestion` — has `suggestion` text for follow-up prompts
+	// TODO: Show `prompt_suggestion` â€” has `suggestion` text for follow-up prompts
 	// low pri, follow ups are dead
 	'prompt_suggestion',
 	'system:init',
 	'system:compact_boundary',
 	'system:status',
-	// TODO: Show `system:api_retry` — has `error`, `attempt`, `max_retries` for retry visibility
+	// TODO: Show `system:api_retry` â€” has `error`, `attempt`, `max_retries` for retry visibility
 	'system:api_retry',
-	// TODO: Show `system:local_command_output` — has `content` text from local slash commands
+	// TODO: Show `system:local_command_output` â€” has `content` text from local slash commands
 	'system:local_command_output',
 	'system:hook_started',
 	'system:hook_progress',
 	'system:hook_response',
-	// TODO: Show `system:task_notification` — has `summary` and `status` for subagent completion
+	// TODO: Show `system:task_notification` â€” has `summary` and `status` for subagent completion
 	'system:task_notification',
-	// TODO: Show `system:task_started` — has `description` and `prompt` for subagent launch
+	// TODO: Show `system:task_started` â€” has `description` and `prompt` for subagent launch
 	'system:task_started',
-	// TODO: Show `system:task_progress` — has `description` and `summary` for subagent progress
+	// TODO: Show `system:task_progress` â€” has `description` and `summary` for subagent progress
 	'system:task_progress',
 	'system:files_persisted',
 	'system:elicitation_complete',
@@ -267,7 +267,7 @@ export function handleAssistantMessage(
 				// ExitPlanMode permission handler can surface the plan
 				// file in the review widget. Hooked at the dispatch
 				// level (rather than inside the EditToolHandler) so we
-				// observe the call regardless of permission mode —
+				// observe the call regardless of permission mode â€”
 				// `bypassPermissions` short-circuits `canUseTool`, and
 				// the SDK may write the plan file via internal paths
 				// that skip `canUseTool` entirely.
@@ -564,7 +564,7 @@ export function parseHookJsonOutput(stdout: string): Partial<HookJsonOutput> | u
 	// vObj skips missing optional fields, so partial results are expected.
 	const result = vHookJsonOutput.validate(raw);
 	if (result.error) {
-		// Validation error means some present field had the wrong type —
+		// Validation error means some present field had the wrong type â€”
 		// extract what we can by validating each field individually.
 		const obj = raw as Record<string, unknown>;
 		const partial: Partial<HookJsonOutput> = {};
@@ -672,13 +672,13 @@ export function handleHookResponse(
 	}
 	// #endregion
 
-	// Cancelled — log only, no user-facing output
+	// Cancelled â€” log only, no user-facing output
 	if (message.outcome === 'cancelled') {
 		logService.trace(`[ClaudeMessageDispatch] Hook "${message.hook_name}" (${message.hook_event}) was cancelled`);
 		return;
 	}
 
-	// Exit code 2 — blocking error (stderr is the message, JSON ignored)
+	// Exit code 2 â€” blocking error (stderr is the message, JSON ignored)
 	if (message.exit_code === 2) {
 		const errorMessage = message.stderr || message.output;
 		logService.warn(`[ClaudeMessageDispatch] Hook "${message.hook_name}" (${message.hook_event}) blocking error: ${errorMessage}`);
@@ -686,7 +686,7 @@ export function handleHookResponse(
 		return;
 	}
 
-	// Other non-zero exit codes — non-blocking warning
+	// Other non-zero exit codes â€” non-blocking warning
 	if (message.exit_code !== undefined && message.exit_code !== 0) {
 		const warningMessage = message.stderr || message.output;
 		const loggedMessage = warningMessage || l10n.t('Exit Code: {0}', message.exit_code);
@@ -697,7 +697,7 @@ export function handleHookResponse(
 		return;
 	}
 
-	// Outcome 'error' without a specific exit code — treat as blocking error
+	// Outcome 'error' without a specific exit code â€” treat as blocking error
 	if (message.outcome === 'error') {
 		const errorMessage = message.stderr || message.output;
 		logService.warn(`[ClaudeMessageDispatch] Hook "${message.hook_name}" (${message.hook_event}) failed: ${errorMessage}`);
@@ -705,7 +705,7 @@ export function handleHookResponse(
 		return;
 	}
 
-	// Exit code 0 (or undefined with success outcome) — parse JSON from stdout
+	// Exit code 0 (or undefined with success outcome) â€” parse JSON from stdout
 	if (!message.stdout) {
 		return;
 	}
@@ -728,7 +728,7 @@ export function handleHookResponse(
 		return;
 	}
 
-	// Handle `systemMessage` — shown as a warning
+	// Handle `systemMessage` â€” shown as a warning
 	if (parsed.systemMessage) {
 		request.stream.hookProgress(hookType, undefined, parsed.systemMessage);
 	}
@@ -806,13 +806,13 @@ export function handleResultMessage(
 /**
  * Routes an SDK message to the appropriate handler.
  *
- * Designed as an `invokeFunction` target — services are resolved from the DI
+ * Designed as an `invokeFunction` target â€” services are resolved from the DI
  * accessor, extra arguments are passed through.
  *
- * Uses TypeScript discriminated union narrowing — no type assertions needed.
+ * Uses TypeScript discriminated union narrowing â€” no type assertions needed.
  * Handlers that don't exist for a given key are logged:
- * - Known keys without a handler → trace-logged.
- * - Unknown keys → warn-logged.
+ * - Known keys without a handler â†’ trace-logged.
+ * - Unknown keys â†’ warn-logged.
  */
 export function dispatchMessage(
 	accessor: ServicesAccessor,
@@ -852,7 +852,7 @@ export function dispatchMessage(
 			break;
 	}
 
-	// Not handled — log based on whether the key is expected
+	// Not handled â€” log based on whether the key is expected
 	const key = messageKey(message);
 	if (ALL_KNOWN_MESSAGE_KEYS.has(key)) {
 		logService.trace(`[ClaudeMessageDispatch] Unhandled known message type: ${key}`);

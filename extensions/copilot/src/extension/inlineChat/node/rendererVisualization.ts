@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptRenderer } from '@zyraxoncode/prompt-tsx';
+import { PromptRenderer } from '@vscode/prompt-tsx';
 import { IDebugValueEditorGlobals } from '../../../util/common/debugValueEditorGlobals';
 
 export class RendererVisualizations {

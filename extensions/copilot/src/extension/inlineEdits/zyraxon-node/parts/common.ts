@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { TextDocument, TextDocumentContentChangeEvent } from 'zyraxoncode';
+import { TextDocument, TextDocumentContentChangeEvent } from 'vscode';
 import { IAlternativeNotebookDocument } from '../../../../platform/notebook/common/alternativeNotebookTextDocument';
 import { StringEdit, StringReplacement } from '../../../../util/vs/editor/common/core/edits/stringEdit';
 import { OffsetRange } from '../../../../util/vs/editor/common/core/ranges/offsetRange';

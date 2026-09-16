@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
- * ZYRAXON Code — Standalone packaging script
+ * ZYRAXON Code â€” Standalone packaging script
  *
- * Replaces the broken @zyraxoncode/gulp-electron pipeline (streamx crashes on Node 24).
+ * Replaces the broken @vscode/gulp-electron pipeline (streamx crashes on Node 24).
  * Uses electron-builder to produce NSIS installers for Windows.
  *
  * Flow:
@@ -72,11 +72,11 @@ function createAppStructure(): void {
 	rimraf(DIST_APP);
 	ensureDir(DIST_APP);
 
-	// Copy bundled output → dist/app/out/
+	// Copy bundled output â†’ dist/app/out/
 	const appOut = path.join(DIST_APP, 'out');
 	rimraf(appOut);
 	copyDirSync(OUT_BUNDLE, appOut);
-	log(`Copied bundle → dist/app/out/ (${fs.readdirSync(appOut).length} items)`);
+	log(`Copied bundle â†’ dist/app/out/ (${fs.readdirSync(appOut).length} items)`);
 
 	// Create package.json for Electron
 	const appPackageJson = {
@@ -185,9 +185,9 @@ function copyResources(): void {
 		fs.copyFileSync(licenseSrc, path.join(DIST_APP, 'LICENSE.txt'));
 	}
 
-	const apiSrc = path.join(ROOT, 'src', 'zyraxoncode-dts', 'zyraxoncode.d.ts');
+	const apiSrc = path.join(ROOT, 'src', 'vscode-dts', 'zyraxoncode.d.ts');
 	if (fs.existsSync(apiSrc)) {
-		const apiDst = path.join(DIST_APP, 'out', 'zyraxoncode-dts');
+		const apiDst = path.join(DIST_APP, 'out', 'vscode-dts');
 		ensureDir(apiDst);
 		fs.copyFileSync(apiSrc, path.join(apiDst, 'zyraxoncode.d.ts'));
 	}

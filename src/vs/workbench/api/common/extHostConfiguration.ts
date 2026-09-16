@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { mixin, deepClone } from '../../../base/common/objects.js';
 import { Event, Emitter } from '../../../base/common/event.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { ExtHostWorkspace, IExtHostWorkspace } from './extHostWorkspace.js';
 import { ExtHostConfigurationShape, MainThreadConfigurationShape, IConfigurationInitData, MainContext } from './extHost.protocol.js';
 import { ConfigurationTarget as ExtHostConfigurationTarget } from './extHostTypes.js';

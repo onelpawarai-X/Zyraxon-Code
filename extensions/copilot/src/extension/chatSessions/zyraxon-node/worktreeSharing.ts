@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IChatSessionMetadataStore } from '../common/chatSessionMetadataStore';
 import { IChatSessionWorkspaceFolderService } from '../common/chatSessionWorkspaceFolderService';
 
@@ -13,7 +13,7 @@ import { IChatSessionWorkspaceFolderService } from '../common/chatSessionWorkspa
  * worktree directory were deleted.
  *
  * A candidate is treated as blocking iff it is *not* the excluded session, *not*
- * a `sub-session` (sub-sessions don't independently keep a worktree alive — they
+ * a `sub-session` (sub-sessions don't independently keep a worktree alive â€” they
  * follow their parent), and *not* archived (archived sessions have their
  * worktree reconstructed via `recreateWorktreeOnUnarchive`, so they don't block
  * cleanup either).

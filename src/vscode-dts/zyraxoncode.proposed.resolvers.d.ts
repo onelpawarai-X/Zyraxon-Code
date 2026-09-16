@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -442,7 +442,7 @@ declare module 'zyraxoncode' {
 	export interface ResourceLabelFormatting {
 		label: string; // myLabel:/${path}
 		// For historic reasons we use an or string here. Once we finalize this API we should start using enums instead and adopt it in extensions.
-		// eslint-disable-next-line local/zyraxoncode-dts-literal-or-types, local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-literal-or-types, local/vscode-dts-string-type-literals
 		separator: '/' | '\\' | '';
 		tildify?: boolean;
 		normalizeDriveLetter?: boolean;

@@ -1,0 +1,7 @@
+﻿{
+	"extends": "./tsconfig.vscode-dts.json",
+	"include": [
+		"vscode-dts/zyraxoncode.d.ts",
+		"vscode-dts/zyraxoncode.proposed.*.d.ts",
+	]
+}

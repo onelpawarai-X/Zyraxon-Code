@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'zyraxoncode';
+import type { LanguageModelToolInformation } from 'vscode';
 import { assertNever } from '../../../../util/vs/base/common/assert';
 import { groupBy } from '../../../../util/vs/base/common/collections';
 import { getToolsForCategory, toolCategories, ToolCategory, ToolName } from '../toolNames';

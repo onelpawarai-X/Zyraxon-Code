@@ -1,17 +1,17 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import type { IDebugLogEntry } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { CopilotChatAttr, CopilotCliSdkAttr, GenAiAttr, GenAiOperationName } from '../../../platform/otel/common/index';
 import { type ICompletedSpanData, type ISpanEventData, SpanStatusCode } from '../../../platform/otel/common/otelService';
 
-// ── Event ID conventions ──
-// {spanId} → direct span mapping (tool calls, model turns, subagent invocations)
-// user-msg-{spanId} → user message extracted from a chat span
-// agent-msg-{spanId} → agent response extracted from a chat span
+// â”€â”€ Event ID conventions â”€â”€
+// {spanId} â†’ direct span mapping (tool calls, model turns, subagent invocations)
+// user-msg-{spanId} â†’ user message extracted from a chat span
+// agent-msg-{spanId} â†’ agent response extracted from a chat span
 
 function userMsgId(spanId: string): string { return `user-msg-${spanId}`; }
 function agentMsgId(spanId: string): string { return `agent-msg-${spanId}`; }
@@ -38,7 +38,7 @@ export function completedSpanToDebugEvent(span: ICompletedSpanData): zyraxoncode
 			return spanToModelTurnEvent(span);
 		case GenAiOperationName.INVOKE_AGENT:
 			// Subagent spans (those with a parent and an identifiable agent name) become subagent invocation events.
-			// Skip SDK wrapper invoke_agent spans that have no agent name — they're transparent containers
+			// Skip SDK wrapper invoke_agent spans that have no agent name â€” they're transparent containers
 			// whose children should appear under their grandparent.
 			if (span.parentSpanId) {
 				const hasAgentName = !!asString(span.attributes[GenAiAttr.AGENT_NAME])
@@ -74,7 +74,7 @@ export function extractConversationEvents(spans: readonly ICompletedSpanData[]):
 			continue;
 		}
 
-		// Extract agent response from output messages — only when there's actual text content
+		// Extract agent response from output messages â€” only when there's actual text content
 		const outputMessages = asString(span.attributes[GenAiAttr.OUTPUT_MESSAGES]);
 		if (outputMessages) {
 			const hasTextContent = hasAgentTextResponse(outputMessages);
@@ -113,7 +113,7 @@ export function spanEventToUserMessage(event: ISpanEventData): zyraxoncode.ChatD
 	return evt;
 }
 
-// ── Detail Resolution Functions ──
+// â”€â”€ Detail Resolution Functions â”€â”€
 
 /**
  * Resolve the full content of a tool call or model turn span for the detail view.
@@ -240,11 +240,11 @@ export function resolveAgentResponseFromSpan(span: ICompletedSpanData): zyraxonc
 	return evt;
 }
 
-// ── Grouping Functions ──
+// â”€â”€ Grouping Functions â”€â”€
 
 /**
  * Group execute_tool spans by their parent span ID to reconstruct "tool call rounds".
- * Returns a map from parentSpanId → tool call spans in that round (ordered by startTime).
+ * Returns a map from parentSpanId â†’ tool call spans in that round (ordered by startTime).
  */
 export function groupToolCallsByParent(spans: readonly ICompletedSpanData[]): Map<string, ICompletedSpanData[]> {
 	const groups = new Map<string, ICompletedSpanData[]>();
@@ -296,7 +296,7 @@ export function detectParallelSubagents(spans: readonly ICompletedSpanData[]): P
 	const result: ParallelSubagentGroup[] = [];
 	for (const [parentId, group] of byParent) {
 		if (group.length < 2) { continue; }
-		// Check for time overlap — if any two spans overlap, they're parallel
+		// Check for time overlap â€” if any two spans overlap, they're parallel
 		group.sort((a, b) => a.startTime - b.startTime);
 		const hasOverlap = group.some((span, i) => {
 			if (i === 0) { return false; }
@@ -317,7 +317,7 @@ export interface ParallelSubagentGroup {
 	readonly spans: readonly ICompletedSpanData[];
 }
 
-// ── Private helpers ──
+// â”€â”€ Private helpers â”€â”€
 
 function spanToToolCallEvent(span: ICompletedSpanData): zyraxoncode.ChatDebugToolCallEvent {
 	let toolName = asString(span.attributes[GenAiAttr.TOOL_NAME]) ?? 'unknown';
@@ -365,7 +365,7 @@ function spanToModelTurnEvent(span: ICompletedSpanData): zyraxoncode.ChatDebugMo
 }
 
 function spanToSubagentEvent(span: ICompletedSpanData): zyraxoncode.ChatDebugSubagentInvocationEvent {
-	// Use agent name from attributes, falling back to parsing from span name (e.g., "invoke_agent task" → "task")
+	// Use agent name from attributes, falling back to parsing from span name (e.g., "invoke_agent task" â†’ "task")
 	const agentName = asString(span.attributes[GenAiAttr.AGENT_NAME])
 		?? (span.name.replace(/^invoke_agent\s*/, '').trim() || 'agent');
 	// Use span name (e.g., "invoke_agent task") for display, matching Grafana
@@ -593,7 +593,7 @@ function capitalize(s: string): string {
 	return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-// ── IDebugLogEntry → ChatDebugEvent converters ──
+// â”€â”€ IDebugLogEntry â†’ ChatDebugEvent converters â”€â”€
 
 /**
  * Convert a JSONL debug log entry into a ZYRAXON Code debug panel event.
@@ -770,7 +770,7 @@ function entryToGenericEvent(entry: IDebugLogEntry): zyraxoncode.ChatDebugGeneri
 	return evt;
 }
 
-// ── IDebugLogEntry detail resolution ──
+// â”€â”€ IDebugLogEntry detail resolution â”€â”€
 
 /**
  * Resolve the full content of a debug log entry for the detail view.

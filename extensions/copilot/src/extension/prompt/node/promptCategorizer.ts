@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { ICopilotTokenStore } from '../../../platform/authentication/common/copilotTokenStore';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -44,8 +44,8 @@ export interface IPromptCategorizerService {
 }
 
 // Categorization outcome values for telemetry
-// Success: outcome == '' — full classification with valid timeEstimates
-// Partial success: outcome == 'partialClassification' — core fields valid, timeEstimate malformed
+// Success: outcome == '' â€” full classification with valid timeEstimates
+// Partial success: outcome == 'partialClassification' â€” core fields valid, timeEstimate malformed
 // Pipeline failures: other non-empty outcomes (timeout, requestFailed, noToolCall, parseError, invalidClassification, error)
 // Low confidence: outcome == '' AND confidence < 0.5
 const CATEGORIZATION_OUTCOMES = {
@@ -76,7 +76,7 @@ function hasValidTimeEstimates(partial: PromptClassification): boolean {
 /**
  * Extracts a partial classification from the LLM response, validating only the core
  * fields (intent, domain, scope, confidence, reasoning). Time estimates are extracted
- * on a best-effort basis — malformed durations are replaced with empty strings.
+ * on a best-effort basis â€” malformed durations are replaced with empty strings.
  *
  * Returns undefined if the core fields are missing or invalid.
  */
@@ -98,7 +98,7 @@ function extractPartialClassification(obj: unknown): PromptClassification | unde
 		return undefined;
 	}
 
-	// Time estimates are optional — extract valid durations, fall back to ''
+	// Time estimates are optional â€” extract valid durations, fall back to ''
 	let bestCase = '';
 	let realistic = '';
 	if (typeof c.timeEstimate === 'object' && c.timeEstimate !== null) {
@@ -255,7 +255,7 @@ export class PromptCategorizerService implements IPromptCategorizerService {
 							classification = partial;
 							outcome = CATEGORIZATION_OUTCOMES.SUCCESS;
 						} else if (partial) {
-							// Core fields valid but timeEstimate malformed — recover partial
+							// Core fields valid but timeEstimate malformed â€” recover partial
 							classification = partial;
 							outcome = CATEGORIZATION_OUTCOMES.PARTIAL_CLASSIFICATION;
 							errorDetail = `Recovered core fields; invalid timeEstimate (arguments length: ${categorizationCall.arguments.length})`;

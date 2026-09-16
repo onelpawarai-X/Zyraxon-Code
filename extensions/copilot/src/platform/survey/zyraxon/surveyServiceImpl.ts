@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as zyraxoncode from 'zyraxoncode';
-import { l10n } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { l10n } from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { IExperimentationService } from '../../telemetry/common/nullExperimentationService';
 import { ITelemetryService } from '../../telemetry/common/telemetry';
@@ -215,7 +215,7 @@ export class SurveyService implements ISurveyService {
 				try {
 					await zyraxoncode.commands.executeCommand('_workbench.action.openCopilotSurvey', source);
 				} catch {
-					// Command unavailable — reset cooldown so user can be prompted again
+					// Command unavailable â€” reset cooldown so user can be prompted again
 					await this.updateNextSurveyDate(DAYS_LATER);
 				}
 			} else if (postponed) {

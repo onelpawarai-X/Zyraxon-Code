@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ import * as os from 'os';
 import * as path from 'path';
 import * as tls from 'tls';
 import * as util from 'util';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -96,7 +96,7 @@ User Settings:
   "github.copilot.advanced.debug.useNodeFetchFetcher": ${nodeFetchConfig}
 \`\`\`${getProxyEnvVariables()}
 `);
-			const proxyAgent = loadZyraxonCodeModule<ProxyAgent>('@zyraxoncode/proxy-agent');
+			const proxyAgent = loadZyraxonCodeModule<ProxyAgent>('@vscode/proxy-agent');
 			const loadSystemCertificatesFromNode = this.configurationService.getNonExtensionConfig<boolean>('http.systemCertificatesNode');
 			const osCertificates = proxyAgent?.loadSystemCertificates ? await loadSystemCertificates(proxyAgent.loadSystemCertificates, loadSystemCertificatesFromNode, this.logService) : undefined;
 			const urls = [
@@ -340,13 +340,13 @@ function timeoutAfter(ms: number) {
  */
 function formatUnexpectedContent(body: string): string {
 	const oneLine = body.replace(/\r\n|\r|\n/g, '\\n');
-	return oneLine.length > 200 ? `${oneLine.slice(0, 200)}…` : oneLine;
+	return oneLine.length > 200 ? `${oneLine.slice(0, 200)}â€¦` : oneLine;
 }
 
 /**
  * Returns `true` when the given telemetry key is a 1DS (One Data System) key, which is sent to the
  * OneCollector endpoint. Otherwise it is a classic Application Insights key sent to the Application
- * Insights endpoint. Mirrors the check in `@zyraxoncode/extension-telemetry`.
+ * Insights endpoint. Mirrors the check in `@vscode/extension-telemetry`.
  */
 function isOneDataSystemKey(key: string): boolean {
 	return key.length === 74
@@ -503,7 +503,7 @@ interface ProxyInfo {
 	 * Where the proxy configuration came from: `localhost`, `noProxyConfig`
 	 * (`http.noProxy`), `noProxyEnv` (`no_proxy`), `setting` (`http.proxy`), `env`
 	 * (`http(s)_proxy`), `remote`, `system_cached`, `system` (OS/PAC) or `fallback`
-	 * from `@zyraxoncode/proxy-agent`, or one of the failure sentinels `missing`
+	 * from `@vscode/proxy-agent`, or one of the failure sentinels `missing`
 	 * (module/API unavailable), `timeout` or `error`.
 	 */
 	source: string;
@@ -511,12 +511,12 @@ interface ProxyInfo {
 
 /**
  * Resolves the proxy type and configuration source for a URL using the bundled
- * `@zyraxoncode/proxy-agent` module. The source reflects which configuration actually
- * determined the resolved proxy (see `@zyraxoncode/proxy-agent`'s `resolveProxyByURL`).
+ * `@vscode/proxy-agent` module. The source reflects which configuration actually
+ * determined the resolved proxy (see `@vscode/proxy-agent`'s `resolveProxyByURL`).
  */
 async function resolveProxyInfo(url: string, logService: ILogService): Promise<ProxyInfo> {
 	try {
-		const proxyAgent = loadZyraxonCodeModule<ProxyAgent>('@zyraxoncode/proxy-agent');
+		const proxyAgent = loadZyraxonCodeModule<ProxyAgent>('@vscode/proxy-agent');
 		if (!proxyAgent?.resolveProxyByURL) {
 			return { type: 'UNKNOWN', source: 'missing' };
 		}

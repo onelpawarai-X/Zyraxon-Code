@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { createDecorator as createServiceIdentifier, IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
 import { ILogService } from '../../log/common/logService';
 import { EditCollector } from './editCollector';

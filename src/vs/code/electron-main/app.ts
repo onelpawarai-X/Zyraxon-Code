@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -1767,7 +1767,7 @@ export class CodeApplication extends Disposable {
 		const win32MutexName = this.productService.win32MutexName;
 		if (isWindows && win32MutexName && isInnoSetupInstall()) {
 			try {
-				const WindowsMutex = await import('@zyraxoncode/windows-mutex');
+				const WindowsMutex = await import('@vscode/windows-mutex');
 				const mutex = new WindowsMutex.Mutex(win32MutexName);
 				Event.once(this.lifecycleMainService.onWillShutdown)(() => mutex.release());
 			} catch (error) {

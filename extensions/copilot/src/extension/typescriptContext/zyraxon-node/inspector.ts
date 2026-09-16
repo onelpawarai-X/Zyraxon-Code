@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 
 import { ContextKind, type ContextItem, type SnippetContext, type TraitContext } from '../../../platform/languageServer/common/languageContextService';
 import * as protocol from '../common/serverProtocol';
@@ -233,7 +233,7 @@ class TreeRunnableResult {
 		const cacheInfo = this.from.cache !== undefined ? 1 : 0;
 		let label = `${id} - ${this.items.length} items - ${this.from.state}`;
 		if (this.parent.summary.serverComputed?.has(this.from.id)) {
-			label += ' - ⏳';
+			label += ' - â³';
 		}
 		const item = new zyraxoncode.TreeItem(label, this.items.length + cacheInfo > 0 ? zyraxoncode.TreeItemCollapsibleState.Collapsed : zyraxoncode.TreeItemCollapsibleState.None);
 		item.id = this.id;
@@ -386,7 +386,7 @@ abstract class TreeContextRequest {
 		const timeString = `${start.getMinutes().toString().padStart(2, '0')}:${start.getSeconds().toString().padStart(2, '0')}.${start.getMilliseconds().toString().padStart(3, '0')}`;
 		this.label = `[${timeString}] - [${this.position.line + 1}:${this.position.character + 1}] ${event.source ?? label} - ${this.summary.stats.yielded} items`;
 		if (this.summary.serverComputed && this.summary.serverComputed.size > 0) {
-			this.label += ` - ⏳ ${this.summary.totalTime}ms`;
+			this.label += ` - â³ ${this.summary.totalTime}ms`;
 		} else {
 			this.label += ` - ${this.summary.totalTime}ms`;
 		}

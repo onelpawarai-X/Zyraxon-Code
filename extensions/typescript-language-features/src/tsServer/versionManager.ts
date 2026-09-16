@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { TypeScriptServiceConfiguration } from '../configuration/configuration';
 import { getTsNativeExtension } from '../commands/useTsgo';
 import { readUnifiedConfig, unifiedConfigSection } from '../utils/configuration';
@@ -109,7 +109,7 @@ export class TypeScriptVersionManager extends Disposable {
 		const bundledVersion = this.versionProvider.defaultVersion;
 		return {
 			label: (!this.useWorkspaceTsdkSetting || !zyraxoncode.workspace.isTrusted
-				? '• '
+				? 'â€¢ '
 				: '') + zyraxoncode.l10n.t("Use ZYRAXON Code's Version"),
 			description: bundledVersion.displayName,
 			detail: bundledVersion.pathLabel,
@@ -124,7 +124,7 @@ export class TypeScriptVersionManager extends Disposable {
 		return this.versionProvider.localVersions.map(version => {
 			return {
 				label: (this.useWorkspaceTsdkSetting && zyraxoncode.workspace.isTrusted && this.currentVersion.eq(version)
-					? '• '
+					? 'â€¢ '
 					: '') + zyraxoncode.l10n.t("Use Workspace Version"),
 				description: version.displayName,
 				detail: version.pathLabel,
@@ -149,7 +149,7 @@ export class TypeScriptVersionManager extends Disposable {
 		const isUsingTsgo = readUnifiedConfig<boolean>('experimental.useTsgo', false, { fallbackSection: 'typescript' });
 
 		return {
-			label: (isUsingTsgo ? '• ' : '') + zyraxoncode.l10n.t("Use TypeScript Native Preview (Experimental)"),
+			label: (isUsingTsgo ? 'â€¢ ' : '') + zyraxoncode.l10n.t("Use TypeScript Native Preview (Experimental)"),
 			description: nativePreviewExtension.packageJSON.version,
 			run: async () => {
 				await zyraxoncode.commands.executeCommand('typescript.native-preview.enable');

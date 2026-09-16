@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ICopilotTokenManager } from '../../../platform/authentication/common/copilotTokenManager';
 import { IChatSessionService } from '../../../platform/chat/common/chatSessionService';
@@ -39,7 +39,7 @@ import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/commo
 import { CloudSessionIdStore } from '../node/cloudSessionIdStore';
 import { reindexSessions, reindexCloudSessions, type CloudReindexResult } from '../node/sessionReindexer';
 
-// ── Configuration ───────────────────────────────────────────────────────────────
+// â”€â”€ Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /**
  * Delay between a terminal event arriving and the resulting flush. Small enough
@@ -58,7 +58,7 @@ const BATCH_INTERVAL_MS = 500;
 export const SAFETY_INTERVAL_MS = 60_000;
 
 /**
- * Default max events per flush request — also acts as a buffer-size flush
+ * Default max events per flush request â€” also acts as a buffer-size flush
  * trigger. The effective value is read from
  * {@link ConfigKey.TeamInternal.SessionSyncMaxEventsPerFlush} at runtime.
  */
@@ -85,7 +85,7 @@ const POLICY_BLOCKED_TTL_MS = 60 * 60 * 1000;
  * - Circuit breaker prevents cascading failures when the cloud is unavailable
  * - Lazy initialization: no work until the first real chat interaction
  *
- * All cloud operations are fire-and-forget — never blocks or slows the chat session.
+ * All cloud operations are fire-and-forget â€” never blocks or slows the chat session.
  *
  * Also implements ISessionSyncStateService so that SessionSyncStatus can
  * observe the current sync state via dependency injection.
@@ -94,9 +94,9 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 
 	declare readonly _serviceBrand: undefined;
 
-	// ── Per-session state ────────────────────────────────────────────────────────
+	// â”€â”€ Per-session state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-	/** Per-session cloud IDs — persisted to globalStorage JSON file. */
+	/** Per-session cloud IDs â€” persisted to globalStorage JSON file. */
 	private readonly _cloudSessions: CloudSessionIdStore;
 
 	/** Whether we've reconciled the disk cache with the cloud API this window. */
@@ -105,7 +105,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 	/** Per-session translation state (parentId chaining, session.start tracking). */
 	private readonly _translationStates = new Map<string, SessionTranslationState>();
 
-	/** Sessions that failed cloud initialization — don't retry. */
+	/** Sessions that failed cloud initialization â€” don't retry. */
 	private readonly _disabledSessions = new Set<string>();
 
 	/** Sessions currently initializing (prevent concurrent init). */
@@ -123,7 +123,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 	/** Whether the policy-blocked notification has been shown this window. */
 	private _policyNotificationShown = false;
 
-	// ── Shared state ─────────────────────────────────────────────────────────────
+	// â”€â”€ Shared state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	/** Buffered events tagged with their chat session ID for correct routing. */
 	private readonly _eventBuffer: Array<{ chatSessionId: string; event: SessionEvent }> = [];
@@ -148,7 +148,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 	/** Whether the session sync suggestion notification has been shown. */
 	private _syncSuggestionShown = false;
 
-	// ── Sync state & status item ────────────────────────────────────────────────
+	// â”€â”€ Sync state & status item â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	private readonly _onDidChangeSyncState = this._register(new Emitter<SessionSyncState>());
 	readonly onDidChangeSyncState = this._onDidChangeSyncState.event;
@@ -160,7 +160,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		this._onDidChangeSyncState.fire(state);
 	}
 
-	/** Cached local synced count — invalidated on set/delete of cloud sessions. */
+	/** Cached local synced count â€” invalidated on set/delete of cloud sessions. */
 	private _cachedLocalSyncedCount: number | undefined;
 
 	/**
@@ -186,7 +186,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 			this._cachedLocalSyncedCount = count;
 			return count;
 		} catch {
-			// SQLite unavailable — fall back to full cloud store size
+			// SQLite unavailable â€” fall back to full cloud store size
 			return this._cloudSessions.size;
 		}
 	}
@@ -200,7 +200,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 	 * Effective safety-net interval (ms), read from configuration. Falls back to
 	 * {@link SAFETY_INTERVAL_MS} when the configuration service is unavailable
 	 * (e.g. tests that bypass the constructor) or when the configured value is
-	 * not a positive finite number — otherwise an invalid treatment could turn
+	 * not a positive finite number â€” otherwise an invalid treatment could turn
 	 * safety backoff into an immediate timer and busy-poll a failing endpoint.
 	 */
 	private _getSafetyIntervalMs(): number {
@@ -213,7 +213,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 	/**
 	 * Effective max events per flush request, read from configuration. Falls back
 	 * to {@link MAX_EVENTS_PER_FLUSH} when the configuration service is
-	 * unavailable or when the configured value is not a positive integer —
+	 * unavailable or when the configured value is not a positive integer â€”
 	 * otherwise an invalid treatment could splice an empty batch and busy-loop
 	 * re-arming fast flushes without uploading any events.
 	 */
@@ -227,7 +227,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 	/**
 	 * Load cloud session IDs from disk (no network).
 	 * The disk file provides instant ID lookups and status bar count.
-	 * Fire-and-forget — errors are silently swallowed.
+	 * Fire-and-forget â€” errors are silently swallowed.
 	 */
 	private async _loadFromDisk(): Promise<void> {
 		await this._cloudSessions.load();
@@ -238,7 +238,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 
 	/**
 	 * Reconcile the local disk cache with the cloud sessions API.
-	 * Called lazily on first delete or reindex — not at startup.
+	 * Called lazily on first delete or reindex â€” not at startup.
 	 * Idempotent within a window lifetime.
 	 */
 	private async _reconcileWithCloud(): Promise<void> {
@@ -253,7 +253,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 			this._invalidateLocalSyncedCount();
 			this._setSyncState({ kind: 'up-to-date', syncedCount: this._getLocalSyncedCount() });
 		} catch {
-			// Non-fatal — disk cache is good enough for ID lookups
+			// Non-fatal â€” disk cache is good enough for ID lookups
 		}
 	}
 
@@ -348,13 +348,13 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 				return;
 			}
 
-			// Cloud sync is active — set initial state
+			// Cloud sync is active â€” set initial state
 			this._setSyncState({ kind: 'on' });
 
 			// Load synced count from disk (no network call at startup)
 			this._loadFromDisk();
 
-			// Listen to completed OTel spans — deferred off the callback
+			// Listen to completed OTel spans â€” deferred off the callback
 			spanListenerStore.add(this._otelService.onDidCompleteSpan(span => {
 				queueMicrotask(() => this._handleSpan(span));
 			}));
@@ -372,7 +372,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		// Best-effort final flush with timeout
 		const pending = this._eventBuffer.length;
 		if (pending > 0) {
-			// Fire-and-forget — cannot block dispose
+			// Fire-and-forget â€” cannot block dispose
 			this._flushBatch().catch(() => { /* best effort */ });
 		}
 
@@ -385,7 +385,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		super.dispose();
 	}
 
-	// ── Session sync suggestion ──────────────────────────────────────────────────
+	// â”€â”€ Session sync suggestion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	private _suggestSessionSync(): void {
 		if (this._syncSuggestionShown) {
@@ -409,7 +409,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		});
 	}
 
-	// ── Reindex (Command Palette) ───────────────────────────────────────────────
+	// â”€â”€ Reindex (Command Palette) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	/**
 	 * User-facing reindex command. Runs local reindex with a progress notification,
@@ -461,7 +461,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		);
 	}
 
-	// ── Delete sessions (Command Palette) ───────────────────────────────────────
+	// â”€â”€ Delete sessions (Command Palette) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	private async _deleteCloudSessions(): Promise<void> {
 		type SessionQuickPickItem = zyraxoncode.QuickPickItem & { sessionId: string };
@@ -515,7 +515,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 				const description = [
 					row.repository,
 					row.created_at ? new Date(row.created_at).toLocaleString() : undefined,
-				].filter(Boolean).join(' · ');
+				].filter(Boolean).join(' Â· ');
 				return { label, description, sessionId: row.id };
 			}),
 		];
@@ -593,7 +593,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 							this._sessionStore.deleteSession(session.id);
 							localDeleted++;
 						} catch {
-							// Best effort — SQLite may be disabled
+							// Best effort â€” SQLite may be disabled
 						}
 					}
 
@@ -603,7 +603,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 						const result = await this._cloudClient.deleteSession(cached.cloudTaskId);
 						switch (result) {
 							case 'deleted': cloudDeleted++; break;
-							case 'not_found': cloudDeleted++; break; // Already gone — count as success
+							case 'not_found': cloudDeleted++; break; // Already gone â€” count as success
 							case 'error': cloudErrors++; break;
 						}
 					}
@@ -647,11 +647,11 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		});
 	}
 
-	// ── Delete from cloud + local SQLite (called by sessions window delete action) ─
+	// â”€â”€ Delete from cloud + local SQLite (called by sessions window delete action) â”€
 
 	/**
 	 * Best-effort cloud and local SQLite deletion for the given session IDs.
-	 * Called from the sessions window right-click delete action — no UI shown.
+	 * Called from the sessions window right-click delete action â€” no UI shown.
 	 */
 	private async _deleteSessionsFromCloud(sessionIds: string[]): Promise<void> {
 		if (!sessionIds || sessionIds.length === 0) {
@@ -678,7 +678,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 				try {
 					await this._cloudClient.deleteSession(cached.cloudTaskId);
 				} catch {
-					// Best effort — don't block the caller
+					// Best effort â€” don't block the caller
 				}
 			}
 
@@ -692,7 +692,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		this._setSyncState({ kind: 'up-to-date', syncedCount: this._getLocalSyncedCount() });
 	}
 
-	// ── Cloud reindex (called from /chronicle reindex) ─────────────────────────
+	// â”€â”€ Cloud reindex (called from /chronicle reindex) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	/**
 	 * Reindex all local sessions to the cloud. Creates cloud sessions for
@@ -759,7 +759,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		return result;
 	}
 
-	// ── Span handling ────────────────────────────────────────────────────────────
+	// â”€â”€ Span handling â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	private _handleSpan(span: ICompletedSpanData): void {
 		try {
@@ -792,7 +792,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 				&& !this._rateLimitedSessions.has(sessionId)) {
 				if (operationName === GenAiOperationName.CHAT) {
 					// CHAT spans (LLM calls) complete before their parent invoke_agent.
-					// Buffer them so usage events aren't lost for the first turn — but
+					// Buffer them so usage events aren't lost for the first turn â€” but
 					// only when the span carries a real chat session id; otherwise no
 					// INVOKE_AGENT will ever arrive to replay against and the buffer
 					// would grow unbounded.
@@ -813,7 +813,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 				if (operationName !== GenAiOperationName.INVOKE_AGENT || subagentId) {
 					return;
 				}
-				// Trigger lazy initialization — don't await, buffer events in the meantime
+				// Trigger lazy initialization â€” don't await, buffer events in the meantime
 				this._initializeSession(sessionId, span);
 			}
 
@@ -845,7 +845,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 				this._scheduleFlush(BATCH_INTERVAL_MS, 'fast');
 			}
 		} catch {
-			// Non-fatal — individual span processing failure
+			// Non-fatal â€” individual span processing failure
 		}
 	}
 
@@ -872,7 +872,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		};
 	}
 
-	// ── Secret registration ─────────────────────────────────────────────────────
+	// â”€â”€ Secret registration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	/**
 	 * Register known authentication tokens as dynamic secrets so they are
@@ -885,7 +885,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 			addSecretValues(githubToken);
 		}
 
-		// Copilot proxy token (async — register when available)
+		// Copilot proxy token (async â€” register when available)
 		this._tokenManager.getCopilotToken().then(token => {
 			if (token.token) {
 				addSecretValues(token.token);
@@ -893,7 +893,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		}).catch(() => { /* non-fatal */ });
 	}
 
-	// ── Lazy session initialization ──────────────────────────────────────────────
+	// â”€â”€ Lazy session initialization â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	private async _initializeSession(sessionId: string, triggerSpan: ICompletedSpanData): Promise<void> {
 		this._initializingSessions.add(sessionId);
@@ -1036,7 +1036,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 				}, {
 					sessionCount: 1,
 				});
-				// Transient — the client is self-backing-off. Mark for retry so
+				// Transient â€” the client is self-backing-off. Mark for retry so
 				// buffered events for this session are not dropped as orphans
 				// and a later flush will reattempt initialization.
 				this._rateLimitedSessions.add(sessionId);
@@ -1153,11 +1153,11 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		}
 	}
 
-	// ── Session disposal ─────────────────────────────────────────────────────────
+	// â”€â”€ Session disposal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	private _handleSessionDispose(sessionId: string): void {
 		// Note: ZYRAXON Code fires onDidDisposeChatSession routinely (opening a new
-		// chat disposes the previous editor view) — it is not a true session
+		// chat disposes the previous editor view) â€” it is not a true session
 		// shutdown. Emitting `session.shutdown` here would cause the cloud UI
 		// to hide the session as completed.
 		this._translationStates.delete(sessionId);
@@ -1165,19 +1165,19 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		this._initializingSessions.delete(sessionId);
 		this._pendingChatSpans.delete(sessionId);
 		this._rateLimitedSessions.delete(sessionId);
-		// Keep _cloudSessions entry — the cloud session ID mapping is needed
+		// Keep _cloudSessions entry â€” the cloud session ID mapping is needed
 		// for future delete operations (e.g. sidebar delete fires after dispose).
 	}
 
-	// ── Buffering ────────────────────────────────────────────────────────────────
+	// â”€â”€ Buffering â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	/**
 	 * Buffer events, drop streaming deltas, and schedule a flush.
 	 *
 	 * Scheduling cadence:
-	 * - terminal event present in the batch → fast flush ({@link BATCH_INTERVAL_MS})
-	 * - buffer at/over {@link MAX_EVENTS_PER_FLUSH} → fast flush
-	 * - otherwise → safety flush ({@link SAFETY_INTERVAL_MS})
+	 * - terminal event present in the batch â†’ fast flush ({@link BATCH_INTERVAL_MS})
+	 * - buffer at/over {@link MAX_EVENTS_PER_FLUSH} â†’ fast flush
+	 * - otherwise â†’ safety flush ({@link SAFETY_INTERVAL_MS})
 	 */
 	private _bufferEvents(chatSessionId: string, events: SessionEvent[]): void {
 		let hasTerminal = false;
@@ -1195,7 +1195,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 			return;
 		}
 
-		// Hard cap — drop oldest events
+		// Hard cap â€” drop oldest events
 		if (this._eventBuffer.length > MAX_BUFFER_SIZE) {
 			const dropped = this._eventBuffer.length - MAX_BUFFER_SIZE;
 			this._eventBuffer.splice(0, dropped);
@@ -1214,7 +1214,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		}
 	}
 
-	// ── Flush scheduling ─────────────────────────────────────────────────────────
+	// â”€â”€ Flush scheduling â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	/**
 	 * Schedule a one-shot flush. Upgrade-only: a pending fast flush is never
@@ -1252,7 +1252,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		}
 	}
 
-	// ── Batch flush ──────────────────────────────────────────────────────────────
+	// â”€â”€ Batch flush â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	private async _flushBatch(): Promise<void> {
 		if (this._isFlushing) {
@@ -1431,7 +1431,7 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 			}
 
 			if (policyBlockedSessions > 0) {
-				// Policy responses are expected — do not count as circuit breaker failures.
+				// Policy responses are expected â€” do not count as circuit breaker failures.
 				this._telemetryService.sendMSFTTelemetryEvent('chronicle.cloudSync', {
 					operation: 'policyBlocked',
 				}, {
@@ -1467,11 +1467,11 @@ export class RemoteSessionExporter extends Disposable implements IExtensionContr
 		}
 
 		// Re-arm after a flush:
-		//  - transient failure or rate limit → back off at safety cadence (60s)
+		//  - transient failure or rate limit â†’ back off at safety cadence (60s)
 		//    so we don't busy-loop against a failing or throttled endpoint;
 		//    the circuit breaker (for failures) and the client's own backoff
 		//    (for rate limits) still gate the actual request independently
-		//  - buffer still has work (re-queued orphans) → fast flush
+		//  - buffer still has work (re-queued orphans) â†’ fast flush
 		//  - otherwise, keep a safety timer running while any cloud session is active
 		//    so late spans are caught even without a terminal event
 		if (flushFailed && this._eventBuffer.length > 0) {

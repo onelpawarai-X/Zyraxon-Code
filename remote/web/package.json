@@ -1,14 +1,14 @@
-{
+﻿{
   "name": "zyraxoncode-web",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "@zyraxon/1ds-core-js": "^3.2.13",
     "@zyraxon/1ds-post-js": "^3.2.13",
-    "@zyraxoncode/codicons": "^0.0.46-28",
-    "@zyraxoncode/iconv-lite-umd": "0.7.1",
-    "@zyraxoncode/tree-sitter-wasm": "^0.3.1",
-    "@zyraxoncode/zyraxoncode-languagedetection": "1.0.23",
+    "@vscode/codicons": "^0.0.46-28",
+    "@vscode/iconv-lite-umd": "0.7.1",
+    "@vscode/tree-sitter-wasm": "^0.3.1",
+    "@vscode/zyraxoncode-languagedetection": "1.0.23",
     "@xterm/addon-clipboard": "^0.3.0-beta.291",
     "@xterm/addon-image": "^0.10.0-beta.291",
     "@xterm/addon-ligatures": "^0.11.0-beta.291",

@@ -1,13 +1,13 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 
 import { execFile } from 'child_process';
 import { promisify } from 'util';
-import { Uri } from 'zyraxoncode';
+import { Uri } from 'vscode';
 import { BatchedProcessor } from '../../../util/common/async';
 import { coalesce } from '../../../util/vs/base/common/arrays';
 import { Sequencer } from '../../../util/vs/base/common/async';

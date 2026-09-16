@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -551,7 +551,7 @@ class CodeMain {
 
 		try {
 			const updatingMutexName = `${productService.win32MutexName}-updating`;
-			const mutex = await import('@zyraxoncode/windows-mutex');
+			const mutex = await import('@vscode/windows-mutex');
 
 			if (!mutex.isActive(updatingMutexName)) {
 				return false;

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, ChatParticipantToolToken, Uri } from 'zyraxoncode';
+import type { CancellationToken, ChatParticipantToolToken, Uri } from 'vscode';
 import { IEndpointProvider } from '../../../../../lib/node/chatLibMain';
 import { ILogger, ILogService } from '../../../../../platform/log/common/logService';
 import { IChatEndpoint } from '../../../../../platform/networking/common/networking';
@@ -187,7 +187,7 @@ export class BackgroundTodoAgentProcessor extends Disposable {
 		// Once disposed the generation is already aborted (see dispose()) and the
 		// queue is torn down, so there is nothing to reset. Guard here because the
 		// endTurn() timeout fallback in agentIntent.ts may call cancel() after the
-		// session — and thus this processor — has been disposed.
+		// session â€” and thus this processor â€” has been disposed.
 		if (this._store.isDisposed) {
 			return;
 		}
@@ -309,7 +309,7 @@ export class BackgroundTodoAgentProcessor extends Disposable {
 		const durationMs = Date.now() - startTime;
 
 		// Non-success responses (canceled, rate-limited, filtered, etc.) should
-		// propagate as errors so the delta is NOT marked processed — a later pass
+		// propagate as errors so the delta is NOT marked processed â€” a later pass
 		// can retry with fresh or coalesced activity.
 		if (response.type !== ChatFetchResponseType.Success) {
 			this.logger.error(`[BackgroundTodo] copilot-utility-small returned non-success response: ${response.type}`);

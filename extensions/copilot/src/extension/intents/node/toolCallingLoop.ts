@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import type { CancellationToken, ChatRequest, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, ChatResult, LanguageModelToolInformation, Progress } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import { Raw } from '@vscode/prompt-tsx';
+import type { CancellationToken, ChatRequest, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, ChatResult, LanguageModelToolInformation, Progress } from 'vscode';
 import { IAuthenticationChatUpgradeService } from '../../../platform/authentication/common/authenticationUpgrade';
 import { IChatDebugFileLoggerService } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { IChatHookService, SessionStartHookInput, SessionStartHookOutput, StopHookInput, StopHookOutput, SubagentStartHookInput, SubagentStartHookOutput, SubagentStopHookInput, SubagentStopHookOutput } from '../../../platform/chat/common/chatHookService';
@@ -356,7 +356,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 	 * Running total of Copilot credits across every model call in the current
 	 * turn. Each fetch reports the credits for that single call, but the context
 	 * usage widget and `IChatModel.sessionCost` treat the per-request value as the
-	 * whole turn, so we accumulate here and emit the running total — mirroring the
+	 * whole turn, so we accumulate here and emit the running total â€” mirroring the
 	 * cumulative credits the agent host reports. Reset on the first iteration of a
 	 * turn ({@link runOne} with `iterationNumber === 0`).
 	 */
@@ -365,8 +365,8 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 	/**
 	 * The full {@link ToolCallingLoopFetchOptions} from the most recent fetch.
 	 * Probes reuse this wholesale (overriding only `messages` and `finishedCb`)
-	 * so that the server-side prompt cache key — which includes tool schemas,
-	 * model capabilities, and other request-shape fields — matches.
+	 * so that the server-side prompt cache key â€” which includes tool schemas,
+	 * model capabilities, and other request-shape fields â€” matches.
 	 */
 	private lastFetchOptions: ToolCallingLoopFetchOptions | undefined;
 
@@ -576,7 +576,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 	 * Autopilot stop hook. In standard Autopilot the model signals completion by calling
 	 * `task_complete`; if it stops without doing so we nudge it to keep going. In Advanced
 	 * Autopilot (`chat.autopilot.advanced.enabled`) completion is judged by the goal
-	 * classifier instead and `task_complete` is ignored as a stop signal — see
+	 * classifier instead and `task_complete` is ignored as a stop signal â€” see
 	 * {@link advancedAutopilotContinue}. Returns a continuation message or `undefined` to
 	 * let the loop stop.
 	 */
@@ -587,7 +587,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 
 		// Advanced Autopilot delegates the completion decision entirely to the goal
 		// classifier. The model's `task_complete` call is intentionally NOT treated as a
-		// stop signal here — the loop only stops when the classifier agrees the original
+		// stop signal here â€” the loop only stops when the classifier agrees the original
 		// request has been satisfied (or a hard safety cap is reached).
 		if (advancedAutopilotEnabled) {
 			return this.advancedAutopilotContinue(result, token);
@@ -610,21 +610,21 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 
 		// If the model produced a substantive text response with no tool calls, treat it
 		// as a final summary and let the loop stop. Nudging in this case typically just
-		// wastes a turn — the model considers itself done. The user can always continue
+		// wastes a turn â€” the model considers itself done. The user can always continue
 		// the conversation if it wasn't.
 		if (result.round.toolCalls.length === 0 && result.round.response.trim().length > 0) {
 			this._logService.info('[ToolCallingLoop] Autopilot: model produced a text-only response, treating as done');
 			return undefined;
 		}
 
-		// safety valve — only give up after exhausting all continuation attempts
+		// safety valve â€” only give up after exhausting all continuation attempts
 		if (this.autopilotIterationCount >= ToolCallingLoop.MAX_AUTOPILOT_ITERATIONS) {
 			this._logService.info(`[ToolCallingLoop] Autopilot: hit max iterations (${ToolCallingLoop.MAX_AUTOPILOT_ITERATIONS}), letting it stop`);
 			return undefined;
 		}
 
 		// If we already nudged once and the model still produced no tool calls, the model
-		// is effectively done — further nudges just waste tokens. Bail out and let the
+		// is effectively done â€” further nudges just waste tokens. Bail out and let the
 		// loop stop.
 		if (this.autopilotStopHookActive && result.round.toolCalls.length === 0) {
 			this._logService.info('[ToolCallingLoop] Autopilot: prior nudge produced no tool calls, stopping to avoid wasted requests');
@@ -633,22 +633,22 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 
 		this.autopilotIterationCount++;
 		return 'You have not yet marked the task as complete using the task_complete tool. ' +
-			'You must call task_complete when done — whether the task involved code changes, answering a question, or any other interaction.\n\n' +
+			'You must call task_complete when done â€” whether the task involved code changes, answering a question, or any other interaction.\n\n' +
 			'Do NOT repeat or restate your previous response. Pick up where you left off.\n\n' +
 			'If you were planning, stop planning and start implementing. ' +
 			'You are not done until you have fully completed the task.\n\n' +
 			'IMPORTANT: Do NOT call task_complete if:\n' +
-			'- You have open questions or ambiguities — make good decisions and keep working\n' +
-			'- You encountered an error — try to resolve it or find an alternative approach\n' +
-			'- There are remaining steps — complete them first\n\n' +
+			'- You have open questions or ambiguities â€” make good decisions and keep working\n' +
+			'- You encountered an error â€” try to resolve it or find an alternative approach\n' +
+			'- There are remaining steps â€” complete them first\n\n' +
 			'When you ARE done, first provide a brief text summary of what was accomplished, then call task_complete. ' +
 			'Both the summary message and the tool call are required.\n\n' +
 			'Keep working autonomously until the task is truly finished, then call task_complete.';
 	}
 
 	/**
-	 * Advanced Autopilot continuation logic. Unlike standard Autopilot — where the model
-	 * signals completion by calling `task_complete` — Advanced Autopilot relies solely on
+	 * Advanced Autopilot continuation logic. Unlike standard Autopilot â€” where the model
+	 * signals completion by calling `task_complete` â€” Advanced Autopilot relies solely on
 	 * a small/fast goal classifier to judge whether the user's original request has been
 	 * satisfied after each turn. `task_complete` is ignored as a stop signal: the loop
 	 * continues until the classifier agrees the goal is met (or is impossible), or a safety
@@ -666,16 +666,16 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 
 		const classifierResult = await this._runAutopilotGoalClassifier(result, token);
 		if (classifierResult?.done) {
-			this._logService.info(`[ToolCallingLoop] Advanced Autopilot classifier: complete — ${classifierResult.reason}`);
+			this._logService.info(`[ToolCallingLoop] Advanced Autopilot classifier: complete â€” ${classifierResult.reason}`);
 			return undefined;
 		}
 		if (classifierResult?.impossible) {
-			this._logService.info(`[ToolCallingLoop] Advanced Autopilot classifier: impossible — ${classifierResult.reason}`);
+			this._logService.info(`[ToolCallingLoop] Advanced Autopilot classifier: impossible â€” ${classifierResult.reason}`);
 			return undefined;
 		}
 		if (classifierResult) {
 			this.autopilotIterationCount++;
-			this._logService.info(`[ToolCallingLoop] Advanced Autopilot classifier: incomplete — ${classifierResult.reason}`);
+			this._logService.info(`[ToolCallingLoop] Advanced Autopilot classifier: incomplete â€” ${classifierResult.reason}`);
 			this.autopilotLastUserReason = classifierResult.reason;
 			return 'The Advanced Autopilot evaluator determined that your original request is not yet complete.\n\n' +
 				`Reason: ${classifierResult.reason}\n\n` +
@@ -684,7 +684,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 		}
 
 		// Classifier unavailable (network/parse failure). Advanced Autopilot does not fall
-		// back to task_complete, so issue one bounded generic nudge — unless a prior nudge
+		// back to task_complete, so issue one bounded generic nudge â€” unless a prior nudge
 		// already stalled (no further tool calls), in which case stop to avoid wasted requests.
 		if (this.autopilotStopHookActive && result.round.toolCalls.length === 0) {
 			this._logService.info('[ToolCallingLoop] Advanced Autopilot: classifier unavailable and prior nudge produced no tool calls, stopping');
@@ -693,7 +693,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 		this.autopilotIterationCount++;
 		this._logService.warn('[ToolCallingLoop] Advanced Autopilot classifier returned no decision; falling back to a generic nudge');
 		return 'Keep working autonomously until the original request is fully satisfied. ' +
-			'Do NOT repeat or restate your previous response — pick up where you left off. ' +
+			'Do NOT repeat or restate your previous response â€” pick up where you left off. ' +
 			'If you were planning, stop planning and start implementing, and resolve any errors or remaining steps before you stop.';
 	}
 
@@ -725,8 +725,8 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 				'Always include a reason, quoting specific text from the transcript whenever possible.',
 				'If the transcript does not contain clear evidence that the request is satisfied, reply "NO insufficient evidence in transcript".',
 				'',
-				'Only use IMPOSSIBLE when the request is genuinely unachievable in this session — for example: the request is self-contradictory, depends on a resource or capability that is unavailable, or the assistant has explicitly tried and exhausted reasonable approaches and stated it cannot be done.',
-				'The assistant claiming completion is evidence, not proof — independently verify by looking for concrete actions (tool calls, file edits, test runs) in the transcript. When in doubt, reply NO without IMPOSSIBLE.',
+				'Only use IMPOSSIBLE when the request is genuinely unachievable in this session â€” for example: the request is self-contradictory, depends on a resource or capability that is unavailable, or the assistant has explicitly tried and exhausted reasonable approaches and stated it cannot be done.',
+				'The assistant claiming completion is evidence, not proof â€” independently verify by looking for concrete actions (tool calls, file edits, test runs) in the transcript. When in doubt, reply NO without IMPOSSIBLE.',
 			].join('\n');
 
 			const userPrompt = `Original user request:\n${originalRequest || '(empty)'}\n\nConversation transcript:\n${transcript}\n\nHas the original request been fully completed?`;
@@ -780,7 +780,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 		const MAX_TOTAL = 8000;
 
 		const truncate = (s: string, max: number): string =>
-			s.length <= max ? s : s.slice(0, max) + `… (truncated ${s.length - max} chars)`;
+			s.length <= max ? s : s.slice(0, max) + `â€¦ (truncated ${s.length - max} chars)`;
 
 		const formatRound = (round: IToolCallRound, index: number): string => {
 			const toolCalls = round.toolCalls.length === 0
@@ -799,7 +799,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 		if (rendered.length <= MAX_TOTAL) {
 			return rendered;
 		}
-		return `… (earlier turns truncated)\n\n${rendered.slice(-MAX_TOTAL)}`;
+		return `â€¦ (earlier turns truncated)\n\n${rendered.slice(-MAX_TOTAL)}`;
 	}
 
 	/**
@@ -973,7 +973,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 			this._logService.info('[ToolCallingLoop] Added task_complete tool for autopilot mode');
 			return [...availableTools, taskCompleteTool];
 		}
-		this._logService.warn('[ToolCallingLoop] task_complete tool not found — autopilot completion may not work');
+		this._logService.warn('[ToolCallingLoop] task_complete tool not found â€” autopilot completion may not work');
 		return availableTools;
 	}
 
@@ -1308,7 +1308,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 					} else {
 						// For top-level agent invocations (not subagents), start a debug
 						// file logging session so entries are flushed to JSONL on disk.
-						// This is idempotent — calling startSession on an already-started
+						// This is idempotent â€” calling startSession on an already-started
 						// session just promotes it if needed.
 						fileLogger.startSession(chatSessionId).catch(() => { /* best effort */ });
 					}
@@ -1550,7 +1550,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 							this._logService.info(`[ToolCallingLoop] Autopilot internal stop hook: continuing because task may not be complete`);
 							const userReason = this.autopilotLastUserReason;
 							const spinnerMessage = userReason
-								? l10n.t('Autopilot: continuing — {0}', userReason)
+								? l10n.t('Autopilot: continuing â€” {0}', userReason)
 								: l10n.t('Autopilot: verifying task is done\u2026');
 							const spinnerPastTense = userReason
 								? l10n.t('Autopilot continued: {0}', userReason)
@@ -2140,7 +2140,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 	 * 1. Tool result messages have a matching tool_call in the preceding assistant message
 	 * 2. (When stripOrphanedToolCalls is set) Every tool_call in an assistant message has
 	 *    a matching tool result message. This prevents errors with models like Gemini which
-	 *    strictly require 1:1 function_call ↔ function_response pairing.
+	 *    strictly require 1:1 function_call â†” function_response pairing.
 	 *
 	 * Returns the validated messages and an array of reasons for any corrections made.
 	 */
@@ -2204,7 +2204,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 			if (orphanedToolCalls.length > 0) {
 				strippedToolCallCount += orphanedToolCalls.length;
 				const validToolCalls = m.toolCalls.filter(tc => toolResultIds.has(tc.id));
-				// Mutate in place — the assistant message was already shallow-copied by stripInternalToolCallIds
+				// Mutate in place â€” the assistant message was already shallow-copied by stripInternalToolCallIds
 				(m as Mutable<Raw.AssistantChatMessage>).toolCalls = validToolCalls.length > 0 ? validToolCalls : undefined;
 			}
 		}

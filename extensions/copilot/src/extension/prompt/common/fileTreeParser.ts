@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { URI } from '../../../util/vs/base/common/uri';
 import { ChatResponseFileTreePart } from '../../../zyraxoncodeTypes';
 
@@ -25,7 +25,7 @@ export function convertFileTreeToChatResponseFileTree(
 
 	for (const line of lines) {
 		let depth = calculateDepth(line);
-		const index = line.lastIndexOf('── ');
+		const index = line.lastIndexOf('â”€â”€ ');
 		const name = index >= 0 ? line.substring(index + 3) : line;
 
 		const fileNode: zyraxoncode.ChatResponseFileTree = { name };
@@ -83,11 +83,11 @@ export function listFilesInResponseFileTree(tree: zyraxoncode.ChatResponseFileTr
 }
 
 function calculateDepth(inputString: string): number {
-	let depth = (inputString.match(/│   /g) || []).length;
+	let depth = (inputString.match(/â”‚   /g) || []).length;
 	depth += (inputString.match(/\|   /g) || []).length;
 	depth += (inputString.match(/    /g) || []).length;
-	depth += (inputString.match(/├── /g) || []).length;
-	depth += (inputString.match(/└── /g) || []).length;
+	depth += (inputString.match(/â”œâ”€â”€ /g) || []).length;
+	depth += (inputString.match(/â””â”€â”€ /g) || []).length;
 
 	return depth;
 }

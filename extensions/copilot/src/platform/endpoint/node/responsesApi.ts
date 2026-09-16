@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { Raw } from '@vscode/prompt-tsx';
 import type { OpenAI } from 'openai';
 import { Response } from '../../../platform/networking/common/fetcherService';
 import { coalesce } from '../../../util/vs/base/common/arrays';
@@ -81,7 +81,7 @@ export function createResponsesRequestBody(accessor: ServicesAccessor, options: 
 			if (!tool.function.name || tool.function.name.length === 0) {
 				continue;
 			}
-			// Always skip the tool_search function tool — 'tool_search' is a reserved namespace in the
+			// Always skip the tool_search function tool â€” 'tool_search' is a reserved namespace in the
 			// Responses API. Client-executed tool search uses { type: 'tool_search', execution: 'client' } instead.
 			if (tool.function.name === CUSTOM_TOOL_SEARCH_NAME) {
 				continue;
@@ -216,7 +216,7 @@ interface ResponseOutputItemWithPhase {
 	phase?: string;
 }
 
-// ── Responses API tool search types ──────────────────────────────────
+// â”€â”€ Responses API tool search types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // These match the shapes from __ZYRAXKEEP__0_
 
 /** Client-executed tool_search tool definition for the Responses API */
@@ -624,8 +624,8 @@ function rawContentToResponsesContentList(parts: readonly Raw.ChatCompletionCont
  * when a reasoning item is round-tripped with an id it did not issue. Reasoning items
  * produced by the Responses API always carry an id beginning with `rs`. Thinking blocks
  * that originated from a different API (e.g. the Anthropic Messages API, whose accumulator
- * generates `thinking_<index>` ids) can leak into a Responses request — most notably via the
- * `zyraxoncode.lm` access path, which has no model gate — and their `encrypted_content` is not a
+ * generates `thinking_<index>` ids) can leak into a Responses request â€” most notably via the
+ * `zyraxoncode.lm` access path, which has no model gate â€” and their `encrypted_content` is not a
  * valid Responses reasoning blob anyway. Such foreign reasoning items must be dropped, not sent.
  */
 function isResponsesReasoningId(id: string | undefined): boolean {
@@ -1387,7 +1387,7 @@ export class OpenAIResponsesProcessor {
 					finishReason = FinishedCompletionReason.ContentFilter;
 					filterReason = extractFilterReasonFromContentFilters(incomplete.content_filters);
 				} else {
-					// Unknown incomplete reason — treat as a server-side stream termination so the
+					// Unknown incomplete reason â€” treat as a server-side stream termination so the
 					// caller surfaces a "request failed" message instead of the generic flake.
 					finishReason = FinishedCompletionReason.ServerError;
 				}

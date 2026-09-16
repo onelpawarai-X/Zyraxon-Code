@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ import { XHRRequest } from 'request-light';
 import {
 	CompletionItem, CompletionItemProvider, CompletionList, TextDocument, Position, Hover, HoverProvider,
 	CancellationToken, Range, DocumentSelector, languages, Disposable, Uri, MarkdownString
-} from 'zyraxoncode';
+} from 'vscode';
 
 export interface ISuggestionsCollector {
 	add(suggestion: CompletionItem): void;

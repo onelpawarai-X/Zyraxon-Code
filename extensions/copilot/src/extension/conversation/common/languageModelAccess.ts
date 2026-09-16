@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
 import { IChatEndpoint, IChatEndpointTokenPricing } from '../../../platform/networking/common/networking';
-import * as l10n from '@zyraxoncode/l10n';
-import type { LanguageModelChatInformation, LanguageModelConfigurationSchema } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { LanguageModelChatInformation, LanguageModelConfigurationSchema } from 'vscode';
 
 /**
  * Picks a sensible default reasoning-effort level given the levels advertised
@@ -14,9 +14,9 @@ import type { LanguageModelChatInformation, LanguageModelConfigurationSchema } f
  * `undefined`, otherwise the UI shows an "undefined" state.
  *
  * Selection order:
- *  - claude / Kimi K3 families → 'high' if available
- *  - other families   → 'medium' if available
- *  - fallback         → the first advertised level
+ *  - claude / Kimi K3 families â†’ 'high' if available
+ *  - other families   â†’ 'medium' if available
+ *  - fallback         â†’ the first advertised level
  */
 export function pickDefaultReasoningEffort(effortLevels: readonly string[], family: string): string | undefined {
 	if (effortLevels.length === 0) {
@@ -146,7 +146,7 @@ export function getModelCapabilitiesDescription(endpoint: IChatEndpoint | Langua
 
 /**
  * Documentation link surfaced in the Auto model description.
- * NOTE: Also defined in src/vs/workbench/contrib/chat/common/languageModels.ts (ILanguageModelChatMetadata.autoModelSelectionDocsUrl) — keep in sync.
+ * NOTE: Also defined in src/vs/workbench/contrib/chat/common/languageModels.ts (ILanguageModelChatMetadata.autoModelSelectionDocsUrl) â€” keep in sync.
  */
 const AUTO_MODEL_DOCS_URL = '__ZYRAXKEEP__0_';
 
@@ -235,7 +235,7 @@ export function formatTokenCount(count: number): string {
  */
 export function formatPricingLabel(pricing: IChatEndpointTokenPricing): string {
 	return l10n.t(
-		'In: {0} · Out: {1} AICs/1M tokens',
+		'In: {0} Â· Out: {1} AICs/1M tokens',
 		formatAicPrice(pricing.default.inputPrice),
 		formatAicPrice(pricing.default.outputPrice),
 	);

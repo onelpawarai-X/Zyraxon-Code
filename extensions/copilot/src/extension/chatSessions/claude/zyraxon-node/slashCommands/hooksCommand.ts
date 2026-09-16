@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { INativeEnvService } from '../../../../../platform/env/common/envService';
 import { createDirectoryIfNotExists, IFileSystemService } from '../../../../../platform/filesystem/common/fileSystemService';
 import { ILogService } from '../../../../../platform/log/common/logService';
@@ -210,8 +210,8 @@ interface IHooksWizardResult {
  * Launches a QuickPick wizard to configure hook events, matchers, and commands.
  *
  * Supports two flows:
- * - CREATE: Add new matcher → enter command → select save location
- * - EDIT: Select existing matcher → select/add hook → saves to original location
+ * - CREATE: Add new matcher â†’ enter command â†’ select save location
+ * - EDIT: Select existing matcher â†’ select/add hook â†’ saves to original location
  */
 export class HooksSlashCommand implements IClaudeSlashCommandHandler {
 	readonly commandName = 'hooks';
@@ -540,7 +540,7 @@ export class HooksSlashCommand implements IClaudeSlashCommandHandler {
 		}
 
 		const selected = await zyraxoncode.window.showQuickPick(items, {
-			title: zyraxoncode.l10n.t('Configure Hook: {0} → {1}', eventConfig.id, matcher),
+			title: zyraxoncode.l10n.t('Configure Hook: {0} â†’ {1}', eventConfig.id, matcher),
 			placeHolder: zyraxoncode.l10n.t('Select a hook to edit or add a new one'),
 			ignoreFocusOut: true,
 		}) as HookItem | undefined;
@@ -560,7 +560,7 @@ export class HooksSlashCommand implements IClaudeSlashCommandHandler {
 
 		// Edit existing hook
 		const editedCommand = await zyraxoncode.window.showInputBox({
-			title: zyraxoncode.l10n.t('Edit Hook: {0} → {1}', eventConfig.id, matcher),
+			title: zyraxoncode.l10n.t('Edit Hook: {0} â†’ {1}', eventConfig.id, matcher),
 			value: selected.command,
 			prompt: zyraxoncode.l10n.t('Modifying {0}. Stdin Input: {1}', location.label, eventConfig.jsonSchema),
 			placeHolder: './my-hook-script.sh',
@@ -672,7 +672,7 @@ export class HooksSlashCommand implements IClaudeSlashCommandHandler {
 
 		return zyraxoncode.window.showInputBox({
 			title: eventConfig.needsMatcher
-				? zyraxoncode.l10n.t('Configure Hook: {0} → {1}', eventConfig.id, matcher)
+				? zyraxoncode.l10n.t('Configure Hook: {0} â†’ {1}', eventConfig.id, matcher)
 				: zyraxoncode.l10n.t('Configure Hook: {0}', eventConfig.id),
 			placeHolder: './my-hook-script.sh',
 			prompt: promptText,

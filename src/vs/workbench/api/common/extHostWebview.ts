@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -17,7 +17,7 @@ import { deserializeWebviewMessage, serializeWebviewMessage } from './extHostWeb
 import { IExtHostWorkspace } from './extHostWorkspace.js';
 import { WebviewRemoteInfo, asWebviewUri, webviewGenericCspSource } from '../../contrib/webview/common/webview.js';
 import { SerializableObjectWithBuffers } from '../../services/extensions/common/proxyIdentifier.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import * as extHostProtocol from './extHost.protocol.js';
 
 export class ExtHostWebview implements zyraxoncode.Webview {

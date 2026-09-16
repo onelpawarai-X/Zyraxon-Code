@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -31,7 +31,7 @@ import { IConfigurationService } from '../../../../../platform/configuration/com
 import { SEMANTIC_HIGHLIGHTING_SETTING_ID, IEditorSemanticHighlightingOptions } from '../../../../../editor/contrib/semanticTokens/common/semanticTokensConfig.js';
 import { Schemas } from '../../../../../base/common/network.js';
 import { ILanguageFeaturesService } from '../../../../../editor/common/services/languageFeatures.js';
-import type * as TreeSitter from '@zyraxoncode/tree-sitter-wasm';
+import type * as TreeSitter from '@vscode/tree-sitter-wasm';
 import { TreeSitterSyntaxTokenBackend } from '../../../../../editor/common/model/tokens/treeSitter/treeSitterSyntaxTokenBackend.js';
 import { TokenizationTextModelPart } from '../../../../../editor/common/model/tokens/tokenizationTextModelPart.js';
 import { TreeSitterTree } from '../../../../../editor/common/model/tokens/treeSitter/treeSitterTree.js';
@@ -156,7 +156,7 @@ interface IDecodedMetadata {
 
 function renderTokenText(tokenText: string): string {
 	if (tokenText.length > 40) {
-		tokenText = tokenText.substr(0, 20) + '…' + tokenText.substr(tokenText.length - 20);
+		tokenText = tokenText.substr(0, 20) + 'â€¦' + tokenText.substr(tokenText.length - 20);
 	}
 	let result: string = '';
 	for (let charIndex = 0, len = tokenText.length; charIndex < len; charIndex++) {

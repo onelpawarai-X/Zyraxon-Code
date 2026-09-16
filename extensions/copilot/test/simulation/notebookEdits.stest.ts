@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import assert from 'assert';
-import type { NotebookCell } from 'zyraxoncode';
+import type { NotebookCell } from 'vscode';
 import { IAlternativeNotebookContentService } from '../../src/platform/notebook/common/alternativeContent';
 import { ITestingServicesAccessor, TestingServiceCollection } from '../../src/platform/test/node/services';
 import { SimulationAlternativeNotebookContentService } from '../../src/platform/test/node/simulationWorkspaceServices';

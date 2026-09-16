@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { Attachment, SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
-import { ChatExtendedRequestHandler, ChatRequestTurn2, ChatSessionProviderOptionItem, Uri } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
+import { ChatExtendedRequestHandler, ChatRequestTurn2, ChatSessionProviderOptionItem, Uri } from 'vscode';
 import { IRunCommandExecutionService } from '../../../platform/commands/common/runCommandExecutionService';
 import { IChatQuotaService } from '../../../platform/chat/common/chatQuotaService';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -181,7 +181,7 @@ export class CopilotCLIChatSessionItemProvider extends Disposable implements zyr
 	/**
 	 * Session ids that were targeted by an explicit `refreshSession(...)` call and have not yet been
 	 * re-provided. The next `provideChatSessionItems` pass eagerly includes `changes` for these
-	 * sessions so the visible row reflects the latest diff info — ZYRAXON Code uses the items returned
+	 * sessions so the visible row reflects the latest diff info â€” ZYRAXON Code uses the items returned
 	 * from `provideChatSessionItems` as source of truth and does not re-invoke `resolveChatSessionItem`
 	 * for already-visible rows. The set is cleared after each `provideChatSessionItems` call.
 	 */
@@ -255,7 +255,7 @@ export class CopilotCLIChatSessionItemProvider extends Disposable implements zyr
 		await this.chatSessionMetadataStore.refresh().catch(() => { /* logged inside */ });
 		if (refreshOptions.reason === 'update') {
 			// Mark the targeted sessions so the next `provideChatSessionItems` pass includes
-			// fresh `changes` for them (push path equivalent — see `pendingChangeIncludeIds`).
+			// fresh `changes` for them (push path equivalent â€” see `pendingChangeIncludeIds`).
 			if ('sessionIds' in refreshOptions) {
 				for (const id of refreshOptions.sessionIds) {
 					this.pendingChangeIncludeIds.add(id);
@@ -333,7 +333,7 @@ export class CopilotCLIChatSessionItemProvider extends Disposable implements zyr
 
 		// Statistics (only returned for trusted workspace/worktree folders).
 		// `getWorktreeChanges`/`getWorkspaceChanges` shell out to `git diff` and dominate the cost
-		// of building an item — defer to `resolveChatSessionItem` for visible items.
+		// of building an item â€” defer to `resolveChatSessionItem` for visible items.
 		// `buildChanges` runs `git diff` and is the slow leg of populating an item. Skip it on the
 		// eager pass and let `resolveChatSessionItem` fill it in lazily for visible items.
 		// But if computing changes is easy (cached or the like), then include them right away to avoid a second update pass.
@@ -1329,7 +1329,7 @@ export class CopilotCLIChatSessionParticipant extends Disposable {
 	 *    the outer `Promise.race` resolves, returning control to ZYRAXON Code so it
 	 *    can dispatch the new (steering) request.
 	 * 4. Crucially, the inner `handleRequestImpl` promise is **not** cancelled
-	 *    or disposed – the original SDK session continues running in the
+	 *    or disposed â€“ the original SDK session continues running in the
 	 *    background.
 	 * 5. When the new request arrives, `handleRequest` on the underlying
 	 *    {@link CopilotCLISession} detects the session is still busy and routes
@@ -1824,7 +1824,7 @@ export class CopilotCLIChatSessionParticipant extends Disposable {
 
 		if (!prUrl) {
 			// Only attempt retry detection if the session has v2 worktree properties
-			// with branch info — v1 worktrees can't store PR URLs, and sessions
+			// with branch info â€” v1 worktrees can't store PR URLs, and sessions
 			// without worktree properties have nothing to look up.
 			if (worktreeProperties.branchName && worktreeProperties.repositoryPath) {
 				this.logService.debug(`[CopilotCLIChatSessionParticipant] No PR URL from session, attempting retry detection for ${sessionId}, branch=${worktreeProperties.branchName}`);
@@ -2638,7 +2638,7 @@ export function registerCLIChatCommands(
 				id: 'git-merge-changes',
 				value: contextValueSegments.join('\n'),
 				icon: new zyraxoncode.ThemeIcon('git-merge'),
-				fullName: `${branchName} → ${baseBranchName}`,
+				fullName: `${branchName} â†’ ${baseBranchName}`,
 				kind: 'generic'
 			}]
 		});
@@ -3063,7 +3063,7 @@ export function registerCLIChatCommands(
 			}
 
 			logService.error('[commitToRepository] Error:', error);
-			zyraxoncode.window.showErrorMessage(l10n.t("Could not save your customization to the default branch — this can happen when the worktree and the base repository have conflicting changes. Your change is still saved in this session's worktree."));
+			zyraxoncode.window.showErrorMessage(l10n.t("Could not save your customization to the default branch â€” this can happen when the worktree and the base repository have conflicting changes. Your change is still saved in this session's worktree."));
 		}
 	}));
 

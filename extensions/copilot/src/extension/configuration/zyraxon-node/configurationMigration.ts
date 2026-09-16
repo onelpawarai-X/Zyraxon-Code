@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@
  */
 
 
-import { ConfigurationTarget, l10n, Uri, window, workspace, WorkspaceFolder } from 'zyraxoncode';
+import { ConfigurationTarget, l10n, Uri, window, workspace, WorkspaceFolder } from 'vscode';
 import { ConfigurationKeyValuePairs, ConfigurationMigration, ConfigurationMigrationRegistry, ConfigurationValue } from '../../../platform/configuration/common/configurationService';
 import { NextCursorLinePrediction } from '../../../platform/inlineEdits/common/dataTypes/nextCursorLinePrediction';
 import { DisposableStore, IDisposable } from '../../../util/vs/base/common/lifecycle';

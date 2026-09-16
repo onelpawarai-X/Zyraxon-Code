@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import Anthropic from '@anthropic-ai/sdk';
-import * as zyraxoncode from 'zyraxoncode';
-import { CancellationToken, LanguageModelChatInformation, LanguageModelChatMessage, LanguageModelChatMessage2, LanguageModelDataPart, LanguageModelResponsePart2, LanguageModelTextPart, LanguageModelThinkingPart, LanguageModelToolCallPart, LanguageModelToolResultPart, Progress, ProvideLanguageModelChatResponseOptions } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { CancellationToken, LanguageModelChatInformation, LanguageModelChatMessage, LanguageModelChatMessage2, LanguageModelDataPart, LanguageModelResponsePart2, LanguageModelTextPart, LanguageModelThinkingPart, LanguageModelToolCallPart, LanguageModelToolResultPart, Progress, ProvideLanguageModelChatResponseOptions } from 'vscode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { CustomDataPartMimeTypes } from '../../../platform/endpoint/common/endpointTypes';
@@ -102,7 +102,7 @@ export class AnthropicLMProvider extends AbstractLanguageModelChatProvider {
 		// Restore OTel trace context to link spans back to the agent trace
 		const parentTraceContext = (options as { modelOptions?: OTelModelOptions }).modelOptions?._otelTraceContext ?? undefined;
 
-		// OTel span handle — created outside doRequest, enriched inside with usage data
+		// OTel span handle â€” created outside doRequest, enriched inside with usage data
 		let otelSpan: ReturnType<typeof this._otelService.startSpan> | undefined;
 
 		const doRequest = async () => {
@@ -701,7 +701,7 @@ export class AnthropicLMProvider extends AbstractLanguageModelChatProvider {
 							};
 
 							// Format citation as readable blockquote with source link
-							const referenceText = `\n> "${citation.cited_text}" — [${zyraxoncode.l10n.t('Source')}](${citation.url})\n\n`;
+							const referenceText = `\n> "${citation.cited_text}" â€” [${zyraxoncode.l10n.t('Source')}](${citation.url})\n\n`;
 
 							// Report formatted reference text to user
 							progress.report(new LanguageModelTextPart(referenceText));

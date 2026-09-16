@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type * as zyraxoncode from 'vscode';
 import { IChatHookService, IPostToolUseHookResult, IPreToolUseHookResult } from '../../../platform/chat/common/chatHookService';
 import { IPostToolUseHookCommandInput, IPostToolUseHookSpecificCommandOutput, IPreToolUseHookCommandInput, IPreToolUseHookSpecificCommandOutput } from '../../../platform/chat/common/hookCommandTypes';
 import { HookCommandResultKind, IHookCommandResult, IHookExecutor } from '../../../platform/chat/common/hookExecutor';
@@ -205,7 +205,7 @@ export class ChatHookService implements IChatHookService {
 							span.setStatus(SpanStatusCode.ERROR, typeof commandResult.result === 'string' ? commandResult.result : undefined);
 						} else {
 							span.setStatus(SpanStatusCode.OK);
-							// Capture hook output for debug panel resolve (success only — errors go to errorMessage)
+							// Capture hook output for debug panel resolve (success only â€” errors go to errorMessage)
 							try {
 								const output = typeof commandResult.result === 'string' ? commandResult.result : JSON.stringify(commandResult.result);
 								if (output) {
@@ -298,7 +298,7 @@ export class ChatHookService implements IChatHookService {
 					effectiveStopReason = '';
 				}
 
-				// Check hookEventName at top level — if present and mismatched, skip this result
+				// Check hookEventName at top level â€” if present and mismatched, skip this result
 				const topLevelHookEventName = resultObj['hookEventName'];
 				if (typeof topLevelHookEventName === 'string' && !isCompatibleHookEventName(topLevelHookEventName, hookType)) {
 					this._logService.trace(`[ChatHookService] Ignoring result with mismatched hookEventName '${topLevelHookEventName}' (expected '${hookType}')`);
@@ -308,7 +308,7 @@ export class ChatHookService implements IChatHookService {
 					};
 				}
 
-				// Check hookEventName inside hookSpecificOutput — if mismatched, strip hookSpecificOutput but keep the rest
+				// Check hookEventName inside hookSpecificOutput â€” if mismatched, strip hookSpecificOutput but keep the rest
 				let stripHookSpecificOutput = false;
 				const hookSpecificOutput = resultObj['hookSpecificOutput'];
 				if (typeof hookSpecificOutput === 'object' && hookSpecificOutput !== null) {
@@ -446,7 +446,7 @@ export class ChatHookService implements IChatHookService {
 			winningReason = allowReason;
 		}
 
-		// Render a visible block in chat for any deny — whether it came from
+		// Render a visible block in chat for any deny â€” whether it came from
 		// exit code 2 or a successful hook with permissionDecision: 'deny'.
 		if (mostRestrictiveDecision === 'deny') {
 			let renderedReason: string;

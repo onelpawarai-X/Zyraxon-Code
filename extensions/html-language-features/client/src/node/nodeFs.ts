@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs';
-import { Uri } from 'zyraxoncode';
+import { Uri } from 'vscode';
 import { FileSystemProvider, FileType } from '../requests';
 
 export function getNodeFileFS(): FileSystemProvider {

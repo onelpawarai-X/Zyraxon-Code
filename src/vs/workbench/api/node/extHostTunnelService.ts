@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -24,7 +24,7 @@ import { IExtHostInitDataService } from '../common/extHostInitDataService.js';
 import { IExtHostRpcService } from '../common/extHostRpcService.js';
 import { ExtHostTunnelService } from '../common/extHostTunnelService.js';
 import { CandidatePort, parseAddress } from '../../services/remote/common/tunnelModel.js';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IExtHostConfiguration } from '../common/extHostConfiguration.js';
 
 export function getSockets(stdout: string): Record<string, { pid: number; socket: number }> {

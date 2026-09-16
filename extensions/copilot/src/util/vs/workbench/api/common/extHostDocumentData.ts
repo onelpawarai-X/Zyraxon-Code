@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
+﻿//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -11,7 +11,7 @@ import { regExpLeadsToEndlessLoop } from '../../../base/common/strings';
 import { URI, UriComponents } from '../../../base/common/uri';
 import { MirrorTextModel } from '../../../editor/common/model/mirrorTextModel';
 import { ensureValidWordDefinition, getWordAtText } from '../../../editor/common/core/wordHelper';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { equals } from '../../../base/common/arrays';
 import { EndOfLine } from './extHostTypes/textEdit';
 import { Position } from './extHostTypes/position';

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -401,7 +401,7 @@ export default defineConfig(
 			// zyraxoncode d.ts
 			'src/vs/amdX.ts',
 			'src/vs/monaco.d.ts',
-			'src/zyraxoncode-dts/**',
+			'src/vscode-dts/**',
 			// Base
 			'src/vs/base/browser/dom.ts',
 			'src/vs/base/browser/mouseEvent.ts',
@@ -927,15 +927,15 @@ export default defineConfig(
 					'message': 'Use Array<...> for arrays of union types.'
 				},
 			],
-			'local/zyraxoncode-dts-create-func': 'warn',
-			'local/zyraxoncode-dts-literal-or-types': 'warn',
-			'local/zyraxoncode-dts-string-type-literals': 'warn',
-			'local/zyraxoncode-dts-interface-naming': 'warn',
-			'local/zyraxoncode-dts-cancellation': 'warn',
-			'local/zyraxoncode-dts-use-export': 'warn',
-			'local/zyraxoncode-dts-use-thenable': 'warn',
-			'local/zyraxoncode-dts-zyraxoncode-in-comments': 'warn',
-			'local/zyraxoncode-dts-provider-naming': [
+			'local/vscode-dts-create-func': 'warn',
+			'local/vscode-dts-literal-or-types': 'warn',
+			'local/vscode-dts-string-type-literals': 'warn',
+			'local/vscode-dts-interface-naming': 'warn',
+			'local/vscode-dts-cancellation': 'warn',
+			'local/vscode-dts-use-export': 'warn',
+			'local/vscode-dts-use-thenable': 'warn',
+			'local/vscode-dts-zyraxoncode-in-comments': 'warn',
+			'local/vscode-dts-provider-naming': [
 				'warn',
 				{
 					'allowed': [
@@ -950,7 +950,7 @@ export default defineConfig(
 					]
 				}
 			],
-			'local/zyraxoncode-dts-event-naming': [
+			'local/vscode-dts-event-naming': [
 				'warn',
 				{
 					'allowed': [
@@ -1538,15 +1538,15 @@ export default defineConfig(
 						'@zyraxon/dev-tunnels-contracts',
 						'@zyraxon/dev-tunnels-management',
 						'@parcel/watcher',
-						'@zyraxoncode/sqlite3',
-						'@zyraxoncode/zyraxoncode-languagedetection',
-						'@zyraxoncode/ripgrep-universal',
-						'@zyraxoncode/iconv-lite-umd',
-						'@zyraxoncode/native-watchdog',
-						'@zyraxoncode/policy-watcher',
-						'@zyraxoncode/proxy-agent',
-						'@zyraxoncode/spdlog',
-						'@zyraxoncode/windows-process-tree',
+						'@vscode/sqlite3',
+						'@vscode/zyraxoncode-languagedetection',
+						'@vscode/ripgrep-universal',
+						'@vscode/iconv-lite-umd',
+						'@vscode/native-watchdog',
+						'@vscode/policy-watcher',
+						'@vscode/proxy-agent',
+						'@vscode/spdlog',
+						'@vscode/windows-process-tree',
 						'assert',
 						'child_process',
 						'console',
@@ -1678,9 +1678,9 @@ export default defineConfig(
 						'@zyraxon/1ds-core-js', // node module allowed even in /common/
 						'@zyraxon/1ds-post-js', // node module allowed even in /common/
 						'@xterm/headless', // node module allowed even in /common/
-						'@zyraxoncode/fs-copyfile', // used by agentHost for file copying after worktree creation
-						'@zyraxoncode/tree-sitter-wasm', // used by agentHost for command auto-approval
-						'@zyraxoncode/copilot-api', // used by agentHost for Copilot API requests
+						'@vscode/fs-copyfile', // used by agentHost for file copying after worktree creation
+						'@vscode/tree-sitter-wasm', // used by agentHost for command auto-approval
+						'@vscode/copilot-api', // used by agentHost for Copilot API requests
 						'@anthropic-ai/sdk', // used by agentHost for Anthropic API requests
 						'@anthropic-ai/claude-agent-sdk', // used by agentHost for Claude Agent SDK session enumeration / queries
 						'@modelcontextprotocol/sdk/**/*', // used by agentHost for Claude client-tool MCP result types (Phase 10)
@@ -1698,7 +1698,7 @@ export default defineConfig(
 						'@zyraxon/1ds-core-js', // node module allowed even in /common/
 						'@zyraxon/1ds-post-js', // node module allowed even in /common/
 						'@xterm/headless', // node module allowed even in /common/
-						'@zyraxoncode/tree-sitter-wasm' // used by agentHost for command auto-approval
+						'@vscode/tree-sitter-wasm' // used by agentHost for command auto-approval
 					]
 				},
 				{
@@ -1708,8 +1708,8 @@ export default defineConfig(
 						'vs/base/parts/*/~',
 						'vs/platform/*/~',
 						'vs/editor/~',
-						'@zyraxoncode/tree-sitter-wasm', // node module allowed even in /common/
-						'@zyraxoncode/diff' // type import (loaded at runtime via resolveAmdNodeModulePath)
+						'@vscode/tree-sitter-wasm', // node module allowed even in /common/
+						'@vscode/diff' // type import (loaded at runtime via resolveAmdNodeModulePath)
 					]
 				},
 				{
@@ -1731,7 +1731,7 @@ export default defineConfig(
 						'vs/editor/~',
 						'vs/editor/contrib/*/~',
 						'vs/editor/standalone/~',
-						'@zyraxoncode/tree-sitter-wasm' // type import
+						'@vscode/tree-sitter-wasm' // type import
 					]
 				},
 				{
@@ -1816,8 +1816,8 @@ export default defineConfig(
 						}, // TODO@layers
 						'tas-client', // node module allowed even in /common/
 						'zyraxoncode-textmate', // node module allowed even in /common/
-						'@zyraxoncode/zyraxoncode-languagedetection', // node module allowed even in /common/
-						'@zyraxoncode/tree-sitter-wasm', // type import
+						'@vscode/zyraxoncode-languagedetection', // node module allowed even in /common/
+						'@vscode/tree-sitter-wasm', // type import
 						{
 							'when': 'hasBrowser',
 							'pattern': '@xterm/xterm'
@@ -1839,7 +1839,7 @@ export default defineConfig(
 						'vs/workbench/contrib/terminal/terminalContribChatExports*',
 						'vs/workbench/contrib/terminal/terminalContribExports*',
 						'zyraxoncode-notebook-renderer', // Type only import
-						'@zyraxoncode/tree-sitter-wasm', // type import
+						'@vscode/tree-sitter-wasm', // type import
 						{
 							'when': 'hasBrowser',
 							'pattern': '@xterm/xterm'
@@ -1869,7 +1869,7 @@ export default defineConfig(
 						// terminalContrib is one extra folder deep
 						'vs/workbench/contrib/terminalContrib/*/~',
 						'zyraxoncode-notebook-renderer', // Type only import
-						'@zyraxoncode/tree-sitter-wasm', // type import
+						'@vscode/tree-sitter-wasm', // type import
 						{
 							'when': 'hasBrowser',
 							'pattern': '@xterm/xterm'
@@ -2039,7 +2039,7 @@ export default defineConfig(
 					'restrictions': []
 				},
 				{
-					'target': 'src/zyraxoncode-dts/**',
+					'target': 'src/vscode-dts/**',
 					'restrictions': []
 				},
 				{
@@ -2241,8 +2241,8 @@ export default defineConfig(
 						}, // TODO@layers
 						'tas-client', // node module allowed even in /common/
 						'zyraxoncode-textmate', // node module allowed even in /common/
-						'@zyraxoncode/zyraxoncode-languagedetection', // node module allowed even in /common/
-						'@zyraxoncode/tree-sitter-wasm', // type import
+						'@vscode/zyraxoncode-languagedetection', // node module allowed even in /common/
+						'@vscode/tree-sitter-wasm', // type import
 						{
 							'when': 'hasBrowser',
 							'pattern': '@xterm/xterm'
@@ -2270,7 +2270,7 @@ export default defineConfig(
 					'restrictions': [
 						'test/automation',
 						'test/smoke/**',
-						'@zyraxoncode/*',
+						'@vscode/*',
 						'@parcel/*',
 						'@playwright/*',
 						'*' // node modules
@@ -2287,7 +2287,7 @@ export default defineConfig(
 					'target': 'test/automation/**',
 					'restrictions': [
 						'test/automation/**',
-						'@zyraxoncode/*',
+						'@vscode/*',
 						'@parcel/*',
 						'playwright-core/**',
 						'@playwright/*',
@@ -2298,7 +2298,7 @@ export default defineConfig(
 					'target': 'test/integration/**',
 					'restrictions': [
 						'test/integration/**',
-						'@zyraxoncode/*',
+						'@vscode/*',
 						'@parcel/*',
 						'@playwright/*',
 						'*' // node modules
@@ -2308,7 +2308,7 @@ export default defineConfig(
 					'target': 'test/monaco/**',
 					'restrictions': [
 						'test/monaco/**',
-						'@zyraxoncode/*',
+						'@vscode/*',
 						'@parcel/*',
 						'@playwright/*',
 						'*' // node modules
@@ -2319,7 +2319,7 @@ export default defineConfig(
 					'restrictions': [
 						'test/automation',
 						'test/mcp/**',
-						'@zyraxoncode/*',
+						'@vscode/*',
 						'@parcel/*',
 						'@playwright/*',
 						'@modelcontextprotocol/sdk/**/*',
@@ -2545,7 +2545,7 @@ export default defineConfig(
 				...builtinModules,
 				// node: dependencies
 				'@humanwhocodes/gitignore-to-minimatch',
-				'@zyraxoncode/extension-telemetry',
+				'@vscode/extension-telemetry',
 				'applicationinsights',
 				'ignore',
 				'isbinaryfile',

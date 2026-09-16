@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -40,7 +40,7 @@ interface ITerminalSandboxFileSystemAccessPaths {
 
 /** Runtime information needed to launch the sandbox-runtime CLI. */
 export interface ITerminalSandboxRuntimeInfo {
-	/** Directory that contains `node_modules/@zyraxoncode/sandbox-runtime` and `node_modules/@zyraxoncode/ripgrep`. */
+	/** Directory that contains `node_modules/@vscode/sandbox-runtime` and `node_modules/@vscode/ripgrep`. */
 	appRoot: string;
 	/**
 	 * Name of the directory (relative to {@link appRoot}) that holds the native
@@ -70,7 +70,7 @@ export interface ITerminalSandboxRuntimeInfo {
  * platform layer cannot resolve on its own. Hosts (workbench, agent host)
  * implement this to bridge their per-environment services (`IRemoteAgentService`,
  * `IWorkspaceContextService`, `IEnvironmentService`, `IProductService`,
- * `ISandboxHelperService`, …) into the engine.
+ * `ISandboxHelperService`, â€¦) into the engine.
  */
 export interface ITerminalSandboxEngineHost {
 	/** Effective OS used by sandbox decisions. May be the remote OS in workbench. */
@@ -120,7 +120,7 @@ export interface ITerminalSandboxEngineHost {
  * Hosts (workbench / agent host) construct an engine with a host adapter that
  * supplies workspace/remote-specific data, then forward their public service
  * methods to the engine and add their own host-specific concerns
- * (chat elicitation, lifecycle hooks, …) on top.
+ * (chat elicitation, lifecycle hooks, â€¦) on top.
  */
 export class TerminalSandboxEngine extends Disposable {
 	private static readonly _urlRegex = /(?:https?|wss?):\/\/[^\s'"`|&;<>]+/gi;

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { extensions } from 'zyraxoncode';
+import { extensions } from 'vscode';
 import { API as GitBaseAPI, GitBaseExtension } from './typings/git-base';
 
 export class GitBaseApi {

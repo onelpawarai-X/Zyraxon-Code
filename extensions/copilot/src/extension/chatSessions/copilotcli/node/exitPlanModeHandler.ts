@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionOptions } from '@github/copilot/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import type { CancellationToken, ChatParticipantToolToken, TextDocument } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { CancellationToken, ChatParticipantToolToken, TextDocument } from 'vscode';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { Delayer } from '../../../../util/vs/base/common/async';

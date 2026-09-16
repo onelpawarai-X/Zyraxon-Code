@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import * as zyraxoncode from 'zyraxoncode';
+import { Raw } from '@vscode/prompt-tsx';
+import * as zyraxoncode from 'vscode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { getTextPart, roleToString } from '../../../platform/chat/common/globalStringUtils';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -117,10 +117,10 @@ export class FeedbackReporter extends Disposable implements IFeedbackReporter {
 							const parsedArgs = JSON.parse(c.function.arguments);
 							argsStr = JSON.stringify(parsedArgs, undefined, 2);
 						} catch (e) { }
-						return `🛠️ ${c.function.name} (${c.id}) ${argsStr}`;
+						return `ðŸ› ï¸ ${c.function.name} (${c.id}) ${argsStr}`;
 					}).join('\n');
 				} else if (message.role === Raw.ChatRole.Tool) {
-					content = `🛠️ ${message.toolCallId}\n${content}`;
+					content = `ðŸ› ï¸ ${message.toolCallId}\n${content}`;
 				}
 
 				return this._embedCodeblock(roleToString(message.role).toUpperCase(), content);

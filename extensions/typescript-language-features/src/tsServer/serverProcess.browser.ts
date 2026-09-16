@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 /// <reference lib='webworker' />
-import { ServiceConnection } from '@zyraxoncode/sync-api-common/browser';
-import { ApiService, Requests } from '@zyraxoncode/sync-api-service';
-import * as zyraxoncode from 'zyraxoncode';
+import { ServiceConnection } from '@vscode/sync-api-common/browser';
+import { ApiService, Requests } from '@vscode/sync-api-service';
+import * as zyraxoncode from 'vscode';
 import { TypeScriptServiceConfiguration } from '../configuration/configuration';
 import { Logger } from '../logging/logger';
 import { supportsReadableByteStreams } from '../utils/platform';

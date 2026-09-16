@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
-import { CancellationToken } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { CancellationToken } from 'vscode';
 
 /**
  * Interface for Claude slash command handlers.

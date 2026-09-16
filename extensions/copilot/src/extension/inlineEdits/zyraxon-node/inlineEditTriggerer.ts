@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
-import { TextDocumentChangeReason } from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
+import { TextDocumentChangeReason } from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { DocumentId } from '../../../platform/inlineEdits/common/dataTypes/documentId';
 import { DocumentSwitchTriggerStrategy } from '../../../platform/inlineEdits/common/dataTypes/triggerOptions';
@@ -166,7 +166,7 @@ export class InlineEditTriggerer extends Disposable {
 		const hadRecentEdit = this._hasRecentEdit(mostRecentChange);
 		if (!hadRecentEdit || !this._hasRecentTrigger()) {
 			// The edit is too old or the provider was not triggered recently (we might be
-			// observing a cursor change following an external edit) — try document switch.
+			// observing a cursor change following an external edit) â€” try document switch.
 			const reason = hadRecentEdit ? 'no recent trigger' : 'no recent edit';
 			if (!this._maybeTriggerOnDocumentSwitch(e, isSameDoc, logger)) {
 				logger.trace(`Return: ${reason}`);

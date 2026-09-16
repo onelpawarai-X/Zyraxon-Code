@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ITokenizer as ITsxTokenizer, OutputMode, Raw } from '@zyraxoncode/prompt-tsx';
-import type { LanguageModelChatTool } from 'zyraxoncode';
+import type { ITokenizer as ITsxTokenizer, OutputMode, Raw } from '@vscode/prompt-tsx';
+import type { LanguageModelChatTool } from 'vscode';
 
 
 export enum TokenizerType {

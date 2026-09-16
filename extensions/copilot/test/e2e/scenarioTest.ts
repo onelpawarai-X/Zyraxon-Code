@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import assert from 'assert';
 import * as fs from 'fs';
-import type { ChatErrorDetails, LanguageModelToolInformation, MappedEditsResponseStream, TextDocument } from 'zyraxoncode';
+import type { ChatErrorDetails, LanguageModelToolInformation, MappedEditsResponseStream, TextDocument } from 'vscode';
 import { CodeBlocksMetadata } from '../../src/extension/codeBlocks/node/codeBlockProcessor';
 import { agentsToCommands, Intent } from '../../src/extension/common/constants';
 import '../../src/extension/intents/node/allIntents';

@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Disposable } from 'zyraxoncode';
-import * as l10n from '@zyraxoncode/l10n';
+import type { Disposable } from 'vscode';
+import * as l10n from '@vscode/l10n';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { ILogService } from '../../../platform/log/common/logService';
 import { IReviewService } from '../../../platform/review/common/reviewService';

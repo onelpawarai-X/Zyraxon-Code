@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IChatSessionService } from '../../../platform/chat/common/chatSessionService';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { type FileRow, type RefRow, type SessionRow, type TurnRow, ISessionStore } from '../../../platform/chronicle/common/sessionStore';
@@ -40,7 +40,7 @@ const SESSION_UPSERT_COOLDOWN_MS = 30_000;
  * Buffered write operations waiting to be flushed to SQLite.
  */
 interface WriteBuffer {
-	/** Session upserts keyed by session ID — later writes merge into earlier ones. */
+	/** Session upserts keyed by session ID â€” later writes merge into earlier ones. */
 	sessions: Map<string, SessionRow>;
 	files: FileRow[];
 	refs: RefRow[];
@@ -154,7 +154,7 @@ export class SessionStoreTracker extends Disposable implements IExtensionContrib
 		super.dispose();
 	}
 
-	// ── Span handling (produces buffered writes, no direct DB calls) ─────
+	// â”€â”€ Span handling (produces buffered writes, no direct DB calls) â”€â”€â”€â”€â”€
 
 	private _handleSpan(span: ICompletedSpanData): void {
 		try {
@@ -162,7 +162,7 @@ export class SessionStoreTracker extends Disposable implements IExtensionContrib
 
 			// Sub-agent spans have no row of their own (schema has no sub-agent concept).
 			// Attribute their tool calls to the parent so we don't lose file/ref signal;
-			// drop their invoke_agent span — the parent's covers that turn.
+			// drop their invoke_agent span â€” the parent's covers that turn.
 			const parentChatSessionId = span.attributes[CopilotChatAttr.PARENT_CHAT_SESSION_ID] as string | undefined;
 			if (parentChatSessionId) {
 				if (operationName === GenAiOperationName.EXECUTE_TOOL && this._initializedSessions.has(parentChatSessionId)) {
@@ -209,10 +209,10 @@ export class SessionStoreTracker extends Disposable implements IExtensionContrib
 				this._handleToolSpan(sessionId, span);
 			}
 
-			// Lightweight timestamp bump — throttled by cooldown
+			// Lightweight timestamp bump â€” throttled by cooldown
 			this._bufferSessionTimestamp(sessionId);
 		} catch {
-			// Non-fatal — individual span processing failure
+			// Non-fatal â€” individual span processing failure
 		}
 	}
 
@@ -373,7 +373,7 @@ export class SessionStoreTracker extends Disposable implements IExtensionContrib
 		}
 	}
 
-	// ── Buffering helpers ────────────────────────────────────────────────
+	// â”€â”€ Buffering helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	/**
 	 * Merge a session upsert into the buffer. Later writes overwrite earlier
@@ -405,7 +405,7 @@ export class SessionStoreTracker extends Disposable implements IExtensionContrib
 		const now = Date.now();
 		const last = this._lastSessionTimestamp.get(sessionId) ?? 0;
 		if (now - last < SESSION_UPSERT_COOLDOWN_MS) {
-			return; // Skip — too recent
+			return; // Skip â€” too recent
 		}
 		this._lastSessionTimestamp.set(sessionId, now);
 		this._bufferSessionUpsert({ id: sessionId, host_type: 'zyraxoncode' });
@@ -417,7 +417,7 @@ export class SessionStoreTracker extends Disposable implements IExtensionContrib
 	/** The session source of the first initialized session (for firstWrite telemetry). */
 	private _firstWriteSessionSource: string | undefined;
 
-	// ── Flush: batch all buffered writes into one transaction ────────────
+	// â”€â”€ Flush: batch all buffered writes into one transaction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 	private _flush(): void {
 		const { sessions, files, refs, turns } = this._buffer;

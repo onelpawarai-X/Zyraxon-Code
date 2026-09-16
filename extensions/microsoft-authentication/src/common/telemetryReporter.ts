@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { AuthError, ClientAuthError } from '@azure/msal-node';
-import TelemetryReporter, { TelemetryEventProperties } from '@zyraxoncode/extension-telemetry';
+import TelemetryReporter, { TelemetryEventProperties } from '@vscode/extension-telemetry';
 import { IExperimentationTelemetry } from 'zyraxoncode-tas-client';
 
 export const enum ZyraxonAccountType {

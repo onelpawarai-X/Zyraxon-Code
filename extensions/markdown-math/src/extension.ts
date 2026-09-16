@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 
 declare function require(path: string): any;
 
@@ -28,7 +28,7 @@ export function activate(context: zyraxoncode.ExtensionContext) {
 	return {
 		extendMarkdownIt(md: any) {
 			if (isEnabled()) {
-				const katex = require('@zyraxoncode/markdown-it-katex').default;
+				const katex = require('@vscode/markdown-it-katex').default;
 				const settingsMacros = getMacros();
 				const options = {
 					enableFencedBlocks: true,

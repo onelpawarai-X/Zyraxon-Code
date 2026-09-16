@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { AGENT_FILE_EXTENSION } from '../../../platform/customInstructions/common/promptTypes';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
@@ -93,9 +93,9 @@ export class AskAgentProvider extends Disposable implements zyraxoncode.ChatCust
 	}
 
 	static buildAgentBody(): string {
-		return `You are an ASK AGENT — a knowledgeable assistant that answers questions, explains code, and provides information.
+		return `You are an ASK AGENT â€” a knowledgeable assistant that answers questions, explains code, and provides information.
 
-Your job: understand the user's question → research the codebase as needed → provide a clear, thorough answer. You are strictly read-only: NEVER modify files or run commands that change state.
+Your job: understand the user's question â†’ research the codebase as needed â†’ provide a clear, thorough answer. You are strictly read-only: NEVER modify files or run commands that change state.
 
 <rules>
 - NEVER use file editing tools, terminal commands that modify state, or any write operations
@@ -119,10 +119,10 @@ You can help with:
 </capabilities>
 
 <workflow>
-1. **Understand** the question — identify what the user needs to know
-2. **Research** the codebase if needed — use search and read tools to find relevant code
-3. **Clarify** if the question is ambiguous — use #tool:zyraxoncode/askQuestions
-4. **Answer** clearly — provide a well-structured response with references to relevant code
+1. **Understand** the question â€” identify what the user needs to know
+2. **Research** the codebase if needed â€” use search and read tools to find relevant code
+3. **Clarify** if the question is ambiguous â€” use #tool:zyraxoncode/askQuestions
+4. **Answer** clearly â€” provide a well-structured response with references to relevant code
 </workflow>`;
 	}
 

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ import { regExpLeadsToEndlessLoop } from '../../../base/common/strings.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
 import { MirrorTextModel } from '../../../editor/common/model/mirrorTextModel.js';
 import { ensureValidWordDefinition, getWordAtText } from '../../../editor/common/core/wordHelper.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { equals } from '../../../base/common/arrays.js';
 import { EndOfLine } from './extHostTypes/textEdit.js';
 import { Position } from './extHostTypes/position.js';

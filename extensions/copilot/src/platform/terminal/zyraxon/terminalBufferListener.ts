@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, Terminal, TerminalExecutedCommand, window } from 'zyraxoncode';
+import { Disposable, Terminal, TerminalExecutedCommand, window } from 'vscode';
 import { basename } from '../../../util/vs/base/common/path';
 import { platform } from '../../../util/vs/base/common/process';
 import { removeAnsiEscapeCodes } from '../../../util/vs/base/common/strings';

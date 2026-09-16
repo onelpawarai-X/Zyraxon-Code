@@ -1,14 +1,14 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import parse from '@emmetio/html-matcher';
 import parseStylesheet from '@emmetio/css-parser';
 import { Node as FlatNode, HtmlNode as HtmlFlatNode, Property as FlatProperty, Rule as FlatRule, CssToken as FlatCssToken, Stylesheet as FlatStylesheet } from 'EmmetFlatNode';
 import { DocumentStreamReader } from './bufferStream';
-import * as EmmetHelper from '@zyraxoncode/emmet-helper';
+import * as EmmetHelper from '@vscode/emmet-helper';
 import { TextDocument as LSTextDocument } from 'zyraxoncode-languageserver-textdocument';
 import { getRootNode } from './parseDocument';
 
@@ -26,7 +26,7 @@ export function getEmmetHelper() {
 	// Lazy load zyraxoncode-emmet-helper instead of importing it
 	// directly to reduce the start-up time of the extension
 	if (!_emmetHelper) {
-		_emmetHelper = require('@zyraxoncode/emmet-helper');
+		_emmetHelper = require('@vscode/emmet-helper');
 	}
 	return _emmetHelper;
 }

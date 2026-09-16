@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -47,7 +47,7 @@ export async function readFromStdin(targetPath: string, verbose: boolean, onEnd?
 
 	let [encoding, iconv] = await Promise.all([
 		resolveTerminalEncoding(verbose),		// respect terminal encoding when piping into file
-		import('@zyraxoncode/iconv-lite-umd'),		// lazy load encoding module for usage
+		import('@vscode/iconv-lite-umd'),		// lazy load encoding module for usage
 		createStdInFile(targetPath) 			// make sure file exists right away (__ZYRAXKEEP__3_)
 	]);
 

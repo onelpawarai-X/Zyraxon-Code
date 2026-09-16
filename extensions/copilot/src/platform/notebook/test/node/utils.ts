@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as fs from 'fs';
 import * as path from '../../../../util/vs/base/common/path';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { BaseAlternativeNotebookContentProvider } from '../../../../platform/notebook/common/alternativeContentProvider';
 import { SimulationWorkspace } from '../../../../platform/test/node/simulationWorkspace';
 import { ExtHostNotebookDocumentData } from '../../../../util/common/test/shims/notebookDocument';

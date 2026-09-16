@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, TextDocument, Disposable as VscodeDisposable } from 'zyraxoncode';
+import type { CancellationToken, TextDocument, Disposable as VscodeDisposable } from 'vscode';
 import { Copilot } from '../../../platform/inlineCompletions/common/api';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { ContextItem } from '../../languageServer/common/languageContextService';

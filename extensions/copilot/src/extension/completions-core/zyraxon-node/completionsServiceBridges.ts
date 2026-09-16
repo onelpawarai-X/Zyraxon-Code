@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { commands, env } from 'zyraxoncode';
+import { commands, env } from 'vscode';
 import { ILogService } from '../../../platform/log/common/logService';
 import { outputChannel } from '../../../platform/log/zyraxoncode/outputChannelLogTarget';
 import { DisposableStore, IDisposable } from '../../../util/vs/base/common/lifecycle';

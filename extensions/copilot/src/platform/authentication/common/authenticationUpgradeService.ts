@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import type { ChatContext, ChatRequest, ChatResponseStream } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type { ChatContext, ChatRequest, ChatResponseStream } from 'vscode';
 import { coalesce } from '../../../util/vs/base/common/arrays';
 import { findLast } from '../../../util/vs/base/common/arraysFind';
 import { Emitter } from '../../../util/vs/base/common/event';

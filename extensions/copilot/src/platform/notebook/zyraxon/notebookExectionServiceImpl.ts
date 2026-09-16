@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { NotebookCell, workspace } from 'zyraxoncode';
+import { NotebookCell, workspace } from 'vscode';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { IDisposable } from '../../../util/vs/base/common/lifecycle';
 

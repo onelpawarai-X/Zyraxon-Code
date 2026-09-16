@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import * as extHostTypeConverters from './extHostTypeConverters.js';
 import { NotebookRange } from './extHostTypes.js';
 import * as notebookCommon from '../../contrib/notebook/common/notebookCommon.js';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { isTextStreamMime } from '../../../base/common/mime.js';
 
 class RawContentChangeEvent {

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -17,9 +17,9 @@ export const IAgentHostGitHubEndpointService = createDecorator<IAgentHostGitHubE
 /**
  * Single source of truth for the GitHub endpoints (protected resources + REST /
  * GraphQL hosts) the agent host talks to. Computed from the optional
- * `githubEnterpriseUri` root config so that every consumer — agent
+ * `githubEnterpriseUri` root config so that every consumer â€” agent
  * `authenticate` / `getProtectedResources`, changeset operation `getAuthToken`
- * lookups, and the REST client — agrees on the same resource identifiers and API
+ * lookups, and the REST client â€” agrees on the same resource identifiers and API
  * base. With no enterprise URI configured, the values are byte-for-byte the
  * github.com defaults.
  */
@@ -53,7 +53,7 @@ export interface IAgentHostGitHubEndpointService {
 
 	/**
 	 * The raw configured GitHub Enterprise base URI (e.g. `__ZYRAXKEEP__2_`),
-	 * or `undefined` for github.com. This is the value the `@zyraxoncode/copilot-api`
+	 * or `undefined` for github.com. This is the value the `@vscode/copilot-api`
 	 * `CAPIClient.updateDomains(..., enterpriseUrlConfig)` expects: it derives the
 	 * GitHub API host (`api.<host>`) used for `copilot_internal` endpoints (token
 	 * mint, etc.) from it. Distinct from {@link getApiBaseUri} (the already-derived

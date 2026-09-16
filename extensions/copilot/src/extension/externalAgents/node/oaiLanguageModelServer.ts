@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestMetadata } from '@zyraxoncode/copilot-api';
-import { Raw } from '@zyraxoncode/prompt-tsx';
+import { RequestMetadata } from '@vscode/copilot-api';
+import { Raw } from '@vscode/prompt-tsx';
 import * as http from 'http';
 import type OpenAI from 'openai';
 import { IChatMLFetcher, Source } from '../../../platform/chat/common/chatMLFetcher';

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, Command, EventEmitter, Event, workspace, Uri, l10n } from 'zyraxoncode';
+import { Disposable, Command, EventEmitter, Event, workspace, Uri, l10n } from 'vscode';
 import { Repository } from './repository';
 import { anyEvent, dispose, filterEvent } from './util';
 import type { Branch, RemoteSourcePublisher } from './api/git';

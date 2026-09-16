@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "media-preview",
   "displayName": "%displayName%",
   "description": "%description%",
@@ -164,7 +164,7 @@
     "watch-typecheck-web": "node ../../node_modules/@typescript/native/lib/tsc.js --project ./tsconfig.browser.json --noEmit --watch"
   },
   "dependencies": {
-    "@zyraxoncode/extension-telemetry": "^0.9.8",
+    "@vscode/extension-telemetry": "^0.9.8",
     "zyraxoncode-uri": "^3.0.6"
   },
   "devDependencies": {

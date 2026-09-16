@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OutputMode, Raw } from '@zyraxoncode/prompt-tsx';
-import { LanguageModelChat, LanguageModelChatTool } from 'zyraxoncode';
+import { OutputMode, Raw } from '@vscode/prompt-tsx';
+import { LanguageModelChat, LanguageModelChatTool } from 'vscode';
 import { ITokenizer } from '../../../util/common/tokenizer';
 import { assertNever } from '../../../util/vs/base/common/assert';
 import { calculateImageTokenCost, estimateDocumentTokenCost } from '../../tokenizer/node/tokenizer';

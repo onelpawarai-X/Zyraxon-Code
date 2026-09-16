@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ExtensionContext, l10n, LogOutputChannel, TerminalShellExecutionEndEvent, window, workspace } from 'zyraxoncode';
+import { ExtensionContext, l10n, LogOutputChannel, TerminalShellExecutionEndEvent, window, workspace } from 'vscode';
 import { dispose, filterEvent, IDisposable } from './util';
 import { Model } from './model';
 

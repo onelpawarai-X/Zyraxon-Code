@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { RequestMetadata } from '@zyraxoncode/copilot-api';
-import type { LanguageModelToolResult2 } from 'zyraxoncode';
+import type { RequestMetadata } from '@vscode/copilot-api';
+import type { LanguageModelToolResult2 } from 'vscode';
 import { ILoggedRequestInfo, LoggedRequest } from '../../../platform/requestLogger/common/requestLogger';
 import { AbstractRequestLogger } from '../../../platform/requestLogger/node/requestLogger';
 import { Event } from '../../../util/vs/base/common/event';

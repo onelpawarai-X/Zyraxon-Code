@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CancellationToken, ChatContext, ChatRequestTurn2 } from 'zyraxoncode';
+import { CancellationToken, ChatContext, ChatRequestTurn2 } from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { SequencerByKey } from '../../../../util/vs/base/common/async';

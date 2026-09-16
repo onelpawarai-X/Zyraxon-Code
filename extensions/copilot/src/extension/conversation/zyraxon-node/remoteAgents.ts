@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { RequestType } from '@zyraxoncode/copilot-api';
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import { ChatCompletionItem, ChatContext, ChatPromptReference, ChatRequest, ChatRequestTurn, ChatResponseMarkdownPart, ChatResponseReferencePart, ChatResponseTurn, ChatResponseWarningPart, ChatVariableLevel, Disposable, DynamicChatParticipantProps, Location, MarkdownString, Position, Progress, Range, TextDocument, TextEditor, ThemeIcon, chat, commands, l10n } from 'zyraxoncode';
+import { RequestType } from '@vscode/copilot-api';
+import { Raw } from '@vscode/prompt-tsx';
+import { ChatCompletionItem, ChatContext, ChatPromptReference, ChatRequest, ChatRequestTurn, ChatResponseMarkdownPart, ChatResponseReferencePart, ChatResponseTurn, ChatResponseWarningPart, ChatVariableLevel, Disposable, DynamicChatParticipantProps, Location, MarkdownString, Position, Progress, Range, TextDocument, TextEditor, ThemeIcon, chat, commands, l10n } from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { IAuthenticationChatUpgradeService } from '../../../platform/authentication/common/authenticationUpgrade';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';

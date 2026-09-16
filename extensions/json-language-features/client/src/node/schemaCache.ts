@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,7 +6,7 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { createHash } from 'crypto';
-import { Memento } from 'zyraxoncode';
+import { Memento } from 'vscode';
 
 interface CacheEntry {
 	etag: string;

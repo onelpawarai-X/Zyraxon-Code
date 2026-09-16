@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RemoteAgentJobPayload } from '@zyraxoncode/copilot-api';
-import * as zyraxoncode from 'zyraxoncode';
-import { l10n } from 'zyraxoncode';
+import { RemoteAgentJobPayload } from '@vscode/copilot-api';
+import * as zyraxoncode from 'vscode';
+import { l10n } from 'vscode';
 import { GithubRepoId } from '../../../platform/git/common/gitService';
 import { PullRequestSearchItem, SessionInfo } from '../../../platform/github/common/githubAPI';
 import { AuthOptions, IOctoKitService, JobInfo, RemoteAgentJobResponse } from '../../../platform/github/common/githubService';

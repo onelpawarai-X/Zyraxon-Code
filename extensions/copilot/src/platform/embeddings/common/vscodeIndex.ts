@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, CommandInformationResult, RelatedInformationProvider, RelatedInformationResult, SettingInformationResult } from 'zyraxoncode';
+import type { CancellationToken, CommandInformationResult, RelatedInformationProvider, RelatedInformationResult, SettingInformationResult } from 'vscode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { TelemetryCorrelationId } from '../../../util/common/telemetryCorrelationId';
 import { sanitizeZyraxonCodeVersion } from '../../../util/common/zyraxoncodeVersion';

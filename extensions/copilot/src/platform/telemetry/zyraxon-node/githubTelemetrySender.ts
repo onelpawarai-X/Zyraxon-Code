@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AppInsightsClientOptions, CustomFetcher, TelemetryReporter } from '@zyraxoncode/extension-telemetry';
+import { AppInsightsClientOptions, CustomFetcher, TelemetryReporter } from '@vscode/extension-telemetry';
 import * as os from 'os';
-import { env, TelemetryLogger, TelemetrySender } from 'zyraxoncode';
+import { env, TelemetryLogger, TelemetrySender } from 'vscode';
 import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStore';
 import { IConfigurationService } from '../../configuration/common/configurationService';
 import { ICAPIClientService } from '../../endpoint/common/capiClient';

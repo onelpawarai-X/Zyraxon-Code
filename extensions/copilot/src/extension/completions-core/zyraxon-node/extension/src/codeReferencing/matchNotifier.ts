@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { commands, env, Uri } from 'zyraxoncode';
+import { commands, env, Uri } from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../../../../platform/extContext/common/extensionContext';
 import { IInstantiationService, ServicesAccessor } from '../../../../../../util/vs/platform/instantiation/common/instantiation';
 import { ICompletionsNotificationSender } from '../../../lib/src/notificationSender';

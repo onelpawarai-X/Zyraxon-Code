@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatResponseStream, ExtendedChatResponsePart } from 'zyraxoncode';
+import type { ChatResponseStream, ExtendedChatResponsePart } from 'vscode';
 import { PositionOffsetTransformer } from '../../../../platform/editing/common/positionOffsetTransformer';
 import { ChatResponseStreamImpl } from '../../../../util/common/chatResponseStreamImpl';
 import { StringEdit } from '../../../../util/vs/editor/common/core/edits/stringEdit';

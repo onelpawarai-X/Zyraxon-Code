@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ export const IToolResultContentRenderer = createServiceIdentifier<IToolResultCon
 /**
  * Renders tool result content parts into human-readable strings.
  * Injected from the zyraxoncode-node layer to avoid layering violations
- * (the rendering depends on @zyraxoncode/prompt-tsx which lives in zyraxoncode-node).
+ * (the rendering depends on @vscode/prompt-tsx which lives in zyraxoncode-node).
  */
 export interface IToolResultContentRenderer {
 	readonly _serviceBrand: undefined;

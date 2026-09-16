@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@ import {
 	WorkspaceEdit,
 	commands,
 	workspace,
-} from 'zyraxoncode';
+} from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../../../../platform/extContext/common/extensionContext';
 import { debounce } from '../../../../../../util/common/debounce';
 import { BasePanelCompletion, ISuggestionsPanel, PanelConfig } from './basePanelTypes';

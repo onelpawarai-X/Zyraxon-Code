@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs';
 import { Sequencer, SequencerByKey } from '../../../base/common/async.js';
-import type { Database, RunResult } from '@zyraxoncode/sqlite3';
+import type { Database, RunResult } from '@vscode/sqlite3';
 import type { IFileEditContent, IFileEditRecord, ILocalTurnRecord, IReviewedFileRecord, ISessionDatabase } from '../common/sessionDataService.js';
 import { dirname } from '../../../base/common/path.js';
 import { URI } from '../../../base/common/uri.js';
@@ -123,9 +123,9 @@ export const sessionDatabaseMigrations: readonly ISessionDatabaseMigration[] = [
 		// `getFirstTurnEventId` / `getNextTurnEventId` scan by rowid and are read
 		// only by the Copilot agent (Claude resolves fork/truncate boundaries from
 		// its own persisted mapping), and in a Copilot database `setTurnEventId`
-		// runs on `user.message` — before any usage is reported — so the parent row
+		// runs on `user.message` â€” before any usage is reported â€” so the parent row
 		// already exists and the insert is a no-op. Were usage ever to land first,
-		// `setTurnEventId` fills the existing row in (`UPDATE … WHERE event_id IS
+		// `setTurnEventId` fills the existing row in (`UPDATE â€¦ WHERE event_id IS
 		// NULL`) and the position is still correct, since a turn's usage precedes
 		// the next turn. Each peer chat gets its own database (see
 		// `SessionDataService`), so a peer turn cannot interleave with another
@@ -137,7 +137,7 @@ export const sessionDatabaseMigrations: readonly ISessionDatabaseMigration[] = [
 	},
 ];
 
-// ---- Promise wrappers around callback-based @zyraxoncode/sqlite3 API -----------
+// ---- Promise wrappers around callback-based @vscode/sqlite3 API -----------
 
 function dbExec(db: Database, sql: string): Promise<void> {
 	return new Promise((resolve, reject) => {
@@ -186,7 +186,7 @@ function dbClose(db: Database): Promise<void> {
 
 function dbOpen(path: string): Promise<Database> {
 	return new Promise((resolve, reject) => {
-		import('@zyraxoncode/sqlite3').then(sqlite3 => {
+		import('@vscode/sqlite3').then(sqlite3 => {
 			const db = new sqlite3.default.Database(path, (err: Error | null) => {
 				if (err) {
 					return reject(err);
@@ -204,7 +204,7 @@ function dbOpen(path: string): Promise<Database> {
  * migrations complete the pragma is updated to the highest applied version.
  */
 export async function runMigrations(db: Database, migrations: readonly ISessionDatabaseMigration[]): Promise<void> {
-	// Enable foreign key enforcement — must be set outside a transaction
+	// Enable foreign key enforcement â€” must be set outside a transaction
 	// and every time a connection is opened.
 	await dbExec(db, 'PRAGMA foreign_keys = ON');
 
@@ -234,7 +234,7 @@ export async function runMigrations(db: Database, migrations: readonly ISessionD
 }
 
 /**
- * A wrapper around a `@zyraxoncode/sqlite3` {@link Database} instance with
+ * A wrapper around a `@vscode/sqlite3` {@link Database} instance with
  * lazy initialisation.
  *
  * The underlying connection is opened on the first async method call
@@ -250,12 +250,12 @@ export class SessionDatabase implements ISessionDatabase {
 	private readonly _fileEditSequencer = new SequencerByKey<string>();
 
 	/**
-	 * Serializes `setMetadata` writes per key. `@zyraxoncode/sqlite3` runs in
+	 * Serializes `setMetadata` writes per key. `@vscode/sqlite3` runs in
 	 * parallelized mode, so two `db.run()` calls on the same connection
 	 * can be dispatched to the libuv thread pool and complete out of
 	 * submission order. For "last writer wins" keys (notably `configValues`
 	 * via {@link setMetadata}), that meant a fast-following second write
-	 * could be overtaken by the first and silently lose its value — see
+	 * could be overtaken by the first and silently lose its value â€” see
 	 * the "Session Config persistence across restarts" integration test.
 	 * Sequencing by key preserves intra-key order while still allowing
 	 * writes for different keys to run concurrently.
@@ -263,8 +263,8 @@ export class SessionDatabase implements ISessionDatabase {
 	private readonly _metadataSequencer = new SequencerByKey<string>();
 
 	/**
-	 * Serializes every `turn_usage` access — writes, prunes, the fork remap, and the restore read
-	 * alike. `@zyraxoncode/sqlite3` runs in parallelized mode (see {@link _metadataSequencer}), so a
+	 * Serializes every `turn_usage` access â€” writes, prunes, the fork remap, and the restore read
+	 * alike. `@vscode/sqlite3` runs in parallelized mode (see {@link _metadataSequencer}), so a
 	 * fire-and-forget `setTurnUsage` submitted before a truncation can otherwise complete *after*
 	 * it and resurrect a row the truncation was meant to remove, and a read can otherwise overtake
 	 * a write it was submitted after. Mutations must go through {@link _mutateTurnUsage} rather
@@ -282,7 +282,7 @@ export class SessionDatabase implements ISessionDatabase {
 
 	/**
 	 * In-flight write operations. Tracked so {@link whenIdle} can await them
-	 * before the process exits — without this, a `SIGTERM` arriving between
+	 * before the process exits â€” without this, a `SIGTERM` arriving between
 	 * a fire-and-forget mutating call (e.g. `setMetadata`) being invoked and
 	 * its underlying SQLite query completing would silently drop the write.
 	 * Every public mutating method routes its returned promise through
@@ -368,7 +368,7 @@ export class SessionDatabase implements ISessionDatabase {
 		return this._track(async () => {
 			const db = await this._ensureDb();
 			await dbRun(db, 'INSERT OR IGNORE INTO turns (id) VALUES (?)', [turnId]);
-			// Only set the event ID if not already set — steering messages
+			// Only set the event ID if not already set â€” steering messages
 			// trigger additional user.message events within the same turn,
 			// and we must preserve the first (boundary) event ID.
 			await dbRun(db, 'UPDATE turns SET event_id = ? WHERE id = ? AND event_id IS NULL', [eventId, turnId]);
@@ -383,7 +383,7 @@ export class SessionDatabase implements ISessionDatabase {
 
 	async getNextTurnEventId(turnId: string): Promise<string | undefined> {
 		const db = await this._ensureDb();
-		// `turns.id` is the canonical turn key — either a live `request_xxx`
+		// `turns.id` is the canonical turn key â€” either a live `request_xxx`
 		// dispatched by the client or, for sessions restored from disk, the
 		// SDK envelope id surfaced by `mapSessionEvents`. The `event_id`
 		// fallback covers the case where the caller asks about a turn that
@@ -409,7 +409,7 @@ export class SessionDatabase implements ISessionDatabase {
 
 	setTurnUsage(turnId: string, usage: string): Promise<void> {
 		return this._mutateTurnUsage(async db => {
-			// Ensure the turn exists — lazily insert since the turn record may not
+			// Ensure the turn exists â€” lazily insert since the turn record may not
 			// have been created by an explicit createTurn() call. This is what makes
 			// the row reachable by the cascade on every prune path; see migration 9
 			// for why creating it cannot perturb turn ordering.
@@ -420,7 +420,7 @@ export class SessionDatabase implements ISessionDatabase {
 
 	async getTurnUsages(): Promise<Map<string, string>> {
 		// Queued on the same sequencer as the writes, not run directly: `setTurnUsage` is
-		// fire-and-forget and `@zyraxoncode/sqlite3` is parallelized, so a restore that reads straight
+		// fire-and-forget and `@vscode/sqlite3` is parallelized, so a restore that reads straight
 		// through can miss a write submitted before it and permanently rebuild that turn without
 		// its cost. Read-after-write ordering is what makes the overlay deterministic.
 		return this._turnUsageSequencer.queue(async () => {
@@ -549,7 +549,7 @@ export class SessionDatabase implements ISessionDatabase {
 	storeFileEdit(edit: IFileEditRecord & IFileEditContent): Promise<void> {
 		return this._track(() => this._fileEditSequencer.queue(edit.filePath, async () => {
 			const db = await this._ensureDb();
-			// Ensure the turn exists — lazily insert since the turn record
+			// Ensure the turn exists â€” lazily insert since the turn record
 			// may not have been created by an explicit createTurn() call.
 			await dbRun(db, 'INSERT OR IGNORE INTO turns (id) VALUES (?)', [edit.turnId]);
 			await dbRun(
@@ -753,7 +753,7 @@ export class SessionDatabase implements ISessionDatabase {
 
 	remapTurnIds(mapping: ReadonlyMap<string, string>): Promise<void> {
 		// Mutates `turn_usage`, so it must serialize with every other such
-		// mutation — a usage write racing the fork transaction would otherwise
+		// mutation â€” a usage write racing the fork transaction would otherwise
 		// land against either the old or the new turn id unpredictably.
 		return this._mutateTurnUsage(async db => {
 			// Defer FK checks to commit time so we can update turns.id and
@@ -827,7 +827,7 @@ export class SessionDatabase implements ISessionDatabase {
 	/**
 	 * Wrap a mutating operation's promise so {@link whenIdle} can await it.
 	 * Invoke at the **outermost** layer of every public mutating method so
-	 * that any internal awaits (notably `_ensureDb()`) are covered too —
+	 * that any internal awaits (notably `_ensureDb()`) are covered too â€”
 	 * tracking only the leaf `dbRun`/`dbExec` would miss the window
 	 * between the method being called and the query actually being queued.
 	 */

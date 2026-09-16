@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// This should be the only place that is allowed to import from @zyraxoncode/component-explorer
+// This should be the only place that is allowed to import from @vscode/component-explorer
 // eslint-disable-next-line local/code-import-patterns
-import { defineFixture, defineFixtureGroup, defineFixtureVariants } from '@zyraxoncode/component-explorer';
+import { defineFixture, defineFixtureGroup, defineFixtureVariants } from '@vscode/component-explorer';
 // eslint-disable-next-line local/code-import-patterns, local/code-amd-node-module
 import { z } from 'zod';
 import { DisposableStore, DisposableTracker, IDisposable, IReference, MutableDisposable, setDisposableTracker, toDisposable } from '../../../../base/common/lifecycle.js';
@@ -250,7 +250,7 @@ class NullStorageService implements IStorageService {
 // Eagerly bundle all built-in theme JSON files so they can be served to
 // `_loadColorTheme` via the IExtensionResourceLoaderService code path. The
 // rspack config maps these JSON files to `asset/source`, so they are imported
-// as raw text (not parsed JSON) — this lets ZYRAXON Code's JSONC parser handle
+// as raw text (not parsed JSON) â€” this lets ZYRAXON Code's JSONC parser handle
 // comments and trailing commas the way it does in the real product.
 /* eslint-disable local/code-import-patterns */
 import dark_modern from '../../../../../../extensions/theme-defaults/themes/dark_modern.json' with { type: 'json' };
@@ -453,7 +453,7 @@ export class FixtureLogService extends NullLogService {
  * `ModelService` for fixtures that disposes all owned text models when the
  * service itself is disposed. This is safe because `TestInstantiationService`
  * is the first item added to the fixture's `DisposableStore`, so it disposes
- * last (LIFO) — after all widgets have already torn down.
+ * last (LIFO) â€” after all widgets have already torn down.
  */
 export class FixtureModelService extends ModelService {
 	override dispose(): void {
@@ -706,7 +706,7 @@ export function createEditorServices(disposables: DisposableStore, options?: Cre
 	// `SyncDescriptor`s (e.g. MenuService, ContextKeyService). Without this,
 	// production services with internal Disposables leak past the fixture.
 	//
-	// Don't add TestInstantiationService to disposables immediately — it must
+	// Don't add TestInstantiationService to disposables immediately â€” it must
 	// dispose runs, which disposes services it instantiated lazily from
 	// `SyncDescriptor`s (e.g. MenuService, ContextKeyService). Without this,
 	// production services with internal Disposables leak past the fixture.
@@ -763,7 +763,7 @@ export function registerWorkbenchServices(registration: ServiceRegistration): vo
 
 	// No-op phone presenter so chat-input fixtures don't crash on
 	// `chatPhoneInputPresenter.enabled.get()`. The real impl is in
-	// `vs/sessions` and only attaches in the agents window — desktop
+	// `vs/sessions` and only attaches in the agents window â€” desktop
 	// fixtures see the no-op (`enabled === false`, sheet calls resolve
 	// immediately) which matches desktop runtime behavior.
 	registration.defineInstance(IChatPhoneInputPresenter, {
@@ -954,7 +954,7 @@ export function defineComponentFixture(options: ComponentFixtureOptions): Themed
 			// Single async dispose orchestrates teardown order:
 			//   1. dispose user disposables (synchronous part)
 			//   2. drain virtual time (so timers scheduled during dispose
-			//      — like `Promise.race([..., timeout(1000)])` — settle and
+			//      â€” like `Promise.race([..., timeout(1000)])` â€” settle and
 			//      release their captured references)
 			//   3. tear down virtual time (uninstall global API, dispose `p`)
 			//   4. stop tracker and check for leaks
@@ -1069,7 +1069,7 @@ export function defineComponentFixture(options: ComponentFixtureOptions): Themed
 					throw e;
 				} finally {
 					// Unpush virtual time so the post-render flow (screenshot
-					// capture, stability checks, …) runs with real timers.
+					// capture, stability checks, â€¦) runs with real timers.
 					renderTimeApi?.dispose();
 				}
 			}

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ExtensionContext } from 'zyraxoncode';
+import { ExtensionContext } from 'vscode';
 import { baseActivate } from '../zyraxoncode/extension';
 import { zyraxoncodeWebContributions } from './contributions';
 import { registerServices } from './services';

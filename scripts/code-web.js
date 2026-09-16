@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 // @ts-check
 
-const testWebLocation = require.resolve('@zyraxoncode/test-web');
+const testWebLocation = require.resolve('@vscode/test-web');
 
 const fs = require('fs');
 const path = require('path');
@@ -87,7 +87,7 @@ async function main() {
 function startServer(runnerArguments) {
 	const env = { ...process.env };
 
-	console.log(`Starting @zyraxoncode/test-web: ${testWebLocation} ${runnerArguments.join(' ')}`);
+	console.log(`Starting @vscode/test-web: ${testWebLocation} ${runnerArguments.join(' ')}`);
 	const proc = cp.spawn(process.execPath, [testWebLocation, ...runnerArguments], { env, stdio: 'inherit' });
 
 	proc.on('exit', (code) => process.exit(code));

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,8 +7,8 @@
  * ## Dropdown Business Rules
  *
  * ### Feature Flags
- * - `CLIBranchSupport`   — gates the Branch dropdown entirely.
- * - `CLIIsolationOption`  — gates the Isolation dropdown entirely.
+ * - `CLIBranchSupport`   â€” gates the Branch dropdown entirely.
+ * - `CLIIsolationOption`  â€” gates the Isolation dropdown entirely.
  *
  * ### Trust
  * - Git repository lookups are only performed on **trusted** folders
@@ -21,7 +21,7 @@
  * #### Isolation dropdown
  * | Scenario                                      | Shown? | Editable? | Selected                                        |
  * |-----------------------------------------------|--------|-----------|-------------------------------------------------|
- * | Feature disabled                              | No     | —         | —                                               |
+ * | Feature disabled                              | No     | â€”         | â€”                                               |
  * | Enabled, folder is a trusted git repo         | Yes    | Yes       | Last-used value (defaults to Workspace)         |
  * | Enabled, folder is NOT a git repo / untrusted | Yes    | Locked    | Forced to Workspace                             |
  * | Re-evaluated after git init (rebuildInputState)       | Yes | Unlocked | Preserves current selection              |
@@ -29,16 +29,16 @@
  * #### Folder / Repository dropdown
  * | Workspace type                        | Shown? | Editable? | Items                                              |
  * |---------------------------------------|--------|-----------|--------------------------------------------------|
- * | Welcome view (no workspace folders)   | Yes    | Yes       | MRU list (max 10) + "Browse folders…" command     |
- * | Single workspace folder, 1 repo item  | No     | —         | Implicit (used as default)                         |
- * | Single workspace folder, 0 repos      | No     | —         | Implicit (workspace folder used as default)        |
+ * | Welcome view (no workspace folders)   | Yes    | Yes       | MRU list (max 10) + "Browse foldersâ€¦" command     |
+ * | Single workspace folder, 1 repo item  | No     | â€”         | Implicit (used as default)                         |
+ * | Single workspace folder, 0 repos      | No     | â€”         | Implicit (workspace folder used as default)        |
  * | Multi-root / multiple repo items      | Yes    | Yes       | All repos + non-git workspace folders, sorted A-Z  |
  *
  * #### Branch dropdown
  * | Scenario                                   | Shown? | Editable? | Selected    |
  * |--------------------------------------------|--------|-----------|-------------|
- * | `CLIBranchSupport` disabled                | No     | —         | —           |
- * | Folder is NOT a git repo / untrusted       | No     | —         | —           |
+ * | `CLIBranchSupport` disabled                | No     | â€”         | â€”           |
+ * | Folder is NOT a git repo / untrusted       | No     | â€”         | â€”           |
  * | Git repo, isolation disabled               | Yes    | Locked    | HEAD branch |
  * | Git repo, isolation enabled + Workspace    | Yes    | Locked    | HEAD branch |
  * | Git repo, isolation enabled + Worktree     | Yes    | Editable  | HEAD branch |
@@ -51,14 +51,14 @@
  * 5. Remote refs excluded
  *
  * #### Selection persistence
- * - **Isolation** — persisted to global state on every change.
- * - **Folder**    — previous selection restored if still in list → first item.
- * - **Branch**    — previous selection if still in list → HEAD → stale previous preserved.
+ * - **Isolation** â€” persisted to global state on every change.
+ * - **Folder**    â€” previous selection restored if still in list â†’ first item.
+ * - **Branch**    â€” previous selection if still in list â†’ HEAD â†’ stale previous preserved.
  *
  * ---
  * ### EXISTING Sessions
  *
- * Everything is **locked** — no dropdowns are editable.
+ * Everything is **locked** â€” no dropdowns are editable.
  *
  * | Dropdown  | Shown?                      | Locked? | Value                                           |
  * |-----------|-----------------------------|---------|-------------------------------------------------|
@@ -70,7 +70,7 @@
  * ### State Transitions
  *
  * **handleInputStateChange** (user dropdown interaction):
- * Partial refresh — rebuilds branch and isolation only.
+ * Partial refresh â€” rebuilds branch and isolation only.
  * Cannot add/remove the folder dropdown group.
  *
  * **rebuildInputState** (external state changes):
@@ -78,8 +78,8 @@
  * Used when git repos are discovered/closed or workspace folders
  * change, since these can add/remove entire dropdown groups.
  *
- * **updateInputStateAfterFolderSelection** (Browse folders… flow):
- * Same pattern as handleInputStateChange — updates folder selection,
+ * **updateInputStateAfterFolderSelection** (Browse foldersâ€¦ flow):
+ * Same pattern as handleInputStateChange â€” updates folder selection,
  * then locks/unlocks isolation and rebuilds branch based on git status.
  *
  * **provideChatSessionProviderOptionGroups** (initial build):
@@ -87,9 +87,9 @@
  * isolation if folder is non-git / untrusted.
  */
 
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
-import { ChatSessionProviderOptionItem, Uri } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
+import { ChatSessionProviderOptionItem, Uri } from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IGitService, RepoContext } from '../../../platform/git/common/gitService';
@@ -113,8 +113,8 @@ export const OPEN_REPOSITORY_COMMAND_ID = 'github.copilot.cli.sessions.openRepos
 /**
  * Resolve which branch should be selected.
  *
- * Priority: previous selection (if still in the branch list) → active (HEAD)
- * branch → previous selection as-is (stale but preserved so it's not lost).
+ * Priority: previous selection (if still in the branch list) â†’ active (HEAD)
+ * branch â†’ previous selection as-is (stale but preserved so it's not lost).
  */
 export function resolveBranchSelection<T extends { id: string }>(
 	branches: readonly T[],
@@ -136,9 +136,9 @@ export function resolveBranchSelection<T extends { id: string }>(
 /**
  * Determine branch dropdown locked state.
  *
- * - Isolation enabled + Workspace selected → locked
- * - Isolation enabled + Worktree selected → editable
- * - Isolation disabled → locked (always workspace mode)
+ * - Isolation enabled + Workspace selected â†’ locked
+ * - Isolation enabled + Worktree selected â†’ editable
+ * - Isolation disabled â†’ locked (always workspace mode)
  */
 export function resolveBranchLockState(
 	isolationEnabled: boolean,
@@ -525,7 +525,7 @@ export class SessionOptionGroupBuilder implements ISessionOptionGroupBuilder {
 
 	/**
 	 * Rebuild dependent option groups based on current selections.
-	 * Called when any dropdown changes — inspects each group's `selected`
+	 * Called when any dropdown changes â€” inspects each group's `selected`
 	 * property to determine the current state and update accordingly.
 	 */
 	async handleInputStateChange(state: zyraxoncode.ChatSessionInputState): Promise<void> {
@@ -545,7 +545,7 @@ export class SessionOptionGroupBuilder implements ISessionOptionGroupBuilder {
 	 * Full rebuild of all option groups (isolation, folder, branch).
 	 * Called when external state changes (workspace folders added/removed,
 	 * git repos discovered/closed) that may require adding or removing
-	 * entire dropdown groups — not just updating branch/isolation.
+	 * entire dropdown groups â€” not just updating branch/isolation.
 	 */
 	async rebuildInputState(state: zyraxoncode.ChatSessionInputState, selectedFolderUri?: zyraxoncode.Uri): Promise<void> {
 		const newGroups = await this._buildGroupsOnce(state, selectedFolderUri);

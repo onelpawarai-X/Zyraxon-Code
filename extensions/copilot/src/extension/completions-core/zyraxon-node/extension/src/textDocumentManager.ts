@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
-import { window, workspace } from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
+import { window, workspace } from 'vscode';
 import { detectLanguage } from '../../lib/src/language/languageDetection';
 import { CopilotTextDocument, INotebookCell, INotebookDocument, ITextDocument } from '../../lib/src/textDocument';
 import { TextDocumentManager, WorkspaceFoldersChangeEvent } from '../../lib/src/textDocumentManager';

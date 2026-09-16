@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
+import * as l10n from '@vscode/l10n';
 import { ILogService } from '../../../../../platform/log/common/logService';
 import { CancellationToken } from '../../../../../util/vs/base/common/cancellation';
 import { LanguageModelTextPart } from '../../../../../zyraxoncodeTypes';
@@ -46,7 +46,7 @@ interface IReviewPlanResult {
 
 /**
  * Validate that a value parsed from the tool result has the shape we
- * expect for {@link IReviewPlanResult}. Cheap, structural — keeps a
+ * expect for {@link IReviewPlanResult}. Cheap, structural â€” keeps a
  * malformed payload from silently flowing into permission decisions.
  */
 function isReviewPlanResult(value: unknown): value is IReviewPlanResult {

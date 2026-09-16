@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import { Raw } from '@zyraxoncode/prompt-tsx';
-import type { ChatErrorDetails, MappedEditsResponseStream, NotebookCell, NotebookDocument, Uri } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import { Raw } from '@vscode/prompt-tsx';
+import type { ChatErrorDetails, MappedEditsResponseStream, NotebookCell, NotebookDocument, Uri } from 'vscode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { FetchStreamSource, IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatLocation, ChatResponse, getErrorDetailsFromChatFetchError, getFilteredMessage } from '../../../../platform/chat/common/commonTypes';

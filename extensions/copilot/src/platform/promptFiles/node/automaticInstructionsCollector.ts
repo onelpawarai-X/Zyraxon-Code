@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
@@ -114,7 +114,7 @@ function isPromptOrInstructionsFile(uri: URI): boolean {
  *      `copilot-instructions.md`).
  *   3. Transitive instruction-file references followed from any file
  *      already in the variable set.
- *   4. The `<instructions>…<skills>…<agents>…` customizations index text
+ *   4. The `<instructions>â€¦<skills>â€¦<agents>â€¦` customizations index text
  *      variable consumed by `CustomInstructions` /
  *      `SkillAdherenceReminder` / `skillTool`.
  */
@@ -191,7 +191,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 		return newEntries;
 	}
 
-	// ─── Step 1: applyTo matching ─────────────────────────────────────────
+	// â”€â”€â”€ Step 1: applyTo matching â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 	private async _addApplyingInstructions(
 		instructionFiles: readonly zyraxoncode.ChatInstruction[],
 		attachedFiles: ResourceSet,
@@ -239,7 +239,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 		}
 	}
 
-	// ─── Step 2: workspace agent instructions ────────────────────────────
+	// â”€â”€â”€ Step 2: workspace agent instructions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 	private async _addAgentInstructions(
 		seenInstructionUris: ResourceSet,
 		telemetry: InstructionsCollectionEvent,
@@ -277,7 +277,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 		}
 	}
 
-	// ─── Step 3: transitive instruction-file references ───────────────────
+	// â”€â”€â”€ Step 3: transitive instruction-file references â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 	private async _addReferencedInstructions(
 		startingFrom: ResourceSet,
 		telemetry: InstructionsCollectionEvent,
@@ -362,7 +362,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 		}
 	}
 
-	// ─── Step 4: customizations index ─────────────────────────────────────
+	// â”€â”€â”€ Step 4: customizations index â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 	private async _buildCustomizationsIndex(
 		instructionFiles: readonly zyraxoncode.ChatInstruction[],
 		tools: Map<zyraxoncode.LanguageModelToolInformation, boolean>,
@@ -388,7 +388,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 		const filePath = (uri: URI) => this._promptPathRepresentationService.getFilePath(uri);
 		const lines: string[] = [];
 
-		// ── <instructions> section ──────────────────────────────────────
+		// â”€â”€ <instructions> section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 		if (readTool) {
 			const useNestedAgentMd = this._configurationService.getNonExtensionConfig<boolean>(PromptConfig.USE_NESTED_AGENT_MD) === true;
 			const nestedAgentsMdPromise = useNestedAgentMd ? this._promptsService.listNestedAgentMDs(token) : Promise.resolve([] as IAgentInstructionFile[]);
@@ -437,7 +437,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 				lines.push('</instructions>', '', '');
 			}
 
-			// ── <skills> section (lives inside the readTool branch) ───────
+			// â”€â”€ <skills> section (lives inside the readTool branch) â”€â”€â”€â”€â”€â”€â”€
 			const allSkills = await this._promptsService.getSkills(token);
 			const isFileLoggingEnabled = this._configurationService.getExperimentBasedConfig<boolean>(ConfigKey.Advanced.ChatDebugFileLogging, this._experimentationService) === true;
 			const modelInvocableSkills = allSkills.filter(skill => {
@@ -534,7 +534,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 			}
 		}
 
-		// ── <agents> section ────────────────────────────────────────────
+		// â”€â”€ <agents> section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 		if (runSubagentTool) {
 			const customAgents = (await this._promptsService.getCustomAgents(token)).filter(a => a.enabled);
 
@@ -612,7 +612,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 					extensionIdHash: hashOrEmpty(skill.extensionId),
 					extensionVersion,
 					// Plugin-name/version is not exposed on `ChatSkill` today
-					// — leave empty until the API surfaces it.
+					// â€” leave empty until the API surfaces it.
 					pluginNameHash: '',
 					pluginVersion: '',
 				});
@@ -643,7 +643,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 function newTelemetryEvent(): InstructionsCollectionEvent {

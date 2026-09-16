@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import assert from 'assert';
-import type { MappedEditsResponseStream } from 'zyraxoncode';
+import type { MappedEditsResponseStream } from 'vscode';
 import { Intent } from '../../src/extension/common/constants';
 import { IDocumentContext } from '../../src/extension/prompt/node/documentContext';
 import { CodeMapper, ICodeMapperExistingDocument } from '../../src/extension/prompts/node/codeMapper/codeMapper';
@@ -227,8 +227,8 @@ forEditsAndAgent((variant, model, configurations) => {
 					`"devDependencies": {`,
 					`	"@zyraxon/tiktokenizer": "^1.0.6",`,
 					`	"@types/node": "^20.11.30",`,
-					`	"@zyraxoncode/test-cli": "^0.0.9",`,
-					`	"@zyraxoncode/test-electron": "^2.4.1",`,
+					`	"@vscode/test-cli": "^0.0.9",`,
+					`	"@vscode/test-electron": "^2.4.1",`,
 					`	"@types/zyraxoncode": "^1.89.0",`,
 					`	"esbuild": "0.25.0",`,
 					`	"npm-dts": "^1.3.12",`, // removed mocha

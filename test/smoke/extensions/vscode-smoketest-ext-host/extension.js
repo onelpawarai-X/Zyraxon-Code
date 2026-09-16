@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 // @ts-check
-const zyraxoncode = require('zyraxoncode');
+const zyraxoncode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 const os = require('os');

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ import { TextEdit } from './extHostTypes.js';
 import { Range, TextDocumentSaveReason, EndOfLine } from './extHostTypeConverters.js';
 import { ExtHostDocuments } from './extHostDocuments.js';
 import { SaveReason } from '../../common/editor.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { LinkedList } from '../../../base/common/linkedList.js';
 import { ILogService } from '../../../platform/log/common/log.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';

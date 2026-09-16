@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Command, commands, ThemeIcon, window } from 'zyraxoncode';
+import { Command, commands, ThemeIcon, window } from 'vscode';
 import { ConfigKey } from '../../../../platform/configuration/common/configurationService';
 import { InlineEditRequestLogContext } from '../../../../platform/inlineEdits/common/inlineEditLogContext';
 import { TsExpr } from '../../../../platform/inlineEdits/common/utils/tsExpr';

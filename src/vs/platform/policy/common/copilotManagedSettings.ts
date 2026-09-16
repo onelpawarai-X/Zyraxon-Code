@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -65,7 +65,7 @@ export const COPILOT_ALLOW_MANAGED_HOOKS_ONLY_CONFIG = 'chat.hooks.allowManagedO
  * Managed-settings key for the default chat model (carried as a plain string: `auto`, a model
  * family name, or a full model id). Nested under `permissions` in the managed-settings schema
  * (alongside {@link COPILOT_DISABLE_BYPASS_PERMISSIONS_MODE_KEY}), so it flattens to the dot-path
- * `permissions.model` in the normalized bag — the key policy `value()` callbacks must read.
+ * `permissions.model` in the normalized bag â€” the key policy `value()` callbacks must read.
  */
 export const COPILOT_MODEL_KEY = 'permissions.model';
 
@@ -130,7 +130,7 @@ let managedModelValueCallback: ((policyData: IPolicyData) => ManagedSettingValue
  * `value` callback for the default-chat-model managed setting ({@link COPILOT_MODEL_KEY}). Like
  * {@link managedSettingValue} it locks the setting to the managed value and otherwise falls through
  * to the user's own value, but it additionally trims the string and treats a blank/whitespace-only
- * value as "unset" (returns `undefined`) — an admin clearing the field must not lock the setting to
+ * value as "unset" (returns `undefined`) â€” an admin clearing the field must not lock the setting to
  * an empty string. The model-specific normalization lives here, alongside the other managed-settings
  * handling, rather than inline at the policy declaration, so every managed-settings control is wired
  * the same way.
@@ -261,7 +261,7 @@ export function projectManagedSettings(values: ManagedSettingsData, definitions:
 export type ManagedSettingsChannel =
 	/** GitHub `/copilot_internal/managed_settings` endpoint (server-delivered). */
 	| 'server'
-	/** Native MDM: OS registry (Windows) / managed preferences (macOS) via `@zyraxoncode/policy-watcher`. */
+	/** Native MDM: OS registry (Windows) / managed preferences (macOS) via `@vscode/policy-watcher`. */
 	| 'nativeMdm'
 	/** File on a well-known disk path (`managed-settings.json`). */
 	| 'file';
@@ -273,7 +273,7 @@ export type ManagedSettingsChannel =
 export type ManagedSettingsSource = ManagedSettingsChannel | 'none';
 
 /**
- * The delivery channels in fixed precedence order (highest first): native MDM → server-delivered →
+ * The delivery channels in fixed precedence order (highest first): native MDM â†’ server-delivered â†’
  * file on disk. This single ordered list drives the per-key resolution in {@link pickManagedSettings}
  * and is the one place to extend when a new channel is introduced. Rationale for the order: the
  * server is harder to bypass than local MDM, and a local file is the most easily tampered with.
@@ -311,7 +311,7 @@ export interface IManagedSettingsPick {
 /**
  * Merge the managed-settings bags from every delivery channel on a **per-key** basis.
  *
- * Precedence (highest first): native MDM → server-delivered → file on disk. Unlike a single
+ * Precedence (highest first): native MDM â†’ server-delivered â†’ file on disk. Unlike a single
  * authoritative source, the channels *are* merged key-by-key: for each key the highest-precedence
  * channel that supplies it wins, but a key that the higher channels never set is still filled in by
  * a lower channel. A value an admin locks via native MDM therefore cannot be overwritten by the
@@ -388,7 +388,7 @@ export const MANAGED_SETTINGS_FILE_NAME = 'managed-settings.json';
  * structured key is one row here (plus the policy declaration that reads the bag key).
  *
  * `key` is both the source field name read from the parsed input and the canonical bag key the
- * JSON string is stored under — for structured settings these are identical by contract (a
+ * JSON string is stored under â€” for structured settings these are identical by contract (a
  * structured key's bag name matches the schema field exactly; only scalar settings flatten to a
  * differently-shaped dot-path, and those don't go through this table).
  */
@@ -522,13 +522,13 @@ function withNestedManagedKeyDeleted(obj: Record<string, unknown>, dottedKey: st
  * `ManagedSettingsData` bag that the policy framework consumes. This is the **single**
  * normalization path for all delivery channels, so downstream projection and policy `value()`
  * callbacks behave identically regardless of source. It does not enforce the declared
- * `managedSettings` schema — dropping undeclared or type-mismatched keys happens later, at
+ * `managedSettings` schema â€” dropping undeclared or type-mismatched keys happens later, at
  * {@link projectManagedSettings}.
  *
  * - Scalar leaves (`permissions.*` and any forward-compatible scalar keys) are flattened into
  *   dot-separated keys.
  * - Structured settings (declared in {@link STRUCTURED_MANAGED_SETTINGS}) are carried as canonical
- *   JSON strings under a single key each — the same shape an admin authors via native MDM.
+ *   JSON strings under a single key each â€” the same shape an admin authors via native MDM.
  *   `PolicyConfiguration` parses the JSON back into the object-typed setting on read.
  *   `extraKnownMarketplaces` is normalized from the schema's `{ [id]: { source, autoUpdate? } }`
  *   map to the policy-backed marketplace dict.

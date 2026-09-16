@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,9 +7,9 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
 import { pickRemoteSource } from './remoteSource';
-import { l10n, workspace, window, Uri, ProgressLocation, commands } from 'zyraxoncode';
+import { l10n, workspace, window, Uri, ProgressLocation, commands } from 'vscode';
 import { RepositoryCache, RepositoryCacheInfo } from './repositoryCache';
-import TelemetryReporter from '@zyraxoncode/extension-telemetry';
+import TelemetryReporter from '@vscode/extension-telemetry';
 import { Model } from './model';
 
 type ApiPostCloneAction = 'none';

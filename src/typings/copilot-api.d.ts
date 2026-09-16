@@ -1,16 +1,16 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 /**
- * Ambient type declarations for @zyraxoncode/copilot-api.
+ * Ambient type declarations for @vscode/copilot-api.
  *
  * The package's .d.ts files use extensionless relative imports which are
  * incompatible with `moduleResolution: "nodenext"`. This file provides
  * the subset of types used by the agent host until the package is fixed.
  */
-declare module '@zyraxoncode/copilot-api' {
+declare module '@vscode/copilot-api' {
 
 	export interface IAbortSignal {
 		readonly aborted: boolean;

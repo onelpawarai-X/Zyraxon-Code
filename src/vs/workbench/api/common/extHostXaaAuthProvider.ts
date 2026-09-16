@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { stringHash } from '../../../base/common/hash.js';
 import { buildIdJagExchangeBody, buildResourceRedemptionBody, fetchAuthorizationServerMetadata, getClaimsFromJWT, IAuthorizationJWTClaims, IAuthorizationTokenResponse, isAuthorizationTokenResponse } from '../../../base/common/oauth.js';
 import { DynamicAuthProvider } from './extHostAuthentication.js';
@@ -56,7 +56,7 @@ export function isExpired(entry: { token: { expires_in?: number }; created_at: n
  * Cross App Access (XAA) / enterprise-managed authentication provider, per
  * `draft-ietf-oauth-identity-assertion-authz-grant`.
  *
- * The IdP login leg is identical to the base class — Auth Code + PKCE against
+ * The IdP login leg is identical to the base class â€” Auth Code + PKCE against
  * the org-configured issuer, using the pre-registered client credentials. On
  * top of that:
  *
@@ -86,7 +86,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 		 * Per-(resource, client_id) client secrets. Lazily populated via the main-thread
 		 * prompt. Keyed by both the resource indicator and the client_id because two
 		 * different resources may legitimately share a client_id but require different
-		 * secrets — keying by client_id alone could send the wrong secret to the wrong AS.
+		 * secrets â€” keying by client_id alone could send the wrong secret to the wrong AS.
 		 */
 		private readonly _resourceClientSecrets = new Map<string, string>();
 
@@ -98,7 +98,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		constructor(...args: any[]) {
 			super(...args);
-			// `authorizationServer` is exposed as a readonly field by the base class — use it
+			// `authorizationServer` is exposed as a readonly field by the base class â€” use it
 			// directly instead of indexing into `args` so this can't silently break if the
 			// base constructor signature changes.
 			const issuer = this.authorizationServer;
@@ -124,14 +124,14 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 				return [toSession(entry.token, entry.scopes, entry.account)];
 			}
 			if (entry) {
-				// Expired — drop and try to silently re-mint below.
+				// Expired â€” drop and try to silently re-mint below.
 				this._resourceTokens.delete(key);
 			}
 
 			// 2. Silent re-mint: the base DynamicAuthProvider persists the IdP session in secret
 			//    storage, so on window reload we can pick it up and re-run legs 2-4 (ID-JAG exchange
 			//    + resource redemption) without any user interaction. Per the IAuthenticationProvider
-			//    contract, getSessions MUST NOT prompt — if anything is missing we just return [].
+			//    contract, getSessions MUST NOT prompt â€” if anything is missing we just return [].
 			const idpSession = await this._tryGetSilentIdpSession();
 			if (!idpSession?.idToken) {
 				return [];
@@ -161,7 +161,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 				throw new Error('Enterprise-managed authentication requires `options.resource` (the resource indicator / MCP server URL) but none was provided.');
 			}
 
-			// Ensure IdP session via the base class (may interact). Don't pass the XAA options through —
+			// Ensure IdP session via the base class (may interact). Don't pass the XAA options through â€”
 			// the IdP login leg is unrelated to the resource/audience, and the base provider would
 			// otherwise look for cached tokens scoped by a foreign audience.
 			const idpSession = await this._ensureIdpSession();
@@ -175,7 +175,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 				// Today the only such path is missing resource client_secret, which prompts the user;
 				// if the prompt is dismissed we still try the redemption with `undefined` (valid for
 				// `token_endpoint_auth_method=none`). So in practice this branch is unreachable for
-				// silent=false — guard defensively anyway.
+				// silent=false â€” guard defensively anyway.
 				throw new Error('Failed to mint a resource access token for the enterprise-managed MCP server.');
 			}
 			return toSession(minted.token, minted.scopes, minted.account);
@@ -183,7 +183,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 
 		/**
 		 * Mints a resource-scoped access token by running legs 2-4 of the XAA flow:
-		 *   2. Exchange IdP id_token → ID-JAG (RFC 8693 token exchange at issuer)
+		 *   2. Exchange IdP id_token â†’ ID-JAG (RFC 8693 token exchange at issuer)
 		 *   3. Discover the resource AS token endpoint
 		 *   4. Redeem the ID-JAG at the resource AS for an access token (RFC 7523 jwt-bearer grant)
 		 *
@@ -201,7 +201,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 			options: zyraxoncode.AuthenticationProviderSessionOptions,
 			silent: boolean,
 		): Promise<IResourceCacheEntry | undefined> {
-			// Leg 2: id_token → ID-JAG
+			// Leg 2: id_token â†’ ID-JAG
 			const jag = await this._exchangeForIdJag(idpSession.idToken!, audience, resource, scopes);
 
 			// Leg 3: resource AS token endpoint
@@ -238,7 +238,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 			// directly via `options.clientSecret` (resolved in `mainThreadMcp` from URL-scoped
 			// secret storage via the "Set Client Secret" code lens above `oauth.clientId` in
 			// mcp.json); otherwise we fall back to a cached per-resource secret or prompt the
-			// user. We pass `undefined` if the user leaves the prompt blank — that's valid for
+			// user. We pass `undefined` if the user leaves the prompt blank â€” that's valid for
 			// clients registered with `token_endpoint_auth_method=none`.
 			let resourceClientSecret: string | undefined = this._clientSecret;
 			const configuredResourceClientSecret = typeof options.clientSecret === 'string' && options.clientSecret.length > 0 ? options.clientSecret : undefined;
@@ -251,15 +251,15 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 					resourceClientSecret = this._resourceClientSecrets.get(secretCacheKey);
 				} else if (silent) {
 					// Silent path: the only way to obtain the resource client_secret here is to
-					// prompt the user — which we can't do. Bail; the caller will escalate to
+					// prompt the user â€” which we can't do. Bail; the caller will escalate to
 					// createSession (allowed to interact) if it needs the token.
 					this._logger.info(`[XAA] Silent mint requires resource client_secret for '${resourceClientId}' but none is cached or configured; deferring to interactive flow.`);
 					return undefined;
 				} else {
-					this._logger.info(`[XAA] Resource AS requires a distinct client_id '${resourceClientId}' — prompting for matching client_secret.`);
+					this._logger.info(`[XAA] Resource AS requires a distinct client_id '${resourceClientId}' â€” prompting for matching client_secret.`);
 					const promptedSecret = await this._proxy.$promptForResourceClientSecret(resourceClientId, resource);
 					if (promptedSecret === undefined) {
-						// User cancelled — don't cache, so re-prompt is possible on next call.
+						// User cancelled â€” don't cache, so re-prompt is possible on next call.
 						return undefined;
 					}
 					// Blank-on-confirm is a valid answer (public client / token_endpoint_auth_method=none).
@@ -380,7 +380,7 @@ export function toSession(token: IAuthorizationTokenResponse, scopes: readonly s
 				label: claims.preferred_username || claims.name || claims.email || 'XAA',
 			};
 		} catch {
-			// ignore — the id_token wasn't a decodable JWT
+			// ignore â€” the id_token wasn't a decodable JWT
 		}
 	}
 	account ??= fallbackAccount ?? { id: 'unknown', label: 'XAA' };

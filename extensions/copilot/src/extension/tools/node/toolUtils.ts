@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptPiece } from '@zyraxoncode/prompt-tsx';
-import type * as zyraxoncode from 'zyraxoncode';
+import { PromptElement, PromptPiece } from '@vscode/prompt-tsx';
+import type * as zyraxoncode from 'vscode';
 import { IChatDebugFileLoggerService } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { ISessionTranscriptService } from '../../../platform/chat/common/sessionTranscriptService';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -320,7 +320,7 @@ export async function isFileExternalAndNeedsConfirmation(accessor: ServicesAcces
 	}
 
 	// If the file doesn't exist, throw immediately rather than showing a confusing "external file"
-	// confirmation — the tool should fail with a clear "file not found" error instead.
+	// confirmation â€” the tool should fail with a clear "file not found" error instead.
 	const fileExists = await fileSystemService.stat(normalizedUri).then(() => true).catch(() => false);
 	if (!fileExists) {
 		throw new Error(`File ${normalizedUri.fsPath} does not exist`);

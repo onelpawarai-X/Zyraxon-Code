@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@zyraxoncode/copilot-api';
+import { RequestType } from '@vscode/copilot-api';
 import { Minimatch } from 'minimatch';
 import { createSha256Hash } from '../../../util/common/crypto';
 import { coalesce } from '../../../util/vs/base/common/arrays';

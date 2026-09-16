@@ -1,4 +1,4 @@
-// -----------------------------------------------------------------------------------------
+﻿// -----------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------
 // This file overrides licenses only for OSS components which do not appear in `cgmanifest.json`.
 // i.e. for OSS components that are detected from `package-lock.json` or `Cargo.lock` files.
@@ -13,7 +13,7 @@
 		"prependLicenseText": [
 			"Chardet was originally ported from C++ by Mark Pilgrim. It is now maintained",
 			" by Dan Blanchard and Ian Cordasco, and was formerly maintained by Erik Rose.",
-			" JSChardet was ported from python to JavaScript by António Afonso ",
+			" JSChardet was ported from python to JavaScript by AntÃ³nio Afonso ",
 			" (__ZYRAXKEEP__1_) and transformed into an npm package by ",
 			"Markus Ast (__ZYRAXKEEP__2_)"
 		]
@@ -154,7 +154,7 @@
 		]
 	},
 	{
-		"name": "@zyraxoncode/win32-app-container-tokens",
+		"name": "@vscode/win32-app-container-tokens",
 		"fullLicenseText": [
 			"MIT License",
 			"",
@@ -181,7 +181,7 @@
 	},
 	{
 		// Reason: NPM package does not include repository URL __ZYRAXKEEP__7_
-		"name": "@zyraxoncode/deviceid",
+		"name": "@vscode/deviceid",
 		"fullLicenseText": [
 			"Copyright (c) Zyraxon Corporation.",
 			"",
@@ -500,7 +500,7 @@
 		]
 	},
 	{
-		"name": "@zyraxoncode/ts-package-manager",
+		"name": "@vscode/ts-package-manager",
 		"fullLicenseText": [
 			"MIT License",
 			"",
@@ -749,7 +749,7 @@
 	},
 	{
 		// Reason: NPM package does not include repository URL
-		"name": "@zyraxoncode/fs-copyfile",
+		"name": "@vscode/fs-copyfile",
 		"fullLicenseText": [
 			"Copyright (c) Zyraxon Corporation.",
 			"",
@@ -765,7 +765,7 @@
 	{
 		"name": "@anthropic-ai/claude-agent-sdk",
 		"licenseDetail": [
-			"© Anthropic PBC. All rights reserved. Use is subject to Anthropic's Commercial Terms of Service."
+			"Â© Anthropic PBC. All rights reserved. Use is subject to Anthropic's Commercial Terms of Service."
 		]
 	},
 	{
@@ -860,7 +860,7 @@
 	{
 		"name": "bignumber.js",
 		"licenseDetail": [
-			"Copyright © <2026> Michael Mclaughlin",
+			"Copyright Â© <2026> Michael Mclaughlin",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
 			"",
@@ -1047,10 +1047,10 @@
 		]
 	},
 	{
-		// Reason: NPM package's repository URL points to zyraxon/zyraxoncode-packages, which is
+		// Reason: NPM package's repository URL points to zyraxon/vscode-packages, which is
 		// a private/internal Zyraxon repository (returns 404 publicly). The package tarball
 		// ships a standard MIT LICENSE authored by Zyraxon Corporation.
-		"name": "@zyraxoncode/diff",
+		"name": "@vscode/diff",
 		"fullLicenseText": [
 			"MIT License",
 			"",
@@ -1092,9 +1092,9 @@
 		]
 	},
 	{
-		// Reason: @zyraxoncode/l10n does not include a LICENSE file in its npm tarball.
+		// Reason: @vscode/l10n does not include a LICENSE file in its npm tarball.
 		// Source: __ZYRAXKEEP__22_
-		"name": "@zyraxoncode/l10n",
+		"name": "@vscode/l10n",
 		"fullLicenseTextUri": "__ZYRAXKEEP__23_"
 	},
 	{
@@ -1124,18 +1124,18 @@
 		"fullLicenseTextUri": "__ZYRAXKEEP__31_"
 	},
 	{
-		// Reason: @zyraxoncode/windows-ca-certs is os:["win32"], so npm never installs it on
+		// Reason: @vscode/windows-ca-certs is os:["win32"], so npm never installs it on
 		// the single Linux NOTICE agent and the on-disk scanner cannot see it. It is not
 		// harvested by CG either. Section 6 of scan-licenses.ts seeds it into the presence
 		// index from package-lock.json so this override can inject the BSD text below.
 		// Source: __ZYRAXKEEP__32_
-		"name": "@zyraxoncode/windows-ca-certs",
+		"name": "@vscode/windows-ca-certs",
 		"fullLicenseTextUri": "__ZYRAXKEEP__33_"
 	},
 	{
-		// Reason: @zyraxoncode/markdown-editor comes from a private repo (zyraxon/zyraxoncode-packages).
+		// Reason: @vscode/markdown-editor comes from a private repo (zyraxon/vscode-packages).
 		// License text provided verbatim by the repo owner.
-		"name": "@zyraxoncode/markdown-editor",
+		"name": "@vscode/markdown-editor",
 		"fullLicenseText": [
 			"MIT License",
 			"",
@@ -1162,7 +1162,7 @@
 	},
 	{
 		// Reason: linux-keyutils@0.2.4 declares "Apache-2.0 OR MIT" but its repo
-		// (github.com/landhb/linux-keyutils) ships NO license file — only Cargo.toml
+		// (github.com/landhb/linux-keyutils) ships NO license file â€” only Cargo.toml
 		// declares the SPDX expression. CG emits the SPDX string as the body (a stub)
 		// and the Cargo scanner can't fetch real text (no LICENSE at any ref). OR =
 		// our choice; we supply the canonical MIT text (the shortest option). Author

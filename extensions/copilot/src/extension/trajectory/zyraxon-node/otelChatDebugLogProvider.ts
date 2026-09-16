@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IChatDebugFileLoggerService, IDebugLogEntry, sessionResourceToId } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -53,7 +53,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 	/** Imported sessions stored in memory (import is rare, sessions are small) */
 	private readonly _importedSessions = new Map<string, IDebugLogEntry[]>();
 
-	/** Map of child session IDs → scoped parent event ID for the active session.
+	/** Map of child session IDs â†’ scoped parent event ID for the active session.
 	 *  Used by the live handler to route child entries under the correct parent node. */
 	private readonly _activeChildSessions = new Map<string, string>();
 
@@ -106,7 +106,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 	 * across ZYRAXON Code restarts (OTel resets its span counter on restart).
 	 */
 	private _scopeEventIds(evt: zyraxoncode.ChatDebugEvent, runIndex: number): void {
-		if (runIndex === 0) { return; } // First run — no suffix needed
+		if (runIndex === 0) { return; } // First run â€” no suffix needed
 		const suffix = `:r${runIndex}`;
 		const evtWithId = evt as { id?: string; parentEventId?: string };
 		if (evtWithId.id) { evtWithId.id += suffix; }
@@ -232,13 +232,13 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 					this._activeChildSessions.set(childSessionId, scopedParentId);
 					// Also load any entries already written before we registered
 					this._streamChildSessionEntries(childSessionId, scopedParentId, entry).catch(() => {
-						// Expected for live scenarios — child file may not exist yet
+						// Expected for live scenarios â€” child file may not exist yet
 					});
 				}
 			}
 		});
 
-		// Read historical entries — from imported cache or from JSONL on disk
+		// Read historical entries â€” from imported cache or from JSONL on disk
 		const startTime = Date.now();
 		const importedEntries = this._importedSessions.get(sessionId);
 
@@ -392,7 +392,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 				if (token.isCancellationRequested) { break; }
 				await this._streamChildSessionEntries(childSessionId, scopedParentId);
 			}
-		}).catch(() => { /* streaming failed — tail events are still shown */ });
+		}).catch(() => { /* streaming failed â€” tail events are still shown */ });
 	}
 
 	/**
@@ -434,7 +434,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 	private async _readChildEntries(childSessionRefEntry: IDebugLogEntry): Promise<IDebugLogEntry[]> {
 		const childSessionId = childSessionRefEntry.attrs.childSessionId as string | undefined;
 
-		// Try readEntries first — handles active sessions with file + unflushed buffer
+		// Try readEntries first â€” handles active sessions with file + unflushed buffer
 		if (childSessionId) {
 			const entries = await this._fileLogger.readEntries(childSessionId);
 			if (entries.length > 0) {
@@ -474,7 +474,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 					});
 					return entries;
 				} catch {
-					// Expected for live scenarios — file hasn't been flushed yet.
+					// Expected for live scenarios â€” file hasn't been flushed yet.
 					// The live handler will pick up child entries via _activeChildSessions.
 				}
 			}
@@ -495,7 +495,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 			return this._resolveEntry(entry);
 		}
 
-		// Cache miss — scan JSONL on disk to find the entry.
+		// Cache miss â€” scan JSONL on disk to find the entry.
 		// This happens when the entry was evicted from the LRU cache.
 		if (this._activeSessionId) {
 			const sessionId = this._activeSessionId;
@@ -585,7 +585,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 		return undefined;
 	}
 
-	// ── Export / Import ──
+	// â”€â”€ Export / Import â”€â”€
 
 	private async _provideChatDebugLogExport(
 		sessionResource: zyraxoncode.Uri,
@@ -675,7 +675,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 				const parsed = JSON.parse(jsonString);
 				sourceSessionId = parsed.copilotChat?.sessionId;
 				sessionTitle = parsed.copilotChat?.sessionTitle;
-			} catch { /* JSONL format — no top-level object */ }
+			} catch { /* JSONL format â€” no top-level object */ }
 			sourceSessionId ??= extractSessionId(spans[0]) ?? `imported-${Date.now()}`;
 			sessionTitle ??= deriveSessionTitleFromSpans(spans);
 
@@ -759,7 +759,7 @@ export class OTelChatDebugLogProviderContribution extends Disposable implements 
 	}
 }
 
-// ── Helpers ──
+// â”€â”€ Helpers â”€â”€
 
 import type { ICompletedSpanData } from '../../../platform/otel/common/otelService';
 

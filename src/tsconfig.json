@@ -1,4 +1,4 @@
-{
+﻿{
 	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
 		"esModuleInterop": true,
@@ -30,8 +30,8 @@
 		"./*.ts",
 		"./typings",
 		"./vs/**/*.ts",
-		"./zyraxoncode-dts/zyraxoncode.proposed.*.d.ts",
-		"./zyraxoncode-dts/zyraxoncode.d.ts"
+		"./vscode-dts/zyraxoncode.proposed.*.d.ts",
+		"./vscode-dts/zyraxoncode.d.ts"
 	],
 	"exclude": [
 		"vs/workbench/contrib/webview/browser/pre/service-worker.js"

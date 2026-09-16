@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ import { Model } from '../model';
 import { Repository as BaseRepository, Resource } from '../repository';
 import type { InputBox, Git, API, Repository, Remote, RepositoryState, Branch, Ref, Submodule, Commit, Change, RepositoryUIState, LogOptions, APIState, CommitOptions, CredentialsProvider, BranchQuery, PushErrorHandler, PublishEvent, FetchOptions, RemoteSourceProvider, RemoteSourcePublisher, PostCommitCommandsProvider, RefQuery, BranchProtectionProvider, InitOptions, SourceControlHistoryItemDetailsProvider, CloneOptions, CommitShortStat, DiffChange, Worktree, RepositoryKind, RepositoryAccessDetails } from './git';
 import { ForcePushMode, GitErrorCodes, RefType, Status } from './git.constants';
-import { Event, SourceControlInputBox, Uri, SourceControl, Disposable, commands, CancellationToken } from 'zyraxoncode';
+import { Event, SourceControlInputBox, Uri, SourceControl, Disposable, commands, CancellationToken } from 'vscode';
 import { combinedDisposable, filterEvent, mapEvent } from '../util';
 import { toGitUri } from '../uri';
 import { GitExtensionImpl } from './extension';

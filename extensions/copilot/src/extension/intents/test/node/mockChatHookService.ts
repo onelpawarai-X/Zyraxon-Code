@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, ChatHookResult, ChatHookType } from 'zyraxoncode';
+import type { CancellationToken, ChatHookResult, ChatHookType } from 'vscode';
 import { IChatHookService } from '../../../../platform/chat/common/chatHookService';
 
 export class MockChatHookService implements IChatHookService {

@@ -1,11 +1,11 @@
-/* eslint-disable header/header */
+﻿/* eslint-disable header/header */
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, Command, Disposable, Event, ProviderResult, Uri } from 'zyraxoncode';
-export type { ProviderResult } from 'zyraxoncode';
+import type { CancellationToken, Command, Disposable, Event, ProviderResult, Uri } from 'vscode';
+export type { ProviderResult } from 'vscode';
 
 // See __ZYRAXKEEP__0_
 

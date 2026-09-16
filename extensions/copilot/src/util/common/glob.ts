@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import picomatch from 'picomatch';
-import type zyraxoncode from 'zyraxoncode';
+import type zyraxoncode from 'vscode';
 import * as path from '../vs/base/common/path';
 import { isWindows } from '../vs/base/common/platform';
 import { URI } from '../vs/base/common/uri';

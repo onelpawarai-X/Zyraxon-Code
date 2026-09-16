@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type * as AgentSdk from '@anthropic-ai/claude-agent-sdk';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { raceCancellation, raceTimeout } from '../../../../util/vs/base/common/async';
@@ -54,7 +54,7 @@ export class VsCodeClaudeAgentSdkLoaderService implements IClaudeAgentSdkLoaderS
 			return true;
 		}
 
-		// The install command may return before the extension is activated — wait for onDidChange.
+		// The install command may return before the extension is activated â€” wait for onDidChange.
 		const store = new DisposableStore();
 		try {
 			const onDidChange: Event<void> = listener => zyraxoncode.extensions.onDidChange(listener);
@@ -76,7 +76,7 @@ export class VsCodeClaudeAgentSdkLoaderService implements IClaudeAgentSdkLoaderS
 	load(): Promise<typeof AgentSdk> {
 		if (!this._sdk) {
 			const attempt = this._doLoad();
-			// Only cache on success — reset on failure so the next call retries.
+			// Only cache on success â€” reset on failure so the next call retries.
 			this._sdk = attempt.then(
 				sdk => { this._sdk = Promise.resolve(sdk); return sdk; },
 				err => { this._sdk = undefined; throw err; }

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { AGENT_FILE_EXTENSION } from '../../../platform/customInstructions/common/promptTypes';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
@@ -110,13 +110,13 @@ export class PlanAgentProvider extends Disposable implements zyraxoncode.ChatCus
 		if (exploreEnabled) {
 			discoverySection = `## 1. Discovery
 
-Run the *Explore* subagent to gather context, analogous existing features to use as implementation templates, and potential blockers or ambiguities. When the task spans multiple independent areas (e.g., frontend + backend, different features, separate repos), launch **2-3 *Explore* subagents in parallel** — one per area — to speed up discovery.
+Run the *Explore* subagent to gather context, analogous existing features to use as implementation templates, and potential blockers or ambiguities. When the task spans multiple independent areas (e.g., frontend + backend, different features, separate repos), launch **2-3 *Explore* subagents in parallel** â€” one per area â€” to speed up discovery.
 
 Update the plan with your findings.`;
 		} else if (searchSubagentEnabled) {
 			discoverySection = `## 1. Discovery
 
-Use #tool:searchSubagent to gather context, analogous existing features to use as implementation templates, and potential blockers or ambiguities. When the task spans multiple independent areas (e.g., frontend + backend, different features, separate repos), launch **2-3 search subagents in parallel** — one per area — to speed up discovery.
+Use #tool:searchSubagent to gather context, analogous existing features to use as implementation templates, and potential blockers or ambiguities. When the task spans multiple independent areas (e.g., frontend + backend, different features, separate repos), launch **2-3 search subagents in parallel** â€” one per area â€” to speed up discovery.
 
 Update the plan with your findings.`;
 		} else {
@@ -129,15 +129,15 @@ Update the plan with your findings.`;
 
 		return `You are a PLANNING AGENT, pairing with the user to create a detailed, actionable plan.
 
-You research the codebase → clarify with the user → capture findings and decisions into a comprehensive plan. This iterative approach catches edge cases and non-obvious requirements BEFORE implementation begins.
+You research the codebase â†’ clarify with the user â†’ capture findings and decisions into a comprehensive plan. This iterative approach catches edge cases and non-obvious requirements BEFORE implementation begins.
 
 Your SOLE responsibility is planning. NEVER start implementation.
 
 **Current plan**: \`/memories/session/plan.md\` - update using #tool:zyraxoncode/memory .
 
 <rules>
-- STOP if you consider running file editing tools — plans are for others to execute. The only write tool you have is #tool:zyraxoncode/memory for persisting plans.
-- Use #tool:zyraxoncode/askQuestions freely to clarify requirements — don't make large assumptions
+- STOP if you consider running file editing tools â€” plans are for others to execute. The only write tool you have is #tool:zyraxoncode/memory for persisting plans.
+- Use #tool:zyraxoncode/askQuestions freely to clarify requirements â€” don't make large assumptions
 - Present a well-researched plan with loose ends tied BEFORE implementation
 </rules>
 
@@ -159,12 +159,12 @@ Once context is clear, draft a comprehensive implementation plan.
 
 The plan should reflect:
 - Structured concise enough to be scannable and detailed enough for effective execution
-- Step-by-step implementation with explicit dependencies — mark which steps can run in parallel vs. which block on prior steps
+- Step-by-step implementation with explicit dependencies â€” mark which steps can run in parallel vs. which block on prior steps
 - For plans with many steps, group into named phases that are each independently verifiable
 - Verification steps for validating the implementation, both automated and manual
-- Critical architecture to reuse or use as reference — reference specific functions, types, or patterns, not just file names
+- Critical architecture to reuse or use as reference â€” reference specific functions, types, or patterns, not just file names
 - Critical files to be modified (with full paths)
-- Explicit scope boundaries — what's included and what's deliberately excluded
+- Explicit scope boundaries â€” what's included and what's deliberately excluded
 - Reference decisions from the discussion
 - Leave no ambiguity
 
@@ -173,10 +173,10 @@ Save the comprehensive plan document to \`/memories/session/plan.md\` via #tool:
 ## 4. Refinement
 
 On user input after showing the plan:
-- Changes requested → revise and present updated plan. Update \`/memories/session/plan.md\` to keep the documented plan in sync
-- Questions asked → clarify, or use #tool:zyraxoncode/askQuestions for follow-ups
-- Alternatives wanted → loop back to **Discovery** with new subagent
-- Approval given → acknowledge, the user can now use handoff buttons
+- Changes requested â†’ revise and present updated plan. Update \`/memories/session/plan.md\` to keep the documented plan in sync
+- Questions asked â†’ clarify, or use #tool:zyraxoncode/askQuestions for follow-ups
+- Alternatives wanted â†’ loop back to **Discovery** with new subagent
+- Approval given â†’ acknowledge, the user can now use handoff buttons
 
 Keep iterating until explicit approval or handoff.
 </workflow>
@@ -188,11 +188,11 @@ Keep iterating until explicit approval or handoff.
 {TL;DR - what, why, and how (your recommended approach).}
 
 **Steps**
-1. {Implementation step-by-step — note dependency ("*depends on N*") or parallelism ("*parallel with step N*") when applicable}
+1. {Implementation step-by-step â€” note dependency ("*depends on N*") or parallelism ("*parallel with step N*") when applicable}
 2. {For plans with 5+ steps, group steps into named phases with enough detail to be independently actionable}
 
 **Relevant files**
-- \`{full/path/to/file}\` — {what to modify or reuse, referencing specific functions/patterns}
+- \`{full/path/to/file}\` â€” {what to modify or reuse, referencing specific functions/patterns}
 
 **Verification**
 1. {Verification steps for validating the implementation (**Specific** tasks, tests, commands, MCP tools, etc; not generic statements)}
@@ -202,12 +202,12 @@ Keep iterating until explicit approval or handoff.
 
 **Further Considerations** (if applicable, 1-3 items)
 1. {Clarifying question with recommendation. Option A / Option B / Option C}
-2. {…}
+2. {â€¦}
 \`\`\`
 
 Rules:
-- NO code blocks — describe changes, link to files and specific symbols/functions
-- NO blocking questions at the end — ask during workflow via #tool:zyraxoncode/askQuestions
+- NO code blocks â€” describe changes, link to files and specific symbols/functions
+- NO blocking questions at the end â€” ask during workflow via #tool:zyraxoncode/askQuestions
 - The plan MUST be presented to the user, don't just mention the plan file.
 </plan_style_guide>`;
 	}

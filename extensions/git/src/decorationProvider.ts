@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { window, workspace, Uri, Disposable, Event, EventEmitter, FileDecoration, FileDecorationProvider, ThemeColor, l10n, SourceControlHistoryItemRef } from 'zyraxoncode';
+import { window, workspace, Uri, Disposable, Event, EventEmitter, FileDecoration, FileDecorationProvider, ThemeColor, l10n, SourceControlHistoryItemRef } from 'vscode';
 import * as path from 'path';
 import { Repository, GitResourceGroup } from './repository';
 import { Model } from './model';
@@ -210,31 +210,31 @@ class GitIncomingChangesFileDecorationProvider implements FileDecorationProvider
 			switch (change.status) {
 				case Status.INDEX_ADDED:
 					bucket.set(change.uri.toString(), {
-						badge: '↓A',
+						badge: 'â†“A',
 						tooltip: l10n.t('Incoming Changes (added)'),
 					});
 					break;
 				case Status.DELETED:
 					bucket.set(change.uri.toString(), {
-						badge: '↓D',
+						badge: 'â†“D',
 						tooltip: l10n.t('Incoming Changes (deleted)'),
 					});
 					break;
 				case Status.INDEX_RENAMED:
 					bucket.set(change.originalUri.toString(), {
-						badge: '↓R',
+						badge: 'â†“R',
 						tooltip: l10n.t('Incoming Changes (renamed)'),
 					});
 					break;
 				case Status.MODIFIED:
 					bucket.set(change.uri.toString(), {
-						badge: '↓M',
+						badge: 'â†“M',
 						tooltip: l10n.t('Incoming Changes (modified)'),
 					});
 					break;
 				default: {
 					bucket.set(change.uri.toString(), {
-						badge: '↓~',
+						badge: 'â†“~',
 						tooltip: l10n.t('Incoming Changes'),
 					});
 					break;

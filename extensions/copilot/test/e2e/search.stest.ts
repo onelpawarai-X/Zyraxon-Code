@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -6,7 +6,7 @@ import assert from 'assert';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
-import type { Command } from 'zyraxoncode';
+import type { Command } from 'vscode';
 import { Turn } from '../../src/extension/prompt/common/conversation';
 import { ITestingServicesAccessor } from '../../src/platform/test/node/services';
 import { ssuite, stest } from '../base/stest';

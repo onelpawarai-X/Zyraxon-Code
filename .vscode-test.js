@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -13,13 +13,13 @@ import * as os from 'os';
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const { defineConfig } = require('@zyraxoncode/test-cli');
+const { defineConfig } = require('@vscode/test-cli');
 
 /**
  * A list of extension folders who have opted into tests, or configuration objects.
  * Edit me to add more!
  *
- * @type {Array<Partial<import("@zyraxoncode/test-cli").TestConfiguration> & { label: string }>}
+ * @type {Array<Partial<import("@vscode/test-cli").TestConfiguration> & { label: string }>}
  */
 const extensions = [
 	{
@@ -97,7 +97,7 @@ const defaultLaunchArgs = process.env.API_TESTS_EXTRA_ARGS?.split(' ') || [
 ];
 
 const config = defineConfig(extensions.map(extension => {
-	/** @type {import('@zyraxoncode/test-cli').TestConfiguration} */
+	/** @type {import('@vscode/test-cli').TestConfiguration} */
 	const config = {
 		platform: 'desktop',
 		files: `extensions/${extension.label}/out/**/*.test.js`,

@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { TextDocument, Uri, ViewColumn, WebviewPanel, commands, window } from 'zyraxoncode';
+import { TextDocument, Uri, ViewColumn, WebviewPanel, commands, window } from 'vscode';
 import { IZyraxonCodeExtensionContext } from '../../../../../../platform/extContext/common/extensionContext';
 import { DisposableStore, IDisposable } from '../../../../../../util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../../../../../util/vs/platform/instantiation/common/instantiation';

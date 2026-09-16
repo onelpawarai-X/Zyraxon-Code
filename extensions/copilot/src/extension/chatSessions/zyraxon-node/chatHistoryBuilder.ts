@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { coalesce } from '../../../util/vs/base/common/arrays';
 import { URI } from '../../../util/vs/base/common/uri';
 import { ChatReferenceBinaryData, ChatRequestTurn2 } from '../../../zyraxoncodeTypes';
@@ -467,7 +467,7 @@ export function buildChatHistory(session: IClaudeCodeSession, getModelDetails?: 
 				// Check if there's actual user text (not just tool results)
 				const requestTurn = extractUserRequest(userContents, currentMessageId, modelId);
 				if (requestTurn) {
-					// Real user message — finalize any pending response first
+					// Real user message â€” finalize any pending response first
 					if (pendingResponseParts.length > 0) {
 						result.push(new zyraxoncode.ChatResponseTurn2(pendingResponseParts, makeResponseResult(pendingResponseModelId), ''));
 						pendingResponseParts = [];
@@ -475,7 +475,7 @@ export function buildChatHistory(session: IClaudeCodeSession, getModelDetails?: 
 					}
 					result.push(requestTurn);
 				}
-				// Otherwise this was a tool-result-only message — don't break the response grouping
+				// Otherwise this was a tool-result-only message â€” don't break the response grouping
 			}
 		} else if (currentType === 'assistant') {
 			// Collect all consecutive assistant messages, skipping synthetic ones

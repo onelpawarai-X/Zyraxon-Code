@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { ArgumentParserResult, parseArguments } from './autocomplete-parser/parseArguments';
 import type { FigState } from './autocomplete/fig/hooks';
 import { createGeneratorState } from './autocomplete/state/generators';

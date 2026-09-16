@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -921,7 +921,7 @@ declare module 'zyraxoncode' {
 	}
 
 	export interface ChatCopyAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'copy';
 		codeBlockIndex: number;
 		copyKind: ChatCopyKind;
@@ -935,7 +935,7 @@ declare module 'zyraxoncode' {
 	}
 
 	export interface ChatInsertAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'insert';
 		codeBlockIndex: number;
 		totalCharacters: number;
@@ -946,7 +946,7 @@ declare module 'zyraxoncode' {
 	}
 
 	export interface ChatApplyAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'apply';
 		codeBlockIndex: number;
 		totalCharacters: number;
@@ -958,37 +958,37 @@ declare module 'zyraxoncode' {
 	}
 
 	export interface ChatTerminalAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'runInTerminal';
 		codeBlockIndex: number;
 		languageId?: string;
 	}
 
 	export interface ChatCommandAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'command';
 		commandButton: ChatCommandButton;
 	}
 
 	export interface ChatFollowupAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'followUp';
 		followup: ChatFollowup;
 	}
 
 	export interface ChatBugReportAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'bug';
 	}
 
 	export interface ChatEditorAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'editor';
 		accepted: boolean;
 	}
 
 	export interface ChatEditingSessionAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'chatEditingSessionAction';
 		uri: Uri;
 		hasRemainingEdits: boolean;
@@ -996,7 +996,7 @@ declare module 'zyraxoncode' {
 	}
 
 	export interface ChatEditingHunkAction {
-		// eslint-disable-next-line local/zyraxoncode-dts-string-type-literals
+		// eslint-disable-next-line local/vscode-dts-string-type-literals
 		kind: 'chatEditingHunkAction';
 		uri: Uri;
 		lineCount: number;

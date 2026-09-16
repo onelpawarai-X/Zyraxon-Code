@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import assert from 'assert';
 import * as path from 'path';
-import type { TextSearchMatch2 } from 'zyraxoncode';
+import type { TextSearchMatch2 } from 'vscode';
 import { SemanticSearchTextSearchProvider } from '../../src/extension/workspaceSemanticSearch/node/semanticSearchTextSearchProvider';
 import { IConversationOptions } from '../../src/platform/chat/common/conversationOptions';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';

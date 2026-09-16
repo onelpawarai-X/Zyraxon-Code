@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import { parentPort } from 'worker_threads';
 import { serializeNotebookToString } from './serializers';
-import type { NotebookData } from 'zyraxoncode';
+import type { NotebookData } from 'vscode';
 
 
 if (parentPort) {

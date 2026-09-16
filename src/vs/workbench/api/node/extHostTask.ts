@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ import { URI, UriComponents } from '../../../base/common/uri.js';
 import { findExecutable } from '../../../base/node/processes.js';
 import * as types from '../common/extHostTypes.js';
 import { IExtHostWorkspace } from '../common/extHostWorkspace.js';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import * as tasks from '../common/shared/tasks.js';
 import { IExtHostDocumentsAndEditors } from '../common/extHostDocumentsAndEditors.js';
 import { IExtHostConfiguration } from '../common/extHostConfiguration.js';

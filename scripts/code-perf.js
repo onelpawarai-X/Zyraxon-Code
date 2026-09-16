@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const perf = require('@zyraxoncode/zyraxoncode-perf');
+const perf = require('@vscode/zyraxoncode-perf');
 
 const VSCODE_FOLDER = path.join(__dirname, '..');
 

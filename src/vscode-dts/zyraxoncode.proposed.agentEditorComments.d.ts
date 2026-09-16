@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -65,7 +65,7 @@ declare module 'zyraxoncode' {
 		 * @param range The range to anchor the comment to.
 		 * @param body The comment text.
 		 */
-		// eslint-disable-next-line local/zyraxoncode-dts-provider-naming
+		// eslint-disable-next-line local/vscode-dts-provider-naming
 		addComment(range: Range, body: string): void;
 
 		/**
@@ -74,7 +74,7 @@ declare module 'zyraxoncode' {
 		 *
 		 * @param id The {@link AgentEditorComment.id id} of the comment to delete.
 		 */
-		// eslint-disable-next-line local/zyraxoncode-dts-provider-naming
+		// eslint-disable-next-line local/vscode-dts-provider-naming
 		deleteComment(id: string): void;
 	}
 

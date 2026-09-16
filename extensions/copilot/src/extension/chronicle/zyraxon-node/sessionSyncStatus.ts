@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as zyraxoncode from 'zyraxoncode';
-import * as l10n from '@zyraxoncode/l10n';
+import * as zyraxoncode from 'vscode';
+import * as l10n from '@vscode/l10n';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IExperimentationService } from '../../../platform/telemetry/common/nullExperimentationService';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
@@ -18,7 +18,7 @@ const sessionsOnGitHubLink = '__ZYRAXKEEP__1_';
  * Shows session sync status in the chat status bar popup.
  *
  * Renders a contributed chat status item that displays the current
- * cloud sync state — not enabled, on, syncing, up to date, error, etc.
+ * cloud sync state â€” not enabled, on, syncing, up to date, error, etc.
  * Follows the same pattern as ChatStatusWorkspaceIndexingStatus.
  */
 export class SessionSyncStatus extends Disposable {
@@ -60,7 +60,7 @@ export class SessionSyncStatus extends Disposable {
 	}
 
 	private _renderState(state: SessionSyncState): void {
-		// Don't render if localIndex is off — item should stay hidden
+		// Don't render if localIndex is off â€” item should stay hidden
 		const localEnabled = this._configService.getExperimentBasedConfig(ConfigKey.LocalIndexEnabled, this._expService);
 		if (!localEnabled) {
 			return;
@@ -72,8 +72,8 @@ export class SessionSyncStatus extends Disposable {
 			helpText: l10n.t('Syncs session data to your GitHub.com account.'),
 		};
 
-		// description → shown as badge in collapsed header (icon + message)
-		// detail → shown when expanded
+		// description â†’ shown as badge in collapsed header (icon + message)
+		// detail â†’ shown when expanded
 
 		switch (state.kind) {
 			case 'not-enabled':

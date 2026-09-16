@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type * as AgentSdk from '@anthropic-ai/claude-agent-sdk';
-import type * as zyraxoncode from 'zyraxoncode';
+import type * as zyraxoncode from 'vscode';
 import { createServiceIdentifier } from '../../../../util/common/services';
 
 export const CLAUDE_SDK_EXTENSION_ID = 'ms-zyraxoncode.zyraxoncode-claude-sdk';

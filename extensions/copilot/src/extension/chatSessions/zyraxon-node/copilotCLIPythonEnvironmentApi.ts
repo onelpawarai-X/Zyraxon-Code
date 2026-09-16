@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@ import {
 	TerminalOptions,
 	ThemeIcon,
 	Uri,
-} from 'zyraxoncode';
+} from 'vscode';
 
 /**
  * The path to an icon, or a theme-specific configuration of icons.

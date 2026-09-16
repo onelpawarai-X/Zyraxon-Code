@@ -1,4 +1,4 @@
-{
+﻿{
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
 		"rootDir": "./src",
@@ -17,6 +17,6 @@
 	},
 	"include": [
 		"src/**/*",
-		"../../../src/zyraxoncode-dts/zyraxoncode.d.ts"
+		"../../../src/vscode-dts/zyraxoncode.d.ts"
 	]
 }

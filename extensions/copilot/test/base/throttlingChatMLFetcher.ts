@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { CancellationToken } from 'zyraxoncode';
+import type { CancellationToken } from 'vscode';
 import { AbstractChatMLFetcher } from '../../src/extension/prompt/node/chatMLFetcher';
 import { IChatMLFetcher, IFetchMLOptions } from '../../src/platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatResponses } from '../../src/platform/chat/common/commonTypes';
@@ -73,7 +73,7 @@ export class ChatModelThrottlingTaskLaunchers {
 
 	/**
 	 * Handles rate limit responses by implementing exponential backoff.
-	 * This updated version uses a shared “backoff chain” to ensure that multiple inflight
+	 * This updated version uses a shared â€œbackoff chainâ€ to ensure that multiple inflight
 	 * requests for the same model do not all retry at the same time.
 	 *
 	 * @param model The chat model that was rate limited
@@ -92,7 +92,7 @@ export class ChatModelThrottlingTaskLaunchers {
 			await ongoingBackoff;
 		}
 
-		// Calculate exponential backoff delay: 1x, 2x, 3x…
+		// Calculate exponential backoff delay: 1x, 2x, 3xâ€¦
 		const delay = baseDelay * retryCount;
 
 		// Create a new backoff promise and set it as active for this model.
@@ -145,7 +145,7 @@ export class ChatModelThrottlingTaskLaunchers {
 							continue;
 						}
 					}
-					// On successful (or non‑rate‑limited) responses:
+					// On successful (or nonâ€‘rateâ€‘limited) responses:
 					continueRetrying = false;
 				}
 			} finally {

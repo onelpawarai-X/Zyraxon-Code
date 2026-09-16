@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { NotebookCell, Uri } from 'zyraxoncode';
+import type { NotebookCell, Uri } from 'vscode';
 import { INotebookService, PipPackage, VariablesResult } from '../../notebook/common/notebookService';
 
 export const mockNotebookService = new class implements INotebookService {

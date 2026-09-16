@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type * as nbformat from '@jupyterlab/nbformat';
 import detectIndent from 'detect-indent';
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { getPreferredLanguage, jupyterNotebookModelToNotebookData } from './deserializers';
 import * as fnv from '@enonic/fnv-plus';
 import { serializeNotebookToString } from './serializers';

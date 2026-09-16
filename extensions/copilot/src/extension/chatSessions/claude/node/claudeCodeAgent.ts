@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import type { EffortLevel, McpServerConfig, Options, PermissionMode, Query, SDKUserMessage, SdkPluginConfig } from '@anthropic-ai/claude-agent-sdk';
 import Anthropic from '@anthropic-ai/sdk';
-import * as l10n from '@zyraxoncode/l10n';
-import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import type * as zyraxoncode from 'vscode';
 import { IChatDebugFileLoggerService } from '../../../../platform/chat/common/chatDebugFileLoggerService';
 import { INativeEnvService } from '../../../../platform/env/common/envService';
 import { IGitService } from '../../../../platform/git/common/gitService';
@@ -536,12 +536,12 @@ export class ClaudeCodeSession extends Disposable {
 		});
 
 		// Cache runtime data (agents, etc.) for the customization provider.
-		// Fire-and-forget to avoid blocking session startup — error handling is inside the service.
+		// Fire-and-forget to avoid blocking session startup â€” error handling is inside the service.
 		void this.runtimeDataService.update(this._queryGenerator);
 
 
 		// Start the message processing loop (fire-and-forget, but _processMessages
-		// handles all errors internally via try/catch → _cleanup)
+		// handles all errors internally via try/catch â†’ _cleanup)
 		void this._processMessages().catch(err => {
 			this.logService.error('[ClaudeCodeSession] Unhandled error in message processing loop', err);
 		});

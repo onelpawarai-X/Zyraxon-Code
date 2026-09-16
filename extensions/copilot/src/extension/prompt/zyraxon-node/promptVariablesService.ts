@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatLanguageModelToolReference, ChatPromptReference } from 'zyraxoncode';
-import * as zyraxoncode from 'zyraxoncode';
+import type { ChatLanguageModelToolReference, ChatPromptReference } from 'vscode';
+import * as zyraxoncode from 'vscode';
 import { IChatDebugFileLoggerService } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';

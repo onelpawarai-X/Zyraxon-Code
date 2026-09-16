@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ import { IChannel, IServerChannel } from '../../../base/parts/ipc/common/ipc.js'
 import { AuthInfo, Credentials, IRequestService } from '../../request/common/request.js';
 
 /**
- * IPC channel name used for in-process agent-host → renderer reverse proxy
+ * IPC channel name used for in-process agent-host â†’ renderer reverse proxy
  * resolution RPCs. The renderer registers a server channel under this name on
  * its `MessagePortClient`; the agent host reaches it via
  * `server.getChannel(name, c => c.ctx === clientId)` on its
@@ -23,7 +23,7 @@ export const AGENT_HOST_CLIENT_PROXY_CHANNEL = 'agentHostClientProxy';
  * URL to the renderer and resolves with the *raw* result of ZYRAXON Code's
  * `IRequestService.resolveProxy` (the Electron session PAC-style string, e.g.
  * `PROXY host:port` / `DIRECT`). The node side feeds this into
- * `@zyraxoncode/proxy-agent`'s `resolveProxyURL` to derive the final proxy URL.
+ * `@vscode/proxy-agent`'s `resolveProxyURL` to derive the final proxy URL.
  */
 export interface IAgentHostClientProxyConnection {
 	resolveProxy(url: string): Promise<string | undefined>;
@@ -45,7 +45,7 @@ export function createAgentHostClientProxyConnection(channel: IChannel): IAgentH
 
 /**
  * Server-side channel for in-process reverse proxy-resolution RPCs from the
- * local agent host. Thin adapter — forwards `resolveProxy` calls to the
+ * local agent host. Thin adapter â€” forwards `resolveProxy` calls to the
  * renderer's {@link IRequestService}, which resolves the proxy through the
  * Electron session (system proxy settings, PAC scripts, etc.). The raw result
  * is returned verbatim; the node side derives the proxy URL from it.

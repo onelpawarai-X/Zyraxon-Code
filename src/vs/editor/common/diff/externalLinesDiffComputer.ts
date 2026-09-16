@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { IDiffComputer as IExternalDiffComputer, createDiffComputer as createExternalDiffComputer } from '@zyraxoncode/diff';
+import type { IDiffComputer as IExternalDiffComputer, createDiffComputer as createExternalDiffComputer } from '@vscode/diff';
 import { resolveAmdNodeModulePath } from '../../../amdX.js';
 import { LineRange } from '../core/ranges/lineRange.js';
 import { OffsetRange } from '../core/ranges/offsetRange.js';
@@ -20,7 +20,7 @@ let externalWasmDiffComputerPromise: Promise<IExternalDiffComputer> | undefined;
 
 function loadExternalModule(): Promise<ExternalDiffModule> {
 	if (!externalModulePromise) {
-		const url = resolveAmdNodeModulePath('@zyraxoncode/diff', 'dist/index.js');
+		const url = resolveAmdNodeModulePath('@vscode/diff', 'dist/index.js');
 		// Use a runtime-computed URL to keep bundlers from rewriting the import.
 		externalModulePromise = import(/* webpackIgnore: true */ /* @vite-ignore */ `${url}`) as Promise<ExternalDiffModule>;
 	}

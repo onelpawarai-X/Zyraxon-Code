@@ -1,10 +1,10 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestMetadata, RequestType } from '@zyraxoncode/copilot-api';
-import type { LanguageModelChat } from 'zyraxoncode';
+import { RequestMetadata, RequestType } from '@vscode/copilot-api';
+import type { LanguageModelChat } from 'vscode';
 import { TaskSingler } from '../../../util/common/taskSingler';
 import { Emitter, Event } from '../../../util/vs/base/common/event';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
@@ -41,7 +41,7 @@ export interface IModelMetadataFetcher {
 	getAllChatModels(): Promise<IChatModelInformation[]>;
 
 	/**
-	 * Retrieves the API-marked default Copilot utility model — the model
+	 * Retrieves the API-marked default Copilot utility model â€” the model
 	 * the CAPI `/models` response flags with `is_chat_fallback === true`.
 	 * Used to back the `copilot-utility` internal endpoint family.
 	 */

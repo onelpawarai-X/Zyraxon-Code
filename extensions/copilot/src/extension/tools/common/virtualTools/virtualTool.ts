@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'zyraxoncode';
+import type { LanguageModelToolInformation } from 'vscode';
 
 export const VIRTUAL_TOOL_NAME_PREFIX = 'activate_';
 export const EMBEDDINGS_GROUP_NAME = VIRTUAL_TOOL_NAME_PREFIX + 'embeddings';

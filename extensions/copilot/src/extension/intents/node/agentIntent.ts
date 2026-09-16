@@ -1,12 +1,12 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import { Raw, RenderPromptResult } from '@zyraxoncode/prompt-tsx';
-import { BudgetExceededError } from '@zyraxoncode/prompt-tsx/dist/base/materialized';
-import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import { Raw, RenderPromptResult } from '@vscode/prompt-tsx';
+import { BudgetExceededError } from '@vscode/prompt-tsx/dist/base/materialized';
+import type * as zyraxoncode from 'vscode';
 import { IChatSessionService } from '../../../platform/chat/common/chatSessionService';
 import { ChatFetchResponseType, ChatLocation, ChatResponse } from '../../../platform/chat/common/commonTypes';
 import { getTextPart } from '../../../platform/chat/common/globalStringUtils';
@@ -85,13 +85,13 @@ function isResponsesCompactionContextManagementEnabled(endpoint: IChatEndpoint, 
  * Applies the user's "Context Size" model-picker selection to the endpoint used
  * for the agent's model requests.
  *
- * The picker offers two tiers — the model's default context max and its full
+ * The picker offers two tiers â€” the model's default context max and its full
  * native window (see `getContextSizeOptions`). For server-managed context (the
  * Responses-API compaction path) the request endpoint's `modelMaxPromptTokens`
  * is what drives the `compact_threshold` sent to the server. If the default
  * tier is not propagated to the request endpoint, the server compacts against
  * the model's full window and the stateful conversation grows far past the
- * user's selection — billing them for the larger context. Mirrors the override
+ * user's selection â€” billing them for the larger context. Mirrors the override
  * applied on the `zyraxoncode.lm` path in `languageModelAccess.ts`.
  *
  * Only clamps when the selection is strictly smaller than the model window so
@@ -169,8 +169,8 @@ export function isBackgroundTodoAgentEnabled(
  *  - **Absolute tokens** (`value >= 100`): a fixed token budget, e.g. `60000`.
  *
  * Values in the ambiguous `(1, 100)` gap (too large to be a sensible ratio, too
- * small to be a useful token budget) are rejected so a typo like `80` — which a
- * user likely meant as "80%" — fails loudly instead of silently compacting after
+ * small to be a useful token budget) are rejected so a typo like `80` â€” which a
+ * user likely meant as "80%" â€” fails loudly instead of silently compacting after
  * 80 tokens.
  *
  * Returns `undefined` when unset (or non-positive), meaning "use the model's full
@@ -382,7 +382,7 @@ export class AgentIntent extends EditCodeIntent {
 			// Endpoint switched mid-session. A summary kicked off against the
 			// previous endpoint's prefix would be applied unconditionally on the
 			// next pre-render, producing a surprising "Compacted conversation"
-			// notice on the new endpoint — cancel and start fresh.
+			// notice on the new endpoint â€” cancel and start fresh.
 			summarizer.cancel();
 			this._backgroundSummarizers.delete(sessionId);
 			summarizer = undefined;
@@ -746,7 +746,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		let result: RenderPromptResult;
 		// For the Anthropic Messages API, cache_control placement is owned
 		// entirely by messagesApi.ts. Suppress prompt-tsx breakpoints to avoid
-		// duplicating or shifting them — but keep summarization on, since the
+		// duplicating or shifting them â€” but keep summarization on, since the
 		// summarization rendering path is independent from cache breakpoints.
 		const isMessagesApi = this.endpoint.apiType === 'messages';
 		const props: AgentPromptProps = {
@@ -766,7 +766,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 			customizations: this._resolvedCustomizations
 		};
 
-		// ── Background compaction ────────────────────────────────────────
+		// â”€â”€ Background compaction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 		//
 		//   Pre-render: if a previous bg pass completed, apply it now.
 		//
@@ -781,7 +781,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		const backgroundSummarizer = summarizationEnabled ? this._getOrCreateBackgroundSummarizer(promptContext.conversation?.sessionId) : undefined;
 		// Walk back through turns to find the most recent one with token usage
 		// metadata. On iteration 1 of a fresh user turn, the current turn has
-		// no fetch yet, so fall back to the previous turn — otherwise the floor
+		// no fetch yet, so fall back to the previous turn â€” otherwise the floor
 		// would be 0 and offer no protection across user-turn boundaries.
 		const lastTurnPromptTokens = findLast(promptContext.conversation?.turns ?? [], turn => !!turn.getMetadata(TurnTokenUsageMetadata))
 			?.getMetadata(TurnTokenUsageMetadata)?.promptTokens;
@@ -794,7 +794,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		// we don't immediately re-trigger background compaction in the post-render check.
 		let didSummarizeThisIteration = false;
 
-		// If a previous background pass completed, apply its summary now — but
+		// If a previous background pass completed, apply its summary now â€” but
 		// only when the current context ratio still warrants it. After a model
 		// switch to a larger window (or an increased context-size override) the
 		// ratio can drop below `applyMinRatio`; applying a stale summary in that
@@ -932,7 +932,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 					let budgetExceededTrigger: string;
 					if (backgroundSummarizer.state === BackgroundSummarizationState.InProgress) {
 						budgetExceededTrigger = 'budgetExceededWaited';
-						this.logService.debug(`[ConversationHistorySummarizer] budget exceeded — waiting on in-progress background compaction instead of new request`);
+						this.logService.debug(`[ConversationHistorySummarizer] budget exceeded â€” waiting on in-progress background compaction instead of new request`);
 						const summaryPromise = backgroundSummarizer.waitForCompletion();
 						progress.report(new ChatResponseProgressPart2(l10n.t('Compacting conversation...'), async () => {
 							try { await summaryPromise; } catch { }
@@ -941,7 +941,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 						await summaryPromise;
 					} else {
 						budgetExceededTrigger = 'budgetExceededReady';
-						this.logService.debug(`[ConversationHistorySummarizer] budget exceeded — applying already-completed background compaction`);
+						this.logService.debug(`[ConversationHistorySummarizer] budget exceeded â€” applying already-completed background compaction`);
 						progress.report(new ChatResponseProgressPart2(l10n.t('Compacted conversation'), async () => l10n.t('Compacted conversation')));
 					}
 					const bgResult = backgroundSummarizer.consumeAndReset();
@@ -956,7 +956,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 							this._sendBackgroundCompactionTelemetry(budgetExceededTrigger, 'applied', contextRatio, promptContext);
 						} catch (reRenderError) {
 							if (reRenderError instanceof BudgetExceededError) {
-								this.logService.debug(`[ConversationHistorySummarizer] re-render after background compaction still exceeded budget — falling back`);
+								this.logService.debug(`[ConversationHistorySummarizer] re-render after background compaction still exceeded budget â€” falling back`);
 								this._sendBackgroundCompactionTelemetry(budgetExceededTrigger, 'appliedButReRenderFailed', contextRatio, promptContext);
 								result = await renderWithoutSummarization('budget exceeded after background compaction applied', { ...props, promptContext });
 							} else {
@@ -964,10 +964,10 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 							}
 						}
 					} else {
-						this.logService.debug(`[ConversationHistorySummarizer] background compaction produced no usable result after budget exceeded — falling back to synchronous summarization`);
+						this.logService.debug(`[ConversationHistorySummarizer] background compaction produced no usable result after budget exceeded â€” falling back to synchronous summarization`);
 						this._sendBackgroundCompactionTelemetry(budgetExceededTrigger, 'noResult', contextRatio, promptContext);
 						this._recordBackgroundCompactionFailure(promptContext, budgetExceededTrigger);
-						// Background compaction failed — fall back to synchronous summarization
+						// Background compaction failed â€” fall back to synchronous summarization
 						result = await renderWithSummarization(`budget exceeded(${e.message}), background compaction failed`);
 						didSummarizeThisIteration = true;
 					}
@@ -1007,7 +1007,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 
 		// Post-render: kick off background compaction if idle and over the
 		// threshold. Prompt cache parity with the main agent fetch matters
-		// here — so we gate kick-off on a completed tool call (cache has been
+		// here â€” so we gate kick-off on a completed tool call (cache has been
 		// warmed) and jitter the threshold around 0.80 to avoid firing at the
 		// same exact boundary every time.
 		if (summarizationEnabled && backgroundSummarizer && !didSummarizeThisIteration) {
@@ -1029,7 +1029,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 				const rawEffort = this.request.modelConfiguration?.reasoningEffort;
 				const isSubagent = !!this.request.subAgentInvocationId;
 				// Must match the main agent's enableThinking logic in
-				// toolCallingLoop.ts runOne() — thinking is only disabled
+				// toolCallingLoop.ts runOne() â€” thinking is only disabled
 				// on continuation turns for Anthropic when no thinking
 				// blocks exist yet in the messages.
 				const shouldDisableThinking = !!promptContext.isContinuation && isAnthropicFamily(this.endpoint) && !ToolCallingLoop.messagesContainThinking(strippedMessages);
@@ -1127,16 +1127,16 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		// anchor (e.g. an early turn before any tool-call round exists, reached
 		// via a cold-cache emergency kick-off) there is nothing to attach the
 		// result to, so skip *before* firing the expensive summarization request
-		// rather than running it for many seconds only to discard the result —
+		// rather than running it for many seconds only to discard the result â€”
 		// which, on slow models, also stalls a later budget-exceeded render that
 		// waits on the in-flight request.
 		const toolCallRoundId = resolveSummaryAnchorRoundId(rounds, history);
 		if (!toolCallRoundId) {
-			this.logService.debug(`[ConversationHistorySummarizer] skipping background compaction at ${(contextRatio * 100).toFixed(0)}% — no tool call round to attach summary to (rounds=${rounds.length}, history=${history.length})`);
+			this.logService.debug(`[ConversationHistorySummarizer] skipping background compaction at ${(contextRatio * 100).toFixed(0)}% â€” no tool call round to attach summary to (rounds=${rounds.length}, history=${history.length})`);
 			return;
 		}
 
-		this.logService.debug(`[ConversationHistorySummarizer] context at ${(contextRatio * 100).toFixed(0)}% — starting background compaction`);
+		this.logService.debug(`[ConversationHistorySummarizer] context at ${(contextRatio * 100).toFixed(0)}% â€” starting background compaction`);
 
 		const bgStartTime = Date.now();
 
@@ -1329,7 +1329,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 				}
 			}
 			if (!found) {
-				this.logService.warn(`[ConversationHistorySummarizer] background compaction round ${bgResult.toolCallRoundId} not found in toolCallRounds or history — summary dropped`);
+				this.logService.warn(`[ConversationHistorySummarizer] background compaction round ${bgResult.toolCallRoundId} not found in toolCallRounds or history â€” summary dropped`);
 			}
 		}
 		// Invalidate the auto mode router cache so the next getChatEndpoint()
@@ -1422,7 +1422,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		GenAiMetrics.incrementAgentSummarizationCount(this.otelService, outcome);
 	}
 
-	// ── Background todo processing ──────────────────────────────────
+	// â”€â”€ Background todo processing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 	private _getOrCreateBackgroundTodoAgentProcessor(promptContext: IBuildPromptContext) {
 		if (!(this.intent instanceof AgentIntent)) {
 			return undefined;

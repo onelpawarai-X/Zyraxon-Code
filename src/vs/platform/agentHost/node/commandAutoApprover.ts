@@ -1,9 +1,9 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Language, Parser, Query, QueryCapture } from '@zyraxoncode/tree-sitter-wasm';
+import type { Language, Parser, Query, QueryCapture } from '@vscode/tree-sitter-wasm';
 import * as fs from 'fs';
 import { Disposable, toDisposable } from '../../../base/common/lifecycle.js';
 import { FileAccess } from '../../../base/common/network.js';
@@ -56,7 +56,7 @@ function isSafeRedirectDestination(dest: string, isPowerShell?: boolean): boolea
 
 /**
  * Classification of a tree-sitter `file_redirect` node.
- * - `read`: input-only redirect (`<`, `<&N`) — never writes.
+ * - `read`: input-only redirect (`<`, `<&N`) â€” never writes.
  * - `safeWrite`: write to a known-safe sink (`/dev/null`, fd duplication, ...).
  * - `unsafeWrite`: write to an arbitrary destination. The destination string
  *   (with surrounding quotes stripped) is included when it could be parsed,
@@ -116,7 +116,7 @@ const pwshNoSpaceRedirectRegex = /^[0-9*]?>>?/;
  * Result of a command auto-approval check.
  * - `approved`: all sub-commands match allow rules and none are denied
  * - `denied`: at least one sub-command matches a deny rule
- * - `noMatch`: no rule matched — requires user confirmation
+ * - `noMatch`: no rule matched â€” requires user confirmation
  */
 export type CommandApprovalResult = 'approved' | 'denied' | 'noMatch';
 
@@ -390,7 +390,7 @@ export class CommandAutoApprover extends Disposable {
 
 	private async _initTreeSitter(): Promise<void> {
 		try {
-			const { default: TreeSitter } = (await import('@zyraxoncode/tree-sitter-wasm'));
+			const { default: TreeSitter } = (await import('@vscode/tree-sitter-wasm'));
 
 			if (this._store.isDisposed) {
 				return;

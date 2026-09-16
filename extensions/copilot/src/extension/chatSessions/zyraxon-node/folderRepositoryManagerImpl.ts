@@ -1,11 +1,11 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@zyraxoncode/l10n';
-import * as zyraxoncode from 'zyraxoncode';
-import { LanguageModelTextPart } from 'zyraxoncode';
+import * as l10n from '@vscode/l10n';
+import * as zyraxoncode from 'vscode';
+import { LanguageModelTextPart } from 'vscode';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { getGitHubRepoInfoFromContext, IGitService } from '../../../platform/git/common/gitService';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -56,7 +56,7 @@ export abstract class FolderRepositoryManager extends Disposable implements IFol
 
 	/**
 	 * In-memory storage for new session folder selections.
-	 * Maps session ID → folder URI.
+	 * Maps session ID â†’ folder URI.
 	 */
 	protected readonly _newSessionFolders = new Map<string, { uri: zyraxoncode.Uri; lastAccessTime: number }>();
 
@@ -473,7 +473,7 @@ export abstract class FolderRepositoryManager extends Disposable implements IFol
 			};
 		}
 
-		// 3. If workspace mode, skip worktree creation — return all as-is
+		// 3. If workspace mode, skip worktree creation â€” return all as-is
 		if (isolation === 'workspace') {
 			const primary = trustedInfos.find(t => t.folder.fsPath === primaryFolder.fsPath)?.info
 				?? { folder: primaryFolder, repository: undefined, repositoryProperties: undefined, worktree: undefined, worktreeProperties: undefined, trusted: true };
@@ -527,7 +527,7 @@ export abstract class FolderRepositoryManager extends Disposable implements IFol
 		const worktreeCreationResults = await Promise.allSettled(
 			trustedInfos.map(async ({ folder, info }) => {
 				if (!info.repository) {
-					// Non-git folder — keep as plain folder
+					// Non-git folder â€” keep as plain folder
 					return { folder, info };
 				}
 

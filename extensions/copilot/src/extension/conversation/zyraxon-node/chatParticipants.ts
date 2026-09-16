@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as zyraxoncode from 'zyraxoncode';
+import * as zyraxoncode from 'vscode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { IChatAgentService, defaultAgentName, editingSessionAgentEditorName, editingSessionAgentName, editsAgentName, getChatParticipantIdFromName, notebookEditorAgentName, terminalAgentName, zyraxoncodeAgentName } from '../../../platform/chat/common/chatAgents';
 import { IChatQuotaService } from '../../../platform/chat/common/chatQuotaService';
@@ -232,7 +232,7 @@ Learn more about [GitHub Copilot](__ZYRAXKEEP__0_) in [ZYRAXON Code](__ZYRAXKEEP
 					this.interactionService.startInteraction();
 				}
 
-				// Generate a shared telemetry message ID on the first turn only — subsequent turns have no
+				// Generate a shared telemetry message ID on the first turn only â€” subsequent turns have no
 				// categorization event to join and ChatTelemetryBuilder will generate its own ID.
 				const telemetryMessageId = context.history.length === 0 ? generateUuid() : undefined;
 

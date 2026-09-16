@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------------------
+﻿/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ import { ExtHostInteractiveShape, IMainContext } from './extHost.protocol.js';
 import { ApiCommand, ApiCommandArgument, ApiCommandResult, ExtHostCommands } from './extHostCommands.js';
 import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import { ExtHostNotebookController } from './extHostNotebook.js';
-import { NotebookEditor } from 'zyraxoncode';
+import { NotebookEditor } from 'vscode';
 
 export class ExtHostInteractive implements ExtHostInteractiveShape {
 	constructor(
