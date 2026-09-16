@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AssistantMessage, BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, Raw, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type { Uri } from 'vscode';
+import { AssistantMessage, BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, Raw, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { Uri } from 'zyraxoncode';
 import { getTextPart } from '../../../../platform/chat/common/globalStringUtils';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { INotebookSection } from '../../../../util/common/notebooks';
@@ -52,7 +52,7 @@ export class NewNotebookPlanningPrompt extends PromptElement<NewNotebookPlanning
 						'',
 						'The JSON schema is:',
 						'{',
-						'  "$schema": "http://json-schema.org/draft-07/schema#",',
+						'  "$schema": "__ZYRAXKEEP__0_",',
 						'  "type": "object",',
 						'  "properties": {',
 						'	"description": {',

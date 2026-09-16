@@ -2,16 +2,16 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptReference, PromptSizing } from '@vscode/prompt-tsx';
-import type { Position, Selection, TextDocument } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptReference, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type { Position, Selection, TextDocument } from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IGitExtensionService } from '../../../../platform/git/common/gitExtensionService';
-import { Repository } from '../../../../platform/git/vscode/git';
+import { Repository } from '../../../../platform/git/zyraxoncode/git';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IParserService } from '../../../../platform/parser/node/parserService';
 import { ServicesAccessor } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Location, Range, Uri } from '../../../../vscodeTypes';
+import { Location, Range, Uri } from '../../../../zyraxoncodeTypes';
 import { Tag } from '../base/tag';
 import { CodeBlock } from '../panel/safeElements';
 import { SymbolAtCursor } from '../panel/symbolAtCursor';

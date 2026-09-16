@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelChat, NotebookDocument, Uri } from 'vscode';
+import type { LanguageModelChat, NotebookDocument, Uri } from 'zyraxoncode';
 import { findCell } from '../../../util/common/notebooks';
 import { createServiceIdentifier } from '../../../util/common/services';
-import { Range } from '../../../vscodeTypes';
+import { Range } from '../../../zyraxoncodeTypes';
 import { ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
 import { modelPrefersJsonNotebookRepresentation } from '../../endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../networking/common/networking';

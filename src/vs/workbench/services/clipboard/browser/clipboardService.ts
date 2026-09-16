@@ -31,7 +31,7 @@ export class BrowserClipboardService extends BaseBrowserClipboardService {
 	override async writeText(text: string, type?: string): Promise<void> {
 		this.logService.trace('BrowserClipboardService#writeText called with type:', type, ' with text.length:', text.length);
 		if (!!this.environmentService.extensionTestsLocationURI && typeof type !== 'string') {
-			type = 'vscode-tests'; // force in-memory clipboard for tests to avoid permission issues
+			type = 'zyraxoncode-tests'; // force in-memory clipboard for tests to avoid permission issues
 		}
 		this.logService.trace('BrowserClipboardService#super.writeText');
 		return super.writeText(text, type);
@@ -40,7 +40,7 @@ export class BrowserClipboardService extends BaseBrowserClipboardService {
 	override async readText(type?: string): Promise<string> {
 		this.logService.trace('BrowserClipboardService#readText called with type:', type);
 		if (!!this.environmentService.extensionTestsLocationURI && typeof type !== 'string') {
-			type = 'vscode-tests'; // force in-memory clipboard for tests to avoid permission issues
+			type = 'zyraxoncode-tests'; // force in-memory clipboard for tests to avoid permission issues
 		}
 
 		if (type) {
@@ -55,7 +55,7 @@ export class BrowserClipboardService extends BaseBrowserClipboardService {
 		} catch (error) {
 			return new Promise<string>(resolve => {
 
-				// Inform user about permissions problem (https://github.com/microsoft/vscode/issues/112089)
+				// Inform user about permissions problem (__ZYRAXKEEP__0_)
 				const listener = new DisposableStore();
 				const handle = this.notificationService.prompt(
 					Severity.Error,
@@ -68,7 +68,7 @@ export class BrowserClipboardService extends BaseBrowserClipboardService {
 						}
 					}, {
 						label: localize('learnMore', "Learn More"),
-						run: () => this.openerService.open('https://go.microsoft.com/fwlink/?linkid=2151362')
+						run: () => this.openerService.open('__ZYRAXKEEP__1_')
 					}],
 					{
 						sticky: true

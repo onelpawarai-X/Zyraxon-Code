@@ -197,15 +197,15 @@ export class BrowserViewFrameInspector extends Disposable {
 				// Best effort; user can re-pick.
 			}
 		};
-		frame.ipc.on('vscode:browserView:elementPicked', onPicked);
-		this._register({ dispose: () => frame.ipc.removeListener('vscode:browserView:elementPicked', onPicked) });
+		frame.ipc.on('zyraxoncode:browserView:elementPicked', onPicked);
+		this._register({ dispose: () => frame.ipc.removeListener('zyraxoncode:browserView:elementPicked', onPicked) });
 		const onCommentRemoved = (event: Electron.IpcMainEvent, elementId: string) => {
 			if (elementId && event.senderFrame === this.frame) {
 				this._onDidRemoveElementComment.fire(elementId);
 			}
 		};
-		frame.ipc.on('vscode:browserView:elementCommentRemoved', onCommentRemoved);
-		this._register({ dispose: () => frame.ipc.removeListener('vscode:browserView:elementCommentRemoved', onCommentRemoved) });
+		frame.ipc.on('zyraxoncode:browserView:elementCommentRemoved', onCommentRemoved);
+		this._register({ dispose: () => frame.ipc.removeListener('zyraxoncode:browserView:elementCommentRemoved', onCommentRemoved) });
 
 		// Listen for pick-stopped IPC from this frame's preload
 		const onPickStopped = (event: Electron.IpcMainEvent) => {
@@ -214,8 +214,8 @@ export class BrowserViewFrameInspector extends Disposable {
 			}
 			this._onDidStopPicking.fire();
 		};
-		frame.ipc.on('vscode:browserView:elementPickStopped', onPickStopped);
-		this._register({ dispose: () => frame.ipc.removeListener('vscode:browserView:elementPickStopped', onPickStopped) });
+		frame.ipc.on('zyraxoncode:browserView:elementPickStopped', onPickStopped);
+		this._register({ dispose: () => frame.ipc.removeListener('zyraxoncode:browserView:elementPickStopped', onPickStopped) });
 
 		this._enableDomains().catch(() => { });
 	}
@@ -241,7 +241,7 @@ export class BrowserViewFrameInspector extends Disposable {
 	 * Send the theme to this frame's preload.
 	 */
 	setTheme(theme: IBrowserViewTheme): void {
-		this.frame.postMessage('vscode:browserView:setTheme', theme);
+		this.frame.postMessage('zyraxoncode:browserView:setTheme', theme);
 	}
 
 	/**
@@ -253,7 +253,7 @@ export class BrowserViewFrameInspector extends Disposable {
 		const mode = this._isPaused && options.mode !== BrowserElementSelectionMode.Comment ? 'cdp' : 'preload';
 		if (this._activeInspection.value?.mode === mode) {
 			if (mode === 'preload') {
-				this.frame.postMessage('vscode:browserView:startElementPicker', options);
+				this.frame.postMessage('zyraxoncode:browserView:startElementPicker', options);
 			}
 			return;
 		}
@@ -286,10 +286,10 @@ export class BrowserViewFrameInspector extends Disposable {
 				}
 			};
 		} else {
-			this.frame.postMessage('vscode:browserView:startElementPicker', options);
+			this.frame.postMessage('zyraxoncode:browserView:startElementPicker', options);
 			const stop = async () => {
 				if (!this.frame.isDestroyed()) {
-					this.frame.postMessage('vscode:browserView:stopElementPicker', {});
+					this.frame.postMessage('zyraxoncode:browserView:stopElementPicker', {});
 				}
 			};
 			this._activeInspection.value = {
@@ -323,7 +323,7 @@ export class BrowserViewFrameInspector extends Disposable {
 
 	private _updateElementComments(update: IBrowserElementCommentsUpdate): void {
 		if (!this.frame.isDestroyed()) {
-			this.frame.postMessage('vscode:browserView:setElementComments', update);
+			this.frame.postMessage('zyraxoncode:browserView:setElementComments', update);
 		}
 	}
 
@@ -332,7 +332,7 @@ export class BrowserViewFrameInspector extends Disposable {
 	 */
 	async extractNodeDataById(elementId: string): Promise<IElementData> {
 		const { result } = await this.connection.sendCommand('Runtime.evaluate', {
-			expression: `window.__vscode_helpers?.getElement(${JSON.stringify(elementId)})`,
+			expression: `window.__zyraxoncode_helpers?.getElement(${JSON.stringify(elementId)})`,
 			returnByValue: false,
 			uniqueContextId: this._uniqueContextId,
 		}) as { result: { objectId?: string } };
@@ -381,20 +381,20 @@ export class BrowserViewFrameInspector extends Disposable {
 				this._onDidInspectElement.fire(nodeData);
 			},
 			addComment: () => {
-				this.frame.postMessage('vscode:browserView:showElementComment', { elementId });
+				this.frame.postMessage('zyraxoncode:browserView:showElementComment', { elementId });
 			},
 			highlight: async () => {
-				this.frame.postMessage('vscode:browserView:highlightElement', { elementId });
+				this.frame.postMessage('zyraxoncode:browserView:highlightElement', { elementId });
 			},
 			hideHighlight: async () => {
-				this.frame.postMessage('vscode:browserView:hideHighlight', {});
+				this.frame.postMessage('zyraxoncode:browserView:hideHighlight', {});
 			},
 			dispose: () => {
 				if (disposed) {
 					return;
 				}
 				disposed = true;
-				this.frame.postMessage('vscode:browserView:hideHighlight', {});
+				this.frame.postMessage('zyraxoncode:browserView:hideHighlight', {});
 			}
 		};
 	}

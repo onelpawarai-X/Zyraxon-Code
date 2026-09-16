@@ -114,15 +114,15 @@ async function stageCoreLibraries(stagingDir: string, target: string): Promise<v
 		'onnxruntime-genai': { version: string };
 	};
 
-	// Microsoft.ML.OnnxRuntime.Gpu.Linux only ships x86_64 native binaries, so
+	// Zyraxon.ML.OnnxRuntime.Gpu.Linux only ships x86_64 native binaries, so
 	// linux-arm64 (and every non-linux-x64 target) uses the cross-platform
 	// Foundry ORT package. Mirrors `ensureCoreLibraries` in the runtime.
-	const ortPackageName = target === 'linux-x64' ? 'Microsoft.ML.OnnxRuntime.Gpu.Linux' : 'Microsoft.ML.OnnxRuntime.Foundry';
+	const ortPackageName = target === 'linux-x64' ? 'Zyraxon.ML.OnnxRuntime.Gpu.Linux' : 'Zyraxon.ML.OnnxRuntime.Foundry';
 
 	const artifacts = [
-		{ name: 'Microsoft.AI.Foundry.Local.Core', version: deps['foundry-local-core'].nuget },
+		{ name: 'Zyraxon.AI.Foundry.Local.Core', version: deps['foundry-local-core'].nuget },
 		{ name: ortPackageName, version: deps.onnxruntime.version },
-		{ name: 'Microsoft.ML.OnnxRuntimeGenAI.Foundry', version: deps['onnxruntime-genai'].version },
+		{ name: 'Zyraxon.ML.OnnxRuntimeGenAI.Foundry', version: deps['onnxruntime-genai'].version },
 	];
 
 	const coreDir = path.join(stagingDir, 'foundry-local-core', target);
@@ -142,7 +142,7 @@ function requiredCoreLibraryNames(target: string): string[] {
 	const ext = isWin ? '.dll' : isMac ? '.dylib' : '.so';
 	const prefix = isWin ? '' : 'lib';
 	return [
-		`Microsoft.AI.Foundry.Local.Core${ext}`,
+		`Zyraxon.AI.Foundry.Local.Core${ext}`,
 		`${prefix}onnxruntime${ext}`,
 		`${prefix}onnxruntime-genai${ext}`,
 	];

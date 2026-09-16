@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Range } from '../../../../util/vs/editor/common/core/range';
-import { Diagnostic, Uri } from '../../../../vscodeTypes';
+import { Diagnostic, Uri } from '../../../../zyraxoncodeTypes';
 import { ContextItem, ContextKind, SnippetContext, TraitContext, type DiagnosticBagContext } from '../../../languageServer/common/languageContextService';
 
 export type LanguageContextEntry = {

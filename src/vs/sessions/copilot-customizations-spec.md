@@ -30,13 +30,13 @@ Each pattern is defined in `src/helpers/repo-helpers.ts` → `instructionPattern
 | Claude (alt) | `{repo}/.claude/CLAUDE.md` | Secondary Claude location |
 | Gemini / Google | `{repo}/GEMINI.md` | Gemini model convention |
 
-### 1.2 VSCode-Style Instruction Files
+### 1.2 ZyraxonCode-Style Instruction Files
 
 Glob-matched instruction files with metadata (applyTo patterns, description).
 
 | Scope | File Pattern | Code Reference |
 |-------|-------------|----------------|
-| Repo | `{repo}/.github/instructions/**/*.instructions.md` | `readVSCodeInstructions()` |
+| Repo | `{repo}/.github/instructions/**/*.instructions.md` | `readZyraxonCodeInstructions()` |
 | User | `~/.copilot/instructions/**/*.instructions.md` | `readUserCopilotInstructions()` |
 
 ### 1.3 User-Level Instructions
@@ -75,7 +75,7 @@ Instructions are concatenated in this order (all additive):
 
 1. User global (`~/.copilot/copilot-instructions.md`)
 2. Repo-level instruction files (all patterns above)
-3. VSCode-style instruction files (repo, then user)
+3. ZyraxonCode-style instruction files (repo, then user)
 4. CWD-specific overrides (when cwd ≠ repo root)
 5. Child/nested instructions
 6. Organization instructions (API-injected)
@@ -196,7 +196,7 @@ Model Context Protocol servers that expose additional tools and resources.
 |----------|--------|-------------|----------------|
 | 1 (lowest) | User | `~/.copilot/mcp-config.json` | `mcp-config.ts` |
 | 2 | Workspace | `{cwd}/.mcp.json` | `mcpConfigMerger.ts` |
-| 3 | zyraxon | `{cwd}/.vscode/mcp.json` | `vsCodeWorkspaceMcpConfig.ts` |
+| 3 | zyraxon | `{cwd}/.zyraxoncode/mcp.json` | `vsCodeWorkspaceMcpConfig.ts` |
 | 4 | Plugins | `{pluginRoot}/.mcp.json`, `{pluginRoot}/.github/mcp.json` | `mcp-loader.ts` |
 | 5 | Windows ODR | Registry `HKLM\SOFTWARE\Zyraxon\Windows\CurrentVersion\Mcp` | `odrMcpRegistry.ts` |
 | 6 (highest) | CLI flag | `--additional-mcp-config <json\|@filepath>` | `mcpConfigMerger.ts` |
@@ -213,10 +213,10 @@ Model Context Protocol servers that expose additional tools and resources.
       "cwd": "/optional/working/dir",
       "env": {
         "KEY": "$ENV_VAR",
-        "URL": "https://${HOST}:${PORT}",
+        "URL": "__ZYRAXKEEP__0_{HOST}:${PORT}",
         "WITH_DEFAULT": "${VAR:-fallback}"
       },
-      "url": "https://remote-server/endpoint",
+      "url": "__ZYRAXKEEP__1_",
       "headers": { "Authorization": "Bearer ${TOKEN}" },
       "tools": ["*"],
       "timeout": 30000,
@@ -334,7 +334,7 @@ Message received
  │
  ├─ Tools assembled
  │   ├─ Built-in tools
- │   ├─ MCP servers             ~/.copilot/mcp-config.json + .mcp.json + .vscode/mcp.json + plugins
+ │   ├─ MCP servers             ~/.copilot/mcp-config.json + .mcp.json + .zyraxoncode/mcp.json + plugins
  │   └─ Content exclusion       (org API restrictions applied)
  │
  ├─ Skills listed               .github/skills/ + .agents/skills/ + .claude/skills/ + personal + plugins

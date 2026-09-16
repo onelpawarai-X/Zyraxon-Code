@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
@@ -44,17 +44,17 @@ export class TestFromTestInvocation implements IIntentInvocation {
 		readonly endpoint: IChatEndpoint,
 		readonly location: ChatLocation,
 		private readonly context: IDocumentContext,
-		private readonly alreadyConsumedChatVariable: vscode.ChatPromptReference | undefined,
+		private readonly alreadyConsumedChatVariable: zyraxoncode.ChatPromptReference | undefined,
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 	) {
 	}
 
 	async buildPrompt(
 		promptContext: IBuildPromptContext,
-		progress: vscode.Progress<
-			vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart
+		progress: zyraxoncode.Progress<
+			zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart
 		>,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	) {
 		const renderer = PromptRenderer.create(
 			this.instantiationService,
@@ -77,9 +77,9 @@ export class TestFromTestInvocation implements IIntentInvocation {
 	async processResponse(
 		context: IResponseProcessorContext,
 		inputStream: AsyncIterable<IResponsePart>,
-		outputStream: vscode.ChatResponseStream,
+		outputStream: zyraxoncode.ChatResponseStream,
 		token: CancellationToken
-	): Promise<vscode.ChatResult | void> {
+	): Promise<zyraxoncode.ChatResult | void> {
 
 		if (this.location === ChatLocation.Panel) {
 			const responseProcessor = this.instantiationService.createInstance(PseudoStopStartResponseProcessor, [], undefined);
@@ -101,7 +101,7 @@ export class TestFromTestInvocation implements IIntentInvocation {
 type Props = PromptElementProps<{
 	context: IDocumentContext;
 	promptContext: IBuildPromptContext;
-	alreadyConsumedChatVariable: vscode.ChatPromptReference | undefined;
+	alreadyConsumedChatVariable: zyraxoncode.ChatPromptReference | undefined;
 }>;
 
 class TestFromTestPrompt extends PromptElement<Props> {

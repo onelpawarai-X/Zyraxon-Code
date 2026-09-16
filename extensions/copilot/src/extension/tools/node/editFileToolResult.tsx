@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { modelNeedsStrongReplaceStringHint } from '../../../platform/endpoint/common/chatModelCapabilities';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -17,7 +17,7 @@ import { IWorkspaceService } from '../../../platform/workspace/common/workspaceS
 import { getLanguage } from '../../../util/common/languages';
 import { timeout } from '../../../util/vs/base/common/async';
 import { URI } from '../../../util/vs/base/common/uri';
-import { Diagnostic, DiagnosticSeverity } from '../../../vscodeTypes';
+import { Diagnostic, DiagnosticSeverity } from '../../../zyraxoncodeTypes';
 import { Tag } from '../../prompts/node/base/tag';
 import { ToolName } from '../common/toolNames';
 import { DiagnosticToolOutput } from './getErrorsTool';
@@ -36,7 +36,7 @@ export interface IEditFileResultProps extends BasePromptElementProps {
 	diagnosticsTimeout?: number;
 	toolName?: ToolName;
 	requestId?: string;
-	model?: vscode.LanguageModelChat;
+	model?: zyraxoncode.LanguageModelChat;
 }
 
 export class EditFileResult extends PromptElement<IEditFileResultProps> {

@@ -5,7 +5,7 @@
 
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { ExtHostAiRelatedInformationShape, IMainContext, MainContext, MainThreadAiRelatedInformationShape } from './extHost.protocol.js';
-import type { CancellationToken, RelatedInformationProvider, RelatedInformationType, RelatedInformationResult } from 'vscode';
+import type { CancellationToken, RelatedInformationProvider, RelatedInformationType, RelatedInformationResult } from 'zyraxoncode';
 import { Disposable } from './extHostTypes.js';
 
 export class ExtHostRelatedInformation implements ExtHostAiRelatedInformationShape {

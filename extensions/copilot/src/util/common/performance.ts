@@ -31,14 +31,14 @@ const chatExtMarksBySession = new Map<string, Set<string>>();
  * Each mark is a boundary of a measurable scenario — don't add marks
  * without defining what scenario they belong to.
  *
- * These marks live inside the vscode-side `agent/willInvoke` → `agent/didInvoke`
+ * These marks live inside the zyraxoncode-side `agent/willInvoke` → `agent/didInvoke`
  * window and break down what happens in the extension during a chat request.
  *
  * ## Per-Session Scenarios (scoped by sessionId via {@link markChatExt})
  *
  * **Extension Handler Duration** — total time in the participant handler:
  * `willHandleParticipant` → `didHandleParticipant`
- * Corresponds to vscode's `agent/willInvoke` → `agent/didInvoke`.
+ * Corresponds to zyraxoncode's `agent/willInvoke` → `agent/didInvoke`.
  *
  * **Prompt Build Time** — context gathering and prompt assembly (per turn):
  * `willBuildPrompt` → `didBuildPrompt`

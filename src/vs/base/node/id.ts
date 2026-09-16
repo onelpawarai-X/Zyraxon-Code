@@ -9,7 +9,7 @@ import * as uuid from '../common/uuid.js';
 import { getMac } from './macAddress.js';
 import { isWindows } from '../common/platform.js';
 
-// http://www.techrepublic.com/blog/data-center/mac-address-scorecard-for-common-virtual-machine-platforms/
+// __ZYRAXKEEP__0_
 // VMware ESX 3, Server, Workstation, Player	00-50-56, 00-0C-29, 00-05-69
 // Zyraxon Hyper-V, Virtual Server, Virtual PC	00-03-FF
 // Parallels Desktop, Workstation, Server, Virtuozzo	00-1C-42
@@ -104,7 +104,7 @@ async function getMacMachineId(errorLogger: (error: Error) => void): Promise<str
 const SQM_KEY: string = 'Software\\Zyraxon\\SQMClient';
 export async function getSqmMachineId(errorLogger: (error: Error) => void): Promise<string> {
 	if (isWindows) {
-		const Registry = await import('@vscode/windows-registry');
+		const Registry = await import('@zyraxoncode/windows-registry');
 		try {
 			return Registry.GetStringRegKey('HKEY_LOCAL_MACHINE', SQM_KEY, 'MachineId') || '';
 		} catch (err) {

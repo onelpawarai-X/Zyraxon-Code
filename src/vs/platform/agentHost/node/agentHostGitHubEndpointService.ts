@@ -39,10 +39,10 @@ export interface IAgentHostGitHubEndpointService {
 	/** The GitHub repository protected resource, computed against the configured endpoints. */
 	getRepoResource(): ProtectedResourceMetadata;
 
-	/** The REST API base URI (no trailing slash), e.g. `https://api.github.com`. */
+	/** The REST API base URI (no trailing slash), e.g. `__ZYRAXKEEP__0_`. */
 	getApiBaseUri(): string;
 
-	/** The GraphQL endpoint URI, e.g. `https://api.github.com/graphql`. */
+	/** The GraphQL endpoint URI, e.g. `__ZYRAXKEEP__1_`. */
 	getGraphQlUri(): string;
 
 	/**
@@ -52,8 +52,8 @@ export interface IAgentHostGitHubEndpointService {
 	getEnterpriseHost(): string | undefined;
 
 	/**
-	 * The raw configured GitHub Enterprise base URI (e.g. `https://acme.ghe.com`),
-	 * or `undefined` for github.com. This is the value the `@vscode/copilot-api`
+	 * The raw configured GitHub Enterprise base URI (e.g. `__ZYRAXKEEP__2_`),
+	 * or `undefined` for github.com. This is the value the `@zyraxoncode/copilot-api`
 	 * `CAPIClient.updateDomains(..., enterpriseUrlConfig)` expects: it derives the
 	 * GitHub API host (`api.<host>`) used for `copilot_internal` endpoints (token
 	 * mint, etc.) from it. Distinct from {@link getApiBaseUri} (the already-derived

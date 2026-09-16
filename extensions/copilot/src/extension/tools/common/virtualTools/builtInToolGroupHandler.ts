@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'vscode';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { assertNever } from '../../../../util/vs/base/common/assert';
 import { groupBy } from '../../../../util/vs/base/common/collections';
 import { getToolsForCategory, toolCategories, ToolCategory, ToolName } from '../toolNames';
@@ -24,7 +24,7 @@ function getCategorySummary(category: ToolCategory): string {
 			return 'Call tools from this group when you need to work with Jupyter notebooks - creating, editing, running cells, and managing notebook operations.';
 		case ToolCategory.WebInteraction:
 			return 'Call tools from this group when you need to interact with web content, browse websites, or access external resources.';
-		case ToolCategory.VSCodeInteraction:
+		case ToolCategory.ZyraxonCodeInteraction:
 			return 'Call tools from this group when you need to interact with the ZYRAXON Code workspace and access ZYRAXON Code features.';
 		case ToolCategory.Testing:
 			return 'Call tools from this group when you need to run tests, analyze test failures, and manage test workflows.';

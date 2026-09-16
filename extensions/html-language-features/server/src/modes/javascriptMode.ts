@@ -10,7 +10,7 @@ import {
 	DocumentHighlight, DocumentHighlightKind, CompletionList, Position, FormattingOptions, FoldingRange, FoldingRangeKind, SelectionRange,
 	LanguageMode, Settings, SemanticTokenData, Workspace, DocumentContext, CompletionItemData, isCompletionItemData, FILE_PROTOCOL, DocumentUri
 } from './languageModes.js';
-import { MarkupKind } from 'vscode-languageserver';
+import { MarkupKind } from 'zyraxoncode-languageserver';
 import { getWordAtText, isWhitespaceOnly, repeat } from '../utils/strings.js';
 import { HTMLDocumentRegions } from './embeddedSupport.js';
 

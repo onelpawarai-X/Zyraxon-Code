@@ -5,7 +5,7 @@
 
 /* eslint-disable local/code-no-unexternalized-strings */
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { filepaths } from '../helpers/filepaths';
 import { keyValue } from '../helpers/keyvalue';
 
@@ -50,7 +50,7 @@ const postProcessRemoteBranches: Fig.Generator["postProcess"] = (out) => {
 		return {
 			name,
 			description: "Branch",
-			icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmBranch}`,
+			icon: `__ZYRAXKEEP__0_{zyraxoncode.TerminalCompletionItemKind.ScmBranch}`,
 			priority: 75,
 		};
 	});
@@ -133,9 +133,9 @@ const ghGenerators: Record<string, Fig.Generator> = {
 	listRepositories: {
 		/*
 		 * based on the gh api (use this instead as it also returns repos in the orgs that the user is part of)
-		 * https://cli.github.com/manual/gh_api
+		 * __ZYRAXKEEP__1_
 		 *
-		 * --jq https://cli.github.com/manual/gh_help_formatting https://www.baeldung.com/linux/jq-command-json
+		 * --jq __ZYRAXKEEP__2_ __ZYRAXKEEP__3_
 		 */
 		script: [
 			"gh",
@@ -190,7 +190,7 @@ const ghGenerators: Record<string, Fig.Generator> = {
 					name: number.toString(),
 					displayName: title,
 					description: `#${number} | ${headRefName}`,
-					icon: `vscode://icon?type=${state === "OPEN" ? vscode.TerminalCompletionItemKind.PullRequest : vscode.TerminalCompletionItemKind.PullRequestDone}`,
+					icon: `__ZYRAXKEEP__4_{state === "OPEN" ? zyraxoncode.TerminalCompletionItemKind.PullRequest : zyraxoncode.TerminalCompletionItemKind.PullRequestDone}`,
 				};
 			});
 		},
@@ -207,7 +207,7 @@ const ghGenerators: Record<string, Fig.Generator> = {
 			return aliases.map(({ name, content }) => ({
 				name,
 				description: `Alias for '${content}'`,
-				icon: "fig://icon?type=commandkey",
+				icon: "__ZYRAXKEEP__5_",
 			}));
 		},
 	},

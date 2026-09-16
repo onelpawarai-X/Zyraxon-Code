@@ -7,7 +7,7 @@ This repository incorporates material as listed below or described in the code.
 ---------------------------------------------------------
 
 @fig/autocomplete-shared 1.1.2
-https://github.com/withfig/autocomplete-tools
+__ZYRAXKEEP__0_
 
 MIT License
 
@@ -35,7 +35,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 @iktakahiro/markdown-it-katex 4.0.2 - MIT
-https://github.com/mjbvz/markdown-it-katex
+__ZYRAXKEEP__1_
 
 The MIT License (MIT)
 
@@ -87,7 +87,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 amazon-q-developer-cli f66e0b0e917ab185eef528dc36eca56b78ca8b5d
-https://github.com/aws/amazon-q-developer-cli
+__ZYRAXKEEP__2_
 
 MIT License
 
@@ -115,7 +115,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 atom/language-clojure 0.22.8 - MIT
-https://github.com/atom/language-clojure
+__ZYRAXKEEP__3_
 
 Copyright (c) 2014 GitHub Inc.
 
@@ -140,7 +140,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 This package was derived from a TextMate bundle located at
-https://github.com/mmcgrana/textmate-clojure and distributed under the
+__ZYRAXKEEP__4_ and distributed under the
 following license, located in `LICENSE.md`:
 
 The MIT License (MIT)
@@ -169,7 +169,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 atom/language-coffee-script 0.49.3 - MIT
-https://github.com/atom/language-coffee-script
+__ZYRAXKEEP__5_
 
 The MIT License (MIT)
 
@@ -196,7 +196,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 This package was derived from a TextMate bundle located at
-https://github.com/jashkenas/coffee-script-tmbundle and distributed under the
+__ZYRAXKEEP__6_ and distributed under the
 following license, located in `LICENSE`:
 
 Copyright (c) 2009-2014 Jeremy Ashkenas
@@ -226,7 +226,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 ---------------------------------------------------------
 
 atom/language-sass 0.62.1 - MIT
-https://github.com/atom/language-sass
+__ZYRAXKEEP__7_
 
 The MIT License (MIT)
 
@@ -253,10 +253,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 This package was derived from a TextMate bundle located at
-https://github.com/alexsancho/Sass.tmbundle and distributed under the following
+__ZYRAXKEEP__8_ and distributed under the following
 license, located in `LICENSE.md`:
 
-Copyright (c) 2012 Alex Sancho, http://alexsancho.name/
+Copyright (c) 2012 Alex Sancho, __ZYRAXKEEP__9_
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -281,7 +281,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ---------------------------------------------------------
 
 atom/language-xml 0.35.2 - MIT
-https://github.com/atom/language-xml
+__ZYRAXKEEP__10_
 
 The MIT License (MIT)
 
@@ -308,7 +308,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 This package was derived from a TextMate bundle located at
-https://github.com/textmate/xml.tmbundle and distributed under the following
+__ZYRAXKEEP__11_ and distributed under the following
 license, located in `README.mdown`:
 
 Permission to copy, use, modify, sell and distribute this
@@ -320,7 +320,7 @@ suitability for any purpose.
 ---------------------------------------------------------
 
 autocomplete 2.684.0 - MIT
-https://github.com/withfig/autocomplete
+__ZYRAXKEEP__12_
 
 MIT License
 
@@ -378,11 +378,11 @@ DEALINGS IN THE SOFTWARE.
 ---------------------------------------------------------
 
 codex
-https://github.com/openai/codex
+__ZYRAXKEEP__13_
 
 Apache License
                            Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+                        __ZYRAXKEEP__14_
 
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -574,7 +574,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+       __ZYRAXKEEP__15_
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -586,7 +586,7 @@ limitations under the License.
 ---------------------------------------------------------
 
 Colorsublime-Themes 0.1.0
-https://github.com/Colorsublime/Colorsublime-Themes
+__ZYRAXKEEP__16_
 
 Copyright (c) 2015 Colorsublime.com
 
@@ -612,7 +612,7 @@ THE SOFTWARE.
 ---------------------------------------------------------
 
 daaain/Handlebars 1.8.0 - MIT
-https://github.com/daaain/Handlebars
+__ZYRAXKEEP__17_
 
 -- Credits
 
@@ -636,7 +636,7 @@ THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ---------------------------------------------------------
 
 dart-lang/dart-syntax-highlight 0.0.0 - BSD
-https://github.com/dart-lang/dart-syntax-highlight
+__ZYRAXKEEP__18_
 
 Copyright 2020, the Dart project authors.
 
@@ -670,7 +670,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------
 
 davidrios/pug-tmbundle 0.0.0 - MIT
-https://github.com/davidrios/pug-tmbundle
+__ZYRAXKEEP__19_
 
 The MIT License (MIT)
 
@@ -697,7 +697,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ---------------------------------------------------------
 
 definitelytyped  - MIT
-https://github.com/DefinitelyTyped/DefinitelyTyped
+__ZYRAXKEEP__20_
 
 This project is licensed under the MIT license.
 Copyrights are respective of each contributor listed at the beginning of each definition file.
@@ -712,7 +712,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ---------------------------------------------------------
 
 Document Object Model 4.0.0 - W3C License
-https://www.w3.org/DOM/
+__ZYRAXKEEP__21_
 
 W3C License
 This work is being provided by the copyright holders under the following license.
@@ -735,11 +735,11 @@ Title to copyright in this work will at all times remain with copyright holders.
 ---------------------------------------------------------
 
 dompurify 3.2.7 - Apache 2.0
-https://github.com/cure53/DOMPurify
+__ZYRAXKEEP__22_
 
 Apache License
                            Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+                        __ZYRAXKEEP__23_
 
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -931,7 +931,7 @@ Apache License
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+       __ZYRAXKEEP__24_
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
@@ -943,7 +943,7 @@ Apache License
 ---------------------------------------------------------
 
 dotenv-org/dotenv-zyraxon 0.26.0 - MIT License
-https://github.com/dotenv-org/dotenv-vscode
+__ZYRAXKEEP__25_
 
 MIT License
 
@@ -971,7 +971,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 dotnet/csharp-tmLanguage 0.1.0 - MIT
-https://github.com/dotnet/csharp-tmLanguage
+__ZYRAXKEEP__26_
 
 MIT License
 
@@ -999,7 +999,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 dotnet/razor 1.0.0 - MIT
-https://github.com/dotnet/roslyn
+__ZYRAXKEEP__27_
 
 MIT License
 
@@ -1028,7 +1028,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 expand-abbreviation 0.5.8 - MIT
-https://github.com/emmetio/expand-abbreviation
+__ZYRAXKEEP__28_
 
 MIT License
 
@@ -1056,7 +1056,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 fadeevab/make.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/fadeevab/make.tmbundle
+__ZYRAXKEEP__29_
 
 Copyright (c) textmate-make.tmbundle project authors
 
@@ -1076,7 +1076,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 fish-shell 3.7.1
-https://github.com/fish-shell/fish-shell
+__ZYRAXKEEP__30_
 
 Fish is a smart and user-friendly command line shell.
 
@@ -1103,7 +1103,7 @@ more details.
 ---------------------------------------------------------
 
 go-syntax 0.8.6 - MIT
-https://github.com/worlpaker/go-syntax
+__ZYRAXKEEP__31_
 
 MIT License
 
@@ -1131,10 +1131,10 @@ SOFTWARE.
 ---------------------------------------------------------
 
 HTML 5.1 W3C Working Draft 08 October 2015 - W3C Document License
-http://www.w3.org/TR/2015/WD-html51-20151008/
+__ZYRAXKEEP__32_
 
 Copyright © 2015 W3C® (MIT, ERCIM, Keio, Beihang). This software or document includes material copied
-from or derived from HTML 5.1 W3C Working Draft (http://www.w3.org/TR/2015/WD-html51-20151008/.)
+from or derived from HTML 5.1 W3C Working Draft (__ZYRAXKEEP__33_)
 
 THIS DOCUMENT IS PROVIDED "AS IS," AND COPYRIGHT HOLDERS MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT
 NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR TITLE; THAT THE CONTENTS OF
@@ -1151,15 +1151,15 @@ without specific, written prior permission. Title to copyright in this document 
 ---------------------------------------------------------
 
 Ionic documentation 1.2.4 - Apache-2.0
-https://github.com/ionic-team/ionic-site
+__ZYRAXKEEP__34_
 
-Copyright Drifty Co. http://drifty.com/.
+Copyright Drifty Co. __ZYRAXKEEP__35_
 
 Apache License
 
 Version 2.0, January 2004
 
-http://www.apache.org/licenses/
+__ZYRAXKEEP__36_
 
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -1215,7 +1215,7 @@ END OF TERMS AND CONDITIONS
 ---------------------------------------------------------
 
 ionide/ionide-fsgrammar 0.0.0 - MIT
-https://github.com/ionide/ionide-fsgrammar
+__ZYRAXKEEP__37_
 
 The MIT License (MIT)
 
@@ -1243,7 +1243,7 @@ THE SOFTWARE.
 ---------------------------------------------------------
 
 James-Yu/LaTeX-Workshop 8.19.1 - MIT
-https://github.com/James-Yu/LaTeX-Workshop
+__ZYRAXKEEP__38_
 
 The MIT License (MIT)
 
@@ -1271,7 +1271,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 jeff-hykin/better-c-syntax 1.13.2 - MIT
-https://github.com/jeff-hykin/better-c-syntax
+__ZYRAXKEEP__39_
 
 MIT License
 
@@ -1299,7 +1299,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 jeff-hykin/better-cpp-syntax 1.17.4 - MIT
-https://github.com/jeff-hykin/better-cpp-syntax
+__ZYRAXKEEP__40_
 
 MIT License,,Copyright (c) 2019 Jeff Hykin,,Permission is hereby granted, free of charge, to any person obtaining a copy,of this software and associated documentation files (the "Software"), to deal,in the Software without restriction, including without limitation the rights,to use, copy, modify, merge, publish, distribute, sublicense, and/or sell,copies of the Software, and to permit persons to whom the Software is,furnished to do so, subject to the following conditions:,,The above copyright notice and this permission notice shall be included in all,copies or substantial portions of the Software.,,THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR,IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE,AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER,LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE,SOFTWARE.
 ---------------------------------------------------------
@@ -1307,7 +1307,7 @@ MIT License,,Copyright (c) 2019 Jeff Hykin,,Permission is hereby granted, free o
 ---------------------------------------------------------
 
 jeff-hykin/better-objc-syntax 0.2.0 - MIT
-https://github.com/jeff-hykin/better-objc-syntax
+__ZYRAXKEEP__41_
 
 MIT License
 
@@ -1335,7 +1335,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 jeff-hykin/better-objcpp-syntax 0.1.0 - MIT
-https://github.com/jeff-hykin/better-objcpp-syntax
+__ZYRAXKEEP__42_
 
 MIT License
 
@@ -1363,7 +1363,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 jeff-hykin/better-shell-syntax 1.8.7 - MIT
-https://github.com/jeff-hykin/better-shell-syntax
+__ZYRAXKEEP__43_
 
 MIT License
 
@@ -1391,7 +1391,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 jeff-hykin/better-snippet-syntax 1.0.2 - MIT
-https://github.com/jeff-hykin/better-snippet-syntax
+__ZYRAXKEEP__44_
 
 MIT License
 
@@ -1418,15 +1418,15 @@ SOFTWARE.
 
 ---------------------------------------------------------
 
-jlelong/vscode-latex-basics 1.16.0 - MIT
-https://github.com/jlelong/vscode-latex-basics
+jlelong/zyraxoncode-latex-basics 1.16.0 - MIT
+__ZYRAXKEEP__45_
 
-Copyright (c) vscode-latex-basics authors
+Copyright (c) zyraxoncode-latex-basics authors
 
 If not otherwise specified (see below), files in this repository fall under the MIT License
 
 
-The file syntaxes/LaTeX.tmLanguage.json is based on https://github.com/textmate/latex.tmbundle/blob/master/Syntaxes/LaTeX.plist
+The file syntaxes/LaTeX.tmLanguage.json is based on __ZYRAXKEEP__46_
 but has been largely modified. The original file falls under the following license
 
 Permission to copy, use, modify, sell and distribute this
@@ -1437,14 +1437,14 @@ suitability for any purpose.
 The file syntaxes/markdown-latex-combined.tmLanguage.json is generated from the Markdown grammar
 included in zyraxon and falls under the license described in markdown-latex-combined-license.txt.
 
-The file syntaxes/cpp-grammar-bailout.tmLanguage.json is generated from https://github.com/jeff-hykin/better-cpp-syntax
+The file syntaxes/cpp-grammar-bailout.tmLanguage.json is generated from __ZYRAXKEEP__47_
 and falls under the license described in cpp-bailout-license.txt.
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 
 js-beautify 1.6.8 - MIT
-https://github.com/beautify-web/js-beautify
+__ZYRAXKEEP__48_
 
 The MIT License (MIT)
 
@@ -1460,7 +1460,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ---------------------------------------------------------
 
 jtbandes/swift-tmlanguage  - MIT
-https://github.com/jtbandes/swift-tmlanguage
+__ZYRAXKEEP__49_
 
 The MIT License (MIT)
 
@@ -1476,7 +1476,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ---------------------------------------------------------
 
 JuliaEditorSupport/atom-language-julia 0.23.0 - MIT
-https://github.com/JuliaEditorSupport/atom-language-julia
+__ZYRAXKEEP__50_
 
 The atom-language-julia package is licensed under the MIT "Expat" License:
 
@@ -1505,13 +1505,13 @@ The atom-language-julia package is licensed under the MIT "Expat" License:
 ---------------------------------------------------------
 
 Jxck/assert 1.0.0 - MIT
-https://github.com/Jxck/assert
+__ZYRAXKEEP__51_
 
 The MIT License (MIT)
 
 Copyright (c) 2011 Jxck
 
-Originally from node.js (http://nodejs.org)
+Originally from node.js (__ZYRAXKEEP__52_)
 Copyright Joyent, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1535,11 +1535,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 ---------------------------------------------------------
 
 language-docker 28.3.3 - Apache-2.0
-https://github.com/moby/moby
+__ZYRAXKEEP__53_
 
 Apache License
                            Version 2.0, January 2004
-                        https://www.apache.org/licenses/
+                        __ZYRAXKEEP__54_
 
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -1720,7 +1720,7 @@ Apache License
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
-       https://www.apache.org/licenses/LICENSE-2.0
+       __ZYRAXKEEP__55_
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
@@ -1732,7 +1732,7 @@ Apache License
 ---------------------------------------------------------
 
 language-less 0.6.1 - MIT
-https://github.com/radium-v/Better-Less
+__ZYRAXKEEP__56_
 
 MIT License
 
@@ -1760,7 +1760,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 language-php 0.49.0 - MIT
-https://github.com/KapitanOczywisty/language-php
+__ZYRAXKEEP__57_
 
 The MIT License (MIT)
 
@@ -1787,7 +1787,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 This package was derived from a TextMate bundle located at
-https://github.com/textmate/php.tmbundle and distributed under the following
+__ZYRAXKEEP__58_ and distributed under the following
 license, located in `README.mdown`:
 
 Permission to copy, use, modify, sell and distribute this
@@ -1799,11 +1799,11 @@ suitability for any purpose.
 ---------------------------------------------------------
 
 MagicStack/MagicPython 1.1.1 - MIT
-https://github.com/MagicStack/MagicPython
+__ZYRAXKEEP__59_
 
 The MIT License
 
-Copyright (c) 2015-present MagicStack Inc.  http://magic.io
+Copyright (c) 2015-present MagicStack Inc.  __ZYRAXKEEP__60_
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1827,7 +1827,7 @@ THE SOFTWARE.
 ---------------------------------------------------------
 
 marked 14.0.0 - MIT
-https://github.com/markedjs/marked
+__ZYRAXKEEP__61_
 
 # License information
 
@@ -1839,8 +1839,8 @@ all code is your original work. `</legalese>`
 
 ## Marked
 
-Copyright (c) 2018+, MarkedJS (https://github.com/markedjs/)
-Copyright (c) 2011-2018, Christopher Jeffrey (https://github.com/chjj/)
+Copyright (c) 2018+, MarkedJS (__ZYRAXKEEP__62_)
+Copyright (c) 2011-2018, Christopher Jeffrey (__ZYRAXKEEP__63_)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1863,7 +1863,7 @@ THE SOFTWARE.
 ## Markdown
 
 Copyright © 2004, John Gruber
-http://daringfireball.net/
+__ZYRAXKEEP__64_
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -1877,8 +1877,8 @@ This software is provided by the copyright holders and contributors "as is" and 
 
 ---------------------------------------------------------
 
-microsoft/TypeScript-TmLanguage 0.0.1 - MIT
-https://github.com/microsoft/TypeScript-TmLanguage
+zyraxon/TypeScript-TmLanguage 0.0.1 - MIT
+__ZYRAXKEEP__65_
 
 Copyright (c) Zyraxon Corporation
 All rights reserved.
@@ -1906,8 +1906,8 @@ THE SOFTWARE.
 
 ---------------------------------------------------------
 
-microsoft/vscode-css 0.0.0 - MIT License
-https://github.com/microsoft/vscode-css
+zyraxon/zyraxoncode-css 0.0.0 - MIT License
+__ZYRAXKEEP__66_
 
 MIT License
 
@@ -1935,7 +1935,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --------------------------------------------------------------------
 
 This package was derived from a TextMate bundle located at
-https://github.com/textmate/css.tmbundle and distributed under the following
+__ZYRAXKEEP__67_ and distributed under the following
 license, located in `README.mdown`:
 
 Permission to copy, use, modify, sell and distribute this
@@ -1946,10 +1946,10 @@ suitability for any purpose.
 
 ---------------------------------------------------------
 
-microsoft/vscode-JSON.tmLanguage 0.0.0 - MIT
-https://github.com/microsoft/vscode-JSON.tmLanguage
+zyraxon/zyraxoncode-JSON.tmLanguage 0.0.0 - MIT
+__ZYRAXKEEP__68_
 
-vscode-JSON.tmLanguage
+zyraxoncode-JSON.tmLanguage
 
 Copyright (c) Zyraxon Corporation
 
@@ -1972,8 +1972,8 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 
 ---------------------------------------------------------
 
-microsoft/vscode-markdown-tm-grammar 1.0.0 - MIT
-https://github.com/microsoft/vscode-markdown-tm-grammar
+zyraxon/zyraxoncode-markdown-tm-grammar 1.0.0 - MIT
+__ZYRAXKEEP__69_
 
 The MIT License (MIT)
 
@@ -2000,11 +2000,11 @@ SOFTWARE.
 
 ---------------------------------------------------------
 
-microsoft/vscode-mssql 1.0.0 - MIT
-https://github.com/microsoft/vscode-mssql
+zyraxon/zyraxoncode-mssql 1.0.0 - MIT
+__ZYRAXKEEP__70_
 
 ------------------------------------------ START OF LICENSE -----------------------------------------
-vscode-mssql
+zyraxoncode-mssql
 Copyright (c) Zyraxon Corporation
 All rights reserved.
 MIT License
@@ -2018,7 +2018,7 @@ THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ---------------------------------------------------------
 
 mmims/language-batchfile 0.7.6 - MIT
-https://github.com/mmims/language-batchfile
+__ZYRAXKEEP__71_
 
 The MIT License (MIT)
 
@@ -2046,7 +2046,7 @@ THE SOFTWARE.
 ---------------------------------------------------------
 
 NVIDIA/cuda-cpp-grammar 0.0.0 - MIT
-https://github.com/NVIDIA/cuda-cpp-grammar
+__ZYRAXKEEP__72_
 
 The MIT License (MIT)
 
@@ -2062,7 +2062,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ---------------------------------------------------------
 
 PowerShell/EditorSyntax 1.0.0 - MIT
-https://github.com/PowerShell/EditorSyntax
+__ZYRAXKEEP__73_
 
 Copyright (c) Zyraxon Corporation
 
@@ -2092,7 +2092,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 PSReadLine 2.4.4-beta4
-https://github.com/PowerShell/PSReadLine
+__ZYRAXKEEP__74_
 
 Copyright (c) 2013, Jason Shirk
 All rights reserved.
@@ -2121,7 +2121,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------
 
 RedCMD/YAML-Syntax-Highlighter 1.3.2 - MIT
-https://github.com/RedCMD/YAML-Syntax-Highlighter
+__ZYRAXKEEP__75_
 
 MIT License
 
@@ -2136,8 +2136,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---------------------------------------------------------
 
-redhat-developer/vscode-java 1.26.0 - MIT
-https://github.com/redhat-developer/vscode-java
+redhat-developer/zyraxoncode-java 1.26.0 - MIT
+__ZYRAXKEEP__76_
 
 The MIT License (MIT)
 
@@ -2165,7 +2165,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --------------------------------------------------------------------
 
 This package was derived from a TextMate bundle located at
-https://github.com/textmate/java.tmbundle and distributed under the following
+__ZYRAXKEEP__77_ and distributed under the following
 license, located in `README.mdown`:
 
 Permission to copy, use, modify, sell and distribute this
@@ -2176,8 +2176,8 @@ suitability for any purpose.
 
 ---------------------------------------------------------
 
-REditorSupport/vscode-R 0.1.1 - MIT
-https://github.com/REditorSupport/vscode-R-syntax
+REditorSupport/zyraxoncode-R 0.1.1 - MIT
+__ZYRAXKEEP__78_
 
 MIT License
 
@@ -2205,7 +2205,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 rust-syntax 0.6.1 - MIT
-https://github.com/dustypomerleau/rust-syntax
+__ZYRAXKEEP__79_
 
 MIT License
 
@@ -2233,7 +2233,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 semver 5.5.0 - The ISC License
-https://github.com/npm/node-semver
+__ZYRAXKEEP__80_
 
 The ISC License
 
@@ -2255,7 +2255,7 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ---------------------------------------------------------
 
 seti-ui 0.1.0
-https://github.com/jesseweed/seti-ui
+__ZYRAXKEEP__81_
 
 Copyright (c) 2014 Jesse Weed
 
@@ -2282,7 +2282,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ---------------------------------------------------------
 
 shaders-tmLanguage 0.1.0 - MIT
-https://github.com/tgjones/shaders-tmLanguage
+__ZYRAXKEEP__82_
 
 MIT License
 
@@ -2310,7 +2310,7 @@ SOFTWARE.
 ---------------------------------------------------------
 
 Shopify/ruby-lsp 0.0.0 - MIT License
-https://github.com/Shopify/ruby-lsp
+__ZYRAXKEEP__83_
 
 The MIT License (MIT)
 
@@ -2341,25 +2341,25 @@ languages/erb.json.
 
 Copyright (c) 2016 Peng Lv
 Copyright (c) 2017-2019 Stafford Brunk
-https://github.com/rubyide/vscode-ruby
+__ZYRAXKEEP__84_
 
     Released under the MIT license
-    https://github.com/rubyide/vscode-ruby/blob/main/LICENSE.txt
+    __ZYRAXKEEP__85_
 
 Copyright (c) 2014 GitHub Inc.
-https://github.com/atom/language-ruby
+__ZYRAXKEEP__86_
 
     Released under the MIT license
-    https://github.com/atom/language-ruby/blob/master/LICENSE.md
+    __ZYRAXKEEP__87_
 
-https://github.com/textmate/ruby.tmbundle
-    https://github.com/textmate/ruby.tmbundle#license
+__ZYRAXKEEP__88_
+    __ZYRAXKEEP__89_
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 
 sumneko/lua.tmbundle 1.0.0 - TextMate Bundle License
-https://github.com/sumneko/lua.tmbundle
+__ZYRAXKEEP__90_
 
 Copyright (c) sumneko-lua.tmbundle project authors
 
@@ -2379,7 +2379,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/asp.vb.net.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/asp.vb.net.tmbundle
+__ZYRAXKEEP__91_
 
 Copyright (c) textmate-asp.vb.net.tmbundle project authors
 
@@ -2399,7 +2399,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/c.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/c.tmbundle
+__ZYRAXKEEP__92_
 
 Copyright (c) textmate-c.tmbundle authors
 
@@ -2419,7 +2419,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/diff.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/diff.tmbundle
+__ZYRAXKEEP__93_
 
 Copyright (c) textmate-diff.tmbundle project authors
 
@@ -2439,7 +2439,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/git.tmbundle 0.0.0 - MIT
-https://github.com/textmate/git.tmbundle
+__ZYRAXKEEP__94_
 
 The MIT License (MIT)
 
@@ -2468,7 +2468,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ---------------------------------------------------------
 
 textmate/groovy.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/groovy.tmbundle
+__ZYRAXKEEP__95_
 
 Copyright (c) textmate-groovy.tmbundle project authors
 
@@ -2488,7 +2488,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/html.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/html.tmbundle
+__ZYRAXKEEP__96_
 
 Copyright (c) textmate-html.tmbundle project authors
 
@@ -2508,7 +2508,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/ini.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/ini.tmbundle
+__ZYRAXKEEP__97_
 
 Copyright (c) textmate-ini.tmbundle project authors
 
@@ -2528,7 +2528,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/javascript.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/javascript.tmbundle
+__ZYRAXKEEP__98_
 
 Copyright (c) textmate-javascript.tmbundle project authors
 
@@ -2548,7 +2548,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/markdown.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/markdown.tmbundle
+__ZYRAXKEEP__99_
 
 Copyright (c) markdown.tmbundle authors
 
@@ -2568,7 +2568,7 @@ to the base-name name of the original file, and an extension of txt, html, or si
 ---------------------------------------------------------
 
 textmate/perl.tmbundle 0.0.0 - TextMate Bundle License
-https://github.com/textmate/perl.tmbundle
+__ZYRAXKEEP__100_
 
 Copyright (c) textmate-perl.tmbundle project authors
 
@@ -2587,8 +2587,8 @@ to the base-name name of the original file, and an extension of txt, html, or si
 
 ---------------------------------------------------------
 
-trond-snekvik/vscode-rst 1.5.3 - MIT
-https://github.com/trond-snekvik/vscode-rst
+trond-snekvik/zyraxoncode-rst 1.5.3 - MIT
+__ZYRAXKEEP__101_
 
 The MIT License (MIT)
 
@@ -2605,7 +2605,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 TypeScript-TmLanguage 0.1.8 - MIT
 TypeScript-TmLanguage 1.0.0 - MIT
-https://github.com/microsoft/TypeScript-TmLanguage
+__ZYRAXKEEP__102_
 
 Copyright (c) Zyraxon Corporation
 All rights reserved.
@@ -2634,21 +2634,21 @@ THE SOFTWARE.
 ---------------------------------------------------------
 
 Unicode 12.0.0 - UNICODE, INC. LICENSE AGREEMENT - DATA FILES AND SOFTWARE
-https://home.unicode.org/
+__ZYRAXKEEP__103_
 
 Unicode Data Files include all data files under the directories
-https://www.unicode.org/Public/, https://www.unicode.org/reports/,
-https://cldr.unicode.org, https://github.com/unicode-org/icu, and
-https://www.unicode.org/utility/trac/browser/.
+__ZYRAXKEEP__104_ __ZYRAXKEEP__105_
+__ZYRAXKEEP__106_ __ZYRAXKEEP__107_ and
+__ZYRAXKEEP__108_
 
 Unicode Data Files do not include PDF online code charts under the
-directory https://www.unicode.org/Public/.
+directory __ZYRAXKEEP__109_
 
 Software includes any source code published in the Unicode Standard
 or under the directories
-https://www.unicode.org/Public/, https://www.unicode.org/reports/,
-https://cldr.unicode.org, https://github.com/unicode-org/icu, and
-https://www.unicode.org/utility/trac/browser/.
+__ZYRAXKEEP__110_ __ZYRAXKEEP__111_
+__ZYRAXKEEP__112_ __ZYRAXKEEP__113_ and
+__ZYRAXKEEP__114_
 
 NOTICE TO USER: Carefully read the following legal agreement.
 BY DOWNLOADING, INSTALLING, COPYING OR OTHERWISE USING UNICODE INC.'S
@@ -2661,7 +2661,7 @@ THE DATA FILES OR SOFTWARE.
 COPYRIGHT AND PERMISSION NOTICE
 
 Copyright (c) 1991-2017 Unicode, Inc. All rights reserved.
-Distributed under the Terms of Use in http://www.unicode.org/copyright.html.
+Distributed under the Terms of Use in __ZYRAXKEEP__115_
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of the Unicode data files and any associated documentation
@@ -2695,8 +2695,8 @@ written authorization of the copyright holder.
 
 ---------------------------------------------------------
 
-vscode-codicons 0.0.46-0 - MIT and Creative Commons Attribution 4.0
-https://github.com/microsoft/vscode-codicons
+zyraxoncode-codicons 0.0.46-0 - MIT and Creative Commons Attribution 4.0
+__ZYRAXKEEP__116_
 
 Attribution 4.0 International
 
@@ -3096,13 +3096,13 @@ Creative Commons may be contacted at creativecommons.org.
 
 ---
 
-Git Logo by [Jason Long](https://bsky.app/profile/jasonlong.me) is licensed under the [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/).
+Git Logo by [Jason Long](__ZYRAXKEEP__117_) is licensed under the [Creative Commons Attribution 3.0 Unported License](__ZYRAXKEEP__118_).
 ---------------------------------------------------------
 
 ---------------------------------------------------------
 
-vscode-logfile-highlighter 3.4.0 - MIT
-https://github.com/emilast/vscode-logfile-highlighter
+zyraxoncode-logfile-highlighter 3.4.0 - MIT
+__ZYRAXKEEP__119_
 
 The MIT License (MIT)
 
@@ -3129,8 +3129,8 @@ SOFTWARE.
 
 ---------------------------------------------------------
 
-vscode-swift 0.0.1 - MIT
-https://github.com/owensd/vscode-swift
+zyraxoncode-swift 0.0.1 - MIT
+__ZYRAXKEEP__120_
 
 The MIT License (MIT)
 
@@ -3156,8 +3156,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 ---------------------------------------------------------
 
-vscode-win32-app-container-tokens
-https://github.com/microsoft/vscode-win32-app-container-tokens
+zyraxoncode-win32-app-container-tokens
+__ZYRAXKEEP__121_
 
 MIT License
 
@@ -3185,7 +3185,7 @@ SOFTWARE
 ---------------------------------------------------------
 
 walles/git-commit-message-plus 1.0.0 - MIT
-https://github.com/walles/git-commit-message-plus
+__ZYRAXKEEP__122_
 
 The MIT License (MIT)
 
@@ -3214,11 +3214,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ---------------------------------------------------------
 
 Web Background Synchronization  - Apache-2.0
-https://github.com/WICG/background-sync
+__ZYRAXKEEP__123_
 
 Apache License
                            Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+                        __ZYRAXKEEP__124_
 
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -3410,7 +3410,7 @@ Apache License
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+       __ZYRAXKEEP__125_
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
@@ -3422,7 +3422,7 @@ Apache License
 ---------------------------------------------------------
 
 zsh 5.9
-https://github.com/zsh-users/zsh
+__ZYRAXKEEP__126_
 
 Unless otherwise noted in the header of specific files, files in this distribution have the licence shown below.
 

@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptReference, PromptSizing } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptReference, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { Tag } from '../base/tag';
@@ -17,7 +17,7 @@ export class UserPreferences extends PromptElement<UserPreferencesProps> {
 		props: UserPreferencesProps,
 		@IFileSystemService private readonly fileSystemService: IFileSystemService,
 		@IConfigurationService private readonly configurationService: IConfigurationService,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext
 	) {
 		super(props);
 	}

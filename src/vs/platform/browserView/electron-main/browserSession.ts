@@ -116,7 +116,7 @@ export class BrowserSession {
 	 * Get or create the singleton global-scope session.
 	 */
 	static getOrCreateGlobal(instantiationService: IInstantiationService): BrowserSession {
-		const electronSession = session.fromPartition('persist:vscode-browser');
+		const electronSession = session.fromPartition('persist:zyraxoncode-browser');
 		return BrowserSession._bySession.get(electronSession)
 			?? instantiationService.createInstance(BrowserSession, 'global', electronSession, BrowserViewStorageScope.Global);
 	}
@@ -140,7 +140,7 @@ export class BrowserSession {
 		}
 
 		const sessionId = `${type ?? 'ephemeral'}:${viewId}`;
-		const electronSession = session.fromPartition(`vscode-browser-${type}${viewId}`);
+		const electronSession = session.fromPartition(`zyraxoncode-browser-${type}${viewId}`);
 		return BrowserSession._bySession.get(electronSession)
 			?? instantiationService.createInstance(BrowserSession, sessionId, electronSession, BrowserViewStorageScope.Ephemeral);
 	}

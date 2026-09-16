@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { window, InputBoxOptions, Uri, Disposable, workspace, QuickPickOptions, l10n, LogOutputChannel } from 'vscode';
+import { window, InputBoxOptions, Uri, Disposable, workspace, QuickPickOptions, l10n, LogOutputChannel } from 'zyraxoncode';
 import { IDisposable, EmptyDisposable, toDisposable, extractFilePathFromArgs } from './util';
 import { IIPCHandler, IIPCServer } from './ipc/ipcServer';
 import type { CredentialsProvider, Credentials } from './api/git';
@@ -67,8 +67,8 @@ export class Askpass implements IIPCHandler, ITerminalEnvironmentProvider {
 
 	async handleAskpass(argv: string[]): Promise<string> {
 		// HTTPS (username | password)
-		// Username for 'https://github.com':
-		// Password for 'https://github.com':
+		// Username for '__ZYRAXKEEP__0_':
+		// Password for '__ZYRAXKEEP__1_':
 		const request = argv[2];
 		const host = argv[4].replace(/^["']+|["':]+$/g, '');
 

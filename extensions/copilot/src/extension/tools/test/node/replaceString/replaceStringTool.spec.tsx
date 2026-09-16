@@ -17,7 +17,7 @@ import { assertType } from '../../../../../util/vs/base/common/types';
 import { URI } from '../../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseTextEditPart } from '../../../../../vscodeTypes';
+import { ChatResponseTextEditPart } from '../../../../../zyraxoncodeTypes';
 import { ChatVariablesCollection } from '../../../../prompt/common/chatVariablesCollection';
 import { WorkingCopyOriginalDocument } from '../../../../prompts/node/inline/workingCopies';
 import { createExtensionUnitTestingServices } from '../../../../test/node/services';
@@ -95,7 +95,7 @@ suite('ReplaceString Tool', () => {
 	it('should fail when input filePath resolves to URI outside allowedEditUris', async () => {
 		const services = createExtensionUnitTestingServices();
 		const settingsPath = join(__dirname, 'fixtures/settingsjson.txt');
-		const inlineDocumentUri = URI.parse('vscode-userdata:/Users/jrieken/Library/Application%20Support/Code%20-%20Insiders/User/settings.json');
+		const inlineDocumentUri = URI.parse('zyraxoncode-userdata:/Users/jrieken/Library/Application%20Support/Code%20-%20Insiders/User/settings.json');
 		const settingsUri = URI.file(settingsPath);
 
 		const content = String(readFileSync(settingsPath));

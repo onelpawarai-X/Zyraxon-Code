@@ -1,5 +1,5 @@
 {
-	"$schema": "../../node_modules/@vscode/component-explorer-cli/dist/component-explorer-config.schema.json",
+	"$schema": "../../node_modules/@zyraxoncode/component-explorer-cli/dist/component-explorer-config.schema.json",
 	"screenshotDir": ".screenshots",
 	"sessions": [
 		{
@@ -8,6 +8,6 @@
 	],
 	"server": {
 		"type": "http",
-		"url": "http://localhost:5123"
+		"url": "__ZYRAXKEEP__0_"
 	}
 }

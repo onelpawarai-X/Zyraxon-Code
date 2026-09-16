@@ -9,11 +9,11 @@ import {
 	Disposable, FormattingOptions, CancellationToken, ProviderResult, TextEdit, CompletionContext, CompletionList, SemanticTokensLegend,
 	DocumentSemanticTokensProvider, DocumentRangeSemanticTokensProvider, SemanticTokens, window, commands, l10n,
 	LogOutputChannel
-} from 'vscode';
+} from 'zyraxoncode';
 import {
 	LanguageClientOptions, RequestType, DocumentRangeFormattingParams,
 	DocumentRangeFormattingRequest, ProvideCompletionItemsSignature, TextDocumentIdentifier, RequestType0, Range as LspRange, Position as LspPosition, NotificationType, BaseLanguageClient
-} from 'vscode-languageclient';
+} from 'zyraxoncode-languageclient';
 import { FileSystemProvider, serveFileSystemRequests } from './requests';
 import { getCustomDataSource } from './customData';
 import { activateAutoInsertion } from './autoInsertion';

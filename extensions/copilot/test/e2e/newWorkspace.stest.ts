@@ -6,12 +6,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { TextDecoder } from 'util';
-import type { ChatResponseFileTree } from 'vscode';
+import type { ChatResponseFileTree } from 'zyraxoncode';
 import { INewWorkspacePreviewContentManager } from '../../src/extension/intents/node/newIntent';
 import { ITestingServicesAccessor } from '../../src/platform/test/node/services';
 import { IQualifiedFile, getLanguageForFile } from '../../src/platform/test/node/simulationWorkspace';
 import { looksLikeDirectory } from '../../src/util/common/fileSystem';
-import { ChatResponseFileTreePart, Uri } from '../../src/vscodeTypes';
+import { ChatResponseFileTreePart, Uri } from '../../src/zyraxoncodeTypes';
 import { ssuite, stest } from '../base/stest';
 import { validate } from '../base/validate';
 import { compileTSWorkspace } from '../simulation/diagnosticProviders/tsc';

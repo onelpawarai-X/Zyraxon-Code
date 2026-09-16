@@ -331,7 +331,7 @@ export abstract class BaseTerminalProfileResolverService extends Disposable impl
 		}
 
 		// Resolve path variables
-		const activeWorkspaceRootUri = this._historyService.getLastActiveWorkspaceRoot(options.remoteAuthority ? Schemas.vscodeRemote : Schemas.file);
+		const activeWorkspaceRootUri = this._historyService.getLastActiveWorkspaceRoot(options.remoteAuthority ? Schemas.zyraxoncodeRemote : Schemas.file);
 		const lastActiveWorkspace = activeWorkspaceRootUri ? this._workspaceContextService.getWorkspaceFolder(activeWorkspaceRootUri) ?? undefined : undefined;
 		profile.path = await this._resolveVariables(profile.path, env, lastActiveWorkspace);
 

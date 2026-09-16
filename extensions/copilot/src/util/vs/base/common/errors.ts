@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -85,7 +85,7 @@ export function setUnexpectedErrorHandler(newUnexpectedErrorHandler: (e: any) =>
  * Returns if the error is a SIGPIPE error. SIGPIPE errors should generally be
  * logged at most once, to avoid a loop.
  *
- * @see https://github.com/microsoft/vscode-remote-release/issues/6481
+ * @see __ZYRAXKEEP__0_
  */
 export function isSigPipeError(e: unknown): e is Error {
 	if (!e || typeof e !== 'object') {
@@ -177,7 +177,7 @@ export function transformErrorFromSerialization(data: SerializedError): Error {
 	return error;
 }
 
-// see https://github.com/v8/v8/wiki/Stack%20Trace%20API#basic-stack-traces
+// see __ZYRAXKEEP__1_
 export interface V8CallSite {
 	getThis(): unknown;
 	getTypeName(): string | null;

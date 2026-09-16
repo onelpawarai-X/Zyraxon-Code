@@ -842,9 +842,9 @@ export function renderForm(
 	const promptHost = DOM.append(promptRow, $('.automation-form-prompt-host.interactive-session'));
 
 	const chatInputStyles: IChatInputStyles = {
-		overlayBackground: 'var(--vscode-input-background)',
-		listForeground: 'var(--vscode-foreground)',
-		listBackground: 'var(--vscode-input-background)',
+		overlayBackground: 'var(--zyraxoncode-input-background)',
+		listForeground: 'var(--zyraxoncode-foreground)',
+		listBackground: 'var(--zyraxoncode-input-background)',
 	};
 
 	const chatInputOptions: IChatInputPartOptions = {

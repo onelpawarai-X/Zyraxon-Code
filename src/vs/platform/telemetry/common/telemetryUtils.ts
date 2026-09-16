@@ -190,7 +190,7 @@ export function validateTelemetryData(data?: unknown): { properties: Properties;
 				console.warn(`Telemetry property: ${prop} has been trimmed to 8192, the original length is ${value.length}`);
 			}
 			//enforce property value to be less than 8192 char, take the first 8192 char
-			// https://docs.microsoft.com/en-us/azure/azure-monitor/app/api-custom-events-metrics#limits
+			// __ZYRAXKEEP__0_
 			properties[prop] = value.substring(0, 8191);
 
 		} else if (typeof value !== 'undefined' && value !== null) {
@@ -313,10 +313,10 @@ function anonymizeFilePaths(stack: string, cleanupPatterns: RegExp[]): string {
 	// Match node_modules or node_modules.asar at any position in the path, capturing the node_modules/... suffix
 	const nodeModulesRegex = /(?:^|[\\\/])((node_modules|node_modules\.asar)[\\\/].*)$/;
 	// Match ZYRAXON Code extension paths:
-	// 1. User extensions: .vscode/extensions/, .vscode-insiders/extensions/, .vscode-server/extensions/, .vscode-server-insiders/extensions/, etc.
+	// 1. User extensions: .zyraxoncode/extensions/, .zyraxoncode-insiders/extensions/, .zyraxoncode-server/extensions/, .zyraxoncode-server-insiders/extensions/, etc.
 	// 2. Built-in extensions: resources/app/extensions/
-	// Capture everything from the vscode folder or resources/app/extensions onwards
-	const vscodeExtensionsPathRegex = /^(.*?)((?:\.vscode(?:-[a-z]+)*|resources[\\\/]app)[\\\/]extensions[\\\/].*)$/i;
+	// Capture everything from the zyraxoncode folder or resources/app/extensions onwards
+	const zyraxoncodeExtensionsPathRegex = /^(.*?)((?:\.zyraxoncode(?:-[a-z]+)*|resources[\\\/]app)[\\\/]extensions[\\\/].*)$/i;
 	const fileRegex = /(file:\/\/)?([a-zA-Z]:(\\\\|\\|\/)|(\\\\|\\|\/))?([\w\-\._@]+(\\\\|\\|\/))+[\w\-\._@]*/g;
 	let lastIndex = 0;
 	updatedStack = '';
@@ -332,11 +332,11 @@ function anonymizeFilePaths(stack: string, cleanupPatterns: RegExp[]): string {
 
 		// anoynimize user file paths that do not need to be retained or cleaned up.
 		if (!overlappingRange) {
-			// Check if this is a ZYRAXON Code extension path - if so, preserve the .vscode*/extensions/... portion
-			const vscodeExtMatch = vscodeExtensionsPathRegex.exec(result[0]);
-			if (vscodeExtMatch) {
-				// Keep ".vscode[-variant]/extensions/extension-name/..." but redact the parent folder
-				updatedStack += stack.substring(lastIndex, result.index) + '<REDACTED: user-file-path>/' + vscodeExtMatch[2];
+			// Check if this is a ZYRAXON Code extension path - if so, preserve the .zyraxoncode*/extensions/... portion
+			const zyraxoncodeExtMatch = zyraxoncodeExtensionsPathRegex.exec(result[0]);
+			if (zyraxoncodeExtMatch) {
+				// Keep ".zyraxoncode[-variant]/extensions/extension-name/..." but redact the parent folder
+				updatedStack += stack.substring(lastIndex, result.index) + '<REDACTED: user-file-path>/' + zyraxoncodeExtMatch[2];
 			} else {
 				// Check if node_modules appears in the path — preserve node_modules/... suffix
 				const nodeModulesMatch = nodeModulesRegex.exec(result[0]);

@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { IAlternativeNotebookContentService } from '../../../platform/notebook/common/alternativeContent';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { findNotebook } from '../../../util/common/notebooks';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExtendedLanguageModelToolResult, LanguageModelDataPart, LanguageModelPromptTsxPart, LanguageModelTextPart, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelDataPart, LanguageModelPromptTsxPart, LanguageModelTextPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { ToolName } from '../common/toolNames';
@@ -38,7 +38,7 @@ export class GetNotebookCellOutputTool implements ICopilotTool<IGetNotebookCellO
 		@ILogService private readonly logger: ILogService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IGetNotebookCellOutputToolParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IGetNotebookCellOutputToolParams>, token: zyraxoncode.CancellationToken) {
 		const { filePath, cellId } = options.input;
 
 		let uri = this.promptPathRepresentationService.resolveFilePath(filePath);
@@ -101,7 +101,7 @@ export class GetNotebookCellOutputTool implements ICopilotTool<IGetNotebookCellO
 		}
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IGetNotebookCellOutputToolParams>): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IGetNotebookCellOutputToolParams>): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		return {
 			invocationMessage: l10n.t`Reading cell output`,
 			pastTenseMessage: l10n.t`Read cell output`,
@@ -121,7 +121,7 @@ interface IGetNotebookCellOutputToolParams {
 
 ToolRegistry.registerTool(GetNotebookCellOutputTool);
 
-async function sendOutcomeTelemetry(telemetryService: ITelemetryService, endpointProvider: IEndpointProvider | undefined, options: vscode.LanguageModelToolInvocationOptions<IGetNotebookCellOutputToolParams>, outcome: string) {
+async function sendOutcomeTelemetry(telemetryService: ITelemetryService, endpointProvider: IEndpointProvider | undefined, options: zyraxoncode.LanguageModelToolInvocationOptions<IGetNotebookCellOutputToolParams>, outcome: string) {
 	const model = (options.model && endpointProvider && (await endpointProvider.getChatEndpoint(options.model)).model);
 
 	/* __GDPR__

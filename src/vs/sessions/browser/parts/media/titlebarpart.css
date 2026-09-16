@@ -64,7 +64,7 @@
 .agent-sessions-workbench.monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-center .window-title {
 	margin: unset;
 	/* Match the ZYRAXON Code window command center font size. */
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 }
 
 .agent-sessions-workbench.monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-right {
@@ -88,7 +88,7 @@
 }
 
 .monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-center > .titlebar-actions-container .monaco-action-bar .action-item:not(.disabled) .codicon {
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 /* Session Title Actions Container (before right toolbar) */
@@ -108,7 +108,7 @@
 	gap: 1px;
 }
 
-.agent-sessions-workbench.monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-right > .titlebar-session-actions-container .monaco-toolbar .actions-container > .action-item.open-in-vscode-titlebar-widget + .action-item {
+.agent-sessions-workbench.monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-right > .titlebar-session-actions-container .monaco-toolbar .actions-container > .action-item.open-in-zyraxoncode-titlebar-widget + .action-item {
 	margin-left: 5px;
 }
 
@@ -119,8 +119,8 @@
 
 /* Toggled action buttons in session actions toolbar */
 .monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-right > .titlebar-session-actions-container .action-label.checked {
-	background: var(--vscode-toolbar-activeBackground);
-	border-radius: var(--vscode-cornerRadius-small);
+	background: var(--zyraxoncode-toolbar-activeBackground);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 /* Secondary sidebar toggle uses icon variants for toggle state — no background needed */
@@ -131,11 +131,11 @@
 
 .monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-right > .titlebar-session-actions-container .action-label.codicon-agent-secondary-sidebar-toggle-open.checked:hover,
 .monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-right > .titlebar-session-actions-container .action-label.codicon-agent-secondary-sidebar-toggle-closed.checked:hover {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-right > .titlebar-actions-container .monaco-action-bar .action-item:not(.disabled) .codicon {
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-right > .titlebar-actions-container .monaco-action-bar .action-item {
@@ -163,7 +163,7 @@
 }
 
 .monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-left > .left-toolbar-container .monaco-action-bar .action-item:not(.disabled) .codicon {
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .monaco-workbench .part.titlebar > .sessions-titlebar-container > .titlebar-left > .left-toolbar-container .monaco-action-bar .action-item {

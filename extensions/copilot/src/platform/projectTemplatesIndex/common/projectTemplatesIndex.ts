@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { createServiceIdentifier } from '../../../util/common/services';
-import { sanitizeVSCodeVersion } from '../../../util/common/vscodeVersion';
+import { sanitizeZyraxonCodeVersion } from '../../../util/common/zyraxoncodeVersion';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
 import { Embedding, EmbeddingType, EmbeddingVector, rankEmbeddings } from '../../embeddings/common/embeddingsComputer';
 import { EmbeddingCacheType, IEmbeddingsCache, LocalEmbeddingsCache, RemoteCacheType, RemoteEmbeddingsCache } from '../../embeddings/common/embeddingsIndex';
@@ -35,7 +35,7 @@ export class ProjectTemplatesIndex implements IProjectTemplatesIndex {
 		@IEnvService envService: IEnvService,
 		@IInstantiationService instantiationService: IInstantiationService
 	) {
-		const cacheVersion = sanitizeVSCodeVersion(envService.getEditorInfo().version);
+		const cacheVersion = sanitizeZyraxonCodeVersion(envService.getEditorInfo().version);
 		this.embeddingsCache = useRemoteCache ?
 			instantiationService.createInstance(RemoteEmbeddingsCache, EmbeddingCacheType.GLOBAL, 'projectTemplateEmbeddings', cacheVersion, EmbeddingType.text3small_512, RemoteCacheType.ProjectTemplates)
 			: instantiationService.createInstance(LocalEmbeddingsCache, EmbeddingCacheType.GLOBAL, 'projectTemplateEmbeddings', cacheVersion, EmbeddingType.text3small_512);

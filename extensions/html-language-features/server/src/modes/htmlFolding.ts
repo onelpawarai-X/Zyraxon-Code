@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { TextDocument, FoldingRange, Position, Range, LanguageModes, LanguageMode } from './languageModes.js';
-import { CancellationToken } from 'vscode-languageserver';
+import { CancellationToken } from 'zyraxoncode-languageserver';
 
 export async function getFoldingRanges(languageModes: LanguageModes, document: TextDocument, maxRanges: number | undefined, _cancellationToken: CancellationToken | null): Promise<FoldingRange[]> {
 	const htmlMode = languageModes.getMode('html');

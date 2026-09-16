@@ -106,13 +106,13 @@ declare namespace monaco {
 		readonly onCancellationRequested: (listener: (e: void) => unknown, thisArgs?: unknown, disposables?: IDisposable[]) => IDisposable;
 	}
 	/**
-	 * Uniform Resource Identifier (Uri) http://tools.ietf.org/html/rfc3986.
+	 * Uniform Resource Identifier (Uri) __ZYRAXKEEP__0_
 	 * This class is a simple parser which creates the basic component parts
-	 * (http://tools.ietf.org/html/rfc3986#section-3) with minimal validation
+	 * (__ZYRAXKEEP__1_) with minimal validation
 	 * and encoding.
 	 *
 	 * ```txt
-	 *       foo://example.com:8042/over/there?name=ferret#nose
+	 *       __ZYRAXKEEP__2_
 	 *       \_/   \______________/\_________/ \_________/ \__/
 	 *        |           |            |            |        |
 	 *     scheme     authority       path        query   fragment
@@ -124,25 +124,25 @@ declare namespace monaco {
 	export class Uri implements UriComponents {
 		static isUri(thing: unknown): thing is Uri;
 		/**
-		 * scheme is the 'http' part of 'http://www.example.com/some/path?query#fragment'.
+		 * scheme is the 'http' part of '__ZYRAXKEEP__3_'.
 		 * The part before the first colon.
 		 */
 		readonly scheme: string;
 		/**
-		 * authority is the 'www.example.com' part of 'http://www.example.com/some/path?query#fragment'.
+		 * authority is the '__ZYRAXKEEP__4_' part of '__ZYRAXKEEP__5_'.
 		 * The part between the first double slashes and the next slash.
 		 */
 		readonly authority: string;
 		/**
-		 * path is the '/some/path' part of 'http://www.example.com/some/path?query#fragment'.
+		 * path is the '/some/path' part of '__ZYRAXKEEP__6_'.
 		 */
 		readonly path: string;
 		/**
-		 * query is the 'query' part of 'http://www.example.com/some/path?query#fragment'.
+		 * query is the 'query' part of '__ZYRAXKEEP__7_'.
 		 */
 		readonly query: string;
 		/**
-		 * fragment is the 'fragment' part of 'http://www.example.com/some/path?query#fragment'.
+		 * fragment is the 'fragment' part of '__ZYRAXKEEP__8_'.
 		 */
 		readonly fragment: string;
 		/**
@@ -159,7 +159,7 @@ declare namespace monaco {
 		 * of UNC paths. See the below sample of a file-uri with an authority (UNC path).
 		 *
 		 * ```ts
-			const u = Uri.parse('file://server/c$/folder/file.txt')
+			const u = Uri.parse('__ZYRAXKEEP__9_')
 			u.authority === 'server'
 			u.path === '/shares/c$/file.txt'
 			u.fsPath === '\\server\c$\folder\file.txt'
@@ -178,8 +178,8 @@ declare namespace monaco {
 			fragment?: string | null;
 		}): Uri;
 		/**
-		 * Creates a new Uri from a string, e.g. `http://www.example.com/some/path`,
-		 * `file:///usr/home`, or `scheme:with/path`.
+		 * Creates a new Uri from a string, e.g. `__ZYRAXKEEP__10_`,
+		 * `__ZYRAXKEEP__11_`, or `scheme:with/path`.
 		 *
 		 * @param value A string which represents an Uri (see `Uri#toString`).
 		 */
@@ -260,7 +260,7 @@ declare namespace monaco {
 	}
 	/**
 	 * Virtual Key Codes, the value does not hold any inherent meaning.
-	 * Inspired somewhat from https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
+	 * Inspired somewhat from __ZYRAXKEEP__12_(v=vs.85).aspx
 	 * But these are "more general", as they should work across browsers & OS`s.
 	 */
 	export enum KeyCode {
@@ -1248,7 +1248,7 @@ declare namespace monaco.editor {
 		 */
 		label: string;
 		/**
-		 * Precondition rule. The value should be a [context key expression](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts).
+		 * Precondition rule. The value should be a [context key expression](__ZYRAXKEEP__13_).
 		 */
 		precondition?: string;
 		/**
@@ -1388,7 +1388,7 @@ declare namespace monaco.editor {
 		 * An URL to open when Ctrl+H (Windows and Linux) or Cmd+H (OSX) is pressed in
 		 * the accessibility help dialog in the editor.
 		 *
-		 * Defaults to "https://go.microsoft.com/fwlink/?linkid=852450"
+		 * Defaults to "__ZYRAXKEEP__14_"
 		 */
 		accessibilityHelpUrl?: string;
 		/**
@@ -3302,7 +3302,7 @@ declare namespace monaco.editor {
 		lineNumbersMinChars?: number;
 		/**
 		 * Enable the rendering of the glyph margin.
-		 * Defaults to true in vscode and to false in monaco-editor.
+		 * Defaults to true in zyraxoncode and to false in monaco-editor.
 		 */
 		glyphMargin?: boolean;
 		/**
@@ -3515,7 +3515,7 @@ declare namespace monaco.editor {
 		wordWrapColumn?: number;
 		/**
 		 * Control indentation of wrapped lines. Can be: 'none', 'same', 'indent' or 'deepIndent'.
-		 * Defaults to 'same' in vscode and to 'none' in monaco-editor.
+		 * Defaults to 'same' in zyraxoncode and to 'none' in monaco-editor.
 		 */
 		wrappingIndent?: 'none' | 'same' | 'indent' | 'deepIndent';
 		/**
@@ -4777,7 +4777,7 @@ declare namespace monaco.editor {
 		/**
 		 * Unicode characters that are common in allowed locales are not being highlighted.
 		 */
-		allowedLocales?: Record<string | '_os' | '_vscode', true>;
+		allowedLocales?: Record<string | '_os' | '_zyraxoncode', true>;
 	}
 
 	export interface IInlineSuggestOptions {
@@ -6912,7 +6912,7 @@ declare namespace monaco.languages {
 
 	/**
 	 * The code action interface defines the contract between extensions and
-	 * the [light bulb](https://code.visualstudio.com/docs/editor/editingevolved#_code-action) feature.
+	 * the [light bulb](__ZYRAXKEEP__15_) feature.
 	 */
 	export interface CodeActionProvider {
 		/**
@@ -7079,7 +7079,7 @@ declare namespace monaco.languages {
 		/**
 		 * Used by the indentation based strategy to decide whether empty lines belong to the previous or the next block.
 		 * A language adheres to the off-side rule if blocks in that language are expressed by their indentation.
-		 * See [wikipedia](https://en.wikipedia.org/wiki/Off-side_rule) for more information.
+		 * See [wikipedia](__ZYRAXKEEP__16_) for more information.
 		 * If not set, `false` is used and empty lines belong to the previous block.
 		 */
 		offSide?: boolean;
@@ -7241,7 +7241,7 @@ declare namespace monaco.languages {
 
 	/**
 	 * The hover provider interface defines the contract between extensions and
-	 * the [hover](https://code.visualstudio.com/docs/editor/intellisense)-feature.
+	 * the [hover](__ZYRAXKEEP__17_)-feature.
 	 */
 	export interface HoverProvider<THover = Hover> {
 		/**
@@ -7479,7 +7479,7 @@ declare namespace monaco.languages {
 
 	/**
 	 * The completion item provider interface defines the contract between extensions and
-	 * the [IntelliSense](https://code.visualstudio.com/docs/editor/intellisense).
+	 * the [IntelliSense](__ZYRAXKEEP__18_).
 	 *
 	 * When computing *complete* completion items is expensive, providers can optionally implement
 	 * the `resolveCompletionItem`-function. In that case it is enough to return completion
@@ -7902,7 +7902,7 @@ declare namespace monaco.languages {
 
 	/**
 	 * The signature help provider interface defines the contract between extensions and
-	 * the [parameter hints](https://code.visualstudio.com/docs/editor/intellisense)-feature.
+	 * the [parameter hints](__ZYRAXKEEP__19_)-feature.
 	 */
 	export interface SignatureHelpProvider {
 		readonly signatureHelpTriggerCharacters?: ReadonlyArray<string>;
@@ -8034,7 +8034,7 @@ declare namespace monaco.languages {
 
 	/**
 	 * The reference provider interface defines the contract between extensions and
-	 * the [find references](https://code.visualstudio.com/docs/editor/editingevolved#_peek)-feature.
+	 * the [find references](__ZYRAXKEEP__20_)-feature.
 	 */
 	export interface ReferenceProvider {
 		/**
@@ -8082,7 +8082,7 @@ declare namespace monaco.languages {
 
 	/**
 	 * The definition provider interface defines the contract between extensions and
-	 * the [go to definition](https://code.visualstudio.com/docs/editor/editingevolved#_go-to-definition)
+	 * the [go to definition](__ZYRAXKEEP__21_)
 	 * and peek definition features.
 	 */
 	export interface DefinitionProvider {
@@ -8094,7 +8094,7 @@ declare namespace monaco.languages {
 
 	/**
 	 * The definition provider interface defines the contract between extensions and
-	 * the [go to definition](https://code.visualstudio.com/docs/editor/editingevolved#_go-to-definition)
+	 * the [go to definition](__ZYRAXKEEP__22_)
 	 * and peek definition features.
 	 */
 	export interface DeclarationProvider {
@@ -8175,7 +8175,7 @@ declare namespace monaco.languages {
 
 	/**
 	 * The document symbol provider interface defines the contract between extensions and
-	 * the [go to symbol](https://code.visualstudio.com/docs/editor/editingevolved#_go-to-symbol)-feature.
+	 * the [go to symbol](__ZYRAXKEEP__23_)-feature.
 	 */
 	export interface DocumentSymbolProvider {
 		displayName?: string;

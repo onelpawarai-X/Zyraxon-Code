@@ -13,7 +13,7 @@ export type SessionsInteractionButton =
 	| 'addTask'
 	| 'generateNewTask'
 	| 'openTerminal'
-	| 'openInVSCode';
+	| 'openInZyraxonCode';
 
 export type SessionsInteractionSource = 'menu' | 'actionWidget' | 'titleBar' | 'sidebar';
 
@@ -33,7 +33,7 @@ type SessionsInteractionClassification = {
  * Log a titlebar button interaction in the Agents window.
  */
 export function logSessionsInteraction(telemetryService: ITelemetryService, button: SessionsInteractionButton, source?: SessionsInteractionSource): void {
-	telemetryService.publicLog2<SessionsInteractionEvent, SessionsInteractionClassification>('vscodeAgents.interaction', source ? { button, source } : { button });
+	telemetryService.publicLog2<SessionsInteractionEvent, SessionsInteractionClassification>('zyraxoncodeAgents.interaction', source ? { button, source } : { button });
 }
 
 // --- Changes panel interactions ---
@@ -49,7 +49,7 @@ type SidePanelToggleClassification = {
 };
 
 export function logSidePanelToggle(telemetryService: ITelemetryService, visible: boolean): void {
-	telemetryService.publicLog2<SidePanelToggleEvent, SidePanelToggleClassification>('vscodeAgents.layout/toggleSidePanel', { visible });
+	telemetryService.publicLog2<SidePanelToggleEvent, SidePanelToggleClassification>('zyraxoncodeAgents.layout/toggleSidePanel', { visible });
 }
 
 type ChangesViewVersionModeChangeEvent = {
@@ -63,7 +63,7 @@ type ChangesViewVersionModeChangeClassification = {
 };
 
 export function logChangesViewVersionModeChange(telemetryService: ITelemetryService, mode: string): void {
-	telemetryService.publicLog2<ChangesViewVersionModeChangeEvent, ChangesViewVersionModeChangeClassification>('vscodeAgents.changesView/versionModeChange', { mode });
+	telemetryService.publicLog2<ChangesViewVersionModeChangeEvent, ChangesViewVersionModeChangeClassification>('zyraxoncodeAgents.changesView/versionModeChange', { mode });
 }
 
 type ChangesViewFileSelectEvent = {
@@ -77,7 +77,7 @@ type ChangesViewFileSelectClassification = {
 };
 
 export function logChangesViewFileSelect(telemetryService: ITelemetryService, changeType: string): void {
-	telemetryService.publicLog2<ChangesViewFileSelectEvent, ChangesViewFileSelectClassification>('vscodeAgents.changesView/fileSelect', { changeType });
+	telemetryService.publicLog2<ChangesViewFileSelectEvent, ChangesViewFileSelectClassification>('zyraxoncodeAgents.changesView/fileSelect', { changeType });
 }
 
 type ChangesViewViewModeChangeEvent = {
@@ -91,7 +91,7 @@ type ChangesViewViewModeChangeClassification = {
 };
 
 export function logChangesViewViewModeChange(telemetryService: ITelemetryService, mode: string): void {
-	telemetryService.publicLog2<ChangesViewViewModeChangeEvent, ChangesViewViewModeChangeClassification>('vscodeAgents.changesView/viewModeChange', { mode });
+	telemetryService.publicLog2<ChangesViewViewModeChangeEvent, ChangesViewViewModeChangeClassification>('zyraxoncodeAgents.changesView/viewModeChange', { mode });
 }
 
 // --- Tunnel agent host discovery ---
@@ -135,7 +135,7 @@ export function logTunnelDiscoveryResult(
 		success: boolean;
 	},
 ): void {
-	telemetryService.publicLog2<TunnelDiscoveryResultEvent, TunnelDiscoveryResultClassification>('vscodeAgents.tunnelDiscovery/result', {
+	telemetryService.publicLog2<TunnelDiscoveryResultEvent, TunnelDiscoveryResultClassification>('zyraxoncodeAgents.tunnelDiscovery/result', {
 		trigger: data.trigger,
 		totalFound: data.totalFound,
 		withActiveHost: data.withActiveHost,
@@ -180,7 +180,7 @@ type TunnelConnectAttemptClassification = {
 };
 
 export function logTunnelConnectAttempt(telemetryService: ITelemetryService, data: { isReconnect: boolean; attempt: number; durationMs: number; success: boolean; errorCategory?: TunnelConnectErrorCategory }): void {
-	telemetryService.publicLog2<TunnelConnectAttemptEvent, TunnelConnectAttemptClassification>('vscodeAgents.tunnelConnect/attempt', {
+	telemetryService.publicLog2<TunnelConnectAttemptEvent, TunnelConnectAttemptClassification>('zyraxoncodeAgents.tunnelConnect/attempt', {
 		isReconnect: data.isReconnect,
 		attempt: data.attempt,
 		durationMs: data.durationMs,
@@ -208,7 +208,7 @@ type TunnelConnectResolvedClassification = {
 };
 
 export function logTunnelConnectResolved(telemetryService: ITelemetryService, data: { isReconnect: boolean; totalAttempts: number; totalDurationMs: number; success: boolean; failureReason?: TunnelConnectFailureReason }): void {
-	telemetryService.publicLog2<TunnelConnectResolvedEvent, TunnelConnectResolvedClassification>('vscodeAgents.tunnelConnect/resolved', {
+	telemetryService.publicLog2<TunnelConnectResolvedEvent, TunnelConnectResolvedClassification>('zyraxoncodeAgents.tunnelConnect/resolved', {
 		isReconnect: data.isReconnect,
 		totalAttempts: data.totalAttempts,
 		totalDurationMs: data.totalDurationMs,
@@ -251,7 +251,7 @@ type SocketCloseClassification = {
 };
 
 export function logSocketClose(telemetryService: ITelemetryService, data: { closeCode: number; wasClean: boolean; lifetimeMs: number; messagesSent: number; messagesReceived: number; messagesDropped: number; trigger: SocketCloseTrigger }): void {
-	telemetryService.publicLog2<SocketCloseEvent, SocketCloseClassification>('vscodeAgents.socket/close', data);
+	telemetryService.publicLog2<SocketCloseEvent, SocketCloseClassification>('zyraxoncodeAgents.socket/close', data);
 }
 
 // --- Send dropped telemetry ---
@@ -271,7 +271,7 @@ type SendDroppedClassification = {
 };
 
 export function logSendDropped(telemetryService: ITelemetryService, data: { readyState: number; timeSinceLastReceiveMs: number; timeSinceLastSendMs: number }): void {
-	telemetryService.publicLog2<SendDroppedEvent, SendDroppedClassification>('vscodeAgents.socket/sendDropped', data);
+	telemetryService.publicLog2<SendDroppedEvent, SendDroppedClassification>('zyraxoncodeAgents.socket/sendDropped', data);
 }
 
 // --- Visibility resumed telemetry ---
@@ -291,7 +291,7 @@ type VisibilityResumedClassification = {
 };
 
 export function logVisibilityResumed(telemetryService: ITelemetryService, data: { hiddenDurationMs: number; socketAlive: boolean; forceClosed: boolean }): void {
-	telemetryService.publicLog2<VisibilityResumedEvent, VisibilityResumedClassification>('vscodeAgents.socket/visibilityResumed', data);
+	telemetryService.publicLog2<VisibilityResumedEvent, VisibilityResumedClassification>('zyraxoncodeAgents.socket/visibilityResumed', data);
 }
 
 // --- Terminal recovery telemetry ---
@@ -309,5 +309,5 @@ type TerminalRecoveryClassification = {
 };
 
 export function logTerminalRecovery(telemetryService: ITelemetryService, data: { recoveredCount: number; totalCount: number }): void {
-	telemetryService.publicLog2<TerminalRecoveryEvent, TerminalRecoveryClassification>('vscodeAgents.terminal/recovery', data);
+	telemetryService.publicLog2<TerminalRecoveryEvent, TerminalRecoveryClassification>('zyraxoncodeAgents.terminal/recovery', data);
 }

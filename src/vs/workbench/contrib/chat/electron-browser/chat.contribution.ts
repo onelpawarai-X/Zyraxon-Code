@@ -89,23 +89,23 @@ class ChatCommandLineHandler extends Disposable {
 	private registerListeners() {
 		const handleChatRequest = (_: unknown, ...args: unknown[]) => {
 			const chatArgs = args[0] as typeof this.environmentService.args.chat;
-			this.logService.trace('vscode:handleChatRequest', chatArgs);
+			this.logService.trace('zyraxoncode:handleChatRequest', chatArgs);
 
-			this.prompt(chatArgs).catch(err => this.logService.error('vscode:handleChatRequest failed', err));
+			this.prompt(chatArgs).catch(err => this.logService.error('zyraxoncode:handleChatRequest failed', err));
 		};
-		ipcRenderer.on('vscode:handleChatRequest', handleChatRequest);
-		this._register({ dispose: () => ipcRenderer.removeListener('vscode:handleChatRequest', handleChatRequest) });
+		ipcRenderer.on('zyraxoncode:handleChatRequest', handleChatRequest);
+		this._register({ dispose: () => ipcRenderer.removeListener('zyraxoncode:handleChatRequest', handleChatRequest) });
 
 		const handleOpenChatSession = (_: unknown, ...args: unknown[]) => {
 			const sessionUriString = args[0] as string;
-			this.logService.trace('vscode:openChatSession', sessionUriString);
+			this.logService.trace('zyraxoncode:openChatSession', sessionUriString);
 
 			const sessionResource = URI.parse(sessionUriString);
 			Promise.resolve(this.chatWidgetService.openSession(sessionResource, ChatViewPaneTarget))
-				.catch(err => this.logService.error('vscode:openChatSession failed', err));
+				.catch(err => this.logService.error('zyraxoncode:openChatSession failed', err));
 		};
-		ipcRenderer.on('vscode:openChatSession', handleOpenChatSession);
-		this._register({ dispose: () => ipcRenderer.removeListener('vscode:openChatSession', handleOpenChatSession) });
+		ipcRenderer.on('zyraxoncode:openChatSession', handleOpenChatSession);
+		this._register({ dispose: () => ipcRenderer.removeListener('zyraxoncode:openChatSession', handleOpenChatSession) });
 	}
 
 	private async prompt(args: typeof this.environmentService.args.chat): Promise<void> {

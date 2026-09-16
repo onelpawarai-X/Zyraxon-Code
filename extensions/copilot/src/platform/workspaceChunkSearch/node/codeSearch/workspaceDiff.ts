@@ -10,7 +10,7 @@ import { Disposable } from '../../../../util/vs/base/common/lifecycle';
 import { ResourceMap, ResourceSet } from '../../../../util/vs/base/common/map';
 import { isEqualOrParent } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
-import { Change } from '../../../git/vscode/git';
+import { Change } from '../../../git/zyraxoncode/git';
 import { LogExecTime } from '../../../log/common/logExecTime';
 import { ILogService } from '../../../log/common/logService';
 import { ISimulationTestContext } from '../../../simulationTestContext/common/simulationTestContext';

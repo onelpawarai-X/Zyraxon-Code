@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import * as URI from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import * as URI from 'zyraxoncode-uri';
 import { Schemes } from './schemes';
 
 export const markdownFileExtensions = Object.freeze<string[]>([
@@ -21,20 +21,20 @@ export const markdownFileExtensions = Object.freeze<string[]>([
 
 export const markdownLanguageIds = ['markdown', 'prompt', 'instructions', 'chatagent', 'skill'];
 
-export function isMarkdownFile(document: vscode.TextDocument) {
+export function isMarkdownFile(document: zyraxoncode.TextDocument) {
 	return markdownLanguageIds.indexOf(document.languageId) !== -1;
 }
 
-export function looksLikeMarkdownPath(resolvedHrefPath: vscode.Uri): boolean {
-	const doc = vscode.workspace.textDocuments.find(doc => doc.uri.toString() === resolvedHrefPath.toString());
+export function looksLikeMarkdownPath(resolvedHrefPath: zyraxoncode.Uri): boolean {
+	const doc = zyraxoncode.workspace.textDocuments.find(doc => doc.uri.toString() === resolvedHrefPath.toString());
 	if (doc) {
 		return isMarkdownFile(doc);
 	}
 
 	if (resolvedHrefPath.scheme === Schemes.notebookCell) {
-		for (const notebook of vscode.workspace.notebookDocuments) {
+		for (const notebook of zyraxoncode.workspace.notebookDocuments) {
 			for (const cell of notebook.getCells()) {
-				if (cell.kind === vscode.NotebookCellKind.Markup && isMarkdownFile(cell.document)) {
+				if (cell.kind === zyraxoncode.NotebookCellKind.Markup && isMarkdownFile(cell.document)) {
 					return true;
 				}
 			}

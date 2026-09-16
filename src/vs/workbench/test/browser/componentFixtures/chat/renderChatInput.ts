@@ -138,7 +138,7 @@ export async function renderChatInput(context: ComponentFixtureContext, fixtureO
 	}
 
 	container.style.width = `${width}px`;
-	container.style.backgroundColor = 'var(--vscode-sideBar-background, var(--vscode-editor-background))';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background, var(--zyraxoncode-editor-background))';
 	container.classList.add('monaco-workbench');
 
 	const session = document.createElement('div');
@@ -172,9 +172,9 @@ export async function renderChatInput(context: ComponentFixtureContext, fixtureO
 		sessionTypePickerDelegate: sandboxingEnabled ? { getActiveSessionProvider: () => SessionType.Local } : undefined,
 	};
 	const styles: IChatInputStyles = {
-		overlayBackground: 'var(--vscode-editor-background)',
-		listForeground: 'var(--vscode-foreground)',
-		listBackground: 'var(--vscode-editor-background)',
+		overlayBackground: 'var(--zyraxoncode-editor-background)',
+		listForeground: 'var(--zyraxoncode-foreground)',
+		listBackground: 'var(--zyraxoncode-editor-background)',
 	};
 
 	const inputPart = disposableStore.add(instantiationService.createInstance(ChatInputPart, ChatAgentLocation.Chat, options, styles, false));

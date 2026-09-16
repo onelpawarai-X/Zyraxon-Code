@@ -8,11 +8,11 @@
 	display: flex;
 	flex-direction: column;
 	/* A small gap so the dropdown reads as separate from the command center box. */
-	margin-top: var(--vscode-spacing-size60);
-	background-color: var(--vscode-editorWidget-background);
-	border: 1px solid var(--vscode-editorWidget-border);
-	border-radius: var(--vscode-cornerRadius-medium);
-	box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+	margin-top: var(--zyraxoncode-spacing-size60);
+	background-color: var(--zyraxoncode-editorWidget-background);
+	border: 1px solid var(--zyraxoncode-editorWidget-border);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
+	box-shadow: 0 2px 8px var(--zyraxoncode-widget-shadow);
 	overflow: hidden;
 }
 
@@ -20,9 +20,9 @@
 .agent-sessions-blocked-list .agent-sessions-blocked-list-header {
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size40);
-	padding: var(--vscode-spacing-size40) var(--vscode-spacing-size40) var(--vscode-spacing-size40) var(--vscode-spacing-size100);
-	border-bottom: 1px solid var(--vscode-editorWidget-border);
+	gap: var(--zyraxoncode-spacing-size40);
+	padding: var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-size100);
+	border-bottom: 1px solid var(--zyraxoncode-editorWidget-border);
 }
 
 .agent-sessions-blocked-list .agent-sessions-blocked-list-title {
@@ -31,8 +31,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-foreground);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agent-sessions-blocked-list .agent-sessions-blocked-list-header-actions {
@@ -58,19 +58,19 @@
 	the eye without shouting: the orange label carries the signal while the fill and
 	border stay subtle so the pill reads as a gentle hint rather than an alert. */
 .command-center .agent-sessions-titlebar-container.agent-sessions-titlebar-requires-input {
-	color: var(--vscode-charts-orange);
-	border-color: color-mix(in srgb, var(--vscode-charts-orange) 40%, var(--vscode-commandCenter-border));
-	background-color: color-mix(in srgb, var(--vscode-charts-orange) 7%, transparent);
+	color: var(--zyraxoncode-charts-orange);
+	border-color: color-mix(in srgb, var(--zyraxoncode-charts-orange) 40%, var(--zyraxoncode-commandCenter-border));
+	background-color: color-mix(in srgb, var(--zyraxoncode-charts-orange) 7%, transparent);
 }
 
 .command-center .agent-sessions-titlebar-container.agent-sessions-titlebar-requires-input:hover {
-	color: var(--vscode-charts-orange);
-	border-color: color-mix(in srgb, var(--vscode-charts-orange) 60%, var(--vscode-commandCenter-border));
-	background-color: color-mix(in srgb, var(--vscode-charts-orange) 12%, transparent);
+	color: var(--zyraxoncode-charts-orange);
+	border-color: color-mix(in srgb, var(--zyraxoncode-charts-orange) 60%, var(--zyraxoncode-commandCenter-border));
+	background-color: color-mix(in srgb, var(--zyraxoncode-charts-orange) 12%, transparent);
 }
 
 .command-center .agent-sessions-titlebar-container.agent-sessions-titlebar-requires-input:focus {
-	outline-color: var(--vscode-charts-orange);
+	outline-color: var(--zyraxoncode-charts-orange);
 }
 
 /* The requires-input pill fills the box and centers its label (no dimming). */
@@ -85,18 +85,18 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 }
 
 /* Attention blink: gently pulses the orange fill twice when a new session becomes blocked. */
 @keyframes agent-sessions-titlebar-attention-blink {
 	0%,
 	100% {
-		background-color: color-mix(in srgb, var(--vscode-charts-orange) 7%, transparent);
+		background-color: color-mix(in srgb, var(--zyraxoncode-charts-orange) 7%, transparent);
 	}
 
 	50% {
-		background-color: color-mix(in srgb, var(--vscode-charts-orange) 26%, transparent);
+		background-color: color-mix(in srgb, var(--zyraxoncode-charts-orange) 26%, transparent);
 	}
 }
 

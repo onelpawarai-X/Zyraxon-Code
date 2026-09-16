@@ -18,7 +18,7 @@ export const enum Intent {
 	SemanticSearch = 'semanticSearch',
 	Terminal = 'terminal',
 	TerminalExplain = 'terminalExplain',
-	VSCode = 'vscode',
+	ZyraxonCode = 'zyraxoncode',
 	Unknown = 'unknown',
 	SetupTests = 'setupTests',
 	Editor = 'editor',
@@ -47,7 +47,7 @@ export const agentsToCommands: Partial<Record<Intent, Record<string, Intent>>> =
 		'setupTests': Intent.SetupTests,
 		'compact': Intent.Agent,
 	},
-	[Intent.VSCode]: {
+	[Intent.ZyraxonCode]: {
 		'search': Intent.Search,
 	},
 	[Intent.Terminal]: {

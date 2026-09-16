@@ -19,13 +19,13 @@ function renderVoiceGlow(state: VoiceGlowState, level: number) {
 		container.classList.add('monaco-workbench');
 		container.style.width = '420px';
 		container.style.padding = '24px';
-		container.style.background = 'var(--vscode-editor-background)';
+		container.style.background = 'var(--zyraxoncode-editor-background)';
 
 		const inputBox = document.createElement('div');
 		inputBox.className = 'chat-input-container';
-		inputBox.style.cssText = 'box-sizing:border-box;background-color:var(--vscode-input-background);border:1px solid var(--vscode-input-border, transparent);border-radius:var(--vscode-cornerRadius-large);padding:10px 12px;min-height:64px;position:relative;';
+		inputBox.style.cssText = 'box-sizing:border-box;background-color:var(--zyraxoncode-input-background);border:1px solid var(--zyraxoncode-input-border, transparent);border-radius:var(--zyraxoncode-cornerRadius-large);padding:10px 12px;min-height:64px;position:relative;';
 		const placeholder = document.createElement('span');
-		placeholder.style.cssText = 'color:var(--vscode-input-placeholderForeground, var(--vscode-descriptionForeground));';
+		placeholder.style.cssText = 'color:var(--zyraxoncode-input-placeholderForeground, var(--zyraxoncode-descriptionForeground));';
 		placeholder.textContent = 'Ask Copilot';
 		inputBox.append(placeholder);
 		container.append(inputBox);

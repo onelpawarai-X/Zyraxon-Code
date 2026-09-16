@@ -1,12 +1,12 @@
 ## So you want to write a tool
 
 New to LLM tools? Here are some starting resources
-- https://code.visualstudio.com/api/extension-guides/tools
-- https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview
-- https://platform.openai.com/docs/guides/function-calling?api-mode=chat
-- https://www.anthropic.com/engineering/building-effective-agents
+- __ZYRAXKEEP__0_
+- __ZYRAXKEEP__1_
+- __ZYRAXKEEP__2_
+- __ZYRAXKEEP__3_
 
-This is aimed at adding tools to vscode-copilot-chat, but much of it would apply to tools in other extensions or MCP servers as well.
+This is aimed at adding tools to zyraxoncode-copilot-chat, but much of it would apply to tools in other extensions or MCP servers as well.
 
 ### Do we need a new tool?
 
@@ -14,7 +14,7 @@ First, consider whether a new built-in tool is needed. Tools should be built-in 
 
 ### Static part
 
-First, add an entry in vscode-copilot's package.json under `contributes.languageModelTools`:
+First, add an entry in zyraxoncode-copilot's package.json under `contributes.languageModelTools`:
 - ~~Give it a name that starts with `copilot_`- this pattern is protected for our use only~~
   - This is obsolete- new tools can use any name, I think matching `toolReferenceName` might be a good idea.
   - The existing `copilot_` tools will be renamed later.
@@ -25,7 +25,7 @@ First, add an entry in vscode-copilot's package.json under `contributes.language
   - What exactly does the tool do?
   - What kind of information does it return?
   - In what cases should the tool be used?
-  - Read more [best practices](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview#best-practices-for-tool-definitions)
+  - Read more [best practices](__ZYRAXKEEP__4_)
 - If the tool takes input, add an `inputSchema`. This is a JSON schema which must describe an object with the properties that the tool takes. Describe the properties in detail. File paths should be absolute paths. Think carefully about which properties are `required`.
 - In `toolNames.ts`, add entries to `ToolName`, `ContributedToolName`, `contributedToolNameToToolNames`. Follow the naming patterns of other tools. `ToolName` is the real name of your tool that the LLM will see. It should also be clear. A good pattern is to start with a verb, e.g. `read_file`.
 - And remember to look for other tools that do similar things, and try to ensure your tool is aligned with them in the input it takes and the terminology it uses, and doesn't overlap in behavior. That will ensure that an LLM can understand how to use them together.
@@ -34,7 +34,7 @@ First, add an entry in vscode-copilot's package.json under `contributes.language
 
 Then, implement your tool in `src/extension/tools/node`:
 - If your tool takes input, write an interface and be sure that it matches the schema in package.json exactly, including which properties are required.
-- A typical tool can implement `vscode.LanguageModelTool`. More sophisticated tools can implement `ICopilotTool`, which gives you some extra functionality.
+- A typical tool can implement `zyraxoncode.LanguageModelTool`. More sophisticated tools can implement `ICopilotTool`, which gives you some extra functionality.
 - Call `ToolRegistry.registerTool(YourTool);` and import your tool file in `allTools.ts`.
 - Is your tool relevant in simulator/swebench scenarios? If so, check that it works.
 - I recommend using prompt-tsx for your tool result if it's not a simple string. This lets you compose the result from multiple parts or reuse other prompt-tsx components.
@@ -68,7 +68,7 @@ If the tool has a potentially dangerous side-effect (e.g. the terminal tool), it
 
 ### Testing
 
-Consider writing a unit test for your tool. One example to copy is [`readFile.spec.tsx`](https://github.com/microsoft/vscode-copilot/blob/a2b8af8b8e7286d4da77ff4108b6bcdeb1441d79/src/extension/tools/node/test/readFile.spec.tsx#L40-L59). This test invokes the tool with some hardcoded arguments and checks the result against a snapshot.
+Consider writing a unit test for your tool. One example to copy is [`readFile.spec.tsx`](__ZYRAXKEEP__5_). This test invokes the tool with some hardcoded arguments and checks the result against a snapshot.
 
 ## Model-Specific Tools
 
@@ -91,9 +91,9 @@ Register model-specific tools using `ToolRegistry.registerModelSpecificTool`:
 ```typescript
 class MyGeminiTool implements ICopilotModelSpecificTool<IMyToolInput> {
 	async invoke(
-		options: vscode.LanguageModelToolInvocationOptions<IMyToolInput>,
-		token: vscode.CancellationToken
-	): Promise<vscode.LanguageModelToolResult> {
+		options: zyraxoncode.LanguageModelToolInvocationOptions<IMyToolInput>,
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.LanguageModelToolResult> {
 		// Gemini-specific implementation
 		return { content: [{ type: 'text', value: 'Result' }] };
 	}

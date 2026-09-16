@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import assert from 'assert';
-import type { NotebookCell } from 'vscode';
+import type { NotebookCell } from 'zyraxoncode';
 import { IAlternativeNotebookContentService } from '../../src/platform/notebook/common/alternativeContent';
 import { ITestingServicesAccessor, TestingServiceCollection } from '../../src/platform/test/node/services';
 import { SimulationAlternativeNotebookContentService } from '../../src/platform/test/node/simulationWorkspaceServices';
-import { NotebookCellData, NotebookCellKind } from '../../src/vscodeTypes';
+import { NotebookCellData, NotebookCellKind } from '../../src/zyraxoncodeTypes';
 import { ssuite, stest } from '../base/stest';
 import { simulatePanelCodeMapper } from './panelCodeMapperSimulator';
 import { assertWorkspaceEdit, fromFixture, toFile } from './stestUtil';

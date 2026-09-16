@@ -1,14 +1,14 @@
 // Copyright 2025 Google LLC
 //
 // This is adapted from the edit corrector in the Gemini CLI which can be found
-// at https://github.com/google-gemini/gemini-cli/blob/5008aea90d4ea7ac6bb5872f3702f3c7a7878ed0/packages/core/src/utils/editCorrector.ts
+// at __ZYRAXKEEP__0_
 // and is available under the following license:
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 
-//        http://www.apache.org/licenses/LICENSE-2.0
+//        __ZYRAXKEEP__1_
 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,9 +17,9 @@
 // limitations under the License.
 
 // eslint-disable-next-line header/header
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import * as JSONC from 'jsonc-parser';
-import type { LanguageModelChat } from 'vscode';
+import type { LanguageModelChat } from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes.js';
 import { ObjectJsonSchema } from '../../../platform/configuration/common/jsonSchema.js';
 import { isGeminiFamily, isHiddenModelF } from '../../../platform/endpoint/common/chatModelCapabilities.js';

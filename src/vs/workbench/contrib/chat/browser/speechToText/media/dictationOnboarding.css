@@ -38,13 +38,13 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: var(--vscode-spacing-size120);
+	gap: var(--zyraxoncode-spacing-size120);
 	box-sizing: border-box;
-	padding: var(--vscode-spacing-size160);
-	border: var(--vscode-strokeThickness) solid var(--vscode-input-border, var(--vscode-widget-border, transparent));
-	border-radius: var(--vscode-cornerRadius-large) var(--vscode-cornerRadius-large) var(--vscode-cornerRadius-xSmall) var(--vscode-cornerRadius-xSmall);
-	background-color: var(--vscode-agentsChatInput-background, var(--vscode-input-background));
-	color: var(--vscode-foreground);
+	padding: var(--zyraxoncode-spacing-size160);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-input-border, var(--zyraxoncode-widget-border, transparent));
+	border-radius: var(--zyraxoncode-cornerRadius-large) var(--zyraxoncode-cornerRadius-large) var(--zyraxoncode-cornerRadius-xSmall) var(--zyraxoncode-cornerRadius-xSmall);
+	background-color: var(--zyraxoncode-agentsChatInput-background, var(--zyraxoncode-input-background));
+	color: var(--zyraxoncode-foreground);
 }
 
 /* --- Copy --- */
@@ -52,21 +52,21 @@
 .dictation-onboarding-header {
 	display: flex;
 	flex-direction: column;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
 	/* Clear of the pinned close button. */
-	padding-right: var(--vscode-spacing-size240);
+	padding-right: var(--zyraxoncode-spacing-size240);
 }
 
 .dictation-onboarding-title {
-	font-size: var(--vscode-fontSize-label1);
-	font-weight: var(--vscode-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-fontSize-label1);
+	font-weight: var(--zyraxoncode-fontWeight-semiBold);
 }
 
 /* One sentence, demoted: it explains the feature once and then supports. */
 .dictation-onboarding-description {
-	font-size: var(--vscode-fontSize-label2);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-fontSize-label2);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 1.45;
 }
 
@@ -77,20 +77,20 @@
  * sentence rather than as a row of buttons.
  */
 .dictation-onboarding-description a {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	cursor: pointer;
 }
 
 .dictation-onboarding-description a:hover,
 .dictation-onboarding-description a:active {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 	text-decoration: underline;
 }
 
 .dictation-onboarding-description a:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
-	border-radius: var(--vscode-cornerRadius-xSmall);
+	border-radius: var(--zyraxoncode-cornerRadius-xSmall);
 }
 
 /* --- Device --- */
@@ -103,7 +103,7 @@
 .dictation-onboarding-device {
 	display: flex;
 	flex-direction: column;
-	gap: var(--vscode-spacing-size80);
+	gap: var(--zyraxoncode-spacing-size80);
 	min-width: 0;
 }
 
@@ -119,32 +119,32 @@
 	position: relative;
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size60);
+	gap: var(--zyraxoncode-spacing-size60);
 	box-sizing: border-box;
 	min-width: 0;
-	height: var(--vscode-spacing-size280);
-	padding: 0 var(--vscode-spacing-size80);
-	border: var(--vscode-strokeThickness) solid var(--vscode-dropdown-border, var(--vscode-input-border, transparent));
-	border-radius: var(--vscode-cornerRadius-small);
-	background-color: var(--vscode-dropdown-background, var(--vscode-input-background));
+	height: var(--zyraxoncode-spacing-size280);
+	padding: 0 var(--zyraxoncode-spacing-size80);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-dropdown-border, var(--zyraxoncode-input-border, transparent));
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	background-color: var(--zyraxoncode-dropdown-background, var(--zyraxoncode-input-background));
 	transition: border-color 100ms ease-out;
 }
 
 .dictation-onboarding-picker:hover {
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .dictation-onboarding-picker:focus-within {
-	border-color: var(--vscode-focusBorder);
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
 	outline-offset: -2px;
 }
 
 .monaco-workbench .dictation-onboarding-picker-icon.codicon[class*='codicon-'] {
 	flex-shrink: 0;
-	font-size: var(--vscode-codiconFontSize-compact);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 	line-height: 1;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 /*
@@ -158,11 +158,11 @@
 	height: 100%;
 	padding: 0;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background-color: transparent;
-	color: var(--vscode-dropdown-foreground, var(--vscode-foreground));
+	color: var(--zyraxoncode-dropdown-foreground, var(--zyraxoncode-foreground));
 	font-family: inherit;
-	font-size: var(--vscode-fontSize-label2);
+	font-size: var(--zyraxoncode-fontSize-label2);
 	text-overflow: ellipsis;
 }
 
@@ -185,8 +185,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: var(--vscode-spacing-size280);
-	padding: 0 var(--vscode-spacing-size60);
+	height: var(--zyraxoncode-spacing-size280);
+	padding: 0 var(--zyraxoncode-spacing-size60);
 	/* Quiet at rest and brightening as the level rises, so the row lifts with the
 	 * voice rather than sitting at full strength in silence. The animation owns
 	 * the exact value, since it also has to drop the row when there is no
@@ -208,7 +208,7 @@
 	flex: 0 0 auto;
 	width: 1px;
 	height: 100%;
-	border-radius: var(--vscode-cornerRadius-circle);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
 	background: currentColor;
 	/* Scaled from the middle, so the row grows symmetrically about its centre
 	 * line the way a waveform does. Transform only - never height - so a row of
@@ -227,8 +227,8 @@
  * the card is leaving.
  */
 .dictation-onboarding-hint {
-	font-size: var(--vscode-fontSize-label3);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-fontSize-label3);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 1.4;
 }
 
@@ -238,7 +238,7 @@
 }
 
 .dictation-onboarding-banner.has-error .dictation-onboarding-hint {
-	color: var(--vscode-inputValidation-errorForeground, var(--vscode-foreground));
+	color: var(--zyraxoncode-inputValidation-errorForeground, var(--zyraxoncode-foreground));
 }
 
 /* --- Confirm --- */
@@ -250,25 +250,25 @@
  */
 .dictation-onboarding-close {
 	position: absolute;
-	top: var(--vscode-spacing-size80);
-	right: var(--vscode-spacing-size80);
+	top: var(--zyraxoncode-spacing-size80);
+	right: var(--zyraxoncode-spacing-size80);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: var(--vscode-spacing-size240);
-	height: var(--vscode-spacing-size240);
-	border-radius: var(--vscode-cornerRadius-small);
-	color: var(--vscode-foreground);
+	width: var(--zyraxoncode-spacing-size240);
+	height: var(--zyraxoncode-spacing-size240);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 	transition: background-color 100ms ease-out;
 }
 
 .dictation-onboarding-close:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .dictation-onboarding-close:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -278,7 +278,7 @@
  * one inheriting the button's foreground.
  */
 .monaco-workbench .dictation-onboarding-close .codicon[class*='codicon-'] {
-	font-size: var(--vscode-codiconFontSize);
+	font-size: var(--zyraxoncode-codiconFontSize);
 	line-height: 1;
 	color: inherit;
 }

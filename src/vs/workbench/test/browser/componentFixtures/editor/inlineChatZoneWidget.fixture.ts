@@ -155,7 +155,7 @@ MenuRegistry.appendMenuItem(MenuId.ChatExecute, {
 function renderInlineChatZoneWidget({ container, disposableStore, theme }: ComponentFixtureContext, showTerminationCard: boolean): void {
 	container.style.width = '600px';
 	container.style.height = '700px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	// The component-explorer harness injects a global `* { box-sizing: border-box }`
 	// reset into the document head. The chat input toolbar (and other Monaco UI bits)
@@ -180,7 +180,7 @@ function renderInlineChatZoneWidget({ container, disposableStore, theme }: Compo
 				override getOpenAriaHint() { return ''; }
 			}());
 			reg.defineInstance(IProductService, new class extends mock<IProductService>() {
-				override readonly urlProtocol = 'vscode';
+				override readonly urlProtocol = 'zyraxoncode';
 			}());
 			reg.defineInstance(ILifecycleService, new class extends mock<ILifecycleService>() {
 				declare readonly _serviceBrand: undefined;
@@ -392,7 +392,7 @@ function renderInlineChatZoneWidget({ container, disposableStore, theme }: Compo
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		SAMPLE_CODE,
-		URI.parse('inmemory://inline-chat-zone.tsx'),
+		URI.parse('__ZYRAXKEEP__0_'),
 		'typescriptreact'
 	));
 

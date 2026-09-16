@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type { CancellationToken, McpHttpServerDefinition, McpServerDefinitionProvider } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { CancellationToken, McpHttpServerDefinition, McpServerDefinitionProvider } from 'zyraxoncode';
 import { authProviderId, IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { AuthProviderId, ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -115,7 +115,7 @@ export class GitHubMcpDefinitionProvider implements McpServerDefinitionProvider<
 
 		const basics = providerId === AuthProviderId.GitHubEnterprise
 			? { label: 'GitHub Enterprise', uri: this.getGheUri() }
-			: { label: 'GitHub', uri: URI.parse('https://api.githubcopilot.com/mcp/') };
+			: { label: 'GitHub', uri: URI.parse('__ZYRAXKEEP__0_') };
 
 		// Build headers object conditionally
 		const headers: Record<string, string> = {};

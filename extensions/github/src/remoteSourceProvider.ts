@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Uri, env, l10n, workspace } from 'vscode';
+import { Uri, env, l10n, workspace } from 'zyraxoncode';
 import { RemoteSourceProvider, RemoteSource, RemoteSourceAction } from './typings/git-base.js';
 import { getOctokit } from './auth.js';
 import { Octokit } from '@octokit/rest';
@@ -136,7 +136,7 @@ export class GithubRemoteSourceProvider implements RemoteSourceProvider {
 				env.openExternal(Uri.parse(link));
 			}
 		}, {
-			label: l10n.t('Checkout on vscode.dev'),
+			label: l10n.t('Checkout on zyraxoncode.dev'),
 			icon: 'globe',
 			run(branch: string) {
 				const link = getBranchLink(url, branch, getVscodeDevHost());

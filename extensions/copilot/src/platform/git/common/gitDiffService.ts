@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, Uri } from 'vscode';
+import type { CancellationToken, Uri } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
-import { Change, Repository } from '../vscode/git';
+import { Change, Repository } from '../zyraxoncode/git';
 
 export const IGitDiffService = createServiceIdentifier<IGitDiffService>('IGitDiffService');
 

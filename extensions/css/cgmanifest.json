@@ -4,15 +4,15 @@
 			"component": {
 				"type": "git",
 				"git": {
-					"name": "microsoft/vscode-css",
-					"repositoryUrl": "https://github.com/microsoft/vscode-css",
+					"name": "zyraxon/zyraxoncode-css",
+					"repositoryUrl": "__ZYRAXKEEP__0_",
 					"commitHash": "9a07d76cb0e7a56f9bfc76328a57227751e4adb4"
 				}
 			},
 			"licenseDetail": [
 				"MIT License",
 				"",
-				"Copyright (c) Microsoft Corporation.",
+				"Copyright (c) Zyraxon Corporation.",
 				"",
 				"Permission is hereby granted, free of charge, to any person obtaining",
 				"a copy of this software and associated documentation files (the",
@@ -36,7 +36,7 @@
 				"--------------------------------------------------------------------",
 				"",
 				"This package was derived from a TextMate bundle located at",
-				"https://github.com/textmate/css.tmbundle and distributed under the following",
+				"__ZYRAXKEEP__1_ and distributed under the following",
 				"license, located in `README.mdown`:",
 				"",
 				"Permission to copy, use, modify, sell and distribute this",
@@ -45,7 +45,7 @@
 				"suitability for any purpose."
 			],
 			"license": "MIT License",
-			"description": "The file syntaxes/css.tmLanguage.json was derived from https://github.com/atom/language-css which was originally converted from the TextMate bundle https://github.com/textmate/css.tmbundle.",
+			"description": "The file syntaxes/css.tmLanguage.json was derived from __ZYRAXKEEP__2_ which was originally converted from the TextMate bundle __ZYRAXKEEP__3_",
 			"version": "0.0.0"
 		}
 	],

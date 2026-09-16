@@ -9,8 +9,8 @@
 	z-index: 2550;
 	left: 50%;
 	-webkit-app-region: no-drag;
-	border-radius: var(--vscode-cornerRadius-xLarge);
-	box-shadow: var(--vscode-shadow-xl);
+	border-radius: var(--zyraxoncode-cornerRadius-xLarge);
+	box-shadow: var(--zyraxoncode-shadow-xl);
 }
 
 .style-override.monaco-enable-motion .quick-input-widget:not(.quick-input-widget-overlay) {
@@ -134,7 +134,7 @@
 }
 
 .quick-input-widget .quick-input-filter .monaco-inputbox {
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 }
 
 .quick-input-widget.hidden-input .quick-input-header {
@@ -337,18 +337,18 @@
 .quick-input-list .monaco-list .monaco-list-row .monaco-highlighted-label .highlight {
 	font-weight: bold;
 	background-color: unset;
-	color: var(--vscode-list-highlightForeground) !important;
+	color: var(--zyraxoncode-list-highlightForeground) !important;
 }
 
 /* preserve list-like styling instead of tree-like styling */
 .quick-input-list .monaco-list .monaco-list-row.focused .monaco-highlighted-label .highlight {
-	color: var(--vscode-quickInputList-focusHighlightForeground) !important;
+	color: var(--zyraxoncode-quickInputList-focusHighlightForeground) !important;
 }
 
 .quick-input-list .quick-input-list-entry .quick-input-list-separator {
 	margin-right: 4px;
-	font-size: var(--vscode-bodyFontSize-xSmall);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-bodyFontSize-xSmall);
+	color: var(--zyraxoncode-descriptionForeground);
 	/* separate from keybindings or actions */
 }
 
@@ -399,7 +399,7 @@
 }
 
 .quick-input-list > .monaco-list:focus .monaco-list-row.focused {
-	outline: 1px solid var(--vscode-list-focusOutline) !important;
+	outline: 1px solid var(--zyraxoncode-list-focusOutline) !important;
 	outline-offset: -1px;
 }
 
@@ -416,7 +416,7 @@
 .quick-input-list .monaco-list-row.focused .monaco-keybinding-key,
 .quick-input-list .monaco-list-row:hover .monaco-keybinding-key {
 	background: none;
-	border-color: var(--vscode-widget-shadow);
+	border-color: var(--zyraxoncode-widget-shadow);
 }
 
 /* In light/dark themes the widget shadow can be transparent, leaving the key borders invisible
@@ -576,6 +576,6 @@
 }
 
 .quick-input-tree > .monaco-list:focus .monaco-list-row.focused {
-	outline: 1px solid var(--vscode-list-focusOutline) !important;
+	outline: 1px solid var(--zyraxoncode-list-focusOutline) !important;
 	outline-offset: -1px;
 }

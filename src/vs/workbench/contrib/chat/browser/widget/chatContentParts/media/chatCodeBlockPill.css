@@ -16,8 +16,8 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
-	font-size: var(--vscode-chat-font-size-body-s);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-chat-font-size-body-s);
+	color: var(--zyraxoncode-descriptionForeground);
 
 	.status-indicator-container {
 		display: flex;
@@ -30,7 +30,7 @@
 			align-items: center;
 			line-height: 1em;
 			top: 1px;
-			color: var(--vscode-icon-foreground) !important;
+			color: var(--zyraxoncode-icon-foreground) !important;
 
 			&::before {
 				font-size: 12px;
@@ -48,13 +48,13 @@
 		}
 
 		.status-label {
-			color: var(--vscode-descriptionForeground);
+			color: var(--zyraxoncode-descriptionForeground);
 			white-space: nowrap;
 		}
 	}
 
 	.chat-codeblock-pill-widget {
-		border: 1px solid var(--vscode-chat-requestBorder, var(--vscode-input-background, transparent));
+		border: 1px solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-background, transparent));
 		border-radius: 4px;
 		text-wrap: nowrap;
 		width: fit-content;
@@ -73,7 +73,7 @@
 			left: 0;
 			height: 100%;
 			width: 0%;
-			background-color: var(--vscode-list-hoverBackground);
+			background-color: var(--zyraxoncode-list-hoverBackground);
 			pointer-events: none;
 			transition: width 0.2s ease-out;
 			z-index: 0;
@@ -117,8 +117,8 @@
 		span.label-detail {
 			padding-left: 4px;
 			font-style: italic;
-			font-size: var(--vscode-chat-font-size-body-s);
-			color: var(--vscode-descriptionForeground);
+			font-size: var(--zyraxoncode-chat-font-size-body-s);
+			color: var(--zyraxoncode-descriptionForeground);
 
 			&:empty {
 				display: none;
@@ -127,7 +127,7 @@
 
 		span.label-added, span.label-removed {
 			padding-left: 4px;
-			font-size: var(--vscode-chat-font-size-body-s);
+			font-size: var(--zyraxoncode-chat-font-size-body-s);
 			vertical-align: middle;
 			line-height: 1em;
 
@@ -138,16 +138,16 @@
 
 		span.label-removed {
 			padding-right: 2px;
-			color: var(--vscode-chat-linesRemovedForeground);
+			color: var(--zyraxoncode-chat-linesRemovedForeground);
 		}
 
 		span.label-added {
-			color: var(--vscode-chat-linesAddedForeground);
+			color: var(--zyraxoncode-chat-linesAddedForeground);
 		}
 
 		&:hover {
-			background-color: var(--vscode-list-hoverBackground);
-			color: var(--vscode-textLink-foreground);
+			background-color: var(--zyraxoncode-list-hoverBackground);
+			color: var(--zyraxoncode-textLink-foreground);
 		}
 	}
 }

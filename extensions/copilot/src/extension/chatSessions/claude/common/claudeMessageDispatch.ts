@@ -6,8 +6,8 @@
 import type { SDKAssistantMessage, SDKCompactBoundaryMessage, SDKHookProgressMessage, SDKHookResponseMessage, SDKHookStartedMessage, SDKMessage, SDKResultMessage, SDKUserMessage, SDKUserMessageReplay } from '@anthropic-ai/claude-agent-sdk';
 import type { TodoWriteInput } from '@anthropic-ai/claude-agent-sdk/sdk-tools';
 import type Anthropic from '@anthropic-ai/sdk';
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import type { ChatFetchError } from '../../../../platform/chat/common/commonTypes';
 import { vBoolean, vLiteral, vObj, vString, type ValidatorType } from '../../../../platform/configuration/common/validator';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -16,7 +16,7 @@ import { CapturingToken } from '../../../../platform/requestLogger/common/captur
 import { IRequestLogger } from '../../../../platform/requestLogger/common/requestLogger';
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
 import { ServicesAccessor } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseThinkingProgressPart, LanguageModelTextPart, type ChatHookType } from '../../../../vscodeTypes';
+import { ChatResponseThinkingProgressPart, LanguageModelTextPart, type ChatHookType } from '../../../../zyraxoncodeTypes';
 import { ExternalEditTracker } from '../../../chatSessions/common/externalEditTracker';
 import { ToolName } from '../../../tools/common/toolNames';
 import { IToolsService } from '../../../tools/common/toolsService';
@@ -30,9 +30,9 @@ import { completeToolInvocation, createFormattedToolInvocation } from './toolInv
 
 /** Per-request state passed to each handler */
 export interface MessageHandlerRequestContext {
-	readonly stream: vscode.ChatResponseStream;
-	readonly toolInvocationToken: vscode.ChatParticipantToolToken;
-	readonly token: vscode.CancellationToken;
+	readonly stream: zyraxoncode.ChatResponseStream;
+	readonly toolInvocationToken: zyraxoncode.ChatParticipantToolToken;
+	readonly token: zyraxoncode.CancellationToken;
 	readonly editTracker?: ExternalEditTracker;
 }
 
@@ -249,7 +249,7 @@ export function handleAssistantMessage(
 			}
 
 			if (claudeEditTools.includes(item.name)) {
-				let uris: vscode.Uri[] = [];
+				let uris: zyraxoncode.Uri[] = [];
 				try {
 					uris = getAffectedUrisForEditTool(item.name, item.input);
 				} catch (e) {
@@ -531,7 +531,7 @@ export function handleHookStarted(
  * - `decision`: "block" to prevent the operation
  * - `reason`: explanation when `decision` is "block"
  *
- * @see https://code.claude.com/docs/en/hooks.md
+ * @see __ZYRAXKEEP__0_
  */
 const vHookJsonOutput = vObj({
 	continue: vBoolean(),
@@ -602,7 +602,7 @@ export function parseHookJsonOutput(stdout: string): Partial<HookJsonOutput> | u
  * Formats a localized error message for a failed hook.
  * @param errorMessage The error message from the hook
  * @returns A localized error message string
- * @todo use a common function with: https://github.com/microsoft/vscode-copilot-chat/blob/9a9461734da42f28e4e2d0b975ebeae6162e9b4c/src/extension/intents/node/hookResultProcessor.ts#L142
+ * @todo use a common function with: __ZYRAXKEEP__1_
  */
 function formatHookErrorMessage(errorMessage: string): string {
 	if (errorMessage) {

@@ -264,22 +264,22 @@ For `IconLabel` and list/tree renderers, this is handled automatically. For cust
 
 ZYRAXON Code ships a design-system **size** ramp, registered in
 `src/vs/platform/theme/common/sizes/baseSizes.ts` (agents font ramp in
-`src/vs/sessions/common/sizes.ts`) and emitted as `--vscode-*` CSS variables.
+`src/vs/sessions/common/sizes.ts`) and emitted as `--zyraxoncode-*` CSS variables.
 When writing or editing CSS, prefer the token var over a raw px value wherever a
 token exists. The full tables + rationale live in the auto-injected
 `.github/instructions/design-tokens.instructions.md` (canonical source — keep
 this section in sync with it). This section captures the **decision logic** for
 deeper styling tasks.
 
-> Every `--vscode-*` size var you reference must already exist in
-> `build/lib/stylelint/vscode-known-variables.json` (`"sizes"` array,
+> Every `--zyraxoncode-*` size var you reference must already exist in
+> `build/lib/stylelint/zyraxoncode-known-variables.json` (`"sizes"` array,
 > alphabetically sorted) or stylelint/hygiene fails. Adding a *new* token means
 > adding it both in `baseSizes.ts` and that JSON file.
 
 ### Spacing — `padding`, `margin`, `gap`
 
 Scale (px): `0, 2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32, 36, 40` →
-`--vscode-spacing-sizeNone`, `--vscode-spacing-size20` … `--vscode-spacing-size400`
+`--zyraxoncode-spacing-sizeNone`, `--zyraxoncode-spacing-size20` … `--zyraxoncode-spacing-size400`
 (token number = px × 10, so `size200` = 20px).
 
 **What matters is the value, not the token.** Adopting the `var()` is optional —
@@ -293,19 +293,19 @@ scale value, **ties round up** (`5px → 6px`, `3px → 4px`, `1px → 2px`,
 
 | px | Variable | Use |
 |----|----------|-----|
-| 2  | `--vscode-cornerRadius-xSmall` | very compact elements |
-| 4  | `--vscode-cornerRadius-small` | controls (buttons, inputs) |
-| 6  | `--vscode-cornerRadius-medium` | base / inner surfaces |
-| 8  | `--vscode-cornerRadius-large` | prominent / outer surfaces |
-| 12 | `--vscode-cornerRadius-xLarge` | very prominent surfaces |
-| 9999 | `--vscode-cornerRadius-circle` | fully rounded (pills, dots) |
+| 2  | `--zyraxoncode-cornerRadius-xSmall` | very compact elements |
+| 4  | `--zyraxoncode-cornerRadius-small` | controls (buttons, inputs) |
+| 6  | `--zyraxoncode-cornerRadius-medium` | base / inner surfaces |
+| 8  | `--zyraxoncode-cornerRadius-large` | prominent / outer surfaces |
+| 12 | `--zyraxoncode-cornerRadius-xLarge` | very prominent surfaces |
+| 9999 | `--zyraxoncode-cornerRadius-circle` | fully rounded (pills, dots) |
 
 **Snap map** for off-scale literals (ties round **up**):
 `2→xSmall`, `3,4→small`, `5,6→medium`, `7,8→large`, `10,11,12→xLarge`,
 `14,16,18,20→xLarge`, `999→circle`.
 
 - **Pills** (radius ≈ half the element height — e.g. `28h`/`14r`, `36h`/`18r`,
-  `22×22`/`11r`) → `--vscode-cornerRadius-circle`, **not** xLarge. The
+  `22×22`/`11r`) → `--zyraxoncode-cornerRadius-circle`, **not** xLarge. The
   literal-nearest token would square them and lose the fully-rounded intent.
 - **Leave untouched:** `50%`, `0`, `0px`, `inherit`, any `calc()`/`var()`.
   Preserve `!important`.
@@ -317,43 +317,43 @@ agents ramp; "Strong" = matching size token + `semiBold`, never a separate size)
 
 | px | Size var | Weight |
 |----|----------|--------|
-| 26 | `--vscode-fontSize-heading1` | semiBold |
-| 18 | `--vscode-fontSize-heading2` | semiBold |
-| 13 | `--vscode-fontSize-heading3` | semiBold |
-| 13 | `--vscode-fontSize-body1` | regular |
-| 11 | `--vscode-fontSize-body2` | regular |
-| 12 | `--vscode-fontSize-label1` | regular |
-| 11 | `--vscode-fontSize-label2` | regular |
-| 10 | `--vscode-fontSize-label3` | regular |
+| 26 | `--zyraxoncode-fontSize-heading1` | semiBold |
+| 18 | `--zyraxoncode-fontSize-heading2` | semiBold |
+| 13 | `--zyraxoncode-fontSize-heading3` | semiBold |
+| 13 | `--zyraxoncode-fontSize-body1` | regular |
+| 11 | `--zyraxoncode-fontSize-body2` | regular |
+| 12 | `--zyraxoncode-fontSize-label1` | regular |
+| 11 | `--zyraxoncode-fontSize-label2` | regular |
+| 10 | `--zyraxoncode-fontSize-label3` | regular |
 
-Generic weights: `--vscode-fontWeight-regular` (400),
-`--vscode-fontWeight-semiBold` (600).
+Generic weights: `--zyraxoncode-fontWeight-regular` (400),
+`--zyraxoncode-fontWeight-semiBold` (600).
 
-**Deprecated** — `--vscode-bodyFontSize` (13) → `--vscode-fontSize-body1`,
-`--vscode-bodyFontSize-small` (12) → `--vscode-fontSize-label1`,
-`--vscode-bodyFontSize-xSmall` (11) → `--vscode-fontSize-body2`.
+**Deprecated** — `--zyraxoncode-bodyFontSize` (13) → `--zyraxoncode-fontSize-body1`,
+`--zyraxoncode-bodyFontSize-small` (12) → `--zyraxoncode-fontSize-label1`,
+`--zyraxoncode-bodyFontSize-xSmall` (11) → `--zyraxoncode-fontSize-body2`.
 
 Agents window (`src/vs/sessions/**`) ramp — identical values, `agents-`-prefixed:
 
 | px | Size var | Weight |
 |----|----------|--------|
-| 26 | `--vscode-agents-fontSize-heading1` | semiBold |
-| 18 | `--vscode-agents-fontSize-heading2` | semiBold |
-| 13 | `--vscode-agents-fontSize-heading3` | semiBold |
-| 13 | `--vscode-agents-fontSize-body1` | regular |
-| 11 | `--vscode-agents-fontSize-body2` | regular |
-| 12 | `--vscode-agents-fontSize-label1` | regular |
-| 11 | `--vscode-agents-fontSize-label2` | regular |
-| 10 | `--vscode-agents-fontSize-label3` | regular |
+| 26 | `--zyraxoncode-agents-fontSize-heading1` | semiBold |
+| 18 | `--zyraxoncode-agents-fontSize-heading2` | semiBold |
+| 13 | `--zyraxoncode-agents-fontSize-heading3` | semiBold |
+| 13 | `--zyraxoncode-agents-fontSize-body1` | regular |
+| 11 | `--zyraxoncode-agents-fontSize-body2` | regular |
+| 12 | `--zyraxoncode-agents-fontSize-label1` | regular |
+| 11 | `--zyraxoncode-agents-fontSize-label2` | regular |
+| 10 | `--zyraxoncode-agents-fontSize-label3` | regular |
 
 Both weight ramps are **two weights only**: `regular` (400) and
-`semiBold` (600) — generic `--vscode-fontWeight-*`, agents
-`--vscode-agents-fontWeight-*`.
+`semiBold` (600) — generic `--zyraxoncode-fontWeight-*`, agents
+`--zyraxoncode-agents-fontWeight-*`.
 
 - **No medium (500).** `font-weight: 500` is off the ramp — snap to `semiBold`.
   Likewise `700`/`bold` → round to the nearer of 400/600.
 - **"Strong" is not a separate size.** "Body 1 Strong" = the matching
-  `--vscode-fontSize-*` (or `--vscode-agents-fontSize-*`) size token + `semiBold`.
+  `--zyraxoncode-fontSize-*` (or `--zyraxoncode-agents-fontSize-*`) size token + `semiBold`.
   Never add a strong *size*.
 - `normal` ≡ 400 → `regular`. Leave `inherit`, `lighter`, `bolder`,
   `var()`/`calc()` untouched.
@@ -364,8 +364,8 @@ Codicons are **only ever 16px or 12px** — never `14px` or any in-between value
 
 | px | Variable | Use |
 |----|----------|-----|
-| 16 | `--vscode-codiconFontSize` (base) | default icon size |
-| 12 | `--vscode-codiconFontSize-compact` | dense/inline chrome |
+| 16 | `--zyraxoncode-codiconFontSize` (base) | default icon size |
+| 12 | `--zyraxoncode-codiconFontSize-compact` | dense/inline chrome |
 
 **Compact-glyph convention:** when sizing an icon at the compact 12px size, also
 swap the registered glyph to its `*Compact` variant (e.g. `Codicon.close` →
@@ -381,13 +381,13 @@ info, lock, plus) have **no** compact variant — keep the regular glyph at 12px
 
 ### Stroke — border width
 
-A **single** stroke thickness: `1px` → `--vscode-strokeThickness`. Applies to the
+A **single** stroke thickness: `1px` → `--zyraxoncode-strokeThickness`. Applies to the
 `border: 1px solid <color>` shorthand and `border-width: 1px`. Other widths have
 no token — leave them.
 
 ```css
-/* prefer */  border: var(--vscode-strokeThickness) solid var(--vscode-widget-border);
-/* avoid  */  border: 1px solid var(--vscode-widget-border);
+/* prefer */  border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-widget-border);
+/* avoid  */  border: 1px solid var(--zyraxoncode-widget-border);
 ```
 
 ---

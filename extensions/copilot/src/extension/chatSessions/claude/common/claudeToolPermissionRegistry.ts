@@ -16,7 +16,7 @@ export interface IToolPermissionHandlerRegistration {
 
 /**
  * Registry of tool permission handlers.
- * Handlers can register from common/, node/, or vscode-node/ folders.
+ * Handlers can register from common/, node/, or zyraxoncode-node/ folders.
  */
 const handlerRegistry: IToolPermissionHandlerRegistration[] = [];
 

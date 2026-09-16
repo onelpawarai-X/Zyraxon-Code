@@ -91,7 +91,7 @@ import { compact } from './consoleCompactor/consoleCompactor.js';
 
 // #region Tool data
 
-const TERMINAL_SANDBOX_DOCUMENTATION_URL = 'https://aka.ms/vscode-sandboxing';
+const TERMINAL_SANDBOX_DOCUMENTATION_URL = '__ZYRAXKEEP__0_';
 const TOOL_REFERENCE_NAME = 'runInTerminal';
 const LEGACY_TOOL_REFERENCE_FULL_NAMES = ['runCommands/runInTerminal'];
 const INPUT_NEEDED_NOTIFICATION_THROTTLE_MS = 5000;
@@ -174,8 +174,8 @@ function createPowerShellModelDescription(shell: string, sandboxingOptions: ISan
 		'- NEVER pipe interactive commands through Select-Object, Where-Object, or other filters — this hides prompts and prevents the terminal from detecting when input is needed. Run interactive commands without pipes.',
 		'',
 		'Interactive Input Handling:',
-		'- When a terminal command is waiting for interactive input, do NOT suggest alternatives or ask the user whether to proceed. Instead, use the vscode_askQuestions tool to collect the needed values from the user, then send them.',
-		`- NEVER use vscode_askQuestions to request sensitive input such as passwords, passphrases, API keys, tokens, or other secrets — answers to that tool are sent through the model. If the prompt requires a secret, tell the user to type it directly into the terminal and stop; do not call vscode_askQuestions or ${TerminalToolId.SendToTerminal} for that prompt.`,
+		'- When a terminal command is waiting for interactive input, do NOT suggest alternatives or ask the user whether to proceed. Instead, use the zyraxoncode_askQuestions tool to collect the needed values from the user, then send them.',
+		`- NEVER use zyraxoncode_askQuestions to request sensitive input such as passwords, passphrases, API keys, tokens, or other secrets — answers to that tool are sent through the model. If the prompt requires a secret, tell the user to type it directly into the terminal and stop; do not call zyraxoncode_askQuestions or ${TerminalToolId.SendToTerminal} for that prompt.`,
 		`- Send exactly one answer per prompt using ${TerminalToolId.SendToTerminal}. Never send multiple answers in a single send.`,
 		`- After each send, call ${TerminalToolId.GetTerminalOutput} to read the next prompt before sending the next answer.`,
 		'- Continue one prompt at a time until the command finishes.',
@@ -321,8 +321,8 @@ ${includeElevationGuidance ? '- Avoid commands that require interactive privileg
 - NEVER pipe interactive commands through tail, head, grep, or other filters — this hides prompts and prevents the terminal from detecting when input is needed. Run interactive commands without pipes.
 
 Interactive Input Handling:
-- When a terminal command is waiting for interactive input, do NOT suggest alternatives or ask the user whether to proceed. Instead, use the vscode_askQuestions tool to collect the needed values from the user, then send them.
-- NEVER use vscode_askQuestions to request sensitive input such as passwords, passphrases, API keys, tokens, or other secrets — answers to that tool are sent through the model. If the prompt requires a secret, tell the user to type it directly into the terminal and stop; do not call vscode_askQuestions or send_to_terminal for that prompt.
+- When a terminal command is waiting for interactive input, do NOT suggest alternatives or ask the user whether to proceed. Instead, use the zyraxoncode_askQuestions tool to collect the needed values from the user, then send them.
+- NEVER use zyraxoncode_askQuestions to request sensitive input such as passwords, passphrases, API keys, tokens, or other secrets — answers to that tool are sent through the model. If the prompt requires a secret, tell the user to type it directly into the terminal and stop; do not call zyraxoncode_askQuestions or send_to_terminal for that prompt.
 - Send exactly one answer per prompt using ${TerminalToolId.SendToTerminal}. Never send multiple answers in a single send.
 - After each send, call ${TerminalToolId.GetTerminalOutput} to read the next prompt before sending the next answer.
 - Continue one prompt at a time until the command finishes.`);
@@ -2470,7 +2470,7 @@ export class RunInTerminalTool extends Disposable implements IToolImpl {
 		this._terminalToolCreator.refreshShellIntegrationQuality(toolTerminal);
 		this._logService.info(`RunInTerminalTool: shellIntegrationQuality=${toolTerminal.shellIntegrationQuality} at banner decision time`);
 		if (!toolResultMessage && toolTerminal.shellIntegrationQuality === ShellIntegrationQuality.None) {
-			toolResultMessage = '$(info) Enable [shell integration](https://code.visualstudio.com/docs/terminal/shell-integration) to improve command detection';
+			toolResultMessage = '$(info) Enable [shell integration](__ZYRAXKEEP__1_) to improve command detection';
 		}
 
 		const resultText: string[] = [];
@@ -2492,7 +2492,7 @@ export class RunInTerminalTool extends Disposable implements IToolImpl {
 			}
 		}
 		if (didSensitiveAutoCancelled) {
-			resultText.push(`Note: The command in terminal ID ${termId} was prompting for a password, passphrase, or other secret. The user is unavailable (auto-approve / autopilot mode is on, so no human can focus the terminal to type a secret) and the command has been cancelled. Stop, do NOT retry the command, do NOT call ${TerminalToolId.SendToTerminal}, and do NOT call vscode_askQuestions for the secret. Tell the user to run the command interactively when they are available.\n\n`);
+			resultText.push(`Note: The command in terminal ID ${termId} was prompting for a password, passphrase, or other secret. The user is unavailable (auto-approve / autopilot mode is on, so no human can focus the terminal to type a secret) and the command has been cancelled. Stop, do NOT retry the command, do NOT call ${TerminalToolId.SendToTerminal}, and do NOT call zyraxoncode_askQuestions for the secret. Tell the user to run the command interactively when they are available.\n\n`);
 		} else if (didInputNeeded) {
 			resultText.push(`Note: The command is running in terminal ID ${termId} and may be waiting for input.\n${this._buildInputNeededSteeringText(chatSessionResource, termId, 'none')}\n\n`);
 		} else if (didTimeout && timeoutValue !== undefined && timeoutValue > 0) {
@@ -2601,9 +2601,9 @@ export class RunInTerminalTool extends Disposable implements IToolImpl {
 	 *   2. In auto-approve mode, leads with `send_to_terminal` for non-secret
 	 *      prompts to minimize round-trips, with a `get_terminal_output` fallback.
 	 *   3. In default mode, leads with `get_terminal_output` as the safe
-	 *      recovery action and offers `vscode_askQuestions` only for real
+	 *      recovery action and offers `zyraxoncode_askQuestions` only for real
 	 *      non-secret prompts. Secret prompts (passwords, passphrases,
-	 *      tokens) must never be routed through `vscode_askQuestions`
+	 *      tokens) must never be routed through `zyraxoncode_askQuestions`
 	 *      because answers to that tool are sent through the model — the
 	 *      user is told to type those values directly into the terminal.
 	 * `kill_terminal` is only advertised when the command may be hung
@@ -2623,7 +2623,7 @@ export class RunInTerminalTool extends Disposable implements IToolImpl {
 			lines.push(`  2. If the command may still be producing output or the shell prompt has not returned, call ${TerminalToolId.GetTerminalOutput} with id="${termId}" to continue polling.`);
 		} else {
 			lines.push(`  1. If the command may still be producing output or the shell prompt has not returned, call ${TerminalToolId.GetTerminalOutput} with id="${termId}" to continue polling. This is the default and safest action when unsure.`);
-			lines.push(`  2. Only if the output clearly ends with a real non-secret input prompt (Continue? (y/n), Enter selection, etc. — a normal shell prompt like \`$\` or \`#\` does NOT count), call the vscode_askQuestions tool to ask the user, then send each answer using ${TerminalToolId.SendToTerminal} with id="${termId}" (which returns the next few lines of output). Repeat one prompt at a time. NEVER route secret prompts (passwords, passphrases, tokens, API keys, etc.) through vscode_askQuestions — answers to that tool are sent through the model. For secret prompts, tell the user to type the value directly into the terminal and stop.`);
+			lines.push(`  2. Only if the output clearly ends with a real non-secret input prompt (Continue? (y/n), Enter selection, etc. — a normal shell prompt like \`$\` or \`#\` does NOT count), call the zyraxoncode_askQuestions tool to ask the user, then send each answer using ${TerminalToolId.SendToTerminal} with id="${termId}" (which returns the next few lines of output). Repeat one prompt at a time. NEVER route secret prompts (passwords, passphrases, tokens, API keys, etc.) through zyraxoncode_askQuestions — answers to that tool are sent through the model. For secret prompts, tell the user to type the value directly into the terminal and stop.`);
 		}
 		if (hungHint === 'timeout') {
 			lines.push(`  3. A timeout does not mean the command failed — call ${TerminalToolId.GetTerminalOutput} with id="${termId}" to continue polling. Only call ${TerminalToolId.KillTerminal} if the command is genuinely hung and you need to retry with a different approach.`);
@@ -3549,7 +3549,7 @@ export class TerminalProfileFetcher {
 		try {
 			const remoteAuthority = this._remoteAgentService.getConnection()?.remoteAuthority;
 			const resource = remoteAuthority
-				? URI.file(shellPath).with({ scheme: 'vscode-remote', authority: remoteAuthority })
+				? URI.file(shellPath).with({ scheme: 'zyraxoncode-remote', authority: remoteAuthority })
 				: URI.file(shellPath);
 			return await this._fileService.exists(resource);
 		} catch {

@@ -1,8 +1,8 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+// For format details, see __ZYRAXKEEP__0_ For config options, see the
+// README at: __ZYRAXKEEP__1_
 {
 	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:4-24",
+	"image": "mcr.zyraxon.com/devcontainers/typescript-node:4-24",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2.16.1": {
 			"moby": false
@@ -17,13 +17,13 @@
 		"DEBIAN_FRONTEND": "noninteractive"
 	},
 	"customizations": {
-		"vscode": {
+		"zyraxoncode": {
 			"extensions": [
-				"dbaeumer.vscode-eslint",
-				"esbenp.prettier-vscode",
+				"dbaeumer.zyraxoncode-eslint",
+				"esbenp.prettier-zyraxoncode",
 				"connor4312.esbuild-problem-matchers",
 				"GitHub.copilot@prerelease",
-				"ms-vscode.extension-test-runner"
+				"ms-zyraxoncode.extension-test-runner"
 			]
 		}
 	},

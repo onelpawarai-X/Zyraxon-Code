@@ -15,7 +15,7 @@ export function applySearchTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_search_open',
+	// 	'zyraxoncode_automation_search_open',
 	// 	'Open the search viewlet',
 	// 	async () => {
 	// 		await app.workbench.search.openSearchViewlet();
@@ -29,7 +29,7 @@ export function applySearchTools(server: McpServer, appService: ApplicationServi
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_search_for_text',
+		'zyraxoncode_automation_search_for_text',
 		'Search for text in files',
 		{
 			searchText: z.string().describe('Text to search for')
@@ -50,7 +50,7 @@ export function applySearchTools(server: McpServer, appService: ApplicationServi
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_search_set_files_to_include',
+	// 	'zyraxoncode_automation_search_set_files_to_include',
 	// 	'Set files to include in search',
 	// 	{
 	// 		pattern: z.string().describe('File pattern to include (e.g., "*.ts", "src/**")')
@@ -69,7 +69,7 @@ export function applySearchTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_search_submit',
+	// 	'zyraxoncode_automation_search_submit',
 	// 	'Submit the current search',
 	// 	async () => {
 	// 		await app.workbench.search.submitSearch();
@@ -84,7 +84,7 @@ export function applySearchTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_search_clear_results',
+	// 	'zyraxoncode_automation_search_clear_results',
 	// 	'Clear search results',
 	// 	async () => {
 	// 		await app.workbench.search.clearSearchResults();

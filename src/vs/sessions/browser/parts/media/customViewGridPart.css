@@ -41,7 +41,7 @@
 	box-sizing: border-box;
 	margin: 0 auto;
 	padding: 6px 10px;
-	border-bottom: var(--vscode-strokeThickness) solid color-mix(in srgb, var(--session-view-foreground) 12%, transparent);
+	border-bottom: var(--zyraxoncode-strokeThickness) solid color-mix(in srgb, var(--session-view-foreground) 12%, transparent);
 }
 
 .custom-view-header-title-row {
@@ -57,8 +57,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-size: var(--vscode-agents-fontSize-heading3, 13px);
-	font-weight: var(--vscode-agents-fontWeight-semiBold, 600);
+	font-size: var(--zyraxoncode-agents-fontSize-heading3, 13px);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold, 600);
 }
 
 .custom-view-header-actions {
@@ -68,12 +68,12 @@
 }
 
 .custom-view-header-actions.custom-view-header-actions-buttons .monaco-action-bar .actions-container {
-	gap: var(--vscode-spacing-size60, 6px);
+	gap: var(--zyraxoncode-spacing-size60, 6px);
 }
 
 .custom-view-header-description {
 	margin-top: 2px;
-	font-size: var(--vscode-agents-fontSize-body2, 12px);
+	font-size: var(--zyraxoncode-agents-fontSize-body2, 12px);
 	opacity: 0.8;
 }
 
@@ -103,6 +103,6 @@
 
 /* The content is the focus fallback when a view does not focus a child of its own. */
 .custom-view-content:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }

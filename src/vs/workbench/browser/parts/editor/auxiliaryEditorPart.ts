@@ -60,7 +60,7 @@ registerAction2(class extends Action2 {
 	}
 
 	override async run(): Promise<void> {
-		compactWindowEmitter.fire({ windowId: getActiveWindow().vscodeWindowId, compact: 'toggle' });
+		compactWindowEmitter.fire({ windowId: getActiveWindow().zyraxoncodeWindowId, compact: 'toggle' });
 	}
 });
 
@@ -81,7 +81,7 @@ registerAction2(class extends Action2 {
 	}
 
 	override async run(): Promise<void> {
-		compactWindowEmitter.fire({ windowId: getActiveWindow().vscodeWindowId, compact: true });
+		compactWindowEmitter.fire({ windowId: getActiveWindow().zyraxoncodeWindowId, compact: true });
 	}
 });
 
@@ -102,7 +102,7 @@ registerAction2(class extends Action2 {
 	}
 
 	override async run(): Promise<void> {
-		compactWindowEmitter.fire({ windowId: getActiveWindow().vscodeWindowId, compact: false });
+		compactWindowEmitter.fire({ windowId: getActiveWindow().zyraxoncodeWindowId, compact: false });
 	}
 });
 
@@ -196,7 +196,7 @@ export class AuxiliaryEditorPart {
 		editorPartContainer.style.position = 'relative';
 		auxiliaryWindow.container.appendChild(editorPartContainer);
 
-		const editorPart = disposables.add(this.instantiationService.createInstance(AuxiliaryEditorPartImpl, auxiliaryWindow.window.vscodeWindowId, this.editorPartsView, options?.state, label));
+		const editorPart = disposables.add(this.instantiationService.createInstance(AuxiliaryEditorPartImpl, auxiliaryWindow.window.zyraxoncodeWindowId, this.editorPartsView, options?.state, label));
 		editorPart.updateOptions({ compact });
 		disposables.add(this.editorPartsView.registerPart(editorPart));
 		editorPart.create(editorPartContainer);
@@ -225,7 +225,7 @@ export class AuxiliaryEditorPart {
 			disposables.add(titlebarPart.onDidChange(() => auxiliaryWindow.layout()));
 			disposables.add(this.layoutService.onDidChangePartVisibility(() => handleTitleBarVisibilityEvent()));
 			disposables.add(onDidChangeFullscreen(windowId => {
-				if (windowId !== auxiliaryWindow.window.vscodeWindowId) {
+				if (windowId !== auxiliaryWindow.window.zyraxoncodeWindowId) {
 					return; // ignore all but our window
 				}
 
@@ -295,7 +295,7 @@ export class AuxiliaryEditorPart {
 
 		// Compact mode
 		disposables.add(compactWindowEmitter.event(e => {
-			if (e.windowId === auxiliaryWindow.window.vscodeWindowId) {
+			if (e.windowId === auxiliaryWindow.window.zyraxoncodeWindowId) {
 				let newCompact: boolean;
 				if (typeof e.compact === 'boolean') {
 					newCompact = e.compact;

@@ -40,7 +40,7 @@ export const extensionMcpCollectionPrefix = 'ext.';
 /**
  * Prefix of the collection id used for MCP servers configured via the various
  * `mcp.json`-style config files (user, remote user, workspace, and
- * `.vscode/mcp.json` workspace-folder configs). The suffix is the
+ * `.zyraxoncode/mcp.json` workspace-folder configs). The suffix is the
  * {@link IMcpConfigPath.id} of the originating config path.
  */
 export const MCP_CONFIGURATION_COLLECTION_ID_PREFIX = 'mcp.config.';
@@ -156,7 +156,7 @@ export namespace McpCollectionDefinition {
 	}
 
 	/**
-	 * Returns `true` when the collection originates from a `.vscode/mcp.json`
+	 * Returns `true` when the collection originates from a `.zyraxoncode/mcp.json`
 	 * workspace-folder config, identified by its collection id prefix (the
 	 * shared `mcp.config.` prefix plus the workspace-folder config id).
 	 */
@@ -167,7 +167,7 @@ export namespace McpCollectionDefinition {
 	/**
 	 * Returns `true` when the collection originates from a folder-root
 	 * `.mcp.json` file (Claude-style), identified by its collection id prefix.
-	 * Distinct from {@link isVscodeMcpJson} (`.vscode/mcp.json`) and from other
+	 * Distinct from {@link isVscodeMcpJson} (`.zyraxoncode/mcp.json`) and from other
 	 * workspace-discovered sources such as `.cursor/mcp.json` or the
 	 * `.code-workspace` workspace-level config.
 	 */
@@ -519,7 +519,7 @@ export interface IMcpToolCallContext {
 
 /**
  * Visibility of an MCP tool, based on the MCP Apps `_meta.ui.visibility` field.
- * @see https://github.com/anthropics/mcp/blob/main/apps.md
+ * @see __ZYRAXKEEP__0_
  */
 export const enum McpToolVisibility {
 	/** Tool is visible to and callable by the language model */
@@ -545,7 +545,7 @@ export const enum McpToolVisibility {
 export type IMcpToolCallUIData =
 	| {
 		readonly kind: 'local';
-		/** URI of the UI resource for rendering (e.g., "ui://weather-server/dashboard") */
+		/** URI of the UI resource for rendering (e.g., "__ZYRAXKEEP__1_") */
 		readonly resourceUri: string;
 		/** Reference to the server definition for reconnection */
 		readonly serverDefinitionId: string;
@@ -554,7 +554,7 @@ export type IMcpToolCallUIData =
 	}
 	| {
 		readonly kind: 'agentHost';
-		/** URI of the UI resource for rendering (e.g., "ui://weather-server/dashboard") */
+		/** URI of the UI resource for rendering (e.g., "__ZYRAXKEEP__2_") */
 		readonly resourceUri: string;
 		/** AHP `mcp://` channel URI for the originating server. */
 		readonly channel: string;
@@ -596,7 +596,7 @@ export const enum McpServerTransportType {
 
 /**
  * MCP server launched on the command line which communicated over stdio.
- * https://spec.modelcontextprotocol.io/specification/2024-11-05/basic/transports/#stdio
+ * __ZYRAXKEEP__3_
  */
 export interface McpServerTransportStdio {
 	readonly type: McpServerTransportType.Stdio;
@@ -645,8 +645,8 @@ export function mcpOAuthClientSecretStorageKey(mcpServerUrl: string, clientId: s
 
 /**
  * MCP server launched on the command line which communicated over SSE or Streamable HTTP.
- * https://spec.modelcontextprotocol.io/specification/2024-11-05/basic/transports/#http-with-sse
- * https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
+ * __ZYRAXKEEP__4_
+ * __ZYRAXKEEP__5_
  */
 export interface McpServerTransportHTTP {
 	readonly type: McpServerTransportType.HTTP;

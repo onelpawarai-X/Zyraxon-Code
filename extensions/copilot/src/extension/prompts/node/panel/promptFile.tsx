@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptReference, PromptSizing } from '@vscode/prompt-tsx';
-import type { ChatLanguageModelToolReference } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptReference, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type { ChatLanguageModelToolReference } from 'zyraxoncode';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IPromptPathRepresentationService } from '../../../../platform/prompts/common/promptPathRepresentationService';

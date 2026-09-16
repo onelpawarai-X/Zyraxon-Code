@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { MdLanguageClient } from './client/client';
 import { CommandManager } from './commandManager';
 import { registerMarkdownCommands } from './commands/index';
@@ -25,7 +25,7 @@ import { registerUpdatePastedLinks } from './languageFeatures/updateLinksOnPaste
 import { markdownLanguageIds } from './util/file';
 
 export function activateShared(
-	context: vscode.ExtensionContext,
+	context: zyraxoncode.ExtensionContext,
 	client: MdLanguageClient,
 	engine: MarkdownItEngine,
 	logger: ILogger,
@@ -46,7 +46,7 @@ export function activateShared(
 	context.subscriptions.push(registerMarkdownLanguageFeatures(client, commandManager, engine));
 	context.subscriptions.push(registerMarkdownCommands(commandManager, previewManager, telemetryReporter, cspArbiter, engine));
 
-	context.subscriptions.push(vscode.window.registerCustomEditorProvider(
+	context.subscriptions.push(zyraxoncode.window.registerCustomEditorProvider(
 		MarkdownEditorProvider.viewType,
 		new MarkdownEditorProvider(context.extensionUri, context.globalState, opener),
 		{
@@ -54,7 +54,7 @@ export function activateShared(
 			supportsMultipleEditorsPerDocument: true,
 		}));
 
-	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(() => {
+	context.subscriptions.push(zyraxoncode.workspace.onDidChangeConfiguration(() => {
 		previewManager.updateConfiguration();
 	}));
 }
@@ -63,9 +63,9 @@ function registerMarkdownLanguageFeatures(
 	client: MdLanguageClient,
 	commandManager: CommandManager,
 	parser: IMdParser,
-): vscode.Disposable {
-	const selector: vscode.DocumentSelector = markdownLanguageIds;
-	return vscode.Disposable.from(
+): zyraxoncode.Disposable {
+	const selector: zyraxoncode.DocumentSelector = markdownLanguageIds;
+	return zyraxoncode.Disposable.from(
 		// Language features
 		registerDiagnosticSupport(selector, commandManager),
 		registerFindFileReferenceSupport(commandManager, client),

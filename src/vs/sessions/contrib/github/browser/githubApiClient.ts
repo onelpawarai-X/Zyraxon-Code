@@ -103,7 +103,7 @@ export class GitHubApiClient extends Disposable {
 			headers: {
 				'Authorization': `token ${token}`,
 				'Accept': accept,
-				'User-Agent': 'VSCode-Sessions-GitHub',
+				'User-Agent': 'ZyraxonCode-Sessions-GitHub',
 				...(options?.etag !== undefined ? { 'If-None-Match': options.etag } : {}),
 				...(options?.data !== undefined ? { 'Content-Type': 'application/json' } : {}),
 			},

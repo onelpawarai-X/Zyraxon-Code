@@ -90,9 +90,9 @@ export class MainThreadGitExtensionService extends Disposable implements MainThr
 	}
 
 	private async _initializeDelegate(): Promise<void> {
-		// Check whether the vscode.git extension is available in the extension host
+		// Check whether the zyraxoncode.git extension is available in the extension host
 		// process before setting the delegate. The delegate should only be set once,
-		// for the extension host process that runs the vscode.git extension
+		// for the extension host process that runs the zyraxoncode.git extension
 		const isExtensionAvailable = await this._proxy.$isGitExtensionAvailable();
 
 		if (isExtensionAvailable && !this._store.isDisposed) {

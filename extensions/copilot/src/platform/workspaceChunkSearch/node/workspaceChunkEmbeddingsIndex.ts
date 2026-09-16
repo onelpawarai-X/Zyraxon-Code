@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { GlobIncludeOptions, shouldInclude } from '../../../util/common/glob';
 import { CallTracker, TelemetryCorrelationId } from '../../../util/common/telemetryCorrelationId';
 import { coalesce } from '../../../util/vs/base/common/arrays';
@@ -20,7 +20,7 @@ import { IAuthenticationService } from '../../authentication/common/authenticati
 import { FileChunk, FileChunkAndScore, FileChunkWithEmbedding, FileChunkWithOptionalEmbedding } from '../../chunking/common/chunk';
 import { ComputeBatchInfo, EmbeddingsComputeQos, IChunkingEndpointClient } from '../../chunking/common/chunkingEndpointClient';
 import { distance, Embedding, EmbeddingType, rankEmbeddings } from '../../embeddings/common/embeddingsComputer';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { logExecTime } from '../../log/common/logExecTime';
 import { ILogService } from '../../log/common/logService';
 import { ISimulationTestContext } from '../../simulationTestContext/common/simulationTestContext';
@@ -56,7 +56,7 @@ export class WorkspaceChunkEmbeddingsIndex extends Disposable {
 
 	constructor(
 		private readonly _embeddingType: EmbeddingType,
-		@IVSCodeExtensionContext vsExtensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext vsExtensionContext: IZyraxonCodeExtensionContext,
 		@IInstantiationService instantiationService: IInstantiationService,
 		@IAuthenticationService private readonly _authService: IAuthenticationService,
 		@ILogService private readonly _logService: ILogService,

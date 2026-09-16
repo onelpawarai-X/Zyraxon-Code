@@ -2,11 +2,11 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import { promises as fs } from 'fs';
 import { tmpdir } from 'os';
 import * as path from 'path';
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { AbstractChatMLFetcher } from '../../src/extension/prompt/node/chatMLFetcher';
 import { IChatMLFetcher, IFetchMLOptions } from '../../src/platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatResponses } from '../../src/platform/chat/common/commonTypes';

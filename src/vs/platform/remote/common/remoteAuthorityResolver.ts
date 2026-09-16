@@ -134,7 +134,7 @@ export class RemoteAuthorityResolverError extends ErrorNoTelemetry {
 		this.isHandled = (code === RemoteAuthorityResolverErrorCode.NotAvailable) && detail === true;
 
 		// workaround when extending builtin objects and when compiling to ES5, see:
-		// https://github.com/microsoft/TypeScript-wiki/blob/master/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
+		// __ZYRAXKEEP__0_
 		Object.setPrototypeOf(this, RemoteAuthorityResolverError.prototype);
 	}
 }
@@ -148,11 +148,11 @@ export interface IRemoteAuthorityResolverService {
 	resolveAuthority(authority: string): Promise<ResolverResult>;
 	getConnectionData(authority: string): IRemoteConnectionData | null;
 	/**
-	 * Get the canonical URI for a `vscode-remote://` URI.
+	 * Get the canonical URI for a `zyraxoncode-remote://` URI.
 	 *
 	 * **NOTE**: This can throw e.g. in cases where there is no resolver installed for the specific remote authority.
 	 *
-	 * @param uri The `vscode-remote://` URI
+	 * @param uri The `zyraxoncode-remote://` URI
 	 */
 	getCanonicalURI(uri: URI): Promise<URI>;
 

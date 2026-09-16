@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { IVSCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
+import type * as zyraxoncode from 'zyraxoncode';
+import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { IPackageJson } from '../../../platform/extensions/common/packageJson';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
@@ -52,7 +52,7 @@ export class CopilotDebugCommandSessionFactory {
 	constructor(
 		private readonly interactor: ICommandInteractor,
 		@ITelemetryService private readonly telemetry: ITelemetryService,
-		@IVSCodeExtensionContext private readonly context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly context: IZyraxonCodeExtensionContext,
 		@IDebugCommandToConfigConverter private readonly commandToConfig: IDebugCommandToConfigConverter,
 		@IExtensionsService private readonly extensionsService: IExtensionsService,
 		@IWorkspaceService private readonly workspaceService: IWorkspaceService,
@@ -145,14 +145,14 @@ export class CopilotDebugCommandSessionFactory {
 		};
 	}
 
-	private async save(launchConfig: { configurations: vscode.DebugConfiguration[]; inputs?: any[] }, folder: URI | undefined) {
+	private async save(launchConfig: { configurations: zyraxoncode.DebugConfiguration[]; inputs?: any[] }, folder: URI | undefined) {
 		await this.launchConfigService.add(folder, launchConfig);
 		if (folder) {
 			await this.launchConfigService.show(folder, launchConfig.configurations[0].name);
 		}
 	}
 
-	private hasMatchingExtension(config: vscode.DebugConfiguration) {
+	private hasMatchingExtension(config: zyraxoncode.DebugConfiguration) {
 		for (const extension of this.extensionsService.allAcrossExtensionHosts) {
 			const debuggers = (extension.packageJSON as IPackageJson)?.contributes?.debuggers;
 			if (Array.isArray(debuggers) && debuggers.some(d => d && d.type === config.type)) {

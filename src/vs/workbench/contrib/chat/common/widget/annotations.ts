@@ -10,7 +10,7 @@ import { isLocation } from '../../../../../editor/common/languages.js';
 import { IChatProgressRenderableResponseContent, IChatProgressResponseContent, appendMarkdownString, canMergeMarkdownStrings } from '../model/chatModel.js';
 import { IChatAgentVulnerabilityDetails } from '../chatService/chatService.js';
 
-export const contentRefUrl = 'http://_vscodecontentref_'; // must be lowercase for URI
+export const contentRefUrl = '__ZYRAXKEEP__0_'; // must be lowercase for URI
 
 export function annotateSpecialMarkdownContent(response: Iterable<IChatProgressResponseContent>): IChatProgressRenderableResponseContent[] {
 	let refIdPool = 0;
@@ -33,7 +33,7 @@ export function annotateSpecialMarkdownContent(response: Iterable<IChatProgressR
 
 			// When the preceding markdown ends inside a code context (inline code span
 			// or fenced code block), markdown links won't be parsed, they render as
-			// literal text like [file](http://_vscodecontentref_/1). In that case, emit
+			// literal text like [file](__ZYRAXKEEP__1_). In that case, emit
 			// just the plain label so the output stays readable.
 			const previousText = previousItem?.kind === 'markdownContent' ? previousItem.content.value : '';
 			if (isInsideCodeContext(previousText)) {
@@ -78,7 +78,7 @@ export function annotateSpecialMarkdownContent(response: Iterable<IChatProgressR
 			}
 		} else if (item.kind === 'markdownVuln') {
 			const vulnText = encodeURIComponent(JSON.stringify(item.vulnerabilities));
-			const markdownText = `<vscode_annotation details='${vulnText}'>${item.content.value}</vscode_annotation>`;
+			const markdownText = `<zyraxoncode_annotation details='${vulnText}'>${item.content.value}</zyraxoncode_annotation>`;
 			if (previousItem?.kind === 'markdownContent') {
 				// Since this is inside a codeblock, it needs to be merged into the previous markdown content.
 				const merged = appendMarkdownString(previousItem.content, new MarkdownString(markdownText));
@@ -90,7 +90,7 @@ export function annotateSpecialMarkdownContent(response: Iterable<IChatProgressR
 			if (previousItem?.kind === 'markdownContent') {
 				const isEditText = item.isEdit ? ` isEdit` : '';
 				const subAgentText = item.subAgentInvocationId ? ` subAgentInvocationId="${encodeURIComponent(item.subAgentInvocationId)}"` : '';
-				const markdownText = `<vscode_codeblock_uri${isEditText}${subAgentText}>${item.uri.toString()}</vscode_codeblock_uri>`;
+				const markdownText = `<zyraxoncode_codeblock_uri${isEditText}${subAgentText}>${item.uri.toString()}</zyraxoncode_codeblock_uri>`;
 				const merged = appendMarkdownString(previousItem.content, new MarkdownString(markdownText));
 				// delete the previous and append to ensure that we don't reorder the edit before the undo stop containing it
 				result.splice(previousItemIndex, 1);
@@ -110,7 +110,7 @@ const contentRefPattern = new RegExp(`^(\\[.*?\\]\\(${contentRefUrl}/\\d+\\))+$`
 
 /**
  * Returns true when the text consists entirely of synthesized content-ref
- * links (e.g. `[file.ts](http://_vscodecontentref_/0)`), with no other
+ * links (e.g. `[file.ts](__ZYRAXKEEP__2_)`), with no other
  * markdown text mixed in. Used to decide whether the MarkdownString
  * properties are "synthetic defaults" that can safely be replaced.
  */
@@ -216,7 +216,7 @@ export interface IMarkdownVulnerability {
 	readonly range: IRange;
 }
 export function extractCodeblockUrisFromText(text: string): { uri: URI; isEdit?: boolean; subAgentInvocationId?: string; textWithoutResult: string } | undefined {
-	const match = /<vscode_codeblock_uri( isEdit)?( subAgentInvocationId="([^"]*)")?>([\s\S]*?)<\/vscode_codeblock_uri>/ms.exec(text);
+	const match = /<zyraxoncode_codeblock_uri( isEdit)?( subAgentInvocationId="([^"]*)")?>([\s\S]*?)<\/zyraxoncode_codeblock_uri>/ms.exec(text);
 	if (match) {
 		const [all, isEdit, , encodedSubAgentId, uriString] = match;
 		if (uriString) {
@@ -242,7 +242,7 @@ export function extractCodeblockUrisFromText(text: string): { uri: URI; isEdit?:
 }
 
 export function extractSubAgentInvocationIdFromText(text: string): string | undefined {
-	const match = /<vscode_codeblock_uri[^>]* subAgentInvocationId="([^"]*)"/ms.exec(text);
+	const match = /<zyraxoncode_codeblock_uri[^>]* subAgentInvocationId="([^"]*)"/ms.exec(text);
 	if (match) {
 		try {
 			return decodeURIComponent(match[1]);
@@ -254,18 +254,18 @@ export function extractSubAgentInvocationIdFromText(text: string): string | unde
 }
 
 export function hasCodeblockUriTag(text: string): boolean {
-	return text.includes('<vscode_codeblock_uri');
+	return text.includes('<zyraxoncode_codeblock_uri');
 }
 
 export function hasEditCodeblockUriTag(text: string): boolean {
-	return text.includes('<vscode_codeblock_uri isEdit');
+	return text.includes('<zyraxoncode_codeblock_uri isEdit');
 }
 
 export function extractVulnerabilitiesFromText(text: string): { newText: string; vulnerabilities: IMarkdownVulnerability[] } {
 	const vulnerabilities: IMarkdownVulnerability[] = [];
 	let newText = text;
 	let match: RegExpExecArray | null;
-	while ((match = /<vscode_annotation details='(.*?)'>(.*?)<\/vscode_annotation>/ms.exec(newText)) !== null) {
+	while ((match = /<zyraxoncode_annotation details='(.*?)'>(.*?)<\/zyraxoncode_annotation>/ms.exec(newText)) !== null) {
 		const [full, details, content] = match;
 		const start = match.index;
 		const textBefore = newText.substring(0, start);

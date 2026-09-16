@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import type { MarkdownPreviewChangeIndicator, MarkdownPreviewInnerChange, MarkdownPreviewLineChanges } from '../../types/previewMessaging';
 
 interface LineChanges {
@@ -22,20 +22,20 @@ interface LineMappings {
 	readonly modifiedToOriginal: number[];
 }
 
-export type ChangedLineRange = Pick<vscode.TextDiffChange, 'originalRange' | 'modifiedRange'>;
+export type ChangedLineRange = Pick<zyraxoncode.TextDiffChange, 'originalRange' | 'modifiedRange'>;
 
 export class MarkdownPreviewLineDiffProvider {
 
-	readonly #originalDocument: vscode.TextDocument;
-	readonly #modifiedDocument: vscode.TextDocument;
+	readonly #originalDocument: zyraxoncode.TextDocument;
+	readonly #modifiedDocument: zyraxoncode.TextDocument;
 
 	#cachedOriginalVersion = -1;
 	#cachedModifiedVersion = -1;
 	#cachedLineChanges: Promise<LineChanges> | undefined;
 
 	public constructor(
-		originalDocument: vscode.TextDocument,
-		modifiedDocument: vscode.TextDocument,
+		originalDocument: zyraxoncode.TextDocument,
+		modifiedDocument: zyraxoncode.TextDocument,
 	) {
 		this.#originalDocument = originalDocument;
 		this.#modifiedDocument = modifiedDocument;
@@ -87,8 +87,8 @@ export class MarkdownPreviewLineDiffProvider {
 	}
 }
 
-async function computeLineChanges(originalDocument: vscode.TextDocument, modifiedDocument: vscode.TextDocument): Promise<LineChanges> {
-	const diff = vscode.workspace.getTextDiff(originalDocument, modifiedDocument, {
+async function computeLineChanges(originalDocument: zyraxoncode.TextDocument, modifiedDocument: zyraxoncode.TextDocument): Promise<LineChanges> {
+	const diff = zyraxoncode.workspace.getTextDiff(originalDocument, modifiedDocument, {
 		ignoreTrimWhitespace: false,
 		maxComputationTimeMs: 5000,
 	});
@@ -151,7 +151,7 @@ async function computeLineChanges(originalDocument: vscode.TextDocument, modifie
 	return { added, deleted, changedLineRanges, originalInnerChanges, modifiedInnerChanges, changeIndicators, ...mappings };
 }
 
-function createChangeIndicators(ranges: readonly ChangedLineRange[], originalDocument: vscode.TextDocument, modifiedDocument: vscode.TextDocument, originalInnerChanges: readonly MarkdownPreviewInnerChange[], modifiedInnerChanges: readonly MarkdownPreviewInnerChange[]): MarkdownPreviewChangeIndicator[] {
+function createChangeIndicators(ranges: readonly ChangedLineRange[], originalDocument: zyraxoncode.TextDocument, modifiedDocument: zyraxoncode.TextDocument, originalInnerChanges: readonly MarkdownPreviewInnerChange[], modifiedInnerChanges: readonly MarkdownPreviewInnerChange[]): MarkdownPreviewChangeIndicator[] {
 	return ranges.map(range => {
 		const modifiedLineCount = range.modifiedRange.end.line - range.modifiedRange.start.line;
 		return {
@@ -167,7 +167,7 @@ function createChangeIndicators(ranges: readonly ChangedLineRange[], originalDoc
 	});
 }
 
-function getRelativeInnerChanges(innerChanges: readonly MarkdownPreviewInnerChange[], range: vscode.Range): MarkdownPreviewInnerChange[] | undefined {
+function getRelativeInnerChanges(innerChanges: readonly MarkdownPreviewInnerChange[], range: zyraxoncode.Range): MarkdownPreviewInnerChange[] | undefined {
 	const relativeInnerChanges: MarkdownPreviewInnerChange[] = [];
 	for (const change of innerChanges) {
 		if (change.line >= range.start.line && change.line < range.end.line) {
@@ -181,7 +181,7 @@ function getRelativeInnerChanges(innerChanges: readonly MarkdownPreviewInnerChan
 	return relativeInnerChanges.length ? relativeInnerChanges : undefined;
 }
 
-function splitChangedLineRangesByMarkdownBlocks(ranges: readonly ChangedLineRange[], originalDocument: vscode.TextDocument, modifiedDocument: vscode.TextDocument): ChangedLineRange[] {
+function splitChangedLineRangesByMarkdownBlocks(ranges: readonly ChangedLineRange[], originalDocument: zyraxoncode.TextDocument, modifiedDocument: zyraxoncode.TextDocument): ChangedLineRange[] {
 	const splitRanges: ChangedLineRange[] = [];
 	for (const range of ranges) {
 		const originalBlocks = getNonBlankLineRanges(originalDocument, range.originalRange);
@@ -200,13 +200,13 @@ function splitChangedLineRangesByMarkdownBlocks(ranges: readonly ChangedLineRang
 	return splitRanges;
 }
 
-function getNonBlankLineRanges(document: vscode.TextDocument, range: vscode.Range): vscode.Range[] {
-	const ranges: vscode.Range[] = [];
+function getNonBlankLineRanges(document: zyraxoncode.TextDocument, range: zyraxoncode.Range): zyraxoncode.Range[] {
+	const ranges: zyraxoncode.Range[] = [];
 	let blockStartLine: number | undefined;
 	for (let line = range.start.line; line < range.end.line; ++line) {
 		if (document.lineAt(line).text.trim().length === 0) {
 			if (blockStartLine !== undefined) {
-				ranges.push(new vscode.Range(blockStartLine, 0, line, 0));
+				ranges.push(new zyraxoncode.Range(blockStartLine, 0, line, 0));
 				blockStartLine = undefined;
 			}
 		} else if (blockStartLine === undefined) {
@@ -214,12 +214,12 @@ function getNonBlankLineRanges(document: vscode.TextDocument, range: vscode.Rang
 		}
 	}
 	if (blockStartLine !== undefined) {
-		ranges.push(new vscode.Range(blockStartLine, 0, range.end.line, 0));
+		ranges.push(new zyraxoncode.Range(blockStartLine, 0, range.end.line, 0));
 	}
 	return ranges;
 }
 
-function getLineRangeText(document: vscode.TextDocument, range: vscode.Range): string {
+function getLineRangeText(document: zyraxoncode.TextDocument, range: zyraxoncode.Range): string {
 	const lines: string[] = [];
 	for (let line = range.start.line; line < range.end.line; ++line) {
 		lines.push(document.lineAt(line).text);
@@ -234,7 +234,7 @@ function getLineRangeText(document: vscode.TextDocument, range: vscode.Range): s
  * middle lines are full-line, and the last line goes from column 0
  * to endColumn.
  */
-function collectInnerChangesForSide(range: vscode.Range, out: MarkdownPreviewInnerChange[]): void {
+function collectInnerChangesForSide(range: zyraxoncode.Range, out: MarkdownPreviewInnerChange[]): void {
 	if (range.isEmpty) {
 		return;
 	}

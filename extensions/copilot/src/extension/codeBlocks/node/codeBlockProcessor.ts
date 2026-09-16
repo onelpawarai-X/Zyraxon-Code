@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatQuestion, ChatResponseClearToPreviousToolInvocationReason, ChatResponsePart, ChatResponseStream, ChatVulnerability, ThinkingDelta, Uri } from 'vscode';
+import type { ChatQuestion, ChatResponseClearToPreviousToolInvocationReason, ChatResponsePart, ChatResponseStream, ChatVulnerability, ThinkingDelta, Uri } from 'zyraxoncode';
 
 import { createFilepathRegexp, mdCodeBlockLangToLanguageId } from '../../../util/common/markdown';
 import { CharCode } from '../../../util/vs/base/common/charCode';
 import { isFalsyOrWhitespace, splitLinesIncludeSeparators } from '../../../util/vs/base/common/strings';
 
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
-import { ChatResponseCodeblockUriPart, ChatResponseMarkdownPart, ChatResponseMarkdownWithVulnerabilitiesPart, MarkdownString } from '../../../vscodeTypes';
+import { ChatResponseCodeblockUriPart, ChatResponseMarkdownPart, ChatResponseMarkdownWithVulnerabilitiesPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { CodeBlock } from '../../prompt/common/conversation';
 
 export type CodeBlockWithResource = { readonly code: string; readonly language?: string; readonly resource: Uri; readonly markdownBeforeBlock?: string };
@@ -111,7 +111,7 @@ export class CodeBlockTrackingChatResponseStream implements ChatResponseStream {
 
 	/**
 	 * If you are adding a new ChatResponseStream type, please make sure to either:
-	 * - Update the date on the vscode engine version in package.json to a date when the API will be available in ZYRAXON Code (sufficient if it's a purely additive/backwards-compatible change)
+	 * - Update the date on the zyraxoncode engine version in package.json to a date when the API will be available in ZYRAXON Code (sufficient if it's a purely additive/backwards-compatible change)
 	 * - Or bump the proposed API version (required if the change is not backwards compatible (changes the shape of an existing API))
 	 * to ensure that this extension version only runs in versions of ZYRAXON Code that contain the necessary API support.
 	 */

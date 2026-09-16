@@ -1563,8 +1563,8 @@ export class ExtensionsWorkbenchService extends Disposable implements IExtension
 
 		const invalidExtensions = this.local.filter(e => e.enablementState === EnablementState.DisabledByInvalidExtension && !e.isWorkspaceScoped);
 		if (invalidExtensions.length) {
-			if (invalidExtensions.some(e => e.local && e.local.manifest.engines?.vscode &&
-				!isEngineValid(e.local.manifest.engines.vscode, this.productService.version, this.productService.date)
+			if (invalidExtensions.some(e => e.local && e.local.manifest.engines?.zyraxoncode &&
+				!isEngineValid(e.local.manifest.engines.zyraxoncode, this.productService.version, this.productService.date)
 			)) {
 				computedNotificiations.push({
 					message: nls.localize('incompatibleExtensions', "Some extensions are disabled due to version incompatibility. Review and update them."),
@@ -1830,8 +1830,8 @@ export class ExtensionsWorkbenchService extends Disposable implements IExtension
 							const productCurrentVersion = this.getProductCurrentVersion();
 							const productUpdateVersion = this.getProductUpdateVersion();
 							if (productUpdateVersion
-								&& !isEngineValid(extension.local.manifest.engines.vscode, productCurrentVersion.version, productCurrentVersion.date)
-								&& isEngineValid(extension.local.manifest.engines.vscode, productUpdateVersion.version, productUpdateVersion.date)
+								&& !isEngineValid(extension.local.manifest.engines.zyraxoncode, productCurrentVersion.version, productCurrentVersion.date)
+								&& isEngineValid(extension.local.manifest.engines.zyraxoncode, productUpdateVersion.version, productUpdateVersion.date)
 							) {
 								const state = this.updateService.state;
 								if (state.type === StateType.AvailableForDownload) {
@@ -2397,7 +2397,7 @@ export class ExtensionsWorkbenchService extends Disposable implements IExtension
 			return nls.localize('consentRequiredToUpdateRepublishedExtension', "The marketplace metadata of this extension changed, likely due to a re-publish.");
 		}
 
-		if (!extension.local.manifest.engines.vscode || extension.local.manifest.main || extension.local.manifest.browser) {
+		if (!extension.local.manifest.engines.zyraxoncode || extension.local.manifest.main || extension.local.manifest.browser) {
 			return;
 		}
 

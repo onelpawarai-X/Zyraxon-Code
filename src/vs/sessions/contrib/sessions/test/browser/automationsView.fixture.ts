@@ -29,7 +29,7 @@ import { ISession } from '../../../../services/sessions/common/session.js';
 import { ISessionsManagementService } from '../../../../services/sessions/common/sessionsManagement.js';
 import { AUTOMATIONS_CUSTOM_VIEW_ID, AutomationsCustomViewContribution } from '../../browser/views/automationsView.js';
 
-const WORKSPACE = URI.parse('file:///workspaces/vscode');
+const WORKSPACE = URI.parse('__ZYRAXKEEP__0_');
 
 class FixtureActionViewItemService extends Disposable implements IActionViewItemService {
 
@@ -167,8 +167,8 @@ function renderAutomations(ctx: ComponentFixtureContext, options: IAutomationsFi
 	ctx.container.classList.add('monaco-workbench');
 	ctx.container.style.width = `${options.width}px`;
 	ctx.container.style.height = `${options.height}px`;
-	ctx.container.style.setProperty('--session-view-background', 'var(--vscode-agentsPanel-background, var(--vscode-sideBar-background))');
-	ctx.container.style.setProperty('--session-view-foreground', 'var(--vscode-agentsPanel-foreground, var(--vscode-sideBar-foreground))');
+	ctx.container.style.setProperty('--session-view-background', 'var(--zyraxoncode-agentsPanel-background, var(--zyraxoncode-sideBar-background))');
+	ctx.container.style.setProperty('--session-view-foreground', 'var(--zyraxoncode-agentsPanel-foreground, var(--zyraxoncode-sideBar-foreground))');
 	ctx.container.style.backgroundColor = 'var(--session-view-background)';
 
 	const node = ctx.disposableStore.add(instantiationService.createInstance(CustomViewNode, descriptor));
@@ -237,7 +237,7 @@ function createRun(id: string, automationId: string, status: IAutomationRun['sta
 		automationId,
 		status,
 		trigger: 'schedule',
-		sessionResource: URI.parse(`vscode-chat-session://fixture/${id}`).toString(),
+		sessionResource: URI.parse(`__ZYRAXKEEP__1_{id}`).toString(),
 		startedAt: startedAt.toISOString(),
 		completedAt: status === 'completed' || status === 'failed' ? startedAt.toISOString() : undefined,
 		errorMessage,

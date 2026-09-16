@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement } from '@zyraxoncode/prompt-tsx';
 import { IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IExtensionsService } from '../../../../platform/extensions/common/extensionsService';
 
-export const MERMAID_MARKDOWN_EXTENSION_ID = 'vscode.mermaid-markdown-features';
+export const MERMAID_MARKDOWN_EXTENSION_ID = 'zyraxoncode.mermaid-markdown-features';
 
 export class EditorIntegrationRules extends PromptElement {
 	render() {

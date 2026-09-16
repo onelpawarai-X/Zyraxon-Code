@@ -103,7 +103,7 @@ const compareCompletionsFn = (leadingLineContent: string, a: TerminalCompletionI
 		}
 	}
 
-	// Sort by folder depth (eg. `vscode/` should come before `vscode-.../`)
+	// Sort by folder depth (eg. `zyraxoncode/` should come before `zyraxoncode-.../`)
 	if (a.completion.kind === TerminalCompletionItemKind.Folder && b.completion.kind === TerminalCompletionItemKind.Folder) {
 		if (a.labelLowNormalizedPath && b.labelLowNormalizedPath) {
 			// Directories

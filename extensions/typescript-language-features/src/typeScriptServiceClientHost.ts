@@ -5,10 +5,10 @@
 
 /* --------------------------------------------------------------------------------------------
  * Includes code from typescript-sublime-plugin project, obtained from
- * https://github.com/microsoft/TypeScript-Sublime-Plugin/blob/master/TypeScript%20Indent.tmPreferences
+ * __ZYRAXKEEP__0_
  * ------------------------------------------------------------------------------------------ */
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { CommandManager } from './commands/commandManager';
 import { ServiceConfigurationProvider } from './configuration/configuration';
 import { DiagnosticLanguage, LanguageDescription } from './configuration/languageDescription';
@@ -64,7 +64,7 @@ export default class TypeScriptServiceClientHost extends Disposable {
 
 	constructor(
 		descriptions: LanguageDescription[],
-		context: vscode.ExtensionContext,
+		context: zyraxoncode.ExtensionContext,
 		onCaseInsensitiveFileSystem: boolean,
 		services: {
 			pluginManager: PluginManager;
@@ -78,7 +78,7 @@ export default class TypeScriptServiceClientHost extends Disposable {
 			experimentTelemetryReporter: IExperimentationTelemetryReporter | undefined;
 			logger: Logger;
 		},
-		onCompletionAccepted: (item: vscode.CompletionItem) => void,
+		onCompletionAccepted: (item: zyraxoncode.CompletionItem) => void,
 	) {
 		super();
 
@@ -157,12 +157,12 @@ export default class TypeScriptServiceClientHost extends Disposable {
 			this.triggerAllDiagnostics();
 		});
 
-		vscode.workspace.onDidChangeConfiguration(this.configurationChanged, this, this._disposables);
+		zyraxoncode.workspace.onDidChangeConfiguration(this.configurationChanged, this, this._disposables);
 		this.configurationChanged();
 		this._register(new LogLevelMonitor(context));
 	}
 
-	private registerExtensionLanguageProvider(description: LanguageDescription, onCompletionAccepted: (item: vscode.CompletionItem) => void) {
+	private registerExtensionLanguageProvider(description: LanguageDescription, onCompletionAccepted: (item: zyraxoncode.CompletionItem) => void) {
 		const manager = new LanguageProvider(this.client, description, this.commandManager, this.client.telemetryReporter, this.typingsStatus, this.fileConfigurationManager, onCompletionAccepted);
 		this.languages.push(manager);
 		this._register(manager);
@@ -185,7 +185,7 @@ export default class TypeScriptServiceClientHost extends Disposable {
 		this.triggerAllDiagnostics();
 	}
 
-	public async handles(resource: vscode.Uri): Promise<boolean> {
+	public async handles(resource: zyraxoncode.Uri): Promise<boolean> {
 		const provider = await this.findLanguage(resource);
 		if (provider) {
 			return true;
@@ -197,7 +197,7 @@ export default class TypeScriptServiceClientHost extends Disposable {
 		this.reportStyleCheckAsWarnings = readUnifiedConfig<boolean>('reportStyleChecksAsWarnings', true, { scope: null, fallbackSection: 'typescript' });
 	}
 
-	private async findLanguage(resource: vscode.Uri): Promise<LanguageProvider | undefined> {
+	private async findLanguage(resource: zyraxoncode.Uri): Promise<LanguageProvider | undefined> {
 		try {
 			// First try finding language just based on the resource.
 			// This is not strictly correct but should be in the vast majority of cases
@@ -211,7 +211,7 @@ export default class TypeScriptServiceClientHost extends Disposable {
 			// If that doesn't work, fallback to using a text document language mode.
 			// This is not ideal since we have to open the document but should always
 			// be correct
-			const doc = await vscode.workspace.openTextDocument(resource);
+			const doc = await zyraxoncode.workspace.openTextDocument(resource);
 			return this.languages.find(language => language.handlesDocument(doc));
 		} catch {
 			return undefined;
@@ -234,7 +234,7 @@ export default class TypeScriptServiceClientHost extends Disposable {
 
 	private async diagnosticsReceived(
 		kind: DiagnosticKind,
-		resource: vscode.Uri,
+		resource: zyraxoncode.Uri,
 		diagnostics: Proto.Diagnostic[],
 		spans: Proto.TextSpan[] | undefined,
 	): Promise<void> {
@@ -249,7 +249,7 @@ export default class TypeScriptServiceClientHost extends Disposable {
 	}
 
 	private configFileDiagnosticsReceived(event: Proto.ConfigFileDiagnosticEvent): void {
-		// See https://github.com/microsoft/TypeScript/issues/10384
+		// See __ZYRAXKEEP__1_
 		const body = event.body;
 		if (!body?.diagnostics || !body.configFile) {
 			return;
@@ -257,8 +257,8 @@ export default class TypeScriptServiceClientHost extends Disposable {
 
 		this.findLanguage(this.client.toResource(body.configFile)).then(language => {
 			language?.configFileDiagnosticsReceived(this.client.toResource(body.configFile), body.diagnostics.map(tsDiag => {
-				const range = tsDiag.start && tsDiag.end ? typeConverters.Range.fromTextSpan(tsDiag) : new vscode.Range(0, 0, 0, 1);
-				const diagnostic = new vscode.Diagnostic(range, tsDiag.text, this.getDiagnosticSeverity(tsDiag));
+				const range = tsDiag.start && tsDiag.end ? typeConverters.Range.fromTextSpan(tsDiag) : new zyraxoncode.Range(0, 0, 0, 1);
+				const diagnostic = new zyraxoncode.Diagnostic(range, tsDiag.text, this.getDiagnosticSeverity(tsDiag));
 				diagnostic.source = language.diagnosticSource;
 				return diagnostic;
 			}));
@@ -268,14 +268,14 @@ export default class TypeScriptServiceClientHost extends Disposable {
 	private createMarkerDatas(
 		diagnostics: Proto.Diagnostic[],
 		source: string
-	): (vscode.Diagnostic & { reportUnnecessary: any; reportDeprecated: any })[] {
+	): (zyraxoncode.Diagnostic & { reportUnnecessary: any; reportDeprecated: any })[] {
 		return diagnostics.map(tsDiag => this.tsDiagnosticToVsDiagnostic(tsDiag, source));
 	}
 
-	private tsDiagnosticToVsDiagnostic(diagnostic: Proto.Diagnostic, source: string): vscode.Diagnostic & { reportUnnecessary: any; reportDeprecated: any } {
+	private tsDiagnosticToVsDiagnostic(diagnostic: Proto.Diagnostic, source: string): zyraxoncode.Diagnostic & { reportUnnecessary: any; reportDeprecated: any } {
 		const { start, end, text } = diagnostic;
-		const range = new vscode.Range(typeConverters.Position.fromLocation(start), typeConverters.Position.fromLocation(end));
-		const converted = new vscode.Diagnostic(range, text, this.getDiagnosticSeverity(diagnostic));
+		const range = new zyraxoncode.Range(typeConverters.Position.fromLocation(start), typeConverters.Position.fromLocation(end));
+		const converted = new zyraxoncode.Diagnostic(range, text, this.getDiagnosticSeverity(diagnostic));
 		converted.source = diagnostic.source || source;
 		if (diagnostic.code) {
 			converted.code = diagnostic.code;
@@ -287,44 +287,44 @@ export default class TypeScriptServiceClientHost extends Disposable {
 				if (!span) {
 					return undefined;
 				}
-				return new vscode.DiagnosticRelatedInformation(typeConverters.Location.fromTextSpan(this.client.toResource(span.file), span), info.message);
+				return new zyraxoncode.DiagnosticRelatedInformation(typeConverters.Location.fromTextSpan(this.client.toResource(span.file), span), info.message);
 			}));
 		}
-		const tags: vscode.DiagnosticTag[] = [];
+		const tags: zyraxoncode.DiagnosticTag[] = [];
 		if (diagnostic.reportsUnnecessary) {
-			tags.push(vscode.DiagnosticTag.Unnecessary);
+			tags.push(zyraxoncode.DiagnosticTag.Unnecessary);
 		}
 		if (diagnostic.reportsDeprecated) {
-			tags.push(vscode.DiagnosticTag.Deprecated);
+			tags.push(zyraxoncode.DiagnosticTag.Deprecated);
 		}
 		converted.tags = tags.length ? tags : undefined;
 
-		const resultConverted = converted as vscode.Diagnostic & { reportUnnecessary: any; reportDeprecated: any };
+		const resultConverted = converted as zyraxoncode.Diagnostic & { reportUnnecessary: any; reportDeprecated: any };
 		resultConverted.reportUnnecessary = diagnostic.reportsUnnecessary;
 		resultConverted.reportDeprecated = diagnostic.reportsDeprecated;
 		return resultConverted;
 	}
 
-	private getDiagnosticSeverity(diagnostic: Proto.Diagnostic): vscode.DiagnosticSeverity {
+	private getDiagnosticSeverity(diagnostic: Proto.Diagnostic): zyraxoncode.DiagnosticSeverity {
 		if (this.reportStyleCheckAsWarnings
 			&& this.isStyleCheckDiagnostic(diagnostic.code)
 			&& diagnostic.category === PConst.DiagnosticCategory.error
 		) {
-			return vscode.DiagnosticSeverity.Warning;
+			return zyraxoncode.DiagnosticSeverity.Warning;
 		}
 
 		switch (diagnostic.category) {
 			case PConst.DiagnosticCategory.error:
-				return vscode.DiagnosticSeverity.Error;
+				return zyraxoncode.DiagnosticSeverity.Error;
 
 			case PConst.DiagnosticCategory.warning:
-				return vscode.DiagnosticSeverity.Warning;
+				return zyraxoncode.DiagnosticSeverity.Warning;
 
 			case PConst.DiagnosticCategory.suggestion:
-				return vscode.DiagnosticSeverity.Hint;
+				return zyraxoncode.DiagnosticSeverity.Hint;
 
 			default:
-				return vscode.DiagnosticSeverity.Error;
+				return zyraxoncode.DiagnosticSeverity.Error;
 		}
 	}
 

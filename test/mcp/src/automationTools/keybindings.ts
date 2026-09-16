@@ -14,7 +14,7 @@ export function applyKeybindingsTools(server: McpServer, appService: Application
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_keybindings_update',
+	// 	'zyraxoncode_automation_keybindings_update',
 	// 	'Update a keybinding for a specific command',
 	// 	{
 	// 		command: z.string().describe('Command ID to update keybinding for'),

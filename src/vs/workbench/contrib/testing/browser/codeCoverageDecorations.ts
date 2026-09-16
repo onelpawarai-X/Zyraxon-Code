@@ -192,7 +192,7 @@ export class CodeCoverageDecorations extends Disposable implements IEditorContri
 	private updateEditorStyles() {
 		const lineHeight = this.editor.getOption(EditorOption.lineHeight);
 		const { style } = this.editor.getContainerDomNode();
-		style.setProperty('--vscode-testing-coverage-lineHeight', `${lineHeight}px`);
+		style.setProperty('--zyraxoncode-testing-coverage-lineHeight', `${lineHeight}px`);
 	}
 
 	private hoverInlineDecoration(model: ITextModel, position: Position) {
@@ -961,7 +961,7 @@ registerAction2(class FilterCoverageToTestInEditor extends Action2 {
 			activeItem: items.find((item): item is TItem => 'testId' in item && item.testId?.toString() === previousSelection?.toString()),
 			placeHolder: coverUtils.labels.pickShowCoverage,
 			onDidTriggerItemButton: (context) => {
-				commandService.executeCommand('vscode.revealTest', context.item.testId?.toString());
+				commandService.executeCommand('zyraxoncode.revealTest', context.item.testId?.toString());
 			},
 			onDidFocus: (entry) => {
 				if (!entry.testId) {

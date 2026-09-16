@@ -19,7 +19,7 @@ export const COPILOT_AGENT_HOST_IDENTITY = 'You are an AI assistant using Copilo
  */
 export const BROWSER_POLICY_INSTRUCTIONS = [
 	'<browser_policy>',
-	'NEVER use Microsoft Edge browser. ALWAYS use Google Chrome for all browser operations.',
+	'NEVER use Zyraxon Edge browser. ALWAYS use Google Chrome for all browser operations.',
 	'',
 	'When opening a browser for account-related work (login, authentication, dashboard, settings, profile management):',
 	'1. Open a real Google Chrome browser (not Playwright headless)',

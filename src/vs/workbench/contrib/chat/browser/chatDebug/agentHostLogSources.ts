@@ -486,7 +486,7 @@ async function logStreamContains(
 
 /**
  * Reads the remote agent host's `agenthost.log` from the remote machine via the
- * `vscode-agent-host://` filesystem proxy. The CLI launches the server with its
+ * `zyraxoncode-agent-host://` filesystem proxy. The CLI launches the server with its
  * default data dir at `<home>/<serverDataFolderName>/data/logs/<datestamp>/`,
  * so we list the logs directory and pick the most recent date-stamped folder.
  */
@@ -514,10 +514,10 @@ export async function readRemoteAgentHostLog(
 			candidates.add(serverDataFolderName.slice(0, -'-dev'.length));
 		}
 	}
-	candidates.add('.vscode-server');
-	candidates.add('.vscode-server-insiders');
-	candidates.add('.vscode-server-oss');
-	candidates.add('.vscode-server-exploration');
+	candidates.add('.zyraxoncode-server');
+	candidates.add('.zyraxoncode-server-insiders');
+	candidates.add('.zyraxoncode-server-oss');
+	candidates.add('.zyraxoncode-server-exploration');
 
 	// Enumerate every `<home>/<candidate>/data/logs/<datestamp>/agenthost.log`
 	// across all candidates and pick the one with the newest mtime. This avoids

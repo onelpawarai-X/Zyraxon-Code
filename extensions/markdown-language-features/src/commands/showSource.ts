@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Command } from '../commandManager';
 import { MarkdownPreviewManager } from '../preview/previewManager';
 
@@ -21,8 +21,8 @@ export class ShowSourceCommand implements Command {
 	public execute() {
 		const { activePreviewResource, activePreviewResourceColumn } = this.#previewManager;
 		if (activePreviewResource && activePreviewResourceColumn) {
-			return vscode.workspace.openTextDocument(activePreviewResource).then(document => {
-				return vscode.window.showTextDocument(document, activePreviewResourceColumn);
+			return zyraxoncode.workspace.openTextDocument(activePreviewResource).then(document => {
+				return zyraxoncode.window.showTextDocument(document, activePreviewResourceColumn);
 			});
 		}
 		return undefined;

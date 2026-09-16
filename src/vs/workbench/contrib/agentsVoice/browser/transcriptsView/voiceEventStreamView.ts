@@ -100,7 +100,7 @@ export class VoiceEventStreamViewPane extends ViewPane {
 		this.emptyState.style.display = 'none';
 		this.emptyState.style.padding = '24px 16px';
 		this.emptyState.style.textAlign = 'center';
-		this.emptyState.style.color = 'var(--vscode-descriptionForeground)';
+		this.emptyState.style.color = 'var(--zyraxoncode-descriptionForeground)';
 		this.emptyState.style.fontSize = '13px';
 		this.emptyState.textContent = localize(
 			'voiceEventStream.empty',
@@ -193,7 +193,7 @@ export class VoiceEventStreamViewPane extends ViewPane {
 
 		const row = DOM.append(this.contentContainer, $('.voice-event-stream-row'));
 		row.style.padding = '8px 0';
-		row.style.borderBottom = '1px solid var(--vscode-editorWhitespace-foreground)';
+		row.style.borderBottom = '1px solid var(--zyraxoncode-editorWhitespace-foreground)';
 
 		const header = DOM.append(row, $('.voice-event-stream-row-header'));
 		header.style.display = 'flex';
@@ -205,25 +205,25 @@ export class VoiceEventStreamViewPane extends ViewPane {
 		const time = DOM.append(header, $('span'));
 		time.textContent = formatTime(turn.timestamp);
 		time.style.fontSize = '11px';
-		time.style.color = 'var(--vscode-descriptionForeground)';
+		time.style.color = 'var(--zyraxoncode-descriptionForeground)';
 
 		const kind = DOM.append(header, $('span'));
 		kind.textContent = turn.kind;
 		kind.style.fontSize = '11px';
 		kind.style.padding = '1px 6px';
-		kind.style.border = '1px solid var(--vscode-editorWhitespace-foreground)';
+		kind.style.border = '1px solid var(--zyraxoncode-editorWhitespace-foreground)';
 		kind.style.borderRadius = '10px';
-		kind.style.color = 'var(--vscode-descriptionForeground)';
+		kind.style.color = 'var(--zyraxoncode-descriptionForeground)';
 
 		const role = DOM.append(header, $('span'));
 		role.textContent = turn.role;
 		role.style.fontSize = '11px';
-		role.style.color = 'var(--vscode-descriptionForeground)';
+		role.style.color = 'var(--zyraxoncode-descriptionForeground)';
 
 		const text = DOM.append(row, $('div'));
 		text.textContent = turn.text;
 		text.style.fontSize = '12px';
-		text.style.color = 'var(--vscode-foreground)';
+		text.style.color = 'var(--zyraxoncode-foreground)';
 		text.style.whiteSpace = 'pre-wrap';
 		text.style.wordBreak = 'break-word';
 
@@ -232,11 +232,11 @@ export class VoiceEventStreamViewPane extends ViewPane {
 			metadata.textContent = JSON.stringify(turn.metadata, null, 2);
 			metadata.style.margin = '6px 0 0';
 			metadata.style.padding = '6px 8px';
-			metadata.style.background = 'var(--vscode-textCodeBlock-background)';
+			metadata.style.background = 'var(--zyraxoncode-textCodeBlock-background)';
 			metadata.style.borderRadius = '4px';
 			metadata.style.fontSize = '11px';
 			metadata.style.lineHeight = '1.4';
-			metadata.style.color = 'var(--vscode-descriptionForeground)';
+			metadata.style.color = 'var(--zyraxoncode-descriptionForeground)';
 			metadata.style.whiteSpace = 'pre-wrap';
 			metadata.style.wordBreak = 'break-word';
 		}

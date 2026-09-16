@@ -8,7 +8,7 @@ process.env.APPLICATION_INSIGHTS_NO_STATSBEAT = 'true';
 
 import * as appInsights from 'applicationinsights';
 import * as os from 'os';
-import type { TelemetrySender } from 'vscode';
+import type { TelemetrySender } from 'zyraxoncode';
 import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStore';
 import { ICAPIClientService } from '../../endpoint/common/capiClient';
 import { IEnvService } from '../../env/common/envService';
@@ -124,8 +124,8 @@ function decorateWithCommonProperties(properties: TelemetryProperties, envServic
 	properties['common_cpu'] = Array.from(new Set(os.cpus().map(c => c.model))).join();
 
 	// We have editor-agnostic fields but keep the vs-specific ones for backward compatibility
-	properties['common_vscodemachineid'] = envService.machineId;
-	properties['common_vscodesessionid'] = envService.sessionId;
+	properties['common_zyraxoncodemachineid'] = envService.machineId;
+	properties['common_zyraxoncodesessionid'] = envService.sessionId;
 	properties['client_deviceid'] = envService.devDeviceId;
 
 	properties['common_uikind'] = envService.uiKind;

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { SymbolItemDragAndDrop, SymbolItemEditorHighlights, SymbolItemNavigation, SymbolTreeInput } from '../references-view';
 import { asResourceUrl, del, getThemeIcon, tail } from '../utils';
 
@@ -13,17 +13,17 @@ export class TypesTreeInput implements SymbolTreeInput<TypeItem> {
 	readonly contextValue: string = 'typeHierarchy';
 
 	constructor(
-		readonly location: vscode.Location,
+		readonly location: zyraxoncode.Location,
 		readonly direction: TypeHierarchyDirection,
 	) {
 		this.title = direction === TypeHierarchyDirection.Supertypes
-			? vscode.l10n.t('Supertypes Of')
-			: vscode.l10n.t('Subtypes Of');
+			? zyraxoncode.l10n.t('Supertypes Of')
+			: zyraxoncode.l10n.t('Subtypes Of');
 	}
 
 	async resolve() {
 
-		const items = await Promise.resolve(vscode.commands.executeCommand<vscode.TypeHierarchyItem[]>('vscode.prepareTypeHierarchy', this.location.uri, this.location.range.start));
+		const items = await Promise.resolve(zyraxoncode.commands.executeCommand<zyraxoncode.TypeHierarchyItem[]>('zyraxoncode.prepareTypeHierarchy', this.location.uri, this.location.range.start));
 		const model = new TypesModel(this.direction, items ?? []);
 		const provider = new TypeItemDataProvider(model);
 
@@ -33,7 +33,7 @@ export class TypesTreeInput implements SymbolTreeInput<TypeItem> {
 
 		return {
 			provider,
-			get message() { return model.roots.length === 0 ? vscode.l10n.t('No results.') : undefined; },
+			get message() { return model.roots.length === 0 ? zyraxoncode.l10n.t('No results.') : undefined; },
 			navigation: model,
 			highlights: model,
 			dnd: model,
@@ -43,7 +43,7 @@ export class TypesTreeInput implements SymbolTreeInput<TypeItem> {
 		};
 	}
 
-	with(location: vscode.Location): TypesTreeInput {
+	with(location: zyraxoncode.Location): TypesTreeInput {
 		return new TypesTreeInput(location, this.direction);
 	}
 }
@@ -61,7 +61,7 @@ export class TypeItem {
 
 	constructor(
 		readonly model: TypesModel,
-		readonly item: vscode.TypeHierarchyItem,
+		readonly item: zyraxoncode.TypeHierarchyItem,
 		readonly parent: TypeItem | undefined,
 	) { }
 
@@ -74,19 +74,19 @@ class TypesModel implements SymbolItemNavigation<TypeItem>, SymbolItemEditorHigh
 
 	readonly roots: TypeItem[] = [];
 
-	private readonly _onDidChange = new vscode.EventEmitter<TypesModel>();
+	private readonly _onDidChange = new zyraxoncode.EventEmitter<TypesModel>();
 	readonly onDidChange = this._onDidChange.event;
 
-	constructor(readonly direction: TypeHierarchyDirection, items: vscode.TypeHierarchyItem[]) {
+	constructor(readonly direction: TypeHierarchyDirection, items: zyraxoncode.TypeHierarchyItem[]) {
 		this.roots = items.map(item => new TypeItem(this, item, undefined));
 	}
 
 	private async _resolveTypes(currentType: TypeItem): Promise<TypeItem[]> {
 		if (this.direction === TypeHierarchyDirection.Supertypes) {
-			const types = await vscode.commands.executeCommand<vscode.TypeHierarchyItem[]>('vscode.provideSupertypes', currentType.item);
+			const types = await zyraxoncode.commands.executeCommand<zyraxoncode.TypeHierarchyItem[]>('zyraxoncode.provideSupertypes', currentType.item);
 			return types ? types.map(item => new TypeItem(this, item, currentType)) : [];
 		} else {
-			const types = await vscode.commands.executeCommand<vscode.TypeHierarchyItem[]>('vscode.provideSubtypes', currentType.item);
+			const types = await zyraxoncode.commands.executeCommand<zyraxoncode.TypeHierarchyItem[]>('zyraxoncode.provideSubtypes', currentType.item);
 			return types ? types.map(item => new TypeItem(this, item, currentType)) : [];
 		}
 	}
@@ -100,17 +100,17 @@ class TypesModel implements SymbolItemNavigation<TypeItem>, SymbolItemEditorHigh
 
 	// -- dnd
 
-	getDragUri(item: TypeItem): vscode.Uri | undefined {
+	getDragUri(item: TypeItem): zyraxoncode.Uri | undefined {
 		return asResourceUrl(item.item.uri, item.item.range);
 	}
 
 	// -- navigation
 
 	location(currentType: TypeItem) {
-		return new vscode.Location(currentType.item.uri, currentType.item.range);
+		return new zyraxoncode.Location(currentType.item.uri, currentType.item.range);
 	}
 
-	nearest(uri: vscode.Uri, _position: vscode.Position): TypeItem | undefined {
+	nearest(uri: zyraxoncode.Uri, _position: zyraxoncode.Position): TypeItem | undefined {
 		return this.roots.find(item => item.item.uri.toString() === uri.toString()) ?? this.roots[0];
 	}
 
@@ -136,7 +136,7 @@ class TypesModel implements SymbolItemNavigation<TypeItem>, SymbolItemEditorHigh
 
 	// --- highlights
 
-	getEditorHighlights(currentType: TypeItem, uri: vscode.Uri): vscode.Range[] | undefined {
+	getEditorHighlights(currentType: TypeItem, uri: zyraxoncode.Uri): zyraxoncode.Range[] | undefined {
 		return currentType.item.uri.toString() === uri.toString() ? [currentType.item.selectionRange] : undefined;
 	}
 
@@ -150,12 +150,12 @@ class TypesModel implements SymbolItemNavigation<TypeItem>, SymbolItemEditorHigh
 	}
 }
 
-class TypeItemDataProvider implements vscode.TreeDataProvider<TypeItem> {
+class TypeItemDataProvider implements zyraxoncode.TreeDataProvider<TypeItem> {
 
-	private readonly _emitter = new vscode.EventEmitter<TypeItem | undefined>();
+	private readonly _emitter = new zyraxoncode.EventEmitter<TypeItem | undefined>();
 	readonly onDidChangeTreeData = this._emitter.event;
 
-	private readonly _modelListener: vscode.Disposable;
+	private readonly _modelListener: zyraxoncode.Disposable;
 
 	constructor(private _model: TypesModel) {
 		this._modelListener = _model.onDidChange(e => this._emitter.fire(e instanceof TypeItem ? e : undefined));
@@ -166,21 +166,21 @@ class TypeItemDataProvider implements vscode.TreeDataProvider<TypeItem> {
 		this._modelListener.dispose();
 	}
 
-	getTreeItem(element: TypeItem): vscode.TreeItem {
+	getTreeItem(element: TypeItem): zyraxoncode.TreeItem {
 
-		const item = new vscode.TreeItem(element.item.name);
+		const item = new zyraxoncode.TreeItem(element.item.name);
 		item.description = element.item.detail;
 		item.contextValue = 'type-item';
 		item.iconPath = getThemeIcon(element.item.kind);
 		item.command = {
-			command: 'vscode.open',
-			title: vscode.l10n.t('Open Type'),
+			command: 'zyraxoncode.open',
+			title: zyraxoncode.l10n.t('Open Type'),
 			arguments: [
 				element.item.uri,
-				{ selection: element.item.selectionRange.with({ end: element.item.selectionRange.start }) } satisfies vscode.TextDocumentShowOptions
+				{ selection: element.item.selectionRange.with({ end: element.item.selectionRange.start }) } satisfies zyraxoncode.TextDocumentShowOptions
 			]
 		};
-		item.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+		item.collapsibleState = zyraxoncode.TreeItemCollapsibleState.Collapsed;
 		return item;
 	}
 

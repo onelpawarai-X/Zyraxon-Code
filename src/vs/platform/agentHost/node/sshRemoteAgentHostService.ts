@@ -93,7 +93,7 @@ const RECONNECT_RELAY_TIMEOUT_MS = 60_000;
 /**
  * One entry in the queue of authentication attempts handed to ssh2's
  * `authHandler`. Each attempt corresponds to one of the auth method shapes
- * documented at https://www.npmjs.com/package/ssh2#client-methods.
+ * documented at __ZYRAXKEEP__0_
  *
  * `keyPath` is internal-only metadata for logging — it is stripped before the
  * attempt is returned to ssh2.
@@ -424,7 +424,7 @@ function createWebSocketRelay(
 			}
 
 			const WS = nativeRequire('ws') as typeof WebSocket;
-			let url = `ws://${dstHost}:${dstPort}`;
+			let url = `__ZYRAXKEEP__1_{dstHost}:${dstPort}`;
 			if (connectionToken) {
 				url += `?tkn=${encodeURIComponent(connectionToken)}`;
 			}
@@ -1356,7 +1356,7 @@ export class SSHRemoteAgentHostMainService extends Disposable implements ISSHRem
 	}
 
 	private get _serverDataFolderName(): string {
-		return this._productService.serverDataFolderName ?? '.vscode-server-oss';
+		return this._productService.serverDataFolderName ?? '.zyraxoncode-server-oss';
 	}
 
 	private get _commit(): string | undefined {
@@ -1388,7 +1388,7 @@ export class SSHRemoteAgentHostMainService extends Disposable implements ISSHRem
 	 * self-update on this path, so the desktop pushes freshness on every
 	 * fresh start — but tolerantly: if the download fails and any other
 	 * usable CLI is present (other commit-keyed or the legacy
-	 * `~/.vscode-cli{,-<quality>}/<archive>`), we fall back to the newest
+	 * `~/.zyraxoncode-cli{,-<quality>}/<archive>`), we fall back to the newest
 	 * one rather than refusing to connect.
 	 *
 	 * In dev/OSS builds with no commit, we keep the loose, non-pinned

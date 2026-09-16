@@ -23,7 +23,7 @@ export const AGENT_HOST_CLIENT_PROXY_CHANNEL = 'agentHostClientProxy';
  * URL to the renderer and resolves with the *raw* result of ZYRAXON Code's
  * `IRequestService.resolveProxy` (the Electron session PAC-style string, e.g.
  * `PROXY host:port` / `DIRECT`). The node side feeds this into
- * `@vscode/proxy-agent`'s `resolveProxyURL` to derive the final proxy URL.
+ * `@zyraxoncode/proxy-agent`'s `resolveProxyURL` to derive the final proxy URL.
  */
 export interface IAgentHostClientProxyConnection {
 	resolveProxy(url: string): Promise<string | undefined>;

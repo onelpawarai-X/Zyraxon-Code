@@ -67,9 +67,9 @@ export class ChatSlashCommandsContribution extends Disposable {
 		super();
 
 		this._store.add(slashCommandService.registerSlashCommand({
-			command: 'vscode-pet',
-			detail: nls.localize('vscodePet', "Toggle an interactive ZYRAXON Code pet (Experimental)"),
-			sortText: 'z3_vscodePet',
+			command: 'zyraxoncode-pet',
+			detail: nls.localize('zyraxoncodePet', "Toggle an interactive ZYRAXON Code pet (Experimental)"),
+			sortText: 'z3_zyraxoncodePet',
 			executeImmediately: true,
 			silent: true,
 			locations: [ChatAgentLocation.Chat]

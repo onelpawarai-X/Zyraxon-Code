@@ -119,7 +119,7 @@ forEditsAndAgent((strategy, variant, model, configurations) => {
 						file: '1.ts',
 						selection: [0, 0, 26, 0],
 						visibleRanges: [[0, 0, 26, 0]],
-						query: 'Update #file:1.ts and #file:2.ts to replace usage of "path" with vscode apis',
+						query: 'Update #file:1.ts and #file:2.ts to replace usage of "path" with zyraxoncode apis',
 						validate: async (outcome, workspace, accessor) => {
 							assertWorkspaceEdit(outcome);
 							assert.strictEqual((await getWorkspaceDiagnostics(accessor, workspace, 'tsc')).filter(d => d.kind === 'syntactic').length, 0);
@@ -446,7 +446,7 @@ forEditsAndAgent((strategy, variant, model, configurations) => {
 							assertContainsAllSnippets(outcome.fileContents, [
 								'function copy(generator, extensionConfig, from, to) {',
 								'function copyTpl(generator, extensionConfig, from, to) {',
-								`copy(generator, extensionConfig, generator.templatePath(bundlerPath, 'vscode'), generator.destinationPath('.vscode'));`,
+								`copy(generator, extensionConfig, generator.templatePath(bundlerPath, 'zyraxoncode'), generator.destinationPath('.zyraxoncode'));`,
 								`copyTpl(generator, extensionConfig, 'vsc-extension-quickstart.md', 'vsc-extension-quickstart.md');`
 							]);
 						}

@@ -6,7 +6,7 @@
 import { join } from 'path';
 import * as fs from 'fs';
 import { copyExtension } from './extensions';
-import { URI } from 'vscode-uri';
+import { URI } from 'zyraxoncode-uri';
 import { measureAndLog } from './logger';
 import type { LaunchOptions } from './code';
 
@@ -29,7 +29,7 @@ export async function resolveElectronConfiguration(options: LaunchOptions): Prom
 		'--disable-experiments',
 		'--no-cached-data',
 		'--disable-updates',
-		'--disable-extension=vscode.vscode-api-tests',
+		'--disable-extension=zyraxoncode.zyraxoncode-api-tests',
 		`--crash-reporter-directory=${crashesPath}`,
 		'--disable-workspace-trust',
 		`--logsPath=${logsPath}`
@@ -61,16 +61,16 @@ export async function resolveElectronConfiguration(options: LaunchOptions): Prom
 			throw new Error('Workspace path is required when running remote');
 		}
 		// Replace workspace path with URI
-		args[0] = `--${workspacePath.endsWith('.code-workspace') ? 'file' : 'folder'}-uri=vscode-remote://test+test/${URI.file(workspacePath).path}`;
+		args[0] = `--${workspacePath.endsWith('.code-workspace') ? 'file' : 'folder'}-uri=__ZYRAXKEEP__0_{URI.file(workspacePath).path}`;
 
 		if (codePath) {
 			if (!extensionsPath) {
 				throw new Error('Extensions path is required when running against a build at the moment.');
 			}
 			// running against a build: copy the test resolver extension
-			await measureAndLog(() => copyExtension(root, extensionsPath, 'vscode-test-resolver'), 'copyExtension(vscode-test-resolver)', logger);
+			await measureAndLog(() => copyExtension(root, extensionsPath, 'zyraxoncode-test-resolver'), 'copyExtension(zyraxoncode-test-resolver)', logger);
 		}
-		args.push('--enable-proposed-api=vscode.vscode-test-resolver');
+		args.push('--enable-proposed-api=zyraxoncode.zyraxoncode-test-resolver');
 		if (userDataDir) {
 			const remoteDataDir = `${userDataDir}-server`;
 			fs.mkdirSync(remoteDataDir, { recursive: true });

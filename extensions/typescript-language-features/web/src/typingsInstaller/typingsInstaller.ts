@@ -5,8 +5,8 @@
 
 /*
  * This file implements the global typings installer API for web clients. It
- * uses [nassun](https://docs.rs/nassun) and
- * [node-maintainer](https://docs.rs/node-maintainer) to install typings
+ * uses [nassun](__ZYRAXKEEP__0_) and
+ * [node-maintainer](__ZYRAXKEEP__1_) to install typings
  * in-memory (and maybe eventually cache them in IndexedDB?).
  *
  * Implementing a typings installer involves implementing two parts:
@@ -23,7 +23,7 @@
  * the stuff the abstract class is already doing for us.
  */
 
-import { PackageManager, PackageType } from '@vscode/ts-package-manager';
+import { PackageManager, PackageType } from '@zyraxoncode/ts-package-manager';
 import { join } from 'path';
 import * as ts from 'typescript/lib/tsserverlibrary';
 import { NameValidationResult, validatePackageNameWorker } from './jsTyping';

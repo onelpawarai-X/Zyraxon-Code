@@ -219,7 +219,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 
 	private readonly containerStylesLoaded = new Map<number /* window ID */, Promise<void>>();
 	whenContainerStylesLoaded(window: CodeWindow): Promise<void> | undefined {
-		return this.containerStylesLoaded.get(window.vscodeWindowId);
+		return this.containerStylesLoaded.get(window.zyraxoncodeWindowId);
 	}
 
 	private _mainContainerDimension!: IDimension;
@@ -495,7 +495,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 
 		// Auxiliary windows
 		this._register(this.auxiliaryWindowService.onDidOpenAuxiliaryWindow(({ window, disposables }) => {
-			const windowId = window.window.vscodeWindowId;
+			const windowId = window.window.zyraxoncodeWindowId;
 			this.containerStylesLoaded.set(windowId, window.whenStylesHaveLoaded);
 			window.whenStylesHaveLoaded.then(() => this.containerStylesLoaded.delete(windowId));
 			disposables.add(toDisposable(() => this.containerStylesLoaded.delete(windowId)));
@@ -543,7 +543,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	}
 
 	private onFullscreenChanged(windowId: number): void {
-		if (windowId !== mainWindow.vscodeWindowId) {
+		if (windowId !== mainWindow.zyraxoncodeWindowId) {
 			return; // ignore all but main window
 		}
 
@@ -600,7 +600,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	private getActiveContainerId(): number {
 		const activeContainer = this.activeContainer;
 
-		return getWindow(activeContainer).vscodeWindowId;
+		return getWindow(activeContainer).zyraxoncodeWindowId;
 	}
 
 	private doUpdateLayoutConfiguration(skipLayout?: boolean): void {
@@ -718,7 +718,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 	}
 
 	private initLayoutState(lifecycleService: ILifecycleService, fileService: IFileService): void {
-		this._mainContainerDimension = getClientArea(this.parent, this.contextService.getWorkbenchState() === WorkbenchState.EMPTY ? DEFAULT_EMPTY_WINDOW_DIMENSIONS : DEFAULT_WORKSPACE_WINDOW_DIMENSIONS); // running with fallback to ensure no error is thrown (https://github.com/microsoft/vscode/issues/240242)
+		this._mainContainerDimension = getClientArea(this.parent, this.contextService.getWorkbenchState() === WorkbenchState.EMPTY ? DEFAULT_EMPTY_WINDOW_DIMENSIONS : DEFAULT_WORKSPACE_WINDOW_DIMENSIONS); // running with fallback to ensure no error is thrown (__ZYRAXKEEP__0_)
 
 		this.stateModel = new LayoutStateModel(this.storageService, this.configurationService, this.contextService, this.environmentService);
 		this.stateModel.load({
@@ -1734,7 +1734,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 			this._mainContainerDimension = getClientArea(this.state.runtime.mainWindowFullscreen ?
 				mainWindow.document.body : 	// in fullscreen mode, make sure to use <body> element because
 				this.parent,				// in that case the workbench will span the entire site
-				this.contextService.getWorkbenchState() === WorkbenchState.EMPTY ? DEFAULT_EMPTY_WINDOW_DIMENSIONS : DEFAULT_WORKSPACE_WINDOW_DIMENSIONS // running with fallback to ensure no error is thrown (https://github.com/microsoft/vscode/issues/240242)
+				this.contextService.getWorkbenchState() === WorkbenchState.EMPTY ? DEFAULT_EMPTY_WINDOW_DIMENSIONS : DEFAULT_WORKSPACE_WINDOW_DIMENSIONS // running with fallback to ensure no error is thrown (__ZYRAXKEEP__1_)
 			);
 
 			this.logService.trace(`Layout#layout, height: ${this._mainContainerDimension.height}, width: ${this._mainContainerDimension.width}`);
@@ -2062,7 +2062,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 
 	private setPanelHidden(hidden: boolean, skipLayout?: boolean): void {
 		if (!this.workbenchGrid) {
-			return; // Return if not initialized fully (https://github.com/microsoft/vscode/issues/105480)
+			return; // Return if not initialized fully (__ZYRAXKEEP__2_)
 		}
 
 		if (!hidden && this.setAuxiliaryBarMaximized(false) && this.isVisible(Parts.PANEL_PART)) {
@@ -2098,7 +2098,7 @@ export abstract class Layout extends Disposable implements IWorkbenchLayoutServi
 		if (hidden && this.paneCompositeService.getActivePaneComposite(ViewContainerLocation.Panel)) {
 			this.paneCompositeService.hideActivePaneComposite(ViewContainerLocation.Panel);
 			if (
-				!isIOS &&						// do not auto focus on iOS (https://github.com/microsoft/vscode/issues/127832)
+				!isIOS &&						// do not auto focus on iOS (__ZYRAXKEEP__3_)
 				!this.isAuxiliaryBarMaximized()	// do not auto focus when auxiliary bar is maximized
 			) {
 				focusEditor = true;

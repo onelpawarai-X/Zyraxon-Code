@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import * as arrays from '../vs/base/common/arrays';
 import * as types from '../vs/base/common/types';
 
@@ -33,7 +33,7 @@ function detectSystemErrorMessage(exception: any): string {
 		return l10n.t("{0}. Please update the '{1}' setting if you want to allow this host.", exception.message, 'security.allowedUNCHosts');
 	}
 
-	// See https://nodejs.org/api/errors.html#errors_class_system_error
+	// See __ZYRAXKEEP__0_
 	if (typeof exception.code === 'string' && typeof exception.errno === 'number' && typeof exception.syscall === 'string') {
 		return l10n.t('A system error occurred ({0})', exception.message);
 	}

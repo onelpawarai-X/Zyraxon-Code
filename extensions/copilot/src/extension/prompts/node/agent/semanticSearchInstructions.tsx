@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement } from '@vscode/prompt-tsx';
-import type { LanguageModelToolInformation } from 'vscode';
+import { BasePromptElementProps, PromptElement } from '@zyraxoncode/prompt-tsx';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { ToolName } from '../../../tools/common/toolNames';
 import { Tag } from '../base/tag';
 import { detectToolCapabilities } from './defaultAgentInstructions';

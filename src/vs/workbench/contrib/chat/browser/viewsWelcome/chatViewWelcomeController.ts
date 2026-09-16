@@ -169,7 +169,7 @@ export class ChatViewWelcomePart extends Disposable {
 					createCSSRule(iconClass, `
 					mask: ${cssUrl} no-repeat 50% 50%;
 					-webkit-mask: ${cssUrl} no-repeat 50% 50%;
-					background-color: var(--vscode-icon-foreground);
+					background-color: var(--zyraxoncode-icon-foreground);
 				`);
 					icon.classList.add(iconId, 'custom-icon');
 				}

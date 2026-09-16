@@ -14,7 +14,7 @@
 	z-index: 10;
 	/* Let clicks pass through to the input editor unless transcript is scrollable */
 	pointer-events: none;
-	background: var(--vscode-input-background, transparent);
+	background: var(--zyraxoncode-input-background, transparent);
 	border-radius: inherit;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
@@ -27,8 +27,8 @@
 .voice-transcript-overlay {
 	height: 100%;
 	box-sizing: border-box;
-	padding: var(--vscode-spacing-size80) var(--vscode-spacing-size120);
-	font-size: var(--vscode-fontSize-body1);
+	padding: var(--zyraxoncode-spacing-size80) var(--zyraxoncode-spacing-size120);
+	font-size: var(--zyraxoncode-fontSize-body1);
 	line-height: 1.4;
 	word-break: break-word;
 	overflow: hidden;
@@ -36,23 +36,23 @@
 }
 
 .voice-transcript-overlay .committed {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .voice-transcript-overlay .partial {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	opacity: 0.6;
 	font-style: italic;
 }
 
 /* Placeholder text while listening: static, no shimmer animation. */
 .voice-transcript-overlay .listening {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-style: italic;
 }
 
 .voice-transcript-overlay .assistant-text {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: pre-wrap;
 }
 
@@ -75,9 +75,9 @@ so mirror the accent-tinted glow here. `voice-active` / `voice-listening` and th
 the button's resting shape so the control never morphs between states — only its
 color and the pulse change. */
 .new-chat-input-area.voice-active .action-label.codicon-voice-mode-compact {
-	--sessions-voice-icon-glow-color: color-mix(in srgb, var(--voice-accent, var(--vscode-charts-blue, #58a6ff)) 40%, transparent);
-	color: var(--voice-accent, var(--vscode-charts-blue, #58a6ff)) !important;
-	border-radius: var(--vscode-cornerRadius-small);
+	--sessions-voice-icon-glow-color: color-mix(in srgb, var(--voice-accent, var(--zyraxoncode-charts-blue, #58a6ff)) 40%, transparent);
+	color: var(--voice-accent, var(--zyraxoncode-charts-blue, #58a6ff)) !important;
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .monaco-workbench.monaco-enable-motion .new-chat-input-area.voice-active.voice-listening .action-label.codicon-voice-mode-compact,

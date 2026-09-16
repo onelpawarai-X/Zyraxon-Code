@@ -15,7 +15,7 @@ AppUpdatesURL=https://github.com/onelpawarai/zyraxon-code/releases
 DefaultGroupName={#NameLong}
 AllowNoIcons=yes
 OutputDir={#OutputDir}
-OutputBaseFilename=VSCodeSetup
+OutputBaseFilename=ZYRAXONCodeSetup
 Compression=lzma
 SolidCompression=yes
 AppMutex={code:GetAppMutex}
@@ -1854,7 +1854,7 @@ begin
   until Length(Text)=0;
 end;
 
-function NeedsAddToPath(VSCode: string): boolean;
+function NeedsAddToPath(ZyraxonCode: string): boolean;
 var
   OrigPath: string;
 begin
@@ -1863,25 +1863,25 @@ begin
     Result := True;
     exit;
   end;
-  Result := Pos(';' + VSCode + ';', ';' + OrigPath + ';') = 0;
+  Result := Pos(';' + ZyraxonCode + ';', ';' + OrigPath + ';') = 0;
 end;
 
-function AddToPath(VSCode: string): string;
+function AddToPath(ZyraxonCode: string): string;
 var
   OrigPath: string;
 begin
   RegQueryStringValue({#EnvironmentRootKey}, '{#EnvironmentKey}', 'Path', OrigPath)
 
   if (Length(OrigPath) > 0) and (OrigPath[Length(OrigPath)] = ';') then
-    Result := OrigPath + VSCode
+    Result := OrigPath + ZyraxonCode
   else
-    Result := OrigPath + ';' + VSCode
+    Result := OrigPath + ';' + ZyraxonCode
 end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
   Path: string;
-  VSCodePath: string;
+  ZyraxonCodePath: string;
   Parts: TArrayOfString;
   NewPath: string;
   i: Integer;
@@ -1898,10 +1898,10 @@ begin
     exit;
   end;
   NewPath := '';
-  VSCodePath := ExpandConstant('{app}\bin')
+  ZyraxonCodePath := ExpandConstant('{app}\bin')
   Explode(Parts, Path, ';');
   for i:=0 to GetArrayLength(Parts)-1 do begin
-    if CompareText(Parts[i], VSCodePath) <> 0 then begin
+    if CompareText(Parts[i], ZyraxonCodePath) <> 0 then begin
       NewPath := NewPath + Parts[i];
 
       if i < GetArrayLength(Parts) - 1 then begin

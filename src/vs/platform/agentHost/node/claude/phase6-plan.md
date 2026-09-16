@@ -32,7 +32,7 @@ Replace [claudeAgent.ts](claudeAgent.ts)'s `sendMessage` stub with a real implem
 |---|---|---|
 | **Modify** | [claudeAgentSdkService.ts](claudeAgentSdkService.ts) | Add `startup({ options }): Promise<WarmQuery>` to `IClaudeSdkBindings` and `IClaudeAgentSdkService`. Phase-5 surface (`listSessions`) preserved. (`getSessionMessages` and `forkSession` are added in Phase 6.5, NOT Phase 6.) |
 | **Major rewrite** | [claudeAgentSession.ts](claudeAgentSession.ts) | Phase-5 minimum (~30 lines) → Phase-6 Query owner (~300 lines): `_query: Query`, `_abortController: AbortController`, prompt iterable (`_createPromptIterable`), `_pendingPromptDeferred: DeferredPromise<void>`, `_inFlightRequests: QueuedRequest[]`, `_isResumed: boolean`, `_currentBlockParts: Map<number, string>`, `_fatalError: Error \| undefined`. Methods: `send`, `_processMessages`, `dispose`. |
-| **Modify** | [claudeAgent.ts](claudeAgent.ts) | Add `_provisionalSessions: Map<string, IClaudeProvisionalSession>`, `_onDidMaterializeSession: Emitter`, `_sessionSequencer: SequencerByKey<string>` (separate from Phase-5's `_disposeSequencer`). Add constructor dependency `@IAgentHostGitService` (resolved as `_gitService`) for `projectFromCopilotContext` lookups during `createSession`. Add helper imports: `rgPath` from `@vscode/ripgrep`, `delimiter` from `../../../../base/common/path.js`. Replace `sendMessage` stub. Make non-fork `createSession` return `provisional: true`. Add `_materializeProvisional`. Update fork branch error: `TODO: Phase 6` → `TODO: Phase 6.5`. Extend `shutdown()` to drain `_provisionalSessions` before the existing `_sessions` drain. |
+| **Modify** | [claudeAgent.ts](claudeAgent.ts) | Add `_provisionalSessions: Map<string, IClaudeProvisionalSession>`, `_onDidMaterializeSession: Emitter`, `_sessionSequencer: SequencerByKey<string>` (separate from Phase-5's `_disposeSequencer`). Add constructor dependency `@IAgentHostGitService` (resolved as `_gitService`) for `projectFromCopilotContext` lookups during `createSession`. Add helper imports: `rgPath` from `@zyraxoncode/ripgrep`, `delimiter` from `../../../../base/common/path.js`. Replace `sendMessage` stub. Make non-fork `createSession` return `provisional: true`. Add `_materializeProvisional`. Update fork branch error: `TODO: Phase 6` → `TODO: Phase 6.5`. Extend `shutdown()` to drain `_provisionalSessions` before the existing `_sessions` drain. |
 | **Create** | [claudeMapSessionEvents.ts](claudeMapSessionEvents.ts) | Pure helper: `SDKMessage → AgentSignal[]`. Markdown/reasoning part allocation. Defense-in-depth skip+warn for `tool_use`. Mirrors Copilot's `mapSessionEvents.ts`. |
 | **Create** | [claudePromptResolver.ts](claudePromptResolver.ts) | Pure helper: `(prompt: string, attachments?: IAgentAttachment[]) → Anthropic.ContentBlockParam[]`. Builds `<system-reminder>` block for file/selection references. |
 | **Modify** | [/package.json](../../../../../../package.json) | No version change — `@anthropic-ai/claude-agent-sdk@0.2.112` already pinned by Phase 5. |
@@ -199,12 +199,12 @@ private async _materializeProvisional(sessionId: string): Promise<ClaudeAgentSes
     }
 
     const subprocessEnv = this._buildSubprocessEnv();
-    // `proxyHandle.baseUrl` is the full URL (e.g. `http://127.0.0.1:54321`,
+    // `proxyHandle.baseUrl` is the full URL (e.g. `__ZYRAXKEEP__0_`,
     // no trailing slash). Source: `claudeProxyService.ts:44-49`. Do NOT
     // try to read `proxyHandle.port`; it is not part of the contract.
     //
     // PATH composition:
-    // - `rgPath` (imported from `@vscode/ripgrep`) is the absolute path to
+    // - `rgPath` (imported from `@zyraxoncode/ripgrep`) is the absolute path to
     //   the ripgrep BINARY. Use `path.dirname(rgPath)` for the directory.
     // - `delimiter` (imported from `../../../../base/common/path.js`) is
     //   the PATH separator (`:` on macOS/Linux, `;` on Windows). Do NOT
@@ -759,7 +759,7 @@ disposeSession(session: URI): Promise<void> {
     - **(a) Only provisional**: create three sessions, none send. Call `shutdown()`. Assert `startupCallCount === 0`, `_provisionalSessions` is empty.
     - **(b) Mixed provisional + materialized**: create three sessions, send on two (leaving one provisional). With `queryAdvance` blocking, call `shutdown()`. Assert all three deferreds resolve/reject (the two materialized reject with abort, the provisional one was never awaiting send), `_sessions` and `_provisionalSessions` both empty, controller of every entry was aborted.
 14. **Mapper throws on a malformed `stream_event` → log + continue.** Inject a malformed message at index 2 via `nextQueryMessages`. Assert: warn was logged once, signals from indices 0, 1, 3, 4 emitted normally, turn completes via `result`.
-15. **Attachment conversion (File / Directory only).** S4 from review: `text` and `selection` fields on `IAgentAttachment` are dropped by `AgentSideEffects` before reaching the agent (`agentSideEffects.ts:699-703, :934-938`), so a Selection-shape input is not realistically reachable in Phase 6. Test the realistic path: `sendMessage('hi', [{type: AttachmentType.File, uri: URI.parse('file:///a')}, {type: AttachmentType.Directory, uri: URI.parse('file:///b')}])`. After the call, inspect `FakeQuery.capturedPrompt` — the first `SDKUserMessage`'s `content` is `[{type:'text', text:'hi'}, {type:'text', text: matches /^<system-reminder>[\s\S]*\/a[\s\S]*\/b/ }]`. Selection rendering is deferred to a future phase that expands `AgentSideEffects` to forward `text` + `selection`; the resolver's `Selection` branch is dead-code until then (per §3.7 note).
+15. **Attachment conversion (File / Directory only).** S4 from review: `text` and `selection` fields on `IAgentAttachment` are dropped by `AgentSideEffects` before reaching the agent (`agentSideEffects.ts:699-703, :934-938`), so a Selection-shape input is not realistically reachable in Phase 6. Test the realistic path: `sendMessage('hi', [{type: AttachmentType.File, uri: URI.parse('__ZYRAXKEEP__1_')}, {type: AttachmentType.Directory, uri: URI.parse('__ZYRAXKEEP__2_')}])`. After the call, inspect `FakeQuery.capturedPrompt` — the first `SDKUserMessage`'s `content` is `[{type:'text', text:'hi'}, {type:'text', text: matches /^<system-reminder>[\s\S]*\/a[\s\S]*\/b/ }]`. Selection rendering is deferred to a future phase that expands `AgentSideEffects` to forward `text` + `selection`; the resolver's `Selection` branch is dead-code until then (per §3.7 note).
 
 ### 5.2 Integration test (1 case)
 

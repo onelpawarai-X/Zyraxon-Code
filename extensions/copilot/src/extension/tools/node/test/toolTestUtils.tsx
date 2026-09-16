@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, ToolResult, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, ToolResult, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { getTextPart } from '../../../../platform/chat/common/globalStringUtils';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { IInstantiationService, ServicesAccessor } from '../../../../util/vs/platform/instantiation/common/instantiation';
 import { PromptRenderer } from '../../../prompts/node/base/promptRenderer';
 
-export async function toolResultToString(accessor: ServicesAccessor, result: vscode.LanguageModelToolResult) {
+export async function toolResultToString(accessor: ServicesAccessor, result: zyraxoncode.LanguageModelToolResult) {
 	return renderElementToString(accessor, <ToolResult data={result} />);
 }
 

@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { disableErrorLogging, parse as parsePartialJson } from 'best-effort-json-parser';
-import type { ChatResponseStream, ChatVulnerability } from 'vscode';
+import type { ChatResponseStream, ChatVulnerability } from 'zyraxoncode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { IResponseDelta } from '../../../platform/networking/common/fetch';
 import { FilterReason } from '../../../platform/networking/common/openai';
 import { isEncryptedThinkingDelta } from '../../../platform/thinking/common/thinking';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { URI } from '../../../util/vs/base/common/uri';
-import { ChatResponseClearToPreviousToolInvocationReason } from '../../../vscodeTypes';
+import { ChatResponseClearToPreviousToolInvocationReason } from '../../../zyraxoncodeTypes';
 import { getContributedToolName } from '../../tools/common/toolNames';
 import { IResponseProcessor, IResponseProcessorContext } from './intents';
 
@@ -83,7 +83,7 @@ export class PseudoStopStartResponseProcessor implements IResponseProcessor {
 				this.thinkingActive = true;
 			}
 		} else if (this.thinkingActive) {
-			progress.thinkingProgress({ id: '', text: '', metadata: { vscodeReasoningDone: true, stopReason: delta.text ? 'text' : 'other' } });
+			progress.thinkingProgress({ id: '', text: '', metadata: { zyraxoncodeReasoningDone: true, stopReason: delta.text ? 'text' : 'other' } });
 			this.thinkingActive = false;
 		}
 

@@ -18,7 +18,7 @@ const REPO_ROOT = path.dirname(path.dirname(path.dirname(import.meta.dirname)));
 
 const ghApiHeaders: Record<string, string> = {
 	Accept: 'application/vnd.github.v3+json',
-	'User-Agent': 'VSCode Build',
+	'User-Agent': 'ZyraxonCode Build',
 };
 
 if (process.env.GITHUB_TOKEN) {
@@ -58,7 +58,7 @@ function getSha(filename: fs.PathLike): string {
 	return hash.digest('hex');
 }
 
-function getVSCodeSysrootChecksum(expectedName: string) {
+function getZyraxonCodeSysrootChecksum(expectedName: string) {
 	const checksums = fs.readFileSync(path.join(REPO_ROOT, 'build', 'checksums', 'vscode-sysroot.txt'), 'utf8');
 	for (const line of checksums.split('\n')) {
 		const [checksum, name] = line.split(/\s+/);
@@ -132,7 +132,7 @@ type SysrootDictEntry = {
 	Tarball: string;
 };
 
-export async function getVSCodeSysroot(arch: DebianArchString, isMusl: boolean = false): Promise<string> {
+export async function getZyraxonCodeSysroot(arch: DebianArchString, isMusl: boolean = false): Promise<string> {
 	let expectedName: string;
 	let triple: string;
 	const prefix = process.env['VSCODE_SYSROOT_PREFIX'] ?? '-glibc-2.28-gcc-10.5.0';
@@ -156,7 +156,7 @@ export async function getVSCodeSysroot(arch: DebianArchString, isMusl: boolean =
 			break;
 	}
 	console.log(`Fetching ${expectedName} for ${triple}`);
-	const checksumSha256 = getVSCodeSysrootChecksum(expectedName);
+	const checksumSha256 = getZyraxonCodeSysrootChecksum(expectedName);
 	if (!checksumSha256) {
 		throw new Error(`Could not find checksum for ${expectedName}`);
 	}

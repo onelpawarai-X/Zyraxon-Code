@@ -335,13 +335,13 @@ class GetStartedWithAccessibilityFeatures extends Action2 {
 	}
 }
 
-class AskVSCodeCopilot extends Action2 {
+class AskZyraxonCodeCopilot extends Action2 {
 	static readonly ID = 'workbench.action.askVScode';
 
 	constructor() {
 		super({
-			id: AskVSCodeCopilot.ID,
-			title: localize2('askVScode', 'Ask @vscode'),
+			id: AskZyraxonCodeCopilot.ID,
+			title: localize2('askVScode', 'Ask @zyraxoncode'),
 			category: Categories.Help,
 			f1: true,
 			precondition: ContextKeyExpr.and(ContextKeyExpr.equals('chatSetupHidden', false), ContextKeyExpr.equals('chatSetupDisabledInWorkspace', false), IsSessionsWindowContext.negate())
@@ -350,15 +350,15 @@ class AskVSCodeCopilot extends Action2 {
 
 	async run(accessor: ServicesAccessor): Promise<void> {
 		const commandService = accessor.get(ICommandService);
-		commandService.executeCommand('workbench.action.chat.open', { mode: 'agent', query: '@vscode ', isPartialQuery: true });
+		commandService.executeCommand('workbench.action.chat.open', { mode: 'agent', query: '@zyraxoncode ', isPartialQuery: true });
 
 	}
 }
 
 MenuRegistry.appendMenuItem(MenuId.MenubarHelpMenu, {
 	command: {
-		id: AskVSCodeCopilot.ID,
-		title: localize2('askVScode', 'Ask @vscode'),
+		id: AskZyraxonCodeCopilot.ID,
+		title: localize2('askVScode', 'Ask @zyraxoncode'),
 	},
 	order: 7,
 	group: '1_welcome',
@@ -405,4 +405,4 @@ if (OpenPrivacyStatementUrlAction.AVAILABLE) {
 
 registerAction2(GetStartedWithAccessibilityFeatures);
 
-registerAction2(AskVSCodeCopilot);
+registerAction2(AskZyraxonCodeCopilot);

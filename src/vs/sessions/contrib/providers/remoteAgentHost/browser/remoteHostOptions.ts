@@ -166,7 +166,7 @@ export function watchForIncompatibleNotifications(
 		const status = provider.connectionStatus!.read(reader);
 		const isIncompatible = RemoteAgentHostConnectionStatus.isIncompatible(status);
 		if (isIncompatible && !lastWasIncompatible) {
-			const upgradeMethod = status.vscodeUpgradeMethod;
+			const upgradeMethod = status.zyraxoncodeUpgradeMethod;
 			const primaryActions = [];
 			if (upgradeMethod) {
 				primaryActions.push(toAction({
@@ -263,7 +263,7 @@ export async function showRemoteHostOptions(accessor: ServicesAccessor, provider
 
 	const status = provider.connectionStatus?.get();
 	const isConnected = RemoteAgentHostConnectionStatus.isConnected(status);
-	const upgradeMethod = RemoteAgentHostConnectionStatus.isIncompatible(status) ? status.vscodeUpgradeMethod : undefined;
+	const upgradeMethod = RemoteAgentHostConnectionStatus.isIncompatible(status) ? status.zyraxoncodeUpgradeMethod : undefined;
 
 	type RemoteOptionPickItem = IQuickPickItem & { id: string };
 	const items: RemoteOptionPickItem[] = [];

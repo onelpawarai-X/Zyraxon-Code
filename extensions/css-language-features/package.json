@@ -3,10 +3,10 @@
   "displayName": "%displayName%",
   "description": "%description%",
   "version": "10.0.0",
-  "publisher": "vscode",
+  "publisher": "zyraxoncode",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.77.0"
+    "zyraxoncode": "^1.77.0"
   },
   "icon": "icons/css.png",
   "activationEvents": [
@@ -26,7 +26,7 @@
     "compile": "npx gulp compile-extension:css-language-features-client compile-extension:css-language-features-server",
     "watch": "npx gulp watch-extension:css-language-features-client watch-extension:css-language-features-server",
     "test": "npm run test --prefix server",
-    "install-client-next": "npm install vscode-languageclient@next"
+    "install-client-next": "npm install zyraxoncode-languageclient@next"
   },
   "categories": [
     "Programming Languages"
@@ -984,7 +984,7 @@
     "jsonValidation": [
       {
         "fileMatch": "*.css-data.json",
-        "url": "https://raw.githubusercontent.com/microsoft/vscode-css-languageservice/master/docs/customData.schema.json"
+        "url": "__ZYRAXKEEP__0_"
       },
       {
         "fileMatch": "package.json",
@@ -993,14 +993,14 @@
     ]
   },
   "dependencies": {
-    "vscode-languageclient": "^10.0.0-next.22",
-    "vscode-uri": "^3.1.0"
+    "zyraxoncode-languageclient": "^10.0.0-next.22",
+    "zyraxoncode-uri": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "24.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/vscode.git"
+    "url": "__ZYRAXKEEP__1_"
   }
 }

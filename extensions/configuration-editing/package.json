@@ -3,10 +3,10 @@
   "displayName": "%displayName%",
   "description": "%description%",
   "version": "10.0.0",
-  "publisher": "vscode",
+  "publisher": "zyraxoncode",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.0.0"
+    "zyraxoncode": "^1.0.0"
   },
   "icon": "images/icon.png",
   "activationEvents": [
@@ -73,116 +73,116 @@
     ],
     "jsonValidation": [
       {
-        "fileMatch": "vscode://defaultsettings/keybindings.json",
-        "url": "vscode://schemas/keybindings"
+        "fileMatch": "__ZYRAXKEEP__0_",
+        "url": "__ZYRAXKEEP__1_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/keybindings.json",
-        "url": "vscode://schemas/keybindings"
+        "url": "__ZYRAXKEEP__2_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/profiles/*/keybindings.json",
-        "url": "vscode://schemas/keybindings"
+        "url": "__ZYRAXKEEP__3_"
       },
       {
-        "fileMatch": "vscode://defaultsettings/*.json",
-        "url": "vscode://schemas/settings/default"
+        "fileMatch": "__ZYRAXKEEP__4_",
+        "url": "__ZYRAXKEEP__5_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/settings.json",
-        "url": "vscode://schemas/settings/user"
+        "url": "__ZYRAXKEEP__6_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/profiles/*/settings.json",
-        "url": "vscode://schemas/settings/profile"
+        "url": "__ZYRAXKEEP__7_"
       },
       {
         "fileMatch": "%MACHINE_SETTINGS_HOME%/settings.json",
-        "url": "vscode://schemas/settings/machine"
+        "url": "__ZYRAXKEEP__8_"
       },
       {
         "fileMatch": "%APP_WORKSPACES_HOME%/*/workspace.json",
-        "url": "vscode://schemas/workspaceConfig"
+        "url": "__ZYRAXKEEP__9_"
       },
       {
         "fileMatch": "**/*.code-workspace",
-        "url": "vscode://schemas/workspaceConfig"
+        "url": "__ZYRAXKEEP__10_"
       },
       {
         "fileMatch": "**/argv.json",
-        "url": "vscode://schemas/argv"
+        "url": "__ZYRAXKEEP__11_"
       },
       {
-        "fileMatch": "/.vscode/settings.json",
-        "url": "vscode://schemas/settings/folder"
+        "fileMatch": "/.zyraxoncode/settings.json",
+        "url": "__ZYRAXKEEP__12_"
       },
       {
-        "fileMatch": "/.vscode/launch.json",
-        "url": "vscode://schemas/launch"
+        "fileMatch": "/.zyraxoncode/launch.json",
+        "url": "__ZYRAXKEEP__13_"
       },
       {
-        "fileMatch": "/.vscode/tasks.json",
-        "url": "vscode://schemas/tasks"
+        "fileMatch": "/.zyraxoncode/tasks.json",
+        "url": "__ZYRAXKEEP__14_"
       },
       {
-        "fileMatch": "/.vscode/mcp.json",
-        "url": "vscode://schemas/mcp"
+        "fileMatch": "/.zyraxoncode/mcp.json",
+        "url": "__ZYRAXKEEP__15_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/tasks.json",
-        "url": "vscode://schemas/tasks"
+        "url": "__ZYRAXKEEP__16_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/chatLanguageModels.json",
-        "url": "vscode://schemas/language-models"
+        "url": "__ZYRAXKEEP__17_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/profiles/*/chatLanguageModels.json",
-        "url": "vscode://schemas/language-models"
+        "url": "__ZYRAXKEEP__18_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/snippets/*.json",
-        "url": "vscode://schemas/snippets"
+        "url": "__ZYRAXKEEP__19_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/prompts/*.toolsets.jsonc",
-        "url": "vscode://schemas/toolsets"
+        "url": "__ZYRAXKEEP__20_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/profiles/*/snippets/.json",
-        "url": "vscode://schemas/snippets"
+        "url": "__ZYRAXKEEP__21_"
       },
       {
         "fileMatch": "%APP_SETTINGS_HOME%/sync/snippets/preview/*.json",
-        "url": "vscode://schemas/snippets"
+        "url": "__ZYRAXKEEP__22_"
       },
       {
         "fileMatch": "**/*.code-snippets",
-        "url": "vscode://schemas/global-snippets"
+        "url": "__ZYRAXKEEP__23_"
       },
       {
-        "fileMatch": "/.vscode/extensions.json",
-        "url": "vscode://schemas/extensions"
+        "fileMatch": "/.zyraxoncode/extensions.json",
+        "url": "__ZYRAXKEEP__24_"
       },
       {
         "fileMatch": "devcontainer.json",
-        "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json"
+        "url": "__ZYRAXKEEP__25_"
       },
       {
         "fileMatch": ".devcontainer.json",
-        "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json"
+        "url": "__ZYRAXKEEP__26_"
       },
       {
-        "fileMatch": "%APP_SETTINGS_HOME%/globalStorage/ms-vscode-remote.remote-containers/nameConfigs/*.json",
+        "fileMatch": "%APP_SETTINGS_HOME%/globalStorage/ms-zyraxoncode-remote.remote-containers/nameConfigs/*.json",
         "url": "./schemas/attachContainer.schema.json"
       },
       {
-        "fileMatch": "%APP_SETTINGS_HOME%/globalStorage/ms-vscode-remote.remote-containers/imageConfigs/*.json",
+        "fileMatch": "%APP_SETTINGS_HOME%/globalStorage/ms-zyraxoncode-remote.remote-containers/imageConfigs/*.json",
         "url": "./schemas/attachContainer.schema.json"
       },
       {
         "fileMatch": "**/quality/*/product.json",
-        "url": "vscode://schemas/vscode-product"
+        "url": "__ZYRAXKEEP__27_"
       }
     ]
   },
@@ -191,6 +191,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/vscode.git"
+    "url": "__ZYRAXKEEP__28_"
   }
 }

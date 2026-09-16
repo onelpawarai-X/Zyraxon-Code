@@ -137,7 +137,7 @@ registerActiveInstanceAction({
 			id,
 			group: '1_shellIntegration',
 			order: 0,
-			when: ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeTerminal),
+			when: ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeTerminal),
 			isHiddenByDefault: true
 		})),
 	],
@@ -184,7 +184,7 @@ registerTerminalAction({
 			id,
 			group: '1_shellIntegration',
 			order: 1,
-			when: ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeTerminal),
+			when: ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeTerminal),
 			isHiddenByDefault: true
 		})),
 	],

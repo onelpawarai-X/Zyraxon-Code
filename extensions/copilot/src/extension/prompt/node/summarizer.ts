@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -21,7 +21,7 @@ import { addHistoryToConversation } from './chatParticipantRequestHandler';
 
 import { sessionResourceToId } from '../../../platform/chat/common/chatDebugFileLoggerService';
 
-export class ChatSummarizerProvider implements vscode.ChatSummarizer {
+export class ChatSummarizerProvider implements zyraxoncode.ChatSummarizer {
 
 	constructor(
 		@ILogService private readonly logService: ILogService,
@@ -31,8 +31,8 @@ export class ChatSummarizerProvider implements vscode.ChatSummarizer {
 	) { }
 
 	async provideChatSummary(
-		context: vscode.ChatContext,
-		token: vscode.CancellationToken,
+		context: zyraxoncode.ChatContext,
+		token: zyraxoncode.CancellationToken,
 	): Promise<string> {
 
 		const { turns } = this.instantiationService.invokeFunction(accessor => addHistoryToConversation(accessor, context.history));

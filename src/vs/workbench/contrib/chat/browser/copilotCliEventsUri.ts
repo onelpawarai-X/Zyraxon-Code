@@ -49,7 +49,7 @@ export function buildLocalSessionStateUri(userHome: URI, environment: IProcessEn
 }
 
 /**
- * Builds a `vscode-agent-host://` URI for the `events.jsonl` file inside
+ * Builds a `zyraxoncode-agent-host://` URI for the `events.jsonl` file inside
  * the host's user home directory, using the connection's reported
  * `defaultDirectory` (set from `os.homedir()` on the host during the
  * AHP handshake).
@@ -75,7 +75,7 @@ export function buildRemoteEventsUri(connection: IRemoteAgentHostConnectionInfo,
 }
 
 /**
- * Builds a `vscode-agent-host://` URI for the host's `~/.copilot/logs`
+ * Builds a `zyraxoncode-agent-host://` URI for the host's `~/.copilot/logs`
  * directory, using the connection's reported home directory.
  */
 export function buildRemoteCopilotLogsUri(connection: IRemoteAgentHostConnectionInfo): URI | undefined {
@@ -175,7 +175,7 @@ function getRawSessionId(sessionResource: URI): string | undefined {
  * used by the chat debug panel and the "Open Copilot CLI State File" command,
  * then unwraps the result into a plain path:
  * - a local `file://` URI becomes its `fsPath` (same machine as the host).
- * - a remote `vscode-agent-host://` URI is unwrapped to the underlying file
+ * - a remote `zyraxoncode-agent-host://` URI is unwrapped to the underlying file
  *   URI whose `path` is the real path on the remote host the agent runs on.
  *
  * Returns `undefined` when the session is not a Copilot CLI session or the

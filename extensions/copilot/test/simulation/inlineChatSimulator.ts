@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import assert from 'assert';
 import * as path from 'path';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { Intent } from '../../src/extension/common/constants';
 import { CopilotInteractiveEditorResponse, InteractionOutcome, InteractionOutcomeComputer } from '../../src/extension/inlineChat/node/promptCraftingTypes';
 import { ICopilotChatResult } from '../../src/extension/prompt/common/conversation';
@@ -37,7 +37,7 @@ import { commonPrefixLength, commonSuffixLength } from '../../src/util/vs/base/c
 import { URI } from '../../src/util/vs/base/common/uri';
 import { SyncDescriptor } from '../../src/util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../src/util/vs/platform/instantiation/common/instantiation';
-import { ChatLocation, ChatReferenceDiagnostic, ChatRequest, ChatRequestEditorData, ChatResponseMarkdownPart, ChatResponseNotebookEditPart, ChatResponseTextEditPart, Diagnostic, DiagnosticRelatedInformation, LanguageModelToolResult, Location, NotebookRange, Range, Selection, TextEdit, Uri, WorkspaceEdit } from '../../src/vscodeTypes';
+import { ChatLocation, ChatReferenceDiagnostic, ChatRequest, ChatRequestEditorData, ChatResponseMarkdownPart, ChatResponseNotebookEditPart, ChatResponseTextEditPart, Diagnostic, DiagnosticRelatedInformation, LanguageModelToolResult, Location, NotebookRange, Range, Selection, TextEdit, Uri, WorkspaceEdit } from '../../src/zyraxoncodeTypes';
 import { SimulationExtHostToolsService } from '../base/extHostContext/simulationExtHostToolsService';
 import { SimulationWorkspaceExtHost } from '../base/extHostContext/simulationWorkspaceExtHost';
 import { SpyingChatMLFetcher } from '../base/spyingChatMLFetcher';
@@ -45,7 +45,7 @@ import { ISimulationTestRuntime, NonExtensionConfiguration } from '../base/stest
 import { createWorkingSetFileVariable, parseQueryForTest } from '../e2e/testHelper';
 import { readBuiltinIntents } from '../intent/intentTest';
 import { getDiagnostics } from './diagnosticProviders';
-import { convertTestToVSCodeDiagnostics } from './diagnosticProviders/utils';
+import { convertTestToZyraxonCodeDiagnostics } from './diagnosticProviders/utils';
 import { SimulationLanguageFeaturesService } from './language/simulationLanguageFeatureService';
 import { IDiagnostic, IDiagnosticComparison, INLINE_CHANGED_DOC_TAG, INLINE_INITIAL_DOC_TAG, INLINE_STATE_TAG, IRange, IWorkspaceState, IWorkspaceStateFile } from './shared/sharedTypes';
 import { DiagnosticProviderId, EditTestStrategy, IDeserializedWorkspaceStateBasedScenario, IInlineEdit, IOutcome, IScenario, IScenarioDiagnostic, IScenarioQuery, OutcomeAnnotation } from './types';
@@ -170,17 +170,17 @@ export async function simulateInlineChatIntent(
 }
 
 export type EditingSimulationHostResponseProcessor = {
-	spyOnStream(stream: vscode.ChatResponseStream): vscode.ChatResponseStream;
-	postProcess(accessor: ITestingServicesAccessor, workspace: SimulationWorkspace, stream: vscode.ChatResponseStream, result?: ICopilotChatResult): Promise<OutcomeAnnotation[]>;
+	spyOnStream(stream: zyraxoncode.ChatResponseStream): zyraxoncode.ChatResponseStream;
+	postProcess(accessor: ITestingServicesAccessor, workspace: SimulationWorkspace, stream: zyraxoncode.ChatResponseStream, result?: ICopilotChatResult): Promise<OutcomeAnnotation[]>;
 };
 
 export interface EditingSimulationHost {
 	agentArgs?: IChatAgentArgs;
 	prepareChatRequestLocation(accessor: ITestingServicesAccessor, range?: Range): {
-		location: vscode.ChatLocation;
-		location2: vscode.ChatRequestEditorData | undefined;
+		location: zyraxoncode.ChatLocation;
+		location2: zyraxoncode.ChatRequestEditorData | undefined;
 	};
-	contributeAdditionalReferences?: (accessor: ITestingServicesAccessor, existingReferences: readonly vscode.ChatPromptReference[]) => vscode.ChatPromptReference[];
+	contributeAdditionalReferences?: (accessor: ITestingServicesAccessor, existingReferences: readonly zyraxoncode.ChatPromptReference[]) => zyraxoncode.ChatPromptReference[];
 	provideResponseProcessor?: (query: IScenarioQuery) => EditingSimulationHostResponseProcessor;
 }
 
@@ -209,11 +209,11 @@ export async function simulateEditingScenario(
 	/**
 	 * A map from doc to relative path with initial contents which is populated right before modifying a document.
 	 */
-	const changedDocsInitialStates = new Map<vscode.TextDocument, Promise<IWorkspaceStateFile> | null>();
+	const changedDocsInitialStates = new Map<zyraxoncode.TextDocument, Promise<IWorkspaceStateFile> | null>();
 
 	// run each query for the scenario
 	try {
-		const seenFiles: vscode.ChatPromptReference[] = [];
+		const seenFiles: zyraxoncode.ChatPromptReference[] = [];
 
 		for (const query of scenario.queries) {
 
@@ -261,7 +261,7 @@ export async function simulateEditingScenario(
 				throw new Error(`query.file is defined but no editor is active`);
 			}
 
-			let initialDiagnostics: ResourceMap<vscode.Diagnostic[]> | undefined;
+			let initialDiagnostics: ResourceMap<zyraxoncode.Diagnostic[]> | undefined;
 
 			if (typeof query.diagnostics === 'string') {
 				// diagnostics are computed
@@ -276,7 +276,7 @@ export async function simulateEditingScenario(
 					throw new Error(`diagnostics can only be an array if there's an active editor (is 'file' specified?)`);
 				}
 				// diagnostics are set explicitly
-				const diagnostics = new ResourceMap<vscode.Diagnostic[]>();
+				const diagnostics = new ResourceMap<zyraxoncode.Diagnostic[]>();
 				diagnostics.set(activeEditor.document.uri, convertToDiagnostics(workspace, query.diagnostics));
 				workspace.setDiagnostics(diagnostics);
 			}
@@ -339,9 +339,9 @@ export async function simulateEditingScenario(
 				prompt = groups?.restOfQuery?.trim() ?? '';
 			}
 
-			const changedDocs: vscode.TextDocument[] = [];
-			const references: vscode.ChatPromptReference[] = [...seenFiles];
-			const toolReferences: vscode.ChatLanguageModelToolReference[] = [];
+			const changedDocs: zyraxoncode.TextDocument[] = [];
+			const references: zyraxoncode.ChatPromptReference[] = [...seenFiles];
+			const toolReferences: zyraxoncode.ChatLanguageModelToolReference[] = [];
 
 			try {
 				const parsedQuery = parseQueryForTest(accessor, prompt, workspace);
@@ -366,7 +366,7 @@ export async function simulateEditingScenario(
 			references.push(...(host.contributeAdditionalReferences?.(accessor, references) ?? []));
 
 			const { location, location2 } = host.prepareChatRequestLocation(accessor, range);
-			let request: vscode.ChatRequest = {
+			let request: zyraxoncode.ChatRequest = {
 				location,
 				location2,
 				command,
@@ -377,7 +377,7 @@ export async function simulateEditingScenario(
 				enableCommandDetection: true, // TODO@ulugbekna: add support for disabling intent detection?
 				toolReferences,
 				toolInvocationToken: (isInExtensionHost ? undefined : {}) as never,
-				model: null!, // https://github.com/microsoft/vscode-copilot/issues/9475
+				model: null!, // __ZYRAXKEEP__0_
 				tools: new Map(),
 				id: '1',
 				sessionId: '1',
@@ -398,7 +398,7 @@ export async function simulateEditingScenario(
 			const markdownChunks: string[] = [];
 			const changedDocuments = new ResourceMap<WorkingCopyOriginalDocument>();
 			let hasActualEdits = false;
-			let stream: vscode.ChatResponseStream = new ChatResponseStreamImpl((value) => {
+			let stream: zyraxoncode.ChatResponseStream = new ChatResponseStreamImpl((value) => {
 				if (value instanceof ChatResponseTextEditPart && value.edits.length > 0) {
 					const { uri, edits } = value;
 
@@ -703,7 +703,7 @@ export async function simulateEditingScenario(
 	}
 }
 
-function setupTools(stream: vscode.ChatResponseStream, request: ChatRequest, accessor: ITestingServicesAccessor) {
+function setupTools(stream: zyraxoncode.ChatResponseStream, request: ChatRequest, accessor: ITestingServicesAccessor) {
 	const toolsService = accessor.get(IToolsService) as TestToolsService | SimulationExtHostToolsService;
 	const instaService = accessor.get(IInstantiationService);
 	const editTool = instaService.createInstance(TestEditFileTool, stream);
@@ -727,12 +727,12 @@ function setupTools(stream: vscode.ChatResponseStream, request: ChatRequest, acc
 	);
 }
 
-function computeMoreMinimalEdit(document: vscode.TextDocument, edit: vscode.TextEdit): vscode.TextEdit {
+function computeMoreMinimalEdit(document: zyraxoncode.TextDocument, edit: zyraxoncode.TextEdit): zyraxoncode.TextEdit {
 	edit = reduceCommonPrefix(document, edit);
 	edit = reduceCommonSuffix(document, edit);
 	return edit;
 
-	function reduceCommonPrefix(document: vscode.TextDocument, edit: vscode.TextEdit): vscode.TextEdit {
+	function reduceCommonPrefix(document: zyraxoncode.TextDocument, edit: zyraxoncode.TextEdit): zyraxoncode.TextEdit {
 		const start = document.offsetAt(edit.range.start);
 		const end = document.offsetAt(edit.range.end);
 		const oldText = document.getText().substring(start, end);
@@ -748,7 +748,7 @@ function computeMoreMinimalEdit(document: vscode.TextDocument, edit: vscode.Text
 		);
 	}
 
-	function reduceCommonSuffix(document: vscode.TextDocument, edit: vscode.TextEdit): vscode.TextEdit {
+	function reduceCommonSuffix(document: zyraxoncode.TextDocument, edit: zyraxoncode.TextEdit): zyraxoncode.TextEdit {
 		const start = document.offsetAt(edit.range.start);
 		const end = document.offsetAt(edit.range.end);
 		const oldText = document.getText().substring(start, end);
@@ -765,9 +765,9 @@ function computeMoreMinimalEdit(document: vscode.TextDocument, edit: vscode.Text
 	}
 }
 
-function applyEditsAndExpandRange(workspace: SimulationWorkspace, document: vscode.TextDocument, edits: vscode.TextEdit[], range: vscode.Range): vscode.Range;
-function applyEditsAndExpandRange(workspace: SimulationWorkspace, document: vscode.TextDocument, edits: vscode.TextEdit[], range: vscode.Range | undefined): vscode.Range | undefined;
-function applyEditsAndExpandRange(workspace: SimulationWorkspace, document: vscode.TextDocument, edits: vscode.TextEdit[], range: vscode.Range | undefined): vscode.Range | undefined {
+function applyEditsAndExpandRange(workspace: SimulationWorkspace, document: zyraxoncode.TextDocument, edits: zyraxoncode.TextEdit[], range: zyraxoncode.Range): zyraxoncode.Range;
+function applyEditsAndExpandRange(workspace: SimulationWorkspace, document: zyraxoncode.TextDocument, edits: zyraxoncode.TextEdit[], range: zyraxoncode.Range | undefined): zyraxoncode.Range | undefined;
+function applyEditsAndExpandRange(workspace: SimulationWorkspace, document: zyraxoncode.TextDocument, edits: zyraxoncode.TextEdit[], range: zyraxoncode.Range | undefined): zyraxoncode.Range | undefined {
 	if (typeof range === 'undefined') {
 		workspace.applyEdits(document.uri, edits, range);
 		return undefined;
@@ -797,7 +797,7 @@ function applyEditsAndExpandRange(workspace: SimulationWorkspace, document: vsco
 	return range;
 }
 
-function convertToDiagnostics(workspace: SimulationWorkspace, diagnostics: IScenarioDiagnostic[] | undefined): vscode.Diagnostic[] {
+function convertToDiagnostics(workspace: SimulationWorkspace, diagnostics: IScenarioDiagnostic[] | undefined): zyraxoncode.Diagnostic[] {
 	return (diagnostics ?? []).map((d) => {
 		const diagnostic = new Diagnostic(new Range(d.startLine, d.startCharacter, d.endLine, d.endCharacter), d.message);
 		diagnostic.relatedInformation = d.relatedInformation?.map(r => {
@@ -813,21 +813,21 @@ function convertToDiagnostics(workspace: SimulationWorkspace, diagnostics: IScen
 async function fetchDiagnostics(accessor: ITestingServicesAccessor, workspace: SimulationWorkspace, providerId: DiagnosticProviderId) {
 	const files = workspace.documents.map(doc => ({ fileName: workspace.getFilePath(doc.document.uri), fileContents: doc.document.getText() }));
 	const diagnostics = await getDiagnostics(accessor, files, providerId);
-	return convertTestToVSCodeDiagnostics(diagnostics, path => workspace.getUriFromFilePath(path));
+	return convertTestToZyraxonCodeDiagnostics(diagnostics, path => workspace.getUriFromFilePath(path));
 }
 
-function toIDiagnostic(diagnostic: vscode.Diagnostic): IDiagnostic {
+function toIDiagnostic(diagnostic: zyraxoncode.Diagnostic): IDiagnostic {
 	return { range: toIRange(diagnostic.range), message: diagnostic.message };
 }
 
-export function toIRange(range: vscode.Range): IRange {
+export function toIRange(range: zyraxoncode.Range): IRange {
 	return {
 		start: { line: range.start.line, character: range.start.character },
 		end: { line: range.end.line, character: range.end.character },
 	};
 }
 
-export function toSelection(selection: [number, number] | [number, number, number, number]): vscode.Selection {
+export function toSelection(selection: [number, number] | [number, number, number, number]): zyraxoncode.Selection {
 	if (selection.length === 2) {
 		return new Selection(selection[0], selection[1], selection[0], selection[1]);
 	} else {
@@ -835,7 +835,7 @@ export function toSelection(selection: [number, number] | [number, number, numbe
 	}
 }
 
-export function toRange(range: [number, number] | [number, number, number, number]): vscode.Range {
+export function toRange(range: [number, number] | [number, number, number, number]): zyraxoncode.Range {
 	if (range.length === 2) {
 		return new Range(range[0], 0, range[1], 0);
 	} else {

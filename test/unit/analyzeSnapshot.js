@@ -18,7 +18,7 @@ if (!workerData) {
 
 	exports.takeSnapshotAndCountClasses = async (/** @type string */currentTest, /** @type string[] */ classes) => {
 		const cleanTitle = currentTest.replace(/[^\w]+/g, '-');
-		const file = join(tmpdir(), `vscode-test-snap-${cleanTitle}.heapsnapshot`);
+		const file = join(tmpdir(), `zyraxoncode-test-snap-${cleanTitle}.heapsnapshot`);
 
 		if (typeof process.takeHeapSnapshot !== 'function') {
 			// node.js:
@@ -72,7 +72,7 @@ if (!workerData) {
 	};
 } else {
 	const { path, classes } = JSON.parse(workerData);
-	const { decode_bytes } = require('@vscode/v8-heap-parser');
+	const { decode_bytes } = require('@zyraxoncode/v8-heap-parser');
 
 	fs.promises.readFile(path)
 		.then(buf => decode_bytes(buf))

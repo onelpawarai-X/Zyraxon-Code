@@ -5,13 +5,13 @@
 
 import { ExtHostManagedSocketsShape, MainContext, MainThreadManagedSocketsShape } from './extHost.protocol.js';
 import { createDecorator } from '../../../platform/instantiation/common/instantiation.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Disposable, DisposableStore, toDisposable } from '../../../base/common/lifecycle.js';
 import { IExtHostRpcService } from './extHostRpcService.js';
 import { VSBuffer } from '../../../base/common/buffer.js';
 
 export interface IExtHostManagedSockets extends ExtHostManagedSocketsShape {
-	setFactory(socketFactoryId: number, makeConnection: () => Thenable<vscode.ManagedMessagePassing>): void;
+	setFactory(socketFactoryId: number, makeConnection: () => Thenable<zyraxoncode.ManagedMessagePassing>): void;
 	/**
 	 * Opens a managed connection in-process using the currently registered
 	 * factory. Used by consumers that live inside the extension host (e.g. the
@@ -19,7 +19,7 @@ export interface IExtHostManagedSockets extends ExtHostManagedSocketsShape {
 	 * the latest factory is the correct one to dial; this avoids depending on a
 	 * factory id that can lag connection-data updates by a renderer round-trip.
 	 */
-	makeConnection(): Promise<vscode.ManagedMessagePassing>;
+	makeConnection(): Promise<zyraxoncode.ManagedMessagePassing>;
 	readonly _serviceBrand: undefined;
 }
 
@@ -39,7 +39,7 @@ export class ExtHostManagedSockets implements IExtHostManagedSockets {
 		this._proxy = extHostRpc.getProxy(MainContext.MainThreadManagedSockets);
 	}
 
-	setFactory(socketFactoryId: number, makeConnection: () => Thenable<vscode.ManagedMessagePassing>): void {
+	setFactory(socketFactoryId: number, makeConnection: () => Thenable<zyraxoncode.ManagedMessagePassing>): void {
 		// Terminate all previous sockets
 		for (const socket of this._managedRemoteSockets.values()) {
 			// calling dispose() will lead to it removing itself from the map
@@ -54,7 +54,7 @@ export class ExtHostManagedSockets implements IExtHostManagedSockets {
 		this._proxy.$registerSocketFactory(this._factory.socketFactoryId);
 	}
 
-	makeConnection(): Promise<vscode.ManagedMessagePassing> {
+	makeConnection(): Promise<zyraxoncode.ManagedMessagePassing> {
 		if (!this._factory) {
 			throw new Error('No managed socket factory registered');
 		}
@@ -105,14 +105,14 @@ export class ExtHostManagedSockets implements IExtHostManagedSockets {
 class ManagedSocketFactory {
 	constructor(
 		public readonly socketFactoryId: number,
-		public readonly makeConnection: () => Thenable<vscode.ManagedMessagePassing>,
+		public readonly makeConnection: () => Thenable<zyraxoncode.ManagedMessagePassing>,
 	) { }
 }
 
 class ManagedSocket extends Disposable {
 	constructor(
 		public readonly socketId: number,
-		public readonly actual: vscode.ManagedMessagePassing,
+		public readonly actual: zyraxoncode.ManagedMessagePassing,
 		disposer: DisposableStore,
 	) {
 		super();

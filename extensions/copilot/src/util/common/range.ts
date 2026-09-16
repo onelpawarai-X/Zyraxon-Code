@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscodeTypes from '../../vscodeTypes';
+import * as zyraxoncodeTypes from '../../zyraxoncodeTypes';
 
-export function collapseRangeToStart(range: vscodeTypes.Range): vscodeTypes.Range {
-	return new vscodeTypes.Range(range.start, range.start);
+export function collapseRangeToStart(range: zyraxoncodeTypes.Range): zyraxoncodeTypes.Range {
+	return new zyraxoncodeTypes.Range(range.start, range.start);
 }

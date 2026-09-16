@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Memento, Uri } from 'vscode';
+import type { Memento, Uri } from 'zyraxoncode';
 import { VSBuffer } from '../../../util/vs/base/common/buffer';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { fileSystemServiceReadAsJSON, IFileSystemService } from '../../filesystem/common/fileSystemService';
 import { ILogService } from '../../log/common/logService';
 import { IFetcherService } from '../../networking/common/fetcherService';
@@ -66,7 +66,7 @@ class EmbeddingsCache {
 		private readonly cacheKey: string,
 		protected readonly cacheVersion: string,
 		@IFileSystemService private readonly fileSystemService: IFileSystemService,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext
 	) {
 		this.cacheVersionKey = `${cacheKey}-version`;
 	}
@@ -331,11 +331,11 @@ export class RemoteEmbeddingsCache implements IEmbeddingsCache {
 	}
 
 	static calculateRemoteCDNURL(cacheContainer: RemoteEmbeddingsContainer, embeddingsType: RemoteCacheType, cacheVersion: string): string {
-		return `https://embeddings.vscode-cdn.net/${cacheContainer}/v${cacheVersion}/${embeddingsType}/core.json`;
+		return `__ZYRAXKEEP__0_{cacheContainer}/v${cacheVersion}/${embeddingsType}/core.json`;
 	}
 
 	static calculateRemoteCDNLatestURL(cacheContainer: RemoteEmbeddingsContainer, embeddingsType: RemoteCacheType, cacheVersion: string): string {
-		return `https://embeddings.vscode-cdn.net/${cacheContainer}/v${cacheVersion}/${embeddingsType}/latest.txt`;
+		return `__ZYRAXKEEP__1_{cacheContainer}/v${cacheVersion}/${embeddingsType}/latest.txt`;
 	}
 }
 
@@ -459,11 +459,11 @@ export class RemoteEmbeddingsExtensionCache extends RemoteEmbeddingsCache {
 	}
 
 	static getInstalledExtensionIds(workbenchService: IWorkbenchService): string[] {
-		return workbenchService.getAllExtensions().filter(e => !e.id.startsWith('vscode')).map(e => e.id);
+		return workbenchService.getAllExtensions().filter(e => !e.id.startsWith('zyraxoncode')).map(e => e.id);
 	}
 
 	static calculateBaseRemoteExtensionCDNURL(cacheContainer: RemoteEmbeddingsContainer, embeddingsType: RemoteCacheType, cacheVersion: string): string {
-		return `https://embeddings.vscode-cdn.net/${cacheContainer}/v${cacheVersion}/${embeddingsType}`;
+		return `__ZYRAXKEEP__2_{cacheContainer}/v${cacheVersion}/${embeddingsType}`;
 	}
 }
 

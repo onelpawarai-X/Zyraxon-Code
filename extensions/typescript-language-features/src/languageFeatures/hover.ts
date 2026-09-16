@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import type * as Proto from '../tsServer/protocol/protocol';
 import { ClientCapability, ITypeScriptServiceClient, ServerType } from '../typescriptService';
 import { conditionalRegistration, requireSomeCapability } from './util/dependentRegistration';
@@ -14,8 +14,8 @@ import FileConfigurationManager from './fileConfigurationManager';
 import { API } from '../tsServer/api';
 
 
-class TypeScriptHoverProvider implements vscode.HoverProvider {
-	private lastHoverAndLevel: [vscode.Hover, number] | undefined;
+class TypeScriptHoverProvider implements zyraxoncode.HoverProvider {
+	private lastHoverAndLevel: [zyraxoncode.Hover, number] | undefined;
 
 	public constructor(
 		private readonly client: ITypeScriptServiceClient,
@@ -23,11 +23,11 @@ class TypeScriptHoverProvider implements vscode.HoverProvider {
 	) { }
 
 	public async provideHover(
-		document: vscode.TextDocument,
-		position: vscode.Position,
-		token: vscode.CancellationToken,
-		context?: vscode.HoverContext,
-	): Promise<vscode.VerboseHover | undefined> {
+		document: zyraxoncode.TextDocument,
+		position: zyraxoncode.Position,
+		token: zyraxoncode.CancellationToken,
+		context?: zyraxoncode.HoverContext,
+	): Promise<zyraxoncode.VerboseHover | undefined> {
 		const filepath = this.client.toOpenTsFilePath(document);
 		if (!filepath) {
 			return undefined;
@@ -52,12 +52,12 @@ class TypeScriptHoverProvider implements vscode.HoverProvider {
 		const contents = this.getContents(document.uri, response.body, response._serverType);
 		const range = typeConverters.Range.fromTextSpan(response.body);
 		const hover = verbosityLevel !== undefined ?
-			new vscode.VerboseHover(
+			new zyraxoncode.VerboseHover(
 				contents,
 				range,
 				/*canIncreaseVerbosity*/ response.body.canIncreaseVerbosityLevel,
 				/*canDecreaseVerbosity*/ verbosityLevel !== 0
-			) : new vscode.Hover(
+			) : new zyraxoncode.Hover(
 				contents,
 				range
 			);
@@ -69,32 +69,32 @@ class TypeScriptHoverProvider implements vscode.HoverProvider {
 	}
 
 	private getContents(
-		resource: vscode.Uri,
+		resource: zyraxoncode.Uri,
 		data: Proto.QuickInfoResponseBody,
 		source: ServerType | undefined,
 	) {
-		const parts: vscode.MarkdownString[] = [];
+		const parts: zyraxoncode.MarkdownString[] = [];
 
 		if (data.displayString) {
 			const displayParts: string[] = [];
 
 			if (source === ServerType.Syntax && this.client.hasCapabilityForResource(resource, ClientCapability.Semantic)) {
 				displayParts.push(
-					vscode.l10n.t({
+					zyraxoncode.l10n.t({
 						message: "(loading...)",
 						comment: ['Prefix displayed for hover entries while the server is still loading']
 					}));
 			}
 
 			displayParts.push(data.displayString);
-			parts.push(new vscode.MarkdownString().appendCodeblock(displayParts.join(' '), 'typescript'));
+			parts.push(new zyraxoncode.MarkdownString().appendCodeblock(displayParts.join(' '), 'typescript'));
 		}
 		const md = documentationToMarkdown(data.documentation, data.tags, this.client, resource);
 		parts.push(md);
 		return parts;
 	}
 
-	private getPreviousLevel(previousHover: vscode.Hover | undefined): number {
+	private getPreviousLevel(previousHover: zyraxoncode.Hover | undefined): number {
 		if (previousHover && this.lastHoverAndLevel && this.lastHoverAndLevel[0] === previousHover) {
 			return this.lastHoverAndLevel[1];
 		}
@@ -106,11 +106,11 @@ export function register(
 	selector: DocumentSelector,
 	client: ITypeScriptServiceClient,
 	fileConfigurationManager: FileConfigurationManager,
-): vscode.Disposable {
+): zyraxoncode.Disposable {
 	return conditionalRegistration([
 		requireSomeCapability(client, ClientCapability.EnhancedSyntax, ClientCapability.Semantic),
 	], () => {
-		return vscode.languages.registerHoverProvider(selector.syntax,
+		return zyraxoncode.languages.registerHoverProvider(selector.syntax,
 			new TypeScriptHoverProvider(client, fileConfigurationManager));
 	});
 }

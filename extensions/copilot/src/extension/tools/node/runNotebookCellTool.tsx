@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptSizing } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { IAlternativeNotebookContentService } from '../../../platform/notebook/common/alternativeContent';
@@ -20,7 +20,7 @@ import { findNotebook, isJupyterNotebookUri } from '../../../util/common/noteboo
 import { raceCancellationError, raceTimeout } from '../../../util/vs/base/common/async';
 import { dispose } from '../../../util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExtendedLanguageModelToolResult, LanguageModelDataPart, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelDataPart, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { Tag } from '../../prompts/node/base/tag';
@@ -92,7 +92,7 @@ export class RunNotebookCellTool implements ICopilotTool<IRunNotebookCellToolPar
 		@ITelemetryService private readonly telemetryService: ITelemetryService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IRunNotebookCellToolParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IRunNotebookCellToolParams>, token: zyraxoncode.CancellationToken) {
 		const { filePath, cellId, continueOnError } = options.input;
 
 		const model = options.model && (await this.endpointProvider.getChatEndpoint(options.model)).model;
@@ -139,8 +139,8 @@ export class RunNotebookCellTool implements ICopilotTool<IRunNotebookCellToolPar
 			}
 
 			let infoMessage: string | undefined = undefined;
-			let executionSummary: vscode.NotebookCellExecutionSummary | undefined = undefined;
-			const disposables: vscode.Disposable[] = [];
+			let executionSummary: zyraxoncode.NotebookCellExecutionSummary | undefined = undefined;
+			const disposables: zyraxoncode.Disposable[] = [];
 			try {
 				const cellExecution = raceCancellationError(this.waitForCellExecution(cell, disposables), token);
 				const autoRevealArg = this.notebookService.getFollowState();
@@ -201,7 +201,7 @@ export class RunNotebookCellTool implements ICopilotTool<IRunNotebookCellToolPar
 		}
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IRunNotebookCellToolParams>): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IRunNotebookCellToolParams>): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		const { filePath, cellId, reason } = options.input;
 
 		const { cell } = this.getNotebookAndCell(filePath, cellId);
@@ -226,7 +226,7 @@ export class RunNotebookCellTool implements ICopilotTool<IRunNotebookCellToolPar
 		return input;
 	}
 
-	private getNotebookAndCell(filePath: string, cellId: string): { notebook: vscode.NotebookDocument; cell: vscode.NotebookCell } {
+	private getNotebookAndCell(filePath: string, cellId: string): { notebook: zyraxoncode.NotebookDocument; cell: zyraxoncode.NotebookCell } {
 		const resolvedUri = this.promptPathRepresentationService.resolveFilePath(filePath);
 		if (!resolvedUri) {
 			throw new Error(`Invalid file path`);
@@ -244,7 +244,7 @@ export class RunNotebookCellTool implements ICopilotTool<IRunNotebookCellToolPar
 		return { notebook, cell };
 	}
 
-	private formatRunMessage(cell: vscode.NotebookCell, reason?: string) {
+	private formatRunMessage(cell: zyraxoncode.NotebookCell, reason?: string) {
 		const lines = [`[](${cell.document.uri.toString()})`, ''];
 		lines.push('```' + cell.document.languageId);
 
@@ -277,8 +277,8 @@ export class RunNotebookCellTool implements ICopilotTool<IRunNotebookCellToolPar
 		return new MarkdownString(message);
 	}
 
-	private async waitForCellExecution(cell: vscode.NotebookCell, disposables: vscode.Disposable[]) {
-		return new Promise<vscode.NotebookCellExecutionSummary>((resolve) => {
+	private async waitForCellExecution(cell: zyraxoncode.NotebookCell, disposables: zyraxoncode.Disposable[]) {
+		return new Promise<zyraxoncode.NotebookCellExecutionSummary>((resolve) => {
 			disposables.push(this.workspaceService.onDidChangeNotebookDocument((e) => {
 				for (const change of e.cellChanges) {
 					if (change.executionSummary && typeof change.executionSummary.success === 'boolean' && change.cell === cell) {
@@ -298,7 +298,7 @@ interface IRunNotebookCellToolParams {
 }
 
 interface IRunNotebookCellResultSummaryProps extends BasePromptElementProps {
-	executionSummary: vscode.NotebookCellExecutionSummary | undefined;
+	executionSummary: zyraxoncode.NotebookCellExecutionSummary | undefined;
 	infoMessage: string | undefined;
 }
 
@@ -327,7 +327,7 @@ class RunNotebookCellResultSummary extends PromptElement<IRunNotebookCellResultS
 		);
 	}
 
-	private renderSummary(cellId: string, execution: vscode.NotebookCellExecutionSummary, renderExecutionOrder: boolean) {
+	private renderSummary(cellId: string, execution: zyraxoncode.NotebookCellExecutionSummary, renderExecutionOrder: boolean) {
 		let result = <>cell {cellId} </>;
 		if (typeof execution?.success === 'boolean') {
 			result = <>{result}{execution?.success ? <>executed successfully <br /></> : <>execution failed <br /></>}</>;
@@ -351,7 +351,7 @@ class RunNotebookCellResultSummary extends PromptElement<IRunNotebookCellResultS
 }
 
 interface IRunNotebookCellOutputProps extends BasePromptElementProps {
-	output: vscode.NotebookCellOutput;
+	output: zyraxoncode.NotebookCellOutput;
 	index: number;
 	sizeLimitRatio: number;
 }
@@ -408,7 +408,7 @@ export class RunNotebookCellOutput extends PromptElement<IRunNotebookCellOutputP
 		</Tag>;
 	}
 
-	private renderOutputFallback(output: vscode.NotebookCellOutput, limit: number) {
+	private renderOutputFallback(output: zyraxoncode.NotebookCellOutput, limit: number) {
 		const items = output.items.map(item => {
 			const buffer = item.data;
 			const text = buffer.toString();

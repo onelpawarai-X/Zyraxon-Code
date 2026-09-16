@@ -22,7 +22,7 @@ function isExclusive(selector: LanguageSelector): boolean {
 	} else if (Array.isArray(selector)) {
 		return selector.every(isExclusive);
 	} else {
-		return !!(selector as LanguageFilter).exclusive; // TODO: microsoft/TypeScript#42768
+		return !!(selector as LanguageFilter).exclusive; // TODO: zyraxon/TypeScript#42768
 	}
 }
 

@@ -8,7 +8,7 @@ import { CopilotToken } from '../../authentication/common/copilotToken';
 import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStore';
 import { IMSFTTelemetrySender, ITelemetrySender, TelemetryEventMeasurements, TelemetryEventProperties } from './telemetry';
 
-// This type aims to mirror the `TelemetryReporter` exposed by `@vscode/extension-telemetry`
+// This type aims to mirror the `TelemetryReporter` exposed by `@zyraxoncode/extension-telemetry`
 // It has a few more methods than just the base sender
 export interface ITelemetryReporter extends ITelemetrySender {
 	sendRawTelemetryEvent(eventName: string, properties?: TelemetryEventProperties, measurements?: TelemetryEventMeasurements): void;
@@ -21,7 +21,7 @@ export class BaseMsftTelemetrySender implements IMSFTTelemetrySender {
 
 	protected readonly _disposables: DisposableStore = new DisposableStore();
 	private _username: string | undefined;
-	private _vscodeTeamMember: boolean = false;
+	private _zyraxoncodeTeamMember: boolean = false;
 	private _sku: string | undefined;
 	private _tid: string | undefined;
 	private _isInternal: boolean = false;
@@ -47,7 +47,7 @@ export class BaseMsftTelemetrySender implements IMSFTTelemetrySender {
 			return;
 		}
 		properties = { ...properties, 'common.tid': this._tid, 'common.userName': this._username ?? 'undefined' };
-		measurements = { ...measurements, 'common.isVscodeTeamMember': this._vscodeTeamMember ? 1 : 0 };
+		measurements = { ...measurements, 'common.isVscodeTeamMember': this._zyraxoncodeTeamMember ? 1 : 0 };
 		this._internalTelemetryReporter.sendRawTelemetryEvent(eventName, properties, measurements);
 	}
 
@@ -92,7 +92,7 @@ export class BaseMsftTelemetrySender implements IMSFTTelemetrySender {
 
 	private processToken(token: CopilotToken | undefined) {
 		this._username = token?.username;
-		this._vscodeTeamMember = !!token?.isVscodeTeamMember;
+		this._zyraxoncodeTeamMember = !!token?.isVscodeTeamMember;
 		// Only update tid if we have a new valid value - preserve last known tid for error telemetry where token may be undefined
 		const newTid = token?.getTokenValue('tid');
 		if (newTid) {

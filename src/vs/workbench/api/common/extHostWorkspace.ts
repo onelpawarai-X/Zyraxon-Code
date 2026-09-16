@@ -31,7 +31,7 @@ import { Range } from './extHostTypes.js';
 import { IURITransformerService } from './extHostUriTransformerService.js';
 import { IFileQueryBuilderOptions, ISearchPatternBuilder, ITextQueryBuilderOptions } from '../../services/search/common/queryBuilder.js';
 import { IRawFileMatch2, ITextSearchResult, resultIsMatch } from '../../services/search/common/search.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostWorkspaceShape, IRelativePatternDto, IWorkspaceData, MainContext, MainThreadMessageOptions, MainThreadMessageServiceShape, MainThreadTelemetryShape, MainThreadWorkspaceShape } from './extHost.protocol.js';
 import { revive } from '../../../base/common/marshalling.js';
 import { AuthInfo, Credentials } from '../../../platform/request/common/request.js';
@@ -44,9 +44,9 @@ import { stringToSnapshot } from '../../services/textfile/common/textfiles.js';
 import type { ExtHostConfigProvider } from './extHostConfiguration.js';
 
 export interface IExtHostWorkspaceProvider {
-	getWorkspaceFolder2(uri: vscode.Uri, resolveParent?: boolean): Promise<vscode.WorkspaceFolder | undefined>;
-	resolveWorkspaceFolder(uri: vscode.Uri): Promise<vscode.WorkspaceFolder | undefined>;
-	getWorkspaceFolders2(): Promise<vscode.WorkspaceFolder[] | undefined>;
+	getWorkspaceFolder2(uri: zyraxoncode.Uri, resolveParent?: boolean): Promise<zyraxoncode.WorkspaceFolder | undefined>;
+	resolveWorkspaceFolder(uri: zyraxoncode.Uri): Promise<zyraxoncode.WorkspaceFolder | undefined>;
+	getWorkspaceFolders2(): Promise<zyraxoncode.WorkspaceFolder[] | undefined>;
 	resolveProxy(url: string): Promise<string | undefined>;
 	lookupAuthorization(authInfo: AuthInfo): Promise<Credentials | undefined>;
 	lookupKerberosAuthorization(url: string): Promise<string | undefined>;
@@ -57,11 +57,11 @@ function isFolderEqual(folderA: URI, folderB: URI, extHostFileSystemInfo: IExtHo
 	return new ExtUri(uri => ignorePathCasing(uri, extHostFileSystemInfo)).isEqual(folderA, folderB);
 }
 
-function compareWorkspaceFolderByUri(a: vscode.WorkspaceFolder, b: vscode.WorkspaceFolder, extHostFileSystemInfo: IExtHostFileSystemInfo): number {
+function compareWorkspaceFolderByUri(a: zyraxoncode.WorkspaceFolder, b: zyraxoncode.WorkspaceFolder, extHostFileSystemInfo: IExtHostFileSystemInfo): number {
 	return isFolderEqual(a.uri, b.uri, extHostFileSystemInfo) ? 0 : compare(a.uri.toString(), b.uri.toString());
 }
 
-function compareWorkspaceFolderByUriAndNameAndIndex(a: vscode.WorkspaceFolder, b: vscode.WorkspaceFolder, extHostFileSystemInfo: IExtHostFileSystemInfo): number {
+function compareWorkspaceFolderByUriAndNameAndIndex(a: zyraxoncode.WorkspaceFolder, b: zyraxoncode.WorkspaceFolder, extHostFileSystemInfo: IExtHostFileSystemInfo): number {
 	if (a.index !== b.index) {
 		return a.index < b.index ? -1 : 1;
 	}
@@ -69,7 +69,7 @@ function compareWorkspaceFolderByUriAndNameAndIndex(a: vscode.WorkspaceFolder, b
 	return isFolderEqual(a.uri, b.uri, extHostFileSystemInfo) ? compare(a.name, b.name) : compare(a.uri.toString(), b.uri.toString());
 }
 
-function delta(oldFolders: vscode.WorkspaceFolder[], newFolders: vscode.WorkspaceFolder[], compare: (a: vscode.WorkspaceFolder, b: vscode.WorkspaceFolder, extHostFileSystemInfo: IExtHostFileSystemInfo) => number, extHostFileSystemInfo: IExtHostFileSystemInfo): { removed: vscode.WorkspaceFolder[]; added: vscode.WorkspaceFolder[] } {
+function delta(oldFolders: zyraxoncode.WorkspaceFolder[], newFolders: zyraxoncode.WorkspaceFolder[], compare: (a: zyraxoncode.WorkspaceFolder, b: zyraxoncode.WorkspaceFolder, extHostFileSystemInfo: IExtHostFileSystemInfo) => number, extHostFileSystemInfo: IExtHostFileSystemInfo): { removed: zyraxoncode.WorkspaceFolder[]; added: zyraxoncode.WorkspaceFolder[] } {
 	const oldSortedFolders = oldFolders.slice(0).sort((a, b) => compare(a, b, extHostFileSystemInfo));
 	const newSortedFolders = newFolders.slice(0).sort((a, b) => compare(a, b, extHostFileSystemInfo));
 
@@ -81,7 +81,7 @@ function ignorePathCasing(uri: URI, extHostFileSystemInfo: IExtHostFileSystemInf
 	return !(capabilities && (capabilities & FileSystemProviderCapabilities.PathCaseSensitive));
 }
 
-interface MutableWorkspaceFolder extends vscode.WorkspaceFolder {
+interface MutableWorkspaceFolder extends zyraxoncode.WorkspaceFolder {
 	name: string;
 	index: number;
 }
@@ -102,13 +102,13 @@ interface FindFilesCallIntent {
 
 class ExtHostWorkspaceImpl extends Workspace {
 
-	static toExtHostWorkspace(data: IWorkspaceData | null, previousConfirmedWorkspace: ExtHostWorkspaceImpl | undefined, previousUnconfirmedWorkspace: ExtHostWorkspaceImpl | undefined, extHostFileSystemInfo: IExtHostFileSystemInfo): { workspace: ExtHostWorkspaceImpl | null; added: vscode.WorkspaceFolder[]; removed: vscode.WorkspaceFolder[] } {
+	static toExtHostWorkspace(data: IWorkspaceData | null, previousConfirmedWorkspace: ExtHostWorkspaceImpl | undefined, previousUnconfirmedWorkspace: ExtHostWorkspaceImpl | undefined, extHostFileSystemInfo: IExtHostFileSystemInfo): { workspace: ExtHostWorkspaceImpl | null; added: zyraxoncode.WorkspaceFolder[]; removed: zyraxoncode.WorkspaceFolder[] } {
 		if (!data) {
 			return { workspace: null, added: [], removed: [] };
 		}
 
 		const { id, name, folders, configuration, transient, isUntitled } = data;
-		const newWorkspaceFolders: vscode.WorkspaceFolder[] = [];
+		const newWorkspaceFolders: zyraxoncode.WorkspaceFolder[] = [];
 
 		// If we have an existing workspace, we try to find the folders that match our
 		// data and update their properties. It could be that an extension stored them
@@ -152,12 +152,12 @@ class ExtHostWorkspaceImpl extends Workspace {
 		return undefined;
 	}
 
-	private readonly _workspaceFolders: vscode.WorkspaceFolder[] = [];
-	private readonly _structure: TernarySearchTree<URI, vscode.WorkspaceFolder>;
+	private readonly _workspaceFolders: zyraxoncode.WorkspaceFolder[] = [];
+	private readonly _structure: TernarySearchTree<URI, zyraxoncode.WorkspaceFolder>;
 
-	constructor(id: string, private _name: string, folders: vscode.WorkspaceFolder[], transient: boolean, configuration: URI | null, private _isUntitled: boolean, ignorePathCasing: (key: URI) => boolean) {
+	constructor(id: string, private _name: string, folders: zyraxoncode.WorkspaceFolder[], transient: boolean, configuration: URI | null, private _isUntitled: boolean, ignorePathCasing: (key: URI) => boolean) {
 		super(id, folders.map(f => new WorkspaceFolder(f)), transient, configuration, ignorePathCasing);
-		this._structure = TernarySearchTree.forUris<vscode.WorkspaceFolder>(ignorePathCasing, () => true);
+		this._structure = TernarySearchTree.forUris<zyraxoncode.WorkspaceFolder>(ignorePathCasing, () => true);
 
 		// setup the workspace folder data structure
 		folders.forEach(folder => {
@@ -174,11 +174,11 @@ class ExtHostWorkspaceImpl extends Workspace {
 		return this._isUntitled;
 	}
 
-	get workspaceFolders(): vscode.WorkspaceFolder[] {
+	get workspaceFolders(): zyraxoncode.WorkspaceFolder[] {
 		return this._workspaceFolders.slice(0);
 	}
 
-	getWorkspaceFolder(uri: URI, resolveParent?: boolean): vscode.WorkspaceFolder | undefined {
+	getWorkspaceFolder(uri: URI, resolveParent?: boolean): zyraxoncode.WorkspaceFolder | undefined {
 		if (resolveParent && this._structure.get(uri)) {
 			// `uri` is a workspace folder so we check for its parent
 			uri = dirname(uri);
@@ -186,7 +186,7 @@ class ExtHostWorkspaceImpl extends Workspace {
 		return this._structure.findSubstr(uri);
 	}
 
-	resolveWorkspaceFolder(uri: URI): vscode.WorkspaceFolder | undefined {
+	resolveWorkspaceFolder(uri: URI): zyraxoncode.WorkspaceFolder | undefined {
 		return this._structure.get(uri);
 	}
 }
@@ -195,8 +195,8 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 
 	readonly _serviceBrand: undefined;
 
-	private readonly _onDidChangeWorkspace = new Emitter<vscode.WorkspaceFoldersChangeEvent>();
-	readonly onDidChangeWorkspace: Event<vscode.WorkspaceFoldersChangeEvent> = this._onDidChangeWorkspace.event;
+	private readonly _onDidChangeWorkspace = new Emitter<zyraxoncode.WorkspaceFoldersChangeEvent>();
+	readonly onDidChangeWorkspace: Event<zyraxoncode.WorkspaceFoldersChangeEvent> = this._onDidChangeWorkspace.event;
 
 	private readonly _onDidGrantWorkspaceTrust = new Emitter<void>();
 	readonly onDidGrantWorkspaceTrust: Event<void> = this._onDidGrantWorkspaceTrust.event;
@@ -221,7 +221,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 
 	private _trusted: boolean = false;
 
-	private readonly _editSessionIdentityProviders = new Map<string, vscode.EditSessionIdentityProvider>();
+	private readonly _editSessionIdentityProviders = new Map<string, zyraxoncode.EditSessionIdentityProvider>();
 
 	// Pushed in by ExtHostConfiguration after init (see `$setConfigProvider`).
 	private _configProvider?: ExtHostConfigProvider;
@@ -285,7 +285,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return this._actualWorkspace ? this._actualWorkspace.name : undefined;
 	}
 
-	get workspaceFile(): vscode.Uri | undefined {
+	get workspaceFile(): zyraxoncode.Uri | undefined {
 		if (this._actualWorkspace) {
 			if (this._actualWorkspace.configuration) {
 				if (this._actualWorkspace.isUntitled) {
@@ -303,14 +303,14 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return this._unconfirmedWorkspace || this._confirmedWorkspace;
 	}
 
-	getWorkspaceFolders(): vscode.WorkspaceFolder[] | undefined {
+	getWorkspaceFolders(): zyraxoncode.WorkspaceFolder[] | undefined {
 		if (!this._actualWorkspace) {
 			return undefined;
 		}
 		return this._actualWorkspace.workspaceFolders.slice(0);
 	}
 
-	async getWorkspaceFolders2(): Promise<vscode.WorkspaceFolder[] | undefined> {
+	async getWorkspaceFolders2(): Promise<zyraxoncode.WorkspaceFolder[] | undefined> {
 		await this._barrier.wait();
 		if (!this._actualWorkspace) {
 			return undefined;
@@ -318,8 +318,8 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return this._actualWorkspace.workspaceFolders.slice(0);
 	}
 
-	updateWorkspaceFolders(extension: IExtensionDescription, index: number, deleteCount: number, ...workspaceFoldersToAdd: { uri: vscode.Uri; name?: string }[]): boolean {
-		const validatedDistinctWorkspaceFoldersToAdd: { uri: vscode.Uri; name?: string }[] = [];
+	updateWorkspaceFolders(extension: IExtensionDescription, index: number, deleteCount: number, ...workspaceFoldersToAdd: { uri: zyraxoncode.Uri; name?: string }[]): boolean {
+		const validatedDistinctWorkspaceFoldersToAdd: { uri: zyraxoncode.Uri; name?: string }[] = [];
 		if (Array.isArray(workspaceFoldersToAdd)) {
 			workspaceFoldersToAdd.forEach(folderToAdd => {
 				if (URI.isUri(folderToAdd.uri) && !validatedDistinctWorkspaceFoldersToAdd.some(f => isFolderEqual(f.uri, folderToAdd.uri, this._extHostFileSystemInfo))) {
@@ -383,14 +383,14 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return true;
 	}
 
-	getWorkspaceFolder(uri: vscode.Uri, resolveParent?: boolean): vscode.WorkspaceFolder | undefined {
+	getWorkspaceFolder(uri: zyraxoncode.Uri, resolveParent?: boolean): zyraxoncode.WorkspaceFolder | undefined {
 		if (!this._actualWorkspace) {
 			return undefined;
 		}
 		return this._actualWorkspace.getWorkspaceFolder(uri, resolveParent);
 	}
 
-	async getWorkspaceFolder2(uri: vscode.Uri, resolveParent?: boolean): Promise<vscode.WorkspaceFolder | undefined> {
+	async getWorkspaceFolder2(uri: zyraxoncode.Uri, resolveParent?: boolean): Promise<zyraxoncode.WorkspaceFolder | undefined> {
 		await this._barrier.wait();
 		if (!this._actualWorkspace) {
 			return undefined;
@@ -398,7 +398,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return this._actualWorkspace.getWorkspaceFolder(uri, resolveParent);
 	}
 
-	async resolveWorkspaceFolder(uri: vscode.Uri): Promise<vscode.WorkspaceFolder | undefined> {
+	async resolveWorkspaceFolder(uri: zyraxoncode.Uri): Promise<zyraxoncode.WorkspaceFolder | undefined> {
 		await this._barrier.wait();
 		if (!this._actualWorkspace) {
 			return undefined;
@@ -423,7 +423,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return folders[0].uri.fsPath;
 	}
 
-	getRelativePath(pathOrUri: string | vscode.Uri, includeWorkspace?: boolean): string {
+	getRelativePath(pathOrUri: string | zyraxoncode.Uri, includeWorkspace?: boolean): string {
 
 		let resource: URI | undefined;
 		let path: string = '';
@@ -459,7 +459,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return result!;
 	}
 
-	private trySetWorkspaceFolders(folders: vscode.WorkspaceFolder[]): void {
+	private trySetWorkspaceFolders(folders: zyraxoncode.WorkspaceFolder[]): void {
 
 		// Update directly here. The workspace is unconfirmed as long as we did not get an
 		// acknowledgement from the main side (via $acceptWorkspaceData)
@@ -495,7 +495,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 	/**
 	 * Note, null/undefined have different and important meanings for "exclude"
 	 */
-	findFiles(include: vscode.GlobPattern | undefined, exclude: vscode.GlobPattern | null | undefined, maxResults: number | undefined, extensionId: ExtensionIdentifier, token: vscode.CancellationToken = CancellationToken.None): Promise<vscode.Uri[]> {
+	findFiles(include: zyraxoncode.GlobPattern | undefined, exclude: zyraxoncode.GlobPattern | null | undefined, maxResults: number | undefined, extensionId: ExtensionIdentifier, token: zyraxoncode.CancellationToken = CancellationToken.None): Promise<zyraxoncode.Uri[]> {
 		this._logService.trace(`extHostWorkspace#findFiles: fileSearch, extension: ${extensionId.value}, entryPoint: findFiles`);
 
 		let excludeString: string = '';
@@ -529,10 +529,10 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 	}
 
 
-	findFiles2(filePatterns: readonly vscode.GlobPattern[],
-		options: vscode.FindFiles2Options = {},
+	findFiles2(filePatterns: readonly zyraxoncode.GlobPattern[],
+		options: zyraxoncode.FindFiles2Options = {},
 		extensionId: ExtensionIdentifier,
-		token: vscode.CancellationToken = CancellationToken.None): Promise<vscode.Uri[]> {
+		token: zyraxoncode.CancellationToken = CancellationToken.None): Promise<zyraxoncode.Uri[]> {
 		this._logService.trace(`extHostWorkspace#findFiles2New: fileSearch, extension: ${extensionId.value}, entryPoint: findFiles2New`);
 		return this._findFilesImpl({ type: 'filePatterns', value: filePatterns }, options, extensionId, 'findFiles2', { useIgnoreFilesLocal: options.useIgnoreFiles?.local, excludeWasNull: false }, token);
 	}
@@ -540,13 +540,13 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 	private async _findFilesImpl(
 		// the old `findFiles` used `include` to query, but the new `findFiles2` uses `filePattern` to query.
 		// `filePattern` is the proper way to handle this, since it takes less precedence than the ignore files.
-		query: { readonly type: 'include'; readonly value: vscode.GlobPattern | undefined } | { readonly type: 'filePatterns'; readonly value: readonly vscode.GlobPattern[] },
-		options: vscode.FindFiles2Options,
+		query: { readonly type: 'include'; readonly value: zyraxoncode.GlobPattern | undefined } | { readonly type: 'filePatterns'; readonly value: readonly zyraxoncode.GlobPattern[] },
+		options: zyraxoncode.FindFiles2Options,
 		extensionId: ExtensionIdentifier,
 		apiKind: FindFilesApiKind,
 		intent: FindFilesCallIntent,
-		token: vscode.CancellationToken
-	): Promise<vscode.Uri[]> {
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.Uri[]> {
 		const useIgnoreFilesLocalRequested: 'unspecified' | 'true' | 'false' =
 			intent.useIgnoreFilesLocal === true ? 'true'
 				: intent.useIgnoreFilesLocal === false ? 'false'
@@ -638,7 +638,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 	private async _findFilesBase(
 		queryOptions: QueryOptions<IFileQueryBuilderOptions>[] | undefined,
 		token: CancellationToken
-	): Promise<vscode.Uri[]> {
+	): Promise<zyraxoncode.Uri[]> {
 		// Ensure the token is recognized by the RPC protocol. Tokens from extension
 		// bundles may use a different CancellationToken module and fail the instanceof
 		// check in isCancellationToken(), causing them to be serialized (without
@@ -665,7 +665,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 
 		// Dedupe entries in a flat array
 		const extUri = new ExtUri(uri => ignorePathCasing(uri, this._extHostFileSystemInfo));
-		const uriMap = new Map<string, vscode.Uri>();
+		const uriMap = new Map<string, zyraxoncode.Uri>();
 
 		for (const uri of flatResult) {
 			const key = extUri.getComparisonKey(uri);
@@ -718,11 +718,11 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		this._telemetryProxy.$publicLog2<FindFilesEvent, FindFilesEventClassification>('extHostFindFiles', event);
 	}
 
-	findTextInFiles2(query: vscode.TextSearchQuery2, options: vscode.FindTextInFilesOptions2 | undefined, extensionId: ExtensionIdentifier, token: vscode.CancellationToken = CancellationToken.None): vscode.FindTextInFilesResponse {
+	findTextInFiles2(query: zyraxoncode.TextSearchQuery2, options: zyraxoncode.FindTextInFilesOptions2 | undefined, extensionId: ExtensionIdentifier, token: zyraxoncode.CancellationToken = CancellationToken.None): zyraxoncode.FindTextInFilesResponse {
 		this._logService.trace(`extHostWorkspace#findTextInFiles2: textSearch, extension: ${extensionId.value}, entryPoint: findTextInFiles2`);
 
 
-		const getOptions = (include: vscode.GlobPattern | undefined): QueryOptions<ITextQueryBuilderOptions> => {
+		const getOptions = (include: zyraxoncode.GlobPattern | undefined): QueryOptions<ITextQueryBuilderOptions> => {
 			if (!options) {
 				return {
 					folder: undefined,
@@ -771,7 +771,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 			(result, uri) => progressEmitter.fire({ result, uri }),
 			token
 		);
-		const asyncIterable = new AsyncIterableProducer<vscode.TextSearchResult2>(async emitter => {
+		const asyncIterable = new AsyncIterableProducer<zyraxoncode.TextSearchResult2>(async emitter => {
 			disposables.add(progressEmitter.event(e => {
 				const result = e.result;
 				const uri = e.uri;
@@ -809,7 +809,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 	}
 
 
-	async findTextInFilesBase(query: vscode.TextSearchQuery, queryOptions: QueryOptions<ITextQueryBuilderOptions>[] | undefined, callback: (result: ITextSearchResult<URI>, uri: URI) => void, token: vscode.CancellationToken = CancellationToken.None): Promise<vscode.TextSearchComplete> {
+	async findTextInFilesBase(query: zyraxoncode.TextSearchQuery, queryOptions: QueryOptions<ITextQueryBuilderOptions>[] | undefined, callback: (result: ITextSearchResult<URI>, uri: URI) => void, token: zyraxoncode.CancellationToken = CancellationToken.None): Promise<zyraxoncode.TextSearchComplete> {
 		const requestId = this._requestIdProvider.getNext();
 
 		let isCanceled = false;
@@ -855,10 +855,10 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		}
 	}
 
-	async findTextInFiles(query: vscode.TextSearchQuery, options: vscode.FindTextInFilesOptions & { useSearchExclude?: boolean }, callback: (result: vscode.TextSearchResult) => void, extensionId: ExtensionIdentifier, token: vscode.CancellationToken = CancellationToken.None): Promise<vscode.TextSearchComplete> {
+	async findTextInFiles(query: zyraxoncode.TextSearchQuery, options: zyraxoncode.FindTextInFilesOptions & { useSearchExclude?: boolean }, callback: (result: zyraxoncode.TextSearchResult) => void, extensionId: ExtensionIdentifier, token: zyraxoncode.CancellationToken = CancellationToken.None): Promise<zyraxoncode.TextSearchComplete> {
 		this._logService.trace(`extHostWorkspace#findTextInFiles: textSearch, extension: ${extensionId.value}, entryPoint: findTextInFiles`);
 
-		const previewOptions: vscode.TextSearchPreviewOptions = typeof options.previewOptions === 'undefined' ?
+		const previewOptions: zyraxoncode.TextSearchPreviewOptions = typeof options.previewOptions === 'undefined' ?
 			{
 				matchLines: 100,
 				charsPerLine: 10000
@@ -898,13 +898,13 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 					ranges: mapArrayOrNot(
 						result.rangeLocations,
 						r => new Range(r.source.startLineNumber, r.source.startColumn, r.source.endLineNumber, r.source.endColumn))
-				} satisfies vscode.TextSearchMatch);
+				} satisfies zyraxoncode.TextSearchMatch);
 			} else {
 				callback({
 					uri,
 					text: result.text,
 					lineNumber: result.lineNumber
-				} satisfies vscode.TextSearchContext);
+				} satisfies zyraxoncode.TextSearchContext);
 			}
 		};
 
@@ -953,11 +953,11 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return this._trusted;
 	}
 
-	requestResourceTrust(options: vscode.ResourceTrustRequestOptions): Promise<boolean | undefined> {
+	requestResourceTrust(options: zyraxoncode.ResourceTrustRequestOptions): Promise<boolean | undefined> {
 		return this._proxy.$requestResourceTrust(options);
 	}
 
-	requestWorkspaceTrust(options?: vscode.WorkspaceTrustRequestOptions): Promise<boolean | undefined> {
+	requestWorkspaceTrust(options?: zyraxoncode.WorkspaceTrustRequestOptions): Promise<boolean | undefined> {
 		return this._proxy.$requestWorkspaceTrust(options);
 	}
 
@@ -972,7 +972,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		this._onDidChangeWorkspaceTrustedFolders.fire();
 	}
 
-	isResourceTrusted(resource: vscode.Uri): Promise<boolean> {
+	isResourceTrusted(resource: zyraxoncode.Uri): Promise<boolean> {
 		return this._proxy.$isResourceTrusted(resource);
 	}
 
@@ -981,7 +981,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 	private _providerHandlePool = 0;
 
 	// called by ext host
-	registerEditSessionIdentityProvider(scheme: string, provider: vscode.EditSessionIdentityProvider) {
+	registerEditSessionIdentityProvider(scheme: string, provider: zyraxoncode.EditSessionIdentityProvider) {
 		if (this._editSessionIdentityProviders.has(scheme)) {
 			throw new Error(`A provider has already been registered for scheme ${scheme}`);
 		}
@@ -1048,11 +1048,11 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return result;
 	}
 
-	private readonly _onWillCreateEditSessionIdentityEvent = new AsyncEmitter<vscode.EditSessionIdentityWillCreateEvent>();
+	private readonly _onWillCreateEditSessionIdentityEvent = new AsyncEmitter<zyraxoncode.EditSessionIdentityWillCreateEvent>();
 
-	getOnWillCreateEditSessionIdentityEvent(extension: IExtensionDescription): Event<vscode.EditSessionIdentityWillCreateEvent> {
+	getOnWillCreateEditSessionIdentityEvent(extension: IExtensionDescription): Event<zyraxoncode.EditSessionIdentityWillCreateEvent> {
 		return (listener, thisArg, disposables) => {
-			const wrappedListener: IExtensionListener<vscode.EditSessionIdentityWillCreateEvent> = function wrapped(e) { listener.call(thisArg, e); };
+			const wrappedListener: IExtensionListener<zyraxoncode.EditSessionIdentityWillCreateEvent> = function wrapped(e) { listener.call(thisArg, e); };
 			wrappedListener.extension = extension;
 			return this._onWillCreateEditSessionIdentityEvent.event(wrappedListener, undefined, disposables);
 		};
@@ -1070,7 +1070,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 			const now = Date.now();
 			await Promise.resolve(thenable);
 			if (Date.now() - now > timeout) {
-				this._logService.warn('SLOW edit session create-participant', (<IExtensionListener<vscode.EditSessionIdentityWillCreateEvent>>listener).extension.identifier);
+				this._logService.warn('SLOW edit session create-participant', (<IExtensionListener<zyraxoncode.EditSessionIdentityWillCreateEvent>>listener).extension.identifier);
 			}
 		});
 
@@ -1081,10 +1081,10 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 
 	// --- canonical uri identity ---
 
-	private readonly _canonicalUriProviders = new Map<string, vscode.CanonicalUriProvider>();
+	private readonly _canonicalUriProviders = new Map<string, zyraxoncode.CanonicalUriProvider>();
 
 	// called by ext host
-	registerCanonicalUriProvider(scheme: string, provider: vscode.CanonicalUriProvider) {
+	registerCanonicalUriProvider(scheme: string, provider: zyraxoncode.CanonicalUriProvider) {
 		if (this._canonicalUriProviders.has(scheme)) {
 			throw new Error(`A provider has already been registered for scheme ${scheme}`);
 		}
@@ -1100,7 +1100,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		});
 	}
 
-	async provideCanonicalUri(uri: URI, options: vscode.CanonicalUriRequestOptions, cancellationToken: CancellationToken): Promise<URI | undefined> {
+	async provideCanonicalUri(uri: URI, options: zyraxoncode.CanonicalUriRequestOptions, cancellationToken: CancellationToken): Promise<URI | undefined> {
 		const provider = this._canonicalUriProviders.get(uri.scheme);
 		if (!provider) {
 			return undefined;
@@ -1121,7 +1121,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 
 	// --- encodings ---
 
-	async decode(content: Uint8Array, args?: { uri?: vscode.Uri; encoding?: string }): Promise<string> {
+	async decode(content: Uint8Array, args?: { uri?: zyraxoncode.Uri; encoding?: string }): Promise<string> {
 		const [uri, opts] = this.toEncodeDecodeParameters(args);
 		const options = await this._proxy.$resolveDecoding(uri, opts);
 
@@ -1143,7 +1143,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return consumeStream(stream, chunks => chunks.join(''));
 	}
 
-	async encode(content: string, args?: { uri?: vscode.Uri; encoding?: string }): Promise<Uint8Array> {
+	async encode(content: string, args?: { uri?: zyraxoncode.Uri; encoding?: string }): Promise<Uint8Array> {
 		const [uri, options] = this.toEncodeDecodeParameters(args);
 		const { encoding, addBOM } = await this._proxy.$resolveEncoding(uri, options);
 
@@ -1157,7 +1157,7 @@ export class ExtHostWorkspace implements ExtHostWorkspaceShape, IExtHostWorkspac
 		return readableToBuffer(res).buffer;
 	}
 
-	private toEncodeDecodeParameters(opts?: { uri?: vscode.Uri; encoding?: string }): [UriComponents | undefined, { encoding: string } | undefined] {
+	private toEncodeDecodeParameters(opts?: { uri?: zyraxoncode.Uri; encoding?: string }): [UriComponents | undefined, { encoding: string } | undefined] {
 		const uri = isUriComponents(opts?.uri) ? opts.uri : undefined;
 		const encoding = typeof opts?.encoding === 'string' ? opts.encoding : undefined;
 
@@ -1192,7 +1192,7 @@ interface IExtensionListener<E> {
 	(e: E): any;
 }
 
-function globsToISearchPatternBuilder(excludes: vscode.GlobPattern[] | undefined): ISearchPatternBuilder<URI>[] {
+function globsToISearchPatternBuilder(excludes: zyraxoncode.GlobPattern[] | undefined): ISearchPatternBuilder<URI>[] {
 	return (
 		excludes?.map((exclude): ISearchPatternBuilder<URI> | undefined => {
 			if (typeof exclude === 'string') {

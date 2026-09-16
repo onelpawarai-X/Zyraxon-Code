@@ -283,12 +283,12 @@ Every rounded thing belongs to exactly one tier:
 
 | Tier | Radius | Token | What it is |
 |------|--------|-------|------------|
-| **Control** | 4px | `--vscode-cornerRadius-small` | interactible elements - buttons, inputs, list rows, tabs |
-| **Inner** | 6px | `--vscode-cornerRadius-medium` | non-control containers sitting *inside* a surface |
-| **Outer** | 8px | `--vscode-cornerRadius-large` | floating / overlay surfaces - menus, hovers, dialogs, toasts |
+| **Control** | 4px | `--zyraxoncode-cornerRadius-small` | interactible elements - buttons, inputs, list rows, tabs |
+| **Inner** | 6px | `--zyraxoncode-cornerRadius-medium` | non-control containers sitting *inside* a surface |
+| **Outer** | 8px | `--zyraxoncode-cornerRadius-large` | floating / overlay surfaces - menus, hovers, dialogs, toasts |
 
 Pills (radius ≈ half the height) are **fully round**
-(`--vscode-cornerRadius-circle`), not "a big radius."
+(`--zyraxoncode-cornerRadius-circle`), not "a big radius."
 - **Decision rule:** pick the tier by the surface's **role in the stack**, not by
   how the corner looks. A bug here sounds like *"this overlay is rounded at the
   control tier,"* never *"this needs more border-radius."*
@@ -336,7 +336,7 @@ just scaled.
 <a id="one-stroke"></a>
 ### One stroke
 
-The standard border/separator stroke is **1px** (`--vscode-strokeThickness`).
+The standard border/separator stroke is **1px** (`--zyraxoncode-strokeThickness`).
 - **Decision rule:** whether an ordinary border is present is a **yes/no** decision.
   Preserve thicker semantic or accessibility strokes, such as focus indicators.
 - **Serves:** *Quiet at rest* (1), *Sameness signals sameness* (6).
@@ -344,7 +344,7 @@ The standard border/separator stroke is **1px** (`--vscode-strokeThickness`).
 <a id="theme-color"></a>
 ### Color comes from the theme
 
-Every color is a `--vscode-*` theme token, so the UI tracks the active theme and
+Every color is a `--zyraxoncode-*` theme token, so the UI tracks the active theme and
 high-contrast modes.
 - **Decision rule:** a hardcoded hex is a bug by construction. Color bugs are
   *"wrong theme token"* (or *"a token that disappears in light/HC"*), never a hex

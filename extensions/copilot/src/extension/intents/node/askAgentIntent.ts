@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -38,10 +38,10 @@ import { IAuthenticationService } from '../../../platform/authentication/common/
 import { IAutomaticInstructionsCollector } from '../../../platform/promptFiles/node/automaticInstructionsCollector';
 
 
-const getTools = (instaService: IInstantiationService, request: vscode.ChatRequest): Promise<vscode.LanguageModelToolInformation[]> =>
+const getTools = (instaService: IInstantiationService, request: zyraxoncode.ChatRequest): Promise<zyraxoncode.LanguageModelToolInformation[]> =>
 	instaService.invokeFunction(async accessor => {
 		const toolsService = accessor.get<IToolsService>(IToolsService);
-		const lookForTags = new Set<string>(['vscode_codesearch']);
+		const lookForTags = new Set<string>(['zyraxoncode_codesearch']);
 		const endpointProvider = accessor.get<IEndpointProvider>(IEndpointProvider);
 		const model = await endpointProvider.getChatEndpoint(request);
 
@@ -67,7 +67,7 @@ export class AskAgentIntent implements IIntent {
 		@IConfigurationService private readonly configurationService: IConfigurationService,
 	) { }
 
-	private getIntentHandlerOptions(request: vscode.ChatRequest): IDefaultIntentRequestHandlerOptions | undefined {
+	private getIntentHandlerOptions(request: zyraxoncode.ChatRequest): IDefaultIntentRequestHandlerOptions | undefined {
 		return {
 			maxToolCallIterations: getRequestedToolCallIterationLimit(request) ?? this.instantiationService.invokeFunction(getAgentMaxRequests),
 			temperature: this.configurationService.getConfig(ConfigKey.Advanced.AgentTemperature) ?? 0,
@@ -75,7 +75,7 @@ export class AskAgentIntent implements IIntent {
 		};
 	}
 
-	async handleRequest(conversation: Conversation, request: vscode.ChatRequest, stream: vscode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext | undefined, agentName: string, location: ChatLocation, chatTelemetry: ChatTelemetryBuilder): Promise<vscode.ChatResult> {
+	async handleRequest(conversation: Conversation, request: zyraxoncode.ChatRequest, stream: zyraxoncode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext | undefined, agentName: string, location: ChatLocation, chatTelemetry: ChatTelemetryBuilder): Promise<zyraxoncode.ChatResult> {
 		const actual = this.instantiationService.createInstance(
 			DefaultIntentRequestHandler,
 			this,
@@ -114,7 +114,7 @@ export class AskAgentIntentInvocation extends AgentIntentInvocation {
 		intent: IIntent,
 		location: ChatLocation,
 		endpoint: IChatEndpoint,
-		request: vscode.ChatRequest,
+		request: zyraxoncode.ChatRequest,
 		@IInstantiationService instantiationService: IInstantiationService,
 		@ICodeMapperService codeMapperService: ICodeMapperService,
 		@IEnvService envService: IEnvService,
@@ -138,7 +138,7 @@ export class AskAgentIntentInvocation extends AgentIntentInvocation {
 		super(intent, location, endpoint, request, { processCodeblocks: true }, instantiationService, codeMapperService, envService, promptPathRepresentationService, endpointProvider, workspaceService, toolsService, configurationService, editLogService, commandService, telemetryService, notebookService, logService, expService, automodeService, otelService, sessionTranscriptService, automaticInstructionsCollector, authenticationService);
 	}
 
-	public override async getAvailableTools(): Promise<vscode.LanguageModelToolInformation[]> {
+	public override async getAvailableTools(): Promise<zyraxoncode.LanguageModelToolInformation[]> {
 		return getTools(this.instantiationService, this.request);
 	}
 }

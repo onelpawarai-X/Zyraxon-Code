@@ -9,16 +9,16 @@
 	flex-direction: column;
 	width: 520px;
 	max-width: 100%;
-	color: var(--vscode-editorHoverWidget-foreground);
+	color: var(--zyraxoncode-editorHoverWidget-foreground);
 }
 
 .sessions-issue-hover-header {
 	display: flex;
 	align-items: baseline;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
-	padding: var(--vscode-spacing-size120) var(--vscode-spacing-size160) 0;
-	font-size: var(--vscode-agents-fontSize-body1);
+	padding: var(--zyraxoncode-spacing-size120) var(--zyraxoncode-spacing-size160) 0;
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 1.4;
 }
 
@@ -31,13 +31,13 @@
 
 .sessions-issue-hover-date {
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .sessions-issue-hover-title {
-	padding: var(--vscode-spacing-size40) var(--vscode-spacing-size160) var(--vscode-spacing-size120);
-	font-size: var(--vscode-agents-fontSize-heading2, 18px);
-	font-weight: var(--vscode-agents-fontWeight-semiBold, 600);
+	padding: var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-size160) var(--zyraxoncode-spacing-size120);
+	font-size: var(--zyraxoncode-agents-fontSize-heading2, 18px);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold, 600);
 	line-height: 1.25;
 	overflow-wrap: anywhere;
 }
@@ -48,11 +48,11 @@
 	-webkit-line-clamp: 3;
 	line-clamp: 3;
 	overflow: hidden;
-	padding: var(--vscode-spacing-size120) var(--vscode-spacing-size160);
-	border-top: var(--vscode-strokeThickness) solid var(--vscode-editorHoverWidget-border);
-	font-size: var(--vscode-agents-fontSize-body1);
+	padding: var(--zyraxoncode-spacing-size120) var(--zyraxoncode-spacing-size160);
+	border-top: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-editorHoverWidget-border);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 1.4;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow-wrap: anywhere;
 }
 
@@ -64,21 +64,21 @@
 	flex-direction: column;
 	min-width: 260px;
 	max-width: 420px;
-	padding: var(--vscode-spacing-size40) 0;
+	padding: var(--zyraxoncode-spacing-size40) 0;
 }
 
 .sessions-issue-list-entry {
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size80);
+	gap: var(--zyraxoncode-spacing-size80);
 	min-width: 0;
-	padding: var(--vscode-spacing-size40) var(--vscode-spacing-size120);
+	padding: var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-size120);
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background: none;
-	color: var(--vscode-editorHoverWidget-foreground);
+	color: var(--zyraxoncode-editorHoverWidget-foreground);
 	font-family: inherit;
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 1.4;
 	text-align: left;
 	cursor: pointer;
@@ -86,12 +86,12 @@
 
 .sessions-issue-list-entry:hover,
 .sessions-issue-list-entry:focus {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 	outline: none;
 }
 
 .sessions-issue-list-entry:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -101,7 +101,7 @@
 
 .sessions-issue-list-entry-number {
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-variant-numeric: tabular-nums;
 }
 

@@ -2861,7 +2861,7 @@
             "installVscDebugger": {
               "type": "boolean",
               "default": false,
-              "description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger."
+              "description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the ZyraxonCode-R-Debugger."
             },
             "useTesting": {
               "type": "boolean",
@@ -3040,7 +3040,7 @@
             "installVscDebugger": {
               "type": "boolean",
               "default": false,
-              "description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger."
+              "description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the ZyraxonCode-R-Debugger."
             },
             "pandocVersion": {
               "type": "string",
@@ -6710,7 +6710,7 @@
           "version": "1.0.15",
           "name": "FFmpeg (via apt-get)",
           "documentationURL": "http://github.com/devcontainers-contrib/features/tree/main/src/ffmpeg-apt-get",
-          "description": "FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge. No matter if they were designed by some standards committee, the community or a corporation. It is also highly portable: FFmpeg compiles, runs, and passes our testing infrastructure FATE across Linux, Mac OS X, Microsoft Windows, the BSDs, Solaris, etc. under a wide variety of build environments, machine architectures, and configurations.",
+          "description": "FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge. No matter if they were designed by some standards committee, the community or a corporation. It is also highly portable: FFmpeg compiles, runs, and passes our testing infrastructure FATE across Linux, Mac OS X, Zyraxon Windows, the BSDs, Solaris, etc. under a wide variety of build environments, machine architectures, and configurations.",
           "options": {},
           "installsAfter": [
             "ghcr.io/devcontainers-contrib/features/apt-get-packages"
@@ -6723,7 +6723,7 @@
           "version": "1.0.18",
           "name": "FFmpeg (via Homebrew)",
           "documentationURL": "http://github.com/devcontainers-contrib/features/tree/main/src/ffmpeg-homebrew",
-          "description": "FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge. No matter if they were designed by some standards committee, the community or a corporation. It is also highly portable: FFmpeg compiles, runs, and passes our testing infrastructure FATE across Linux, Mac OS X, Microsoft Windows, the BSDs, Solaris, etc. under a wide variety of build environments, machine architectures, and configurations.",
+          "description": "FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge. No matter if they were designed by some standards committee, the community or a corporation. It is also highly portable: FFmpeg compiles, runs, and passes our testing infrastructure FATE across Linux, Mac OS X, Zyraxon Windows, the BSDs, Solaris, etc. under a wide variety of build environments, machine architectures, and configurations.",
           "options": {
             "version": {
               "default": "latest",
@@ -17731,7 +17731,7 @@
           "name": "SQLite",
           "id": "ghcr.io/warrenbuckley/codespace-features/sqlite",
           "version": "1.0.0",
-          "description": "Installs SQLite into the devcontainer and uses the SQLite VSCode extension",
+          "description": "Installs SQLite into the devcontainer and uses the SQLite ZyraxonCode extension",
           "keywords": [
             "SQLite",
             "Database"
@@ -19506,7 +19506,7 @@
           "id": "ghcr.io/multiversx/mx-template-devcontainers/smart-contracts-rust",
           "version": "0.2.0",
           "name": "MultiversX: Smart Contracts Development (Rust)",
-          "description": "Develop smart contracts for MultiversX. Includes Rust, mxpy, VSCode extensions etc.",
+          "description": "Develop smart contracts for MultiversX. Includes Rust, mxpy, ZyraxonCode extensions etc.",
           "documentationURL": "https://github.com/multiversx/mx-template-devcontainers/blob/main/src/smart-contracts-rust",
           "publisher": "MultiversX",
           "licenseURL": "https://github.com/multiversx/mx-template-devcontainers/blob/main/LICENSE",

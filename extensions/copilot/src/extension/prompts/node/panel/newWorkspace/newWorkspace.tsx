@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, RenderPromptResult, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, RenderPromptResult, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../../../platform/chat/common/commonTypes';
 import { EmbeddingType, IEmbeddingsComputer } from '../../../../../platform/embeddings/common/embeddingsComputer';
 import { IEndpointProvider } from '../../../../../platform/endpoint/common/endpointProvider';
@@ -16,7 +16,7 @@ import { reportProgressOnSlowPromise } from '../../../../../util/common/progress
 import { CancellationToken } from '../../../../../util/vs/base/common/cancellation';
 import * as path from '../../../../../util/vs/base/common/path';
 import { IInstantiationService } from '../../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseProgressPart } from '../../../../../vscodeTypes';
+import { ChatResponseProgressPart } from '../../../../../zyraxoncodeTypes';
 import { newId } from '../../../../intents/node/newIntent';
 import { PromptMetadata } from '../../../../prompt/common/conversation';
 import { IBuildPromptContext } from '../../../../prompt/common/intents';
@@ -73,7 +73,7 @@ export class NewWorkspacePrompt extends PromptElement<NewWorkspacePromptProps, N
 		super(props);
 	}
 
-	override async prepare(sizing: PromptSizing, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart> | undefined, token: CancellationToken): Promise<NewWorkspacePromptState> {
+	override async prepare(sizing: PromptSizing, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart> | undefined, token: CancellationToken): Promise<NewWorkspacePromptState> {
 		if (!progress) {
 			throw new Error('Progress is required');
 		}
@@ -122,7 +122,7 @@ export class NewWorkspacePrompt extends PromptElement<NewWorkspacePromptProps, N
 							if (items.length > 0) {
 								let url: string;
 								if (repoPath === '.') {
-									url = `httpx://github.com/${org}/${repo}`;
+									url = `__ZYRAXKEEP__0_{org}/${repo}`;
 								} else {
 									url = path.dirname(items[0].html_url);
 								}
@@ -290,7 +290,7 @@ export class NewWorkspacePrompt extends PromptElement<NewWorkspacePromptProps, N
 							'## Valid setup question with an irrelevant URL ##',
 							'',
 							'User: Create a TypeScript express app',
-							'URL: https://github.com/microsoft/vscode-extension-samples/tree/main/getting-started-sample',
+							'URL: __ZYRAXKEEP__1_',
 							'Assistant:',
 							'',
 							'Sure, here\'s a proposed directory structure for a TypeScript Express app:',
@@ -324,12 +324,12 @@ export class NewWorkspacePrompt extends PromptElement<NewWorkspacePromptProps, N
 							'',
 							'## Valid setup question with a relevant project URL. Notice how you should not propose a file directory structure in this case. ##',
 							'',
-							'User: Create a VSCode extension sample for contributing getting started walkthrough.',
-							'URL: https://github.com/microsoft/vscode-extension-samples/tree/main/getting-started-sample',
+							'User: Create a ZyraxonCode extension sample for contributing getting started walkthrough.',
+							'URL: __ZYRAXKEEP__2_',
 							'Assistant:',
 							'',
 							'# USING_URL',
-							'Sure, here\'s a GitHub sample project to help you get started on creating a VSCode extension with a walkthrough contribution: [Walkthrough Sample](https://github.com/microsoft/vscode-extension-samples/tree/main/getting-started-sample)',
+							'Sure, here\'s a GitHub sample project to help you get started on creating a ZyraxonCode extension with a walkthrough contribution: [Walkthrough Sample](__ZYRAXKEEP__3_)',
 							'',
 						].join('\n')}
 						<br />
@@ -424,7 +424,7 @@ export class NewWorkspaceMetaPrompt extends PromptElement<NewWorkspaceMetaPrompt
 					When responding:<br />
 					- Use Markdown to format your response, starting with a `# Question` header followed by the rephrased question.<br />
 					- If the user's intent is unclear or unrelated to ZYRAXON Code, simply return the original question without modification.<br />
-					- If the user has not explicitly mentioned that they are looking for a project or a file, assume that they are asking for a Visual Studio project.<br />
+					- If the user has not explicitly mentioned that they are looking for a project or a file, assume that they are asking for a ZYRAXON project.<br />
 					- Avoid requesting additional information or directly answering the question.<br />
 					- Use the template below to report the identified intent, rephrased question, and any application logic or feature that may be relevant.<br />
 					<br />

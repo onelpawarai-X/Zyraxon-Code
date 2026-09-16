@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, NotebookCell, NotebookDocument } from 'vscode';
+import type { CancellationToken, NotebookCell, NotebookDocument } from 'zyraxoncode';
 import { isJupyterNotebookUri } from '../../../util/common/notebooks';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { isUri } from '../../../util/common/types';
 import { AsyncIterableObject, AsyncIterableSource, DeferredPromise } from '../../../util/vs/base/common/async';
 import { StringSHA1 } from '../../../util/vs/base/common/hash';
 import { Constants } from '../../../util/vs/base/common/uint';
-import { EndOfLine, NotebookCellData, NotebookCellKind, NotebookEdit, NotebookRange, Range, TextEdit, Uri } from '../../../vscodeTypes';
+import { EndOfLine, NotebookCellData, NotebookCellKind, NotebookEdit, NotebookRange, Range, TextEdit, Uri } from '../../../zyraxoncodeTypes';
 import { IDiffService } from '../../diff/common/diffService';
 import { ILogService } from '../../log/common/logService';
 import { ITelemetryService } from '../../telemetry/common/telemetry';

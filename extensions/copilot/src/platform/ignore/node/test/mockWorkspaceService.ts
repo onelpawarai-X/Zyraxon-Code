@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { FileSystem, NotebookData, NotebookDocument, NotebookDocumentChangeEvent, ResourceTrustRequestOptions, TextDocument, TextDocumentChangeEvent, TextEditorSelectionChangeEvent, Uri, WorkspaceEdit, WorkspaceFolder, WorkspaceFoldersChangeEvent, WorkspaceTrustRequestOptions } from 'vscode';
+import type { FileSystem, NotebookData, NotebookDocument, NotebookDocumentChangeEvent, ResourceTrustRequestOptions, TextDocument, TextDocumentChangeEvent, TextEditorSelectionChangeEvent, Uri, WorkspaceEdit, WorkspaceFolder, WorkspaceFoldersChangeEvent, WorkspaceTrustRequestOptions } from 'zyraxoncode';
 import { Event } from '../../../../util/vs/base/common/event';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { NotebookDocumentSnapshot } from '../../../editing/common/notebookDocumentSnapshot';

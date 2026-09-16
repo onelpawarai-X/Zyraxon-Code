@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ITokenizer as ITsxTokenizer, OutputMode, Raw } from '@vscode/prompt-tsx';
-import type { LanguageModelChatTool } from 'vscode';
+import type { ITokenizer as ITsxTokenizer, OutputMode, Raw } from '@zyraxoncode/prompt-tsx';
+import type { LanguageModelChatTool } from 'zyraxoncode';
 
 
 export enum TokenizerType {

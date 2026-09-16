@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@vscode/copilot-api';
+import { RequestType } from '@zyraxoncode/copilot-api';
 import { Codicon } from '../../../util/vs/base/common/codicons';
 import { IAuthenticationService } from '../../authentication/common/authentication';
 import type { ImageTelemetryMeasurements } from '../../image/common/imageTelemetry';
@@ -68,7 +68,7 @@ export class RouterDecisionFetcher {
 	) {
 	}
 
-	async getRouterDecision(query: string, autoModeToken: string, availableModels: string[], stickyThreshold?: number, contextSignals?: RoutingContextSignals, conversationId?: string, vscodeRequestId?: string, routingMethod?: string, hasImage?: boolean, imageTelemetryEventMeasurements?: Partial<ImageTelemetryMeasurements>): Promise<RouterDecisionResponse> {
+	async getRouterDecision(query: string, autoModeToken: string, availableModels: string[], stickyThreshold?: number, contextSignals?: RoutingContextSignals, conversationId?: string, zyraxoncodeRequestId?: string, routingMethod?: string, hasImage?: boolean, imageTelemetryEventMeasurements?: Partial<ImageTelemetryMeasurements>): Promise<RouterDecisionResponse> {
 		const startTime = Date.now();
 		const requestBody: Record<string, unknown> = { prompt: query, available_models: availableModels, ...contextSignals };
 		if (stickyThreshold !== undefined) {
@@ -146,7 +146,7 @@ export class RouterDecisionFetcher {
 				"owner": "lramos15",
 				"comment": "Reports the routing decision made by the auto mode router API",
 				"conversationId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The conversation ID in which the routing decision was made." },
-				"vscodeRequestId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The ZYRAXON Code chat request id in which the routing decision was made." },
+				"zyraxoncodeRequestId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The ZYRAXON Code chat request id in which the routing decision was made." },
 				"routingMethod": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The routing method used for this request (empty=server default, binary, hydra). Identifies the A/B/C experiment path." },
 				"fallback": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "Whether the router signaled a fallback to default automod selection." },
 				"fallbackReason": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The reason provided by the server when fallback is true." },
@@ -164,7 +164,7 @@ export class RouterDecisionFetcher {
 		this._telemetryService.sendMSFTTelemetryEvent('automode.routerDecision',
 			{
 				conversationId: conversationId ?? '',
-				vscodeRequestId: vscodeRequestId ?? '',
+				zyraxoncodeRequestId: zyraxoncodeRequestId ?? '',
 				routingMethod: result.routing_method ?? '',
 				fallback: String(result.fallback ?? false),
 				fallbackReason: result.fallback_reason ?? '',
@@ -185,7 +185,7 @@ export class RouterDecisionFetcher {
 		this._telemetryService.sendEnhancedGHTelemetryEvent('automode.routerDecisionRestricted',
 			{
 				conversationId: conversationId ?? '',
-				vscodeRequestId: vscodeRequestId ?? '',
+				zyraxoncodeRequestId: zyraxoncodeRequestId ?? '',
 				predictedLabel: result.predicted_label,
 				routingMethod: result.routing_method ?? '',
 				fallback: String(result.fallback ?? false),

@@ -128,7 +128,7 @@ export abstract class AbstractExtensionService extends Disposable implements IEx
 
 		// help the file service to activate providers by activating extensions by file system event
 		this._register(this._fileService.onWillActivateFileSystemProvider(e => {
-			if (e.scheme !== Schemas.vscodeRemote) {
+			if (e.scheme !== Schemas.zyraxoncodeRemote) {
 				e.join(this.activateByEvent(`onFileSystem:${e.scheme}`));
 			}
 		}));
@@ -380,7 +380,7 @@ export abstract class AbstractExtensionService extends Disposable implements IEx
 		}
 
 		const extensionKinds = this._runningLocations.readExtensionKinds(extension);
-		const isRemote = extension.extensionLocation.scheme === Schemas.vscodeRemote;
+		const isRemote = extension.extensionLocation.scheme === Schemas.zyraxoncodeRemote;
 		const extensionHostKind = this._extensionHostKindPicker.pickExtensionHostKind(extension.identifier, extensionKinds, !isRemote, isRemote, ExtensionRunningPreference.None);
 		if (extensionHostKind === null) {
 			return false;
@@ -624,7 +624,7 @@ export abstract class AbstractExtensionService extends Disposable implements IEx
 		if (runningLocation === null) {
 			// not sure if we should support that, but it was possible to have an test outside an extension
 
-			if (testLocation.scheme === Schemas.vscodeRemote) {
+			if (testLocation.scheme === Schemas.zyraxoncodeRemote) {
 				runningLocation = new RemoteRunningLocation();
 			} else {
 				// When a debugger attaches to the extension host, it will surface all console.log messages from the extension host,
@@ -1013,7 +1013,7 @@ export abstract class AbstractExtensionService extends Disposable implements IEx
 
 				// Note: some callers come in so early that the extension hosts have not even been created yet.
 				// Therefore we kick off the extension host creation, but without awaiting it.
-				// See https://github.com/microsoft/vscode/issues/260061
+				// See __ZYRAXKEEP__0_
 				void this._initializeIfNeeded();
 
 				return this._activateByEvent(activationEvent, activationKind);
@@ -1351,7 +1351,7 @@ class ExtensionHostCollection extends Disposable {
 	}
 
 	public async stopAllInReverse(): Promise<void> {
-		// See https://github.com/microsoft/vscode/issues/152204
+		// See __ZYRAXKEEP__1_
 		// Dispose extension hosts in reverse creation order because the local extension host
 		// might be critical in sustaining a connection to the remote extension host
 		for (let i = this._extensionHostManagers.length - 1; i >= 0; i--) {

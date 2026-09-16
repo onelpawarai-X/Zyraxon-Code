@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
@@ -37,7 +37,7 @@ export interface IClaudeCodeModels {
 	 * Registers a LanguageModelChatProvider so that Claude models appear in
 	 * ZYRAXON Code's built-in model picker for the claude-code session type.
 	 */
-	registerLanguageModelChatProvider(lm: typeof vscode['lm']): void;
+	registerLanguageModelChatProvider(lm: typeof zyraxoncode['lm']): void;
 }
 
 export const IClaudeCodeModels = createServiceIdentifier<IClaudeCodeModels>('IClaudeCodeModels');
@@ -58,8 +58,8 @@ export class ClaudeCodeModels extends Disposable implements IClaudeCodeModels {
 		}));
 	}
 
-	public registerLanguageModelChatProvider(lm: typeof vscode['lm']): void {
-		const provider: vscode.LanguageModelChatProvider = {
+	public registerLanguageModelChatProvider(lm: typeof zyraxoncode['lm']): void {
+		const provider: zyraxoncode.LanguageModelChatProvider = {
 			onDidChangeLanguageModelChatInformation: this._onDidChange.event,
 			provideLanguageModelChatInformation: async (_options, _token) => {
 				return this._provideLanguageModelChatInfo();
@@ -84,7 +84,7 @@ export class ClaudeCodeModels extends Disposable implements IClaudeCodeModels {
 		return this._cachedEndpoints;
 	}
 
-	private async _provideLanguageModelChatInfo(): Promise<vscode.LanguageModelChatInformation[]> {
+	private async _provideLanguageModelChatInfo(): Promise<zyraxoncode.LanguageModelChatInformation[]> {
 		const endpoints = await this._getEndpoints();
 		return endpoints.map(endpoint => {
 			const multiplier = endpoint.multiplier === undefined ? undefined : `${endpoint.multiplier}x`;
@@ -216,7 +216,7 @@ export function pickReasoningEffort(endpoint: IChatEndpoint | undefined, request
 	return undefined;
 }
 
-function buildConfigurationSchema(endpoint: IChatEndpoint): vscode.LanguageModelConfigurationSchema | undefined {
+function buildConfigurationSchema(endpoint: IChatEndpoint): zyraxoncode.LanguageModelConfigurationSchema | undefined {
 	const effortLevels = endpoint.supportsReasoningEffort?.filter(
 		(level): level is typeof SUPPORTED_EFFORT_LEVELS[number] =>
 			(SUPPORTED_EFFORT_LEVELS as readonly string[]).includes(level)

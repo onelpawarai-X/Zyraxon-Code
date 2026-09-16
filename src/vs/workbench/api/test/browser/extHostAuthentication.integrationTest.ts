@@ -24,7 +24,7 @@ import { IRemoteAgentService } from '../../../services/remote/common/remoteAgent
 import { TestRPCProtocol } from '../common/testRPCProtocol.js';
 import { TestEnvironmentService, TestHostService, TestQuickInputService, TestRemoteAgentService } from '../../../test/browser/workbenchTestServices.js';
 import { TestActivityService, TestExtensionService, TestLoggerService, TestProductService, TestStorageService } from '../../../test/common/workbenchTestServices.js';
-import type { AuthenticationProvider, AuthenticationSession } from 'vscode';
+import type { AuthenticationProvider, AuthenticationSession } from 'zyraxoncode';
 import { IBrowserWorkbenchEnvironmentService } from '../../../services/environment/browser/environmentService.js';
 import { IProductService } from '../../../../platform/product/common/productService.js';
 import { AuthenticationAccessService, IAuthenticationAccessService } from '../../../services/authentication/browser/authenticationAccessService.js';

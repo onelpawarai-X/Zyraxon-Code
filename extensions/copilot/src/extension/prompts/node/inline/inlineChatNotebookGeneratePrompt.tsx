@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { INotebookService } from '../../../../platform/notebook/common/notebookService';
@@ -63,7 +63,7 @@ export class InlineChatNotebookGeneratePrompt extends PromptElement<InlineChatEd
 	}
 
 	render(state: InlineChatNotebookBasePromptState, sizing: PromptSizing) {
-		if (this.props.documentContext.document.uri.scheme !== Schemas.vscodeNotebookCell) {
+		if (this.props.documentContext.document.uri.scheme !== Schemas.zyraxoncodeNotebookCell) {
 			throw illegalArgument('InlineChatNotebookBasePrompt should be used only with a notebook!');
 		}
 		const { query, history, chatVariables } = this.props.promptContext;
@@ -152,7 +152,7 @@ class InlineChatNotebookGenerateSelection extends PromptElement<InlineChatNotebo
 		const inSummaryExperiment = this.experimentationService.getTreatmentVariable('copilotchat.notebookSummary')
 			|| this.configurationService.getConfig(ConfigKey.Advanced.NotebookSummaryExperimentEnabled);
 
-		let executedCells: vscode.NotebookCell[] | undefined = undefined;
+		let executedCells: zyraxoncode.NotebookCell[] | undefined = undefined;
 		if (inSummaryExperiment && this.tabsAndEditorsService.activeNotebookEditor?.notebook && this.tabsAndEditorsService.activeNotebookEditor?.notebook.uri.path === document.uri.path) {
 			// experiment new notebook summary
 			executedCells = this.notebookService.getCellExecutions(this.tabsAndEditorsService.activeNotebookEditor.notebook.uri);
@@ -165,7 +165,7 @@ class InlineChatNotebookGenerateSelection extends PromptElement<InlineChatNotebo
 	}
 
 	render(state: InlineChatNotebookSelectionState, sizing: PromptSizing) {
-		if (this.props.documentContext.document.uri.scheme !== Schemas.vscodeNotebookCell) {
+		if (this.props.documentContext.document.uri.scheme !== Schemas.zyraxoncodeNotebookCell) {
 			throw illegalArgument('InlineChatNotebookSelection should be used only with a notebook!');
 		}
 		const { wholeRange } = state;
@@ -253,7 +253,7 @@ class InlineChatNotebookGenerateSelection extends PromptElement<InlineChatNotebo
 
 interface InlineChatJupyterNotebookCellSummaryContextRendererProps extends BasePromptElementProps {
 	documentContext: IDocumentContext;
-	executedCells: vscode.NotebookCell[] | undefined;
+	executedCells: zyraxoncode.NotebookCell[] | undefined;
 }
 
 class InlineChatJupyterNotebookCellSummaryContextRenderer extends PromptElement<InlineChatJupyterNotebookCellSummaryContextRendererProps> {
@@ -308,7 +308,7 @@ class InlineChatJupyterNotebookCellSummaryContextRenderer extends PromptElement<
 	}
 }
 
-class NotebookCellContent extends PromptElement<{ cell: vscode.NotebookCell } & BasePromptElementProps> {
+class NotebookCellContent extends PromptElement<{ cell: zyraxoncode.NotebookCell } & BasePromptElementProps> {
 	override render() {
 		return <>
 			```{this.props.cell.document.languageId}<br />

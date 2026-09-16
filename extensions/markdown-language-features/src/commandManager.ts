@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 export interface Command {
 	readonly id: string;
@@ -12,7 +12,7 @@ export interface Command {
 }
 
 export class CommandManager {
-	readonly #commands = new Map<string, vscode.Disposable>();
+	readonly #commands = new Map<string, zyraxoncode.Disposable>();
 
 	public dispose() {
 		for (const registration of this.#commands.values()) {
@@ -21,9 +21,9 @@ export class CommandManager {
 		this.#commands.clear();
 	}
 
-	public register<T extends Command>(command: T): vscode.Disposable {
+	public register<T extends Command>(command: T): zyraxoncode.Disposable {
 		this.#registerCommand(command.id, command.execute, command);
-		return new vscode.Disposable(() => {
+		return new zyraxoncode.Disposable(() => {
 			this.#commands.delete(command.id);
 		});
 	}
@@ -33,6 +33,6 @@ export class CommandManager {
 			return;
 		}
 
-		this.#commands.set(id, vscode.commands.registerCommand(id, impl, thisArg));
+		this.#commands.set(id, zyraxoncode.commands.registerCommand(id, impl, thisArg));
 	}
 }

@@ -25,13 +25,13 @@ import { Schemas } from '../../../../base/common/network.js';
  * The optional "prefix" contains arbitrary text and the optional "path" contains a file system path.
  * Concatenating both results in the original command line argument.
  */
-interface ILaunchVSCodeArgument {
+interface ILaunchZyraxonCodeArgument {
 	prefix?: string;
 	path?: string;
 }
 
-interface ILaunchVSCodeArguments {
-	args: ILaunchVSCodeArgument[];
+interface ILaunchZyraxonCodeArguments {
+	args: ILaunchZyraxonCodeArgument[];
 	debugRenderer?: boolean;
 	env?: { [key: string]: string | null };
 }
@@ -656,9 +656,9 @@ export class RawDebugSession implements IDisposable {
 
 		const safeSendResponse = (response: DebugProtocol.Response) => this.debugAdapter && this.debugAdapter.sendResponse(response);
 
-		if (request.command === 'launchVSCode') {
+		if (request.command === 'launchZyraxonCode') {
 			try {
-				let result = await this.launchVsCode(<ILaunchVSCodeArguments>request.arguments);
+				let result = await this.launchVsCode(<ILaunchZyraxonCodeArguments>request.arguments);
 				if (!result.success) {
 					const { confirmed } = await this.dialogSerivce.confirm({
 						type: Severity.Warning,
@@ -666,7 +666,7 @@ export class RawDebugSession implements IDisposable {
 						primaryButton: nls.localize({ key: 'continue', comment: ['&& denotes a mnemonic'] }, "&&Continue")
 					});
 					if (confirmed) {
-						result = await this.launchVsCode(<ILaunchVSCodeArguments>request.arguments);
+						result = await this.launchVsCode(<ILaunchZyraxonCodeArguments>request.arguments);
 					} else {
 						response.success = false;
 						safeSendResponse(response);
@@ -727,11 +727,11 @@ export class RawDebugSession implements IDisposable {
 		}
 	}
 
-	private launchVsCode(vscodeArgs: ILaunchVSCodeArguments): Promise<IOpenExtensionWindowResult> {
+	private launchVsCode(zyraxoncodeArgs: ILaunchZyraxonCodeArguments): Promise<IOpenExtensionWindowResult> {
 
 		const args: string[] = [];
 
-		for (const arg of vscodeArgs.args) {
+		for (const arg of zyraxoncodeArgs.args) {
 			const a2 = (arg.prefix || '') + (arg.path || '');
 			const match = /^--(.+)=(.+)$/.exec(a2);
 			if (match && match.length === 3) {
@@ -747,11 +747,11 @@ export class RawDebugSession implements IDisposable {
 			}
 		}
 
-		if (vscodeArgs.env) {
-			args.push(`--extensionEnvironment=${JSON.stringify(vscodeArgs.env)}`);
+		if (zyraxoncodeArgs.env) {
+			args.push(`--extensionEnvironment=${JSON.stringify(zyraxoncodeArgs.env)}`);
 		}
 
-		return this.extensionHostDebugService.openExtensionDevelopmentHostWindow(args, !!vscodeArgs.debugRenderer);
+		return this.extensionHostDebugService.openExtensionDevelopmentHostWindow(args, !!zyraxoncodeArgs.debugRenderer);
 	}
 
 	private send<R extends DebugProtocol.Response>(command: string, args: any, token?: CancellationToken, timeout?: number, showErrors = true): Promise<R | undefined> {

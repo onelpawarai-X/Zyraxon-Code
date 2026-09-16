@@ -3,12 +3,12 @@ setlocal
 
 pushd %~dp0\..
 
-:: TODO(deepak1556): Remove this once we bump to node containing fix for https://github.com/nodejs/node/issues/63638.
+:: TODO(deepak1556): Remove this once we bump to node containing fix for __ZYRAXKEEP__0_
 for /f "delims=" %%i in ('node -p "require('fs').realpathSync.native(require('os').tmpdir())"') do set "TMP=%%i"
 set "TEMP=%TMP%"
 
 IF "%~1" == "" (
-	set AUTHORITY=vscode-remote://test+test/
+	set AUTHORITY=__ZYRAXKEEP__1_
 	:: backward to forward slashed
 	set EXT_PATH=%CD:\=/%/extensions
 
@@ -41,12 +41,12 @@ if not exist ".\test\integration\browser\out\index.js" (
 
 echo.
 echo ### API tests (folder)
-call node .\test\integration\browser\out\index.js --workspacePath=.\extensions\vscode-api-tests\testWorkspace --enable-proposed-api=vscode.vscode-api-tests --extensionDevelopmentPath=.\extensions\vscode-api-tests --extensionTestsPath=.\extensions\vscode-api-tests\out\singlefolder-tests %*
+call node .\test\integration\browser\out\index.js --workspacePath=.\extensions\zyraxoncode-api-tests\testWorkspace --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests --extensionDevelopmentPath=.\extensions\zyraxoncode-api-tests --extensionTestsPath=.\extensions\zyraxoncode-api-tests\out\singlefolder-tests %*
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo.
 echo ### API tests (workspace)
-call node .\test\integration\browser\out\index.js --workspacePath=.\extensions\vscode-api-tests\testworkspace.code-workspace --enable-proposed-api=vscode.vscode-api-tests --extensionDevelopmentPath=.\extensions\vscode-api-tests --extensionTestsPath=.\extensions\vscode-api-tests\out\workspace-tests %*
+call node .\test\integration\browser\out\index.js --workspacePath=.\extensions\zyraxoncode-api-tests\testworkspace.code-workspace --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests --extensionDevelopmentPath=.\extensions\zyraxoncode-api-tests --extensionTestsPath=.\extensions\zyraxoncode-api-tests\out\workspace-tests %*
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo.

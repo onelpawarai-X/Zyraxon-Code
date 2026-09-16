@@ -265,12 +265,12 @@ extends:
         enabled: true
         configFile: $(Build.SourcesDirectory)/build/azure-pipelines/config/tsaoptions.json
       binskim:
-        analyzeTargetGlob: '+:file|$(Agent.BuildDirectory)/VSCode-*/**/*.exe;+:file|$(Agent.BuildDirectory)/VSCode-*/**/*.dll;+:file|$(Agent.BuildDirectory)/VSCode-*/**/*.node;-:file|$(Agent.BuildDirectory)/VSCode-*/**/resources/**/*.exe;-:file|$(Agent.BuildDirectory)/VSCode-*/**/resources/**/*.node;-:file|$(Build.SourcesDirectory)/.build/**/system-setup/VSCodeSetup*.exe;-:file|$(Build.SourcesDirectory)/.build/**/user-setup/VSCodeUserSetup*.exe'
+        analyzeTargetGlob: '+:file|$(Agent.BuildDirectory)/ZyraxonCode-*/**/*.exe;+:file|$(Agent.BuildDirectory)/ZyraxonCode-*/**/*.dll;+:file|$(Agent.BuildDirectory)/ZyraxonCode-*/**/*.node;-:file|$(Agent.BuildDirectory)/ZyraxonCode-*/**/resources/**/*.exe;-:file|$(Agent.BuildDirectory)/ZyraxonCode-*/**/resources/**/*.node;-:file|$(Build.SourcesDirectory)/.build/**/system-setup/ZyraxonCodeSetup*.exe;-:file|$(Build.SourcesDirectory)/.build/**/user-setup/ZyraxonCodeUserSetup*.exe'
       codeql:
         runSourceLanguagesInSourceAnalysis: true
         compiled:
           enabled: false
-          justificationForDisabling: "CodeQL breaks ESRP CodeSign on macOS (ICM #520035761, githubcustomers/microsoft-codeql-support#198)"
+          justificationForDisabling: "CodeQL breaks ESRP CodeSign on macOS (ICM #520035761, githubcustomers/zyraxon-codeql-support#198)"
       credscan:
         suppressionsFile: $(Build.SourcesDirectory)/build/azure-pipelines/config/CredScanSuppressions.json
       eslint:
@@ -813,7 +813,7 @@ extends:
               - job: ApproveRelease
                 displayName: "Approve Release"
                 variables:
-                  - group: VSCodePeerApproval
+                  - group: ZyraxonCodePeerApproval
                   - name: skipComponentGovernanceDetection
                     value: true
 

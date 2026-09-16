@@ -10,7 +10,7 @@
 }
 
 .chat-auto-mode-resolution-body {
-	border-left: var(--vscode-strokeThickness) solid var(--vscode-chat-requestBorder);
+	border-left: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-chat-requestBorder);
 	margin-left: 4px;
 	padding-left: 12px;
 	padding-top: 2px;
@@ -22,7 +22,7 @@
 }
 
 .chat-auto-mode-resolution-explanation {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .chat-auto-mode-resolution-detail {

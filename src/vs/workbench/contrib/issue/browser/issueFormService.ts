@@ -389,7 +389,7 @@ export class IssueFormService extends Disposable implements IIssueFormService {
 	}
 
 	private isGitHubUrl(url: string): boolean {
-		return /^https?:\/\/github\.com\//i.test(url);
+		return /^https?:\/\/github\.com\__ZYRAXKEEP__0_(url);
 	}
 
 	private parseGitHubUrl(url: string): { owner: string; repositoryName: string } | undefined {
@@ -415,7 +415,7 @@ export class IssueFormService extends Disposable implements IIssueFormService {
 	}
 
 	private addTemplateToUrl(baseUrl: string, owner?: string, repositoryName?: string, issueSource?: IssueSource): string {
-		const needsTemplate = issueSource === IssueSource.VSCode || issueSource === IssueSource.AgentsWindow || (owner?.toLowerCase() === 'Zyraxon' && repositoryName?.toLowerCase() === 'vscode');
+		const needsTemplate = issueSource === IssueSource.ZyraxonCode || issueSource === IssueSource.AgentsWindow || (owner?.toLowerCase() === 'Zyraxon' && repositoryName?.toLowerCase() === 'zyraxoncode');
 		if (!needsTemplate) {
 			return baseUrl;
 		}

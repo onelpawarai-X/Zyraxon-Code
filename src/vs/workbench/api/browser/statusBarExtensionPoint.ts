@@ -125,8 +125,8 @@ class ExtensionStatusBarItemService implements IExtensionStatusBarItemService {
 				// We cannot enforce unique priorities across all extensions, so we
 				// use the extension identifier as a secondary sort key to reduce
 				// the likelyhood of collisions.
-				// See https://github.com/microsoft/vscode/issues/177835
-				// See https://github.com/microsoft/vscode/issues/123827
+				// See __ZYRAXKEEP__0_
+				// See __ZYRAXKEEP__1_
 				entryPriority = { primary: priority, secondary: hash(extensionId) };
 			} else {
 				entryPriority = priority;
@@ -191,7 +191,7 @@ const statusBarItemSchema = {
 	properties: {
 		id: {
 			type: 'string',
-			markdownDescription: localize('id', 'The identifier of the status bar entry. Must be unique within the extension. The same value must be used when calling the `vscode.window.createStatusBarItem(id, ...)`-API')
+			markdownDescription: localize('id', 'The identifier of the status bar entry. Must be unique within the extension. The same value must be used when calling the `zyraxoncode.window.createStatusBarItem(id, ...)`-API')
 		},
 		name: {
 			type: 'string',
@@ -225,7 +225,7 @@ const statusBarItemSchema = {
 			properties: {
 				role: {
 					type: 'string',
-					description: localize('accessibilityInformation.role', 'The role of the status bar entry which defines how a screen reader interacts with it. More about aria roles can be found here https://w3c.github.io/aria/#widget_roles')
+					description: localize('accessibilityInformation.role', 'The role of the status bar entry which defines how a screen reader interacts with it. More about aria roles can be found here __ZYRAXKEEP__2_')
 				},
 				label: {
 					type: 'string',
@@ -237,7 +237,7 @@ const statusBarItemSchema = {
 } as const satisfies IJSONSchema;
 
 const statusBarItemsSchema: IJSONSchema = {
-	description: localize('vscode.extension.contributes.statusBarItems', "Contributes items to the status bar."),
+	description: localize('zyraxoncode.extension.contributes.statusBarItems', "Contributes items to the status bar."),
 	oneOf: [
 		statusBarItemSchema,
 		{

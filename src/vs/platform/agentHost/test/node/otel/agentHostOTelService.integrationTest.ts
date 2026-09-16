@@ -175,7 +175,7 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 				'deployment.environment.name': 'dev',
 				custom: 'value with spaces',
 				'service.name': 'agent-host',
-				'service.namespace': 'vscode.agent-host',
+				'service.namespace': 'zyraxoncode.agent-host',
 			},
 		});
 	});
@@ -219,13 +219,13 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 		deepStrictEqual(result.resourceSpans[0].scopeSpans[2].spans, []);
 		strictEqual(result.resourceSpans[1].scopeSpans[0].spans.length, 1);
 		ok(result.resourceSpans[0].resource.attributes.some(attribute => attribute.key === 'deployment.environment.name' && attribute.value.stringValue === 'test'));
-		ok(result.resourceSpans.every(resourceSpan => resourceSpan.resource.attributes.some(attribute => attribute.key === 'service.namespace' && attribute.value.stringValue === 'vscode.agent-host')));
+		ok(result.resourceSpans.every(resourceSpan => resourceSpan.resource.attributes.some(attribute => attribute.key === 'service.namespace' && attribute.value.stringValue === 'zyraxoncode.agent-host')));
 	});
 
 	test('getSdkTelemetryConfig: returns undefined when fully disabled', async () => {
 		const saved = saveEnv();
 		try {
-			const tmp = await mkdtemp(join(tmpdir(), 'vscode-otel-svc-'));
+			const tmp = await mkdtemp(join(tmpdir(), 'zyraxoncode-otel-svc-'));
 			store.add({ dispose: () => void rm(tmp, { recursive: true, force: true }).catch(() => undefined) });
 
 			const di = store.add(new TestInstantiationService());
@@ -249,7 +249,7 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 			process.env.COPILOT_OTEL_SOURCE_NAME = 'agent-host';
 			process.env.OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT = 'true';
 
-			const tmp = await mkdtemp(join(tmpdir(), 'vscode-otel-svc-'));
+			const tmp = await mkdtemp(join(tmpdir(), 'zyraxoncode-otel-svc-'));
 			store.add({ dispose: () => void rm(tmp, { recursive: true, force: true }).catch(() => undefined) });
 
 			const di = store.add(new TestInstantiationService());
@@ -273,9 +273,9 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 		try {
 			for (const protocol of ['http/protobuf', 'grpc', 'http/grpc']) {
 				process.env.COPILOT_OTEL_ENABLED = 'true';
-				process.env.OTEL_EXPORTER_OTLP_ENDPOINT = 'http://collector:4318';
+				process.env.OTEL_EXPORTER_OTLP_ENDPOINT = '__ZYRAXKEEP__0_';
 				process.env.OTEL_EXPORTER_OTLP_PROTOCOL = protocol;
-				const tmp = await mkdtemp(join(tmpdir(), 'vscode-otel-svc-'));
+				const tmp = await mkdtemp(join(tmpdir(), 'zyraxoncode-otel-svc-'));
 				store.add({ dispose: () => void rm(tmp, { recursive: true, force: true }).catch(() => undefined) });
 				const di = store.add(new TestInstantiationService());
 				di.set(ILogService, new NullLogService());
@@ -310,11 +310,11 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 
 	test('native SDK config splits DB traces from direct external signals', async () => {
 		const saved = saveEnv();
-		const tmp = await mkdtemp(join(tmpdir(), 'vscode-otel-svc-'));
+		const tmp = await mkdtemp(join(tmpdir(), 'zyraxoncode-otel-svc-'));
 		store.add({ dispose: () => void rm(tmp, { recursive: true, force: true }).catch(() => undefined) });
 		try {
 			process.env.COPILOT_OTEL_DB_SPAN_EXPORTER_ENABLED = 'true';
-			process.env.OTEL_EXPORTER_OTLP_ENDPOINT = 'http://collector:4318';
+			process.env.OTEL_EXPORTER_OTLP_ENDPOINT = '__ZYRAXKEEP__1_';
 			process.env.OTEL_EXPORTER_OTLP_PROTOCOL = 'http/protobuf';
 			const di = store.add(new TestInstantiationService());
 			di.set(ILogService, new NullLogService());
@@ -322,10 +322,10 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 			const svc = store.add(di.createInstance(AgentHostOTelService, undefined));
 
 			const config = await svc.getNativeSdkTelemetryConfig();
-			ok(config?.traces?.endpoint.startsWith('http://127.0.0.1:'));
+			ok(config?.traces?.endpoint.startsWith('__ZYRAXKEEP__2_'));
 			strictEqual(config?.traces?.protocol, 'http/json');
-			deepStrictEqual(config?.external, { endpoint: 'http://collector:4318', protocol: 'http/protobuf' });
-			deepStrictEqual(config?.resourceAttributes, { 'service.namespace': 'vscode.agent-host' });
+			deepStrictEqual(config?.external, { endpoint: '__ZYRAXKEEP__3_', protocol: 'http/protobuf' });
+			deepStrictEqual(config?.resourceAttributes, { 'service.namespace': 'zyraxoncode.agent-host' });
 			const context = svc.getSessionTraceContext('conversation', 'claude:/conversation');
 			ok(context);
 			strictEqual(context.traceparent, `00-${context.traceId}-${context.spanId}-01`);
@@ -338,7 +338,7 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 
 	test('DB mode: starts loopback, persists posted spans to SQLite, and exposes db path', async () => {
 		const saved = saveEnv();
-		const tmp = await mkdtemp(join(tmpdir(), 'vscode-otel-svc-'));
+		const tmp = await mkdtemp(join(tmpdir(), 'zyraxoncode-otel-svc-'));
 		const cleanup = () => rm(tmp, { recursive: true, force: true }).catch(() => undefined);
 		try {
 			process.env.COPILOT_OTEL_DB_SPAN_EXPORTER_ENABLED = 'true';
@@ -351,7 +351,7 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 			const cfg = await svc.getSdkTelemetryConfig();
 			ok(cfg, 'expected a TelemetryConfig');
 			strictEqual(cfg!.exporterType, 'otlp-http');
-			ok(cfg!.otlpEndpoint?.startsWith('http://127.0.0.1:'), `expected loopback endpoint, got ${cfg!.otlpEndpoint}`);
+			ok(cfg!.otlpEndpoint?.startsWith('__ZYRAXKEEP__4_'), `expected loopback endpoint, got ${cfg!.otlpEndpoint}`);
 
 			const dbPath = svc.getSpansDbPath();
 			ok(dbPath, 'expected a db path in DB mode');
@@ -396,7 +396,7 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 
 	test('DB mode: emits session title metadata spans when content capture is enabled', async () => {
 		const saved = saveEnv();
-		const tmp = await mkdtemp(join(tmpdir(), 'vscode-otel-svc-'));
+		const tmp = await mkdtemp(join(tmpdir(), 'zyraxoncode-otel-svc-'));
 		const cleanup = () => rm(tmp, { recursive: true, force: true }).catch(() => undefined);
 		try {
 			process.env.COPILOT_OTEL_DB_SPAN_EXPORTER_ENABLED = 'true';
@@ -423,7 +423,7 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 				strictEqual(reader.getSpanAttribute(titleSpan.span_id, AgentHostSessionTitleAttribute)?.length, 200);
 				strictEqual(reader.getSpanAttribute(titleSpan.span_id, AgentHostSessionUriAttribute), 'copilotcli:/conv-title');
 				strictEqual(reader.getSpanAttribute(titleSpan.span_id, 'service.name'), 'agent-host-test');
-				strictEqual(reader.getSpanAttribute(titleSpan.span_id, 'service.namespace'), 'vscode.agent-host');
+				strictEqual(reader.getSpanAttribute(titleSpan.span_id, 'service.namespace'), 'zyraxoncode.agent-host');
 			} finally {
 				reader.close();
 			}
@@ -439,10 +439,10 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 			for (const protocol of ['http/protobuf', 'grpc']) {
 				process.env.COPILOT_OTEL_DB_SPAN_EXPORTER_ENABLED = 'true';
 				process.env.COPILOT_OTEL_EXPORTER_TYPE = protocol === 'grpc' ? 'otlp-grpc' : 'otlp-http';
-				process.env.OTEL_EXPORTER_OTLP_ENDPOINT = 'http://collector:4318';
+				process.env.OTEL_EXPORTER_OTLP_ENDPOINT = '__ZYRAXKEEP__5_';
 				process.env.OTEL_EXPORTER_OTLP_PROTOCOL = protocol;
 				let fetchCalls = 0;
-				const tmp = await mkdtemp(join(tmpdir(), 'vscode-otel-svc-'));
+				const tmp = await mkdtemp(join(tmpdir(), 'zyraxoncode-otel-svc-'));
 				store.add({ dispose: () => void rm(tmp, { recursive: true, force: true }).catch(() => undefined) });
 				const di = store.add(new TestInstantiationService());
 				di.set(ILogService, new NullLogService());
@@ -464,14 +464,14 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 
 	test('DB mode + external endpoint: outbound forwarder is configured (best-effort)', async () => {
 		const saved = saveEnv();
-		const tmp = await mkdtemp(join(tmpdir(), 'vscode-otel-svc-'));
+		const tmp = await mkdtemp(join(tmpdir(), 'zyraxoncode-otel-svc-'));
 		const cleanup = () => rm(tmp, { recursive: true, force: true }).catch(() => undefined);
 		try {
 			process.env.COPILOT_OTEL_DB_SPAN_EXPORTER_ENABLED = 'true';
 			process.env.COPILOT_OTEL_EXPORTER_TYPE = 'otlp-http';
 			// Point the forwarder at an unreachable port; the forwarder is "best-effort"
 			// and must not fail ingestion when the external sink is down.
-			process.env.OTEL_EXPORTER_OTLP_ENDPOINT = 'http://127.0.0.1:1';
+			process.env.OTEL_EXPORTER_OTLP_ENDPOINT = '__ZYRAXKEEP__6_';
 
 			const di = store.add(new TestInstantiationService());
 			di.set(ILogService, new NullLogService());
@@ -479,7 +479,7 @@ suite('platform/agentHost - AgentHostOTelService (integration)', () => {
 			const svc = store.add(di.createInstance(AgentHostOTelService, undefined));
 
 			const cfg = await svc.getSdkTelemetryConfig();
-			ok(cfg!.otlpEndpoint?.startsWith('http://127.0.0.1:'));
+			ok(cfg!.otlpEndpoint?.startsWith('__ZYRAXKEEP__7_'));
 			// The SDK is still pointed at our loopback, not the user's endpoint.
 			notStrictEqual(cfg!.otlpEndpoint, process.env.OTEL_EXPORTER_OTLP_ENDPOINT);
 

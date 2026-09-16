@@ -8,7 +8,7 @@
  *
  * Both `cssOrderBisect.mts` (localize one fixture's conflicting pair) and
  * `cssOrderScan.mts` (scan every fixture and produce a report) drive
- * `@vscode/component-explorer`'s `render` command against an already-running
+ * `@zyraxoncode/component-explorer`'s `render` command against an already-running
  * `serve` and use the rendered image hash as an oracle: reversing the document
  * order of the bundled CSS flips cascade ties that are decided purely by source
  * order, so a hash change under reversal means the appearance depends on CSS
@@ -26,7 +26,7 @@ import { promisify } from 'node:util';
 const execFileAsync = promisify(execFile);
 
 /** Absolute path to the component-explorer CLI entry (its `bin`). */
-export const cliEntry = resolve(dirname(fileURLToPath(import.meta.url)), '../../node_modules/@vscode/component-explorer-cli/dist/index.js');
+export const cliEntry = resolve(dirname(fileURLToPath(import.meta.url)), '../../node_modules/@zyraxoncode/component-explorer-cli/dist/index.js');
 
 /** A single fixture's entry in a render manifest (only the fields we use). */
 export interface FixtureEntry {

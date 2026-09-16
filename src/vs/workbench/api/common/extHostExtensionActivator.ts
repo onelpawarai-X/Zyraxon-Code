@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import * as errors from '../../../base/common/errors.js';
 import { Disposable, IDisposable } from '../../../base/common/lifecycle.js';
 import { ExtensionDescriptionRegistry } from '../../services/extensions/common/extensionDescriptionRegistry.js';
@@ -16,7 +16,7 @@ import { Barrier } from '../../../base/common/async.js';
  * Represents the source code (module) of an extension.
  */
 export interface IExtensionModule {
-	activate?(ctx: vscode.ExtensionContext): Promise<IExtensionAPI>;
+	activate?(ctx: zyraxoncode.ExtensionContext): Promise<IExtensionAPI>;
 	deactivate?(): void;
 }
 

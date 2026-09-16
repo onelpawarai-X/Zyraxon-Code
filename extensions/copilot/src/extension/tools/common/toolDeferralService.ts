@@ -26,8 +26,8 @@ const additionalNonDeferredToolNames = new Set<string>([
 	// Dynamically injected tools (no ToolName enum entry)
 	'task_complete',
 	// ZYRAXON Code built-in language tools that should always be available
-	'vscode_renameSymbol',
-	'vscode_listCodeUsages',
+	'zyraxoncode_renameSymbol',
+	'zyraxoncode_listCodeUsages',
 ]);
 
 /**

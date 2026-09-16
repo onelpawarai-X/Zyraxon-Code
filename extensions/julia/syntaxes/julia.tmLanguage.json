@@ -7,7 +7,7 @@
 	"version": "https://github.com/JuliaEditorSupport/atom-language-julia/commit/25cc285b5e8accab4ff7725eeb8594f458b45ce4",
 	"name": "Julia",
 	"scopeName": "source.julia",
-	"comment": "This grammar is used by Atom (Oniguruma), GitHub (PCRE), and VSCode (Oniguruma),\nso all regexps must be compatible with both engines.\n\nSpecs:\n- https://github.com/kkos/oniguruma/blob/master/doc/RE\n- https://www.pcre.org/current/doc/html/",
+	"comment": "This grammar is used by Atom (Oniguruma), GitHub (PCRE), and ZyraxonCode (Oniguruma),\nso all regexps must be compatible with both engines.\n\nSpecs:\n- https://github.com/kkos/oniguruma/blob/master/doc/RE\n- https://www.pcre.org/current/doc/html/",
 	"patterns": [
 		{
 			"include": "#operator"

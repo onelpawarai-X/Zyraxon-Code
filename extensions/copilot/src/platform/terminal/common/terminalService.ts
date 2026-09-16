@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Emitter, Event } from '../../../util/vs/base/common/event';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
@@ -16,29 +16,29 @@ export interface ITerminalService {
 
 	readonly terminalBuffer: string;
 
-	readonly terminalLastCommand: vscode.TerminalExecutedCommand | undefined;
+	readonly terminalLastCommand: zyraxoncode.TerminalExecutedCommand | undefined;
 
 	readonly terminalSelection: string;
 
 	readonly terminalShellType: string;
 
-	readonly onDidChangeTerminalShellIntegration: vscode.Event<vscode.TerminalShellIntegrationChangeEvent>;
-	readonly onDidEndTerminalShellExecution: vscode.Event<vscode.TerminalShellExecutionEndEvent>;
-	readonly onDidCloseTerminal: vscode.Event<vscode.Terminal>;
-	readonly onDidWriteTerminalData: vscode.Event<vscode.TerminalDataWriteEvent>;
+	readonly onDidChangeTerminalShellIntegration: zyraxoncode.Event<zyraxoncode.TerminalShellIntegrationChangeEvent>;
+	readonly onDidEndTerminalShellExecution: zyraxoncode.Event<zyraxoncode.TerminalShellExecutionEndEvent>;
+	readonly onDidCloseTerminal: zyraxoncode.Event<zyraxoncode.Terminal>;
+	readonly onDidWriteTerminalData: zyraxoncode.Event<zyraxoncode.TerminalDataWriteEvent>;
 
 	/**
-	 * See {@link vscode.window.createTerminal}.
+	 * See {@link zyraxoncode.window.createTerminal}.
 	 */
-	createTerminal(name?: string, shellPath?: string, shellArgs?: readonly string[] | string): vscode.Terminal;
-	createTerminal(options: vscode.TerminalOptions): vscode.Terminal;
-	createTerminal(options: vscode.ExtensionTerminalOptions): vscode.Terminal;
+	createTerminal(name?: string, shellPath?: string, shellArgs?: readonly string[] | string): zyraxoncode.Terminal;
+	createTerminal(options: zyraxoncode.TerminalOptions): zyraxoncode.Terminal;
+	createTerminal(options: zyraxoncode.ExtensionTerminalOptions): zyraxoncode.Terminal;
 
 	/**
 	 * Gets the buffer for a terminal.
 	 * @param maxChars The maximum number of chars to return from the buffer, defaults to 16k
 	 */
-	getBufferForTerminal(terminal: vscode.Terminal, maxChars?: number): string;
+	getBufferForTerminal(terminal: zyraxoncode.Terminal, maxChars?: number): string;
 
 	/**
 	 * Gets the buffer for a terminal with the given pid.
@@ -50,7 +50,7 @@ export interface ITerminalService {
 	 * Gets the last command executed in a terminal.
 	 * @param terminal The terminal to get the last command for
 	 */
-	getLastCommandForTerminal(terminal: vscode.Terminal): vscode.TerminalExecutedCommand | undefined;
+	getLastCommandForTerminal(terminal: zyraxoncode.Terminal): zyraxoncode.TerminalExecutedCommand | undefined;
 
 	/**
 	 * Contributes a path to the terminal PATH environment variable.
@@ -75,7 +75,7 @@ export interface ITerminalService {
 	 */
 	removePathContribution(contributor: string): void;
 
-	readonly terminals: readonly vscode.Terminal[];
+	readonly terminals: readonly zyraxoncode.Terminal[];
 }
 
 export const enum ShellIntegrationQuality {
@@ -86,14 +86,14 @@ export const enum ShellIntegrationQuality {
 
 
 export class NullTerminalService extends Disposable implements ITerminalService {
-	private _onDidWriteTerminalData = this._register(new Emitter<vscode.TerminalDataWriteEvent>());
-	onDidWriteTerminalData: Event<vscode.TerminalDataWriteEvent> = this._onDidWriteTerminalData.event;
-	private _onDidChangeTerminalShellIntegration = this._register(new Emitter<vscode.TerminalShellIntegrationChangeEvent>());
-	onDidChangeTerminalShellIntegration: Event<vscode.TerminalShellIntegrationChangeEvent> = this._onDidChangeTerminalShellIntegration.event;
-	private _onDidEndTerminalShellExecution = this._register(new Emitter<vscode.TerminalShellExecutionEndEvent>());
-	onDidEndTerminalShellExecution: Event<vscode.TerminalShellExecutionEndEvent> = this._onDidEndTerminalShellExecution.event;
-	private _onDidCloseTerminal = this._register(new Emitter<vscode.Terminal>());
-	onDidCloseTerminal: Event<vscode.Terminal> = this._onDidCloseTerminal.event;
+	private _onDidWriteTerminalData = this._register(new Emitter<zyraxoncode.TerminalDataWriteEvent>());
+	onDidWriteTerminalData: Event<zyraxoncode.TerminalDataWriteEvent> = this._onDidWriteTerminalData.event;
+	private _onDidChangeTerminalShellIntegration = this._register(new Emitter<zyraxoncode.TerminalShellIntegrationChangeEvent>());
+	onDidChangeTerminalShellIntegration: Event<zyraxoncode.TerminalShellIntegrationChangeEvent> = this._onDidChangeTerminalShellIntegration.event;
+	private _onDidEndTerminalShellExecution = this._register(new Emitter<zyraxoncode.TerminalShellExecutionEndEvent>());
+	onDidEndTerminalShellExecution: Event<zyraxoncode.TerminalShellExecutionEndEvent> = this._onDidEndTerminalShellExecution.event;
+	private _onDidCloseTerminal = this._register(new Emitter<zyraxoncode.Terminal>());
+	onDidCloseTerminal: Event<zyraxoncode.Terminal> = this._onDidCloseTerminal.event;
 
 	declare readonly _serviceBrand: undefined;
 
@@ -103,7 +103,7 @@ export class NullTerminalService extends Disposable implements ITerminalService 
 		return '';
 	}
 
-	get terminalLastCommand(): vscode.TerminalExecutedCommand | undefined {
+	get terminalLastCommand(): zyraxoncode.TerminalExecutedCommand | undefined {
 		return undefined;
 	}
 
@@ -115,7 +115,7 @@ export class NullTerminalService extends Disposable implements ITerminalService 
 		return '';
 	}
 
-	async getCwdForSession(sessionId: string): Promise<vscode.Uri | undefined> {
+	async getCwdForSession(sessionId: string): Promise<zyraxoncode.Uri | undefined> {
 		return Promise.resolve(undefined);
 	}
 
@@ -131,22 +131,22 @@ export class NullTerminalService extends Disposable implements ITerminalService 
 		throw new Error('Method not implemented.');
 	}
 
-	async associateTerminalWithSession(terminal: vscode.Terminal, sessionId: string, shellIntegrationquality: ShellIntegrationQuality): Promise<void> {
+	async associateTerminalWithSession(terminal: zyraxoncode.Terminal, sessionId: string, shellIntegrationquality: ShellIntegrationQuality): Promise<void> {
 		Promise.resolve();
 	}
 
-	createTerminal(name?: string, shellPath?: string, shellArgs?: readonly string[] | string): vscode.Terminal;
-	createTerminal(options: vscode.TerminalOptions): vscode.Terminal;
-	createTerminal(options: vscode.ExtensionTerminalOptions): vscode.Terminal;
-	createTerminal(name?: any, shellPath?: any, shellArgs?: any): vscode.Terminal {
-		return {} as vscode.Terminal;
+	createTerminal(name?: string, shellPath?: string, shellArgs?: readonly string[] | string): zyraxoncode.Terminal;
+	createTerminal(options: zyraxoncode.TerminalOptions): zyraxoncode.Terminal;
+	createTerminal(options: zyraxoncode.ExtensionTerminalOptions): zyraxoncode.Terminal;
+	createTerminal(name?: any, shellPath?: any, shellArgs?: any): zyraxoncode.Terminal {
+		return {} as zyraxoncode.Terminal;
 	}
 
-	get terminals(): readonly vscode.Terminal[] {
+	get terminals(): readonly zyraxoncode.Terminal[] {
 		return [];
 	}
 
-	getBufferForTerminal(terminal: vscode.Terminal, maxLines?: number): string {
+	getBufferForTerminal(terminal: zyraxoncode.Terminal, maxLines?: number): string {
 		return '';
 	}
 
@@ -154,7 +154,7 @@ export class NullTerminalService extends Disposable implements ITerminalService 
 		return Promise.resolve('');
 	}
 
-	getLastCommandForTerminal(terminal: vscode.Terminal): vscode.TerminalExecutedCommand | undefined {
+	getLastCommandForTerminal(terminal: zyraxoncode.Terminal): zyraxoncode.TerminalExecutedCommand | undefined {
 		return undefined;
 	}
 
@@ -176,6 +176,6 @@ export function isNullTerminalService(thing: any): thing is NullTerminalService 
 	return thing && typeof thing.createTerminal === 'function' && thing.createTerminal() === undefined;
 }
 
-export interface IKnownTerminal extends vscode.Terminal {
+export interface IKnownTerminal extends zyraxoncode.Terminal {
 	id: string;
 }

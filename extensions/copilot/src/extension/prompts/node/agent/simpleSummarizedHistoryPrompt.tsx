@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Chunk, PrioritizedList, PromptElement, PromptElementProps, UserMessage } from '@vscode/prompt-tsx';
-import type { LanguageModelToolResult } from 'vscode';
+import { Chunk, PrioritizedList, PromptElement, PromptElementProps, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { LanguageModelToolResult } from 'zyraxoncode';
 import { truncate } from '../../../../util/vs/base/common/strings';
 import { IToolCall, IToolCallRound } from '../../../prompt/common/intents';
 import { Tag } from '../base/tag';

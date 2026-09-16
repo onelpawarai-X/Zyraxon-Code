@@ -364,7 +364,7 @@ fn detect_installed_program(_log: &log::Logger) -> io::Result<Vec<PathBuf>> {
 }
 
 // Looks for the given binary name in the PATH, returning all candidate matches.
-// Based on https://github.dev/microsoft/vscode-js-debug/blob/7594d05518df6700df51771895fcad0ddc7f92f9/src/common/pathUtils.ts#L15
+// Based on __ZYRAXKEEP__0_
 #[cfg(target_os = "linux")]
 fn detect_installed_program(log: &log::Logger) -> io::Result<Vec<PathBuf>> {
 	use crate::constants::APPLICATION_NAME;
@@ -413,7 +413,7 @@ mod tests {
 
 	use super::*;
 
-	fn make_fake_vscode_install(path: &Path) {
+	fn make_fake_zyraxoncode_install(path: &Path) {
 		let bin = DESKTOP_CLI_RELATIVE_PATH
 			.split(',')
 			.next()
@@ -430,10 +430,10 @@ mod tests {
 			.expect("expected to write binary");
 	}
 
-	fn make_multiple_vscode_install() -> tempfile::TempDir {
+	fn make_multiple_zyraxoncode_install() -> tempfile::TempDir {
 		let dir = tempfile::tempdir().expect("expected to make temp dir");
-		make_fake_vscode_install(&dir.path().join("desktop/stable"));
-		make_fake_vscode_install(&dir.path().join("desktop/1.68.2"));
+		make_fake_zyraxoncode_install(&dir.path().join("desktop/stable"));
+		make_fake_zyraxoncode_install(&dir.path().join("desktop/1.68.2"));
 		dir
 	}
 
@@ -448,7 +448,7 @@ mod tests {
 
 	#[tokio::test]
 	async fn test_set_preferred_version() {
-		let dir = make_multiple_vscode_install();
+		let dir = make_multiple_zyraxoncode_install();
 		let lp = LauncherPaths::new_without_replacements(dir.path().to_owned());
 		let vm1 = CodeVersionManager::new(log::Logger::test(), &lp, Platform::LinuxARM64);
 
@@ -480,7 +480,7 @@ mod tests {
 
 	#[tokio::test]
 	async fn test_gets_entrypoint() {
-		let dir = make_multiple_vscode_install();
+		let dir = make_multiple_zyraxoncode_install();
 
 		assert!(CodeVersionManager::get_entrypoint_for_install_dir(
 			&dir.path().join("desktop").join("stable")

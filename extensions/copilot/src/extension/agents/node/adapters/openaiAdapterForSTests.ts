@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
-import { ChatCompletionContentPartKind } from '@vscode/prompt-tsx/dist/base/output/rawTypes';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import { ChatCompletionContentPartKind } from '@zyraxoncode/prompt-tsx/dist/base/output/rawTypes';
 import * as http from 'http';
 import { ChatCompletionChunk, ChatCompletionCreateParamsBase, ChatCompletionMessageParam } from 'openai/resources/chat/completions.js';
 import type { OpenAiFunctionTool } from '../../../../platform/networking/common/fetch';

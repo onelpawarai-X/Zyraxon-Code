@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Tunnel } from '@microsoft/dev-tunnels-contracts';
-import type { TunnelManagementHttpClient } from '@microsoft/dev-tunnels-management';
+import type { Tunnel } from '@zyraxon/dev-tunnels-contracts';
+import type { TunnelManagementHttpClient } from '@zyraxon/dev-tunnels-management';
 import { connect } from 'net';
 import { hostname } from 'os';
 import { Emitter, Event } from '../../../base/common/event.js';
@@ -93,7 +93,7 @@ export class TunnelHostMainService extends Disposable implements ITunnelAgentHos
 		// We disable automatic local port forwarding so that we can capture
 		// the raw data stream and pipe it into the agent host process
 		// directly, without needing a physical TCP listener on port 31546.
-		const { TunnelRelayTunnelHost } = await import('@microsoft/dev-tunnels-connections');
+		const { TunnelRelayTunnelHost } = await import('@zyraxon/dev-tunnels-connections');
 		const host = new TunnelRelayTunnelHost(client);
 		host.forwardConnectionsToLocalPorts = false;
 		host.trace = (_level: unknown, _eventId: unknown, msg: string) => {
@@ -174,15 +174,15 @@ export class TunnelHostMainService extends Disposable implements ITunnelAgentHos
 	private _getTunnelName(): string {
 		let name = this._configurationService.getValue<string>(CONFIGURATION_KEY_HOST_NAME) || hostname();
 		name = name.replace(/^-+/g, '').replace(/[^\w-]/g, '').substring(0, 20);
-		return name || 'vscode';
+		return name || 'zyraxoncode';
 	}
 
 	private async _createManagementClient(token: string, authProvider: 'github' | 'Zyraxon'): Promise<TunnelManagementHttpClient> {
-		const mgmt = await import('@microsoft/dev-tunnels-management');
+		const mgmt = await import('@zyraxon/dev-tunnels-management');
 		const authHeader = authProvider === 'github' ? `github ${token}` : `Bearer ${token}`;
 
 		return new mgmt.TunnelManagementHttpClient(
-			'vscode-sessions',
+			'zyraxoncode-sessions',
 			mgmt.ManagementApiVersions.Version20230927preview,
 			async () => authHeader,
 		);

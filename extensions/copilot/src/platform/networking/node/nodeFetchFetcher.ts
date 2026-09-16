@@ -38,7 +38,7 @@ export class NodeFetchFetcher extends BaseFetchFetcher {
 		// Caching requires the host-provided fetch-patch factory so cached requests
 		// still go through the proxy/CA-injection patch. On older hosts that lack
 		// the factory, caching is silently disabled.
-		const factory = (globalThis as any).__vscodeCreateFetchPatch as FetchPatchFactory | undefined;
+		const factory = (globalThis as any).__zyraxoncodeCreateFetchPatch as FetchPatchFactory | undefined;
 		const interceptor = cacheOptions.mode !== 'off' && factory ? createCacheInterceptor(cacheOptions) : undefined;
 		super(getFetch(interceptor, factory), envService, NodeFetchFetcher.ID, reportEvent, userAgentLibraryUpdate);
 	}
@@ -86,7 +86,7 @@ function createCacheStore(options: NodeFetchCacheOptions): CacheStore | undefine
 }
 
 function getFetch(cacheInterceptor: undici.Dispatcher.DispatcherComposeInterceptor | undefined, createFetchPatch: FetchPatchFactory | undefined): FetchImpl {
-	const defaultFetch = (globalThis as any).__vscodePatchedFetch || globalThis.fetch;
+	const defaultFetch = (globalThis as any).__zyraxoncodePatchedFetch || globalThis.fetch;
 	const cachedFetch = cacheInterceptor && createFetchPatch ? createFetchPatch({ interceptors: [cacheInterceptor] }) : undefined;
 	return function (input, init, useCache) {
 		if (useCache && cachedFetch) {

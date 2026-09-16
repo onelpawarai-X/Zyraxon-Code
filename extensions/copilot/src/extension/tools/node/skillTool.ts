@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ICustomInstructionsService } from '../../../platform/customInstructions/common/customInstructionsService';
 import { SKILL_FILENAME } from '../../../platform/customInstructions/common/promptTypes';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
@@ -17,7 +17,7 @@ import { extUriBiasedIgnorePathCase } from '../../../util/vs/base/common/resourc
 import { equalsIgnoreCase } from '../../../util/vs/base/common/strings';
 import { isString } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
-import { ExtendedLanguageModelToolResult, LanguageModelTextPart, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelTextPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { isCustomizationsIndex } from '../../prompt/common/chatVariablesCollection';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { ToolName } from '../common/toolNames';
@@ -54,7 +54,7 @@ class SkillTool implements ICopilotTool<ISkillParams> {
 		@IExtensionsService private readonly extensionsService: IExtensionsService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<ISkillParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<ISkillParams>, token: zyraxoncode.CancellationToken) {
 		const uri = this.resolveSkillUri(options.input.skill);
 
 		// Read the skill file content
@@ -104,7 +104,7 @@ ${skillContent}
 		return result;
 	}
 
-	private async invokeFork(skillContent: string, uri: URI, options: vscode.LanguageModelToolInvocationOptions<ISkillParams>, token: vscode.CancellationToken) {
+	private async invokeFork(skillContent: string, uri: URI, options: zyraxoncode.LanguageModelToolInvocationOptions<ISkillParams>, token: zyraxoncode.CancellationToken) {
 		const skillInfo = this.customInstructionsService.getSkillInfo(uri);
 		const skillLabel = skillInfo?.skillName ?? options.input.skill;
 
@@ -155,7 +155,7 @@ Task: ${query}`;
 		return result;
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<ISkillParams>, _token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation | undefined> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<ISkillParams>, _token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation | undefined> {
 		let uri: URI;
 		try {
 			uri = this.resolveSkillUri(options.input.skill);
@@ -176,14 +176,14 @@ Task: ${query}`;
 
 		if (mode === 'fork') {
 			return {
-				invocationMessage: new MarkdownString(l10n.t`Running skill ${formatUriForFileWidget(uri, { vscodeLinkType: 'skill', linkText: skillLabel })}`),
-				pastTenseMessage: new MarkdownString(l10n.t`Ran skill ${formatUriForFileWidget(uri, { vscodeLinkType: 'skill', linkText: skillLabel })}`),
+				invocationMessage: new MarkdownString(l10n.t`Running skill ${formatUriForFileWidget(uri, { zyraxoncodeLinkType: 'skill', linkText: skillLabel })}`),
+				pastTenseMessage: new MarkdownString(l10n.t`Ran skill ${formatUriForFileWidget(uri, { zyraxoncodeLinkType: 'skill', linkText: skillLabel })}`),
 			};
 		}
 
 		return {
-			invocationMessage: new MarkdownString(l10n.t`Loading skill ${formatUriForFileWidget(uri, { vscodeLinkType: 'skill', linkText: skillLabel })}`),
-			pastTenseMessage: new MarkdownString(l10n.t`Loaded skill ${formatUriForFileWidget(uri, { vscodeLinkType: 'skill', linkText: skillLabel })}`),
+			invocationMessage: new MarkdownString(l10n.t`Loading skill ${formatUriForFileWidget(uri, { zyraxoncodeLinkType: 'skill', linkText: skillLabel })}`),
+			pastTenseMessage: new MarkdownString(l10n.t`Loaded skill ${formatUriForFileWidget(uri, { zyraxoncodeLinkType: 'skill', linkText: skillLabel })}`),
 		};
 	}
 

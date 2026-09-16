@@ -12,13 +12,13 @@ import which from 'which';
 import { EventEmitter } from 'events';
 import { fileTypeFromBuffer } from 'file-type';
 import { assign, groupBy, IDisposable, toDisposable, dispose, mkdirp, readBytes, detectUnicodeEncoding, Encoding, onceEvent, splitInChunks, Limiter, Versions, isWindows, pathEquals, isMacintosh, isDescendant, relativePathWithNoFallback, Mutable } from './util';
-import { CancellationError, CancellationToken, ConfigurationChangeEvent, LogOutputChannel, Progress, Uri, workspace } from 'vscode';
+import { CancellationError, CancellationToken, ConfigurationChangeEvent, LogOutputChannel, Progress, Uri, workspace } from 'zyraxoncode';
 import type { Commit as ApiCommit, Ref, Branch, Remote, LogOptions, Change, CommitOptions, RefQuery as ApiRefQuery, InitOptions, DiffChange, Worktree as ApiWorktree } from './api/git';
 import { RefType, ForcePushMode, GitErrorCodes, Status } from './api/git.constants';
 import * as byline from 'byline';
 import { StringDecoder } from 'string_decoder';
 
-// https://github.com/microsoft/vscode/issues/65693
+// __ZYRAXKEEP__0_
 const MAX_CLI_LENGTH = 30000;
 
 export interface IGit {
@@ -363,8 +363,8 @@ function getGitErrorCode(stderr: string): string | undefined {
 	return undefined;
 }
 
-// https://github.com/microsoft/vscode/issues/89373
-// https://github.com/git-for-windows/git/issues/2478
+// __ZYRAXKEEP__1_
+// __ZYRAXKEEP__2_
 function sanitizePath(path: string): string {
 	return path.replace(/^([a-z]):\\/i, (_, letter) => `${letter.toUpperCase()}:\\`);
 }
@@ -951,7 +951,7 @@ export function parseGitCommits(data: string): Commit[] {
 			message = message.substr(0, message.length - 1);
 		}
 
-		// Stop excessive memory usage by using substr -- https://bugs.chromium.org/p/v8/issues/detail?id=2869
+		// Stop excessive memory usage by using substr -- __ZYRAXKEEP__3_
 		commits.push({
 			hash: ` ${ref}`.substr(1),
 			message: ` ${message}`.substr(1),
@@ -2877,7 +2877,7 @@ export class Repository {
 				// Git 2.45 adds support for a new reference storage backend called "reftable", promising
 				// faster lookups, reads, and writes for repositories with any number of references. For
 				// backwards compatibility the `.git/HEAD` file contains `ref: refs/heads/.invalid`. More
-				// details are available at https://git-scm.com/docs/reftable
+				// details are available at __ZYRAXKEEP__4_
 				if (result.name === '.invalid') {
 					this._isUsingRefTable = true;
 					this.logger.warn(`[Git][getHEAD] Failed to parse HEAD file: Repository is using reftable format.`);
@@ -3109,7 +3109,7 @@ export class Repository {
 		}
 
 		for (const remote of remotes) {
-			// https://github.com/microsoft/vscode/issues/45271
+			// __ZYRAXKEEP__5_
 			remote.isReadOnly = remote.pushUrl === undefined || remote.pushUrl === 'no_push';
 		}
 
@@ -3175,7 +3175,7 @@ export class Repository {
 			args.push('--ignore-case');
 		}
 
-		if (/^refs\/(heads|remotes)\//i.test(name)) {
+		if (/^refs\/(heads|remotes)\__ZYRAXKEEP__6_(name)) {
 			args.push(name);
 		} else {
 			args.push(`refs/heads/${name}`, `refs/remotes/${name}`);
@@ -3286,7 +3286,7 @@ export class Repository {
 				return '';
 			}
 
-			// https://github.com/git/git/blob/3a0f269e7c82aa3a87323cb7ae04ac5f129f036b/path.c#L612
+			// __ZYRAXKEEP__7_
 			const homedir = os.homedir();
 			let templatePath = result.stdout.trim()
 				.replace(/^~([^\/]*)\//, (_, user) => `${user ? path.join(path.dirname(homedir), user) : homedir}/`);

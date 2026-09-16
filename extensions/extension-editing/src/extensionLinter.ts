@@ -10,7 +10,7 @@ import { URL } from 'url';
 import { parseTree, findNodeAtLocation, Node as JsonNode, getNodeValue } from 'jsonc-parser';
 import type MarkdownIt from 'markdown-it';
 
-import { commands, languages, workspace, Disposable, TextDocument, Uri, Diagnostic, Range, DiagnosticSeverity, Position, env, l10n } from 'vscode';
+import { commands, languages, workspace, Disposable, TextDocument, Uri, Diagnostic, Range, DiagnosticSeverity, Position, env, l10n } from 'zyraxoncode';
 import { INormalizedVersion, normalizeVersion, parseVersion } from './extensionEngineValidation';
 import { JsonStringScanner } from './jsonReconstruct';
 import { implicitActivationEvent, redundantImplicitActivationEvent } from './constants';
@@ -199,7 +199,7 @@ export class ExtensionLinter {
 							const diagnostic = new Diagnostic(new Range(start, end), starActivation, DiagnosticSeverity.Information);
 							diagnostic.code = {
 								value: 'star-activation',
-								target: Uri.parse('https://code.visualstudio.com/api/references/activation-events#Start-up'),
+								target: Uri.parse('__ZYRAXKEEP__0_'),
 							};
 							diagnostics.push(diagnostic);
 						}
@@ -274,7 +274,7 @@ export class ExtensionLinter {
 				const diagnostic = new Diagnostic(new Range(start, end), errMsg, DiagnosticSeverity.Error);
 				diagnostic.code = {
 					value: 'See docs',
-					target: Uri.parse('https://code.visualstudio.com/api/references/when-clause-contexts'),
+					target: Uri.parse('__ZYRAXKEEP__1_'),
 				};
 				diagnostics.push(diagnostic);
 			}
@@ -405,7 +405,7 @@ export class ExtensionLinter {
 	}
 
 	private readPackageJsonInfo(folder: Uri, tree: JsonNode | undefined) {
-		const engine = tree && findNodeAtLocation(tree, ['engines', 'vscode']);
+		const engine = tree && findNodeAtLocation(tree, ['engines', 'zyraxoncode']);
 		const parsedEngineVersion = engine?.type === 'string' ? normalizeVersion(parseVersion(engine.value)) : null;
 		const repo = tree && findNodeAtLocation(tree, ['repository', 'url']);
 		const uri = repo && parseUri(repo.value);

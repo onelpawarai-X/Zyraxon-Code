@@ -7,7 +7,7 @@ import assert from 'assert';
 import * as fs from 'fs';
 import { EOL } from 'os';
 import * as path from 'path';
-import type { NotebookDocument } from 'vscode';
+import type { NotebookDocument } from 'zyraxoncode';
 import { Intent } from '../../src/extension/common/constants';
 import { IDiffService } from '../../src/platform/diff/common/diffService';
 import { DiffServiceImpl } from '../../src/platform/diff/node/diffServiceImpl';
@@ -1165,7 +1165,7 @@ async function assertPythonCodeIsValid(accessor: ITestingServicesAccessor, pytho
 }
 
 async function getNotebookCellDiagnostics(accessor: ITestingServicesAccessor, workspace: SimulationWorkspace, method: DiagnosticProviderId | DiagnosticsProvider): Promise<ITestDiagnostic[]> {
-	const files = workspace.documents.filter(doc => doc.document.uri.scheme === Schemas.vscodeNotebookCell).map(doc => ({ fileName: workspace.getFilePath(doc.document.uri), fileContents: doc.document.getText() }));
+	const files = workspace.documents.filter(doc => doc.document.uri.scheme === Schemas.zyraxoncodeNotebookCell).map(doc => ({ fileName: workspace.getFilePath(doc.document.uri), fileContents: doc.document.getText() }));
 	if (typeof method === 'string') {
 		return await getDiagnostics(accessor, files, method);
 	} else {

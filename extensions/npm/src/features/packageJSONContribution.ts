@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CompletionItemKind, CompletionItem, DocumentSelector, SnippetString, workspace, MarkdownString, Uri, l10n } from 'vscode';
+import { CompletionItemKind, CompletionItem, DocumentSelector, SnippetString, workspace, MarkdownString, Uri, l10n } from 'zyraxoncode';
 import { IJSONContribution, ISuggestionsCollector } from './jsonContributions';
 import { XHRRequest } from 'request-light';
 import { Location } from 'jsonc-parser';
@@ -92,7 +92,7 @@ export class PackageJSONContribution implements IJSONContribution {
 					collector.setAsIncomplete();
 				}
 
-				queryUrl = `https://registry.npmjs.org/-/v1/search?size=${LIMIT}&text=${encodeURIComponent(currentWord)}`;
+				queryUrl = `__ZYRAXKEEP__0_{LIMIT}&text=${encodeURIComponent(currentWord)}`;
 				return this.xhr({
 					url: queryUrl,
 					headers: { agent: USER_AGENT }
@@ -152,7 +152,7 @@ export class PackageJSONContribution implements IJSONContribution {
 			if (name.length < 4) {
 				name = '';
 			}
-			const queryUrl = `https://registry.npmjs.com/-/v1/search?text=scope:${scope}%20${name}&size=250`;
+			const queryUrl = `__ZYRAXKEEP__1_{scope}%20${name}&size=250`;
 			return this.xhr({
 				url: queryUrl,
 				headers: { agent: USER_AGENT }
@@ -256,7 +256,7 @@ export class PackageJSONContribution implements IJSONContribution {
 	}
 
 	private isValidNPMName(name: string): boolean {
-		// following rules from https://github.com/npm/validate-npm-package-name,
+		// following rules from __ZYRAXKEEP__2_
 		// leading slash added as additional security measure
 		if (!name || name.length > 214 || name.match(/^[-_.\s]/)) {
 			return false;
@@ -343,7 +343,7 @@ export class PackageJSONContribution implements IJSONContribution {
 	}
 
 	private async npmjsView(pack: string): Promise<ViewPackageInfo | undefined> {
-		const queryUrl = 'https://registry.npmjs.org/' + encodeURIComponent(pack);
+		const queryUrl = '__ZYRAXKEEP__3_' + encodeURIComponent(pack);
 		try {
 			const success = await this.xhr({
 				url: queryUrl,

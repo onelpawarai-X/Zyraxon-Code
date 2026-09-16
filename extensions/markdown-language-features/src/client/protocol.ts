@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import { FileRename, RequestType } from 'vscode-languageclient';
-import type * as lsp from 'vscode-languageserver-types';
-import type * as md from 'vscode-markdown-languageservice';
+import * as zyraxoncode from 'zyraxoncode';
+import { FileRename, RequestType } from 'zyraxoncode-languageclient';
+import type * as lsp from 'zyraxoncode-languageserver-types';
+import type * as md from 'zyraxoncode-markdown-languageservice';
 
 
 export type ResolvedDocumentLinkTarget =
-	| { readonly kind: 'file'; readonly uri: vscode.Uri; position?: lsp.Position; fragment?: string }
-	| { readonly kind: 'folder'; readonly uri: vscode.Uri }
-	| { readonly kind: 'external'; readonly uri: vscode.Uri };
+	| { readonly kind: 'file'; readonly uri: zyraxoncode.Uri; position?: lsp.Position; fragment?: string }
+	| { readonly kind: 'folder'; readonly uri: zyraxoncode.Uri }
+	| { readonly kind: 'external'; readonly uri: zyraxoncode.Uri };
 
 //#region From server
 export const parse = new RequestType<{ uri: string; text?: string }, md.Token[], any>('markdown/parse');

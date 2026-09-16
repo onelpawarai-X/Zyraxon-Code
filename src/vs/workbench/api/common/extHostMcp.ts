@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { DeferredPromise, raceCancellationError, Sequencer, timeout } from '../../../base/common/async.js';
 import { CancellationToken, CancellationTokenSource } from '../../../base/common/cancellation.js';
 import { CancellationError } from '../../../base/common/errors.js';
@@ -33,16 +33,16 @@ import { IExtHostWorkspace } from './extHostWorkspace.js';
 export const IExtHostMpcService = createDecorator<IExtHostMpcService>('IExtHostMpcService');
 
 export interface IExtHostMpcService extends ExtHostMcpShape {
-	registerMcpConfigurationProvider(extension: IExtensionDescription, id: string, provider: vscode.McpServerDefinitionProvider): IDisposable;
+	registerMcpConfigurationProvider(extension: IExtensionDescription, id: string, provider: zyraxoncode.McpServerDefinitionProvider): IDisposable;
 
 	/** Event that fires when the set of MCP server definitions changes. */
 	readonly onDidChangeMcpServerDefinitions: Event<void>;
 
 	/** Returns all MCP server definitions known to the editor. */
-	readonly mcpServerDefinitions: readonly vscode.McpServerDefinition[];
+	readonly mcpServerDefinitions: readonly zyraxoncode.McpServerDefinition[];
 
 	/** Starts an MCP gateway that exposes MCP servers via HTTP endpoints. */
-	startMcpGateway(chatSessionResource?: URI): Promise<vscode.McpGateway | undefined>;
+	startMcpGateway(chatSessionResource?: URI): Promise<zyraxoncode.McpGateway | undefined>;
 }
 
 const serverDataValidation = vObj({
@@ -63,7 +63,7 @@ const serverDataValidation = vObj({
 });
 
 // Can be validated with:
-// declare const _serverDataValidationTest: vscode.McpStdioServerDefinition | vscode.McpHttpServerDefinition;
+// declare const _serverDataValidationTest: zyraxoncode.McpStdioServerDefinition | zyraxoncode.McpHttpServerDefinition;
 // const _serverDataValidationProd: ValidatorType<typeof serverDataValidation> = _serverDataValidationTest;
 
 export class ExtHostMcpService extends Disposable implements IExtHostMpcService {
@@ -71,19 +71,19 @@ export class ExtHostMcpService extends Disposable implements IExtHostMpcService 
 	private readonly _initialProviderPromises = new Set<Promise<void>>();
 	protected readonly _sseEventSources = this._register(new DisposableMap<number, McpHTTPHandle>());
 	private readonly _unresolvedMcpServers = new Map</* collectionId */ string, {
-		provider: vscode.McpServerDefinitionProvider;
-		servers: vscode.McpServerDefinition[];
+		provider: zyraxoncode.McpServerDefinitionProvider;
+		servers: zyraxoncode.McpServerDefinition[];
 	}>();
 
 	// MCP server definitions synced from main thread
 	private readonly _onDidChangeMcpServerDefinitions = this._register(new Emitter<void>());
 	readonly onDidChangeMcpServerDefinitions: Event<void> = this._onDidChangeMcpServerDefinitions.event;
-	private _mcpServerDefinitions: readonly vscode.McpServerDefinition[] = [];
+	private _mcpServerDefinitions: readonly zyraxoncode.McpServerDefinition[] = [];
 
 	// Active gateways with their server emitters for dynamic updates
 	private readonly _activeGateways = new Map<string, {
-		servers: vscode.McpGatewayServer[];
-		onDidChangeServers: Emitter<readonly vscode.McpGatewayServer[]>;
+		servers: zyraxoncode.McpGatewayServer[];
+		onDidChangeServers: Emitter<readonly zyraxoncode.McpGatewayServer[]>;
 	}>();
 
 	constructor(
@@ -98,7 +98,7 @@ export class ExtHostMcpService extends Disposable implements IExtHostMpcService 
 	}
 
 	/** Returns all MCP server definitions known to the editor. */
-	get mcpServerDefinitions(): readonly vscode.McpServerDefinition[] {
+	get mcpServerDefinitions(): readonly zyraxoncode.McpServerDefinition[] {
 		return this._mcpServerDefinitions;
 	}
 
@@ -168,8 +168,8 @@ export class ExtHostMcpService extends Disposable implements IExtHostMpcService 
 		return resolved ? Convert.McpServerDefinition.from(resolved) : undefined;
 	}
 
-	/** {@link vscode.lm.registerMcpServerDefinitionProvider} */
-	public registerMcpConfigurationProvider(extension: IExtensionDescription, id: string, provider: vscode.McpServerDefinitionProvider): IDisposable {
+	/** {@link zyraxoncode.lm.registerMcpServerDefinitionProvider} */
+	public registerMcpConfigurationProvider(extension: IExtensionDescription, id: string, provider: zyraxoncode.McpServerDefinitionProvider): IDisposable {
 		const store = new DisposableStore();
 
 		const metadata = extension.contributes?.mcpServerDefinitionProviders?.find(m => m.id === id);
@@ -201,7 +201,7 @@ export class ExtHostMcpService extends Disposable implements IExtHostMpcService 
 				}
 
 				serverDataValidation.validateOrThrow(item);
-				if ((item as vscode.McpHttpServerDefinition2).authentication) {
+				if ((item as zyraxoncode.McpHttpServerDefinition2).authentication) {
 					checkProposedApiEnabled(extension, 'mcpToolDefinitions');
 				}
 
@@ -263,19 +263,19 @@ export class ExtHostMcpService extends Disposable implements IExtHostMpcService 
 		return store;
 	}
 
-	/** {@link vscode.lm.startMcpGateway} */
-	public async startMcpGateway(chatSessionResource?: URI): Promise<vscode.McpGateway | undefined> {
+	/** {@link zyraxoncode.lm.startMcpGateway} */
+	public async startMcpGateway(chatSessionResource?: URI): Promise<zyraxoncode.McpGateway | undefined> {
 		const result = await this._proxy.$startMcpGateway(chatSessionResource?.toJSON());
 		if (!result) {
 			return undefined;
 		}
 
 		const gatewayId = result.gatewayId;
-		const servers: vscode.McpGatewayServer[] = result.servers.map(s => ({
+		const servers: zyraxoncode.McpGatewayServer[] = result.servers.map(s => ({
 			label: s.label,
 			address: URI.revive(s.address),
 		}));
-		const onDidChangeServers = new Emitter<readonly vscode.McpGatewayServer[]>();
+		const onDidChangeServers = new Emitter<readonly zyraxoncode.McpGatewayServer[]>();
 
 		this._activeGateways.set(gatewayId, { servers, onDidChangeServers });
 
@@ -297,7 +297,7 @@ export class ExtHostMcpService extends Disposable implements IExtHostMpcService 
 			return;
 		}
 
-		const servers: vscode.McpGatewayServer[] = newServers.map(s => ({
+		const servers: zyraxoncode.McpGatewayServer[] = newServers.map(s => ({
 			label: s.label,
 			address: URI.revive(s.address),
 		}));
@@ -334,8 +334,8 @@ type HttpModeT =
 const MAX_FOLLOW_REDIRECTS = 5;
 const REDIRECT_STATUS_CODES = [301, 302, 303, 307, 308];
 // MCP server URLs are restricted to http(s) at configuration time; the redirect
-// path must enforce the same so a Location header cannot reach unix://, pipe://,
-// file://, etc.
+// path must enforce the same so a Location header cannot reach __ZYRAXKEEP__0_ __ZYRAXKEEP__1_
+// __ZYRAXKEEP__2_ etc.
 const ALLOWED_REDIRECT_PROTOCOLS = new Set(['http:', 'https:']);
 // Credential-bearing headers that must not be replayed to a different origin
 // after a redirect (matches browser fetch / curl behavior). Compared case-insensitively.
@@ -490,7 +490,7 @@ export class McpHTTPHandle extends Disposable {
 		if (res.status >= 300) {
 			// "When a client receives HTTP 404 in response to a request containing an Mcp-Session-Id, it MUST start a new session by sending a new InitializeRequest without a session ID attached"
 			// Though this says only 404, some servers send 400s as well, including their example
-			// https://github.com/modelcontextprotocol/typescript-sdk/issues/389
+			// __ZYRAXKEEP__3_
 			const retryWithSessionId = this._mode.value === HttpMode.Http && !!this._mode.sessionId && (res.status === 400 || res.status === 404);
 
 			this._proxy.$onDidChangeState(this._id, {

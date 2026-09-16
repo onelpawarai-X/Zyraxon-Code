@@ -116,7 +116,7 @@ export interface ISandboxContext {
 }
 
 interface ISandboxGlobal {
-	vscode: {
+	zyraxoncode: {
 		readonly ipcRenderer: IpcRenderer;
 		readonly ipcMessagePort: IpcMessagePort;
 		readonly webFrame: WebFrame;
@@ -126,13 +126,13 @@ interface ISandboxGlobal {
 	};
 }
 
-const vscodeGlobal = (globalThis as unknown as ISandboxGlobal).vscode;
-export const ipcRenderer: IpcRenderer = vscodeGlobal.ipcRenderer;
-export const ipcMessagePort: IpcMessagePort = vscodeGlobal.ipcMessagePort;
-export const webFrame: WebFrame = vscodeGlobal.webFrame;
-export const process: ISandboxNodeProcess = vscodeGlobal.process;
-export const context: ISandboxContext = vscodeGlobal.context;
-export const webUtils: WebUtils = vscodeGlobal.webUtils;
+const zyraxoncodeGlobal = (globalThis as unknown as ISandboxGlobal).zyraxoncode;
+export const ipcRenderer: IpcRenderer = zyraxoncodeGlobal.ipcRenderer;
+export const ipcMessagePort: IpcMessagePort = zyraxoncodeGlobal.ipcMessagePort;
+export const webFrame: WebFrame = zyraxoncodeGlobal.webFrame;
+export const process: ISandboxNodeProcess = zyraxoncodeGlobal.process;
+export const context: ISandboxContext = zyraxoncodeGlobal.context;
+export const webUtils: WebUtils = zyraxoncodeGlobal.webUtils;
 
 /**
  * A set of globals only available to main windows that depend

@@ -12,7 +12,7 @@ import { IWorkbenchContribution } from '../../../common/contributions.js';
 import { createStyleSheet } from '../../../../base/browser/domStylesheets.js';
 
 export const minSize = 1;
-export const maxSize = 20; // see also https://ux.stackexchange.com/questions/39023/what-is-the-optimum-button-size-of-touch-screen-applications
+export const maxSize = 20; // see also __ZYRAXKEEP__0_
 
 export class SashSettingsController extends Disposable implements IWorkbenchContribution {
 
@@ -41,8 +41,8 @@ export class SashSettingsController extends Disposable implements IWorkbenchCont
 
 		this.styleSheet.textContent = `
 			.monaco-workbench {
-				--vscode-sash-size: ${size}px;
-				--vscode-sash-hover-size: ${hoverSize}px;
+				--zyraxoncode-sash-size: ${size}px;
+				--zyraxoncode-sash-hover-size: ${hoverSize}px;
 			}
 		`;
 

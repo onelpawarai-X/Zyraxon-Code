@@ -226,7 +226,7 @@ export class Menubar extends Disposable {
 
 		// Due to limitations in Electron, it is not possible to update menu items dynamically. The suggested
 		// workaround from Electron is to set the application menu again.
-		// See also https://github.com/electron/electron/issues/846
+		// See also __ZYRAXKEEP__0_
 		//
 		// Run delayed to prevent updating menu while it is open
 		if (!this.willShutdown) {
@@ -426,8 +426,8 @@ export class Menubar extends Disposable {
 				const lastActiveWindow = this.windowsMainService.getLastActiveWindow();
 				if (
 					this.windowsMainService.getWindowCount() === 0 || 	// allow to quit when no more windows are open
-					!!BrowserWindow.getFocusedWindow() ||				// allow to quit when window has focus (fix for https://github.com/microsoft/vscode/issues/39191)
-					lastActiveWindow?.win?.isMinimized()				// allow to quit when window has no focus but is minimized (https://github.com/microsoft/vscode/issues/63000)
+					!!BrowserWindow.getFocusedWindow() ||				// allow to quit when window has focus (fix for __ZYRAXKEEP__1_)
+					lastActiveWindow?.win?.isMinimized()				// allow to quit when window has no focus but is minimized (__ZYRAXKEEP__2_)
 				) {
 					const confirmed = await this.confirmBeforeQuit(event);
 					if (confirmed) {
@@ -778,10 +778,10 @@ export class Menubar extends Disposable {
 		}
 
 		// We make sure to not run actions when the window has no focus, this helps
-		// for https://github.com/microsoft/vscode/issues/25907 and specifically for
-		// https://github.com/microsoft/vscode/issues/11928
+		// for __ZYRAXKEEP__3_ and specifically for
+		// __ZYRAXKEEP__4_
 		// Still allow to run when the last active window is minimized though for
-		// https://github.com/microsoft/vscode/issues/63000
+		// __ZYRAXKEEP__5_
 		if (!activeBrowserWindow) {
 			const lastActiveWindow = this.windowsMainService.getLastActiveWindow();
 			if (lastActiveWindow?.win?.isMinimized()) {
@@ -795,7 +795,7 @@ export class Menubar extends Disposable {
 
 			if (isMacintosh && !this.environmentMainService.isBuilt && !activeWindow.isReady) {
 				if ((invocation.type === 'commandId' && invocation.commandId === 'workbench.action.toggleDevTools') || (invocation.type !== 'commandId' && invocation.userSettingsLabel === 'alt+cmd+i')) {
-					// prevent this action from running twice on macOS (https://github.com/microsoft/vscode/issues/62719)
+					// prevent this action from running twice on macOS (__ZYRAXKEEP__6_)
 					// we already register a keybinding in workbench.ts for opening developer tools in case something
 					// goes wrong and that keybinding is only removed when the application has loaded (= window ready).
 					return false;
@@ -804,10 +804,10 @@ export class Menubar extends Disposable {
 
 			if (invocation.type === 'commandId') {
 				const runActionPayload: INativeRunActionInWindowRequest = { id: invocation.commandId, from: 'menu' };
-				activeWindow.sendWhenReady('vscode:runAction', CancellationToken.None, runActionPayload);
+				activeWindow.sendWhenReady('zyraxoncode:runAction', CancellationToken.None, runActionPayload);
 			} else {
 				const runKeybindingPayload: INativeRunKeybindingInWindowRequest = { userSettingsLabel: invocation.userSettingsLabel };
-				activeWindow.sendWhenReady('vscode:runKeybinding', CancellationToken.None, runKeybindingPayload);
+				activeWindow.sendWhenReady('zyraxoncode:runKeybinding', CancellationToken.None, runKeybindingPayload);
 			}
 
 			return true;

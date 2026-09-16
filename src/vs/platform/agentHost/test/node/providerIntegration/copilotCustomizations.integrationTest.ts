@@ -6,7 +6,7 @@
 /**
  * Agent host end-to-end tests (Copilot customizations, mocked LLM).
  *
- * agent host log file: ~/.zyraxon-code/tmp/tmp_vscode_1/ahp-customizations-home-mock-ZBucPX/Library/Application Support/ZYRAXON Code Dev/logs/20260701T192836/agenthost-server.log
+ * agent host log file: ~/.zyraxon-code/tmp/tmp_zyraxoncode_1/ahp-customizations-home-mock-ZBucPX/Library/Application Support/ZYRAXON Code Dev/logs/20260701T192836/agenthost-server.log
  */
 
 import assert from 'assert';
@@ -238,7 +238,7 @@ suite('Agent Host Provider Integration — Copilot Customizations', function () 
 			await runSimpleSkillWatchTest('scan');
 		});
 
-		// skipped for https://github.com/github/copilot-agent-runtime/issues/13285
+		// skipped for __ZYRAXKEEP__0_
 		test.skip('watch skill file changes [discover]', async function () {
 			this.timeout(TEST_TIMEOUT_MS);
 			await runSimpleSkillWatchTest('discover');
@@ -259,7 +259,7 @@ suite('Agent Host Provider Integration — Copilot Customizations', function () 
 			await runSimpleInstructionWatchTest('scan');
 		});
 
-		// skipped for https://github.com/github/copilot-agent-runtime/issues/13000
+		// skipped for __ZYRAXKEEP__1_
 		test.skip('watch instruction file changes [discover]', async function () {
 			this.timeout(TEST_TIMEOUT_MS);
 			await runSimpleInstructionWatchTest('discover');

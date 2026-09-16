@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
-import type { ChatPromptReference, ChatResult } from 'vscode';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { ChatPromptReference, ChatResult } from 'zyraxoncode';
 import { getTextPart } from '../../../platform/chat/common/globalStringUtils';
 import { NotebookDocumentSnapshot } from '../../../platform/editing/common/notebookDocumentSnapshot';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
@@ -20,7 +20,7 @@ import { isEqual } from '../../../util/vs/base/common/resources';
 import { isNumber, isString } from '../../../util/vs/base/common/types';
 import { isUriComponents, URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Range, Uri } from '../../../vscodeTypes';
+import { Range, Uri } from '../../../zyraxoncodeTypes';
 import { ChatVariablesCollection, isCustomizationsIndex, isInstructionFile } from '../../prompt/common/chatVariablesCollection';
 import { Turn } from '../../prompt/common/conversation';
 import { IBuildPromptContext, IWorkingSet, WorkingSetEntryState } from '../../prompt/common/intents';
@@ -349,10 +349,10 @@ class EditCodeStepFactory {
 					continue;
 				}
 				// No need to explicitly add the notebook to the working set, let the user do this.
-				if (chatVariable.value.scheme !== Schemas.vscodeNotebookCellOutput) {
+				if (chatVariable.value.scheme !== Schemas.zyraxoncodeNotebookCellOutput) {
 					await addWorkingSetEntry(notebook.uri, false);
 				}
-				if (chatVariable.value.scheme === Schemas.vscodeNotebookCellOutput) {
+				if (chatVariable.value.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 					otherChatVariables.push(reference);
 				}
 			} else if (isUri(chatVariable.value)) {
@@ -375,7 +375,7 @@ export function isNotebookVariable(chatVariableValue?: unknown): chatVariableVal
 	if (!chatVariableValue || !isUri(chatVariableValue)) {
 		return false;
 	}
-	return chatVariableValue.scheme === Schemas.vscodeNotebookCell || chatVariableValue.scheme === Schemas.vscodeNotebookCellOutput;
+	return chatVariableValue.scheme === Schemas.zyraxoncodeNotebookCell || chatVariableValue.scheme === Schemas.zyraxoncodeNotebookCellOutput;
 }
 
 interface ITextDocumentMutableWorkingSetEntry {

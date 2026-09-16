@@ -12,9 +12,9 @@ import product from '../../../../platform/product/common/product.js';
 import { IStorageService, StorageScope, StorageTarget } from '../../../../platform/storage/common/storage.js';
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry.js';
 
-const CHAT_PET_ENABLED_STORAGE_KEY = 'chat.vscodePet.enabled';
-const CHAT_PET_VARIANT_STORAGE_KEY = 'chat.vscodePet.variant';
-const CHAT_PET_ON_THE_RUN_STORAGE_KEY = 'chat.vscodePet.onTheRun';
+const CHAT_PET_ENABLED_STORAGE_KEY = 'chat.zyraxoncodePet.enabled';
+const CHAT_PET_VARIANT_STORAGE_KEY = 'chat.zyraxoncodePet.variant';
+const CHAT_PET_ON_THE_RUN_STORAGE_KEY = 'chat.zyraxoncodePet.onTheRun';
 
 export type ChatPetVariant = 'stable' | 'insiders';
 

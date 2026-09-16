@@ -273,8 +273,8 @@ async function main() {
 
 	// copy static assets to dist
 	await copyStaticAssets([
-		...treeSitterGrammars.map(grammar => `node_modules/@vscode/tree-sitter-wasm/wasm/${grammar.name}.wasm`),
-		'node_modules/@vscode/tree-sitter-wasm/wasm/tree-sitter.wasm',
+		...treeSitterGrammars.map(grammar => `node_modules/@zyraxoncode/tree-sitter-wasm/wasm/${grammar.name}.wasm`),
+		'node_modules/@zyraxoncode/tree-sitter-wasm/wasm/tree-sitter.wasm',
 		'node_modules/@github/blackbird-external-ingest-utils/pkg/nodejs/external_ingest_utils_bg.wasm',
 	], 'dist');
 

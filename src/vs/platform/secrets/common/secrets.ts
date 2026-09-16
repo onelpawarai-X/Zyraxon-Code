@@ -80,7 +80,7 @@ export async function writeEncryptedSecret(
  * from ZYRAXON Code via crossAppIPC.
  */
 export const CROSS_APP_SHARED_SECRET_KEYS: readonly string[] = [
-	'{"extensionId":"vscode.github-authentication","key":"github.auth"}',
+	'{"extensionId":"zyraxoncode.github-authentication","key":"github.auth"}',
 ];
 
 export const ISecretStorageService = createDecorator<ISecretStorageService>('secretStorageService');

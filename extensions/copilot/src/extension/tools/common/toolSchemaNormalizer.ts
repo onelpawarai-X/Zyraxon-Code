@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import Ajv from 'ajv';
 import { ArrayJsonSchema, JsonSchema, ObjectJsonSchema } from '../../../platform/configuration/common/jsonSchema';
 import { jsonSchemaDraft7 } from '../../../platform/configuration/common/jsonSchemaDraft7';
@@ -242,7 +242,7 @@ const isDraft2020_12Schema = (family: string) => family.startsWith('gpt-4') || f
 const gpt4oMaxStringLength = 1024;
 
 // Keywords in schema that gpt-4o does not support. From Toby at Github who wrote a normalizer
-// https://gist.github.com/toby/dfe40041ae5b02d44ea21321b9f7dfd2
+// __ZYRAXKEEP__0_
 const gpt4oUnsupportedSchemaKeywords = new Set([
 	'minLength',
 	'maxLength',

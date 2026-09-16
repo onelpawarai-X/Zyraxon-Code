@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing } from '@vscode/prompt-tsx';
-import type { LanguageModelToolInformation } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { isGpt5PlusFamily } from '../../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { IPromptPathRepresentationService } from '../../../../platform/prompts/common/promptPathRepresentationService';
 import { IExperimentationService } from '../../../../platform/telemetry/common/nullExperimentationService';
-import { LanguageModelToolMCPSource } from '../../../../vscodeTypes';
+import { LanguageModelToolMCPSource } from '../../../../zyraxoncodeTypes';
 import { agenticBrowserTools, ToolName } from '../../../tools/common/toolNames';
 import { IToolsService } from '../../../tools/common/toolsService';
 import { InstructionMessage } from '../base/instructionMessage';
@@ -147,11 +147,11 @@ export class DefaultAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				{tools[ToolName.ExecutionSubagent] && <>For most terminal commands, use {ToolName.ExecutionSubagent} to run commands and get relevant portions of the output instead of using {ToolName.CoreRunInTerminal}. This helps avoid output truncation for commands with very verbose output.<br /></>}
 				{tools[ToolName.CoreRunInTerminal] && <>Don't call the {ToolName.CoreRunInTerminal} tool multiple times in parallel. Instead, run one command and wait for the output before running the next command.<br /></>}
 				{tools[ToolName.ExecutionSubagent] && <>Don't call {ToolName.ExecutionSubagent} multiple times in parallel. Instead, invoke one subagent and wait for its response before running the next command.<br /></>}
-				When invoking a tool that takes a file path, always use the absolute file path. If the file has a scheme like untitled: or vscode-userdata:, then use a URI with the scheme.<br />
+				When invoking a tool that takes a file path, always use the absolute file path. If the file has a scheme like untitled: or zyraxoncode-userdata:, then use a URI with the scheme.<br />
 				{tools[ToolName.CoreRunInTerminal] && <>NEVER try to edit a file by running terminal commands unless the user specifically asks for it.<br /></>}
 				{!tools.hasSomeEditTool && <>You don't currently have any tools available for editing files. If the user asks you to edit a file, you can ask the user to enable editing tools or print a codeblock with the suggested changes.<br /></>}
 				{!tools[ToolName.CoreRunInTerminal] && <>You don't currently have any tools available for running terminal commands. If the user asks you to run a terminal command, you can ask the user to enable terminal tools or print a codeblock with the suggested command.<br /></>}
-			{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Microsoft Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).<br /></>}
+			{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Zyraxon Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).<br /></>}
 			Tools can be disabled by the user. You may see tools used previously in the conversation that are not currently available. Be careful to only use the tools that are currently available to you.
 		</Tag>
 			{this.props.codesearchMode && <CodesearchModeInstructions {...this.props} />}
@@ -306,11 +306,11 @@ export class AlternateGPTPrompt extends PromptElement<DefaultAgentPromptProps> {
 				{tools[ToolName.FindTextInFiles] && <>You can use the {ToolName.FindTextInFiles} to get an overview of a file by searching for a string within that one file, instead of using {ToolName.ReadFile} many times.<br /></>}
 				{tools[ToolName.Codebase] && <>If you don't know exactly the string or filename pattern you're looking for, use {ToolName.Codebase} to do a semantic search across the workspace.<br /></>}
 				{tools[ToolName.CoreRunInTerminal] && <>Don't call the {ToolName.CoreRunInTerminal} tool multiple times in parallel. Instead, run one command and wait for the output before running the next command.<br /></>}
-				When invoking a tool that takes a file path, always use the absolute file path. If the file has a scheme like untitled: or vscode-userdata:, then use a URI with the scheme.<br />
+				When invoking a tool that takes a file path, always use the absolute file path. If the file has a scheme like untitled: or zyraxoncode-userdata:, then use a URI with the scheme.<br />
 				{tools[ToolName.CoreRunInTerminal] && <>NEVER try to edit a file by running terminal commands unless the user specifically asks for it.<br /></>}
 				{!tools.hasSomeEditTool && <>You don't currently have any tools available for editing files. If the user asks you to edit a file, you can ask the user to enable editing tools or print a codeblock with the suggested changes.<br /></>}
 				{!tools[ToolName.CoreRunInTerminal] && <>You don't currently have any tools available for running terminal commands. If the user asks you to run a terminal command, you can ask the user to enable terminal tools or print a codeblock with the suggested command.<br /></>}
-			{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Microsoft Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).<br /></>}
+			{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Zyraxon Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).<br /></>}
 			Tools can be disabled by the user. You may see tools used previously in the conversation that are not currently available. Be careful to only use the tools that are currently available to you.
 		</Tag>
 		{this.props.codesearchMode && <CodesearchModeInstructions {...this.props} />}

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import * as uri from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import * as uri from 'zyraxoncode-uri';
 import { ILogger } from '../logging';
 import { MarkdownItEngine } from '../markdownEngine';
 import { MarkdownContributionProvider } from '../markdownExtensions';
@@ -23,11 +23,11 @@ import type { DiffScrollSyncData, MarkdownPreviewInnerChange, MarkdownPreviewLin
  * can be localized using our normal localization process.
  */
 const previewStrings = {
-	cspAlertMessageText: vscode.l10n.t("Some content has been disabled in this document"),
+	cspAlertMessageText: zyraxoncode.l10n.t("Some content has been disabled in this document"),
 
-	cspAlertMessageTitle: vscode.l10n.t("Potentially unsafe or insecure content has been disabled in the Markdown preview. Change the Markdown preview security setting to allow insecure content or enable scripts"),
+	cspAlertMessageTitle: zyraxoncode.l10n.t("Potentially unsafe or insecure content has been disabled in the Markdown preview. Change the Markdown preview security setting to allow insecure content or enable scripts"),
 
-	cspAlertMessageLabel: vscode.l10n.t("Content Disabled Security Warning"),
+	cspAlertMessageLabel: zyraxoncode.l10n.t("Content Disabled Security Warning"),
 };
 
 export interface MarkdownContentProviderOutput {
@@ -44,14 +44,14 @@ export interface ImageInfo {
 export class MdDocumentRenderer {
 
 	readonly #engine: MarkdownItEngine;
-	readonly #context: Pick<vscode.ExtensionContext, 'extensionUri'>;
+	readonly #context: Pick<zyraxoncode.ExtensionContext, 'extensionUri'>;
 	readonly #cspArbiter: ContentSecurityPolicyArbiter;
 	readonly #contributionProvider: MarkdownContributionProvider;
 	readonly #logger: ILogger;
 
 	constructor(
 		engine: MarkdownItEngine,
-		context: Pick<vscode.ExtensionContext, 'extensionUri'>,
+		context: Pick<zyraxoncode.ExtensionContext, 'extensionUri'>,
 		cspArbiter: ContentSecurityPolicyArbiter,
 		contributionProvider: MarkdownContributionProvider,
 		logger: ILogger
@@ -62,15 +62,15 @@ export class MdDocumentRenderer {
 		this.#contributionProvider = contributionProvider;
 		this.#logger = logger;
 		this.iconPath = {
-			dark: vscode.Uri.joinPath(this.#context.extensionUri, 'media', 'preview-dark.svg'),
-			light: vscode.Uri.joinPath(this.#context.extensionUri, 'media', 'preview-light.svg'),
+			dark: zyraxoncode.Uri.joinPath(this.#context.extensionUri, 'media', 'preview-dark.svg'),
+			light: zyraxoncode.Uri.joinPath(this.#context.extensionUri, 'media', 'preview-light.svg'),
 		};
 	}
 
-	public readonly iconPath: { light: vscode.Uri; dark: vscode.Uri };
+	public readonly iconPath: { light: zyraxoncode.Uri; dark: zyraxoncode.Uri };
 
 	public async renderDocument(
-		markdownDocument: vscode.TextDocument,
+		markdownDocument: zyraxoncode.TextDocument,
 		resourceProvider: WebviewResourceProvider,
 		previewConfigurations: MarkdownPreviewConfigurationManager,
 		initialLine: number | undefined,
@@ -79,7 +79,7 @@ export class MdDocumentRenderer {
 		imageInfo: readonly ImageInfo[],
 		lineChanges: MarkdownPreviewLineChanges | undefined,
 		diffScrollSync: DiffScrollSyncData | undefined,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	): Promise<MarkdownContentProviderOutput> {
 		const sourceUri = markdownDocument.uri;
 		const config = previewConfigurations.loadAndCacheConfiguration(sourceUri);
@@ -113,7 +113,7 @@ export class MdDocumentRenderer {
 			<head>
 				<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 				<meta http-equiv="Content-Security-Policy" content="${escapeAttribute(csp)}">
-				<meta id="vscode-markdown-preview-data"
+				<meta id="zyraxoncode-markdown-preview-data"
 					data-settings="${escapeAttribute(JSON.stringify(initialData))}"
 					data-strings="${escapeAttribute(JSON.stringify(previewStrings))}"
 					data-state="${escapeAttribute(JSON.stringify(state || {}))}"
@@ -122,7 +122,7 @@ export class MdDocumentRenderer {
 				${this.#getStyles(resourceProvider, sourceUri, config, imageInfo)}
 				<base href="${resourceProvider.asWebviewUri(markdownDocument.uri)}">
 			</head>
-			<body class="vscode-body ${config.scrollBeyondLastLine ? 'scrollBeyondLastLine' : ''} ${config.wordWrap ? 'wordWrap' : ''} ${config.markEditorSelection ? 'showEditorSelection' : ''}">
+			<body class="zyraxoncode-body ${config.scrollBeyondLastLine ? 'scrollBeyondLastLine' : ''} ${config.wordWrap ? 'wordWrap' : ''} ${config.markEditorSelection ? 'showEditorSelection' : ''}">
 				${this.#getScripts(resourceProvider, nonce)}
 			</body>
 			</html>`;
@@ -133,7 +133,7 @@ export class MdDocumentRenderer {
 	}
 
 	public async renderBody(
-		markdownDocument: vscode.TextDocument,
+		markdownDocument: zyraxoncode.TextDocument,
 		resourceProvider: WebviewResourceProvider,
 		lineChanges?: MarkdownPreviewLineChanges,
 	): Promise<MarkdownContentProviderOutput> {
@@ -142,7 +142,7 @@ export class MdDocumentRenderer {
 		// If there are inner changes, inject invisible marker text into the source text
 		// before rendering. The webview uses the CSS Custom Highlight API to create
 		// highlights between each marker pair, which works across HTML tag boundaries.
-		const input: vscode.TextDocument | string = innerChanges?.length
+		const input: zyraxoncode.TextDocument | string = innerChanges?.length
 			? injectInnerChangeMarkers(markdownDocument.getText(), innerChanges)
 			: markdownDocument;
 
@@ -154,12 +154,12 @@ export class MdDocumentRenderer {
 		};
 	}
 
-	public renderFileNotFoundDocument(resource: vscode.Uri): string {
+	public renderFileNotFoundDocument(resource: zyraxoncode.Uri): string {
 		const resourcePath = uri.Utils.basename(resource);
-		const body = vscode.l10n.t('{0} cannot be found', resourcePath);
+		const body = zyraxoncode.l10n.t('{0} cannot be found', resourcePath);
 		return `<!DOCTYPE html>
 			<html>
-			<body class="vscode-body">
+			<body class="zyraxoncode-body">
 				${body}
 			</body>
 			</html>`;
@@ -167,11 +167,11 @@ export class MdDocumentRenderer {
 
 	#extensionResourcePath(resourceProvider: WebviewResourceProvider, mediaFile: string): string {
 		const webviewResource = resourceProvider.asWebviewUri(
-			vscode.Uri.joinPath(this.#context.extensionUri, 'media', mediaFile));
+			zyraxoncode.Uri.joinPath(this.#context.extensionUri, 'media', mediaFile));
 		return webviewResource.toString();
 	}
 
-	#fixHref(resourceProvider: WebviewResourceProvider, resource: vscode.Uri, href: string): string {
+	#fixHref(resourceProvider: WebviewResourceProvider, resource: zyraxoncode.Uri, href: string): string {
 		if (!href) {
 			return href;
 		}
@@ -182,20 +182,20 @@ export class MdDocumentRenderer {
 
 		// Assume it must be a local file
 		if (href.startsWith('/') || /^[a-z]:\\/i.test(href)) {
-			return resourceProvider.asWebviewUri(vscode.Uri.file(href)).toString();
+			return resourceProvider.asWebviewUri(zyraxoncode.Uri.file(href)).toString();
 		}
 
 		// Use a workspace relative path if there is a workspace
-		const root = vscode.workspace.getWorkspaceFolder(resource);
+		const root = zyraxoncode.workspace.getWorkspaceFolder(resource);
 		if (root) {
-			return resourceProvider.asWebviewUri(vscode.Uri.joinPath(root.uri, href)).toString();
+			return resourceProvider.asWebviewUri(zyraxoncode.Uri.joinPath(root.uri, href)).toString();
 		}
 
 		// Otherwise look relative to the markdown file
-		return resourceProvider.asWebviewUri(vscode.Uri.joinPath(uri.Utils.dirname(resource), href)).toString();
+		return resourceProvider.asWebviewUri(zyraxoncode.Uri.joinPath(uri.Utils.dirname(resource), href)).toString();
 	}
 
-	#computeCustomStyleSheetIncludes(resourceProvider: WebviewResourceProvider, resource: vscode.Uri, config: MarkdownPreviewConfiguration): string {
+	#computeCustomStyleSheetIncludes(resourceProvider: WebviewResourceProvider, resource: zyraxoncode.Uri, config: MarkdownPreviewConfiguration): string {
 		if (!Array.isArray(config.styles)) {
 			return '';
 		}
@@ -231,7 +231,7 @@ export class MdDocumentRenderer {
 		return ret;
 	}
 
-	#getStyles(resourceProvider: WebviewResourceProvider, resource: vscode.Uri, config: MarkdownPreviewConfiguration, imageInfo: readonly ImageInfo[]): string {
+	#getStyles(resourceProvider: WebviewResourceProvider, resource: zyraxoncode.Uri, config: MarkdownPreviewConfiguration, imageInfo: readonly ImageInfo[]): string {
 		const baseStyles: string[] = [];
 		for (const resource of this.#contributionProvider.contributions.previewStyles) {
 			baseStyles.push(`<link rel="stylesheet" type="text/css" href="${escapeAttribute(resourceProvider.asWebviewUri(resource))}">`);
@@ -256,7 +256,7 @@ export class MdDocumentRenderer {
 
 	#getCsp(
 		provider: WebviewResourceProvider,
-		resource: vscode.Uri,
+		resource: zyraxoncode.Uri,
 		nonce: string
 	): string {
 		const rule = provider.cspSource.split(';')[0];
@@ -265,7 +265,7 @@ export class MdDocumentRenderer {
 				return `default-src 'none'; img-src 'self' ${rule} http: https: data:; media-src 'self' ${rule} http: https: data:; script-src 'nonce-${nonce}'; style-src 'self' ${rule} 'unsafe-inline' http: https: data:; font-src 'self' ${rule} http: https: data:;`;
 
 			case MarkdownPreviewSecurityLevel.AllowInsecureLocalContent:
-				return `default-src 'none'; img-src 'self' ${rule} https: data: http://localhost:* http://127.0.0.1:*; media-src 'self' ${rule} https: data: http://localhost:* http://127.0.0.1:*; script-src 'nonce-${nonce}'; style-src 'self' ${rule} 'unsafe-inline' https: data: http://localhost:* http://127.0.0.1:*; font-src 'self' ${rule} https: data: http://localhost:* http://127.0.0.1:*;`;
+				return `default-src 'none'; img-src 'self' ${rule} https: data: __ZYRAXKEEP__0_ __ZYRAXKEEP__1_ media-src 'self' ${rule} https: data: __ZYRAXKEEP__2_ __ZYRAXKEEP__3_ script-src 'nonce-${nonce}'; style-src 'self' ${rule} 'unsafe-inline' https: data: __ZYRAXKEEP__4_ __ZYRAXKEEP__5_ font-src 'self' ${rule} https: data: __ZYRAXKEEP__6_ __ZYRAXKEEP__7_`;
 
 			case MarkdownPreviewSecurityLevel.AllowScriptsAndAllContent:
 				return ``;

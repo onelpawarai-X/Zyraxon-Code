@@ -141,10 +141,10 @@ src/extension/chatSessions/claude/
     ├── claudeOTelTracker.ts          # invoke_agent claude span + per-session token/cost rollup
     └── claudeLanguageModelServer.ts  # Local HTTP proxy → chatMLFetcher (chat spans)
 
-src/extension/chat/vscode-node/
+src/extension/chat/zyraxoncode-node/
 └── chatHookService.ts                # execute_hook spans for foreground agent hooks
 
-src/extension/trajectory/vscode-node/
+src/extension/trajectory/zyraxoncode-node/
 ├── otelChatDebugLogProvider.ts       # Debug panel data provider
 ├── otelSpanToChatDebugEvent.ts       # Span → ChatDebugEvent conversion
 └── otlpFormatConversion.ts           # OTLP ↔ in-memory span format
@@ -193,7 +193,7 @@ Key methods:
 | `NodeOTelService` | OTel enabled — full SDK, OTLP/file/console export, optional SQLite span exporter |
 | `InMemoryOTelService` | Registered when OTel is **disabled** in the extension host — no SDK is loaded, but spans/metrics/logs are still captured in-memory so the Agent Debug Log panel keeps working |
 
-Selection happens in `src/extension/extension/vscode-node/services.ts`: exactly one of `NodeOTelService` or `InMemoryOTelService` is bound to `IOTelService` per extension host based on `resolveOTelConfig().enabled`.
+Selection happens in `src/extension/extension/zyraxoncode-node/services.ts`: exactly one of `NodeOTelService` or `InMemoryOTelService` is bound to `IOTelService` per extension host based on `resolveOTelConfig().enabled`.
 
 ### Two TracerProviders in Same Process
 
@@ -338,9 +338,9 @@ if (this._otelService.config.captureContent) {
 
 ### Attribute Truncation
 
-All free-form content attributes (prompts, tool arguments/results, hook input/output, reasoning text) **must** be passed through `truncateForOTel(value, otel.config.maxAttributeSizeChars)` before being set on a span. The default `maxAttributeSizeChars` is `0` (no truncation), matching the [OTel spec default of `Infinity`](https://opentelemetry.io/docs/specs/otel/common/#attribute-limits) for `AttributeValueLengthLimit`. Users whose OTel backend caps per-attribute size should set `github.copilot.chat.otel.maxAttributeSizeChars` (or the `COPILOT_OTEL_MAX_ATTRIBUTE_SIZE_CHARS` env var) to a positive value so OTLP batches stay under the backend cap — consult the backend's documentation for the appropriate value.
+All free-form content attributes (prompts, tool arguments/results, hook input/output, reasoning text) **must** be passed through `truncateForOTel(value, otel.config.maxAttributeSizeChars)` before being set on a span. The default `maxAttributeSizeChars` is `0` (no truncation), matching the [OTel spec default of `Infinity`](__ZYRAXKEEP__0_) for `AttributeValueLengthLimit`. Users whose OTel backend caps per-attribute size should set `github.copilot.chat.otel.maxAttributeSizeChars` (or the `COPILOT_OTEL_MAX_ATTRIBUTE_SIZE_CHARS` env var) to a positive value so OTLP batches stay under the backend cap — consult the backend's documentation for the appropriate value.
 
-> **Chars vs. bytes.** The [OTel spec](https://opentelemetry.io/docs/specs/otel/common/#attribute-limits) defines string attribute limits as "counting any character in it as 1". `truncateForOTel` approximates this using `value.length`, which counts UTF-16 code units rather than Unicode code points — so astral-plane characters (e.g. some emoji) count as 2 against the limit. Backends typically apply a separate UTF-8 byte limit downstream, so the on-wire size for non-ASCII content can be larger than the configured character count.
+> **Chars vs. bytes.** The [OTel spec](__ZYRAXKEEP__1_) defines string attribute limits as "counting any character in it as 1". `truncateForOTel` approximates this using `value.length`, which counts UTF-16 code units rather than Unicode code points — so astral-plane characters (e.g. some emoji) count as 2 against the limit. Backends typically apply a separate UTF-8 byte limit downstream, so the on-wire size for non-ASCII content can be larger than the configured character count.
 
 ```typescript
 const maxLen = this._otelService.config.maxAttributeSizeChars; // 0 = unlimited
@@ -412,7 +412,7 @@ Notes:
 These spans are produced by the Copilot runtime SDK, not the extension, so there are **two independent export paths** with different correlation coverage:
 
 - **Debug panel copy** (via the bridge → `injectCompletedSpan` → `onDidCompleteSpan`): `copilotCliBridgeSpanProcessor.ts` injects `copilot_chat.chat_session_id` **and** `gen_ai.conversation.id` (session id) onto the copied span for any span that lacks them, keyed by a traceId → session map. This affects only the debug-panel / file-logger view.
-- **SDK's own OTLP export** (via the runtime's `BatchSpanProcessor`): the bridge **cannot** mutate these spans. Their `gen_ai.conversation.id` is whatever the runtime stamps — currently `invoke_agent` and `chat` (and `execute_tool` once [github/copilot-agent-runtime#12383](https://github.com/github/copilot-agent-runtime/pull/12383) lands). Closing this gap for other CLI child spans must happen in the runtime.
+- **SDK's own OTLP export** (via the runtime's `BatchSpanProcessor`): the bridge **cannot** mutate these spans. Their `gen_ai.conversation.id` is whatever the runtime stamps — currently `invoke_agent` and `chat` (and `execute_tool` once [github/copilot-agent-runtime#12383](__ZYRAXKEEP__2_) lands). Closing this gap for other CLI child spans must happen in the runtime.
 
 ---
 
@@ -460,7 +460,7 @@ src/extension/chatSessions/claude/{common,node}/test/
 ├── claudeMessageDispatch.spec.ts           # Claude span emission
 └── claudeCodeAgentOTel.spec.ts             # Claude agent end-to-end
 
-src/extension/trajectory/vscode-node/test/
+src/extension/trajectory/zyraxoncode-node/test/
 ├── otelSpanToChatDebugEvent.spec.ts
 └── otlpFormatConversion.spec.ts
 ```

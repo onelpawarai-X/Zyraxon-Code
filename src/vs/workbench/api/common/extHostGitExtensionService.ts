@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { Event } from '../../../base/common/event.js';
 import { Disposable, DisposableMap } from '../../../base/common/lifecycle.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
@@ -14,7 +14,7 @@ import { IExtHostRpcService } from './extHostRpcService.js';
 import { ExtHostGitExtensionShape, GitBranchDto, GitChangeDto, GitDiffChangeDto, GitRefDto, GitRefQueryDto, GitRefTypeDto, GitRepositoryStateDto, GitUpstreamRefDto, MainContext, MainThreadGitExtensionShape } from './extHost.protocol.js';
 import { ResourceMap } from '../../../base/common/map.js';
 
-const GIT_EXTENSION_ID = 'vscode.git';
+const GIT_EXTENSION_ID = 'zyraxoncode.git';
 
 function toGitRefTypeDto(type: GitRefType): GitRefTypeDto {
 	switch (type) {
@@ -87,21 +87,21 @@ interface DiffChange extends Change {
 }
 
 interface Repository {
-	readonly rootUri: vscode.Uri;
+	readonly rootUri: zyraxoncode.Uri;
 	readonly state: RepositoryState;
 
 	status(): Promise<void>;
 	getBranchBase(name: string): Promise<Branch | undefined>;
-	getRefs(query: GitRefQuery, token?: vscode.CancellationToken): Promise<GitRef[]>;
+	getRefs(query: GitRefQuery, token?: zyraxoncode.CancellationToken): Promise<GitRef[]>;
 	diffBetweenWithStats(ref1: string, ref2: string, path?: string): Promise<DiffChange[]>;
 	diffBetweenWithStats2(ref: string, path?: string): Promise<DiffChange[]>;
 	isBranchProtected(branch?: Branch): boolean;
 }
 
 interface Change {
-	readonly uri: vscode.Uri;
-	readonly originalUri: vscode.Uri;
-	readonly renameUri: vscode.Uri | undefined;
+	readonly uri: zyraxoncode.Uri;
+	readonly originalUri: zyraxoncode.Uri;
+	readonly renameUri: zyraxoncode.Uri | undefined;
 	readonly status: number;
 }
 
@@ -161,7 +161,7 @@ interface GitRefQuery {
 }
 
 interface GitExtensionAPI {
-	openRepository(root: vscode.Uri): Promise<Repository | null>;
+	openRepository(root: zyraxoncode.Uri): Promise<Repository | null>;
 }
 
 interface GitExtension {
@@ -185,7 +185,7 @@ export class ExtHostGitExtensionService extends Disposable implements IExtHostGi
 
 	private readonly _repositories = new Map<number, Repository>();
 	private readonly _repositoryByUri = new ResourceMap<number>();
-	private readonly _repositoryStateChangeListeners = new DisposableMap<number, vscode.Disposable>();
+	private readonly _repositoryStateChangeListeners = new DisposableMap<number, zyraxoncode.Disposable>();
 
 	constructor(
 		@IExtHostRpcService extHostRpc: IExtHostRpcService,
@@ -237,7 +237,7 @@ export class ExtHostGitExtensionService extends Disposable implements IExtHostGi
 		return { handle, rootUri: repository.rootUri, state };
 	}
 
-	async $getRefs(handle: number, query: GitRefQueryDto, token?: vscode.CancellationToken): Promise<GitRefDto[]> {
+	async $getRefs(handle: number, query: GitRefQueryDto, token?: zyraxoncode.CancellationToken): Promise<GitRefDto[]> {
 		const repository = this._repositories.get(handle);
 		if (!repository) {
 			return [];

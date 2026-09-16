@@ -22,15 +22,15 @@ const backendOnlyModuleNames = [
 	'@xterm/headless'
 ];
 
-const vscodeDir = process.argv.length >= 3 ? process.argv[2] : process.cwd();
-if (!path.basename(vscodeDir).match(/.*vscode.*/)) {
-	console.error('The cwd is not "vscode" root');
+const zyraxoncodeDir = process.argv.length >= 3 ? process.argv[2] : process.cwd();
+if (!path.basename(zyraxoncodeDir).match(/.*zyraxoncode.*/)) {
+	console.error('The cwd is not "zyraxoncode" root');
 	return;
 }
 
 function getLatestModuleVersion(moduleName) {
 	return new Promise((resolve, reject) => {
-		cp.exec(`npm view ${moduleName} versions --json`, { cwd: vscodeDir }, (err, stdout, stderr) => {
+		cp.exec(`npm view ${moduleName} versions --json`, { cwd: zyraxoncodeDir }, (err, stdout, stderr) => {
 			if (err) {
 				reject(err);
 			}
@@ -62,7 +62,7 @@ async function update() {
 		console.log(`  ${m}@${latestVersions[m]}`);
 	}
 
-	const pkg = require(path.join(vscodeDir, 'package.json'));
+	const pkg = require(path.join(zyraxoncodeDir, 'package.json'));
 
 	const modulesWithVersion = [];
 	for (const m of moduleNames) {
@@ -75,7 +75,7 @@ async function update() {
 	}
 
 	if (modulesWithVersion.length > 0) {
-		for (const cwd of [vscodeDir, path.join(vscodeDir, 'remote'), path.join(vscodeDir, 'remote/web')]) {
+		for (const cwd of [zyraxoncodeDir, path.join(zyraxoncodeDir, 'remote'), path.join(zyraxoncodeDir, 'remote/web')]) {
 			console.log(`${path.join(cwd, 'package.json')}: Updating\n  ${modulesWithVersion.join('\n  ')}`);
 			cp.execSync(`npm install ${modulesWithVersion.join(' ')}`, { cwd });
 		}
@@ -91,7 +91,7 @@ async function update() {
 		backendOnlyModulesWithVersion.push(moduleWithVersion);
 	}
 	if (backendOnlyModulesWithVersion.length > 0) {
-		for (const cwd of [vscodeDir, path.join(vscodeDir, 'remote')]) {
+		for (const cwd of [zyraxoncodeDir, path.join(zyraxoncodeDir, 'remote')]) {
 			console.log(`${path.join(cwd, 'package.json')}: Updating\n  ${backendOnlyModulesWithVersion.join('\n  ')}`);
 			cp.execSync(`npm install ${backendOnlyModulesWithVersion.join(' ')}`, { cwd });
 		}

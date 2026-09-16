@@ -14,7 +14,7 @@ export function applyQuickAccessTools(server: McpServer, appService: Application
 	const tools: RegisteredTool[] = [];
 
 	tools.push(server.tool(
-		'vscode_automation_command_run',
+		'zyraxoncode_automation_command_run',
 		'Run a command by name through the command palette',
 		{
 			command: z.string().describe('The command name to run'),
@@ -34,7 +34,7 @@ export function applyQuickAccessTools(server: McpServer, appService: Application
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_quick_open_file',
+		'zyraxoncode_automation_quick_open_file',
 		'Open quick file search and select a file',
 		{
 			fileName: z.string().describe('Name or pattern of file to search for'),
@@ -55,7 +55,7 @@ export function applyQuickAccessTools(server: McpServer, appService: Application
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_quick_input_type',
+	// 	'zyraxoncode_automation_quick_input_type',
 	// 	'Type text into the currently open quick input',
 	// 	{
 	// 		text: z.string().describe('Text to type into quick input')
@@ -74,7 +74,7 @@ export function applyQuickAccessTools(server: McpServer, appService: Application
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_quick_input_select_item',
+	// 	'zyraxoncode_automation_quick_input_select_item',
 	// 	'Select an item from the quick input list',
 	// 	{
 	// 		index: z.number().optional().describe('Index of item to select (0-based)'),

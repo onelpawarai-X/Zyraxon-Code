@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatLanguageModelToolReference, ChatPromptReference } from 'vscode';
+import type { ChatLanguageModelToolReference, ChatPromptReference } from 'zyraxoncode';
 import { IToolsService } from '../../src/extension/tools/common/toolsService';
 import { ITestingServicesAccessor } from '../../src/platform/test/node/services';
 import { SimulationWorkspace } from '../../src/platform/test/node/simulationWorkspace';
 import { basename } from '../../src/util/vs/base/common/resources';
-import { Location, Uri } from '../../src/vscodeTypes';
+import { Location, Uri } from '../../src/zyraxoncodeTypes';
 import { IConversationTestCase } from './scenarioLoader';
 
 export interface IParsedQuery {
@@ -32,14 +32,14 @@ export async function parseQueryForScenarioTest(accessor: ITestingServicesAccess
 		const selection = activeTextEditor.selections?.[0];
 		if (selection) {
 			query.variables.push({
-				id: 'vscode.implicit',
+				id: 'zyraxoncode.implicit',
 				name: `file:${basename(activeTextEditor.document.uri)}`,
 				value: new Location(activeTextEditor.document.uri, selection),
 				modelDescription: `User's active selection`
 			});
 		} else {
 			query.variables.push({
-				id: 'vscode.implicit',
+				id: 'zyraxoncode.implicit',
 				name: `file:${basename(activeTextEditor.document.uri)}`,
 				value: activeTextEditor.document.uri,
 				modelDescription: `User's active file`

@@ -57,7 +57,7 @@ export class BuiltinExtensionsScannerService implements IBuiltinExtensionsScanne
 				} else {
 					// Find builtin extensions by checking for DOM
 					// eslint-disable-next-line no-restricted-syntax
-					const builtinExtensionsElement = mainWindow.document.getElementById('vscode-workbench-builtin-extensions');
+					const builtinExtensionsElement = mainWindow.document.getElementById('zyraxoncode-workbench-builtin-extensions');
 					const builtinExtensionsElementAttribute = builtinExtensionsElement ? builtinExtensionsElement.getAttribute('data-settings') : undefined;
 					if (builtinExtensionsElementAttribute) {
 						try {

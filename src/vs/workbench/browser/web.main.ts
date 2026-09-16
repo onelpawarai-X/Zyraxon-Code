@@ -224,7 +224,7 @@ export class BrowserMain extends Disposable {
 							name: tunnelOptions.label,
 							source: {
 								source: TunnelSource.Extension,
-								description: labelService.getHostLabel(Schemas.vscodeRemote, this.configuration.remoteAuthority)
+								description: labelService.getHostLabel(Schemas.zyraxoncodeRemote, this.configuration.remoteAuthority)
 							},
 							elevateIfNeeded: false,
 							privacy: tunnelOptions.privacy
@@ -289,7 +289,7 @@ export class BrowserMain extends Disposable {
 		serviceCollection.set(IProductService, productService);
 
 		// Environment
-		const logsPath = URI.file(toLocalISOString(new Date()).replace(/-|:|\.\d+Z$/g, '')).with({ scheme: 'vscode-log' });
+		const logsPath = URI.file(toLocalISOString(new Date()).replace(/-|:|\.\d+Z$/g, '')).with({ scheme: 'zyraxoncode-log' });
 		const environmentService = new BrowserWorkbenchEnvironmentService(workspace.id, logsPath, this.configuration, productService);
 		serviceCollection.set(IBrowserWorkbenchEnvironmentService, environmentService);
 
@@ -513,11 +513,11 @@ export class BrowserMain extends Disposable {
 
 		// IndexedDB is used for logging and user data
 		let indexedDB: IndexedDB | undefined;
-		const userDataStore = 'vscode-userdata-store';
-		const logsStore = 'vscode-logs-store';
-		const handlesStore = 'vscode-filehandles-store';
+		const userDataStore = 'zyraxoncode-userdata-store';
+		const logsStore = 'zyraxoncode-logs-store';
+		const handlesStore = 'zyraxoncode-filehandles-store';
 		try {
-			indexedDB = await IndexedDB.create('vscode-web-db', 3, [userDataStore, logsStore, handlesStore]);
+			indexedDB = await IndexedDB.create('zyraxoncode-web-db', 3, [userDataStore, logsStore, handlesStore]);
 
 			// Close onWillShutdown
 			this.onWillShutdownDisposables.add(toDisposable(() => indexedDB?.close()));
@@ -537,14 +537,14 @@ export class BrowserMain extends Disposable {
 		// User data
 		let userDataProvider;
 		if (indexedDB) {
-			userDataProvider = new IndexedDBFileSystemProvider(Schemas.vscodeUserData, indexedDB, userDataStore, true);
+			userDataProvider = new IndexedDBFileSystemProvider(Schemas.zyraxoncodeUserData, indexedDB, userDataStore, true);
 			this.indexedDBFileSystemProviders.push(userDataProvider);
 			this.registerDeveloperActions(userDataProvider);
 		} else {
 			logService.info('Using in-memory user data provider');
 			userDataProvider = new InMemoryFileSystemProvider();
 		}
-		fileService.registerProvider(Schemas.vscodeUserData, userDataProvider);
+		fileService.registerProvider(Schemas.zyraxoncodeUserData, userDataProvider);
 
 		// Local file access (if supported by browser)
 		if (WebFileSystemAccess.supported(mainWindow)) {
@@ -627,7 +627,7 @@ export class BrowserMain extends Disposable {
 			}
 		}
 
-		const configurationCache = new ConfigurationCache([Schemas.file, Schemas.vscodeUserData, Schemas.tmp] /* Cache all non native resources */, environmentService, fileService);
+		const configurationCache = new ConfigurationCache([Schemas.file, Schemas.zyraxoncodeUserData, Schemas.tmp] /* Cache all non native resources */, environmentService, fileService);
 		const workspaceService = new WorkspaceService({ remoteAuthority: this.configuration.remoteAuthority, configurationCache }, environmentService, userDataProfileService, userDataProfilesService, fileService, remoteAgentService, uriIdentityService, logService, policyService);
 
 		try {

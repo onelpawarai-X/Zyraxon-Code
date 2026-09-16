@@ -4,14 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IEnvService } from '../../../../platform/env/common/envService';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IPromptsService } from '../../../../platform/promptFiles/common/promptsService';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
@@ -38,7 +38,7 @@ const COPILOT_CLI_SESSION_AGENTS_MEMENTO_KEY = 'github.copilot.cli.sessionAgents
  * @deprecated Use empty strings to represent default model/agent instead.
  * Left here for backward compatibility (for state stored by older versions of Chat extension).
  */
-export const COPILOT_CLI_DEFAULT_AGENT_ID = '___vscode_default___';
+export const COPILOT_CLI_DEFAULT_AGENT_ID = '___zyraxoncode_default___';
 
 export interface CopilotCLIModelInfo {
 	readonly id: string;
@@ -70,7 +70,7 @@ export interface ICopilotCLIModels {
 	getDefaultModel(): Promise<string | undefined>;
 	setDefaultModel(modelId: string | undefined): Promise<void>;
 	getModels(): Promise<CopilotCLIModelInfo[]>;
-	registerLanguageModelChatProvider(lm: typeof vscode['lm']): void;
+	registerLanguageModelChatProvider(lm: typeof zyraxoncode['lm']): void;
 }
 
 export function matchesCopilotCLIModel(model: Pick<CopilotCLIModelInfo, 'id' | 'name'>, modelId: string): boolean {
@@ -86,12 +86,12 @@ export class CopilotCLIModels extends Disposable implements ICopilotCLIModels {
 	declare _serviceBrand: undefined;
 	private _availableModels?: Promise<CopilotCLIModelInfo[]>;
 	/** Synchronously available model infos (includes `auto`). Set once the eager fetch completes. */
-	private _resolvedModelInfos?: vscode.LanguageModelChatInformation[];
+	private _resolvedModelInfos?: zyraxoncode.LanguageModelChatInformation[];
 	private readonly _onDidChange = this._register(new Emitter<void>());
 
 	constructor(
 		@ICopilotCLISDK private readonly copilotCLISDK: ICopilotCLISDK,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 		@ILogService private readonly logService: ILogService,
 		@IAuthenticationService private readonly _authenticationService: IAuthenticationService,
 		@IConfigurationService private readonly configurationService: IConfigurationService,
@@ -156,7 +156,7 @@ export class CopilotCLIModels extends Disposable implements ICopilotCLIModels {
 			return [];
 		}
 
-		// No need to query sdk multiple times, cache the result, this cannot change during a vscode session.
+		// No need to query sdk multiple times, cache the result, this cannot change during a zyraxoncode session.
 		if (!this._availableModels) {
 			this._availableModels = this._getAvailableModels();
 		}
@@ -201,8 +201,8 @@ export class CopilotCLIModels extends Disposable implements ICopilotCLIModels {
 		}
 	}
 
-	public registerLanguageModelChatProvider(lm: typeof vscode['lm']): void {
-		const provider: vscode.LanguageModelChatProvider = {
+	public registerLanguageModelChatProvider(lm: typeof zyraxoncode['lm']): void {
+		const provider: zyraxoncode.LanguageModelChatProvider = {
 			onDidChangeLanguageModelChatInformation: this._onDidChange.event,
 			provideLanguageModelChatInformation: async (_options, _token) => {
 				const models = this._resolvedModelInfos ?? [];
@@ -224,13 +224,13 @@ export class CopilotCLIModels extends Disposable implements ICopilotCLIModels {
 		this._onDidChange.fire();
 	}
 
-	private _buildModelInfos(models: CopilotCLIModelInfo[]): vscode.LanguageModelChatInformation[] {
+	private _buildModelInfos(models: CopilotCLIModelInfo[]): zyraxoncode.LanguageModelChatInformation[] {
 		const isReasoningEffortEnabled = this.configurationService.getConfig(ConfigKey.Advanced.CLIThinkingEffortEnabled);
 		const isAutoModelEnabled = this.configurationService.getConfig(ConfigKey.Advanced.CLIAutoModelEnabled);
 		const preferLongContext = this.configurationService.getConfig(ConfigKey.PreferLongContext);
-		const modelsInfo: vscode.LanguageModelChatInformation[] = models.map((model, index) => {
+		const modelsInfo: zyraxoncode.LanguageModelChatInformation[] = models.map((model, index) => {
 			const multiplier = model.multiplier === undefined ? undefined : `${model.multiplier}x`;
-			const modelInfo: vscode.LanguageModelChatInformation = {
+			const modelInfo: zyraxoncode.LanguageModelChatInformation = {
 				id: model.id,
 				name: model.name,
 				family: model.id,
@@ -271,7 +271,7 @@ export class CopilotCLIModels extends Disposable implements ICopilotCLIModels {
 	}
 }
 
-function buildAutoModel(defaultModel?: CopilotCLIModelInfo): vscode.LanguageModelChatInformation {
+function buildAutoModel(defaultModel?: CopilotCLIModelInfo): zyraxoncode.LanguageModelChatInformation {
 	return {
 		id: 'auto',
 		name: 'Auto',
@@ -292,8 +292,8 @@ function buildAutoModel(defaultModel?: CopilotCLIModelInfo): vscode.LanguageMode
 
 export const COPILOT_CLI_CONTEXT_SIZE_PROPERTY = 'contextSize';
 
-function buildConfigurationSchema(modelInfo: CopilotCLIModelInfo, isReasoningEffortEnabled: boolean, preferLongContext: boolean): { configurationSchema?: vscode.LanguageModelConfigurationSchema } {
-	const properties: Record<string, NonNullable<vscode.LanguageModelConfigurationSchema['properties']>[string]> = {};
+function buildConfigurationSchema(modelInfo: CopilotCLIModelInfo, isReasoningEffortEnabled: boolean, preferLongContext: boolean): { configurationSchema?: zyraxoncode.LanguageModelConfigurationSchema } {
+	const properties: Record<string, NonNullable<zyraxoncode.LanguageModelConfigurationSchema['properties']>[string]> = {};
 
 	// Reasoning effort config
 	if (isReasoningEffortEnabled) {
@@ -335,7 +335,7 @@ function buildConfigurationSchema(modelInfo: CopilotCLIModelInfo, isReasoningEff
 				group: 'tokens',
 			};
 		} else {
-			// No surcharge and the user prefers long context — show only the long context option as a non-switchable indicator. See microsoft/vscode#322950, microsoft/vscode#323116.
+			// No surcharge and the user prefers long context — show only the long context option as a non-switchable indicator. See zyraxon/zyraxoncode#322950, zyraxon/zyraxoncode#323116.
 			properties[COPILOT_CLI_CONTEXT_SIZE_PROPERTY] = {
 				type: 'number',
 				title: l10n.t('Context Size'),
@@ -361,7 +361,7 @@ export interface CLIAgentInfo {
 	readonly agent: Readonly<SweCustomAgent>;
 	/** File URI for prompt-file agents, synthetic `copilotcli:` URI for SDK-only agents. */
 	readonly sourceUri: URI;
-	readonly source: vscode.ChatResourceSource;
+	readonly source: zyraxoncode.ChatResourceSource;
 	readonly extensionId: string | undefined;
 	readonly pluginUri: URI | undefined;
 }
@@ -384,7 +384,7 @@ export class CopilotCLIAgents extends Disposable implements ICopilotCLIAgents {
 	readonly onDidChangeAgents: Event<void> = this._onDidChangeAgents.event;
 	constructor(
 		@IPromptsService private readonly promptsService: IPromptsService,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 		@ILogService private readonly logService: ILogService,
 		@IWorkspaceService private readonly workspaceService: IWorkspaceService,
 	) {
@@ -492,7 +492,7 @@ export class CopilotCLIAgents extends Disposable implements ICopilotCLIAgents {
 		return [...merged.values()];
 	}
 
-	private toCustomAgent(customAgent: vscode.ChatCustomAgent): CLIAgentInfo | undefined {
+	private toCustomAgent(customAgent: zyraxoncode.ChatCustomAgent): CLIAgentInfo | undefined {
 		const agentName = getAgentFileNameFromFilePath(customAgent.uri);
 		const headerName = customAgent.name;
 		const name = headerName === undefined || headerName === '' ? agentName : headerName;
@@ -567,7 +567,7 @@ export class CopilotCLISDK implements ICopilotCLISDK {
 	private _ensureShimsPromise?: Promise<void>;
 	private _initializeLogger = new Lazy<Promise<void>>(() => this.initLogger());
 	constructor(
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 		@IEnvService private readonly envService: IEnvService,
 		@ILogService private readonly logService: ILogService,
 		@IInstantiationService protected readonly instantiationService: IInstantiationService,
@@ -594,7 +594,7 @@ export class CopilotCLISDK implements ICopilotCLISDK {
 			await this._ensureShimsPromise;
 			// The SDK's sandbox auto-detection looks for `mxc-bin/<arch>/wxc-exec.exe` (and the
 			// Linux/macOS equivalents) under `MXC_BIN_DIR`. ZYRAXON Code core ships the MXC
-			// sandbox binaries at `<appRoot>/node_modules/@microsoft/mxc-sdk/bin/<arch>/`
+			// sandbox binaries at `<appRoot>/node_modules/@zyraxon/mxc-sdk/bin/<arch>/`
 			// (or `node_modules.asar.unpacked/...` in a packaged build), so point
 			// `MXC_BIN_DIR` there. The @github/copilot package's own `mxc-bin/` is excluded
 			// from the product build (see build/.moduleignore).
@@ -681,9 +681,9 @@ export class CopilotCLISDK implements ICopilotCLISDK {
 				}
 			};
 			if (authType === 'token') {
-				return { type: 'token', token: 'mock-token', host: 'https://github.com', copilotUser };
+				return { type: 'token', token: 'mock-token', host: '__ZYRAXKEEP__0_', copilotUser };
 			}
-			return { type: 'hmac', hmac: 'empty', host: 'https://github.com', copilotUser };
+			return { type: 'hmac', hmac: 'empty', host: '__ZYRAXKEEP__1_', copilotUser };
 		}
 
 		const { resolveAuthInfoFromToken } = await this.getPackage();
@@ -693,7 +693,7 @@ export class CopilotCLISDK implements ICopilotCLISDK {
 			return {
 				type: 'token',
 				token: copilotToken?.accessToken ?? '',
-				host: 'https://github.com'
+				host: '__ZYRAXKEEP__2_'
 			};
 		}
 		return userInfo;

@@ -399,7 +399,7 @@ export interface IAgentHostOTelSettings {
  * values here just before requesting the agent-host connection, so the host is spawned with
  * the managed OTel env. See {@link readAgentHostOTelPolicySettings}.
  */
-export const AgentHostOTelPolicyIpcChannel = 'vscode:agentHostOTelPolicy';
+export const AgentHostOTelPolicyIpcChannel = 'zyraxoncode:agentHostOTelPolicy';
 
 /**
  * Resolve the enterprise-policy values for the `chat.agentHost.otel.*` settings from a
@@ -917,9 +917,9 @@ export interface AuthenticateResult {
  * token down separate code paths.
  */
 export const GITHUB_COPILOT_PROTECTED_RESOURCE: ProtectedResourceMetadata = {
-	resource: 'https://api.github.com',
+	resource: '__ZYRAXKEEP__0_',
 	resource_name: 'GitHub Copilot',
-	authorization_servers: ['https://github.com/login/oauth'],
+	authorization_servers: ['__ZYRAXKEEP__1_'],
 	scopes_supported: ['read:user', 'user:email'],
 	required: true,
 };
@@ -937,9 +937,9 @@ export const GITHUB_COPILOT_PROTECTED_RESOURCE: ProtectedResourceMetadata = {
  * contributor resolves it lazily in response to operation invocations.
  */
 export const GITHUB_REPO_PROTECTED_RESOURCE: ProtectedResourceMetadata = {
-	resource: 'https://api.github.com/repos',
+	resource: '__ZYRAXKEEP__2_',
 	resource_name: 'GitHub Repository',
-	authorization_servers: ['https://github.com/login/oauth'],
+	authorization_servers: ['__ZYRAXKEEP__3_'],
 	scopes_supported: ['repo'],
 	required: false,
 };

@@ -1,11 +1,11 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { es5ClassCompat } from './es5ClassCompat';
 import { Position } from './position';
 import { getDebugDescriptionOfRange, Range } from './range';
@@ -81,7 +81,7 @@ export class Selection extends Range {
 	}
 }
 
-export function getDebugDescriptionOfSelection(selection: vscode.Selection): string {
+export function getDebugDescriptionOfSelection(selection: zyraxoncode.Selection): string {
 	let rangeStr = getDebugDescriptionOfRange(selection);
 	if (!selection.isEmpty) {
 		if (selection.active.isEqual(selection.start)) {

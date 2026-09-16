@@ -2,9 +2,9 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as l10n from '@vscode/l10n';
-import { Raw } from '@vscode/prompt-tsx';
-import type { CancellationToken, ChatResponseFileTreePart, ChatResponseStream, NotebookDocument } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, ChatResponseFileTreePart, ChatResponseStream, NotebookDocument } from 'zyraxoncode';
 import { IChatMLFetcher, IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IConversationOptions } from '../../../platform/chat/common/conversationOptions';
@@ -19,7 +19,7 @@ import { extractNotebookOutline, INotebookSection } from '../../../util/common/n
 import { AsyncIterableObject, AsyncIterableSource, DeferredPromise } from '../../../util/vs/base/common/async';
 import { Lazy } from '../../../util/vs/base/common/lazy';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseMarkdownPart, NotebookEdit, Uri, WorkspaceEdit } from '../../../vscodeTypes';
+import { ChatResponseMarkdownPart, NotebookEdit, Uri, WorkspaceEdit } from '../../../zyraxoncodeTypes';
 import { ChatVariablesCollection } from '../../prompt/common/chatVariablesCollection';
 import { Turn } from '../../prompt/common/conversation';
 import { IBuildPromptContext } from '../../prompt/common/intents';

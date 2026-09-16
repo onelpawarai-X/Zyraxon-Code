@@ -67,7 +67,7 @@ jobs:
       # run aside under a name the runner does not touch.
       - ${{ each i in parameters.iterations }}:
         - powershell: |
-            npm run smoketest-no-compile -- --tracing --build "$(agent.builddirectory)\VSCode-win32-$(VSCODE_ARCH)"
+            npm run smoketest-no-compile -- --tracing --build "$(agent.builddirectory)\ZyraxonCode-win32-$(VSCODE_ARCH)"
             $status = $LASTEXITCODE
             if ($status -ne 0 -and (Test-Path .build\logs\smoke-tests-electron)) {
               Move-Item .build\logs\smoke-tests-electron ".build\logs\failed-iteration-${{ i }}"

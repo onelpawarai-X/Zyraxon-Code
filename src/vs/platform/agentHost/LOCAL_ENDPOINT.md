@@ -35,7 +35,7 @@ The current schema version is `1`:
     "schemaVersion": 1,
     "pid": 12345,
     "instanceId": "base64url-instance-id",
-    "endpointPath": "\\\\.\\pipe\\vscode-agent-host-...",
+    "endpointPath": "\\\\.\\pipe\\zyraxoncode-agent-host-...",
     "connectionToken": "base64url-bearer-token",
     "protocolVersion": "0.7.0"
   }
@@ -75,14 +75,14 @@ Connections without the token, or with the wrong token, are rejected with HTTP
 On Windows, `endpointPath` is a named pipe:
 
 ```text
-\\.\pipe\vscode-agent-host-<user-data-hash>-<instance-id>
+\\.\pipe\zyraxoncode-agent-host-<user-data-hash>-<instance-id>
 ```
 
 On macOS/Linux, the socket is placed under `os.tmpdir()` using a short,
 user-data-specific directory to stay within Unix socket path-length limits:
 
 ```text
-<os.tmpdir()>/vscode-ah-<user-data-hash>/<instance-id>.sock
+<os.tmpdir()>/zyraxoncode-ah-<user-data-hash>/<instance-id>.sock
 ```
 
 Clients must use the path from the metadata file rather than reconstructing it.

@@ -55,10 +55,10 @@ body {
 	margin: 1em;
 }
 
-.vscode-dark .loading-indicator {
+.zyraxoncode-dark .loading-indicator {
 	background-image: url('./loading-dark.svg');
 }
 
-.vscode-high-contrast .loading-indicator {
+.zyraxoncode-high-contrast .loading-indicator {
 	background-image: url('./loading-hc.svg');
 }

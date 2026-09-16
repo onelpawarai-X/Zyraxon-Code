@@ -9,7 +9,7 @@ import { isFalsyOrWhitespace } from '../../../base/common/strings.js';
 import { URI } from '../../../base/common/uri.js';
 import { createDecorator } from '../../../platform/instantiation/common/instantiation.js';
 import { IExtHostRpcService } from './extHostRpcService.js';
-import { WindowState } from 'vscode';
+import { WindowState } from 'zyraxoncode';
 import { ExtHostWindowShape, IOpenUriOptions, MainContext, MainThreadWindowShape } from './extHost.protocol.js';
 import { IExtHostInitDataService } from './extHostInitDataService.js';
 import { decodeBase64 } from '../../../base/common/buffer.js';

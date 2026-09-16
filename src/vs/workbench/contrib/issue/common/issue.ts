@@ -24,7 +24,7 @@ export const enum IssueType {
 }
 
 export enum IssueSource {
-	VSCode = 'vscode',
+	ZyraxonCode = 'zyraxoncode',
 	AgentsWindow = 'agentsWindow',
 	Extension = 'extension',
 	Marketplace = 'marketplace',

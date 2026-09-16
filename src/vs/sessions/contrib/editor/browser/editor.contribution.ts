@@ -444,7 +444,7 @@ class AddFileAsContextAction extends Action2 {
 		const resources = resolvedContext.groupedEditors
 			.flatMap(groupedEditor => groupedEditor.editors)
 			.map(editor => EditorResourceAccessor.getCanonicalUri(editor, { supportSideBySide: SideBySideEditor.PRIMARY }))
-			.filter((uri): uri is URI => uri !== undefined && [Schemas.file, Schemas.vscodeRemote, Schemas.untitled].includes(uri.scheme));
+			.filter((uri): uri is URI => uri !== undefined && [Schemas.file, Schemas.zyraxoncodeRemote, Schemas.untitled].includes(uri.scheme));
 		if (resources.length === 0) {
 			return;
 		}

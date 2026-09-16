@@ -10,9 +10,9 @@ import { registerWorkbenchContribution2, WorkbenchPhase } from '../../../../comm
 import { Extensions as ConfigurationExtensions, IConfigurationRegistry } from '../../../../../platform/configuration/common/configurationRegistry.js';
 import { Registry } from '../../../../../platform/registry/common/platform.js';
 import { ILanguageModelsService } from '../../common/languageModels.js';
-import { ZyraxonBridgeLanguageModelProvider, DEFAULT_ZYRAXON_BRIDGE_URL, ZYRAXON_BRIDGE_URL_SETTING } from './zyraxonBridgeLanguageModelProvider.js';
+import { ZyraxonBridgeLanguageModelProvider, DEFAULT_ZYRAXON_BRIDGE_URL, ZYRAXON_BRIDGE_URL_SETTING, DEFAULT_ZYRAXON_MODE, ZYRAXON_MODE_SETTING, ZYRAXON_MODES } from './zyraxonBridgeLanguageModelProvider.js';
 
-export const ZYRAXON_BRIDGE_VENDOR = 'zyraxon';
+export const ZYRAXON_BRIDGE_VENDOR = 'opencode';
 
 const configurationRegistry = Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Configuration);
 configurationRegistry.registerConfiguration({
@@ -24,17 +24,21 @@ configurationRegistry.registerConfiguration({
 		[ZYRAXON_BRIDGE_URL_SETTING]: {
 			type: 'string',
 			default: DEFAULT_ZYRAXON_BRIDGE_URL,
-			markdownDescription: nls.localize('zyraxon.bridgeUrl', 'Base URL of the local Zyraxon instance server bridge used to serve agent models and chat requests. The bridge shares the same model catalog as the Zyraxon agent, so provider credentials configured in the agent\'s settings apply here too.'),
+			markdownDescription: nls.localize('zyraxon.bridgeUrl', 'Base URL of the local OpenCode-compatible bridge used to serve models and chat requests. Override this only for a self-hosted bridge.'),
+		},
+		[ZYRAXON_MODE_SETTING]: {
+			type: 'string',
+			enum: ZYRAXON_MODES.map(m => m.id),
+			enumDescriptions: ZYRAXON_MODES.map(m => nls.localize(m.id, m.description)),
+			default: DEFAULT_ZYRAXON_MODE,
+			markdownDescription: nls.localize('zyraxon.mode', 'Active Zyraxon AI mode. The mode prompt is injected into every chat request.'),
 		},
 	},
 });
 
 /**
- * Registers the {@link ZyraxonBridgeLanguageModelProvider} with the editor's
- * language models service so ZYRAXON bridge models appear in the chat model
- * picker alongside the editor's own providers. The provider fetches the live
- * model list from the bridge (`GET /v1/models`), so agent-side provider
- * credentials surface here without editor-side configuration.
+ * Registers the OpenCode-compatible provider so its live model catalogue
+ * appears in the editor's chat model picker.
  */
 class ZyraxonBridgeContribution extends Disposable {
 	static readonly ID = 'workbench.contrib.chat.zyraxonBridge';

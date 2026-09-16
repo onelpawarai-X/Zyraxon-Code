@@ -112,7 +112,7 @@ function renderPermissionPickerList(context: ComponentFixtureContext, options: P
 	container.classList.add('monaco-workbench');
 	container.style.width = '320px';
 	container.style.padding = '8px';
-	container.style.backgroundColor = 'var(--vscode-editor-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-editor-background)';
 
 	// Render inside an .action-widget wrapper so the popup-scoped CSS applies.
 	const wrapper = document.createElement('div');

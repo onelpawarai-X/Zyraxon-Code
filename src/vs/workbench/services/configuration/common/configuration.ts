@@ -11,19 +11,19 @@ import { Event } from '../../../../base/common/event.js';
 import { ResourceMap } from '../../../../base/common/map.js';
 import { IAnyWorkspaceIdentifier } from '../../../../platform/workspace/common/workspace.js';
 
-export const FOLDER_CONFIG_FOLDER_NAME = '.vscode';
+export const FOLDER_CONFIG_FOLDER_NAME = '.zyraxoncode';
 export const FOLDER_SETTINGS_NAME = 'settings';
 export const FOLDER_SETTINGS_PATH = `${FOLDER_CONFIG_FOLDER_NAME}/${FOLDER_SETTINGS_NAME}.json`;
 
-export const defaultSettingsSchemaId = 'vscode://schemas/settings/default';
-export const userSettingsSchemaId = 'vscode://schemas/settings/user';
-export const profileSettingsSchemaId = 'vscode://schemas/settings/profile';
-export const machineSettingsSchemaId = 'vscode://schemas/settings/machine';
-export const workspaceSettingsSchemaId = 'vscode://schemas/settings/workspace';
-export const folderSettingsSchemaId = 'vscode://schemas/settings/folder';
-export const launchSchemaId = 'vscode://schemas/launch';
-export const tasksSchemaId = 'vscode://schemas/tasks';
-export const mcpSchemaId = 'vscode://schemas/mcp';
+export const defaultSettingsSchemaId = '__ZYRAXKEEP__0_';
+export const userSettingsSchemaId = '__ZYRAXKEEP__1_';
+export const profileSettingsSchemaId = '__ZYRAXKEEP__2_';
+export const machineSettingsSchemaId = '__ZYRAXKEEP__3_';
+export const workspaceSettingsSchemaId = '__ZYRAXKEEP__4_';
+export const folderSettingsSchemaId = '__ZYRAXKEEP__5_';
+export const launchSchemaId = '__ZYRAXKEEP__6_';
+export const tasksSchemaId = '__ZYRAXKEEP__7_';
+export const mcpSchemaId = '__ZYRAXKEEP__8_';
 
 export const APPLICATION_SCOPES = [ConfigurationScope.APPLICATION, ConfigurationScope.APPLICATION_MACHINE];
 export const PROFILE_SCOPES = [ConfigurationScope.MACHINE, ConfigurationScope.WINDOW, ConfigurationScope.RESOURCE, ConfigurationScope.LANGUAGE_OVERRIDABLE, ConfigurationScope.MACHINE_OVERRIDABLE];

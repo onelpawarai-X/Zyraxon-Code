@@ -1,5 +1,5 @@
 {
-	"$schema": "../../node_modules/@vscode/component-explorer-cli/dist/component-explorer-config.schema.json",
+	"$schema": "../../node_modules/@zyraxoncode/component-explorer-cli/dist/component-explorer-config.schema.json",
 	"screenshotDir": ".screenshots",
 	"sessions": [
 		{
@@ -20,8 +20,8 @@
 		"cmd": "npm run serve-out-rspack",
 		"cwd": "../../",
 		"wait": {
-			"stdout": "http://localhost:(?<port>\\d+)/"
+			"stdout": "__ZYRAXKEEP__0_(?<port>\\d+)/"
 		},
-		"url": "http://localhost:${var:port}"
+		"url": "__ZYRAXKEEP__1_{var:port}"
 	}
 }

@@ -7,7 +7,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const perf = require('@vscode/vscode-perf');
+const perf = require('@zyraxoncode/zyraxoncode-perf');
 
 const VSCODE_FOLDER = path.join(__dirname, '..');
 

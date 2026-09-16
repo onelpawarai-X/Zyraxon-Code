@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CommentModeController, CommentsModel, EditorController, EditorModel, EditorView, GutterMarker, OffsetRange, Selection, StringEdit, StringValue, VsCodeV2CommentsView, findNodeOffsetById, taskCheckboxRange } from '@vscode/markdown-editor';
-import { Disposable, autorun, observableValue } from '@vscode/markdown-editor/observables';
+import { CommentModeController, CommentsModel, EditorController, EditorModel, EditorView, GutterMarker, OffsetRange, Selection, StringEdit, StringValue, VsCodeV2CommentsView, findNodeOffsetById, taskCheckboxRange } from '@zyraxoncode/markdown-editor';
+import { Disposable, autorun, observableValue } from '@zyraxoncode/markdown-editor/observables';
 import mermaid from 'mermaid';
 import 'katex/dist/katex.min.css';
-import '@vscode/markdown-editor/editor.css';
-import '@vscode/markdown-editor/themes/vscode-default.css';
-import '@vscode/markdown-editor/commentInput.css';
-import '@vscode/markdown-editor/vscodeCommentWidgetV2.css';
+import '@zyraxoncode/markdown-editor/editor.css';
+import '@zyraxoncode/markdown-editor/themes/zyraxoncode-default.css';
+import '@zyraxoncode/markdown-editor/commentInput.css';
+import '@zyraxoncode/markdown-editor/zyraxoncodeCommentWidgetV2.css';
 import './markdownEditor.css';
 import { WebviewSyntaxHighlighter } from './syntaxHighlighter';
 
@@ -43,8 +43,8 @@ class Editor extends Disposable {
 	#commentsView: VsCodeV2CommentsView | undefined;
 	/** Whether the workbench feedback store currently accepts new comments for this resource. */
 	readonly #acceptsComments = observableValue<boolean>('acceptsComments', false);
-	readonly #vscode = acquireVsCodeApi();
-	readonly #syntaxHighlighter = new WebviewSyntaxHighlighter((message) => this.#vscode.postMessage(message));
+	readonly #zyraxoncode = acquireVsCodeApi();
+	readonly #syntaxHighlighter = new WebviewSyntaxHighlighter((message) => this.#zyraxoncode.postMessage(message));
 
 	constructor(host: HTMLElement) {
 		super();
@@ -101,7 +101,7 @@ class Editor extends Disposable {
 			}
 		});
 
-		this.#vscode.postMessage({ type: 'ready' });
+		this.#zyraxoncode.postMessage({ type: 'ready' });
 	}
 
 	#createView(host: HTMLElement, readonly: boolean, content: string): void {
@@ -116,14 +116,14 @@ class Editor extends Disposable {
 		model.readonlyMode.set(readonly, undefined);
 
 		const view = this._register(new EditorView(model, {
-			classNames: ['md-theme-vscode-default'],
+			classNames: ['md-theme-zyraxoncode-default'],
 			syntaxHighlighter: this.#syntaxHighlighter,
 			onOpenLink: (url) => {
 				const scheme = /^([a-z][a-z0-9+.-]*):/i.exec(url)?.[1].toLowerCase();
 				if (scheme && scheme !== 'file') {
 					return false;
 				}
-				this.#vscode.postMessage({ type: 'openLink', href: url });
+				this.#zyraxoncode.postMessage({ type: 'openLink', href: url });
 				return undefined;
 			},
 			onToggleCheckbox: (item, newChecked) => {
@@ -167,17 +167,17 @@ class Editor extends Disposable {
 		// from the Edit menu, dirty state and hot exit.
 		this._register(new EditorController(model, view, {
 			historyStrategy: {
-				undo: () => this.#vscode.postMessage({ type: 'history', command: 'undo' }),
-				redo: () => this.#vscode.postMessage({ type: 'history', command: 'redo' }),
+				undo: () => this.#zyraxoncode.postMessage({ type: 'history', command: 'undo' }),
+				redo: () => this.#zyraxoncode.postMessage({ type: 'history', command: 'redo' }),
 			},
 		}));
 		host.appendChild(view.element);
 
 		// Render comments as the ZYRAXON Code V2 markdown cards. The card colours come
-		// from the webview's own `--vscode-*` theme variables; `theme` only picks
+		// from the webview's own `--zyraxoncode-*` theme variables; `theme` only picks
 		// the light/dark token wrapper. `resolveLine` maps a comment's start offset
 		// to a 1-based line for the card header.
-		const isLight = document.body.classList.contains('vscode-light');
+		const isLight = document.body.classList.contains('zyraxoncode-light');
 		this.#commentsView = this._register(new VsCodeV2CommentsView(this.#comments, view, {
 			theme: isLight ? 'light' : 'dark',
 			resolveLine: (offset) => model.sourceText.get().value.slice(0, offset).split('\n').length,
@@ -192,7 +192,7 @@ class Editor extends Disposable {
 			if (accepts && !commentController) {
 				commentController = new CommentModeController(model, view, {
 					onSubmit: ({ text, range }) => {
-						this.#vscode.postMessage({ type: 'addComment', start: range.start, endExclusive: range.endExclusive, text });
+						this.#zyraxoncode.postMessage({ type: 'addComment', start: range.start, endExclusive: range.endExclusive, text });
 					},
 				});
 			} else if (!accepts && commentController) {
@@ -213,7 +213,7 @@ class Editor extends Disposable {
 			if (!this.#isUpdatingComments) {
 				for (const id of knownCommentIds) {
 					if (!currentIds.has(id)) {
-						this.#vscode.postMessage({ type: 'deleteComment', id });
+						this.#zyraxoncode.postMessage({ type: 'deleteComment', id });
 					}
 				}
 			}
@@ -269,7 +269,7 @@ class Editor extends Disposable {
 		this._register(autorun((reader) => {
 			const isReadonly = reader.readObservable(this.model.readonlyMode);
 			if (!firstReadonly) {
-				this.#vscode.postMessage({ type: 'setReadonly', readonly: isReadonly });
+				this.#zyraxoncode.postMessage({ type: 'setReadonly', readonly: isReadonly });
 			}
 			firstReadonly = false;
 		}));
@@ -281,7 +281,7 @@ class Editor extends Disposable {
 		this._register(autorun((reader) => {
 			const text = reader.readObservable(this.model.sourceText).value;
 			if (!this.isUpdatingFromExtension && text !== previousText) {
-				this.#vscode.postMessage({ type: 'edit', ...computeTextEdit(previousText, text) });
+				this.#zyraxoncode.postMessage({ type: 'edit', ...computeTextEdit(previousText, text) });
 			}
 			previousText = text;
 		}));
@@ -293,11 +293,11 @@ class Editor extends Disposable {
 	}
 
 	#getViewState(): PersistedViewState {
-		return (this.#vscode.getState() as PersistedViewState | undefined) ?? {};
+		return (this.#zyraxoncode.getState() as PersistedViewState | undefined) ?? {};
 	}
 
 	#patchViewState(patch: PersistedViewState): void {
-		this.#vscode.setState({ ...this.#getViewState(), ...patch });
+		this.#zyraxoncode.setState({ ...this.#getViewState(), ...patch });
 	}
 
 	#restoreScroll(host: HTMLElement, scrollTop: number | undefined): void {

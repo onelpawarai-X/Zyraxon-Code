@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import * as assert from 'assert';
 import { outdent } from 'outdent';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { guessNamingConvention, NamingConvention } from '../../src/extension/renameSuggestions/common/namingConvention';
 import { RenameSuggestionsProvider } from '../../src/extension/renameSuggestions/node/renameSuggestionsProvider';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';
@@ -12,7 +12,7 @@ import { IRelativeFile } from '../../src/platform/test/node/simulationWorkspace'
 import { deannotateSrc } from '../../src/util/common/test/annotatedSrc';
 import { CancellationToken } from '../../src/util/vs/base/common/cancellation';
 import { IInstantiationService } from '../../src/util/vs/platform/instantiation/common/instantiation';
-import { NewSymbolNameTriggerKind, Range } from '../../src/vscodeTypes';
+import { NewSymbolNameTriggerKind, Range } from '../../src/zyraxoncodeTypes';
 import { ISimulationTestRuntime, ssuite, stest } from '../base/stest';
 import { setupSimulationWorkspace, teardownSimulationWorkspace } from './inlineChatSimulator';
 import { INLINE_INITIAL_DOC_TAG } from './shared/sharedTypes';
@@ -22,7 +22,7 @@ type OffsetRange = {
 	endIndex: number;
 };
 
-function offsetRangeToPositionRange(offsetRange: OffsetRange, document: vscode.TextDocument): vscode.Range {
+function offsetRangeToPositionRange(offsetRange: OffsetRange, document: zyraxoncode.TextDocument): zyraxoncode.Range {
 	const startPos = document.positionAt(offsetRange.startIndex);
 	const endPos = document.positionAt(offsetRange.endIndex);
 	const range = new Range(startPos, endPos);
@@ -42,7 +42,7 @@ ssuite({ title: 'Rename suggestions', location: 'external' }, () => {
 	 *
 	 * @remark lower-cases symbol names for string search but not search-strings
 	 */
-	function assertIncludesLowercased(newSymbolNames: vscode.NewSymbolName[], searchStrings: string | string[]) {
+	function assertIncludesLowercased(newSymbolNames: zyraxoncode.NewSymbolName[], searchStrings: string | string[]) {
 		searchStrings = Array.isArray(searchStrings) ? searchStrings : [searchStrings];
 		searchStrings = searchStrings.map(s => s.toLowerCase());
 		for (const symbol of newSymbolNames) {
@@ -54,12 +54,12 @@ ssuite({ title: 'Rename suggestions', location: 'external' }, () => {
 		}
 	}
 
-	function assertLength(newSymbolNames: vscode.NewSymbolName[]) {
+	function assertLength(newSymbolNames: zyraxoncode.NewSymbolName[]) {
 		assert.ok(newSymbolNames.length > 1,
 			`expected at least ${1} newSymbolNames but received ${newSymbolNames.length}\n${JSON.stringify(newSymbolNames.map(v => v.newSymbolName), null, '\t')}`);
 	}
 
-	function countMatches(newSymbolNames: vscode.NewSymbolName[], searchStrings: string) {
+	function countMatches(newSymbolNames: zyraxoncode.NewSymbolName[], searchStrings: string) {
 		const searchStringsLowercased = searchStrings.toLowerCase();
 		return newSymbolNames.filter(symbol => symbol.newSymbolName.toLowerCase().includes(searchStringsLowercased)).length;
 	}

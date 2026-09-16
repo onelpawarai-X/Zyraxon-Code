@@ -20,7 +20,7 @@ import { IRemoteAgentService } from '../../../../services/remote/common/remoteAg
 import { ITelemetryService } from '../../../../../platform/telemetry/common/telemetry.js';
 import { IWorkspaceContextService } from '../../../../../platform/workspace/common/workspace.js';
 import { ChatRequestVariableSet, IChatRequestVariableEntry, isPromptFileVariableEntry, toPromptFileVariableEntry, toPromptTextVariableEntry, PromptFileVariableKind, IPromptTextVariableEntry, ChatRequestToolReferenceEntry, toToolVariableEntry } from '../attachments/chatVariableEntries.js';
-import { ILanguageModelToolsService, IToolData, VSCodeToolReference } from '../tools/languageModelToolsService.js';
+import { ILanguageModelToolsService, IToolData, ZyraxonCodeToolReference } from '../tools/languageModelToolsService.js';
 import { PromptsConfig } from './config/config.js';
 import { isInClaudeAgentsFolder, isInClaudeRulesFolder, isPromptOrInstructionsFile } from './config/promptFileLocations.js';
 import { ParsedPromptFile } from './promptFileParser.js';
@@ -344,7 +344,7 @@ export class ComputeAutomaticInstructions {
 		const readTool = this._getTool('readFile');
 		const runInTerminalTool = this._getTool('runInTerminal');
 		const fileReadTool = readTool ?? runInTerminalTool;
-		const runSubagentTool = this._getTool(VSCodeToolReference.runSubagent);
+		const runSubagentTool = this._getTool(ZyraxonCodeToolReference.runSubagent);
 		const skillTool = this._getTool('skill');
 		const currentSessionType = this._currentSessionType;
 
@@ -627,13 +627,13 @@ export class ComputeAutomaticInstructions {
 
 export function getFilePath(uri: URI, remoteOS: OperatingSystem | undefined, isRemote = false): string {
 	// When connected to a remote, local file:// URIs must be represented using
-	// the vscode-local scheme so the remote extension host can read them via the
+	// the zyraxoncode-local scheme so the remote extension host can read them via the
 	// local file bridge. This works for WSL, SSH, and dev containers without
 	// any cache migration.
 	if (isRemote && uri.scheme === Schemas.file) {
-		return uri.with({ scheme: 'vscode-local' }).toString();
+		return uri.with({ scheme: 'zyraxoncode-local' }).toString();
 	}
-	if (uri.scheme === Schemas.file || uri.scheme === Schemas.vscodeRemote) {
+	if (uri.scheme === Schemas.file || uri.scheme === Schemas.zyraxoncodeRemote) {
 		const fsPath = uri.fsPath;
 		// uri.fsPath uses the local OS's path separators, but the path
 		// may belong to a remote with a different OS. Normalize separators

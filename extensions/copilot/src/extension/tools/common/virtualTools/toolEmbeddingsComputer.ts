@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'vscode';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { Embedding, EmbeddingType, IEmbeddingsComputer, isValidEmbedding, rankEmbeddings } from '../../../../platform/embeddings/common/embeddingsComputer';
 import { EmbeddingsGrouper, Node } from '../../../../platform/embeddings/common/embeddingsGrouper';
 import { ILogService } from '../../../../platform/log/common/logService';

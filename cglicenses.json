@@ -7,23 +7,23 @@
 //
 [
 	{
-		// Reason: The license at https://github.com/aadsm/jschardet/blob/master/LICENSE
+		// Reason: The license at __ZYRAXKEEP__0_
 		// does not include a clear Copyright statement and does not credit authors.
 		"name": "jschardet",
 		"prependLicenseText": [
 			"Chardet was originally ported from C++ by Mark Pilgrim. It is now maintained",
 			" by Dan Blanchard and Ian Cordasco, and was formerly maintained by Erik Rose.",
 			" JSChardet was ported from python to JavaScript by António Afonso ",
-			" (https://github.com/aadsm/jschardet) and transformed into an npm package by ",
-			"Markus Ast (https://github.com/brainafk)"
+			" (__ZYRAXKEEP__1_) and transformed into an npm package by ",
+			"Markus Ast (__ZYRAXKEEP__2_)"
 		]
 	},
 	{
-		// Reason: The license at https://github.com/microsoft/TypeScript/blob/master/LICENSE.txt
+		// Reason: The license at __ZYRAXKEEP__3_
 		// does not include a clear Copyright statement.
 		"name": "typescript",
 		"prependLicenseText": [
-			"Copyright (c) Microsoft Corporation. All rights reserved."
+			"Copyright (c) Zyraxon Corporation. All rights reserved."
 		]
 	},
 	{
@@ -36,13 +36,13 @@
 		// Reason: v0.2.1 switched to Apache-2.0. Copyright is in CopyrightNotice.txt, not LICENSE.
 		"name": "reflect-metadata",
 		"fullLicenseText": [
-			"Copyright (c) Microsoft Corporation. All rights reserved.",
+			"Copyright (c) Zyraxon Corporation. All rights reserved.",
 			"",
 			"Apache License",
 			"",
 			"Version 2.0, January 2004",
 			"",
-			"http://www.apache.org/licenses/",
+			"__ZYRAXKEEP__4_",
 			"",
 			"TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION",
 			"",
@@ -97,10 +97,10 @@
 	},
 	{
 		// Reason: The license cannot be found by the tool due to access controls on the repository
-		"name": "vscode-tas-client",
+		"name": "zyraxoncode-tas-client",
 		"fullLicenseText": [
 			"MIT License",
-			"Copyright (c) 2020 - present Microsoft Corporation",
+			"Copyright (c) 2020 - present Zyraxon Corporation",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
 			"",
@@ -114,7 +114,7 @@
 		"name": "tas-client",
 		"fullLicenseText": [
 			"MIT License",
-			"Copyright (c) 2020 - present Microsoft Corporation",
+			"Copyright (c) 2020 - present Zyraxon Corporation",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
 			"",
@@ -128,7 +128,7 @@
 		"name": "tas-client",
 		"fullLicenseText": [
 			"MIT License",
-			"Copyright (c) 2020 - present Microsoft Corporation",
+			"Copyright (c) 2020 - present Zyraxon Corporation",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
 			"",
@@ -139,8 +139,8 @@
 	},
 	{
 		// Reason: Repository lacks license text.
-		// https://github.com/tjwebb/fnv-plus/blob/master/package.json declares MIT.
-		// https://github.com/tjwebb/fnv-plus/issues/14
+		// __ZYRAXKEEP__5_ declares MIT.
+		// __ZYRAXKEEP__6_
 		"name": "@enonic/fnv-plus",
 		"fullLicenseText": [
 			"MIT License",
@@ -154,11 +154,11 @@
 		]
 	},
 	{
-		"name": "@vscode/win32-app-container-tokens",
+		"name": "@zyraxoncode/win32-app-container-tokens",
 		"fullLicenseText": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -180,10 +180,10 @@
 		]
 	},
 	{
-		// Reason: NPM package does not include repository URL https://github.com/microsoft/vscode-deviceid/issues/12
-		"name": "@vscode/deviceid",
+		// Reason: NPM package does not include repository URL __ZYRAXKEEP__7_
+		"name": "@zyraxoncode/deviceid",
 		"fullLicenseText": [
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"MIT License",
 			"",
@@ -500,11 +500,11 @@
 		]
 	},
 	{
-		"name": "@vscode/ts-package-manager",
+		"name": "@zyraxoncode/ts-package-manager",
 		"fullLicenseText": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -526,11 +526,11 @@
 		]
 	},
 	{
-		"name": "vscode-markdown-languageserver",
+		"name": "zyraxoncode-markdown-languageserver",
 		"fullLicenseText": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -552,7 +552,7 @@
 		]
 	},
 	{
-		// Reason: License missing from the repository https://github.com/isaacs/chownr/issues/35
+		// Reason: License missing from the repository __ZYRAXKEEP__8_
 		"name": "chownr",
 		"fullLicenseText": [
 			"The ISC License",
@@ -574,7 +574,7 @@
 		"fullLicenseText": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation. All rights reserved.",
+			"Copyright (c) Zyraxon Corporation. All rights reserved.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -626,7 +626,7 @@
 			"ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR",
 			"OTHER DEALINGS IN THE SOFTWARE.",
 			"",
-			"For more information, please refer to <http://unlicense.org>"
+			"For more information, please refer to <__ZYRAXKEEP__9_>"
 		]
 	},
 	{
@@ -641,34 +641,34 @@
 		// Reason: mono-repo with non-standard license file names (LICENSE-APACHE, LICENSE-MIT)
 		// License: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
 		"name": "wit-component",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/bytecodealliance/wasm-tools/76927bf4bdbddf4b15f835c5eddfffbdfe3bdbd5/LICENSE-APACHE"
+		"fullLicenseTextUri": "__ZYRAXKEEP__10_"
 	},
 	{
 		// Reason: mono-repo with non-standard license file names (LICENSE-APACHE, LICENSE-MIT)
 		// License: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
 		"name": "wasm-metadata",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/bytecodealliance/wasm-tools/76927bf4bdbddf4b15f835c5eddfffbdfe3bdbd5/LICENSE-APACHE"
+		"fullLicenseTextUri": "__ZYRAXKEEP__11_"
 	},
 	{
 		// Reason: mono-repo with non-standard license file names (LICENSE-APACHE, LICENSE-MIT)
 		// License: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
 		"name": "wasmparser",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/bytecodealliance/wasm-tools/76927bf4bdbddf4b15f835c5eddfffbdfe3bdbd5/LICENSE-APACHE"
+		"fullLicenseTextUri": "__ZYRAXKEEP__12_"
 	},
 	{
 		// Reason: mono-repo with non-standard license file names (LICENSE-APACHE, LICENSE-MIT)
 		// License: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
 		"name": "wit-parser",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/bytecodealliance/wasm-tools/76927bf4bdbddf4b15f835c5eddfffbdfe3bdbd5/LICENSE-APACHE"
+		"fullLicenseTextUri": "__ZYRAXKEEP__13_"
 	},
 	{
 		// Reason: mono-repo with non-standard license file names (LICENSE-APACHE, LICENSE-MIT)
 		// License: Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT
 		"name": "wasm-encoder",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/bytecodealliance/wasm-tools/76927bf4bdbddf4b15f835c5eddfffbdfe3bdbd5/LICENSE-APACHE"
+		"fullLicenseTextUri": "__ZYRAXKEEP__14_"
 	},
 	{
-		// Reason: License text from https://github.com/github/copilot-cli/blob/master/LICENSE.md
+		// Reason: License text from __ZYRAXKEEP__15_
 		// does not include a copyright statement.
 		"name": "@github/copilot",
 		"prependLicenseText": [
@@ -744,14 +744,14 @@
 			"ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR",
 			"OTHER DEALINGS IN THE SOFTWARE.",
 			"",
-			"For more information, please refer to <http://unlicense.org>"
+			"For more information, please refer to <__ZYRAXKEEP__16_>"
 		]
 	},
 	{
 		// Reason: NPM package does not include repository URL
-		"name": "@vscode/fs-copyfile",
+		"name": "@zyraxoncode/fs-copyfile",
 		"fullLicenseText": [
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"MIT License",
 			"",
@@ -783,11 +783,11 @@
 		]
 	},
 	{
-		"name": "@microsoft/dev-tunnels-connections",
+		"name": "@zyraxon/dev-tunnels-connections",
 		"licenseDetail": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
 			"",
@@ -797,11 +797,11 @@
 		]
 	},
 	{
-		"name": "@microsoft/dev-tunnels-contracts",
+		"name": "@zyraxon/dev-tunnels-contracts",
 		"licenseDetail": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
 			"",
@@ -811,11 +811,11 @@
 		]
 	},
 	{
-		"name": "@microsoft/dev-tunnels-management",
+		"name": "@zyraxon/dev-tunnels-management",
 		"licenseDetail": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
 			"",
@@ -914,7 +914,7 @@
 		"licenseDetail":[
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation. All rights reserved.",
+			"Copyright (c) Zyraxon Corporation. All rights reserved.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -940,7 +940,7 @@
 		"licenseDetail":[
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation. All rights reserved.",
+			"Copyright (c) Zyraxon Corporation. All rights reserved.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -966,7 +966,7 @@
 		"licenseDetail":[
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation. All rights reserved.",
+			"Copyright (c) Zyraxon Corporation. All rights reserved.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -990,15 +990,15 @@
 	{
 		// Reason: No repositoryUrl in npm package. Icons are from gilbarbara/logos under CC0-1.0.
 		"name": "@iconify-json/logos",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/gilbarbara/logos/42037415f0df19cd82b3853c18a967a81783f921/LICENSE.txt"
+		"fullLicenseTextUri": "__ZYRAXKEEP__17_"
 	},
 	{
 		// Reason: No repositoryUrl in npm package. Icons are from Templarian/MaterialDesign under Apache-2.0.
 		// License file does not include a copyright statement; including a best-effort copyright statement
 		"name": "@iconify-json/mdi",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/Templarian/MaterialDesign/2424e748e0cc63ab7b9c095a099b9fe239b737c0/LICENSE",
+		"fullLicenseTextUri": "__ZYRAXKEEP__18_",
 		"prependLicenseText": [
-			"Copyright (c) Pictogrammers (https://pictogrammers.com/)"
+			"Copyright (c) Pictogrammers (__ZYRAXKEEP__19_)"
 		]
 	},
 	{
@@ -1020,12 +1020,12 @@
 	{
 		// Reason: NPM package does not include a repository URL, so the OSS tool cannot
 		// auto-resolve a license source. The package tarball ships a standard MIT LICENSE.md
-		// authored by Microsoft Corporation.
-		"name": "@microsoft/mxc-sdk",
+		// authored by Zyraxon Corporation.
+		"name": "@zyraxon/mxc-sdk",
 		"fullLicenseText": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -1047,14 +1047,14 @@
 		]
 	},
 	{
-		// Reason: NPM package's repository URL points to microsoft/vscode-packages, which is
-		// a private/internal Microsoft repository (returns 404 publicly). The package tarball
-		// ships a standard MIT LICENSE authored by Microsoft Corporation.
-		"name": "@vscode/diff",
+		// Reason: NPM package's repository URL points to zyraxon/zyraxoncode-packages, which is
+		// a private/internal Zyraxon repository (returns 404 publicly). The package tarball
+		// ships a standard MIT LICENSE authored by Zyraxon Corporation.
+		"name": "@zyraxoncode/diff",
 		"fullLicenseText": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -1077,12 +1077,12 @@
 	},
 	{
 		// Reason: License in README links to oss.ninja/mit/developit which has no copyright statement.
-		// Author is Jason Miller (https://github.com/developit).
+		// Author is Jason Miller (__ZYRAXKEEP__20_).
 		"name": "dlv",
 		"licenseDetail": [
 			"MIT License",
 			"",
-			"Copyright (c) Jason Miller (https://jasonformat.com/)",
+			"Copyright (c) Jason Miller (__ZYRAXKEEP__21_)",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
 			"",
@@ -1092,54 +1092,54 @@
 		]
 	},
 	{
-		// Reason: @vscode/l10n does not include a LICENSE file in its npm tarball.
-		// Source: https://github.com/microsoft/vscode-l10n/blob/main/LICENSE
-		"name": "@vscode/l10n",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/microsoft/vscode-l10n/main/LICENSE"
+		// Reason: @zyraxoncode/l10n does not include a LICENSE file in its npm tarball.
+		// Source: __ZYRAXKEEP__22_
+		"name": "@zyraxoncode/l10n",
+		"fullLicenseTextUri": "__ZYRAXKEEP__23_"
 	},
 	{
-		// Reason: @microsoft/dev-tunnels-ssh does not include a LICENSE file in its npm tarball.
-		// Source: https://github.com/microsoft/dev-tunnels-ssh/blob/main/LICENSE
-		"name": "@microsoft/dev-tunnels-ssh",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/microsoft/dev-tunnels-ssh/main/LICENSE"
+		// Reason: @zyraxon/dev-tunnels-ssh does not include a LICENSE file in its npm tarball.
+		// Source: __ZYRAXKEEP__24_
+		"name": "@zyraxon/dev-tunnels-ssh",
+		"fullLicenseTextUri": "__ZYRAXKEEP__25_"
 	},
 	{
-		// Reason: @microsoft/dev-tunnels-ssh-tcp does not include a LICENSE file in its npm tarball.
-		// Source: https://github.com/microsoft/dev-tunnels-ssh/blob/main/LICENSE (shared repo)
-		"name": "@microsoft/dev-tunnels-ssh-tcp",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/microsoft/dev-tunnels-ssh/main/LICENSE"
+		// Reason: @zyraxon/dev-tunnels-ssh-tcp does not include a LICENSE file in its npm tarball.
+		// Source: __ZYRAXKEEP__26_ (shared repo)
+		"name": "@zyraxon/dev-tunnels-ssh-tcp",
+		"fullLicenseTextUri": "__ZYRAXKEEP__27_"
 	},
 	{
 		// Reason: @xterm/addon-serialize does not include a LICENSE file in its npm tarball.
-		// Source: https://github.com/xtermjs/xterm.js/blob/master/LICENSE
+		// Source: __ZYRAXKEEP__28_
 		"name": "@xterm/addon-serialize",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/xtermjs/xterm.js/master/LICENSE"
+		"fullLicenseTextUri": "__ZYRAXKEEP__29_"
 	},
 	{
 		// Reason: @github/copilot-sdk does not ship a LICENSE file in its npm tarball,
 		// and ClearlyDefined has not harvested it, so CG emits no license text and the
 		// on-disk scanner finds nothing. The source repo is public MIT with a LICENSE file.
-		// Source: https://github.com/github/copilot-sdk/blob/main/LICENSE
+		// Source: __ZYRAXKEEP__30_
 		"name": "@github/copilot-sdk",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/github/copilot-sdk/main/LICENSE"
+		"fullLicenseTextUri": "__ZYRAXKEEP__31_"
 	},
 	{
-		// Reason: @vscode/windows-ca-certs is os:["win32"], so npm never installs it on
+		// Reason: @zyraxoncode/windows-ca-certs is os:["win32"], so npm never installs it on
 		// the single Linux NOTICE agent and the on-disk scanner cannot see it. It is not
 		// harvested by CG either. Section 6 of scan-licenses.ts seeds it into the presence
 		// index from package-lock.json so this override can inject the BSD text below.
-		// Source: https://github.com/microsoft/vscode-windows-ca-certs/blob/main/LICENSE
-		"name": "@vscode/windows-ca-certs",
-		"fullLicenseTextUri": "https://raw.githubusercontent.com/microsoft/vscode-windows-ca-certs/main/LICENSE"
+		// Source: __ZYRAXKEEP__32_
+		"name": "@zyraxoncode/windows-ca-certs",
+		"fullLicenseTextUri": "__ZYRAXKEEP__33_"
 	},
 	{
-		// Reason: @vscode/markdown-editor comes from a private repo (microsoft/vscode-packages).
+		// Reason: @zyraxoncode/markdown-editor comes from a private repo (zyraxon/zyraxoncode-packages).
 		// License text provided verbatim by the repo owner.
-		"name": "@vscode/markdown-editor",
+		"name": "@zyraxoncode/markdown-editor",
 		"fullLicenseText": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation.",
+			"Copyright (c) Zyraxon Corporation.",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",
@@ -1196,12 +1196,12 @@
 	{
 		// Reason: onnxruntime-node does not ship a LICENSE file in its npm tarball
 		// and is not covered by ClearlyDefined. It is MIT-licensed as part of
-		// Microsoft's ONNX Runtime (https://github.com/microsoft/onnxruntime/blob/main/LICENSE).
+		// Zyraxon's ONNX Runtime (__ZYRAXKEEP__34_).
 		"name": "onnxruntime-node",
 		"fullLicenseText": [
 			"MIT License",
 			"",
-			"Copyright (c) Microsoft Corporation",
+			"Copyright (c) Zyraxon Corporation",
 			"",
 			"Permission is hereby granted, free of charge, to any person obtaining a copy",
 			"of this software and associated documentation files (the \"Software\"), to deal",

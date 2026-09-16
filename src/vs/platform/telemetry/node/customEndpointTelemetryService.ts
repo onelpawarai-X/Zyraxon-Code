@@ -30,8 +30,8 @@ export class CustomEndpointTelemetryService implements ICustomEndpointTelemetryS
 	private getCustomTelemetryService(endpoint: ITelemetryEndpoint): ITelemetryService {
 		if (!this.customTelemetryServices.has(endpoint.id)) {
 			const telemetryInfo: { [key: string]: string } = Object.create(null);
-			telemetryInfo['common.vscodemachineid'] = this.telemetryService.machineId;
-			telemetryInfo['common.vscodesessionid'] = this.telemetryService.sessionId;
+			telemetryInfo['common.zyraxoncodemachineid'] = this.telemetryService.machineId;
+			telemetryInfo['common.zyraxoncodesessionid'] = this.telemetryService.sessionId;
 			const args = [endpoint.id, JSON.stringify(telemetryInfo), endpoint.aiKey];
 			const client = new TelemetryClient(
 				FileAccess.asFileUri('bootstrap-fork').fsPath,

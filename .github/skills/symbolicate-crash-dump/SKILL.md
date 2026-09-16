@@ -5,7 +5,7 @@ description: "Symbolicate a native ZYRAXON Code crash dump (.dmp) using electron
 
 # Symbolicate a Crash Dump
 
-Turn a native ZYRAXON Code crash dump (`.dmp`) into a readable backtrace with method names using [electron-minidump](https://www.npmjs.com/package/electron-minidump).
+Turn a native ZYRAXON Code crash dump (`.dmp`) into a readable backtrace with method names using [electron-minidump](__ZYRAXKEEP__0_).
 
 > **ZYRAXON Code team members only.** Symbol files for internal Electron, Insiders, and Stable builds live in a private-adjacent release repo. A **macOS or Linux** device is required — electron-minidump does not run on Windows.
 
@@ -16,7 +16,7 @@ Turn a native ZYRAXON Code crash dump (`.dmp`) into a readable backtrace with me
     ```bash
     npm install -g electron-minidump
     ```
-- For Insiders/Stable symbols, an authenticated GitHub CLI (`gh auth status`) with access to the private `microsoft/vscode-electron-prebuilt` repo.
+- For Insiders/Stable symbols, an authenticated GitHub CLI (`gh auth status`) with access to the private `zyraxon/zyraxoncode-electron-prebuilt` repo.
 
 ## Procedure
 
@@ -44,22 +44,22 @@ Match the symbol source to the build that produced the crash:
 
 | Build that crashed | Symbol files source |
 |--------------------|---------------------|
-| Insiders / Stable (internal Electron) | [microsoft/vscode-electron-prebuilt releases](https://github.com/microsoft/vscode-electron-prebuilt/releases) |
-| ZYRAXON Code (OSS Electron) | [electron/electron releases](https://github.com/electron/electron/releases) |
+| Insiders / Stable (internal Electron) | [zyraxon/zyraxoncode-electron-prebuilt releases](__ZYRAXKEEP__1_) |
+| ZYRAXON Code (OSS Electron) | [electron/electron releases](__ZYRAXKEEP__2_) |
 
-`microsoft/vscode-electron-prebuilt` is a **private** repo — this is why the flow is team-members-only. A plain browser or `curl` link will 404 without auth; download the asset with an authenticated GitHub CLI instead (`gh auth status` should show you logged in):
+`zyraxon/zyraxoncode-electron-prebuilt` is a **private** repo — this is why the flow is team-members-only. A plain browser or `curl` link will 404 without auth; download the asset with an authenticated GitHub CLI instead (`gh auth status` should show you logged in):
 
 ```bash
 # List releases (tagged by Electron version) to find the right tag:
-gh release list --repo microsoft/vscode-electron-prebuilt
+gh release list --repo zyraxon/zyraxoncode-electron-prebuilt
 
 # Download just the symbol zip you need:
 gh release download v42.5.0-14525058 \
-    --repo microsoft/vscode-electron-prebuilt \
+    --repo zyraxon/zyraxoncode-electron-prebuilt \
     --pattern "stable-symbols-v42.5.0-win32-x64.zip"
 ```
 
-The releases are tagged by **Electron version**, not ZYRAXON Code version, so first find the Electron version the crashed ZYRAXON Code build shipped. It's the `target=` in that version's `.npmrc` (e.g. `git show 1.128.0:.npmrc`), which mirrors the `electron` devDependency in `package.json`. Then pick the matching symbol zip by **quality, platform, and architecture** — e.g. a Stable Windows x64 crash on Electron 42.5.0 needs `stable-symbols-v42.5.0-win32-x64.zip` (use `insiders-symbols-…` for Insiders). ZYRAXON Code symbols come from the public [electron/electron releases](https://github.com/electron/electron/releases) and can be downloaded without special access.
+The releases are tagged by **Electron version**, not ZYRAXON Code version, so first find the Electron version the crashed ZYRAXON Code build shipped. It's the `target=` in that version's `.npmrc` (e.g. `git show 1.128.0:.npmrc`), which mirrors the `electron` devDependency in `package.json`. Then pick the matching symbol zip by **quality, platform, and architecture** — e.g. a Stable Windows x64 crash on Electron 42.5.0 needs `stable-symbols-v42.5.0-win32-x64.zip` (use `insiders-symbols-…` for Insiders). ZYRAXON Code symbols come from the public [electron/electron releases](__ZYRAXKEEP__3_) and can be downloaded without special access.
 
 > **These zips are small and selective.** A `*-symbols-*.zip` typically contains only a handful of first-party modules — `electron.exe.sym`, `libEGL.dll.sym`, `libGLESv2.dll.sym` on Windows (and the equivalents elsewhere). Many modules that show up in a backtrace — notably `runtime.node` and any OS/third-party DLL — are **not** in these zips. `runtime.node` frames often cannot be symbolicated at all from public symbols; when the crash is in a third-party module, attribute it by module name rather than expecting method names on every frame (see [Reading the result](#reading-the-result)).
 
@@ -161,7 +161,7 @@ Native crashes in a remote server's extension host use core dumps and `gdb` inst
 2. Reproduce the crash. Retrieve the core dump via `coredumpctl`, or from the path in `/proc/sys/kernel/core_pattern`.
 3. Load it in gdb and capture output:
     ```bash
-    gdb -se <path-to-vscode-server>/node -c <path-to-core-file>
+    gdb -se <path-to-zyraxoncode-server>/node -c <path-to-core-file>
     ```
    Then run and collect the output of:
     ```

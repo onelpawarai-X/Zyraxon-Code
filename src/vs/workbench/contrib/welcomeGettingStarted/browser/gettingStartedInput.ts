@@ -27,7 +27,7 @@ export interface GettingStartedEditorOptions extends IEditorOptions {
 export class GettingStartedInput extends EditorInput {
 
 	static readonly ID = gettingStartedInputTypeId;
-	static readonly RESOURCE = URI.from({ scheme: Schemas.walkThrough, authority: 'vscode_getting_started_page' });
+	static readonly RESOURCE = URI.from({ scheme: Schemas.walkThrough, authority: 'zyraxoncode_getting_started_page' });
 	private _selectedCategory: string | undefined;
 	private _selectedStep: string | undefined;
 	private _showTelemetryNotice: boolean;

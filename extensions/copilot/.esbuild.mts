@@ -31,7 +31,7 @@ const baseNodeBuildOptions = {
 	...baseBuildOptions,
 	external: [
 		'./package.json',
-		'./.vscode-test.mjs',
+		'./.zyraxoncode-test.mjs',
 		'playwright',
 		'keytar',
 		'@azure/functions-core',
@@ -43,12 +43,12 @@ const baseNodeBuildOptions = {
 		'sqlite3',
 		'node-pty',
 		'@github/copilot',
-		'@vscode/webview-ui-toolkit',
-		'@vscode/l10n',
-		'@vscode/prompt-tsx',
-		'@vscode/copilot-api',
-		'@vscode/vsce',
-		'@microsoft/tiktokenizer',
+		'@zyraxoncode/webview-ui-toolkit',
+		'@zyraxoncode/l10n',
+		'@zyraxoncode/prompt-tsx',
+		'@zyraxoncode/copilot-api',
+		'@zyraxoncode/vsce',
+		'@zyraxon/tiktokenizer',
 		'@google/genai',
 		'@anthropic-ai/sdk',
 		'@anthropic-ai/claude-agent-sdk',
@@ -80,20 +80,20 @@ const webviewBuildOptions = {
 	platform: 'browser',
 	target: 'es2024',
 	entryPoints: [
-		{ in: 'src/extension/completions-core/vscode-node/extension/src/copilotPanel/webView/suggestionsPanelWebview.ts', out: 'suggestionsPanelWebview' },
+		{ in: 'src/extension/completions-core/zyraxoncode-node/extension/src/copilotPanel/webView/suggestionsPanelWebview.ts', out: 'suggestionsPanelWebview' },
 	],
 	external: [
-		'@vscode/webview-ui-toolkit',
-		'@vscode/l10n',
-		'@vscode/prompt-tsx',
+		'@zyraxoncode/webview-ui-toolkit',
+		'@zyraxoncode/l10n',
+		'@zyraxoncode/prompt-tsx',
 		'react',
 		'react-dom',
 	]
 } satisfies esbuild.BuildOptions;
 
 const nodeExtHostTestGlobs = [
-	'src/**/vscode/**/*.test.{ts,tsx}',
-	'src/**/vscode-node/**/*.test.{ts,tsx}',
+	'src/**/zyraxoncode/**/*.test.{ts,tsx}',
+	'src/**/zyraxoncode-node/**/*.test.{ts,tsx}',
 	// deprecated
 	'src/extension/**/*.test.{ts,tsx}'
 ];
@@ -126,7 +126,7 @@ const testBundlePlugin: esbuild.Plugin = {
 };
 
 const nodeExtHostSanityTestGlobs = [
-	'src/**/vscode-node/**/*.sanity-test.{ts,tsx}',
+	'src/**/zyraxoncode-node/**/*.sanity-test.{ts,tsx}',
 ];
 
 const sanityTestBundlePlugin: esbuild.Plugin = {
@@ -176,29 +176,29 @@ const importMetaPlugin: esbuild.Plugin = {
 const shimVsCodeTypesPlugin: esbuild.Plugin = {
 	name: 'shimVsCodeTypesPlugin',
 	setup(build) {
-		// Create a virtual module that will try to require vscode at runtime
-		build.onResolve({ filter: /^vscode$/ }, args => {
+		// Create a virtual module that will try to require zyraxoncode at runtime
+		build.onResolve({ filter: /^zyraxoncode$/ }, args => {
 			return {
-				path: 'vscode-dynamic',
-				namespace: 'vscode-fallback'
+				path: 'zyraxoncode-dynamic',
+				namespace: 'zyraxoncode-fallback'
 			};
 		});
 
-		build.onLoad({ filter: /^vscode-dynamic$/, namespace: 'vscode-fallback' }, () => {
+		build.onLoad({ filter: /^zyraxoncode-dynamic$/, namespace: 'zyraxoncode-fallback' }, () => {
 			return {
 				contents: `
-					let vscode;
+					let zyraxoncode;
 					// See test/simulationExtension/extension.js for where and why this is created.
 					if (typeof COPILOT_SIMULATION_VSCODE !== 'undefined') {
-						vscode = COPILOT_SIMULATION_VSCODE;
+						zyraxoncode = COPILOT_SIMULATION_VSCODE;
 					} else {
 						try {
-							vscode = eval('require(' + JSON.stringify('vscode') + ')');
+							zyraxoncode = eval('require(' + JSON.stringify('zyraxoncode') + ')');
 						} catch (e) {
-							vscode = require('./src/util/common/test/shims/vscodeTypesShim.ts');
+							zyraxoncode = require('./src/util/common/test/shims/zyraxoncodeTypesShim.ts');
 						}
 					}
-					module.exports = vscode;
+					module.exports = zyraxoncode;
 				`,
 				resolveDir: REPO_ROOT
 			};
@@ -209,13 +209,13 @@ const shimVsCodeTypesPlugin: esbuild.Plugin = {
 const nodeExtHostBuildOptions = {
 	...baseNodeBuildOptions,
 	entryPoints: [
-		{ in: './src/extension/extension/vscode-node/extension.ts', out: 'extension' },
+		{ in: './src/extension/extension/zyraxoncode-node/extension.ts', out: 'extension' },
 		{ in: './src/platform/parser/node/parserWorker.ts', out: 'worker2' },
 		{ in: './src/platform/tokenizer/node/tikTokenizerWorker.ts', out: 'tikTokenizerWorker' },
 		{ in: './src/platform/diff/node/diffWorkerMain.ts', out: 'diffWorker' },
 		{ in: './src/extension/chatSessions/copilotcli/node/copilotCLITodoWorker.ts', out: 'copilotCLITodoWorker' },
 		{ in: './src/extension/onboardDebug/node/copilotDebugWorker/index.ts', out: 'copilotDebugCommand' },
-		{ in: './src/extension/chatSessions/vscode-node/copilotCLIShim.ts', out: 'copilotCLIShim' },
+		{ in: './src/extension/chatSessions/zyraxoncode-node/copilotCLIShim.ts', out: 'copilotCLIShim' },
 		{ in: './src/test-extension.ts', out: 'test-extension' },
 		{ in: './src/sanity-test-extension.ts', out: 'sanity-test-extension' },
 	],
@@ -223,7 +223,7 @@ const nodeExtHostBuildOptions = {
 	plugins: [testBundlePlugin, sanityTestBundlePlugin, importMetaPlugin],
 	external: [
 		...baseNodeBuildOptions.external,
-		'vscode'
+		'zyraxoncode'
 	]
 } satisfies esbuild.BuildOptions;
 
@@ -231,21 +231,21 @@ const webExtHostBuildOptions = {
 	...baseBuildOptions,
 	platform: 'browser',
 	entryPoints: [
-		{ in: './src/extension/extension/vscode-worker/extension.ts', out: 'web' },
+		{ in: './src/extension/extension/zyraxoncode-worker/extension.ts', out: 'web' },
 	],
 	format: 'cjs', // Necessary to export activate function from bundle for extension
 	external: [
-		'vscode',
+		'zyraxoncode',
 		'http',
 	]
 } satisfies esbuild.BuildOptions;
 
 // ZYRAXON-PATCH: simulation-test entry path resolves relative to REPO_ROOT.
 // Guard the whole target so it is skipped when the stub entry is absent.
-const _simEntry = path.join(REPO_ROOT, '.vscode', 'extensions', 'test-extension', 'main.ts');
+const _simEntry = path.join(REPO_ROOT, '.zyraxoncode', 'extensions', 'test-extension', 'main.ts');
 const nodeExtHostSimulationTestOptions = fs.existsSync(_simEntry) ? {
 	...nodeExtHostBuildOptions,
-	outdir: '.vscode/extensions/test-extension/dist',
+	outdir: '.zyraxoncode/extensions/test-extension/dist',
 	entryPoints: [
 		{ in: _simEntry, out: './simulation-extension' }
 	]
@@ -270,7 +270,7 @@ const nodeSimulationWorkbenchUIBuildOptions = {
 		{ in: './test/simulation/workbench/simulationWorkbench.tsx', out: 'simulationWorkbench' },
 	],
 	alias: {
-		'vscode': './src/util/common/test/shims/vscodeTypesShim.ts'
+		'zyraxoncode': './src/util/common/test/shims/zyraxoncodeTypesShim.ts'
 	},
 	external: [
 		...baseNodeBuildOptions.external,
@@ -289,9 +289,9 @@ const nodeSimulationWorkbenchUIBuildOptions = {
 } satisfies esbuild.BuildOptions;
 
 async function typeScriptServerPluginPackageJsonInstall(): Promise<void> {
-	await mkdir('./node_modules/@vscode/copilot-typescript-server-plugin', { recursive: true });
+	await mkdir('./node_modules/@zyraxoncode/copilot-typescript-server-plugin', { recursive: true });
 	const source = path.join(import.meta.dirname, './src/extension/typescriptContext/serverPlugin/package.json');
-	const destination = path.join(import.meta.dirname, './node_modules/@vscode/copilot-typescript-server-plugin/package.json');
+	const destination = path.join(import.meta.dirname, './node_modules/@zyraxoncode/copilot-typescript-server-plugin/package.json');
 	try {
 		await copyFile(source, destination);
 	} catch (error) {
@@ -305,7 +305,7 @@ const typeScriptServerPluginBuildOptions = {
 	// keepNames: true,
 	logLevel: 'info',
 	minify: !isDev,
-	outdir: './node_modules/@vscode/copilot-typescript-server-plugin/dist',
+	outdir: './node_modules/@zyraxoncode/copilot-typescript-server-plugin/dist',
 	platform: 'node',
 	sourcemap: isDev ? 'linked' : false,
 	sourcesContent: false,
@@ -330,7 +330,7 @@ async function moveSourceMapsToSeparateDir(): Promise<void> {
 
 	const outputDirs = [
 		'./dist',
-		'./node_modules/@vscode/copilot-typescript-server-plugin/dist',
+		'./node_modules/@zyraxoncode/copilot-typescript-server-plugin/dist',
 	];
 
 	await mkdir(sourceMapOutDir, { recursive: true });
@@ -420,7 +420,7 @@ async function main() {
 				`**/.git/**`,
 				`**/.simulation/**`,
 				`**/test/outcome/**`,
-				`.vscode-test/**`,
+				`.zyraxoncode-test/**`,
 				`**/.venv/**`,
 				`**/dist/**`,
 				`**/node_modules/**`,

@@ -69,7 +69,7 @@ class ServerKeyedAESCrypto implements ISecretStorageCrypto {
 
 	async seal(data: string): Promise<string> {
 		// Get a new key and IV on every change, to avoid the risk of reusing the same key and IV pair with AES-GCM
-		// (see also: https://developer.mozilla.org/en-US/docs/Web/API/AesGcmParams#properties)
+		// (see also: __ZYRAXKEEP__0_)
 		const iv = mainWindow.crypto.getRandomValues(new Uint8Array(AESConstants.IV_LENGTH));
 		// crypto.getRandomValues isn't a good-enough PRNG to generate crypto keys, so we need to use crypto.subtle.generateKey and export the key instead
 		const clientKeyObj = await mainWindow.crypto.subtle.generateKey(
@@ -224,7 +224,7 @@ export class LocalStorageSecretStorageProvider implements ISecretStorageProvider
 	private loadAuthSessionFromElement(): Record<string, string> {
 		let authSessionInfo: (AuthenticationSessionInfo & { scopes: string[][] }) | undefined;
 		// eslint-disable-next-line no-restricted-syntax
-		const authSessionElement = mainWindow.document.getElementById('vscode-workbench-auth-session');
+		const authSessionElement = mainWindow.document.getElementById('zyraxoncode-workbench-auth-session');
 		const authSessionElementAttribute = authSessionElement ? authSessionElement.getAttribute('data-settings') : undefined;
 		if (authSessionElementAttribute) {
 			try {
@@ -247,7 +247,7 @@ export class LocalStorageSecretStorageProvider implements ISecretStorageProvider
 			return record;
 		}
 
-		const authAccount = JSON.stringify({ extensionId: 'vscode.github-authentication', key: 'github.auth' });
+		const authAccount = JSON.stringify({ extensionId: 'zyraxoncode.github-authentication', key: 'github.auth' });
 		record[authAccount] = JSON.stringify(authSessionInfo.scopes.map(scopes => ({
 			id: authSessionInfo.id,
 			scopes,
@@ -318,21 +318,21 @@ class LocalStorageURLCallbackProvider extends Disposable implements IURLCallback
 
 	create(options: Partial<UriComponents> = {}): URI {
 		const id = ++LocalStorageURLCallbackProvider.REQUEST_ID;
-		const queryParams: string[] = [`vscode-reqid=${id}`];
+		const queryParams: string[] = [`zyraxoncode-reqid=${id}`];
 
 		for (const key of LocalStorageURLCallbackProvider.QUERY_KEYS) {
 			const value = options[key];
 
 			if (value) {
-				queryParams.push(`vscode-${key}=${encodeURIComponent(value)}`);
+				queryParams.push(`zyraxoncode-${key}=${encodeURIComponent(value)}`);
 			}
 		}
 
 		// TODO@joao remove eventually
-		// https://github.com/microsoft/vscode-dev/issues/62
-		// https://github.com/microsoft/vscode/blob/159479eb5ae451a66b5dac3c12d564f32f454796/extensions/github-authentication/src/githubServer.ts#L50-L50
-		if (!(options.authority === 'vscode.github-authentication' && options.path === '/dummy')) {
-			const key = `vscode-web.url-callbacks[${id}]`;
+		// __ZYRAXKEEP__1_
+		// __ZYRAXKEEP__2_
+		if (!(options.authority === 'zyraxoncode.github-authentication' && options.path === '/dummy')) {
+			const key = `zyraxoncode-web.url-callbacks[${id}]`;
 			localStorage.removeItem(key);
 
 			this.pendingCallbacks.add(id);
@@ -374,7 +374,7 @@ class LocalStorageURLCallbackProvider extends Disposable implements IURLCallback
 		let pendingCallbacks: Set<number> | undefined;
 
 		for (const id of this.pendingCallbacks) {
-			const key = `vscode-web.url-callbacks[${id}]`;
+			const key = `zyraxoncode-web.url-callbacks[${id}]`;
 			const result = localStorage.getItem(key);
 
 			if (result !== null) {
@@ -430,8 +430,8 @@ class WorkspaceProvider implements IWorkspaceProvider {
 					if (config.remoteAuthority && value.startsWith(posix.sep)) {
 						// when connected to a remote and having a value
 						// that is a path (begins with a `/`), assume this
-						// is a vscode-remote resource as simplified URL.
-						workspace = { folderUri: URI.from({ scheme: Schemas.vscodeRemote, path: value, authority: config.remoteAuthority }) };
+						// is a zyraxoncode-remote resource as simplified URL.
+						workspace = { folderUri: URI.from({ scheme: Schemas.zyraxoncodeRemote, path: value, authority: config.remoteAuthority }) };
 					} else {
 						workspace = { folderUri: URI.parse(value) };
 					}
@@ -443,8 +443,8 @@ class WorkspaceProvider implements IWorkspaceProvider {
 					if (config.remoteAuthority && value.startsWith(posix.sep)) {
 						// when connected to a remote and having a value
 						// that is a path (begins with a `/`), assume this
-						// is a vscode-remote resource as simplified URL.
-						workspace = { workspaceUri: URI.from({ scheme: Schemas.vscodeRemote, path: value, authority: config.remoteAuthority }) };
+						// is a zyraxoncode-remote resource as simplified URL.
+						workspace = { workspaceUri: URI.from({ scheme: Schemas.zyraxoncodeRemote, path: value, authority: config.remoteAuthority }) };
 					} else {
 						workspace = { workspaceUri: URI.parse(value) };
 					}
@@ -544,7 +544,7 @@ class WorkspaceProvider implements IWorkspaceProvider {
 	}
 
 	private encodeWorkspacePath(uri: URI): string {
-		if (this.config.remoteAuthority && uri.scheme === Schemas.vscodeRemote) {
+		if (this.config.remoteAuthority && uri.scheme === Schemas.zyraxoncodeRemote) {
 
 			// when connected to a remote and having a folder
 			// or workspace for that remote, only use the path
@@ -578,11 +578,11 @@ class WorkspaceProvider implements IWorkspaceProvider {
 	hasRemote(): boolean {
 		if (this.workspace) {
 			if (isFolderToOpen(this.workspace)) {
-				return this.workspace.folderUri.scheme === Schemas.vscodeRemote;
+				return this.workspace.folderUri.scheme === Schemas.zyraxoncodeRemote;
 			}
 
 			if (isWorkspaceToOpen(this.workspace)) {
-				return this.workspace.workspaceUri.scheme === Schemas.vscodeRemote;
+				return this.workspace.workspaceUri.scheme === Schemas.zyraxoncodeRemote;
 			}
 		}
 
@@ -605,13 +605,13 @@ function readCookie(name: string): string | undefined {
 
 	// Find config by checking for DOM
 	// eslint-disable-next-line no-restricted-syntax
-	const configElement = mainWindow.document.getElementById('vscode-workbench-web-configuration');
+	const configElement = mainWindow.document.getElementById('zyraxoncode-workbench-web-configuration');
 	const configElementAttribute = configElement ? configElement.getAttribute('data-settings') : undefined;
 	if (!configElement || !configElementAttribute) {
 		throw new Error('Missing web configuration element');
 	}
 	const config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents; callbackRoute: string } = JSON.parse(configElementAttribute);
-	const secretStorageKeyPath = readCookie('vscode-secret-key-path');
+	const secretStorageKeyPath = readCookie('zyraxoncode-secret-key-path');
 	const secretStorageCrypto = secretStorageKeyPath && ServerKeyedAESCrypto.supported()
 		? new ServerKeyedAESCrypto(secretStorageKeyPath) : new TransparentCrypto();
 

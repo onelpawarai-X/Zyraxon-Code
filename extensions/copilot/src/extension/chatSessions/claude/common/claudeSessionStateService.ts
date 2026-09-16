@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { EffortLevel, PermissionMode } from '@anthropic-ai/claude-agent-sdk';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { CapturingToken } from '../../../../platform/requestLogger/common/capturingToken';
 import type { TraceContext } from '../../../../platform/otel/common/otelService';
 import { createServiceIdentifier } from '../../../../util/common/services';
@@ -15,7 +15,7 @@ import type { ParsedClaudeModelId } from './claudeModelId';
 /**
  * Usage handler function type for reporting token usage to stream.
  */
-export type UsageHandler = (usage: vscode.ChatResultUsage) => void;
+export type UsageHandler = (usage: zyraxoncode.ChatResultUsage) => void;
 
 export interface SessionState {
 	modelId: ParsedClaudeModelId | undefined;

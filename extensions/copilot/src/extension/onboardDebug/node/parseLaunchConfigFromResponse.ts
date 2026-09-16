@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as jsonc from 'jsonc-parser';
-import type { DebugConfiguration } from 'vscode';
+import type { DebugConfiguration } from 'zyraxoncode';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { IDebugConfigSchema, IPackageJson } from '../../../platform/extensions/common/packageJson';
 import { extractCodeBlocks } from '../../../util/common/markdown';

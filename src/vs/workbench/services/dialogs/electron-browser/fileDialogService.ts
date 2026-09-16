@@ -71,7 +71,7 @@ export class FileDialogService extends AbstractFileDialogService implements IFil
 			// - Only real files can be shown in the native file picker
 			// - If the simple file dialog is enabled
 			// - driver automation (like smoke tests) can use the simple file dialog but not native
-			useSimplified: ((schema !== Schemas.file) && (schema !== Schemas.vscodeUserData)) || setting || !!this.environmentService.enableSmokeTestDriver,
+			useSimplified: ((schema !== Schemas.file) && (schema !== Schemas.zyraxoncodeUserData)) || setting || !!this.environmentService.enableSmokeTestDriver,
 			isSetting: newWindowSetting
 		};
 	}
@@ -156,7 +156,7 @@ export class FileDialogService extends AbstractFileDialogService implements IFil
 			buttonLabel: typeof options.saveLabel === 'string' ? options.saveLabel : options.saveLabel?.withMnemonic,
 			filters: options.filters,
 			title: options.title,
-			targetWindowId: getActiveWindow().vscodeWindowId
+			targetWindowId: getActiveWindow().zyraxoncodeWindowId
 		};
 	}
 
@@ -186,7 +186,7 @@ export class FileDialogService extends AbstractFileDialogService implements IFil
 			buttonLabel: typeof options.openLabel === 'string' ? options.openLabel : options.openLabel?.withMnemonic,
 			filters: options.filters,
 			properties: [],
-			targetWindowId: getActiveWindow().vscodeWindowId
+			targetWindowId: getActiveWindow().zyraxoncodeWindowId
 		};
 
 		newOptions.properties.push('createDirectory');

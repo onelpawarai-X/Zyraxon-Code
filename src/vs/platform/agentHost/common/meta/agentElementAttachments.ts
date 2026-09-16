@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 export const AgentHostElementAttachmentDisplayKind = 'element';
-export const AgentHostElementAttachmentMetadataKey = 'vscode.agentHost.elementAttachment';
+export const AgentHostElementAttachmentMetadataKey = 'zyraxoncode.agentHost.elementAttachment';
 
 export interface IAgentHostElementAttachmentMetadata {
 	readonly correlationId: string;

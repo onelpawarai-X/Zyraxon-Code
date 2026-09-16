@@ -26,7 +26,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/readOnlyBanner/' }, {
 function renderBanner({ container, disposableStore }: ComponentFixtureContext, content: ISessionReadOnlyBannerContent): void {
 	container.style.width = '480px';
 	container.style.padding = '8px';
-	container.style.backgroundColor = 'var(--vscode-editorWidget-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-editorWidget-background)';
 
 	const banner = disposableStore.add(new SessionReadOnlyBanner());
 	banner.setContent(content);

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 /**
- * Shared types for the core `vscode_askQuestions` tool responses.
+ * Shared types for the core `zyraxoncode_askQuestions` tool responses.
  * Used by any consumer that invokes the tool and needs to parse its result.
  */
 

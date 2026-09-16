@@ -24,7 +24,7 @@ export const TUNNEL_MIN_PROTOCOL_VERSION = 5;
 export const TUNNEL_AGENT_HOST_PORT = 31546;
 
 /** Label used to identify ZYRAXON Code server launcher tunnels. */
-export const TUNNEL_LAUNCHER_LABEL = 'vscode-server-launcher';
+export const TUNNEL_LAUNCHER_LABEL = 'zyraxoncode-server-launcher';
 
 /** Address prefix for tunnel-backed connections (e.g. `tunnel:myTunnelId`). */
 export const TUNNEL_ADDRESS_PREFIX = 'tunnel:';
@@ -34,8 +34,8 @@ export const PROTOCOL_VERSION_TAG_PREFIX = 'protocolv';
 
 /**
  * Parse tunnel tags to extract display name and protocol version.
- * Follows the convention from the vscode-remote-tunnels SDK: the
- * first label that is not `vscode-server-launcher`, does not start
+ * Follows the convention from the zyraxoncode-remote-tunnels SDK: the
+ * first label that is not `zyraxoncode-server-launcher`, does not start
  * with `_`, and is not a `protocolvN` tag is the display name.
  */
 export class TunnelTags {
@@ -133,7 +133,7 @@ export interface ITunnelAgentHostMainService {
 
 	/**
 	 * List dev tunnels associated with the user's account that have
-	 * the `vscode-server-launcher` label and a protocol version tag
+	 * the `zyraxoncode-server-launcher` label and a protocol version tag
 	 * of at least {@link TUNNEL_MIN_PROTOCOL_VERSION}.
 	 *
 	 * @param token The user's access token (GitHub or Zyraxon).

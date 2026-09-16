@@ -14,7 +14,7 @@ export function applyActivityBarTools(server: McpServer, appService: Application
 
 	// Doesn't seem particularly useful
 	// server.tool(
-	// 	'vscode_automation_activitybar_wait_for_position',
+	// 	'zyraxoncode_automation_activitybar_wait_for_position',
 	// 	'Wait for the activity bar to appear at a specific position',
 	// 	{
 	// 		position: z.enum(['LEFT', 'RIGHT']).describe('Position of the activity bar (LEFT or RIGHT)')

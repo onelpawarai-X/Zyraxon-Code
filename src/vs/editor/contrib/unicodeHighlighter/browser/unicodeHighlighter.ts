@@ -166,7 +166,7 @@ export class UnicodeHighlighter extends Disposable implements IEditorContributio
 				if (locale === '_os') {
 					const osLocale = safeIntl.NumberFormat().value.resolvedOptions().locale;
 					return osLocale;
-				} else if (locale === '_vscode') {
+				} else if (locale === '_zyraxoncode') {
 					return platform.language;
 				}
 				return locale;

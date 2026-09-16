@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StatusBarAlignment as ExtHostStatusBarAlignment, Disposable, ThemeColor, asStatusBarItemIdentifier } from './extHostTypes.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { MainContext, MainThreadStatusBarShape, IMainContext, ICommandDto, ExtHostStatusBarShape, StatusBarItemDto } from './extHost.protocol.js';
 import { localize } from '../../../nls.js';
 import { CommandsConverter } from './extHostCommands.js';
@@ -16,7 +16,7 @@ import * as htmlContent from '../../../base/common/htmlContent.js';
 import { checkProposedApiEnabled } from '../../services/extensions/common/extensions.js';
 
 
-export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
+export class ExtHostStatusBarEntry implements zyraxoncode.StatusBarItem {
 
 	private static ID_GEN = 0;
 
@@ -42,8 +42,8 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 	private _visible?: boolean;
 
 	private _text: string = '';
-	private _tooltip?: string | vscode.MarkdownString;
-	private _tooltip2?: string | vscode.MarkdownString | undefined | ((token: vscode.CancellationToken) => Promise<string | vscode.MarkdownString | undefined>);
+	private _tooltip?: string | zyraxoncode.MarkdownString;
+	private _tooltip2?: string | zyraxoncode.MarkdownString | undefined | ((token: zyraxoncode.CancellationToken) => Promise<string | zyraxoncode.MarkdownString | undefined>);
 	private _name?: string;
 	private _color?: string | ThemeColor;
 	private _backgroundColor?: ThemeColor;
@@ -51,12 +51,12 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 	private _latestCommandRegistration?: DisposableStore;
 	private readonly _staleCommandRegistrations = new DisposableStore();
 	private _command?: {
-		readonly fromApi: string | vscode.Command;
+		readonly fromApi: string | zyraxoncode.Command;
 		readonly internal: ICommandDto;
 	};
 
 	private _timeoutHandle: Timeout | undefined;
-	private _accessibilityInformation?: vscode.AccessibilityInformation;
+	private _accessibilityInformation?: zyraxoncode.AccessibilityInformation;
 
 	constructor(proxy: MainThreadStatusBarShape, commands: CommandsConverter, staticItems: ReadonlyMap<string, StatusBarItemDto>, extension: IExtensionDescription, id?: string, alignment?: ExtHostStatusBarAlignment, priority?: number, _onDispose?: () => void);
 	constructor(proxy: MainThreadStatusBarShape, commands: CommandsConverter, staticItems: ReadonlyMap<string, StatusBarItemDto>, extension: IExtensionDescription | undefined, id: string, alignment?: ExtHostStatusBarAlignment, priority?: number, _onDispose?: () => void);
@@ -97,7 +97,7 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 		// Our RPC mechanism use JSON to serialize data which does
 		// not support `Infinity` so we need to fill in the number
 		// equivalent as close as possible.
-		// https://github.com/microsoft/vscode/issues/133317
+		// __ZYRAXKEEP__0_
 
 		if (priority === Number.POSITIVE_INFINITY) {
 			return Number.MAX_VALUE;
@@ -118,7 +118,7 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 		return this._entryId;
 	}
 
-	public get alignment(): vscode.StatusBarAlignment {
+	public get alignment(): zyraxoncode.StatusBarAlignment {
 		return this._alignment;
 	}
 
@@ -134,11 +134,11 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 		return this._name;
 	}
 
-	public get tooltip(): vscode.MarkdownString | string | undefined {
+	public get tooltip(): zyraxoncode.MarkdownString | string | undefined {
 		return this._tooltip;
 	}
 
-	public get tooltip2(): vscode.MarkdownString | string | undefined | ((token: vscode.CancellationToken) => Promise<vscode.MarkdownString | string | undefined>) {
+	public get tooltip2(): zyraxoncode.MarkdownString | string | undefined | ((token: zyraxoncode.CancellationToken) => Promise<zyraxoncode.MarkdownString | string | undefined>) {
 		if (this._extension) {
 			checkProposedApiEnabled(this._extension, 'statusBarItemTooltip');
 		}
@@ -154,11 +154,11 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 		return this._backgroundColor;
 	}
 
-	public get command(): string | vscode.Command | undefined {
+	public get command(): string | zyraxoncode.Command | undefined {
 		return this._command?.fromApi;
 	}
 
-	public get accessibilityInformation(): vscode.AccessibilityInformation | undefined {
+	public get accessibilityInformation(): zyraxoncode.AccessibilityInformation | undefined {
 		return this._accessibilityInformation;
 	}
 
@@ -172,12 +172,12 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 		this.update();
 	}
 
-	public set tooltip(tooltip: vscode.MarkdownString | string | undefined) {
+	public set tooltip(tooltip: zyraxoncode.MarkdownString | string | undefined) {
 		this._tooltip = tooltip;
 		this.update();
 	}
 
-	public set tooltip2(tooltip: vscode.MarkdownString | string | undefined | ((token: vscode.CancellationToken) => Promise<vscode.MarkdownString | string | undefined>)) {
+	public set tooltip2(tooltip: zyraxoncode.MarkdownString | string | undefined | ((token: zyraxoncode.CancellationToken) => Promise<zyraxoncode.MarkdownString | string | undefined>)) {
 		if (this._extension) {
 			checkProposedApiEnabled(this._extension, 'statusBarItemTooltip');
 		}
@@ -200,7 +200,7 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 		this.update();
 	}
 
-	public set command(command: string | vscode.Command | undefined) {
+	public set command(command: string | zyraxoncode.Command | undefined) {
 		if (this._command?.fromApi === command) {
 			return;
 		}
@@ -225,7 +225,7 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 		this.update();
 	}
 
-	public set accessibilityInformation(accessibilityInformation: vscode.AccessibilityInformation | undefined) {
+	public set accessibilityInformation(accessibilityInformation: zyraxoncode.AccessibilityInformation | undefined) {
 		this._accessibilityInformation = accessibilityInformation;
 		this.update();
 	}
@@ -311,7 +311,7 @@ export class ExtHostStatusBarEntry implements vscode.StatusBarItem {
 
 class StatusBarMessage {
 
-	private readonly _item: vscode.StatusBarItem;
+	private readonly _item: zyraxoncode.StatusBarItem;
 	private readonly _messages: { message: string }[] = [];
 
 	constructor(statusBar: ExtHostStatusBar) {
@@ -368,7 +368,7 @@ export class ExtHostStatusBar implements ExtHostStatusBarShape {
 		}
 	}
 
-	async $provideTooltip(entryId: string, cancellation: vscode.CancellationToken): Promise<string | htmlContent.IMarkdownString | undefined> {
+	async $provideTooltip(entryId: string, cancellation: zyraxoncode.CancellationToken): Promise<string | htmlContent.IMarkdownString | undefined> {
 		const entry = this._entries.get(entryId);
 		if (!entry) {
 			return undefined;
@@ -378,9 +378,9 @@ export class ExtHostStatusBar implements ExtHostStatusBarShape {
 		return !cancellation.isCancellationRequested ? MarkdownString.fromStrict(tooltip) : undefined;
 	}
 
-	createStatusBarEntry(extension: IExtensionDescription | undefined, id: string, alignment?: ExtHostStatusBarAlignment, priority?: number): vscode.StatusBarItem;
-	createStatusBarEntry(extension: IExtensionDescription, id?: string, alignment?: ExtHostStatusBarAlignment, priority?: number): vscode.StatusBarItem;
-	createStatusBarEntry(extension: IExtensionDescription, id: string, alignment?: ExtHostStatusBarAlignment, priority?: number): vscode.StatusBarItem {
+	createStatusBarEntry(extension: IExtensionDescription | undefined, id: string, alignment?: ExtHostStatusBarAlignment, priority?: number): zyraxoncode.StatusBarItem;
+	createStatusBarEntry(extension: IExtensionDescription, id?: string, alignment?: ExtHostStatusBarAlignment, priority?: number): zyraxoncode.StatusBarItem;
+	createStatusBarEntry(extension: IExtensionDescription, id: string, alignment?: ExtHostStatusBarAlignment, priority?: number): zyraxoncode.StatusBarItem {
 		const entry = new ExtHostStatusBarEntry(this._proxy, this._commands, this._existingItems, extension, id, alignment, priority, () => this._entries.delete(entry.entryId));
 		this._entries.set(entry.entryId, entry);
 

@@ -464,7 +464,7 @@ export class ModelPickerWidget extends Disposable {
 			recentModelIds: this._languageModelsService.getRecentlyUsedModelIds().filter(id => !this._languageModelsService.isModelHidden(id)),
 			pinnedModelIds: this._languageModelsService.getPinnedModelIds().filter(id => !this._languageModelsService.isModelHidden(id)),
 			controlModels: controlModelsForTier,
-			currentVSCodeVersion: this._productService.version,
+			currentZyraxonCodeVersion: this._productService.version,
 			updateStateType: this._updateService.state.type,
 			manageSettingsUrl,
 			manageModelsAction,

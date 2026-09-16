@@ -17,8 +17,8 @@ import { ILogService } from '../../../../platform/log/common/log.js';
 
 const localeStorage = new class LocaleStorage {
 
-	private static readonly LOCAL_STORAGE_LOCALE_KEY = 'vscode.nls.locale';
-	private static readonly LOCAL_STORAGE_EXTENSION_ID_KEY = 'vscode.nls.languagePackExtensionId';
+	private static readonly LOCAL_STORAGE_LOCALE_KEY = 'zyraxoncode.nls.locale';
+	private static readonly LOCAL_STORAGE_EXTENSION_ID_KEY = 'zyraxoncode.nls.languagePackExtensionId';
 
 	setLocale(locale: string): void {
 		localStorage.setItem(LocaleStorage.LOCAL_STORAGE_LOCALE_KEY, locale);
@@ -134,8 +134,8 @@ class WebActiveLanguagePackService implements IActiveLanguagePackService {
 		try {
 			const tagResult = await this.galleryService.query({ text: `tag:lp-${language}` }, CancellationToken.None);
 
-			// Only install extensions that are published by Zyraxon and start with vscode-language-pack for extra certainty
-			const extensionToInstall = tagResult.firstPage.find(e => e.publisher === 'MS-CEINTL' && e.name.startsWith('vscode-language-pack'));
+			// Only install extensions that are published by Zyraxon and start with zyraxoncode-language-pack for extra certainty
+			const extensionToInstall = tagResult.firstPage.find(e => e.publisher === 'MS-CEINTL' && e.name.startsWith('zyraxoncode-language-pack'));
 			if (extensionToInstall) {
 				localeStorage.setExtensionId(extensionToInstall.identifier.id);
 				return extensionToInstall.identifier.id;

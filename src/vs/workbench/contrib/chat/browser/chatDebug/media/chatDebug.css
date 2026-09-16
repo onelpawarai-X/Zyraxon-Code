@@ -28,7 +28,7 @@
 }
 .chat-debug-logging-disabled-message {
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin: 0 0 16px;
 }
 
@@ -55,12 +55,12 @@
 }
 .chat-debug-home-subtitle {
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin: 0 0 24px;
 }
 .chat-debug-home-empty {
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin: 0;
 }
 .chat-debug-home-session-list {
@@ -76,16 +76,16 @@
 	width: 100%;
 	text-align: left;
 	padding: 8px 12px;
-	border: 1px solid var(--vscode-widget-border, transparent);
+	border: 1px solid var(--zyraxoncode-widget-border, transparent);
 	background: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	border-radius: 4px;
 	cursor: pointer;
 	font-size: 13px;
 	gap: 8px;
 }
 .chat-debug-home-session-item:hover {
-	background: var(--vscode-list-hoverBackground);
+	background: var(--zyraxoncode-list-hoverBackground);
 }
 .chat-debug-home-session-item:disabled {
 	cursor: default;
@@ -106,9 +106,9 @@
 	border-radius: 3px;
 	background: linear-gradient(
 		90deg,
-		var(--vscode-descriptionForeground) 25%,
-		var(--vscode-chat-thinkingShimmer, rgba(255, 255, 255, 0.3)) 50%,
-		var(--vscode-descriptionForeground) 75%
+		var(--zyraxoncode-descriptionForeground) 25%,
+		var(--zyraxoncode-chat-thinkingShimmer, rgba(255, 255, 255, 0.3)) 50%,
+		var(--zyraxoncode-descriptionForeground) 75%
 	);
 	background-size: 200% 100%;
 	animation: chat-debug-shimmer 2s linear infinite;
@@ -118,8 +118,8 @@
 	flex-shrink: 0;
 	padding: 2px 8px;
 	border-radius: 10px;
-	background: var(--vscode-badge-background);
-	color: var(--vscode-badge-foreground);
+	background: var(--zyraxoncode-badge-background);
+	color: var(--zyraxoncode-badge-foreground);
 	font-size: 11px;
 	font-weight: 500;
 }
@@ -142,7 +142,7 @@
 /* ---- Breadcrumb ---- */
 .chat-debug-breadcrumb {
 	flex-shrink: 0;
-	border-bottom: 1px solid var(--vscode-widget-border, transparent);
+	border-bottom: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-breadcrumb .monaco-breadcrumbs {
 	height: 22px;
@@ -210,7 +210,7 @@
 	font-size: 13px;
 	font-weight: 600;
 	margin: 0 0 10px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-overview-metrics {
 	display: flex;
@@ -218,14 +218,14 @@
 	flex-wrap: wrap;
 }
 .chat-debug-overview-metric-card {
-	border: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+	border: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-panel-border));
 	border-radius: 4px;
 	padding: 12px 16px;
 	min-width: 120px;
 }
 .chat-debug-overview-metric-label {
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 4px;
 }
 .chat-debug-overview-metric-value {
@@ -239,9 +239,9 @@
 	border-radius: 3px;
 	background: linear-gradient(
 		90deg,
-		var(--vscode-descriptionForeground) 25%,
-		var(--vscode-chat-thinkingShimmer, rgba(255, 255, 255, 0.3)) 50%,
-		var(--vscode-descriptionForeground) 75%
+		var(--zyraxoncode-descriptionForeground) 25%,
+		var(--zyraxoncode-chat-thinkingShimmer, rgba(255, 255, 255, 0.3)) 50%,
+		var(--zyraxoncode-descriptionForeground) 75%
 	);
 	background-size: 200% 100%;
 	animation: chat-debug-shimmer 2s linear infinite;
@@ -257,11 +257,11 @@
 	display: contents;
 }
 .chat-debug-overview-detail-label {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: nowrap;
 }
 .chat-debug-overview-detail-value {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-overview-actions {
 	display: flex;
@@ -280,7 +280,7 @@
 	height: 26px;
 	border: none;
 	background: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	border-radius: 4px;
 	cursor: pointer;
 	opacity: 0.7;
@@ -289,14 +289,14 @@
 }
 .chat-debug-icon-button.monaco-button:hover {
 	opacity: 1;
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 .chat-debug-overview-action-button-primary {
-	background: var(--vscode-button-background);
-	color: var(--vscode-button-foreground);
+	background: var(--zyraxoncode-button-background);
+	color: var(--zyraxoncode-button-foreground);
 }
 .chat-debug-overview-action-button-primary:hover {
-	background: var(--vscode-button-hoverBackground);
+	background: var(--zyraxoncode-button-hoverBackground);
 }
 
 /* ---- Logs view ---- */
@@ -319,7 +319,7 @@
 	margin-right: auto;
 }
 .chat-debug-editor-header .viewpane-filter-container .monaco-inputbox {
-	border-color: var(--vscode-panelInput-border, transparent) !important;
+	border-color: var(--zyraxoncode-panelInput-border, transparent) !important;
 }
 .chat-debug-view-mode-toggle.monaco-button {
 	width: auto;
@@ -348,9 +348,9 @@
 	padding: 4px 16px;
 	font-weight: 600;
 	font-size: 12px;
-	border-bottom: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
+	border-bottom: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-panel-border));
 	flex-shrink: 0;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	opacity: 0.8;
 }
 .chat-debug-table-header .chat-debug-col-created {
@@ -402,7 +402,7 @@
 }
 .chat-debug-logs-show-more-status {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-log-row {
 	display: flex;
@@ -414,7 +414,7 @@
 .chat-debug-log-row .chat-debug-log-created {
 	width: 160px;
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .monaco-list:focus .monaco-list-row.selected .chat-debug-log-created,
 .monaco-list:focus .monaco-list-row.focused .chat-debug-log-created {
@@ -436,20 +436,20 @@
 }
 .chat-debug-log-row.chat-debug-log-error,
 .chat-debug-log-row.chat-debug-log-error:hover {
-	background-color: var(--vscode-inputValidation-errorBackground,
+	background-color: var(--zyraxoncode-inputValidation-errorBackground,
 				rgba(255, 0, 0, 0.1)) !important;
-	color: var(--vscode-errorForeground) !important;
+	color: var(--zyraxoncode-errorForeground) !important;
 }
 .monaco-tl-row:has(.chat-debug-log-row.chat-debug-log-error) {
-	background-color: var(--vscode-inputValidation-errorBackground,
+	background-color: var(--zyraxoncode-inputValidation-errorBackground,
 				rgba(255, 0, 0, 0.1)) !important;
 }
 .chat-debug-log-row.chat-debug-log-warning {
-	background-color: var(--vscode-inputValidation-warningBackground,
+	background-color: var(--zyraxoncode-inputValidation-warningBackground,
 				rgba(255, 204, 0, 0.1)) !important;
 }
 .monaco-tl-row:has(.chat-debug-log-row.chat-debug-log-warning) {
-	background-color: var(--vscode-inputValidation-warningBackground,
+	background-color: var(--zyraxoncode-inputValidation-warningBackground,
 				rgba(255, 204, 0, 0.1)) !important;
 }
 .chat-debug-log-row.chat-debug-log-trace {
@@ -459,10 +459,10 @@
 	flex-shrink: 0;
 	display: flex;
 	flex-direction: column;
-	border-left: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
-	border-top: 1px solid var(--vscode-widget-border, var(--vscode-panel-border));
-	box-shadow: -6px 0 6px -6px var(--vscode-widget-shadow);
-	background: var(--vscode-panel-background);
+	border-left: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-panel-border));
+	border-top: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-panel-border));
+	box-shadow: -6px 0 6px -6px var(--zyraxoncode-widget-shadow);
+	background: var(--zyraxoncode-panel-background);
 	font-size: 12px;
 	position: relative;
 	overflow: hidden;
@@ -477,7 +477,7 @@
 	width: auto;
 	border: none;
 	background: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 	font-size: 16px;
 	line-height: 1;
@@ -487,7 +487,7 @@
 }
 .chat-debug-detail-button.monaco-button:hover {
 	opacity: 1;
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 .chat-debug-detail-panel pre {
 	margin: 0;
@@ -501,7 +501,7 @@
 	outline: none;
 }
 .chat-debug-detail-panel pre:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 }
 
 /* ---- File List Content ---- */
@@ -517,7 +517,7 @@
 	margin-bottom: 4px;
 }
 .chat-debug-file-list-summary {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 8px;
 }
 .chat-debug-file-list-section {
@@ -536,13 +536,13 @@
 	text-align: center;
 }
 .chat-debug-file-list-status-icon.status-loaded {
-	color: var(--vscode-testing-iconPassed, #73c991);
+	color: var(--zyraxoncode-testing-iconPassed, #73c991);
 }
 .chat-debug-file-list-status-icon.status-skipped {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-file-list-status-icon.status-error {
-	color: var(--vscode-testing-iconFailed, #f14c4c);
+	color: var(--zyraxoncode-testing-iconFailed, #f14c4c);
 }
 .chat-debug-file-list-row {
 	display: flex;
@@ -560,7 +560,7 @@
 .chat-debug-file-list-group-header {
 	margin-top: 4px;
 	padding: 2px 4px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-file-list-group-header:first-child {
 	margin-top: 0;
@@ -575,7 +575,7 @@
 	text-align: center;
 }
 .chat-debug-file-link {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	text-decoration: none;
 	cursor: pointer;
 	white-space: nowrap;
@@ -584,10 +584,10 @@
 }
 .chat-debug-file-link:hover {
 	text-decoration: underline;
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 .chat-debug-file-list-badge {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -595,7 +595,7 @@
 	min-width: 0;
 }
 .chat-debug-file-list-detail {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -612,7 +612,7 @@
 	outline: none;
 }
 .chat-debug-message-content:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 }
 .chat-debug-message-content-title {
 	font-weight: 600;
@@ -620,7 +620,7 @@
 	margin-bottom: 4px;
 }
 .chat-debug-message-content-summary {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 8px;
 	white-space: pre-wrap;
 	word-break: break-word;
@@ -634,7 +634,7 @@
 }
 .chat-debug-message-section {
 	margin-bottom: 4px;
-	border: 1px solid var(--vscode-widget-border, transparent);
+	border: 1px solid var(--zyraxoncode-widget-border, transparent);
 	border-radius: 4px;
 	overflow: hidden;
 }
@@ -643,15 +643,15 @@
 	align-items: center;
 	gap: 4px;
 	padding: 4px 8px;
-	background: var(--vscode-editorWidget-background);
+	background: var(--zyraxoncode-editorWidget-background);
 	border-radius: 3px;
 	user-select: none;
 	font-weight: 600;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 }
 .chat-debug-message-section-header:hover {
-	background: var(--vscode-list-hoverBackground);
+	background: var(--zyraxoncode-list-hoverBackground);
 }
 .chat-debug-message-section-chevron {
 	flex-shrink: 0;
@@ -665,7 +665,7 @@
 	white-space: nowrap;
 }
 .chat-debug-message-section-content-wrapper {
-	border-top: 1px solid var(--vscode-widget-border, transparent);
+	border-top: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-message-section-content {
 	margin: 0;
@@ -673,12 +673,12 @@
 	white-space: pre-wrap;
 	word-break: break-word;
 	font-size: 12px;
-	font-family: var(--vscode-chat-font-family, monospace);
+	font-family: var(--zyraxoncode-chat-font-family, monospace);
 	background: transparent;
 	outline: none;
 }
 .chat-debug-message-section-content:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 }
 
 /* ---- File list: inline file link ---- */
@@ -701,7 +701,7 @@
 .chat-debug-settings-gear.monaco-button:hover,
 .chat-debug-section-copy-btn.monaco-button:hover {
 	opacity: 1;
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 .chat-debug-settings-gear-header-passthrough,
 .chat-debug-section-copy-header-passthrough {
@@ -715,7 +715,7 @@
 /* ---- File list: source folder section ---- */
 .chat-debug-source-folder-content {
 	padding: 8px 12px;
-	border-top: 1px solid var(--vscode-widget-border, transparent);
+	border-top: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-source-folder-note {
 	margin-bottom: 4px;
@@ -727,7 +727,7 @@
 	padding: 1px 0;
 }
 .chat-debug-source-folder-index {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	flex-shrink: 0;
 	min-width: 16px;
 	text-align: right;
@@ -766,7 +766,7 @@
 	overflow: hidden;
 	position: relative;
 	cursor: grab;
-	background: var(--vscode-editor-background);
+	background: var(--zyraxoncode-editor-background);
 }
 .chat-debug-flowchart-content:active {
 	cursor: grabbing;
@@ -803,7 +803,7 @@
 	display: inline;
 }
 .chat-debug-flowchart-subgraph-header:focus {
-	outline: 2px solid var(--vscode-focusBorder);
+	outline: 2px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
 }
 .chat-debug-flowchart-empty {
@@ -812,7 +812,7 @@
 	justify-content: center;
 	height: 100%;
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-flowchart-show-more {
 	display: flex;
@@ -835,8 +835,8 @@
 	position: relative;
 }
 .chat-debug-cache-rail {
-	border-right: 1px solid var(--vscode-widget-border, transparent);
-	background: var(--vscode-sideBar-background);
+	border-right: 1px solid var(--zyraxoncode-widget-border, transparent);
+	background: var(--zyraxoncode-sideBar-background);
 	display: flex;
 	flex-direction: column;
 	min-height: 0;
@@ -848,7 +848,7 @@
 	align-items: center;
 	gap: 6px;
 	padding: 6px 10px;
-	border-bottom: 1px solid var(--vscode-widget-border, transparent);
+	border-bottom: 1px solid var(--zyraxoncode-widget-border, transparent);
 	flex-shrink: 0;
 }
 .chat-debug-cache-rail-toolbar:empty {
@@ -858,7 +858,7 @@
 	font-size: 10.5px;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	flex-shrink: 0;
 }
 .chat-debug-cache-filter-button {
@@ -869,17 +869,17 @@
 	min-width: 0;
 	padding: 2px 6px;
 	font-size: 11.5px;
-	color: var(--vscode-foreground);
-	background: var(--vscode-button-secondaryBackground, var(--vscode-input-background));
-	border: 1px solid var(--vscode-widget-border, transparent);
+	color: var(--zyraxoncode-foreground);
+	background: var(--zyraxoncode-button-secondaryBackground, var(--zyraxoncode-input-background));
+	border: 1px solid var(--zyraxoncode-widget-border, transparent);
 	border-radius: 4px;
 	cursor: pointer;
 }
 .chat-debug-cache-filter-button:hover {
-	background: var(--vscode-button-secondaryHoverBackground, var(--vscode-list-hoverBackground));
+	background: var(--zyraxoncode-button-secondaryHoverBackground, var(--zyraxoncode-list-hoverBackground));
 }
 .chat-debug-cache-filter-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 .chat-debug-cache-filter-button-text {
@@ -892,7 +892,7 @@
 }
 .chat-debug-cache-filter-chevron {
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	flex-shrink: 0;
 }
 .chat-debug-cache-rail-list {
@@ -902,7 +902,7 @@
 }
 .chat-debug-cache-group-header {
 	padding: 10px 10px 4px 10px;
-	border-top: 1px solid var(--vscode-widget-border, transparent);
+	border-top: 1px solid var(--zyraxoncode-widget-border, transparent);
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
@@ -910,11 +910,11 @@
 	user-select: none;
 }
 .chat-debug-cache-group-header:hover {
-	background: var(--vscode-list-hoverBackground);
+	background: var(--zyraxoncode-list-hoverBackground);
 }
 .chat-debug-cache-group-header:focus,
 .chat-debug-cache-group-header:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 .chat-debug-cache-rail-list > .chat-debug-cache-group-header:first-child {
@@ -930,7 +930,7 @@
 	content: "\25BE";
 	display: inline-block;
 	width: 10px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 10px;
 	transition: transform 0.15s;
 }
@@ -940,7 +940,7 @@
 .chat-debug-cache-group-prompt {
 	font-size: 11.5px;
 	font-weight: 600;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -950,8 +950,8 @@
 .chat-debug-cache-group-count {
 	font-family: var(--monaco-monospace-font);
 	font-size: 10.5px;
-	color: var(--vscode-badge-foreground);
-	background: var(--vscode-badge-background);
+	color: var(--zyraxoncode-badge-foreground);
+	background: var(--zyraxoncode-badge-background);
 	padding: 1px 7px;
 	border-radius: 10px;
 	flex-shrink: 0;
@@ -959,7 +959,7 @@
 .chat-debug-cache-group-meta {
 	font-family: var(--monaco-monospace-font);
 	font-size: 10.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -982,20 +982,20 @@
 	border-left: 3px solid transparent;
 }
 .chat-debug-cache-turn:hover {
-	background: var(--vscode-list-hoverBackground);
+	background: var(--zyraxoncode-list-hoverBackground);
 }
 .chat-debug-cache-turn:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 .chat-debug-cache-turn.is-selected {
-	border-left-color: var(--vscode-focusBorder);
-	background: var(--vscode-list-activeSelectionBackground);
-	color: var(--vscode-list-activeSelectionForeground);
+	border-left-color: var(--zyraxoncode-focusBorder);
+	background: var(--zyraxoncode-list-activeSelectionBackground);
+	color: var(--zyraxoncode-list-activeSelectionForeground);
 }
 .chat-debug-cache-turn-idx {
 	font-family: var(--monaco-monospace-font);
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 11px;
 	text-align: right;
 	padding-top: 1px;
@@ -1009,7 +1009,7 @@
 }
 .chat-debug-cache-turn-top {
 	font-size: 11.5px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
@@ -1026,15 +1026,15 @@
 .chat-debug-cache-turn-chip {
 	font-family: var(--monaco-monospace-font);
 	font-size: 10.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-turn-hit.is-bad {
-	color: var(--vscode-charts-red);
+	color: var(--zyraxoncode-charts-red);
 	font-weight: 600;
 }
 .chat-debug-cache-turn-sub {
 	font-size: 10.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -1053,7 +1053,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-title-row {
 	display: flex;
@@ -1064,7 +1064,7 @@
 .chat-debug-cache-title {
 	margin: 0;
 	font-size: 14px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-cache-title-actions {
 	display: flex;
@@ -1076,8 +1076,8 @@
 	gap: 12px;
 }
 .chat-debug-cache-card {
-	background: var(--vscode-editorWidget-background);
-	border: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	background: var(--zyraxoncode-editorWidget-background);
+	border: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 	border-radius: 6px;
 	padding: 10px 12px;
 	display: flex;
@@ -1088,14 +1088,14 @@
 	an avoidable break, yellow for suspected expiration, green for healthy
 	growth — a permanent red border made every request look broken. */
 .chat-debug-cache-card.break.is-critical {
-	border-color: var(--vscode-charts-red);
+	border-color: var(--zyraxoncode-charts-red);
 }
 .chat-debug-cache-card.break.is-warning {
-	border-color: var(--vscode-charts-yellow);
+	border-color: var(--zyraxoncode-charts-yellow);
 }
 .chat-debug-cache-card.break.is-ok,
 .chat-debug-cache-card.break.is-info {
-	border-color: var(--vscode-charts-green);
+	border-color: var(--zyraxoncode-charts-green);
 }
 .chat-debug-cache-findings {
 	display: flex;
@@ -1124,7 +1124,7 @@ button.chat-debug-cache-finding.is-clickable:hover .chat-debug-cache-finding-tit
 	text-decoration: underline;
 }
 button.chat-debug-cache-finding.is-clickable:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
 }
 .chat-debug-cache-finding-icon {
@@ -1132,16 +1132,16 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	padding-top: 1px;
 }
 .chat-debug-cache-finding-icon.is-ok {
-	color: var(--vscode-charts-green);
+	color: var(--zyraxoncode-charts-green);
 }
 .chat-debug-cache-finding-icon.is-info {
-	color: var(--vscode-charts-blue);
+	color: var(--zyraxoncode-charts-blue);
 }
 .chat-debug-cache-finding-icon.is-warning {
-	color: var(--vscode-charts-yellow);
+	color: var(--zyraxoncode-charts-yellow);
 }
 .chat-debug-cache-finding-icon.is-critical {
-	color: var(--vscode-charts-red);
+	color: var(--zyraxoncode-charts-red);
 }
 .chat-debug-cache-finding-body {
 	display: flex;
@@ -1152,23 +1152,23 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 .chat-debug-cache-finding-title {
 	font-size: 11.5px;
 	font-weight: 600;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-cache-finding-detail {
 	font-family: var(--monaco-monospace-font);
 	font-size: 11px;
 	line-height: 1.5;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-cache-finding-hint {
 	font-size: 11px;
 	line-height: 1.5;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 /* ---- Session cache health (cross-turn report) ---- */
 .chat-debug-cache-session-health {
-	background: var(--vscode-editorWidget-background);
-	border: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	background: var(--zyraxoncode-editorWidget-background);
+	border: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 	border-radius: 6px;
 	padding: 10px 12px;
 	display: flex;
@@ -1178,7 +1178,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 .chat-debug-cache-session-health-stats {
 	font-family: var(--monaco-monospace-font);
 	font-size: 11.5px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-cache-session-health-chips {
 	display: flex;
@@ -1193,8 +1193,8 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	font-size: 10.5px;
 	padding: 2px 8px;
 	border-radius: 10px;
-	border: 1px solid var(--vscode-widget-border, transparent);
-	color: var(--vscode-descriptionForeground);
+	border: 1px solid var(--zyraxoncode-widget-border, transparent);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-session-health-chip .codicon {
 	font-size: 12px;
@@ -1204,12 +1204,12 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 .chat-debug-cache-session-health-chip.cause-model,
 .chat-debug-cache-session-health-chip.cause-options,
 .chat-debug-cache-session-health-chip.cause-history {
-	color: var(--vscode-charts-red);
-	border-color: var(--vscode-charts-red);
+	color: var(--zyraxoncode-charts-red);
+	border-color: var(--zyraxoncode-charts-red);
 }
 .chat-debug-cache-session-health-chip.cause-expiration {
-	color: var(--vscode-charts-yellow);
-	border-color: var(--vscode-charts-yellow);
+	color: var(--zyraxoncode-charts-yellow);
+	border-color: var(--zyraxoncode-charts-yellow);
 }
 /* ---- Rail: idle-gap separators ---- */
 .chat-debug-cache-rail-gap {
@@ -1219,7 +1219,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	padding: 3px 10px;
 	font-family: var(--monaco-monospace-font);
 	font-size: 10px;
-	color: var(--vscode-charts-yellow);
+	color: var(--zyraxoncode-charts-yellow);
 	opacity: 0.9;
 }
 .chat-debug-cache-rail-gap .codicon {
@@ -1229,34 +1229,34 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 .chat-debug-cache-rail-gap::after {
 	content: "";
 	flex: 1 1 auto;
-	border-top: 1px dashed color-mix(in srgb, var(--vscode-charts-yellow) 50%, transparent);
+	border-top: 1px dashed color-mix(in srgb, var(--zyraxoncode-charts-yellow) 50%, transparent);
 }
 .chat-debug-cache-card-h {
 	display: flex;
 	align-items: center;
 	gap: 6px;
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 }
 .chat-debug-cache-card-headline {
 	font-size: 14px;
 	font-weight: 600;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-cache-card-sub {
 	font-size: 11.5px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-cache-perf-rule {
 	height: 1px;
-	background: var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	background: var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 	margin: 12px 0 4px;
 }
 .chat-debug-cache-perf-section-h {
 	font-size: 10.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 	margin-bottom: 4px;
@@ -1264,26 +1264,26 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 .chat-debug-cache-perf-line {
 	font-family: var(--monaco-monospace-font);
 	font-size: 11.5px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	line-height: 1.5;
 }
 .chat-debug-cache-request-shape-note {
 	margin-top: 6px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-options-banner {
 	font-family: var(--monaco-monospace-font);
 	font-size: 11.5px;
-	color: var(--vscode-charts-yellow);
-	background: var(--vscode-editorWidget-background);
-	border: 1px solid var(--vscode-charts-yellow);
+	color: var(--zyraxoncode-charts-yellow);
+	background: var(--zyraxoncode-editorWidget-background);
+	border: 1px solid var(--zyraxoncode-charts-yellow);
 	border-radius: 4px;
 	padding: 6px 10px;
 }
 .chat-debug-cache-options-table {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	border: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 	border-radius: 6px;
 	overflow: hidden;
 }
@@ -1294,20 +1294,20 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	padding: 6px 12px;
 	font-family: var(--monaco-monospace-font);
 	font-size: 11.5px;
-	border-top: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	border-top: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 }
 .chat-debug-cache-options-row:first-child {
 	border-top: none;
 }
 .chat-debug-cache-options-row.head {
-	background: var(--vscode-editorWidget-background);
-	color: var(--vscode-descriptionForeground);
+	background: var(--zyraxoncode-editorWidget-background);
+	color: var(--zyraxoncode-descriptionForeground);
 	text-transform: uppercase;
 	font-size: 10.5px;
 	letter-spacing: 0.05em;
 }
 .chat-debug-cache-options-row.changed {
-	background: var(--vscode-diffEditor-removedLineBackground, rgba(244, 135, 113, 0.08));
+	background: var(--zyraxoncode-diffEditor-removedLineBackground, rgba(244, 135, 113, 0.08));
 }
 .chat-debug-cache-options-cell {
 	overflow: hidden;
@@ -1315,7 +1315,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	white-space: nowrap;
 }
 .chat-debug-cache-options-cell.key {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-kv {
 	display: flex;
@@ -1326,17 +1326,17 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	flex-wrap: wrap;
 }
 .chat-debug-cache-kv .k {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	flex-shrink: 0;
 }
 .chat-debug-cache-kv .v {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	min-width: 0;
 }
 .chat-debug-cache-section-h {
 	margin: 0 0 8px;
 	font-size: 12px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 }
@@ -1346,7 +1346,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	gap: 6px 16px;
 	font-family: var(--monaco-monospace-font);
 	font-size: 10.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 8px;
 }
 .chat-debug-cache-sig-legend-entry {
@@ -1361,34 +1361,34 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	border-radius: 2px;
 }
 .chat-debug-cache-sig-swatch.role-system {
-	background: var(--vscode-charts-purple, #b292ff);
+	background: var(--zyraxoncode-charts-purple, #b292ff);
 }
 .chat-debug-cache-sig-swatch.role-tools {
-	background: var(--vscode-charts-orange, #d9822b);
+	background: var(--zyraxoncode-charts-orange, #d9822b);
 }
 .chat-debug-cache-sig-swatch.role-user {
-	background: var(--vscode-charts-blue);
+	background: var(--zyraxoncode-charts-blue);
 }
 .chat-debug-cache-sig-swatch.role-assistant {
-	background: var(--vscode-charts-green);
+	background: var(--zyraxoncode-charts-green);
 }
 .chat-debug-cache-sig-swatch.role-tool {
-	background: var(--vscode-charts-yellow);
+	background: var(--zyraxoncode-charts-yellow);
 }
 .chat-debug-cache-sig-swatch.role-tool-search {
-	background: var(--vscode-charts-foreground, #56b6c2);
+	background: var(--zyraxoncode-charts-foreground, #56b6c2);
 }
 .chat-debug-cache-sig-swatch.role-drift {
 	background: transparent;
-	outline: 2px solid var(--vscode-charts-red);
+	outline: 2px solid var(--zyraxoncode-charts-red);
 	outline-offset: -2px;
 }
 .chat-debug-cache-sig-lanes {
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
-	background: var(--vscode-editorWidget-background);
-	border: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	background: var(--zyraxoncode-editorWidget-background);
+	border: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 	border-radius: 6px;
 	padding: 12px 14px;
 }
@@ -1401,19 +1401,19 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 .chat-debug-cache-sig-lane-label {
 	font-family: var(--monaco-monospace-font);
 	font-size: 10.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 }
 .chat-debug-cache-sig-lane-total {
 	font-family: var(--monaco-monospace-font);
 	font-size: 10.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	text-align: right;
 }
 .chat-debug-cache-sig-bar {
 	height: 22px;
-	background: var(--vscode-input-background, #2a2a2a);
+	background: var(--zyraxoncode-input-background, #2a2a2a);
 	border-radius: 4px;
 	overflow: hidden;
 	display: flex;
@@ -1435,27 +1435,27 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	filter: brightness(1.2);
 }
 .chat-debug-cache-sig-seg.role-system {
-	background: var(--vscode-charts-purple, #b292ff);
+	background: var(--zyraxoncode-charts-purple, #b292ff);
 	color: #1a0e30;
 }
 .chat-debug-cache-sig-seg.role-tools {
-	background: var(--vscode-charts-orange, #d9822b);
+	background: var(--zyraxoncode-charts-orange, #d9822b);
 	color: #2a1500;
 }
 .chat-debug-cache-sig-seg.role-user {
-	background: var(--vscode-charts-blue);
+	background: var(--zyraxoncode-charts-blue);
 	color: #06243d;
 }
 .chat-debug-cache-sig-seg.role-assistant {
-	background: var(--vscode-charts-green);
+	background: var(--zyraxoncode-charts-green);
 	color: #082b0c;
 }
 .chat-debug-cache-sig-seg.role-tool {
-	background: var(--vscode-charts-yellow);
+	background: var(--zyraxoncode-charts-yellow);
 	color: #2a1d00;
 }
 .chat-debug-cache-sig-seg.role-tool-search {
-	background: var(--vscode-charts-foreground, #56b6c2);
+	background: var(--zyraxoncode-charts-foreground, #56b6c2);
 	color: #102326;
 }
 .chat-debug-cache-sig-seg.role-empty {
@@ -1463,7 +1463,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	border-right: none;
 }
 .chat-debug-cache-sig-seg.is-drift {
-	outline: 2px solid var(--vscode-charts-red);
+	outline: 2px solid var(--zyraxoncode-charts-red);
 	outline-offset: -2px;
 	filter: brightness(0.85);
 	/* A drifted sliver must stay visible and clickable even when its share
@@ -1472,20 +1472,20 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 }
 .chat-debug-cache-sig-seg.role-coalesced,
 .chat-debug-cache-sig-swatch.role-coalesced {
-	background: color-mix(in srgb, var(--vscode-descriptionForeground) 30%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-descriptionForeground) 30%, transparent);
 }
 .chat-debug-cache-sig-break {
 	position: absolute;
 	top: -2px;
 	bottom: -2px;
-	border-left: 2px dashed var(--vscode-charts-red);
+	border-left: 2px dashed var(--zyraxoncode-charts-red);
 	pointer-events: none;
 }
 .chat-debug-cache-sig-seg.is-clickable {
 	cursor: pointer;
 }
 .chat-debug-cache-sig-seg.is-clickable:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
 }
 /* Prefix-match rail: thin reused/recomputed split under the lanes. */
@@ -1497,22 +1497,22 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	border-radius: 3px;
 	overflow: hidden;
 	display: flex;
-	background: var(--vscode-input-background, #2a2a2a);
+	background: var(--zyraxoncode-input-background, #2a2a2a);
 }
 .chat-debug-cache-sig-reuse-seg {
 	height: 100%;
 }
 .chat-debug-cache-sig-reuse-seg.is-reused {
-	background: var(--vscode-charts-green);
+	background: var(--zyraxoncode-charts-green);
 }
 .chat-debug-cache-sig-reuse-seg.is-recomputed {
-	background: var(--vscode-charts-red);
+	background: var(--zyraxoncode-charts-red);
 	opacity: 0.8;
 }
 .chat-debug-cache-sig-summary {
 	font-family: var(--monaco-monospace-font);
 	font-size: 11.5px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	margin-top: 8px;
 }
 .chat-debug-cache-sig-breakdown {
@@ -1524,16 +1524,16 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	gap: 6px;
 	padding: 2px 0;
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	background: transparent;
 	border: none;
 	cursor: pointer;
 }
 .chat-debug-cache-sig-breakdown-toggle:hover {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 .chat-debug-cache-sig-breakdown-toggle:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
 }
 .chat-debug-cache-sig-breakdown-chev {
@@ -1545,7 +1545,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 }
 .chat-debug-cache-sig-breakdown-table {
 	margin-top: 8px;
-	border: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	border: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 	border-radius: 6px;
 	overflow: hidden;
 }
@@ -1556,7 +1556,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	align-items: center;
 	padding: 4px 10px;
 	font-size: 11px;
-	border-top: 1px solid var(--vscode-widget-border, transparent);
+	border-top: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-cache-sig-breakdown-row:first-child {
 	border-top: none;
@@ -1566,15 +1566,15 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	font-size: 10px;
 	text-transform: uppercase;
 	letter-spacing: 0.04em;
-	color: var(--vscode-descriptionForeground);
-	background: var(--vscode-editorWidget-background);
+	color: var(--zyraxoncode-descriptionForeground);
+	background: var(--zyraxoncode-editorWidget-background);
 }
 .chat-debug-cache-sig-breakdown-row.total {
 	font-weight: 600;
-	background: var(--vscode-editorWidget-background);
+	background: var(--zyraxoncode-editorWidget-background);
 }
 .chat-debug-cache-sig-breakdown-row.is-drift {
-	background: color-mix(in srgb, var(--vscode-charts-red) 12%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-charts-red) 12%, transparent);
 }
 .chat-debug-cache-sig-breakdown-row .cell {
 	overflow: hidden;
@@ -1583,7 +1583,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 }
 .chat-debug-cache-sig-breakdown-row .cell.idx {
 	font-family: var(--monaco-monospace-font);
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-sig-breakdown-row .cell.chunk {
 	display: flex;
@@ -1610,24 +1610,24 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 }
 .chat-debug-cache-acc-empty {
 	font-size: 11.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-acc-item {
-	background: var(--vscode-editorWidget-background);
-	border: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	background: var(--zyraxoncode-editorWidget-background);
+	border: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 	border-left-width: 3px;
 	border-radius: 6px;
 	overflow: hidden;
 }
 .chat-debug-cache-acc-item.contentDrift,
 .chat-debug-cache-acc-item.lengthChange {
-	border-left-color: var(--vscode-charts-red);
+	border-left-color: var(--zyraxoncode-charts-red);
 }
 .chat-debug-cache-acc-item.onlyInA {
-	border-left-color: var(--vscode-charts-yellow);
+	border-left-color: var(--zyraxoncode-charts-yellow);
 }
 .chat-debug-cache-acc-item.onlyInB {
-	border-left-color: var(--vscode-charts-blue);
+	border-left-color: var(--zyraxoncode-charts-blue);
 }
 .chat-debug-cache-acc-head {
 	display: grid;
@@ -1638,16 +1638,16 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	cursor: pointer;
 }
 .chat-debug-cache-acc-head:hover {
-	background: var(--vscode-list-hoverBackground);
+	background: var(--zyraxoncode-list-hoverBackground);
 }
 .chat-debug-cache-acc-head:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 .chat-debug-cache-chev::before {
 	content: "\25B6";
 	display: inline-block;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 10px;
 	transition: transform 0.15s;
 }
@@ -1657,13 +1657,13 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 .chat-debug-cache-acc-name {
 	font-family: var(--monaco-monospace-font);
 	font-size: 12px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 .chat-debug-cache-acc-name .role {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-right: 6px;
 }
 .chat-debug-cache-acc-name .chat-debug-cache-sig-swatch {
@@ -1675,40 +1675,40 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	font-size: 10.5px;
 	padding: 2px 8px;
 	border-radius: 10px;
-	background: var(--vscode-badge-background);
-	color: var(--vscode-badge-foreground);
+	background: var(--zyraxoncode-badge-background);
+	color: var(--zyraxoncode-badge-foreground);
 }
 .chat-debug-cache-acc-badge.identical {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	background: transparent;
-	border: 1px solid var(--vscode-widget-border, transparent);
+	border: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-cache-acc-badge.contentDrift,
 .chat-debug-cache-acc-badge.lengthChange {
-	color: var(--vscode-charts-red);
+	color: var(--zyraxoncode-charts-red);
 	background: transparent;
-	border: 1px solid var(--vscode-charts-red);
+	border: 1px solid var(--zyraxoncode-charts-red);
 }
 .chat-debug-cache-acc-badge.onlyInA {
-	color: var(--vscode-charts-yellow);
+	color: var(--zyraxoncode-charts-yellow);
 	background: transparent;
-	border: 1px solid var(--vscode-charts-yellow);
+	border: 1px solid var(--zyraxoncode-charts-yellow);
 }
 .chat-debug-cache-acc-badge.onlyInB {
-	color: var(--vscode-charts-blue);
+	color: var(--zyraxoncode-charts-blue);
 	background: transparent;
-	border: 1px solid var(--vscode-charts-blue);
+	border: 1px solid var(--zyraxoncode-charts-blue);
 }
 .chat-debug-cache-acc-sizes {
 	font-family: var(--monaco-monospace-font);
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	min-width: 130px;
 	text-align: right;
 }
 .chat-debug-cache-acc-body {
 	display: none;
-	border-top: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	border-top: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 }
 .chat-debug-cache-acc-item.open .chat-debug-cache-acc-body {
 	display: block;
@@ -1720,9 +1720,9 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	padding: 6px 12px;
 	font-size: 11px;
 	line-height: 1.4;
-	color: var(--vscode-notificationsWarningIcon-foreground, var(--vscode-charts-orange));
-	background: var(--vscode-inputValidation-warningBackground, transparent);
-	border-top: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground, var(--zyraxoncode-charts-orange));
+	background: var(--zyraxoncode-inputValidation-warningBackground, transparent);
+	border-top: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 }
 .chat-debug-cache-acc-truncated::before {
 	content: "\26A0";
@@ -1736,10 +1736,10 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 }
 @keyframes chat-debug-cache-flash {
 	0% {
-		background: color-mix(in srgb, var(--vscode-focusBorder) 30%, var(--vscode-editorWidget-background));
+		background: color-mix(in srgb, var(--zyraxoncode-focusBorder) 30%, var(--zyraxoncode-editorWidget-background));
 	}
 	100% {
-		background: var(--vscode-editorWidget-background);
+		background: var(--zyraxoncode-editorWidget-background);
 	}
 }
 .chat-debug-cache-acc-change-note {
@@ -1747,14 +1747,14 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	font-family: var(--monaco-monospace-font);
 	font-size: 11px;
 	line-height: 1.5;
-	color: var(--vscode-foreground);
-	background: color-mix(in srgb, var(--vscode-charts-yellow) 8%, transparent);
-	border-bottom: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	color: var(--zyraxoncode-foreground);
+	background: color-mix(in srgb, var(--zyraxoncode-charts-yellow) 8%, transparent);
+	border-bottom: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 }
 .chat-debug-cache-acc-identical-note {
 	margin-top: 6px;
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-diff {
 	display: grid;
@@ -1771,12 +1771,12 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	word-break: break-word;
 }
 .chat-debug-cache-diff-col + .chat-debug-cache-diff-col {
-	border-left: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border));
+	border-left: 1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border));
 }
 .chat-debug-cache-diff-col h4 {
 	margin: 0 0 6px;
 	font-size: 10.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-weight: 600;
 	text-transform: uppercase;
 }
@@ -1792,20 +1792,20 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	border-radius: 2px;
 }
 .chat-debug-cache-diff-line.add {
-	background: var(--vscode-diffEditor-insertedLineBackground, rgba(95, 184, 107, 0.12));
+	background: var(--zyraxoncode-diffEditor-insertedLineBackground, rgba(95, 184, 107, 0.12));
 }
 .chat-debug-cache-diff-line.remove {
-	background: var(--vscode-diffEditor-removedLineBackground, rgba(244, 135, 113, 0.12));
+	background: var(--zyraxoncode-diffEditor-removedLineBackground, rgba(244, 135, 113, 0.12));
 }
 .chat-debug-cache-diff-line.context {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-cache-diff-line.add .chat-debug-cache-diff-inner {
-	background: var(--vscode-diffEditor-insertedTextBackground, rgba(95, 184, 107, 0.4));
+	background: var(--zyraxoncode-diffEditor-insertedTextBackground, rgba(95, 184, 107, 0.4));
 	border-radius: 2px;
 }
 .chat-debug-cache-diff-line.remove .chat-debug-cache-diff-inner {
-	background: var(--vscode-diffEditor-removedTextBackground, rgba(244, 135, 113, 0.4));
+	background: var(--zyraxoncode-diffEditor-removedTextBackground, rgba(244, 135, 113, 0.4));
 	border-radius: 2px;
 }
 
@@ -1823,16 +1823,16 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	gap: 6px;
 	padding: 6px 12px;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
-	background: var(--vscode-editorWidget-background);
-	border-bottom: 1px solid var(--vscode-widget-border, transparent);
+	color: var(--zyraxoncode-descriptionForeground);
+	background: var(--zyraxoncode-editorWidget-background);
+	border-bottom: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-wirelog-toolbar {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	padding: 6px 12px;
-	border-bottom: 1px solid var(--vscode-widget-border, transparent);
+	border-bottom: 1px solid var(--zyraxoncode-widget-border, transparent);
 	flex-shrink: 0;
 }
 .chat-debug-wirelog-select {
@@ -1847,16 +1847,16 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	height: 24px;
 	padding: 2px 6px;
 	font-size: 12px;
-	color: var(--vscode-input-foreground);
-	background: var(--vscode-input-background);
-	border: 1px solid var(--vscode-input-border, transparent);
+	color: var(--zyraxoncode-input-foreground);
+	background: var(--zyraxoncode-input-background);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
 	border-radius: 2px;
 }
 .chat-debug-wirelog-filter::placeholder {
-	color: var(--vscode-input-placeholderForeground);
+	color: var(--zyraxoncode-input-placeholderForeground);
 }
 .chat-debug-wirelog-filter:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 .chat-debug-wirelog-action {
@@ -1870,24 +1870,24 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	gap: 6px;
 	padding: 6px 12px;
 	flex-shrink: 0;
-	border-bottom: 1px solid var(--vscode-widget-border, transparent);
+	border-bottom: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-wirelog-chip {
 	padding: 1px 8px;
 	font-size: 11px;
 	border-radius: 10px;
-	color: var(--vscode-badge-foreground);
-	background: var(--vscode-badge-background);
+	color: var(--zyraxoncode-badge-foreground);
+	background: var(--zyraxoncode-badge-background);
 }
 .chat-debug-wirelog-chip-error {
-	color: var(--vscode-inputValidation-errorForeground, var(--vscode-errorForeground));
-	background: var(--vscode-inputValidation-errorBackground, transparent);
-	border: 1px solid var(--vscode-inputValidation-errorBorder, var(--vscode-errorForeground));
+	color: var(--zyraxoncode-inputValidation-errorForeground, var(--zyraxoncode-errorForeground));
+	background: var(--zyraxoncode-inputValidation-errorBackground, transparent);
+	border: 1px solid var(--zyraxoncode-inputValidation-errorBorder, var(--zyraxoncode-errorForeground));
 }
 .chat-debug-wirelog-chip-pending {
-	color: var(--vscode-inputValidation-warningForeground, var(--vscode-foreground));
-	background: var(--vscode-inputValidation-warningBackground, transparent);
-	border: 1px solid var(--vscode-inputValidation-warningBorder, var(--vscode-editorWarning-foreground));
+	color: var(--zyraxoncode-inputValidation-warningForeground, var(--zyraxoncode-foreground));
+	background: var(--zyraxoncode-inputValidation-warningBackground, transparent);
+	border: 1px solid var(--zyraxoncode-inputValidation-warningBorder, var(--zyraxoncode-editorWarning-foreground));
 }
 .chat-debug-wirelog-body {
 	flex: 1 1 auto;
@@ -1902,11 +1902,11 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	gap: 12px;
 	padding: 6px 0;
 	flex-shrink: 0;
-	border-top: 1px solid var(--vscode-widget-border, transparent);
+	border-top: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-wirelog-loadmore-status {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-wirelog-list {
 	padding: 4px 0;
@@ -1915,15 +1915,15 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 }
 .chat-debug-wirelog-list.chat-debug-wirelog-message {
 	padding: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: pre-wrap;
 }
 .chat-debug-wirelog-noresults {
 	padding: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-wirelog-row {
-	border-bottom: 1px solid var(--vscode-widget-border, rgba(128, 128, 128, 0.15));
+	border-bottom: 1px solid var(--zyraxoncode-widget-border, rgba(128, 128, 128, 0.15));
 }
 .chat-debug-wirelog-row-header {
 	display: flex;
@@ -1934,35 +1934,35 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	white-space: nowrap;
 }
 .chat-debug-wirelog-row-header:hover {
-	background: var(--vscode-list-hoverBackground);
+	background: var(--zyraxoncode-list-hoverBackground);
 }
 .chat-debug-wirelog-row-header:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 .chat-debug-wirelog-row-error {
-	border-left: 2px solid var(--vscode-errorForeground);
+	border-left: 2px solid var(--zyraxoncode-errorForeground);
 }
 .chat-debug-wirelog-row-error .chat-debug-wirelog-row-header {
-	background: var(--vscode-inputValidation-errorBackground, transparent);
+	background: var(--zyraxoncode-inputValidation-errorBackground, transparent);
 }
 .chat-debug-wirelog-row-error .chat-debug-wirelog-method {
-	color: var(--vscode-errorForeground);
+	color: var(--zyraxoncode-errorForeground);
 }
 .chat-debug-wirelog-chevron {
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 14px;
 }
 .chat-debug-wirelog-dir {
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 14px;
 }
 .chat-debug-wirelog-method {
 	font-family: var(--monaco-monospace-font);
 	font-size: 12px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -1972,8 +1972,8 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	font-family: var(--monaco-monospace-font);
 	font-size: 11px;
 	border-radius: 3px;
-	color: var(--vscode-textPreformat-foreground);
-	background: var(--vscode-textPreformat-background);
+	color: var(--zyraxoncode-textPreformat-foreground);
+	background: var(--zyraxoncode-textPreformat-background);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -1985,30 +1985,30 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	text-transform: uppercase;
 	letter-spacing: 0.04em;
 	border-radius: 3px;
-	color: var(--vscode-descriptionForeground);
-	background: var(--vscode-badge-background);
+	color: var(--zyraxoncode-descriptionForeground);
+	background: var(--zyraxoncode-badge-background);
 }
 .chat-debug-wirelog-status {
 	flex-shrink: 0;
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-wirelog-status-ok {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-wirelog-status-error {
-	color: var(--vscode-errorForeground);
+	color: var(--zyraxoncode-errorForeground);
 	font-weight: 600;
 }
 .chat-debug-wirelog-status-pending {
-	color: var(--vscode-editorWarning-foreground);
+	color: var(--zyraxoncode-editorWarning-foreground);
 }
 .chat-debug-wirelog-time {
 	flex-shrink: 0;
 	margin-left: auto;
 	font-family: var(--monaco-monospace-font);
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-wirelog-row-details {
 	display: none;
@@ -2024,7 +2024,7 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	font-size: 11px;
 	text-transform: uppercase;
 	letter-spacing: 0.04em;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 2px;
 }
 .chat-debug-wirelog-detail-json {
@@ -2036,24 +2036,24 @@ button.chat-debug-cache-finding.is-clickable:focus-visible {
 	white-space: pre-wrap;
 	word-break: break-word;
 	tab-size: 2;
-	color: var(--vscode-foreground);
-	background: var(--vscode-textCodeBlock-background, var(--vscode-editorWidget-background));
+	color: var(--zyraxoncode-foreground);
+	background: var(--zyraxoncode-textCodeBlock-background, var(--zyraxoncode-editorWidget-background));
 	border-radius: 3px;
 }
 .chat-debug-wirelog-detail-json-error {
-	color: var(--vscode-errorForeground);
+	color: var(--zyraxoncode-errorForeground);
 }
 .chat-debug-wirelog-detail-note {
 	font-size: 11px;
 	font-style: italic;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 .chat-debug-wirelog-footer {
 	flex-shrink: 0;
 	padding: 4px 12px;
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
-	border-top: 1px solid var(--vscode-widget-border, transparent);
+	color: var(--zyraxoncode-descriptionForeground);
+	border-top: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 .chat-debug-wirelog-footer:empty {
 	display: none;

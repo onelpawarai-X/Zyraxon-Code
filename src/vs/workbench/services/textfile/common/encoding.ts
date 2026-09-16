@@ -82,7 +82,7 @@ class DecoderStream implements IDecoderStream {
 	static async create(encoding: string): Promise<DecoderStream> {
 		let decoder: IDecoderStream | undefined = undefined;
 		if (encoding !== UTF8) {
-			const iconv = await importAMDNodeModule<typeof import('@vscode/iconv-lite-umd')>('@vscode/iconv-lite-umd', 'lib/iconv-lite-umd.js');
+			const iconv = await importAMDNodeModule<typeof import('@zyraxoncode/iconv-lite-umd')>('@zyraxoncode/iconv-lite-umd', 'lib/iconv-lite-umd.js');
 			decoder = iconv.getDecoder(toNodeEncoding(encoding));
 		} else {
 			const utf8TextDecoder = new TextDecoder();
@@ -215,7 +215,7 @@ export function toDecodeStream(source: VSBufferReadableStream, options: IDecodeS
 }
 
 export async function toEncodeReadable(readable: Readable<string>, encoding: string, options?: { addBOM?: boolean }): Promise<VSBufferReadable> {
-	const iconv = await importAMDNodeModule<typeof import('@vscode/iconv-lite-umd')>('@vscode/iconv-lite-umd', 'lib/iconv-lite-umd.js');
+	const iconv = await importAMDNodeModule<typeof import('@zyraxoncode/iconv-lite-umd')>('@zyraxoncode/iconv-lite-umd', 'lib/iconv-lite-umd.js');
 	const encoder = iconv.getEncoder(toNodeEncoding(encoding), options);
 
 	let bytesWritten = false;
@@ -264,7 +264,7 @@ export async function toEncodeReadable(readable: Readable<string>, encoding: str
 }
 
 export async function encodingExists(encoding: string): Promise<boolean> {
-	const iconv = await importAMDNodeModule<typeof import('@vscode/iconv-lite-umd')>('@vscode/iconv-lite-umd', 'lib/iconv-lite-umd.js');
+	const iconv = await importAMDNodeModule<typeof import('@zyraxoncode/iconv-lite-umd')>('@zyraxoncode/iconv-lite-umd', 'lib/iconv-lite-umd.js');
 
 	return iconv.encodingExists(toNodeEncoding(encoding));
 }
@@ -313,7 +313,7 @@ export function detectEncodingByBOMFromBuffer(buffer: VSBuffer | null, bytesRead
 // - ASCII: we never want this encoding (most UTF-8 files would happily detect as
 //          ASCII files and then you could not type non-ASCII characters anymore)
 // - UTF-16: we have our own detection logic for UTF-16
-// - UTF-32: we do not support this encoding in VSCode
+// - UTF-32: we do not support this encoding in ZyraxonCode
 const IGNORE_ENCODINGS = ['ascii', 'utf-16', 'utf-32'];
 
 /**
@@ -322,12 +322,12 @@ const IGNORE_ENCODINGS = ['ascii', 'utf-16', 'utf-32'];
 async function guessEncodingByBuffer(buffer: VSBuffer, candidateGuessEncodings?: string[]): Promise<string | null> {
 	const jschardet = await importAMDNodeModule<typeof import('jschardet')>('jschardet', 'dist/jschardet.min.js');
 
-	// ensure to limit buffer for guessing due to https://github.com/aadsm/jschardet/issues/53
+	// ensure to limit buffer for guessing due to __ZYRAXKEEP__0_
 	const limitedBuffer = buffer.slice(0, AUTO_ENCODING_GUESS_MAX_BYTES);
 
 	// before guessing jschardet calls toString('binary') on input if it is a Buffer,
 	// since we are using it inside browser environment as well we do conversion ourselves
-	// https://github.com/aadsm/jschardet/blob/v2.1.1/src/index.js#L36-L40
+	// __ZYRAXKEEP__1_
 	const binaryString = encodeLatin1(limitedBuffer.buffer);
 
 	// ensure to convert candidate encodings to jschardet encoding names if provided
@@ -342,7 +342,7 @@ async function guessEncodingByBuffer(buffer: VSBuffer, candidateGuessEncodings?:
 	try {
 		guessed = jschardet.detect(binaryString, candidateGuessEncodings ? { detectEncodings: candidateGuessEncodings } : undefined);
 	} catch (error) {
-		return null; // jschardet throws for unknown encodings (https://github.com/microsoft/vscode/issues/239928)
+		return null; // jschardet throws for unknown encodings (__ZYRAXKEEP__2_)
 	}
 
 	if (!guessed?.encoding) {
@@ -391,7 +391,7 @@ function encodeLatin1(buffer: Uint8Array): string {
 
 /**
  * The encodings that are allowed in a settings file don't match the canonical encoding labels specified by WHATWG.
- * See https://encoding.spec.whatwg.org/#names-and-labels
+ * See __ZYRAXKEEP__3_
  * Iconv-lite strips all non-alphanumeric characters, but ripgrep doesn't. For backcompat, allow these labels.
  */
 export function toCanonicalName(enc: string): string {

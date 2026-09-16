@@ -11,7 +11,7 @@ import { cloneAndChange } from '../../../base/common/objects.js';
 import { MainContext, MainThreadCommandsShape, ExtHostCommandsShape, ICommandDto, ICommandMetadataDto, MainThreadTelemetryShape } from './extHost.protocol.js';
 import { isNonEmptyArray } from '../../../base/common/arrays.js';
 import * as languages from '../../../editor/common/languages.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILogService } from '../../../platform/log/common/log.js';
 import { revive } from '../../../base/common/marshalling.js';
 import { IRange, Range } from '../../../editor/common/core/range.js';
@@ -90,7 +90,7 @@ export class ExtHostCommands implements ExtHostCommandsShape {
 			{
 				processArgument(arg) {
 					return cloneAndChange(arg, function (obj) {
-						// Reverse of https://github.com/microsoft/vscode/blob/1f28c5fc681f4c01226460b6d1c7e91b8acb4a5b/src/vs/workbench/api/node/extHostCommands.ts#L112-L127
+						// Reverse of __ZYRAXKEEP__0_
 						if (Range.isIRange(obj)) {
 							return extHostTypeConverter.Range.to(obj);
 						}
@@ -286,7 +286,7 @@ export class ExtHostCommands implements ExtHostCommandsShape {
 			return;
 		}
 		if (id.startsWith('code.copilot.logStructured')) {
-			// This command is very active. See https://github.com/microsoft/vscode/issues/254153.
+			// This command is very active. See __ZYRAXKEEP__1_
 			return;
 		}
 		type ExtensionActionTelemetry = {
@@ -349,7 +349,7 @@ export const IExtHostCommands = createDecorator<IExtHostCommands>('IExtHostComma
 export class CommandsConverter implements extHostTypeConverter.Command.ICommandsConverter {
 
 	readonly delegatingCommandId: string = `__vsc${generateUuid()}`;
-	private readonly _cache = new Map<string, vscode.Command>();
+	private readonly _cache = new Map<string, zyraxoncode.Command>();
 	private _cachIdPool = 0;
 
 	// --- conversion between internal and api commands
@@ -361,9 +361,9 @@ export class CommandsConverter implements extHostTypeConverter.Command.ICommands
 		this._commands.registerCommand(true, this.delegatingCommandId, this._executeConvertedCommand, this);
 	}
 
-	toInternal(command: vscode.Command, disposables: DisposableStore): ICommandDto;
-	toInternal(command: vscode.Command | undefined, disposables: DisposableStore): ICommandDto | undefined;
-	toInternal(command: vscode.Command | undefined, disposables: DisposableStore): ICommandDto | undefined {
+	toInternal(command: zyraxoncode.Command, disposables: DisposableStore): ICommandDto;
+	toInternal(command: zyraxoncode.Command | undefined, disposables: DisposableStore): ICommandDto | undefined;
+	toInternal(command: zyraxoncode.Command | undefined, disposables: DisposableStore): ICommandDto | undefined {
 
 		if (!command) {
 			return undefined;
@@ -410,7 +410,7 @@ export class CommandsConverter implements extHostTypeConverter.Command.ICommands
 		return result;
 	}
 
-	fromInternal(command: ICommandDto): vscode.Command | undefined {
+	fromInternal(command: ICommandDto): zyraxoncode.Command | undefined {
 
 		if (typeof command.$ident === 'string') {
 			return this._cache.get(command.$ident);
@@ -425,7 +425,7 @@ export class CommandsConverter implements extHostTypeConverter.Command.ICommands
 	}
 
 
-	getActualCommand(...args: unknown[]): vscode.Command | undefined {
+	getActualCommand(...args: unknown[]): zyraxoncode.Command | undefined {
 		return this._cache.get(args[0] as string);
 	}
 

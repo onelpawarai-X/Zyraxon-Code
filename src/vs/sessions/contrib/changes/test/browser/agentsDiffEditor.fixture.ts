@@ -42,7 +42,7 @@ import { AgentFeedbackKind, AgentFeedbackState, IAgentFeedback, IAgentFeedbackSe
 import { Menus } from '../../../../browser/menus.js';
 import { ISession } from '../../../../services/sessions/common/session.js';
 
-const SESSION_RESOURCE = URI.parse('fixture-session://agents-diff');
+const SESSION_RESOURCE = URI.parse('__ZYRAXKEEP__0_');
 const MODIFIED_FIRST_RESOURCE = URI.file('/workspace/src/first.ts');
 const OVERLAY_RESOURCE = URI.file('/workspace/changes.diff');
 const FIXTURE_WIDTH = 860;
@@ -192,7 +192,7 @@ async function renderAgentsDiffEditor({ container, disposableStore, disposableSt
 	container.classList.add('agent-sessions-workbench', 'dock-detail-panel');
 	container.style.width = `${fixtureWidth}px`;
 	container.style.height = `${FIXTURE_HEIGHT}px`;
-	container.style.background = 'var(--vscode-agentsPanel-background)';
+	container.style.background = 'var(--zyraxoncode-agentsPanel-background)';
 
 	const editorPart = container.appendChild($('.part.editor'));
 	editorPart.style.position = 'relative';
@@ -300,16 +300,16 @@ function renderDockedDetailPanel(editorPart: HTMLElement): void {
 	detail.style.width = `${DETAIL_WIDTH}px`;
 	detail.style.height = '100%';
 	detail.style.boxSizing = 'border-box';
-	detail.style.background = 'var(--vscode-sideBar-background)';
-	detail.style.borderLeft = 'var(--vscode-strokeThickness) solid var(--vscode-sideBar-border)';
+	detail.style.background = 'var(--zyraxoncode-sideBar-background)';
+	detail.style.borderLeft = 'var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-sideBar-border)';
 
 	const title = detail.appendChild($('.fixture-docked-detail-title'));
 	title.textContent = 'Files';
 	title.style.height = '35px';
 	title.style.boxSizing = 'border-box';
 	title.style.padding = '8px 12px';
-	title.style.fontWeight = 'var(--vscode-fontWeight-semiBold)';
-	title.style.borderBottom = 'var(--vscode-strokeThickness) solid var(--vscode-sideBar-border)';
+	title.style.fontWeight = 'var(--zyraxoncode-fontWeight-semiBold)';
+	title.style.borderBottom = 'var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-sideBar-border)';
 
 	const files = detail.appendChild($('.fixture-docked-detail-files'));
 	files.style.padding = '8px 12px';
@@ -321,7 +321,7 @@ function renderDockedDetailPanel(editorPart: HTMLElement): void {
 		row.appendChild(document.createTextNode(name));
 		const count = row.appendChild($('span'));
 		count.textContent = stats;
-		count.style.color = 'var(--vscode-descriptionForeground)';
+		count.style.color = 'var(--zyraxoncode-descriptionForeground)';
 	}
 }
 

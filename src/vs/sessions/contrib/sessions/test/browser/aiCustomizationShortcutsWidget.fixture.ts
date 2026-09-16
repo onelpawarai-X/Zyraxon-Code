@@ -180,7 +180,7 @@ function createMockHarnessService(hiddenSections: readonly string[] = []): ICust
 function renderWidget(ctx: ComponentFixtureContext, options?: { mcpServerCount?: number; counts?: ICustomizationCounts; hiddenSections?: readonly string[]; height?: number }): void {
 	ctx.container.style.width = '300px';
 	ctx.container.style.height = `${options?.height ?? 260}px`;
-	ctx.container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	ctx.container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 
 	const actionViewItemService = new FixtureActionViewItemService();
 

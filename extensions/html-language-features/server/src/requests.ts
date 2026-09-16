@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType, Connection } from 'vscode-languageserver';
+import { RequestType, Connection } from 'zyraxoncode-languageserver';
 import { RuntimeEnvironment } from './htmlServer.js';
 
 export namespace FsStatRequest {

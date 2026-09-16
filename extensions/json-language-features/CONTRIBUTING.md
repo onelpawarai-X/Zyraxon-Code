@@ -1,13 +1,13 @@
 ## Setup
 
-- Clone [microsoft/zyraxon](https://github.com/microsoft/vscode)
+- Clone [zyraxon/zyraxon](__ZYRAXKEEP__0_)
 - Run `npm i` at `/`, this will install
 	- Dependencies for `/extension/json-language-features/`
 	- Dependencies for `/extension/json-language-features/server/`
 	- devDependencies such as `gulp`
 - Open `/extensions/json-language-features/` as the workspace in ZYRAXON Code
 - In `/extensions/json-language-features/` run `npm run compile`(or `npm run watch`) to build the client and server
-- Run the [`Launch Extension`](https://github.com/microsoft/vscode/blob/master/extensions/json-language-features/.vscode/launch.json) debug target in the Debug View. This will:
+- Run the [`Launch Extension`](__ZYRAXKEEP__1_) debug target in the Debug View. This will:
 	- Launch a new ZYRAXON Code instance with the `json-language-features` extension loaded
 - Open a `.json` file to activate the extension. The extension will start the JSON language server process.
 - Add `"json.trace.server": "verbose"` to the settings to observe the communication between client and server in the `JSON Language Server` output.
@@ -18,24 +18,24 @@
 - Run `Reload Window` command in the launched instance to reload the extension
 
 
-### Contribute to vscode-json-languageservice
+### Contribute to zyraxoncode-json-languageservice
 
-[microsoft/vscode-json-languageservice](https://github.com/microsoft/vscode-json-languageservice) is the library that implements the language smarts for JSON.
+[zyraxon/zyraxoncode-json-languageservice](__ZYRAXKEEP__2_) is the library that implements the language smarts for JSON.
 The JSON language server forwards most the of requests to the service library.
-If you want to fix JSON issues or make improvements, you should make changes at [microsoft/vscode-json-languageservice](https://github.com/microsoft/vscode-json-languageservice).
+If you want to fix JSON issues or make improvements, you should make changes at [zyraxon/zyraxoncode-json-languageservice](__ZYRAXKEEP__3_).
 
-However, within this extension, you can run a development version of `vscode-json-languageservice` to debug code or test language features interactively:
+However, within this extension, you can run a development version of `zyraxoncode-json-languageservice` to debug code or test language features interactively:
 
-#### Linking `vscode-json-languageservice` in `json-language-features/server/`
+#### Linking `zyraxoncode-json-languageservice` in `json-language-features/server/`
 
-- Clone [microsoft/vscode-json-languageservice](https://github.com/microsoft/vscode-json-languageservice)
-- Run `npm i` in `vscode-json-languageservice`
-- Run `npm link` in `vscode-json-languageservice`. This will compile and link `vscode-json-languageservice`
-- In `json-language-features/server/`, run `npm link vscode-json-languageservice`
+- Clone [zyraxon/zyraxoncode-json-languageservice](__ZYRAXKEEP__4_)
+- Run `npm i` in `zyraxoncode-json-languageservice`
+- Run `npm link` in `zyraxoncode-json-languageservice`. This will compile and link `zyraxoncode-json-languageservice`
+- In `json-language-features/server/`, run `npm link zyraxoncode-json-languageservice`
 
-#### Testing the development version of `vscode-json-languageservice`
+#### Testing the development version of `zyraxoncode-json-languageservice`
 
-- Open both `vscode-json-languageservice` and this extension in two windows or with a single window with the[multi-root workspace](https://code.visualstudio.com/docs/editor/multi-root-workspaces) feature.
-- Run `npm run watch` at `json-language-features/server/` to recompile this extension with the linked version of `vscode-json-languageservice`
-- Make some changes in `vscode-json-languageservice`
-- Now when you run `Launch Extension` debug target, the launched instance will use your development version of `vscode-json-languageservice`. You can interactively test the language features.
+- Open both `zyraxoncode-json-languageservice` and this extension in two windows or with a single window with the[multi-root workspace](__ZYRAXKEEP__5_) feature.
+- Run `npm run watch` at `json-language-features/server/` to recompile this extension with the linked version of `zyraxoncode-json-languageservice`
+- Make some changes in `zyraxoncode-json-languageservice`
+- Now when you run `Launch Extension` debug target, the launched instance will use your development version of `zyraxoncode-json-languageservice`. You can interactively test the language features.

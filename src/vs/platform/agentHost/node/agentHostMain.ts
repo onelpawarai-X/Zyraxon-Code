@@ -124,7 +124,7 @@ async function startAgentHost(): Promise<void> {
 	server.registerChannel(AgentHostIpcChannels.Logger, new LoggerChannel(loggerService, () => DefaultURITransformer));
 	const logger = loggerService.createLogger('agenthost', { name: localize('agentHost', "Agent Host") });
 	// OTLP log fan-out: any consumer that subscribes to the host's
-	// `ahp-otlp://logs/{level}` channel will receive every log record this
+	// `__ZYRAXKEEP__0_{level}` channel will receive every log record this
 	// `ILogService` produces, in addition to the regular file logger. The
 	// emitter is created here so it can be shared by every protocol
 	// handler instantiated below.
@@ -313,7 +313,7 @@ async function startAgentHost(): Promise<void> {
 		server.registerChannel(AgentHostIpcChannels.AgentHost, agentChannel);
 	}
 
-	// Single shared `vscode-agent-client` filesystem provider. Per-client
+	// Single shared `zyraxoncode-agent-client` filesystem provider. Per-client
 	// authorities are added by protocol handlers or the non-protocol reverse
 	// bridges below.
 	const clientFileSystemProvider = disposables.add(new AgentHostClientFileSystemProvider());
@@ -426,8 +426,8 @@ async function startAgentHost(): Promise<void> {
 			}
 
 			const socketPath = isWindows
-				? `\\\\.\\pipe\\vscode-agent-host-${generateUuid().replace(/-/g, '')}`
-				: join(os.tmpdir(), `vscode-agent-host-${generateUuid().replace(/-/g, '')}.sock`);
+				? `\\\\.\\pipe\\zyraxoncode-agent-host-${generateUuid().replace(/-/g, '')}`
+				: join(os.tmpdir(), `zyraxoncode-agent-host-${generateUuid().replace(/-/g, '')}.sock`);
 
 			const wsServer = disposables.add(await WebSocketProtocolServer.create(
 				{ socketPath },
@@ -468,7 +468,7 @@ async function startAgentHost(): Promise<void> {
 			if (!url) {
 				return undefined;
 			}
-			// Inspector URL looks like: ws://host:port/uuid (host may be IPv6 in brackets)
+			// Inspector URL looks like: __ZYRAXKEEP__1_ (host may be IPv6 in brackets)
 			try {
 				const parsedUrl = new URL(url);
 				if (parsedUrl.protocol !== 'ws:') {
@@ -493,7 +493,7 @@ async function startAgentHost(): Promise<void> {
 				return {
 					host,
 					port,
-					devtoolsUrl: `devtools://devtools/bundled/js_app.html?v8only=true&ws=${devtoolsHost}:${parsedUrl.port}/${auth}`,
+					devtoolsUrl: `__ZYRAXKEEP__2_{devtoolsHost}:${parsedUrl.port}/${auth}`,
 				};
 			} catch {
 				logService.warn(`[AgentHost] Unexpected inspector URL: ${url}`);

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { IPromptWorkspaceLabels } from '../../../context/node/resolvers/promptWorkspaceLabels';
 import { EmbeddedInsideUserMessage, embeddedInsideUserMessageDefault } from '../base/promptElement';
 import { Tag } from '../base/tag';

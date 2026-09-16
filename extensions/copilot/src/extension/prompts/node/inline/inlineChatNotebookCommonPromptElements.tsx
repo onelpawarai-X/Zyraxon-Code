@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing, TextChunk, TokenLimit, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing, TextChunk, TokenLimit, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { INotebookService, PipPackage, VariablesResult } from '../../../../platform/notebook/common/notebookService';
 import { ITabsAndEditorsService } from '../../../../platform/tabs/common/tabsAndEditorsService';
@@ -13,7 +13,7 @@ import { ILanguage } from '../../../../util/common/languages';
 import { createFencedCodeBlock } from '../../../../util/common/markdown';
 import { isNotebookCellOrNotebookChatInput } from '../../../../util/common/notebooks';
 import { illegalArgument } from '../../../../util/vs/base/common/errors';
-import { Range } from '../../../../vscodeTypes';
+import { Range } from '../../../../zyraxoncodeTypes';
 import { generateNotebookCellContext, getSelectionAndCodeAroundSelection } from '../../../context/node/resolvers/inlineChatSelection';
 import { CodeContextRegion, CodeContextTracker } from '../../../inlineChat/node/codeContextRegion';
 import { IDocumentContext } from '../../../prompt/node/documentContext';
@@ -35,7 +35,7 @@ export interface InlineChatNotebookSelectionCommonProps extends BasePromptElemen
 
 export interface InlineChatNotebookSelectionState {
 	wholeRange: Range;
-	executedCells?: vscode.NotebookCell[];
+	executedCells?: zyraxoncode.NotebookCell[];
 }
 
 export interface InlineChatCellSelectionProps extends BasePromptElementProps {
@@ -43,8 +43,8 @@ export interface InlineChatCellSelectionProps extends BasePromptElementProps {
 	readonly document: TextDocumentSnapshot;
 	readonly projectedDocument: ProjectedDocument;
 	readonly language: ILanguage;
-	readonly diagnostics: vscode.Diagnostic[];
-	readonly selection: vscode.Selection;
+	readonly diagnostics: zyraxoncode.Diagnostic[];
+	readonly selection: zyraxoncode.Selection;
 	readonly adjustedSelection: Range;
 	readonly isSummarized: boolean;
 	readonly selectedLinesContent: string;
@@ -282,7 +282,7 @@ export const CustomNotebookExamples = [
 		viewType: 'polyglot-notebook',
 		exampleCells: [
 			{ lan: 'markdown', source: 'Samples' },
-			{ lan: 'csharp', source: 'using Microsoft.Data.Analysis;' },
+			{ lan: 'csharp', source: 'using Zyraxon.Data.Analysis;' },
 			{ lan: 'csharp', source: 'DateTimeDataFrameColumn dateTimes = new DateTimeDataFrameColumn(\"DateTimes\");\n Int32DataFrameColumn ints = new Int32DataFrameColumn(\"Ints\", 6);\n StringDataFrameColumn strings = new StringDataFrameColumn(\"Strings\", 6);' },
 			{ lan: 'csharp', source: 'dateTimes.Append(DateTime.Parse(\"2019/01/01\"));' }
 		]
@@ -312,8 +312,8 @@ export const CustomNotebookExamples = [
 	{
 		viewType: 'http-notebook',
 		exampleCells: [
-			{ lan: 'http', source: 'GET https://httpbin.org/get' },
-			{ lan: 'http', source: 'POST https://httpbin.org/post' },
+			{ lan: 'http', source: 'GET __ZYRAXKEEP__0_' },
+			{ lan: 'http', source: 'POST __ZYRAXKEEP__1_' },
 		]
 	},
 	{
@@ -333,16 +333,16 @@ export const CustomNotebookExamples = [
 	{
 		viewType: 'github-issues',
 		exampleCells: [
-			{ lan: 'github-issues', source: '$vscode=repo:microsoft/vscode\n$milestone=milestone:"May 2020"' },
-			{ lan: 'github-issues', source: '$vscode $milestone is:closed author:@me -assignee:@me label:bug -label:verified' },
-			{ lan: 'github-issues', source: '$vscode assignee:@me is:open label:freeze-slow-crash-leak' },
+			{ lan: 'github-issues', source: '$zyraxoncode=repo:zyraxon/zyraxoncode\n$milestone=milestone:"May 2020"' },
+			{ lan: 'github-issues', source: '$zyraxoncode $milestone is:closed author:@me -assignee:@me label:bug -label:verified' },
+			{ lan: 'github-issues', source: '$zyraxoncode assignee:@me is:open label:freeze-slow-crash-leak' },
 		]
 	},
 	{
 		viewType: 'rest-book',
 		exampleCells: [
 			{ lan: 'rest-book', source: 'GET google.com' },
-			{ lan: 'rest-book', source: 'GET https://www.google.com\n    ?query="fun"\n    &page=2\n    User-Agent: rest-book\n    Content-Type: application/json' },
+			{ lan: 'rest-book', source: 'GET __ZYRAXKEEP__2_\n    ?query="fun"\n    &page=2\n    User-Agent: rest-book\n    Content-Type: application/json' },
 		]
 	}
 ];
@@ -382,7 +382,7 @@ export class CustomNotebookExampleRenderer extends PromptElement<CustomNotebookE
 
 function findNotebookType(
 	workspaceService: IWorkspaceService,
-	uri: vscode.Uri
+	uri: zyraxoncode.Uri
 ) {
 	const notebook = workspaceService.notebookDocuments.find(
 		doc =>
@@ -465,7 +465,7 @@ export class InlineChatCustomNotebookCellsContextRenderer extends PromptElement<
 
 //#region Variables
 type InlineChatNotebookVariablesPromptProps = PromptElementProps<{
-	notebookURI: vscode.Uri;
+	notebookURI: zyraxoncode.Uri;
 	query: string;
 	priorities: NotebookPromptPriority;
 }>;

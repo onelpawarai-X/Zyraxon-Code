@@ -69,51 +69,51 @@ export default defineThemedFixtureGroup({
 
 const themedButtonStyles = {
 	...unthemedButtonStyles,
-	buttonBackground: 'var(--vscode-button-background)',
-	buttonHoverBackground: 'var(--vscode-button-hoverBackground)',
-	buttonForeground: 'var(--vscode-button-foreground)',
-	buttonSecondaryBackground: 'var(--vscode-button-secondaryBackground)',
-	buttonSecondaryHoverBackground: 'var(--vscode-button-secondaryHoverBackground)',
-	buttonSecondaryForeground: 'var(--vscode-button-secondaryForeground)',
-	buttonBorder: 'var(--vscode-button-border)',
+	buttonBackground: 'var(--zyraxoncode-button-background)',
+	buttonHoverBackground: 'var(--zyraxoncode-button-hoverBackground)',
+	buttonForeground: 'var(--zyraxoncode-button-foreground)',
+	buttonSecondaryBackground: 'var(--zyraxoncode-button-secondaryBackground)',
+	buttonSecondaryHoverBackground: 'var(--zyraxoncode-button-secondaryHoverBackground)',
+	buttonSecondaryForeground: 'var(--zyraxoncode-button-secondaryForeground)',
+	buttonBorder: 'var(--zyraxoncode-button-border)',
 };
 
 const themedToggleStyles = {
 	...unthemedToggleStyles,
-	inputActiveOptionBorder: 'var(--vscode-inputOption-activeBorder)',
-	inputActiveOptionForeground: 'var(--vscode-inputOption-activeForeground)',
-	inputActiveOptionBackground: 'var(--vscode-inputOption-activeBackground)',
+	inputActiveOptionBorder: 'var(--zyraxoncode-inputOption-activeBorder)',
+	inputActiveOptionForeground: 'var(--zyraxoncode-inputOption-activeForeground)',
+	inputActiveOptionBackground: 'var(--zyraxoncode-inputOption-activeBackground)',
 };
 
 const themedCheckboxStyles = {
-	checkboxBackground: 'var(--vscode-checkbox-background)',
-	checkboxBorder: 'var(--vscode-checkbox-border)',
-	checkboxForeground: 'var(--vscode-checkbox-foreground)',
+	checkboxBackground: 'var(--zyraxoncode-checkbox-background)',
+	checkboxBorder: 'var(--zyraxoncode-checkbox-border)',
+	checkboxForeground: 'var(--zyraxoncode-checkbox-foreground)',
 	checkboxDisabledBackground: undefined,
 	checkboxDisabledForeground: undefined,
 };
 
 const themedInputBoxStyles = {
 	...unthemedInboxStyles,
-	inputBackground: 'var(--vscode-input-background)',
-	inputForeground: 'var(--vscode-input-foreground)',
-	inputBorder: 'var(--vscode-input-border)',
-	inputValidationInfoBackground: 'var(--vscode-inputValidation-infoBackground)',
-	inputValidationInfoBorder: 'var(--vscode-inputValidation-infoBorder)',
-	inputValidationWarningBackground: 'var(--vscode-inputValidation-warningBackground)',
-	inputValidationWarningBorder: 'var(--vscode-inputValidation-warningBorder)',
-	inputValidationErrorBackground: 'var(--vscode-inputValidation-errorBackground)',
-	inputValidationErrorBorder: 'var(--vscode-inputValidation-errorBorder)',
+	inputBackground: 'var(--zyraxoncode-input-background)',
+	inputForeground: 'var(--zyraxoncode-input-foreground)',
+	inputBorder: 'var(--zyraxoncode-input-border)',
+	inputValidationInfoBackground: 'var(--zyraxoncode-inputValidation-infoBackground)',
+	inputValidationInfoBorder: 'var(--zyraxoncode-inputValidation-infoBorder)',
+	inputValidationWarningBackground: 'var(--zyraxoncode-inputValidation-warningBackground)',
+	inputValidationWarningBorder: 'var(--zyraxoncode-inputValidation-warningBorder)',
+	inputValidationErrorBackground: 'var(--zyraxoncode-inputValidation-errorBackground)',
+	inputValidationErrorBorder: 'var(--zyraxoncode-inputValidation-errorBorder)',
 };
 
 const themedBadgeStyles = {
-	badgeBackground: 'var(--vscode-badge-background)',
-	badgeForeground: 'var(--vscode-badge-foreground)',
+	badgeBackground: 'var(--zyraxoncode-badge-background)',
+	badgeForeground: 'var(--zyraxoncode-badge-foreground)',
 	badgeBorder: undefined,
 };
 
 const themedProgressBarOptions = {
-	progressBarBackground: 'var(--vscode-progressBar-background)',
+	progressBarBackground: 'var(--zyraxoncode-progressBar-background)',
 };
 
 
@@ -261,7 +261,7 @@ function renderToggles({ container, disposableStore }: ComponentFixtureContext):
 
 		const labelEl = $('span');
 		labelEl.textContent = label;
-		labelEl.style.color = 'var(--vscode-foreground)';
+		labelEl.style.color = 'var(--zyraxoncode-foreground)';
 		row.appendChild(labelEl);
 
 		return row;
@@ -347,7 +347,7 @@ function renderCountBadges({ container, disposableStore }: ComponentFixtureConte
 
 		const label = $('span');
 		label.textContent = 'Issues';
-		label.style.color = 'var(--vscode-foreground)';
+		label.style.color = 'var(--zyraxoncode-foreground)';
 		badgeContainer.appendChild(label);
 
 		disposableStore.add(new CountBadge(badgeContainer, { count }, themedBadgeStyles));
@@ -369,7 +369,7 @@ function renderActionBar({ container, disposableStore }: ComponentFixtureContext
 	// Horizontal action bar
 	const horizontalLabel = $('div');
 	horizontalLabel.textContent = 'Horizontal Actions:';
-	horizontalLabel.style.color = 'var(--vscode-foreground)';
+	horizontalLabel.style.color = 'var(--zyraxoncode-foreground)';
 	horizontalLabel.style.marginBottom = '4px';
 	container.appendChild(horizontalLabel);
 
@@ -392,7 +392,7 @@ function renderActionBar({ container, disposableStore }: ComponentFixtureContext
 	// Action bar with disabled items
 	const mixedLabel = $('div');
 	mixedLabel.textContent = 'Mixed States:';
-	mixedLabel.style.color = 'var(--vscode-foreground)';
+	mixedLabel.style.color = 'var(--zyraxoncode-foreground)';
 	mixedLabel.style.marginBottom = '4px';
 	container.appendChild(mixedLabel);
 
@@ -426,7 +426,7 @@ function renderProgressBars({ container, disposableStore }: ComponentFixtureCont
 		const section = $('div');
 		const labelEl = $('div');
 		labelEl.textContent = label;
-		labelEl.style.color = 'var(--vscode-foreground)';
+		labelEl.style.color = 'var(--zyraxoncode-foreground)';
 		labelEl.style.marginBottom = '8px';
 		labelEl.style.fontSize = '12px';
 		section.appendChild(labelEl);
@@ -478,7 +478,7 @@ function renderHighlightedLabels({ container, disposableStore }: ComponentFixtur
 	container.style.display = 'flex';
 	container.style.flexDirection = 'column';
 	container.style.gap = '8px';
-	container.style.color = 'var(--vscode-foreground)';
+	container.style.color = 'var(--zyraxoncode-foreground)';
 
 	const createHighlightedLabel = (text: string, highlights: { start: number; end: number }[]) => {
 		const row = $('div');
@@ -492,7 +492,7 @@ function renderHighlightedLabels({ container, disposableStore }: ComponentFixtur
 		row.appendChild(labelContainer);
 
 		const queryLabel = $('span');
-		queryLabel.style.color = 'var(--vscode-descriptionForeground)';
+		queryLabel.style.color = 'var(--zyraxoncode-descriptionForeground)';
 		queryLabel.style.fontSize = '12px';
 		queryLabel.textContent = `(matches highlighted)`;
 		row.appendChild(queryLabel);

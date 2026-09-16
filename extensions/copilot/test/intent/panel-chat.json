@@ -42,7 +42,7 @@
 	{
 		"Location": "panel",
 		"Request": "What is the command to open the integrated terminal?",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -111,7 +111,7 @@
 	},
 	{
 		"Location": "panel",
-		"Request": "vscode extension for chat participants, the extension will be for accessing internal schibsted developer apis and using that information in the chat context",
+		"Request": "zyraxoncode extension for chat participants, the extension will be for accessing internal schibsted developer apis and using that information in the chat context",
 		"Intent": "new"
 	},
 	{
@@ -152,7 +152,7 @@
 	{
 		"Location": "panel",
 		"Request": "favor ajudar com a troca da tela de fundo do ZYRAXON Code.",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -167,7 +167,7 @@
 	{
 		"Location": "panel",
 		"Request": "what do you call that debug panel that has the continue, step in, step out buttons",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -182,16 +182,16 @@
 	{
 		"Location": "panel",
 		"Request": "go to next change using keyboard shortcut",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
-		"Request": "how do i add env var to a test execution of jest in vscode?",
-		"Intent": "vscode"
+		"Request": "how do i add env var to a test execution of jest in zyraxoncode?",
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
-		"Request": "fix this error: \n\n\n  \u00d7 you're importing a component that needs usestate. it only works in a client component but none of its parents are marked with \"use client\", so they're server components by default.\n  \u2502 learn more: https://nextjs.org/docs/getting-started/react-essentials\n  \u2502 \n  \u2502 \n    \u256d\u2500[<REDACTED FILEPATH>\n 48 \u2502 // }\n 49 \u2502 \n 50 \u2502 import link from \"next/link\";\n 51 \u2502 import { useeffect, usestate } from \"react\";\n    \u00b7                     \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n 52 \u2502 \n 53 \u2502 export default function index({ initialdata }) {\n 54 \u2502   const [data, setdata] = usestate(initialdata);\n    \u2570\u2500\u2500\u2500\u2500\n\n  \u00d7 \"getserversideprops\" is not supported in app/. read more: https://nextjs.org/docs/app/building-your-application/data-fetching\n  \u2502 \n  \u2502 \n    \u256d\u2500[<REDACTED FILEPATH>\n 83 \u2502   );\n 84 \u2502 }\n 85 \u2502 \n 86 \u2502 export async function getserversideprops() {\n    \u00b7                       \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n 87 \u2502   let initialdata = null;\n 88 \u2502   try {\n 89 \u2502     const response = await fetch(\"http://localhost:3000/videos\");\n    \u2570\u2500\u2500\u2500\u2500\n\nimport trace for requested module:\n./src/app/page.js\n get /_next/static/webpack/6e6cf486d002fe77.webpack.hot-update.json 500 in 441ms\n \u26a0 fast refresh had to perform a full reload due to a runtime error.\n get / 500 in 26ms",
+		"Request": "fix this error: \n\n\n  \u00d7 you're importing a component that needs usestate. it only works in a client component but none of its parents are marked with \"use client\", so they're server components by default.\n  \u2502 learn more: __ZYRAXKEEP__0_\n  \u2502 \n  \u2502 \n    \u256d\u2500[<REDACTED FILEPATH>\n 48 \u2502 // }\n 49 \u2502 \n 50 \u2502 import link from \"next/link\";\n 51 \u2502 import { useeffect, usestate } from \"react\";\n    \u00b7                     \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n 52 \u2502 \n 53 \u2502 export default function index({ initialdata }) {\n 54 \u2502   const [data, setdata] = usestate(initialdata);\n    \u2570\u2500\u2500\u2500\u2500\n\n  \u00d7 \"getserversideprops\" is not supported in app/. read more: __ZYRAXKEEP__1_\n  \u2502 \n  \u2502 \n    \u256d\u2500[<REDACTED FILEPATH>\n 83 \u2502   );\n 84 \u2502 }\n 85 \u2502 \n 86 \u2502 export async function getserversideprops() {\n    \u00b7                       \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n 87 \u2502   let initialdata = null;\n 88 \u2502   try {\n 89 \u2502     const response = await fetch(\"__ZYRAXKEEP__2_\");\n    \u2570\u2500\u2500\u2500\u2500\n\nimport trace for requested module:\n./src/app/page.js\n get /_next/static/webpack/6e6cf486d002fe77.webpack.hot-update.json 500 in 441ms\n \u26a0 fast refresh had to perform a full reload due to a runtime error.\n get / 500 in 26ms",
 		"Intent": "fix"
 	},
 	{
@@ -212,7 +212,7 @@
 	{
 		"Location": "panel",
 		"Request": "how to add debug configuration for a node js app",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -227,7 +227,7 @@
 	{
 		"Location": "panel",
 		"Request": "remove current changes in branch with git?",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -262,7 +262,7 @@
 	{
 		"Location": "panel",
 		"Request": "how to install extension",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -317,11 +317,11 @@
 	{
 		"Location": "panel",
 		"Request": "how to change the workspace in debug view",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
-		"Request": "vscode extension for chat participants, the extension should be updated to use cats instead of dogs",
+		"Request": "zyraxoncode extension for chat participants, the extension should be updated to use cats instead of dogs",
 		"Intent": "new"
 	},
 	{
@@ -352,7 +352,7 @@
 	{
 		"Location": "panel",
 		"Request": "open command palette",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -362,7 +362,7 @@
 	{
 		"Location": "panel",
 		"Request": "set typescript spaces to 2",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -392,12 +392,12 @@
 	{
 		"Location": "panel",
 		"Request": "how to change position of explorer in ZYRAXON Code",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
 		"Request": "can i turn off the warning about committing to a protected branch",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -422,7 +422,7 @@
 	{
 		"Location": "panel",
 		"Request": "how can i change the code colours in the screen?",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -437,7 +437,7 @@
 	{
 		"Location": "panel",
 		"Request": "how can i collapse all code sections of a file",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -487,7 +487,7 @@
 	{
 		"Location": "panel",
 		"Request": "run command azure app service: deploy to web app",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -497,7 +497,7 @@
 	{
 		"Location": "panel",
 		"Request": "multiple cursors by holding ctrl alt and the arrow keys",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -517,7 +517,7 @@
 	{
 		"Location": "panel",
 		"Request": "shortcut to delete a line",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -557,12 +557,12 @@
 	{
 		"Location": "panel",
 		"Request": "how can i configure ZYRAXON Code to automatically trim trailing whitespace when saving a file?",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
 		"Request": "How to change colour theme in ZYRAXON Code?",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -596,7 +596,7 @@
 	},
 	{
 		"Location": "panel",
-		"Request": "What is a good vscode extensions starting point if I want to contribute to the chat view",
+		"Request": "What is a good zyraxoncode extensions starting point if I want to contribute to the chat view",
 		"Intent": "new"
 	},
 	{
@@ -612,7 +612,7 @@
 	{
 		"Location": "panel",
 		"Request": "How can I center my layout in the workbench?",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -647,12 +647,12 @@
 	{
 		"Location": "panel",
 		"Request": "create a venv",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
-		"Request": "What is the name of that setting when vscode fake opens a file and how to disable it?",
-		"Intent": "vscode"
+		"Request": "What is the name of that setting when zyraxoncode fake opens a file and how to disable it?",
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -691,18 +691,18 @@
 	},
 	{
 		"Location": "panel",
-		"Request": "Latest updated features in vscode",
-		"Intent": "vscode"
+		"Request": "Latest updated features in zyraxoncode",
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
 		"Request": "Keyboard shortcut to toggle chat panel",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
 		"Request": "delete git branch from cmd palette",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"Location": "panel",
@@ -712,11 +712,11 @@
 	{
 		"location": "panel",
 		"Request": "inspect keybindings",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	},
 	{
 		"location": "panel",
 		"Request": "how do I display git changes in a tree rather than a list?",
-		"Intent": "vscode"
+		"Intent": "zyraxoncode"
 	}
 ]

@@ -50,16 +50,16 @@ export class LabelContribution implements IWorkbenchContribution {
 				separator: os === OperatingSystem.Windows ? '\\' : '/',
 				tildify: os !== OperatingSystem.Windows,
 				normalizeDriveLetter: os === OperatingSystem.Windows,
-				workspaceSuffix: isWeb ? undefined : Schemas.vscodeRemote
+				workspaceSuffix: isWeb ? undefined : Schemas.zyraxoncodeRemote
 			};
 			this.labelService.registerFormatter({
-				scheme: Schemas.vscodeRemote,
+				scheme: Schemas.zyraxoncodeRemote,
 				formatting
 			});
 
 			if (remoteEnvironment) {
 				this.labelService.registerFormatter({
-					scheme: Schemas.vscodeUserData,
+					scheme: Schemas.zyraxoncodeUserData,
 					formatting
 				});
 			}
@@ -101,13 +101,13 @@ class RemoteInvalidWorkspaceDetector extends Disposable implements IWorkbenchCon
 		// validate that the workspace exists before actually opening
 		// it. As such, we need to check on that after startup and guide
 		// the user to a valid workspace.
-		// (see https://github.com/microsoft/vscode/issues/133872)
+		// (see __ZYRAXKEEP__0_)
 		if (this.environmentService.remoteAuthority) {
 			remoteAgentService.getEnvironment().then(remoteEnv => {
 				if (remoteEnv) {
 					// we use the presence of `remoteEnv` to figure out
 					// if we got a healthy remote connection
-					// (see https://github.com/microsoft/vscode/issues/135331)
+					// (see __ZYRAXKEEP__1_)
 					this.validateRemoteWorkspace();
 				}
 			});

@@ -1,5 +1,5 @@
 {
-  "name": "vscode-html-languageserver",
+  "name": "zyraxoncode-html-languageserver",
   "description": "HTML language server",
   "version": "10.0.0",
   "author": "Zyraxon Corporation",
@@ -10,12 +10,12 @@
   },
   "main": "./out/node/htmlServerMain",
   "dependencies": {
-    "@vscode/l10n": "^0.0.18",
-    "vscode-css-languageservice": "^7.0.0-next.1",
-    "vscode-html-languageservice": "^6.0.0-next.1",
-    "vscode-languageserver": "^10.0.0-next.18",
-    "vscode-languageserver-textdocument": "^1.0.12",
-    "vscode-uri": "^3.1.0"
+    "@zyraxoncode/l10n": "^0.0.18",
+    "zyraxoncode-css-languageservice": "^7.0.0-next.1",
+    "zyraxoncode-html-languageservice": "^6.0.0-next.1",
+    "zyraxoncode-languageserver": "^10.0.0-next.18",
+    "zyraxoncode-languageserver-textdocument": "^1.0.12",
+    "zyraxoncode-uri": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "24.x"
@@ -23,10 +23,10 @@
   "scripts": {
     "compile": "npx gulp compile-extension:html-language-features-server",
     "watch": "npx gulp watch-extension:html-language-features-server",
-    "install-service-next": "npm install vscode-css-languageservice@next && npm install vscode-html-languageservice@next",
-    "install-service-local": "npm install vscode-css-languageservice && npm install vscode-html-languageservice",
-    "install-server-next": "npm install vscode-languageserver@next",
-    "install-server-local": "npm install vscode-languageserver",
+    "install-service-next": "npm install zyraxoncode-css-languageservice@next && npm install zyraxoncode-html-languageservice@next",
+    "install-service-local": "npm install zyraxoncode-css-languageservice && npm install zyraxoncode-html-languageservice",
+    "install-server-next": "npm install zyraxoncode-languageserver@next",
+    "install-server-local": "npm install zyraxoncode-languageserver",
     "test": "npm run compile && node ./test/index.js"
   }
 }

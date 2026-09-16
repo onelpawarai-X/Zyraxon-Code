@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { IIgnoreService } from '../../../platform/ignore/common/ignoreService';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
@@ -16,7 +16,7 @@ import { Disposable } from '../../../util/vs/base/common/lifecycle';
 
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { isTestFile, TestFileFinder } from '../../prompt/node/testFiles';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
@@ -53,7 +53,7 @@ class FindTestFilesTool extends Disposable implements ICopilotTool<IFindTestFile
 		this._testFileFinder = this.instantiationService.createInstance(TestFileFinder);
 	}
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IFindTestFilesToolsParams>, token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IFindTestFilesToolsParams>, token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 
 		let languageId: string | undefined;
 		const inputUris: URI[] = [];
@@ -130,7 +130,7 @@ class FindTestFilesTool extends Disposable implements ICopilotTool<IFindTestFile
 		return result;
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IFindTestFilesToolsParams>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IFindTestFilesToolsParams>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		if (!options.input.filePaths?.length) {
 			throw new Error('Invalid input');
 		}
@@ -155,7 +155,7 @@ class FindTestFilesTool extends Disposable implements ICopilotTool<IFindTestFile
 		const filePaths: string[] = [];
 		const ranges: ([a: number, b: number, c: number, d: number] | undefined)[] = [];
 
-		function addPath(path: string, range: vscode.Range | undefined) {
+		function addPath(path: string, range: zyraxoncode.Range | undefined) {
 			if (!seen.has(path)) {
 				seen.add(path);
 				filePaths.push(path);

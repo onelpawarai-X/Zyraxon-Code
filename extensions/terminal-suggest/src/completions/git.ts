@@ -5,7 +5,7 @@
 
 /* eslint-disable local/code-no-unexternalized-strings */
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 function ai(...args: any[]): undefined { return undefined; }
 
@@ -46,7 +46,7 @@ const postProcessTrackedFiles: Fig.Generator["postProcess"] = (
 
 			return {
 				name: file,
-				icon: `fig://icon?type=${ext}&color=ff0000&badge=${item.working}`,
+				icon: `__ZYRAXKEEP__0_{ext}&color=ff0000&badge=${item.working}`,
 				description: "Changed tracked files",
 				// If the current file already is already added
 				// we want to lower the priority
@@ -91,7 +91,7 @@ const postProcessBranches =
 									name: branch.replaceAll("*", "").trim(),
 									description: "Current branch",
 									priority: 100,
-									icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmBranch}`
+									icon: `__ZYRAXKEEP__1_{zyraxoncode.TerminalCompletionItemKind.ScmBranch}`
 								};
 							} else if (oldParts[0] === "+") {
 								name = branch.replaceAll("+", "").trim();
@@ -113,7 +113,7 @@ const postProcessBranches =
 						return {
 							name,
 							description,
-							icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmBranch}`,
+							icon: `__ZYRAXKEEP__2_{zyraxoncode.TerminalCompletionItemKind.ScmBranch}`,
 							priority: 75,
 						};
 					}
@@ -134,7 +134,7 @@ const postProcessBranches =
 					return {
 						name,
 						description,
-						icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmBranch}`,
+						icon: `__ZYRAXKEEP__3_{zyraxoncode.TerminalCompletionItemKind.ScmBranch}`,
 						priority,
 					};
 				})
@@ -179,7 +179,7 @@ export const gitGenerators = {
 			return lines.map((line) => {
 				return {
 					name: line.substring(0, hashLength),
-					icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmCommit}`,
+					icon: `__ZYRAXKEEP__4_{zyraxoncode.TerminalCompletionItemKind.ScmCommit}`,
 					description: line.substring(descriptionStart),
 				};
 			});
@@ -199,7 +199,7 @@ export const gitGenerators = {
 				return {
 					name,
 					description: `Alias for '${value}'`,
-					icon: "fig://icon?type=commandkey",
+					icon: "__ZYRAXKEEP__5_",
 				};
 			});
 			const seen = new Set();
@@ -225,7 +225,7 @@ export const gitGenerators = {
 			return output.split("\n").map((line) => {
 				return {
 					name: line.substring(0, 7),
-					icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmCommit}`,
+					icon: `__ZYRAXKEEP__6_{zyraxoncode.TerminalCompletionItemKind.ScmCommit}`,
 					description: line.substring(7),
 				};
 			});
@@ -248,7 +248,7 @@ export const gitGenerators = {
 					// account for conventional commit messages
 					name: file.split(":").slice(2).join(":"),
 					insertValue: file.split(":")[0],
-					icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmStash}`,
+					icon: `__ZYRAXKEEP__7_{zyraxoncode.TerminalCompletionItemKind.ScmStash}`,
 				};
 			});
 		},
@@ -257,8 +257,8 @@ export const gitGenerators = {
 	// Tree-ish
 	// This needs to be fleshed out properly....
 	// e.g. what is difference to commit-ish?
-	// Refer to this:https://stackoverflow.com/questions/23303549/what-are-commit-ish-and-tree-ish-in-git/40910185
-	// https://mirrors.edge.kernel.org/pub/software/scm/git/docs/#_identifier_terminology
+	// Refer to this:__ZYRAXKEEP__8_
+	// __ZYRAXKEEP__9_
 
 	treeish: {
 		script: ["git", "--no-optional-locks", "diff", "--cached", "--name-only"],
@@ -273,7 +273,7 @@ export const gitGenerators = {
 				return {
 					name: file,
 					insertValue: (!tokens.includes("--") ? "-- " : "") + file,
-					icon: `fig://icon?type=file`,
+					icon: `__ZYRAXKEEP__10_`,
 					description: "Staged file",
 				};
 			});
@@ -354,7 +354,7 @@ export const gitGenerators = {
 			return Object.keys(remoteURLs).map((remote) => {
 				return {
 					name: remote,
-					icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmRemote}`,
+					icon: `__ZYRAXKEEP__11_{zyraxoncode.TerminalCompletionItemKind.ScmRemote}`,
 					description: "Remote",
 				};
 			});
@@ -372,7 +372,7 @@ export const gitGenerators = {
 		postProcess: function (output) {
 			return output.split("\n").map((tag) => ({
 				name: tag,
-				icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmTag}`
+				icon: `__ZYRAXKEEP__12_{zyraxoncode.TerminalCompletionItemKind.ScmTag}`
 			}));
 		},
 	} satisfies Fig.Generator,
@@ -449,7 +449,7 @@ export const gitGenerators = {
 					return {
 						name: name + "*",
 						description: "Wildcard",
-						icon: "fig://icon?type=asterisk",
+						icon: "__ZYRAXKEEP__13_",
 					};
 				}),
 				...files.map((item) => {
@@ -468,7 +468,7 @@ export const gitGenerators = {
 					const priority = item.alreadyAdded ? 50 : 100;
 					return {
 						name: file,
-						icon: `fig://icon?type=${ext}&color=ff0000&badge=${item.working}`,
+						icon: `__ZYRAXKEEP__14_{ext}&color=ff0000&badge=${item.working}`,
 						description: "Changed file",
 						priority,
 					};
@@ -5317,7 +5317,7 @@ const completionSpec: Fig.Spec = {
 				//         name: ".",
 				//         description: "current directory",
 				//         insertValue: ".",
-				//         icon: "fig://icon?type=folder"
+				//         icon: "__ZYRAXKEEP__15_"
 				//     }
 				// ],
 				generators: [gitGenerators.files_for_staging, { template: "folders" }],
@@ -5339,7 +5339,7 @@ const completionSpec: Fig.Spec = {
 				//         name: ".",
 				//         description: "current directory",
 				//         insertValue: ".",
-				//         icon: "fig://icon?type=folder"
+				//         icon: "__ZYRAXKEEP__16_"
 				//     }
 				// ],
 				generators: gitGenerators.files_for_staging,
@@ -5499,7 +5499,7 @@ const completionSpec: Fig.Spec = {
 				//         name: ".",
 				//         description: "current directory",
 				//         insertValue: ".",
-				//         icon: "fig://icon?type=folder"
+				//         icon: "__ZYRAXKEEP__17_"
 				//     }
 				// ],
 				generators: gitGenerators.files_for_staging,
@@ -5857,7 +5857,7 @@ const completionSpec: Fig.Spec = {
 				{
 					name: "--signoff",
 					description:
-						"Add a Signed-off-by trailer by the committer at the end of the commit log message. The meaning of a signoff depends on the project to which you're committing. For example, it may certify that the committer has the rights to submit the work under the project's license or agrees to some contributor representation, such as a Developer Certificate of Origin. (See http://developercertificate.org for the one used by the Linux kernel and Git projects.) Consult the documentation or leadership of the project to which you're contributing to understand how the signoffs are used in that project",
+						"Add a Signed-off-by trailer by the committer at the end of the commit log message. The meaning of a signoff depends on the project to which you're committing. For example, it may certify that the committer has the rights to submit the work under the project's license or agrees to some contributor representation, such as a Developer Certificate of Origin. (See __ZYRAXKEEP__18_ for the one used by the Linux kernel and Git projects.) Consult the documentation or leadership of the project to which you're contributing to understand how the signoffs are used in that project",
 				},
 				{
 					name: "--no-signoff",
@@ -7996,7 +7996,7 @@ const completionSpec: Fig.Spec = {
 					{
 						name: ".",
 						description: "Current directory",
-						icon: "fig://icon?type=folder",
+						icon: "__ZYRAXKEEP__19_",
 					},
 				],
 				generators: gitGenerators.files_for_staging,
@@ -8640,7 +8640,7 @@ const completionSpec: Fig.Spec = {
 						{
 							name: "-",
 							description: "Switch to the last used branch",
-							icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmBranch}`
+							icon: `__ZYRAXKEEP__20_{zyraxoncode.TerminalCompletionItemKind.ScmBranch}`
 						},
 						{
 							name: "--",
@@ -9219,7 +9219,7 @@ const completionSpec: Fig.Spec = {
 				isVariadic: true,
 				isOptional: true,
 				// A single dash can be used as arg to merge as short hand for the previous branch
-				// https://github.com/git/git/blob/master/Documentation/RelNotes/1.7.6.txt#L84
+				// __ZYRAXKEEP__21_
 				suggestions: [
 					{ name: "-", description: "Shorthand for the previous branch" },
 				],
@@ -9307,7 +9307,7 @@ const completionSpec: Fig.Spec = {
 				{
 					name: "--signoff",
 					description:
-						"Add a Signed-off-by trailer by the committer at the end of the commit log message. The meaning of a signoff depends on the project to which you're committing. For example, it may certify that the committer has the rights to submit the work under the project's license or agrees to some contributor representation, such as a Developer Certificate of Origin. (See http://developercertificate.org for the one used by the Linux kernel and Git projects.) Consult the documentation or leadership of the project to which you're contributing to understand how the signoffs are used in that project",
+						"Add a Signed-off-by trailer by the committer at the end of the commit log message. The meaning of a signoff depends on the project to which you're committing. For example, it may certify that the committer has the rights to submit the work under the project's license or agrees to some contributor representation, such as a Developer Certificate of Origin. (See __ZYRAXKEEP__22_ for the one used by the Linux kernel and Git projects.) Consult the documentation or leadership of the project to which you're contributing to understand how the signoffs are used in that project",
 				},
 				{
 					name: "--no-signoff",
@@ -9806,7 +9806,7 @@ const completionSpec: Fig.Spec = {
 						{
 							name: "-",
 							description: "Switch to the last used branch",
-							icon: `vscode://icon?type=${vscode.TerminalCompletionItemKind.ScmBranch}`
+							icon: `__ZYRAXKEEP__23_{zyraxoncode.TerminalCompletionItemKind.ScmBranch}`
 						},
 					],
 				},
@@ -10254,7 +10254,7 @@ const completionSpec: Fig.Spec = {
 				{
 					name: "--user-path",
 					description:
-						"Allow ~user notation to be used in requests. When specified with no parameter, requests to git://host/~alice/foo is taken as a request to access foo repository in the home directory of user alice. If --user-path=some-path is specified, the same request is taken as a request to access the some-path/foo repository in the home directory of user alice",
+						"Allow ~user notation to be used in requests. When specified with no parameter, requests to __ZYRAXKEEP__24_ is taken as a request to access foo repository in the home directory of user alice. If --user-path=some-path is specified, the same request is taken as a request to access the some-path/foo repository in the home directory of user alice",
 					requiresSeparator: true,
 					args: {
 						name: "path",
@@ -10345,7 +10345,7 @@ const completionSpec: Fig.Spec = {
 			name: "commit -m 'msg'",
 			description: "Git commit shortcut",
 			insertValue: "commit -m '{cursor}'",
-			icon: "fig://template?color=2ecc71&badge=🔥", // allow-any-unicode-next-line
+			icon: "__ZYRAXKEEP__25_", // allow-any-unicode-next-line
 			// type: "shortcut",
 		},
 	],

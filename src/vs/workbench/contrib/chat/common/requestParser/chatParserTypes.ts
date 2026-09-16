@@ -219,7 +219,7 @@ export class ChatRequestDynamicVariablePart implements IParsedChatRequestPart {
 	}
 
 	toVariableEntry(): IChatRequestVariableEntry {
-		if (this.id === 'vscode.problems') {
+		if (this.id === 'zyraxoncode.problems') {
 			return IDiagnosticVariableEntryFilterData.toEntry((this.data as IChatRequestProblemsVariable).filter);
 		}
 

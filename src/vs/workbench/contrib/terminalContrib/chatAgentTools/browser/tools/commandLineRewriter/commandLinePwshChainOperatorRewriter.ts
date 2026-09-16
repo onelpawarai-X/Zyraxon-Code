@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { QueryCapture } from '@vscode/tree-sitter-wasm';
+import type { QueryCapture } from '@zyraxoncode/tree-sitter-wasm';
 import { Disposable } from '../../../../../../../base/common/lifecycle.js';
 import { isPowerShell } from '../../runInTerminalHelpers.js';
 import type { TreeSitterCommandParser } from '../../treeSitterCommandParser.js';
@@ -18,7 +18,7 @@ export class CommandLinePwshChainOperatorRewriter extends Disposable implements 
 
 	async rewrite(options: ICommandLineRewriterOptions): Promise<ICommandLineRewriterResult | undefined> {
 		// TODO: This should just be Windows PowerShell in the future when the powershell grammar
-		// supports chain operators https://github.com/airbus-cert/tree-sitter-powershell/issues/27
+		// supports chain operators __ZYRAXKEEP__0_
 		if (isPowerShell(options.shell, options.os)) {
 			let doubleAmpersandCaptures: QueryCapture[] | undefined;
 			try {

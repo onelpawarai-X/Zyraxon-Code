@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type * as AgentSdk from '@anthropic-ai/claude-agent-sdk';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../../util/common/services';
 
-export const CLAUDE_SDK_EXTENSION_ID = 'ms-vscode.vscode-claude-sdk';
+export const CLAUDE_SDK_EXTENSION_ID = 'ms-zyraxoncode.zyraxoncode-claude-sdk';
 
 export interface IClaudeAgentSdkLoaderService {
 	readonly _serviceBrand: undefined;
@@ -19,7 +19,7 @@ export interface IClaudeAgentSdkLoaderService {
 	 * Ensures the SDK is available, installing it if necessary.
 	 * Returns true if the SDK is available after the call.
 	 */
-	install(token: vscode.CancellationToken): Promise<boolean>;
+	install(token: zyraxoncode.CancellationToken): Promise<boolean>;
 
 	/** Loads and returns the SDK module. Throws if the SDK cannot be loaded. */
 	load(): Promise<typeof AgentSdk>;

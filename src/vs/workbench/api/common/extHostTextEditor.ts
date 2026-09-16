@@ -12,7 +12,7 @@ import { ISingleEditOperation } from '../../../editor/common/core/editOperation.
 import { IResolvedTextEditorConfiguration, ITextEditorConfigurationUpdate, MainThreadTextEditorsShape } from './extHost.protocol.js';
 import * as TypeConverters from './extHostTypeConverters.js';
 import { EndOfLine, Position, Range, Selection, SnippetString, TextEditorLineNumbersStyle, TextEditorRevealType } from './extHostTypes.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILogService } from '../../../platform/log/common/log.js';
 import { Lazy } from '../../../base/common/lazy.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
@@ -21,9 +21,9 @@ export class TextEditorDecorationType {
 
 	private static readonly _Keys = new IdGenerator('TextEditorDecorationType');
 
-	readonly value: vscode.TextEditorDecorationType;
+	readonly value: zyraxoncode.TextEditorDecorationType;
 
-	constructor(proxy: MainThreadTextEditorsShape, extension: IExtensionDescription, options: vscode.DecorationRenderOptions) {
+	constructor(proxy: MainThreadTextEditorsShape, extension: IExtensionDescription, options: zyraxoncode.DecorationRenderOptions) {
 		const key = TextEditorDecorationType._Keys.nextId();
 		proxy.$registerTextEditorDecorationType(extension.identifier, key, TypeConverters.DecorationRenderOptions.from(options));
 		this.value = Object.freeze({
@@ -37,7 +37,7 @@ export class TextEditorDecorationType {
 }
 
 export interface ITextEditOperation {
-	range: vscode.Range;
+	range: zyraxoncode.Range;
 	text: string | null;
 	forceMoveMarkers: boolean;
 }
@@ -52,7 +52,7 @@ export interface IEditData {
 
 class TextEditorEdit {
 
-	private readonly _document: vscode.TextDocument;
+	private readonly _document: zyraxoncode.TextDocument;
 	private readonly _documentVersionId: number;
 	private readonly _undoStopBefore: boolean;
 	private readonly _undoStopAfter: boolean;
@@ -60,7 +60,7 @@ class TextEditorEdit {
 	private _setEndOfLine: EndOfLine | undefined = undefined;
 	private _finalized: boolean = false;
 
-	constructor(document: vscode.TextDocument, options: { undoStopBefore: boolean; undoStopAfter: boolean }) {
+	constructor(document: zyraxoncode.TextDocument, options: { undoStopBefore: boolean; undoStopAfter: boolean }) {
 		this._document = document;
 		this._documentVersionId = document.version;
 		this._undoStopBefore = options.undoStopBefore;
@@ -149,7 +149,7 @@ export class ExtHostTextEditorOptions {
 	private _cursorStyle!: TextEditorCursorStyle;
 	private _lineNumbers!: TextEditorLineNumbersStyle;
 
-	readonly value: vscode.TextEditorOptions;
+	readonly value: zyraxoncode.TextEditorOptions;
 
 	constructor(proxy: MainThreadTextEditorsShape, id: string, source: IResolvedTextEditorConfiguration, logService: ILogService) {
 		this._proxy = proxy;
@@ -331,7 +331,7 @@ export class ExtHostTextEditorOptions {
 		}));
 	}
 
-	public assign(newOptions: vscode.TextEditorOptions) {
+	public assign(newOptions: zyraxoncode.TextEditorOptions) {
 		const bulkConfigurationUpdate: ITextEditorConfigurationUpdate = {};
 		let hasUpdate = false;
 
@@ -409,20 +409,20 @@ export class ExtHostTextEditor {
 	private _selections: Selection[];
 	private _options: ExtHostTextEditorOptions;
 	private _visibleRanges: Range[];
-	private _viewColumn: vscode.ViewColumn | undefined;
+	private _viewColumn: zyraxoncode.ViewColumn | undefined;
 	private _disposed: boolean = false;
 	private _hasDecorationsForKey = new Set<string>();
-	private _diffInformation: vscode.TextEditorDiffInformation[] | undefined;
+	private _diffInformation: zyraxoncode.TextEditorDiffInformation[] | undefined;
 
-	readonly value: vscode.TextEditor;
+	readonly value: zyraxoncode.TextEditor;
 
 	constructor(
 		readonly id: string,
 		private readonly _proxy: MainThreadTextEditorsShape,
 		private readonly _logService: ILogService,
-		document: Lazy<vscode.TextDocument>,
+		document: Lazy<zyraxoncode.TextDocument>,
 		selections: Selection[], options: IResolvedTextEditorConfiguration,
-		visibleRanges: Range[], viewColumn: vscode.ViewColumn | undefined
+		visibleRanges: Range[], viewColumn: zyraxoncode.ViewColumn | undefined
 	) {
 		this._selections = selections;
 		this._options = new ExtHostTextEditorOptions(this._proxy, this.id, options, _logService);
@@ -432,7 +432,7 @@ export class ExtHostTextEditor {
 		const that = this;
 
 		this.value = Object.freeze({
-			get document(): vscode.TextDocument {
+			get document(): zyraxoncode.TextDocument {
 				return document.value;
 			},
 			set document(_value) {
@@ -473,16 +473,16 @@ export class ExtHostTextEditor {
 				return that._diffInformation;
 			},
 			// --- options
-			get options(): vscode.TextEditorOptions {
+			get options(): zyraxoncode.TextEditorOptions {
 				return that._options.value;
 			},
-			set options(value: vscode.TextEditorOptions) {
+			set options(value: zyraxoncode.TextEditorOptions) {
 				if (!that._disposed) {
 					that._options.assign(value);
 				}
 			},
 			// --- view column
-			get viewColumn(): vscode.ViewColumn | undefined {
+			get viewColumn(): zyraxoncode.ViewColumn | undefined {
 				return that._viewColumn;
 			},
 			set viewColumn(_value) {
@@ -529,7 +529,7 @@ export class ExtHostTextEditor {
 				}
 				return _proxy.$tryInsertSnippet(id, document.value.version, snippet.value, ranges, options);
 			},
-			setDecorations(decorationType: vscode.TextEditorDecorationType, ranges: Range[] | vscode.DecorationOptions[]): void {
+			setDecorations(decorationType: zyraxoncode.TextEditorDecorationType, ranges: Range[] | zyraxoncode.DecorationOptions[]): void {
 				const willBeEmpty = (ranges.length === 0);
 				if (willBeEmpty && !that._hasDecorationsForKey.has(decorationType.key)) {
 					// avoid no-op call to the renderer
@@ -564,14 +564,14 @@ export class ExtHostTextEditor {
 					}
 				});
 			},
-			revealRange(range: Range, revealType: vscode.TextEditorRevealType): void {
+			revealRange(range: Range, revealType: zyraxoncode.TextEditorRevealType): void {
 				that._runOnProxy(() => _proxy.$tryRevealRange(
 					id,
 					TypeConverters.Range.from(range),
 					(revealType || TextEditorRevealType.Default)
 				));
 			},
-			show(column: vscode.ViewColumn) {
+			show(column: zyraxoncode.ViewColumn) {
 				_proxy.$tryShowEditor(id, TypeConverters.ViewColumn.from(column));
 			},
 			hide() {
@@ -600,7 +600,7 @@ export class ExtHostTextEditor {
 		this._visibleRanges = value;
 	}
 
-	_acceptViewColumn(value: vscode.ViewColumn) {
+	_acceptViewColumn(value: zyraxoncode.ViewColumn) {
 		ok(!this._disposed);
 		this._viewColumn = value;
 	}
@@ -610,12 +610,12 @@ export class ExtHostTextEditor {
 		this._selections = selections;
 	}
 
-	_acceptDiffInformation(diffInformation: vscode.TextEditorDiffInformation[] | undefined): void {
+	_acceptDiffInformation(diffInformation: zyraxoncode.TextEditorDiffInformation[] | undefined): void {
 		ok(!this._disposed);
 		this._diffInformation = diffInformation;
 	}
 
-	private async _trySetSelection(): Promise<vscode.TextEditor | null | undefined> {
+	private async _trySetSelection(): Promise<zyraxoncode.TextEditor | null | undefined> {
 		const selection = this._selections.map(TypeConverters.Selection.from);
 		await this._runOnProxy(() => this._proxy.$trySetSelections(this.id, selection));
 		return this.value;

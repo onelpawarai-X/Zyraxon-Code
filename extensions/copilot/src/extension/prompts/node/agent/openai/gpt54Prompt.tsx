@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { isGpt54 } from '../../../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../../../platform/networking/common/networking';
 import { ToolName } from '../../../../tools/common/toolNames';
@@ -138,7 +138,7 @@ export class Gpt54Prompt extends PromptElement<DefaultAgentPromptProps> {
 				* Each reference should have a stand alone path. Even if it's the same file.<br />
 				* For clickable/openable file references, the path target must be an absolute filesystem path. Labels may be short (for example, `[app.ts](/abs/path/app.ts)`).<br />
 				* Optionally include line/column (1‑based): :line[:column] or #Lline[Ccolumn] (column defaults to 1).<br />
-				* Do not use URIs like file://, vscode://, or https://.<br />
+				* Do not use URIs like __ZYRAXKEEP__0_ __ZYRAXKEEP__1_ or __ZYRAXKEEP__2_<br />
 				* Do not provide range of lines<br />
 				- Don’t use emojis or em dash unless explicitly instructed.<br />
 			</Tag>

@@ -49,7 +49,7 @@ export class PlaywrightDriver {
 	private static traceCounter = 1;
 	private static screenShotCounter = 1;
 
-	private static readonly vscodeToPlaywrightKey: { [key: string]: string } = {
+	private static readonly zyraxoncodeToPlaywrightKey: { [key: string]: string } = {
 		cmd: 'Meta',
 		ctrl: 'Control',
 		shift: 'Shift',
@@ -587,8 +587,8 @@ export class PlaywrightDriver {
 			const keys = chord.split('+');
 			const keysDown: string[] = [];
 			for (let i = 0; i < keys.length; i++) {
-				if (keys[i] in PlaywrightDriver.vscodeToPlaywrightKey) {
-					keys[i] = PlaywrightDriver.vscodeToPlaywrightKey[keys[i]];
+				if (keys[i] in PlaywrightDriver.zyraxoncodeToPlaywrightKey) {
+					keys[i] = PlaywrightDriver.zyraxoncodeToPlaywrightKey[keys[i]];
 				}
 				await this.page.keyboard.down(keys[i]);
 				keysDown.push(keys[i]);

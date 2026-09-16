@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 .chat-used-context.chat-hook-outcome-blocked .chat-used-context-label .codicon {
-	color: var(--vscode-notificationsWarningIcon-foreground) !important;
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground) !important;
 }
 
 .chat-thinking-box .chat-used-context.chat-hook-outcome-blocked > .chat-used-context-label .codicon,
@@ -20,21 +20,21 @@
 }
 
 .chat-hook-reason {
-	font-size: var(--vscode-chat-font-size-body-s);
+	font-size: var(--zyraxoncode-chat-font-size-body-s);
 	padding: 4px 10px;
 	white-space: pre-wrap;
 }
 
 .chat-hook-message {
-	font-size: var(--vscode-chat-font-size-body-s);
+	font-size: var(--zyraxoncode-chat-font-size-body-s);
 	padding: 4px 10px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: pre-wrap;
 }
 
 /* When both reason and message are shown, add a subtle separator */
 .chat-hook-reason + .chat-hook-message {
-	border-top: 1px solid var(--vscode-chat-requestBorder, var(--vscode-editorWidget-border));
+	border-top: 1px solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-editorWidget-border));
 	margin-top: 2px;
 	padding-top: 6px;
 }

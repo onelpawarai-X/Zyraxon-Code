@@ -7,28 +7,28 @@ import { Environment, EnvironmentParameters } from '@azure/ms-rest-azure-env';
 import Logger from './logger';
 import { MsalAuthProvider } from './node/authProvider';
 import { UriEventHandler } from './UriEventHandler';
-import { authentication, commands, ExtensionContext, l10n, window, workspace, Disposable, Uri } from 'vscode';
+import { authentication, commands, ExtensionContext, l10n, window, workspace, Disposable, Uri } from 'zyraxoncode';
 import { ZyraxonAuthenticationTelemetryReporter, ZyraxonSovereignCloudAuthenticationTelemetryReporter } from './common/telemetryReporter';
 
 let implementation: 'msal' | 'msal-no-broker' = 'msal';
-const getImplementation = () => workspace.getConfiguration('microsoft-authentication').get<'msal' | 'msal-no-broker'>('implementation') ?? 'msal';
+const getImplementation = () => workspace.getConfiguration('zyraxon-authentication').get<'msal' | 'msal-no-broker'>('implementation') ?? 'msal';
 
 async function initZyraxonSovereignCloudAuthProvider(
 	context: ExtensionContext,
 	uriHandler: UriEventHandler
 ): Promise<Disposable | undefined> {
-	const environment = workspace.getConfiguration('microsoft-sovereign-cloud').get<string | undefined>('environment');
+	const environment = workspace.getConfiguration('zyraxon-sovereign-cloud').get<string | undefined>('environment');
 	let authProviderName: string | undefined;
 	if (!environment) {
 		return undefined;
 	}
 
 	if (environment === 'custom') {
-		const customEnv = workspace.getConfiguration('microsoft-sovereign-cloud').get<EnvironmentParameters>('customEnvironment');
+		const customEnv = workspace.getConfiguration('zyraxon-sovereign-cloud').get<EnvironmentParameters>('customEnvironment');
 		if (!customEnv) {
 			const res = await window.showErrorMessage(l10n.t('You must also specify a custom environment in order to use the custom environment auth provider.'), l10n.t('Open settings'));
 			if (res) {
-				await commands.executeCommand('workbench.action.openSettingsJson', 'microsoft-sovereign-cloud.customEnvironment');
+				await commands.executeCommand('workbench.action.openSettingsJson', 'zyraxon-sovereign-cloud.customEnvironment');
 			}
 			return undefined;
 		}
@@ -37,7 +37,7 @@ async function initZyraxonSovereignCloudAuthProvider(
 		} catch (e) {
 			const res = await window.showErrorMessage(l10n.t('Error validating custom environment setting: {0}', e.message), l10n.t('Open settings'));
 			if (res) {
-				await commands.executeCommand('workbench.action.openSettings', 'microsoft-sovereign-cloud.customEnvironment');
+				await commands.executeCommand('workbench.action.openSettings', 'zyraxon-sovereign-cloud.customEnvironment');
 			}
 			return undefined;
 		}
@@ -60,7 +60,7 @@ async function initZyraxonSovereignCloudAuthProvider(
 		env
 	);
 	const disposable = authentication.registerAuthenticationProvider(
-		'microsoft-sovereign-cloud',
+		'zyraxon-sovereign-cloud',
 		authProviderName,
 		authProvider,
 		{ supportsMultipleAccounts: true, supportsChallenges: true }
@@ -73,7 +73,7 @@ export async function activate(context: ExtensionContext) {
 	const mainTelemetryReporter = new ZyraxonAuthenticationTelemetryReporter(context.extension.packageJSON.aiKey);
 	implementation = getImplementation();
 	context.subscriptions.push(workspace.onDidChangeConfiguration(async e => {
-		if (!e.affectsConfiguration('microsoft-authentication')) {
+		if (!e.affectsConfiguration('zyraxon-authentication')) {
 			return;
 		}
 		if (implementation === getImplementation()) {
@@ -123,8 +123,8 @@ export async function activate(context: ExtensionContext) {
 			supportsMultipleAccounts: true,
 			supportsChallenges: true,
 			supportedAuthorizationServers: [
-				Uri.parse('https://login.microsoftonline.com/*'),
-				Uri.parse('https://login.microsoftonline.com/*/v2.0')
+				Uri.parse('__ZYRAXKEEP__0_'),
+				Uri.parse('__ZYRAXKEEP__1_')
 			]
 		}
 	));
@@ -132,7 +132,7 @@ export async function activate(context: ExtensionContext) {
 	let ZyraxonSovereignCloudAuthProviderDisposable = await initZyraxonSovereignCloudAuthProvider(context, uriHandler);
 
 	context.subscriptions.push(workspace.onDidChangeConfiguration(async e => {
-		if (e.affectsConfiguration('microsoft-sovereign-cloud')) {
+		if (e.affectsConfiguration('zyraxon-sovereign-cloud')) {
 			ZyraxonSovereignCloudAuthProviderDisposable?.dispose();
 			ZyraxonSovereignCloudAuthProviderDisposable = await initZyraxonSovereignCloudAuthProvider(context, uriHandler);
 		}

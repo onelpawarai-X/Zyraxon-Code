@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { StringSHA1 } from '../../../vs/base/common/hash';
 import { Schemas } from '../../../vs/base/common/network';
 import { URI as Uri } from '../../../vs/base/common/uri';
@@ -167,7 +167,7 @@ function splitMultilineString(source: string | string[]): string[] {
 	return [];
 }
 
-function translateCellErrorOutput(output: vscode.NotebookCellOutput) {
+function translateCellErrorOutput(output: zyraxoncode.NotebookCellOutput) {
 	// it should have at least one output item
 	const firstItem = output.items[0];
 	// Bug in ZYRAXON Code.
@@ -193,7 +193,7 @@ function translateCellErrorOutput(output: vscode.NotebookCellOutput) {
 	};
 }
 
-function convertStreamOutput(output: vscode.NotebookCellOutput) {
+function convertStreamOutput(output: zyraxoncode.NotebookCellOutput) {
 	const outputs: string[] = [];
 	output.items
 		.filter((opit) => opit.mime === CellOutputMimeTypes.stderr || opit.mime === CellOutputMimeTypes.stdout)
@@ -229,7 +229,7 @@ function convertStreamOutput(output: vscode.NotebookCellOutput) {
 	};
 }
 
-function getOutputStreamType(output: vscode.NotebookCellOutput): string | undefined {
+function getOutputStreamType(output: zyraxoncode.NotebookCellOutput): string | undefined {
 	if (output.items.length > 0) {
 		return output.items[0].mime === CellOutputMimeTypes.stderr ? 'stderr' : 'stdout';
 	}
@@ -269,7 +269,7 @@ function convertOutputMimeToJupyterOutput(mime: string, value: Uint8Array) {
 	}
 }
 
-function translateCellDisplayOutput(output: vscode.NotebookCellOutput): any {
+function translateCellDisplayOutput(output: zyraxoncode.NotebookCellOutput): any {
 	const customMetadata = output.metadata as CellOutputMetadata | undefined;
 	let result;
 	// Possible some other extension added some output (do best effort to translate & save in ipynb).
@@ -381,14 +381,14 @@ export class ExtHostCell {
 	kind: NotebookCellKind;
 	documentData: IExtHostDocumentData;
 	metadata: { readonly [key: string]: any };
-	private _outputs: vscode.NotebookCellOutput[];
+	private _outputs: zyraxoncode.NotebookCellOutput[];
 	executionSummary: NotebookCellExecutionSummary | undefined;
 
 	get document() {
 		return this.documentData.document;
 	}
 
-	private _apiCell: vscode.NotebookCell | undefined;
+	private _apiCell: zyraxoncode.NotebookCell | undefined;
 
 	constructor(
 		index: number,
@@ -396,7 +396,7 @@ export class ExtHostCell {
 		notebook: ExtHostNotebookDocumentData,
 		documentData: IExtHostDocumentData,
 		metadata: { readonly [key: string]: any },
-		outputs: vscode.NotebookCellOutput[],
+		outputs: zyraxoncode.NotebookCellOutput[],
 		executionSummary: NotebookCellExecutionSummary | undefined,
 	) {
 		this.documentData = documentData;
@@ -408,10 +408,10 @@ export class ExtHostCell {
 		this.notebook = notebook;
 	}
 
-	get apiCell(): vscode.NotebookCell {
+	get apiCell(): zyraxoncode.NotebookCell {
 		if (!this._apiCell) {
 			const that = this;
-			const apiCell: vscode.NotebookCell = {
+			const apiCell: zyraxoncode.NotebookCell = {
 				get index() { return that.notebook.getCellIndex(that); },
 				notebook: that.notebook.document,
 				kind: that.kind,
@@ -425,7 +425,7 @@ export class ExtHostCell {
 		return this._apiCell;
 	}
 
-	appendOutput(outputs: vscode.NotebookCellOutput[]) {
+	appendOutput(outputs: zyraxoncode.NotebookCellOutput[]) {
 		this._outputs.push(...outputs);
 	}
 }
@@ -448,7 +448,7 @@ export class ExtHostNotebookDocumentData {
 			const content = cell.source.join('');
 
 			if (cell.cell_type === 'code') {
-				const doc = createTextDocumentData(uri.with({ scheme: Schemas.vscodeNotebookCell, fragment: generateCellFragment(index) }), content, codeLanguageId);
+				const doc = createTextDocumentData(uri.with({ scheme: Schemas.zyraxoncodeNotebookCell, fragment: generateCellFragment(index) }), content, codeLanguageId);
 				if (simulationWorkspace) {
 					simulationWorkspace.addDocument(doc);
 				}
@@ -457,7 +457,7 @@ export class ExtHostNotebookDocumentData {
 
 				cells.push(new ExtHostCell(index, NotebookCellKind.Code, notebookDocument, doc, cell.metadata, outputs, undefined));
 			} else {
-				const doc = createTextDocumentData(uri.with({ scheme: Schemas.vscodeNotebookCell, fragment: generateCellFragment(index) }), content, 'markdown');
+				const doc = createTextDocumentData(uri.with({ scheme: Schemas.zyraxoncodeNotebookCell, fragment: generateCellFragment(index) }), content, 'markdown');
 				if (simulationWorkspace) {
 					simulationWorkspace.addDocument(doc);
 				}
@@ -479,7 +479,7 @@ export class ExtHostNotebookDocumentData {
 		const cells: ExtHostCell[] = [];
 
 		for (const [index, cell] of notebook.entries()) {
-			const doc = createTextDocumentData(uri.with({ scheme: Schemas.vscodeNotebookCell, fragment: generateCellFragment(index) }), cell.value, cell.language);
+			const doc = createTextDocumentData(uri.with({ scheme: Schemas.zyraxoncodeNotebookCell, fragment: generateCellFragment(index) }), cell.value, cell.language);
 			if (simulationWorkspace) {
 				simulationWorkspace.addDocument(doc);
 			}
@@ -498,7 +498,7 @@ export class ExtHostNotebookDocumentData {
 		const cells: ExtHostCell[] = [];
 
 		for (const [index, cell] of data.cells.entries()) {
-			const doc = createTextDocumentData(uri.with({ scheme: Schemas.vscodeNotebookCell, fragment: generateCellFragment(index) }), cell.value, cell.languageId);
+			const doc = createTextDocumentData(uri.with({ scheme: Schemas.zyraxoncodeNotebookCell, fragment: generateCellFragment(index) }), cell.value, cell.languageId);
 			if (cell.outputs?.length) {
 				throw new Error('Not implemented');
 			}
@@ -515,7 +515,7 @@ export class ExtHostNotebookDocumentData {
 		return notebookDocument;
 	}
 
-	public static applyEdits(notebookDocument: ExtHostNotebookDocumentData, edits: vscode.NotebookEdit[], simulationWorkspace?: ISimulationWorkspace) {
+	public static applyEdits(notebookDocument: ExtHostNotebookDocumentData, edits: zyraxoncode.NotebookEdit[], simulationWorkspace?: ISimulationWorkspace) {
 		for (const edit of edits) {
 			if (edit.newNotebookMetadata) {
 				throw new Error('Not Supported');
@@ -531,10 +531,10 @@ export class ExtHostNotebookDocumentData {
 		}
 	}
 
-	private static replaceCells(notebookDocument: ExtHostNotebookDocumentData, range: vscode.NotebookRange, cells: vscode.NotebookCellData[], simulationWorkspace?: ISimulationWorkspace) {
+	private static replaceCells(notebookDocument: ExtHostNotebookDocumentData, range: zyraxoncode.NotebookRange, cells: zyraxoncode.NotebookCellData[], simulationWorkspace?: ISimulationWorkspace) {
 		const uri = notebookDocument.uri;
 		const docs = cells.map((cell, index) => {
-			const doc = createTextDocumentData(uri.with({ scheme: Schemas.vscodeNotebookCell, fragment: generateCellFragment(notebookDocument.cells.length + index + 1) }), cell.value, cell.languageId);
+			const doc = createTextDocumentData(uri.with({ scheme: Schemas.zyraxoncodeNotebookCell, fragment: generateCellFragment(notebookDocument.cells.length + index + 1) }), cell.value, cell.languageId);
 			if (simulationWorkspace) {
 				simulationWorkspace.addDocument(doc);
 			}
@@ -562,7 +562,7 @@ export class ExtHostNotebookDocumentData {
 
 	private readonly _notebookType: string;
 
-	private _notebook: vscode.NotebookDocument | undefined;
+	private _notebook: zyraxoncode.NotebookDocument | undefined;
 	private _metadata: Record<string, any>;
 	private _versionId: number = 0;
 	private _isDirty: boolean = false;
@@ -580,10 +580,10 @@ export class ExtHostNotebookDocumentData {
 		this._cells = cells;
 	}
 
-	get document(): vscode.NotebookDocument {
+	get document(): zyraxoncode.NotebookDocument {
 		if (!this._notebook) {
 			const that = this;
-			const apiObject: vscode.NotebookDocument = {
+			const apiObject: zyraxoncode.NotebookDocument = {
 				get uri() { return that.uri; },
 				get version() { return that._versionId; },
 				get notebookType() { return that._notebookType; },
@@ -615,7 +615,7 @@ export class ExtHostNotebookDocumentData {
 		return this._cells[index];
 	}
 
-	private _getCells(range: vscode.NotebookRange): ExtHostCell[] {
+	private _getCells(range: zyraxoncode.NotebookRange): ExtHostCell[] {
 		const result: ExtHostCell[] = [];
 		for (let i = range.start; i < range.end; i++) {
 			result.push(this._cells[i]);
@@ -639,7 +639,7 @@ export class ExtHostNotebookDocumentData {
 		}, undefined, 4);
 	}
 
-	appendCellOutput(cellIndex: number, outputs: vscode.NotebookCellOutput[]): void {
+	appendCellOutput(cellIndex: number, outputs: zyraxoncode.NotebookCellOutput[]): void {
 		this._cells[cellIndex].appendOutput(outputs);
 	}
 }
@@ -649,6 +649,6 @@ export class ExtHostNotebookDocumentData {
 // 	_documents.set(notebook.uri, notebook);
 // }
 
-// export function getNotebookDocuments(): vscode.NotebookDocument[] {
+// export function getNotebookDocuments(): zyraxoncode.NotebookDocument[] {
 // 	return Array.from(_documents.values()).map(data => data.document);
 // }

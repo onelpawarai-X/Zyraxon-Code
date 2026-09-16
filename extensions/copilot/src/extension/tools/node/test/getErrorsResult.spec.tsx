@@ -13,7 +13,7 @@ import { getLanguage } from '../../../../util/common/languages';
 import { createTextDocumentData } from '../../../../util/common/test/shims/textDocument';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../util/vs/platform/instantiation/common/descriptors';
-import { DiagnosticSeverity, Range } from '../../../../vscodeTypes';
+import { DiagnosticSeverity, Range } from '../../../../zyraxoncodeTypes';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { DiagnosticToolOutput } from '../getErrorsTool';
 import { renderElementToString } from './toolTestUtils';

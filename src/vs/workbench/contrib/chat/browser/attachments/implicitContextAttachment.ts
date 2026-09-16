@@ -112,7 +112,7 @@ export class ImplicitContextAttachmentWidget extends Disposable {
 
 		contextNode.classList.toggle('disabled', !context.enabled);
 		const file: URI | undefined = context.uri;
-		const attachmentTypeName = file?.scheme === Schemas.vscodeNotebookCell ? localize('cell.lowercase', "cell") : localize('file.lowercase', "file");
+		const attachmentTypeName = file?.scheme === Schemas.zyraxoncodeNotebookCell ? localize('cell.lowercase', "cell") : localize('file.lowercase', "file");
 		const contextLabel = context.name ?? (file ? basename(file) : localize('implicitContextFallback', "context"));
 
 		const isSuggestedEnabled = this.configService.getValue('chat.implicitContext.suggestedContext');
@@ -234,11 +234,11 @@ export class ImplicitContextAttachmentWidget extends Disposable {
 		const file = URI.isUri(attachmentValue) ? attachmentValue : attachmentValue!.uri;
 		const range = URI.isUri(attachmentValue) || !isSelection ? undefined : attachmentValue!.range;
 
-		if (file.scheme === Schemas.vscodeBrowser) {
+		if (file.scheme === Schemas.zyraxoncodeBrowser) {
 			return this.renderBrowserResource(file, label, contextNode);
 		}
 
-		const attachmentTypeName = file.scheme === Schemas.vscodeNotebookCell ? localize('cell.lowercase', "cell") : localize('file.lowercase', "file");
+		const attachmentTypeName = file.scheme === Schemas.zyraxoncodeNotebookCell ? localize('cell.lowercase', "cell") : localize('file.lowercase', "file");
 
 		const fileBasename = basename(file);
 		const fileDirname = dirname(file);
@@ -307,7 +307,7 @@ export class ImplicitContextAttachmentWidget extends Disposable {
 			this.attachmentModel.addContext(context);
 		} else {
 			const file = URI.isUri(attachment.value) ? attachment.value : attachment.value.uri;
-			if (file.scheme === Schemas.vscodeNotebookCell && isLocation(attachment.value)) {
+			if (file.scheme === Schemas.zyraxoncodeNotebookCell && isLocation(attachment.value)) {
 				this.attachmentModel.addFile(file, attachment.value.range);
 			} else {
 				this.attachmentModel.addFile(file);

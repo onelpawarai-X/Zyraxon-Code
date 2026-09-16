@@ -139,7 +139,7 @@ let powershellProfile = {
 	icon: Codicon.terminalPowershell
 };
 let jsdebugProfile = {
-	extensionIdentifier: 'ms-vscode.js-debug-nightly',
+	extensionIdentifier: 'ms-zyraxoncode.js-debug-nightly',
 	icon: 'debug',
 	id: 'extension.js-debug.debugTerminal',
 	title: 'JavaScript Debug Terminal'
@@ -192,7 +192,7 @@ suite('TerminalProfileService', () => {
 			icon: Codicon.terminalPowershell
 		};
 		jsdebugProfile = {
-			extensionIdentifier: 'ms-vscode.js-debug-nightly',
+			extensionIdentifier: 'ms-zyraxoncode.js-debug-nightly',
 			icon: 'debug',
 			id: 'extension.js-debug.debugTerminal',
 			title: 'JavaScript Debug Terminal'

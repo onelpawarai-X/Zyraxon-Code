@@ -17,7 +17,7 @@
 	div.header {
 		display: flex;
 		align-items: center;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 		margin-bottom: 4px;
 		font-size: 12px;
 		font-weight: 600;
@@ -25,7 +25,7 @@
 
 	div.description {
 		font-size: 11px;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 	}
 
 	.monaco-button {
@@ -49,12 +49,12 @@
 
 	.chart-toggle-button:hover {
 		opacity: 1;
-		background-color: var(--vscode-toolbar-hoverBackground);
+		background-color: var(--zyraxoncode-toolbar-hoverBackground);
 	}
 
 	.chart-toggle-button.active {
 		opacity: 1;
-		background-color: var(--vscode-toolbar-activeBackground);
+		background-color: var(--zyraxoncode-toolbar-activeBackground);
 	}
 
 	/* Chart container */
@@ -99,7 +99,7 @@
 	}
 
 	.settings .setting.disabled .setting-label {
-		color: var(--vscode-disabledForeground);
+		color: var(--zyraxoncode-disabledForeground);
 	}
 
 
@@ -121,7 +121,7 @@
 		.detail-item,
 		.detail-item a {
 			margin-left: auto;
-			color: var(--vscode-descriptionForeground);
+			color: var(--zyraxoncode-descriptionForeground);
 		}
 	}
 }

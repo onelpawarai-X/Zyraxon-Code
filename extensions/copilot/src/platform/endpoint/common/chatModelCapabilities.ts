@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelChat } from 'vscode';
+import type { LanguageModelChat } from 'zyraxoncode';
 import { getCachedSha256Hash } from '../../../util/common/crypto';
 import { ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
 import type { IChatEndpoint } from '../../networking/common/networking';

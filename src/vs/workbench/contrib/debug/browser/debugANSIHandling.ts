@@ -36,7 +36,7 @@ export function handleANSIOutput(text: string, linkDetector: ILinkDetector, work
 		let sequenceFound: boolean = false;
 
 		// Potentially an ANSI escape sequence.
-		// See http://ascii-table.com/ansi-escape-sequences.php & https://en.wikipedia.org/wiki/ANSI_escape_code
+		// See __ZYRAXKEEP__0_ & __ZYRAXKEEP__1_
 		if (text.charCodeAt(currentPos) === 27 && text.charAt(currentPos + 1) === '[') {
 
 			const startPos: number = currentPos;
@@ -157,7 +157,7 @@ export function handleANSIOutput(text: string, linkDetector: ILinkDetector, work
 	 * @param styleCodes Array of ANSI basic styling numbers, which will be
 	 * applied in order. New colors and backgrounds clear old ones; new formatting
 	 * does not.
-	 * @see {@link https://en.wikipedia.org/wiki/ANSI_escape_code#SGR }
+	 * @see {@link __ZYRAXKEEP__2_ }
 	 */
 	function setBasicFormatters(styleCodes: number[]): void {
 		for (const code of styleCodes) {
@@ -310,7 +310,7 @@ export function handleANSIOutput(text: string, linkDetector: ILinkDetector, work
 	 * @param colorType If `'foreground'`, will set foreground color, if
 	 * `'background'`, will set background color, and if it is `'underline'`
 	 * will set the underline color.
-	 * @see {@link https://en.wikipedia.org/wiki/ANSI_escape_code#24-bit }
+	 * @see {@link __ZYRAXKEEP__3_ }
 	 */
 	function set24BitColor(styleCodes: number[], colorType: 'foreground' | 'background' | 'underline'): void {
 		if (styleCodes.length >= 5 &&
@@ -329,7 +329,7 @@ export function handleANSIOutput(text: string, linkDetector: ILinkDetector, work
 	 * @param colorType If `'foreground'`, will set foreground color, if
 	 * `'background'`, will set background color and if it is `'underline'`
 	 * will set the underline color.
-	 * @see {@link https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit }
+	 * @see {@link __ZYRAXKEEP__4_ }
 	 */
 	function set8BitColor(styleCodes: number[], colorType: 'foreground' | 'background' | 'underline'): void {
 		let colorNumber = styleCodes[2];
@@ -341,7 +341,7 @@ export function handleANSIOutput(text: string, linkDetector: ILinkDetector, work
 			if (colorType === 'underline') {
 				// for underline colors we just decode the 0-15 color number to theme color, set and return
 				const colorName = ansiColorIdentifiers[colorNumber];
-				changeColor(colorType, `--vscode-debug-ansi-${colorName}`);
+				changeColor(colorType, `--zyraxoncode-debug-ansi-${colorName}`);
 				return;
 			}
 			// Need to map to one of the four basic color ranges (30-37, 90-97, 40-47, 100-107)
@@ -385,7 +385,7 @@ export function handleANSIOutput(text: string, linkDetector: ILinkDetector, work
 
 		if (colorIndex !== undefined && colorType) {
 			const colorName = ansiColorIdentifiers[colorIndex];
-			changeColor(colorType, `--vscode-debug-ansi-${colorName.replaceAll('.', '-')}`);
+			changeColor(colorType, `--zyraxoncode-debug-ansi-${colorName.replaceAll('.', '-')}`);
 		}
 	}
 }
@@ -449,7 +449,7 @@ export function appendStylizedStringToContainer(
  * Calculate the color from the color set defined in the ANSI 8-bit standard.
  * Standard and high intensity colors are not defined in the standard as specific
  * colors, so these and invalid colors return `undefined`.
- * @see {@link https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit } for info.
+ * @see {@link __ZYRAXKEEP__5_ } for info.
  * @param colorNumber The number (ranging from 16 to 255) referring to the color
  * desired.
  */
@@ -503,7 +503,7 @@ registerThemingParticipant((theme, collector) => {
 				// this uses the default contrast ratio of 4 (from the terminal),
 				// we may want to make this configurable in the future, but this is
 				// good to keep things sane to start with.
-				return `--vscode-debug-ansi-${color.replaceAll('.', '-')}:${bg ? bg.ensureConstrast(actual, 4) : actual}`;
+				return `--zyraxoncode-debug-ansi-${color.replaceAll('.', '-')}:${bg ? bg.ensureConstrast(actual, 4) : actual}`;
 			})
 			.filter(isDefined);
 

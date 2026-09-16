@@ -5,13 +5,13 @@
 
 import type { Attachment, PermissionRequestedEvent } from '@github/copilot/sdk';
 import { platform } from 'node:os';
-import type { CancellationToken, ChatParticipantToolToken, ChatResponseStream } from 'vscode';
+import type { CancellationToken, ChatParticipantToolToken, ChatResponseStream } from 'zyraxoncode';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { extUriBiasedIgnorePathCase, isEqual } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService, ServicesAccessor } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelTextPart, Uri } from '../../../../vscodeTypes';
+import { LanguageModelTextPart, Uri } from '../../../../zyraxoncodeTypes';
 import { ToolName } from '../../../tools/common/toolNames';
 import { IToolsService } from '../../../tools/common/toolsService';
 import { createEditConfirmation, formatDiffAsUnified } from '../../../tools/node/editFileToolUtils';

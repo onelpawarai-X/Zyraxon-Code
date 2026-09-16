@@ -1,0 +1,7 @@
+{
+	"extends": "./tsconfig.zyraxoncode-dts.json",
+	"include": [
+		"zyraxoncode-dts/zyraxoncode.d.ts",
+		"zyraxoncode-dts/zyraxoncode.proposed.*.d.ts",
+	]
+}

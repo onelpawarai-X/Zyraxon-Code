@@ -85,13 +85,13 @@ export class GettingStartedDetailsRenderer {
 						box-sizing: border-box;
 					}
 					checkbox.checked > img {
-						outline: 2px solid var(--vscode-focusBorder);
+						outline: 2px solid var(--zyraxoncode-focusBorder);
 						outline-offset: 4px;
 						border-radius: 4px;
 					}
 					.theme-picker-link {
 						margin-top: 16px;
-						color: var(--vscode-textLink-foreground);
+						color: var(--zyraxoncode-textLink-foreground);
 					}
 					blockquote > p:first-child {
 						margin-top: 0;
@@ -125,11 +125,11 @@ export class GettingStartedDetailsRenderer {
 				</vertically-centered>
 			</body>
 			<script nonce="${nonce}">
-				const vscode = acquireVsCodeApi();
+				const zyraxoncode = acquireVsCodeApi();
 
 				document.querySelectorAll('[when-checked]').forEach(el => {
 					el.addEventListener('click', () => {
-						vscode.postMessage(el.getAttribute('when-checked'));
+						zyraxoncode.postMessage(el.getAttribute('when-checked'));
 					});
 				});
 

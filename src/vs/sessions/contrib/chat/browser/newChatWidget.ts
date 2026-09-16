@@ -123,7 +123,7 @@ export class NewChatWidget extends Disposable {
 		this._workspacePickerVisibleKey = SessionWorkspacePickerVisibleContext.bindTo(contextKeyService);
 		this._register(toDisposable(() => this._workspacePickerVisibleKey.reset()));
 		this._renderHarnessPickerInControls = this.options.renderSessionTypePickerInControls.get();
-		// On web (vscode.dev / insiders.vscode.dev), use {@link WebWorkspacePicker}
+		// On web (zyraxoncode.dev / insiders.zyraxoncode.dev), use {@link WebWorkspacePicker}
 		// which scopes recents to the active host and renders as a bottom
 		// sheet on phone-layout viewports. On Electron desktop, the regular
 		// {@link WorkspacePicker} is fine — phones never run there.
@@ -292,7 +292,7 @@ export class NewChatWidget extends Disposable {
 		));
 		const petAction = this._register(new Action(
 			'sessions.chatPet.toggle',
-			localize('petAction', "Pet (/vscode-pet)"),
+			localize('petAction', "Pet (/zyraxoncode-pet)"),
 			undefined,
 			true,
 			() => this.chatPetService.toggle()
@@ -316,7 +316,7 @@ export class NewChatWidget extends Disposable {
 		}));
 
 		const workspacePickerContainer = dom.append(chatWidgetContent, dom.$('.new-session-workspace-picker-container'));
-		// On web (vscode.dev / insiders.vscode.dev) the workspace picker is
+		// On web (zyraxoncode.dev / insiders.zyraxoncode.dev) the workspace picker is
 		// scoped to the currently selected agent host. When no hosts are
 		// known there is nothing for the user to pick, so swap the picker
 		// out for the no-agent-host empty state. On Electron desktop the

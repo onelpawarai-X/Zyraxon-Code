@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Tunnel } from '@microsoft/dev-tunnels-contracts';
-import type { TunnelManagementHttpClient } from '@microsoft/dev-tunnels-management';
+import type { Tunnel } from '@zyraxon/dev-tunnels-contracts';
+import type { TunnelManagementHttpClient } from '@zyraxon/dev-tunnels-management';
 import { createHash } from 'crypto';
 import type WebSocket from 'ws';
 import { Emitter, Event } from '../../../base/common/event.js';
@@ -125,7 +125,7 @@ export class TunnelAgentHostMainService extends Disposable implements ITunnelAge
 		const seen = new Set<string>();
 
 		try {
-			// Enumerate all tunnels with the vscode-server-launcher label
+			// Enumerate all tunnels with the zyraxoncode-server-launcher label
 			const tunnels = await client.listTunnels(undefined, undefined, {
 				labels: [TUNNEL_LAUNCHER_LABEL],
 				requireAllLabels: true,
@@ -203,7 +203,7 @@ export class TunnelAgentHostMainService extends Disposable implements ITunnelAge
 		}
 
 		// Connect to the tunnel relay
-		const { TunnelRelayTunnelClient } = await import('@microsoft/dev-tunnels-connections');
+		const { TunnelRelayTunnelClient } = await import('@zyraxon/dev-tunnels-connections');
 		const relayClient = new TunnelRelayTunnelClient(client);
 		relayClient.acceptLocalConnectionsForForwardedPorts = false;
 		if (resolved.endpoints) {
@@ -293,11 +293,11 @@ export class TunnelAgentHostMainService extends Disposable implements ITunnelAge
 	}
 
 	private async _createManagementClient(token: string, authProvider: 'github' | 'Zyraxon'): Promise<TunnelManagementHttpClient> {
-		const mgmt = await import('@microsoft/dev-tunnels-management');
+		const mgmt = await import('@zyraxon/dev-tunnels-management');
 		const authHeader = authProvider === 'github' ? `github ${token}` : `Bearer ${token}`;
 
 		return new mgmt.TunnelManagementHttpClient(
-			'vscode-sessions',
+			'zyraxoncode-sessions',
 			mgmt.ManagementApiVersions.Version20230927preview,
 			async () => authHeader,
 		);
@@ -339,7 +339,7 @@ export class TunnelAgentHostMainService extends Disposable implements ITunnelAge
 
 		return new Promise((resolve, reject) => {
 			// Construct WebSocket URL — the stream is already connected to the right port
-			let url = `ws://localhost:${TUNNEL_AGENT_HOST_PORT}`;
+			let url = `__ZYRAXKEEP__0_{TUNNEL_AGENT_HOST_PORT}`;
 			if (connectionToken) {
 				url += `?tkn=${encodeURIComponent(connectionToken)}`;
 			}

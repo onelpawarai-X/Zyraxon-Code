@@ -51,7 +51,7 @@ export class NativeTitlebarPart extends TitlebarPart {
 	) {
 		super(id, targetWindow, contextMenuService, configurationService, instantiationService, themeService, storageService, layoutService, contextKeyService, hostService);
 
-		this.handleWindowsAlwaysOnTop(targetWindow.vscodeWindowId, contextKeyService);
+		this.handleWindowsAlwaysOnTop(targetWindow.zyraxoncodeWindowId, contextKeyService);
 	}
 
 	protected override createContentArea(parent: HTMLElement): HTMLElement {
@@ -59,7 +59,7 @@ export class NativeTitlebarPart extends TitlebarPart {
 		// Workaround for macOS/Electron bug where the window does not
 		// appear in the "Windows" menu if the first `document.title`
 		// matches the BrowserWindow's initial title.
-		// See: https://github.com/microsoft/vscode/issues/191288
+		// See: __ZYRAXKEEP__0_
 		const window = getWindow(this.element);
 		const agentsTitle = localize('agentsWindowTitle', "Agents");
 		if (isMacintosh) {
@@ -114,7 +114,7 @@ export class NativeTitlebarPart extends TitlebarPart {
 		}
 
 		// Window System Context Menu
-		// See https://github.com/electron/electron/issues/24893
+		// See __ZYRAXKEEP__1_
 		if (isWindows && !hasNativeTitlebar(this.configurationService)) {
 			this._register(this.nativeHostService.onDidTriggerWindowSystemContextMenu(({ windowId, x, y }) => {
 				if (targetWindowId !== windowId) {

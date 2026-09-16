@@ -15,7 +15,7 @@ export function applyExtensionsTools(server: McpServer, appService: ApplicationS
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_extensions_search',
+	// 	'zyraxoncode_automation_extensions_search',
 	// 	'Search for an extension by ID',
 	// 	{
 	// 		extensionId: z.string().describe('Extension ID to search for (e.g., "ms-python.python")')
@@ -33,7 +33,7 @@ export function applyExtensionsTools(server: McpServer, appService: ApplicationS
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_extensions_open',
+		'zyraxoncode_automation_extensions_open',
 		'Open an extension by ID',
 		{
 			extensionId: z.string().describe('Extension ID to open (e.g., "ms-python.python")')
@@ -53,7 +53,7 @@ export function applyExtensionsTools(server: McpServer, appService: ApplicationS
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_extensions_close',
+	// 	'zyraxoncode_automation_extensions_close',
 	// 	'Close an extension tab by title',
 	// 	{
 	// 		title: z.string().describe('Extension title to close')
@@ -71,7 +71,7 @@ export function applyExtensionsTools(server: McpServer, appService: ApplicationS
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_extensions_install',
+		'zyraxoncode_automation_extensions_install',
 		'Install an extension by ID',
 		{
 			extensionId: z.string().describe('Extension ID to install (e.g., "ms-python.python")'),

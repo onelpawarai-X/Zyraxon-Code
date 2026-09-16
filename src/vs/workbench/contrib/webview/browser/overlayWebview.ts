@@ -134,7 +134,7 @@ export class OverlayWebview extends Disposable implements IOverlayWebview {
 
 		const oldOwner = this._owner;
 
-		if (this._windowId !== targetWindow.vscodeWindowId) {
+		if (this._windowId !== targetWindow.zyraxoncodeWindowId) {
 			// moving to a new window
 			this.release(oldOwner);
 			// since we are moving to a new window, we need to dispose the webview and recreate
@@ -145,7 +145,7 @@ export class OverlayWebview extends Disposable implements IOverlayWebview {
 		}
 
 		this._owner = owner;
-		this._windowId = targetWindow.vscodeWindowId;
+		this._windowId = targetWindow.zyraxoncodeWindowId;
 		this._show(targetWindow);
 
 		if (this._anchorState) {
@@ -186,7 +186,7 @@ export class OverlayWebview extends Disposable implements IOverlayWebview {
 		}
 
 		if (this._options.retainContextWhenHidden) {
-			// https://github.com/microsoft/vscode/issues/157424
+			// __ZYRAXKEEP__0_
 			// We need to record the current state when retaining context so we can try to showFind() when showing webview again
 			this._shouldShowFindWidgetOnRestore = !!this._findWidgetVisible?.get();
 			this.hideFind(false);
@@ -267,7 +267,7 @@ export class OverlayWebview extends Disposable implements IOverlayWebview {
 			this._firstLoadPendingMessages.clear();
 		}
 
-		// https://github.com/microsoft/vscode/issues/157424
+		// __ZYRAXKEEP__1_
 		if (this.options.retainContextWhenHidden && this._shouldShowFindWidgetOnRestore) {
 			this.showFind(false);
 			// Reset

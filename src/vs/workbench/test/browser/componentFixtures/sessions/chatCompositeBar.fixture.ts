@@ -35,7 +35,7 @@ interface IMockChatOptions {
 }
 
 function createMockChat(options: IMockChatOptions): IChat {
-	const resource = URI.parse(`vscode-session-chat://chat/${Math.random().toString(36).slice(2)}`);
+	const resource = URI.parse(`__ZYRAXKEEP__0_{Math.random().toString(36).slice(2)}`);
 	return new class extends mock<IChat>() {
 		override readonly resource = resource;
 		override readonly title: IObservable<string> = observableValue('title', options.title);
@@ -97,7 +97,7 @@ function renderBar(ctx: ComponentFixtureContext, chats: readonly IChat[], active
 	});
 
 	container.style.width = '360px';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 
 	const bar = disposableStore.add(instantiationService.createInstance(ChatCompositeBar));
 	bar.setSession(createMockSession(chats, activeChat, sessionTitle));

@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type { ChatErrorDetails, ChatResult } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { ChatErrorDetails, ChatResult } from 'zyraxoncode';
 import { secondsToHumanReadableTime } from '../../../util/common/time';
-import { ChatErrorLevel } from '../../../vscodeTypes';
+import { ChatErrorLevel } from '../../../zyraxoncodeTypes';
 import { GitHubOutageStatus } from '../../github/common/githubService';
 import { APIErrorResponse, APIUsage, FilterReason } from '../../networking/common/openai';
 
@@ -32,7 +32,7 @@ export enum ChatLocation {
 	Editor = 4,
 	/**
 	 * Chat is happening in an editing session.
-	 * This location doesn't exist in vscode API, but is still used to compute the location sent for some intents.
+	 * This location doesn't exist in zyraxoncode API, but is still used to compute the location sent for some intents.
 	 */
 	EditingSession = 5,
 	/**
@@ -206,7 +206,7 @@ function getRateLimitMessage(fetchResult: ChatFetchError, copilotPlan: string | 
 	if (fetchResult.capiError?.code?.startsWith('agent_mode_limit_exceeded')) { // Rate limited in agent mode
 		return l10n.t({
 			message: 'Sorry, you have exceeded the agent mode rate limit. Please switch to ask mode and try again in {0}. [Learn More]({1})',
-			args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+			args: [retryAfterString, '__ZYRAXKEEP__0_'],
 			comment: [`{Locked=']({'}`]
 		});
 	}
@@ -214,13 +214,13 @@ function getRateLimitMessage(fetchResult: ChatFetchError, copilotPlan: string | 
 		if (fetchResult.isAuto) {
 			return l10n.t({
 				message: 'Sorry, the upstream model provider is currently experiencing high demand. Please try again in {0}. [Learn More]({1})',
-				args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+				args: [retryAfterString, '__ZYRAXKEEP__1_'],
 				comment: [`{Locked=']({'}`]
 			});
 		}
 		return l10n.t({
 			message: 'Sorry, the upstream model provider is currently experiencing high demand. Please try again in {0} or consider switching to Auto. [Learn More]({1})',
-			args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+			args: [retryAfterString, '__ZYRAXKEEP__2_'],
 			comment: [`{Locked=']({'}`]
 		});
 	}
@@ -228,14 +228,14 @@ function getRateLimitMessage(fetchResult: ChatFetchError, copilotPlan: string | 
 		if (copilotPlan === 'free' || copilotPlan === 'individual' || copilotPlan === 'individual_pro') {
 			return l10n.t({
 				message: 'You\'ve hit your session rate limit. Please upgrade your plan or wait {0} for your limit to reset. [Learn More]({1})',
-				args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+				args: [retryAfterString, '__ZYRAXKEEP__3_'],
 				comment: [`{Locked=']({'}`]
 			});
 		}
 
 		return l10n.t({
 			message: 'You\'ve hit your session rate limit. Please wait {0} for your limit to reset. [Learn More]({1})',
-			args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+			args: [retryAfterString, '__ZYRAXKEEP__4_'],
 			comment: [`{Locked=']({'}`]
 		});
 	}
@@ -246,14 +246,14 @@ function getRateLimitMessage(fetchResult: ChatFetchError, copilotPlan: string | 
 			if (fetchResult.isAuto) {
 				return l10n.t({
 					message: 'You\'ve reached your weekly rate limit. Please wait for your limit to reset on {0}. [Learn More]({1})',
-					args: [resetDateString, 'https://aka.ms/github-copilot-rate-limit-error'],
+					args: [resetDateString, '__ZYRAXKEEP__5_'],
 					comment: [`{Locked=']({'}`]
 				});
 			}
 
 			return l10n.t({
 				message: 'You\'ve reached your weekly rate limit. Please switch to the Auto model to continue working or wait for your limit to reset on {0}. [Learn More]({1})',
-				args: [resetDateString, 'https://aka.ms/github-copilot-rate-limit-error'],
+				args: [resetDateString, '__ZYRAXKEEP__6_'],
 				comment: [`{Locked=']({'}`]
 			});
 		}
@@ -261,14 +261,14 @@ function getRateLimitMessage(fetchResult: ChatFetchError, copilotPlan: string | 
 		if (fetchResult.isAuto) {
 			return l10n.t({
 				message: 'You\'ve reached your weekly rate limit. Please wait {0} for your limit to reset. [Learn More]({1})',
-				args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+				args: [retryAfterString, '__ZYRAXKEEP__7_'],
 				comment: [`{Locked=']({'}`]
 			});
 		}
 
 		return l10n.t({
 			message: 'You\'ve reached your weekly rate limit. Please switch to the Auto model to continue working or wait {0} for your limit to reset. [Learn More]({1})',
-			args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+			args: [retryAfterString, '__ZYRAXKEEP__8_'],
 			comment: [`{Locked=']({'}`]
 		});
 	}
@@ -276,20 +276,20 @@ function getRateLimitMessage(fetchResult: ChatFetchError, copilotPlan: string | 
 		if (fetchResult.isAuto) {
 			return l10n.t({
 				message: 'You\'ve hit the rate limit for this model. Please try again in {0}. [Learn More]({1})',
-				args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+				args: [retryAfterString, '__ZYRAXKEEP__9_'],
 				comment: [`{Locked=']({'}`]
 			});
 		}
 		return l10n.t({
 			message: 'You\'ve hit the rate limit for this model. Please try switching to Auto or try again in {0}. [Learn More]({1})',
-			args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+			args: [retryAfterString, '__ZYRAXKEEP__10_'],
 			comment: [`{Locked=']({'}`]
 		});
 	}
 	if (fetchResult.capiError?.code?.startsWith('integration_rate_limited')) {
 		return l10n.t({
 			message: 'Sorry, GitHub Copilot Chat is currently experiencing high demand. Please try again in {0}. [Learn More]({1})',
-			args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+			args: [retryAfterString, '__ZYRAXKEEP__11_'],
 			comment: [`{Locked=']({'}`]
 		});
 	}
@@ -298,13 +298,13 @@ function getRateLimitMessage(fetchResult: ChatFetchError, copilotPlan: string | 
 		if (fetchResult.isAuto) {
 			return l10n.t({
 				message: 'Sorry, you have been rate-limited. Please wait {0} before trying again. [Learn More]({1})\n\nServer Error: {2}\nError Code: {3}',
-				args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error', fetchResult.capiError.message, fetchResult.capiError.code],
+				args: [retryAfterString, '__ZYRAXKEEP__12_', fetchResult.capiError.message, fetchResult.capiError.code],
 				comment: [`{Locked=']({'}`]
 			});
 		}
 		return l10n.t({
 			message: 'Sorry, you have been rate-limited. Please wait {0} before trying again or consider switching to Auto. [Learn More]({1})\n\nServer Error: {2}\nError Code: {3}',
-			args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error', fetchResult.capiError.message, fetchResult.capiError.code],
+			args: [retryAfterString, '__ZYRAXKEEP__13_', fetchResult.capiError.message, fetchResult.capiError.code],
 			comment: [`{Locked=']({'}`]
 		});
 	}
@@ -312,13 +312,13 @@ function getRateLimitMessage(fetchResult: ChatFetchError, copilotPlan: string | 
 	if (fetchResult.isAuto) {
 		return l10n.t({
 			message: 'Sorry, your request was rate-limited. Please wait {0} before trying again. [Learn More]({1})',
-			args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+			args: [retryAfterString, '__ZYRAXKEEP__14_'],
 			comment: [`{Locked=']({'}`]
 		});
 	}
 	return l10n.t({
 		message: 'Sorry, your request was rate-limited. Please wait {0} before trying again or consider switching to Auto. [Learn More]({1})',
-		args: [retryAfterString, 'https://aka.ms/github-copilot-rate-limit-error'],
+		args: [retryAfterString, '__ZYRAXKEEP__15_'],
 		comment: [`{Locked=']({'}`]
 	});
 }
@@ -383,7 +383,7 @@ function getQuotaHitMessage(fetchResult: ChatFetchError, copilotPlan: string | u
 	} else if (fetchResult.capiError?.code === 'overage_limit_reached') {
 		return l10n.t({
 			message: 'You cannot accrue additional premium requests at this time. Please contact [GitHub Support]({0}) to continue using Copilot.',
-			args: ['https://support.github.com/contact'],
+			args: ['__ZYRAXKEEP__16_'],
 			comment: [`{Locked=']({'}`]
 		});
 	} else if (fetchResult.capiError?.code === 'additional_spend_limit_reached') {
@@ -392,7 +392,7 @@ function getQuotaHitMessage(fetchResult: ChatFetchError, copilotPlan: string | u
 		}
 		return l10n.t({
 			message: `You've reached your additional usage limit for your plan. [Manage Budget]({0})`,
-			args: ['https://github.com/settings/copilot/features'],
+			args: ['__ZYRAXKEEP__17_'],
 			comment: [`{Locked=']({'}`]
 		});
 	} else if (fetchResult.capiError?.code === 'billing_not_configured' && fetchResult.capiError?.message) {
@@ -479,7 +479,7 @@ function getErrorDetailsFromChatFetchErrorInner(fetchResult: ChatFetchError, cop
 	if (gitHubOutageStatus !== GitHubOutageStatus.None) {
 		const outageMsg = l10n.t({
 			message: 'Note: GitHub is currently experiencing a service disruption. This may be affecting Copilot. Check [GitHub Status]({0}) for details.',
-			args: ['https://www.githubstatus.com'],
+			args: ['__ZYRAXKEEP__18_'],
 			comment: [`{Locked=']({'}`]
 		});
 
@@ -495,8 +495,8 @@ export function getFilteredMessage(category: FilterReason, supportsMarkdown: boo
 			if (supportsMarkdown) {
 				return l10n.t({
 					message:
-						`Sorry, the response matched public code so it was blocked. Please rephrase your prompt. [Learn more](https://aka.ms/copilot-chat-filtered-docs).`,
-					comment: [`{Locked='](https://aka.ms/copilot-chat-filtered-docs)'}`]
+						`Sorry, the response matched public code so it was blocked. Please rephrase your prompt. [Learn more](__ZYRAXKEEP__19_).`,
+					comment: [`{Locked='](__ZYRAXKEEP__20_)'}`]
 				});
 			} else {
 				return l10n.t(`Sorry, the response matched public code so it was blocked. Please rephrase your prompt.`);
@@ -505,8 +505,8 @@ export function getFilteredMessage(category: FilterReason, supportsMarkdown: boo
 			if (supportsMarkdown) {
 				return l10n.t({
 					message:
-						`Sorry, your prompt was filtered by the Responsible AI Service. Please rephrase your prompt and try again. [Learn more](https://aka.ms/copilot-chat-filtered-docs).`,
-					comment: [`{Locked='](https://aka.ms/copilot-chat-filtered-docs)'}`]
+						`Sorry, your prompt was filtered by the Responsible AI Service. Please rephrase your prompt and try again. [Learn more](__ZYRAXKEEP__21_).`,
+					comment: [`{Locked='](__ZYRAXKEEP__22_)'}`]
 				});
 			} else {
 				return l10n.t(`Sorry, your prompt was filtered by the Responsible AI Service. Please rephrase your prompt and try again.`);
@@ -515,8 +515,8 @@ export function getFilteredMessage(category: FilterReason, supportsMarkdown: boo
 			if (supportsMarkdown) {
 				return l10n.t({
 					message:
-						`Sorry, the response was filtered by the Responsible AI Service. Please rephrase your prompt and try again. [Learn more](https://aka.ms/copilot-chat-filtered-docs).`,
-					comment: [`{Locked='](https://aka.ms/copilot-chat-filtered-docs)'}`]
+						`Sorry, the response was filtered by the Responsible AI Service. Please rephrase your prompt and try again. [Learn more](__ZYRAXKEEP__23_).`,
+					comment: [`{Locked='](__ZYRAXKEEP__24_)'}`]
 				});
 			} else {
 				return l10n.t(`Sorry, the response was filtered by the Responsible AI Service. Please rephrase your prompt and try again.`);

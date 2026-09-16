@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -59,6 +59,6 @@ if (enableLogging) {
 }
 
 if (env && env['VSCODE_DEV_DEBUG_OBSERVABLES']) {
-	// To debug observables you also need the extension "ms-vscode.debug-value-editor"
+	// To debug observables you also need the extension "ms-zyraxoncode.debug-value-editor"
 	addLogger(DevToolsLogger.getInstance());
 }

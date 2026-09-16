@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptReference, Raw } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptReference, Raw } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { getTextPart, roleToString } from '../../../platform/chat/common/globalStringUtils';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { isAutoModel } from '../../../platform/endpoint/node/autoChatEndpoint';
-import { IVSCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { ILanguageDiagnosticsService } from '../../../platform/languages/common/languageDiagnosticsService';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
@@ -149,7 +149,7 @@ type RequestPanelTelemetryProperties = RequestTelemetryProperties & {
 	isParticipantDetected: string;
 	mode: string;
 	parentRequestId: string | undefined;
-	vscodeRequestId: string | undefined;
+	zyraxoncodeRequestId: string | undefined;
 	slashCommand: string;
 	isSystemInitiated: string;
 };
@@ -212,7 +212,7 @@ const builtinSlashCommands = new Set(
 	Object.values(agentsToCommands).flatMap(commands => commands ? Object.keys(commands) : [])
 );
 
-function getSlashCommandForTelemetry(request: vscode.ChatRequest, extensionUri: URI): string {
+function getSlashCommandForTelemetry(request: zyraxoncode.ChatRequest, extensionUri: URI): string {
 	// Built-in slash commands (explain, fix, tests, etc.) are safe to send as plain text
 	if (request.command && builtinSlashCommands.has(request.command)) {
 		return request.command;
@@ -248,7 +248,7 @@ export class ChatTelemetryBuilder {
 		private readonly _sessionId: string,
 		private readonly _documentContext: IDocumentContext | undefined,
 		private readonly _firstTurn: boolean,
-		private readonly _request: vscode.ChatRequest,
+		private readonly _request: zyraxoncode.ChatRequest,
 		telemetryMessageId: string | undefined,
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 	) {
@@ -319,7 +319,7 @@ export abstract class ChatTelemetry<C extends IDocumentContext | undefined = IDo
 	protected _editLineCount: number = 0;
 
 	// todo@connor4312: temporary event to track occurences of patches in response
-	// text, ref https://github.com/microsoft/vscode-copilot/issues/16608
+	// text, ref __ZYRAXKEEP__0_
 	private _didSeePatchInResponse = false;
 	private _lastMarkdownLine = '';
 
@@ -344,7 +344,7 @@ export abstract class ChatTelemetry<C extends IDocumentContext | undefined = IDo
 		protected readonly _sessionId: string,
 		protected readonly _documentContext: C,
 		protected readonly _firstTurn: boolean,
-		protected readonly _request: vscode.ChatRequest,
+		protected readonly _request: zyraxoncode.ChatRequest,
 		protected readonly _startTime: number,
 		baseUserTelemetry: ConversationalBaseTelemetryData,
 		protected readonly _conversation: Conversation,
@@ -387,7 +387,7 @@ export abstract class ChatTelemetry<C extends IDocumentContext | undefined = IDo
 		this._addedLinkCount += n;
 	}
 
-	public markEmittedMarkdown(str: vscode.MarkdownString) {
+	public markEmittedMarkdown(str: zyraxoncode.MarkdownString) {
 		this._markdownCharCount += str.value.length;
 		this._lastMarkdownLine += str.value;
 		if (this._lastMarkdownLine.includes(PATCH_PREFIX.trim())) {
@@ -398,7 +398,7 @@ export abstract class ChatTelemetry<C extends IDocumentContext | undefined = IDo
 		this._lastMarkdownLine = this._lastMarkdownLine.slice(i + 1);
 	}
 
-	public markEmittedEdits(uri: vscode.Uri, edits: vscode.TextEdit[]) {
+	public markEmittedEdits(uri: zyraxoncode.Uri, edits: zyraxoncode.TextEdit[]) {
 		this._editCount += edits.length;
 		this._editLineCount += edits.reduce((acc, edit) => acc + edit.newText.split('\n').length, 0);
 	}
@@ -446,7 +446,7 @@ export abstract class ChatTelemetry<C extends IDocumentContext | undefined = IDo
 
 
 		// todo@connor4312: temporary event to track occurences of patches in response
-		// text, ref https://github.com/microsoft/vscode-copilot/issues/16608
+		// text, ref __ZYRAXKEEP__1_
 		if (this._didSeePatchInResponse) {
 			/* __GDPR__
 				"applyPatch.inResponse" : {
@@ -469,7 +469,7 @@ export abstract class ChatTelemetry<C extends IDocumentContext | undefined = IDo
 						'ask');
 	}
 
-	public sendToolCallingTelemetry(toolCallRounds: IToolCallRound[], availableTools: readonly vscode.LanguageModelToolInformation[], responseType: ChatFetchResponseType | 'cancelled' | 'maxToolCalls'): void {
+	public sendToolCallingTelemetry(toolCallRounds: IToolCallRound[], availableTools: readonly zyraxoncode.LanguageModelToolInformation[], responseType: ChatFetchResponseType | 'cancelled' | 'maxToolCalls'): void {
 		if (availableTools.length === 0) {
 			return;
 		}
@@ -584,7 +584,7 @@ export class PanelChatTelemetry extends ChatTelemetry<IDocumentContext | undefin
 		sessionId: string,
 		documentContext: IDocumentContext | undefined,
 		firstTurn: boolean,
-		request: vscode.ChatRequest,
+		request: zyraxoncode.ChatRequest,
 		startTime: number,
 		baseUserTelemetry: ConversationalBaseTelemetryData,
 		conversation: Conversation,
@@ -599,7 +599,7 @@ export class PanelChatTelemetry extends ChatTelemetry<IDocumentContext | undefin
 		repoInfoTelemetry: RepoInfoTelemetry,
 		@ITelemetryService telemetryService: ITelemetryService,
 		@IConfigurationService private readonly _configurationService: IConfigurationService,
-		@IVSCodeExtensionContext private readonly _extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _extensionContext: IZyraxonCodeExtensionContext,
 	) {
 		super(ChatLocation.Panel,
 			sessionId,
@@ -716,7 +716,7 @@ export class PanelChatTelemetry extends ChatTelemetry<IDocumentContext | undefin
 				"isAuto": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "Whether the request was for an Auto model" },
 				"mode": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The chat mode used for this request (e.g., ask, edit, agent, custom)." },
 				"parentRequestId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The parent request id if this request is from a subagent." },
-				"vscodeRequestId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The ZYRAXON Code chat request id, for joining with ZYRAXON Code telemetry events." },
+				"zyraxoncodeRequestId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The ZYRAXON Code chat request id, for joining with ZYRAXON Code telemetry events." },
 				"slashCommand": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The slash command used by the user, if any (e.g. troubleshoot, explain). Empty if no slash command was used." },
 				"isSystemInitiated": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "Whether the request was system-initiated (e.g. terminal completion notification) rather than user-typed." }
 			}
@@ -737,7 +737,7 @@ export class PanelChatTelemetry extends ChatTelemetry<IDocumentContext | undefin
 			toolCounts: JSON.stringify(toolCounts),
 			mode: this._getModeNameForTelemetry(),
 			parentRequestId: this._request.parentRequestId,
-			vscodeRequestId: this._request.id,
+			zyraxoncodeRequestId: this._request.id,
 			slashCommand: getSlashCommandForTelemetry(this._request, URI.from(this._extensionContext.extensionUri)),
 			isSystemInitiated: String(!!this._request.isSystemInitiated)
 		} satisfies RequestPanelTelemetryProperties, {
@@ -777,7 +777,7 @@ export class PanelChatTelemetry extends ChatTelemetry<IDocumentContext | undefin
 				toolCounts: JSON.stringify(toolCounts),
 				mode: modeName,
 				codeBlocks: JSON.stringify(codeBlocks),
-				vscodeRequestId: this._request.id,
+				zyraxoncodeRequestId: this._request.id,
 			},
 			{
 				isAgent: this._intent.id === AgentIntent.ID ? 1 : 0,
@@ -837,7 +837,7 @@ export class InlineChatTelemetry extends ChatTelemetry<IDocumentContext> {
 		sessionId: string,
 		documentContext: IDocumentContext,
 		firstTurn: boolean,
-		request: vscode.ChatRequest,
+		request: zyraxoncode.ChatRequest,
 		startTime: number,
 		baseUserTelemetry: ConversationalBaseTelemetryData,
 		conversation: Conversation,
@@ -928,7 +928,7 @@ export class InlineChatTelemetry extends ChatTelemetry<IDocumentContext> {
 				"wholeRangeLineCount": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "How many lines are in the expanded whole range." },
 				"editCount": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "How many edits are suggested." },
 				"editLineCount": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "How many lines are in all suggested edits." },
-				"markdownCharCount": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "How many characters were emitted as markdown to vscode in the response stream." },
+				"markdownCharCount": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "How many characters were emitted as markdown to zyraxoncode in the response stream." },
 				"problemsCount": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "How many problems are in the current document." },
 				"selectionProblemsCount": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "How many problems are in the current selected code." },
 				"diagnosticsCount": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "isMeasurement": true, "comment": "How many diagnostic codes are in the current ." },

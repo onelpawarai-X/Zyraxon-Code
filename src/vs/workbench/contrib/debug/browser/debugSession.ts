@@ -357,7 +357,7 @@ export class DebugSession implements IDebugSession {
 			await this.raw.start();
 			this.registerListeners();
 			await this.raw.initialize({
-				clientID: 'vscode',
+				clientID: 'zyraxoncode',
 				clientName: this.productService.nameLong,
 				adapterID: this.configuration.type,
 				pathFormat: 'path',
@@ -498,7 +498,7 @@ export class DebugSession implements IDebugSession {
 		if (breakpointsToSend.length && !rawSource.adapterData) {
 			rawSource.adapterData = breakpointsToSend[0].adapterData;
 		}
-		// Normalize all drive letters going out from vscode to debug adapters so we are consistent with our resolving #43959
+		// Normalize all drive letters going out from zyraxoncode to debug adapters so we are consistent with our resolving #43959
 		if (rawSource.path) {
 			rawSource.path = normalizeDriveLetter(rawSource.path);
 		}
@@ -1178,7 +1178,7 @@ export class DebugSession implements IDebugSession {
 				const container = new ExpressionContainer(this, undefined, event.body.variablesReference, generateUuid());
 				const children = container.getChildren();
 				// we should put appendToRepl into queue to make sure the logs to be displayed in correct order
-				// see https://github.com/microsoft/vscode/issues/126967#issuecomment-874954269
+				// see __ZYRAXKEEP__0_
 				outputQueue.queue(async () => {
 					const resolved = await children;
 					// For single logged variables, try to use the output if we can so
@@ -1325,7 +1325,7 @@ export class DebugSession implements IDebugSession {
 		}));
 		this.rawListeners.add(this.raw.onDidInvalidated(async event => {
 			const areas = event.body.areas || ['all'];
-			// If invalidated event only requires to update variables or watch, do that, otherwise refetch threads https://github.com/microsoft/vscode/issues/106745
+			// If invalidated event only requires to update variables or watch, do that, otherwise refetch threads __ZYRAXKEEP__1_
 			if (areas.includes('threads') || areas.includes('stacks') || areas.includes('all')) {
 				this.cancelAllRequests();
 				this.model.clearThreads(this.getId(), true);

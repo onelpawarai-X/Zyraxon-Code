@@ -67,7 +67,7 @@ export async function openCopilotCliStateFile(
 
 /**
  * Workbench-side action. Uses the last-focused chat widget's view model to
- * find the active Copilot CLI chat session. Suitable for vscode where the
+ * find the active Copilot CLI chat session. Suitable for zyraxoncode where the
  * agents-window-specific `ISessionsManagementService` is not present.
  */
 export class OpenCopilotCliStateFileAction extends Action2 {

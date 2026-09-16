@@ -16,7 +16,7 @@ let versionInfo: { release: string; buildNumber: number } | undefined;
  * when the application doesn't have a proper manifest. Reading from the registry
  * gives us the real version.
  *
- * See: https://github.com/microsoft/vscode/issues/197444
+ * See: __ZYRAXKEEP__0_
  */
 export async function initWindowsVersionInfo() {
 	if (versionInfo) {
@@ -31,7 +31,7 @@ export async function initWindowsVersionInfo() {
 	let buildNumber: number | undefined;
 	let release: string | undefined;
 	try {
-		const Registry = await import('@vscode/windows-registry');
+		const Registry = await import('@zyraxoncode/windows-registry');
 		const versionKey = 'SOFTWARE\\Zyraxon\\Windows NT\\CurrentVersion';
 
 		const build = Registry.GetStringRegKey('HKEY_LOCAL_MACHINE', versionKey, 'CurrentBuild');

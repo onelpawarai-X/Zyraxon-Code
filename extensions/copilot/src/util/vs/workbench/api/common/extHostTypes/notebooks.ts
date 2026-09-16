@@ -1,11 +1,11 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { es5ClassCompat } from './es5ClassCompat';
 import { illegalArgument } from '../../../../base/common/errors';
 import { Mimes, normalizeMimeType, isTextStreamMime } from '../../../../base/common/mime';
@@ -17,7 +17,7 @@ export enum NotebookCellKind {
 }
 
 export class NotebookRange {
-	static isNotebookRange(thing: unknown): thing is vscode.NotebookRange {
+	static isNotebookRange(thing: unknown): thing is zyraxoncode.NotebookRange {
 		if (thing instanceof NotebookRange) {
 			return true;
 		}
@@ -90,11 +90,11 @@ export class NotebookCellData {
 		}
 	}
 
-	static isNotebookCellDataArray(value: unknown): value is vscode.NotebookCellData[] {
+	static isNotebookCellDataArray(value: unknown): value is zyraxoncode.NotebookCellData[] {
 		return Array.isArray(value) && (<unknown[]>value).every(elem => NotebookCellData.isNotebookCellData(elem));
 	}
 
-	static isNotebookCellData(value: unknown): value is vscode.NotebookCellData {
+	static isNotebookCellData(value: unknown): value is zyraxoncode.NotebookCellData {
 		// return value instanceof NotebookCellData;
 		return true;
 	}
@@ -103,11 +103,11 @@ export class NotebookCellData {
 	value: string;
 	languageId: string;
 	mime?: string;
-	outputs?: vscode.NotebookCellOutput[];
+	outputs?: zyraxoncode.NotebookCellOutput[];
 	metadata?: Record<string, unknown>;
-	executionSummary?: vscode.NotebookCellExecutionSummary;
+	executionSummary?: zyraxoncode.NotebookCellExecutionSummary;
 
-	constructor(kind: NotebookCellKind, value: string, languageId: string, mime?: string, outputs?: vscode.NotebookCellOutput[], metadata?: Record<string, unknown>, executionSummary?: vscode.NotebookCellExecutionSummary) {
+	constructor(kind: NotebookCellKind, value: string, languageId: string, mime?: string, outputs?: zyraxoncode.NotebookCellOutput[], metadata?: Record<string, unknown>, executionSummary?: zyraxoncode.NotebookCellExecutionSummary) {
 		this.kind = kind;
 		this.value = value;
 		this.languageId = languageId;
@@ -131,7 +131,7 @@ export class NotebookData {
 }
 
 @es5ClassCompat
-export class NotebookEdit implements vscode.NotebookEdit {
+export class NotebookEdit implements zyraxoncode.NotebookEdit {
 
 	static isNotebookCellEdit(thing: unknown): thing is NotebookEdit {
 		if (thing instanceof NotebookEdit) {
@@ -148,7 +148,7 @@ export class NotebookEdit implements vscode.NotebookEdit {
 		return new NotebookEdit(range, newCells);
 	}
 
-	static insertCells(index: number, newCells: vscode.NotebookCellData[]): vscode.NotebookEdit {
+	static insertCells(index: number, newCells: zyraxoncode.NotebookCellData[]): zyraxoncode.NotebookEdit {
 		return new NotebookEdit(new NotebookRange(index, index), newCells);
 	}
 
@@ -181,15 +181,15 @@ export class NotebookEdit implements vscode.NotebookEdit {
 
 export class NotebookCellOutputItem {
 
-	static isNotebookCellOutputItem(obj: unknown): obj is vscode.NotebookCellOutputItem {
+	static isNotebookCellOutputItem(obj: unknown): obj is zyraxoncode.NotebookCellOutputItem {
 		if (obj instanceof NotebookCellOutputItem) {
 			return true;
 		}
 		if (!obj) {
 			return false;
 		}
-		return typeof (<vscode.NotebookCellOutputItem>obj).mime === 'string'
-			&& (<vscode.NotebookCellOutputItem>obj).data instanceof Uint8Array;
+		return typeof (<zyraxoncode.NotebookCellOutputItem>obj).mime === 'string'
+			&& (<zyraxoncode.NotebookCellOutputItem>obj).data instanceof Uint8Array;
 	}
 
 	static error(err: Error | { name: string; message?: string; stack?: string }): NotebookCellOutputItem {
@@ -239,7 +239,7 @@ export class NotebookCellOutputItem {
 
 export class NotebookCellOutput {
 
-	static isNotebookCellOutput(candidate: unknown): candidate is vscode.NotebookCellOutput {
+	static isNotebookCellOutput(candidate: unknown): candidate is zyraxoncode.NotebookCellOutput {
 		if (candidate instanceof NotebookCellOutput) {
 			return true;
 		}

@@ -7,7 +7,7 @@ There are several ways in which you can contribute, beyond writing code. The goa
 ## Asking Questions
 
 
-Have a question? Instead of opening an issue, please ask on [Stack Overflow](https://stackoverflow.com/questions/tagged/zyraxon-code) using the tag `zyraxon-code`.
+Have a question? Instead of opening an issue, please ask on [Stack Overflow](__ZYRAXKEEP__0_) using the tag `zyraxon-code`.
 
 The active community will be eager to assist you. Your well-worded question will serve as a resource to others searching for help.
 
@@ -15,7 +15,7 @@ The active community will be eager to assist you. Your well-worded question will
 
 Your comments and feedback are welcome, and the development team is available via a handful of different channels.
 
-See the [Feedback Channels](https://github.com/onelpawarai/zyraxon-code/wiki/Feedback-Channels) wiki page for details on how to share your thoughts.
+See the [Feedback Channels](__ZYRAXKEEP__1_) wiki page for details on how to share your thoughts.
 
 ## Reporting Issues
 
@@ -23,17 +23,17 @@ Have you identified a reproducible problem in ZYRAXON Code? Do you have a featur
 
 ### Identify Where to Report
 
-The ZYRAXON Code project is distributed across multiple repositories. Try to file the issue against the correct repository. Check the list of [Related Projects](https://github.com/onelpawarai/zyraxon-code/wiki/Related-Projects) if you aren't sure which repo is correct.
+The ZYRAXON Code project is distributed across multiple repositories. Try to file the issue against the correct repository. Check the list of [Related Projects](__ZYRAXKEEP__2_) if you aren't sure which repo is correct.
 
-Can you recreate the issue even after [disabling all extensions](https://zyraxon.ai/docs/editor/extension-gallery#_disable-an-extension)? If you find the issue is caused by an extension you have installed, please file an issue on the extension's repo directly.
+Can you recreate the issue even after [disabling all extensions](__ZYRAXKEEP__3_)? If you find the issue is caused by an extension you have installed, please file an issue on the extension's repo directly.
 
 ### Look For an Existing Issue
 
-Before you create a new issue, please do a search in [open issues](https://github.com/onelpawarai/zyraxon-code/issues) to see if the issue or feature request has already been filed.
+Before you create a new issue, please do a search in [open issues](__ZYRAXKEEP__4_) to see if the issue or feature request has already been filed.
 
-Be sure to scan through the [most popular](https://github.com/onelpawarai/zyraxon-code/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc) feature requests.
+Be sure to scan through the [most popular](__ZYRAXKEEP__5_) feature requests.
 
-If you find your issue already exists, make relevant comments and add your [reaction](https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments). Use a reaction in place of a "+1" comment:
+If you find your issue already exists, make relevant comments and add your [reaction](__ZYRAXKEEP__6_). Use a reaction in place of a "+1" comment:
 
 * 👍 - upvote
 * 👎 - downvote
@@ -64,7 +64,7 @@ Please include the following with each issue:
 
 ### Creating Pull Requests
 
-* Please refer to the article on [creating pull requests](https://github.com/onelpawarai/zyraxon-code/wiki/How-to-Contribute#pull-requests) and contributing to this project.
+* Please refer to the article on [creating pull requests](__ZYRAXKEEP__7_) and contributing to this project.
 
 ### Final Checklist
 
@@ -78,21 +78,21 @@ Don't feel bad if the developers can't reproduce the issue right away. They will
 
 ### Follow Your Issue
 
-Once submitted, your report will go into the [issue tracking](https://github.com/onelpawarai/zyraxon-code/wiki/Issue-Tracking) workflow. Be sure to understand what will happen next, so you know what to expect and how to continue to assist throughout the process.
+Once submitted, your report will go into the [issue tracking](__ZYRAXKEEP__8_) workflow. Be sure to understand what will happen next, so you know what to expect and how to continue to assist throughout the process.
 
 ## Automated Issue Management
 
-We use GitHub Actions to help us manage issues. These Actions and their descriptions can be [viewed here](https://github.com/onelpawarai/zyraxon-code-github-triage-actions). Some examples of what these Actions do are:
+We use GitHub Actions to help us manage issues. These Actions and their descriptions can be [viewed here](__ZYRAXKEEP__9_). Some examples of what these Actions do are:
 
 * Automatically close any issue marked `info-needed` if there has been no response in the past 7 days.
 * Automatically lock issues 45 days after they are closed.
-* Automatically implement the ZYRAXON Code [feature request pipeline](https://github.com/onelpawarai/zyraxon-code/wiki/Issues-Triaging#managing-feature-requests).
+* Automatically implement the ZYRAXON Code [feature request pipeline](__ZYRAXKEEP__10_).
 
 If you believe the bot got something wrong, please open a new issue and let us know.
 
 ## Contributing Fixes
 
-If you are interested in writing code to fix issues, please see [How to Contribute](https://github.com/onelpawarai/zyraxon-code/wiki/How-to-Contribute) in the wiki.
+If you are interested in writing code to fix issues, please see [How to Contribute](__ZYRAXKEEP__11_) in the wiki.
 
 ## Thank You
 

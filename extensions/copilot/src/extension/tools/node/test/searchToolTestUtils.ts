@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OutputMode } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { OutputMode } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { IChatEndpoint, IEmbeddingsEndpoint } from '../../../../platform/networking/common/networking';
 import { ITokenizer as IUtilTokenizer, TokenizerType } from '../../../../util/common/tokenizer';
@@ -43,7 +43,7 @@ export function createMockEndpointProvider(modelFamily: string): IEndpointProvid
 		getAllChatEndpoints: async () => [],
 		getAllCompletionModels: async () => [],
 		getEmbeddingsEndpoint: async () => ({
-			urlOrRequestMetadata: 'https://mock-embeddings-endpoint',
+			urlOrRequestMetadata: '__ZYRAXKEEP__0_',
 			acquireTokenizer: createMockTokenizer,
 			modelMaxPromptTokens: 1000,
 			modelMaxOutputTokens: 1000,
@@ -62,7 +62,7 @@ export function createMockEndpointProvider(modelFamily: string): IEndpointProvid
 /**
  * Mock language model chat for testing search tools with model-specific behavior
  */
-export const mockLanguageModelChat: vscode.LanguageModelChat = {
+export const mockLanguageModelChat: zyraxoncode.LanguageModelChat = {
 	name: 'test-model',
 	id: 'test-id',
 	vendor: 'test',
@@ -73,10 +73,10 @@ export const mockLanguageModelChat: vscode.LanguageModelChat = {
 	sendRequest: async () => ({
 		text: (async function* () { yield ''; })(),
 		stream: (async function* () { })()
-	} as vscode.LanguageModelChatResponse),
+	} as zyraxoncode.LanguageModelChatResponse),
 	countTokens: async () => 0,
 	capabilities: {
 		supportsToolCalling: true,
 		supportsImageToText: true
 	},
-} as vscode.LanguageModelChat;
+} as zyraxoncode.LanguageModelChat;

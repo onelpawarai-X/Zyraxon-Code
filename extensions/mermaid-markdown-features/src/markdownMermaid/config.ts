@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 import type MarkdownIt from 'markdown-it';
 
@@ -16,9 +16,9 @@ const enum ShowControlsMode {
 	OnHoverOrFocus = 'onHoverOrFocus'
 }
 
-const defaultMermaidTheme = 'vscode';
+const defaultMermaidTheme = 'zyraxoncode';
 const validMermaidThemes = [
-	'vscode',
+	'zyraxoncode',
 	'base',
 	'forest',
 	'dark',
@@ -31,7 +31,7 @@ function sanitizeMermaidTheme(theme: string | undefined): string {
 }
 
 export function buildMermaidConfigData() {
-	const config = vscode.workspace.getConfiguration(configSection);
+	const config = zyraxoncode.workspace.getConfiguration(configSection);
 	return {
 		darkModeTheme: sanitizeMermaidTheme(config.get('darkModeTheme')),
 		lightModeTheme: sanitizeMermaidTheme(config.get('lightModeTheme')),

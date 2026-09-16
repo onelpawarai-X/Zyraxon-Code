@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type * as nbformat from '@jupyterlab/nbformat';
-import { extensions, NotebookCellData, NotebookCellExecutionSummary, NotebookCellKind, NotebookCellOutput, NotebookCellOutputItem, NotebookData } from 'vscode';
+import { extensions, NotebookCellData, NotebookCellExecutionSummary, NotebookCellKind, NotebookCellOutput, NotebookCellOutputItem, NotebookData } from 'zyraxoncode';
 import { CellMetadata, CellOutputMetadata } from './common';
 import { textMimeTypes } from './constants';
 
@@ -26,7 +26,7 @@ export function getPreferredLanguage(metadata?: nbformat.INotebookMetadata) {
 	const defaultLanguage =
 		extensions.getExtension('ms-python.python')
 			? 'python'
-			: (extensions.getExtension('ms-dotnettools.dotnet-interactive-vscode') ? 'csharp' : 'python');
+			: (extensions.getExtension('ms-dotnettools.dotnet-interactive-zyraxoncode') ? 'csharp' : 'python');
 
 	// Note, whatever language is returned here, when the user selects a kernel, the cells (of blank documents) get updated based on that kernel selection.
 	return translateKernelLanguageToMonaco(jupyterLanguage || defaultLanguage);
@@ -78,7 +78,7 @@ function sortOutputItemsBasedOnDisplayOrder(outputItems: NotebookCellOutputItem[
 			let index = orderOfMimeTypes.findIndex((mime) => isMimeTypeMatch(mime, item.mime));
 			// Sometimes we can have mime types with empty data, e.g. when using holoview we can have `application/vnd.holoviews_load.v0+json` with empty value.
 			// & in these cases we have HTML/JS and those take precedence.
-			// https://github.com/microsoft/vscode-jupyter/issues/6109
+			// __ZYRAXKEEP__0_
 			if (isEmptyVendoredMimeType(item)) {
 				index = -1;
 			}
@@ -268,14 +268,14 @@ export function jupyterCellOutputToCellOutput(output: nbformat.IOutput): Noteboo
 	 * Rich, { mime: value }
 	 *
 	 * outputs: [
-			new vscode.NotebookCellOutput([
-				new vscode.NotebookCellOutputItem('application/x.notebook.stream', 2),
-				new vscode.NotebookCellOutputItem('application/x.notebook.stream', 3),
+			new zyraxoncode.NotebookCellOutput([
+				new zyraxoncode.NotebookCellOutputItem('application/x.notebook.stream', 2),
+				new zyraxoncode.NotebookCellOutputItem('application/x.notebook.stream', 3),
 			]),
-			new vscode.NotebookCellOutput([
-				new vscode.NotebookCellOutputItem('text/markdown', '## header 2'),
-				new vscode.NotebookCellOutputItem('image/svg+xml', [
-					"<svg baseProfile=\"full\" height=\"200\" version=\"1.1\" width=\"300\" xmlns=\"http://www.w3.org/2000/svg\">\n",
+			new zyraxoncode.NotebookCellOutput([
+				new zyraxoncode.NotebookCellOutputItem('text/markdown', '## header 2'),
+				new zyraxoncode.NotebookCellOutputItem('image/svg+xml', [
+					"<svg baseProfile=\"full\" height=\"200\" version=\"1.1\" width=\"300\" xmlns=\"__ZYRAXKEEP__1_\">\n",
 					"  <rect fill=\"blue\" height=\"100%\" width=\"100%\"/>\n",
 					"  <circle cx=\"150\" cy=\"100\" fill=\"green\" r=\"80\"/>\n",
 					"  <text fill=\"white\" font-size=\"60\" text-anchor=\"middle\" x=\"150\" y=\"125\">SVG</text>\n",
@@ -322,8 +322,8 @@ function createNotebookCellDataFromCodeCell(cell: nbformat.ICodeCell, cellLangua
 		? { executionOrder: cell.execution_count as number }
 		: {};
 
-	const vscodeCustomMetadata = cell.metadata?.['vscode'] as { [key: string]: any } | undefined;
-	const cellLanguageId = vscodeCustomMetadata && vscodeCustomMetadata.languageId && typeof vscodeCustomMetadata.languageId === 'string' ? vscodeCustomMetadata.languageId : cellLanguage;
+	const zyraxoncodeCustomMetadata = cell.metadata?.['zyraxoncode'] as { [key: string]: any } | undefined;
+	const cellLanguageId = zyraxoncodeCustomMetadata && zyraxoncodeCustomMetadata.languageId && typeof zyraxoncodeCustomMetadata.languageId === 'string' ? zyraxoncodeCustomMetadata.languageId : cellLanguage;
 	const cellData = new NotebookCellData(NotebookCellKind.Code, source, cellLanguageId);
 
 	cellData.outputs = outputs;

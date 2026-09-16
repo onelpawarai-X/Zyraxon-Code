@@ -81,12 +81,12 @@
 
 	if (process.contextIsolated) {
 		try {
-			contextBridge.exposeInMainWorld('vscode', globals);
+			contextBridge.exposeInMainWorld('zyraxoncode', globals);
 		} catch (error) {
 			console.error(error);
 		}
 	} else {
 		// @ts-ignore
-		window.vscode = globals;
+		window.zyraxoncode = globals;
 	}
 }());

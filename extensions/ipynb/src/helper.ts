@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CancellationError } from 'vscode';
+import { CancellationError } from 'zyraxoncode';
 
 export function deepClone<T>(obj: T): T {
 	if (obj === null || typeof obj !== 'object') {
 		return obj;
 	}
 	if (obj instanceof RegExp) {
-		// See https://github.com/microsoft/TypeScript/issues/10990
+		// See __ZYRAXKEEP__0_
 		return obj;
 	}
 	if (Array.isArray(obj)) {
@@ -28,7 +28,7 @@ export function deepClone<T>(obj: T): T {
 	return result as T;
 }
 
-// from https://github.com/microsoft/vscode/blob/43ae27a30e7b5e8711bf6b218ee39872ed2b8ef6/src/vs/base/common/objects.ts#L117
+// from __ZYRAXKEEP__1_
 export function objectEquals(one: any, other: any) {
 	if (one === other) {
 		return true;
@@ -85,7 +85,7 @@ export function objectEquals(one: any, other: any) {
 
 /**
  * A helper to delay/debounce execution of a task, includes cancellation/disposal support.
- * Pulled from https://github.com/microsoft/vscode/blob/3059063b805ed0ac10a6d9539e213386bfcfb852/extensions/markdown-language-features/src/util/async.ts
+ * Pulled from __ZYRAXKEEP__2_
  */
 export class Delayer<T> {
 
@@ -154,7 +154,7 @@ export interface ITask<T> {
 export function generateUuid(): string {
 	// use `randomUUID` if possible
 	if (typeof crypto.randomUUID === 'function') {
-		// see https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto
+		// see __ZYRAXKEEP__3_
 		// > Although crypto is available on all windows, the returned Crypto object only has one
 		// > usable feature in insecure contexts: the getRandomValues() method.
 		// > In general, you should use this API only in secure contexts.

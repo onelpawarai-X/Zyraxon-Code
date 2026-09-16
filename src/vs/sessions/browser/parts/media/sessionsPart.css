@@ -11,7 +11,7 @@
 .monaco-workbench .part.sessionspart > .content .monaco-editor,
 .monaco-workbench .part.sessionspart > .content .monaco-editor .margin,
 .monaco-workbench .part.sessionspart > .content .monaco-editor .monaco-editor-background {
-	background-color: var(--vscode-agentsPanel-background);
+	background-color: var(--zyraxoncode-agentsPanel-background);
 }
 
 .monaco-workbench .part.sessionspart .session-view,
@@ -22,7 +22,7 @@
 }
 
 .monaco-workbench .part.sessionspart .session-view .interactive-session {
-	--vscode-interactive-session-foreground: var(--session-view-foreground) !important;
+	--zyraxoncode-interactive-session-foreground: var(--session-view-foreground) !important;
 }
 
 .monaco-workbench .part.sessionspart > .content > .monaco-progress-container {
@@ -56,7 +56,7 @@
 }
 
 .monaco-workbench .part.sessionspart > .title {
-	background-color: var(--vscode-agentsPanel-background);
+	background-color: var(--zyraxoncode-agentsPanel-background);
 }
 
 .monaco-workbench .part.sessionspart > .title > .title-label {
@@ -91,21 +91,21 @@
 
 .monaco-workbench .part.sessionspart > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.checked:not(:focus) .active-item-indicator:before,
 .monaco-workbench .part.sessionspart > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.checked.clicked:focus .active-item-indicator:before {
-	border-top-color: var(--vscode-panelTitle-activeBorder) !important;
+	border-top-color: var(--zyraxoncode-panelTitle-activeBorder) !important;
 }
 
 .monaco-workbench .part.sessionspart > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:hover .action-label,
 .monaco-workbench .part.sessionspart > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:focus .action-label {
-	color: var(--vscode-agentsPanel-foreground) !important;
+	color: var(--zyraxoncode-agentsPanel-foreground) !important;
 }
 
 .monaco-workbench .part.sessionspart > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.checked .action-label,
 .monaco-workbench .part.sessionspart > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:hover .action-label {
-	outline: var(--vscode-contrastActiveBorder, unset) solid 1px !important;
+	outline: var(--zyraxoncode-contrastActiveBorder, unset) solid 1px !important;
 }
 
 .monaco-workbench .part.sessionspart > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:not(.checked):hover .action-label {
-	outline: var(--vscode-contrastActiveBorder, unset) dashed 1px !important;
+	outline: var(--zyraxoncode-contrastActiveBorder, unset) dashed 1px !important;
 }
 
 .monaco-workbench .sessionspart.part.pane-composite-part > .composite.title > .title-actions {

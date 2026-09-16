@@ -7,7 +7,7 @@
 	width: 36px;
 	height: 36px;
 	margin-right: 16px;
-	border-radius: var(--vscode-cornerRadius-xSmall, 2px);
+	border-radius: var(--zyraxoncode-cornerRadius-xSmall, 2px);
 	flex-shrink: 0;
 	object-fit: contain;
 }
@@ -52,7 +52,7 @@
 
 .verified-publisher > .extension-verified-publisher-domain {
 	padding-left: 2px;
-	color: var(--vscode-extensionIcon-verifiedForeground);
+	color: var(--zyraxoncode-extensionIcon-verifiedForeground);
 	text-decoration: var(--text-link-decoration);
 }
 
@@ -67,19 +67,19 @@
 	justify-content: center;
 	width: 16px;
 	height: 16px;
-	border-top-left-radius: var(--vscode-cornerRadius-small, 4px);
-	border-bottom-right-radius: var(--vscode-cornerRadius-small, 4px);
+	border-top-left-radius: var(--zyraxoncode-cornerRadius-small, 4px);
+	border-bottom-right-radius: var(--zyraxoncode-cornerRadius-small, 4px);
 	box-sizing: border-box;
 }
 
 .extension-bookmark > .pre-release {
-	background-color: var(--vscode-extensionIcon-preReleaseForeground);
+	background-color: var(--zyraxoncode-extensionIcon-preReleaseForeground);
 	color: #ffffff;
 }
 
 .extension-bookmark > .recommendation {
-	background-color: var(--vscode-extensionButton-prominentBackground);
-	color: var(--vscode-extensionButton-prominentForeground);
+	background-color: var(--zyraxoncode-extensionButton-prominentBackground);
+	color: var(--zyraxoncode-extensionButton-prominentForeground);
 }
 
 .extension-bookmark > .recommendation > .codicon,
@@ -93,7 +93,7 @@
 .hc-light .extension-bookmark > .recommendation,
 .hc-black .extension-bookmark > .pre-release,
 .hc-light .extension-bookmark > .pre-release {
-	background-color: var(--vscode-editor-background);
-	color: var(--vscode-contrastBorder);
-	border: var(--vscode-strokeThickness) solid var(--vscode-contrastBorder);
+	background-color: var(--zyraxoncode-editor-background);
+	color: var(--zyraxoncode-contrastBorder);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-contrastBorder);
 }

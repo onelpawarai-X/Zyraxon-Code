@@ -33,6 +33,6 @@ run({
 	srcDir,
 	outdir: outDir,
 	additionalOptions: {
-		external: ['@vscode/markdown-it-katex'],
+		external: ['@zyraxoncode/markdown-it-katex'],
 	},
 }, process.argv, postBuild);

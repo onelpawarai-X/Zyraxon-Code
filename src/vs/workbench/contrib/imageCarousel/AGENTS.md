@@ -6,7 +6,7 @@ A generic workbench editor for viewing collections of images in a carousel/slide
 
 The image carousel is a self-contained workbench contribution that follows the **custom editor** pattern:
 
-- **URI scheme**: `vscode-image-carousel` (registered in `Schemas` in `src/vs/base/common/network.ts`) — used for `EditorInput.resource` identity.
+- **URI scheme**: `zyraxoncode-image-carousel` (registered in `Schemas` in `src/vs/base/common/network.ts`) — used for `EditorInput.resource` identity.
 - **Direct editor input**: Callers create `ImageCarouselEditorInput` with a collection and open it directly via `IEditorService.openEditor()`.
 - **Image extraction**: Chat integration builds a **sections-based** collection from chat request/response items. A section can include user-attached request images alongside response-derived images (tool invocations and inline references). For paired request/response items, the section title prefers the user's chat request message; pending requests with image attachments form their own section.
 

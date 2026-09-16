@@ -10,7 +10,7 @@ import { RelativePattern } from '../../../platform/filesystem/common/fileTypes';
 import { IGitDiffService } from '../../../platform/git/common/gitDiffService';
 import { IGitExtensionService } from '../../../platform/git/common/gitExtensionService';
 import { getOrderedRepoInfosFromContext, IGitService, normalizeFetchUrl, RepoContext, ResolvedRepoRemoteInfo } from '../../../platform/git/common/gitService';
-import { Change, Repository } from '../../../platform/git/vscode/git';
+import { Change, Repository } from '../../../platform/git/zyraxoncode/git';
 import { ILogService } from '../../../platform/log/common/logService';
 import { ITelemetryService, multiplexProperties } from '../../../platform/telemetry/common/telemetry';
 import { extUriBiasedIgnorePathCase } from '../../../util/vs/base/common/resources';

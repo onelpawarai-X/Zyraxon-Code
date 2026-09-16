@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IConversationOptions } from '../../../platform/chat/common/conversationOptions';
@@ -39,7 +39,7 @@ export class GitCommitMessageGenerator {
 
 		const temperature = Math.min(
 			this.conversationOptions.temperature * (1 + attemptCount),
-			2 /* MAX temperature - https://platform.openai.com/docs/api-reference/chat/create#chat/create-temperature */
+			2 /* MAX temperature - __ZYRAXKEEP__0_ */
 		);
 
 		const requestStartTime = Date.now();

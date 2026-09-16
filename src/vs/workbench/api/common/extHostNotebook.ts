@@ -26,7 +26,7 @@ import * as typeConverters from './extHostTypeConverters.js';
 import * as extHostTypes from './extHostTypes.js';
 import { INotebookExclusiveDocumentFilter, INotebookContributionData } from '../../contrib/notebook/common/notebookCommon.js';
 import { SerializableObjectWithBuffers } from '../../services/extensions/common/proxyIdentifier.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostCell, ExtHostNotebookDocument } from './extHostNotebookDocument.js';
 import { ExtHostNotebookEditor } from './extHostNotebookEditor.js';
 import { IExtHostConsumerFileSystem } from './extHostFileSystemConsumer.js';
@@ -47,29 +47,29 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 	private readonly _notebookDocumentsProxy: MainThreadNotebookDocumentsShape;
 	private readonly _notebookEditorsProxy: MainThreadNotebookEditorsShape;
 
-	private readonly _notebookStatusBarItemProviders = new Map<number, vscode.NotebookCellStatusBarItemProvider>();
+	private readonly _notebookStatusBarItemProviders = new Map<number, zyraxoncode.NotebookCellStatusBarItemProvider>();
 	private readonly _documents = new ResourceMap<ExtHostNotebookDocument>();
 	private readonly _editors = new Map<string, ExtHostNotebookEditor>();
 	private readonly _commandsConverter: CommandsConverter;
 
-	private readonly _onDidChangeActiveNotebookEditor = new Emitter<vscode.NotebookEditor | undefined>();
+	private readonly _onDidChangeActiveNotebookEditor = new Emitter<zyraxoncode.NotebookEditor | undefined>();
 	readonly onDidChangeActiveNotebookEditor = this._onDidChangeActiveNotebookEditor.event;
 
 	private _activeNotebookEditor: ExtHostNotebookEditor | undefined;
-	get activeNotebookEditor(): vscode.NotebookEditor | undefined {
+	get activeNotebookEditor(): zyraxoncode.NotebookEditor | undefined {
 		return this._activeNotebookEditor?.apiEditor;
 	}
 	private _visibleNotebookEditors: ExtHostNotebookEditor[] = [];
-	get visibleNotebookEditors(): vscode.NotebookEditor[] {
+	get visibleNotebookEditors(): zyraxoncode.NotebookEditor[] {
 		return this._visibleNotebookEditors.map(editor => editor.apiEditor);
 	}
 
-	private _onDidOpenNotebookDocument = new Emitter<vscode.NotebookDocument>();
-	readonly onDidOpenNotebookDocument: Event<vscode.NotebookDocument> = this._onDidOpenNotebookDocument.event;
-	private _onDidCloseNotebookDocument = new Emitter<vscode.NotebookDocument>();
-	readonly onDidCloseNotebookDocument: Event<vscode.NotebookDocument> = this._onDidCloseNotebookDocument.event;
+	private _onDidOpenNotebookDocument = new Emitter<zyraxoncode.NotebookDocument>();
+	readonly onDidOpenNotebookDocument: Event<zyraxoncode.NotebookDocument> = this._onDidOpenNotebookDocument.event;
+	private _onDidCloseNotebookDocument = new Emitter<zyraxoncode.NotebookDocument>();
+	readonly onDidCloseNotebookDocument: Event<zyraxoncode.NotebookDocument> = this._onDidCloseNotebookDocument.event;
 
-	private _onDidChangeVisibleNotebookEditors = new Emitter<vscode.NotebookEditor[]>();
+	private _onDidChangeVisibleNotebookEditors = new Emitter<zyraxoncode.NotebookEditor[]>();
 	onDidChangeVisibleNotebookEditors = this._onDidChangeVisibleNotebookEditors.event;
 
 	private _statusBarCache = new Cache<IDisposable>('NotebookCellStatusBarCache');
@@ -123,7 +123,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 		return editor;
 	}
 
-	getIdByEditor(editor: vscode.NotebookEditor): string | undefined {
+	getIdByEditor(editor: zyraxoncode.NotebookEditor): string | undefined {
 		for (const [id, candidate] of this._editors) {
 			if (candidate.apiEditor === editor) {
 				return id;
@@ -146,7 +146,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 		return result;
 	}
 
-	private static _convertNotebookRegistrationData(extension: IExtensionDescription, registration: vscode.NotebookRegistrationData | undefined): INotebookContributionData | undefined {
+	private static _convertNotebookRegistrationData(extension: IExtensionDescription, registration: zyraxoncode.NotebookRegistrationData | undefined): INotebookContributionData | undefined {
 		if (!registration) {
 			return;
 		}
@@ -166,7 +166,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 		};
 	}
 
-	registerNotebookCellStatusBarItemProvider(extension: IExtensionDescription, notebookType: string, provider: vscode.NotebookCellStatusBarItemProvider) {
+	registerNotebookCellStatusBarItemProvider(extension: IExtensionDescription, notebookType: string, provider: zyraxoncode.NotebookCellStatusBarItemProvider) {
 
 		const handle = ExtHostNotebookController._notebookStatusBarItemProviderHandlePool++;
 		const eventHandle = typeof provider.onDidChangeCellStatusBarItems === 'function' ? ExtHostNotebookController._notebookStatusBarItemProviderHandlePool++ : undefined;
@@ -174,7 +174,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 		this._notebookStatusBarItemProviders.set(handle, provider);
 		this._notebookProxy.$registerNotebookCellStatusBarItemProvider(handle, eventHandle, notebookType);
 
-		let subscription: vscode.Disposable | undefined;
+		let subscription: zyraxoncode.Disposable | undefined;
 		if (eventHandle !== undefined) {
 			subscription = provider.onDidChangeCellStatusBarItems!(_ => this._notebookProxy.$emitCellStatusBarEvent(eventHandle));
 		}
@@ -186,7 +186,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 		});
 	}
 
-	async createNotebookDocument(options: { viewType: string; content?: vscode.NotebookData }): Promise<URI> {
+	async createNotebookDocument(options: { viewType: string; content?: zyraxoncode.NotebookData }): Promise<URI> {
 		const canonicalUri = await this._notebookDocumentsProxy.$tryCreateNotebook({
 			viewType: options.viewType,
 			content: options.content && typeConverters.NotebookData.from(options.content)
@@ -194,7 +194,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 		return URI.revive(canonicalUri);
 	}
 
-	async openNotebookDocument(uri: URI): Promise<vscode.NotebookDocument> {
+	async openNotebookDocument(uri: URI): Promise<zyraxoncode.NotebookDocument> {
 		const cached = this._documents.get(uri);
 		if (cached) {
 			return cached.apiNotebook;
@@ -204,7 +204,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 		return assertReturnsDefined(document?.apiNotebook);
 	}
 
-	async showNotebookDocument(notebook: vscode.NotebookDocument, options?: vscode.NotebookDocumentShowOptions): Promise<vscode.NotebookEditor> {
+	async showNotebookDocument(notebook: zyraxoncode.NotebookDocument, options?: zyraxoncode.NotebookDocumentShowOptions): Promise<zyraxoncode.NotebookEditor> {
 		let resolvedOptions: INotebookDocumentShowOptions;
 		if (typeof options === 'object') {
 			resolvedOptions = {
@@ -275,9 +275,9 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 	// --- serialize/deserialize
 
 	private _handlePool = 0;
-	private readonly _notebookSerializer = new Map<number, { viewType: string; serializer: vscode.NotebookSerializer; options: vscode.NotebookDocumentContentOptions | undefined }>();
+	private readonly _notebookSerializer = new Map<number, { viewType: string; serializer: zyraxoncode.NotebookSerializer; options: zyraxoncode.NotebookDocumentContentOptions | undefined }>();
 
-	registerNotebookSerializer(extension: IExtensionDescription, viewType: string, serializer: vscode.NotebookSerializer, options?: vscode.NotebookDocumentContentOptions, registration?: vscode.NotebookRegistrationData): vscode.Disposable {
+	registerNotebookSerializer(extension: IExtensionDescription, viewType: string, serializer: zyraxoncode.NotebookSerializer, options?: zyraxoncode.NotebookDocumentContentOptions, registration?: zyraxoncode.NotebookRegistrationData): zyraxoncode.Disposable {
 		if (isFalsyOrWhitespace(viewType)) {
 			throw new Error(`viewType cannot be empty or just whitespace`);
 		}
@@ -336,7 +336,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 				throw new files.FileOperationError(localize('err.readonly', "Unable to modify read-only file '{0}'", this._resourceForError(uri)), files.FileOperationResult.FILE_PERMISSION_DENIED);
 			}
 
-			const data: vscode.NotebookData = {
+			const data: zyraxoncode.NotebookData = {
 				metadata: filter(document.apiNotebook.metadata, key => !(serializer.options?.transientDocumentMetadata ?? {})[key]),
 				cells: [],
 			};
@@ -443,7 +443,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 							}
 							const hasOtherMatches = otherViewTypeFileTargets.some(target => {
 								// use the same strategy that the editor service uses to open editors
-								// https://github.com/microsoft/vscode/blob/ac1631528e67637da65ec994c6dc35d73f6e33cc/src/vs/workbench/services/editor/browser/editorResolverService.ts#L359-L366
+								// __ZYRAXKEEP__0_
 								if (include.isFromSettings && !target.isFromSettings) {
 									// if the include is from the settings and target isn't, even if it matches, it's still overridden.
 									return false;
@@ -649,7 +649,7 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 					modelData
 				);
 
-				// add cell document as vscode.TextDocument
+				// add cell document as zyraxoncode.TextDocument
 				addedCellDocuments.push(...modelData.cells.map(cell => ExtHostCell.asModelAddData(cell)));
 
 				this._documents.get(uri)?.dispose();
@@ -727,14 +727,14 @@ export class ExtHostNotebookController implements ExtHostNotebookShape {
 		const notebookTypeArg = ApiCommandArgument.String.with('notebookType', 'A notebook type');
 
 		const commandDataToNotebook = new ApiCommand(
-			'vscode.executeDataToNotebook', '_executeDataToNotebook', 'Invoke notebook serializer',
+			'zyraxoncode.executeDataToNotebook', '_executeDataToNotebook', 'Invoke notebook serializer',
 			[notebookTypeArg, new ApiCommandArgument<Uint8Array, VSBuffer>('data', 'Bytes to convert to data', v => v instanceof Uint8Array, v => VSBuffer.wrap(v))],
-			new ApiCommandResult<SerializableObjectWithBuffers<NotebookDataDto>, vscode.NotebookData>('Notebook Data', data => typeConverters.NotebookData.to(data.value))
+			new ApiCommandResult<SerializableObjectWithBuffers<NotebookDataDto>, zyraxoncode.NotebookData>('Notebook Data', data => typeConverters.NotebookData.to(data.value))
 		);
 
 		const commandNotebookToData = new ApiCommand(
-			'vscode.executeNotebookToData', '_executeNotebookToData', 'Invoke notebook serializer',
-			[notebookTypeArg, new ApiCommandArgument<vscode.NotebookData, SerializableObjectWithBuffers<NotebookDataDto>>('NotebookData', 'Notebook data to convert to bytes', v => true, v => new SerializableObjectWithBuffers(typeConverters.NotebookData.from(v)))],
+			'zyraxoncode.executeNotebookToData', '_executeNotebookToData', 'Invoke notebook serializer',
+			[notebookTypeArg, new ApiCommandArgument<zyraxoncode.NotebookData, SerializableObjectWithBuffers<NotebookDataDto>>('NotebookData', 'Notebook data to convert to bytes', v => true, v => new SerializableObjectWithBuffers(typeConverters.NotebookData.from(v)))],
 			new ApiCommandResult<VSBuffer, Uint8Array>('Bytes', dto => dto.buffer)
 		);
 

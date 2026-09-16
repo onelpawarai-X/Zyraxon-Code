@@ -170,7 +170,7 @@ async fn check_glibc_version() -> Result<bool, String> {
 }
 
 /// Check for nixos to avoid mandating glibc versions. See:
-/// https://github.com/microsoft/vscode-remote-release/issues/7129
+/// __ZYRAXKEEP__0_
 #[allow(dead_code)]
 async fn check_is_nixos() -> bool {
 	fs::metadata(NIXOS_TEST_PATH).await.is_ok()
@@ -189,7 +189,7 @@ async fn check_is_nixos() -> bool {
 #[cfg(not(windows))]
 pub async fn skip_requirements_check() -> bool {
 	std::env::var("VSCODE_SERVER_CUSTOM_GLIBC_LINKER").is_ok()
-		|| fs::metadata("/tmp/vscode-skip-server-requirements-check")
+		|| fs::metadata("/tmp/zyraxoncode-skip-server-requirements-check")
 			.await
 			.is_ok()
 }

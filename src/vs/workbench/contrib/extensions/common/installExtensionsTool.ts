@@ -10,14 +10,14 @@ import { areSameExtensions } from '../../../../platform/extensionManagement/comm
 import { CountTokensCallback, IPreparedToolInvocation, IToolData, IToolImpl, IToolInvocation, IToolInvocationPreparationContext, IToolResult, ToolDataSource, ToolProgress } from '../../chat/common/tools/languageModelToolsService.js';
 import { IExtensionsWorkbenchService } from './extensions.js';
 
-export const InstallExtensionsToolId = 'vscode_installExtensions';
+export const InstallExtensionsToolId = 'zyraxoncode_installExtensions';
 
 export const InstallExtensionsToolData: IToolData = {
 	id: InstallExtensionsToolId,
 	toolReferenceName: 'installExtensions',
 	canBeReferencedInPrompt: true,
 	displayName: localize('installExtensionsTool.displayName', 'Install Extensions'),
-	modelDescription: 'This is a tool for installing extensions in ZYRAXON Code. You should provide the list of extension ids to install. The identifier of an extension is \'\${ publisher }.\${ name }\' for example: \'vscode.csharp\'.',
+	modelDescription: 'This is a tool for installing extensions in ZYRAXON Code. You should provide the list of extension ids to install. The identifier of an extension is \'\${ publisher }.\${ name }\' for example: \'zyraxoncode.csharp\'.',
 	userDescription: localize('installExtensionsTool.userDescription', 'Tool for installing extensions'),
 	source: ToolDataSource.Internal,
 	inputSchema: {
@@ -28,7 +28,7 @@ export const InstallExtensionsToolData: IToolData = {
 				items: {
 					type: 'string',
 				},
-				description: 'The ids of the extensions to search for. The identifier of an extension is \'\${ publisher }.\${ name }\' for example: \'vscode.csharp\'.',
+				description: 'The ids of the extensions to search for. The identifier of an extension is \'\${ publisher }.\${ name }\' for example: \'zyraxoncode.csharp\'.',
 			},
 		}
 	}

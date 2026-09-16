@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, ChatHookResult, ChatHookType } from 'vscode';
+import type { CancellationToken, ChatHookResult, ChatHookType } from 'zyraxoncode';
 import { IChatHookService } from '../../../../platform/chat/common/chatHookService';
 
 export class MockChatHookService implements IChatHookService {

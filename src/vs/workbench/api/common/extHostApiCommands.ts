@@ -21,7 +21,7 @@ import * as typeConverters from './extHostTypeConverters.js';
 import * as types from './extHostTypes.js';
 import { TransientCellMetadata, TransientDocumentMetadata } from '../../contrib/notebook/common/notebookCommon.js';
 import * as search from '../../contrib/search/common/search.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { PromptsType } from '../../contrib/chat/common/promptSyntax/promptTypes.js';
 import type { IExtensionPromptFileResult } from '../../contrib/chat/common/promptSyntax/chatPromptFilesContribution.js';
 
@@ -30,20 +30,20 @@ import type { IExtensionPromptFileResult } from '../../contrib/chat/common/promp
 const newCommands: ApiCommand[] = [
 	// -- document highlights
 	new ApiCommand(
-		'vscode.executeDocumentHighlights', '_executeDocumentHighlights', 'Execute document highlight provider.',
+		'zyraxoncode.executeDocumentHighlights', '_executeDocumentHighlights', 'Execute document highlight provider.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
 		new ApiCommandResult<languages.DocumentHighlight[], types.DocumentHighlight[] | undefined>('A promise that resolves to an array of DocumentHighlight-instances.', tryMapWith(typeConverters.DocumentHighlight.to))
 	),
 	// -- document symbols
 	new ApiCommand(
-		'vscode.executeDocumentSymbolProvider', '_executeDocumentSymbolProvider', 'Execute document symbol provider.',
+		'zyraxoncode.executeDocumentSymbolProvider', '_executeDocumentSymbolProvider', 'Execute document symbol provider.',
 		[ApiCommandArgument.Uri],
-		new ApiCommandResult<languages.DocumentSymbol[], vscode.SymbolInformation[] | undefined>('A promise that resolves to an array of SymbolInformation and DocumentSymbol instances.', (value, apiArgs) => {
+		new ApiCommandResult<languages.DocumentSymbol[], zyraxoncode.SymbolInformation[] | undefined>('A promise that resolves to an array of SymbolInformation and DocumentSymbol instances.', (value, apiArgs) => {
 
 			if (isFalsyOrEmpty(value)) {
 				return undefined;
 			}
-			class MergedInfo extends types.SymbolInformation implements vscode.DocumentSymbol {
+			class MergedInfo extends types.SymbolInformation implements zyraxoncode.DocumentSymbol {
 				static to(symbol: languages.DocumentSymbol): MergedInfo {
 					const res = new MergedInfo(
 						symbol.name,
@@ -59,9 +59,9 @@ const newCommands: ApiCommand[] = [
 				}
 
 				detail!: string;
-				range!: vscode.Range;
-				selectionRange!: vscode.Range;
-				children!: vscode.DocumentSymbol[];
+				range!: zyraxoncode.Range;
+				selectionRange!: zyraxoncode.Range;
+				children!: zyraxoncode.DocumentSymbol[];
 				override containerName: string = '';
 			}
 			return value.map(MergedInfo.to);
@@ -70,85 +70,85 @@ const newCommands: ApiCommand[] = [
 	),
 	// -- formatting
 	new ApiCommand(
-		'vscode.executeFormatDocumentProvider', '_executeFormatDocumentProvider', 'Execute document format provider.',
+		'zyraxoncode.executeFormatDocumentProvider', '_executeFormatDocumentProvider', 'Execute document format provider.',
 		[ApiCommandArgument.Uri, new ApiCommandArgument('options', 'Formatting options', _ => true, v => v)],
 		new ApiCommandResult<languages.TextEdit[], types.TextEdit[] | undefined>('A promise that resolves to an array of TextEdits.', tryMapWith(typeConverters.TextEdit.to))
 	),
 	new ApiCommand(
-		'vscode.executeFormatRangeProvider', '_executeFormatRangeProvider', 'Execute range format provider.',
+		'zyraxoncode.executeFormatRangeProvider', '_executeFormatRangeProvider', 'Execute range format provider.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Range, new ApiCommandArgument('options', 'Formatting options', _ => true, v => v)],
 		new ApiCommandResult<languages.TextEdit[], types.TextEdit[] | undefined>('A promise that resolves to an array of TextEdits.', tryMapWith(typeConverters.TextEdit.to))
 	),
 	new ApiCommand(
-		'vscode.executeFormatOnTypeProvider', '_executeFormatOnTypeProvider', 'Execute format on type provider.',
+		'zyraxoncode.executeFormatOnTypeProvider', '_executeFormatOnTypeProvider', 'Execute format on type provider.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position, new ApiCommandArgument('ch', 'Trigger character', v => typeof v === 'string', v => v), new ApiCommandArgument('options', 'Formatting options', _ => true, v => v)],
 		new ApiCommandResult<languages.TextEdit[], types.TextEdit[] | undefined>('A promise that resolves to an array of TextEdits.', tryMapWith(typeConverters.TextEdit.to))
 	),
 	// -- go to symbol (definition, type definition, declaration, impl, references)
 	new ApiCommand(
-		'vscode.executeDefinitionProvider', '_executeDefinitionProvider', 'Execute all definition providers.',
+		'zyraxoncode.executeDefinitionProvider', '_executeDefinitionProvider', 'Execute all definition providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
-		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | vscode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
+		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | zyraxoncode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
 	),
 	new ApiCommand(
-		'vscode.experimental.executeDefinitionProvider_recursive', '_executeDefinitionProvider_recursive', 'Execute all definition providers.',
+		'zyraxoncode.experimental.executeDefinitionProvider_recursive', '_executeDefinitionProvider_recursive', 'Execute all definition providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
-		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | vscode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
+		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | zyraxoncode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
 	),
 	new ApiCommand(
-		'vscode.executeTypeDefinitionProvider', '_executeTypeDefinitionProvider', 'Execute all type definition providers.',
+		'zyraxoncode.executeTypeDefinitionProvider', '_executeTypeDefinitionProvider', 'Execute all type definition providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
-		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | vscode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
+		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | zyraxoncode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
 	),
 	new ApiCommand(
-		'vscode.experimental.executeTypeDefinitionProvider_recursive', '_executeTypeDefinitionProvider_recursive', 'Execute all type definition providers.',
+		'zyraxoncode.experimental.executeTypeDefinitionProvider_recursive', '_executeTypeDefinitionProvider_recursive', 'Execute all type definition providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
-		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | vscode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
+		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | zyraxoncode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
 	),
 	new ApiCommand(
-		'vscode.executeDeclarationProvider', '_executeDeclarationProvider', 'Execute all declaration providers.',
+		'zyraxoncode.executeDeclarationProvider', '_executeDeclarationProvider', 'Execute all declaration providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
-		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | vscode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
+		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | zyraxoncode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
 	),
 	new ApiCommand(
-		'vscode.experimental.executeDeclarationProvider_recursive', '_executeDeclarationProvider_recursive', 'Execute all declaration providers.',
+		'zyraxoncode.experimental.executeDeclarationProvider_recursive', '_executeDeclarationProvider_recursive', 'Execute all declaration providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
-		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | vscode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
+		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | zyraxoncode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
 	),
 	new ApiCommand(
-		'vscode.executeImplementationProvider', '_executeImplementationProvider', 'Execute all implementation providers.',
+		'zyraxoncode.executeImplementationProvider', '_executeImplementationProvider', 'Execute all implementation providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
-		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | vscode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
+		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | zyraxoncode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
 	),
 	new ApiCommand(
-		'vscode.experimental.executeImplementationProvider_recursive', '_executeImplementationProvider_recursive', 'Execute all implementation providers.',
+		'zyraxoncode.experimental.executeImplementationProvider_recursive', '_executeImplementationProvider_recursive', 'Execute all implementation providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
-		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | vscode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
+		new ApiCommandResult<(languages.Location | languages.LocationLink)[], (types.Location | zyraxoncode.LocationLink)[] | undefined>('A promise that resolves to an array of Location or LocationLink instances.', mapLocationOrLocationLink)
 	),
 	new ApiCommand(
-		'vscode.executeReferenceProvider', '_executeReferenceProvider', 'Execute all reference providers.',
+		'zyraxoncode.executeReferenceProvider', '_executeReferenceProvider', 'Execute all reference providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
 		new ApiCommandResult<languages.Location[], types.Location[] | undefined>('A promise that resolves to an array of Location-instances.', tryMapWith(typeConverters.location.to))
 	),
 	new ApiCommand(
-		'vscode.experimental.executeReferenceProvider', '_executeReferenceProvider_recursive', 'Execute all reference providers.',
+		'zyraxoncode.experimental.executeReferenceProvider', '_executeReferenceProvider_recursive', 'Execute all reference providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
 		new ApiCommandResult<languages.Location[], types.Location[] | undefined>('A promise that resolves to an array of Location-instances.', tryMapWith(typeConverters.location.to))
 	),
 	// -- hover
 	new ApiCommand(
-		'vscode.executeHoverProvider', '_executeHoverProvider', 'Execute all hover providers.',
+		'zyraxoncode.executeHoverProvider', '_executeHoverProvider', 'Execute all hover providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
 		new ApiCommandResult<languages.Hover[], types.Hover[] | undefined>('A promise that resolves to an array of Hover-instances.', tryMapWith(typeConverters.Hover.to))
 	),
 	new ApiCommand(
-		'vscode.experimental.executeHoverProvider_recursive', '_executeHoverProvider_recursive', 'Execute all hover providers.',
+		'zyraxoncode.experimental.executeHoverProvider_recursive', '_executeHoverProvider_recursive', 'Execute all hover providers.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
 		new ApiCommandResult<languages.Hover[], types.Hover[] | undefined>('A promise that resolves to an array of Hover-instances.', tryMapWith(typeConverters.Hover.to))
 	),
 	// -- selection range
 	new ApiCommand(
-		'vscode.executeSelectionRangeProvider', '_executeSelectionRangeProvider', 'Execute selection range provider.',
+		'zyraxoncode.executeSelectionRangeProvider', '_executeSelectionRangeProvider', 'Execute selection range provider.',
 		[ApiCommandArgument.Uri, new ApiCommandArgument<types.Position[], IPosition[]>('position', 'A position in a text document', v => Array.isArray(v) && v.every(v => types.Position.isPosition(v)), v => v.map(typeConverters.Position.from))],
 		new ApiCommandResult<IRange[][], types.SelectionRange[]>('A promise that resolves to an array of ranges.', result => {
 			return result.map(ranges => {
@@ -162,7 +162,7 @@ const newCommands: ApiCommand[] = [
 	),
 	// -- symbol search
 	new ApiCommand(
-		'vscode.executeWorkspaceSymbolProvider', '_executeWorkspaceSymbolProvider', 'Execute all workspace symbol providers.',
+		'zyraxoncode.executeWorkspaceSymbolProvider', '_executeWorkspaceSymbolProvider', 'Execute all workspace symbol providers.',
 		[ApiCommandArgument.String.with('query', 'Search string')],
 		new ApiCommandResult<search.IWorkspaceSymbol[], types.SymbolInformation[]>('A promise that resolves to an array of SymbolInformation-instances.', value => {
 			return value.map(typeConverters.WorkspaceSymbol.to);
@@ -170,23 +170,23 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- call hierarchy
 	new ApiCommand(
-		'vscode.prepareCallHierarchy', '_executePrepareCallHierarchy', 'Prepare call hierarchy at a position inside a document',
+		'zyraxoncode.prepareCallHierarchy', '_executePrepareCallHierarchy', 'Prepare call hierarchy at a position inside a document',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
 		new ApiCommandResult<ICallHierarchyItemDto[], types.CallHierarchyItem[]>('A promise that resolves to an array of CallHierarchyItem-instances', v => v.map(typeConverters.CallHierarchyItem.to))
 	),
 	new ApiCommand(
-		'vscode.provideIncomingCalls', '_executeProvideIncomingCalls', 'Compute incoming calls for an item',
+		'zyraxoncode.provideIncomingCalls', '_executeProvideIncomingCalls', 'Compute incoming calls for an item',
 		[ApiCommandArgument.CallHierarchyItem],
 		new ApiCommandResult<IIncomingCallDto[], types.CallHierarchyIncomingCall[]>('A promise that resolves to an array of CallHierarchyIncomingCall-instances', v => v.map(typeConverters.CallHierarchyIncomingCall.to))
 	),
 	new ApiCommand(
-		'vscode.provideOutgoingCalls', '_executeProvideOutgoingCalls', 'Compute outgoing calls for an item',
+		'zyraxoncode.provideOutgoingCalls', '_executeProvideOutgoingCalls', 'Compute outgoing calls for an item',
 		[ApiCommandArgument.CallHierarchyItem],
 		new ApiCommandResult<IOutgoingCallDto[], types.CallHierarchyOutgoingCall[]>('A promise that resolves to an array of CallHierarchyOutgoingCall-instances', v => v.map(typeConverters.CallHierarchyOutgoingCall.to))
 	),
 	// --- rename
 	new ApiCommand(
-		'vscode.prepareRename', '_executePrepareRename', 'Execute the prepareRename of rename provider.',
+		'zyraxoncode.prepareRename', '_executePrepareRename', 'Execute the prepareRename of rename provider.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
 		new ApiCommandResult<languages.RenameLocation, { range: types.Range; placeholder: string } | undefined>('A promise that resolves to a range and placeholder text.', value => {
 			if (!value) {
@@ -199,7 +199,7 @@ const newCommands: ApiCommand[] = [
 		})
 	),
 	new ApiCommand(
-		'vscode.executeDocumentRenameProvider', '_executeDocumentRenameProvider', 'Execute rename provider.',
+		'zyraxoncode.executeDocumentRenameProvider', '_executeDocumentRenameProvider', 'Execute rename provider.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position, ApiCommandArgument.String.with('newName', 'The new symbol name')],
 		new ApiCommandResult<IWorkspaceEditDto & { rejectReason?: string }, types.WorkspaceEdit | undefined>('A promise that resolves to a WorkspaceEdit.', value => {
 			if (!value) {
@@ -213,13 +213,13 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- links
 	new ApiCommand(
-		'vscode.executeLinkProvider', '_executeLinkProvider', 'Execute document link provider.',
+		'zyraxoncode.executeLinkProvider', '_executeLinkProvider', 'Execute document link provider.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Number.with('linkResolveCount', 'Number of links that should be resolved, only when links are unresolved.').optional()],
-		new ApiCommandResult<languages.ILink[], vscode.DocumentLink[]>('A promise that resolves to an array of DocumentLink-instances.', value => value.map(typeConverters.DocumentLink.to))
+		new ApiCommandResult<languages.ILink[], zyraxoncode.DocumentLink[]>('A promise that resolves to an array of DocumentLink-instances.', value => value.map(typeConverters.DocumentLink.to))
 	),
 	// --- semantic tokens
 	new ApiCommand(
-		'vscode.provideDocumentSemanticTokensLegend', '_provideDocumentSemanticTokensLegend', 'Provide semantic tokens legend for a document',
+		'zyraxoncode.provideDocumentSemanticTokensLegend', '_provideDocumentSemanticTokensLegend', 'Provide semantic tokens legend for a document',
 		[ApiCommandArgument.Uri],
 		new ApiCommandResult<languages.SemanticTokensLegend, types.SemanticTokensLegend | undefined>('A promise that resolves to SemanticTokensLegend.', value => {
 			if (!value) {
@@ -229,7 +229,7 @@ const newCommands: ApiCommand[] = [
 		})
 	),
 	new ApiCommand(
-		'vscode.provideDocumentSemanticTokens', '_provideDocumentSemanticTokens', 'Provide semantic tokens for a document',
+		'zyraxoncode.provideDocumentSemanticTokens', '_provideDocumentSemanticTokens', 'Provide semantic tokens for a document',
 		[ApiCommandArgument.Uri],
 		new ApiCommandResult<VSBuffer, types.SemanticTokens | undefined>('A promise that resolves to SemanticTokens.', value => {
 			if (!value) {
@@ -244,7 +244,7 @@ const newCommands: ApiCommand[] = [
 		})
 	),
 	new ApiCommand(
-		'vscode.provideDocumentRangeSemanticTokensLegend', '_provideDocumentRangeSemanticTokensLegend', 'Provide semantic tokens legend for a document range',
+		'zyraxoncode.provideDocumentRangeSemanticTokensLegend', '_provideDocumentRangeSemanticTokensLegend', 'Provide semantic tokens legend for a document range',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Range.optional()],
 		new ApiCommandResult<languages.SemanticTokensLegend, types.SemanticTokensLegend | undefined>('A promise that resolves to SemanticTokensLegend.', value => {
 			if (!value) {
@@ -254,7 +254,7 @@ const newCommands: ApiCommand[] = [
 		})
 	),
 	new ApiCommand(
-		'vscode.provideDocumentRangeSemanticTokens', '_provideDocumentRangeSemanticTokens', 'Provide semantic tokens for a document range',
+		'zyraxoncode.provideDocumentRangeSemanticTokens', '_provideDocumentRangeSemanticTokens', 'Provide semantic tokens for a document range',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Range],
 		new ApiCommandResult<VSBuffer, types.SemanticTokens | undefined>('A promise that resolves to SemanticTokens.', value => {
 			if (!value) {
@@ -270,14 +270,14 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- completions
 	new ApiCommand(
-		'vscode.executeCompletionItemProvider', '_executeCompletionItemProvider', 'Execute completion item provider.',
+		'zyraxoncode.executeCompletionItemProvider', '_executeCompletionItemProvider', 'Execute completion item provider.',
 		[
 			ApiCommandArgument.Uri,
 			ApiCommandArgument.Position,
 			ApiCommandArgument.String.with('triggerCharacter', 'Trigger completion when the user types the character, like `,` or `(`').optional(),
 			ApiCommandArgument.Number.with('itemResolveCount', 'Number of completions to resolve (too large numbers slow down completions)').optional()
 		],
-		new ApiCommandResult<languages.CompletionList, vscode.CompletionList>('A promise that resolves to a CompletionList-instance.', (value, _args, converter) => {
+		new ApiCommandResult<languages.CompletionList, zyraxoncode.CompletionList>('A promise that resolves to a CompletionList-instance.', (value, _args, converter) => {
 			if (!value) {
 				return new types.CompletionList([]);
 			}
@@ -287,9 +287,9 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- signature help
 	new ApiCommand(
-		'vscode.executeSignatureHelpProvider', '_executeSignatureHelpProvider', 'Execute signature help provider.',
+		'zyraxoncode.executeSignatureHelpProvider', '_executeSignatureHelpProvider', 'Execute signature help provider.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position, ApiCommandArgument.String.with('triggerCharacter', 'Trigger signature help when the user types the character, like `,` or `(`').optional()],
-		new ApiCommandResult<languages.SignatureHelp, vscode.SignatureHelp | undefined>('A promise that resolves to SignatureHelp.', value => {
+		new ApiCommandResult<languages.SignatureHelp, zyraxoncode.SignatureHelp | undefined>('A promise that resolves to SignatureHelp.', value => {
 			if (value) {
 				return typeConverters.SignatureHelp.to(value);
 			}
@@ -298,25 +298,25 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- code lens
 	new ApiCommand(
-		'vscode.executeCodeLensProvider', '_executeCodeLensProvider', 'Execute code lens provider.',
+		'zyraxoncode.executeCodeLensProvider', '_executeCodeLensProvider', 'Execute code lens provider.',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Number.with('itemResolveCount', 'Number of lenses that should be resolved and returned. Will only return resolved lenses, will impact performance)').optional()],
-		new ApiCommandResult<languages.CodeLens[], vscode.CodeLens[] | undefined>('A promise that resolves to an array of CodeLens-instances.', (value, _args, converter) => {
-			return tryMapWith<languages.CodeLens, vscode.CodeLens>(item => {
+		new ApiCommandResult<languages.CodeLens[], zyraxoncode.CodeLens[] | undefined>('A promise that resolves to an array of CodeLens-instances.', (value, _args, converter) => {
+			return tryMapWith<languages.CodeLens, zyraxoncode.CodeLens>(item => {
 				return new types.CodeLens(typeConverters.Range.to(item.range), item.command && converter.fromInternal(item.command));
 			})(value);
 		})
 	),
 	// --- code actions
 	new ApiCommand(
-		'vscode.executeCodeActionProvider', '_executeCodeActionProvider', 'Execute code action provider.',
+		'zyraxoncode.executeCodeActionProvider', '_executeCodeActionProvider', 'Execute code action provider.',
 		[
 			ApiCommandArgument.Uri,
 			new ApiCommandArgument('rangeOrSelection', 'Range in a text document. Some refactoring provider requires Selection object.', v => types.Range.isRange(v), v => types.Selection.isSelection(v) ? typeConverters.Selection.from(v) : typeConverters.Range.from(v)),
 			ApiCommandArgument.String.with('kind', 'Code action kind to return code actions for').optional(),
 			ApiCommandArgument.Number.with('itemResolveCount', 'Number of code actions to resolve (too large numbers slow down code actions)').optional()
 		],
-		new ApiCommandResult<CustomCodeAction[], (vscode.CodeAction | vscode.Command | undefined)[] | undefined>('A promise that resolves to an array of Command-instances.', (value, _args, converter) => {
-			return tryMapWith<CustomCodeAction, vscode.CodeAction | vscode.Command | undefined>((codeAction) => {
+		new ApiCommandResult<CustomCodeAction[], (zyraxoncode.CodeAction | zyraxoncode.Command | undefined)[] | undefined>('A promise that resolves to an array of Command-instances.', (value, _args, converter) => {
+			return tryMapWith<CustomCodeAction, zyraxoncode.CodeAction | zyraxoncode.Command | undefined>((codeAction) => {
 				if (codeAction._isSynthetic) {
 					if (!codeAction.command) {
 						throw new Error('Synthetic code actions must have a command');
@@ -341,9 +341,9 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- colors
 	new ApiCommand(
-		'vscode.executeDocumentColorProvider', '_executeDocumentColorProvider', 'Execute document color provider.',
+		'zyraxoncode.executeDocumentColorProvider', '_executeDocumentColorProvider', 'Execute document color provider.',
 		[ApiCommandArgument.Uri],
-		new ApiCommandResult<IRawColorInfo[], vscode.ColorInformation[]>('A promise that resolves to an array of ColorInformation objects.', result => {
+		new ApiCommandResult<IRawColorInfo[], zyraxoncode.ColorInformation[]>('A promise that resolves to an array of ColorInformation objects.', result => {
 			if (result) {
 				return result.map(ci => new types.ColorInformation(typeConverters.Range.to(ci.range), typeConverters.Color.to(ci.color)));
 			}
@@ -351,7 +351,7 @@ const newCommands: ApiCommand[] = [
 		})
 	),
 	new ApiCommand(
-		'vscode.executeColorPresentationProvider', '_executeColorPresentationProvider', 'Execute color presentation provider.',
+		'zyraxoncode.executeColorPresentationProvider', '_executeColorPresentationProvider', 'Execute color presentation provider.',
 		[
 			new ApiCommandArgument<types.Color, [number, number, number, number]>('color', 'The color to show and insert', v => v instanceof types.Color, typeConverters.Color.from),
 			new ApiCommandArgument<{ uri: URI; range: types.Range }, { uri: URI; range: IRange }>('context', 'Context object with uri and range', _v => true, v => ({ uri: v.uri, range: typeConverters.Range.from(v.range) })),
@@ -365,17 +365,17 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- inline hints
 	new ApiCommand(
-		'vscode.executeInlayHintProvider', '_executeInlayHintProvider', 'Execute inlay hints provider',
+		'zyraxoncode.executeInlayHintProvider', '_executeInlayHintProvider', 'Execute inlay hints provider',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Range],
-		new ApiCommandResult<languages.InlayHint[], vscode.InlayHint[]>('A promise that resolves to an array of Inlay objects', (result, args, converter) => {
+		new ApiCommandResult<languages.InlayHint[], zyraxoncode.InlayHint[]>('A promise that resolves to an array of Inlay objects', (result, args, converter) => {
 			return result.map(typeConverters.InlayHint.to.bind(undefined, converter));
 		})
 	),
 	// --- folding
 	new ApiCommand(
-		'vscode.executeFoldingRangeProvider', '_executeFoldingRangeProvider', 'Execute folding range provider',
+		'zyraxoncode.executeFoldingRangeProvider', '_executeFoldingRangeProvider', 'Execute folding range provider',
 		[ApiCommandArgument.Uri],
-		new ApiCommandResult<languages.FoldingRange[] | undefined, vscode.FoldingRange[] | undefined>('A promise that resolves to an array of FoldingRange objects', (result, args) => {
+		new ApiCommandResult<languages.FoldingRange[] | undefined, zyraxoncode.FoldingRange[] | undefined>('A promise that resolves to an array of FoldingRange objects', (result, args) => {
 			if (result) {
 				return result.map(typeConverters.FoldingRange.to);
 			}
@@ -385,7 +385,7 @@ const newCommands: ApiCommand[] = [
 
 	// --- notebooks
 	new ApiCommand(
-		'vscode.resolveNotebookContentProviders', '_resolveNotebookContentProvider', 'Resolve Notebook Content Providers',
+		'zyraxoncode.resolveNotebookContentProviders', '_resolveNotebookContentProvider', 'Resolve Notebook Content Providers',
 		[
 			// new ApiCommandArgument<string, string>('viewType', '', v => typeof v === 'string', v => v),
 			// new ApiCommandArgument<string, string>('displayName', '', v => typeof v === 'string', v => v),
@@ -395,12 +395,12 @@ const newCommands: ApiCommand[] = [
 			viewType: string;
 			displayName: string;
 			options: { transientOutputs: boolean; transientCellMetadata: TransientCellMetadata; transientDocumentMetadata: TransientDocumentMetadata };
-			filenamePattern: (vscode.GlobPattern | { include: vscode.GlobPattern; exclude: vscode.GlobPattern })[];
+			filenamePattern: (zyraxoncode.GlobPattern | { include: zyraxoncode.GlobPattern; exclude: zyraxoncode.GlobPattern })[];
 		}[], {
 			viewType: string;
 			displayName: string;
-			filenamePattern: (vscode.GlobPattern | { include: vscode.GlobPattern; exclude: vscode.GlobPattern })[];
-			options: vscode.NotebookDocumentContentOptions;
+			filenamePattern: (zyraxoncode.GlobPattern | { include: zyraxoncode.GlobPattern; exclude: zyraxoncode.GlobPattern })[];
+			options: zyraxoncode.NotebookDocumentContentOptions;
 		}[] | undefined>('A promise that resolves to an array of NotebookContentProvider static info objects.', tryMapWith(item => {
 			return {
 				viewType: item.viewType,
@@ -416,22 +416,22 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- debug support
 	new ApiCommand(
-		'vscode.executeInlineValueProvider', '_executeInlineValueProvider', 'Execute inline value provider',
+		'zyraxoncode.executeInlineValueProvider', '_executeInlineValueProvider', 'Execute inline value provider',
 		[
 			ApiCommandArgument.Uri,
 			ApiCommandArgument.Range,
 			new ApiCommandArgument<types.InlineValueContext, IInlineValueContextDto>('context', 'An InlineValueContext', v => v && typeof v.frameId === 'number' && v.stoppedLocation instanceof types.Range, v => typeConverters.InlineValueContext.from(v))
 		],
-		new ApiCommandResult<languages.InlineValue[], vscode.InlineValue[]>('A promise that resolves to an array of InlineValue objects', result => {
+		new ApiCommandResult<languages.InlineValue[], zyraxoncode.InlineValue[]>('A promise that resolves to an array of InlineValue objects', result => {
 			return result.map(typeConverters.InlineValue.to);
 		})
 	),
 	// --- open'ish commands
 	new ApiCommand(
-		'vscode.open', '_workbench.open', 'Opens the provided resource in the editor. Can be a text or binary file, or an http(s) URL. If you need more control over the options for opening a text file, use vscode.window.showTextDocument instead.',
+		'zyraxoncode.open', '_workbench.open', 'Opens the provided resource in the editor. Can be a text or binary file, or an http(s) URL. If you need more control over the options for opening a text file, use zyraxoncode.window.showTextDocument instead.',
 		[
 			new ApiCommandArgument<URI | string>('uriOrString', 'Uri-instance or string (only http/https)', v => URI.isUri(v) || (typeof v === 'string' && matchesSomeScheme(v, Schemas.http, Schemas.https)), v => v),
-			new ApiCommandArgument<vscode.ViewColumn | typeConverters.TextEditorOpenOptions | undefined, [vscode.ViewColumn?, ITextEditorOptions?] | undefined>('columnOrOptions', 'Either the column in which to open or editor options, see vscode.TextDocumentShowOptions',
+			new ApiCommandArgument<zyraxoncode.ViewColumn | typeConverters.TextEditorOpenOptions | undefined, [zyraxoncode.ViewColumn?, ITextEditorOptions?] | undefined>('columnOrOptions', 'Either the column in which to open or editor options, see zyraxoncode.TextDocumentShowOptions',
 				v => v === undefined || typeof v === 'number' || typeof v === 'object',
 				v => !v ? v : typeof v === 'number' ? [typeConverters.ViewColumn.from(v), undefined] : [typeConverters.ViewColumn.from(v.viewColumn), typeConverters.TextEditorOpenOptions.from(v)]
 			).optional(),
@@ -440,11 +440,11 @@ const newCommands: ApiCommand[] = [
 		ApiCommandResult.Void
 	),
 	new ApiCommand(
-		'vscode.openWith', '_workbench.openWith', 'Opens the provided resource with a specific editor.',
+		'zyraxoncode.openWith', '_workbench.openWith', 'Opens the provided resource with a specific editor.',
 		[
 			ApiCommandArgument.Uri.with('resource', 'Resource to open'),
 			ApiCommandArgument.String.with('viewId', 'Custom editor view id. This should be the viewType string for custom editors or the notebookType string for notebooks. Use \'default\' to use ZYRAXON Code\'s default text editor'),
-			new ApiCommandArgument<vscode.ViewColumn | typeConverters.TextEditorOpenOptions | undefined, [vscode.ViewColumn?, ITextEditorOptions?] | undefined>('columnOrOptions', 'Either the column in which to open or editor options, see vscode.TextDocumentShowOptions',
+			new ApiCommandArgument<zyraxoncode.ViewColumn | typeConverters.TextEditorOpenOptions | undefined, [zyraxoncode.ViewColumn?, ITextEditorOptions?] | undefined>('columnOrOptions', 'Either the column in which to open or editor options, see zyraxoncode.TextDocumentShowOptions',
 				v => v === undefined || typeof v === 'number' || typeof v === 'object',
 				v => !v ? v : typeof v === 'number' ? [typeConverters.ViewColumn.from(v), undefined] : [typeConverters.ViewColumn.from(v.viewColumn), typeConverters.TextEditorOpenOptions.from(v)],
 			).optional()
@@ -452,12 +452,12 @@ const newCommands: ApiCommand[] = [
 		ApiCommandResult.Void
 	),
 	new ApiCommand(
-		'vscode.diff', '_workbench.diff', 'Opens the provided resources in the diff editor to compare their contents.',
+		'zyraxoncode.diff', '_workbench.diff', 'Opens the provided resources in the diff editor to compare their contents.',
 		[
 			ApiCommandArgument.Uri.with('left', 'Left-hand side resource of the diff editor'),
 			ApiCommandArgument.Uri.with('right', 'Right-hand side resource of the diff editor'),
 			ApiCommandArgument.String.with('title', 'Human readable title for the diff editor').optional(),
-			new ApiCommandArgument<typeConverters.TextEditorOpenOptions | undefined, [number?, ITextEditorOptions?] | undefined>('columnOrOptions', 'Either the column in which to open or editor options, see vscode.TextDocumentShowOptions',
+			new ApiCommandArgument<typeConverters.TextEditorOpenOptions | undefined, [number?, ITextEditorOptions?] | undefined>('columnOrOptions', 'Either the column in which to open or editor options, see zyraxoncode.TextDocumentShowOptions',
 				v => v === undefined || typeof v === 'object',
 				v => v && [typeConverters.ViewColumn.from(v.viewColumn), typeConverters.TextEditorOpenOptions.from(v)]
 			).optional(),
@@ -465,7 +465,7 @@ const newCommands: ApiCommand[] = [
 		ApiCommandResult.Void
 	),
 	new ApiCommand(
-		'vscode.changes', '_workbench.changes', 'Opens a list of resources in the changes editor to compare their contents.',
+		'zyraxoncode.changes', '_workbench.changes', 'Opens a list of resources in the changes editor to compare their contents.',
 		[
 			ApiCommandArgument.String.with('title', 'Human readable title for the changes editor'),
 			new ApiCommandArgument<[URI, URI?, URI?][]>('resourceList', 'List of resources to compare',
@@ -491,39 +491,39 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- type hierarchy
 	new ApiCommand(
-		'vscode.prepareTypeHierarchy', '_executePrepareTypeHierarchy', 'Prepare type hierarchy at a position inside a document',
+		'zyraxoncode.prepareTypeHierarchy', '_executePrepareTypeHierarchy', 'Prepare type hierarchy at a position inside a document',
 		[ApiCommandArgument.Uri, ApiCommandArgument.Position],
 		new ApiCommandResult<ITypeHierarchyItemDto[], types.TypeHierarchyItem[]>('A promise that resolves to an array of TypeHierarchyItem-instances', v => v.map(typeConverters.TypeHierarchyItem.to))
 	),
 	new ApiCommand(
-		'vscode.provideSupertypes', '_executeProvideSupertypes', 'Compute supertypes for an item',
+		'zyraxoncode.provideSupertypes', '_executeProvideSupertypes', 'Compute supertypes for an item',
 		[ApiCommandArgument.TypeHierarchyItem],
 		new ApiCommandResult<ITypeHierarchyItemDto[], types.TypeHierarchyItem[]>('A promise that resolves to an array of TypeHierarchyItem-instances', v => v.map(typeConverters.TypeHierarchyItem.to))
 	),
 	new ApiCommand(
-		'vscode.provideSubtypes', '_executeProvideSubtypes', 'Compute subtypes for an item',
+		'zyraxoncode.provideSubtypes', '_executeProvideSubtypes', 'Compute subtypes for an item',
 		[ApiCommandArgument.TypeHierarchyItem],
 		new ApiCommandResult<ITypeHierarchyItemDto[], types.TypeHierarchyItem[]>('A promise that resolves to an array of TypeHierarchyItem-instances', v => v.map(typeConverters.TypeHierarchyItem.to))
 	),
 	// --- testing
 	new ApiCommand(
-		'vscode.revealTestInExplorer', '_revealTestInExplorer', 'Reveals a test instance in the explorer',
+		'zyraxoncode.revealTestInExplorer', '_revealTestInExplorer', 'Reveals a test instance in the explorer',
 		[ApiCommandArgument.TestItem],
 		ApiCommandResult.Void
 	),
 	new ApiCommand(
-		'vscode.startContinuousTestRun', 'testing.startContinuousRunFromExtension', 'Starts running the given tests with continuous run mode.',
+		'zyraxoncode.startContinuousTestRun', 'testing.startContinuousRunFromExtension', 'Starts running the given tests with continuous run mode.',
 		[ApiCommandArgument.TestProfile, ApiCommandArgument.Arr(ApiCommandArgument.TestItem)],
 		ApiCommandResult.Void
 	),
 	new ApiCommand(
-		'vscode.stopContinuousTestRun', 'testing.stopContinuousRunFromExtension', 'Stops running the given tests with continuous run mode.',
+		'zyraxoncode.stopContinuousTestRun', 'testing.stopContinuousRunFromExtension', 'Stops running the given tests with continuous run mode.',
 		[ApiCommandArgument.Arr(ApiCommandArgument.TestItem)],
 		ApiCommandResult.Void
 	),
 	// --- continue edit session
 	new ApiCommand(
-		'vscode.experimental.editSession.continue', '_workbench.editSessions.actions.continueEditSession', 'Continue the current edit session in a different workspace',
+		'zyraxoncode.experimental.editSession.continue', '_workbench.editSessions.actions.continueEditSession', 'Continue the current edit session in a different workspace',
 		[ApiCommandArgument.Uri.with('workspaceUri', 'The target workspace to continue the current edit session in')],
 		ApiCommandResult.Void
 	),
@@ -538,7 +538,7 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- inline chat
 	new ApiCommand(
-		'vscode.editorChat.start', 'inlineChat.start', 'Invoke a new editor chat session',
+		'zyraxoncode.editorChat.start', 'inlineChat.start', 'Invoke a new editor chat session',
 		[new ApiCommandArgument<InlineChatEditorApiArg | undefined, InlineChatRunOptions | undefined>('Run arguments', '', _v => true, v => {
 
 			if (!v) {
@@ -559,9 +559,9 @@ const newCommands: ApiCommand[] = [
 	),
 	// --- extension prompt files
 	new ApiCommand(
-		'vscode.extensionPromptFileProvider', '_listExtensionPromptFiles', 'Get all extension-contributed prompt files (custom agents, instructions, and prompt files).',
+		'zyraxoncode.extensionPromptFileProvider', '_listExtensionPromptFiles', 'Get all extension-contributed prompt files (custom agents, instructions, and prompt files).',
 		[],
-		new ApiCommandResult<IExtensionPromptFileResult[], { uri: vscode.Uri; type: PromptsType; extensionId: string }[]>(
+		new ApiCommandResult<IExtensionPromptFileResult[], { uri: zyraxoncode.Uri; type: PromptsType; extensionId: string }[]>(
 			'A promise that resolves to an array of objects containing uri, type, and extensionId.',
 			(value) => {
 				if (!value) {
@@ -578,12 +578,12 @@ const newCommands: ApiCommand[] = [
 ];
 
 type InlineChatEditorApiArg = {
-	initialRange?: vscode.Range;
-	initialSelection?: vscode.Selection;
+	initialRange?: zyraxoncode.Range;
+	initialSelection?: zyraxoncode.Selection;
 	message?: string;
-	attachments?: vscode.Uri[];
+	attachments?: zyraxoncode.Uri[];
 	autoSend?: boolean;
-	position?: vscode.Position;
+	position?: zyraxoncode.Position;
 	resolveOnResponse?: boolean;
 };
 
@@ -625,11 +625,11 @@ function tryMapWith<T, R>(f: (x: T) => R) {
 	};
 }
 
-function mapLocationOrLocationLink(values: (languages.Location | languages.LocationLink)[]): (types.Location | vscode.LocationLink)[] | undefined {
+function mapLocationOrLocationLink(values: (languages.Location | languages.LocationLink)[]): (types.Location | zyraxoncode.LocationLink)[] | undefined {
 	if (!Array.isArray(values)) {
 		return undefined;
 	}
-	const result: (types.Location | vscode.LocationLink)[] = [];
+	const result: (types.Location | zyraxoncode.LocationLink)[] = [];
 	for (const item of values) {
 		if (languages.isLocationLink(item)) {
 			result.push(typeConverters.DefinitionLink.to(item));

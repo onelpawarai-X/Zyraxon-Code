@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { PositionOffsetTransformer } from '../../../../../platform/editing/common/positionOffsetTransformer';
 import { Lazy } from '../../../../../util/vs/base/common/lazy';
 import { StringEdit } from '../../../../../util/vs/editor/common/core/edits/stringEdit';
 import { OffsetRange } from '../../../../../util/vs/editor/common/core/ranges/offsetRange';
-import { Range } from '../../../../../vscodeTypes';
+import { Range } from '../../../../../zyraxoncodeTypes';
 
 export class ProjectedText {
 	constructor(
@@ -69,7 +69,7 @@ export class ProjectedText {
 		return edit.rebaseSkipConflicting(this.edits.inverse(this.originalText));
 	}
 
-	public projectBackTextEdit(edits: readonly vscode.TextEdit[]): vscode.TextEdit[] {
+	public projectBackTextEdit(edits: readonly zyraxoncode.TextEdit[]): zyraxoncode.TextEdit[] {
 		const offsetEdit = this.positionOffsetTransformer.toOffsetEdit(edits);
 		const back = this.projectBackOffsetEdit(offsetEdit);
 		return this.originalPositionOffsetTransformer.toTextEdits(back);

@@ -70,7 +70,7 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
 
 		// If it's a remote workspace, open the canonical URI if it is a local folder
 		try {
-			if (root?.scheme === Schemas.vscodeRemote) {
+			if (root?.scheme === Schemas.zyraxoncodeRemote) {
 				const canonicalUri = await remoteAuthorityResolverService.getCanonicalURI(root);
 				if (canonicalUri.scheme === Schemas.file) {
 					terminalService.openTerminal(config, canonicalUri.fsPath);
@@ -87,7 +87,7 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
 			return;
 		}
 		try {
-			if (activeFile?.scheme === Schemas.vscodeRemote) {
+			if (activeFile?.scheme === Schemas.zyraxoncodeRemote) {
 				const canonicalUri = await remoteAuthorityResolverService.getCanonicalURI(activeFile);
 				if (canonicalUri.scheme === Schemas.file) {
 					terminalService.openTerminal(config, canonicalUri.fsPath);

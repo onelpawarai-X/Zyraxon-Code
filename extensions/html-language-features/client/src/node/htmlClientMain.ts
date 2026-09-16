@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { getNodeFileFS } from './nodeFs';
-import { Disposable, ExtensionContext, l10n } from 'vscode';
+import { Disposable, ExtensionContext, l10n } from 'zyraxoncode';
 import { startClient, LanguageClientConstructor, AsyncDisposable } from '../htmlClient';
-import { ServerOptions, TransportKind, LanguageClientOptions, LanguageClient } from 'vscode-languageclient/node';
+import { ServerOptions, TransportKind, LanguageClientOptions, LanguageClient } from 'zyraxoncode-languageclient/node';
 import * as fs from 'fs';
-import TelemetryReporter from '@vscode/extension-telemetry';
+import TelemetryReporter from '@zyraxoncode/extension-telemetry';
 
 
 let telemetry: TelemetryReporter | undefined;

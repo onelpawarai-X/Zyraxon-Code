@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement } from '@vscode/prompt-tsx';
+import { PromptElement } from '@zyraxoncode/prompt-tsx';
 import { extractCodeBlocks } from '../../../../util/common/markdown';
 import { splitLines } from '../../../../util/vs/base/common/strings';
-import { TextEdit } from '../../../../vscodeTypes';
+import { TextEdit } from '../../../../zyraxoncodeTypes';
 import { OutcomeAnnotation } from '../../../inlineChat/node/promptCraftingTypes';
 import { createEditsFromPseudoDiff } from '../../../prompt/node/editFromDiffGeneration';
 import { LineRange, Lines, LinesEdit } from '../../../prompt/node/editGeneration';

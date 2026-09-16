@@ -3,19 +3,19 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 import { ExtHostSecretState } from './extHostSecretState.js';
 import { ExtensionIdentifier, IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { Event } from '../../../base/common/event.js';
 import { DisposableStore } from '../../../base/common/lifecycle.js';
 
-export class ExtensionSecrets implements vscode.SecretStorage {
+export class ExtensionSecrets implements zyraxoncode.SecretStorage {
 
 	protected readonly _id: string;
 	readonly #secretState: ExtHostSecretState;
 
-	readonly onDidChange: Event<vscode.SecretStorageChangeEvent>;
+	readonly onDidChange: Event<zyraxoncode.SecretStorageChangeEvent>;
 	readonly disposables = new DisposableStore();
 
 	constructor(extensionDescription: IExtensionDescription, secretState: ExtHostSecretState) {

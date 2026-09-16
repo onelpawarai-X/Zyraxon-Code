@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { workspace, WorkspaceFoldersChangeEvent, Uri, window, Event, EventEmitter, QuickPickItem, Disposable, SourceControl, SourceControlResourceGroup, TextEditor, Memento, commands, LogOutputChannel, l10n, ProgressLocation, WorkspaceFolder, ThemeIcon, ResourceTrustRequestOptions } from 'vscode';
-import TelemetryReporter from '@vscode/extension-telemetry';
+import { workspace, WorkspaceFoldersChangeEvent, Uri, window, Event, EventEmitter, QuickPickItem, Disposable, SourceControl, SourceControlResourceGroup, TextEditor, Memento, commands, LogOutputChannel, l10n, ProgressLocation, WorkspaceFolder, ThemeIcon, ResourceTrustRequestOptions } from 'zyraxoncode';
+import TelemetryReporter from '@zyraxoncode/extension-telemetry';
 import { IRepositoryResolver, Repository, RepositoryState } from './repository';
 import { memoize, sequentialize, debounce } from './decorators';
 import { dispose, anyEvent, filterEvent, isDescendant, Limiter, pathEquals, toDisposable, eventToPromise } from './util';
@@ -714,7 +714,7 @@ export class Model implements IRepositoryResolver, IBranchProtectionProviderRegi
 			const rawRoot = await this.git.getRepositoryRoot(repoPath);
 
 			// This can happen whenever `path` has the wrong case sensitivity in case
-			// insensitive file systems https://github.com/microsoft/vscode/issues/33498
+			// insensitive file systems __ZYRAXKEEP__0_
 			return { repositoryRoot: Uri.file(rawRoot).fsPath, unsafeRepositoryMatch: null };
 		} catch (err) {
 			// Handle unsafe repository
@@ -1210,7 +1210,7 @@ export class Model implements IRepositoryResolver, IBranchProtectionProviderRegi
 			commands.executeCommand('git.manageUnsafeRepositories');
 		} else if (choice === learnMore) {
 			// Learn More
-			commands.executeCommand('vscode.open', Uri.parse('https://aka.ms/vscode-git-unsafe-repository'));
+			commands.executeCommand('zyraxoncode.open', Uri.parse('__ZYRAXKEEP__1_'));
 		}
 	}
 

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { newHTMLDataProvider, IHTMLDataProvider } from 'vscode-html-languageservice';
+import { newHTMLDataProvider, IHTMLDataProvider } from 'zyraxoncode-html-languageservice';
 import { CustomDataRequestService } from './htmlServer.js';
 
 export function fetchHTMLDataProviders(dataPaths: string[], requestService: CustomDataRequestService): Promise<IHTMLDataProvider[]> {

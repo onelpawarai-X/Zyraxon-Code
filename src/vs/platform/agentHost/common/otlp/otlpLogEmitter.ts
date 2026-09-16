@@ -16,7 +16,7 @@ import { AbstractMessageLogger, format, LogLevel } from '../../../log/common/log
  * Kept as a constant so producer (host) and consumer (workbench) cannot
  * drift out of sync.
  */
-export const OTLP_LOGS_CHANNEL_TEMPLATE = 'ahp-otlp://logs/{level}';
+export const OTLP_LOGS_CHANNEL_TEMPLATE = '__ZYRAXKEEP__0_{level}';
 
 /**
  * Scheme used by every OTLP channel URI. Lets routers tell them apart from
@@ -33,7 +33,7 @@ export const OTLP_LOG_LEVELS = ['trace', 'debug', 'info', 'warn', 'error', 'fata
 export type OtlpLogLevelName = typeof OTLP_LOG_LEVELS[number];
 
 /**
- * Lowest [OTLP `SeverityNumber`](https://opentelemetry.io/docs/specs/otel/logs/data-model/#field-severitynumber)
+ * Lowest [OTLP `SeverityNumber`](__ZYRAXKEEP__1_)
  * within each named severity band. A record is delivered when its
  * `severityNumber >= levelToSeverityNumber(subscribed level)`.
  */
@@ -286,7 +286,7 @@ export function toResourceLogsPayloadBatch(records: readonly IOtlpLogRecord[]): 
 				resource: { attributes: [] },
 				scopeLogs: [
 					{
-						scope: { name: 'vscode.agentHost' },
+						scope: { name: 'zyraxoncode.agentHost' },
 						logRecords: records.map(r => ({
 							timeUnixNano: r.timeUnixNano,
 							observedTimeUnixNano: r.timeUnixNano,
@@ -461,7 +461,7 @@ function msToUnixNano(ms: number): string {
  * URI does not encode one or the encoded value is not a recognised name.
  *
  * The URI shape advertised by this host implementation is
- * `ahp-otlp://logs/<level>` where `<level>` is one of {@link OTLP_LOG_LEVELS}.
+ * `__ZYRAXKEEP__2_<level>` where `<level>` is one of {@link OTLP_LOG_LEVELS}.
  */
 export function extractLevelFromOtlpLogsUri(uri: string): OtlpLogLevelName | undefined {
 	// Strip the scheme + authority prefix; the level is the last path
@@ -481,5 +481,5 @@ export function extractLevelFromOtlpLogsUri(uri: string): OtlpLogLevelName | und
  * notifications.
  */
 export function buildOtlpLogsChannelUri(level: OtlpLogLevelName): string {
-	return `ahp-otlp://logs/${level}`;
+	return `__ZYRAXKEEP__3_{level}`;
 }

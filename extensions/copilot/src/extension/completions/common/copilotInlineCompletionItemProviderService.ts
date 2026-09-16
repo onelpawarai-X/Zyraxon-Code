@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { InlineCompletionItemProvider } from 'vscode';
+import type { InlineCompletionItemProvider } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
 

@@ -281,7 +281,7 @@ export class SessionsMain extends Disposable {
 
 		// Use FileUserDataProvider for user data to
 		// enable atomic read / write operations.
-		fileService.registerProvider(Schemas.vscodeUserData, this._register(new FileUserDataProvider(Schemas.file, diskFileSystemProvider, Schemas.vscodeUserData, userDataProfilesService, uriIdentityService, logService)));
+		fileService.registerProvider(Schemas.zyraxoncodeUserData, this._register(new FileUserDataProvider(Schemas.file, diskFileSystemProvider, Schemas.zyraxoncodeUserData, userDataProfilesService, uriIdentityService, logService)));
 
 		// Remote Agent
 		const remoteSocketFactoryService = new RemoteSocketFactoryService();
@@ -365,7 +365,7 @@ export class SessionsMain extends Disposable {
 		policyService: IPolicyService,
 		environmentService: INativeWorkbenchEnvironmentService,
 	): Promise<ConfigurationService> {
-		const configurationCache = new ConfigurationCache([Schemas.file, Schemas.vscodeUserData], environmentService, fileService);
+		const configurationCache = new ConfigurationCache([Schemas.file, Schemas.zyraxoncodeUserData], environmentService, fileService);
 		const configurationService = new ConfigurationService(userDataProfileService, workspaceContextService, uriIdentityService, fileService, policyService, logService, configurationCache, environmentService);
 		try {
 			await configurationService.initialize();

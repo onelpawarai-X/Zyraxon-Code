@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { VSCODE_LOGO_PATH } from './vscodeLogoPath.js';
+import { VSCODE_LOGO_PATH } from './zyraxoncodeLogoPath.js';
 
 /**
  * ZYRAXON Code logo "fish" used by the Agents window aquarium. Each fish is a small
@@ -171,7 +171,7 @@ export class Fish {
 	}
 }
 
-const SVG_NS = 'http://www.w3.org/2000/svg';
+const SVG_NS = '__ZYRAXKEEP__0_';
 
 /**
  * Number of vertical strips the body is sliced into. More strips = smoother
@@ -217,7 +217,7 @@ function ensureSharedDefs(targetDocument: Document): void {
 
 	// All strips reference this symbol via `<use href="#agents-aquarium-fish-logo">`,
 	// so the path data is parsed exactly ONCE per session instead of FISH_COUNT * NUM_STRIPS.
-	container.appendChild(createVSCodeLogoSymbol(targetDocument));
+	container.appendChild(createZyraxonCodeLogoSymbol(targetDocument));
 
 	const defs = targetDocument.createElementNS(SVG_NS, 'defs');
 	for (let i = 0; i < NUM_BODY_STRIPS; i++) {
@@ -239,7 +239,7 @@ function ensureSharedDefs(targetDocument: Document): void {
 	sharedDefsByDocument.set(targetDocument, container);
 }
 
-function createVSCodeLogoSymbol(targetDocument: Document): SVGSymbolElement {
+function createZyraxonCodeLogoSymbol(targetDocument: Document): SVGSymbolElement {
 	const symbol = targetDocument.createElementNS(SVG_NS, 'symbol');
 	symbol.setAttribute('id', SHARED_LOGO_SYMBOL_ID);
 	symbol.setAttribute('viewBox', '0 0 96 96');

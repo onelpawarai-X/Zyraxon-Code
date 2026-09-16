@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AssistantMessage, BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
-import type { Range } from 'vscode';
+import { AssistantMessage, BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { Range } from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { ITabsAndEditorsService } from '../../../../platform/tabs/common/tabsAndEditorsService';
 import * as path from '../../../../util/vs/base/common/path';
-import { Location } from '../../../../vscodeTypes';
+import { Location } from '../../../../zyraxoncodeTypes';
 import { PromptReference } from '../../../prompt/common/conversation';
 import { CurrentEditor } from './currentEditor';
 import { CodeBlock } from './safeElements';

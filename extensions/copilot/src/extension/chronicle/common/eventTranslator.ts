@@ -165,7 +165,7 @@ export function translateSpan(
 			pushEvent(events, state, 'session.start', {
 				sessionId: getSessionId(span) ?? generateUuid(),
 				version: 1,
-				producer: 'vscode-copilot-chat',
+				producer: 'zyraxoncode-copilot-chat',
 				copilotVersion: '1.0.0',
 				startTime: new Date(span.startTime).toISOString(),
 				selectedModel: span.attributes[GenAiAttr.REQUEST_MODEL] as string | undefined,
@@ -327,7 +327,7 @@ export function translateDebugLogEntry(
 				pushEventAt(events, state, ts, 'session.start', {
 					sessionId,
 					version: 1,
-					producer: 'vscode-copilot-chat',
+					producer: 'zyraxoncode-copilot-chat',
 					copilotVersion: typeof entry.attrs.copilotVersion === 'string' ? entry.attrs.copilotVersion : '1.0.0',
 					startTime: ts,
 					context: {

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { URI } from '../../../base/common/uri.js';
 import { MainContext, MainThreadDiaglogsShape, IMainContext } from './extHost.protocol.js';
 
@@ -15,13 +15,13 @@ export class ExtHostDialogs {
 		this._proxy = mainContext.getProxy(MainContext.MainThreadDialogs);
 	}
 
-	showOpenDialog(options?: vscode.OpenDialogOptions): Promise<URI[] | undefined> {
+	showOpenDialog(options?: zyraxoncode.OpenDialogOptions): Promise<URI[] | undefined> {
 		return this._proxy.$showOpenDialog(options).then(filepaths => {
 			return filepaths ? filepaths.map(p => URI.revive(p)) : undefined;
 		});
 	}
 
-	showSaveDialog(options?: vscode.SaveDialogOptions): Promise<URI | undefined> {
+	showSaveDialog(options?: zyraxoncode.SaveDialogOptions): Promise<URI | undefined> {
 		return this._proxy.$showSaveDialog(options).then(filepath => {
 			return filepath ? URI.revive(filepath) : undefined;
 		});

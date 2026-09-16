@@ -110,27 +110,27 @@ interface IRawGalleryQueryResult {
 }
 
 const AssetType = {
-	Icon: 'Microsoft.VisualStudio.Services.Icons.Default',
-	Details: 'Microsoft.VisualStudio.Services.Content.Details',
-	Changelog: 'Microsoft.VisualStudio.Services.Content.Changelog',
-	Manifest: 'Microsoft.VisualStudio.Code.Manifest',
-	VSIX: 'Microsoft.VisualStudio.Services.VSIXPackage',
-	License: 'Microsoft.VisualStudio.Services.Content.License',
-	Repository: 'Microsoft.VisualStudio.Services.Links.Source',
-	Signature: 'Microsoft.VisualStudio.Services.VsixSignature'
+	Icon: 'Zyraxon.VisualStudio.Services.Icons.Default',
+	Details: 'Zyraxon.VisualStudio.Services.Content.Details',
+	Changelog: 'Zyraxon.VisualStudio.Services.Content.Changelog',
+	Manifest: 'Zyraxon.VisualStudio.Code.Manifest',
+	VSIX: 'Zyraxon.VisualStudio.Services.VSIXPackage',
+	License: 'Zyraxon.VisualStudio.Services.Content.License',
+	Repository: 'Zyraxon.VisualStudio.Services.Links.Source',
+	Signature: 'Zyraxon.VisualStudio.Services.VsixSignature'
 };
 
 const PropertyType = {
-	Dependency: 'Microsoft.VisualStudio.Code.ExtensionDependencies',
-	ExtensionPack: 'Microsoft.VisualStudio.Code.ExtensionPack',
-	Engine: 'Microsoft.VisualStudio.Code.Engine',
-	PreRelease: 'Microsoft.VisualStudio.Code.PreRelease',
-	EnabledApiProposals: 'Microsoft.VisualStudio.Code.EnabledApiProposals',
-	LocalizedLanguages: 'Microsoft.VisualStudio.Code.LocalizedLanguages',
-	WebExtension: 'Microsoft.VisualStudio.Code.WebExtension',
-	SponsorLink: 'Microsoft.VisualStudio.Code.SponsorLink',
-	SupportLink: 'Microsoft.VisualStudio.Services.Links.Support',
-	ExecutesCode: 'Microsoft.VisualStudio.Code.ExecutesCode',
+	Dependency: 'Zyraxon.VisualStudio.Code.ExtensionDependencies',
+	ExtensionPack: 'Zyraxon.VisualStudio.Code.ExtensionPack',
+	Engine: 'Zyraxon.VisualStudio.Code.Engine',
+	PreRelease: 'Zyraxon.VisualStudio.Code.PreRelease',
+	EnabledApiProposals: 'Zyraxon.VisualStudio.Code.EnabledApiProposals',
+	LocalizedLanguages: 'Zyraxon.VisualStudio.Code.LocalizedLanguages',
+	WebExtension: 'Zyraxon.VisualStudio.Code.WebExtension',
+	SponsorLink: 'Zyraxon.VisualStudio.Code.SponsorLink',
+	SupportLink: 'Zyraxon.VisualStudio.Services.Links.Support',
+	ExecutesCode: 'Zyraxon.VisualStudio.Code.ExecutesCode',
 	Private: 'PrivateMarketplace',
 };
 
@@ -299,7 +299,7 @@ function getStatistic(statistics: IRawGalleryExtensionStatistics[], name: string
 }
 
 function getCoreTranslationAssets(version: IRawGalleryExtensionVersion): [string, IGalleryExtensionAsset][] {
-	const coreTranslationAssetPrefix = 'Microsoft.VisualStudio.Code.Translation.';
+	const coreTranslationAssetPrefix = 'Zyraxon.VisualStudio.Code.Translation.';
 	const result = version.files.filter(f => f.assetType.indexOf(coreTranslationAssetPrefix) === 0);
 	return result.reduce<[string, IGalleryExtensionAsset][]>((result, file) => {
 		const asset = getVersionAsset(version, file.assetType);
@@ -1082,7 +1082,7 @@ export abstract class AbstractExtensionGalleryService implements IExtensionGalle
 				this.logService.error(`Manifest was not found for the extension ${extensionId} with version ${version}`);
 				return undefined;
 			}
-			return manifest.engines.vscode;
+			return manifest.engines.zyraxoncode;
 		} catch (error) {
 			this.logService.error(`Error while getting the engine for the version ${version}.`, getErrorMessage(error));
 			return undefined;
@@ -1277,7 +1277,7 @@ export abstract class AbstractExtensionGalleryService implements IExtensionGalle
 				/**
 				 * Need all versions if the extension is a release version with a different target platform than requested and also has a pre-release version
 				 * Because, this is a platform specific extension and can have a newer release version supporting this platform.
-				 * See https://github.com/microsoft/vscode/issues/139628
+				 * See __ZYRAXKEEP__0_
 				*/
 				|| (!extension.properties.isPreReleaseVersion && extension.properties.targetPlatform !== criteria.targetPlatform && extension.hasPreReleaseVersion)
 			) {
@@ -1379,7 +1379,7 @@ export abstract class AbstractExtensionGalleryService implements IExtensionGalle
 		query = query
 			/* Always exclude non validated extensions */
 			.withFlags(...query.flags, Flag.ExcludeNonValidated)
-			.withFilter(FilterType.Target, 'Microsoft.VisualStudio.Code');
+			.withFilter(FilterType.Target, 'Zyraxon.VisualStudio.Code');
 
 		const unpublishedFlag = extensionGalleryManifest.capabilities.extensionQuery.flags?.find(f => f.name === Flag.Unpublished);
 		/* Always exclude unpublished extensions */

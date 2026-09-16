@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { FileType } from '../../../platform/filesystem/common/fileTypes';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { IInstantiationService, ServicesAccessor } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelPromptTsxPart, LanguageModelToolResult, MarkdownString } from '../../../vscodeTypes';
+import { LanguageModelPromptTsxPart, LanguageModelToolResult, MarkdownString } from '../../../zyraxoncodeTypes';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { ToolName } from '../common/toolNames';
 import { ToolRegistry } from '../common/toolsRegistry';
@@ -24,7 +24,7 @@ interface IListDirParams {
 	path: string;
 }
 
-class ListDirTool implements vscode.LanguageModelTool<IListDirParams> {
+class ListDirTool implements zyraxoncode.LanguageModelTool<IListDirParams> {
 	public static readonly toolName = ToolName.ListDirectory;
 	public static readonly nonDeferred = true;
 
@@ -37,7 +37,7 @@ class ListDirTool implements vscode.LanguageModelTool<IListDirParams> {
 		@IPromptPathRepresentationService private readonly promptPathRepresentationService: IPromptPathRepresentationService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IListDirParams>, token: CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IListDirParams>, token: CancellationToken) {
 		const uri = resolveToolInputPath(options.input.path, this.promptPathRepresentationService);
 
 		checkCancellation(token);
@@ -49,7 +49,7 @@ class ListDirTool implements vscode.LanguageModelTool<IListDirParams> {
 				await renderPromptElementJSON(this.instantiationService, ListDirResult, { results: contents }, options.tokenizationOptions, token))]);
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IListDirParams>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation | undefined> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IListDirParams>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation | undefined> {
 		const uri = resolveToolInputPath(options.input.path, this.promptPathRepresentationService);
 
 		// Check if directory is external (outside workspace)

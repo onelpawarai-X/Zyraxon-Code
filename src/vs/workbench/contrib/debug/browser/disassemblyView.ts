@@ -743,7 +743,7 @@ class BreakpointRenderer implements ITableRenderer<IDisassembledInstructionEntry
 						// the debug adapter may hand out a new `instructionReference`
 						// for the same location after symbol reloads / certain steps,
 						// so a reference+offset lookup would otherwise fail to remove
-						// the breakpoint (microsoft/vscode#289678).
+						// the breakpoint (zyraxon/zyraxoncode#289678).
 						this._debugService.removeInstructionBreakpoints(reference, offset, address);
 					} else if (currentElement.element.allowBreakpoint && !currentElement.element.isBreakpointSet) {
 						this._debugService.addInstructionBreakpoint({ instructionReference: reference, offset, address, canPersist: false });

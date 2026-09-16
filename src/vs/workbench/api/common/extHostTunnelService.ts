@@ -16,12 +16,12 @@ import { IExtHostInitDataService } from './extHostInitDataService.js';
 import { IExtHostRpcService } from './extHostRpcService.js';
 import * as types from './extHostTypes.js';
 import { CandidatePort } from '../../services/remote/common/tunnelModel.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
-class ExtensionTunnel extends DisposableTunnel implements vscode.Tunnel { }
+class ExtensionTunnel extends DisposableTunnel implements zyraxoncode.Tunnel { }
 
 export namespace TunnelDtoConverter {
-	export function fromApiTunnel(tunnel: vscode.Tunnel): TunnelDto {
+	export function fromApiTunnel(tunnel: zyraxoncode.Tunnel): TunnelDto {
 		return {
 			remoteAddress: tunnel.remoteAddress,
 			localAddress: tunnel.localAddress,
@@ -44,19 +44,19 @@ export namespace TunnelDtoConverter {
 	}
 }
 
-export interface Tunnel extends vscode.Disposable {
+export interface Tunnel extends zyraxoncode.Disposable {
 	remote: { port: number; host: string };
 	localAddress: string;
 }
 
 export interface IExtHostTunnelService extends ExtHostTunnelServiceShape {
 	readonly _serviceBrand: undefined;
-	openTunnel(extension: IExtensionDescription, forward: TunnelOptions): Promise<vscode.Tunnel | undefined>;
-	getTunnels(): Promise<vscode.TunnelDescription[]>;
-	onDidChangeTunnels: vscode.Event<void>;
-	setTunnelFactory(provider: vscode.RemoteAuthorityResolver | undefined, managedRemoteAuthority: vscode.ManagedResolvedAuthority | undefined): Promise<IDisposable>;
-	registerPortsAttributesProvider(portSelector: PortAttributesSelector, provider: vscode.PortAttributesProvider): IDisposable;
-	registerTunnelProvider(provider: vscode.TunnelProvider, information: vscode.TunnelInformation): Promise<IDisposable>;
+	openTunnel(extension: IExtensionDescription, forward: TunnelOptions): Promise<zyraxoncode.Tunnel | undefined>;
+	getTunnels(): Promise<zyraxoncode.TunnelDescription[]>;
+	onDidChangeTunnels: zyraxoncode.Event<void>;
+	setTunnelFactory(provider: zyraxoncode.RemoteAuthorityResolver | undefined, managedRemoteAuthority: zyraxoncode.ManagedResolvedAuthority | undefined): Promise<IDisposable>;
+	registerPortsAttributesProvider(portSelector: PortAttributesSelector, provider: zyraxoncode.PortAttributesProvider): IDisposable;
+	registerTunnelProvider(provider: zyraxoncode.TunnelProvider, information: zyraxoncode.TunnelInformation): Promise<IDisposable>;
 	hasTunnelProvider(): Promise<boolean>;
 }
 
@@ -65,14 +65,14 @@ export const IExtHostTunnelService = createDecorator<IExtHostTunnelService>('IEx
 export class ExtHostTunnelService extends Disposable implements IExtHostTunnelService {
 	readonly _serviceBrand: undefined;
 	protected readonly _proxy: MainThreadTunnelServiceShape;
-	private _forwardPortProvider: ((tunnelOptions: TunnelOptions, tunnelCreationOptions: TunnelCreationOptions, token?: vscode.CancellationToken) => Thenable<vscode.Tunnel | undefined> | undefined) | undefined;
+	private _forwardPortProvider: ((tunnelOptions: TunnelOptions, tunnelCreationOptions: TunnelCreationOptions, token?: zyraxoncode.CancellationToken) => Thenable<zyraxoncode.Tunnel | undefined> | undefined) | undefined;
 	private _showCandidatePort: (host: string, port: number, detail: string) => Thenable<boolean> = () => { return Promise.resolve(true); };
-	private _extensionTunnels: Map<string, Map<number, { tunnel: vscode.Tunnel; disposeListener: IDisposable }>> = new Map();
+	private _extensionTunnels: Map<string, Map<number, { tunnel: zyraxoncode.Tunnel; disposeListener: IDisposable }>> = new Map();
 	private _onDidChangeTunnels: Emitter<void> = this._register(new Emitter<void>());
-	onDidChangeTunnels: vscode.Event<void> = this._onDidChangeTunnels.event;
+	onDidChangeTunnels: zyraxoncode.Event<void> = this._onDidChangeTunnels.event;
 
 	private _providerHandleCounter: number = 0;
-	private _portAttributesProviders: Map<number, { provider: vscode.PortAttributesProvider; selector: PortAttributesSelector }> = new Map();
+	private _portAttributesProviders: Map<number, { provider: zyraxoncode.PortAttributesProvider; selector: PortAttributesSelector }> = new Map();
 
 	constructor(
 		@IExtHostRpcService extHostRpc: IExtHostRpcService,
@@ -83,11 +83,11 @@ export class ExtHostTunnelService extends Disposable implements IExtHostTunnelSe
 		this._proxy = extHostRpc.getProxy(MainContext.MainThreadTunnelService);
 	}
 
-	async openTunnel(extension: IExtensionDescription, forward: TunnelOptions): Promise<vscode.Tunnel | undefined> {
+	async openTunnel(extension: IExtensionDescription, forward: TunnelOptions): Promise<zyraxoncode.Tunnel | undefined> {
 		this.logService.trace(`ForwardedPorts: (ExtHostTunnelService) ${extension.identifier.value} called openTunnel API for ${forward.remoteAddress.host}:${forward.remoteAddress.port}.`);
 		const tunnel = await this._proxy.$openTunnel(forward, extension.displayName);
 		if (tunnel) {
-			const disposableTunnel: vscode.Tunnel = new ExtensionTunnel(tunnel.remoteAddress, tunnel.localAddress, () => {
+			const disposableTunnel: zyraxoncode.Tunnel = new ExtensionTunnel(tunnel.remoteAddress, tunnel.localAddress, () => {
 				return this._proxy.$closeTunnel(tunnel.remoteAddress);
 			});
 			this._register(disposableTunnel);
@@ -96,14 +96,14 @@ export class ExtHostTunnelService extends Disposable implements IExtHostTunnelSe
 		return undefined;
 	}
 
-	async getTunnels(): Promise<vscode.TunnelDescription[]> {
+	async getTunnels(): Promise<zyraxoncode.TunnelDescription[]> {
 		return this._proxy.$getTunnels();
 	}
 	private nextPortAttributesProviderHandle(): number {
 		return this._providerHandleCounter++;
 	}
 
-	registerPortsAttributesProvider(portSelector: PortAttributesSelector, provider: vscode.PortAttributesProvider): vscode.Disposable {
+	registerPortsAttributesProvider(portSelector: PortAttributesSelector, provider: zyraxoncode.PortAttributesProvider): zyraxoncode.Disposable {
 		if (portSelector.portRange === undefined && portSelector.commandPattern === undefined) {
 			this.logService.error('PortAttributesProvider must specify either a portRange or a commandPattern');
 		}
@@ -117,26 +117,26 @@ export class ExtHostTunnelService extends Disposable implements IExtHostTunnelSe
 		});
 	}
 
-	async $providePortAttributes(handles: number[], ports: number[], pid: number | undefined, commandLine: string | undefined, cancellationToken: vscode.CancellationToken): Promise<ProvidedPortAttributes[]> {
-		const providedAttributes: { providedAttributes: vscode.PortAttributes | null | undefined; port: number }[] = [];
+	async $providePortAttributes(handles: number[], ports: number[], pid: number | undefined, commandLine: string | undefined, cancellationToken: zyraxoncode.CancellationToken): Promise<ProvidedPortAttributes[]> {
+		const providedAttributes: { providedAttributes: zyraxoncode.PortAttributes | null | undefined; port: number }[] = [];
 		for (const handle of handles) {
 			const provider = this._portAttributesProviders.get(handle);
 			if (!provider) {
 				return [];
 			}
 			providedAttributes.push(...(await Promise.all(ports.map(async (port) => {
-				let providedAttributes: vscode.PortAttributes | null | undefined;
+				let providedAttributes: zyraxoncode.PortAttributes | null | undefined;
 				try {
 					providedAttributes = await provider.provider.providePortAttributes({ port, pid, commandLine }, cancellationToken);
 				} catch (e) {
 					// Call with old signature for breaking API change
-					providedAttributes = await (provider.provider.providePortAttributes as unknown as (port: number, pid: number | undefined, commandLine: string | undefined, token: vscode.CancellationToken) => vscode.ProviderResult<vscode.PortAttributes>)(port, pid, commandLine, cancellationToken);
+					providedAttributes = await (provider.provider.providePortAttributes as unknown as (port: number, pid: number | undefined, commandLine: string | undefined, token: zyraxoncode.CancellationToken) => zyraxoncode.ProviderResult<zyraxoncode.PortAttributes>)(port, pid, commandLine, cancellationToken);
 				}
 				return { providedAttributes, port };
 			}))));
 		}
 
-		const allAttributes = <{ providedAttributes: vscode.PortAttributes; port: number }[]>providedAttributes.filter(attribute => !!attribute.providedAttributes);
+		const allAttributes = <{ providedAttributes: zyraxoncode.PortAttributes; port: number }[]>providedAttributes.filter(attribute => !!attribute.providedAttributes);
 
 		return (allAttributes.length > 0) ? allAttributes.map(attributes => {
 			return {
@@ -148,7 +148,7 @@ export class ExtHostTunnelService extends Disposable implements IExtHostTunnelSe
 
 	async $registerCandidateFinder(_enable: boolean): Promise<void> { }
 
-	registerTunnelProvider(provider: vscode.TunnelProvider, information: vscode.TunnelInformation): Promise<IDisposable> {
+	registerTunnelProvider(provider: zyraxoncode.TunnelProvider, information: zyraxoncode.TunnelInformation): Promise<IDisposable> {
 		if (this._forwardPortProvider) {
 			throw new Error('A tunnel provider has already been registered. Only the first tunnel provider to be registered will be used.');
 		}
@@ -182,7 +182,7 @@ export class ExtHostTunnelService extends Disposable implements IExtHostTunnelSe
 	 * If this is the case, the tunnel cannot be connected to via a websocket from
 	 * the share process, so a synethic tunnel factory is used as a default.
 	 */
-	async setTunnelFactory(provider: vscode.RemoteAuthorityResolver | undefined, managedRemoteAuthority: vscode.ManagedResolvedAuthority | undefined): Promise<IDisposable> {
+	async setTunnelFactory(provider: zyraxoncode.RemoteAuthorityResolver | undefined, managedRemoteAuthority: zyraxoncode.ManagedResolvedAuthority | undefined): Promise<IDisposable> {
 		// Do not wait for any of the proxy promises here.
 		// It will delay startup and there is nothing that needs to be waited for.
 		if (provider) {
@@ -229,7 +229,7 @@ export class ExtHostTunnelService extends Disposable implements IExtHostTunnelSe
 		});
 	}
 
-	protected makeManagedTunnelFactory(_authority: vscode.ManagedResolvedAuthority): vscode.RemoteAuthorityResolver['tunnelFactory'] {
+	protected makeManagedTunnelFactory(_authority: zyraxoncode.ManagedResolvedAuthority): zyraxoncode.RemoteAuthorityResolver['tunnelFactory'] {
 		return undefined; // may be overridden
 	}
 

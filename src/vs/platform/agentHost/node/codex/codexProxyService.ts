@@ -35,7 +35,7 @@ import {
  * loses its endpoint.
  */
 export interface ICodexProxyHandle extends ILoopbackProxyHandle {
-	/** e.g. `http://127.0.0.1:54321` — no trailing slash. */
+	/** e.g. `__ZYRAXKEEP__0_` — no trailing slash. */
 	readonly baseUrl: string;
 	/** Random per-process nonce used as `Bearer <nonce>` by the codex CLI. */
 	readonly nonce: string;
@@ -111,7 +111,7 @@ const PROXY_USER_FACING_NAME = 'CodexProxyService';
  * in the Copilot Chat extension, which tags Codex requests with the same
  * prefix.
  */
-const USER_AGENT_PREFIX = 'vscode_codex';
+const USER_AGENT_PREFIX = 'zyraxoncode_codex';
 
 /**
  * When set to an absolute directory path, every `/v1/responses` request body
@@ -207,7 +207,7 @@ export class CodexProxyService extends LoopbackProxyServer<ICodexProxyState, str
 		runtime: ICodexProxyRuntime,
 	): Promise<void> {
 		const method = req.method ?? 'GET';
-		const pathname = new URL(req.url ?? '/', 'http://127.0.0.1').pathname;
+		const pathname = new URL(req.url ?? '/', '__ZYRAXKEEP__1_').pathname;
 		const incomingHeaders = Object.keys(req.headers).join(', ');
 		this._logService.info(`[${PROXY_USER_FACING_NAME}] >>> ${method} ${pathname} (headers: ${incomingHeaders})`);
 
@@ -471,9 +471,9 @@ function buildOutboundHeaders(inbound: http.IncomingHttpHeaders): Record<string,
  * server-side identification.
  *
  * Examples:
- * - `codex/1.2.3` → `vscode_codex/1.2.3`
- * - `OpenAI/Python/1.0` → `vscode_codex/Python/1.0`
- * - `unknown` → `vscode_codex/unknown`
+ * - `codex/1.2.3` → `zyraxoncode_codex/1.2.3`
+ * - `OpenAI/Python/1.0` → `zyraxoncode_codex/Python/1.0`
+ * - `unknown` → `zyraxoncode_codex/unknown`
  */
 function transformUserAgent(userAgent: string): string {
 	const slashIndex = userAgent.indexOf('/');

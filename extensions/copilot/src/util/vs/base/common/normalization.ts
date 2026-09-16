@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -46,7 +46,7 @@ function normalize(str: string, form: string, normalizedCache: LRUCache<string, 
  * When original string contains accent characters directly, only lower casing will be performed.
  * This is done so as to keep the string length the same and not affect indices.
  *
- * @see https://stackoverflow.com/questions/990904/remove-accents-diacritics-in-a-string-in-javascript/37511463#37511463
+ * @see __ZYRAXKEEP__0_
  */
 export const tryNormalizeToBase: (str: string) => string = function () {
 	const cache = new LRUCache<string, string>(10000); // bounded to 10000 elements

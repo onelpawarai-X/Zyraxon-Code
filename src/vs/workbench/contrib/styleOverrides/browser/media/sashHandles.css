@@ -31,7 +31,7 @@
 	width: 2px;
 	height: 2px;
 	border-radius: 50%;
-	background: color-mix(in srgb, var(--vscode-foreground) 30%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 30%, transparent);
 	opacity: 0.5;
 }
 
@@ -45,7 +45,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	box-shadow: 0 -5px currentColor, 0 5px currentColor;
-	color: color-mix(in srgb, var(--vscode-foreground) 30%, transparent);
+	color: color-mix(in srgb, var(--zyraxoncode-foreground) 30%, transparent);
 }
 
 /* Horizontal sash: three dots in a row, centered. */
@@ -54,7 +54,7 @@
 	top: 50%;
 	transform: translate(-50%, -50%);
 	box-shadow: -5px 0 currentColor, 5px 0 currentColor;
-	color: color-mix(in srgb, var(--vscode-foreground) 30%, transparent);
+	color: color-mix(in srgb, var(--zyraxoncode-foreground) 30%, transparent);
 }
 
 /* While hovering/dragging, defer to the base full-length highlight. */

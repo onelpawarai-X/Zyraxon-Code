@@ -38,5 +38,5 @@ export interface IPopupOptions {
 	positioningItem?: number;
 }
 
-export const CONTEXT_MENU_CHANNEL = 'vscode:contextmenu';
-export const CONTEXT_MENU_CLOSE_CHANNEL = 'vscode:onCloseContextMenu';
+export const CONTEXT_MENU_CHANNEL = 'zyraxoncode:contextmenu';
+export const CONTEXT_MENU_CLOSE_CHANNEL = 'zyraxoncode:onCloseContextMenu';

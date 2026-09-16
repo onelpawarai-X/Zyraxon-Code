@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { RepositoryProperties, WorkspaceFolderEntry } from './chatSessionMetadataStore';
 import { ChatSessionWorktreeFile } from './chatSessionWorktreeService';
@@ -20,7 +20,7 @@ export interface IChatSessionWorkspaceFolderService {
 	/**
 	 * Triggered when the set of changes in a session workspace folder has changed.
 	 */
-	onDidChangeWorkspaceFolderChanges: vscode.Event<{ sessionId: string }>;
+	onDidChangeWorkspaceFolderChanges: zyraxoncode.Event<{ sessionId: string }>;
 	deleteTrackedWorkspaceFolder(sessionId: string): Promise<void>;
 	/**
 	 * Track workspace folder selection for a session (for folders without git repos in multi-root workspaces)
@@ -30,7 +30,7 @@ export interface IChatSessionWorkspaceFolderService {
 	/**
 	 * Get the workspace folder associated with a session (if a workspace folder without git repo was selected)
 	 */
-	getSessionWorkspaceFolder(sessionId: string): Promise<vscode.Uri | undefined>;
+	getSessionWorkspaceFolder(sessionId: string): Promise<zyraxoncode.Uri | undefined>;
 
 	/**
 	 * Get the workspace folder entry associated with a session (if a workspace folder without git repo was selected)
@@ -72,12 +72,12 @@ export interface IChatSessionWorkspaceFolderService {
 	 * Clear cached changes for all sessions associated with a workspace folder.
 	 * Returns the affected session IDs.
 	 */
-	clearWorkspaceChanges(folderUri: vscode.Uri): string[];
+	clearWorkspaceChanges(folderUri: zyraxoncode.Uri): string[];
 
 	hasCachedChanges(sessionId: string): Promise<boolean>;
 
 	/**
 	 * Returns the ids of sessions whose tracked workspace folder matches the given URI.
 	 */
-	getAssociatedSessions(folderUri: vscode.Uri): string[];
+	getAssociatedSessions(folderUri: zyraxoncode.Uri): string[];
 }

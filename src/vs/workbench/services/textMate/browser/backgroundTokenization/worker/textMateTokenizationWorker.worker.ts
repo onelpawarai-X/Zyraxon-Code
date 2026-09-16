@@ -8,7 +8,7 @@ import { LanguageId } from '../../../../../../editor/common/encodedTokenAttribut
 import { IModelChangedEvent } from '../../../../../../editor/common/model/mirrorTextModel.js';
 import { ICreateGrammarResult, TMGrammarFactory } from '../../../common/TMGrammarFactory.js';
 import { IValidEmbeddedLanguagesMap, IValidGrammarDefinition, IValidTokenTypeMap } from '../../../common/TMScopeRegistry.js';
-import type { IOnigLib, IRawTheme, StackDiff } from 'vscode-textmate';
+import type { IOnigLib, IRawTheme, StackDiff } from 'zyraxoncode-textmate';
 import { TextMateWorkerTokenizer } from './textMateWorkerTokenizer.js';
 import { importAMDNodeModule } from '../../../../../../amdX.js';
 import { IWebWorkerServerRequestHandler, IWebWorkerServer } from '../../../../../../base/common/worker/webWorker.js';
@@ -73,26 +73,26 @@ export class TextMateTokenizationWorker implements IWebWorkerServerRequestHandle
 	}
 
 	private async _loadTMGrammarFactory(grammarDefinitions: IValidGrammarDefinition[], onigurumaWASMUri: string): Promise<TMGrammarFactory> {
-		const vscodeTextmate = await importAMDNodeModule<typeof import('vscode-textmate')>('vscode-textmate', 'release/main.js');
-		const vscodeOniguruma = await importAMDNodeModule<typeof import('vscode-oniguruma')>('vscode-oniguruma', 'release/main.js');
+		const zyraxoncodeTextmate = await importAMDNodeModule<typeof import('zyraxoncode-textmate')>('zyraxoncode-textmate', 'release/main.js');
+		const zyraxoncodeOniguruma = await importAMDNodeModule<typeof import('zyraxoncode-oniguruma')>('zyraxoncode-oniguruma', 'release/main.js');
 		const response = await fetch(onigurumaWASMUri);
 
 		// Using the response directly only works if the server sets the MIME type 'application/wasm'.
 		// Otherwise, a TypeError is thrown when using the streaming compiler.
 		// We therefore use the non-streaming compiler :(.
 		const bytes = await response.arrayBuffer();
-		await vscodeOniguruma.loadWASM(bytes);
+		await zyraxoncodeOniguruma.loadWASM(bytes);
 
 		const onigLib: Promise<IOnigLib> = Promise.resolve({
-			createOnigScanner: (sources) => vscodeOniguruma.createOnigScanner(sources),
-			createOnigString: (str) => vscodeOniguruma.createOnigString(str)
+			createOnigScanner: (sources) => zyraxoncodeOniguruma.createOnigScanner(sources),
+			createOnigString: (str) => zyraxoncodeOniguruma.createOnigString(str)
 		});
 
 		return new TMGrammarFactory({
 			logTrace: (msg: string) => {/* console.log(msg) */ },
 			logError: (msg: string, err: unknown) => console.error(msg, err),
 			readFile: (resource: URI) => this._host.$readFile(resource)
-		}, grammarDefinitions, vscodeTextmate, onigLib);
+		}, grammarDefinitions, zyraxoncodeTextmate, onigLib);
 	}
 
 	// These methods are called by the renderer

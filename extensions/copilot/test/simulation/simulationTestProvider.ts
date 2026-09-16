@@ -5,7 +5,7 @@
 import { ITestFailure, ITestProvider } from '../../src/platform/testing/common/testProvider';
 import { Event } from '../../src/util/vs/base/common/event';
 import { URI } from '../../src/util/vs/base/common/uri';
-import { Range } from '../../src/vscodeTypes';
+import { Range } from '../../src/zyraxoncodeTypes';
 
 export class SimulationTestProvider implements ITestProvider {
 	declare readonly _serviceBrand: undefined;

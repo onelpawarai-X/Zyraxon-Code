@@ -71,7 +71,7 @@ function renderTurnPills(ctx: ComponentFixtureContext, options: IRenderTurnPills
 	const content: IChatTurnPillsPart = {
 		kind: 'turnPills',
 		requestId: 'request-1',
-		sessionResource: URI.parse('vscode-chat-session://agent-host/session-1'),
+		sessionResource: URI.parse('__ZYRAXKEEP__0_'),
 	};
 	const partContext = upcastPartial<IChatContentPartRenderContext>({ container });
 
@@ -86,7 +86,7 @@ function renderTurnPills(ctx: ComponentFixtureContext, options: IRenderTurnPills
 	// codicon sizing custom properties).
 	container.classList.add('monaco-workbench', 'interactive-session');
 	container.style.padding = '12px';
-	container.style.backgroundColor = 'var(--vscode-editor-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-editor-background)';
 	container.appendChild(part.domNode);
 }
 

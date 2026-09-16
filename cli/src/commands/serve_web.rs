@@ -61,13 +61,13 @@ const RELEASE_CHECK_INTERVAL: u64 = 60 * 60;
 /// Number of bytes for the secret keys. See workbench.ts for their usage.
 const SECRET_KEY_BYTES: usize = 32;
 /// Path to mint the key combining server and client parts.
-const SECRET_KEY_MINT_PATH: &str = "_vscode-cli/mint-key";
+const SECRET_KEY_MINT_PATH: &str = "_zyraxoncode-cli/mint-key";
 /// Cookie set to the `SECRET_KEY_MINT_PATH`
-const PATH_COOKIE_NAME: &str = "vscode-secret-key-path";
+const PATH_COOKIE_NAME: &str = "zyraxoncode-secret-key-path";
 /// HTTP-only cookie where the client's secret half is stored.
-const SECRET_KEY_COOKIE_NAME: &str = "vscode-cli-secret-half";
+const SECRET_KEY_COOKIE_NAME: &str = "zyraxoncode-cli-secret-half";
 
-/// Implements the vscode "server of servers". Clients who go to the URI get
+/// Implements the zyraxoncode "server of servers". Clients who go to the URI get
 /// served the latest version of the ZYRAXON Code server whenever they load the
 /// page. The ZYRAXON Code server prefixes all assets and connections it loads with
 /// its version string, so existing clients can continue to get served even
@@ -341,7 +341,7 @@ async fn forward_ws_req_to_server(
 	(rw, handle): (AsyncPipe, ConnectionHandle),
 	mut req: Request<Incoming>,
 ) -> Response<HyperBody> {
-	// splicing of client and servers inspired by https://github.com/hyperium/hyper/blob/fece9f7f50431cf9533cfe7106b53a77b48db699/examples/upgrades.rs
+	// splicing of client and servers inspired by __ZYRAXKEEP__0_
 	let (mut request_sender, connection) =
 		match hyper::client::conn::http1::handshake(TokioIo::new(rw)).await {
 			Ok(r) => r,

@@ -16,7 +16,7 @@ tools:
 
 # Issue Migration Prompt
 
-Use this prompt when migrating issues from one GitHub repository to another (e.g., from `microsoft/vscode-copilot` to `microsoft/zyraxon`).
+Use this prompt when migrating issues from one GitHub repository to another (e.g., from `zyraxon/zyraxoncode-copilot` to `zyraxon/zyraxon`).
 
 ## Input Methods
 
@@ -27,7 +27,7 @@ You can specify which issues to migrate using **any** of these three methods:
 Provide a full GitHub issues search URL. **All matching issues will be migrated.**
 
 ```
-https://github.com/microsoft/vscode-copilot/issues?q=is%3Aissue+is%3Aopen+assignee%3Ayoyokrazy
+__ZYRAXKEEP__0_
 ```
 
 ### Option B: GitHub Search Query Parameters
@@ -35,7 +35,7 @@ https://github.com/microsoft/vscode-copilot/issues?q=is%3Aissue+is%3Aopen+assign
 Provide search query syntax for a specific repo. **All matching issues will be migrated.**
 
 ```
-repo:microsoft/vscode-copilot is:issue is:open assignee:yoyokrazy
+repo:zyraxon/zyraxoncode-copilot is:issue is:open assignee:yoyokrazy
 ```
 
 Common query filters:
@@ -52,7 +52,7 @@ Common query filters:
 Provide a direct link to a single issue. **Only this issue will be migrated.**
 
 ```
-https://github.com/microsoft/vscode-copilot/issues/12345
+__ZYRAXKEEP__1_
 ```
 
 ## Task
@@ -109,8 +109,8 @@ This applies to:
 
 **Convert ALL `#NUMBER` references to full URLs:**
 
-✅ Correct: `https://github.com/microsoft/vscode-copilot/issues/12345`
-✅ Also OK: `microsoft/vscode-copilot#12345`
+✅ Correct: `__ZYRAXKEEP__2_`
+✅ Also OK: `zyraxon/zyraxoncode-copilot#12345`
 ❌ Wrong: `#12345` (will link to wrong repo)
 
 This applies to:
@@ -141,12 +141,12 @@ After creating the new issue and all comments:
 
 ## Example Transformation
 
-### Original Issue Body (in `microsoft/vscode-copilot`):
+### Original Issue Body (in `zyraxon/zyraxoncode-copilot`):
 
 ```markdown
 I noticed @johndoe had a similar issue in #9999. cc @janedoe for visibility.
 
-Related to #8888 and microsoft/zyraxon#12345.
+Related to #8888 and zyraxon/zyraxon#12345.
 
 Steps to reproduce:
 
@@ -154,17 +154,17 @@ Steps to reproduce:
 2. ...
 ```
 
-### Migrated Issue Body (in `microsoft/zyraxon`):
+### Migrated Issue Body (in `zyraxon/zyraxon`):
 
 ```markdown
-_Transferred from microsoft/vscode-copilot#12345_
+_Transferred from zyraxon/zyraxoncode-copilot#12345_
 _Original author: `@originalauthor`_
 
 ---
 
-I noticed `@johndoe` had a similar issue in https://github.com/microsoft/vscode-copilot/issues/9999. cc `@janedoe` for visibility.
+I noticed `@johndoe` had a similar issue in __ZYRAXKEEP__3_ cc `@janedoe` for visibility.
 
-Related to https://github.com/microsoft/vscode-copilot/issues/8888 and microsoft/zyraxon#12345.
+Related to __ZYRAXKEEP__4_ and zyraxon/zyraxon#12345.
 
 Steps to reproduce:
 
@@ -172,7 +172,7 @@ Steps to reproduce:
 2. ...
 ```
 
-Note: The `microsoft/zyraxon#12345` reference was already a cross-repo link, so it stays unchanged.
+Note: The `zyraxon/zyraxon#12345` reference was already a cross-repo link, so it stays unchanged.
 
 ## Checklist Before Migration
 

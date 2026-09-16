@@ -16,16 +16,16 @@
 .agent-sessions-workbench .part.editor .tabs-container > .tab {
 	background-color: transparent !important;
 	border-right: none !important;
-	border-radius: var(--vscode-cornerRadius-small);
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	box-shadow: none !important;
 	padding: var(--agent-sessions-editor-tab-padding, 0 0 0 4px) !important;
 	--tab-border-top-color: transparent !important;
 }
 
 .agent-sessions-workbench .part.editor .tabs-container > .tab.tab-actions-left:not(.sticky-compact) {
-	--agent-sessions-editor-tab-padding: 0 var(--vscode-spacing-size100) 0 0;
+	--agent-sessions-editor-tab-padding: 0 var(--zyraxoncode-spacing-size100) 0 0;
 }
 
 /* Size tabs to their content and never shrink them, so that when more tabs
@@ -65,7 +65,7 @@
 	align-items: center;
 	/* Opaque background so tabs scrolling under this sticky button are occluded
 	 * instead of bleeding through it (the tab strip sits on the editor card). */
-	background: var(--vscode-editor-background);
+	background: var(--zyraxoncode-editor-background);
 }
 
 /* Match the "New Chat" (+) button in the session-header chat tab bar: a compact,
@@ -77,18 +77,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	color: var(--chat-tab-inactive-foreground, currentColor);
 }
 
 .agent-sessions-workbench .part.editor .tabs-container > .tabs-bar-add-tab .action-label:not(.disabled):hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 	color: var(--chat-tab-active-foreground, currentColor);
 }
 
 .agent-sessions-workbench .part.editor .tabs-container > .tabs-bar-add-tab .action-label:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-	outline-offset: calc(-1 * var(--vscode-strokeThickness));
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+	outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
 }
 
 .agent-sessions-workbench .part.editor .tabs-and-actions-container {
@@ -98,7 +98,7 @@
 }
 
 .agent-sessions-workbench .part.editor .tabs-container > .tab.active {
-	background-color: color-mix(in srgb, var(--vscode-foreground) 5%, transparent) !important;
+	background-color: color-mix(in srgb, var(--zyraxoncode-foreground) 5%, transparent) !important;
 }
 
 .agent-sessions-workbench .part.editor .tabs-container > .tab .tab-border-top-container,

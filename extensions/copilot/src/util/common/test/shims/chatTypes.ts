@@ -3,40 +3,40 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { VSBuffer } from '../../../vs/base/common/buffer';
 import { MarkdownString } from '../../../vs/workbench/api/common/extHostTypes/markdownString';
 
 export class ChatResponseMarkdownPart {
-	value: vscode.MarkdownString;
-	constructor(value: string | vscode.MarkdownString) {
+	value: zyraxoncode.MarkdownString;
+	constructor(value: string | zyraxoncode.MarkdownString) {
 		this.value = typeof value === 'string' ? new MarkdownString(value) : value;
 	}
 }
 
 export class ChatResponseCodeblockUriPart {
 	isEdit?: boolean;
-	value: vscode.Uri;
+	value: zyraxoncode.Uri;
 	undoStopId?: string;
-	constructor(value: vscode.Uri, isEdit?: boolean, undoStopId?: string) {
+	constructor(value: zyraxoncode.Uri, isEdit?: boolean, undoStopId?: string) {
 		this.value = value;
 		this.undoStopId = undoStopId;
 	}
 }
 
 export class ChatResponseFileTreePart {
-	value: vscode.ChatResponseFileTree[];
-	baseUri: vscode.Uri;
-	constructor(value: vscode.ChatResponseFileTree[], baseUri: vscode.Uri) {
+	value: zyraxoncode.ChatResponseFileTree[];
+	baseUri: zyraxoncode.Uri;
+	constructor(value: zyraxoncode.ChatResponseFileTree[], baseUri: zyraxoncode.Uri) {
 		this.value = value;
 		this.baseUri = baseUri;
 	}
 }
 export class ChatResponseAnchorPart {
-	value: vscode.Uri | vscode.Location;
+	value: zyraxoncode.Uri | zyraxoncode.Location;
 	value2: any;
 	title?: string;
-	constructor(value: vscode.Uri | vscode.Location, title?: string) {
+	constructor(value: zyraxoncode.Uri | zyraxoncode.Location, title?: string) {
 		this.value = value;
 		this.title = title;
 	}
@@ -82,7 +82,7 @@ export class ChatResponseHookPart {
 
 export class ChatResponseVoiceProgressPart {
 	constructor(
-		readonly id: vscode.ChatResponseVoiceProgressStage,
+		readonly id: zyraxoncode.ChatResponseVoiceProgressStage,
 		readonly value: string,
 	) { }
 }
@@ -92,7 +92,7 @@ export class ChatResponseExternalEditPart {
 	didGetApplied!: (value: string) => void;
 
 	constructor(
-		public uris: vscode.Uri[],
+		public uris: zyraxoncode.Uri[],
 		public callback: () => Thenable<unknown>,
 	) {
 		this.applied = new Promise<string>((resolve) => {
@@ -103,39 +103,39 @@ export class ChatResponseExternalEditPart {
 
 export class ChatResponseProgressPart2 {
 	value: string;
-	task?: (progress: vscode.Progress<vscode.ChatResponseWarningPart>) => Thenable<string | void>;
-	constructor(value: string, task?: (progress: vscode.Progress<vscode.ChatResponseWarningPart>) => Thenable<string | void>) {
+	task?: (progress: zyraxoncode.Progress<zyraxoncode.ChatResponseWarningPart>) => Thenable<string | void>;
+	constructor(value: string, task?: (progress: zyraxoncode.Progress<zyraxoncode.ChatResponseWarningPart>) => Thenable<string | void>) {
 		this.value = value;
 		this.task = task;
 	}
 }
 
 export class ChatResponseWarningPart {
-	value: vscode.MarkdownString;
-	constructor(value: string | vscode.MarkdownString) {
+	value: zyraxoncode.MarkdownString;
+	constructor(value: string | zyraxoncode.MarkdownString) {
 		this.value = typeof value === 'string' ? new MarkdownString(value) : value;
 	}
 }
 
 export class ChatResponseInfoPart {
-	value: vscode.MarkdownString;
-	constructor(value: string | vscode.MarkdownString) {
+	value: zyraxoncode.MarkdownString;
+	constructor(value: string | zyraxoncode.MarkdownString) {
 		this.value = typeof value === 'string' ? new MarkdownString(value) : value;
 	}
 }
 
 export class ChatResponseReferencePart {
-	value: vscode.Uri | vscode.Location;
-	constructor(value: vscode.Uri | vscode.Location) {
+	value: zyraxoncode.Uri | zyraxoncode.Location;
+	constructor(value: zyraxoncode.Uri | zyraxoncode.Location) {
 		this.value = value;
 	}
 }
 
 export class ChatResponseReferencePart2 {
-	value: vscode.Uri | vscode.Location | { variableName: string; value?: vscode.Uri | vscode.Location };
-	iconPath?: vscode.Uri | vscode.ThemeIcon | { light: vscode.Uri; dark: vscode.Uri };
-	options?: { status?: { description: string; kind: vscode.ChatResponseReferencePartStatusKind } };
-	constructor(value: vscode.Uri | vscode.Location | { variableName: string; value?: vscode.Uri | vscode.Location }, iconPath?: vscode.Uri | vscode.ThemeIcon | { light: vscode.Uri; dark: vscode.Uri }, options?: { status?: { description: string; kind: vscode.ChatResponseReferencePartStatusKind } }) {
+	value: zyraxoncode.Uri | zyraxoncode.Location | { variableName: string; value?: zyraxoncode.Uri | zyraxoncode.Location };
+	iconPath?: zyraxoncode.Uri | zyraxoncode.ThemeIcon | { light: zyraxoncode.Uri; dark: zyraxoncode.Uri };
+	options?: { status?: { description: string; kind: zyraxoncode.ChatResponseReferencePartStatusKind } };
+	constructor(value: zyraxoncode.Uri | zyraxoncode.Location | { variableName: string; value?: zyraxoncode.Uri | zyraxoncode.Location }, iconPath?: zyraxoncode.Uri | zyraxoncode.ThemeIcon | { light: zyraxoncode.Uri; dark: zyraxoncode.Uri }, options?: { status?: { description: string; kind: zyraxoncode.ChatResponseReferencePartStatusKind } }) {
 		this.value = value;
 		this.iconPath = iconPath;
 		this.options = options;
@@ -144,10 +144,10 @@ export class ChatResponseReferencePart2 {
 
 export class ChatResponseMovePart {
 
-	readonly uri: vscode.Uri;
-	readonly range: vscode.Range;
+	readonly uri: zyraxoncode.Uri;
+	readonly range: zyraxoncode.Range;
 
-	constructor(uri: vscode.Uri, range: vscode.Range) {
+	constructor(uri: zyraxoncode.Uri, range: zyraxoncode.Range) {
 		this.uri = uri;
 		this.range = range;
 	}
@@ -166,22 +166,22 @@ export class ChatResponsePullRequestPart {
 	/**
 	 * @deprecated
 	 */
-	readonly uri?: vscode.Uri;
+	readonly uri?: zyraxoncode.Uri;
 	readonly linkTag: string;
 	readonly title: string;
 	readonly description: string;
 	readonly author: string;
-	readonly command: vscode.Command;
-	constructor(uriOrCommand: vscode.Uri | vscode.Command, title: string, description: string, author: string, linkTag: string) {
+	readonly command: zyraxoncode.Command;
+	constructor(uriOrCommand: zyraxoncode.Uri | zyraxoncode.Command, title: string, description: string, author: string, linkTag: string) {
 		if ('command' in uriOrCommand && typeof uriOrCommand.command === 'string') {
 			// It's a Command
 			this.command = uriOrCommand;
 		} else {
 			// It's a Uri
-			this.uri = uriOrCommand as vscode.Uri;
+			this.uri = uriOrCommand as zyraxoncode.Uri;
 			this.command = {
 				title: 'View Pull Request',
-				command: 'vscode.open',
+				command: 'zyraxoncode.open',
 				arguments: [uriOrCommand]
 			};
 		}
@@ -208,10 +208,10 @@ export class ChatResponseAutoModeResolutionPart {
 
 
 export class ChatResponseCodeCitationPart {
-	value: vscode.Uri;
+	value: zyraxoncode.Uri;
 	license: string;
 	snippet: string;
-	constructor(value: vscode.Uri, license: string, snippet: string) {
+	constructor(value: zyraxoncode.Uri, license: string, snippet: string) {
 		this.value = value;
 		this.license = license;
 		this.snippet = snippet;
@@ -219,26 +219,26 @@ export class ChatResponseCodeCitationPart {
 }
 
 export class ChatResponseCommandButtonPart {
-	value: vscode.Command;
-	constructor(value: vscode.Command) {
+	value: zyraxoncode.Command;
+	constructor(value: zyraxoncode.Command) {
 		this.value = value;
 	}
 }
 
 export class ChatResponseMarkdownWithVulnerabilitiesPart {
-	value: vscode.MarkdownString;
-	vulnerabilities: vscode.ChatVulnerability[];
-	constructor(value: string | vscode.MarkdownString, vulnerabilities: vscode.ChatVulnerability[]) {
+	value: zyraxoncode.MarkdownString;
+	vulnerabilities: zyraxoncode.ChatVulnerability[];
+	constructor(value: string | zyraxoncode.MarkdownString, vulnerabilities: zyraxoncode.ChatVulnerability[]) {
 		this.value = typeof value === 'string' ? new MarkdownString(value) : value;
 		this.vulnerabilities = vulnerabilities;
 	}
 }
 
 export class ChatResponseTextEditPart {
-	uri: vscode.Uri;
-	edits: vscode.TextEdit[];
+	uri: zyraxoncode.Uri;
+	edits: zyraxoncode.TextEdit[];
 	isDone?: boolean;
-	constructor(uri: vscode.Uri, editsOrDone: vscode.TextEdit | vscode.TextEdit[] | true) {
+	constructor(uri: zyraxoncode.Uri, editsOrDone: zyraxoncode.TextEdit | zyraxoncode.TextEdit[] | true) {
 		this.uri = uri;
 		if (editsOrDone === true) {
 			this.isDone = true;
@@ -249,11 +249,11 @@ export class ChatResponseTextEditPart {
 	}
 }
 
-export class ChatResponseNotebookEditPart implements vscode.ChatResponseNotebookEditPart {
-	uri: vscode.Uri;
-	edits: vscode.NotebookEdit[];
+export class ChatResponseNotebookEditPart implements zyraxoncode.ChatResponseNotebookEditPart {
+	uri: zyraxoncode.Uri;
+	edits: zyraxoncode.NotebookEdit[];
 	isDone?: boolean;
-	constructor(uri: vscode.Uri, editsOrDone: vscode.NotebookEdit | vscode.NotebookEdit[] | true) {
+	constructor(uri: zyraxoncode.Uri, editsOrDone: zyraxoncode.NotebookEdit | zyraxoncode.NotebookEdit[] | true) {
 		this.uri = uri;
 		if (editsOrDone === true) {
 			this.isDone = true;
@@ -265,9 +265,9 @@ export class ChatResponseNotebookEditPart implements vscode.ChatResponseNotebook
 	}
 }
 
-export class ChatResponseWorkspaceEditPart implements vscode.ChatResponseWorkspaceEditPart {
-	edits: vscode.ChatWorkspaceFileEdit[];
-	constructor(edits: vscode.ChatWorkspaceFileEdit[]) {
+export class ChatResponseWorkspaceEditPart implements zyraxoncode.ChatResponseWorkspaceEditPart {
+	edits: zyraxoncode.ChatWorkspaceFileEdit[];
+	constructor(edits: zyraxoncode.ChatWorkspaceFileEdit[]) {
 		this.edits = edits;
 	}
 }
@@ -291,22 +291,22 @@ export enum ChatQuestionType {
 	MultiSelect = 3
 }
 
-export class ChatQuestion implements vscode.ChatQuestion {
+export class ChatQuestion implements zyraxoncode.ChatQuestion {
 	id: string;
-	type: vscode.ChatQuestionType;
+	type: zyraxoncode.ChatQuestionType;
 	title: string;
-	message?: string | vscode.MarkdownString;
-	options?: vscode.ChatQuestionOption[];
+	message?: string | zyraxoncode.MarkdownString;
+	options?: zyraxoncode.ChatQuestionOption[];
 	defaultValue?: string | string[];
 	allowFreeformInput?: boolean;
 
 	constructor(
 		id: string,
-		type: vscode.ChatQuestionType,
+		type: zyraxoncode.ChatQuestionType,
 		title: string,
 		options?: {
-			message?: string | vscode.MarkdownString;
-			options?: vscode.ChatQuestionOption[];
+			message?: string | zyraxoncode.MarkdownString;
+			options?: zyraxoncode.ChatQuestionOption[];
 			defaultValue?: string | string[];
 			allowFreeformInput?: boolean;
 		}
@@ -323,44 +323,44 @@ export class ChatQuestion implements vscode.ChatQuestion {
 	}
 }
 
-export class ChatResponseQuestionCarouselPart implements vscode.ChatResponseQuestionCarouselPart {
-	questions: vscode.ChatQuestion[];
+export class ChatResponseQuestionCarouselPart implements zyraxoncode.ChatResponseQuestionCarouselPart {
+	questions: zyraxoncode.ChatQuestion[];
 	allowSkip: boolean;
-	constructor(questions: vscode.ChatQuestion[], allowSkip?: boolean) {
+	constructor(questions: zyraxoncode.ChatQuestion[], allowSkip?: boolean) {
 		this.questions = questions;
 		this.allowSkip = allowSkip ?? false;
 	}
 }
 
-export class ChatRequestTurn implements vscode.ChatRequestTurn {
+export class ChatRequestTurn implements zyraxoncode.ChatRequestTurn {
 	constructor(
 		readonly prompt: string,
 		readonly command: string | undefined,
-		readonly references: vscode.ChatPromptReference[],
+		readonly references: zyraxoncode.ChatPromptReference[],
 		readonly participant: string,
-		readonly toolReferences: vscode.ChatLanguageModelToolReference[]
+		readonly toolReferences: zyraxoncode.ChatLanguageModelToolReference[]
 	) { }
 }
 
-export class ChatRequestTurn2 implements vscode.ChatRequestTurn2 {
+export class ChatRequestTurn2 implements zyraxoncode.ChatRequestTurn2 {
 	constructor(
 		readonly prompt: string,
 		readonly command: string | undefined,
-		readonly references: vscode.ChatPromptReference[],
+		readonly references: zyraxoncode.ChatPromptReference[],
 		readonly participant: string,
-		readonly toolReferences: readonly vscode.ChatLanguageModelToolReference[],
-		readonly editedFileEvents: vscode.ChatRequestEditedFileEvent[] | undefined,
+		readonly toolReferences: readonly zyraxoncode.ChatLanguageModelToolReference[],
+		readonly editedFileEvents: zyraxoncode.ChatRequestEditedFileEvent[] | undefined,
 		readonly id: string | undefined,
 		readonly modelId: string | undefined,
-		readonly modeInstructions2: vscode.ChatRequestModeInstructions | undefined,
+		readonly modeInstructions2: zyraxoncode.ChatRequestModeInstructions | undefined,
 	) { }
 }
 
-export class ChatResponseTurn implements vscode.ChatResponseTurn {
+export class ChatResponseTurn implements zyraxoncode.ChatResponseTurn {
 
 	constructor(
 		readonly response: ReadonlyArray<ChatResponseMarkdownPart | ChatResponseFileTreePart | ChatResponseAnchorPart | ChatResponseCommandButtonPart>,
-		readonly result: vscode.ChatResult,
+		readonly result: zyraxoncode.ChatResult,
 		readonly participant: string,
 		readonly command?: string
 	) { }
@@ -368,23 +368,23 @@ export class ChatResponseTurn implements vscode.ChatResponseTurn {
 
 export class ChatRequestEditorData {
 	constructor(
-		readonly editor: vscode.TextEditor,
-		readonly document: vscode.TextDocument,
-		readonly selection: vscode.Selection,
-		readonly wholeRange: vscode.Range,
+		readonly editor: zyraxoncode.TextEditor,
+		readonly document: zyraxoncode.TextDocument,
+		readonly selection: zyraxoncode.Selection,
+		readonly wholeRange: zyraxoncode.Range,
 	) { }
 }
 
 export class ChatRequestNotebookData {
 	constructor(
-		readonly cell: vscode.TextDocument
+		readonly cell: zyraxoncode.TextDocument
 	) { }
 }
 
 
 export class ChatReferenceDiagnostic {
 	constructor(
-		readonly diagnostics: [vscode.Uri, vscode.Diagnostic[]][]
+		readonly diagnostics: [zyraxoncode.Uri, zyraxoncode.Diagnostic[]][]
 	) { }
 }
 
@@ -404,7 +404,7 @@ export class LanguageModelToolResult2 {
 	constructor(public content: (LanguageModelTextPart | LanguageModelPromptTsxPart | LanguageModelDataPart | unknown)[]) { }
 }
 
-export class LanguageModelTextPart implements vscode.LanguageModelTextPart {
+export class LanguageModelTextPart implements zyraxoncode.LanguageModelTextPart {
 	value: string;
 
 	constructor(value: string) {
@@ -427,7 +427,7 @@ export class LanguageModelTextPart2 extends LanguageModelTextPart {
 	}
 }
 
-export class LanguageModelThinkingPart implements vscode.LanguageModelThinkingPart {
+export class LanguageModelThinkingPart implements zyraxoncode.LanguageModelThinkingPart {
 	value: string | string[];
 	id?: string;
 	metadata?: { readonly [key: string]: any };
@@ -439,7 +439,7 @@ export class LanguageModelThinkingPart implements vscode.LanguageModelThinkingPa
 	}
 }
 
-export class LanguageModelDataPart implements vscode.LanguageModelDataPart {
+export class LanguageModelDataPart implements zyraxoncode.LanguageModelDataPart {
 	mimeType: string;
 	data: Uint8Array<ArrayBufferLike>;
 
@@ -448,16 +448,16 @@ export class LanguageModelDataPart implements vscode.LanguageModelDataPart {
 		this.data = data;
 	}
 
-	static image(data: Uint8Array<ArrayBufferLike>, mimeType: string): vscode.LanguageModelDataPart {
+	static image(data: Uint8Array<ArrayBufferLike>, mimeType: string): zyraxoncode.LanguageModelDataPart {
 		return new LanguageModelDataPart(data, mimeType);
 	}
 
-	static json(value: object): vscode.LanguageModelDataPart {
+	static json(value: object): zyraxoncode.LanguageModelDataPart {
 		const rawStr = JSON.stringify(value, undefined, '\t');
 		return new LanguageModelDataPart(VSBuffer.fromString(rawStr).buffer, 'json');
 	}
 
-	static text(value: string): vscode.LanguageModelDataPart {
+	static text(value: string): zyraxoncode.LanguageModelDataPart {
 		return new LanguageModelDataPart(VSBuffer.fromString(value).buffer, 'text/plain');
 	}
 }
@@ -493,7 +493,7 @@ export enum ExcludeSettingOptions {
 }
 
 export class TextSearchMatch2 {
-	constructor(public uri: vscode.Uri, public ranges: { sourceRange: vscode.Range; previewRange: vscode.Range }[], public previewText: string) { }
+	constructor(public uri: zyraxoncode.Uri, public ranges: { sourceRange: zyraxoncode.Range; previewRange: zyraxoncode.Range }[], public previewText: string) { }
 }
 
 export class AISearchKeyword {
@@ -524,15 +524,15 @@ export enum ChatResponseClearToPreviousToolInvocationReason {
 	CopyrightContentRetry = 2,
 }
 
-export class LanguageModelToolExtensionSource implements vscode.LanguageModelToolExtensionSource {
+export class LanguageModelToolExtensionSource implements zyraxoncode.LanguageModelToolExtensionSource {
 	constructor(public readonly id: string, public readonly label: string) { }
 }
 
-export class LanguageModelToolMCPSource implements vscode.LanguageModelToolMCPSource {
+export class LanguageModelToolMCPSource implements zyraxoncode.LanguageModelToolMCPSource {
 	constructor(public readonly label: string, public readonly name: string, public readonly instructions: string | undefined) { }
 }
 
-export class LanguageModelToolCallPart implements vscode.LanguageModelToolCallPart {
+export class LanguageModelToolCallPart implements zyraxoncode.LanguageModelToolCallPart {
 	callId: string;
 	name: string;
 	input: object;
@@ -545,7 +545,7 @@ export class LanguageModelToolCallPart implements vscode.LanguageModelToolCallPa
 	}
 }
 
-export class LanguageModelToolResultPart implements vscode.LanguageModelToolResultPart {
+export class LanguageModelToolResultPart implements zyraxoncode.LanguageModelToolResultPart {
 	callId: string;
 	content: (LanguageModelTextPart | LanguageModelPromptTsxPart | unknown)[];
 	isError: boolean;
@@ -557,7 +557,7 @@ export class LanguageModelToolResultPart implements vscode.LanguageModelToolResu
 	}
 }
 
-export class LanguageModelToolResultPart2 implements vscode.LanguageModelToolResultPart2 {
+export class LanguageModelToolResultPart2 implements zyraxoncode.LanguageModelToolResultPart2 {
 	callId: string;
 	content: (LanguageModelTextPart | LanguageModelPromptTsxPart | LanguageModelDataPart | unknown)[];
 	isError: boolean;
@@ -580,7 +580,7 @@ export enum LanguageModelChatToolMode {
 	Required = 2
 }
 
-export class LanguageModelChatMessage implements vscode.LanguageModelChatMessage {
+export class LanguageModelChatMessage implements zyraxoncode.LanguageModelChatMessage {
 	role: LanguageModelChatMessageRole;
 	content: Array<any>;
 	name: string | undefined;
@@ -600,7 +600,7 @@ export class LanguageModelChatMessage implements vscode.LanguageModelChatMessage
 	}
 }
 
-export class McpToolInvocationContentData implements vscode.McpToolInvocationContentData {
+export class McpToolInvocationContentData implements zyraxoncode.McpToolInvocationContentData {
 	mimeType: string;
 	data: Uint8Array;
 
@@ -610,7 +610,7 @@ export class McpToolInvocationContentData implements vscode.McpToolInvocationCon
 	}
 }
 
-export interface ChatMcpToolInvocationData extends vscode.ChatMcpToolInvocationData {
+export interface ChatMcpToolInvocationData extends zyraxoncode.ChatMcpToolInvocationData {
 	input: string;
 	output: McpToolInvocationContentData[];
 }
@@ -619,12 +619,12 @@ export class ChatToolInvocationPart {
 	toolName: string;
 	toolCallId: string;
 	isError?: boolean;
-	invocationMessage?: string | vscode.MarkdownString;
-	originMessage?: string | vscode.MarkdownString;
-	pastTenseMessage?: string | vscode.MarkdownString;
+	invocationMessage?: string | zyraxoncode.MarkdownString;
+	originMessage?: string | zyraxoncode.MarkdownString;
+	pastTenseMessage?: string | zyraxoncode.MarkdownString;
 	isConfirmed?: boolean;
 	isComplete?: boolean;
-	toolSpecificData?: vscode.ChatTerminalToolInvocationData | ChatMcpToolInvocationData;
+	toolSpecificData?: zyraxoncode.ChatTerminalToolInvocationData | ChatMcpToolInvocationData;
 
 	constructor(toolName: string,
 		toolCallId: string,
@@ -649,11 +649,11 @@ export class ChatSubagentToolInvocationData {
 	}
 }
 
-export class ChatResponseTurn2 implements vscode.ChatResponseTurn2 {
+export class ChatResponseTurn2 implements zyraxoncode.ChatResponseTurn2 {
 
 	constructor(
 		readonly response: ReadonlyArray<ChatResponseMarkdownPart | ChatResponseFileTreePart | ChatResponseAnchorPart | ChatResponseCommandButtonPart | ChatResponseExtensionsPart | ChatToolInvocationPart>,
-		readonly result: vscode.ChatResult,
+		readonly result: zyraxoncode.ChatResult,
 		readonly participant: string,
 		readonly command?: string
 	) { }
@@ -694,10 +694,10 @@ export class LanguageModelError extends Error {
 /**
  * Represents a chat-related resource, such as a custom agent, instructions, prompt file, or skill.
  */
-export class ChatResource implements vscode.ChatResource {
-	readonly uri: vscode.Uri;
+export class ChatResource implements zyraxoncode.ChatResource {
+	readonly uri: zyraxoncode.Uri;
 
-	constructor(uri: vscode.Uri) {
+	constructor(uri: zyraxoncode.Uri) {
 		this.uri = uri;
 	}
 }
@@ -718,7 +718,7 @@ export class McpStdioServerDefinition {
 	/**
 	 * The working directory used to start the server.
 	 */
-	cwd?: vscode.Uri;
+	cwd?: zyraxoncode.Uri;
 
 	/**
 	 * The command used to start the server. Node.js-based servers may use
@@ -774,7 +774,7 @@ export class McpHttpServerDefinition {
 	 * The URI of the server. The editor will make a POST request to this URI
 	 * to begin each session.
 	 */
-	uri: vscode.Uri;
+	uri: zyraxoncode.Uri;
 
 	/**
 	 * Optional additional heads included with each request to the server.
@@ -792,7 +792,7 @@ export class McpHttpServerDefinition {
 	 * @param uri The URI of the server.
 	 * @param headers Optional additional heads included with each request to the server.
 	 */
-	constructor(label: string, uri: vscode.Uri, headers?: Record<string, string>, version?: string) {
+	constructor(label: string, uri: zyraxoncode.Uri, headers?: Record<string, string>, version?: string) {
 		this.label = label;
 		this.uri = uri;
 		this.headers = headers ?? {};

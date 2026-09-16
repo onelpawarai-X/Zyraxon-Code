@@ -32,7 +32,7 @@
  */
 .spotlight-hole {
 	position: fixed;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 	pointer-events: none;
 	/*
 	 * The dim color matches the modal scrim (.monaco-dialog-modal-block.dimmed)
@@ -41,15 +41,15 @@
 	 */
 	box-shadow:
 		0 0 0 9999px rgba(0, 0, 0, 0.5),
-		0 0 0 2px var(--vscode-focusBorder) inset;
+		0 0 0 2px var(--zyraxoncode-focusBorder) inset;
 	transition: top 0.2s ease, left 0.2s ease, width 0.2s ease, height 0.2s ease;
 }
 
 .spotlight-callout-pointer {
 	position: fixed;
 	box-sizing: border-box;
-	width: var(--vscode-spacing-size100);
-	height: var(--vscode-spacing-size100);
+	width: var(--zyraxoncode-spacing-size100);
+	height: var(--zyraxoncode-spacing-size100);
 	z-index: 1;
 	pointer-events: none;
 }
@@ -58,9 +58,9 @@
 	content: '';
 	position: absolute;
 	inset: 0;
-	background: var(--vscode-editorWidget-background);
-	border-right: var(--vscode-strokeThickness) solid var(--vscode-widget-border, transparent);
-	border-bottom: var(--vscode-strokeThickness) solid var(--vscode-widget-border, transparent);
+	background: var(--zyraxoncode-editorWidget-background);
+	border-right: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-widget-border, transparent);
+	border-bottom: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-widget-border, transparent);
 }
 
 .spotlight-callout-pointer.top::after {
@@ -84,13 +84,13 @@
 	box-sizing: border-box;
 	z-index: 0;
 	width: 320px;
-	max-width: calc(100vw - var(--vscode-spacing-size320));
-	padding: var(--vscode-spacing-size160);
-	background: var(--vscode-editorWidget-background);
-	color: var(--vscode-editorWidget-foreground);
-	border: var(--vscode-strokeThickness) solid var(--vscode-widget-border, transparent);
-	border-radius: var(--vscode-cornerRadius-large);
-	box-shadow: 0 2px 8px var(--vscode-widget-shadow, rgba(0, 0, 0, 0.36));
+	max-width: calc(100vw - var(--zyraxoncode-spacing-size320));
+	padding: var(--zyraxoncode-spacing-size160);
+	background: var(--zyraxoncode-editorWidget-background);
+	color: var(--zyraxoncode-editorWidget-foreground);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-widget-border, transparent);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	box-shadow: 0 2px 8px var(--zyraxoncode-widget-shadow, rgba(0, 0, 0, 0.36));
 	pointer-events: auto;
 }
 
@@ -100,20 +100,20 @@
 }
 
 .spotlight-callout-title {
-	margin: 0 0 var(--vscode-spacing-size80) 0;
-	font-size: var(--vscode-bodyFontSize);
+	margin: 0 0 var(--zyraxoncode-spacing-size80) 0;
+	font-size: var(--zyraxoncode-bodyFontSize);
 	font-weight: 600;
 }
 
 .spotlight-callout-description {
 	margin: 0;
-	font-size: var(--vscode-bodyFontSize);
+	font-size: var(--zyraxoncode-bodyFontSize);
 	line-height: 1.4;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .spotlight-callout-description p {
-	margin: 0 0 var(--vscode-spacing-size80) 0;
+	margin: 0 0 var(--zyraxoncode-spacing-size80) 0;
 }
 
 .spotlight-callout-description p:last-child {
@@ -124,19 +124,19 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: var(--vscode-spacing-size120);
-	margin-top: var(--vscode-spacing-size160);
+	gap: var(--zyraxoncode-spacing-size120);
+	margin-top: var(--zyraxoncode-spacing-size160);
 }
 
 .spotlight-callout-counter {
-	font-size: var(--vscode-bodyFontSize-small);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-bodyFontSize-small);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .spotlight-callout-actions {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--vscode-spacing-size80);
+	gap: var(--zyraxoncode-spacing-size80);
 }
 
 .spotlight-callout-actions .monaco-button {

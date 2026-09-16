@@ -7,7 +7,7 @@ import { Emitter, Event, AsyncEmitter, IWaitUntil, IWaitUntilData } from '../../
 import { GLOBSTAR, GLOB_SPLIT, IRelativePattern, parse } from '../../../base/common/glob.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
 import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostFileSystemEventServiceShape, FileSystemEvents, IMainContext, SourceTargetPair, IWorkspaceEditDto, IWillRunFileOperationParticipation, MainContext, IRelativePatternDto } from './extHost.protocol.js';
 import * as typeConverter from './extHostTypeConverters.js';
 import { Disposable, WorkspaceEdit } from './extHostTypes.js';
@@ -29,13 +29,13 @@ export interface FileSystemWatcherCreateOptions {
 	readonly ignoreDeleteEvents?: boolean;
 }
 
-class FileSystemWatcher implements vscode.FileSystemWatcher {
+class FileSystemWatcher implements zyraxoncode.FileSystemWatcher {
 
 	private readonly session = Math.random();
 
-	private readonly _onDidCreate = new Emitter<vscode.Uri>();
-	private readonly _onDidChange = new Emitter<vscode.Uri>();
-	private readonly _onDidDelete = new Emitter<vscode.Uri>();
+	private readonly _onDidCreate = new Emitter<zyraxoncode.Uri>();
+	private readonly _onDidChange = new Emitter<zyraxoncode.Uri>();
+	private readonly _onDidDelete = new Emitter<zyraxoncode.Uri>();
 
 	private _disposable: Disposable;
 	private _config: number;
@@ -85,7 +85,7 @@ class FileSystemWatcher implements vscode.FileSystemWatcher {
 		// we start to ignore events outside the workspace when only a string
 		// pattern is provided to avoid sending events to extensions that are
 		// unexpected.
-		// https://github.com/microsoft/vscode/issues/3025
+		// __ZYRAXKEEP__0_
 		const excludeOutOfWorkspaceEvents = typeof globPattern === 'string';
 
 		// 1.84.x introduces new proposed API for a watcher to set exclude
@@ -200,7 +200,7 @@ class FileSystemWatcher implements vscode.FileSystemWatcher {
 			// such as `bar` for a exclude, will work to exclude any of
 			// `<workspace path>/bar` but will not work as include for files within
 			// `bar` unless a suffix of `/**` if added.
-			// (https://github.com/microsoft/vscode/issues/148245)
+			// (__ZYRAXKEEP__1_)
 			else if (!recursive) {
 				const workspaceFolder = workspace.getWorkspaceFolder(URI.revive(globPattern.baseUri));
 				if (workspaceFolder) {
@@ -237,15 +237,15 @@ class FileSystemWatcher implements vscode.FileSystemWatcher {
 		this._disposable.dispose();
 	}
 
-	get onDidCreate(): Event<vscode.Uri> {
+	get onDidCreate(): Event<zyraxoncode.Uri> {
 		return this._onDidCreate.event;
 	}
 
-	get onDidChange(): Event<vscode.Uri> {
+	get onDidChange(): Event<zyraxoncode.Uri> {
 		return this._onDidChange.event;
 	}
 
-	get onDidDelete(): Event<vscode.Uri> {
+	get onDidDelete(): Event<zyraxoncode.Uri> {
 		return this._onDidDelete.event;
 	}
 }
@@ -287,16 +287,16 @@ export class ExtHostFileSystemEventService implements ExtHostFileSystemEventServ
 
 	private readonly _onFileSystemEvent = new Emitter<LazyRevivedFileSystemEvents>();
 
-	private readonly _onDidRenameFile = new Emitter<vscode.FileRenameEvent>();
-	private readonly _onDidCreateFile = new Emitter<vscode.FileCreateEvent>();
-	private readonly _onDidDeleteFile = new Emitter<vscode.FileDeleteEvent>();
-	private readonly _onWillRenameFile = new AsyncEmitter<vscode.FileWillRenameEvent>();
-	private readonly _onWillCreateFile = new AsyncEmitter<vscode.FileWillCreateEvent>();
-	private readonly _onWillDeleteFile = new AsyncEmitter<vscode.FileWillDeleteEvent>();
+	private readonly _onDidRenameFile = new Emitter<zyraxoncode.FileRenameEvent>();
+	private readonly _onDidCreateFile = new Emitter<zyraxoncode.FileCreateEvent>();
+	private readonly _onDidDeleteFile = new Emitter<zyraxoncode.FileDeleteEvent>();
+	private readonly _onWillRenameFile = new AsyncEmitter<zyraxoncode.FileWillRenameEvent>();
+	private readonly _onWillCreateFile = new AsyncEmitter<zyraxoncode.FileWillCreateEvent>();
+	private readonly _onWillDeleteFile = new AsyncEmitter<zyraxoncode.FileWillDeleteEvent>();
 
-	readonly onDidRenameFile: Event<vscode.FileRenameEvent> = this._onDidRenameFile.event;
-	readonly onDidCreateFile: Event<vscode.FileCreateEvent> = this._onDidCreateFile.event;
-	readonly onDidDeleteFile: Event<vscode.FileDeleteEvent> = this._onDidDeleteFile.event;
+	readonly onDidRenameFile: Event<zyraxoncode.FileRenameEvent> = this._onDidRenameFile.event;
+	readonly onDidCreateFile: Event<zyraxoncode.FileCreateEvent> = this._onDidCreateFile.event;
+	readonly onDidDeleteFile: Event<zyraxoncode.FileDeleteEvent> = this._onDidDeleteFile.event;
 
 	constructor(
 		private readonly _mainContext: IMainContext,
@@ -308,7 +308,7 @@ export class ExtHostFileSystemEventService implements ExtHostFileSystemEventServ
 
 	//--- file events
 
-	createFileSystemWatcher(workspace: IExtHostWorkspace, configProvider: ExtHostConfigProvider, fileSystemInfo: ExtHostFileSystemInfo, extension: IExtensionDescription, globPattern: vscode.GlobPattern, options: FileSystemWatcherCreateOptions): vscode.FileSystemWatcher {
+	createFileSystemWatcher(workspace: IExtHostWorkspace, configProvider: ExtHostConfigProvider, fileSystemInfo: ExtHostFileSystemInfo, extension: IExtensionDescription, globPattern: zyraxoncode.GlobPattern, options: FileSystemWatcherCreateOptions): zyraxoncode.FileSystemWatcher {
 		return new FileSystemWatcher(this._mainContext, configProvider, fileSystemInfo, workspace, extension, this._onFileSystemEvent.event, typeConverter.GlobPattern.from(globPattern), options);
 	}
 
@@ -336,15 +336,15 @@ export class ExtHostFileSystemEventService implements ExtHostFileSystemEventServ
 	}
 
 
-	getOnWillRenameFileEvent(extension: IExtensionDescription): Event<vscode.FileWillRenameEvent> {
+	getOnWillRenameFileEvent(extension: IExtensionDescription): Event<zyraxoncode.FileWillRenameEvent> {
 		return this._createWillExecuteEvent(extension, this._onWillRenameFile);
 	}
 
-	getOnWillCreateFileEvent(extension: IExtensionDescription): Event<vscode.FileWillCreateEvent> {
+	getOnWillCreateFileEvent(extension: IExtensionDescription): Event<zyraxoncode.FileWillCreateEvent> {
 		return this._createWillExecuteEvent(extension, this._onWillCreateFile);
 	}
 
-	getOnWillDeleteFileEvent(extension: IExtensionDescription): Event<vscode.FileWillDeleteEvent> {
+	getOnWillDeleteFileEvent(extension: IExtensionDescription): Event<zyraxoncode.FileWillDeleteEvent> {
 		return this._createWillExecuteEvent(extension, this._onWillDeleteFile);
 	}
 

@@ -5,7 +5,7 @@
 
 import * as os from 'os';
 import * as path from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import * as child_process from 'child_process';
 import * as fs from 'fs';
 import { BaseServiceConfigurationProvider } from './configuration';
@@ -23,7 +23,7 @@ export class ElectronServiceConfigurationProvider extends BaseServiceConfigurati
 		return inspectValue;
 	}
 
-	protected readGlobalTsdk(configuration: vscode.WorkspaceConfiguration): string | null {
+	protected readGlobalTsdk(configuration: zyraxoncode.WorkspaceConfiguration): string | null {
 		const unifiedInspect = configuration.inspect('js/ts.tsdk.path');
 		if (unifiedInspect && typeof unifiedInspect.globalValue === 'string') {
 			return this.fixPathPrefixes(unifiedInspect.globalValue);
@@ -35,7 +35,7 @@ export class ElectronServiceConfigurationProvider extends BaseServiceConfigurati
 		return null;
 	}
 
-	protected readLocalTsdk(configuration: vscode.WorkspaceConfiguration): string | null {
+	protected readLocalTsdk(configuration: zyraxoncode.WorkspaceConfiguration): string | null {
 		const unifiedInspect = configuration.inspect('js/ts.tsdk.path');
 		if (unifiedInspect && typeof unifiedInspect.workspaceValue === 'string') {
 			return this.fixPathPrefixes(unifiedInspect.workspaceValue);
@@ -47,11 +47,11 @@ export class ElectronServiceConfigurationProvider extends BaseServiceConfigurati
 		return null;
 	}
 
-	protected readLocalNodePath(configuration: vscode.WorkspaceConfiguration): string | null {
+	protected readLocalNodePath(configuration: zyraxoncode.WorkspaceConfiguration): string | null {
 		return this.validatePath(this.readLocalNodePathWorker(configuration));
 	}
 
-	private readLocalNodePathWorker(configuration: vscode.WorkspaceConfiguration): string | null {
+	private readLocalNodePathWorker(configuration: zyraxoncode.WorkspaceConfiguration): string | null {
 		const unifiedInspect = configuration.inspect('js/ts.tsserver.node.path');
 		const inspect = (unifiedInspect?.workspaceValue && typeof unifiedInspect.workspaceValue === 'string')
 			? unifiedInspect
@@ -70,11 +70,11 @@ export class ElectronServiceConfigurationProvider extends BaseServiceConfigurati
 		return null;
 	}
 
-	protected readGlobalNodePath(configuration: vscode.WorkspaceConfiguration): string | null {
+	protected readGlobalNodePath(configuration: zyraxoncode.WorkspaceConfiguration): string | null {
 		return this.validatePath(this.readGlobalNodePathWorker(configuration));
 	}
 
-	private readGlobalNodePathWorker(configuration: vscode.WorkspaceConfiguration): string | null {
+	private readGlobalNodePathWorker(configuration: zyraxoncode.WorkspaceConfiguration): string | null {
 		const unifiedInspect = configuration.inspect('js/ts.tsserver.node.path');
 		const inspect = (unifiedInspect?.globalValue && typeof unifiedInspect.globalValue === 'string')
 			? unifiedInspect
@@ -96,19 +96,19 @@ export class ElectronServiceConfigurationProvider extends BaseServiceConfigurati
 			const out = child_process.execFileSync('node', ['-e', 'console.log(process.execPath)'], {
 				windowsHide: true,
 				timeout: 2000,
-				cwd: vscode.workspace.workspaceFolders?.[0].uri.fsPath,
+				cwd: zyraxoncode.workspace.workspaceFolders?.[0].uri.fsPath,
 				encoding: 'utf-8',
 			});
 			return out.trim();
 		} catch (error) {
-			vscode.window.showWarningMessage(vscode.l10n.t("Could not detect a Node installation to run TS Server."));
+			zyraxoncode.window.showWarningMessage(zyraxoncode.l10n.t("Could not detect a Node installation to run TS Server."));
 			return null;
 		}
 	}
 
 	private validatePath(nodePath: string | null): string | null {
 		if (nodePath && (!fs.existsSync(nodePath) || fs.lstatSync(nodePath).isDirectory())) {
-			vscode.window.showWarningMessage(vscode.l10n.t("The path {0} doesn\'t point to a valid Node installation to run TS Server. Falling back to bundled Node.", nodePath));
+			zyraxoncode.window.showWarningMessage(zyraxoncode.l10n.t("The path {0} doesn\'t point to a valid Node installation to run TS Server. Falling back to bundled Node.", nodePath));
 			return null;
 		}
 		return nodePath;

@@ -20,25 +20,25 @@
 	border: none;
 	padding: 6px;
 	margin: 0;
-	font-size: var(--vscode-agents-fontSize-label1, 12px);
+	font-size: var(--zyraxoncode-agents-fontSize-label1, 12px);
 	height: auto;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	background: transparent;
-	color: var(--vscode-agentsPanel-foreground, var(--vscode-foreground));
+	color: var(--zyraxoncode-agentsPanel-foreground, var(--zyraxoncode-foreground));
 	width: 100%;
 	text-align: left;
 	justify-content: flex-start;
 	text-decoration: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	cursor: pointer;
 	gap: 6px;
 	display: flex;
 }
 
 .sidebar-action-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .sidebar-action-button.monaco-text-button:focus {

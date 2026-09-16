@@ -7,7 +7,7 @@ import { Event } from '../../../base/common/event.js';
 import * as platform from '../../../base/common/platform.js';
 import type { IExperimentationFilterProvider } from 'tas-client';
 
-export const ASSIGNMENT_STORAGE_KEY = 'VSCode.ABExp.FeatureData';
+export const ASSIGNMENT_STORAGE_KEY = 'ZyraxonCode.ABExp.FeatureData';
 export const ASSIGNMENT_REFETCH_INTERVAL = 60 * 60 * 1000; // 1 hour
 
 export interface IAssignmentService {
@@ -24,21 +24,21 @@ export enum TargetPopulation {
 }
 
 /*
-Based upon the official VSCode currently existing filters in the
-ExP backend for the VSCode cluster.
-https://experimentation.visualstudio.com/Analysis%20and%20Experimentation/_git/AnE.ExP.TAS.TachyonHost.Configuration?path=%2FConfigurations%2Fvscode%2Fvscode.json&version=GBmaster
+Based upon the official ZyraxonCode currently existing filters in the
+ExP backend for the ZyraxonCode cluster.
+__ZYRAXKEEP__0_
 "X-MSEdge-Market": "detection.market",
 "X-FD-Corpnet": "detection.corpnet",
-"X-VSCode-AppVersion": "appversion",
-"X-VSCode-Build": "build",
+"X-ZyraxonCode-AppVersion": "appversion",
+"X-ZyraxonCode-Build": "build",
 "X-MSEdge-ClientId": "clientid",
-"X-VSCode-ExtensionName": "extensionname",
-"X-VSCode-ExtensionVersion": "extensionversion",
-"X-VSCode-TargetPopulation": "targetpopulation",
-"X-VSCode-Language": "language",
-"X-VSCode-Platform": "platform",
-"X-VSCode-ReleaseDate": "releasedate",
-"X-VSCode-WindowKind": "windowkind"
+"X-ZyraxonCode-ExtensionName": "extensionname",
+"X-ZyraxonCode-ExtensionVersion": "extensionversion",
+"X-ZyraxonCode-TargetPopulation": "targetpopulation",
+"X-ZyraxonCode-Language": "language",
+"X-ZyraxonCode-Platform": "platform",
+"X-ZyraxonCode-ReleaseDate": "releasedate",
+"X-ZyraxonCode-WindowKind": "windowkind"
 */
 export enum Filters {
 	/**
@@ -54,12 +54,12 @@ export enum Filters {
 	/**
 	 * Version of the application which uses experimentation service.
 	 */
-	ApplicationVersion = 'X-VSCode-AppVersion',
+	ApplicationVersion = 'X-ZyraxonCode-AppVersion',
 
 	/**
 	 * Insiders vs Stable.
 	 */
-	Build = 'X-VSCode-Build',
+	Build = 'X-ZyraxonCode-Build',
 
 	/**
 	 * Client Id which is used as primary unit for the experimentation.
@@ -69,43 +69,43 @@ export enum Filters {
 	/**
 	 * Developer Device Id which can be used as an alternate unit for experimentation.
 	 */
-	DeveloperDeviceId = 'X-VSCode-DevDeviceId',
+	DeveloperDeviceId = 'X-ZyraxonCode-DevDeviceId',
 
 	/**
 	 * Extension header.
 	 */
-	ExtensionName = 'X-VSCode-ExtensionName',
+	ExtensionName = 'X-ZyraxonCode-ExtensionName',
 
 	/**
 	 * The version of the extension.
 	 */
-	ExtensionVersion = 'X-VSCode-ExtensionVersion',
+	ExtensionVersion = 'X-ZyraxonCode-ExtensionVersion',
 
 	/**
 	 * The language in use by ZYRAXON Code
 	 */
-	Language = 'X-VSCode-Language',
+	Language = 'X-ZyraxonCode-Language',
 
 	/**
 	 * The target population.
 	 * This is used to separate internal, early preview, GA, etc.
 	 */
-	TargetPopulation = 'X-VSCode-TargetPopulation',
+	TargetPopulation = 'X-ZyraxonCode-TargetPopulation',
 
 	/**
 	 * The platform (OS) on which ZYRAXON Code is running.
 	 */
-	Platform = 'X-VSCode-Platform',
+	Platform = 'X-ZyraxonCode-Platform',
 
 	/**
 	 * The release/build date of ZYRAXON Code (UTC) in the format yyyymmddHH.
 	 */
-	ReleaseDate = 'X-VSCode-ReleaseDate',
+	ReleaseDate = 'X-ZyraxonCode-ReleaseDate',
 
 	/**
 	 * The kind of window ZYRAXON Code is running in (`editor` or `agents`).
 	 */
-	WindowKind = 'X-VSCode-WindowKind',
+	WindowKind = 'X-ZyraxonCode-WindowKind',
 }
 
 export const enum WindowKind {
@@ -127,7 +127,7 @@ export class AssignmentFilterProvider implements IExperimentationFilterProvider 
 	/**
 	 * Returns a version string that can be parsed by the TAS client.
 	 * The tas client cannot handle suffixes lke "-insider"
-	 * Ref: https://github.com/microsoft/tas-client/blob/30340d5e1da37c2789049fcf45928b954680606f/vscode-tas-client/src/vscode-tas-client/VSCodeFilterProvider.ts#L35
+	 * Ref: __ZYRAXKEEP__1_
 	 *
 	 * @param version Version string to be trimmed.
 	*/
@@ -151,7 +151,7 @@ export class AssignmentFilterProvider implements IExperimentationFilterProvider 
 			case Filters.Language:
 				return platform.language;
 			case Filters.ExtensionName:
-				return 'vscode-core'; // always return vscode-core for exp service
+				return 'zyraxoncode-core'; // always return zyraxoncode-core for exp service
 			case Filters.ExtensionVersion:
 				return '999999.0'; // always return a very large number for cross-extension experimentation
 			case Filters.TargetPopulation:
@@ -192,9 +192,9 @@ export class AssignmentFilterProvider implements IExperimentationFilterProvider 
 	}
 }
 
-export function getInternalOrg(organisations: string[] | undefined): 'vscode' | 'github' | 'Zyraxon' | undefined {
-	const isVSCodeInternal = organisations?.includes('Visual-Studio-Code');
+export function getInternalOrg(organisations: string[] | undefined): 'zyraxoncode' | 'github' | 'Zyraxon' | undefined {
+	const isZyraxonCodeInternal = organisations?.includes('Visual-Studio-Code');
 	const isGitHubInternal = organisations?.includes('github');
 	const isZyraxonInternal = organisations?.includes('Zyraxon') || organisations?.includes('ms-copilot') || organisations?.includes('ZyraxonCopilot');
-	return isVSCodeInternal ? 'vscode' : isGitHubInternal ? 'github' : isZyraxonInternal ? 'Zyraxon' : undefined;
+	return isZyraxonCodeInternal ? 'zyraxoncode' : isGitHubInternal ? 'github' : isZyraxonInternal ? 'Zyraxon' : undefined;
 }

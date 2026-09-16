@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 .terminal-voice {
-	background-color: var(--vscode-terminal-background, var(--vscode-panel-background));
+	background-color: var(--zyraxoncode-terminal-background, var(--zyraxoncode-panel-background));
 	padding: 2px;
 	border-radius: 8px;
 	display: flex;
@@ -21,7 +21,7 @@
 }
 
 .terminal-voice.recording.codicon.codicon-mic-filled {
-	color: var(--vscode-activityBarBadge-background);
+	color: var(--zyraxoncode-activityBarBadge-background);
 	animation: ani-terminal-speech 1s infinite;
 	cursor: pointer;
 	pointer-events: auto;
@@ -29,15 +29,15 @@
 
 @keyframes ani-terminal-speech {
 	0% {
-		color: var(--vscode-terminalCursor-background);
+		color: var(--zyraxoncode-terminalCursor-background);
 	}
 
 	50% {
-		color: var(--vscode-activityBarBadge-background);
+		color: var(--zyraxoncode-activityBarBadge-background);
 	}
 
 	100% {
-		color: var(--vscode-terminalCursor-background);
+		color: var(--zyraxoncode-terminalCursor-background);
 	}
 }
 
@@ -46,7 +46,7 @@
  * provisional text rather than the static italic ghost-text style, keeping all
  * three speech surfaces consistent while words stream in. */
 .terminal-voice-progress-text {
-	color: var(--vscode-input-placeholderForeground);
+	color: var(--zyraxoncode-input-placeholderForeground);
 	z-index: 1000;
 }
 
@@ -54,6 +54,6 @@
  * loads. Italic so it reads as a status message rather than dictated speech. */
 .terminal-voice-preparing-text {
 	font-style: italic;
-	color: var(--vscode-input-placeholderForeground);
+	color: var(--zyraxoncode-input-placeholderForeground);
 	z-index: 1000;
 }

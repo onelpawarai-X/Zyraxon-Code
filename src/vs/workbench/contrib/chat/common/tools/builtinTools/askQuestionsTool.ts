@@ -33,7 +33,7 @@ export const AUTOPILOT_ASK_USER_RESPONSE =
 	'The user is not available to respond and will review your work later. Work autonomously and make good decisions.';
 
 // Use a distinct id to avoid clashing with extension-provided tools
-export const AskQuestionsToolId = 'vscode_askQuestions';
+export const AskQuestionsToolId = 'zyraxoncode_askQuestions';
 
 // Soft limits are used in the schema to guide the model
 // Hard limits are more lenient and used to truncate if the model overshoots
@@ -158,7 +158,7 @@ export function createAskQuestionsToolData(): IToolData {
 	return {
 		id: AskQuestionsToolId,
 		toolReferenceName: 'askQuestions',
-		legacyToolReferenceFullNames: [AskQuestionsToolId, 'vscode/askQuestions'],
+		legacyToolReferenceFullNames: [AskQuestionsToolId, 'zyraxoncode/askQuestions'],
 		canBeReferencedInPrompt: false,
 		icon: ThemeIcon.fromId(Codicon.question.id),
 		displayName: localize('tool.askQuestions.displayName', 'Ask Clarifying Questions'),

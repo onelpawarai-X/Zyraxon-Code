@@ -30,7 +30,7 @@ import { IEditorService } from '../../../services/editor/common/editorService.js
 import { ITextFileService } from '../../../services/textfile/common/textfiles.js';
 
 interface IDebugProtocolVariableWithContext extends DebugProtocol.Variable {
-	__vscodeVariableMenuContext?: string;
+	__zyraxoncodeVariableMenuContext?: string;
 }
 
 export class ExpressionContainer implements IExpressionContainer {
@@ -163,7 +163,7 @@ export class ExpressionContainer implements IExpressionContainer {
 					const count = nameCount.get(v.name) || 0;
 					const idDuplicationIndex = count > 0 ? count.toString() : '';
 					nameCount.set(v.name, count + 1);
-					return new Variable(this.session, this.threadId, this, v.variablesReference, v.name, v.evaluateName, v.value, v.namedVariables, v.indexedVariables, v.memoryReference, v.presentationHint, v.type, v.__vscodeVariableMenuContext, true, 0, idDuplicationIndex, v.declarationLocationReference, v.valueLocationReference);
+					return new Variable(this.session, this.threadId, this, v.variablesReference, v.name, v.evaluateName, v.value, v.namedVariables, v.indexedVariables, v.memoryReference, v.presentationHint, v.type, v.__zyraxoncodeVariableMenuContext, true, 0, idDuplicationIndex, v.declarationLocationReference, v.valueLocationReference);
 				}
 				return new Variable(this.session, this.threadId, this, 0, '', undefined, nls.localize('invalidVariableAttributes', "Invalid variable attributes"), 0, 0, undefined, { kind: 'virtual' }, undefined, undefined, false);
 			});
@@ -400,7 +400,7 @@ export class Variable extends ExpressionContainer implements IExpression {
 		}
 
 		try {
-			// Send out a setExpression for debug extensions that do not support set variables https://github.com/microsoft/vscode/issues/124679#issuecomment-869844437
+			// Send out a setExpression for debug extensions that do not support set variables __ZYRAXKEEP__0_
 			if (this.session.capabilities.supportsSetExpression && !this.session.capabilities.supportsSetVariable && this.evaluateName) {
 				return this.setExpression(value, stackFrame);
 			}

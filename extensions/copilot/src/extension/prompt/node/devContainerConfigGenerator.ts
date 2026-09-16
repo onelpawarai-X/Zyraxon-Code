@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { DevContainerConfigFeature, DevContainerConfigGeneratorResult, DevContainerConfigIndex, DevContainerConfigTemplate } from '../../../platform/devcontainer/common/devContainerConfigurationService';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';

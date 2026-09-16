@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Disposable } from 'vscode';
-import * as l10n from '@vscode/l10n';
+import type { Disposable } from 'zyraxoncode';
+import * as l10n from '@zyraxoncode/l10n';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { ILogService } from '../../../platform/log/common/logService';
 import { IReviewService } from '../../../platform/review/common/reviewService';
 import { DisposableStore } from '../../../util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Extension, Uri } from '../../../vscodeTypes';
+import { Extension, Uri } from '../../../zyraxoncodeTypes';
 import { API, RepositoryDescription } from '../../githubPullRequest';
 import { GitHubPullRequestTitleAndDescriptionGenerator } from '../../prompt/node/githubPullRequestTitleAndDescriptionGenerator';
 import { GitHubPullRequestReviewerCommentsProvider } from '../../review/node/githubPullRequestReviewerCommentsProvider';
@@ -34,7 +34,7 @@ export class GitHubPullRequestProviders implements Disposable {
 	}
 
 	private getExtension(): Extension<API> | undefined {
-		return this.extensionService.getExtension('github.vscode-pull-request-github');
+		return this.extensionService.getExtension('github.zyraxoncode-pull-request-github');
 	}
 
 	private initializeGitHubPRExtensionApi() {
@@ -43,7 +43,7 @@ export class GitHubPullRequestProviders implements Disposable {
 		const initialize = async () => {
 			if (githubPRExtension) {
 				const extension = await githubPRExtension!.activate();
-				this.logService.info('Successfully activated the GitHub.vscode-pull-request-github extension.');
+				this.logService.info('Successfully activated the GitHub.zyraxoncode-pull-request-github extension.');
 
 				this.gitHubExtensionApi = extension;
 				this.registerTitleAndDescriptionProvider();
@@ -54,7 +54,7 @@ export class GitHubPullRequestProviders implements Disposable {
 		if (githubPRExtension) {
 			initialize();
 		} else {
-			this.logService.info('GitHub.vscode-pull-request-github extension is not yet activated.');
+			this.logService.info('GitHub.zyraxoncode-pull-request-github extension is not yet activated.');
 
 			const listener = this.extensionService.onDidChange(() => {
 				githubPRExtension = this.getExtension();
@@ -131,7 +131,7 @@ export class GitHubPullRequestProviders implements Disposable {
 					const extension = await githubPRExtension.activate();
 					this.gitHubExtensionApi = extension;
 				} else {
-					this.logService.warn('GitHub.vscode-pull-request-github extension API is not available.');
+					this.logService.warn('GitHub.zyraxoncode-pull-request-github extension API is not available.');
 					return undefined;
 				}
 			}
@@ -142,7 +142,7 @@ export class GitHubPullRequestProviders implements Disposable {
 
 			return await this.gitHubExtensionApi.getRepositoryDescription(uri);
 		} catch (error) {
-			this.logService.error('Failed to get repository description from GitHub.vscode-pull-request-github extension.', error);
+			this.logService.error('Failed to get repository description from GitHub.zyraxoncode-pull-request-github extension.', error);
 			return undefined;
 		}
 	}

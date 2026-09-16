@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import type { OpenAI } from 'openai';
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { CopilotToken } from '../../../platform/authentication/common/copilotToken';
 import { FetchStreamRecorder, IChatMLFetcher, IFetchMLOptions, Source } from '../../../platform/chat/common/chatMLFetcher';
@@ -757,7 +757,7 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 			this._logService.info(`Waiting ${delay}ms before pinging CAPI to check network connectivity...`);
 			await new Promise(resolve => setTimeout(resolve, delay));
 			try {
-				const isGHEnterprise = this._capiClientService.dotcomAPIURL !== 'https://api.github.com';
+				const isGHEnterprise = this._capiClientService.dotcomAPIURL !== '__ZYRAXKEEP__0_';
 				const url = this._capiClientService.capiPingURL;
 				const headers = await this._getAuthHeaders(isGHEnterprise, url);
 				const res = await this._fetcherService.fetch(url, {
@@ -848,7 +848,7 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 			interactionType,
 		} = params;
 
-		// net::ERR_NETWORK_CHANGED: https://github.com/microsoft/vscode/issues/260297
+		// net::ERR_NETWORK_CHANGED: __ZYRAXKEEP__1_
 		const isNetworkChangedError = ['darwin', 'linux'].includes(process.platform) && processed.reason.indexOf('net::ERR_NETWORK_CHANGED') !== -1;
 		// When Electron's network process crashes, all requests through it fail permanently.
 		// Fall back to node-fetch which bypasses Electron's network stack entirely.

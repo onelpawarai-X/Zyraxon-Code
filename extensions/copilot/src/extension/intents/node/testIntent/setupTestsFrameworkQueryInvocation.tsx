@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, RenderPromptResult, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, RenderPromptResult, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IRunCommandExecutionService } from '../../../../platform/commands/common/runCommandExecutionService';
@@ -37,8 +37,8 @@ export class SetupTestsFrameworkQueryInvocationRaw {
 	}
 	public async buildPrompt(
 		context: IBuildPromptContext,
-		progress: vscode.Progress<vscode.ChatResponseReferencePart | vscode.ChatResponseProgressPart> | undefined,
-		token: vscode.CancellationToken,
+		progress: zyraxoncode.Progress<zyraxoncode.ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart> | undefined,
+		token: zyraxoncode.CancellationToken,
 	): Promise<RenderPromptResult> {
 		const renderer = PromptRenderer.create(this.instantiationService, this.endpoint, SetupTestsPrompt, {
 			endpoint: this.endpoint,
@@ -50,7 +50,7 @@ export class SetupTestsFrameworkQueryInvocationRaw {
 		return renderer.render(progress, token);
 	}
 
-	public async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	public async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		const enum State {
 			Reasoning,
 			Frameworks,
@@ -121,7 +121,7 @@ const frameworkPrefix = 'FRAMEWORK: ';
 interface WorkspacePromptProps extends BasePromptElementProps {
 	promptContext: IBuildPromptContext;
 	document?: TextDocumentSnapshot;
-	selection?: vscode.Selection;
+	selection?: zyraxoncode.Selection;
 	endpoint: IChatEndpoint;
 }
 

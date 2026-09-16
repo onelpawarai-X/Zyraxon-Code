@@ -59,7 +59,7 @@ export const enum LayoutSettings {
  * experiment (`LayoutSettings.MODERN_UI`) is enabled. Parts grow or shrink their
  * content by this amount to leave room for the margin/border applied in CSS
  * (`src/vs/workbench/browser/media/floatingPanels.css`, `.floating-panels`).
- * Keep in sync with the `--vscode-spacing-size40` (4px) token used there.
+ * Keep in sync with the `--zyraxoncode-spacing-size40` (4px) token used there.
  */
 export const FLOATING_PANEL_MARGIN = 4;
 
@@ -67,7 +67,7 @@ export const FLOATING_PANEL_MARGIN = 4;
  * The trailing card margin (in pixels) when the Modern UI Update experiment is
  * enabled. Together with the next card's leading {@link FLOATING_PANEL_MARGIN},
  * it forms the 4px inter-card gap. Keep in sync with the
- * `--vscode-spacing-sizeNone` (0px) token used in `floatingPanels.css`.
+ * `--zyraxoncode-spacing-sizeNone` (0px) token used in `floatingPanels.css`.
  */
 export const FLOATING_PANEL_INNER_MARGIN = 0;
 

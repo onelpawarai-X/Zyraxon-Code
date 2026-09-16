@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable local/code-no-dangerous-type-assertions */
 
-import { LogOutputChannel } from 'vscode';
+import { LogOutputChannel } from 'zyraxoncode';
 
 export const enum OperationKind {
 	Add = 'Add',

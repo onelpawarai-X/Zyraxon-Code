@@ -5,7 +5,7 @@
 
 .chat-confirmation-widget {
 	border: none;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -18,8 +18,8 @@
 
 .chat-confirmation-widget + .chat-tool-approval-message {
 	margin: -12px 6px 16px;
-	color: var(--vscode-descriptionForeground);
-	font-size: var(--vscode-chat-font-size-body-s);
+	color: var(--zyraxoncode-descriptionForeground);
+	font-size: var(--zyraxoncode-chat-font-size-body-s);
 }
 
 .chat-confirmation-widget-message {
@@ -71,7 +71,7 @@
 .chat-confirmation-widget .chat-confirmation-widget-title p,
 .chat-confirmation-widget .chat-confirmation-widget-title .rendered-markdown {
 	display: inline;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .chat-confirmation-widget .chat-confirmation-widget-title p {
@@ -79,7 +79,7 @@
 }
 
 .chat-confirmation-widget .chat-confirmation-widget-title .codicon-error {
-	color: var(--vscode-errorForeground) !important;
+	color: var(--zyraxoncode-errorForeground) !important;
 }
 
 .chat-confirmation-widget .chat-confirmation-widget-title .chat-confirmation-widget-expando {
@@ -98,9 +98,9 @@
 }
 
 .chat-confirmation-widget-message h3 {
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	margin: 4px 0 8px;
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 }
 
 .chat-confirmation-widget .chat-confirmation-widget-title .rendered-markdown p a {
@@ -108,8 +108,8 @@
 }
 
 .chat-confirmation-widget-title small {
-	font-size: var(--vscode-agents-fontSize-body2);
-	font-weight: var(--vscode-agents-fontWeight-regular);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
+	font-weight: var(--zyraxoncode-agents-fontWeight-regular);
 	opacity: 0.7;
 
 	&::before {
@@ -142,9 +142,9 @@
 }
 
 .chat-confirmation-widget .chat-confirmation-widget-message-container {
-	border: 1px solid var(--vscode-chat-requestBorder);
-	border-radius: var(--vscode-cornerRadius-medium);
-	font-size: var(--vscode-chat-font-size-body-s);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
+	font-size: var(--zyraxoncode-chat-font-size-body-s);
 }
 
 .chat-confirmation-widget .chat-buttons-container {
@@ -223,7 +223,7 @@
 	margin-top: -4px;
 
 	a {
-		color: var(--vscode-textLink-foreground);
+		color: var(--zyraxoncode-textLink-foreground);
 		text-decoration: underline;
 		display: block;
 		cursor: pointer;
@@ -273,12 +273,12 @@
 
 .chat-confirmation-widget2 {
 	margin-bottom: 8px;
-	border: 1px solid var(--vscode-chat-requestBorder);
-	border-radius: var(--vscode-cornerRadius-medium);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 }
 
 .chat-confirmation-widget2 .chat-confirmation-widget-title {
-	border-bottom: 1px solid var(--vscode-chat-requestBorder);
+	border-bottom: 1px solid var(--zyraxoncode-chat-requestBorder);
 	padding: 4px 8px;
 	display: flex;
 	justify-content: space-between;
@@ -288,8 +288,8 @@
 	.chat-title {
 		flex: 1 1 auto;
 		min-width: 0;
-		font-size: var(--vscode-agents-fontSize-heading3);
-		font-weight: var(--vscode-agents-fontWeight-semiBold);
+		font-size: var(--zyraxoncode-agents-fontSize-heading3);
+		font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 		overflow-wrap: anywhere;
 	}
 
@@ -326,8 +326,8 @@
 }
 
 .chat-confirmation-widget2 .chat-confirmation-widget-message:not(:has(.chat-confirmation-message-terminal)) {
-	background: var(--vscode-chat-requestBackground);
-	border-bottom: 1px solid var(--vscode-chat-requestBorder);
+	background: var(--zyraxoncode-chat-requestBackground);
+	border-bottom: 1px solid var(--zyraxoncode-chat-requestBorder);
 	padding: 6px 9px 0 9px;
 
 	.tool-postconfirm-display {
@@ -342,7 +342,7 @@
 
 .chat-confirmation-widget2 .chat-modified-files-confirmation-list {
 	margin: 8px -9px 0;
-	border-top: 1px solid var(--vscode-chat-requestBorder);
+	border-top: 1px solid var(--zyraxoncode-chat-requestBorder);
 	border-left: none;
 	border-right: none;
 	border-bottom: none;
@@ -361,8 +361,8 @@
 	.working-set-title {
 		flex: 1;
 		min-width: 0;
-		color: var(--vscode-descriptionForeground);
-		font-size: var(--vscode-agents-fontSize-label1);
+		color: var(--zyraxoncode-descriptionForeground);
+		font-size: var(--zyraxoncode-agents-fontSize-label1);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -375,7 +375,7 @@
 			border: none;
 			border-radius: 2px;
 			background-color: unset;
-			color: var(--vscode-descriptionForeground);
+			color: var(--zyraxoncode-descriptionForeground);
 		}
 
 		.monaco-button:focus {
@@ -405,17 +405,17 @@
 		display: inline-flex;
 		gap: 4px;
 		margin-left: 6px;
-		font-size: var(--vscode-agents-fontSize-label2);
-		font-weight: var(--vscode-agents-fontWeight-semiBold);
+		font-size: var(--zyraxoncode-agents-fontSize-label2);
+		font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 		flex-shrink: 0;
 	}
 
 	.working-set-lines-added {
-		color: var(--vscode-chat-linesAddedForeground);
+		color: var(--zyraxoncode-chat-linesAddedForeground);
 	}
 
 	.working-set-lines-removed {
-		color: var(--vscode-chat-linesRemovedForeground);
+		color: var(--zyraxoncode-chat-linesRemovedForeground);
 	}
 
 	.chat-editing-session-actions {
@@ -450,7 +450,7 @@
 	}
 
 	.chat-editing-session-list .monaco-list-row:hover {
-		background-color: var(--vscode-list-hoverBackground) !important;
+		background-color: var(--zyraxoncode-list-hoverBackground) !important;
 	}
 
 	.chat-editing-session-list .monaco-icon-label {
@@ -473,7 +473,7 @@
 }
 
 .chat-confirmation-widget2 .chat-confirmation-message-terminal .chat-confirmation-message-terminal-editor {
-	border-bottom: 1px solid var(--vscode-chat-requestBorder);
+	border-bottom: 1px solid var(--zyraxoncode-chat-requestBorder);
 }
 
 .chat-confirmation-widget2 .chat-confirmation-message-terminal .chat-confirmation-message-terminal-editor .interactive-result-code-block {
@@ -512,7 +512,7 @@
 	}
 
 	.monaco-button-dropdown > .monaco-button.monaco-dropdown-button.codicon[class*='codicon-'] {
-		font-size: var(--vscode-codiconFontSize-compact);
+		font-size: var(--zyraxoncode-codiconFontSize-compact);
 	}
 }
 
@@ -526,13 +526,13 @@
 .chat-tool-invocation-part {
 	.chat-confirmation-widget {
 		border: none;
-		font-size: var(--vscode-chat-font-size-body-s);
+		font-size: var(--zyraxoncode-chat-font-size-body-s);
 
 		.chat-confirmation-widget-message {
 			margin: 2px 0 0 0;
-			border: 1px solid var(--vscode-chat-requestBorder);
-			border-radius: var(--vscode-cornerRadius-medium);
-			font-size: var(--vscode-chat-font-size-body-s);
+			border: 1px solid var(--zyraxoncode-chat-requestBorder);
+			border-radius: var(--zyraxoncode-cornerRadius-medium);
+			font-size: var(--zyraxoncode-chat-font-size-body-s);
 		}
 
 	}
@@ -548,12 +548,12 @@
 		}
 
 		.codicon {
-			font-size: var(--vscode-codiconFontSize-compact);
+			font-size: var(--zyraxoncode-codiconFontSize-compact);
 		}
 
 		&:hover  {
 			p, .rendered-markdown {
-				color: var(--vscode-foreground);
+				color: var(--zyraxoncode-foreground);
 			}
 
 			.chat-collapsible-hover-chevron {
@@ -564,7 +564,7 @@
 
 	.chat-confirmation-widget:not(.collapsed) .chat-confirmation-widget-title {
 		p, .rendered-markdown {
-			color: var(--vscode-foreground);
+			color: var(--zyraxoncode-foreground);
 		}
 	}
 
@@ -587,11 +587,11 @@
 
 	.chat-confirmation-widget.shimmer-progress .chat-confirmation-widget-title-inner > .rendered-markdown > p {
 		background: linear-gradient(90deg,
-				var(--vscode-descriptionForeground) 0%,
-				var(--vscode-descriptionForeground) 30%,
-				var(--vscode-chat-thinkingShimmer) 50%,
-				var(--vscode-descriptionForeground) 70%,
-				var(--vscode-descriptionForeground) 100%);
+				var(--zyraxoncode-descriptionForeground) 0%,
+				var(--zyraxoncode-descriptionForeground) 30%,
+				var(--zyraxoncode-chat-thinkingShimmer) 50%,
+				var(--zyraxoncode-descriptionForeground) 70%,
+				var(--zyraxoncode-descriptionForeground) 100%);
 		background-size: 400% 100%;
 		background-clip: text;
 		-webkit-background-clip: text;

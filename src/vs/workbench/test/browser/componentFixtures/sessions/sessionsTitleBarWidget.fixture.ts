@@ -188,14 +188,14 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	// Default: shows the active session pill (icon + title + workspace).
 	SessionsTitleBar_ActiveSession: defineComponentFixture({
 		render: (ctx) => renderTitleBar(ctx, {
-			activeSession: createMockActiveSession('Fix authentication redirect loop', 'vscode'),
+			activeSession: createMockActiveSession('Fix authentication redirect loop', 'zyraxoncode'),
 		}),
 	}),
 
 	// Requires-input: generic orange state (a mix, or unclassified needs-input).
 	SessionsTitleBar_RequiresInput: defineComponentFixture({
 		render: (ctx) => renderTitleBar(ctx, {
-			activeSession: createMockActiveSession('Fix authentication redirect loop', 'vscode'),
+			activeSession: createMockActiveSession('Fix authentication redirect loop', 'zyraxoncode'),
 			blockedCount: 3,
 		}),
 	}),
@@ -203,7 +203,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	// Requires-input (terminal): all blocked sessions are waiting on a terminal command.
 	SessionsTitleBar_RequiresInputTerminal: defineComponentFixture({
 		render: (ctx) => renderTitleBar(ctx, {
-			activeSession: createMockActiveSession('Fix authentication redirect loop', 'vscode'),
+			activeSession: createMockActiveSession('Fix authentication redirect loop', 'zyraxoncode'),
 			blocked: [
 				{ reason: BlockedSessionReason.NeedsInput, approvalKind: AgentSessionApprovalKind.Terminal },
 				{ reason: BlockedSessionReason.NeedsInput, approvalKind: AgentSessionApprovalKind.Terminal },
@@ -214,7 +214,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	// Requires-input (question): all blocked sessions are asking a question.
 	SessionsTitleBar_RequiresInputQuestion: defineComponentFixture({
 		render: (ctx) => renderTitleBar(ctx, {
-			activeSession: createMockActiveSession('Fix authentication redirect loop', 'vscode'),
+			activeSession: createMockActiveSession('Fix authentication redirect loop', 'zyraxoncode'),
 			blocked: [
 				{ reason: BlockedSessionReason.NeedsInput, approvalKind: AgentSessionApprovalKind.Question },
 			],
@@ -224,7 +224,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	// Requires-input (failing CI): all blocked sessions have failing CI checks.
 	SessionsTitleBar_RequiresInputFailingCI: defineComponentFixture({
 		render: (ctx) => renderTitleBar(ctx, {
-			activeSession: createMockActiveSession('Fix authentication redirect loop', 'vscode'),
+			activeSession: createMockActiveSession('Fix authentication redirect loop', 'zyraxoncode'),
 			blocked: [
 				{ reason: BlockedSessionReason.FailingCI },
 				{ reason: BlockedSessionReason.FailingCI },
@@ -235,7 +235,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	// Requires-input (mixed): a mix of reasons falls back to the generic message.
 	SessionsTitleBar_RequiresInputMixed: defineComponentFixture({
 		render: (ctx) => renderTitleBar(ctx, {
-			activeSession: createMockActiveSession('Fix authentication redirect loop', 'vscode'),
+			activeSession: createMockActiveSession('Fix authentication redirect loop', 'zyraxoncode'),
 			blocked: [
 				{ reason: BlockedSessionReason.NeedsInput, approvalKind: AgentSessionApprovalKind.Terminal },
 				{ reason: BlockedSessionReason.FailingCI },
@@ -246,7 +246,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	// Approved (one): transient green confirmation after approving a session action.
 	SessionsTitleBar_ApprovedOne: defineComponentFixture({
 		render: (ctx) => renderTitleBar(ctx, {
-			activeSession: createMockActiveSession('Fix authentication redirect loop', 'vscode'),
+			activeSession: createMockActiveSession('Fix authentication redirect loop', 'zyraxoncode'),
 			approvedCount: 1,
 		}),
 	}),
@@ -255,7 +255,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	// Takes precedence over the orange requires-input state while visible.
 	SessionsTitleBar_ApprovedMany: defineComponentFixture({
 		render: (ctx) => renderTitleBar(ctx, {
-			activeSession: createMockActiveSession('Fix authentication redirect loop', 'vscode'),
+			activeSession: createMockActiveSession('Fix authentication redirect loop', 'zyraxoncode'),
 			blockedCount: 3,
 			approvedCount: 3,
 		}),

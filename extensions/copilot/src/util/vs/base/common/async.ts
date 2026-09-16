@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -184,7 +184,7 @@ export function asPromise<T>(callback: () => T | Thenable<T>): Promise<T> {
 /**
  * Creates and returns a new promise, plus its `resolve` and `reject` callbacks.
  *
- * Replace with standardized [`Promise.withResolvers`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers) once it is supported
+ * Replace with standardized [`Promise.withResolvers`](__ZYRAXKEEP__0_) once it is supported
  */
 export function promiseWithResolvers<T>(): { promise: Promise<T>; resolve: (value: T | PromiseLike<T>) => void; reject: (err?: any) => void } {
 	let resolve: (value: T | PromiseLike<T>) => void;
@@ -1445,9 +1445,9 @@ type IdleApi = Pick<typeof globalThis, 'requestIdleCallback' | 'cancelIdleCallba
  * callback but queue it on the regular event loop (like setTimeout). Typically
  * this should not be used.
  *
- * [IdleDeadline]: https://developer.mozilla.org/en-US/docs/Web/API/IdleDeadline
- * [requestIdleCallback]: https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
- * [setTimeout]: https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
+ * [IdleDeadline]: __ZYRAXKEEP__1_
+ * [requestIdleCallback]: __ZYRAXKEEP__2_
+ * [setTimeout]: __ZYRAXKEEP__3_
  *
  * **Note** that there is `dom.ts#runWhenWindowIdle` which is better suited when running inside a browser
  * context

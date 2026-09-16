@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing } from '@vscode/prompt-tsx';
-import type { Uri } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type { Uri } from 'zyraxoncode';
 import { IAlternativeNotebookContentService } from '../../../../platform/notebook/common/alternativeContent';
 import { INotebookService } from '../../../../platform/notebook/common/notebookService';
 import { IPromptPathRepresentationService } from '../../../../platform/prompts/common/promptPathRepresentationService';
@@ -130,7 +130,7 @@ function getNotebookUrisFromChatVariables(chatVariables: ChatVariablesCollection
 		if (isNotebookVariable(chatVar.value)) {
 			// Notebook cell or output
 			const [notebook,] = getNotebookAndCellFromUri(chatVar.value, workspaceService.notebookDocuments);
-			if (chatVar.value.scheme === Schemas.vscodeNotebookCellOutput) {
+			if (chatVar.value.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 				continue;
 			}
 			notebookUri = notebook?.uri;
@@ -159,12 +159,12 @@ export class NotebookXmlFormatPrompt extends PromptElement<NotebookFormatCommonP
 	async render(_state: void, _sizing: PromptSizing) {
 		return <>
 			When generating notebook content, use an XML-based format. <br />
-			1. Each cell must be wrapped in a {'<VSCode.Cell>'} with a `language` attribute indicating the type of content. (e.g., `markdown`, `python`). <br />
+			1. Each cell must be wrapped in a {'<ZyraxonCode.Cell>'} with a `language` attribute indicating the type of content. (e.g., `markdown`, `python`). <br />
 			2. Existing cells must contain the `id` attribute to uniquely identify each cell. <br />
 			3. New cells do not need an `id` attribute. <br />
-			4. Ensure that each {'<VSCode.Cell>'} is valid XML and logically structured. <br />
-			5. Do not XML encode the contents within each {'<VSCode.Cell>'} cell. <br />
-			6. Do not reference the XML tags {`<VSCode.Cell>`} in user messages. <br />
+			4. Ensure that each {'<ZyraxonCode.Cell>'} is valid XML and logically structured. <br />
+			5. Do not XML encode the contents within each {'<ZyraxonCode.Cell>'} cell. <br />
+			6. Do not reference the XML tags {`<ZyraxonCode.Cell>`} in user messages. <br />
 			7. Do not reference Cell Ids (as users cannot see these values) in user messages, instead use the Cell number (starting from 1). <br />
 			<br />
 			Here is sample content of a Notebook document:<br />
@@ -172,15 +172,15 @@ export class NotebookXmlFormatPrompt extends PromptElement<NotebookFormatCommonP
 			<Tag name='example'>
 				<ExampleCodeBlock languageId='xml' examplePath={this.props.tsExampleFilePath} includeFilepath={true} minNumberOfBackticks={4}
 					code={[
-						`<VSCode.Cell id="f8939937" language="markdown">`,
+						`<ZyraxonCode.Cell id="f8939937" language="markdown">`,
 						`# Import Required Libraries`,
 						`Import the necessary libraries, including pandas and plotly.`,
-						`</VSCode.Cell>`,
-						`<VSCode.Cell id="0b4e03d1" language="python">`,
+						`</ZyraxonCode.Cell>`,
+						`<ZyraxonCode.Cell id="0b4e03d1" language="python">`,
 						`# Import Required Libraries`,
 						`import pandas as pd`,
 						`import plotly.express as px`,
-						`</VSCode.Cell>`,
+						`</ZyraxonCode.Cell>`,
 					].join('\n')}
 				/>
 			</Tag>
@@ -251,7 +251,7 @@ class NotebookTextFormatPrompt extends PromptElement<NotebookFormatCommonPromptP
 	async render(_state: void, _sizing: PromptSizing) {
 		return <>
 			When generating notebook content, use a Jupytext like format. <br />
-			1. Each cell must begin with a comment beginning with `#%% vscode.cell` followed by the cell attributes.<br />
+			1. Each cell must begin with a comment beginning with `#%% zyraxoncode.cell` followed by the cell attributes.<br />
 			2. For existing cell in the document, use the `id` attribute to identify the cell. If the cell is new, DO NOT include the `id` attribute.<br />
 			3. Use the `language` attribute to define the language of the content (e.g., `markdown`, `python`). <br />
 			4. For markdown cells, use triple quotes to wrap the content.<br />
@@ -263,12 +263,12 @@ class NotebookTextFormatPrompt extends PromptElement<NotebookFormatCommonPromptP
 			<Tag name='example'>
 				<ExampleCodeBlock languageId='python' examplePath={this.props.tsExampleFilePath} includeFilepath={true} minNumberOfBackticks={4}
 					code={[
-						`#%% vscode.cell [id=0fd89b28] [language=markdown]`,
+						`#%% zyraxoncode.cell [id=0fd89b28] [language=markdown]`,
 						`"""`,
 						`# Import Required Libraries`,
 						`Import the necessary libraries, including pandas and plotly.`,
 						`"""`,
-						`#%% vscode.cell [id=0b4e03d1] [language=python]`,
+						`#%% zyraxoncode.cell [id=0b4e03d1] [language=python]`,
 						`# Import Required Libraries`,
 						`import pandas as pd`,
 						`import plotly.express as px`,

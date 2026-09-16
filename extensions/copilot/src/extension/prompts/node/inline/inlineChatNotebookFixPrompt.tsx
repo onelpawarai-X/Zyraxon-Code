@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILanguageDiagnosticsService, rangeSpanningDiagnostics } from '../../../../platform/languages/common/languageDiagnosticsService';
@@ -17,7 +17,7 @@ import { illegalArgument } from '../../../../util/vs/base/common/errors';
 import { Schemas } from '../../../../util/vs/base/common/network';
 import { StringEdit } from '../../../../util/vs/editor/common/core/edits/stringEdit';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Range, Uri } from '../../../../vscodeTypes';
+import { Range, Uri } from '../../../../zyraxoncodeTypes';
 import { findDiagnosticForSelectionAndPrompt, findFixRangeOfInterest, generateFixContext } from '../../../context/node/resolvers/fixSelection';
 import { generateNotebookCellContext } from '../../../context/node/resolvers/inlineChatSelection';
 import { InlineFixProps } from '../../../context/node/resolvers/inlineFixIntentInvocation';
@@ -206,8 +206,8 @@ interface InlineChatNotebookSelectionRendererProps extends InlineChatNotebookSel
 	readonly document: TextDocumentSnapshot;
 	readonly projectedDocument: ProjectedDocument;
 	readonly language: ILanguage;
-	readonly diagnostics: vscode.Diagnostic[];
-	readonly selection: vscode.Selection;
+	readonly diagnostics: zyraxoncode.Diagnostic[];
+	readonly selection: zyraxoncode.Selection;
 	readonly adjustedSelection: Range;
 	readonly isSummarized: boolean;
 	readonly selectedLinesContent: string;
@@ -216,7 +216,7 @@ interface InlineChatNotebookSelectionRendererProps extends InlineChatNotebookSel
 class InlineChatFixNotebookSelectionRenderer extends PromptElement<InlineChatNotebookSelectionRendererProps> {
 
 	render(state: void, sizing: PromptSizing) {
-		if (this.props.documentContext.document.uri.scheme !== Schemas.vscodeNotebookCell) {
+		if (this.props.documentContext.document.uri.scheme !== Schemas.zyraxoncodeNotebookCell) {
 			throw illegalArgument('InlineChatNotebookSelectionRenderer should be used only with a notebook!');
 		}
 

@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEditSurvivalTrackingSession } from '../../../platform/editSurvivalTracking/common/editSurvivalTrackerService';
 import { ChatResponseStreamImpl } from '../../../util/common/chatResponseStreamImpl';
 import { ResourceSet } from '../../../util/vs/base/common/map';
-import { ChatResponseMarkdownPart, ChatResponseNotebookEditPart, ChatResponseTextEditPart } from '../../../vscodeTypes';
+import { ChatResponseMarkdownPart, ChatResponseNotebookEditPart, ChatResponseTextEditPart } from '../../../zyraxoncodeTypes';
 import { ChatTelemetry } from '../../prompt/node/chatParticipantTelemetry';
 import { IDocumentContext } from '../../prompt/node/documentContext';
 import { IIntent } from '../../prompt/node/intents';
@@ -47,10 +47,10 @@ export class InteractionOutcomeComputer {
 		return new InteractionOutcome(this._interactionOutcomeKind, this._annotations);
 	}
 
-	constructor(private readonly _currentDocument: vscode.Uri | undefined) {
+	constructor(private readonly _currentDocument: zyraxoncode.Uri | undefined) {
 	}
 
-	public spyOnStream(outStream: vscode.ChatResponseStream): vscode.ChatResponseStream {
+	public spyOnStream(outStream: zyraxoncode.ChatResponseStream): zyraxoncode.ChatResponseStream {
 		return ChatResponseStreamImpl.spy(outStream, (part) => {
 			if (part instanceof ChatResponseMarkdownPart) {
 				this._markEmittedMarkdown(part.value);
@@ -64,15 +64,15 @@ export class InteractionOutcomeComputer {
 		});
 	}
 
-	private _markEmittedMarkdown(str: vscode.MarkdownString) {
+	private _markEmittedMarkdown(str: zyraxoncode.MarkdownString) {
 		this._seenMarkdown = true;
 	}
 
-	private _markEmittedEdits(uri: vscode.Uri, edits: vscode.TextEdit[]) {
+	private _markEmittedEdits(uri: zyraxoncode.Uri, edits: zyraxoncode.TextEdit[]) {
 		this._seenEdits.add(uri);
 	}
 
-	private _markEmittedNotebookEdits(uri: vscode.Uri, edits: vscode.NotebookEdit[]) {
+	private _markEmittedNotebookEdits(uri: zyraxoncode.Uri, edits: zyraxoncode.NotebookEdit[]) {
 		this._seenEdits.add(uri);
 	}
 
@@ -121,7 +121,7 @@ export enum OutcomeAnnotationLabel {
  */
 export interface ISessionTurnStorage {
 	lastDocumentContent: string;
-	lastWholeRange: vscode.Range;
+	lastWholeRange: zyraxoncode.Range;
 }
 
 //#endregion

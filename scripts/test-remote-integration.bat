@@ -3,12 +3,12 @@ setlocal
 
 pushd %~dp0\..
 
-:: TODO(deepak1556): Remove this once we bump to node containing fix for https://github.com/nodejs/node/issues/63638.
+:: TODO(deepak1556): Remove this once we bump to node containing fix for __ZYRAXKEEP__0_
 for /f "delims=" %%i in ('node -p "require('fs').realpathSync.native(require('os').tmpdir())"') do set "TMP=%%i"
 set "TEMP=%TMP%"
 
 IF "%~1" == "" (
-	set AUTHORITY=vscode-remote://test+test/
+	set AUTHORITY=__ZYRAXKEEP__1_
 	:: backward to forward slashed
 	set EXT_PATH=%CD:\=/%/extensions
 
@@ -20,7 +20,7 @@ IF "%~1" == "" (
 	set VSCODEUSERDATADIR=%3
 )
 IF "%VSCODEUSERDATADIR%" == "" (
-	set VSCODEUSERDATADIR=%TMP%\vscodeuserfolder-%RANDOM%-%TIME:~6,5%
+	set VSCODEUSERDATADIR=%TMP%\zyraxoncodeuserfolder-%RANDOM%-%TIME:~6,5%
 )
 
 set REMOTE_EXT_PATH=%AUTHORITY%%EXT_PATH%
@@ -32,7 +32,7 @@ set TESTRESOLVER_LOGS_FOLDER=%VSCODELOGSDIR%\server
 if "%VSCODE_REMOTE_SERVER_PATH%"=="" (
 	echo Using remote server out of sources for integration tests
 ) else (
-	set TESTRESOLVER_INSTALL_BUILTIN_EXTENSION=ms-vscode.vscode-smoketest-check
+	set TESTRESOLVER_INSTALL_BUILTIN_EXTENSION=ms-zyraxoncode.zyraxoncode-smoketest-check
 	echo Using '%VSCODE_REMOTE_SERVER_PATH%' as server path
 )
 
@@ -48,7 +48,7 @@ if "%INTEGRATION_TEST_ELECTRON_PATH%"=="" (
 	set ELECTRON_ENABLE_LOGGING=1
 
 	:: Extra arguments only when running against a built version
-	set API_TESTS_EXTRA_ARGS_BUILT=--extensions-dir=%EXT_PATH% --enable-proposed-api=vscode.vscode-test-resolver --enable-proposed-api=vscode.vscode-api-tests
+	set API_TESTS_EXTRA_ARGS_BUILT=--extensions-dir=%EXT_PATH% --enable-proposed-api=zyraxoncode.zyraxoncode-test-resolver --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests
 
  	echo Using %INTEGRATION_TEST_ELECTRON_PATH% as Electron path
 )
@@ -63,12 +63,12 @@ set API_TESTS_EXTRA_ARGS=--disable-telemetry --disable-experiments --skip-welcom
 
 echo.
 echo ### API tests (folder)
-call "%INTEGRATION_TEST_ELECTRON_PATH%" --folder-uri=%REMOTE_EXT_PATH%/vscode-api-tests/testWorkspace --extensionDevelopmentPath=%REMOTE_EXT_PATH%/vscode-api-tests --extensionTestsPath=%REMOTE_EXT_PATH%/vscode-api-tests/out/singlefolder-tests %API_TESTS_EXTRA_ARGS% %API_TESTS_EXTRA_ARGS_BUILT%
+call "%INTEGRATION_TEST_ELECTRON_PATH%" --folder-uri=%REMOTE_EXT_PATH%/zyraxoncode-api-tests/testWorkspace --extensionDevelopmentPath=%REMOTE_EXT_PATH%/zyraxoncode-api-tests --extensionTestsPath=%REMOTE_EXT_PATH%/zyraxoncode-api-tests/out/singlefolder-tests %API_TESTS_EXTRA_ARGS% %API_TESTS_EXTRA_ARGS_BUILT%
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo.
 echo ### API tests (workspace)
-call "%INTEGRATION_TEST_ELECTRON_PATH%" --file-uri=%REMOTE_EXT_PATH%/vscode-api-tests/testworkspace.code-workspace --extensionDevelopmentPath=%REMOTE_EXT_PATH%/vscode-api-tests --extensionTestsPath=%REMOTE_EXT_PATH%/vscode-api-tests/out/workspace-tests %API_TESTS_EXTRA_ARGS% %API_TESTS_EXTRA_ARGS_BUILT%
+call "%INTEGRATION_TEST_ELECTRON_PATH%" --file-uri=%REMOTE_EXT_PATH%/zyraxoncode-api-tests/testworkspace.code-workspace --extensionDevelopmentPath=%REMOTE_EXT_PATH%/zyraxoncode-api-tests --extensionTestsPath=%REMOTE_EXT_PATH%/zyraxoncode-api-tests/out/workspace-tests %API_TESTS_EXTRA_ARGS% %API_TESTS_EXTRA_ARGS_BUILT%
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo.

@@ -317,7 +317,7 @@ export class RenameWidget implements IRenameWidget, IContentWidget, IDisposable 
 	}
 
 	afterRender(position: ContentWidgetPositionPreference | null): void {
-		// FIXME@ulugbekna: commenting trace log out until we start unmounting the widget from editor properly - https://github.com/microsoft/vscode/issues/226975
+		// FIXME@ulugbekna: commenting trace log out until we start unmounting the widget from editor properly - __ZYRAXKEEP__0_
 		// this._trace('invoking afterRender, position: ', position ? 'not null' : 'null');
 		if (position === null) {
 			// cancel rename when input widget isn't rendered anymore
@@ -958,7 +958,7 @@ class InputWithButton implements IDisposable {
 				this.domNode.style.outlineWidth = '1px';
 				this.domNode.style.outlineStyle = 'solid';
 				this.domNode.style.outlineOffset = '-1px';
-				this.domNode.style.outlineColor = 'var(--vscode-focusBorder)';
+				this.domNode.style.outlineColor = 'var(--zyraxoncode-focusBorder)';
 			}));
 			this._disposables.add(dom.addDisposableListener(this.input, dom.EventType.BLUR, () => {
 				this.domNode.style.outline = 'none';

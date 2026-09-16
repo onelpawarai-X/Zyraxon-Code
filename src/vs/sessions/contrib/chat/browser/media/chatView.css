@@ -28,8 +28,8 @@
 
 .agent-sessions-workbench .interactive-session .chat-scroll-down {
 	right: max(
-		var(--vscode-spacing-size320),
-		calc((100% - var(--session-view-centered-content-max-width, 950px)) / 2 + var(--vscode-spacing-size320))
+		var(--zyraxoncode-spacing-size320),
+		calc((100% - var(--session-view-centered-content-max-width, 950px)) / 2 + var(--zyraxoncode-spacing-size320))
 	);
 }
 
@@ -69,33 +69,33 @@
 
 .agent-sessions-workbench .chat-editor-relative .interactive-list .monaco-scrollable-element > .shadow.top {
 	height: 16px;
-	background: linear-gradient(to bottom, var(--vscode-editor-background), transparent);
+	background: linear-gradient(to bottom, var(--zyraxoncode-editor-background), transparent);
 	box-shadow: none;
 }
 
 .agent-sessions-workbench .interactive-session .interactive-response .interactive-result-code-block {
-	border-color: var(--vscode-editorWidget-border, var(--vscode-widget-border));
+	border-color: var(--zyraxoncode-editorWidget-border, var(--zyraxoncode-widget-border));
 }
 
 /* ---- Chat Input ---- */
 
 .agent-sessions-workbench .interactive-session .chat-input-container {
-	border-radius: var(--vscode-cornerRadius-large);
-	border-color: var(--vscode-agentsChatInput-border) !important;
-	background-color: var(--vscode-agentsChatInput-background);
-	color: var(--vscode-agentsChatInput-foreground);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	border-color: var(--zyraxoncode-agentsChatInput-border) !important;
+	background-color: var(--zyraxoncode-agentsChatInput-background);
+	color: var(--zyraxoncode-agentsChatInput-foreground);
 }
 
 .agent-sessions-workbench .interactive-session .chat-input-container.focused {
-	border-color: var(--vscode-agentsChatInput-focusBorder, var(--vscode-focusBorder)) !important;
+	border-color: var(--zyraxoncode-agentsChatInput-focusBorder, var(--zyraxoncode-focusBorder)) !important;
 }
 
 .agent-sessions-workbench .interactive-session .chat-input-container.working:not(.focused) {
-	border-color: var(--vscode-agentsChatInput-border) !important;
+	border-color: var(--zyraxoncode-agentsChatInput-border) !important;
 }
 
 .agent-sessions-workbench .interactive-session .chat-input-container.working.focused {
-	border-color: color-mix(in srgb, var(--vscode-agentsChatInput-focusBorder, var(--vscode-focusBorder)) 40%, transparent) !important;
+	border-color: color-mix(in srgb, var(--zyraxoncode-agentsChatInput-focusBorder, var(--zyraxoncode-focusBorder)) 40%, transparent) !important;
 }
 
 .agent-sessions-workbench .interactive-session .interactive-input-part .chat-editor-container .interactive-input-editor .monaco-editor {
@@ -103,7 +103,7 @@
 }
 
 .agent-sessions-workbench .interactive-session .interactive-input-part .chat-editor-container .interactive-input-editor .monaco-editor .monaco-editor-background {
-	background-color: var(--vscode-agentsChatInput-background);
+	background-color: var(--zyraxoncode-agentsChatInput-background);
 }
 
 .agent-sessions-workbench .part.sessionspart .interactive-session .interactive-input-part,
@@ -118,7 +118,7 @@
 
 .agent-sessions-workbench .part.sessionspart .interactive-session .chat-edit-input-container .interactive-input-part,
 .agent-sessions-workbench .chat-editor-relative .interactive-session .chat-edit-input-container .interactive-input-part {
-	padding: var(--vscode-spacing-size80) 0 var(--vscode-spacing-size40);
+	padding: var(--zyraxoncode-spacing-size80) 0 var(--zyraxoncode-spacing-size40);
 }
 
 .agent-sessions-workbench .interactive-session .chat-input-toolbars .chat-sessionPicker-container {

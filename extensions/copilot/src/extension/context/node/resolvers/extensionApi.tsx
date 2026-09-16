@@ -2,15 +2,15 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import { ChatResponsePart } from '@vscode/prompt-tsx/dist/base/vscodeTypes';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import { ChatResponsePart } from '@zyraxoncode/prompt-tsx/dist/base/zyraxoncodeTypes';
 import { Embedding, EmbeddingType, EmbeddingVector, IEmbeddingsComputer, rankEmbeddings } from '../../../../platform/embeddings/common/embeddingsComputer';
 import { EmbeddingCacheType, IEmbeddingsCache, LocalEmbeddingsCache, RemoteCacheType, RemoteEmbeddingsCache } from '../../../../platform/embeddings/common/embeddingsIndex';
 import { IEnvService } from '../../../../platform/env/common/envService';
 import { Progress } from '../../../../platform/notification/common/notificationService';
 import { createFencedCodeBlock } from '../../../../util/common/markdown';
 import { TelemetryCorrelationId } from '../../../../util/common/telemetryCorrelationId';
-import { sanitizeVSCodeVersion } from '../../../../util/common/vscodeVersion';
+import { sanitizeZyraxonCodeVersion } from '../../../../util/common/zyraxoncodeVersion';
 import { CancellationToken } from '../../../../util/vs/base/common/cancellation';
 import { createDecorator, IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
 
@@ -30,7 +30,7 @@ export class ApiEmbeddingsIndex implements IApiEmbeddingsIndex {
 		@IEnvService envService: IEnvService,
 		@IInstantiationService instantiationService: IInstantiationService
 	) {
-		const cacheVersion = sanitizeVSCodeVersion(envService.getEditorInfo().version);
+		const cacheVersion = sanitizeZyraxonCodeVersion(envService.getEditorInfo().version);
 		this.embeddingsCache = useRemoteCache ?
 			instantiationService.createInstance(RemoteEmbeddingsCache, EmbeddingCacheType.GLOBAL, 'api', cacheVersion, EmbeddingType.text3small_512, RemoteCacheType.Api) :
 			instantiationService.createInstance(LocalEmbeddingsCache, EmbeddingCacheType.GLOBAL, 'api', cacheVersion, EmbeddingType.text3small_512);
@@ -51,7 +51,7 @@ export class ApiEmbeddingsIndex implements IApiEmbeddingsIndex {
 
 	private toContextString(context: ApiContext): string {
 		if (context.type === 'code') {
-			return `API Reference Code Snippet from vscode.d.ts:\n${createFencedCodeBlock(context.lang, context.text)}`;
+			return `API Reference Code Snippet from zyraxoncode.d.ts:\n${createFencedCodeBlock(context.lang, context.text)}`;
 		} else if (context.type === 'command') {
 			return `${context.text}`;
 		} else if (context.type === 'documentationCodeBlock') {
@@ -71,13 +71,13 @@ export interface IApiEmbeddingsIndex {
 
 export const IApiEmbeddingsIndex = createDecorator<IApiEmbeddingsIndex>('IApiEmbeddingsIndex');
 
-export interface VSCodeAPIContextProps extends BasePromptElementProps {
+export interface ZyraxonCodeAPIContextProps extends BasePromptElementProps {
 	query: string;
 }
 
-export class VSCodeAPIContextElement extends PromptElement<VSCodeAPIContextProps> {
+export class ZyraxonCodeAPIContextElement extends PromptElement<ZyraxonCodeAPIContextProps> {
 	constructor(
-		props: VSCodeAPIContextProps,
+		props: ZyraxonCodeAPIContextProps,
 		@IApiEmbeddingsIndex private readonly apiEmbeddingsIndex: IApiEmbeddingsIndex,
 		@IEmbeddingsComputer private readonly embeddingsComputer: IEmbeddingsComputer,
 	) {
@@ -95,7 +95,7 @@ export class VSCodeAPIContextElement extends PromptElement<VSCodeAPIContextProps
 			return [];
 		}
 
-		const embeddingResult = await this.embeddingsComputer.computeEmbeddings(EmbeddingType.text3small_512, [this.props.query], {}, new TelemetryCorrelationId('VSCodeAPIContextElement::getSnippets'), token);
+		const embeddingResult = await this.embeddingsComputer.computeEmbeddings(EmbeddingType.text3small_512, [this.props.query], {}, new TelemetryCorrelationId('ZyraxonCodeAPIContextElement::getSnippets'), token);
 		if (embeddingResult.values.length === 0) {
 			return [];
 		}

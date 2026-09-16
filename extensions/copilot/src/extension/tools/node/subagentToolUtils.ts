@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { ChatSubagentToolInvocationData, ChatToolInvocationPart } from '../../../vscodeTypes';
+import type * as zyraxoncode from 'zyraxoncode';
+import { ChatSubagentToolInvocationData, ChatToolInvocationPart } from '../../../zyraxoncodeTypes';
 import { ToolName } from '../common/toolNames';
 
 export interface ISubagentToolInvocationUpdate {
@@ -15,7 +15,7 @@ export interface ISubagentToolInvocationUpdate {
 	result?: string;
 }
 
-export function updateSubagentInvocation(stream: vscode.ChatResponseStream | undefined, toolCallId: string | undefined, toolName: ToolName, data: ISubagentToolInvocationUpdate): void {
+export function updateSubagentInvocation(stream: zyraxoncode.ChatResponseStream | undefined, toolCallId: string | undefined, toolName: ToolName, data: ISubagentToolInvocationUpdate): void {
 	if (!stream || !toolCallId) {
 		return;
 	}

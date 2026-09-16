@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { CancellationToken } from '../../../../util/vs/base/common/cancellation';
 import { IInstantiationService, createDecorator } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelTextPart } from '../../../../vscodeTypes';
+import { LanguageModelTextPart } from '../../../../zyraxoncodeTypes';
 import { ToolName } from '../../../tools/common/toolNames';
 import { IToolsService } from '../../../tools/common/toolsService';
 import {

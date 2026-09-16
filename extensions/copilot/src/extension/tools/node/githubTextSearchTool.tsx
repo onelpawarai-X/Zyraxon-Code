@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptReference, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptReference, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { FileChunkAndScore } from '../../../platform/chunking/common/chunk';
 import { GithubRepoId } from '../../../platform/git/common/gitService';
 import { GithubCodeSearchScope, IGithubCodeSearchService } from '../../../platform/remoteCodeSearch/common/githubCodeSearchService';
@@ -15,7 +15,7 @@ import { isLocation, isUri } from '../../../util/common/types';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { getUniqueReferences } from '../../prompt/common/conversation';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { ToolName } from '../common/toolNames';
@@ -36,7 +36,7 @@ export class GithubTextSearchTool implements ICopilotTool<GithubTextSearchToolPa
 		@IGithubCodeSearchService private readonly _githubCodeSearch: IGithubCodeSearchService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<GithubTextSearchToolParams>, token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<GithubTextSearchToolParams>, token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		const scope = parseScope(options.input.scope);
 		if (!scope) {
 			throw new Error(l10n.t`Invalid input. Could not parse 'scope' argument`);
@@ -62,7 +62,7 @@ export class GithubTextSearchTool implements ICopilotTool<GithubTextSearchToolPa
 				if (parts.length >= 3) {
 					const nwo = `${parts[0]}/${parts[1]}`;
 					const relativePath = parts.slice(2).join('/');
-					file = URI.joinPath(URI.parse('https://github.com'), nwo, 'tree', 'main', '/' + relativePath).with({
+					file = URI.joinPath(URI.parse('__ZYRAXKEEP__0_'), nwo, 'tree', 'main', '/' + relativePath).with({
 						fragment: entry.range.startLineNumber > 0
 							? `L${entry.range.startLineNumber}-L${entry.range.endLineNumber}`
 							: undefined,
@@ -94,7 +94,7 @@ export class GithubTextSearchTool implements ICopilotTool<GithubTextSearchToolPa
 		return result;
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<GithubTextSearchToolParams>, _token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<GithubTextSearchToolParams>, _token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation> {
 		if (!options.input.scope) {
 			throw new Error(l10n.t`Invalid input. No 'scope' argument provided`);
 		}

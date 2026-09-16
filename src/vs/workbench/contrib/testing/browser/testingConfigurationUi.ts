@@ -99,7 +99,7 @@ const triggerButtonHandler = (service: ITestProfileService, resolve: (arg: undef
 	};
 
 CommandsRegistry.registerCommand({
-	id: 'vscode.pickMultipleTestProfiles',
+	id: 'zyraxoncode.pickMultipleTestProfiles',
 	handler: async (accessor: ServicesAccessor, options: IConfigurationPickerOptions & {
 		selected?: ITestRunProfile[];
 	}) => {
@@ -135,7 +135,7 @@ CommandsRegistry.registerCommand({
 });
 
 CommandsRegistry.registerCommand({
-	id: 'vscode.pickTestProfile',
+	id: 'zyraxoncode.pickTestProfile',
 	handler: async (accessor: ServicesAccessor, options: IConfigurationPickerOptions) => {
 		const profileService = accessor.get(ITestProfileService);
 		const quickpick = buildPicker(accessor, options);

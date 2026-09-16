@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { ChatResponseReferencePartStatusKind, MetadataMap, PromptReference, Raw } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { ChatResponseReferencePartStatusKind, MetadataMap, PromptReference, Raw } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -32,7 +32,7 @@ import { assertType, isObject } from '../../../util/vs/base/common/types';
 import { isUriComponents, URI } from '../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { BrandedService, IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestEditorData, Location, MarkdownString } from '../../../vscodeTypes';
+import { ChatRequestEditorData, Location, MarkdownString } from '../../../zyraxoncodeTypes';
 import { CodeBlockInfo, CodeBlockProcessor, isCodeBlockWithResource } from '../../codeBlocks/node/codeBlockProcessor';
 import { ICommandService } from '../../commands/node/commandService';
 import { Intent } from '../../common/constants';
@@ -66,7 +66,7 @@ type IntentInvocationCtor<T extends BrandedService[]> = {
 		intent: IIntent,
 		location: ChatLocation,
 		endpoint: IChatEndpoint,
-		request: vscode.ChatRequest,
+		request: zyraxoncode.ChatRequest,
 		intentOptions: EditCodeIntentOptions,
 		...args: T[]
 	): EditCodeIntentInvocation;
@@ -100,8 +100,8 @@ export class EditCodeIntent implements IIntent {
 		private readonly intentOptions: EditCodeIntentOptions = { processCodeblocks: true, intentInvocation: EditCodeIntentInvocation },
 	) { }
 
-	private async _handleCodesearch(conversation: Conversation, request: vscode.ChatRequest, location: ChatLocation, stream: vscode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext | undefined, chatTelemetry: ChatTelemetryBuilder): Promise<{ request: vscode.ChatRequest; conversation: Conversation }> {
-		const foundReferences: vscode.ChatPromptReference[] = [];
+	private async _handleCodesearch(conversation: Conversation, request: zyraxoncode.ChatRequest, location: ChatLocation, stream: zyraxoncode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext | undefined, chatTelemetry: ChatTelemetryBuilder): Promise<{ request: zyraxoncode.ChatRequest; conversation: Conversation }> {
+		const foundReferences: zyraxoncode.ChatPromptReference[] = [];
 		if ((this.configurationService.getConfig(ConfigKey.CodeSearchAgentEnabled) || this.configurationService.getConfig(ConfigKey.Advanced.CodeSearchAgentEnabled)) && request.toolReferences.find((r) => r.name === CodebaseTool.toolName && !isDirectorySemanticSearch(r))) {
 
 			const latestTurn = conversation.getLatestTurn();
@@ -130,7 +130,7 @@ export class EditCodeIntent implements IIntent {
 		return { conversation, request };
 	}
 
-	private async _handleApplyConfirmedEdits(edits: (MappedEditsRequest & { chatRequestId: string; chatRequestModel: string })[], outputStream: vscode.ChatResponseStream, token: CancellationToken) {
+	private async _handleApplyConfirmedEdits(edits: (MappedEditsRequest & { chatRequestId: string; chatRequestModel: string })[], outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken) {
 		const hydrateMappedEditsRequest = async (request: MappedEditsRequest): Promise<MappedEditsRequest> => {
 			const workingSet = await Promise.all(request.workingSet.map(async (ws): Promise<IWorkingSetEntry> => {
 				if (isTextDocumentSnapshotJSON(ws.document)) {
@@ -163,7 +163,7 @@ export class EditCodeIntent implements IIntent {
 		}));
 	}
 
-	async handleRequest(conversation: Conversation, request: vscode.ChatRequest, stream: vscode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext | undefined, agentName: string, location: ChatLocation, chatTelemetry: ChatTelemetryBuilder, yieldRequested: () => boolean): Promise<vscode.ChatResult> {
+	async handleRequest(conversation: Conversation, request: zyraxoncode.ChatRequest, stream: zyraxoncode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext | undefined, agentName: string, location: ChatLocation, chatTelemetry: ChatTelemetryBuilder, yieldRequested: () => boolean): Promise<zyraxoncode.ChatResult> {
 		const applyEdits = request.acceptedConfirmationData?.filter(isEditsOkayConfirmation);
 		if (applyEdits?.length) {
 			await this._handleApplyConfirmedEdits(applyEdits.flatMap(e => ({ ...e.edits, chatRequestId: e.chatRequestId, chatRequestModel: request.model.id })), stream, token);
@@ -174,7 +174,7 @@ export class EditCodeIntent implements IIntent {
 		return this.instantiationService.createInstance(EditIntentRequestHandler, this, conversation, request, stream, token, documentContext, location, chatTelemetry, this.getIntentHandlerOptions(request), yieldRequested).getResult();
 	}
 
-	protected getIntentHandlerOptions(_request: vscode.ChatRequest): IDefaultIntentRequestHandlerOptions | undefined {
+	protected getIntentHandlerOptions(_request: zyraxoncode.ChatRequest): IDefaultIntentRequestHandlerOptions | undefined {
 		return undefined;
 	}
 
@@ -198,9 +198,9 @@ class EditIntentRequestHandler {
 	constructor(
 		private readonly intent: EditCodeIntent,
 		private readonly conversation: Conversation,
-		private readonly request: vscode.ChatRequest,
-		private readonly stream: vscode.ChatResponseStream,
-		private readonly token: vscode.CancellationToken,
+		private readonly request: zyraxoncode.ChatRequest,
+		private readonly stream: zyraxoncode.ChatResponseStream,
+		private readonly token: zyraxoncode.CancellationToken,
 		private readonly documentContext: IDocumentContext | undefined,
 		private readonly location: ChatLocation,
 		private readonly chatTelemetry: ChatTelemetryBuilder,
@@ -212,7 +212,7 @@ class EditIntentRequestHandler {
 		@IOTelService private readonly otelService: IOTelService,
 	) { }
 
-	async getResult(): Promise<vscode.ChatResult> {
+	async getResult(): Promise<zyraxoncode.ChatResult> {
 		const actual = this.instantiationService.createInstance(
 			DefaultIntentRequestHandler,
 			this.intent,
@@ -319,7 +319,7 @@ export class EditCodeIntentInvocation implements IIntentInvocation {
 		readonly intent: IIntent,
 		readonly location: ChatLocation,
 		readonly endpoint: IChatEndpoint,
-		protected readonly request: vscode.ChatRequest,
+		protected readonly request: zyraxoncode.ChatRequest,
 		private readonly intentOptions: EditCodeIntentInvocationOptions,
 		@IInstantiationService protected readonly instantiationService: IInstantiationService,
 		@ICodeMapperService private readonly codeMapperService: ICodeMapperService,
@@ -336,29 +336,29 @@ export class EditCodeIntentInvocation implements IIntentInvocation {
 		@IOTelService protected readonly otelService: IOTelService,
 	) { }
 
-	getAvailableTools(): vscode.LanguageModelToolInformation[] | Promise<vscode.LanguageModelToolInformation[]> | undefined {
+	getAvailableTools(): zyraxoncode.LanguageModelToolInformation[] | Promise<zyraxoncode.LanguageModelToolInformation[]> | undefined {
 		return undefined;
 	}
 
 	async buildPrompt(
 		promptContext: IBuildPromptContext,
-		progress: vscode.Progress<vscode.ChatResponseReferencePart | vscode.ChatResponseProgressPart>,
-		token: vscode.CancellationToken
+		progress: zyraxoncode.Progress<zyraxoncode.ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart>,
+		token: zyraxoncode.CancellationToken
 	): Promise<IBuildPromptResult> {
 
 		// Add any references from the codebase invocation to the request
 		const codebase = await this._getCodebaseReferences(promptContext, token);
 
-		const allReferences: vscode.ChatPromptReference[] = [];
+		const allReferences: zyraxoncode.ChatPromptReference[] = [];
 		allReferences.push(...promptContext.chatVariables.references);
-		let toolReferences: vscode.ChatPromptReference[] = [];
+		let toolReferences: zyraxoncode.ChatPromptReference[] = [];
 		if (codebase) {
 			toolReferences = toNewChatReferences(promptContext.chatVariables, codebase.references);
 			allReferences.push(...toolReferences);
 		}
 
 		if (this.request.location2 instanceof ChatRequestEditorData) {
-			const editorRequestReference: vscode.ChatPromptReference = {
+			const editorRequestReference: zyraxoncode.ChatPromptReference = {
 				id: '',
 				name: this.request.location2.document.fileName,
 				value: new Location(this.request.location2.document.uri, this.request.location2.wholeRange)
@@ -444,7 +444,7 @@ export class EditCodeIntentInvocation implements IIntentInvocation {
 
 	protected async _getCodebaseReferences(
 		promptContext: IBuildPromptContext,
-		token: vscode.CancellationToken,
+		token: zyraxoncode.CancellationToken,
 	) {
 		const codebaseTools = this.stableToolReferences.filter(t => t.name === ToolName.Codebase);
 		if (!codebaseTools.length) {
@@ -458,7 +458,7 @@ export class EditCodeIntentInvocation implements IIntentInvocation {
 		return { toolCallResults: getToolCallResults(metadatas), references, metadatas };
 	}
 
-	private shouldKeepReference(editCodeStep: EditCodeStep, ref: PromptReference, toolReferences: vscode.ChatPromptReference[], chatVariables: ChatVariablesCollection): boolean {
+	private shouldKeepReference(editCodeStep: EditCodeStep, ref: PromptReference, toolReferences: zyraxoncode.ChatPromptReference[], chatVariables: ChatVariablesCollection): boolean {
 		if (ref.options?.status && ref.options?.status?.kind !== ChatResponseReferencePartStatusKind.Complete) {
 			// Always show references for files which have warnings
 			return true;
@@ -503,7 +503,7 @@ export class EditCodeIntentInvocation implements IIntentInvocation {
 		return undefined;
 	}
 
-	async processResponse?(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: vscode.CancellationToken): Promise<vscode.ChatResult> {
+	async processResponse?(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.ChatResult> {
 		assertType(this._editCodeStep);
 
 		const codeMapperWork: Promise<IMapCodeResult | undefined>[] = [];
@@ -643,7 +643,7 @@ export class EditCodeIntentInvocation implements IIntentInvocation {
 		if (this.workspaceService.getWorkspaceFolder(uri)) {
 			return uri;
 		}
-		if (uri.scheme === Schemas.file || uri.scheme === Schemas.vscodeRemote) {
+		if (uri.scheme === Schemas.file || uri.scheme === Schemas.zyraxoncodeRemote) {
 			// do not directly modify files outside the workspace. Create an untitled file instead, let the user save when ok
 			return URI.from({ scheme: Schemas.untitled, path: uri.path });
 		}
@@ -654,7 +654,7 @@ export class EditCodeIntentInvocation implements IIntentInvocation {
 
 const fileHeadingLineStart = '### ';
 
-export function getCodeBlocksFromResponse(textStream: AsyncIterable<string>, outputStream: vscode.ChatResponseStream, createUriFromResponsePath: (p: string) => URI | undefined, remoteName: string | undefined): AsyncIterable<CodeBlock> {
+export function getCodeBlocksFromResponse(textStream: AsyncIterable<string>, outputStream: zyraxoncode.ChatResponseStream, createUriFromResponsePath: (p: string) => URI | undefined, remoteName: string | undefined): AsyncIterable<CodeBlock> {
 
 	return new AsyncIterableObject<CodeBlock>(async (emitter) => {
 
@@ -663,7 +663,7 @@ export function getCodeBlocksFromResponse(textStream: AsyncIterable<string>, out
 			path => {
 				return createUriFromResponsePath(path);
 			},
-			(markdown: MarkdownString, codeBlockInfo: CodeBlockInfo | undefined, vulnerabilities: vscode.ChatVulnerability[] | undefined) => {
+			(markdown: MarkdownString, codeBlockInfo: CodeBlockInfo | undefined, vulnerabilities: zyraxoncode.ChatVulnerability[] | undefined) => {
 				if (vulnerabilities) {
 					outputStream.markdownWithVulnerabilities(markdown, vulnerabilities);
 				} else {
@@ -687,7 +687,7 @@ export function getCodeBlocksFromResponse(textStream: AsyncIterable<string>, out
 					let fileUri = createUriFromResponsePath(header);
 					if (fileUri) {
 						if (remoteName) {
-							fileUri = URI.from({ scheme: Schemas.vscodeRemote, authority: remoteName, path: fileUri.path });
+							fileUri = URI.from({ scheme: Schemas.zyraxoncodeRemote, authority: remoteName, path: fileUri.path });
 						}
 						const headerLine = `### [${basename(fileUri)}](${fileUri.toString()})\n`;
 						return new MarkdownString(headerLine);
@@ -707,22 +707,22 @@ export function getCodeBlocksFromResponse(textStream: AsyncIterable<string>, out
 	});
 }
 
-function getUriOfReference(ref: PromptReference): vscode.Uri | undefined {
+function getUriOfReference(ref: PromptReference): zyraxoncode.Uri | undefined {
 	if ('variableName' in ref.anchor) {
 		return _extractUri(ref.anchor.value);
 	}
 	return _extractUri(ref.anchor);
 }
 
-function _extractUri(something: vscode.Uri | vscode.Location | undefined): vscode.Uri | undefined {
+function _extractUri(something: zyraxoncode.Uri | zyraxoncode.Location | undefined): zyraxoncode.Uri | undefined {
 	if (isLocation(something)) {
 		return something.uri;
 	}
 	return something;
 }
 
-export function toNewChatReferences(chatVariables: ChatVariablesCollection, promptReferences: PromptReference[]): vscode.ChatPromptReference[] {
-	const toolReferences: vscode.ChatPromptReference[] = [];
+export function toNewChatReferences(chatVariables: ChatVariablesCollection, promptReferences: PromptReference[]): zyraxoncode.ChatPromptReference[] {
+	const toolReferences: zyraxoncode.ChatPromptReference[] = [];
 	const seen = new ResourceSet();
 
 	for (const reference of promptReferences) {
@@ -747,7 +747,7 @@ export function toNewChatReferences(chatVariables: ChatVariablesCollection, prom
 }
 
 function getToolCallResults(metadatas: MetadataMap) {
-	const toolCallResults: Record<string, vscode.LanguageModelToolResult2> = {};
+	const toolCallResults: Record<string, zyraxoncode.LanguageModelToolResult2> = {};
 	for (const metadata of metadatas.getAll(ToolResultMetadata)) {
 		toolCallResults[metadata.toolCallId] = metadata.result;
 	}
@@ -762,7 +762,7 @@ export function mergeMetadata(m1: MetadataMap, m2: MetadataMap): MetadataMap {
 	};
 }
 
-function isDirectorySemanticSearch(toolCall: vscode.ChatLanguageModelToolReference) {
+function isDirectorySemanticSearch(toolCall: zyraxoncode.ChatLanguageModelToolReference) {
 	if (toolCall.name !== ToolName.Codebase) {
 		return false;
 	}

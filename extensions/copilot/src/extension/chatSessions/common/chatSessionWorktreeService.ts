@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { RepoContext } from '../../../platform/git/common/gitService';
 import { createServiceIdentifier } from '../../../util/common/services';
 
@@ -66,20 +66,20 @@ export interface IChatSessionWorktreeService {
 	 * This event does not guarantee that the underlying set of changes was updated directly; callers
 	 * should re-query {@link getWorktreeChanges} when it fires.
 	 */
-	onDidChangeWorktreeChanges: vscode.Event<{ sessionId: string }>;
+	onDidChangeWorktreeChanges: zyraxoncode.Event<{ sessionId: string }>;
 
-	createWorktree(repositoryPath: vscode.Uri, stream?: vscode.ChatResponseStream, baseBranch?: string, branchName?: string): Promise<ChatSessionWorktreeProperties | undefined>;
+	createWorktree(repositoryPath: zyraxoncode.Uri, stream?: zyraxoncode.ChatResponseStream, baseBranch?: string, branchName?: string): Promise<ChatSessionWorktreeProperties | undefined>;
 
 	getWorktreeProperties(sessionId: string): Promise<ChatSessionWorktreeProperties | undefined>;
 	setWorktreeProperties(sessionId: string, properties: string | ChatSessionWorktreeProperties): Promise<void>;
 	updateWorktreeProperties(sessionId: string, properties: Partial<ChatSessionWorktreeProperties>): Promise<void>;
 
 	getWorktreeRepository(sessionId: string): Promise<RepoContext | undefined>;
-	getWorktreePath(sessionId: string): Promise<vscode.Uri | undefined>;
+	getWorktreePath(sessionId: string): Promise<zyraxoncode.Uri | undefined>;
 
 	applyWorktreeChanges(sessionId: string): Promise<void>;
 
-	getWorktreeChanges(sessionId: string): Promise<readonly vscode.ChatSessionChangedFile[] | undefined>;
+	getWorktreeChanges(sessionId: string): Promise<readonly zyraxoncode.ChatSessionChangedFile[] | undefined>;
 
 	refreshWorktreeChanges(sessionId: string): Promise<void>;
 

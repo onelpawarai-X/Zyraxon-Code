@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Event, Disposable, EventEmitter, SourceControlHistoryItemRef, l10n, workspace, Uri, DiagnosticSeverity, env, SourceControlHistoryItem } from 'vscode';
+import { Event, Disposable, EventEmitter, SourceControlHistoryItemRef, l10n, workspace, Uri, DiagnosticSeverity, env, SourceControlHistoryItem } from 'zyraxoncode';
 import { basename, dirname, normalize, sep, relative } from 'path';
 import { Readable } from 'stream';
 import { promises as fs, createReadStream } from 'fs';
@@ -356,7 +356,7 @@ export function relativePath(from: string, to: string): string {
 export function relativePathWithNoFallback(from: string, to: string): string | undefined {
 	// There are cases in which the `from` path may contain a trailing separator at
 	// the end (ex: "C:\", "\\server\folder\" (Windows) or "/" (Linux/macOS)) which
-	// is by design as documented in https://github.com/nodejs/node/issues/1765. If
+	// is by design as documented in __ZYRAXKEEP__0_ If
 	// the trailing separator is missing, we add it.
 	if (from.charAt(from.length - 1) !== sep) {
 		from += sep;

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { NotebookDocumentSnapshot } from '../../../platform/editing/common/notebookDocumentSnapshot';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -21,7 +21,7 @@ import { extname } from '../../../util/vs/base/common/resources';
 import { count } from '../../../util/vs/base/common/strings';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Position as ExtPosition, Range as ExtRange, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString, TextEdit } from '../../../vscodeTypes';
+import { Position as ExtPosition, Range as ExtRange, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString, TextEdit } from '../../../zyraxoncodeTypes';
 import { CodeBlockProcessor } from '../../codeBlocks/node/codeBlockProcessor';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
@@ -60,7 +60,7 @@ export class CreateFileTool implements ICopilotTool<ICreateFileParams> {
 		@IEndpointProvider protected readonly endpointProvider: IEndpointProvider,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<ICreateFileParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<ICreateFileParams>, token: zyraxoncode.CancellationToken) {
 		const uri = this.promptPathRepresentationService.resolveFilePath(options.input.filePath);
 		if (!uri) {
 			throw new Error(`Invalid file path`);
@@ -116,7 +116,7 @@ export class CreateFileTool implements ICopilotTool<ICreateFileParams> {
 			const content = removeLeadingFilepathComment(options.input.content, languageId, options.input.filePath);
 			// When the file has been deleted from disk but ZYRAXON Code still holds a stale
 			// in-memory doc with content, use a full-document replace so the old buffer
-			// is overwritten rather than prepended to (https://github.com/microsoft/vscode/issues/311043).
+			// is overwritten rather than prepended to (__ZYRAXKEEP__0_).
 			if (!fileExists && doc && doc.getText().length > 0) {
 				const lastLine = doc.lineCount - 1;
 				this._promptContext.stream.textEdit(uri, TextEdit.replace(new ExtRange(0, 0, lastLine, doc.lineAt(lastLine).text.length), content));
@@ -165,7 +165,7 @@ export class CreateFileTool implements ICopilotTool<ICreateFileParams> {
 		return input;
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<ICreateFileParams>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<ICreateFileParams>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation> {
 		const uri = resolveToolInputPath(options.input.filePath, this.promptPathRepresentationService);
 		const content = options.input.content || '';
 
@@ -192,7 +192,7 @@ export class CreateFileTool implements ICopilotTool<ICreateFileParams> {
 		};
 	}
 
-	async handleToolStream(options: vscode.LanguageModelToolInvocationStreamOptions<ICreateFileParams>, _token: vscode.CancellationToken): Promise<vscode.LanguageModelToolStreamResult> {
+	async handleToolStream(options: zyraxoncode.LanguageModelToolInvocationStreamOptions<ICreateFileParams>, _token: zyraxoncode.CancellationToken): Promise<zyraxoncode.LanguageModelToolStreamResult> {
 		let invocationMessage: MarkdownString;
 
 		// rawInput is now a partial object (parsed via tryParsePartialToolInput)

@@ -5,7 +5,7 @@
 
 import { URI } from '../../../util/vs/base/common/uri';
 import { IEnvService } from '../../env/common/envService';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { ILogService } from '../../log/common/logService';
 import { INotificationService } from '../../notification/common/notificationService';
 
@@ -19,7 +19,7 @@ export class SnippyNotifier {
 
 	constructor(
 		@INotificationService private readonly notificationService: INotificationService,
-		@IVSCodeExtensionContext private readonly context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly context: IZyraxonCodeExtensionContext,
 		@ILogService private readonly logService: ILogService,
 		@IEnvService private readonly envService: IEnvService,
 	) { }

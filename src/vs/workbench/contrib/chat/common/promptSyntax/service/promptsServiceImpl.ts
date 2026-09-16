@@ -388,7 +388,7 @@ export class PromptsService extends Disposable implements IPromptsService {
 	/**
 	 * Registers a prompt file provider (CustomAgentProvider, InstructionsProvider, or PromptFileProvider).
 	 * This will be called by the extension host bridge when
-	 * an extension registers a provider via vscode.chat.registerCustomAgentProvider(),
+	 * an extension registers a provider via zyraxoncode.chat.registerCustomAgentProvider(),
 	 * registerInstructionsProvider(), or registerPromptFileProvider().
 	 */
 	public registerPromptFileProvider(extension: IExtensionDescription, type: PromptsType, provider: {

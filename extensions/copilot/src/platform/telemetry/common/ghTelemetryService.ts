@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { TelemetrySender } from 'vscode';
+import type { TelemetrySender } from 'zyraxoncode';
 import { redactPaths } from '../../../util/common/pathRedaction';
 import { IConfigurationService } from '../../configuration/common/configurationService';
 import { IEnvService } from '../../env/common/envService';
@@ -177,8 +177,8 @@ export class GHTelemetryService implements IGHTelemetryService {
 
 		// and the real error, which might contain arbitrary data, to enhanced telemetry.
 		// We have previously observed paths and other potential PII in
-		//  - arbitrary unhandled exceptions coming from other extensions in the VSCode extension
-		//  - fields inserted into the data sent by `sendTelemetryException` in `vscode-extension-telementry` like `Assembly`,
+		//  - arbitrary unhandled exceptions coming from other extensions in the ZyraxonCode extension
+		//  - fields inserted into the data sent by `sendTelemetryException` in `zyraxoncode-extension-telementry` like `Assembly`,
 		this.sendTelemetryException(true /* secure */, error, definedTelemetryDataSecure);
 	}
 

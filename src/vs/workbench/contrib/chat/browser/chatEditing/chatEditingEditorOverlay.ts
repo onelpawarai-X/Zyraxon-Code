@@ -67,7 +67,7 @@ export class ChatEditingAcceptRejectActionViewItem extends ActionViewItem {
 
 					const ratio = -100 * (ctrl.remaining / ctrl.total);
 
-					this.element.style.setProperty('--vscode-action-item-auto-timeout', `${ratio}%`);
+					this.element.style.setProperty('--zyraxoncode-action-item-auto-timeout', `${ratio}%`);
 
 					this.element.classList.toggle('auto', true);
 					listener.value = addDisposableGenericMouseMoveListener(this.element, () => ctrl.cancel());
@@ -425,7 +425,7 @@ export class ChatEditingEditorOverlay implements IWorkbenchContribution {
 			for (const group of groups) {
 
 				if (!(group instanceof EditorGroupView)) {
-					// TODO@jrieken better with https://github.com/microsoft/vscode/tree/ben/layout-group-container
+					// TODO@jrieken better with __ZYRAXKEEP__0_
 					continue;
 				}
 

@@ -28,10 +28,10 @@ import { ILanguageDetectionWorker, LanguageDetectionWorkerHost } from './languag
 
 const TOP_LANG_COUNTS = 12;
 
-const regexpModuleLocation: AppResourcePath = `${nodeModulesPath}/vscode-regexp-languagedetection`;
-const regexpModuleLocationAsar: AppResourcePath = `${nodeModulesAsarPath}/vscode-regexp-languagedetection`;
-const moduleLocation: AppResourcePath = `${nodeModulesPath}/@vscode/vscode-languagedetection`;
-const moduleLocationAsar: AppResourcePath = `${nodeModulesAsarPath}/@vscode/vscode-languagedetection`;
+const regexpModuleLocation: AppResourcePath = `${nodeModulesPath}/zyraxoncode-regexp-languagedetection`;
+const regexpModuleLocationAsar: AppResourcePath = `${nodeModulesAsarPath}/zyraxoncode-regexp-languagedetection`;
+const moduleLocation: AppResourcePath = `${nodeModulesPath}/@zyraxoncode/zyraxoncode-languagedetection`;
+const moduleLocationAsar: AppResourcePath = `${nodeModulesAsarPath}/@zyraxoncode/zyraxoncode-languagedetection`;
 
 export class LanguageDetectionService extends Disposable implements ILanguageDetectionService {
 	static readonly enablementSettingKey = 'workbench.editor.languageDetection';
@@ -73,7 +73,7 @@ export class LanguageDetectionService extends Disposable implements ILanguageDet
 			languageService,
 			telemetryService,
 			webWorkerService,
-			// TODO See if it's possible to bundle vscode-languagedetection
+			// TODO See if it's possible to bundle zyraxoncode-languagedetection
 			useAsar
 				? FileAccess.asBrowserUri(`${moduleLocationAsar}/dist/lib/index.js`).toString(true)
 				: FileAccess.asBrowserUri(`${moduleLocation}/dist/lib/index.js`).toString(true),

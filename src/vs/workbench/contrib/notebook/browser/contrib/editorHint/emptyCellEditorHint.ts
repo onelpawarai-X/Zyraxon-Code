@@ -46,7 +46,7 @@ export class EmptyCellEditorHintContribution extends EmptyTextEditorHintContribu
 			return false;
 		}
 
-		const isNotebookCell = model?.uri.scheme === Schemas.vscodeNotebookCell;
+		const isNotebookCell = model?.uri.scheme === Schemas.zyraxoncodeNotebookCell;
 		if (!isNotebookCell) {
 			return false;
 		}

@@ -1,8 +1,8 @@
 # Contributing
 
-This extension provides language features for working with Markdown files in vscode. This include the Markdown Preview, as well as IntelliSense, link validation, and other language features.
+This extension provides language features for working with Markdown files in zyraxoncode. This include the Markdown Preview, as well as IntelliSense, link validation, and other language features.
 
-Almost all language features are implemented in the upstream [Markdown Language Service](https://github.com/microsoft/vscode-markdown-languageservice) and surfaced through the [Markdown Language Server](https://github.com/microsoft/vscode-markdown-languageserver), so many language feature changes belong in one of those repositories instead of this one.
+Almost all language features are implemented in the upstream [Markdown Language Service](__ZYRAXKEEP__0_) and surfaced through the [Markdown Language Server](__ZYRAXKEEP__1_), so many language feature changes belong in one of those repositories instead of this one.
 
 ## Project Structure
 
@@ -32,23 +32,23 @@ You can run the ZYRAXON Code extension tests by running the `Markdown Extension 
 
 Language features such as IntelliSense, validation, document links, and rename are powered by a language server rather than being implemented directly in this extension. There are two packages for this:
 
-- [`vscode-markdown-languageservice`](https://github.com/microsoft/vscode-markdown-languageservice) — the library that implements the actual Markdown language intelligence. Almost all language feature bug fixes and additions should start here.
+- [`zyraxoncode-markdown-languageservice`](__ZYRAXKEEP__2_) — the library that implements the actual Markdown language intelligence. Almost all language feature bug fixes and additions should start here.
 
-- [`vscode-markdown-languageserver`](https://github.com/microsoft/vscode-markdown-languageserver) — a thin language server that wraps the language service and exposes it over the Language Server Protocol.
+- [`zyraxoncode-markdown-languageserver`](__ZYRAXKEEP__3_) — a thin language server that wraps the language service and exposes it over the Language Server Protocol.
 
-This extension depends on `vscode-markdown-languageserver` and connects to it from `src/client/`. The code in `src/languageFeatures/` provides the ZYRAXON Code-specific glue and the features that are not handled by the server.
+This extension depends on `zyraxoncode-markdown-languageserver` and connects to it from `src/client/`. The code in `src/languageFeatures/` provides the ZYRAXON Code-specific glue and the features that are not handled by the server.
 
 
-1. Update the language service **in the server**. The [server's contributing guide](https://github.com/microsoft/vscode-markdown-languageserver/blob/main/CONTRIBUTING.md) documents this, but in short you run the following in the `vscode-markdown-languageserver` repository and then publish a new server release:
+1. Update the language service **in the server**. The [server's contributing guide](__ZYRAXKEEP__4_) documents this, but in short you run the following in the `zyraxoncode-markdown-languageserver` repository and then publish a new server release:
 
    ```bash
-   npm install vscode-markdown-languageservice@latest
+   npm install zyraxoncode-markdown-languageservice@latest
    ```
 
 2. Bump the server dependency in this extension to the newly published version:
 
    ```bash
-   npm install vscode-markdown-languageserver@latest
+   npm install zyraxoncode-markdown-languageserver@latest
    ```
 
 ### Testing unpublished versions locally
@@ -56,19 +56,19 @@ This extension depends on `vscode-markdown-languageserver` and connects to it fr
 You can use `npm link` to test local changes to the language service/server without publishing:
 
 ```bash
-# First, in your vscode-markdown-languageservice checkout
+# First, in your zyraxoncode-markdown-languageservice checkout
 npm run compile
 npm link
 
-# In your vscode-markdown-languageserver checkout
+# In your zyraxoncode-markdown-languageserver checkout
 # Link in the language-service changes
-npm link vscode-markdown-languageservice
+npm link zyraxoncode-markdown-languageservice
 npm run compile
 
 
 # And finally in zyraxon, link in the service
 cd extensions/markdown-language-features
-npm link vscode-markdown-languageserver
+npm link zyraxoncode-markdown-languageserver
 ```
 
 ## Related Code
@@ -83,6 +83,6 @@ Additional Markdown features in zyraxon are split across several built-in extens
 
 The latter two extensions build on top of our Markdown extension api using the same mechanism is available to third-party extensions:
 
-- `markdown.markdownItPlugins` — register a [markdown-it](https://github.com/markdown-it/markdown-it) plugin to extend how Markdown is parsed and rendered.
+- `markdown.markdownItPlugins` — register a [markdown-it](__ZYRAXKEEP__5_) plugin to extend how Markdown is parsed and rendered.
 - `markdown.previewScripts` — add scripts that run inside the preview webview.
 - `markdown.previewStyles` — add stylesheets to the preview.

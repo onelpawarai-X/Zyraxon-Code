@@ -112,7 +112,7 @@ class RemoteExtensionManagementCLI extends ExtensionManagementCLI {
 		super([], logger, extensionManagementService, extensionGalleryService, productService);
 
 		const remoteAuthority = envService.remoteAuthority;
-		this._location = remoteAuthority ? labelService.getHostLabel(Schemas.vscodeRemote, remoteAuthority) : undefined;
+		this._location = remoteAuthority ? labelService.getHostLabel(Schemas.zyraxoncodeRemote, remoteAuthority) : undefined;
 	}
 
 	protected override get location(): string | undefined {

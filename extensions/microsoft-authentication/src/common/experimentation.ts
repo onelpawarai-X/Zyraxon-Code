@@ -2,11 +2,11 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as vscode from 'vscode';
-import { getExperimentationService, IExperimentationService, IExperimentationTelemetry, TargetPopulation } from 'vscode-tas-client';
+import * as zyraxoncode from 'zyraxoncode';
+import { getExperimentationService, IExperimentationService, IExperimentationTelemetry, TargetPopulation } from 'zyraxoncode-tas-client';
 
 export async function createExperimentationService(
-	context: vscode.ExtensionContext,
+	context: zyraxoncode.ExtensionContext,
 	experimentationTelemetry: IExperimentationTelemetry,
 	isPreRelease: boolean,
 ): Promise<IExperimentationService> {

@@ -10,7 +10,7 @@ import { ToolResultFileEditContent } from './state/sessionState.js';
 import { URI } from '../../../base/common/uri.js';
 import { EditTelemetryTrigger } from '../../telemetry/common/editTelemetry.js';
 
-export const FILE_EDIT_ATTRIBUTION_PROPERTY = '_vscodeEditAttribution';
+export const FILE_EDIT_ATTRIBUTION_PROPERTY = '_zyraxoncodeEditAttribution';
 // Workbench edit-source tracking reports a coverage gap when Agent Host attribution exceeds this cap.
 export const MAX_EDIT_ATTRIBUTION_FILE_SIZE = 5 * 1024 * 1024;
 const EDIT_ATTRIBUTION_RESOURCE_SCHEME = 'agent-edit-attribution';

@@ -12,14 +12,14 @@
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 	}
 
 	/* Header section with session details */
 	.agent-session-hover-header {
 		height: 60px;
 		padding: 0 12px;
-		border-bottom: 1px solid var(--vscode-widget-border);
+		border-bottom: 1px solid var(--zyraxoncode-widget-border);
 		flex-shrink: 0;
 		display: flex;
 		flex-direction: column;
@@ -30,7 +30,7 @@
 		font-weight: 600;
 		font-size: 13px;
 		margin-bottom: 4px;
-		color: var(--vscode-foreground);
+		color: var(--zyraxoncode-foreground);
 		display: flex;
 		align-items: center;
 		gap: 6px;
@@ -41,7 +41,7 @@
 
 	.agent-session-hover-details {
 		font-size: 11px;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 		display: flex;
 		align-items: center;
 		gap: 4px;
@@ -64,11 +64,11 @@
 	}
 
 	.agent-session-hover-diff .insertions {
-		color: var(--vscode-chat-linesAddedForeground);
+		color: var(--zyraxoncode-chat-linesAddedForeground);
 	}
 
 	.agent-session-hover-diff .deletions {
-		color: var(--vscode-chat-linesRemovedForeground);
+		color: var(--zyraxoncode-chat-linesRemovedForeground);
 	}
 
 	/* Content area with chat list */

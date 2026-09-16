@@ -142,7 +142,7 @@ export interface ServerParsedArgs {
 	 * The contents of the file will be used as the connection token. Use only `[0-9A-Z\-]` as contents in the file.
 	 * The file can optionally end in a `\n` which will be ignored.
 	 *
-	 * This secret must be communicated to any vscode instance via the resolver or embedder API.
+	 * This secret must be communicated to any zyraxoncode instance via the resolver or embedder API.
 	 */
 	'connection-token-file'?: string;
 

@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatContext, ChatPromptReference, ChatRequest, ChatRequestTurn, ChatResponseTurn, ExtendedChatResponsePart, Uri } from 'vscode';
+import type { ChatContext, ChatPromptReference, ChatRequest, ChatRequestTurn, ChatResponseTurn, ExtendedChatResponsePart, Uri } from 'zyraxoncode';
 import { ChatResponseStreamImpl } from '../../../util/common/chatResponseStreamImpl';
 import { MarkdownString } from '../../../util/vs/base/common/htmlContent';
 import { URI } from '../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
-import * as vscodeTypes from '../../../vscodeTypes';
+import * as zyraxoncodeTypes from '../../../zyraxoncodeTypes';
 
 export class TestChatRequest implements ChatRequest {
 	public command: string | undefined;
 	public references: readonly ChatPromptReference[];
-	public location: vscodeTypes.ChatLocation;
+	public location: zyraxoncodeTypes.ChatLocation;
 	public location2 = undefined;
 	public attempt: number;
 	public enableCommandDetection: boolean;
@@ -24,7 +24,7 @@ export class TestChatRequest implements ChatRequest {
 	public tools = new Map();
 	public id = generateUuid();
 	public sessionId = generateUuid();
-	public sessionResource = vscodeTypes.Uri.parse(`test://session/${this.sessionId}`);
+	public sessionResource = zyraxoncodeTypes.Uri.parse(`__ZYRAXKEEP__0_{this.sessionId}`);
 	public hasHooksEnabled = false;
 
 	constructor(
@@ -32,7 +32,7 @@ export class TestChatRequest implements ChatRequest {
 		references?: ChatPromptReference[]
 	) {
 		this.references = references ?? [];
-		this.location = vscodeTypes.ChatLocation.Panel;
+		this.location = zyraxoncodeTypes.ChatLocation.Panel;
 		this.attempt = 0;
 		this.enableCommandDetection = false;
 		this.isParticipantDetected = false;

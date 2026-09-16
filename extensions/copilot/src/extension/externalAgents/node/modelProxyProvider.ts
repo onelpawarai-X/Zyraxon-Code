@@ -3,18 +3,18 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
 import { OpenAILanguageModelServer } from './oaiLanguageModelServer';
 
-export class LanguageModelProxyProvider implements vscode.LanguageModelProxyProvider {
+export class LanguageModelProxyProvider implements zyraxoncode.LanguageModelProxyProvider {
 	constructor(
 		@IInstantiationService private readonly instantiationService: IInstantiationService
 	) { }
 
-	async provideModelProxy(forExtensionId: string, token: vscode.CancellationToken): Promise<vscode.LanguageModelProxy | undefined> {
+	async provideModelProxy(forExtensionId: string, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.LanguageModelProxy | undefined> {
 		const server = this.instantiationService.createInstance(OpenAILanguageModelServer);
 		await server.start();
 
@@ -22,8 +22,8 @@ export class LanguageModelProxyProvider implements vscode.LanguageModelProxyProv
 	}
 }
 
-class OpenAILanguageModelProxy extends Disposable implements vscode.LanguageModelProxy {
-	public readonly uri: vscode.Uri;
+class OpenAILanguageModelProxy extends Disposable implements zyraxoncode.LanguageModelProxy {
+	public readonly uri: zyraxoncode.Uri;
 	public readonly key: string;
 
 	constructor(
@@ -33,7 +33,7 @@ class OpenAILanguageModelProxy extends Disposable implements vscode.LanguageMode
 		this._register(runningServer);
 
 		const config = runningServer.getConfig();
-		this.uri = URI.parse(`http://localhost:${config.port}`);
+		this.uri = URI.parse(`__ZYRAXKEEP__0_{config.port}`);
 		this.key = config.nonce;
 	}
 }

@@ -60,7 +60,7 @@ export const mcpServerCollisionBehaviorSection = 'chat.mcp.collisionBehavior';
  * registered with `included: false` so it is hidden from the Settings UI and
  * settings.json IntelliSense; it is intended to be delivered through enterprise
  * policy (Windows Group Policy / macOS managed preferences / Linux
- * `/etc/vscode/policy.json`), with hand-editing of `settings.json` as a
+ * `/etc/zyraxoncode/policy.json`), with hand-editing of `settings.json` as a
  * developer escape hatch.
  */
 export const mcpEnterpriseManagedAuthIdpSection = 'mcp.enterpriseManagedAuth.idp';
@@ -96,7 +96,7 @@ export const mcpSchemaExampleServers = {
 
 const httpSchemaExamples = {
 	'my-mcp-server': {
-		url: 'http://localhost:3001/mcp',
+		url: '__ZYRAXKEEP__0_',
 		headers: {},
 	}
 };
@@ -328,7 +328,7 @@ export const mcpContributionPoint: IExtensionPointDescriptor<IMcpCollectionContr
 		}
 	},
 	jsonSchema: {
-		description: localize('vscode.extension.contributes.mcp', 'Contributes Model Context Protocol servers. Users of this should also use `vscode.lm.registerMcpServerDefinitionProvider`.'),
+		description: localize('zyraxoncode.extension.contributes.mcp', 'Contributes Model Context Protocol servers. Users of this should also use `zyraxoncode.lm.registerMcpServerDefinitionProvider`.'),
 		type: 'array',
 		defaultSnippets: [{ body: [{ id: '', label: '' }] }],
 		items: {
@@ -337,15 +337,15 @@ export const mcpContributionPoint: IExtensionPointDescriptor<IMcpCollectionContr
 			defaultSnippets: [{ body: { id: '', label: '' } }],
 			properties: {
 				id: {
-					description: localize('vscode.extension.contributes.mcp.id', "Unique ID for the collection."),
+					description: localize('zyraxoncode.extension.contributes.mcp.id', "Unique ID for the collection."),
 					type: 'string'
 				},
 				label: {
-					description: localize('vscode.extension.contributes.mcp.label', "Display name for the collection."),
+					description: localize('zyraxoncode.extension.contributes.mcp.label', "Display name for the collection."),
 					type: 'string'
 				},
 				when: {
-					description: localize('vscode.extension.contributes.mcp.when', "Condition which must be true to enable this collection."),
+					description: localize('zyraxoncode.extension.contributes.mcp.when', "Condition which must be true to enable this collection."),
 					type: 'string'
 				}
 			}

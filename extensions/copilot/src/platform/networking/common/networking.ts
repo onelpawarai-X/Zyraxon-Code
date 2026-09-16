@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestMetadata } from '@vscode/copilot-api';
-import { Raw } from '@vscode/prompt-tsx';
-import type { CancellationToken } from 'vscode';
+import { RequestMetadata } from '@zyraxoncode/copilot-api';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { ITokenizer, TokenizerType } from '../../../util/common/tokenizer';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
@@ -41,7 +41,7 @@ export interface IFetcher {
 	fetchWithPagination<T>(baseUrl: string, options: PaginationOptions<T>): Promise<T[]>;
 }
 
-export const userAgentLibraryHeader = 'X-VSCode-User-Agent-Library-Version';
+export const userAgentLibraryHeader = 'X-ZyraxonCode-User-Agent-Library-Version';
 
 export type ReqHeaders = { [key: string]: string };
 /**

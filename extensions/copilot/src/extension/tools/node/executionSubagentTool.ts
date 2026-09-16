@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { CapturingToken } from '../../../platform/requestLogger/common/capturingToken';
@@ -14,7 +14,7 @@ import { IExperimentationService } from '../../../platform/telemetry/common/null
 import { ChatResponseStreamImpl } from '../../../util/common/chatResponseStreamImpl';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseNotebookEditPart, ChatResponseTextEditPart, ChatToolInvocationPart, ExtendedLanguageModelToolResult, LanguageModelTextPart, MarkdownString } from '../../../vscodeTypes';
+import { ChatResponseNotebookEditPart, ChatResponseTextEditPart, ChatToolInvocationPart, ExtendedLanguageModelToolResult, LanguageModelTextPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { Conversation, Turn } from '../../prompt/common/conversation';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { ExecutionSubagentToolCallingLoop, IBackgroundCommand } from '../../prompt/node/executionSubagentToolCallingLoop';
@@ -41,7 +41,7 @@ class ExecutionSubagentTool implements ICopilotTool<IExecutionSubagentParams> {
 		@IConfigurationService private readonly configurationService: IConfigurationService,
 		@IExperimentationService private readonly experimentationService: IExperimentationService
 	) { }
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IExecutionSubagentParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IExecutionSubagentParams>, token: zyraxoncode.CancellationToken) {
 		const executionInstruction = [
 			'Execution query: ',
 			`${options.input.query}`,
@@ -152,7 +152,7 @@ class ExecutionSubagentTool implements ICopilotTool<IExecutionSubagentParams> {
 		return result;
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IExecutionSubagentParams>, _token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IExecutionSubagentParams>, _token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		return {
 			invocationMessage: options.input.description,
 		};

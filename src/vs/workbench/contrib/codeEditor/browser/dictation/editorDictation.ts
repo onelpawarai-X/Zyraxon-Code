@@ -43,7 +43,7 @@ const VOICE_CATEGORY = localize2('voiceCategory', "Voice");
  * True when the built-in on-device dictation engine is available (and AI
  * features are enabled). Mirrors the chat input's `ChatSpeechToTextConfigured`
  * gate so editor dictation can run through the built-in engine even when the
- * `ms-vscode.vscode-speech` extension is not installed.
+ * `ms-zyraxoncode.zyraxoncode-speech` extension is not installed.
  */
 const BuiltinDictationConfigured = ContextKeyExpr.and(ChatContextKeys.enabled, ChatContextKeys.speechToTextConfigured);
 
@@ -179,8 +179,8 @@ export class DictationWidget extends Disposable implements IContentWidget {
 		const lineHeight = position ? this.editor.getLineHeightForPosition(position) : this.editor.getOption(EditorOption.lineHeight);
 		const width = this.editor.getLayoutInfo().contentWidth * 0.7;
 
-		this.domNode.style.setProperty('--vscode-editor-dictation-widget-height', `${lineHeight}px`);
-		this.domNode.style.setProperty('--vscode-editor-dictation-widget-width', `${width}px`);
+		this.domNode.style.setProperty('--zyraxoncode-editor-dictation-widget-height', `${lineHeight}px`);
+		this.domNode.style.setProperty('--zyraxoncode-editor-dictation-widget-width', `${width}px`);
 
 		return null;
 	}

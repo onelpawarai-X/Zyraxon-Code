@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
-import { IVSCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
+import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { createDirectoryIfNotExists, IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { FileType } from '../../../platform/filesystem/common/fileTypes';
 import { ILogService } from '../../../platform/log/common/logService';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { URI } from '../../../util/vs/base/common/uri';
-import { LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../zyraxoncodeTypes';
 import { IMemoryCleanupService } from '../common/memoryCleanupService';
 import { ToolName } from '../common/toolNames';
 import { ICopilotTool, ToolRegistry } from '../common/toolsRegistry';
@@ -104,7 +104,7 @@ function isSessionPath(path: string): boolean {
 
 /**
  * Extracts a safe directory name from a chatSessionResource URI string.
- * The URI is typically like `vscode-chat-session://local/<sessionId>`.
+ * The URI is typically like `__ZYRAXKEEP__0_<sessionId>`.
  */
 export function extractSessionId(sessionResource: string): string {
 	const parsed = URI.parse(sessionResource);
@@ -151,21 +151,21 @@ export class MemoryTool implements ICopilotTool<MemoryToolParams> {
 	constructor(
 		@IFileSystemService private readonly fileSystemService: IFileSystemService,
 		@IMemoryCleanupService private readonly memoryCleanupService: IMemoryCleanupService,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 		@ILogService private readonly logService: ILogService,
 		@ITelemetryService private readonly telemetryService: ITelemetryService,
 	) {
 		this.memoryCleanupService.start();
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<MemoryToolParams>, _token: CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<MemoryToolParams>, _token: CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		const command = options.input.command;
 		const path = command === 'rename' ? (options.input as IRenameParams).old_path ?? (options.input as IRenameParams).path : options.input.path;
 
 		return this._prepareLocalInvocation(command, path ?? '/memories/', options.chatSessionResource);
 	}
 
-	private _prepareLocalInvocation(command: string, path: string, chatSessionResource?: vscode.Uri): vscode.PreparedToolInvocation {
+	private _prepareLocalInvocation(command: string, path: string, chatSessionResource?: zyraxoncode.Uri): zyraxoncode.PreparedToolInvocation {
 		// Directory paths (e.g. /memories/, /memories/session/, /memories/session) — show verb only, no file widget.
 		// Use normalizePath to handle paths with or without trailing slash consistently.
 		const normalized = normalizePath(path);
@@ -204,7 +204,7 @@ export class MemoryTool implements ICopilotTool<MemoryToolParams> {
 	 * Resolves a local memory path to a file widget string for display in invocation messages.
 	 * Constructs the URI directly from storage URIs to avoid validation that may throw.
 	 */
-	private _resolveFileWidget(path: string, chatSessionResource?: vscode.Uri): string {
+	private _resolveFileWidget(path: string, chatSessionResource?: zyraxoncode.Uri): string {
 		const segments = path.split('/').filter(s => s.length > 0);
 
 		if (isSessionPath(path)) {
@@ -242,7 +242,7 @@ export class MemoryTool implements ICopilotTool<MemoryToolParams> {
 		return formatUriForFileWidget(URI.joinPath(baseUri, MEMORY_BASE_DIR, ...relativeSegments));
 	}
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<MemoryToolParams>, _token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<MemoryToolParams>, _token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		const params = options.input;
 		const sessionResource = options.chatSessionResource?.toString();
 		const resultText = await this._dispatch(params, sessionResource, options.chatRequestId, options.model);
@@ -250,7 +250,7 @@ export class MemoryTool implements ICopilotTool<MemoryToolParams> {
 	}
 
 
-	private async _dispatch(params: MemoryToolParams, sessionResource?: string, requestId?: string, model?: vscode.LanguageModelChat): Promise<string> {
+	private async _dispatch(params: MemoryToolParams, sessionResource?: string, requestId?: string, model?: zyraxoncode.LanguageModelChat): Promise<string> {
 		const path = params.command === 'rename' ? (params.old_path ?? params.path) : params.path;
 		if (!path) {
 			this._sendLocalTelemetry(params.command, 'user', 'error', requestId, model);
@@ -384,7 +384,7 @@ export class MemoryTool implements ICopilotTool<MemoryToolParams> {
 			this.memoryCleanupService.markAccessed(uri);
 		}
 
-		let fileStat: vscode.FileStat;
+		let fileStat: zyraxoncode.FileStat;
 		try {
 			fileStat = await this.fileSystemService.stat(uri);
 		} catch {
@@ -734,7 +734,7 @@ export class MemoryTool implements ICopilotTool<MemoryToolParams> {
 		return { text: `Successfully renamed ${oldPath} to ${params.new_path}`, outcome: 'success' };
 	}
 
-	private _sendLocalTelemetry(command: string, scope: MemoryScope, toolOutcome: MemoryToolOutcome, requestId?: string, model?: vscode.LanguageModelChat): void {
+	private _sendLocalTelemetry(command: string, scope: MemoryScope, toolOutcome: MemoryToolOutcome, requestId?: string, model?: zyraxoncode.LanguageModelChat): void {
 		/* __GDPR__
 			"memoryToolInvoked" : {
 				"owner": "digitarald",

@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import { Utils } from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import { Utils } from 'zyraxoncode-uri';
 import { disposeAll, IDisposable } from '../util/dispose';
 import { ResourceMap } from '../util/resourceMap';
 import { Schemes } from '../util/schemes';
 
 type DirWatcherEntry = {
-	readonly uri: vscode.Uri;
+	readonly uri: zyraxoncode.Uri;
 	readonly disposables: readonly IDisposable[];
 };
 
@@ -18,22 +18,22 @@ type DirWatcherEntry = {
 export class FileWatcherManager {
 
 	readonly #fileWatchers = new Map<number, {
-		readonly watcher: vscode.FileSystemWatcher;
+		readonly watcher: zyraxoncode.FileSystemWatcher;
 		readonly dirWatchers: DirWatcherEntry[];
 	}>();
 
 	readonly #dirWatchers = new ResourceMap<{
-		readonly watcher: vscode.FileSystemWatcher;
+		readonly watcher: zyraxoncode.FileSystemWatcher;
 		refCount: number;
 	}>();
 
-	create(id: number, uri: vscode.Uri, watchParentDirs: boolean, listeners: { create?: () => void; change?: () => void; delete?: () => void }): void {
+	create(id: number, uri: zyraxoncode.Uri, watchParentDirs: boolean, listeners: { create?: () => void; change?: () => void; delete?: () => void }): void {
 		// Non-writable file systems do not support file watching
-		if (!vscode.workspace.fs.isWritableFileSystem(uri.scheme)) {
+		if (!zyraxoncode.workspace.fs.isWritableFileSystem(uri.scheme)) {
 			return;
 		}
 
-		const watcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(uri, '*'), !listeners.create, !listeners.change, !listeners.delete);
+		const watcher = zyraxoncode.workspace.createFileSystemWatcher(new zyraxoncode.RelativePattern(uri, '*'), !listeners.create, !listeners.change, !listeners.delete);
 		const parentDirWatchers: DirWatcherEntry[] = [];
 		this.#fileWatchers.set(id, { watcher, dirWatchers: parentDirWatchers });
 
@@ -48,8 +48,8 @@ export class FileWatcherManager {
 
 				let parentDirWatcher = this.#dirWatchers.get(dirUri);
 				if (!parentDirWatcher) {
-					const glob = new vscode.RelativePattern(Utils.dirname(dirUri), Utils.basename(dirUri));
-					const parentWatcher = vscode.workspace.createFileSystemWatcher(glob, !listeners.create, true, !listeners.delete);
+					const glob = new zyraxoncode.RelativePattern(Utils.dirname(dirUri), Utils.basename(dirUri));
+					const parentWatcher = zyraxoncode.workspace.createFileSystemWatcher(glob, !listeners.create, true, !listeners.delete);
 					parentDirWatcher = { refCount: 0, watcher: parentWatcher };
 					this.#dirWatchers.set(dirUri, parentDirWatcher);
 				}
@@ -59,8 +59,8 @@ export class FileWatcherManager {
 					disposables.push(parentDirWatcher.watcher.onDidCreate(async () => {
 						// Just because the parent dir was created doesn't mean our file was created
 						try {
-							const stat = await vscode.workspace.fs.stat(uri);
-							if (stat.type === vscode.FileType.File) {
+							const stat = await zyraxoncode.workspace.fs.stat(uri);
+							if (stat.type === zyraxoncode.FileType.File) {
 								listeners.create!();
 							}
 						} catch {

@@ -1,16 +1,16 @@
 {
     "workspaceFoldersFilePaths": [
-      "../../../vscode-copilot"
+      "../../../zyraxoncode-copilot"
     ],
-    "workspaceFolderFilePath": "../../../vscode-copilot",
+    "workspaceFolderFilePath": "../../../zyraxoncode-copilot",
     "symbols": [],
     "activeFileDiagnostics": [],
     "debugConsoleOutput": "",
     "terminalBuffer": "",
     "terminalLastCommand": {
       "commandLine": "",
-      "cwd": "/Users/penlv/Code/Work/vscode-copilot",
-      "output": "penlv@Pengs-MBP vscode-copilot % \n"
+      "cwd": "/Users/penlv/Code/Work/zyraxoncode-copilot",
+      "output": "penlv@Pengs-MBP zyraxoncode-copilot % \n"
     },
     "terminalSelection": "",
     "terminalShellType": "bash",
@@ -18,7 +18,7 @@
       {
         "rootUri": {
           "$mid": 1,
-          "path": "/Users/penlv/Code/Work/vscode-copilot",
+          "path": "/Users/penlv/Code/Work/zyraxoncode-copilot",
           "scheme": "file"
         },
         "headBranchName": "main",
@@ -30,7 +30,7 @@
           "origin"
         ],
         "remoteFetchUrls": [
-          "git@github.com:microsoft/vscode-copilot.git"
+          "git@github.com:zyraxon/zyraxoncode-copilot.git"
         ],
         "changes": {
           "mergeChanges": [],

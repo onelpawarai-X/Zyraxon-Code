@@ -39,8 +39,8 @@
 	max-height: 80vh;
 	display: flex;
 	flex-direction: column;
-	background: var(--vscode-menu-background, var(--vscode-editor-background));
-	color: var(--vscode-menu-foreground, var(--vscode-foreground));
+	background: var(--zyraxoncode-menu-background, var(--zyraxoncode-editor-background));
+	color: var(--zyraxoncode-menu-foreground, var(--zyraxoncode-foreground));
 	border-top-left-radius: 16px;
 	border-top-right-radius: 16px;
 	padding-bottom: env(safe-area-inset-bottom);
@@ -58,8 +58,8 @@
 	width: 36px;
 	height: 4px;
 	margin: 8px auto 4px;
-	border-radius: var(--vscode-cornerRadius-xSmall);
-	background: color-mix(in srgb, var(--vscode-foreground) 30%, transparent);
+	border-radius: var(--zyraxoncode-cornerRadius-xSmall);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 30%, transparent);
 	flex-shrink: 0;
 }
 
@@ -89,7 +89,7 @@
 	height: 36px;
 	border: none;
 	background: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 	border-radius: 50%;
 	flex-shrink: 0;
@@ -99,12 +99,12 @@
 }
 
 .host-picker-sheet-close:active {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .host-picker-sheet-subtitle {
 	padding: 0 16px 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 13px;
 	line-height: 1.4;
 	flex-shrink: 0;
@@ -119,16 +119,16 @@
 .host-picker-sheet-section-title {
 	padding: 12px 16px 4px;
 	font-size: 11px;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .host-picker-sheet-divider {
 	height: 1px;
 	margin: 8px 16px;
-	background: color-mix(in srgb, var(--vscode-foreground) 12%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 12%, transparent);
 }
 
 /* --- Host row -------------------------------------------------------- */
@@ -155,17 +155,17 @@
 }
 
 .host-picker-sheet-item:focus-visible {
-	outline: 2px solid var(--vscode-focusBorder);
+	outline: 2px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -2px;
 }
 
 .host-picker-sheet-item:active {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .host-picker-sheet-item.checked .host-picker-sheet-item-name {
 	font-weight: 600;
-	color: var(--vscode-menu-selectionForeground, var(--vscode-foreground));
+	color: var(--zyraxoncode-menu-selectionForeground, var(--zyraxoncode-foreground));
 }
 
 .host-picker-sheet-item-icon {
@@ -175,7 +175,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	flex-shrink: 0;
 }
 
@@ -191,17 +191,17 @@
 	width: 8px;
 	height: 8px;
 	border-radius: 50%;
-	background: var(--vscode-descriptionForeground);
-	border: 2px solid var(--vscode-menu-background, var(--vscode-editor-background));
+	background: var(--zyraxoncode-descriptionForeground);
+	border: 2px solid var(--zyraxoncode-menu-background, var(--zyraxoncode-editor-background));
 	box-sizing: content-box;
 }
 
 .host-picker-sheet-item-status.connected {
-	background: var(--vscode-testing-iconPassed, var(--vscode-debugIcon-startForeground, #388a34));
+	background: var(--zyraxoncode-testing-iconPassed, var(--zyraxoncode-debugIcon-startForeground, #388a34));
 }
 
 .host-picker-sheet-item-status.connecting {
-	background: var(--vscode-debugIcon-startForeground, #388a34);
+	background: var(--zyraxoncode-debugIcon-startForeground, #388a34);
 	animation: host-picker-sheet-blink 1.2s ease-in-out infinite;
 }
 
@@ -221,7 +221,7 @@
 
 .host-picker-sheet-item-sub {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -232,7 +232,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--vscode-textLink-foreground, var(--vscode-button-background));
+	color: var(--zyraxoncode-textLink-foreground, var(--zyraxoncode-button-background));
 	font-size: 14px;
 	flex-shrink: 0;
 }
@@ -245,7 +245,7 @@
 	align-items: center;
 	gap: 4px;
 	padding: 16px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 13px;
 	text-align: center;
 }
@@ -254,7 +254,7 @@
 
 .host-picker-sheet-footer {
 	flex-shrink: 0;
-	border-top: 1px solid color-mix(in srgb, var(--vscode-foreground) 12%, transparent);
+	border-top: 1px solid color-mix(in srgb, var(--zyraxoncode-foreground) 12%, transparent);
 }
 
 .host-picker-sheet-action {
@@ -266,9 +266,9 @@
 	padding: 0 16px;
 	border: none;
 	background: transparent;
-	color: var(--vscode-textLink-foreground, var(--vscode-button-background));
+	color: var(--zyraxoncode-textLink-foreground, var(--zyraxoncode-button-background));
 	font-size: 14px;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	text-align: left;
 	cursor: pointer;
 	touch-action: manipulation;
@@ -276,7 +276,7 @@
 }
 
 .host-picker-sheet-action:active {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .host-picker-sheet-action[aria-disabled='true'] {

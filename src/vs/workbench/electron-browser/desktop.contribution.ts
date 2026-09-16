@@ -53,7 +53,7 @@ import product from '../../platform/product/common/product.js';
 		// macOS: behave like other native apps that have documents
 		// but can run without a document opened and allow to close
 		// the window when the last document is closed
-		// (https://github.com/microsoft/vscode/issues/126042)
+		// (__ZYRAXKEEP__0_)
 		KeybindingsRegistry.registerKeybindingRule({
 			id: CloseWindowAction.ID,
 			weight: KeybindingWeight.WorkbenchContrib,
@@ -152,7 +152,7 @@ import product from '../../platform/product/common/product.js';
 				'maximum': 120,
 				'included': !isWindows,
 				'scope': ConfigurationScope.APPLICATION,
-				'markdownDescription': localize('application.shellEnvironmentResolutionTimeout', "Controls the timeout in seconds before giving up resolving the shell environment when the application is not already launched from a terminal. See our [documentation](https://go.microsoft.com/fwlink/?linkid=2149667) for more information.")
+				'markdownDescription': localize('application.shellEnvironmentResolutionTimeout', "Controls the timeout in seconds before giving up resolving the shell environment when the application is not already launched from a terminal. See our [documentation](__ZYRAXKEEP__1_) for more information.")
 			}
 		}
 	});
@@ -401,13 +401,13 @@ import product from '../../platform/product/common/product.js';
 
 // JSON Schemas
 (function registerJSONSchemas(): void {
-	const argvDefinitionFileSchemaId = 'vscode://schemas/argv';
+	const argvDefinitionFileSchemaId = '__ZYRAXKEEP__2_';
 	const jsonRegistry = Registry.as<IJSONContributionRegistry>(JSONExtensions.JSONContribution);
 	const schema: IJSONSchema = {
 		id: argvDefinitionFileSchemaId,
 		allowComments: true,
 		allowTrailingCommas: true,
-		description: 'VSCode static command line definition file',
+		description: 'ZyraxonCode static command line definition file',
 		type: 'object',
 		additionalProperties: false,
 		properties: {
@@ -421,7 +421,7 @@ import product from '../../platform/product/common/product.js';
 			},
 			'proxy-bypass-list': {
 				type: 'string',
-				description: localize('argv.proxyBypassList', 'Bypass any specified proxy for the given semi-colon-separated list of hosts. Example value "<local>;*.microsoft.com;*foo.com;1.2.3.4:5678", will use the proxy server for all hosts except for local addresses (localhost, 127.0.0.1 etc.), microsoft.com subdomains, hosts that contain the suffix foo.com and anything at 1.2.3.4:5678')
+				description: localize('argv.proxyBypassList', 'Bypass any specified proxy for the given semi-colon-separated list of hosts. Example value "<local>;*.zyraxon.com;*foo.com;1.2.3.4:5678", will use the proxy server for all hosts except for local addresses (localhost, 127.0.0.1 etc.), zyraxon.com subdomains, hosts that contain the suffix foo.com and anything at 1.2.3.4:5678')
 			},
 			'disable-hardware-acceleration': {
 				type: 'boolean',
@@ -441,7 +441,7 @@ import product from '../../platform/product/common/product.js';
 			},
 			'enable-proposed-api': {
 				type: 'array',
-				description: localize('argv.enebleProposedApi', "Enable proposed APIs for a list of extension ids (such as \`vscode.git\`). Proposed APIs are unstable and subject to breaking without warning at any time. This should only be set for extension development and testing purposes."),
+				description: localize('argv.enebleProposedApi', "Enable proposed APIs for a list of extension ids (such as \`zyraxoncode.git\`). Proposed APIs are unstable and subject to breaking without warning at any time. This should only be set for extension development and testing purposes."),
 				items: {
 					type: 'string'
 				}

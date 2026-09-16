@@ -6,7 +6,7 @@
 import { exec } from 'child_process';
 import * as fs from 'fs/promises';
 import { promisify } from 'util';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import * as glob from '../../../util/common/glob';
 import { getLanguageForResource } from '../../../util/common/languages';
 import { createTextDocumentData } from '../../../util/common/test/shims/textDocument';
@@ -21,7 +21,7 @@ import { basename } from '../../../util/vs/base/common/resources';
 import { createRegExp } from '../../../util/vs/base/common/strings';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Position, Range, TerminalShellExecutionCommandLineConfidence } from '../../../vscodeTypes';
+import { Position, Range, TerminalShellExecutionCommandLineConfidence } from '../../../zyraxoncodeTypes';
 import { ConfigKey } from '../../configuration/common/configurationService';
 import { IDebugOutputService } from '../../debug/common/debugOutputService';
 import { IDialogService } from '../../dialog/common/dialogService';
@@ -29,7 +29,7 @@ import { IFileSystemService } from '../../filesystem/common/fileSystemService';
 import { FileType, RelativePattern } from '../../filesystem/common/fileTypes';
 import { NodeFileSystemService } from '../../filesystem/node/fileSystemServiceImpl';
 import { IGitService, RepoContext } from '../../git/common/gitService';
-import { Branch, Change, CommitOptions, CommitShortStat, DiffChange, Ref, RefQuery, Repository, RepositoryAccessDetails } from '../../git/vscode/git';
+import { Branch, Change, CommitOptions, CommitShortStat, DiffChange, Ref, RefQuery, Repository, RepositoryAccessDetails } from '../../git/zyraxoncode/git';
 import { AbstractLanguageDiagnosticsService } from '../../languages/common/languageDiagnosticsService';
 import { ILanguageFeaturesService } from '../../languages/common/languageFeaturesService';
 import { ILogService } from '../../log/common/logService';
@@ -46,29 +46,29 @@ import { isNotebook, SimulationWorkspace } from './simulationWorkspace';
 export const WORKSPACE_PATH = `/Users/someone/Projects/proj01/`;
 
 export class SimulationWorkspaceService extends AbstractWorkspaceService {
-	override fs!: vscode.FileSystem;
+	override fs!: zyraxoncode.FileSystem;
 	constructor(private readonly workspace: SimulationWorkspace) {
 		super();
 	}
 
-	override get textDocuments(): readonly vscode.TextDocument[] {
+	override get textDocuments(): readonly zyraxoncode.TextDocument[] {
 		return this.workspace.documents.map(d => d.document);
 	}
 
-	override onDidOpenTextDocument: vscode.Event<vscode.TextDocument> = Event.None;
-	override onDidCloseTextDocument: vscode.Event<vscode.TextDocument> = Event.None;
-	override onDidOpenNotebookDocument: vscode.Event<vscode.NotebookDocument> = Event.None;
-	override onDidCloseNotebookDocument: vscode.Event<vscode.NotebookDocument> = Event.None;
-	override onDidChangeTextDocument: vscode.Event<vscode.TextDocumentChangeEvent> = Event.None;
-	override onDidChangeWorkspaceFolders: vscode.Event<vscode.WorkspaceFoldersChangeEvent> = Event.None;
-	override onDidChangeNotebookDocument: vscode.Event<vscode.NotebookDocumentChangeEvent> = Event.None;
-	override onDidChangeTextEditorSelection: vscode.Event<vscode.TextEditorSelectionChangeEvent> = Event.None;
+	override onDidOpenTextDocument: zyraxoncode.Event<zyraxoncode.TextDocument> = Event.None;
+	override onDidCloseTextDocument: zyraxoncode.Event<zyraxoncode.TextDocument> = Event.None;
+	override onDidOpenNotebookDocument: zyraxoncode.Event<zyraxoncode.NotebookDocument> = Event.None;
+	override onDidCloseNotebookDocument: zyraxoncode.Event<zyraxoncode.NotebookDocument> = Event.None;
+	override onDidChangeTextDocument: zyraxoncode.Event<zyraxoncode.TextDocumentChangeEvent> = Event.None;
+	override onDidChangeWorkspaceFolders: zyraxoncode.Event<zyraxoncode.WorkspaceFoldersChangeEvent> = Event.None;
+	override onDidChangeNotebookDocument: zyraxoncode.Event<zyraxoncode.NotebookDocumentChangeEvent> = Event.None;
+	override onDidChangeTextEditorSelection: zyraxoncode.Event<zyraxoncode.TextEditorSelectionChangeEvent> = Event.None;
 
-	override showTextDocument(document: vscode.TextDocument): Promise<void> {
+	override showTextDocument(document: zyraxoncode.TextDocument): Promise<void> {
 		return Promise.resolve();
 	}
 
-	override async openTextDocument(uri: vscode.Uri): Promise<vscode.TextDocument> {
+	override async openTextDocument(uri: zyraxoncode.Uri): Promise<zyraxoncode.TextDocument> {
 		if (this.workspace.hasDocument(uri)) {
 			return this.workspace.getDocument(uri).document;
 		}
@@ -84,9 +84,9 @@ export class SimulationWorkspaceService extends AbstractWorkspaceService {
 		throw new Error(`File not found ${uri.fsPath}`);
 	}
 
-	override async openNotebookDocument(uri: vscode.Uri): Promise<vscode.NotebookDocument>;
-	override async openNotebookDocument(notebookType: string, content?: vscode.NotebookData): Promise<vscode.NotebookDocument>;
-	override async openNotebookDocument(arg1: vscode.Uri | string, arg2?: vscode.NotebookData): Promise<vscode.NotebookDocument> {
+	override async openNotebookDocument(uri: zyraxoncode.Uri): Promise<zyraxoncode.NotebookDocument>;
+	override async openNotebookDocument(notebookType: string, content?: zyraxoncode.NotebookData): Promise<zyraxoncode.NotebookDocument>;
+	override async openNotebookDocument(arg1: zyraxoncode.Uri | string, arg2?: zyraxoncode.NotebookData): Promise<zyraxoncode.NotebookDocument> {
 		if (typeof arg1 === 'string') {
 			// Handle the overload for notebookType and content
 			throw new Error('Not implemented');
@@ -99,7 +99,7 @@ export class SimulationWorkspaceService extends AbstractWorkspaceService {
 		}
 	}
 
-	override get notebookDocuments(): readonly vscode.NotebookDocument[] {
+	override get notebookDocuments(): readonly zyraxoncode.NotebookDocument[] {
 		return this.workspace.getNotebookDocuments();
 	}
 
@@ -116,23 +116,23 @@ export class SimulationWorkspaceService extends AbstractWorkspaceService {
 		return Promise.resolve();
 	}
 
-	override async showWorkspaceFolderPicker(): Promise<vscode.WorkspaceFolder | undefined> {
+	override async showWorkspaceFolderPicker(): Promise<zyraxoncode.WorkspaceFolder | undefined> {
 		return undefined;
 	}
 
-	override applyEdit(edit: vscode.WorkspaceEdit): Thenable<boolean> {
+	override applyEdit(edit: zyraxoncode.WorkspaceEdit): Thenable<boolean> {
 		return Promise.resolve(true);
 	}
 
-	override isResourceTrusted(_resource: vscode.Uri): Thenable<boolean> {
+	override isResourceTrusted(_resource: zyraxoncode.Uri): Thenable<boolean> {
 		return Promise.resolve(true);
 	}
 
-	override requestResourceTrust(options: vscode.ResourceTrustRequestOptions): Thenable<boolean | undefined> {
+	override requestResourceTrust(options: zyraxoncode.ResourceTrustRequestOptions): Thenable<boolean | undefined> {
 		return Promise.resolve(true);
 	}
 
-	override requestWorkspaceTrust(options?: vscode.WorkspaceTrustRequestOptions): Thenable<boolean | undefined> {
+	override requestWorkspaceTrust(options?: zyraxoncode.WorkspaceTrustRequestOptions): Thenable<boolean | undefined> {
 		return Promise.resolve(true);
 	}
 }
@@ -145,9 +145,9 @@ export class SimulationLanguageDiagnosticsService extends AbstractLanguageDiagno
 		super();
 	}
 
-	override onDidChangeDiagnostics: vscode.Event<vscode.DiagnosticChangeEvent> = this.workspace.onDidChangeDiagnostics;
-	override getDiagnostics: (resource: vscode.Uri) => vscode.Diagnostic[] = this.workspace.getDiagnostics.bind(this.workspace);
-	override getAllDiagnostics(): [vscode.Uri, vscode.Diagnostic[]][] {
+	override onDidChangeDiagnostics: zyraxoncode.Event<zyraxoncode.DiagnosticChangeEvent> = this.workspace.onDidChangeDiagnostics;
+	override getDiagnostics: (resource: zyraxoncode.Uri) => zyraxoncode.Diagnostic[] = this.workspace.getDiagnostics.bind(this.workspace);
+	override getAllDiagnostics(): [zyraxoncode.Uri, zyraxoncode.Diagnostic[]][] {
 		return this.workspace.getAllDiagnostics();
 	}
 }
@@ -166,7 +166,7 @@ export class SimulationFileSystemAdaptor implements IFileSystemService {
 		this._delegate = new NodeFileSystemService();
 	}
 
-	async stat(uri: URI): Promise<vscode.FileStat> {
+	async stat(uri: URI): Promise<zyraxoncode.FileStat> {
 		try {
 			const doc = await this._workspaceService.openTextDocument(uri);
 			if (doc) {
@@ -252,7 +252,7 @@ export class SimulationFileSystemAdaptor implements IFileSystemService {
 		return this._delegate.isWritableFileSystem(scheme);
 	}
 
-	createFileSystemWatcher(glob: string | vscode.RelativePattern): vscode.FileSystemWatcher {
+	createFileSystemWatcher(glob: string | zyraxoncode.RelativePattern): zyraxoncode.FileSystemWatcher {
 		return this._delegate.createFileSystemWatcher(glob);
 	}
 }
@@ -261,11 +261,11 @@ export class SimulationReviewService implements IReviewService {
 	declare _serviceBrand: undefined;
 
 	private diagnosticCollection = {
-		diagnosticCollection: new Map<string, readonly vscode.Diagnostic[]>(),
-		get(uri: vscode.Uri) {
+		diagnosticCollection: new Map<string, readonly zyraxoncode.Diagnostic[]>(),
+		get(uri: zyraxoncode.Uri) {
 			return this.diagnosticCollection.get(uri.toString());
 		},
-		set(uri: vscode.Uri, diagnostics: readonly vscode.Diagnostic[] | undefined) {
+		set(uri: zyraxoncode.Uri, diagnostics: readonly zyraxoncode.Diagnostic[] | undefined) {
 			if (diagnostics?.length) {
 				this.diagnosticCollection.set(uri.toString(), diagnostics);
 			} else {
@@ -318,11 +318,11 @@ export class SimulationReviewService implements IReviewService {
 	updateReviewComment(_comment: ReviewComment) {
 	}
 
-	findReviewComment(_threadOrComment: vscode.CommentThread | vscode.Comment): ReviewComment | undefined {
+	findReviewComment(_threadOrComment: zyraxoncode.CommentThread | zyraxoncode.Comment): ReviewComment | undefined {
 		return undefined;
 	}
 
-	findCommentThread(comment: ReviewComment): vscode.CommentThread | undefined {
+	findCommentThread(comment: ReviewComment): zyraxoncode.CommentThread | undefined {
 		return undefined;
 	}
 }
@@ -337,27 +337,27 @@ export class SimulationNotebookService implements INotebookService {
 		private _variablesMap = new ResourceMap<VariablesResult[]>()
 	) { }
 
-	getCellExecutions(notebook: vscode.Uri): vscode.NotebookCell[] {
+	getCellExecutions(notebook: zyraxoncode.Uri): zyraxoncode.NotebookCell[] {
 		return [];
 	}
 
-	runCells(notebook: vscode.Uri, range: { start: number; end: number }, autoReveal: boolean): Promise<void> {
+	runCells(notebook: zyraxoncode.Uri, range: { start: number; end: number }, autoReveal: boolean): Promise<void> {
 		return Promise.resolve();
 	}
 
-	ensureKernelSelected(notebook: vscode.Uri): Promise<void> {
+	ensureKernelSelected(notebook: zyraxoncode.Uri): Promise<void> {
 		return Promise.resolve();
 	}
 
-	async getVariables(notebook: vscode.Uri): Promise<VariablesResult[]> {
+	async getVariables(notebook: zyraxoncode.Uri): Promise<VariablesResult[]> {
 		return this._variablesMap.get(notebook) ?? [];
 	}
 
-	async getPipPackages(notebook: vscode.Uri): Promise<PipPackage[]> {
+	async getPipPackages(notebook: zyraxoncode.Uri): Promise<PipPackage[]> {
 		return [];
 	}
 
-	setVariables(uri: vscode.Uri, variables: VariablesResult[]) {
+	setVariables(uri: zyraxoncode.Uri, variables: VariablesResult[]) {
 		if (!this._workspace.getNotebook(uri)) {
 			return;
 		}
@@ -367,7 +367,7 @@ export class SimulationNotebookService implements INotebookService {
 
 	populateNotebookProviders(): void { }
 
-	hasSupportedNotebooks(uri: vscode.Uri): boolean {
+	hasSupportedNotebooks(uri: zyraxoncode.Uri): boolean {
 		if (isNotebook(uri)) {
 			return true;
 		}
@@ -396,13 +396,13 @@ export class SimulationNotebookService implements INotebookService {
 
 export class SimulationNotebookSummaryTracker implements INotebookSummaryTracker {
 	declare _serviceBrand: undefined;
-	trackNotebook(notebook: vscode.NotebookDocument): void {
+	trackNotebook(notebook: zyraxoncode.NotebookDocument): void {
 		//
 	}
-	clearState(notebook: vscode.NotebookDocument): void {
+	clearState(notebook: zyraxoncode.NotebookDocument): void {
 		//
 	}
-	listNotebooksWithChanges(): vscode.NotebookDocument[] {
+	listNotebooksWithChanges(): zyraxoncode.NotebookDocument[] {
 		return [];
 	}
 
@@ -436,7 +436,7 @@ export class SnapshotSearchService extends AbstractSearchService {
 		super();
 	}
 
-	override async findTextInFiles(query: vscode.TextSearchQuery, options: vscode.FindTextInFilesOptions, progress: vscode.Progress<vscode.TextSearchResult>, token: vscode.CancellationToken): Promise<vscode.TextSearchComplete> {
+	override async findTextInFiles(query: zyraxoncode.TextSearchQuery, options: zyraxoncode.FindTextInFilesOptions, progress: zyraxoncode.Progress<zyraxoncode.TextSearchResult>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.TextSearchComplete> {
 
 		const uris = await this.findFiles(options.include ?? '**/*', { exclude: options.exclude ? [options.exclude] : undefined, maxResults: options.maxResults }, token);
 
@@ -457,9 +457,9 @@ export class SnapshotSearchService extends AbstractSearchService {
 		});
 	}
 
-	override findTextInFiles2(query: vscode.TextSearchQuery2, options?: vscode.FindTextInFilesOptions2, token?: vscode.CancellationToken): vscode.FindTextInFilesResponse {
-		const iterableSource = new AsyncIterableSource<vscode.TextSearchMatch2>();
-		const doSearch = async (): Promise<vscode.TextSearchComplete2> => {
+	override findTextInFiles2(query: zyraxoncode.TextSearchQuery2, options?: zyraxoncode.FindTextInFilesOptions2, token?: zyraxoncode.CancellationToken): zyraxoncode.FindTextInFilesResponse {
+		const iterableSource = new AsyncIterableSource<zyraxoncode.TextSearchMatch2>();
+		const doSearch = async (): Promise<zyraxoncode.TextSearchComplete2> => {
 			const uris = await this.findFiles(options?.include ?? ['**/*'], { exclude: options?.exclude, maxResults: options?.maxResults }, token);
 
 			const maxResults = options?.maxResults ?? Number.MAX_SAFE_INTEGER;
@@ -491,7 +491,7 @@ export class SnapshotSearchService extends AbstractSearchService {
 		};
 	}
 
-	private _search2(query: vscode.TextSearchQuery2, document: vscode.TextDocument, iterableSource: AsyncIterableSource<vscode.TextSearchMatch2>) {
+	private _search2(query: zyraxoncode.TextSearchQuery2, document: zyraxoncode.TextDocument, iterableSource: AsyncIterableSource<zyraxoncode.TextSearchMatch2>) {
 		return this._search(query, document, {
 			report: match => {
 				iterableSource.emitOne({
@@ -506,7 +506,7 @@ export class SnapshotSearchService extends AbstractSearchService {
 		});
 	}
 
-	private _search(query: vscode.TextSearchQuery, document: vscode.TextDocument, progress: vscode.Progress<vscode.TextSearchMatch>) {
+	private _search(query: zyraxoncode.TextSearchQuery, document: zyraxoncode.TextDocument, progress: zyraxoncode.Progress<zyraxoncode.TextSearchMatch>) {
 
 		let matches = 0;
 
@@ -540,9 +540,9 @@ export class SnapshotSearchService extends AbstractSearchService {
 		return matches;
 	}
 
-	override async findFiles(filePattern: vscode.GlobPattern | vscode.GlobPattern[], options?: vscode.FindFiles2Options | undefined, token?: vscode.CancellationToken | undefined): Promise<vscode.Uri[]> {
+	override async findFiles(filePattern: zyraxoncode.GlobPattern | zyraxoncode.GlobPattern[], options?: zyraxoncode.FindFiles2Options | undefined, token?: zyraxoncode.CancellationToken | undefined): Promise<zyraxoncode.Uri[]> {
 		const filePatterns = asArray(filePattern);
-		const out: vscode.Uri[] = [];
+		const out: zyraxoncode.Uri[] = [];
 
 		const processDir = async (dir: URI, workspaceRoot: URI) => {
 			if (token?.isCancellationRequested) {
@@ -557,7 +557,7 @@ export class SnapshotSearchService extends AbstractSearchService {
 				return;
 			}
 
-			const toRelativePattern = (pattern: vscode.GlobPattern) => {
+			const toRelativePattern = (pattern: zyraxoncode.GlobPattern) => {
 				if (typeof pattern === 'string') {
 					return new RelativePattern(workspaceRoot, pattern);
 				} else {
@@ -591,19 +591,19 @@ export class TestingDialogService implements IDialogService {
 
 	declare _serviceBrand: undefined;
 
-	showQuickPick<T extends vscode.QuickPickItem>(items: readonly T[] | Thenable<readonly T[]>, options: vscode.QuickPickOptions, token?: vscode.CancellationToken | undefined): Thenable<T | undefined> {
+	showQuickPick<T extends zyraxoncode.QuickPickItem>(items: readonly T[] | Thenable<readonly T[]>, options: zyraxoncode.QuickPickOptions, token?: zyraxoncode.CancellationToken | undefined): Thenable<T | undefined> {
 		throw new Error('Method not implemented.');
 	}
 
-	showOpenDialog(options: vscode.OpenDialogOptions): Thenable<vscode.Uri[] | undefined> {
+	showOpenDialog(options: zyraxoncode.OpenDialogOptions): Thenable<zyraxoncode.Uri[] | undefined> {
 		throw new Error('Method not implemented.');
 	}
 }
 
 export interface ITestingTabsAndEditorsServiceDelegate {
-	getActiveTextEditor: () => vscode.TextEditor | undefined;
-	getVisibleTextEditors: () => readonly vscode.TextEditor[];
-	getActiveNotebookEditor: () => vscode.NotebookEditor | undefined;
+	getActiveTextEditor: () => zyraxoncode.TextEditor | undefined;
+	getVisibleTextEditors: () => readonly zyraxoncode.TextEditor[];
+	getActiveNotebookEditor: () => zyraxoncode.NotebookEditor | undefined;
 }
 
 export class TestingTabsAndEditorsService implements ITabsAndEditorsService {
@@ -618,16 +618,16 @@ export class TestingTabsAndEditorsService implements ITabsAndEditorsService {
 
 	onDidChangeActiveTextEditor = Event.None;
 	onDidChangeTabs = Event.None;
-	get activeTextEditor(): vscode.TextEditor | undefined {
+	get activeTextEditor(): zyraxoncode.TextEditor | undefined {
 		return this.delegate.getActiveTextEditor();
 	}
-	get visibleTextEditors(): readonly vscode.TextEditor[] {
+	get visibleTextEditors(): readonly zyraxoncode.TextEditor[] {
 		return this.delegate.getVisibleTextEditors();
 	}
-	get activeNotebookEditor(): vscode.NotebookEditor | undefined {
+	get activeNotebookEditor(): zyraxoncode.NotebookEditor | undefined {
 		return this.delegate.getActiveNotebookEditor();
 	}
-	get visibleNotebookEditors(): readonly vscode.NotebookEditor[] {
+	get visibleNotebookEditors(): readonly zyraxoncode.NotebookEditor[] {
 		return this.activeNotebookEditor ? [this.activeNotebookEditor] : [];
 	}
 
@@ -637,7 +637,7 @@ export class TestingTabsAndEditorsService implements ITabsAndEditorsService {
 			return [];
 		}
 
-		const tab: vscode.Tab = {
+		const tab: zyraxoncode.Tab = {
 			group: null!,
 			isActive: true,
 			input: { uri: this.activeTextEditor.document.uri },
@@ -744,7 +744,7 @@ export class TestingGitService implements IGitService {
 				upstreamRemote: undefined,
 				isRebasing: false,
 				remoteFetchUrls: [
-					`https://github.com/microsoft/simuluation-test-${basename(workspaceFolderPath)}`
+					`__ZYRAXKEEP__0_{basename(workspaceFolderPath)}`
 				],
 				remotes: [],
 				worktrees: [],
@@ -777,7 +777,7 @@ export class TestingGitService implements IGitService {
 		return undefined;
 	}
 
-	async diffWith(uri: vscode.Uri, ref: string): Promise<Change[] | undefined> {
+	async diffWith(uri: zyraxoncode.Uri, ref: string): Promise<Change[] | undefined> {
 		return undefined;
 	}
 
@@ -849,27 +849,27 @@ export class TestingTerminalService extends Disposable implements ITerminalServi
 		super();
 	}
 
-	get terminals(): readonly vscode.Terminal[] {
+	get terminals(): readonly zyraxoncode.Terminal[] {
 		return [];
 	}
 
-	private _onDidChangeTerminalShellIntegration = this._register(new Emitter<vscode.TerminalShellIntegrationChangeEvent>());
-	onDidChangeTerminalShellIntegration: vscode.Event<vscode.TerminalShellIntegrationChangeEvent> = this._onDidChangeTerminalShellIntegration.event;
+	private _onDidChangeTerminalShellIntegration = this._register(new Emitter<zyraxoncode.TerminalShellIntegrationChangeEvent>());
+	onDidChangeTerminalShellIntegration: zyraxoncode.Event<zyraxoncode.TerminalShellIntegrationChangeEvent> = this._onDidChangeTerminalShellIntegration.event;
 
-	private _onDidEndTerminalShellExecution = this._register(new Emitter<vscode.TerminalShellExecutionEndEvent>());
-	onDidEndTerminalShellExecution: Event<vscode.TerminalShellExecutionEndEvent> = this._onDidEndTerminalShellExecution.event;
+	private _onDidEndTerminalShellExecution = this._register(new Emitter<zyraxoncode.TerminalShellExecutionEndEvent>());
+	onDidEndTerminalShellExecution: Event<zyraxoncode.TerminalShellExecutionEndEvent> = this._onDidEndTerminalShellExecution.event;
 
-	onDidCloseTerminal: vscode.Event<vscode.Terminal> = Event.None;
-	onDidWriteTerminalData: vscode.Event<vscode.TerminalDataWriteEvent> = Event.None;
+	onDidCloseTerminal: zyraxoncode.Event<zyraxoncode.Terminal> = Event.None;
+	onDidWriteTerminalData: zyraxoncode.Event<zyraxoncode.TerminalDataWriteEvent> = Event.None;
 
-	private readonly sessionTerminals = new Map<string, { terminal: vscode.Terminal; shellIntegrationQuality: ShellIntegrationQuality; id: string }[]>();
+	private readonly sessionTerminals = new Map<string, { terminal: zyraxoncode.Terminal; shellIntegrationQuality: ShellIntegrationQuality; id: string }[]>();
 
-	createTerminal(name?: string, shellPath?: string, shellArgs?: string[] | string): vscode.Terminal;
-	createTerminal(options: vscode.TerminalOptions): vscode.Terminal;
-	createTerminal(options: vscode.ExtensionTerminalOptions): vscode.Terminal;
-	createTerminal(nameOrOpts?: string | vscode.TerminalOptions | vscode.ExtensionTerminalOptions, shellPath?: string, shellArgs?: string[] | string): vscode.Terminal {
-		const options: vscode.TerminalOptions | vscode.ExtensionTerminalOptions = typeof nameOrOpts === 'string' || nameOrOpts === undefined ?
-			{ name: nameOrOpts, shellPath, shellArgs } satisfies vscode.TerminalOptions :
+	createTerminal(name?: string, shellPath?: string, shellArgs?: string[] | string): zyraxoncode.Terminal;
+	createTerminal(options: zyraxoncode.TerminalOptions): zyraxoncode.Terminal;
+	createTerminal(options: zyraxoncode.ExtensionTerminalOptions): zyraxoncode.Terminal;
+	createTerminal(nameOrOpts?: string | zyraxoncode.TerminalOptions | zyraxoncode.ExtensionTerminalOptions, shellPath?: string, shellArgs?: string[] | string): zyraxoncode.Terminal {
+		const options: zyraxoncode.TerminalOptions | zyraxoncode.ExtensionTerminalOptions = typeof nameOrOpts === 'string' || nameOrOpts === undefined ?
+			{ name: nameOrOpts, shellPath, shellArgs } satisfies zyraxoncode.TerminalOptions :
 			nameOrOpts;
 		if ('pty' in options) {
 			throw new Error('Not implemented');
@@ -884,11 +884,11 @@ export class TestingTerminalService extends Disposable implements ITerminalServi
 		return terminal;
 	}
 
-	getCwdForSession(sessionId: string): Promise<vscode.Uri | undefined> {
+	getCwdForSession(sessionId: string): Promise<zyraxoncode.Uri | undefined> {
 		return Promise.resolve(undefined);
 	}
 
-	associateTerminalWithSession(terminal: vscode.Terminal, sessionId: string, id: string, shellIntegrationQuality: ShellIntegrationQuality): Promise<void> {
+	associateTerminalWithSession(terminal: zyraxoncode.Terminal, sessionId: string, id: string, shellIntegrationQuality: ShellIntegrationQuality): Promise<void> {
 		const terms = this.sessionTerminals.get(sessionId);
 		if (terms) {
 			terms.push({ terminal, shellIntegrationQuality, id });
@@ -902,18 +902,18 @@ export class TestingTerminalService extends Disposable implements ITerminalServi
 		return Promise.resolve(this.sessionTerminals.get(sessionId)?.map(t => { return { ...t.terminal, id: t.id }; }) || []);
 	}
 
-	getToolTerminalForSession(sessionId: string): Promise<{ terminal: vscode.Terminal; shellIntegrationQuality: ShellIntegrationQuality } | undefined> {
+	getToolTerminalForSession(sessionId: string): Promise<{ terminal: zyraxoncode.Terminal; shellIntegrationQuality: ShellIntegrationQuality } | undefined> {
 		return Promise.resolve(this.sessionTerminals.get(sessionId)?.at(0));
 	}
 
-	getLastCommandForTerminal(terminal: vscode.Terminal): vscode.TerminalExecutedCommand | undefined {
+	getLastCommandForTerminal(terminal: zyraxoncode.Terminal): zyraxoncode.TerminalExecutedCommand | undefined {
 		return undefined;
 	}
 
 	get terminalBuffer(): string {
 		return this._workspace.terminalBuffer ?? '';
 	}
-	get terminalLastCommand(): vscode.TerminalExecutedCommand | undefined {
+	get terminalLastCommand(): zyraxoncode.TerminalExecutedCommand | undefined {
 		return this._workspace.terminalLastCommand;
 	}
 	get terminalSelection(): string {
@@ -922,7 +922,7 @@ export class TestingTerminalService extends Disposable implements ITerminalServi
 	get terminalShellType(): string {
 		return this._workspace.terminalShellType ?? '';
 	}
-	getBufferForTerminal(terminal: vscode.Terminal, maxChars?: number): string {
+	getBufferForTerminal(terminal: zyraxoncode.Terminal, maxChars?: number): string {
 		return '';
 	}
 	getBufferWithPid(pid: number, maxChars?: number): Promise<string> {
@@ -936,18 +936,18 @@ export class TestingTerminalService extends Disposable implements ITerminalServi
 	}
 }
 
-class SimulationTerminal extends Disposable implements vscode.Terminal {
+class SimulationTerminal extends Disposable implements zyraxoncode.Terminal {
 	private static NextPID = 0;
 
 	readonly name: string;
 	selection: string | undefined;
 	readonly processId = Promise.resolve(SimulationTerminal.NextPID++);
-	exitStatus: vscode.TerminalExitStatus | undefined;
-	state: vscode.TerminalState;
-	shellIntegration: vscode.TerminalShellIntegration;
+	exitStatus: zyraxoncode.TerminalExitStatus | undefined;
+	state: zyraxoncode.TerminalState;
+	shellIntegration: zyraxoncode.TerminalShellIntegration;
 
 	constructor(
-		public readonly creationOptions: vscode.TerminalOptions,
+		public readonly creationOptions: zyraxoncode.TerminalOptions,
 		workspace: SimulationWorkspace,
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 	) {
@@ -975,12 +975,12 @@ class SimulationTerminal extends Disposable implements vscode.Terminal {
 	}
 }
 
-class SimulationTerminalShellIntegration extends Disposable implements vscode.TerminalShellIntegration {
-	private readonly _onDidEndTerminalShellExecution = this._register(new Emitter<vscode.TerminalShellExecutionEndEvent>());
-	onDidEndTerminalShellExecution: Event<vscode.TerminalShellExecutionEndEvent> = this._onDidEndTerminalShellExecution.event;
+class SimulationTerminalShellIntegration extends Disposable implements zyraxoncode.TerminalShellIntegration {
+	private readonly _onDidEndTerminalShellExecution = this._register(new Emitter<zyraxoncode.TerminalShellExecutionEndEvent>());
+	onDidEndTerminalShellExecution: Event<zyraxoncode.TerminalShellExecutionEndEvent> = this._onDidEndTerminalShellExecution.event;
 
 	constructor(
-		public readonly cwd: vscode.Uri | undefined,
+		public readonly cwd: zyraxoncode.Uri | undefined,
 		private readonly workspace: SimulationWorkspace,
 		private readonly terminal: SimulationTerminal,
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
@@ -989,7 +989,7 @@ class SimulationTerminalShellIntegration extends Disposable implements vscode.Te
 		this.cwd = cwd && workspace.mapLocation(cwd);
 	}
 
-	executeCommand(command: string, args?: string[]): vscode.TerminalShellExecution {
+	executeCommand(command: string, args?: string[]): zyraxoncode.TerminalShellExecution {
 		if (args) {
 			command = `${command} ${args.join(' ')}`;
 		}
@@ -1002,13 +1002,13 @@ class SimulationTerminalShellIntegration extends Disposable implements vscode.Te
 	}
 }
 
-class SimulationTerminalShellExecution extends Disposable implements vscode.TerminalShellExecution {
+class SimulationTerminalShellExecution extends Disposable implements zyraxoncode.TerminalShellExecution {
 	private _onDidEndTerminalShellExecution = new Emitter<void>();
 	onDidEndTerminalShellExecution: Event<void> = this._onDidEndTerminalShellExecution.event;
 
 	constructor(
-		public readonly commandLine: vscode.TerminalShellExecutionCommandLine,
-		public readonly cwd: vscode.Uri | undefined,
+		public readonly commandLine: zyraxoncode.TerminalShellExecutionCommandLine,
+		public readonly cwd: zyraxoncode.Uri | undefined,
 		private readonly workspace: SimulationWorkspace,
 		@ILogService private readonly logService: ILogService,
 	) {
@@ -1081,22 +1081,22 @@ export class TestingLanguageService implements ILanguageFeaturesService {
 
 	}
 
-	async getWorkspaceSymbols(query: string): Promise<vscode.SymbolInformation[]> {
+	async getWorkspaceSymbols(query: string): Promise<zyraxoncode.SymbolInformation[]> {
 		return this._workspace.workspaceSymbols?.filter(s => s.name.includes(query)) ?? [];
 	}
-	async getDefinitions(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.Location | vscode.LocationLink)[]> {
+	async getDefinitions(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.Location | zyraxoncode.LocationLink)[]> {
 		throw new Error('Method not implemented.');
 	}
-	async getImplementations(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.Location | vscode.LocationLink)[]> {
+	async getImplementations(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.Location | zyraxoncode.LocationLink)[]> {
 		throw new Error('Method not implemented.');
 	}
-	async getReferences(uri: vscode.Uri, position: vscode.Position): Promise<vscode.Location[]> {
+	async getReferences(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<zyraxoncode.Location[]> {
 		throw new Error('Method not implemented.');
 	}
-	async getDocumentSymbols(uri: vscode.Uri): Promise<vscode.DocumentSymbol[]> {
+	async getDocumentSymbols(uri: zyraxoncode.Uri): Promise<zyraxoncode.DocumentSymbol[]> {
 		throw new Error('Method not implemented.');
 	}
-	getDiagnostics(uri: vscode.Uri): vscode.Diagnostic[] {
+	getDiagnostics(uri: zyraxoncode.Uri): zyraxoncode.Diagnostic[] {
 		return [];
 	}
 }

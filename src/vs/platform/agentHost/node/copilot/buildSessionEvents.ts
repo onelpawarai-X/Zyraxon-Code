@@ -25,7 +25,7 @@ const DEFAULT_SESSION_EVENT_SCHEMA_VERSION = 1;
  * migrated event log is attributable to this translation path rather than a
  * genuine agent run.
  */
-const MIGRATION_PRODUCER = 'vscode-copilot-migration';
+const MIGRATION_PRODUCER = 'zyraxoncode-copilot-migration';
 
 /**
  * Options controlling how {@link buildSessionEventsFromTurns} synthesizes a

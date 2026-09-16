@@ -6,7 +6,7 @@
 import { Lazy } from '../common/lazy.js';
 
 const _rgDiskPath = new Lazy(async () => {
-	const m = await import('@vscode/ripgrep-universal');
+	const m = await import('@zyraxoncode/ripgrep-universal');
 	return m.rgPath.replace(/\bnode_modules\.asar\b/, 'node_modules.asar.unpacked');
 });
 

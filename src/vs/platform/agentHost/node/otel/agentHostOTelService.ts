@@ -527,7 +527,7 @@ export class AgentHostOTelService extends Disposable implements IAgentHostOTelSe
 	private _encodeOtlpSpan(span: ICompletedSpanData): Buffer {
 		const resourceAttributeKeys = new Set(Object.keys(this._config.resourceAttributes));
 		const attributes = Object.entries(span.attributes)
-			.filter(([key]) => !resourceAttributeKeys.has(key) || key === GenAiAttr.CONVERSATION_ID || key.startsWith('vscode.agent_host.'))
+			.filter(([key]) => !resourceAttributeKeys.has(key) || key === GenAiAttr.CONVERSATION_ID || key.startsWith('zyraxoncode.agent_host.'))
 			.map(([key, value]) => ({
 				key,
 				value: typeof value === 'string' ? { stringValue: value }
@@ -540,7 +540,7 @@ export class AgentHostOTelService extends Disposable implements IAgentHostOTelSe
 			resourceSpans: [{
 				...(resourceAttributes.length ? { resource: { attributes: resourceAttributes } } : {}),
 				scopeSpans: [{
-					scope: { name: this._config.sourceName ?? 'vscode.agent-host' },
+					scope: { name: this._config.sourceName ?? 'zyraxoncode.agent-host' },
 					spans: [{
 						traceId: span.traceId,
 						spanId: span.spanId,

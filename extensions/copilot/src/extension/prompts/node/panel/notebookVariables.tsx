@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing, TextChunk, TokenLimit } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing, TextChunk, TokenLimit } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { parseAndCleanStack } from '../../../../platform/notebook/common/helpers';
 import { INotebookService, VariablesResult } from '../../../../platform/notebook/common/notebookService';
@@ -18,7 +18,7 @@ import { getCharLimit } from '../inline/summarizedDocument/summarizeDocumentHelp
 import { Image } from './image';
 
 type NotebookVariablesPromptProps = PromptElementProps<{
-	notebook: vscode.NotebookDocument;
+	notebook: zyraxoncode.NotebookDocument;
 }>;
 
 interface InlineChatNotebookRuntimeState {

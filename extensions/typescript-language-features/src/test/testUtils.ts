@@ -7,7 +7,7 @@ import * as assert from 'assert';
 import * as fs from 'fs';
 import * as os from 'os';
 import { join } from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 export function rndName() {
 	let name = '';
@@ -18,7 +18,7 @@ export function rndName() {
 	return name;
 }
 
-export function createRandomFile(contents = '', fileExtension = 'txt'): Thenable<vscode.Uri> {
+export function createRandomFile(contents = '', fileExtension = 'txt'): Thenable<zyraxoncode.Uri> {
 	return new Promise((resolve, reject) => {
 		const tmpFile = join(os.tmpdir(), rndName() + '.' + fileExtension);
 		fs.writeFile(tmpFile, contents, (error) => {
@@ -26,13 +26,13 @@ export function createRandomFile(contents = '', fileExtension = 'txt'): Thenable
 				return reject(error);
 			}
 
-			resolve(vscode.Uri.file(tmpFile));
+			resolve(zyraxoncode.Uri.file(tmpFile));
 		});
 	});
 }
 
 
-export function deleteFile(file: vscode.Uri): Thenable<boolean> {
+export function deleteFile(file: zyraxoncode.Uri): Thenable<boolean> {
 	return new Promise((resolve, reject) => {
 		fs.unlink(file.fsPath, (err) => {
 			if (err) {
@@ -49,15 +49,15 @@ export const CURSOR = '$$CURSOR$$';
 export function withRandomFileEditor(
 	contents: string,
 	fileExtension: string,
-	run: (editor: vscode.TextEditor, doc: vscode.TextDocument) => Thenable<void>
+	run: (editor: zyraxoncode.TextEditor, doc: zyraxoncode.TextDocument) => Thenable<void>
 ): Thenable<boolean> {
 	const cursorIndex = contents.indexOf(CURSOR);
 	return createRandomFile(contents.replace(CURSOR, ''), fileExtension).then(file => {
-		return vscode.workspace.openTextDocument(file).then(doc => {
-			return vscode.window.showTextDocument(doc).then((editor) => {
+		return zyraxoncode.workspace.openTextDocument(file).then(doc => {
+			return zyraxoncode.window.showTextDocument(doc).then((editor) => {
 				if (cursorIndex >= 0) {
 					const pos = doc.positionAt(cursorIndex);
-					editor.selection = new vscode.Selection(pos, pos);
+					editor.selection = new zyraxoncode.Selection(pos, pos);
 				}
 				return run(editor, doc).then(_ => {
 					if (doc.isDirty) {
@@ -77,14 +77,14 @@ export const wait = (ms: number) => new Promise<void>(resolve => setTimeout(() =
 
 export const joinLines = (...args: string[]) => args.join(os.platform() === 'win32' ? '\r\n' : '\n');
 
-export async function createTestEditor(uri: vscode.Uri, ...lines: string[]) {
-	const document = await vscode.workspace.openTextDocument(uri);
-	const editor = await vscode.window.showTextDocument(document);
-	await editor.insertSnippet(new vscode.SnippetString(joinLines(...lines)), new vscode.Range(0, 0, 1000, 0));
+export async function createTestEditor(uri: zyraxoncode.Uri, ...lines: string[]) {
+	const document = await zyraxoncode.workspace.openTextDocument(uri);
+	const editor = await zyraxoncode.window.showTextDocument(document);
+	await editor.insertSnippet(new zyraxoncode.SnippetString(joinLines(...lines)), new zyraxoncode.Range(0, 0, 1000, 0));
 	return editor;
 }
 
-export function assertEditorContents(editor: vscode.TextEditor, expectedDocContent: string, message?: string): void {
+export function assertEditorContents(editor: zyraxoncode.TextEditor, expectedDocContent: string, message?: string): void {
 	const cursorIndex = expectedDocContent.indexOf(CURSOR);
 
 	assert.strictEqual(
@@ -104,14 +104,14 @@ export function assertEditorContents(editor: vscode.TextEditor, expectedDocConte
 
 export type VsCodeConfiguration = { [key: string]: any };
 
-export async function updateConfig(documentUri: vscode.Uri, newConfig: VsCodeConfiguration): Promise<VsCodeConfiguration> {
+export async function updateConfig(documentUri: zyraxoncode.Uri, newConfig: VsCodeConfiguration): Promise<VsCodeConfiguration> {
 	const oldConfig: VsCodeConfiguration = {};
-	const config = vscode.workspace.getConfiguration(undefined, documentUri);
+	const config = zyraxoncode.workspace.getConfiguration(undefined, documentUri);
 
 	for (const configKey of Object.keys(newConfig)) {
 		oldConfig[configKey] = config.get(configKey);
 		await new Promise<void>((resolve, reject) =>
-			config.update(configKey, newConfig[configKey], vscode.ConfigurationTarget.Global)
+			config.update(configKey, newConfig[configKey], zyraxoncode.ConfigurationTarget.Global)
 				.then(() => resolve(), reject));
 	}
 	return oldConfig;
@@ -129,7 +129,7 @@ export const Config = Object.freeze({
 export const insertModesValues = Object.freeze(['insert', 'replace']);
 
 export async function enumerateConfig(
-	documentUri: vscode.Uri,
+	documentUri: zyraxoncode.Uri,
 	configKey: string,
 	values: readonly string[],
 	f: (message: string) => Promise<void>
@@ -142,8 +142,8 @@ export async function enumerateConfig(
 }
 
 
-export function onChangedDocument(documentUri: vscode.Uri, disposables: vscode.Disposable[]) {
-	return new Promise<vscode.TextDocument>(resolve => vscode.workspace.onDidChangeTextDocument(e => {
+export function onChangedDocument(documentUri: zyraxoncode.Uri, disposables: zyraxoncode.Disposable[]) {
+	return new Promise<zyraxoncode.TextDocument>(resolve => zyraxoncode.workspace.onDidChangeTextDocument(e => {
 		if (e.document.uri.toString() === documentUri.toString()) {
 			resolve(e.document);
 		}
@@ -151,9 +151,9 @@ export function onChangedDocument(documentUri: vscode.Uri, disposables: vscode.D
 }
 
 export async function retryUntilDocumentChanges(
-	documentUri: vscode.Uri,
+	documentUri: zyraxoncode.Uri,
 	options: { retries: number; timeout: number },
-	disposables: vscode.Disposable[],
+	disposables: zyraxoncode.Disposable[],
 	exec: () => Thenable<unknown>,
 ) {
 	const didChangeDocument = onChangedDocument(documentUri, disposables);

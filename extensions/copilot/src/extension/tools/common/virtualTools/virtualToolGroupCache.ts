@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { encodeBase64, VSBuffer } from '../../../../util/vs/base/common/buffer';
 import { LRUCache } from '../../../../util/vs/base/common/map';
-import { LanguageModelToolInformation } from '../../../../vscodeTypes';
+import { LanguageModelToolInformation } from '../../../../zyraxoncodeTypes';
 import { ISummarizedToolCategory, ISummarizedToolCategoryUpdatable, IToolGroupingCache } from './virtualToolTypes';
 
 const GROUP_CACHE_SIZE = 128;
@@ -29,7 +29,7 @@ export class ToolGroupingCache implements IToolGroupingCache {
 	private _changed = false;
 
 	constructor(
-		@IVSCodeExtensionContext private readonly _extContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _extContext: IZyraxonCodeExtensionContext,
 	) {
 		const cached = _extContext.globalState.get<StoredValue>(GROUP_CACHE_NAME);
 		if (cached?.version === 2) {

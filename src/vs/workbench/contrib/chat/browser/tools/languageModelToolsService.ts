@@ -52,7 +52,7 @@ import { HookType } from '../../common/promptSyntax/hookTypes.js';
 import { CopilotChatSettingId, CopilotToolId } from '../../common/tools/copilotToolIds.js';
 import { ILanguageModelToolsConfirmationService } from '../../common/tools/languageModelToolsConfirmationService.js';
 import { TerminalToolId } from '../../common/tools/terminalToolIds.js';
-import { CountTokensCallback, createToolSchemaUri, IBeginToolCallOptions, IExternalPreToolUseHookResult, ILanguageModelToolsService, IPreparedToolInvocation, isToolSet, IToolData, IToolImpl, IToolInvocation, IToolInvokedEvent, IToolResult, IToolResultInputOutputDetails, IToolSet, SpecedToolAliases, stringifyPromptTsxPart, ToolAndToolSetEnablementMap, ToolDataSource, ToolInvocationPresentation, toolMatchesModel, ToolSet, ToolSetForModel, VSCodeToolReference } from '../../common/tools/languageModelToolsService.js';
+import { CountTokensCallback, createToolSchemaUri, IBeginToolCallOptions, IExternalPreToolUseHookResult, ILanguageModelToolsService, IPreparedToolInvocation, isToolSet, IToolData, IToolImpl, IToolInvocation, IToolInvokedEvent, IToolResult, IToolResultInputOutputDetails, IToolSet, SpecedToolAliases, stringifyPromptTsxPart, ToolAndToolSetEnablementMap, ToolDataSource, ToolInvocationPresentation, toolMatchesModel, ToolSet, ToolSetForModel, ZyraxonCodeToolReference } from '../../common/tools/languageModelToolsService.js';
 import { IToolResultCompressor } from '../../common/tools/toolResultCompressor.js';
 import { getToolConfirmationAlert } from '../accessibility/chatAccessibilityProvider.js';
 import { IChatWidgetService } from '../chat.js';
@@ -73,7 +73,7 @@ export const enum AutoApproveStorageKeys {
 	GlobalAutoApproveOptIn = 'chat.tools.global.autoApprove.optIn'
 }
 
-const SkipAutoApproveConfirmationKey = 'vscode.chat.tools.global.autoApprove.testMode';
+const SkipAutoApproveConfirmationKey = 'zyraxoncode.chat.tools.global.autoApprove.testMode';
 
 /**
  * Marks a {@link ToolConfirmKind.ConfirmationNotNeeded} decision that came from the session
@@ -85,36 +85,36 @@ const autoApproveAllReason = 'auto-approve-all';
 // This tool will always require user confirmation even in auto approval mode.
 // Users cannot auto approve this tool via settings either, as this is a tool used before the agentic loop.
 const toolIdsThatCannotBeAutoApproved = new Set([
-	'vscode_get_confirmation_with_options',
-	'vscode_get_modified_files_confirmation',
+	'zyraxoncode_get_confirmation_with_options',
+	'zyraxoncode_get_modified_files_confirmation',
 ]);
 
 // Fetch uses two tools: the model-facing 'copilot_fetchWebPage' and the internal
-// 'vscode_fetchWebPage_internal' it delegates to. Both auto-approve themselves, so the Autopilot
+// 'zyraxoncode_fetchWebPage_internal' it delegates to. Both auto-approve themselves, so the Autopilot
 // risk gate classifies them to catch dangerous fetches (leaking secrets to an attacker URL,
 // hitting internal hosts).
 const fetchWebPageToolIds = new Set([
 	'copilot_fetchWebPage',
-	'vscode_fetchWebPage_internal',
+	'zyraxoncode_fetchWebPage_internal',
 ]);
 
 export const globalAutoApproveDescription = localize2(
 	{
 		key: 'autoApprove3.markdown',
 		comment: [
-			'{Locked=\'](https://github.com/features/codespaces)\'}',
-			'{Locked=\'](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)\'}',
-			'{Locked=\'](https://code.visualstudio.com/docs/copilot/security)\'}',
+			'{Locked=\'](__ZYRAXKEEP__0_)\'}',
+			'{Locked=\'](__ZYRAXKEEP__1_)\'}',
+			'{Locked=\'](__ZYRAXKEEP__2_)\'}',
 			'{Locked=\'**\'}',
 			'{Locked=\'[`chat.autoReply`](command:workbench.action.openSettings?%5B%22chat.autoReply%22%5D)\'}',
 		]
 	},
-	'Global auto approve also known as "YOLO mode" disables manual approval completely for _all tools in all workspaces_, allowing the agent to act fully autonomously. This is extremely dangerous and is *never* recommended, even containerized environments like [Codespaces](https://github.com/features/codespaces) and [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) have user keys forwarded into the container that could be compromised.\n\n**This feature disables [critical security protections](https://code.visualstudio.com/docs/copilot/security) and makes it much easier for an attacker to compromise the machine.**\n\nNote: This setting only controls tool approval and does not prevent the agent from asking questions. To automatically answer agent questions, use the [`chat.autoReply`](command:workbench.action.openSettings?%5B%22chat.autoReply%22%5D) setting.'
+	'Global auto approve also known as "YOLO mode" disables manual approval completely for _all tools in all workspaces_, allowing the agent to act fully autonomously. This is extremely dangerous and is *never* recommended, even containerized environments like [Codespaces](__ZYRAXKEEP__3_) and [Dev Containers](__ZYRAXKEEP__4_) have user keys forwarded into the container that could be compromised.\n\n**This feature disables [critical security protections](__ZYRAXKEEP__5_) and makes it much easier for an attacker to compromise the machine.**\n\nNote: This setting only controls tool approval and does not prevent the agent from asking questions. To automatically answer agent questions, use the [`chat.autoReply`](command:workbench.action.openSettings?%5B%22chat.autoReply%22%5D) setting.'
 );
 
 export class LanguageModelToolsService extends Disposable implements ILanguageModelToolsService {
 	_serviceBrand: undefined;
-	readonly vscodeToolSet: ToolSet;
+	readonly zyraxoncodeToolSet: ToolSet;
 	readonly executeToolSet: ToolSet;
 	readonly readToolSet: ToolSet;
 	readonly agentToolSet: ToolSet;
@@ -189,13 +189,13 @@ export class LanguageModelToolsService extends Disposable implements ILanguageMo
 		this._ctxToolsCount = ChatContextKeys.Tools.toolsCount.bindTo(_contextKeyService);
 
 		// Create the internal ZYRAXON Code tool set
-		this.vscodeToolSet = this._register(this.createToolSet(
+		this.zyraxoncodeToolSet = this._register(this.createToolSet(
 			ToolDataSource.Internal,
-			'vscode',
-			VSCodeToolReference.vscode,
+			'zyraxoncode',
+			ZyraxonCodeToolReference.zyraxoncode,
 			{
-				icon: ThemeIcon.fromId(Codicon.vscode.id),
-				description: localize('copilot.toolSet.vscode.description', 'Use ZYRAXON Code features'),
+				icon: ThemeIcon.fromId(Codicon.zyraxoncode.id),
+				description: localize('copilot.toolSet.zyraxoncode.description', 'Use ZYRAXON Code features'),
 				deprecated: true,
 			}
 		));
@@ -283,9 +283,9 @@ export class LanguageModelToolsService extends Disposable implements ILanguageMo
 			}
 		}
 
-		// Special case for 'vscode_fetchWebPage_internal', which is allowed if we allow 'web' tools
+		// Special case for 'zyraxoncode_fetchWebPage_internal', which is allowed if we allow 'web' tools
 		// Fetch is implemented with two tools, this one and 'copilot_fetchWebPage'
-		if (toolOrToolSet.id === 'vscode_fetchWebPage_internal' && permittedInternalToolSetIds.includes(SpecedToolAliases.web)) {
+		if (toolOrToolSet.id === 'zyraxoncode_fetchWebPage_internal' && permittedInternalToolSetIds.includes(SpecedToolAliases.web)) {
 			this._logService.trace(`LanguageModelToolsService#isPermitted: Tool ${toolOrToolSet.id} (${toolOrToolSet.toolReferenceName}) permitted=true (special case)`);
 			return true;
 		}
@@ -1322,7 +1322,7 @@ export class LanguageModelToolsService extends Disposable implements ILanguageMo
 	}
 
 	private getEligibleForAutoApprovalSpecialCase(toolData: IToolData): string | undefined {
-		if (toolData.id === 'vscode_fetchWebPage_internal') {
+		if (toolData.id === 'zyraxoncode_fetchWebPage_internal') {
 			return 'fetch';
 		}
 		return undefined;
@@ -1331,7 +1331,7 @@ export class LanguageModelToolsService extends Disposable implements ILanguageMo
 	private isToolEligibleForAutoApproval(toolData: IToolData): boolean {
 		const fullReferenceName = this.getEligibleForAutoApprovalSpecialCase(toolData) ?? getToolFullReferenceName(toolData);
 		if (toolData.id === 'copilot_fetchWebPage') {
-			// Special case, this fetch will call an internal tool 'vscode_fetchWebPage_internal'
+			// Special case, this fetch will call an internal tool 'zyraxoncode_fetchWebPage_internal'
 			return true;
 		}
 		if (toolIdsThatCannotBeAutoApproved.has(toolData.id)) {
@@ -1537,7 +1537,7 @@ export class LanguageModelToolsService extends Disposable implements ILanguageMo
 	}
 
 	private static readonly githubMCPServerAliases = ['github/github-mcp-server', 'io.github.github/github-mcp-server', 'github-mcp-server'];
-	private static readonly playwrightMCPServerAliases = ['microsoft/playwright-mcp', 'com.microsoft/playwright-mcp'];
+	private static readonly playwrightMCPServerAliases = ['zyraxon/playwright-mcp', 'com.zyraxon/playwright-mcp'];
 
 	private *getToolSetAliases(toolSet: ToolSet, fullReferenceName: string): Iterable<string> {
 		if (fullReferenceName !== toolSet.referenceName) {
@@ -1561,7 +1561,7 @@ export class LanguageModelToolsService extends Disposable implements ILanguageMo
 				yield 'shell'; // legacy alias
 				break;
 			case SpecedToolAliases.agent: // 'agent'
-				yield VSCodeToolReference.runSubagent; // prefer the tool set over th old tool name
+				yield ZyraxonCodeToolReference.runSubagent; // prefer the tool set over th old tool name
 				yield 'custom-agent'; // legacy alias
 				break;
 		}
@@ -1569,7 +1569,7 @@ export class LanguageModelToolsService extends Disposable implements ILanguageMo
 
 	private * getToolAliases(toolSet: IToolData, fullReferenceName: string): Iterable<string> {
 		const referenceName = toolSet.toolReferenceName ?? toolSet.displayName;
-		if (fullReferenceName !== referenceName && referenceName !== VSCodeToolReference.runSubagent) {
+		if (fullReferenceName !== referenceName && referenceName !== ZyraxonCodeToolReference.runSubagent) {
 			yield referenceName; // simple name, without toolset name
 		}
 		if (toolSet.legacyToolReferenceFullNames) {
@@ -1833,7 +1833,7 @@ export class LanguageModelToolsService extends Disposable implements ILanguageMo
 				}
 				if (tool.legacyToolReferenceFullNames) {
 					// If the tool is in a toolset (fullReferenceName has a '/'), also add the
-					// namespaced form of legacy names (e.g. 'vscode/oldName' → 'vscode/newName')
+					// namespaced form of legacy names (e.g. 'zyraxoncode/oldName' → 'zyraxoncode/newName')
 					const slashIndex = fullReferenceName.lastIndexOf('/');
 					const toolSetPrefix = slashIndex !== -1 ? fullReferenceName.substring(0, slashIndex + 1) : undefined;
 

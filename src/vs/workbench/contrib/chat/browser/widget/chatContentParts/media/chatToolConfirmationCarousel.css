@@ -20,13 +20,13 @@
 }
 
 .chat-tool-confirmation-carousel {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	display: flex;
 	flex-direction: column;
 	max-height: min(300px, 45vh);
-	border: 1px solid var(--vscode-input-border, transparent);
-	border-radius: var(--vscode-cornerRadius-large);
-	background-color: var(--vscode-panel-background);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	background-color: var(--zyraxoncode-panel-background);
 	overflow: hidden;
 
 	&:focus {
@@ -35,7 +35,7 @@
 
 	&:focus-visible,
 	&:focus-within {
-		border-color: var(--vscode-focusBorder);
+		border-color: var(--zyraxoncode-focusBorder);
 	}
 
 	.chat-tool-carousel-content .chat-confirmation-widget-container:focus {
@@ -43,11 +43,11 @@
 	}
 
 	a {
-		color: var(--vscode-foreground);
+		color: var(--zyraxoncode-foreground);
 
 		&:hover,
 		&:active {
-			color: var(--vscode-textLink-activeForeground);
+			color: var(--zyraxoncode-textLink-activeForeground);
 		}
 	}
 
@@ -56,7 +56,7 @@
 		align-items: center;
 		gap: 8px;
 		padding: 6px 10px 6px 12px;
-		border-bottom: 1px solid var(--vscode-chat-requestBorder, var(--vscode-input-border, transparent));
+		border-bottom: 1px solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-border, transparent));
 	}
 
 	.chat-tool-carousel-title-group {
@@ -71,19 +71,19 @@
 	.chat-tool-carousel-collapsed-title {
 		flex: 1 1 auto;
 		min-width: 0;
-		font-weight: var(--vscode-agents-fontWeight-semiBold);
-		font-size: var(--vscode-chat-font-size-body-s);
+		font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+		font-size: var(--zyraxoncode-chat-font-size-body-s);
 		overflow-wrap: anywhere;
 		white-space: normal;
-		color: var(--vscode-foreground);
+		color: var(--zyraxoncode-foreground);
 	}
 
 	.chat-tool-carousel-agent-label {
 		background: none;
 		border: none;
 		cursor: pointer;
-		font-size: var(--vscode-chat-font-size-body-s);
-		color: var(--vscode-textLink-foreground);
+		font-size: var(--zyraxoncode-chat-font-size-body-s);
+		color: var(--zyraxoncode-textLink-foreground);
 		padding: 0;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -114,7 +114,7 @@
 		border: none !important;
 		box-shadow: none !important;
 		background: transparent !important;
-		color: var(--vscode-icon-foreground) !important;
+		color: var(--zyraxoncode-icon-foreground) !important;
 		cursor: pointer;
 		display: flex;
 		align-items: center;
@@ -122,7 +122,7 @@
 	}
 
 	.monaco-button.chat-tool-carousel-dismiss-button:hover {
-		background: var(--vscode-toolbar-hoverBackground) !important;
+		background: var(--zyraxoncode-toolbar-hoverBackground) !important;
 	}
 
 	button:focus,
@@ -144,11 +144,11 @@
 		border: none !important;
 		box-shadow: none !important;
 		background: transparent !important;
-		color: var(--vscode-foreground) !important;
+		color: var(--zyraxoncode-foreground) !important;
 	}
 
 	.monaco-button.chat-tool-carousel-nav-arrow:hover:not(.disabled) {
-		background: var(--vscode-toolbar-hoverBackground) !important;
+		background: var(--zyraxoncode-toolbar-hoverBackground) !important;
 	}
 
 	.monaco-button.chat-tool-carousel-nav-arrow.disabled {
@@ -163,7 +163,7 @@
 		border: none !important;
 		box-shadow: none !important;
 		background: transparent !important;
-		color: var(--vscode-icon-foreground) !important;
+		color: var(--zyraxoncode-icon-foreground) !important;
 		cursor: pointer;
 		display: flex;
 		align-items: center;
@@ -171,7 +171,7 @@
 	}
 
 	.monaco-button.chat-tool-carousel-header-button:hover:not(.disabled) {
-		background: var(--vscode-toolbar-hoverBackground) !important;
+		background: var(--zyraxoncode-toolbar-hoverBackground) !important;
 	}
 
 	&.chat-tool-carousel-content-expanded {
@@ -222,8 +222,8 @@
 			flex-direction: column;
 			flex: 1;
 			min-height: 0;
-			border: 1px solid var(--vscode-chat-requestBorder, var(--vscode-input-border, transparent));
-			border-radius: var(--vscode-cornerRadius-medium);
+			border: 1px solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-border, transparent));
+			border-radius: var(--zyraxoncode-cornerRadius-medium);
 			overflow: hidden;
 		}
 
@@ -245,11 +245,11 @@
 		}
 
 		.chat-confirmation-message-terminal-editor .interactive-result-code-block {
-			background-color: var(--vscode-sideBar-background);
+			background-color: var(--zyraxoncode-sideBar-background);
 		}
 
 		.chat-confirmation-message-terminal-editor .interactive-result-editor {
-			background-color: var(--vscode-sideBar-background);
+			background-color: var(--zyraxoncode-sideBar-background);
 		}
 
 		.chat-buttons-container {
@@ -302,8 +302,8 @@
 	}
 
 	.chat-tool-carousel-step-indicator {
-		font-size: var(--vscode-chat-font-size-body-s);
-		color: var(--vscode-descriptionForeground);
+		font-size: var(--zyraxoncode-chat-font-size-body-s);
+		color: var(--zyraxoncode-descriptionForeground);
 		white-space: nowrap;
 		padding: 0 4px;
 	}
@@ -311,9 +311,9 @@
 
 .agent-sessions-workbench .chat-tool-confirmation-carousel,
 .editor-instance .chat-tool-confirmation-carousel {
-	background-color: var(--vscode-editor-background);
+	background-color: var(--zyraxoncode-editor-background);
 
 	.interactive-result-editor {
-		background-color: var(--vscode-interactive-result-editor-background-color, var(--vscode-editor-background));
+		background-color: var(--zyraxoncode-interactive-result-editor-background-color, var(--zyraxoncode-editor-background));
 	}
 }

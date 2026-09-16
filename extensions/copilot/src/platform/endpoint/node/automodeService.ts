@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@vscode/copilot-api';
-import type { ChatRequest } from 'vscode';
+import { RequestType } from '@zyraxoncode/copilot-api';
+import type { ChatRequest } from 'zyraxoncode';
 import { FetchedValue } from '../../../shared-fetch-utils/common/fetchedValue';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Disposable, DisposableMap } from '../../../util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatLocation } from '../../../vscodeTypes';
+import { ChatLocation } from '../../../zyraxoncodeTypes';
 import { IAuthenticationService } from '../../authentication/common/authentication';
 import { IEnvService } from '../../env/common/envService';
 import { getImageTelemetryEventMeasurements, getImageTelemetryMeasurementsFromReferences, type ImageTelemetryMeasurements } from '../../image/common/imageTelemetry';

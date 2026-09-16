@@ -62,7 +62,7 @@ interface IChangesViewFixtureOptions {
 	readonly height?: number;
 }
 
-const WORKSPACE_URI = URI.file('/workspace/vscode');
+const WORKSPACE_URI = URI.file('/workspace/zyraxoncode');
 const VIEW_WIDTH = 380;
 const VIEW_HEIGHT = 520;
 
@@ -226,10 +226,10 @@ function createWorkspace(): ISessionWorkspace {
 		uncommittedChanges: 0,
 		gitHubInfo: constObservable<IGitHubInfo | undefined>({
 			owner: 'Zyraxon',
-			repo: 'vscode',
+			repo: 'zyraxoncode',
 			pullRequest: {
 				number: 293163,
-				uri: URI.parse('https://github.com/microsoft/vscode/pull/293163'),
+				uri: URI.parse('__ZYRAXKEEP__0_'),
 				icon: Codicon.gitPullRequest,
 			},
 		}),
@@ -237,12 +237,12 @@ function createWorkspace(): ISessionWorkspace {
 
 	return {
 		uri: WORKSPACE_URI,
-		label: 'vscode',
+		label: 'zyraxoncode',
 		icon: Codicon.folder,
 		folders: [{
 			root: WORKSPACE_URI,
 			workingDirectory: WORKSPACE_URI,
-			name: 'vscode',
+			name: 'zyraxoncode',
 			description: undefined,
 			gitRepository,
 		}],
@@ -261,7 +261,7 @@ function createSession(options: IChangesViewFixtureOptions): IActiveSession {
 
 	return new class extends mock<IActiveSession>() {
 		override readonly sessionId = 'fixture:changes-view';
-		override readonly resource = URI.parse('fixture-session://changes-view');
+		override readonly resource = URI.parse('__ZYRAXKEEP__1_');
 		override readonly providerId = 'fixture';
 		override readonly sessionType = 'fixture';
 		override readonly icon = Codicon.account;
@@ -295,10 +295,10 @@ function createSession(options: IChangesViewFixtureOptions): IActiveSession {
 }
 
 function createFileChange(path: string, kind: 'added' | 'modified' | 'deleted', insertions: number, deletions: number): ISessionFileChange {
-	const uri = URI.file(`/workspace/vscode/${path}`);
+	const uri = URI.file(`/workspace/zyraxoncode/${path}`);
 	return {
 		uri,
-		originalUri: kind === 'added' ? undefined : URI.file(`/workspace/vscode/.baseline/${path}`),
+		originalUri: kind === 'added' ? undefined : URI.file(`/workspace/zyraxoncode/.baseline/${path}`),
 		modifiedUri: kind === 'deleted' ? undefined : uri,
 		insertions,
 		deletions,
@@ -321,7 +321,7 @@ function createCheck(id: number, name: string, status: GitHubCheckStatus, conclu
 		conclusion,
 		startedAt: '2026-05-14T12:00:00Z',
 		completedAt: status === GitHubCheckStatus.Completed ? '2026-05-14T12:05:00Z' : undefined,
-		detailsUrl: `https://github.com/microsoft/vscode/actions/runs/${id}`,
+		detailsUrl: `__ZYRAXKEEP__2_{id}`,
 	};
 }
 
@@ -333,7 +333,7 @@ function createCIModel(checks: readonly IGitHubCICheck[] | undefined): GitHubPul
 
 	return new class extends mock<GitHubPullRequestCIModel>() {
 		override readonly owner = 'Zyraxon';
-		override readonly repo = 'vscode';
+		override readonly repo = 'zyraxoncode';
 		override readonly prNumber = 293163;
 		override readonly headSha = 'abcdef1234567890';
 		override readonly checks = constObservable(visibleChecks);
@@ -373,7 +373,7 @@ function renderChangesView(ctx: ComponentFixtureContext, options: IChangesViewFi
 
 	container.style.width = `${VIEW_WIDTH}px`;
 	container.style.height = `${height}px`;
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 
 	const host = dom.append(container, dom.$('.part.auxiliarybar'));
 	host.style.width = '100%';
@@ -463,7 +463,7 @@ const SAMPLE_OTHER_FILES = [
 	createOtherFile('/home/user/.gitconfig', SessionFileOperation.Modified),
 	createOtherFile('/home/user/.ssh/config', SessionFileOperation.Modified),
 	createOtherFile('/home/user/.local/share/copilot/state.json', SessionFileOperation.Created),
-	createOtherFile('/home/user/.vscode-insiders/argv.json', SessionFileOperation.Modified),
+	createOtherFile('/home/user/.zyraxoncode-insiders/argv.json', SessionFileOperation.Modified),
 ];
 
 const SAMPLE_CHECKS = [

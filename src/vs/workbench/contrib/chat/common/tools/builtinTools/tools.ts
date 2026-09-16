@@ -35,7 +35,7 @@ export class BuiltinToolsContribution extends Disposable implements IWorkbenchCo
 
 		const askQuestionsTool = this._register(instantiationService.createInstance(AskQuestionsTool));
 		this._register(toolsService.registerTool(AskQuestionsToolData, askQuestionsTool));
-		this._register(toolsService.vscodeToolSet.addTool(AskQuestionsToolData));
+		this._register(toolsService.zyraxoncodeToolSet.addTool(AskQuestionsToolData));
 
 		const reviewPlanTool = this._register(instantiationService.createInstance(ReviewPlanTool));
 		this._register(toolsService.registerTool(ReviewPlanToolData, reviewPlanTool));
@@ -104,4 +104,4 @@ export class BuiltinToolsContribution extends Disposable implements IWorkbenchCo
 	}
 }
 
-export const InternalFetchWebPageToolId = 'vscode_fetchWebPage_internal';
+export const InternalFetchWebPageToolId = 'zyraxoncode_fetchWebPage_internal';

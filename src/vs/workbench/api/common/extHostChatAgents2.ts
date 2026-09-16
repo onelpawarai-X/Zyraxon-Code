@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { coalesce } from '../../../base/common/arrays.js';
 import { DeferredPromise, raceCancellation, raceCancellationError, timeout } from '../../../base/common/async.js';
 import { CancellationToken, CancellationTokenSource } from '../../../base/common/cancellation.js';
@@ -46,7 +46,7 @@ export class ChatAgentResponseStream {
 	private _stopWatch = StopWatch.create(false);
 	private _isClosed: boolean = false;
 	private _firstProgress: number | undefined;
-	private _apiObject: vscode.ChatResponseStream | undefined;
+	private _apiObject: zyraxoncode.ChatResponseStream | undefined;
 
 	constructor(
 		private readonly _extension: IExtensionDescription,
@@ -114,7 +114,7 @@ export class ChatAgentResponseStream {
 				return;
 			}
 
-			const _report = (progress: IChatProgressDto, task?: (progress: vscode.Progress<vscode.ChatResponseWarningPart | vscode.ChatResponseReferencePart>) => Thenable<string | void>) => {
+			const _report = (progress: IChatProgressDto, task?: (progress: zyraxoncode.Progress<zyraxoncode.ChatResponseWarningPart | zyraxoncode.ChatResponseReferencePart>) => Thenable<string | void>) => {
 				// Measure the time to the first progress update with real markdown content
 				if (typeof this._firstProgress === 'undefined' && (progress.kind === 'markdownContent' || progress.kind === 'markdownVuln' || progress.kind === 'beginToolInvocation')) {
 					this._firstProgress = this._stopWatch.elapsed();
@@ -124,12 +124,12 @@ export class ChatAgentResponseStream {
 					const myHandle = taskHandlePool++;
 					const progressReporterPromise = send(progress, myHandle);
 					const progressReporter = {
-						report: (p: vscode.ChatResponseWarningPart | vscode.ChatResponseReferencePart) => {
+						report: (p: zyraxoncode.ChatResponseWarningPart | zyraxoncode.ChatResponseReferencePart) => {
 							progressReporterPromise.then(() => {
 								if (extHostTypes.MarkdownString.isMarkdownString(p.value)) {
-									send(typeConvert.ChatResponseWarningPart.from(<vscode.ChatResponseWarningPart>p), myHandle);
+									send(typeConvert.ChatResponseWarningPart.from(<zyraxoncode.ChatResponseWarningPart>p), myHandle);
 								} else {
-									send(typeConvert.ChatResponseReferencePart.from(<vscode.ChatResponseReferencePart>p), myHandle);
+									send(typeConvert.ChatResponseReferencePart.from(<zyraxoncode.ChatResponseReferencePart>p), myHandle);
 								}
 							});
 						}
@@ -143,7 +143,7 @@ export class ChatAgentResponseStream {
 				}
 			};
 
-			this._apiObject = Object.freeze<vscode.ChatResponseStream>({
+			this._apiObject = Object.freeze<zyraxoncode.ChatResponseStream>({
 				clearToPreviousToolInvocation(reason) {
 					throwIfDone(this.markdown);
 					send({ kind: 'clearToPreviousToolInvocation', reason: reason });
@@ -193,14 +193,14 @@ export class ChatAgentResponseStream {
 					_report(dto);
 					return this;
 				},
-				progress(value, task?: ((progress: vscode.Progress<vscode.ChatResponseWarningPart>) => Thenable<string | void>)) {
+				progress(value, task?: ((progress: zyraxoncode.Progress<zyraxoncode.ChatResponseWarningPart>) => Thenable<string | void>)) {
 					throwIfDone(this.progress);
 					const part = new extHostTypes.ChatResponseProgressPart2(value, task);
 					const dto = task ? typeConvert.ChatTask.from(part) : typeConvert.ChatResponseProgressPart.from(part);
 					_report(dto, task);
 					return this;
 				},
-				thinkingProgress(thinkingDelta: vscode.ThinkingDelta) {
+				thinkingProgress(thinkingDelta: zyraxoncode.ThinkingDelta) {
 					throwIfDone(this.thinkingProgress);
 					checkProposedApiEnabled(that._extension, 'chatParticipantAdditions');
 					const part = new extHostTypes.ChatResponseThinkingProgressPart(thinkingDelta.text ?? '', thinkingDelta.id, thinkingDelta.metadata);
@@ -208,7 +208,7 @@ export class ChatAgentResponseStream {
 					_report(dto);
 					return this;
 				},
-				hookProgress(hookType: vscode.ChatHookType, stopReason?: string, systemMessage?: string) {
+				hookProgress(hookType: zyraxoncode.ChatHookType, stopReason?: string, systemMessage?: string) {
 					throwIfDone(this.hookProgress);
 					checkProposedApiEnabled(that._extension, 'chatParticipantAdditions');
 					const part = new extHostTypes.ChatResponseHookPart(hookType, stopReason, systemMessage);
@@ -216,7 +216,7 @@ export class ChatAgentResponseStream {
 					_report(dto);
 					return this;
 				},
-				voiceProgress(id: vscode.ChatResponseVoiceProgressStage, value: string) {
+				voiceProgress(id: zyraxoncode.ChatResponseVoiceProgressStage, value: string) {
 					throwIfDone(this.voiceProgress);
 					checkProposedApiEnabled(that._extension, 'chatParticipantPrivate');
 					const part = new extHostTypes.ChatResponseVoiceProgressPart(id, value);
@@ -279,7 +279,7 @@ export class ChatAgentResponseStream {
 
 					return this;
 				},
-				codeCitation(value: vscode.Uri, license: string, snippet: string): void {
+				codeCitation(value: zyraxoncode.Uri, license: string, snippet: string): void {
 					throwIfDone(this.codeCitation);
 					checkProposedApiEnabled(that._extension, 'chatParticipantAdditions');
 
@@ -337,7 +337,7 @@ export class ChatAgentResponseStream {
 					_report(dto);
 					return this;
 				},
-				async questionCarousel(questions: vscode.ChatQuestion[], allowSkip = true): Promise<Record<string, unknown> | undefined> {
+				async questionCarousel(questions: zyraxoncode.ChatQuestion[], allowSkip = true): Promise<Record<string, unknown> | undefined> {
 					throwIfDone(this.questionCarousel);
 					checkProposedApiEnabled(that._extension, 'chatParticipantAdditions');
 
@@ -479,7 +479,7 @@ export class ChatAgentResponseStream {
 
 interface InFlightChatRequest {
 	requestId: string;
-	extRequest: vscode.ChatRequest;
+	extRequest: zyraxoncode.ChatRequest;
 	extension: IRelaxedExtensionDescription;
 	hooks?: ChatRequestHooks;
 	yieldRequested: boolean;
@@ -496,10 +496,10 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 	private readonly _participantDetectionProviders = new Map<number, ExtHostParticipantDetector>();
 
 	private static _contributionsProviderIdPool = 0;
-	private readonly _promptFileProviders = new Map<number, { extension: IExtensionDescription; provider: vscode.ChatCustomAgentProvider | vscode.ChatInstructionsProvider | vscode.ChatPromptFileProvider | vscode.ChatSkillProvider | vscode.ChatHookProvider }>();
+	private readonly _promptFileProviders = new Map<number, { extension: IExtensionDescription; provider: zyraxoncode.ChatCustomAgentProvider | zyraxoncode.ChatInstructionsProvider | zyraxoncode.ChatPromptFileProvider | zyraxoncode.ChatSkillProvider | zyraxoncode.ChatHookProvider }>();
 
 	private static _customizationProviderIdPool = 0;
-	private readonly _customizationProviders = new Map<number, { extension: IExtensionDescription; provider: vscode.ChatSessionCustomizationProvider }>();
+	private readonly _customizationProviders = new Map<number, { extension: IExtensionDescription; provider: zyraxoncode.ChatSessionCustomizationProvider }>();
 
 	private readonly _sessionDisposables: DisposableResourceMap<DisposableStore> = this._register(new DisposableResourceMap());
 	private readonly _completionDisposables: DisposableMap<number, DisposableStore> = this._register(new DisposableMap());
@@ -509,7 +509,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 	// Map of requestId -> resolveId -> deferred promise for question carousel answers
 	private readonly _pendingCarouselResolvers = new Map<string, Map<string, DeferredPromise<Record<string, unknown> | undefined>>>();
 
-	private readonly _onDidChangeChatRequestTools = this._register(new Emitter<vscode.ChatRequest>());
+	private readonly _onDidChangeChatRequestTools = this._register(new Emitter<zyraxoncode.ChatRequest>());
 	readonly onDidChangeChatRequestTools = this._onDidChangeChatRequestTools.event;
 
 	private readonly _onDidDisposeChatSession = this._register(new Emitter<string>());
@@ -545,8 +545,8 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 	}
 
 
-	private toCustomAgent(dto: ICustomAgentDto): vscode.ChatCustomAgent {
-		return Object.freeze<vscode.ChatCustomAgent>({
+	private toCustomAgent(dto: ICustomAgentDto): zyraxoncode.ChatCustomAgent {
+		return Object.freeze<zyraxoncode.ChatCustomAgent>({
 			uri: URI.revive(dto.uri),
 			name: dto.name,
 			description: dto.description,
@@ -563,8 +563,8 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		});
 	}
 
-	private toInstruction(dto: IInstructionDto): vscode.ChatInstruction {
-		return Object.freeze<vscode.ChatInstruction>({
+	private toInstruction(dto: IInstructionDto): zyraxoncode.ChatInstruction {
+		return Object.freeze<zyraxoncode.ChatInstruction>({
 			uri: URI.revive(dto.uri),
 			name: dto.name,
 			description: dto.description,
@@ -576,8 +576,8 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		});
 	}
 
-	private toSkill(dto: ISkillDto): vscode.ChatSkill {
-		return Object.freeze<vscode.ChatSkill>({
+	private toSkill(dto: ISkillDto): zyraxoncode.ChatSkill {
+		return Object.freeze<zyraxoncode.ChatSkill>({
 			uri: URI.revive(dto.uri),
 			name: dto.name,
 			description: dto.description,
@@ -590,8 +590,8 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		});
 	}
 
-	private toSlashCommand(dto: ISlashCommandDto): vscode.ChatSlashCommand {
-		return Object.freeze<vscode.ChatSlashCommand>({
+	private toSlashCommand(dto: ISlashCommandDto): zyraxoncode.ChatSlashCommand {
+		return Object.freeze<zyraxoncode.ChatSlashCommand>({
 			uri: URI.revive(dto.uri),
 			name: dto.name,
 			description: dto.description,
@@ -604,7 +604,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		});
 	}
 
-	private toHook(dto: IHookDto): vscode.ChatHook {
+	private toHook(dto: IHookDto): zyraxoncode.ChatHook {
 		return Object.freeze({
 			uri: URI.revive(dto.uri),
 			sessionTypes: dto.sessionTypes,
@@ -614,31 +614,31 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		});
 	}
 
-	private toPlugin(dto: IPluginDto): vscode.ChatPlugin {
+	private toPlugin(dto: IPluginDto): zyraxoncode.ChatPlugin {
 		return Object.freeze({ uri: URI.revive(dto.uri) });
 	}
 
-	provideCustomAgents(token: vscode.CancellationToken): Thenable<readonly vscode.ChatCustomAgent[]> {
+	provideCustomAgents(token: zyraxoncode.CancellationToken): Thenable<readonly zyraxoncode.ChatCustomAgent[]> {
 		return this._customAgents.get(token);
 	}
 
-	provideInstructions(token: vscode.CancellationToken): Thenable<readonly vscode.ChatInstruction[]> {
+	provideInstructions(token: zyraxoncode.CancellationToken): Thenable<readonly zyraxoncode.ChatInstruction[]> {
 		return this._instructions.get(token);
 	}
 
-	provideSkills(token: vscode.CancellationToken): Thenable<readonly vscode.ChatSkill[]> {
+	provideSkills(token: zyraxoncode.CancellationToken): Thenable<readonly zyraxoncode.ChatSkill[]> {
 		return this._skills.get(token);
 	}
 
-	provideSlashCommands(token: vscode.CancellationToken): Thenable<readonly vscode.ChatSlashCommand[]> {
+	provideSlashCommands(token: zyraxoncode.CancellationToken): Thenable<readonly zyraxoncode.ChatSlashCommand[]> {
 		return this._slashCommands.get(token);
 	}
 
-	provideHooks(token: vscode.CancellationToken): Thenable<readonly vscode.ChatHook[]> {
+	provideHooks(token: zyraxoncode.CancellationToken): Thenable<readonly zyraxoncode.ChatHook[]> {
 		return this._hooks.get(token);
 	}
 
-	providePlugins(token: vscode.CancellationToken): Thenable<readonly vscode.ChatPlugin[]> {
+	providePlugins(token: zyraxoncode.CancellationToken): Thenable<readonly zyraxoncode.ChatPlugin[]> {
 		return this._plugins.get(token);
 	}
 
@@ -698,11 +698,11 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		});
 	}
 
-	async transferActiveChat(newWorkspace: vscode.Uri): Promise<void> {
+	async transferActiveChat(newWorkspace: zyraxoncode.Uri): Promise<void> {
 		await this._proxy.$transferActiveChatSession(newWorkspace);
 	}
 
-	createChatAgent(extension: IExtensionDescription, id: string, handler: vscode.ChatExtendedRequestHandler): vscode.ChatParticipant {
+	createChatAgent(extension: IExtensionDescription, id: string, handler: zyraxoncode.ChatExtendedRequestHandler): zyraxoncode.ChatParticipant {
 		const handle = ExtHostChatAgents2._idPool++;
 		const agent = new ExtHostChatAgent(extension, id, this._proxy, handle, handler);
 		this._agents.set(handle, agent);
@@ -711,7 +711,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		return agent.apiAgent;
 	}
 
-	createDynamicChatAgent(extension: IExtensionDescription, id: string, dynamicProps: vscode.DynamicChatParticipantProps, handler: vscode.ChatExtendedRequestHandler): vscode.ChatParticipant {
+	createDynamicChatAgent(extension: IExtensionDescription, id: string, dynamicProps: zyraxoncode.DynamicChatParticipantProps, handler: zyraxoncode.ChatExtendedRequestHandler): zyraxoncode.ChatParticipant {
 		const handle = ExtHostChatAgents2._idPool++;
 		const agent = new ExtHostChatAgent(extension, id, this._proxy, handle, handler);
 		this._agents.set(handle, agent);
@@ -720,7 +720,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		return agent.apiAgent;
 	}
 
-	registerChatParticipantDetectionProvider(extension: IExtensionDescription, provider: vscode.ChatParticipantDetectionProvider): vscode.Disposable {
+	registerChatParticipantDetectionProvider(extension: IExtensionDescription, provider: zyraxoncode.ChatParticipantDetectionProvider): zyraxoncode.Disposable {
 		const handle = ExtHostChatAgents2._participantDetectionProviderIdPool++;
 		this._participantDetectionProviders.set(handle, new ExtHostParticipantDetector(extension, provider));
 		this._proxy.$registerChatParticipantDetectionProvider(handle);
@@ -734,7 +734,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 	 * Internal method that handles all prompt file provider types.
 	 * Routes custom agents, instructions, prompt files, and skills to the unified internal implementation.
 	 */
-	registerPromptFileProvider(extension: IExtensionDescription, type: PromptsType, provider: vscode.ChatCustomAgentProvider | vscode.ChatInstructionsProvider | vscode.ChatPromptFileProvider | vscode.ChatSkillProvider | vscode.ChatHookProvider): vscode.Disposable {
+	registerPromptFileProvider(extension: IExtensionDescription, type: PromptsType, provider: zyraxoncode.ChatCustomAgentProvider | zyraxoncode.ChatInstructionsProvider | zyraxoncode.ChatPromptFileProvider | zyraxoncode.ChatSkillProvider | zyraxoncode.ChatHookProvider): zyraxoncode.Disposable {
 		const handle = ExtHostChatAgents2._contributionsProviderIdPool++;
 		this._promptFileProviders.set(handle, { extension, provider });
 		this._proxy.$registerPromptFileProvider(handle, type, extension.identifier);
@@ -743,22 +743,22 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 
 		// Listen to provider change events and notify main thread
 		// Check for the appropriate event based on the provider type
-		let changeEvent: vscode.Event<void> | undefined;
+		let changeEvent: zyraxoncode.Event<void> | undefined;
 		switch (type) {
 			case PromptsType.agent:
-				changeEvent = (provider as vscode.ChatCustomAgentProvider).onDidChangeCustomAgents;
+				changeEvent = (provider as zyraxoncode.ChatCustomAgentProvider).onDidChangeCustomAgents;
 				break;
 			case PromptsType.instructions:
-				changeEvent = (provider as vscode.ChatInstructionsProvider).onDidChangeInstructions;
+				changeEvent = (provider as zyraxoncode.ChatInstructionsProvider).onDidChangeInstructions;
 				break;
 			case PromptsType.prompt:
-				changeEvent = (provider as vscode.ChatPromptFileProvider).onDidChangePromptFiles;
+				changeEvent = (provider as zyraxoncode.ChatPromptFileProvider).onDidChangePromptFiles;
 				break;
 			case PromptsType.skill:
-				changeEvent = (provider as vscode.ChatSkillProvider).onDidChangeSkills;
+				changeEvent = (provider as zyraxoncode.ChatSkillProvider).onDidChangeSkills;
 				break;
 			case PromptsType.hook:
-				changeEvent = (provider as vscode.ChatHookProvider).onDidChangeHooks;
+				changeEvent = (provider as zyraxoncode.ChatHookProvider).onDidChangeHooks;
 				break;
 		}
 
@@ -783,29 +783,29 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		}
 
 		const provider = providerData.provider;
-		let resources: vscode.ChatResource[] | undefined;
+		let resources: zyraxoncode.ChatResource[] | undefined;
 		switch (type) {
 			case PromptsType.agent:
-				resources = await (provider as vscode.ChatCustomAgentProvider).provideCustomAgents(context, token) ?? undefined;
+				resources = await (provider as zyraxoncode.ChatCustomAgentProvider).provideCustomAgents(context, token) ?? undefined;
 				break;
 			case PromptsType.instructions:
-				resources = await (provider as vscode.ChatInstructionsProvider).provideInstructions(context, token) ?? undefined;
+				resources = await (provider as zyraxoncode.ChatInstructionsProvider).provideInstructions(context, token) ?? undefined;
 				break;
 			case PromptsType.prompt:
-				resources = await (provider as vscode.ChatPromptFileProvider).providePromptFiles(context, token) ?? undefined;
+				resources = await (provider as zyraxoncode.ChatPromptFileProvider).providePromptFiles(context, token) ?? undefined;
 				break;
 			case PromptsType.skill:
-				resources = await (provider as vscode.ChatSkillProvider).provideSkills(context, token) ?? undefined;
+				resources = await (provider as zyraxoncode.ChatSkillProvider).provideSkills(context, token) ?? undefined;
 				break;
 			case PromptsType.hook:
-				resources = await (provider as vscode.ChatHookProvider).provideHooks(context, token) ?? undefined;
+				resources = await (provider as zyraxoncode.ChatHookProvider).provideHooks(context, token) ?? undefined;
 				break;
 		}
 
 		return resources;
 	}
 
-	registerChatSessionCustomizationProvider(extension: IExtensionDescription, chatSessionType: string, metadata: vscode.ChatSessionCustomizationProviderMetadata, provider: vscode.ChatSessionCustomizationProvider): vscode.Disposable {
+	registerChatSessionCustomizationProvider(extension: IExtensionDescription, chatSessionType: string, metadata: zyraxoncode.ChatSessionCustomizationProviderMetadata, provider: zyraxoncode.ChatSessionCustomizationProvider): zyraxoncode.Disposable {
 		const handle = ExtHostChatAgents2._customizationProviderIdPool++;
 		this._customizationProviders.set(handle, { extension, provider });
 
@@ -893,7 +893,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		}
 	}
 
-	async $detectChatParticipant(handle: number, requestDto: Dto<IChatAgentRequest>, context: { history: IChatAgentHistoryEntryDto[] }, options: { location: ChatAgentLocation; participants?: vscode.ChatParticipantMetadata[] }, token: CancellationToken): Promise<vscode.ChatParticipantDetectionResult | null | undefined> {
+	async $detectChatParticipant(handle: number, requestDto: Dto<IChatAgentRequest>, context: { history: IChatAgentHistoryEntryDto[] }, options: { location: ChatAgentLocation; participants?: zyraxoncode.ChatParticipantMetadata[] }, token: CancellationToken): Promise<zyraxoncode.ChatParticipantDetectionResult | null | undefined> {
 		const detector = this._participantDetectionProviders.get(handle);
 		if (!detector) {
 			return undefined;
@@ -926,7 +926,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		const convertedHistory = await this.prepareHistoryTurns(extension, request.agentId, context);
 
 		// in-place converting for location-data
-		let location: vscode.ChatRequestEditorData | vscode.ChatRequestNotebookData | undefined;
+		let location: zyraxoncode.ChatRequestEditorData | zyraxoncode.ChatRequestNotebookData | undefined;
 		if (request.locationData?.type === ChatAgentLocation.EditorInline) {
 			// editor data
 			const document = this._documents.getDocument(request.locationData.document);
@@ -945,8 +945,8 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		return { request, location, history: convertedHistory };
 	}
 
-	private async getModelForRequest(request: IChatAgentRequest, extension: IExtensionDescription): Promise<vscode.LanguageModelChat> {
-		let model: vscode.LanguageModelChat | undefined;
+	private async getModelForRequest(request: IChatAgentRequest, extension: IExtensionDescription): Promise<zyraxoncode.LanguageModelChat> {
+		let model: zyraxoncode.LanguageModelChat | undefined;
 		if (request.userSelectedModelId) {
 			model = await this._languageModels.getLanguageModelByIdentifier(extension, request.userSelectedModelId);
 		}
@@ -1020,7 +1020,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 
 
 			// If this request originates from a contributed chat session editor, attempt to resolve the ChatSession API object
-			let chatSessionContext: vscode.ChatSessionContext | undefined;
+			let chatSessionContext: zyraxoncode.ChatSessionContext | undefined;
 			if (context.chatSessionContext) {
 				const sessionResource = URI.revive(context.chatSessionContext.chatSessionResource);
 				const inputState = await this._chatSessions.getInputStateForSession(
@@ -1039,7 +1039,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 				};
 			}
 
-			const chatContext: vscode.ChatContext = {
+			const chatContext: zyraxoncode.ChatContext = {
 				history,
 				chatSessionContext,
 				get yieldRequested() { return inFlightRequest?.yieldRequested ?? false; }
@@ -1111,11 +1111,11 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		return this._diagnostics.getDiagnostics();
 	}
 
-	private async getToolsForRequest(extension: IExtensionDescription, tools: UserSelectedTools | undefined, modelId: string, token: CancellationToken): Promise<Map<vscode.LanguageModelToolInformation, boolean>> {
+	private async getToolsForRequest(extension: IExtensionDescription, tools: UserSelectedTools | undefined, modelId: string, token: CancellationToken): Promise<Map<zyraxoncode.LanguageModelToolInformation, boolean>> {
 		if (!tools) {
 			return new Map();
 		}
-		const result = new Map<vscode.LanguageModelToolInformation, boolean>();
+		const result = new Map<zyraxoncode.LanguageModelToolInformation, boolean>();
 		for (const tool of this._tools.getTools(extension)) {
 			if (typeof tools[tool.name] === 'boolean') {
 				result.set(tool, tools[tool.name]);
@@ -1124,18 +1124,18 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 		return result;
 	}
 
-	private async prepareHistoryTurns(extension: Readonly<IRelaxedExtensionDescription>, agentId: string, context: { history: IChatAgentHistoryEntryDto[] }): Promise<(vscode.ChatRequestTurn | vscode.ChatResponseTurn)[]> {
-		const res: (vscode.ChatRequestTurn | vscode.ChatResponseTurn)[] = [];
+	private async prepareHistoryTurns(extension: Readonly<IRelaxedExtensionDescription>, agentId: string, context: { history: IChatAgentHistoryEntryDto[] }): Promise<(zyraxoncode.ChatRequestTurn | zyraxoncode.ChatResponseTurn)[]> {
+		const res: (zyraxoncode.ChatRequestTurn | zyraxoncode.ChatResponseTurn)[] = [];
 
 		for (const h of context.history) {
 			const ehResult = typeConvert.ChatAgentResult.to(h.result);
-			const result: vscode.ChatResult = agentId === h.request.agentId || (isBuiltinParticipant(h.request.agentId) && isBuiltinParticipant(agentId)) ?
+			const result: zyraxoncode.ChatResult = agentId === h.request.agentId || (isBuiltinParticipant(h.request.agentId) && isBuiltinParticipant(agentId)) ?
 				ehResult :
 				{ ...ehResult, metadata: undefined };
 
 			// REQUEST turn
-			const varsWithoutTools: vscode.ChatPromptReference[] = [];
-			const toolReferences: vscode.ChatLanguageModelToolReference[] = [];
+			const varsWithoutTools: zyraxoncode.ChatPromptReference[] = [];
+			const toolReferences: zyraxoncode.ChatLanguageModelToolReference[] = [];
 			for (const v of h.request.variables.variables) {
 				if (v.kind === 'tool') {
 					toolReferences.push(typeConvert.ChatLanguageModelToolReference.to(v));
@@ -1219,7 +1219,7 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 				break;
 		}
 
-		const feedback: vscode.ChatResultFeedback = {
+		const feedback: zyraxoncode.ChatResultFeedback = {
 			result: ehResult,
 			kind,
 		};
@@ -1306,46 +1306,46 @@ export class ExtHostChatAgents2 extends Disposable implements ExtHostChatAgentsS
 class ExtHostParticipantDetector {
 	constructor(
 		public readonly extension: IExtensionDescription,
-		public readonly provider: vscode.ChatParticipantDetectionProvider,
+		public readonly provider: zyraxoncode.ChatParticipantDetectionProvider,
 	) { }
 }
 
 class ExtHostChatAgent {
 
-	private _followupProvider: vscode.ChatFollowupProvider | undefined;
-	private _iconPath: vscode.Uri | { light: vscode.Uri; dark: vscode.Uri } | vscode.ThemeIcon | undefined;
-	private _helpTextPrefix: string | vscode.MarkdownString | undefined;
-	private _helpTextPostfix: string | vscode.MarkdownString | undefined;
-	private _onDidReceiveFeedback = new Emitter<vscode.ChatResultFeedback>();
-	private _onDidPerformAction = new Emitter<vscode.ChatUserActionEvent>();
+	private _followupProvider: zyraxoncode.ChatFollowupProvider | undefined;
+	private _iconPath: zyraxoncode.Uri | { light: zyraxoncode.Uri; dark: zyraxoncode.Uri } | zyraxoncode.ThemeIcon | undefined;
+	private _helpTextPrefix: string | zyraxoncode.MarkdownString | undefined;
+	private _helpTextPostfix: string | zyraxoncode.MarkdownString | undefined;
+	private _onDidReceiveFeedback = new Emitter<zyraxoncode.ChatResultFeedback>();
+	private _onDidPerformAction = new Emitter<zyraxoncode.ChatUserActionEvent>();
 	private _supportIssueReporting: boolean | undefined;
-	private _agentVariableProvider?: { provider: vscode.ChatParticipantCompletionItemProvider; triggerCharacters: string[] };
-	private _additionalWelcomeMessage?: string | vscode.MarkdownString | undefined;
-	private _titleProvider?: vscode.ChatTitleProvider | undefined;
-	private _summarizer?: vscode.ChatSummarizer | undefined;
-	private _pauseStateEmitter = new Emitter<vscode.ChatParticipantPauseStateEvent>();
+	private _agentVariableProvider?: { provider: zyraxoncode.ChatParticipantCompletionItemProvider; triggerCharacters: string[] };
+	private _additionalWelcomeMessage?: string | zyraxoncode.MarkdownString | undefined;
+	private _titleProvider?: zyraxoncode.ChatTitleProvider | undefined;
+	private _summarizer?: zyraxoncode.ChatSummarizer | undefined;
+	private _pauseStateEmitter = new Emitter<zyraxoncode.ChatParticipantPauseStateEvent>();
 
 	constructor(
 		public readonly extension: IExtensionDescription,
 		public readonly id: string,
 		private readonly _proxy: MainThreadChatAgentsShape2,
 		private readonly _handle: number,
-		private _requestHandler: vscode.ChatExtendedRequestHandler,
+		private _requestHandler: zyraxoncode.ChatExtendedRequestHandler,
 	) { }
 
-	acceptFeedback(feedback: vscode.ChatResultFeedback) {
+	acceptFeedback(feedback: zyraxoncode.ChatResultFeedback) {
 		this._onDidReceiveFeedback.fire(feedback);
 	}
 
-	acceptAction(event: vscode.ChatUserActionEvent) {
+	acceptAction(event: zyraxoncode.ChatUserActionEvent) {
 		this._onDidPerformAction.fire(event);
 	}
 
-	setChatRequestPauseState(pauseState: vscode.ChatParticipantPauseStateEvent) {
+	setChatRequestPauseState(pauseState: zyraxoncode.ChatParticipantPauseStateEvent) {
 		this._pauseStateEmitter.fire(pauseState);
 	}
 
-	async invokeCompletionProvider(query: string, token: CancellationToken): Promise<vscode.ChatCompletionItem[]> {
+	async invokeCompletionProvider(query: string, token: CancellationToken): Promise<zyraxoncode.ChatCompletionItem[]> {
 		if (!this._agentVariableProvider) {
 			return [];
 		}
@@ -1353,7 +1353,7 @@ class ExtHostChatAgent {
 		return await this._agentVariableProvider.provider.provideCompletionItems(query, token) ?? [];
 	}
 
-	async provideFollowups(result: vscode.ChatResult, context: vscode.ChatContext, token: CancellationToken): Promise<vscode.ChatFollowup[]> {
+	async provideFollowups(result: zyraxoncode.ChatResult, context: zyraxoncode.ChatContext, token: CancellationToken): Promise<zyraxoncode.ChatFollowup[]> {
 		if (!this._followupProvider) {
 			return [];
 		}
@@ -1369,7 +1369,7 @@ class ExtHostChatAgent {
 			.filter(f => !(f && 'message' in f));
 	}
 
-	async provideTitle(context: vscode.ChatContext, token: CancellationToken): Promise<string | undefined> {
+	async provideTitle(context: zyraxoncode.ChatContext, token: CancellationToken): Promise<string | undefined> {
 		if (!this._titleProvider) {
 			return;
 		}
@@ -1377,7 +1377,7 @@ class ExtHostChatAgent {
 		return await this._titleProvider.provideChatTitle(context, token) ?? undefined;
 	}
 
-	async provideSummary(context: vscode.ChatContext, token: CancellationToken): Promise<string | undefined> {
+	async provideSummary(context: zyraxoncode.ChatContext, token: CancellationToken): Promise<string | undefined> {
 		if (!this._summarizer) {
 			return;
 		}
@@ -1385,7 +1385,7 @@ class ExtHostChatAgent {
 		return await this._summarizer.provideChatSummary(context, token) ?? undefined;
 	}
 
-	get apiAgent(): vscode.ChatParticipant {
+	get apiAgent(): zyraxoncode.ChatParticipant {
 		let disposed = false;
 		let updateScheduled = false;
 		const updateMetadataSoon = () => {
@@ -1531,10 +1531,10 @@ class ExtHostChatAgent {
 				that._pauseStateEmitter.dispose();
 				that._proxy.$unregisterAgent(that._handle);
 			},
-		} satisfies vscode.ChatParticipant;
+		} satisfies zyraxoncode.ChatParticipant;
 	}
 
-	invoke(request: vscode.ChatRequest, context: vscode.ChatContext, response: vscode.ChatResponseStream, token: CancellationToken): vscode.ProviderResult<vscode.ChatResult | void> {
+	invoke(request: zyraxoncode.ChatRequest, context: zyraxoncode.ChatContext, response: zyraxoncode.ChatResponseStream, token: CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.ChatResult | void> {
 		return this._requestHandler(request, context, response, token);
 	}
 }

@@ -1,20 +1,20 @@
-<VSCode.Cell id="<CELL_ID_0>" language="markdown">
+<ZyraxonCode.Cell id="<CELL_ID_0>" language="markdown">
 # Import Required Libraries
 Import the necessary libraries, including pandas and matplotlib.
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_1>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_1>" language="python">
 # Import Required Libraries
 import pandas as pd
 import matplotlib.pyplot as plt
 
 # Import plotly data
 import plotly.data as data
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_2>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_2>" language="markdown">
 # Load Sample Data from plotly.data
 Load sample datasets from the plotly.data package into pandas DataFrames.
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_3>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_3>" language="python">
 # Load Sample Data from plotly.data
 
 # Load the 'gapminder' dataset into a pandas DataFrame
@@ -28,12 +28,12 @@ iris_df = data.iris()
 
 # Display the first few rows of each DataFrame
 gapminder_df.head(), tips_df.head(), iris_df.head()
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_4>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_4>" language="markdown">
 # DataFrame Operations
 Perform various DataFrame operations such as filtering, grouping, and merging.
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_5>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_5>" language="python">
 # DataFrame Operations
 
 # Filtering: Select rows where the year is 2007 in the gapminder dataset
@@ -47,16 +47,16 @@ average_tips_by_day
 # Merging: Merge the iris dataset with itself on the species column
 merged_iris = pd.merge(iris_df, iris_df, on='species', suffixes=('_left', '_right'))
 merged_iris.head()
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_6>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_6>" language="markdown">
 # Descriptive Statistics
 Calculate descriptive statistics for the DataFrames, including mean, median, and standard deviation.
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_7>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_7>" language="markdown">
 # Data Visualization with Matplotlib
 Create static plots using Matplotlib to visualize the data, including bar charts, scatter plots, and line charts.
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_8>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_8>" language="python">
 # Data Visualization with Matplotlib
 
 # Bar Chart: Average Tips by Day
@@ -100,12 +100,12 @@ plt.suptitle('')
 plt.xlabel('Day')
 plt.ylabel('Tip')
 plt.show()
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_9>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_9>" language="markdown">
 # Interactive Plots with Matplotlib
 Create interactive plots using Matplotlib to explore the data, including hover effects and zooming.
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_10>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_10>" language="python">
 # Interactive Plots with Matplotlib
 
 # Interactive Scatter Plot: Life Expectancy vs. GDP per Capita (2007) with Hover Effects
@@ -140,13 +140,13 @@ plt.show()
 scatter_matrix(iris_df, figsize=(12, 8), diagonal='kde', color=iris_df['species'].astype('category').cat.codes)
 plt.suptitle('Interactive Scatter Matrix of Iris Dataset')
 plt.show()
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_11>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_11>" language="python">
 
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_12>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_12>" language="python">
 
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_13>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_13>" language="python">
 
-</VSCode.Cell>
+</ZyraxonCode.Cell>

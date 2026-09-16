@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Extension } from 'vscode';
+import type { Extension } from 'zyraxoncode';
 import { Event } from '../../../util/vs/base/common/event';
 import { IExtensionsService } from '../../extensions/common/extensionsService';
 

@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { PackageDocument } from './packageDocumentHelper';
 import { PackageDocumentL10nSupport } from './packageDocumentL10nSupport';
 
-export function activate(context: vscode.ExtensionContext) {
-	//package.json suggestions
+export function activate(context: zyraxoncode.ExtensionContext) {
+	__ZYRAXKEEP__0_ suggestions
 	context.subscriptions.push(registerPackageDocumentCompletions());
 
-	//package.json go to definition for NLS strings
+	__ZYRAXKEEP__1_ go to definition for NLS strings
 	context.subscriptions.push(new PackageDocumentL10nSupport());
 }
 
-function registerPackageDocumentCompletions(): vscode.Disposable {
-	return vscode.languages.registerCompletionItemProvider({ language: 'json', pattern: '**/package.json' }, {
+function registerPackageDocumentCompletions(): zyraxoncode.Disposable {
+	return zyraxoncode.languages.registerCompletionItemProvider({ language: 'json', pattern: '**/package.json' }, {
 		provideCompletionItems(document, position, token) {
 			return new PackageDocument(document).provideCompletionItems(position, token);
 		}

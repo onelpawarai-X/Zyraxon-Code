@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestMetadata } from '@vscode/copilot-api';
-import { Raw } from '@vscode/prompt-tsx';
+import { RequestMetadata } from '@zyraxoncode/copilot-api';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import * as http from 'http';
 import type OpenAI from 'openai';
 import { IChatMLFetcher, Source } from '../../../platform/chat/common/chatMLFetcher';
@@ -47,7 +47,7 @@ export class OpenAILanguageModelServer extends Disposable {
 		super();
 		this.config = {
 			port: 0, // Will be set to random available port
-			nonce: 'vscode-lm-' + generateUuid()
+			nonce: 'zyraxoncode-lm-' + generateUuid()
 		};
 
 		this.server = this.createServer();
@@ -187,7 +187,7 @@ export class OpenAILanguageModelServer extends Disposable {
 				res,
 				endpointRequestBody,
 				headers,
-				'vscode_codex'
+				'zyraxoncode_codex'
 			);
 
 			let messagesForLogging: Raw.ChatMessage[] = [];
@@ -248,7 +248,7 @@ export class OpenAILanguageModelServer extends Disposable {
 						...this.config,
 						port: address.port
 					};
-					this.info(`Language Model Server started on http://localhost:${this.config.port}`);
+					this.info(`Language Model Server started on __ZYRAXKEEP__0_{this.config.port}`);
 					resolve();
 					return;
 				}

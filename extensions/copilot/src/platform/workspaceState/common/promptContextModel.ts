@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { RepoContext } from '../../git/common/gitService';
 
 
@@ -16,25 +16,25 @@ export interface ISerializedWorkspaceState {
 	readonly workspaceFolderFilePath: string | undefined;
 	readonly repoContexts: Array<RepoContext | undefined> | undefined;
 	readonly activeTextEditor: {
-		selections: { anchor: vscode.Position; active: vscode.Position; isReversed: boolean }[];
+		selections: { anchor: zyraxoncode.Position; active: zyraxoncode.Position; isReversed: boolean }[];
 		documentFilePath: string;
-		visibleRanges: { start: vscode.Position; end: vscode.Position }[];
+		visibleRanges: { start: zyraxoncode.Position; end: zyraxoncode.Position }[];
 		languageId: string;
 	} | undefined;
 	readonly symbols: {
 		name: string;
-		kind: vscode.SymbolKind;
+		kind: zyraxoncode.SymbolKind;
 		containerName: string;
 		filePath: string;
-		start: vscode.Position;
-		end: vscode.Position;
+		start: zyraxoncode.Position;
+		end: zyraxoncode.Position;
 	}[] | undefined;
 	readonly notebookDocumentFilePaths: string[] | undefined;
 	readonly activeFileDiagnostics: {
-		start: vscode.Position;
-		end: vscode.Position;
+		start: zyraxoncode.Position;
+		end: zyraxoncode.Position;
 		message: string;
-		severity?: vscode.DiagnosticSeverity;
+		severity?: zyraxoncode.DiagnosticSeverity;
 		relatedInformation?: ISerializedDiagnosticRelatedInformation[];
 	}[];
 	readonly debugConsoleOutput: string;
@@ -59,8 +59,8 @@ export interface ISerializedWorkspaceState {
 
 export interface ISerializedDiagnosticRelatedInformation {
 	readonly message: string;
-	readonly start: vscode.Position;
-	readonly end: vscode.Position;
+	readonly start: zyraxoncode.Position;
+	readonly end: zyraxoncode.Position;
 	readonly filePath: string;
 }
 

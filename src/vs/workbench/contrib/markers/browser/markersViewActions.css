@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 .markers-panel-action-filter > .markers-panel-filter-controls > .monaco-action-bar .action-label.markers-filters.checked {
-	border-color: var(--vscode-inputOption-activeBorder);
-	color: var(--vscode-inputOption-activeForeground);
-	background-color: var(--vscode-inputOption-activeBackground);
+	border-color: var(--zyraxoncode-inputOption-activeBorder);
+	color: var(--zyraxoncode-inputOption-activeForeground);
+	background-color: var(--zyraxoncode-inputOption-activeBackground);
 }

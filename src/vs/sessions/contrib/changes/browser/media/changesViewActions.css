@@ -9,11 +9,11 @@
 	gap: 4px;
 	cursor: pointer;
 	padding: 0 4px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .changes-action-view-item:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .changes-action-view-item .changes-action-icon {
@@ -24,9 +24,9 @@
 }
 
 .changes-action-view-item .changes-action-added {
-	color: var(--vscode-gitDecoration-addedResourceForeground);
+	color: var(--zyraxoncode-gitDecoration-addedResourceForeground);
 }
 
 .changes-action-view-item .changes-action-removed {
-	color: var(--vscode-gitDecoration-deletedResourceForeground);
+	color: var(--zyraxoncode-gitDecoration-deletedResourceForeground);
 }

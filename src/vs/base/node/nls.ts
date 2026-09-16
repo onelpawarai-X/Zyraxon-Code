@@ -64,7 +64,7 @@ export async function resolveNLSConfiguration({ userLocale, osLocale, userDataPa
 		}
 
 		const languagePack = languagePacks[resolvedLanguage];
-		const mainLanguagePackPath = languagePack?.translations?.['vscode'];
+		const mainLanguagePackPath = languagePack?.translations?.['zyraxoncode'];
 		if (
 			!languagePack ||
 			typeof languagePack.hash !== 'string' ||
@@ -97,7 +97,7 @@ export async function resolveNLSConfiguration({ userLocale, osLocale, userDataPa
 				corruptMarkerFile: languagePackCorruptMarkerFile
 			},
 
-			// NLS: below properties are a relic from old times only used by vscode-nls and deprecated
+			// NLS: below properties are a relic from old times only used by zyraxoncode-nls and deprecated
 			locale: userLocale,
 			availableLanguages: { '*': resolvedLanguage },
 			_languagePackId: languagePackId,
@@ -163,7 +163,7 @@ export async function resolveNLSConfiguration({ userLocale, osLocale, userDataPa
 /**
  * The `languagepacks.json` file is a JSON file that contains all metadata
  * about installed language extensions per language. Specifically, for
- * core (`vscode`) and all extensions it supports, it points to the related
+ * core (`zyraxoncode`) and all extensions it supports, it points to the related
  * translation files.
  *
  * The file is updated whenever a new language pack is installed or removed.
@@ -207,7 +207,7 @@ function defaultNLSConfiguration(userLocale: string, osLocale: string, nlsMetada
 		resolvedLanguage: 'en',
 		defaultMessagesFile: join(nlsMetadataPath, 'nls.messages.json'),
 
-		// NLS: below 2 are a relic from old times only used by vscode-nls and deprecated
+		// NLS: below 2 are a relic from old times only used by zyraxoncode-nls and deprecated
 		locale: userLocale,
 		availableLanguages: {}
 	};

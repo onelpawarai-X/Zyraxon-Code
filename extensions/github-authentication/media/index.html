@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="content">
 			<div class="icon-container">
-				<img src="code-icon.svg" class="vscode-icon">
+				<img src="code-icon.svg" class="zyraxoncode-icon">
 			</div>
 			<h1 class="title">Launching <span class="app-name"></span></h1>
 			<div class="message">
@@ -35,10 +35,10 @@
 
 		// if name contains 'insiders', update filter CSS variables
 		if (appName.toLowerCase().includes('insiders')) {
-			document.documentElement.style.setProperty('--vscode-filter-0', 'var(--vscode-insiders-filter-0)');
-			document.documentElement.style.setProperty('--vscode-filter-50', 'var(--vscode-insiders-filter-50)');
-			document.documentElement.style.setProperty('--vscode-filter-70', 'var(--vscode-insiders-filter-70)');
-			document.documentElement.style.setProperty('--vscode-filter-100', 'var(--vscode-insiders-filter-100)');
+			document.documentElement.style.setProperty('--zyraxoncode-filter-0', 'var(--zyraxoncode-insiders-filter-0)');
+			document.documentElement.style.setProperty('--zyraxoncode-filter-50', 'var(--zyraxoncode-insiders-filter-50)');
+			document.documentElement.style.setProperty('--zyraxoncode-filter-70', 'var(--zyraxoncode-insiders-filter-70)');
+			document.documentElement.style.setProperty('--zyraxoncode-filter-100', 'var(--zyraxoncode-insiders-filter-100)');
 		}
 
 		const error = urlParams.get('error');
@@ -53,7 +53,7 @@
 			document.querySelector('.success-message > .detail').textContent = 'You can now close this window.';
 		} else {
 			// Wrap the redirect URI so that the browser remembers who triggered the redirect
-			const wrappedRedirectUri = `https://vscode.dev/redirect?url=${encodeURIComponent(redirectUri)}`;
+			const wrappedRedirectUri = `__ZYRAXKEEP__0_{encodeURIComponent(redirectUri)}`;
 			// Set up the fallback link
 			const fallbackLink = document.getElementById('fallback-link');
 			if (fallbackLink) {

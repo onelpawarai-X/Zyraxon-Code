@@ -13,7 +13,7 @@ const exclude = [
 	/* default: */ '**/node_modules/**', '**/dist/**', '**/cypress/**', '**/.{idea,git,cache,output,temp}/**', '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*',
 ];
 
-// reference https://vitest.dev/config/#configuring-vitest
+// reference __ZYRAXKEEP__0_
 export default defineConfig(({ mode }) => ({
 	test: {
 		include: ['**/*.spec.ts', '**/*.spec.tsx'],
@@ -21,8 +21,8 @@ export default defineConfig(({ mode }) => ({
 		env: loadEnv(mode, process.cwd(), ''),
 		alias: {
 			// similar to aliasing in the esbuild config `.esbuild.mts`
-			// vitest requires aliases to be absolute paths. reference: https://vitejs.dev/config/shared-options#resolve-alias
-			'vscode': path.resolve(__dirname, 'src/util/common/test/shims/vscodeTypesShim.ts'),
+			// vitest requires aliases to be absolute paths. reference: __ZYRAXKEEP__1_
+			'zyraxoncode': path.resolve(__dirname, 'src/util/common/test/shims/zyraxoncodeTypesShim.ts'),
 		}
 	},
 	server: {

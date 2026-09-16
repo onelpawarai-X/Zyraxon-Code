@@ -52,9 +52,9 @@ declare const process: INodeProcess;
 const $globalThis: any = globalThis;
 
 let nodeProcess: INodeProcess | undefined = undefined;
-if (typeof $globalThis.vscode !== 'undefined' && typeof $globalThis.vscode.process !== 'undefined') {
+if (typeof $globalThis.zyraxoncode !== 'undefined' && typeof $globalThis.zyraxoncode.process !== 'undefined') {
 	// Native environment (sandboxed)
-	nodeProcess = $globalThis.vscode.process;
+	nodeProcess = $globalThis.zyraxoncode.process;
 } else if (typeof process !== 'undefined' && typeof process?.versions?.node === 'string') {
 	// Native environment (non-sandboxed)
 	nodeProcess = process;
@@ -210,7 +210,7 @@ export const translationsConfigFile = _translationsConfigFile;
 export const setTimeout0IsFaster = (typeof $globalThis.postMessage === 'function' && !$globalThis.importScripts);
 
 /**
- * See https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#:~:text=than%204%2C%20then-,set%20timeout%20to%204,-.
+ * See __ZYRAXKEEP__0_
  *
  * Works similarly to `setTimeout(0)` but doesn't suffer from the 4ms artificial delay
  * that browsers set when the nesting level is > 5.
@@ -224,10 +224,10 @@ export const setTimeout0 = (() => {
 		const pending: IQueueElement[] = [];
 
 		$globalThis.addEventListener('message', (e: any) => {
-			if (e.data && e.data.vscodeScheduleAsyncWork) {
+			if (e.data && e.data.zyraxoncodeScheduleAsyncWork) {
 				for (let i = 0, len = pending.length; i < len; i++) {
 					const candidate = pending[i];
-					if (candidate.id === e.data.vscodeScheduleAsyncWork) {
+					if (candidate.id === e.data.zyraxoncodeScheduleAsyncWork) {
 						pending.splice(i, 1);
 						candidate.callback();
 						return;
@@ -242,7 +242,7 @@ export const setTimeout0 = (() => {
 				id: myId,
 				callback: callback
 			});
-			$globalThis.postMessage({ vscodeScheduleAsyncWork: myId }, '*');
+			$globalThis.postMessage({ zyraxoncodeScheduleAsyncWork: myId }, '*');
 		};
 	}
 	return (callback: () => void) => setTimeout(callback);

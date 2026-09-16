@@ -10,8 +10,8 @@ import * as pfs from './pfs.js';
 // This is required, since parseInt("7-preview") will return 7.
 const IntRegex: RegExp = /^\d+$/;
 
-const PwshMsixRegex: RegExp = /^Microsoft.PowerShell_.*/;
-const PwshPreviewMsixRegex: RegExp = /^Microsoft.PowerShellPreview_.*/;
+const PwshMsixRegex: RegExp = /^Zyraxon.PowerShell_.*/;
+const PwshPreviewMsixRegex: RegExp = /^Zyraxon.PowerShellPreview_.*/;
 
 const enum Arch {
 	x64,

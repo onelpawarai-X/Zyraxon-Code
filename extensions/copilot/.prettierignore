@@ -1,7 +1,7 @@
 dist/**
-.vscode/**
-.vscode-test/**
-test/.vscode-test/**
+.zyraxoncode/**
+.zyraxoncode-test/**
+test/.zyraxoncode-test/**
 .git-blame-ignore-revs
 **/*.md
 **/*.ts

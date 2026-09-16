@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { IVSCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { FileType } from '../../../platform/filesystem/common/fileTypes';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -45,7 +45,7 @@ export class ChatDiskSessionResources extends Disposable implements IChatDiskSes
 	public currentCleanup?: Promise<void>;
 
 	constructor(
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 		@IFileSystemService private readonly fileSystem: IFileSystemService,
 		@ILogService private readonly logService: ILogService
 	) {

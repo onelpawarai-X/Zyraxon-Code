@@ -60,7 +60,7 @@
 .agent-host-filter-combo.sidebar .agent-host-filter-button .agent-host-filter-trailing-icon {
 	flex: 0 0 auto;
 	opacity: 0.7;
-	font-size: var(--vscode-codiconFontSize-compact, 12px);
+	font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 }
 
 /* Connect indicator: independent control sitting next to the picker
@@ -82,9 +82,9 @@
 	padding: 0 6px;
 	margin: 0 2px;
 	cursor: pointer;
-	color: var(--vscode-titleBar-activeForeground);
-	border-radius: var(--vscode-cornerRadius-small);
-	font-size: var(--vscode-agents-fontSize-label1);
+	color: var(--zyraxoncode-titleBar-activeForeground);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	user-select: none;
 	-webkit-user-select: none;
 	touch-action: manipulation;
@@ -94,11 +94,11 @@
 }
 
 .agent-host-filter-combo .agent-host-filter-dropdown:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .agent-host-filter-combo .agent-host-filter-dropdown:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -150,7 +150,7 @@
 	margin-left: auto;
 	width: 22px;
 	height: 22px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	cursor: pointer;
 	touch-action: manipulation;
 	-webkit-user-select: none;
@@ -166,32 +166,32 @@
 }
 
 .agent-host-filter-combo .agent-host-filter-connect.connected .codicon {
-	color: var(--vscode-testing-iconPassed, var(--vscode-debugIcon-startForeground, #388a34)) !important;
+	color: var(--zyraxoncode-testing-iconPassed, var(--zyraxoncode-debugIcon-startForeground, #388a34)) !important;
 }
 
 .agent-host-filter-combo .agent-host-filter-connect.connecting .codicon {
-	color: var(--vscode-debugIcon-startForeground, #388a34);
+	color: var(--zyraxoncode-debugIcon-startForeground, #388a34);
 	animation: agent-host-filter-pulse 1.2s ease-in-out infinite;
 }
 
 .agent-host-filter-combo .agent-host-filter-connect.disconnected .codicon {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agent-host-filter-combo .agent-host-filter-connect.rediscover .codicon {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agent-host-filter-combo .agent-host-filter-connect:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .agent-host-filter-combo .agent-host-filter-connect:hover .codicon {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agent-host-filter-combo .agent-host-filter-connect:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -217,7 +217,7 @@
 	inset: -2px;
 	border-radius: 50%;
 	box-sizing: border-box;
-	border: 1px solid var(--vscode-progressBar-background, var(--vscode-textLink-foreground));
+	border: 1px solid var(--zyraxoncode-progressBar-background, var(--zyraxoncode-textLink-foreground));
 	opacity: 0;
 	pointer-events: none;
 	animation: agent-host-filter-discover-ring 1.8s ease-out infinite;

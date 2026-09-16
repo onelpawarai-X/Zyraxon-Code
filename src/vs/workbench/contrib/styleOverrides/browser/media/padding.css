@@ -18,7 +18,7 @@
 /*
  * Inset view pane content (sidebar / panel / auxiliary bar sections) by a
  * horizontal amount matching the Agents window panel padding
- * (8px / --vscode-spacing-size80) so content has breathing room from the edges.
+ * (8px / --zyraxoncode-spacing-size80) so content has breathing room from the edges.
  *
  * The pane *header* is padded, and each list/tree *row* box is inset so there is
  * a real margin between the row (including its hover / selection highlight) and
@@ -33,15 +33,15 @@
 
 /* Header: inset the section title / actions to line up with the rows below. */
 .style-override .monaco-pane-view .pane:not(:has(> .pane-body.chat-viewpane)) > .pane-header {
-	padding-left: var(--vscode-spacing-size40, 4px);
+	padding-left: var(--zyraxoncode-spacing-size40, 4px);
 	padding-right: 0;
-	margin: 0 var(--vscode-spacing-size40, 4px);
+	margin: 0 var(--zyraxoncode-spacing-size40, 4px);
 }
 
 /* Body: inset each row box, leaving the scrollbar pinned to the pane edge. */
 .style-override .monaco-pane-view .pane-body:not(.chat-viewpane) .monaco-list-row {
-	left: var(--vscode-spacing-size40, 4px);
-	right: var(--vscode-spacing-size40, 4px);
+	left: var(--zyraxoncode-spacing-size40, 4px);
+	right: var(--zyraxoncode-spacing-size40, 4px);
 	width: auto;
 }
 
@@ -49,8 +49,8 @@
  * KEEP IN SYNC WITH: part.ts PartLayout.TITLE_HEIGHT_STYLE_OVERRIDE */
 .style-override.monaco-workbench .part > .title {
 	height: 32px;
-	padding-left: var(--vscode-spacing-size40, 4px);
-	padding-right: var(--vscode-spacing-size40, 4px);
+	padding-left: var(--zyraxoncode-spacing-size40, 4px);
+	padding-right: var(--zyraxoncode-spacing-size40, 4px);
 }
 
 .style-override.monaco-workbench .part > .title > .title-label {
@@ -83,7 +83,7 @@
 
 /* Inset the part title label (e.g. "Explorer") to align with the content below. */
 .style-override.monaco-workbench .part > .title > .title-label {
-	padding-left: var(--vscode-spacing-size80, 8px);
+	padding-left: var(--zyraxoncode-spacing-size80, 8px);
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -108,24 +108,24 @@
 	background-color: transparent;
 
 	> .monaco-tl-row {
-		border-radius: var(--vscode-cornerRadius-small);
+		border-radius: var(--zyraxoncode-cornerRadius-small);
 	}
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer .monaco-list-row.agent-session-item-row {
-	padding-bottom: var(--vscode-spacing-size40, 4px);
+	padding-bottom: var(--zyraxoncode-spacing-size40, 4px);
 
 	.agent-session-item {
-		padding-block: var(--vscode-spacing-size60, 6px);
+		padding-block: var(--zyraxoncode-spacing-size60, 6px);
 
 		.agent-session-title-row {
-			padding-bottom: var(--vscode-spacing-size20, 2px);
+			padding-bottom: var(--zyraxoncode-spacing-size20, 2px);
 		}
 	}
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer .monaco-list-row.agent-session-section-row {
-	padding-bottom: var(--vscode-spacing-size40, 4px);
+	padding-bottom: var(--zyraxoncode-spacing-size40, 4px);
 
 	.agent-session-section {
 		line-height: 26px;
@@ -137,7 +137,7 @@
 	outline: none;
 
 	> .monaco-tl-row {
-		background-color: var(--vscode-list-inactiveFocusBackground);
+		background-color: var(--zyraxoncode-list-inactiveFocusBackground);
 	}
 }
 
@@ -146,7 +146,7 @@
 	outline: none;
 
 	> .monaco-tl-row {
-		background-color: var(--vscode-list-inactiveSelectionBackground);
+		background-color: var(--zyraxoncode-list-inactiveSelectionBackground);
 	}
 }
 
@@ -155,7 +155,7 @@
 	outline: none;
 
 	> .monaco-tl-row {
-		background-color: var(--vscode-list-hoverBackground);
+		background-color: var(--zyraxoncode-list-hoverBackground);
 	}
 }
 
@@ -164,7 +164,7 @@
 	outline: none;
 
 	> .monaco-tl-row {
-		background-color: var(--vscode-list-focusBackground);
+		background-color: var(--zyraxoncode-list-focusBackground);
 	}
 }
 
@@ -173,7 +173,7 @@
 	outline: none;
 
 	> .monaco-tl-row {
-		background-color: var(--vscode-list-activeSelectionBackground);
+		background-color: var(--zyraxoncode-list-activeSelectionBackground);
 	}
 }
 
@@ -182,7 +182,7 @@
 	outline: none;
 
 	> .monaco-tl-row {
-		background-color: var(--vscode-list-activeSelectionBackground);
+		background-color: var(--zyraxoncode-list-activeSelectionBackground);
 	}
 }
 
@@ -192,32 +192,32 @@
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer .monaco-list-row.agent-session-list-row.focused > .monaco-tl-row {
-	outline: 1px dotted var(--vscode-list-inactiveFocusOutline);
+	outline: 1px dotted var(--zyraxoncode-list-inactiveFocusOutline);
 	outline-offset: -1px;
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer .monaco-list-row.agent-session-list-row.focused.selected > .monaco-tl-row {
-	outline-color: var(--vscode-contrastActiveBorder, var(--vscode-list-inactiveFocusOutline));
+	outline-color: var(--zyraxoncode-contrastActiveBorder, var(--zyraxoncode-list-inactiveFocusOutline));
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer .monaco-list:focus .monaco-list-row.agent-session-list-row.focused > .monaco-tl-row,
 .context-menu-visible .style-override.monaco-workbench .agent-sessions-viewer .monaco-list.last-focused .monaco-list-row.agent-session-list-row.focused > .monaco-tl-row {
-	outline: 1px solid var(--vscode-list-focusOutline);
+	outline: 1px solid var(--zyraxoncode-list-focusOutline);
 	outline-offset: -1px;
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer .monaco-list-row.agent-session-list-row.selected:not(.focused) > .monaco-tl-row {
-	outline: 1px dotted var(--vscode-contrastActiveBorder);
+	outline: 1px dotted var(--zyraxoncode-contrastActiveBorder);
 	outline-offset: -1px;
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer .monaco-list-row.agent-session-list-row:hover:not(.focused):not(.selected) > .monaco-tl-row {
-	outline: 1px dashed var(--vscode-contrastActiveBorder);
+	outline: 1px dashed var(--zyraxoncode-contrastActiveBorder);
 	outline-offset: -1px;
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer .monaco-list:focus .monaco-list-row.agent-session-list-row.focused.selected > .monaco-tl-row {
-	outline-color: var(--vscode-list-focusAndSelectionOutline, var(--vscode-contrastActiveBorder, var(--vscode-list-focusOutline)));
+	outline-color: var(--zyraxoncode-list-focusAndSelectionOutline, var(--zyraxoncode-contrastActiveBorder, var(--zyraxoncode-list-focusOutline)));
 }
 
 .style-override.monaco-workbench .chat-viewpane {
@@ -226,12 +226,12 @@
 	}
 	&.chat-view-location-auxiliarybar {
 		.chat-view-title-inner {
-			padding: var(--vscode-spacing-size40, 4px);
+			padding: var(--zyraxoncode-spacing-size40, 4px);
 		}
 	}
 	&.chat-view-location-sidebar, &.chat-view-location-panel {
 		.chat-view-title-inner {
-			padding: 0 var(--vscode-spacing-size40, 4px) 0 var(--vscode-spacing-size80, 8px);
+			padding: 0 var(--zyraxoncode-spacing-size40, 4px) 0 var(--zyraxoncode-spacing-size80, 8px);
 		}
 	}
 }
@@ -250,7 +250,7 @@
  * vertical activity bar a 4px bottom margin so they sit consistently above the
  * window edge, matching the pane header margins. */
 .style-override.monaco-workbench .activitybar:not(.top):not(.bottom) > .content > :not(.composite-bar):last-child {
-	margin-bottom: calc(var(--vscode-spacing-size20, 2px) + var(--vscode-strokeThickness, 1px));
+	margin-bottom: calc(var(--zyraxoncode-spacing-size20, 2px) + var(--zyraxoncode-strokeThickness, 1px));
 }
 
 .style-override.monaco-workbench .part.basepanel.bottom .composite.title,
@@ -329,7 +329,7 @@
  * padding).
  */
 .style-override.monaco-workbench .part.panel .pane-body.integrated-terminal .xterm {
-	padding-bottom: var(--vscode-spacing-size80, 8px);
+	padding-bottom: var(--zyraxoncode-spacing-size80, 8px);
 }
 
 .style-override.monaco-workbench .scm-view .monaco-list-row .resource-group .actions-container,
@@ -355,5 +355,5 @@
 }
 
 .style-override.monaco-workbench .monaco-pane-view .pane:not(.merged-header) .monaco-progress-container {
-	top: var(--vscode-spacing-size240);
+	top: var(--zyraxoncode-spacing-size240);
 }

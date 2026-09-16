@@ -64,7 +64,7 @@ export interface IPathService {
 	 * Figures out if the provided resource has a valid file name
 	 * for the operating system the file is saved to.
 	 *
-	 * Note: this currently only supports `file` and `vscode-file`
+	 * Note: this currently only supports `file` and `zyraxoncode-file`
 	 * protocols where we know the limits of the file systems behind
 	 * these OS. Other remotes are not supported and this method
 	 * will always return `true` for them.
@@ -128,7 +128,7 @@ export abstract class AbstractPathService implements IPathService {
 		// Our `isValidBasename` method only works with our
 		// standard schemes for files on disk, either locally
 		// or remote.
-		if (resource.scheme === Schemas.file || resource.scheme === Schemas.vscodeRemote) {
+		if (resource.scheme === Schemas.file || resource.scheme === Schemas.zyraxoncodeRemote) {
 			return isValidBasename(name ?? basename(resource), os === OperatingSystem.Windows);
 		}
 
@@ -141,7 +141,7 @@ export abstract class AbstractPathService implements IPathService {
 
 	static findDefaultUriScheme(environmentService: IWorkbenchEnvironmentService, contextService: IWorkspaceContextService): string {
 		if (environmentService.remoteAuthority) {
-			return Schemas.vscodeRemote;
+			return Schemas.zyraxoncodeRemote;
 		}
 
 		const virtualWorkspace = getVirtualWorkspaceScheme(contextService.getWorkspace());

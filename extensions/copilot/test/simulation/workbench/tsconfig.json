@@ -13,11 +13,11 @@
 	},
 	"include": [
 		"**/*",
-		"../../../src/extension/vscode-api.d.ts",
+		"../../../src/extension/zyraxoncode-api.d.ts",
 		"../../../src/util/vs/*.d.ts"
 	],
 	"exclude": [
 		"../fixtures/**/*",
-		"../shims/vscodeTypesShim.ts"
+		"../shims/zyraxoncodeTypesShim.ts"
 	]
 }

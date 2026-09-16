@@ -10,7 +10,7 @@ import { chatSessionResourceToId } from '../../../common/model/chatUri.js';
 
 export const AgentHostSessionReferenceAttachmentDisplayKind = 'sessionReference';
 export const AgentHostSessionReferenceTrajectoryAttachmentDisplayKind = 'sessionReferenceTrajectory';
-export const AgentHostSessionReferenceAttachmentMetadataKey = 'vscode.agentHost.sessionReference';
+export const AgentHostSessionReferenceAttachmentMetadataKey = 'zyraxoncode.agentHost.sessionReference';
 
 interface IAgentHostSessionReferenceAttachmentMetadata {
 	readonly sessionResource: string;

@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type { ChatResponseStream } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { ChatResponseStream } from 'zyraxoncode';
 import { ILogService } from '../../../platform/log/common/logService';
-import { ChatHookType } from '../../../vscodeTypes';
+import { ChatHookType } from '../../../zyraxoncodeTypes';
 
 /**
  * Error thrown when a hook requests the agent to abort processing.

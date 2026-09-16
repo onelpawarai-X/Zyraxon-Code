@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Memento } from 'vscode';
+import type { Memento } from 'zyraxoncode';
 import { ResourceMap } from '../../../../util/vs/base/common/map';
 import { basenameOrAuthority } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';

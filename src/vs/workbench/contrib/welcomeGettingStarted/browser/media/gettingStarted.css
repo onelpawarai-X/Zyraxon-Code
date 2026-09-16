@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.file-icons-enabled .show-file-icons .vscode_getting_started_page-name-file-icon.file-icon::before {
+.file-icons-enabled .show-file-icons .zyraxoncode_getting_started_page-name-file-icon.file-icon::before {
 	content: ' ';
 	background-image: url('../../../../browser/media/code-icon.svg');
 }
@@ -158,7 +158,7 @@
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideCategories > .gettingStartedCategoriesContainer > .categories-column > .recently-opened {
-	margin-bottom: var(--vscode-spacing-size80);
+	margin-bottom: var(--zyraxoncode-spacing-size80);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideCategories > .gettingStartedCategoriesContainer > .categories-column-left {
@@ -191,8 +191,8 @@
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideCategories .category-title {
 	margin: 4px 0 4px;
-	font-size: var(--vscode-bodyFontSize);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-bodyFontSize);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	text-align: left;
 	display: inline-block;
 	overflow: hidden;
@@ -252,7 +252,7 @@
 	top: 50%;
 	transform: translateY(-50%);
 	padding: 4px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideCategories .recently-opened li {
@@ -269,7 +269,7 @@
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideCategories .recently-opened-delete-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideCategories .recently-opened-delete-button::before {
@@ -316,7 +316,7 @@
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlide .getting-started-category {
 	width: calc(100% - 16px);
-	font-size: var(--vscode-bodyFontSize);
+	font-size: var(--zyraxoncode-bodyFontSize);
 	box-sizing: border-box;
 	line-height: normal;
 	margin: 8px 8px 8px 0;
@@ -355,10 +355,10 @@
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlide .getting-started-category .new-badge {
 	justify-self: flex-end;
 	align-self: flex-start;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	padding: 2px 4px;
 	margin: 4px;
-	font-size: var(--vscode-bodyFontSize-xSmall);
+	font-size: var(--zyraxoncode-bodyFontSize-xSmall);
 	white-space: nowrap;
 }
 
@@ -375,9 +375,9 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	border-top-left-radius: var(--vscode-cornerRadius-medium, 6px);
-	border-bottom-right-radius: var(--vscode-cornerRadius-medium, 6px);
-	background-color: var(--vscode-activityBarBadge-background);
+	border-top-left-radius: var(--zyraxoncode-cornerRadius-medium, 6px);
+	border-bottom-right-radius: var(--zyraxoncode-cornerRadius-medium, 6px);
+	background-color: var(--zyraxoncode-activityBarBadge-background);
 	box-sizing: border-box;
 }
 
@@ -414,7 +414,7 @@
 	padding-right: 8px;
 	max-width: 24px;
 	max-height: 24px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	position: relative;
 	top: auto;
 }
@@ -471,11 +471,11 @@
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step.expanded {
 	cursor: default !important;
-	border: 1px solid var(--vscode-welcomePage-tileBorder);
+	border: 1px solid var(--zyraxoncode-welcomePage-tileBorder);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step.expanded h3 {
-	color: var(--vscode-walkthrough-stepTitle-foreground);
+	color: var(--zyraxoncode-walkthrough-stepTitle-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step.expanded > .codicon {
@@ -485,11 +485,11 @@
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step:not(.expanded) {
 	height: 48px;
 	background: none;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step:not(.expanded):hover {
-	background: var(--vscode-welcomePage-tileHoverBackground);
+	background: var(--zyraxoncode-welcomePage-tileHoverBackground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step:not(.expanded) .step-title {
@@ -529,7 +529,7 @@
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step .shortcut-message {
 	display: flex;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 	margin-top: 12px;
 	white-space: pre;
@@ -765,12 +765,12 @@
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 0;
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .step-list-container button:focus-visible {
-	box-shadow: inset 0 0 0 1px var(--vscode-focusBorder);
+	box-shadow: inset 0 0 0 1px var(--zyraxoncode-focusBorder);
 	outline: none;
 }
 
@@ -916,7 +916,7 @@
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step .codicon:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 0;
 }
 
@@ -1002,89 +1002,89 @@
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .hide-category-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer {
-	background: var(--vscode-welcomePage-background);
-	color: var(--vscode-foreground);
+	background: var(--zyraxoncode-welcomePage-background);
+	color: var(--zyraxoncode-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .description {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 1.4em;
 	font-size: 1.4em;
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .category-progress .message {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .gettingStartedDetailsContent > .getting-started-footer {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .icon-widget {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step .codicon-getting-started-step-checked {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step.expanded .codicon-getting-started-step-unchecked {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button {
-	background: var(--vscode-welcomePage-tileBackground);
+	background: var(--zyraxoncode-welcomePage-tileBackground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button:hover {
-	background: var(--vscode-welcomePage-tileHoverBackground);
-	outline-color: var(--vscode-contrastActiveBorder, var(--vscode-focusBorder));
+	background: var(--zyraxoncode-welcomePage-tileHoverBackground);
+	outline-color: var(--zyraxoncode-contrastActiveBorder, var(--zyraxoncode-focusBorder));
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button.expanded:hover {
-	background: var(--vscode-welcomePage-tileBackground);
+	background: var(--zyraxoncode-welcomePage-tileBackground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button.emphasis {
-	color: var(--vscode-button-foreground);
+	color: var(--zyraxoncode-button-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button.emphasis {
-	background: var(--vscode-button-background);
+	background: var(--zyraxoncode-button-background);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideDetails .getting-started-step .codicon-getting-started-step-unchecked {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button.emphasis:hover {
-	background: var(--vscode-button-hoverBackground);
+	background: var(--zyraxoncode-button-hoverBackground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer a:not(.hide-category-button) {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .button-link {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	text-decoration: var(--text-link-decoration);
 }
 
 /* Make arrow icons consistent with the next and back buttons in color */
 .monaco-workbench .part.editor > .content .gettingStartedContainer .codicon.codicon-arrow-left,
 .monaco-workbench .part.editor > .content .gettingStartedContainer .codicon.codicon-arrow-right {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	font-size: 18px;
 }
 
 /* Make arrow icons change color on hover, consistent with button-link hover */
 .monaco-workbench .part.editor > .content .gettingStartedContainer .codicon.codicon-arrow-left:hover,
 .monaco-workbench .part.editor > .content .gettingStartedContainer .codicon.codicon-arrow-right:hover {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .start-container .button-link {
@@ -1092,27 +1092,27 @@
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer a:not(.hide-category-button):hover {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer a:not(.hide-category-button):active {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button.button-link:hover {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button.button-link:hover .codicon {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer a:not(.codicon-close):focus {
-	outline-color: var(--vscode-focusBorder);
+	outline-color: var(--zyraxoncode-focusBorder);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button {
-	border: 1px solid var(--vscode-contrastBorder);
+	border: 1px solid var(--zyraxoncode-contrastBorder);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer button.button-link {
@@ -1120,29 +1120,29 @@
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlideCategories .progress-bar-inner {
-	background-color: var(--vscode-welcomePage-progress-foreground);
+	background-color: var(--zyraxoncode-welcomePage-progress-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlide .getting-started-category .new-badge {
-	color: var(--vscode-activityBarBadge-foreground);
+	color: var(--zyraxoncode-activityBarBadge-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlide .getting-started-category .featured .featured-icon {
-	color: var(--vscode-activityBarBadge-foreground);
+	color: var(--zyraxoncode-activityBarBadge-foreground);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlide .getting-started-category .new-badge {
-	background-color: var(--vscode-activityBarBadge-background);
+	background-color: var(--zyraxoncode-activityBarBadge-background);
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlide .getting-started-checkbox {
-	background-color: var(--vscode-checkbox-background) !important;
+	background-color: var(--zyraxoncode-checkbox-background) !important;
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlide .getting-started-checkbox {
-	color: var(--vscode-checkbox-foreground) !important;
+	color: var(--zyraxoncode-checkbox-foreground) !important;
 }
 
 .monaco-workbench .part.editor > .content .gettingStartedContainer .gettingStartedSlide .getting-started-checkbox {
-	border-color: var(--vscode-checkbox-border) !important;
+	border-color: var(--zyraxoncode-checkbox-border) !important;
 }

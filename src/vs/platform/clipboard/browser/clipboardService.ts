@@ -18,9 +18,9 @@ import { ILogService } from '../../log/common/log.js';
 /**
  * Custom mime type used for storing a list of uris in the clipboard.
  *
- * Requires support for custom web clipboards https://github.com/w3c/clipboard-apis/pull/175
+ * Requires support for custom web clipboards __ZYRAXKEEP__0_
  */
-const vscodeResourcesMime = 'application/vnd.code.resources';
+const zyraxoncodeResourcesMime = 'application/vnd.code.resources';
 
 export class BrowserClipboardService extends Disposable implements IClipboardService {
 
@@ -81,7 +81,7 @@ export class BrowserClipboardService extends Disposable implements IClipboardSer
 	// A call to clipboard.write or clipboard.writeText outside the scope of a user
 	// gesture(such as "click" or "touch" event handlers) will result in the immediate
 	// rejection of the promise returned by the API call."
-	// From: https://webkit.org/blog/10855/async-clipboard-api/
+	// From: __ZYRAXKEEP__1_
 	//
 	// Since extensions run in a web worker, and handle gestures in an asynchronous way,
 	// they are not classified by Safari as "in response to a user gesture" and will reject.
@@ -100,7 +100,7 @@ export class BrowserClipboardService extends Disposable implements IClipboardSer
 			// The ctor of ClipboardItem allows you to pass in a promise that will resolve to a string.
 			// This allows us to pass in a Promise that will either be cancelled by another event or
 			// resolved with the contents of the first call to this.writeText.
-			// see https://developer.mozilla.org/en-US/docs/Web/API/ClipboardItem/ClipboardItem#parameters
+			// see __ZYRAXKEEP__2_
 			getActiveWindow().navigator.clipboard.write([new ClipboardItem({
 				'text/plain': currentWritePromise.p,
 			})]).catch(async err => {
@@ -220,10 +220,10 @@ export class BrowserClipboardService extends Disposable implements IClipboardSer
 		try {
 			await getActiveWindow().navigator.clipboard.write([
 				new ClipboardItem({
-					[`web ${vscodeResourcesMime}`]: new Blob([
+					[`web ${zyraxoncodeResourcesMime}`]: new Blob([
 						JSON.stringify(resources.map(x => x.toJSON()))
 					], {
-						type: vscodeResourcesMime
+						type: zyraxoncodeResourcesMime
 					})
 				})
 			]);
@@ -249,8 +249,8 @@ export class BrowserClipboardService extends Disposable implements IClipboardSer
 		try {
 			const items = await getActiveWindow().navigator.clipboard.read();
 			for (const item of items) {
-				if (item.types.includes(`web ${vscodeResourcesMime}`)) {
-					const blob = await item.getType(`web ${vscodeResourcesMime}`);
+				if (item.types.includes(`web ${zyraxoncodeResourcesMime}`)) {
+					const blob = await item.getType(`web ${zyraxoncodeResourcesMime}`);
 					const resources = (JSON.parse(await blob.text()) as URI[]).map(x => URI.from(x));
 					return resources;
 				}
@@ -288,7 +288,7 @@ export class BrowserClipboardService extends Disposable implements IClipboardSer
 		try {
 			const items = await getActiveWindow().navigator.clipboard.read();
 			for (const item of items) {
-				if (item.types.includes(`web ${vscodeResourcesMime}`)) {
+				if (item.types.includes(`web ${zyraxoncodeResourcesMime}`)) {
 					return true;
 				}
 			}

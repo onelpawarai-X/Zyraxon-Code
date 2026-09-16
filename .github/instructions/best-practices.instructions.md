@@ -21,7 +21,7 @@ applyTo: src/vs/**
 
 ## URI
 
-- Don't hardcode URI scheme strings like `'file'`, `'untitled'`, or `'vscode-remote'`. Use the `Schemas` constants from `vs/base/common/network.ts` (e.g. `Schemas.file`, `Schemas.untitled`, `Schemas.vscodeRemote`).
+- Don't hardcode URI scheme strings like `'file'`, `'untitled'`, or `'zyraxoncode-remote'`. Use the `Schemas` constants from `vs/base/common/network.ts` (e.g. `Schemas.file`, `Schemas.untitled`, `Schemas.zyraxoncodeRemote`).
 - Don't compare URIs with `===` or `uri.toString()`. Use the comparison utilities from `vs/base/common/resources.ts`: `isEqual` for equality, `isEqualOrParent` for containment, and `getComparisonKey` when a URI is used as a map/set key. These handle path-case sensitivity and fragment/authority correctly. When you need explicit control over case sensitivity, use an `ExtUri` instance (`extUri`, `extUriIgnorePathCase`, or `extUriBiasedIgnorePathCase`) instead of the bound helpers.
 
 ## Resource Labels

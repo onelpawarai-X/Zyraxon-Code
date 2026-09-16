@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 export namespace Copilot {
 
@@ -30,12 +30,12 @@ export namespace Copilot {
 	*
 	* Example:
 	* ```
-	* const copilot = vscode.extensions.getExtension("github.copilot");
+	* const copilot = zyraxoncode.extensions.getExtension("github.copilot");
 	* const contextProviderAPI = copilot.exports.getContextProviderAPI("v1") as ContextProviderApiV1;
 	* ```
 	*/
 	export interface ContextProviderApiV1 {
-		registerContextProvider<T extends SupportedContextItem>(provider: ContextProvider<T>): vscode.Disposable;
+		registerContextProvider<T extends SupportedContextItem>(provider: ContextProvider<T>): zyraxoncode.Disposable;
 	}
 
 	/**
@@ -59,12 +59,12 @@ export namespace Copilot {
 	*/
 	export interface ContextProvider<T extends SupportedContextItem> {
 		id: string;
-		selector: vscode.DocumentSelector;
+		selector: zyraxoncode.DocumentSelector;
 		resolver: ContextResolver<T>;
 	}
 
 	export interface ContextResolver<T extends SupportedContextItem> {
-		resolve(request: ResolveRequest, token: vscode.CancellationToken): Promise<T> | Promise<T[]> | AsyncIterable<T>;
+		resolve(request: ResolveRequest, token: zyraxoncode.CancellationToken): Promise<T> | Promise<T[]> | AsyncIterable<T>;
 		// Optional method to be invoked if the request timed out. This requests additional context items.
 		resolveOnTimeout?(request: ResolveRequest): T | readonly T[] | undefined;
 	}
@@ -151,7 +151,7 @@ export namespace Copilot {
 		/**
 		 * Data from completionItem
 		 *
-		 * See https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#completionItem
+		 * See __ZYRAXKEEP__0_
 		 */
 		data?: unknown;
 
@@ -199,8 +199,8 @@ export namespace Copilot {
 	}
 
 	export interface DiagnosticBag extends ContextItem {
-		uri: vscode.Uri;
-		values: vscode.Diagnostic[];
+		uri: zyraxoncode.Uri;
+		values: zyraxoncode.Diagnostic[];
 	}
 
 	export type SupportedContextItem = Trait | CodeSnippet | DiagnosticBag;

@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { BasePromptElementProps, PromptElement, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { DevContainerConfigFeature, DevContainerConfigTemplate } from '../../../../platform/devcontainer/common/devContainerConfigurationService';
 import { SafetyRules } from '../base/safetyRules';
 

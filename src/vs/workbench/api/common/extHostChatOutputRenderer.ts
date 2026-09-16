@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { CancellationToken } from '../../../base/common/cancellation.js';
 import { ExtHostChatOutputRendererShape, type IChatOutputRenderContextDto, IMainContext, MainContext, MainThreadChatOutputRendererShape } from './extHost.protocol.js';
 import { Disposable } from './extHostTypes.js';
@@ -16,7 +16,7 @@ export class ExtHostChatOutputRenderer implements ExtHostChatOutputRendererShape
 	private readonly _proxy: MainThreadChatOutputRendererShape;
 
 	private readonly _renderers = new Map</*viewType*/ string, {
-		readonly renderer: vscode.ChatOutputRenderer;
+		readonly renderer: zyraxoncode.ChatOutputRenderer;
 		readonly extension: IExtensionDescription;
 	}>();
 
@@ -27,7 +27,7 @@ export class ExtHostChatOutputRenderer implements ExtHostChatOutputRendererShape
 		this._proxy = mainContext.getProxy(MainContext.MainThreadChatOutputRenderer);
 	}
 
-	registerChatOutputRenderer(extension: IExtensionDescription, viewType: string, renderer: vscode.ChatOutputRenderer): vscode.Disposable {
+	registerChatOutputRenderer(extension: IExtensionDescription, viewType: string, renderer: zyraxoncode.ChatOutputRenderer): zyraxoncode.Disposable {
 		if (this._renderers.has(viewType)) {
 			throw new Error(`Chat output renderer already registered for: ${viewType}`);
 		}
@@ -48,7 +48,7 @@ export class ExtHostChatOutputRenderer implements ExtHostChatOutputRendererShape
 		}
 
 		const extHostWebview = this.webviews.createNewWebview(webviewHandle, {}, entry.extension);
-		const chatOutputWebview: vscode.ChatOutputWebview = Object.freeze({
+		const chatOutputWebview: zyraxoncode.ChatOutputWebview = Object.freeze({
 			webview: extHostWebview,
 			onDidDispose: extHostWebview._onDidDispose,
 		});

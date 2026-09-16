@@ -13,16 +13,16 @@ export const IChatDebugFileLoggerService = createServiceIdentifier<IChatDebugFil
 /**
  * Extract the chat session ID string from a session resource URI.
  *
- * - `vscode-chat-session://local/<base64EncodedSessionId>` — decodes base64
- * - `copilotcli:///<sessionId>` and `claude-code:///<sessionId>` — uses raw path segment
+ * - `__ZYRAXKEEP__0_<base64EncodedSessionId>` — decodes base64
+ * - `__ZYRAXKEEP__1_<sessionId>` and `__ZYRAXKEEP__2_<sessionId>` — uses raw path segment
  */
 export function sessionResourceToId(sessionResource: URI): string {
 	const pathSegment = sessionResource.path.replace(/^\//, '').split('/').pop() || '';
 	if (!pathSegment) {
 		return pathSegment;
 	}
-	// Only vscode-chat-session URIs use base64-encoded session IDs
-	if (sessionResource.scheme === 'vscode-chat-session') {
+	// Only zyraxoncode-chat-session URIs use base64-encoded session IDs
+	if (sessionResource.scheme === 'zyraxoncode-chat-session') {
 		try {
 			return new TextDecoder().decode(decodeBase64(pathSegment).buffer);
 		} catch {

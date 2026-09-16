@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { ILanguage } from '../../../util/common/languages';
 import { FilePathCodeMarker } from '../../context/node/resolvers/selectionContextHelpers';
@@ -101,7 +101,7 @@ export class CodeContextRegion {
 	 * If a `rangeToNotModify` is provided, it will not trim away lines included in that range.
 	 * @param rangeToNotModify Optional range to not modify while trimming.
 	 */
-	public trim(rangeToNotModify?: vscode.Range): void {
+	public trim(rangeToNotModify?: zyraxoncode.Range): void {
 		// remove empty lines from the beginning
 		// but do not trim away lines included in `rangeToNotModify`
 		const maxFirstLineIndex = rangeToNotModify ? Math.min(this.lastLineIndex, rangeToNotModify.start.line) : this.lastLineIndex;

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OutputMode, Raw, toMode } from '@vscode/prompt-tsx';
-import type { LanguageModelChatTool } from 'vscode';
+import { OutputMode, Raw, toMode } from '@zyraxoncode/prompt-tsx';
+import type { LanguageModelChatTool } from 'zyraxoncode';
 import { LRUCache } from '../../../util/common/cache';
 import { getImageDimensions } from '../../../util/common/imageUtils';
 import { createServiceIdentifier } from '../../../util/common/services';
@@ -178,7 +178,7 @@ class BPETokenizer extends Disposable implements ITokenizer {
 	/**
 	 * Counts tokens for a single chat message within a completion request.
 	 *
-	 * Follows https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb for GPT 3.5/4 models.
+	 * Follows __ZYRAXKEEP__0_ for GPT 3.5/4 models.
 	 *
 	 * **Note**: The result does not include base tokens for the completion itself.
 	 */
@@ -333,7 +333,7 @@ class BPETokenizer extends Disposable implements ITokenizer {
 
 //#region Image tokenizer helpers
 
-// https://platform.openai.com/docs/guides/vision#calculating-costs
+// __ZYRAXKEEP__1_
 export function calculateImageTokenCost(imageUrl: string, detail: 'low' | 'high' | 'auto' | undefined): number {
 	let { width, height } = getImageDimensions(imageUrl);
 

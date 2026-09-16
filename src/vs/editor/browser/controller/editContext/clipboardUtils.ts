@@ -131,7 +131,7 @@ const ClipboardEventUtils = {
 	getTextData(clipboardData: IReadableClipboardData | DataTransfer): [string, ClipboardStoredMetadata | null] {
 		const text = clipboardData.getData(Mimes.text);
 		let metadata: ClipboardStoredMetadata | null = null;
-		const rawmetadata = clipboardData.getData('vscode-editor-data');
+		const rawmetadata = clipboardData.getData('zyraxoncode-editor-data');
 		if (typeof rawmetadata === 'string') {
 			try {
 				metadata = <ClipboardStoredMetadata>JSON.parse(rawmetadata);
@@ -155,7 +155,7 @@ const ClipboardEventUtils = {
 		if (typeof html === 'string') {
 			clipboardData.setData('text/html', html);
 		}
-		clipboardData.setData('vscode-editor-data', JSON.stringify(metadata));
+		clipboardData.setData('zyraxoncode-editor-data', JSON.stringify(metadata));
 	}
 };
 

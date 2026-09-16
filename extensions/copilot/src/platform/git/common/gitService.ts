@@ -10,7 +10,7 @@ import { Event } from '../../../util/vs/base/common/event';
 import { IObservable } from '../../../util/vs/base/common/observableInternal';
 import { equalsIgnoreCase } from '../../../util/vs/base/common/strings';
 import { URI } from '../../../util/vs/base/common/uri';
-import { Branch, Change, CommitOptions, CommitShortStat, DiffChange, Ref, RefQuery, Repository, RepositoryAccessDetails, RepositoryKind, Worktree } from '../vscode/git';
+import { Branch, Change, CommitOptions, CommitShortStat, DiffChange, Ref, RefQuery, Repository, RepositoryAccessDetails, RepositoryKind, Worktree } from '../zyraxoncode/git';
 
 export interface RepoContext {
 	readonly rootUri: URI;
@@ -166,7 +166,7 @@ export function parseRemoteUrl(fetchUrl: string): { host: string; rawHost: strin
 	fetchUrl = fetchUrl.trim();
 	try {
 		// Normalize git shorthand syntax (git@github.com:user/repo.git) into an explicit ssh:// url
-		// See https://git-scm.com/docs/git-clone/2.35.0#_git_urls
+		// See __ZYRAXKEEP__0_
 		if (/^[\w\d\-]+@/i.test(fetchUrl)) {
 			const parts = fetchUrl.split(':');
 			if (parts.length !== 2) {
@@ -233,7 +233,7 @@ export function toGithubNwo(id: GithubRepoId): string {
 }
 
 export function toGithubWebUrl(id: GithubRepoId): string {
-	return `https://${id.host}/${id.org}/${id.repo}`;
+	return `__ZYRAXKEEP__1_{id.host}/${id.org}/${id.repo}`;
 }
 
 /**
@@ -290,9 +290,9 @@ export function getAdoRepoIdFromFetchUrl(fetchUrl: string): AdoRepoId | undefine
 		return undefined;
 	}
 
-	// Http: https://dev.azure.com/organization/project/_git/repository
-	// Http: https://dev.azure.com/organization/project/_git/_optimized/repository
-	// Http: https://dev.azure.com/organization/project/_git/_full/repository
+	// Http: __ZYRAXKEEP__2_
+	// Http: __ZYRAXKEEP__3_
+	// Http: __ZYRAXKEEP__4_
 	if (parsed.host === 'dev.azure.com') {
 		const partsMatch = parsed.path.match(/^\/?(?<org>[^/]+)\/(?<project>[^/]+?)\/_git\/(?:_(?:optimized|full)\/)?(?<repo>[^/]+?)(\.git|\/)?$/i);
 		if (partsMatch?.groups) {
@@ -312,7 +312,7 @@ export function getAdoRepoIdFromFetchUrl(fetchUrl: string): AdoRepoId | undefine
 		return undefined;
 	}
 
-	// legacy https: https://organization.visualstudio.com/project/_git/repository
+	// legacy https: __ZYRAXKEEP__5_
 	// Legacy ssh: git@organization.visualstudio.com:v3/organization/project/repository
 	if (parsed.host.endsWith('.visualstudio.com')) {
 		const hostMatch = parsed.host.match(/^(?<org>[^\.]+)\.visualstudio\.com$/i);
@@ -326,12 +326,12 @@ export function getAdoRepoIdFromFetchUrl(fetchUrl: string): AdoRepoId | undefine
 			// Legacy ssh:  git@organization.visualstudio.com:v3/organization/project/_full/repository
 			parsed.path.match(/^\/(v3\/)(?<org>[^/]+?)\/(?<project>[^/]+?)\/(?:_(?:optimized|full)\/)?(?<repo>[^/]+?)(\.git|\/)?$/i)
 
-			// legacy https: https://organization.visualstudio.com/project/_git/repository
-			// legacy https: https://organization.visualstudio.com/project/_git/_optimized/repository
-			// legacy https: https://organization.visualstudio.com/project/_git/_full/repository
-			// or legacy https: https://organization.visualstudio.com/collection/project/_git/repository
-			// or legacy https: https://organization.visualstudio.com/collection/project/_git/_optimized/repository
-			// or legacy https: https://organization.visualstudio.com/collection/project/_git/_full/repository
+			// legacy https: __ZYRAXKEEP__6_
+			// legacy https: __ZYRAXKEEP__7_
+			// legacy https: __ZYRAXKEEP__8_
+			// or legacy https: __ZYRAXKEEP__9_
+			// or legacy https: __ZYRAXKEEP__10_
+			// or legacy https: __ZYRAXKEEP__11_
 			?? parsed.path.match(/^\/?((?<collection>[^/]+?)\/)?(?<project>[^/]+?)\/_git\/(?:_(?:optimized|full)\/)?(?<repo>[^/]+?)(\.git|\/)?$/i);
 		if (partsMatch?.groups) {
 			return new AdoRepoId(hostMatch.groups.org, partsMatch.groups.project, partsMatch.groups.repo);
@@ -351,7 +351,7 @@ export function getAdoRepoIdFromFetchUrl(fetchUrl: string): AdoRepoId | undefine
 export function normalizeFetchUrl(fetchUrl: string): string {
 	// Handle SSH shorthand (git@host:project/repo.git)
 	if (/^[\w\d\-]+@[\w\d\.\-]+:/.test(fetchUrl)) {
-		fetchUrl = fetchUrl.replace(/([\w\d\-]+)@([\w\d\.\-]+):(.+)/, 'https://$2/$3');
+		fetchUrl = fetchUrl.replace(/([\w\d\-]+)@([\w\d\.\-]+):(.+)/, '__ZYRAXKEEP__12_');
 		return fetchUrl;
 	}
 

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { LogOutputChannel, Memento, Uri, workspace } from 'vscode';
+import { LogOutputChannel, Memento, Uri, workspace } from 'zyraxoncode';
 import { LRUCache } from './cache';
 import type { Remote, RepositoryAccessDetails } from './api/git';
 import { isDescendant } from './util';
@@ -85,7 +85,7 @@ export class RepositoryCache {
 	/**
 	 * Associate a repository remote URL with a local workspace folder or workspace file.
 	 * Re-associating bumps recency and persists the updated LRU state.
-	 * @param repoUrl Remote repository URL (e.g. https://github.com/owner/repo.git)
+	 * @param repoUrl Remote repository URL (e.g. __ZYRAXKEEP__0_)
 	 * @param rootPath Root path of the local repo clone.
 	 */
 	set(repoUrl: string, rootPath: string): void {

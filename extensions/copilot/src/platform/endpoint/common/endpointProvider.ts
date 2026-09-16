@@ -4,12 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import { RequestMetadata } from '@vscode/copilot-api';
-import type { LanguageModelChat } from 'vscode';
+import { RequestMetadata } from '@zyraxoncode/copilot-api';
+import type { LanguageModelChat } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { TokenizerType } from '../../../util/common/tokenizer';
 import { Event } from '../../../util/vs/base/common/event';
-import type { ChatRequest } from '../../../vscodeTypes';
+import type { ChatRequest } from '../../../zyraxoncodeTypes';
 import { IChatEndpoint, IEmbeddingsEndpoint } from '../../networking/common/networking';
 
 export type CustomModel = {

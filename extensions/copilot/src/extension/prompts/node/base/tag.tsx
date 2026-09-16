@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, TextChunk, useKeepWith } from '@vscode/prompt-tsx';
+import { PromptElement, PromptElementProps, TextChunk, useKeepWith } from '@zyraxoncode/prompt-tsx';
 
 export type TagProps = PromptElementProps<{
 	name: string;

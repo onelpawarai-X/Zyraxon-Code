@@ -21,4 +21,4 @@ export const AiAgentEnvVar = 'AI_AGENT';
  * (in-workbench) harness terminal tool, the agent host process and every agent
  * SDK subprocess it launches — otherwise the surface is under-counted.
  */
-export const AiAgentEnvValue = 'github_copilot_vscode_agent';
+export const AiAgentEnvValue = 'github_copilot_zyraxoncode_agent';

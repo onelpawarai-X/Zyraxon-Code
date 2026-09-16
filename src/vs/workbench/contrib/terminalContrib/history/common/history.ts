@@ -438,7 +438,7 @@ export async function fetchFishHistory(accessor: ServicesAccessor): Promise<IShe
 	 * > The command history is stored in the file ~/.local/share/fish/fish_history
 	 *   (or $XDG_DATA_HOME/fish/fish_history if that variable is set) by default.
 	 *
-	 * (https://fishshell.com/docs/current/interactive.html#history-search)
+	 * (__ZYRAXKEEP__0_)
 	 */
 	const overridenDataHome = env['XDG_DATA_HOME'];
 
@@ -467,8 +467,8 @@ export async function fetchFishHistory(accessor: ServicesAccessor): Promise<IShe
 	 * These apply to `fish` v3.5.1:
 	 * - It looks like YAML but it's not. It's, quoting, *"a broken psuedo-YAML"*.
 	 *   See these discussions for more details:
-	 *   - https://github.com/fish-shell/fish-shell/pull/6493
-	 *   - https://github.com/fish-shell/fish-shell/issues/3341
+	 *   - __ZYRAXKEEP__1_
+	 *   - __ZYRAXKEEP__2_
 	 * - Every record should exactly start with `- cmd:` (the whitespace between `-` and `cmd` cannot be replaced with tab)
 	 * - Both `- cmd: echo 1` and `- cmd:echo 1` are valid entries.
 	 * - Backslashes are esacped as `\\`.
@@ -535,7 +535,7 @@ async function fetchFileContents(
 	const connection = remoteAgentService.getConnection();
 	const isRemote = !!connection?.remoteAuthority;
 	const resource = URI.from({
-		scheme: isRemote ? Schemas.vscodeRemote : Schemas.file,
+		scheme: isRemote ? Schemas.zyraxoncodeRemote : Schemas.file,
 		authority: isRemote ? connection.remoteAuthority : undefined,
 		path: URI.file(join(folderPrefix, filePath)).path
 	});

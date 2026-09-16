@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { basename } from 'path';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { DocumentId } from '../../../platform/inlineEdits/common/dataTypes/documentId';
 import { Edits, RootedEdit } from '../../../platform/inlineEdits/common/dataTypes/edit';
@@ -178,7 +178,7 @@ function getSourcePatchIndex(cachedEdit: CachedOrRebasedEdit): number | undefine
 		: cachedEdit.patchIndex;
 }
 
-export interface NESInlineCompletionContext extends vscode.InlineCompletionContext {
+export interface NESInlineCompletionContext extends zyraxoncode.InlineCompletionContext {
 	enforceCacheDelay: boolean;
 	changeHint?: NesChangeHint;
 }

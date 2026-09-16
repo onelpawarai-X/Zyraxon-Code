@@ -5,34 +5,34 @@
 
 /* Alert color mappings using theme variables */
 blockquote[data-severity="note"] {
-	--vscode-textBlockQuote-border: var(--vscode-markdownAlert-note-foreground);
+	--zyraxoncode-textBlockQuote-border: var(--zyraxoncode-markdownAlert-note-foreground);
 }
 
 blockquote[data-severity="tip"] {
-	--vscode-textBlockQuote-border: var(--vscode-markdownAlert-tip-foreground);
+	--zyraxoncode-textBlockQuote-border: var(--zyraxoncode-markdownAlert-tip-foreground);
 }
 
 blockquote[data-severity="important"] {
-	--vscode-textBlockQuote-border: var(--vscode-markdownAlert-important-foreground);
+	--zyraxoncode-textBlockQuote-border: var(--zyraxoncode-markdownAlert-important-foreground);
 }
 
 blockquote[data-severity="warning"] {
-	--vscode-textBlockQuote-border: var(--vscode-markdownAlert-warning-foreground);
+	--zyraxoncode-textBlockQuote-border: var(--zyraxoncode-markdownAlert-warning-foreground);
 }
 
 blockquote[data-severity="caution"] {
-	--vscode-textBlockQuote-border: var(--vscode-markdownAlert-caution-foreground);
+	--zyraxoncode-textBlockQuote-border: var(--zyraxoncode-markdownAlert-caution-foreground);
 }
 
 /* Alert title styling */
 blockquote[data-severity] > p > :first-child {
 	display: inline-flex;
 	align-items: center;
-	color: var(--vscode-textBlockQuote-border);
+	color: var(--zyraxoncode-textBlockQuote-border);
 	font-weight: bolder;
 }
 
 blockquote[data-severity] > p > :first-child .codicon {
-	color: var(--vscode-textBlockQuote-border);
+	color: var(--zyraxoncode-textBlockQuote-border);
 	padding-right: 6px;
 }

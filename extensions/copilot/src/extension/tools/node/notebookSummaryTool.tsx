@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { PromptElement, PromptElementProps, PromptSizing } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { PromptElement, PromptElementProps, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IAlternativeNotebookContentService } from '../../../platform/notebook/common/alternativeContent';
 import { getCellId } from '../../../platform/notebook/common/helpers';
 import { INotebookSummaryTracker } from '../../../platform/notebook/common/notebookSummaryTracker';
@@ -13,7 +13,7 @@ import { IPromptPathRepresentationService } from '../../../platform/prompts/comm
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { findNotebook } from '../../../util/common/notebooks';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelPromptTsxPart, LanguageModelToolResult, MarkdownString, NotebookCellKind, Position } from '../../../vscodeTypes';
+import { LanguageModelPromptTsxPart, LanguageModelToolResult, MarkdownString, NotebookCellKind, Position } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { NotebookVariables } from '../../prompts/node/panel/notebookVariables';
@@ -42,7 +42,7 @@ export class NotebookSummaryTool implements ICopilotTool<INotebookSummaryToolPar
 		@ILogService private readonly logger: ILogService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<INotebookSummaryToolParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<INotebookSummaryToolParams>, token: zyraxoncode.CancellationToken) {
 		this.logger.trace(`Invoking Notebook Summary Tool for file ${options.input.filePath}`);
 		let uri = this.promptPathRepresentationService.resolveFilePath(options.input.filePath);
 		if (!uri) {
@@ -94,7 +94,7 @@ export class NotebookSummaryTool implements ICopilotTool<INotebookSummaryToolPar
 		return input;
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<INotebookSummaryToolParams>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<INotebookSummaryToolParams>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		return {
 			invocationMessage: new MarkdownString(l10n.t`Retrieving Notebook summary.`)
 		};
@@ -106,7 +106,7 @@ ToolRegistry.registerTool(NotebookSummaryTool);
 
 
 type NotebookStatePromptProps = PromptElementProps<{
-	notebook: vscode.NotebookDocument;
+	notebook: zyraxoncode.NotebookDocument;
 	altDoc: AlternativeNotebookDocument | undefined;
 	includeCellLines: boolean;
 }>;

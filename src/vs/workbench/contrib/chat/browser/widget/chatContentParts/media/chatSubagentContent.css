@@ -62,7 +62,7 @@
 
 		.chat-collapsible-markdown-content {
 			.rendered-markdown {
-				font-size: var(--vscode-chat-font-size-body-s);
+				font-size: var(--zyraxoncode-chat-font-size-body-s);
 				line-height: 1.5em;
 			}
 		}
@@ -76,24 +76,24 @@
 		background: none;
 		border: none;
 		outline: none;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 		cursor: pointer;
-		font-size: var(--vscode-chat-font-size-body-s);
+		font-size: var(--zyraxoncode-chat-font-size-body-s);
 		position: relative;
 
 		&::before {
 			content: '\2022';
 			position: absolute;
 			left: 8px;
-			color: var(--vscode-descriptionForeground);
+			color: var(--zyraxoncode-descriptionForeground);
 		}
 
 		&:hover {
-			color: var(--vscode-textLink-foreground);
+			color: var(--zyraxoncode-textLink-foreground);
 		}
 
 		&:focus-visible {
-			outline: 1px solid var(--vscode-focusBorder);
+			outline: 1px solid var(--zyraxoncode-focusBorder);
 			outline-offset: 2px;
 		}
 	}

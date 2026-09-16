@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, Raw } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, Raw } from '@zyraxoncode/prompt-tsx';
 import { CustomDataPartMimeTypes } from './endpointTypes';
 
 /**
@@ -20,7 +20,7 @@ export type StatefulMarkerWithModel = {
 	/**
 	 * The local summary generation included when an extension-contributed/BYOK
 	 * response created this marker. Used only to filter stale markers before
-	 * crossing the `vscode.lm` boundary; first-party state is managed separately.
+	 * crossing the `zyraxoncode.lm` boundary; first-party state is managed separately.
 	 */
 	summarizedAtRoundId?: string;
 };

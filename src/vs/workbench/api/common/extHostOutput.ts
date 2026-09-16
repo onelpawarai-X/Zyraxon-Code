@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { MainContext, MainThreadOutputServiceShape, ExtHostOutputServiceShape } from './extHost.protocol.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { URI } from '../../../base/common/uri.js';
 import { createDecorator } from '../../../platform/instantiation/common/instantiation.js';
 import { IExtHostRpcService } from './extHostRpcService.js';
@@ -22,7 +22,7 @@ import { Emitter } from '../../../base/common/event.js';
 import { DisposableStore, toDisposable } from '../../../base/common/lifecycle.js';
 import { ResourceMap } from '../../../base/common/map.js';
 
-class ExtHostOutputChannel extends AbstractMessageLogger implements vscode.LogOutputChannel {
+class ExtHostOutputChannel extends AbstractMessageLogger implements zyraxoncode.LogOutputChannel {
 
 	private offset: number = 0;
 
@@ -68,7 +68,7 @@ class ExtHostOutputChannel extends AbstractMessageLogger implements vscode.LogOu
 		}
 	}
 
-	show(columnOrPreserveFocus?: vscode.ViewColumn | boolean, preserveFocus?: boolean): void {
+	show(columnOrPreserveFocus?: zyraxoncode.ViewColumn | boolean, preserveFocus?: boolean): void {
 		this.logger.flush();
 		this.proxy.$reveal(this.id, !!(typeof columnOrPreserveFocus === 'boolean' ? columnOrPreserveFocus : preserveFocus));
 	}
@@ -105,7 +105,7 @@ export class ExtHostOutputService implements ExtHostOutputServiceShape {
 	private readonly outputsLocation: URI;
 	private outputDirectoryPromise: Thenable<URI> | undefined;
 	private readonly extensionLogDirectoryCreationPromise = new ResourceMap<Thenable<void>>();
-	private readonly logOutputChannels = new ResourceMap<vscode.OutputChannel>();
+	private readonly logOutputChannels = new ResourceMap<zyraxoncode.OutputChannel>();
 	private namePool: number = 1;
 
 	private readonly channels = new Map<string, ExtHostLogOutputChannel | ExtHostOutputChannel>();
@@ -130,7 +130,7 @@ export class ExtHostOutputService implements ExtHostOutputServiceShape {
 		}
 	}
 
-	createOutputChannel(name: string, options: string | { log: true } | undefined, extension: IExtensionDescription): vscode.OutputChannel | vscode.LogOutputChannel {
+	createOutputChannel(name: string, options: string | { log: true } | undefined, extension: IExtensionDescription): zyraxoncode.OutputChannel | zyraxoncode.LogOutputChannel {
 		name = name.trim();
 		if (!name) {
 			throw new Error('illegal argument `name`. must not be falsy');
@@ -219,7 +219,7 @@ export class ExtHostOutputService implements ExtHostOutputServiceShape {
 		return extensionLogDirectoryPromise;
 	}
 
-	private createExtHostOutputChannel(name: string, channelPromise: Promise<ExtHostOutputChannel>, channelDisposables: DisposableStore): vscode.OutputChannel {
+	private createExtHostOutputChannel(name: string, channelPromise: Promise<ExtHostOutputChannel>, channelDisposables: DisposableStore): zyraxoncode.OutputChannel {
 		const validate = () => {
 			if (channelDisposables.isDisposed) {
 				throw new Error('Channel has been closed');
@@ -244,7 +244,7 @@ export class ExtHostOutputService implements ExtHostOutputServiceShape {
 				validate();
 				channelPromise.then(channel => channel.replace(value));
 			},
-			show(columnOrPreserveFocus?: vscode.ViewColumn | boolean, preserveFocus?: boolean): void {
+			show(columnOrPreserveFocus?: zyraxoncode.ViewColumn | boolean, preserveFocus?: boolean): void {
 				validate();
 				channelPromise.then(channel => channel.show(columnOrPreserveFocus, preserveFocus));
 			},
@@ -258,7 +258,7 @@ export class ExtHostOutputService implements ExtHostOutputServiceShape {
 		};
 	}
 
-	private createExtHostLogOutputChannel(name: string, logLevel: LogLevel, channelPromise: Promise<ExtHostOutputChannel>, channelDisposables: DisposableStore): vscode.LogOutputChannel {
+	private createExtHostLogOutputChannel(name: string, logLevel: LogLevel, channelPromise: Promise<ExtHostOutputChannel>, channelDisposables: DisposableStore): zyraxoncode.LogOutputChannel {
 		const validate = () => {
 			if (channelDisposables.isDisposed) {
 				throw new Error('Channel has been closed');

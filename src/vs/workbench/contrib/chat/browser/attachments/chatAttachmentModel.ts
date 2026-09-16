@@ -63,7 +63,7 @@ export class ChatAttachmentModel extends Disposable {
 				this.addContext(context);
 			}
 			return;
-		} else if (uri.scheme === Schemas.vscodeBrowser) {
+		} else if (uri.scheme === Schemas.zyraxoncodeBrowser) {
 			const entry = await this.chatAttachmentResolveService.resolveEditorAttachContext({ resource: uri });
 			if (entry) {
 				this.addContext(entry);

@@ -89,8 +89,8 @@ npm run perf:chat -- \
 
 # Compare two production builds:
 npm run perf:chat -- \
-  --build ../VSCode-darwin-arm64-feature/Code\ -\ OSS.app/Contents/MacOS/Code\ -\ OSS \
-  --baseline-build ../VSCode-darwin-arm64-main/Code\ -\ OSS.app/Contents/MacOS/Code\ -\ OSS \
+  --build ../ZyraxonCode-darwin-arm64-feature/Code\ -\ OSS.app/Contents/MacOS/Code\ -\ OSS \
+  --baseline-build ../ZyraxonCode-darwin-arm64-main/Code\ -\ OSS.app/Contents/MacOS/Code\ -\ OSS \
   --runs 5
 ```
 
@@ -103,7 +103,7 @@ The tool classifies builds into three modes based on the executable path:
 | Mode | Source | Characteristics |
 |---|---|---|
 | `dev` | `.build/electron/` (local dev) | Unbundled sources, `VSCODE_DEV=1`, `NODE_ENV=development`. Higher memory and startup overhead. |
-| `production` | `../VSCode-<platform>-<arch>/` (from `gulp zyraxon`) | Bundled JS, no dev flags. Matches release characteristics but uses local source. |
+| `production` | `../ZyraxonCode-<platform>-<arch>/` (from `gulp zyraxon`) | Bundled JS, no dev flags. Matches release characteristics but uses local source. |
 | `release` | `./` (downloaded via ``) | Official published build. |
 
 When test and baseline builds have different modes (e.g. dev vs release), the tool shows a warning and prompts for confirmation. Use `--force` or `--ci` to skip the prompt.
@@ -125,7 +125,7 @@ npm run perf:chat -- --test-setting chat.experimental.incrementalRendering.enabl
 
 # Compare two builds with different settings:
 npm run perf:chat -- \
-  --baseline-build "../vscode2/.build/electron/ZYRAXON Code.app/Contents/MacOS/ZYRAXON Code" \
+  --baseline-build "../zyraxoncode2/.build/electron/ZYRAXON Code.app/Contents/MacOS/ZYRAXON Code" \
   --baseline-setting chat.experimental.incrementalRendering.enabled=true \
   --test-setting chat.experimental.incrementalRendering.enabled=false \
   --runs 3
@@ -241,16 +241,16 @@ The perf + leak checks run in CI via the **`.github/workflows/chat-perf.yml`** w
 
 ```bash
 # List recent runs (most recent first) — note the run IDs and dates
-gh run list --workflow chat-perf.yml -R microsoft/zyraxon --limit 30 \
+gh run list --workflow chat-perf.yml -R zyraxon/zyraxon --limit 30 \
   --json databaseId,status,conclusion,createdAt,headBranch \
   --jq '.[] | [.databaseId, (.conclusion//.status), .createdAt, .headBranch] | @tsv'
 
 # See a run's per-job results
-gh run view <run-id> -R microsoft/zyraxon --json jobs \
+gh run view <run-id> -R zyraxon/zyraxon --json jobs \
   --jq '.jobs[] | [.name, (.conclusion//.status)] | @tsv'
 
 # Trigger a run manually against any ref/version:
-gh workflow run chat-perf.yml -R microsoft/zyraxon --ref main \
+gh workflow run chat-perf.yml -R zyraxon/zyraxon --ref main \
   -f test_build=<branch|sha|version> -f baseline_build=<version>
 ```
 
@@ -265,11 +265,11 @@ gh workflow run chat-perf.yml -R microsoft/zyraxon --ref main \
 
 ```bash
 # List a run's artifacts + whether they've expired
-gh api repos/microsoft/vscode/actions/runs/<run-id>/artifacts \
+gh api repos/zyraxon/zyraxoncode/actions/runs/<run-id>/artifacts \
   --jq '.artifacts[] | [.name, .expired] | @tsv'
 
 # Download the human-readable summary (best first stop; survives 30 days)
-gh run download <run-id> -R microsoft/zyraxon -n chat-perf-summary
+gh run download <run-id> -R zyraxon/zyraxon -n chat-perf-summary
 ```
 
 ### Pinpointing where a metric regressed / went flaky
@@ -305,7 +305,7 @@ The mock LLM server (`common/mock-llm-server.js`) implements the full CAPI URL s
 - `POST /chat/completions` — SSE streaming response matching the scenario
 - Agent, session, telemetry, and token endpoints
 
-The copilot extension connects to this server via `IS_SCENARIO_AUTOMATION=1` mode with `overrideCapiUrl` and `overrideProxyUrl` settings. The `vscode-api-tests` extension must be disabled (`--disable-extension=vscode.vscode-api-tests`) because it contributes a duplicate `copilot` vendor that blocks the real extension's language model provider registration.
+The copilot extension connects to this server via `IS_SCENARIO_AUTOMATION=1` mode with `overrideCapiUrl` and `overrideProxyUrl` settings. The `zyraxoncode-api-tests` extension must be disabled (`--disable-extension=zyraxoncode.zyraxoncode-api-tests`) because it contributes a duplicate `copilot` vendor that blocks the real extension's language model provider registration.
 
 ### Adding a scenario
 

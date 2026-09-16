@@ -37,5 +37,5 @@ export function getCopilotCLIWorkspaceFile(sessionId: string) {
  * installs (Stable, Insiders, OSS, Exploration) and the Agents application.
  */
 export function getCopilotBulkMetadataFile(): string {
-	return join(getCopilotHome(), 'vscode.session.metadata.cache.json');
+	return join(getCopilotHome(), 'zyraxoncode.session.metadata.cache.json');
 }

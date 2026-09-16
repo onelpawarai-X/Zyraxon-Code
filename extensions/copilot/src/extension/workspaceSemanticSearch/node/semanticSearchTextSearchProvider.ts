@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { FileChunk } from '../../../platform/chunking/common/chunk';
 import { IRunCommandExecutionService } from '../../../platform/commands/common/runCommandExecutionService';
@@ -25,7 +25,7 @@ import { StopWatch } from '../../../util/vs/base/common/stopwatch';
 import * as strings from '../../../util/vs/base/common/strings';
 import { URI } from '../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
-import { AISearchKeyword, ChatResponseReferencePart, ChatLocation as DeprecatedChatLocation, Position, TextSearchMatch2, Range as VSCodeRange } from '../../../vscodeTypes';
+import { AISearchKeyword, ChatResponseReferencePart, ChatLocation as DeprecatedChatLocation, Position, TextSearchMatch2, Range as ZyraxonCodeRange } from '../../../zyraxoncodeTypes';
 import { IIntentService } from '../../intents/node/intentService';
 import { ChatVariablesCollection } from '../../prompt/common/chatVariablesCollection';
 import { ISearchPanelKeywordsPromptContext } from '../../prompts/node/panel/searchPanelKeywordsPrompt';
@@ -61,7 +61,7 @@ export interface IRankResult {
 	query: string;
 }
 
-export class SemanticSearchTextSearchProvider extends Disposable implements vscode.AITextSearchProvider {
+export class SemanticSearchTextSearchProvider extends Disposable implements zyraxoncode.AITextSearchProvider {
 	private _endpoint: IChatEndpoint | undefined = undefined;
 	public readonly name: string = 'Copilot';
 	public static feedBackSentKey = 'github.copilot.search.feedback.sent';
@@ -99,16 +99,16 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 		this._commandService.executeCommand('setContext', SemanticSearchTextSearchProvider.feedBackSentKey, false);
 	}
 
-	private getPreviewRange(previewText?: string, symbolsToHighlight?: TreeSitterExpressionInfo[] | undefined): VSCodeRange {
+	private getPreviewRange(previewText?: string, symbolsToHighlight?: TreeSitterExpressionInfo[] | undefined): ZyraxonCodeRange {
 		if (!previewText) {
-			return new VSCodeRange(new Position(0, 0), new Position(0, 0));
+			return new ZyraxonCodeRange(new Position(0, 0), new Position(0, 0));
 		}
 		if (symbolsToHighlight && symbolsToHighlight.length > 0) {
 			// Find the first symbol that actually exists in the previewText
 			for (const symbol of symbolsToHighlight) {
 				const index = previewText.indexOf(symbol.text);
 				if (index !== -1) {
-					return new VSCodeRange(
+					return new ZyraxonCodeRange(
 						new Position(0, index),
 						new Position(0, index + symbol.text.length)
 					);
@@ -120,23 +120,23 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 		const startIndex = firstNonWhitespaceIndex !== -1 && firstNonWhitespaceIndex !== previewText.length ?
 			firstNonWhitespaceIndex : 0;
 
-		return new VSCodeRange(
+		return new ZyraxonCodeRange(
 			new Position(0, startIndex),
 			new Position(0, previewText.length)
 		);
 	}
 
-	provideAITextSearchResults(query: string, options: vscode.TextSearchProviderOptions, progress: vscode.Progress<vscode.TextSearchResult2>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextSearchComplete2> {
+	provideAITextSearchResults(query: string, options: zyraxoncode.TextSearchProviderOptions, progress: zyraxoncode.Progress<zyraxoncode.TextSearchResult2>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.TextSearchComplete2> {
 		this.resetFeedbackContext();
 		const sw = new StopWatch();
 		const getResults = async () => {
-			const chatProgress: vscode.Progress<ChatResponseReferencePart | vscode.ChatResponseProgressPart> = {
+			const chatProgress: zyraxoncode.Progress<ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart> = {
 				report(_obj) { }
 			};
 			this._logService.trace(`Starting semantic search for ${query}`);
 			SemanticSearchTextSearchProvider.latestQuery = query;
-			const includes = new Set<vscode.GlobPattern>();
-			const excludes = new Set<vscode.GlobPattern>();
+			const includes = new Set<zyraxoncode.GlobPattern>();
+			const excludes = new Set<zyraxoncode.GlobPattern>();
 			for (const folder of options.folderOptions) {
 				if (folder.includes) {
 					folder.includes.forEach(e => {
@@ -185,7 +185,7 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 			const chunkResults = result.chunks.map(c => c.chunk);
 			const intent = this._intentService.getIntent('searchPanel', ChatLocation.Other);
 			if (intent) {
-				const request: vscode.ChatRequest = {
+				const request: zyraxoncode.ChatRequest = {
 					location: DeprecatedChatLocation.Panel,
 					location2: undefined,
 					command: 'searchPanel',
@@ -204,7 +204,7 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 					hasHooksEnabled: false,
 				};
 				const intentInvocation = await intent.invoke({ location: ChatLocation.Other, request });
-				const progress: vscode.Progress<ChatResponseReferencePart | vscode.ChatResponseProgressPart> = {
+				const progress: zyraxoncode.Progress<ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart> = {
 					report(_obj) { }
 				};
 				const buildPromptContext: ISearchPanelPromptContext = {
@@ -305,7 +305,7 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 
 
 			this._logService.debug(`Semantic search took ${sw.elapsed()}ms`);
-			return { limitHit: false } satisfies vscode.TextSearchComplete;
+			return { limitHit: false } satisfies zyraxoncode.TextSearchComplete;
 		};
 		return getResults();
 	}
@@ -421,9 +421,9 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 		}
 	}
 
-	async reportSearchResults(rankingResults: IRankResult[], combinedChunks: FileChunk[], progress: vscode.Progress<vscode.AISearchResult>, token: vscode.CancellationToken): Promise<void> {
-		const onResult: vscode.Progress<vscode.TextSearchResult> = {
-			report: async (result: vscode.TextSearchMatch) => {
+	async reportSearchResults(rankingResults: IRankResult[], combinedChunks: FileChunk[], progress: zyraxoncode.Progress<zyraxoncode.AISearchResult>, token: zyraxoncode.CancellationToken): Promise<void> {
+		const onResult: zyraxoncode.Progress<zyraxoncode.TextSearchResult> = {
+			report: async (result: zyraxoncode.TextSearchMatch) => {
 				const docContainingRef = await this.workspaceService.openTextDocumentAndSnapshot(result.uri);
 				const resultAST = this._parserService.getTreeSitterAST(
 					{ languageId: docContainingRef.languageId, getText: () => docContainingRef.getText() });
@@ -434,7 +434,7 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 				const ranges = result.ranges instanceof Array
 					? result.ranges.map(r => {
 						return {
-							sourceRange: new VSCodeRange(
+							sourceRange: new ZyraxonCodeRange(
 								new Position(r.start.line, r.start.character),
 								new Position(r.end.line, (result.preview.text?.length || 0) + r.end.character)
 							),
@@ -442,13 +442,13 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 						};
 					})
 					: [{
-						sourceRange: new VSCodeRange(
+						sourceRange: new ZyraxonCodeRange(
 							new Position(result.ranges.start.line, result.ranges.start.character),
 							new Position(result.ranges.end.line, (result.preview.text?.length || 0) + result.ranges.end.character),
 						),
 						previewRange: this.getPreviewRange(result.preview.text, symbolsToHighlight),
 					}];
-				const match: vscode.TextSearchMatch2 = new TextSearchMatch2(
+				const match: zyraxoncode.TextSearchMatch2 = new TextSearchMatch2(
 					result.uri,
 					ranges,
 					result.preview.text
@@ -481,10 +481,10 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 				endIndex: docContainingRef.offsetAt(new Position(chunk.range.endLineNumber, chunk.range.endColumn)),
 			});
 			const rangeText = docContainingRef.getText().split('\n').slice(chunk.range.startLineNumber, chunk.range.endLineNumber).join('\n');
-			const match: vscode.TextSearchMatch2 = new TextSearchMatch2(
+			const match: zyraxoncode.TextSearchMatch2 = new TextSearchMatch2(
 				chunk.file,
 				[{
-					sourceRange: new VSCodeRange(
+					sourceRange: new ZyraxonCodeRange(
 						chunk.range.startLineNumber,
 						chunk.range.startColumn,
 						chunk.range.endLineNumber,
@@ -498,7 +498,7 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 		}
 	}
 
-	async treeSitterAIKeywords(query: string, progress: vscode.Progress<vscode.AISearchResult>, chunks: FileChunk[], token: vscode.CancellationToken): Promise<void> {
+	async treeSitterAIKeywords(query: string, progress: zyraxoncode.Progress<zyraxoncode.AISearchResult>, chunks: FileChunk[], token: zyraxoncode.CancellationToken): Promise<void> {
 		const keywordSearchDuration = Date.now();
 		const symbols = new Set<string>();
 		for (const chunk of chunks) {
@@ -513,7 +513,7 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 		}
 		const searchKeywordsIntent = this._intentService.getIntent('searchKeywords', ChatLocation.Other);
 		if (searchKeywordsIntent) {
-			const request: vscode.ChatRequest = {
+			const request: zyraxoncode.ChatRequest = {
 				location: DeprecatedChatLocation.Panel,
 				location2: undefined,
 				command: 'searchKeywords',
@@ -532,7 +532,7 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 				hasHooksEnabled: false,
 			};
 			const intentInvocation = await searchKeywordsIntent.invoke({ location: ChatLocation.Other, request });
-			const fakeProgress: vscode.Progress<any | any> = {
+			const fakeProgress: zyraxoncode.Progress<any | any> = {
 				report(_obj) { }
 			};
 			const buildPromptContext: ISearchPanelKeywordsPromptContext = {
@@ -610,10 +610,10 @@ export class SemanticSearchTextSearchProvider extends Disposable implements vsco
 	}
 }
 
-function getMatchRanges(fileResults: FileChunk[]): { sourceRange: vscode.Range; previewRange: vscode.Range }[] {
-	const ranges: { sourceRange: vscode.Range; previewRange: vscode.Range }[] = [];
+function getMatchRanges(fileResults: FileChunk[]): { sourceRange: zyraxoncode.Range; previewRange: zyraxoncode.Range }[] {
+	const ranges: { sourceRange: zyraxoncode.Range; previewRange: zyraxoncode.Range }[] = [];
 	fileResults.forEach(snippet => {
-		const range = new VSCodeRange(
+		const range = new ZyraxonCodeRange(
 			new Position(snippet.range.startLineNumber, snippet.range.startColumn),
 			new Position(snippet.range.endLineNumber, snippet.range.endColumn)
 		);
@@ -625,13 +625,13 @@ function getMatchRanges(fileResults: FileChunk[]): { sourceRange: vscode.Range; 
 }
 
 export async function getSearchResults(
-	fileReader: (uri: vscode.Uri) => Promise<Uint8Array>,
+	fileReader: (uri: zyraxoncode.Uri) => Promise<Uint8Array>,
 	fileResults: FileChunk[],
-	token: vscode.CancellationToken = CancellationToken.None,
+	token: zyraxoncode.CancellationToken = CancellationToken.None,
 	logService?: ILogService,
 	telemetryService?: ITelemetryService
-): Promise<vscode.TextSearchMatch2[]> {
-	const results: vscode.TextSearchMatch2[] = [];
+): Promise<zyraxoncode.TextSearchMatch2[]> {
+	const results: zyraxoncode.TextSearchMatch2[] = [];
 
 	const getResultsRanges = async () => {
 		// get all chunks per file

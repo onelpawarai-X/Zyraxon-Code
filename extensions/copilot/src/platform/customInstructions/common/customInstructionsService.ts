@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { match } from '../../../util/vs/base/common/glob';
@@ -15,7 +15,7 @@ import { dirname, isAbsolute } from '../../../util/vs/base/common/path';
 import { extUriBiasedIgnorePathCase } from '../../../util/vs/base/common/resources';
 import { isObject } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
-import { FileType, Uri } from '../../../vscodeTypes';
+import { FileType, Uri } from '../../../zyraxoncodeTypes';
 import { IRunCommandExecutionService } from '../../commands/common/runCommandExecutionService';
 import { CodeGenerationImportInstruction, CodeGenerationTextInstruction, Config, ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
 import { INativeEnvService } from '../../env/common/envService';
@@ -34,7 +34,7 @@ declare const TextDecoder: {
 export interface ICustomInstructions {
 	readonly kind: CustomInstructionsKind;
 	readonly content: IInstruction[];
-	readonly reference: vscode.Uri;
+	readonly reference: zyraxoncode.Uri;
 }
 
 export enum CustomInstructionsKind {
@@ -403,7 +403,7 @@ export class CustomInstructionsService extends Disposable implements ICustomInst
 
 	public async refreshExtensionPromptFiles(): Promise<void> {
 		try {
-			const extensionPromptFiles = await this.runCommandExecutionService.executeCommand('vscode.extensionPromptFileProvider') as IExtensionPromptFile[] | undefined;
+			const extensionPromptFiles = await this.runCommandExecutionService.executeCommand('zyraxoncode.extensionPromptFileProvider') as IExtensionPromptFile[] | undefined;
 			this._extensionPromptFilesCache = extensionPromptFiles ?? [];
 		} catch (e) {
 			this.logService.warn(`Error fetching extension prompt files: ${e}`);
@@ -447,7 +447,7 @@ export class CustomInstructionsService extends Disposable implements ICustomInst
 	}
 
 	public async isExternalInstructionsFile(uri: URI): Promise<boolean> {
-		if (uri.scheme === Schemas.vscodeUserData && uri.path.endsWith(INSTRUCTION_FILE_EXTENSION)) {
+		if (uri.scheme === Schemas.zyraxoncodeUserData && uri.path.endsWith(INSTRUCTION_FILE_EXTENSION)) {
 			return true;
 		}
 		if (this._matchInstructionLocationsFromConfig.get()(uri)
@@ -534,7 +534,7 @@ class InstructionIndexFile implements IInstructionIndexFile {
 			const uri = this.promptPathRepresentationService.resolveFilePath(filePath);
 			if (uri) {
 				result.add(uri);
-				if (uri.scheme === Schemas.vscodeUserData) {
+				if (uri.scheme === Schemas.zyraxoncodeUserData) {
 					result.add(URI.from({ scheme: Schemas.file, path: uri.path }));
 				}
 			}

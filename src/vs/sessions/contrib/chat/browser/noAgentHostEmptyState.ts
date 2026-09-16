@@ -17,11 +17,11 @@ import { IProductService } from '../../../../platform/product/common/productServ
 
 const $ = dom.$;
 
-const LEARN_MORE_URL = 'https://aka.ms/VSCode/Agents/docs';
+const LEARN_MORE_URL = '__ZYRAXKEEP__0_';
 
 /**
  * Empty state shown in the new-session view when the agents window is
- * open on web (vscode.dev / insiders.vscode.dev) and no agent hosts have
+ * open on web (zyraxoncode.dev / insiders.zyraxoncode.dev) and no agent hosts have
  * been discovered. Replaces the workspace picker — which can't surface
  * any useful items without a host — with a heading, a description that
  * tells the user how to bring a host online with the ZYRAXON Code CLI, and

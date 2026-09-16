@@ -2609,7 +2609,7 @@ export class AgentService extends Disposable implements IAgentService {
 	}
 
 	/**
-	 * Reads `originalUri` through the `vscode-agent-client` filesystem
+	 * Reads `originalUri` through the `zyraxoncode-agent-client` filesystem
 	 * provider so it is fetched from the originating client. Falls back to
 	 * a direct read against `originalUri` when no client filesystem
 	 * authority is registered for `clientId` (e.g. unit tests, in-process
@@ -4148,7 +4148,7 @@ export class AgentService extends Disposable implements IAgentService {
 		// Mirror the live `_handleSubagentStarted` flow on restore: surface the
 		// subagent as a read-only peer chat in the PARENT session's catalog so it
 		// reappears as a tab (and the inline "Open Agent" link can reveal it)
-		// after a restart. Uses the same `ahp-chat://subagent/...` chat URI form
+		// after a restart. Uses the same `__ZYRAXKEEP__0_` chat URI form
 		// as the live path so the sessions provider parses and surfaces it.
 		const subagentChatUri = buildSubagentChatUri(parentSessionStr, child.toolCallId);
 		this._stateManager.addChat(parentSessionStr, subagentChatUri, {

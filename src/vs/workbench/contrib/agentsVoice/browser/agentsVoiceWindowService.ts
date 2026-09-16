@@ -142,7 +142,7 @@ export class AgentsVoiceWindowService extends Disposable implements IAgentsVoice
 		const inputBg = theme.getColor(inputBackground)?.toString() ?? '#3C3C3C';
 		const inputBd = theme.getColor(inputBorder)?.toString() ?? 'transparent';
 
-		auxiliaryWindow.container.style.setProperty('--vscode-agents-background', bgColor);
+		auxiliaryWindow.container.style.setProperty('--zyraxoncode-agents-background', bgColor);
 		auxiliaryWindow.container.style.backgroundColor = inputBg;
 		auxiliaryWindow.container.style.border = `1px solid ${inputBd}`;
 		auxiliaryWindow.container.style.boxSizing = 'border-box';

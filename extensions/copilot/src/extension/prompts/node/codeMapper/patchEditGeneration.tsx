@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement } from '@zyraxoncode/prompt-tsx';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { IPromptPathRepresentationService } from '../../../../platform/prompts/common/promptPathRepresentationService';
 import { equals } from '../../../../util/vs/base/common/arrays';
 import { AsyncIterableObject } from '../../../../util/vs/base/common/async';
 import { CharCode } from '../../../../util/vs/base/common/charCode';
 import { URI } from '../../../../util/vs/base/common/uri';
-import { TextEdit, Uri } from '../../../../vscodeTypes';
+import { TextEdit, Uri } from '../../../../zyraxoncodeTypes';
 import { OutcomeAnnotation, OutcomeAnnotationLabel } from '../../../inlineChat/node/promptCraftingTypes';
 import { Lines, LinesEdit } from '../../../prompt/node/editGeneration';
 import { IGuessedIndentation, guessIndentation } from '../../../prompt/node/indentationGuesser';

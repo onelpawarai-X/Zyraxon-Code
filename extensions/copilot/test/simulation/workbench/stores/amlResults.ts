@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as csvParse from 'csv-parse/sync';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { OutputAnnotation } from '../../shared/sharedTypes';
 import { AMLRunKind } from './amlSimulations';
 
@@ -24,21 +24,21 @@ interface RepoContext {
 interface ISerializedWorkspaceState {
 	readonly workspaceFoldersFilePaths: string[] | undefined;
 	readonly activeTextEditor: {
-		selections: { anchor: vscode.Position; active: vscode.Position; isReversed: boolean }[];
+		selections: { anchor: zyraxoncode.Position; active: zyraxoncode.Position; isReversed: boolean }[];
 		documentFilePath: string;
-		visibleRanges: { start: vscode.Position; end: vscode.Position }[];
+		visibleRanges: { start: zyraxoncode.Position; end: zyraxoncode.Position }[];
 		languageId: string;
 	} | undefined;
 	readonly symbols: {
 		name: string;
-		kind: vscode.SymbolKind;
+		kind: zyraxoncode.SymbolKind;
 		containerName: string;
 		filePath: string;
-		start: vscode.Position;
-		end: vscode.Position;
+		start: zyraxoncode.Position;
+		end: zyraxoncode.Position;
 	}[] | undefined;
 	readonly notebookDocumentFilePaths: string[] | undefined;
-	readonly activeFileDiagnostics: { start: vscode.Position; end: vscode.Position; message: string; severity?: vscode.DiagnosticSeverity }[];
+	readonly activeFileDiagnostics: { start: zyraxoncode.Position; end: zyraxoncode.Position; message: string; severity?: zyraxoncode.DiagnosticSeverity }[];
 	readonly debugConsoleOutput: string;
 	readonly repoContext: RepoContext | undefined;
 	readonly terminalBuffer: string;

@@ -133,7 +133,7 @@ async function openSessionDefault(accessor: ServicesAccessor, session: IAgentSes
 			target = ChatViewPaneTarget;
 		}
 
-		const isLocalChatSession = session.resource.scheme === Schemas.vscodeChatEditor || getChatSessionType(session.resource) === localChatSessionType;
+		const isLocalChatSession = session.resource.scheme === Schemas.zyraxoncodeChatEditor || getChatSessionType(session.resource) === localChatSessionType;
 		if (!isLocalChatSession && !(await chatSessionsService.canResolveChatSession(getChatSessionType(session.resource)))) {
 			target = openOptions?.sideBySide ? SIDE_GROUP : ACTIVE_GROUP; // force to open in editor if session cannot be resolved in panel
 			options = { ...options, revealIfOpened: true };

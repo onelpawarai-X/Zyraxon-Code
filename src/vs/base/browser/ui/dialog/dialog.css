@@ -31,8 +31,8 @@
 	min-height: 75px;
 	padding: 8px;
 	transform: translate3d(0px, 0px, 0px);
-	border-radius: var(--vscode-cornerRadius-xLarge);
-	box-shadow: var(--vscode-shadow-xl);
+	border-radius: var(--zyraxoncode-cornerRadius-xLarge);
+	box-shadow: var(--zyraxoncode-shadow-xl);
 }
 
 .monaco-dialog-box.align-vertical {
@@ -236,7 +236,7 @@
 	outline-offset: 2px !important;
 	outline-width: 1px;
 	outline-style: solid;
-	outline-color: var(--vscode-focusBorder);
+	outline-color: var(--zyraxoncode-focusBorder);
 	border-radius: 4px;
 }
 
@@ -250,5 +250,5 @@
 }
 
 .monaco-dialog-modal-block .dialog-shadow {
-	border-radius: var(--vscode-cornerRadius-xLarge);
+	border-radius: var(--zyraxoncode-cornerRadius-xLarge);
 }

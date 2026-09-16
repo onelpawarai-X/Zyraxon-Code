@@ -3,18 +3,18 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as scip from '@c4312/scip';
-import * as LSIF from '@vscode/lsif-language-service';
+import * as LSIF from '@zyraxoncode/lsif-language-service';
 import * as fs from 'fs/promises';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILanguageFeaturesService } from '../../../src/platform/languages/common/languageFeaturesService';
 import { SimulationWorkspace } from '../../../src/platform/test/node/simulationWorkspace';
 import { escapeRegExpCharacters } from '../../../src/util/vs/base/common/strings';
 import { URI } from '../../../src/util/vs/base/common/uri';
-import { Location, Range } from '../../../src/vscodeTypes';
+import { Location, Range } from '../../../src/zyraxoncodeTypes';
 
-const REPO_NAME = 'vscode-copilot';
+const REPO_NAME = 'zyraxoncode-copilot';
 const liftLSIFRange = (range: LSIF.types.Range): Range => new Range(range.start.line, range.start.character, range.end.line, range.end.character);
-const liftLSIFLocations = (locations: undefined | LSIF.types.Location | LSIF.types.Location[]): vscode.Location[] => {
+const liftLSIFLocations = (locations: undefined | LSIF.types.Location | LSIF.types.Location[]): zyraxoncode.Location[] => {
 	if (!locations) {
 		return [];
 	}
@@ -66,7 +66,7 @@ class SCIPGraph implements IGraph {
 	}
 
 	declarations(uri: string, position: LSIF.types.Position): LSIF.types.Location | LSIF.types.Location[] | undefined {
-		// https://github.com/sourcegraph/scip/blob/0504a347d36dbff48b21f53ccfedb46f3803855e/scip.proto#L501
+		// __ZYRAXKEEP__0_
 		return this.findOccurencesOfSymbolAt(uri, position, o => !!(o.symbolRoles & 0x1));
 	}
 
@@ -134,7 +134,7 @@ const makeTranslator = (workspace: SimulationWorkspace, indexRoot: string) => {
 	const indexPath = URI.parse(indexRoot).path;
 	const lastIndex = indexPath.lastIndexOf(REPO_NAME);
 	if (lastIndex === -1) {
-		throw new Error(`Index path ${indexPath} does not contain 'vscode-copilot', please ensure the index is generated in the correct workspace`);
+		throw new Error(`Index path ${indexPath} does not contain 'zyraxoncode-copilot', please ensure the index is generated in the correct workspace`);
 	}
 
 	const subdir = indexPath.slice(lastIndex + REPO_NAME.length + 1);
@@ -193,30 +193,30 @@ export class LSIFLanguageFeaturesService implements ILanguageFeaturesService {
 		return graph;
 	}
 
-	async getDocumentSymbols(uri: vscode.Uri): Promise<vscode.DocumentSymbol[]> {
+	async getDocumentSymbols(uri: zyraxoncode.Uri): Promise<zyraxoncode.DocumentSymbol[]> {
 		throw new Error('Unimplemented: excercise for the reader');
 	}
 
-	async getDefinitions(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.LocationLink | vscode.Location)[]> {
+	async getDefinitions(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.LocationLink | zyraxoncode.Location)[]> {
 		const graph = await this._getGraph();
 		return liftLSIFLocations(graph.definitions(uri.toString(true), position));
 	}
 
-	async getImplementations(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.LocationLink | vscode.Location)[]> {
+	async getImplementations(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.LocationLink | zyraxoncode.Location)[]> {
 		const graph = await this._getGraph();
 		return liftLSIFLocations(graph.declarations(uri.toString(true), position));
 	}
 
-	async getReferences(uri: vscode.Uri, position: vscode.Position): Promise<vscode.Location[]> {
+	async getReferences(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<zyraxoncode.Location[]> {
 		const graph = await this._getGraph();
 		return liftLSIFLocations(graph.references(uri.toString(true), position, { includeDeclaration: true }));
 	}
 
-	getDiagnostics(_uri: vscode.Uri): vscode.Diagnostic[] {
+	getDiagnostics(_uri: zyraxoncode.Uri): zyraxoncode.Diagnostic[] {
 		return []; // not part of LSIF
 	}
 
-	async getWorkspaceSymbols(query: string): Promise<vscode.SymbolInformation[]> {
+	async getWorkspaceSymbols(query: string): Promise<zyraxoncode.SymbolInformation[]> {
 		throw new Error('Unimplemented: excercise for the reader');
 		// would have to iterate through all documents, get all symbols that match
 	}

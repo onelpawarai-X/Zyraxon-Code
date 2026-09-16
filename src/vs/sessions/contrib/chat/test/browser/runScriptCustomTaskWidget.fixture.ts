@@ -17,8 +17,8 @@ const workspaceUnavailableReason = 'Workspace storage is unavailable for this se
 function renderWidget(ctx: ComponentFixtureContext, state: IRunScriptCustomTaskWidgetState): void {
 	ctx.container.style.width = '600px';
 	ctx.container.style.padding = '0';
-	ctx.container.style.borderRadius = 'var(--vscode-cornerRadius-xLarge)';
-	ctx.container.style.backgroundColor = 'var(--vscode-quickInput-background)';
+	ctx.container.style.borderRadius = 'var(--zyraxoncode-cornerRadius-xLarge)';
+	ctx.container.style.backgroundColor = 'var(--zyraxoncode-quickInput-background)';
 	ctx.container.style.overflow = 'hidden';
 
 	const widget = ctx.disposableStore.add(new RunScriptCustomTaskWidget(state));

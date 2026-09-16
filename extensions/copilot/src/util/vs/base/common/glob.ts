@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -175,7 +175,7 @@ function parseRegExp(pattern: string): string {
 						}
 
 						// glob split matching is not allowed within character ranges
-						// see http://man7.org/linux/man-pages/man7/glob.7.html
+						// see __ZYRAXKEEP__0_
 						else if (char === GLOB_SPLIT) {
 							res = '';
 						}
@@ -409,7 +409,7 @@ function wrapRelativePattern(parsedPattern: ParsedStringPattern, arg2: string | 
 		// For that we try to extract the portion of the `path`
 		// that comes after the `base` portion. We have to account
 		// for the fact that `base` might end in a path separator
-		// (https://github.com/microsoft/vscode/issues/162498)
+		// (__ZYRAXKEEP__1_)
 
 		return parsedPattern(ltrim(path.substring(arg2.base.length), sep), basename);
 	};

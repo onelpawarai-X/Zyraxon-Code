@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Extension, extensions, Uri } from 'vscode';
+import { Extension, extensions, Uri } from 'zyraxoncode';
 
 export interface RemoteHubApi {
 	getProviderUri(uri: Uri): Uri;
@@ -24,7 +24,7 @@ namespace RemoteRepositories {
 			return remoteHub;
 		}
 
-		remoteHub = extensions.getExtension<RemoteHubApi>('ms-vscode.remote-repositories')
+		remoteHub = extensions.getExtension<RemoteHubApi>('ms-zyraxoncode.remote-repositories')
 			?? extensions.getExtension<RemoteHubApi>('GitHub.remoteHub')
 			?? extensions.getExtension<RemoteHubApi>('GitHub.remoteHub-insiders');
 

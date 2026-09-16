@@ -46,7 +46,7 @@ export const pasteAsPreferenceConfig = 'editor.pasteAs.preferences';
 
 export const pasteWidgetVisibleCtx = new RawContextKey<boolean>('pasteWidgetVisible', false, localize('pasteWidgetVisible', "Whether the paste widget is showing"));
 
-const vscodeClipboardMime = 'application/vnd.code.copymetadata';
+const zyraxoncodeClipboardMime = 'application/vnd.code.copymetadata';
 
 interface CopyMetadata {
 	readonly id?: string;
@@ -240,7 +240,7 @@ export class CopyPasteController extends Disposable implements IEditorContributi
 		if (!dataTransfer) {
 			return;
 		}
-		dataTransfer.delete(vscodeClipboardMime);
+		dataTransfer.delete(zyraxoncodeClipboardMime);
 
 		MessageController.get(this._editor)?.closeMessage();
 		this._currentPasteOperation?.cancel();
@@ -529,14 +529,14 @@ export class CopyPasteController extends Disposable implements IEditorContributi
 
 	private setCopyMetadata(clipboardData: IWritableClipboardData, metadata: CopyMetadata) {
 		this._logService.trace('CopyPasteController#setCopyMetadata new id : ', metadata.id);
-		clipboardData.setData(vscodeClipboardMime, JSON.stringify(metadata));
+		clipboardData.setData(zyraxoncodeClipboardMime, JSON.stringify(metadata));
 	}
 
 	private fetchCopyMetadata(e: IClipboardPasteEvent): CopyMetadata | undefined {
 		this._logService.trace('CopyPasteController#fetchCopyMetadata');
 
 		// Prefer using the clipboard data we saved off
-		const rawMetadata = e.clipboardData.getData(vscodeClipboardMime);
+		const rawMetadata = e.clipboardData.getData(zyraxoncodeClipboardMime);
 		if (rawMetadata) {
 			try {
 				return JSON.parse(rawMetadata);

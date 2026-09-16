@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { URI } from '../../../util/vs/base/common/uri';
@@ -30,7 +30,7 @@ export interface IWorkspaceMutation {
 	 * Applies all mutations to the workspace.
 	 * @throws if the edits have already beed applied
 	 */
-	apply(progress: undefined | vscode.Progress<{ message: string }>, token: vscode.CancellationToken): Promise<void>;
+	apply(progress: undefined | zyraxoncode.Progress<{ message: string }>, token: zyraxoncode.CancellationToken): Promise<void>;
 }
 
 /**

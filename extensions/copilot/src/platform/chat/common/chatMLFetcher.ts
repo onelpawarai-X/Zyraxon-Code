@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { AsyncIterableObject, AsyncIterableSource } from '../../../util/vs/base/common/async';
 import { Event } from '../../../util/vs/base/common/event';

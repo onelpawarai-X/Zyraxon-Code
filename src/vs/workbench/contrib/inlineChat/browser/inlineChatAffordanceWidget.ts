@@ -326,7 +326,7 @@ export class InlineChatAffordanceWidget extends Disposable implements IContentWi
 		const position = this.#editor.getPosition();
 		const lineHeight = position ? this.#editor.getLineHeightForPosition(position) : this.#editor.getOption(EditorOption.lineHeight);
 
-		this.#domNode.style.setProperty('--vscode-inline-chat-affordance-height', `${lineHeight}px`);
+		this.#domNode.style.setProperty('--zyraxoncode-inline-chat-affordance-height', `${lineHeight}px`);
 
 		return null;
 	}

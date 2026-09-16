@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { StringEdit, StringReplacement } from '../../../util/vs/editor/common/core/edits/stringEdit';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
 import { IDiffService } from '../../diff/common/diffService';
@@ -32,7 +32,7 @@ export async function stringEditFromDiff(original: string, modified: string, dif
 }
 
 export function stringEditFromTextContentChange(
-	contentChanges: readonly vscode.TextDocumentContentChangeEvent[]
+	contentChanges: readonly zyraxoncode.TextDocumentContentChangeEvent[]
 ) {
 	const editsArr = contentChanges.map(c => new StringReplacement(OffsetRange.ofStartAndLength(c.rangeOffset, c.rangeLength), c.text));
 	editsArr.reverse();

@@ -2,8 +2,8 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { downloadAndUnzipVSCode } from '@vscode/test-electron';
-import { createVSIX } from '@vscode/vsce';
+import { downloadAndUnzipZyraxonCode } from '@zyraxoncode/test-electron';
+import { createVSIX } from '@zyraxoncode/vsce';
 import { ChildProcess, spawn } from 'child_process';
 import { AddressInfo, createServer, Socket } from 'net';
 import * as fs from 'node:fs/promises';
@@ -56,9 +56,9 @@ export class TestExecutionInExtension {
 		const { chromium } = await import('playwright');
 
 		//@ts-ignore
-		const testConfig: { default: { version: string } } = await import('../.vscode-test.mjs');
+		const testConfig: { default: { version: string } } = await import('../.zyraxoncode-test.mjs');
 		const [serverBinary, browser] = await Promise.all([
-			downloadAndUnzipVSCode(testConfig.default.version, getServerPlatform()),
+			downloadAndUnzipZyraxonCode(testConfig.default.version, getServerPlatform()),
 			chromium.launch({ headless: ctx.opts.headless }),
 		]);
 		const browserContext = await browser.newContext();
@@ -75,8 +75,8 @@ export class TestExecutionInExtension {
 
 		const vsixFile = await TestExecutionInExtension._packExtension();
 		const child = spawn(serverBinary, [
-			'--server-data-dir', path.resolve(__dirname, '../.vscode-test/server-data'),
-			'--extensions-dir', path.resolve(__dirname, '../.vscode-test/server-extensions'),
+			'--server-data-dir', path.resolve(__dirname, '../.zyraxoncode-test/server-data'),
+			'--extensions-dir', path.resolve(__dirname, '../.zyraxoncode-test/server-extensions'),
 			...ctx.opts.installExtensions.flatMap(ext => ['--install-extension', ext]),
 			'--install-extension', vsixFile,
 			'--force',
@@ -96,7 +96,7 @@ export class TestExecutionInExtension {
 		});
 		const output: Buffer[] = [];
 		await new Promise((resolve, reject) => {
-			const log = logger.tag('VSCodeServer');
+			const log = logger.tag('ZyraxonCodeServer');
 			const push = (data: Buffer) => {
 				log.trace(data.toString().trim());
 				output.push(data);
@@ -272,7 +272,7 @@ export class TestExecutionInExtension {
 			}
 
 			if (explicitWorkspaceFolder || this._pending.size + this._available.size < MAX_CONCURRENT_SESSIONS) {
-				const dir = explicitWorkspaceFolder || path.join(tmpdir(), 'vscode-simulation-extension-test', generateUuid());
+				const dir = explicitWorkspaceFolder || path.join(tmpdir(), 'zyraxoncode-simulation-extension-test', generateUuid());
 				const workspace = ProxiedWorkspace.create(dir, this._browserContext, this._serverPortNumber, this._connectionToken);
 				const pending = { dir, workspace };
 
@@ -351,7 +351,7 @@ class ProxiedWorkspace extends Disposable {
 		}
 		await fs.mkdir(dir, { recursive: true });
 
-		const url = new URL('http://127.0.0.1');
+		const url = new URL('__ZYRAXKEEP__0_');
 		url.port = String(serverPort);
 		url.searchParams.set('tkn', connectionToken);
 		url.searchParams.set('folder', URI.file(dir).path);

@@ -585,7 +585,7 @@ export class BrowserProcessExplorerControl extends ProcessExplorerControl {
 
 		const processes: { name: string; rootProcess: ProcessItem | IRemoteDiagnosticError }[] = [];
 
-		const hostName = this.labelService.getHostLabel(Schemas.vscodeRemote, connection.remoteAuthority);
+		const hostName = this.labelService.getHostLabel(Schemas.zyraxoncodeRemote, connection.remoteAuthority);
 		const result = await this.remoteAgentService.getDiagnosticInfo({ includeProcesses: true });
 		if (result) {
 			if (isRemoteDiagnosticError(result)) {

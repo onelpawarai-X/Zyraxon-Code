@@ -8,14 +8,14 @@
 	flex: 0 0 26px;
 	align-items: center;
 	justify-content: center;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	box-sizing: border-box;
 	height: 26px;
-	padding: 0 var(--vscode-spacing-size100);
-	background-color: color-mix(in srgb, var(--vscode-focusBorder) 4%, var(--vscode-editorWidget-background));
-	color: var(--vscode-descriptionForeground);
-	font-family: var(--vscode-chat-font-family, inherit);
-	font-size: var(--vscode-fontSize-label1);
+	padding: 0 var(--zyraxoncode-spacing-size100);
+	background-color: color-mix(in srgb, var(--zyraxoncode-focusBorder) 4%, var(--zyraxoncode-editorWidget-background));
+	color: var(--zyraxoncode-descriptionForeground);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
+	font-size: var(--zyraxoncode-fontSize-label1);
 }
 
 .chat-readonly-banner.hidden {
@@ -26,11 +26,11 @@
 	display: flex;
 	flex-shrink: 0;
 	align-items: center;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .chat-readonly-banner-icon .codicon {
-	font-size: var(--vscode-codiconFontSize);
+	font-size: var(--zyraxoncode-codiconFontSize);
 }
 
 .chat-readonly-banner-text {
@@ -42,6 +42,6 @@
 
 .hc-black .chat-readonly-banner,
 .hc-light .chat-readonly-banner {
-	border-top: var(--vscode-strokeThickness) solid var(--vscode-contrastBorder);
-	border-bottom: var(--vscode-strokeThickness) solid var(--vscode-contrastBorder);
+	border-top: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-contrastBorder);
+	border-bottom: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-contrastBorder);
 }

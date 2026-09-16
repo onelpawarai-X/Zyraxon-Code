@@ -2,11 +2,11 @@
 /**
  * ZYRAXON Code — Standalone packaging script
  *
- * Replaces the broken @vscode/gulp-electron pipeline (streamx crashes on Node 24).
+ * Replaces the broken @zyraxoncode/gulp-electron pipeline (streamx crashes on Node 24).
  * Uses electron-builder to produce NSIS installers for Windows.
  *
  * Flow:
- *   1. Verify esbuild bundle output exists (out-vscode-min/)
+ *   1. Verify esbuild bundle output exists (out-zyraxoncode-min/)
  *   2. Create proper Electron app structure in dist/app/
  *   3. Run electron-builder to produce NSIS installer
  */
@@ -16,7 +16,7 @@ import * as path from 'path';
 import { execSync } from 'child_process';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const OUT_BUNDLE = path.join(ROOT, 'out-vscode-min');
+const OUT_BUNDLE = path.join(ROOT, 'out-zyraxoncode-min');
 const DIST_APP = path.join(ROOT, 'dist', 'app');
 const PRODUCT = JSON.parse(fs.readFileSync(path.join(ROOT, 'product.json'), 'utf8'));
 const PACKAGE = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
@@ -50,7 +50,7 @@ function checkBundleOutput(): void {
 	if (!fs.existsSync(OUT_BUNDLE)) {
 		logError(`Bundle output not found at ${OUT_BUNDLE}`);
 		logError('Run the esbuild bundle first:');
-		logError('  node build/next/index.ts bundle --minify --nls --out out-vscode-min --target desktop');
+		logError('  node build/next/index.ts bundle --minify --nls --out out-zyraxoncode-min --target desktop');
 		process.exit(1);
 	}
 
@@ -60,7 +60,7 @@ function checkBundleOutput(): void {
 		process.exit(1);
 	}
 
-	log(`Found ${jsFiles.length} JS bundles in out-vscode-min/`);
+	log(`Found ${jsFiles.length} JS bundles in out-zyraxoncode-min/`);
 }
 
 /**
@@ -102,7 +102,7 @@ function createAppStructure(): void {
 		JSON.stringify(productCopy, null, 2)
 	);
 
-	// Copy bootstrap files from out-vscode-min to dist/app/
+	// Copy bootstrap files from out-zyraxoncode-min to dist/app/
 	for (const bootstrap of ['main.js', 'cli.js', 'bootstrap-fork.js']) {
 		const src = path.join(OUT_BUNDLE, bootstrap);
 		const dst = path.join(DIST_APP, bootstrap);
@@ -185,11 +185,11 @@ function copyResources(): void {
 		fs.copyFileSync(licenseSrc, path.join(DIST_APP, 'LICENSE.txt'));
 	}
 
-	const apiSrc = path.join(ROOT, 'src', 'vscode-dts', 'vscode.d.ts');
+	const apiSrc = path.join(ROOT, 'src', 'zyraxoncode-dts', 'zyraxoncode.d.ts');
 	if (fs.existsSync(apiSrc)) {
-		const apiDst = path.join(DIST_APP, 'out', 'vscode-dts');
+		const apiDst = path.join(DIST_APP, 'out', 'zyraxoncode-dts');
 		ensureDir(apiDst);
-		fs.copyFileSync(apiSrc, path.join(apiDst, 'vscode.d.ts'));
+		fs.copyFileSync(apiSrc, path.join(apiDst, 'zyraxoncode.d.ts'));
 	}
 
 	log('Copied resource files');

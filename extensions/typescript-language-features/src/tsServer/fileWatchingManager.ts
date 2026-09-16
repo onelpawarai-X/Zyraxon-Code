@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import { Utils } from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import { Utils } from 'zyraxoncode-uri';
 import { Schemes } from '../configuration/schemes';
 import { Logger } from '../logging/logger';
 import { disposeAll, IDisposable } from '../utils/dispose';
 import { ResourceMap } from '../utils/resourceMap';
 
 interface DirWatcherEntry {
-	readonly uri: vscode.Uri;
+	readonly uri: zyraxoncode.Uri;
 	readonly disposables: readonly IDisposable[];
 }
 
@@ -19,14 +19,14 @@ interface DirWatcherEntry {
 export class FileWatcherManager implements IDisposable {
 
 	private readonly _fileWatchers = new Map<number, {
-		readonly uri: vscode.Uri;
-		readonly watcher: vscode.FileSystemWatcher;
+		readonly uri: zyraxoncode.Uri;
+		readonly watcher: zyraxoncode.FileSystemWatcher;
 		readonly dirWatchers: DirWatcherEntry[];
 	}>();
 
 	private readonly _dirWatchers = new ResourceMap<{
-		readonly uri: vscode.Uri;
-		readonly watcher: vscode.FileSystemWatcher;
+		readonly uri: zyraxoncode.Uri;
+		readonly watcher: zyraxoncode.FileSystemWatcher;
 		refCount: number;
 	}>(uri => uri.toString(), { onCaseInsensitiveFileSystem: false });
 
@@ -46,15 +46,15 @@ export class FileWatcherManager implements IDisposable {
 		this._dirWatchers.clear();
 	}
 
-	create(id: number, uri: vscode.Uri, watchParentDirs: boolean, isRecursive: boolean, listeners: { create?: (uri: vscode.Uri) => void; change?: (uri: vscode.Uri) => void; delete?: (uri: vscode.Uri) => void }): void {
+	create(id: number, uri: zyraxoncode.Uri, watchParentDirs: boolean, isRecursive: boolean, listeners: { create?: (uri: zyraxoncode.Uri) => void; change?: (uri: zyraxoncode.Uri) => void; delete?: (uri: zyraxoncode.Uri) => void }): void {
 		this.logger.trace(`Creating file watcher for ${uri.toString()}`);
 
 		// Non-writable file systems do not support file watching
-		if (!vscode.workspace.fs.isWritableFileSystem(uri.scheme)) {
+		if (!zyraxoncode.workspace.fs.isWritableFileSystem(uri.scheme)) {
 			return;
 		}
 
-		const watcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(uri, isRecursive ? '**' : '*'), !listeners.create, !listeners.change, !listeners.delete);
+		const watcher = zyraxoncode.workspace.createFileSystemWatcher(new zyraxoncode.RelativePattern(uri, isRecursive ? '**' : '*'), !listeners.create, !listeners.change, !listeners.delete);
 		const parentDirWatchers: DirWatcherEntry[] = [];
 		this._fileWatchers.set(id, { uri, watcher, dirWatchers: parentDirWatchers });
 
@@ -70,8 +70,8 @@ export class FileWatcherManager implements IDisposable {
 				let parentDirWatcher = this._dirWatchers.get(dirUri);
 				if (!parentDirWatcher) {
 					this.logger.trace(`Creating parent dir watcher for ${dirUri.toString()}`);
-					const glob = new vscode.RelativePattern(Utils.dirname(dirUri), Utils.basename(dirUri));
-					const parentWatcher = vscode.workspace.createFileSystemWatcher(glob, !listeners.create, true, !listeners.delete);
+					const glob = new zyraxoncode.RelativePattern(Utils.dirname(dirUri), Utils.basename(dirUri));
+					const parentWatcher = zyraxoncode.workspace.createFileSystemWatcher(glob, !listeners.create, true, !listeners.delete);
 					parentDirWatcher = { uri: dirUri, refCount: 0, watcher: parentWatcher };
 					this._dirWatchers.set(dirUri, parentDirWatcher);
 				}
@@ -81,8 +81,8 @@ export class FileWatcherManager implements IDisposable {
 					disposables.push(parentDirWatcher.watcher.onDidCreate(async () => {
 						// Just because the parent dir was created doesn't mean our file was created
 						try {
-							const stat = await vscode.workspace.fs.stat(uri);
-							if (stat.type === vscode.FileType.File) {
+							const stat = await zyraxoncode.workspace.fs.stat(uri);
+							if (stat.type === zyraxoncode.FileType.File) {
 								listeners.create!(uri);
 							}
 						} catch {

@@ -172,7 +172,7 @@ export async function getEvaluatableExpressionAtPosition(languageFeaturesService
 	return null;
 }
 
-// RFC 2396, Appendix A: https://www.ietf.org/rfc/rfc2396.txt
+// RFC 2396, Appendix A: __ZYRAXKEEP__0_
 const _schemePattern = /^[a-zA-Z][a-zA-Z0-9\+\-\.]+:/;
 
 export function isUriString(s: string | undefined): boolean {
@@ -287,7 +287,7 @@ function convertPaths(msg: DebugProtocol.ProtocolMessage, fixSourcePath: (toDA: 
 				case 'gotoTargets':
 					fixSourcePath(true, (<DebugProtocol.GotoTargetsArguments>request.arguments).source);
 					break;
-				case 'launchVSCode':
+				case 'launchZyraxonCode':
 					request.arguments.args.forEach((arg: PathContainer | undefined) => fixSourcePath(false, arg));
 					break;
 				default:

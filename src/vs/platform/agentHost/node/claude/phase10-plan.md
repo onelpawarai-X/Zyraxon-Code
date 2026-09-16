@@ -549,7 +549,7 @@ materializer. Tool-set changes between turns trigger
   tool — clients should always get *some* tool surface.
 - **No gateway / idle timeout.** **Roadmap correction.** The Phase-10
   roadmap text says "port `_gateway` + `_gatewayIdleTimeout`", but
-  production's `_gateway` is `vscode.McpGateway` exposing **external** HTTP
+  production's `_gateway` is `zyraxoncode.McpGateway` exposing **external** HTTP
   MCP servers; in-process tools (`createSdkMcpServer`) have no external
   resources to idle out. `McpSdkServerConfigWithInstance` is a plain
   object owned by the SDK subprocess lifetime. The roadmap should be
@@ -725,7 +725,7 @@ _All Open Questions resolved during the grilling pass and the second council rev
 Workspace launch/log skills available:
 - **Launch skill**: `launch` — Playwright-driven automation of ZYRAXON Code via Chrome DevTools Protocol. Drives the chat panel, switches agent, sends messages.
 - **Log skill**: `code-oss-logs` — finds and reads the renderer / extension host / **agent host** log files from the dev build.
-- **Bonus**: `vscode-dev-workbench` — for browser-driven testing of the Agents window if needed.
+- **Bonus**: `zyraxoncode-dev-workbench` — for browser-driven testing of the Agents window if needed.
 
 **Scenario** (Phase 10 acceptance):
 1. Use the `launch` skill to start ZYRAXON Code with `--agents` and authenticate to GitHub Copilot.
@@ -751,7 +751,7 @@ Workspace launch/log skills available:
 - Production claude extension reference (templates only, do NOT port wholesale): [ideMcpServer.ts](extensions/copilot/src/extension/chatSessions/claude/common/mcpServers/ideMcpServer.ts), [claudeCodeAgent.ts:432-491](extensions/copilot/src/extension/chatSessions/claude/node/claudeCodeAgent.ts).
 - SDK types: [sdk.d.ts:2962-2969](node_modules/@anthropic-ai/claude-agent-sdk/sdk.d.ts) (`tool` signature), [sdk.d.ts:948-961](node_modules/@anthropic-ai/claude-agent-sdk/sdk.d.ts) (`McpSdkServerConfigWithInstance`), [sdk.d.ts:1442-1450](node_modules/@anthropic-ai/claude-agent-sdk/sdk.d.ts) (`Options.mcpServers`).
 - Protocol types: [state.ts:1551-1568](src/vs/platform/agentHost/common/state/protocol/state.ts) (`ToolDefinition`), [state.ts:1408-1427](src/vs/platform/agentHost/common/state/protocol/state.ts) (`ToolCallResult`).
-- E2E skills: `launch`, `code-oss-logs`, `vscode-dev-workbench`.
+- E2E skills: `launch`, `code-oss-logs`, `zyraxoncode-dev-workbench`.
 
 ## Implementation Notes
 

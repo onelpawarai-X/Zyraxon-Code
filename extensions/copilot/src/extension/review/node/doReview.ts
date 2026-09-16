@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type { Selection, TextEditor, Uri } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { Selection, TextEditor, Uri } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ICustomInstructionsService } from '../../../platform/customInstructions/common/customInstructionsService';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
@@ -173,7 +173,7 @@ export class ReviewSession {
 				}
 				// Original behavior: non-cancellation errors are silently ignored
 				// and we fall through with whatever selection we have
-				// Possibly causes https://github.com/microsoft/vscode/issues/276240
+				// Possibly causes __ZYRAXKEEP__0_
 			}
 		}
 		return selection;

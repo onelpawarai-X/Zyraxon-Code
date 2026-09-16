@@ -3,9 +3,9 @@
 	"displayName": "Sessions E2E Mock",
 	"description": "Mock auth, chat participant, and file system for E2E testing",
 	"version": "0.0.1",
-	"publisher": "vscode",
+	"publisher": "zyraxoncode",
 	"engines": {
-		"vscode": "^1.100.0"
+		"zyraxoncode": "^1.100.0"
 	},
 	"extensionKind": ["ui", "workspace"],
 	"browser": "./extension.js",
@@ -70,7 +70,7 @@
 				},
 				{
 					"command": "github.copilot.chat.checkoutPullRequestReroute",
-					"when": "chatSessionType == copilot-cloud-agent && !github.vscode-pull-request-github.activated && gitOpenRepositoryCount != 0",
+					"when": "chatSessionType == copilot-cloud-agent && !github.zyraxoncode-pull-request-github.activated && gitOpenRepositoryCount != 0",
 					"group": "navigation@0"
 				},
 				{

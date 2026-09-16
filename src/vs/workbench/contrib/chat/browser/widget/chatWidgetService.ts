@@ -168,7 +168,7 @@ export class ChatWidgetService extends Disposable implements IChatWidgetService 
 			// focus transfer to other documents is async. If we depend on the focus
 			// being synchronously transferred in consuming code, this can fail, so
 			// wait for it to propagate
-			const isGroupActive = () => dom.getWindow(this.layoutService.activeContainer).vscodeWindowId === existingEditorWindowId;
+			const isGroupActive = () => dom.getWindow(this.layoutService.activeContainer).zyraxoncodeWindowId === existingEditorWindowId;
 
 			let ensureFocusTransfer: Promise<void> | undefined;
 			if (!isGroupActive() && !options?.preserveFocus) {

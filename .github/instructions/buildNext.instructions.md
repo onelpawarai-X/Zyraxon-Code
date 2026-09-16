@@ -19,10 +19,10 @@ To test changes:
 node build/next/index.ts transpile --out out-test
 
 # Test bundle (server-web target to test the auth fix)
-node build/next/index.ts bundle --nls --target server-web --out out-vscode-reh-web-test
+node build/next/index.ts bundle --nls --target server-web --out out-zyraxoncode-reh-web-test
 
 # Verify product config was injected
-grep -l "serverLicense" out-vscode-reh-web-test/vs/code/browser/workbench/workbench.js
+grep -l "serverLicense" out-zyraxoncode-reh-web-test/vs/code/browser/workbench/workbench.js
 ```
 
 ---
@@ -39,7 +39,7 @@ grep -l "serverLicense" out-vscode-reh-web-test/vs/code/browser/workbench/workbe
 
 ### Integration with Old Build
 
-In [build/gulpfile.vscode.ts](../../build/gulpfile.vscode.ts), the `core-ci` task wires up these helpers (defined in [build/lib/esbuild.ts](../../build/lib/esbuild.ts)):
+In [build/gulpfile.zyraxoncode.ts](../../build/gulpfile.zyraxoncode.ts), the `core-ci` task wires up these helpers (defined in [build/lib/esbuild.ts](../../build/lib/esbuild.ts)):
 - `runEsbuildTranspile()` → transpile command
 - `runEsbuildBundle()` → bundle command
 
@@ -89,7 +89,7 @@ Two placeholders that need injection:
 
 **Problem:** The desktop target had `keyboardMapEntryPoints` as separate esbuild entry points, producing `layout.contribution.darwin.js`, `layout.contribution.linux.js`, and `layout.contribution.win.js` as standalone files in the output.
 
-**Root cause:** In the old build (`gulpfile.vscode.ts`), `vscodeEntryPoints` does NOT include `buildfile.keyboardMaps`. These files are only separate entry points for server-web (`gulpfile.reh.ts`) and web (`gulpfile.vscode.web.ts`). For desktop, they're imported as dependencies of `workbench.desktop.main` and get bundled into it.
+**Root cause:** In the old build (`gulpfile.zyraxoncode.ts`), `zyraxoncodeEntryPoints` does NOT include `buildfile.keyboardMaps`. These files are only separate entry points for server-web (`gulpfile.reh.ts`) and web (`gulpfile.zyraxoncode.web.ts`). For desktop, they're imported as dependencies of `workbench.desktop.main` and get bundled into it.
 
 **Fix:** Removed `...keyboardMapEntryPoints` from the `desktop` case in `getEntryPointsForTarget()`. Keep for `server-web` and `web`.
 
@@ -107,11 +107,11 @@ Two placeholders that need injection:
 
 **Problem:** The new build used curated, specific resource pattern lists (e.g., `desktopResourcePatterns`) for **both** transpile/dev and production/bundle builds. Team members kept discovering missing resources because every new non-TS file in `src/` required manually adding its pattern.
 
-**Root cause:** The old gulp build uses `gulp.src('src/**')` for dev/transpile — a catch-all glob that streams **every file** in `src/`. Non-TS files bypass the compiler via `tsFilter` + `tsFilter.restore` and land in `out/` untouched. This is inherently complete. The old build only uses curated resource lists for **production packaging** (`vscodeResourceIncludes`, `serverResourceIncludes` in the gulpfiles).
+**Root cause:** The old gulp build uses `gulp.src('src/**')` for dev/transpile — a catch-all glob that streams **every file** in `src/`. Non-TS files bypass the compiler via `tsFilter` + `tsFilter.restore` and land in `out/` untouched. This is inherently complete. The old build only uses curated resource lists for **production packaging** (`zyraxoncodeResourceIncludes`, `serverResourceIncludes` in the gulpfiles).
 
 **Fix:**
 - **Transpile/dev path** (`transpile` command, `--watch` mode): Now uses `copyAllNonTsFiles()` which copies ALL non-TS files from `src/` to the output, matching old `gulp.src('src/**')` behavior. No curated patterns needed.
-- **Bundle/production path** (`bundle` command): Continues using `copyResources()` with curated per-target patterns, matching old `vscodeResourceIncludes` etc.
+- **Bundle/production path** (`bundle` command): Continues using `copyResources()` with curated per-target patterns, matching old `zyraxoncodeResourceIncludes` etc.
 - Removed `devOnlyResourcePatterns` and `testFixturePatterns` — no longer needed since the broad copy handles all dev resources.
 - Watch mode incremental copy now accepts **any** non-`.ts` file change (removed the `copyExtensions` allowlist).
 
@@ -123,10 +123,10 @@ Two placeholders that need injection:
 
 ```bash
 # Build server-web with new system
-node build/next/index.ts bundle --nls --target server-web --out out-vscode-reh-web-min
+node build/next/index.ts bundle --nls --target server-web --out out-zyraxoncode-reh-web-min
 
 # Package it (uses gulp task)
-npm run gulp vscode-reh-web-darwin-arm64-min
+npm run gulp zyraxoncode-reh-web-darwin-arm64-min
 
 # Run server
 ./vszyraxon-code-server-darwin-arm64-web/bin/zyraxon-zyraxon-code-server --connection-token dev-token
@@ -198,7 +198,7 @@ npm run gulp vscode-reh-web-darwin-arm64-min
 ### Action Items
 
 1. **[CRITICAL] Missing `preload-browserView.ts`** — Add to `desktopStandaloneFiles` in index.ts. Without it, BrowserView (used for Simple Browser) may fail.
-2. **[SIZE] Web bundles in desktop build** — `workbench.web.main.internal.js` and `vs/code/browser/workbench/workbench.js` together add ~31 MB. These are written by the esbuild bundler and not filtered out. Consider: either don't bundle web entry points for the desktop target, or ensure the packaging step excludes them (currently `packageTask` takes `out-vscode-min/**` without filtering).
+2. **[SIZE] Web bundles in desktop build** — `workbench.web.main.internal.js` and `vs/code/browser/workbench/workbench.js` together add ~31 MB. These are written by the esbuild bundler and not filtered out. Consider: either don't bundle web entry points for the desktop target, or ensure the packaging step excludes them (currently `packageTask` takes `out-zyraxoncode-min/**` without filtering).
 3. **[SIZE] No mangling** — The desktop main bundle is 2.5 MB larger due to no property mangling. Known open item.
 4. **[MINOR] Duplicate codicon.ttf** — Exists at both `out/media/codicon.ttf` (from esbuild `file` loader) and `out/vs/base/browser/ui/codicons/codicon/codicon.ttf` (from `commonResourcePatterns`). Consider removing from `commonResourcePatterns` if it's already handled by the loader.
 5. **[MINOR] Extra SVGs** — `desktopResourcePatterns` uses `*.svg` for extensions media but old build only ships `language-icon.svg`. The loading spinners may be unused in the desktop build.
@@ -247,7 +247,7 @@ Two categories of corruption:
 
 **Plugin interaction:** Both the NLS plugin and `fileContentMapperPlugin` register `onLoad({ filter: /\.ts$/ })`. In esbuild, the first `onLoad` to return non-`undefined` wins. The NLS plugin is `unshift`ed (runs first), so files with NLS calls skip `fileContentMapperPlugin`. This is safe in practice since `product.ts` (which has `BUILD->INSERT_PRODUCT_CONFIGURATION`) has no localize calls.
 
-### Still Broken — Full Production Build (`npm run gulp vscode-min`)
+### Still Broken — Full Production Build (`npm run gulp zyraxoncode-min`)
 
 **Symptom:** Source maps are totally broken in the minified production build. E.g. a breakpoint at `src/vs/editor/browser/editorExtensions.ts` line 308 resolves to `src/vs/editor/common/cursor/cursorMoveCommands.ts` line 732 — a completely different file. This is **cross-file** mapping corruption, not just column drift.
 
@@ -283,8 +283,8 @@ Two categories of corruption:
 
 **How to reproduce:**
 ```bash
-npm run gulp vscode-min
-# Open out-vscode-min/ in a debugger, set breakpoints in editor files
+npm run gulp zyraxoncode-min
+# Open out-zyraxoncode-min/ in a debugger, set breakpoints in editor files
 # Observe breakpoints resolve to wrong files
 ```
 
@@ -329,5 +329,5 @@ The default `ZYRAXON Code - Build` task now runs three parallel watchers:
 - **`build/lib/compilation.ts`**: `ICompileTaskOptions` gained `noEmit?: boolean`. `watchTypeCheckTask()` runs the tsc type-checker in watch mode with `noEmit: true`.
 - **`build/gulpfile.ts`**: `watchClientTask` is now `task.parallel(compilation.watchTypeCheckTask('src'), ...)` — no `rimraf('out')` (the transpiler owns that), no JS emit.
 - **`build/next/index.ts`**: Watch mode emits `Starting transpilation...` / `Finished transpilation with N errors after X ms` for ZYRAXON Code problem matcher.
-- **`.vscode/tasks.json`**: Old "Core - Build" split into "Core - Transpile" + "Core - Typecheck" with separate problem matchers (owners: `esbuild` vs `typescript`).
+- **`.zyraxoncode/tasks.json`**: Old "Core - Build" split into "Core - Transpile" + "Core - Typecheck" with separate problem matchers (owners: `esbuild` vs `typescript`).
 - **`package.json`**: Added `watch-client-transpile`, `watch-client-transpiled`, `kill-watch-client-transpiled` scripts.

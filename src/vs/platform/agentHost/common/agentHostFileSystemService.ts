@@ -21,7 +21,7 @@ export type { IRemoteFilesystemConnection } from './agentHostFileSystemProvider.
  * URIs under this scheme are served by a registered {@link InMemoryFileSystemProvider}
  * and are reachable by the agent host via `fetchContent`.
  */
-export const SYNCED_CUSTOMIZATION_SCHEME = 'vscode-synced-customization';
+export const SYNCED_CUSTOMIZATION_SCHEME = 'zyraxoncode-synced-customization';
 
 export const IAgentHostFileSystemService = createDecorator<IAgentHostFileSystemService>('agentHostFileSystemService');
 
@@ -30,13 +30,13 @@ export interface IAgentHostFileSystemService {
 
 	/**
 	 * Register a mapping from a URI authority to a connection so that
-	 * `vscode-agent-host://[authority]/…` URIs resolve through this connection.
+	 * `zyraxoncode-agent-host://[authority]/…` URIs resolve through this connection.
 	 */
 	registerAuthority(authority: string, connection: IRemoteFilesystemConnection): IDisposable;
 
 	/**
 	 * Ensures the in-memory filesystem provider for synced customizations
-	 * (`vscode-synced-customization:` scheme) is registered. Safe to call
+	 * (`zyraxoncode-synced-customization:` scheme) is registered. Safe to call
 	 * multiple times — only the first call registers the provider.
 	 */
 	ensureSyncedCustomizationProvider(): void;

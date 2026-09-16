@@ -760,7 +760,7 @@ const createRunTestDecoration = (
 				const building = hoverMessage = new MarkdownString('', true).appendText(hoverMessageParts.join(', ') + '.');
 				if (testIdWithMessages) {
 					const args = encodeURIComponent(JSON.stringify([testIdWithMessages]));
-					building.appendMarkdown(` [${localize('peekTestOutout', 'Peek Test Output')}](command:vscode.peekTestError?${args})`);
+					building.appendMarkdown(` [${localize('peekTestOutout', 'Peek Test Output')}](command:zyraxoncode.peekTestError?${args})`);
 				}
 			}
 
@@ -1054,7 +1054,7 @@ abstract class RunTestDecoration {
 
 		if (capabilities & TestRunProfileBitset.HasNonDefaultProfile) {
 			testActions.push(new Action('testing.runUsing', localize('testing.runUsing', 'Execute Using Profile...'), undefined, undefined, async () => {
-				const profile: ITestRunProfile | undefined = await this.commandService.executeCommand('vscode.pickTestProfile', { onlyForTest: test });
+				const profile: ITestRunProfile | undefined = await this.commandService.executeCommand('zyraxoncode.pickTestProfile', { onlyForTest: test });
 				if (!profile) {
 					return;
 				}
@@ -1072,7 +1072,7 @@ abstract class RunTestDecoration {
 
 		if (resultItem && isFailedState(resultItem.computedState)) {
 			testActions.push(new Action('testing.gutter.peekFailure', localize('peek failure', 'Peek Error'), undefined, undefined,
-				() => this.commandService.executeCommand('vscode.peekTestError', test.item.extId)));
+				() => this.commandService.executeCommand('zyraxoncode.peekTestError', test.item.extId)));
 		}
 
 		if (resultItem?.computedState === TestResultState.Running) {
@@ -1422,13 +1422,13 @@ class TestErrorContentWidget extends Disposable implements IContentWidget {
 
 		this.node.name.innerText = text || 'Test Failed';
 
-		const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		const svg = document.createElementNS('__ZYRAXKEEP__0_', 'svg');
 		svg.setAttribute('width', '15');
 		svg.setAttribute('height', '10');
 		svg.setAttribute('preserveAspectRatio', 'none');
 		svg.setAttribute('viewBox', '0 0 15 10');
 
-		const leftArrow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		const leftArrow = document.createElementNS('__ZYRAXKEEP__1_', 'path');
 		leftArrow.setAttribute('d', 'M15 0 L10 0 L0 5 L10 10 L15 10 Z');
 		svg.append(leftArrow);
 

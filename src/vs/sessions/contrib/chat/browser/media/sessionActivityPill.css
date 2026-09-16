@@ -22,7 +22,7 @@
 	width: fit-content;
 	min-width: 0;
 	max-width: 280px;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	overflow: hidden;
 	white-space: nowrap;
 	touch-action: manipulation;
@@ -36,6 +36,6 @@
 }
 
 .session-activity-pill .session-activity-pill-button .codicon {
-	font-size: var(--vscode-codiconFontSize-compact);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 	flex-shrink: 0;
 }

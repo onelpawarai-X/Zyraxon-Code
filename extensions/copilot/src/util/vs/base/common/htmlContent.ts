@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -153,7 +153,7 @@ export function markdownStringEqual(a: IMarkdownString, b: IMarkdownString): boo
 }
 
 export function escapeMarkdownSyntaxTokens(text: string): string {
-	// escape markdown syntax tokens: http://daringfireball.net/projects/markdown/syntax#backslash
+	// escape markdown syntax tokens: __ZYRAXKEEP__0_
 	return text.replace(/[\\`*_{}[\]()#+\-!~]/g, '\\$&'); // CodeQL [SM02383] Backslash is escaped in the character class
 }
 
@@ -170,7 +170,7 @@ export function escapeMarkdownLinkLabel(text: string): string {
 }
 
 /**
- * @see https://github.com/microsoft/vscode/issues/193746
+ * @see __ZYRAXKEEP__1_
  */
 export function appendEscapedMarkdownCodeBlockFence(code: string, langId: string) {
 	const longestFenceLength =

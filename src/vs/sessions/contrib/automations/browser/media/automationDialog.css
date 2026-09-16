@@ -57,8 +57,8 @@
 	min-width: min(520px, 92vw);
 	max-width: 92vw;
 	padding: 0;
-	background-color: var(--vscode-editorWidget-background);
-	color: var(--vscode-editorWidget-foreground);
+	background-color: var(--zyraxoncode-editorWidget-background);
+	color: var(--zyraxoncode-editorWidget-foreground);
 	/* Anchor for the absolutely-positioned close-X (see below). */
 	position: relative;
 }
@@ -142,16 +142,16 @@
 	/* Right padding reserves room for the floating close-X chip. */
 	padding: 8px 36px 8px 14px;
 	text-align: left;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	font-size: var(--vscode-agents-fontSize-heading2);
-	color: var(--vscode-editorWidget-foreground);
-	background-color: var(--vscode-editorWidget-background);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-agents-fontSize-heading2);
+	color: var(--zyraxoncode-editorWidget-foreground);
+	background-color: var(--zyraxoncode-editorWidget-background);
 }
 
 .automation-description {
 	padding: 8px 14px;
-	font-size: var(--vscode-agents-fontSize-body2, 12px);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2, 12px);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 1.4;
 }
 
@@ -179,15 +179,15 @@
 
 .monaco-dialog-box.automation-dialog .dialog-message-row .dialog-message-container::-webkit-scrollbar-thumb {
 	min-height: 20px;
-	background-color: var(--vscode-scrollbarSlider-background);
+	background-color: var(--zyraxoncode-scrollbarSlider-background);
 }
 
 .monaco-dialog-box.automation-dialog .dialog-message-row .dialog-message-container::-webkit-scrollbar-thumb:hover {
-	background-color: var(--vscode-scrollbarSlider-hoverBackground);
+	background-color: var(--zyraxoncode-scrollbarSlider-hoverBackground);
 }
 
 .monaco-dialog-box.automation-dialog .dialog-message-row .dialog-message-container::-webkit-scrollbar-thumb:active {
-	background-color: var(--vscode-scrollbarSlider-activeBackground);
+	background-color: var(--zyraxoncode-scrollbarSlider-activeBackground);
 }
 
 .monaco-dialog-box.automation-dialog .dialog-message-row .dialog-message-container::-webkit-scrollbar-corner {
@@ -284,7 +284,7 @@
 .automation-form-prompt-host .monaco-editor,
 .automation-form-prompt-host .monaco-editor-background,
 .automation-form-prompt-host .monaco-editor .margin {
-	background-color: var(--vscode-settings-textInputBackground, var(--vscode-input-background));
+	background-color: var(--zyraxoncode-settings-textInputBackground, var(--zyraxoncode-input-background));
 }
 
 .automation-form-prompt-host .interactive-input-and-side-toolbar {
@@ -310,7 +310,7 @@
  * We hide the `.action-label` (which carries the codicon class) rather than
  * the parent `.action-item`. Targeting the `.action-item` would require a
  * `:has()` selector, whose invalidation bookkeeping is paid across every
- * `.action-item` in the workbench (see microsoft/vscode#324985). Since
+ * `.action-item` in the workbench (see zyraxon/zyraxoncode#324985). Since
  * `.action-item` has no intrinsic padding/margin (actionbar.css), hiding the
  * label collapses the slot to zero width, so there is no visual gap.
  *
@@ -334,7 +334,7 @@
  * appear as an orphan vertical line on whichever visible chip follows
  * our hidden `+`/settings items. For example the bar drawn to the left
  * of the Folder/Worktree isolation chip because it follows the Copilot
- * CLI chip in the secondary toolbar (microsoft/vscode-internalbacklog#8304). The remaining visible
+ * CLI chip in the secondary toolbar (zyraxon/zyraxoncode-internalbacklog#8304). The remaining visible
  * chips (Agent, model, mode, isolation) already have enough intrinsic
  * padding to read as separate without the divider. Dropping dividers
  * entirely is simpler and more resilient than per-pair suppression rules
@@ -380,7 +380,7 @@
  * 1. `.sessions-chat-picker-slot.sessions-chat-workspace-picker
  *    .action-label` (sessions-layer `chatWidget.css:244-269`) sets a
  *    welcome-flow visual: label 18px, inner span 18px, icons 16px,
- *    chevron, generous padding, `color: var(--vscode-foreground)`.
+ *    chevron, generous padding, `color: var(--zyraxoncode-foreground)`.
  *
  * 2. `.monaco-action-bar .action-label` (actionbar.css:48) sets the
  *    base toolbar font-size to **11px**. This is what Mode/Model
@@ -394,7 +394,7 @@
  *    not on an ancestor we can inherit from.
  *
  * Result: match the 11px base, neutralize the welcome-flow oversizing,
- * keep the Mode/Model color (`var(--vscode-icon-foreground)`), match
+ * keep the Mode/Model color (`var(--zyraxoncode-icon-foreground)`), match
  * the chip metrics from `.chat-secondary-toolbar .chat-input-picker-item
  * .action-label` (chat.css:1728), and hide the chevron (the neighboring
  * secondary-toolbar pickers don't render one).
@@ -407,7 +407,7 @@
 	padding: 3px 6px;
 	font-size: 11px;
 	line-height: normal;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .automation-form-prompt-host .chat-secondary-toolbar .sessions-chat-picker-slot.sessions-chat-workspace-picker .action-label .sessions-chat-dropdown-label {
@@ -441,7 +441,7 @@
 	gap: 8px;
 	margin-top: 2px;
 	padding-top: 10px;
-	border-top: 1px solid var(--vscode-widget-border, transparent);
+	border-top: 1px solid var(--zyraxoncode-widget-border, transparent);
 }
 
 .automation-form-row.automation-form-checkbox-row > .monaco-checkbox {
@@ -514,24 +514,24 @@
  * its control so each form row reads as a discrete section.
  */
 .automation-form-label {
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
 	line-height: 1.4;
 	margin-bottom: 2px;
 	cursor: default;
 }
 
 .automation-form-hint {
-	font-size: var(--vscode-agents-fontSize-body2, 11px);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2, 11px);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 1.4;
 	min-height: 1em;
 }
 
 .automation-form-checkbox-label {
-	font-size: var(--vscode-agents-fontSize-body1, 13px);
-	color: var(--vscode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1, 13px);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 }
 
@@ -554,10 +554,10 @@
 .automation-form-select,
 .automation-form-textarea {
 	font-family: inherit;
-	font-size: var(--vscode-agents-fontSize-body1, 13px);
-	color: var(--vscode-settings-textInputForeground, var(--vscode-input-foreground));
-	background-color: var(--vscode-settings-textInputBackground, var(--vscode-input-background));
-	border: 1px solid var(--vscode-settings-textInputBorder, var(--vscode-input-border, var(--vscode-contrastBorder, transparent)));
+	font-size: var(--zyraxoncode-agents-fontSize-body1, 13px);
+	color: var(--zyraxoncode-settings-textInputForeground, var(--zyraxoncode-input-foreground));
+	background-color: var(--zyraxoncode-settings-textInputBackground, var(--zyraxoncode-input-background));
+	border: 1px solid var(--zyraxoncode-settings-textInputBorder, var(--zyraxoncode-input-border, var(--zyraxoncode-contrastBorder, transparent)));
 	border-radius: 2px;
 	padding: 4px 6px;
 	box-sizing: border-box;
@@ -566,9 +566,9 @@
 }
 
 .automation-form-select {
-	color: var(--vscode-settings-dropdownForeground, var(--vscode-dropdown-foreground));
-	background-color: var(--vscode-settings-dropdownBackground, var(--vscode-dropdown-background));
-	border-color: var(--vscode-settings-dropdownBorder, var(--vscode-dropdown-border, var(--vscode-contrastBorder, transparent)));
+	color: var(--zyraxoncode-settings-dropdownForeground, var(--zyraxoncode-dropdown-foreground));
+	background-color: var(--zyraxoncode-settings-dropdownBackground, var(--zyraxoncode-dropdown-background));
+	border-color: var(--zyraxoncode-settings-dropdownBorder, var(--zyraxoncode-dropdown-border, var(--zyraxoncode-contrastBorder, transparent)));
 }
 
 .automation-form-textarea {
@@ -580,14 +580,14 @@
 .automation-form-input:focus,
 .automation-form-select:focus,
 .automation-form-textarea:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .automation-form-empty {
 	font-size: 12px;
-	color: var(--vscode-errorForeground);
+	color: var(--zyraxoncode-errorForeground);
 	padding: 6px 0;
 }
 
@@ -621,7 +621,7 @@
 	align-items: center;
 	margin-left: auto;
 	min-width: 0;
-	gap: var(--vscode-spacing-size60);
+	gap: var(--zyraxoncode-spacing-size60);
 }
 
 .automation-form-prompt-host .automation-form-branch-picker-slot {
@@ -632,21 +632,21 @@
 .automation-form-prompt-host .automation-form-branch-slot {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	height: 16px;
-	padding: var(--vscode-spacing-size20) var(--vscode-spacing-size60);
-	font-size: var(--vscode-agents-fontSize-label2);
-	color: var(--vscode-icon-foreground);
+	padding: var(--zyraxoncode-spacing-size20) var(--zyraxoncode-spacing-size60);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
+	color: var(--zyraxoncode-icon-foreground);
 	background: transparent;
 	border: none;
 	min-width: 0;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	touch-action: manipulation;
 }
 
 .automation-form-prompt-host .automation-form-branch-slot > .codicon {
-	font-size: var(--vscode-codiconFontSize-compact);
-	color: var(--vscode-icon-foreground);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
+	color: var(--zyraxoncode-icon-foreground);
 	flex-shrink: 0;
 }
 
@@ -655,23 +655,23 @@
 }
 
 .automation-form-prompt-host .automation-form-branch-slot:not(.branch-picker-disabled):hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
-	color: var(--vscode-foreground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .automation-form-prompt-host .automation-form-branch-slot:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-	outline-offset: calc(-1 * var(--vscode-strokeThickness));
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+	outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
 }
 
 .automation-form-prompt-host .automation-form-branch-slot.branch-picker-disabled,
 .automation-form-prompt-host .automation-form-branch-slot.branch-picker-disabled > .codicon {
 	cursor: default;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .automation-form-prompt-host .automation-form-branch-name {
-	font-size: var(--vscode-agents-fontSize-label2);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
 }
 
 .automation-form-prompt-host .automation-form-branch-name {
@@ -688,7 +688,7 @@
 	height: 16px;
 	padding: 3px 6px;
 	font-size: 11px;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 	background: transparent;
 	border: none;
 	opacity: 0.6;
@@ -709,7 +709,7 @@
  * placeholder, not a real ref name". */
 .automation-form-prompt-host .automation-form-branch-slot.branch-picker-missing,
 .automation-form-prompt-host .automation-form-branch-slot.branch-picker-missing > .codicon {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .automation-form-prompt-host .automation-form-branch-slot.branch-picker-missing .automation-form-branch-name {
@@ -718,5 +718,5 @@
 
 .hc-black .automation-form-prompt-host .automation-form-branch-slot:focus-visible,
 .hc-light .automation-form-prompt-host .automation-form-branch-slot:focus-visible {
-	outline-color: var(--vscode-contrastActiveBorder);
+	outline-color: var(--zyraxoncode-contrastActiveBorder);
 }

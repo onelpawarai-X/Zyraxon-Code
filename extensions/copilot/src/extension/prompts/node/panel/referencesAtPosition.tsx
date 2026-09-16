@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { isScenarioAutomation } from '../../../../platform/env/common/envService';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILanguageFeaturesService } from '../../../../platform/languages/common/languageFeaturesService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { TreeSitterOffsetRange } from '../../../../platform/parser/node/nodes';
-import { IParserService, treeSitterOffsetRangeToVSCodeRange, vscodeToTreeSitterOffsetRange } from '../../../../platform/parser/node/parserService';
+import { IParserService, treeSitterOffsetRangeToZyraxonCodeRange, zyraxoncodeToTreeSitterOffsetRange } from '../../../../platform/parser/node/parserService';
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { getLanguage } from '../../../../util/common/languages';
-import { ExtensionMode, Location, Selection, Uri } from '../../../../vscodeTypes';
+import { ExtensionMode, Location, Selection, Uri } from '../../../../zyraxoncodeTypes';
 import { asyncComputeWithTimeBudget } from '../../../context/node/resolvers/selectionContextHelpers';
 import { determineNodeToDocument } from '../../../prompt/node/definitionAroundCursor';
 import { CodeBlock } from './safeElements';
@@ -27,7 +27,7 @@ type Props = PromptElementProps<{
 	 * Range of interest for which definitions are to be found.
 	 * @remark if not provided, will use active selection in currently active editor
 	 */
-	position: vscode.Position;
+	position: zyraxoncode.Position;
 	/**
 	 * Timeout for finding implementations in milliseconds. Defaults to 200ms.
 	 */
@@ -38,7 +38,7 @@ type CodeExcerpt = {
 	languageId: string;
 	uri: Uri;
 	code: string;
-	excerptRange: vscode.Range;
+	excerptRange: zyraxoncode.Range;
 };
 
 /**
@@ -50,7 +50,7 @@ export class ReferencesAtPosition extends PromptElement<Props> {
 	constructor(
 		props: Props,
 		@IIgnoreService private readonly ignoreService: IIgnoreService,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 		@ILanguageFeaturesService private readonly languageFeaturesService: ILanguageFeaturesService,
 		@IWorkspaceService private readonly workspaceService: IWorkspaceService,
 		@ILogService private readonly logService: ILogService,
@@ -135,7 +135,7 @@ export class ReferencesAtPosition extends PromptElement<Props> {
 				continue;
 			}
 
-			const range = vscodeToTreeSitterOffsetRange(ref.range, docContainingRef);
+			const range = zyraxoncodeToTreeSitterOffsetRange(ref.range, docContainingRef);
 			const calls = await treeSitterAST.getCallExpressions(range);
 			const functions = await treeSitterAST.getFunctionDefinitions();
 			if (calls.length > 0) {
@@ -143,7 +143,7 @@ export class ReferencesAtPosition extends PromptElement<Props> {
 					languageId: docContainingRef.languageId,
 					uri: docContainingRef.uri,
 					code: calls[0].text,
-					excerptRange: treeSitterOffsetRangeToVSCodeRange(docContainingRef, calls[0]),
+					excerptRange: treeSitterOffsetRangeToZyraxonCodeRange(docContainingRef, calls[0]),
 				} as CodeExcerpt);
 			} else if (functions.some(f => TreeSitterOffsetRange.doIntersect(f, range))) {
 				// since language service gives us only links to identifiers, expand to whole implementation/definition using tree-sitter

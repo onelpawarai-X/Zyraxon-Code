@@ -92,7 +92,7 @@ export class WorkingCopyHistoryTracker extends Disposable implements IWorkbenchC
 		// Make sure to track the content version of each entry that
 		// was moved in our map. This ensures that a subsequent save
 		// without a content change does not add a redundant entry
-		// (https://github.com/microsoft/vscode/issues/145881)
+		// (__ZYRAXKEEP__0_)
 		for (const resource of resources) {
 			const contentVersion = this.getContentVersion(resource);
 			this.historyEntryContentVersion.set(resource, contentVersion);
@@ -193,7 +193,7 @@ export class WorkingCopyHistoryTracker extends Disposable implements IWorkbenchC
 	private shouldTrackHistory(resource: URI, stat: IFileStatWithMetadata): boolean {
 		if (
 			resource.scheme !== this.pathService.defaultUriScheme && 	// track history for all workspace resources
-			resource.scheme !== Schemas.vscodeUserData &&				// track history for all settings
+			resource.scheme !== Schemas.zyraxoncodeUserData &&				// track history for all settings
 			resource.scheme !== Schemas.inMemory	 					// track history for tests that use in-memory
 		) {
 			return false; // do not support unknown resources

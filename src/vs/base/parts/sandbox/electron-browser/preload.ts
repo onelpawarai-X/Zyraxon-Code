@@ -14,7 +14,7 @@
 	//#region Utilities
 
 	function validateIPC(channel: string): true | never {
-		if (!channel?.startsWith('vscode:')) {
+		if (!channel?.startsWith('zyraxoncode:')) {
 			throw new Error(`Unsupported event IPC channel '${channel}'`);
 		}
 
@@ -38,9 +38,9 @@
 	let configuration: ISandboxConfiguration | undefined = undefined;
 
 	const resolveConfiguration: Promise<ISandboxConfiguration> = (async () => {
-		const windowConfigIpcChannel = parseArgv('vscode-window-config');
+		const windowConfigIpcChannel = parseArgv('zyraxoncode-window-config');
 		if (!windowConfigIpcChannel) {
-			throw new Error('Preload: did not find expected vscode-window-config in renderer process arguments list.');
+			throw new Error('Preload: did not find expected zyraxoncode-window-config in renderer process arguments list.');
 		}
 
 		try {
@@ -56,13 +56,13 @@
 			// window DOM elements to avoid UI flicker. We always
 			// have to set the zoom level from within the window
 			// because Chrome has it's own way of remembering zoom
-			// settings per origin (if vscode-file:// is used) and
+			// settings per origin (if zyraxoncode-file:// is used) and
 			// we want to ensure that the user configuration wins.
 			webFrame.setZoomLevel(resolvedConfiguration.zoomLevel ?? 0);
 
 			return resolvedConfiguration;
 		} catch (error) {
-			throw new Error(`Preload: unable to fetch vscode-window-config: ${error}`);
+			throw new Error(`Preload: unable to fetch zyraxoncode-window-config: ${error}`);
 		}
 	})();
 
@@ -71,7 +71,7 @@
 	//#region Resolve Shell Environment
 
 	/**
-	 * If VSCode is not run from a terminal, we should resolve additional
+	 * If ZyraxonCode is not run from a terminal, we should resolve additional
 	 * shell specific environment from the OS shell to ensure we are seeing
 	 * all development related environment variables. We do this from the
 	 * main process because it may involve spawning a shell.
@@ -82,7 +82,7 @@
 		// `shellEnv` from the main side
 		const [userEnv, shellEnv] = await Promise.all([
 			(async () => (await resolveConfiguration).userEnv)(),
-			ipcRenderer.invoke('vscode:fetchShellEnv')
+			ipcRenderer.invoke('zyraxoncode:fetchShellEnv')
 		]);
 
 		return { ...process.env, ...shellEnv, ...userEnv };
@@ -96,7 +96,7 @@
 	// ###                                                                 ###
 	// ###       !!! DO NOT USE GET/SET PROPERTIES ANYWHERE HERE !!!       ###
 	// ###       !!!  UNLESS THE ACCESS IS WITHOUT SIDE EFFECTS  !!!       ###
-	// ###       (https://github.com/electron/electron/issues/25516)       ###
+	// ###       (__ZYRAXKEEP__0_)       ###
 	// ###                                                                 ###
 	// #######################################################################
 
@@ -193,7 +193,7 @@
 		 * Support for a subset of access to node.js global `process`.
 		 *
 		 * Note: when `sandbox` is enabled, the only properties available
-		 * are https://github.com/electron/electron/blob/master/docs/api/process.md#sandbox
+		 * are __ZYRAXKEEP__1_
 		 */
 		process: {
 			get platform() { return process.platform; },
@@ -247,8 +247,8 @@
 	};
 
 	try {
-		// Use `contextBridge` APIs to expose globals to VSCode
-		contextBridge.exposeInMainWorld('vscode', globals);
+		// Use `contextBridge` APIs to expose globals to ZyraxonCode
+		contextBridge.exposeInMainWorld('zyraxoncode', globals);
 	} catch (error) {
 		console.error(error);
 	}

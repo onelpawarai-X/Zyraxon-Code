@@ -24,7 +24,7 @@ import { IExtHostInitDataService } from '../common/extHostInitDataService.js';
 import { IExtHostRpcService } from '../common/extHostRpcService.js';
 import { ExtHostTunnelService } from '../common/extHostTunnelService.js';
 import { CandidatePort, parseAddress } from '../../services/remote/common/tunnelModel.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { IExtHostConfiguration } from '../common/extHostConfiguration.js';
 
 export function getSockets(stdout: string): Record<string, { pid: number; socket: number }> {
@@ -73,7 +73,7 @@ export function parseIpAddress(hex: string): string {
 			}
 		}
 	} else {
-		// Nice explanation of host format in tcp6 file: https://serverfault.com/questions/592574/why-does-proc-net-tcp6-represents-1-as-1000
+		// Nice explanation of host format in tcp6 file: __ZYRAXKEEP__0_
 		for (let i = 0; i < hex.length; i += 8) {
 			const word = hex.substring(i, i + 8);
 			let subWord = '';
@@ -109,9 +109,9 @@ function knownExcludeCmdline(command: string): boolean {
 	if (command.length > 500) {
 		return false;
 	}
-	return !!command.match(/.*\.vscode-server-[a-zA-Z]+\/bin.*/)
+	return !!command.match(/.*\.zyraxoncode-server-[a-zA-Z]+\/bin.*/)
 		|| (command.indexOf('out/server-main.js') !== -1)
-		|| (command.indexOf('_productName=VSCode') !== -1);
+		|| (command.indexOf('_productName=ZyraxonCode') !== -1);
 }
 
 export function getRootProcesses(stdout: string) {
@@ -319,7 +319,7 @@ export class NodeExtHostTunnelService extends ExtHostTunnelService {
 		return (!settingValue || settingValue === 'localhost') ? '127.0.0.1' : '0.0.0.0';
 	}
 
-	protected override makeManagedTunnelFactory(authority: vscode.ManagedResolvedAuthority): vscode.RemoteAuthorityResolver['tunnelFactory'] {
+	protected override makeManagedTunnelFactory(authority: zyraxoncode.ManagedResolvedAuthority): zyraxoncode.RemoteAuthorityResolver['tunnelFactory'] {
 		return async (tunnelOptions) => {
 			const t = new NodeRemoteTunnel(
 				{
@@ -375,7 +375,7 @@ export class NodeExtHostTunnelService extends ExtHostTunnelService {
 
 export class ExtHostManagedSocket extends ManagedSocket {
 	public static connect(
-		passing: vscode.ManagedMessagePassing,
+		passing: zyraxoncode.ManagedMessagePassing,
 		path: string, query: string, debugLabel: string,
 	): Promise<ExtHostManagedSocket> {
 		const d = new DisposableStore();
@@ -399,7 +399,7 @@ export class ExtHostManagedSocket extends ManagedSocket {
 	}
 
 	constructor(
-		private readonly passing: vscode.ManagedMessagePassing,
+		private readonly passing: zyraxoncode.ManagedMessagePassing,
 		debugLabel: string,
 		half: RemoteSocketHalf,
 	) {

@@ -12,7 +12,7 @@ export function popup(items: IContextMenuItem[], options?: IPopupOptions, onHide
 	const processedItems: IContextMenuItem[] = [];
 
 	const contextMenuId = contextMenuIdPool++;
-	const onClickChannel = `vscode:onContextMenu${contextMenuId}`;
+	const onClickChannel = `zyraxoncode:onContextMenu${contextMenuId}`;
 	const onClickChannelHandler = (_event: unknown, ...args: unknown[]) => {
 		const itemId = args[0] as number;
 		const context = args[1] as IContextMenuEvent;

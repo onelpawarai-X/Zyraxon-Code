@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, ChatResponseReferencePartStatusKind, Document, Image, PromptElement, PromptReference, PromptSizing } from '@vscode/prompt-tsx';
-import { UserMessage } from '@vscode/prompt-tsx/dist/base/promptElements';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, ChatResponseReferencePartStatusKind, Document, Image, PromptElement, PromptReference, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import { UserMessage } from '@zyraxoncode/prompt-tsx/dist/base/promptElements';
 import { AbstractDocumentWithLanguageId } from '../../../../platform/editing/common/abstractText';
 import { NotebookDocumentSnapshot } from '../../../../platform/editing/common/notebookDocumentSnapshot';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
@@ -23,7 +23,7 @@ import { Schemas } from '../../../../util/vs/base/common/network';
 import { basename } from '../../../../util/vs/base/common/resources';
 import { splitLines } from '../../../../util/vs/base/common/strings';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Location, Position, Range, Uri } from '../../../../vscodeTypes';
+import { Location, Position, Range, Uri } from '../../../../zyraxoncodeTypes';
 import { IPromptEndpoint } from '../base/promptRenderer';
 import { Tag } from '../base/tag';
 import { SummarizedDocumentLineNumberStyle } from '../inline/summarizedDocument/implementation';
@@ -173,7 +173,7 @@ export class FileVariable extends PromptElement<FileVariableProps, unknown> {
 		let documentSnapshot: TextDocumentSnapshot | NotebookDocumentSnapshot;
 		let fileUri: Uri = uri;
 
-		if (uri.scheme === Schemas.vscodeNotebookCellOutput) {
+		if (uri.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 			// add exception for notebook cell output with image mime type in unsupported endpoint
 			const items = getNotebookCellOutput(uri, this.workspaceService.notebookDocuments);
 			if (!items) {
@@ -193,7 +193,7 @@ export class FileVariable extends PromptElement<FileVariableProps, unknown> {
 				);
 			}
 		}
-		if (uri.scheme === Schemas.vscodeNotebookCell || uri.scheme === Schemas.vscodeNotebookCellOutput) {
+		if (uri.scheme === Schemas.zyraxoncodeNotebookCell || uri.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 			const [notebook, cell] = getNotebookAndCellFromUri(uri, this.workspaceService.notebookDocuments);
 			if (!notebook) {
 				return;

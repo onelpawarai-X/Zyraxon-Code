@@ -15,10 +15,10 @@
 	},
 	"include": [
 		"src/**/*",
-		"../../src/vscode-dts/vscode.d.ts",
-		"../../src/vscode-dts/vscode.proposed.canonicalUriProvider.d.ts",
-		"../../src/vscode-dts/vscode.proposed.scmHistoryProvider.d.ts",
-		"../../src/vscode-dts/vscode.proposed.shareProvider.d.ts",
-		"../../src/vscode-dts/vscode.proposed.timeline.d.ts"
+		"../../src/zyraxoncode-dts/zyraxoncode.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.canonicalUriProvider.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.scmHistoryProvider.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.shareProvider.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.timeline.d.ts"
 	]
 }

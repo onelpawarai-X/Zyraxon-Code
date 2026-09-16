@@ -65,7 +65,7 @@ export class AgentHostLanguageModelProvider extends Disposable implements ILangu
 			.map(m => {
 				const pricing = readAgentModelPricingMeta(m);
 				const multiplierNumeric = pricing.multiplierNumeric;
-				// "Auto" advertises the auto-mode discount (detail) + description (tooltip). microsoft/vscode#321778, #321659.
+				// "Auto" advertises the auto-mode discount (detail) + description (tooltip). zyraxon/zyraxoncode#321778, #321659.
 				const isAuto = m.id === 'auto';
 				const discountPercent = pricing.discountPercent;
 				// Guard against a non-finite or out-of-range value from the open `_meta` bag so we never render

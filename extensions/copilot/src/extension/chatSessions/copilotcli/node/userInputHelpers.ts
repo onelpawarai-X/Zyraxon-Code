@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { UserInputRequestedEvent } from '@github/copilot/sdk';
-import type { CancellationToken, ChatParticipantToolToken } from 'vscode';
+import type { CancellationToken, ChatParticipantToolToken } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../../util/common/services';
 
 export type UserInputRequest = Omit<UserInputRequestedEvent['data'], 'requestId'>;

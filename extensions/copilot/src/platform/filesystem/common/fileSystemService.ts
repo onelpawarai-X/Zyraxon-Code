@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { FileStat, FileSystem, FileSystemWatcher, RelativePattern, Uri } from 'vscode';
+import type { FileStat, FileSystem, FileSystemWatcher, RelativePattern, Uri } from 'zyraxoncode';
 import { LRUCache } from '../../../util/common/cache';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { FileType } from './fileTypes';

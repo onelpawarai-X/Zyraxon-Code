@@ -58,7 +58,7 @@ export interface PullRequestCreatedEvent {
  * `AgentHostChangesetOperationService.updateOperations`.
  *
  * The flow mirrors the Copilot CLI extension's `createPullRequest` helper
- * (`extensions/copilot/src/extension/chatSessions/vscode-node/copilotCLIChatSessionsContribution.ts`):
+ * (`extensions/copilot/src/extension/chatSessions/zyraxoncode-node/copilotCLIChatSessionsContribution.ts`):
  *
  * 1. Resolve session → working directory + current/base branch from
  *    {@link ISessionGitState}.

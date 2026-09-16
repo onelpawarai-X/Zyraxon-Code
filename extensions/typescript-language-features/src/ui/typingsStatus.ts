@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { ITypeScriptServiceClient } from '../typescriptService';
 import { readUnifiedConfig } from '../utils/configuration';
 import { Disposable } from '../utils/dispose';
@@ -81,9 +81,9 @@ export class AtaProgressReporter extends Disposable {
 			});
 		});
 
-		vscode.window.withProgress({
-			location: vscode.ProgressLocation.Window,
-			title: vscode.l10n.t("Fetching data for better TypeScript IntelliSense")
+		zyraxoncode.window.withProgress({
+			location: zyraxoncode.ProgressLocation.Window,
+			title: zyraxoncode.l10n.t("Fetching data for better TypeScript IntelliSense")
 		}, () => promise);
 	}
 
@@ -97,18 +97,18 @@ export class AtaProgressReporter extends Disposable {
 
 	private async onTypesInstallerInitializationFailed() {
 		if (readUnifiedConfig<boolean>('tsserver.checkNpmIsInstalled', true, { fallbackSection: 'typescript', fallbackSubSectionNameOverride: 'check.npmIsInstalled' })) {
-			const dontShowAgain: vscode.MessageItem = {
-				title: vscode.l10n.t("Don't Show Again"),
+			const dontShowAgain: zyraxoncode.MessageItem = {
+				title: zyraxoncode.l10n.t("Don't Show Again"),
 			};
-			const selected = await vscode.window.showWarningMessage(
-				vscode.l10n.t(
+			const selected = await zyraxoncode.window.showWarningMessage(
+				zyraxoncode.l10n.t(
 					"Could not install typings files for JavaScript language features. Please ensure that NPM is installed, or configure 'js/ts.tsserver.npm.path' in your user settings. Alternatively, check the [documentation]({0}) to learn more.",
-					'https://go.microsoft.com/fwlink/?linkid=847635'
+					'__ZYRAXKEEP__0_'
 				),
 				dontShowAgain);
 
 			if (selected === dontShowAgain) {
-				vscode.workspace.getConfiguration('js/ts').update('tsserver.checkNpmIsInstalled', false, true);
+				zyraxoncode.workspace.getConfiguration('js/ts').update('tsserver.checkNpmIsInstalled', false, true);
 			}
 		}
 	}

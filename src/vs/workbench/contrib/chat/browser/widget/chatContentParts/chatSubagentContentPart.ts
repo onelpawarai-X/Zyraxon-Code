@@ -292,7 +292,7 @@ export class ChatSubagentContentPart extends ChatCollapsibleContentPart implemen
 				action,
 				options,
 				this.instantiationService,
-				dom.getWindow(container).vscodeWindowId
+				dom.getWindow(container).zyraxoncodeWindowId
 			),
 		}));
 		this._openChatToolbar.setActions([menuAction]);

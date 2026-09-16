@@ -15,7 +15,7 @@ export function applySettingsTools(server: McpServer, appService: ApplicationSer
 
 	// I don't think we need this and the batch version
 	// server.tool(
-	// 	'vscode_automation_settings_add_user_setting',
+	// 	'zyraxoncode_automation_settings_add_user_setting',
 	// 	'Add a single user setting key-value pair',
 	// 	{
 	// 		setting: z.string().describe('Setting key (e.g., "editor.fontSize")'),
@@ -34,7 +34,7 @@ export function applySettingsTools(server: McpServer, appService: ApplicationSer
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_settings_add_user_settings',
+		'zyraxoncode_automation_settings_add_user_settings',
 		'Add multiple user settings at once',
 		{
 			settings: z.array(z.tuple([z.string(), z.string()])).describe('Array of [key, value] setting pairs')
@@ -53,7 +53,7 @@ export function applySettingsTools(server: McpServer, appService: ApplicationSer
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_settings_clear_user_settings',
+		'zyraxoncode_automation_settings_clear_user_settings',
 		'Clear all user settings',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -69,7 +69,7 @@ export function applySettingsTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_settings_open_user_file',
+	// 	'zyraxoncode_automation_settings_open_user_file',
 	// 	'Open the user settings JSON file',
 	// 	async () => {
 	// 		await app.workbench.settingsEditor.openUserSettingsFile();
@@ -84,7 +84,7 @@ export function applySettingsTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_settings_open_user_ui',
+	// 	'zyraxoncode_automation_settings_open_user_ui',
 	// 	'Open the user settings UI',
 	// 	async () => {
 	// 		await app.workbench.settingsEditor.openUserSettingsUI();
@@ -98,7 +98,7 @@ export function applySettingsTools(server: McpServer, appService: ApplicationSer
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_settings_search_ui',
+		'zyraxoncode_automation_settings_search_ui',
 		'Search for settings in the settings UI',
 		{
 			query: z.string().describe('Search query for settings')

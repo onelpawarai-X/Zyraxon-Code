@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { GlobIncludeOptions } from '../../../util/common/glob';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { FileChunkAndScore } from '../../chunking/common/chunk';
@@ -41,6 +41,6 @@ export interface StrategySearchResult {
 }
 
 export type WorkspaceSearchAlert =
-	| vscode.ChatResponseWarningPart
-	| vscode.ChatResponseCommandButtonPart
-	| vscode.ChatResponseMarkdownPart;
+	| zyraxoncode.ChatResponseWarningPart
+	| zyraxoncode.ChatResponseCommandButtonPart
+	| zyraxoncode.ChatResponseMarkdownPart;

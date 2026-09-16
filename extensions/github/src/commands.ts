@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { RefType } from './typings/git.constants.js';
 import type { API as GitAPI, Repository } from './typings/git.d.ts';
 import { publishRepository } from './publish.js';
@@ -15,22 +15,22 @@ async function copyVscodeDevLink(gitAPI: GitAPI, useSelection: boolean, context:
 	try {
 		const permalink = await getLink(gitAPI, useSelection, true, getVscodeDevHost(), 'headlink', context, includeRange);
 		if (permalink) {
-			return vscode.env.clipboard.writeText(permalink);
+			return zyraxoncode.env.clipboard.writeText(permalink);
 		}
 	} catch (err) {
-		if (!(err instanceof vscode.CancellationError)) {
-			vscode.window.showErrorMessage(err.message);
+		if (!(err instanceof zyraxoncode.CancellationError)) {
+			zyraxoncode.window.showErrorMessage(err.message);
 		}
 	}
 }
 
-async function openVscodeDevLink(gitAPI: GitAPI): Promise<vscode.Uri | undefined> {
+async function openVscodeDevLink(gitAPI: GitAPI): Promise<zyraxoncode.Uri | undefined> {
 	try {
 		const headlink = await getLink(gitAPI, true, false, getVscodeDevHost(), 'headlink');
-		return headlink ? vscode.Uri.parse(headlink) : undefined;
+		return headlink ? zyraxoncode.Uri.parse(headlink) : undefined;
 	} catch (err) {
-		if (!(err instanceof vscode.CancellationError)) {
-			vscode.window.showErrorMessage(err.message);
+		if (!(err instanceof zyraxoncode.CancellationError)) {
+			zyraxoncode.window.showErrorMessage(err.message);
 		}
 		return undefined;
 	}
@@ -48,12 +48,12 @@ function resolveSessionRepo(gitAPI: GitAPI, sessionMetadata: { worktreePath?: st
 		return undefined;
 	}
 
-	const worktreeUri = vscode.Uri.file(sessionMetadata.worktreePath);
+	const worktreeUri = zyraxoncode.Uri.file(sessionMetadata.worktreePath);
 	const repository = gitAPI.getRepository(worktreeUri);
 
 	if (!repository) {
 		if (showErrors) {
-			vscode.window.showErrorMessage(vscode.l10n.t('Could not find a git repository for the session worktree.'));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t('Could not find a git repository for the session worktree.'));
 		}
 		return undefined;
 	}
@@ -63,7 +63,7 @@ function resolveSessionRepo(gitAPI: GitAPI, sessionMetadata: { worktreePath?: st
 
 	if (remotes.length === 0) {
 		if (showErrors) {
-			vscode.window.showErrorMessage(vscode.l10n.t('Could not find a GitHub remote for this repository.'));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t('Could not find a GitHub remote for this repository.'));
 		}
 		return undefined;
 	}
@@ -75,7 +75,7 @@ function resolveSessionRepo(gitAPI: GitAPI, sessionMetadata: { worktreePath?: st
 	const remoteInfo = getRepositoryFromUrl(gitRemote.fetchUrl!);
 	if (!remoteInfo) {
 		if (showErrors) {
-			vscode.window.showErrorMessage(vscode.l10n.t('Could not parse GitHub remote URL.'));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t('Could not parse GitHub remote URL.'));
 		}
 		return undefined;
 	}
@@ -83,7 +83,7 @@ function resolveSessionRepo(gitAPI: GitAPI, sessionMetadata: { worktreePath?: st
 	const head = repository.state.HEAD;
 	if (!head?.name) {
 		if (showErrors) {
-			vscode.window.showErrorMessage(vscode.l10n.t('Could not determine the current branch.'));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t('Could not determine the current branch.'));
 		}
 		return undefined;
 	}
@@ -91,7 +91,7 @@ function resolveSessionRepo(gitAPI: GitAPI, sessionMetadata: { worktreePath?: st
 	return { repository, remoteInfo, gitRemote: { name: gitRemote.name, fetchUrl: gitRemote.fetchUrl! }, head: head as ResolvedSessionRepo['head'] };
 }
 
-async function createPullRequest(gitAPI: GitAPI, sessionResource: vscode.Uri | undefined, sessionMetadata: { worktreePath?: string } | undefined): Promise<void> {
+async function createPullRequest(gitAPI: GitAPI, sessionResource: zyraxoncode.Uri | undefined, sessionMetadata: { worktreePath?: string } | undefined): Promise<void> {
 	if (!sessionResource) {
 		return;
 	}
@@ -106,26 +106,26 @@ async function createPullRequest(gitAPI: GitAPI, sessionResource: vscode.Uri | u
 	// Ensure the branch is published to the remote
 	if (!head.upstream) {
 		try {
-			await vscode.window.withProgress(
-				{ location: vscode.ProgressLocation.Notification, title: vscode.l10n.t('Publishing branch to {0}...', gitRemote.name) },
+			await zyraxoncode.window.withProgress(
+				{ location: zyraxoncode.ProgressLocation.Notification, title: zyraxoncode.l10n.t('Publishing branch to {0}...', gitRemote.name) },
 				async () => {
 					await repository.push(gitRemote.name, head.name, true);
 				}
 			);
 		} catch (err) {
-			vscode.window.showErrorMessage(vscode.l10n.t('Failed to publish branch: {0}', err instanceof Error ? err.message : String(err)));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t('Failed to publish branch: {0}', err instanceof Error ? err.message : String(err)));
 			return;
 		}
 	}
 
 	// Build the GitHub PR creation URL
-	// Format: https://github.com/owner/repo/compare/base...head
-	const prUrl = `https://github.com/${remoteInfo.owner}/${remoteInfo.repo}/compare/${head.name}?expand=1`;
+	// Format: __ZYRAXKEEP__0_
+	const prUrl = `__ZYRAXKEEP__1_{remoteInfo.owner}/${remoteInfo.repo}/compare/${head.name}?expand=1`;
 
-	vscode.env.openExternal(vscode.Uri.parse(prUrl));
+	zyraxoncode.env.openExternal(zyraxoncode.Uri.parse(prUrl));
 }
 
-async function openPullRequest(gitAPI: GitAPI, _sessionResource: vscode.Uri | undefined, sessionMetadata: { worktreePath?: string } | undefined): Promise<void> {
+async function openPullRequest(gitAPI: GitAPI, _sessionResource: zyraxoncode.Uri | undefined, sessionMetadata: { worktreePath?: string } | undefined): Promise<void> {
 	const resolved = resolveSessionRepo(gitAPI, sessionMetadata, true);
 	if (!resolved) {
 		return;
@@ -141,7 +141,7 @@ async function openPullRequest(gitAPI: GitAPI, _sessionResource: vscode.Uri | un
 		});
 
 		if (pullRequests.length > 0) {
-			vscode.env.openExternal(vscode.Uri.parse(pullRequests[0].html_url));
+			zyraxoncode.env.openExternal(zyraxoncode.Uri.parse(pullRequests[0].html_url));
 			return;
 		}
 	} catch {
@@ -150,7 +150,7 @@ async function openPullRequest(gitAPI: GitAPI, _sessionResource: vscode.Uri | un
 
 	// Fallback: open the repository page
 	const { remoteInfo } = resolved;
-	vscode.env.openExternal(vscode.Uri.parse(`https://github.com/${remoteInfo.owner}/${remoteInfo.repo}`));
+	zyraxoncode.env.openExternal(zyraxoncode.Uri.parse(`__ZYRAXKEEP__2_{remoteInfo.owner}/${remoteInfo.repo}`));
 }
 
 async function openOnGitHub(repository: Repository, commit: string): Promise<void> {
@@ -163,7 +163,7 @@ async function openOnGitHub(repository: Repository, commit: string): Promise<voi
 		.filter(r => remoteNames.has(r.name) && r.fetchUrl && getRepositoryFromUrl(r.fetchUrl));
 
 	if (remotes.length === 0) {
-		vscode.window.showInformationMessage(vscode.l10n.t('No GitHub remotes found that contain this commit.'));
+		zyraxoncode.window.showInformationMessage(zyraxoncode.l10n.t('No GitHub remotes found that contain this commit.'));
 		return;
 	}
 
@@ -173,38 +173,38 @@ async function openOnGitHub(repository: Repository, commit: string): Promise<voi
 		?? remotes[0];
 
 	const link = getCommitLink(remote.fetchUrl!, commit);
-	vscode.env.openExternal(vscode.Uri.parse(link));
+	zyraxoncode.env.openExternal(zyraxoncode.Uri.parse(link));
 }
 
-export function registerCommands(gitAPI: GitAPI): vscode.Disposable {
+export function registerCommands(gitAPI: GitAPI): zyraxoncode.Disposable {
 	const disposables = new DisposableStore();
 
-	disposables.add(vscode.commands.registerCommand('github.publish', async () => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.publish', async () => {
 		try {
 			publishRepository(gitAPI);
 		} catch (err) {
-			vscode.window.showErrorMessage(err.message);
+			zyraxoncode.window.showErrorMessage(err.message);
 		}
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.copyVscodeDevLink', async (context: LinkContext) => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.copyVscodeDevLink', async (context: LinkContext) => {
 		return copyVscodeDevLink(gitAPI, true, context);
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.copyVscodeDevLinkFile', async (context: LinkContext) => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.copyVscodeDevLinkFile', async (context: LinkContext) => {
 		return copyVscodeDevLink(gitAPI, false, context);
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.copyVscodeDevLinkWithoutRange', async (context: LinkContext) => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.copyVscodeDevLinkWithoutRange', async (context: LinkContext) => {
 		return copyVscodeDevLink(gitAPI, true, context, false);
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.openOnGitHub', async (url: string, historyItemId: string) => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.openOnGitHub', async (url: string, historyItemId: string) => {
 		const link = getCommitLink(url, historyItemId);
-		vscode.env.openExternal(vscode.Uri.parse(link));
+		zyraxoncode.env.openExternal(zyraxoncode.Uri.parse(link));
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.graph.openOnGitHub', async (repository: vscode.SourceControl, historyItem: vscode.SourceControlHistoryItem) => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.graph.openOnGitHub', async (repository: zyraxoncode.SourceControl, historyItem: zyraxoncode.SourceControlHistoryItem) => {
 		if (!repository || !historyItem) {
 			return;
 		}
@@ -217,7 +217,7 @@ export function registerCommands(gitAPI: GitAPI): vscode.Disposable {
 		await openOnGitHub(apiRepository, historyItem.id);
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.timeline.openOnGitHub', async (item: vscode.TimelineItem, uri: vscode.Uri) => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.timeline.openOnGitHub', async (item: zyraxoncode.TimelineItem, uri: zyraxoncode.Uri) => {
 		if (!item.id || !uri) {
 			return;
 		}
@@ -230,15 +230,15 @@ export function registerCommands(gitAPI: GitAPI): vscode.Disposable {
 		await openOnGitHub(apiRepository, item.id);
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.openOnVscodeDev', async () => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.openOnVscodeDev', async () => {
 		return openVscodeDevLink(gitAPI);
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.createPullRequest', async (sessionResource: vscode.Uri | undefined, sessionMetadata: { worktreePath?: string } | undefined) => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.createPullRequest', async (sessionResource: zyraxoncode.Uri | undefined, sessionMetadata: { worktreePath?: string } | undefined) => {
 		return createPullRequest(gitAPI, sessionResource, sessionMetadata);
 	}));
 
-	disposables.add(vscode.commands.registerCommand('github.openPullRequest', async (sessionResource: vscode.Uri | undefined, sessionMetadata: { worktreePath?: string } | undefined) => {
+	disposables.add(zyraxoncode.commands.registerCommand('github.openPullRequest', async (sessionResource: zyraxoncode.Uri | undefined, sessionMetadata: { worktreePath?: string } | undefined) => {
 		return openPullRequest(gitAPI, sessionResource, sessionMetadata);
 	}));
 

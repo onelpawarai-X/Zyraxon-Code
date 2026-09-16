@@ -34,10 +34,10 @@ function getInternalCommonProperties(commonProperties: ICommonProperties | undef
 	Object.defineProperties(result, Object.getOwnPropertyDescriptors(commonProperties));
 	result['common.extname'] = INTERNAL_EXTENSION_ID;
 	result['common.extversion'] = extensionVersion;
-	result['common.vscodemachineid'] = commonProperties['common.machineId'];
-	result['common.vscodesessionid'] = commonProperties['sessionID'];
-	result['common.vscodecommithash'] = commonProperties['commitHash'];
-	result['common.vscodeversion'] = commonProperties['version'];
+	result['common.zyraxoncodemachineid'] = commonProperties['common.machineId'];
+	result['common.zyraxoncodesessionid'] = commonProperties['sessionID'];
+	result['common.zyraxoncodecommithash'] = commonProperties['commitHash'];
+	result['common.zyraxoncodeversion'] = commonProperties['version'];
 	return result;
 }
 

@@ -8,45 +8,45 @@ This folder contains the Claude Code integration for ZYRAXON Code Chat. It enabl
 
 > **Important:** For the most up-to-date information on the Claude Agent SDK, always refer to the official documentation:
 >
-> - **[Agent SDK Overview](https://platform.claude.com/docs/en/agent-sdk/overview)** - General SDK concepts, capabilities, and getting started guide
-> - **[Agent SDK Quickstart](https://platform.claude.com/docs/en/agent-sdk/quickstart)** - Step-by-step guide to building your first agent
-> - **[TypeScript SDK Reference](https://platform.claude.com/docs/en/agent-sdk/typescript)** - Complete API reference for the TypeScript SDK including all functions, types, and interfaces
-> - **[TypeScript V2 Preview](https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview)** - Preview of the simplified V2 interface with session-based send/stream patterns
+> - **[Agent SDK Overview](__ZYRAXKEEP__0_)** - General SDK concepts, capabilities, and getting started guide
+> - **[Agent SDK Quickstart](__ZYRAXKEEP__1_)** - Step-by-step guide to building your first agent
+> - **[TypeScript SDK Reference](__ZYRAXKEEP__2_)** - Complete API reference for the TypeScript SDK including all functions, types, and interfaces
+> - **[TypeScript V2 Preview](__ZYRAXKEEP__3_)** - Preview of the simplified V2 interface with session-based send/stream patterns
 >
 > The SDK package is `@anthropic-ai/claude-agent-sdk`. The official documentation covers tools, hooks, subagents, MCP integration, permissions, sessions, and more.
 
 ### Core SDK Features
 
 **Getting Started:**
-- [Overview](https://platform.claude.com/docs/en/agent-sdk/overview) - Learn about the Agent SDK architecture and core concepts
-- [Quickstart](https://platform.claude.com/docs/en/agent-sdk/quickstart) - Get up and running with your first agent in minutes
+- [Overview](__ZYRAXKEEP__4_) - Learn about the Agent SDK architecture and core concepts
+- [Quickstart](__ZYRAXKEEP__5_) - Get up and running with your first agent in minutes
 
 **Core SDK Implementation:**
-- [TypeScript](https://platform.claude.com/docs/en/agent-sdk/typescript) - Main TypeScript SDK reference for building agents
-- [TypeScript v2 Preview](https://platform.claude.com/docs/en/agent-sdk/typescript-v2-preview) - Preview of upcoming v2 API with enhanced features
-- [Streaming vs Single Mode](https://platform.claude.com/docs/en/agent-sdk/streaming-vs-single-mode) - Choose between streaming responses or single-turn completions
+- [TypeScript](__ZYRAXKEEP__6_) - Main TypeScript SDK reference for building agents
+- [TypeScript v2 Preview](__ZYRAXKEEP__7_) - Preview of upcoming v2 API with enhanced features
+- [Streaming vs Single Mode](__ZYRAXKEEP__8_) - Choose between streaming responses or single-turn completions
 
 **User Interaction & Control:**
-- [Permissions](https://platform.claude.com/docs/en/agent-sdk/permissions) - Control what actions Claude can take with user approval flows
-- [User Input](https://platform.claude.com/docs/en/agent-sdk/user-input) - Collect clarifications and decisions from users during execution
-- [Hooks](https://platform.claude.com/docs/en/agent-sdk/hooks) - Execute custom logic at key points in the agent lifecycle
+- [Permissions](__ZYRAXKEEP__9_) - Control what actions Claude can take with user approval flows
+- [User Input](__ZYRAXKEEP__10_) - Collect clarifications and decisions from users during execution
+- [Hooks](__ZYRAXKEEP__11_) - Execute custom logic at key points in the agent lifecycle
 
 **State & Session Management:**
-- [Sessions](https://platform.claude.com/docs/en/agent-sdk/sessions) - Manage conversation history and context across interactions
-- [File Checkpointing](https://platform.claude.com/docs/en/agent-sdk/file-checkpointing) - Save and restore file states for undo/redo functionality
+- [Sessions](__ZYRAXKEEP__12_) - Manage conversation history and context across interactions
+- [File Checkpointing](__ZYRAXKEEP__13_) - Save and restore file states for undo/redo functionality
 
 **Advanced Features:**
-- [Structured Outputs](https://platform.claude.com/docs/en/agent-sdk/structured-outputs) - Get reliable JSON responses with schema validation
-- [Modifying System Prompts](https://platform.claude.com/docs/en/agent-sdk/modifying-system-prompts) - Customize Claude's behavior and instructions
-- [MCP](https://platform.claude.com/docs/en/agent-sdk/mcp) - Connect to Model Context Protocol servers for extended capabilities
-- [Custom Tools](https://platform.claude.com/docs/en/agent-sdk/custom-tools) - Build your own tools to extend Claude's functionality
+- [Structured Outputs](__ZYRAXKEEP__14_) - Get reliable JSON responses with schema validation
+- [Modifying System Prompts](__ZYRAXKEEP__15_) - Customize Claude's behavior and instructions
+- [MCP](__ZYRAXKEEP__16_) - Connect to Model Context Protocol servers for extended capabilities
+- [Custom Tools](__ZYRAXKEEP__17_) - Build your own tools to extend Claude's functionality
 
 **Agent Composition & UX:**
-- [Subagents](https://platform.claude.com/docs/en/agent-sdk/subagents) - Compose complex workflows by delegating to specialized agents
-- [Slash Commands](https://platform.claude.com/docs/en/agent-sdk/slash-commands) - Add custom `/commands` for quick actions
-- [Skills](https://platform.claude.com/docs/en/agent-sdk/skills) - Package reusable agent capabilities as installable modules
-- [Todo Tracking](https://platform.claude.com/docs/en/agent-sdk/todo-tracking) - Help Claude manage and display task progress
-- [Plugins](https://platform.claude.com/docs/en/agent-sdk/plugins) - Extend the SDK with community-built integrations
+- [Subagents](__ZYRAXKEEP__18_) - Compose complex workflows by delegating to specialized agents
+- [Slash Commands](__ZYRAXKEEP__19_) - Add custom `/commands` for quick actions
+- [Skills](__ZYRAXKEEP__20_) - Package reusable agent capabilities as installable modules
+- [Todo Tracking](__ZYRAXKEEP__21_) - Help Claude manage and display task progress
+- [Plugins](__ZYRAXKEEP__22_) - Extend the SDK with community-built integrations
 
 ## Overview
 
@@ -169,7 +169,7 @@ Formats tool invocations for display in ZYRAXON Code's chat UI:
 - Handles tool-specific formatting (Bash commands, file reads, searches, etc.)
 - Suppresses certain tools from display (TodoWrite, Edit, Write) where other UI handles them
 
-### `../../chatSessions/vscode-node/chatHistoryBuilder.ts`
+### `../../chatSessions/zyraxoncode-node/chatHistoryBuilder.ts`
 
 Converts a persisted `IClaudeCodeSession` into ZYRAXON Code `ChatResponsePart[]` for replay in the chat UI:
 - Reconstructs assistant text, thinking blocks, tool invocations, and tool results into chat response parts
@@ -242,10 +242,10 @@ In multi-root and empty workspaces, a folder picker option appears in the chat s
 
 - **`common/claudeFolderInfo.ts`**: `ClaudeFolderInfo` interface
 - **`../../chatSessions/common/claudeWorkspaceFolderService.ts`**: `IClaudeWorkspaceFolderService` interface — computes git diff changes for session items
-- **`../../chatSessions/vscode-node/claudeWorkspaceFolderServiceImpl.ts`**: Implementation — diffs the session's branch against its base branch, caches results, and maps changes to `ChatSessionChangedFile[]` for display in the Sessions view
-- **`../../chatSessions/vscode-node/claudeChatSessionContentProvider.ts`**: Folder resolution, picker options, session metadata enrichment, and git command handlers
+- **`../../chatSessions/zyraxoncode-node/claudeWorkspaceFolderServiceImpl.ts`**: Implementation — diffs the session's branch against its base branch, caches results, and maps changes to `ChatSessionChangedFile[]` for display in the Sessions view
+- **`../../chatSessions/zyraxoncode-node/claudeChatSessionContentProvider.ts`**: Folder resolution, picker options, session metadata enrichment, and git command handlers
 - **`../../chatSessions/common/builtinSlashCommands.ts`**: Shared constants for built-in slash commands (`/commit`, `/sync`, `/merge`, etc.) used by both Claude and CopilotCLI sessions
-- **`../../chatSessions/vscode-node/folderRepositoryManagerImpl.ts`**: `FolderRepositoryManager` (abstract base) with `ClaudeFolderRepositoryManager` subclass — the Claude subclass does not depend on `ICopilotCLISessionService` (CopilotCLI has its own subclass `CopilotCLIFolderRepositoryManager`)
+- **`../../chatSessions/zyraxoncode-node/folderRepositoryManagerImpl.ts`**: `FolderRepositoryManager` (abstract base) with `ClaudeFolderRepositoryManager` subclass — the Claude subclass does not depend on `ICopilotCLISessionService` (CopilotCLI has its own subclass `CopilotCLIFolderRepositoryManager`)
 - **`node/claudeCodeAgent.ts`**: Consumes `ClaudeFolderInfo` in `ClaudeCodeSession._startSession()`
 - **`node/sessionParser/claudeCodeSessionService.ts`**: `_getProjectSlugs()` generates slugs for all folders
 
@@ -263,7 +263,7 @@ ZYRAXON Code calls `getChatSessionInputState` to get a `ChatSessionInputState` o
 InputStateReactivePipeline {
   permissionMode:   ISettableObservable<PermissionMode>
   folderUri:        ISettableObservable<URI | undefined>
-  folderItems:      ISettableObservable<readonly vscode.ChatSessionProviderOptionItem[]>
+  folderItems:      ISettableObservable<readonly zyraxoncode.ChatSessionProviderOptionItem[]>
   isSessionStarted: ISettableObservable<boolean>
   store:            DisposableStore    // owns all autoruns for this pipeline
 }
@@ -395,7 +395,7 @@ Unit tests are located in `node/test/`:
 - `fixtures/`: Sample `.jsonl` session files for testing
 
 Additional tests for the session item controller and content provider:
-- `../../chatSessions/vscode-node/test/claudeChatSessionContentProvider.spec.ts`: Tests for session metadata enrichment, git command handlers, session lifecycle, and content provider behavior
+- `../../chatSessions/zyraxoncode-node/test/claudeChatSessionContentProvider.spec.ts`: Tests for session metadata enrichment, git command handlers, session lifecycle, and content provider behavior
 
 ## Extension Registries
 
@@ -429,7 +429,7 @@ The hook registry allows registering custom hooks that execute at key points in 
 
 ### Slash Command Registry
 
-**Location:** `vscode-node/slashCommands/claudeSlashCommandRegistry.ts`
+**Location:** `zyraxoncode-node/slashCommands/claudeSlashCommandRegistry.ts`
 
 The slash command registry manages custom slash commands available in Claude chat sessions. Commands allow users to trigger specific functionality via `/commandname` syntax.
 
@@ -453,11 +453,11 @@ interface IClaudeSlashCommandHandler {
 
 Slash commands often need to present choices or gather input from users. When doing so, prefer the simpler one-shot APIs over the more complex builder APIs:
 
-- **Prefer:** `vscode.window.showQuickPick()` - Simple function call that returns the selected item(s)
-- **Avoid:** `vscode.window.createQuickPick()` - More complex, requires manual lifecycle management
+- **Prefer:** `zyraxoncode.window.showQuickPick()` - Simple function call that returns the selected item(s)
+- **Avoid:** `zyraxoncode.window.createQuickPick()` - More complex, requires manual lifecycle management
 
-- **Prefer:** `vscode.window.showInputBox()` - Simple function call that returns the entered text
-- **Avoid:** `vscode.window.createInputBox()` - More complex, requires manual lifecycle management
+- **Prefer:** `zyraxoncode.window.showInputBox()` - Simple function call that returns the entered text
+- **Avoid:** `zyraxoncode.window.createInputBox()` - More complex, requires manual lifecycle management
 
 The `show*` APIs are sufficient for most slash command use cases and result in cleaner, more maintainable code. Only use `create*` APIs when you need advanced features like dynamic item updates, multi-step wizards, or custom event handling.
 
@@ -476,13 +476,13 @@ Tool permission handlers control what actions Claude can take without user confi
 **Key Features:**
 - Auto-approve safe operations (e.g., file edits within workspace)
 - Request user confirmation for potentially dangerous operations
-- Handlers are organized by platform (common, node, vscode-node)
+- Handlers are organized by platform (common, node, zyraxoncode-node)
 
 **Handler Types:**
 - **Common handlers** (`common/toolPermissionHandlers/`):
   - `bashToolHandler.ts` - Controls bash/shell command execution
   - `exitPlanModeHandler.ts` - Manages plan mode transitions
-  - `askUserQuestionHandler.ts` - Delegates to the core `vscode_askQuestions` tool for question carousel UI
+  - `askUserQuestionHandler.ts` - Delegates to the core `zyraxoncode_askQuestions` tool for question carousel UI
 
 - **Node handlers** (`node/toolPermissionHandlers/`):
   - `editToolHandler.ts` - Handles file edit operations (Edit, Write, MultiEdit)
@@ -520,7 +520,7 @@ interface IClaudeMcpServerContributor {
 **Index Chain:**
 - `common/mcpServers/index.ts` → Platform-agnostic contributors
 - `node/mcpServers/index.ts` → Node-specific contributors (imports common first)
-- `vscode-node/mcpServers/index.ts` → ZYRAXON Code-specific contributors (imports node first)
+- `zyraxoncode-node/mcpServers/index.ts` → ZYRAXON Code-specific contributors (imports node first)
 
 **Extending the Registries:**
 
@@ -534,7 +534,7 @@ To add new functionality:
 2. **New Slash Command:**
    - Create a class implementing `IClaudeSlashCommandHandler`
    - Call `registerClaudeSlashCommand(YourHandler)` at module load time
-   - Import your command module in `vscode-node/slashCommands/index.ts`
+   - Import your command module in `zyraxoncode-node/slashCommands/index.ts`
    - If providing a `commandId`, register the command in `package.json`:
      ```json
      {
@@ -545,14 +545,14 @@ To add new functionality:
      ```
 
 3. **New Tool Permission Handler:**
-   - Create handler in appropriate directory (common/node/vscode-node)
+   - Create handler in appropriate directory (common/node/zyraxoncode-node)
    - Implement tool approval logic
    - Import your handler module in `index.ts` to trigger registration
 
 4. **New MCP Server Contributor:**
    - Create a class implementing `IClaudeMcpServerContributor`
    - Call `registerClaudeMcpServerContributor(YourContributor)` at module load time
-   - Import your contributor module in the appropriate `mcpServers/index.ts` (common/node/vscode-node)
+   - Import your contributor module in the appropriate `mcpServers/index.ts` (common/node/zyraxoncode-node)
 
 ## Configuration
 

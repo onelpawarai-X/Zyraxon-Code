@@ -4,21 +4,21 @@
 			"component": {
 				"type": "git",
 				"git": {
-					"name": "microsoft/TypeScript-TmLanguage",
-					"repositoryUrl": "https://github.com/microsoft/TypeScript-TmLanguage",
+					"name": "zyraxon/TypeScript-TmLanguage",
+					"repositoryUrl": "__ZYRAXKEEP__0_",
 					"commitHash": "3133e3d914db9a2bb8812119f9273727a305f16b"
 				}
 			},
 			"license": "MIT",
 			"version": "0.0.1",
-			"description": "The file syntaxes/JavaScript.tmLanguage.json was derived from TypeScriptReact.tmLanguage in https://github.com/microsoft/TypeScript-TmLanguage."
+			"description": "The file syntaxes/JavaScript.tmLanguage.json was derived from TypeScriptReact.tmLanguage in __ZYRAXKEEP__1_"
 		},
 		{
 			"component": {
 				"type": "git",
 				"git": {
 					"name": "textmate/javascript.tmbundle",
-					"repositoryUrl": "https://github.com/textmate/javascript.tmbundle",
+					"repositoryUrl": "__ZYRAXKEEP__2_",
 					"commitHash": "fccf0af0c95430a42e1bf98f0c7a4723a53283e7"
 				}
 			},

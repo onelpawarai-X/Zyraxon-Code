@@ -35,8 +35,8 @@ import '../../../../../platform/hover/browser/hover.css';
 // ============================================================================
 
 function createMockWorkspace(issues: readonly IGitHubIssueRef[]): ISessionWorkspace {
-	const root = URI.file('/home/user/projects/vscode');
-	const gitHubInfo: IGitHubInfo = { owner: 'Zyraxon', repo: 'vscode', issues };
+	const root = URI.file('/home/user/projects/zyraxoncode');
+	const gitHubInfo: IGitHubInfo = { owner: 'Zyraxon', repo: 'zyraxoncode', issues };
 
 	const gitRepository: ISessionGitRepository = {
 		uri: root,
@@ -48,14 +48,14 @@ function createMockWorkspace(issues: readonly IGitHubIssueRef[]): ISessionWorksp
 	const folder: ISessionFolder = {
 		root,
 		workingDirectory: root,
-		name: 'vscode',
+		name: 'zyraxoncode',
 		description: undefined,
 		gitRepository,
 	};
 
 	return {
 		uri: root,
-		label: 'vscode',
+		label: 'zyraxoncode',
 		icon: Codicon.folder,
 		folders: [folder],
 		requiresWorkspaceTrust: false,
@@ -73,9 +73,9 @@ function createMockSession(issues: readonly IGitHubIssueRef[]): IActiveSession {
 function toIssueRef(issue: IGitHubIssue): IGitHubIssueRef {
 	return {
 		owner: 'Zyraxon',
-		repo: 'vscode',
+		repo: 'zyraxoncode',
 		number: issue.number,
-		uri: URI.parse(`https://github.com/microsoft/vscode/issues/${issue.number}`),
+		uri: URI.parse(`__ZYRAXKEEP__0_{issue.number}`),
 	};
 }
 
@@ -92,7 +92,7 @@ function renderIssuePill(ctx: ComponentFixtureContext, issues: readonly IGitHubI
 		colorTheme: ctx.theme,
 		additionalServices: (reg) => {
 			reg.defineInstance(ISessionContext, new SessionContext(session));
-			reg.defineInstance(IGitHubService, createFixtureGitHubService([], issues.map(issue => ({ owner: 'Zyraxon', repo: 'vscode', issue }))));
+			reg.defineInstance(IGitHubService, createFixtureGitHubService([], issues.map(issue => ({ owner: 'Zyraxon', repo: 'zyraxoncode', issue }))));
 		},
 	});
 
@@ -117,7 +117,7 @@ function renderIssuePill(ctx: ComponentFixtureContext, issues: readonly IGitHubI
 	item.render(toolbar);
 
 	container.style.padding = '8px';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 }
 
 function renderInHoverWidget(ctx: ComponentFixtureContext, content: HTMLElement, width: string): void {
@@ -125,7 +125,7 @@ function renderInHoverWidget(ctx: ComponentFixtureContext, content: HTMLElement,
 
 	container.style.padding = '24px';
 	container.style.width = width;
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 
 	const hover = document.createElement('div');
 	hover.classList.add('monaco-hover', 'workbench-hover');
@@ -147,9 +147,9 @@ function renderInHoverWidget(ctx: ComponentFixtureContext, content: HTMLElement,
 function renderIssueHover(ctx: ComponentFixtureContext, issue: IGitHubIssue): void {
 	renderInHoverWidget(ctx, createIssueHoverElement({
 		owner: 'Zyraxon',
-		repo: 'vscode',
+		repo: 'zyraxoncode',
 		number: issue.number,
-		repositoryHref: 'https://github.com/microsoft/vscode',
+		repositoryHref: '__ZYRAXKEEP__1_',
 		issue,
 	}), '580px');
 }

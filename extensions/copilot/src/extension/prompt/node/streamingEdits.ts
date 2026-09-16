@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
 import { CharCode } from '../../../util/vs/base/common/charCode';
 import { Constants } from '../../../util/vs/base/common/uint';
-import { Range, TextEdit } from '../../../vscodeTypes';
+import { Range, TextEdit } from '../../../zyraxoncodeTypes';
 import { looksLikeCode } from '../common/codeGuesser';
 import { isImportStatement } from '../common/importStatement';
 import { EditStrategy, Lines, trimLeadingWhitespace } from './editGeneration';
@@ -27,8 +27,8 @@ export class InsertOrReplaceStreamingEdits implements IStreamingEditsStrategy {
 
 	constructor(
 		private readonly myDocument: StreamingWorkingCopyDocument,
-		private readonly initialSelection: vscode.Range,
-		private readonly adjustedSelection: vscode.Range,
+		private readonly initialSelection: zyraxoncode.Range,
+		private readonly adjustedSelection: zyraxoncode.Range,
 		private readonly editStrategy: EditStrategy,
 		private readonly collectImports: boolean = true,
 		private readonly lineFilter: ILineFilter = LineFilters.noop,
@@ -225,7 +225,7 @@ export class InsertionStreamingEdits implements IStreamingEditsStrategy {
 
 	constructor(
 		private readonly _myDocument: IStreamingWorkingCopyDocument,
-		private readonly _cursorPosition: vscode.Position,
+		private readonly _cursorPosition: zyraxoncode.Position,
 		private readonly _lineFilter: ILineFilter = LineFilters.noop
 	) { }
 
@@ -287,7 +287,7 @@ export class ReplaceSelectionStreamingEdits implements IStreamingEditsStrategy {
 
 	constructor(
 		private readonly _myDocument: IStreamingWorkingCopyDocument,
-		private readonly _selection: vscode.Range,
+		private readonly _selection: zyraxoncode.Range,
 		private readonly _lineFilter: ILineFilter = LineFilters.noop
 	) { }
 
@@ -365,7 +365,7 @@ export class StreamingEditsResult {
  */
 class ReplyIndentationTracker {
 
-	private _replyIndentStyle: vscode.FormattingOptions | undefined;
+	private _replyIndentStyle: zyraxoncode.FormattingOptions | undefined;
 	private indentDelta: number;
 
 	constructor(
@@ -399,7 +399,7 @@ class ReplyIndentationTracker {
 		this.indentDelta = replyIndentLevel - docIndentLevel;
 	}
 
-	public reindent(replyLine: string, desiredStyle: vscode.FormattingOptions): ReplyLine {
+	public reindent(replyLine: string, desiredStyle: zyraxoncode.FormattingOptions): ReplyLine {
 		if (replyLine === '') {
 			// Do not indent empty lines artificially
 			return new ReplyLine('', 0, '', 0);
@@ -445,7 +445,7 @@ export class LineRange {
 
 export interface IStreamingWorkingCopyDocument {
 	readonly languageId: string;
-	readonly indentStyle: vscode.FormattingOptions;
+	readonly indentStyle: zyraxoncode.FormattingOptions;
 	readonly didNoopEdits: boolean;
 	readonly didEdits: boolean;
 	readonly additionalImports: string[];
@@ -466,7 +466,7 @@ export interface IStreamingWorkingCopyDocument {
  */
 export class StreamingWorkingCopyDocument implements IStreamingWorkingCopyDocument {
 
-	public readonly indentStyle: vscode.FormattingOptions;
+	public readonly indentStyle: zyraxoncode.FormattingOptions;
 	private readonly _originalLines: string[] = [];
 	private lines: DocumentLine[] = [];
 	public readonly firstSentLineIndex: number;
@@ -492,13 +492,13 @@ export class StreamingWorkingCopyDocument implements IStreamingWorkingCopyDocume
 	}
 
 	constructor(
-		private readonly outputStream: vscode.ChatResponseStream,
-		private readonly uri: vscode.Uri,
+		private readonly outputStream: zyraxoncode.ChatResponseStream,
+		private readonly uri: zyraxoncode.Uri,
 		sourceCode: string,
 		sentLines: SentLine[],
 		selection: LineRange,
 		public readonly languageId: string,
-		fileIndentInfo: vscode.FormattingOptions | undefined
+		fileIndentInfo: zyraxoncode.FormattingOptions | undefined
 	) {
 		// console.info(`---------\nNEW StreamingWorkingCopyDocument`);
 		this.indentStyle = IndentUtils.getDocumentIndentStyle(sourceCode, fileIndentInfo);
@@ -665,7 +665,7 @@ class DocumentLine {
 
 	constructor(
 		public readonly content: string,
-		private readonly _indentStyle: vscode.FormattingOptions
+		private readonly _indentStyle: zyraxoncode.FormattingOptions
 	) { }
 
 	public markSent(sentInCodeBlock: SentInCodeBlock): void {
@@ -675,26 +675,26 @@ class DocumentLine {
 
 class IndentUtils {
 
-	public static getDocumentIndentStyle(sourceCode: string, fileIndentInfo: vscode.FormattingOptions | undefined): vscode.FormattingOptions {
+	public static getDocumentIndentStyle(sourceCode: string, fileIndentInfo: zyraxoncode.FormattingOptions | undefined): zyraxoncode.FormattingOptions {
 		if (fileIndentInfo) {
 			// the indentation is known
 			return fileIndentInfo;
 		}
 
 		// we need to detect the indentation
-		return <vscode.FormattingOptions>guessIndentation(Lines.fromString(sourceCode), 4, false);
+		return <zyraxoncode.FormattingOptions>guessIndentation(Lines.fromString(sourceCode), 4, false);
 	}
 
-	public static guessIndentStyleFromLine(line: string): vscode.FormattingOptions | undefined {
+	public static guessIndentStyleFromLine(line: string): zyraxoncode.FormattingOptions | undefined {
 		const leadingWhitespace = IndentUtils._getLeadingWhitespace(line);
 		if (leadingWhitespace === '' || leadingWhitespace === ' ') {
 			// insufficient information
 			return undefined;
 		}
-		return <vscode.FormattingOptions>guessIndentation([line], 4, false);
+		return <zyraxoncode.FormattingOptions>guessIndentation([line], 4, false);
 	}
 
-	public static reindentLine(line: string, originalIndentStyle: vscode.FormattingOptions, desiredIndentStyle: vscode.FormattingOptions, getDesiredIndentLevel: (currentIndentLevel: number) => number = (n) => n): string {
+	public static reindentLine(line: string, originalIndentStyle: zyraxoncode.FormattingOptions, desiredIndentStyle: zyraxoncode.FormattingOptions, getDesiredIndentLevel: (currentIndentLevel: number) => number = (n) => n): string {
 		let indentLevel = computeIndentLevel2(line, originalIndentStyle.tabSize);
 		const desiredIndentLevel = getDesiredIndentLevel(indentLevel);
 
@@ -714,7 +714,7 @@ class IndentUtils {
 		return normalizeIndentation(line, desiredIndentStyle.tabSize, desiredIndentStyle.insertSpaces);
 	}
 
-	private static _outdent(line: string, indentStyle: vscode.FormattingOptions): string {
+	private static _outdent(line: string, indentStyle: zyraxoncode.FormattingOptions): string {
 		let chrIndex = 0;
 		while (chrIndex < line.length) {
 			const chr = line.charCodeAt(chrIndex);
@@ -1137,7 +1137,7 @@ export function streamLines(source: AsyncIterable<string>): AsyncIterableObject<
 	});
 }
 
-function hasImportsInRange(doc: IStreamingWorkingCopyDocument, range: vscode.Range): boolean {
+function hasImportsInRange(doc: IStreamingWorkingCopyDocument, range: zyraxoncode.Range): boolean {
 	const startLine = (range.start.character === 0 ? range.start.line : range.start.line + 1);
 	const endLine = (doc.getLine(range.end.line).content.length === range.end.character ? range.end.line : range.end.line - 1);
 	for (let i = startLine; i <= endLine; i++) {
@@ -1148,7 +1148,7 @@ function hasImportsInRange(doc: IStreamingWorkingCopyDocument, range: vscode.Ran
 	return false;
 }
 
-function collectImportsIfNoneWereSentInRange(stream: AsyncIterableObject<LineOfText>, doc: IStreamingWorkingCopyDocument, rangeToCheckForImports: vscode.Range): AsyncIterableObject<LineOfText> {
+function collectImportsIfNoneWereSentInRange(stream: AsyncIterableObject<LineOfText>, doc: IStreamingWorkingCopyDocument, rangeToCheckForImports: zyraxoncode.Range): AsyncIterableObject<LineOfText> {
 	if (hasImportsInRange(doc, rangeToCheckForImports)) {
 		// there are imports in the sent code block
 		// no need to collect imports

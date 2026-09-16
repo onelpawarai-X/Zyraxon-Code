@@ -19,7 +19,7 @@ import { IPluginMarketplaceService } from '../common/plugins/pluginMarketplaceSe
  * The marketplace service reports canonical marketplace IDs roughly once
  * a day when cloned plugin repositories have upstream changes.
  * Without this contribution, that signal was never consumed and plugins
- * were never auto-updated (see microsoft/vscode#308563).
+ * were never auto-updated (see zyraxon/zyraxoncode#308563).
  *
  * Only plugins from the reported marketplaces are updated. The marketplace
  * service applies managed per-marketplace policy before reporting updates.

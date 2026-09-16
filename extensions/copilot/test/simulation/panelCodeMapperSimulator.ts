@@ -2,14 +2,14 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { ChatPromptReference, ChatResponseStream } from 'vscode';
+import type { ChatPromptReference, ChatResponseStream } from 'zyraxoncode';
 import { isCodeBlockWithResource } from '../../src/extension/codeBlocks/node/codeBlockProcessor';
 import { ITabsAndEditorsService } from '../../src/platform/tabs/common/tabsAndEditorsService';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';
 import { isLocation } from '../../src/util/common/types';
 import { URI } from '../../src/util/vs/base/common/uri';
 import { ServicesAccessor } from '../../src/util/vs/platform/instantiation/common/instantiation';
-import { ChatLocation, Location, Uri } from '../../src/vscodeTypes';
+import { ChatLocation, Location, Uri } from '../../src/zyraxoncodeTypes';
 import { EditingSimulationHost, EditingSimulationHostResponseProcessor, simulateEditingScenario } from './inlineChatSimulator';
 import { EditTestStrategy, IScenario, IScenarioQuery, OutcomeAnnotation } from './types';
 

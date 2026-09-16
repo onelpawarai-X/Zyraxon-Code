@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import type { ICompletionResource } from '../types';
 import { type ExecOptionsWithStringEncoding } from 'node:child_process';
 import { execHelper } from './common';
@@ -43,15 +43,15 @@ const enum PwshCommandType {
 	// All = 383,
 }
 
-const pwshCommandTypeToCompletionKind: Map<PwshCommandType, vscode.TerminalCompletionItemKind> = new Map([
-	[PwshCommandType.Alias, vscode.TerminalCompletionItemKind.Alias],
-	[PwshCommandType.Function, vscode.TerminalCompletionItemKind.Method],
-	[PwshCommandType.Filter, vscode.TerminalCompletionItemKind.Method],
-	[PwshCommandType.Cmdlet, vscode.TerminalCompletionItemKind.Method],
-	[PwshCommandType.ExternalScript, vscode.TerminalCompletionItemKind.Method],
-	[PwshCommandType.Application, vscode.TerminalCompletionItemKind.Method],
-	[PwshCommandType.Script, vscode.TerminalCompletionItemKind.Method],
-	[PwshCommandType.Configuration, vscode.TerminalCompletionItemKind.Argument],
+const pwshCommandTypeToCompletionKind: Map<PwshCommandType, zyraxoncode.TerminalCompletionItemKind> = new Map([
+	[PwshCommandType.Alias, zyraxoncode.TerminalCompletionItemKind.Alias],
+	[PwshCommandType.Function, zyraxoncode.TerminalCompletionItemKind.Method],
+	[PwshCommandType.Filter, zyraxoncode.TerminalCompletionItemKind.Method],
+	[PwshCommandType.Cmdlet, zyraxoncode.TerminalCompletionItemKind.Method],
+	[PwshCommandType.ExternalScript, zyraxoncode.TerminalCompletionItemKind.Method],
+	[PwshCommandType.Application, zyraxoncode.TerminalCompletionItemKind.Method],
+	[PwshCommandType.Script, zyraxoncode.TerminalCompletionItemKind.Method],
+	[PwshCommandType.Configuration, zyraxoncode.TerminalCompletionItemKind.Argument],
 ]);
 
 async function getAliases(options: ExecOptionsWithStringEncoding, existingCommands?: Set<string>): Promise<ICompletionResource[]> {
@@ -93,8 +93,8 @@ async function getAliases(options: ExecOptionsWithStringEncoding, existingComman
 				label: e.Name,
 				detail: detailParts.join('\n\n'),
 				kind: (isAlias
-					? vscode.TerminalCompletionItemKind.Alias
-					: vscode.TerminalCompletionItemKind.Method),
+					? zyraxoncode.TerminalCompletionItemKind.Alias
+					: zyraxoncode.TerminalCompletionItemKind.Method),
 				definitionCommand,
 			};
 		});

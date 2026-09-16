@@ -7,7 +7,7 @@ import { Emitter, Event } from '../../../base/common/event.js';
 import { Disposable, DisposableMap } from '../../../base/common/lifecycle.js';
 import { URI } from '../../../base/common/uri.js';
 import { Codicon } from '../../../base/common/codicons.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { BrowserTabDto, ExtHostBrowsersShape, IMainContext, MainContext, MainThreadBrowsersShape } from './extHost.protocol.js';
 import { generateUuid } from '../../../base/common/uuid.js';
 import * as extHostTypes from './extHostTypes.js';
@@ -21,7 +21,7 @@ class ExtHostBrowserTab {
 	private _title: string;
 	private _favicon: string | undefined;
 
-	readonly value: vscode.BrowserTab;
+	readonly value: zyraxoncode.BrowserTab;
 
 	constructor(
 		readonly id: string,
@@ -37,12 +37,12 @@ class ExtHostBrowserTab {
 		this.value = {
 			get url(): string { return that._url; },
 			get title(): string { return that._title; },
-			get icon(): vscode.IconPath {
+			get icon(): zyraxoncode.IconPath {
 				return that._favicon
 					? URI.parse(that._favicon)
-					: new extHostTypes.ThemeIcon(Codicon.globe.id) as vscode.ThemeIcon;
+					: new extHostTypes.ThemeIcon(Codicon.globe.id) as zyraxoncode.ThemeIcon;
 			},
-			startCDPSession(): Promise<vscode.BrowserCDPSession> {
+			startCDPSession(): Promise<zyraxoncode.BrowserCDPSession> {
 				return that._startCDPSession();
 			},
 			close(): Promise<void> {
@@ -68,7 +68,7 @@ class ExtHostBrowserTab {
 		return changed;
 	}
 
-	private async _startCDPSession(): Promise<vscode.BrowserCDPSession> {
+	private async _startCDPSession(): Promise<zyraxoncode.BrowserCDPSession> {
 		const sessionId = generateUuid();
 		await this._proxy.$startCDPSession(sessionId, this.id);
 		const session = new ExtHostBrowserCDPSession(sessionId, this._proxy);
@@ -91,7 +91,7 @@ class ExtHostBrowserCDPSession {
 
 	private _closed = false;
 
-	readonly value: vscode.BrowserCDPSession;
+	readonly value: zyraxoncode.BrowserCDPSession;
 
 	constructor(
 		readonly id: string,
@@ -162,17 +162,17 @@ export class ExtHostBrowsers extends Disposable implements ExtHostBrowsersShape 
 
 	private _activeBrowserTabId: string | undefined;
 
-	private readonly _onDidOpenBrowserTab = this._register(new Emitter<vscode.BrowserTab>());
-	readonly onDidOpenBrowserTab: Event<vscode.BrowserTab> = this._onDidOpenBrowserTab.event;
+	private readonly _onDidOpenBrowserTab = this._register(new Emitter<zyraxoncode.BrowserTab>());
+	readonly onDidOpenBrowserTab: Event<zyraxoncode.BrowserTab> = this._onDidOpenBrowserTab.event;
 
-	private readonly _onDidCloseBrowserTab = this._register(new Emitter<vscode.BrowserTab>());
-	readonly onDidCloseBrowserTab: Event<vscode.BrowserTab> = this._onDidCloseBrowserTab.event;
+	private readonly _onDidCloseBrowserTab = this._register(new Emitter<zyraxoncode.BrowserTab>());
+	readonly onDidCloseBrowserTab: Event<zyraxoncode.BrowserTab> = this._onDidCloseBrowserTab.event;
 
-	private readonly _onDidChangeActiveBrowserTab = this._register(new Emitter<vscode.BrowserTab | undefined>());
-	readonly onDidChangeActiveBrowserTab: Event<vscode.BrowserTab | undefined> = this._onDidChangeActiveBrowserTab.event;
+	private readonly _onDidChangeActiveBrowserTab = this._register(new Emitter<zyraxoncode.BrowserTab | undefined>());
+	readonly onDidChangeActiveBrowserTab: Event<zyraxoncode.BrowserTab | undefined> = this._onDidChangeActiveBrowserTab.event;
 
-	private readonly _onDidChangeBrowserTabState = this._register(new Emitter<vscode.BrowserTab>());
-	readonly onDidChangeBrowserTabState: Event<vscode.BrowserTab> = this._onDidChangeBrowserTabState.event;
+	private readonly _onDidChangeBrowserTabState = this._register(new Emitter<zyraxoncode.BrowserTab>());
+	readonly onDidChangeBrowserTabState: Event<zyraxoncode.BrowserTab> = this._onDidChangeBrowserTabState.event;
 
 	constructor(mainContext: IMainContext) {
 		super();
@@ -181,18 +181,18 @@ export class ExtHostBrowsers extends Disposable implements ExtHostBrowsersShape 
 
 	// #region Public API (called from extension code)
 
-	get browserTabs(): readonly vscode.BrowserTab[] {
+	get browserTabs(): readonly zyraxoncode.BrowserTab[] {
 		return [...this._browserTabs.values()].map(t => t.value);
 	}
 
-	get activeBrowserTab(): vscode.BrowserTab | undefined {
+	get activeBrowserTab(): zyraxoncode.BrowserTab | undefined {
 		if (this._activeBrowserTabId) {
 			return this._browserTabs.get(this._activeBrowserTabId)?.value;
 		}
 		return undefined;
 	}
 
-	async openBrowserTab(url: string, options?: vscode.BrowserTabShowOptions): Promise<vscode.BrowserTab> {
+	async openBrowserTab(url: string, options?: zyraxoncode.BrowserTabShowOptions): Promise<zyraxoncode.BrowserTab> {
 		const viewColumn = typeConverters.ViewColumn.from(options?.viewColumn);
 		const dto = await this._proxy.$openBrowserTab(url, viewColumn, {
 			preserveFocus: options?.preserveFocus,

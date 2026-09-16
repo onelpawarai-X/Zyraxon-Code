@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { CancellationToken } from '../../../base/common/cancellation.js';
 import { Emitter } from '../../../base/common/event.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
@@ -15,13 +15,13 @@ import { ExtHostDocuments } from './extHostDocuments.js';
 import { IURITransformer } from '../../../base/common/uriIpc.js';
 import { ExtensionIdentifier, IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 
-class ExtHostSourceControlDiffInformation implements vscode.SourceControlDiffInformationProvider {
+class ExtHostSourceControlDiffInformation implements zyraxoncode.SourceControlDiffInformationProvider {
 
 	private readonly _onDidChange = new Emitter<void>();
 	readonly onDidChange = this._onDidChange.event;
 
-	private _diffInformation: vscode.TextEditorDiffInformation | undefined;
-	get diffInformation(): vscode.TextEditorDiffInformation | undefined { return this._diffInformation; }
+	private _diffInformation: zyraxoncode.TextEditorDiffInformation | undefined;
+	get diffInformation(): zyraxoncode.TextEditorDiffInformation | undefined { return this._diffInformation; }
 
 	constructor(
 		private readonly handle: number,
@@ -44,7 +44,7 @@ class ExtHostSourceControlDiffInformation implements vscode.SourceControlDiffInf
 		const changes = diffInformation.changes.map(change => {
 			const [originalStartLineNumber, originalEndLineNumberExclusive, modifiedStartLineNumber, modifiedEndLineNumberExclusive] = change;
 
-			let kind: vscode.TextEditorChangeKind;
+			let kind: zyraxoncode.TextEditorChangeKind;
 			if (originalStartLineNumber === originalEndLineNumberExclusive) {
 				kind = TextEditorChangeKind.Addition;
 			} else if (modifiedStartLineNumber === modifiedEndLineNumberExclusive) {
@@ -57,7 +57,7 @@ class ExtHostSourceControlDiffInformation implements vscode.SourceControlDiffInf
 				original: { startLineNumber: originalStartLineNumber, endLineNumberExclusive: originalEndLineNumberExclusive },
 				modified: { startLineNumber: modifiedStartLineNumber, endLineNumberExclusive: modifiedEndLineNumberExclusive },
 				kind
-			} satisfies vscode.TextEditorChange;
+			} satisfies zyraxoncode.TextEditorChange;
 		});
 
 		this._diffInformation = Object.freeze({
@@ -84,7 +84,7 @@ export class ExtHostQuickDiff implements ExtHostQuickDiffShape {
 	private static handlePool: number = 0;
 
 	private proxy: MainThreadQuickDiffShape;
-	private providers: Map<number, vscode.QuickDiffProvider> = new Map();
+	private providers: Map<number, zyraxoncode.QuickDiffProvider> = new Map();
 	private informations: Map<number, ExtHostSourceControlDiffInformation> = new Map();
 
 	constructor(
@@ -111,7 +111,7 @@ export class ExtHostQuickDiff implements ExtHostQuickDiffShape {
 		this.informations.get(handle)?.$acceptDiffInformation(diffInformation);
 	}
 
-	registerQuickDiffProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, quickDiffProvider: vscode.QuickDiffProvider, id: string, label: string, rootUri?: vscode.Uri): vscode.Disposable {
+	registerQuickDiffProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, quickDiffProvider: zyraxoncode.QuickDiffProvider, id: string, label: string, rootUri?: zyraxoncode.Uri): zyraxoncode.Disposable {
 		const handle = ExtHostQuickDiff.handlePool++;
 		this.providers.set(handle, quickDiffProvider);
 
@@ -125,7 +125,7 @@ export class ExtHostQuickDiff implements ExtHostQuickDiffShape {
 		};
 	}
 
-	createSourceControlDiffInformation(uri: vscode.Uri): vscode.SourceControlDiffInformationProvider {
+	createSourceControlDiffInformation(uri: zyraxoncode.Uri): zyraxoncode.SourceControlDiffInformationProvider {
 		const handle = ExtHostQuickDiff.handlePool++;
 		const information = new ExtHostSourceControlDiffInformation(handle, this.proxy, this.documents, h => this.informations.delete(h));
 		this.informations.set(handle, information);

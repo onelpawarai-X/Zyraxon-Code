@@ -33,14 +33,14 @@
 	min-height: 44px;
 	padding: 0 8px;
 	padding-top: env(safe-area-inset-top);
-	border-bottom: 1px solid var(--vscode-panel-border, var(--vscode-editorWidget-border, transparent));
+	border-bottom: 1px solid var(--zyraxoncode-panel-border, var(--zyraxoncode-editorWidget-border, transparent));
 	flex-shrink: 0;
 	box-sizing: content-box;
 }
 
 .mobile-multi-diff-file-count {
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	padding-right: 8px;
 }
 
@@ -69,10 +69,10 @@
 	box-sizing: border-box;
 	padding: 8px 12px;
 	z-index: 3;
-	background: var(--vscode-multiDiffEditor-headerBackground);
-	border-top: 1px solid var(--vscode-sideBarSectionHeader-border, var(--vscode-multiDiffEditor-border, transparent));
-	border-bottom: 1px solid var(--vscode-sideBarSectionHeader-border, var(--vscode-multiDiffEditor-border, transparent));
-	color: var(--vscode-foreground);
+	background: var(--zyraxoncode-multiDiffEditor-headerBackground);
+	border-top: 1px solid var(--zyraxoncode-sideBarSectionHeader-border, var(--zyraxoncode-multiDiffEditor-border, transparent));
+	border-bottom: 1px solid var(--zyraxoncode-sideBarSectionHeader-border, var(--zyraxoncode-multiDiffEditor-border, transparent));
+	color: var(--zyraxoncode-foreground);
 	font-size: 13px;
 	line-height: 22px;
 	cursor: pointer;
@@ -82,9 +82,9 @@
 
 .mobile-multi-diff-file-chevron.codicon {
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	padding: 4px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	cursor: pointer;
 }
 
@@ -94,15 +94,15 @@
 }
 
 .mobile-multi-diff-file-header:active {
-	background: var(--vscode-toolbar-hoverBackground, var(--vscode-multiDiffEditor-headerBackground));
+	background: var(--zyraxoncode-toolbar-hoverBackground, var(--zyraxoncode-multiDiffEditor-headerBackground));
 }
 
 .mobile-multi-diff-file-chevron:hover {
-	background: var(--vscode-toolbar-hoverBackground, transparent);
+	background: var(--zyraxoncode-toolbar-hoverBackground, transparent);
 }
 
 .mobile-multi-diff-file-chevron:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder, transparent);
+	outline: 1px solid var(--zyraxoncode-focusBorder, transparent);
 	outline-offset: -1px;
 }
 
@@ -117,17 +117,17 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	letter-spacing: 0.01em;
 }
 
 .mobile-multi-diff-file-dir {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-weight: 400;
 }
 
 .mobile-multi-diff-file-base {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	font-weight: 600;
 }
 
@@ -141,11 +141,11 @@
 }
 
 .mobile-multi-diff-stat-added {
-	color: var(--vscode-gitDecoration-addedResourceForeground, #73c991);
+	color: var(--zyraxoncode-gitDecoration-addedResourceForeground, #73c991);
 }
 
 .mobile-multi-diff-stat-removed {
-	color: var(--vscode-gitDecoration-deletedResourceForeground, #f14c4c);
+	color: var(--zyraxoncode-gitDecoration-deletedResourceForeground, #f14c4c);
 }
 
 /* -- File content area ------------------------------------------------------- */
@@ -192,7 +192,7 @@
 
 .mobile-multi-diff-file-section .mobile-diff-hunk-header {
 	position: static;
-	background: var(--vscode-editor-background, #1e1e1e);
+	background: var(--zyraxoncode-editor-background, #1e1e1e);
 }
 
 .mobile-multi-diff-file-content .mobile-multi-diff-body-entry {

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { ILogService, LogLevel } from '../../log/common/logService';
 import { ITelemetryService } from '../../telemetry/common/telemetry';
 import { TelemetryData } from '../../telemetry/common/telemetryData';
@@ -167,12 +167,12 @@ interface ChoiceJSON {
 	index: number;
 	/**
 	 * The text attribute as defined in completions streaming.
-	 * See https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#event_stream_format
+	 * See __ZYRAXKEEP__0_
 	 */
 	text?: string;
 	/**
 	 * The delta attribute as defined in chat streaming.
-	 * See https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb
+	 * See __ZYRAXKEEP__1_
 	 */
 	delta?: { content: string | null };
 	finish_reason?: FinishedCompletionReason.Stop | FinishedCompletionReason.Length | FinishedCompletionReason.FunctionCall | FinishedCompletionReason.ContentFilter | FinishedCompletionReason.ServerError | FinishedCompletionReason.ToolCalls | null;

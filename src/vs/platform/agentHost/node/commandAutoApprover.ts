@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Language, Parser, Query, QueryCapture } from '@vscode/tree-sitter-wasm';
+import type { Language, Parser, Query, QueryCapture } from '@zyraxoncode/tree-sitter-wasm';
 import * as fs from 'fs';
 import { Disposable, toDisposable } from '../../../base/common/lifecycle.js';
 import { FileAccess } from '../../../base/common/network.js';
@@ -95,7 +95,7 @@ function classifyFileRedirect(redirectText: string, isPowerShell?: boolean): Fil
  * truncate the surrounding command. Mirrors the workbench's
  * `TreeSitterCommandParser` workaround.
  *
- * See https://github.com/microsoft/vscode/issues/294010
+ * See __ZYRAXKEEP__0_
  * TODO: Remove once upstream tree-sitter PowerShell grammar is updated.
  */
 const pwshFlagEqualsRegex = /(^|\s)(-{1,2}[\w-]+)=/g;
@@ -390,7 +390,7 @@ export class CommandAutoApprover extends Disposable {
 
 	private async _initTreeSitter(): Promise<void> {
 		try {
-			const { default: TreeSitter } = (await import('@vscode/tree-sitter-wasm'));
+			const { default: TreeSitter } = (await import('@zyraxoncode/tree-sitter-wasm'));
 
 			if (this._store.isDisposed) {
 				return;
@@ -400,7 +400,7 @@ export class CommandAutoApprover extends Disposable {
 			// files are unpacked next to the ASAR archive (`node_modules.asar.unpacked`),
 			// while in dev and on the server (which has no ASAR) they live in a plain
 			// `node_modules`.
-			const moduleRoot = URI.joinPath(FileAccess.asFileUri(getAppNodeModulesPath()), '@vscode', 'tree-sitter-wasm', 'wasm');
+			const moduleRoot = URI.joinPath(FileAccess.asFileUri(getAppNodeModulesPath()), '@zyraxoncode', 'tree-sitter-wasm', 'wasm');
 			const wasmPath = URI.joinPath(moduleRoot, 'tree-sitter.wasm').fsPath;
 
 			await TreeSitter.Parser.init({

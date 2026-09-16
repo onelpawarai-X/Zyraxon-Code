@@ -63,7 +63,7 @@ export async function main(argv: string[]): Promise<void> {
 			// bootstrap-esm.js determines the electron environment based
 			// on the following variable. For the server we need to unset
 			// it to prevent importing any electron specific modules.
-			// Refs https://github.com/microsoft/vscode/issues/221883
+			// Refs __ZYRAXKEEP__0_
 			delete env['ELECTRON_RUN_AS_NODE'];
 
 			const tunnelArgs = argv.slice(argv.indexOf(subcommand) + 1); // all arguments behind `tunnel`
@@ -110,13 +110,13 @@ export async function main(argv: string[]): Promise<void> {
 	else if (args['locate-shell-integration-path']) {
 		let file: string;
 		switch (args['locate-shell-integration-path']) {
-			// Usage: `[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"`
+			// Usage: `[[ "$TERM_PROGRAM" == "zyraxoncode" ]] && . "$(code --locate-shell-integration-path bash)"`
 			case 'bash': file = 'shellIntegration-bash.sh'; break;
-			// Usage: `if ($env:TERM_PROGRAM -eq "vscode") { . "$(code --locate-shell-integration-path pwsh)" }`
+			// Usage: `if ($env:TERM_PROGRAM -eq "zyraxoncode") { . "$(code --locate-shell-integration-path pwsh)" }`
 			case 'pwsh': file = 'shellIntegration.ps1'; break;
-			// Usage: `[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"`
+			// Usage: `[[ "$TERM_PROGRAM" == "zyraxoncode" ]] && . "$(code --locate-shell-integration-path zsh)"`
 			case 'zsh': file = 'shellIntegration-rc.zsh'; break;
-			// Usage: `string match -q "$TERM_PROGRAM" "vscode"; and . (code --locate-shell-integration-path fish)`
+			// Usage: `string match -q "$TERM_PROGRAM" "zyraxoncode"; and . (code --locate-shell-integration-path fish)`
 			case 'fish': file = 'shellIntegration.fish'; break;
 			default: throw new Error('Error using --locate-shell-integration-path: Invalid shell type');
 		}
@@ -200,9 +200,9 @@ export async function main(argv: string[]): Promise<void> {
 				// On Windows we use a different strategy of saving the file
 				// by first truncating the file and then writing with r+ mode.
 				// This helps to save hidden files on Windows
-				// (see https://github.com/microsoft/vscode/issues/931) and
+				// (see __ZYRAXKEEP__1_) and
 				// prevent removing alternate data streams
-				// (see https://github.com/microsoft/vscode/issues/6363)
+				// (see __ZYRAXKEEP__2_)
 				truncateSync(target, 0);
 				writeFileSync(target, data, { flag: 'r+' });
 			} else {
@@ -245,7 +245,7 @@ export async function main(argv: string[]): Promise<void> {
 
 		// Handle --transient option
 		if (args['transient']) {
-			const tempParentDir = randomPath(tmpdir(), 'vscode');
+			const tempParentDir = randomPath(tmpdir(), 'zyraxoncode');
 			const tempUserDataDir = join(tempParentDir, 'data');
 			const tempExtensionsDir = join(tempParentDir, 'extensions');
 			const tempSharedDataDir = join(tempParentDir, 'shared');
@@ -275,7 +275,7 @@ export async function main(argv: string[]): Promise<void> {
 
 			// Read from stdin: we require a single "-" argument to be passed in order to start reading from
 			// stdin. We do this because there is no reliable way to find out if data is piped to stdin. Just
-			// checking for stdin being connected to a TTY is not enough (https://github.com/microsoft/vscode/issues/40351)
+			// checking for stdin being connected to a TTY is not enough (__ZYRAXKEEP__3_)
 
 			if (hasReadStdinArg) {
 				stdinFilePath = getStdinFilePath();
@@ -495,7 +495,7 @@ export async function main(argv: string[]): Promise<void> {
 
 			// On Windows, Chromium filters standalone URL-like argv tokens (containing "://")
 			// before main.js runs, so rewrite `--folder-uri <uri>` / `--file-uri <uri>` to
-			// `--flag=value` form. See https://github.com/microsoft/vscode/issues/209072.
+			// `--flag=value` form. See __ZYRAXKEEP__4_
 			const spawnArgs = isWindows ? combineUriFlags(argv.slice(2)) : argv.slice(2);
 
 			// We spawn the resolved executable directly
@@ -503,7 +503,7 @@ export async function main(argv: string[]): Promise<void> {
 		} else {
 			// On macOS, we spawn using the open command to obtain behavior
 			// similar to if the app was launched from the dock
-			// https://github.com/microsoft/vscode/issues/102975
+			// __ZYRAXKEEP__5_
 
 			// The following args are for the open command itself, rather than for ZYRAXON Code:
 			// -n creates a new instance.
@@ -551,7 +551,7 @@ export async function main(argv: string[]): Promise<void> {
 				// Ignore the _ env var, because the open command
 				// ignores it anyway.
 				// Pass the rest of the env vars in to fix
-				// https://github.com/microsoft/vscode/issues/134696.
+				// __ZYRAXKEEP__6_
 				if (e !== '_') {
 					spawnArgs.push('--env');
 					spawnArgs.push(`${e}=${env[e]}`);
@@ -562,8 +562,8 @@ export async function main(argv: string[]): Promise<void> {
 
 			if (env['VSCODE_DEV']) {
 				// If we're in development mode, replace the . arg with the
-				// vscode source arg. Because the OSS app isn't bundled,
-				// it needs the full vscode source arg to launch properly.
+				// zyraxoncode source arg. Because the OSS app isn't bundled,
+				// it needs the full zyraxoncode source arg to launch properly.
 				const curdir = '.';
 				const launchDirIndex = spawnArgs.indexOf(curdir);
 				if (launchDirIndex !== -1) {

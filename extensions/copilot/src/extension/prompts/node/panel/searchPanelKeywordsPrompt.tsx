@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
 import { CopilotIdentityRules } from '../base/copilotIdentity';

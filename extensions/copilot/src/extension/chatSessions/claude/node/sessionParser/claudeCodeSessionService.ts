@@ -13,7 +13,7 @@
  * - Subagent loading via `listSubagents()` + `getSubagentMessages()`
  */
 
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { ILogService } from '../../../../../platform/log/common/logService';
 import { IWorkspaceService } from '../../../../../platform/workspace/common/workspaceService';
 import { createServiceIdentifier } from '../../../../../util/common/services';

@@ -79,9 +79,9 @@ getDescriptor(): IAgentDescriptor {
 
 getProtectedResources(): ProtectedResourceMetadata[] {
     return [{
-        resource: 'https://api.github.com',
+        resource: '__ZYRAXKEEP__0_',
         resource_name: 'GitHub Copilot',
-        authorization_servers: ['https://github.com/login/oauth'],
+        authorization_servers: ['__ZYRAXKEEP__1_'],
         scopes_supported: ['read:user', 'user:email'],
         required: true,
     }];
@@ -96,7 +96,7 @@ Mirror `CopilotAgent.authenticate()` (lines 277–309):
 
 ```ts
 async authenticate(resource: string, token: string): Promise<boolean> {
-    if (resource !== 'https://api.github.com') {
+    if (resource !== '__ZYRAXKEEP__2_') {
         return false;
     }
     const tokenChanged = this._githubToken !== token;
@@ -326,7 +326,7 @@ Imports needed (mirror `agentHostMain.ts` lines ~20–25):
 New file: `src/vs/platform/agentHost/test/node/claudeAgent.test.ts`. Mirror the harness style of `src/vs/platform/agentHost/test/node/copilotAgent.test.ts` (read lines 233–262 for the `createTestAgentContext` pattern).
 
 **Mock services (no extensive mocking — minimal stand-ins):**
-- `IClaudeProxyService` mock: `start(token)` returns `{ baseUrl: 'http://127.0.0.1:0', nonce: 'test-nonce', dispose: () => disposeCount++ }`. Track call count and last token.
+- `IClaudeProxyService` mock: `start(token)` returns `{ baseUrl: '__ZYRAXKEEP__3_', nonce: 'test-nonce', dispose: () => disposeCount++ }`. Track call count and last token.
 - `ICopilotApiService` mock: `models(token)` returns a canned `CCAModel[]` mixing Anthropic + non-Anthropic + non-tool-calls + non-picker.
 
 **Test cases (use `assert.deepStrictEqual` snapshots per repo guidelines):**
@@ -334,11 +334,11 @@ New file: `src/vs/platform/agentHost/test/node/claudeAgent.test.ts`. Mirror the 
 1. `getDescriptor()` returns `{ provider: 'claude', displayName: 'Claude', description: ... }`.
 2. `getProtectedResources()` matches the GitHub resource shape.
 3. Models observable is empty before `authenticate`.
-4. `authenticate('https://api.github.com', token)` returns `true`, calls `start(token)`, populates models with only the Claude-family entries, in correct `IAgentModelInfo` shape.
-5. `authenticate('https://other.example.com', token)` returns `false`; a follow-up `authenticate('https://api.github.com', token)` still works (proxy `start` called exactly once total). Catches implementations that early-return `false` after corrupting state.
+4. `authenticate('__ZYRAXKEEP__4_', token)` returns `true`, calls `start(token)`, populates models with only the Claude-family entries, in correct `IAgentModelInfo` shape.
+5. `authenticate('__ZYRAXKEEP__5_', token)` returns `false`; a follow-up `authenticate('__ZYRAXKEEP__6_', token)` still works (proxy `start` called exactly once total). Catches implementations that early-return `false` after corrupting state.
 6. Calling `authenticate` twice with the **same** token does NOT call `start()` again (token unchanged path).
 7. Calling `authenticate` with a **different** token: new `start(tokenB)` was called AND old handle was disposed.
-8. Filter excludes: non-Anthropic vendor (e.g. `vendor: 'copilot'` for the synthetic `auto` model — verified at `extensions/copilot/src/extension/conversation/vscode-node/chatParticipants.ts:312`), missing `/v1/messages` endpoint, `model_picker_enabled: false`, `tool_calls: false`, unparseable Claude id (e.g. id `'auto'` would also fail `tryParseClaudeModelId`).
+8. Filter excludes: non-Anthropic vendor (e.g. `vendor: 'copilot'` for the synthetic `auto` model — verified at `extensions/copilot/src/extension/conversation/zyraxoncode-node/chatParticipants.ts:312`), missing `/v1/messages` endpoint, `model_picker_enabled: false`, `tool_calls: false`, unparseable Claude id (e.g. id `'auto'` would also fail `tryParseClaudeModelId`).
 9. `AgentSession.uri('claude', 'abc')` round-trips: scheme `'claude'`, `AgentSession.id()` returns `'abc'`, `AgentSession.provider()` returns `'claude'`.
 10. `dispose()` disposes the proxy handle; second `dispose()` is idempotent.
 11. Each stubbed method (sample 3–4) throws an `Error` whose message contains `'TODO: Phase'` and the right number.
@@ -349,8 +349,8 @@ New file: `src/vs/platform/agentHost/test/node/claudeAgent.test.ts`. Mirror the 
     const tokAModels = new DeferredPromise<CCAModel[]>();
     mockApi.models = (token: string) => token === 'tokA' ? tokAModels.p : Promise.resolve([CLAUDE_MODEL_B]);
 
-    void agent.authenticate('https://api.github.com', 'tokA');  // refresh-A starts, hangs on tokAModels.p
-    await agent.authenticate('https://api.github.com', 'tokB'); // refresh-B runs to completion, models == [B]
+    void agent.authenticate('__ZYRAXKEEP__7_', 'tokA');  // refresh-A starts, hangs on tokAModels.p
+    await agent.authenticate('__ZYRAXKEEP__8_', 'tokB'); // refresh-B runs to completion, models == [B]
 
     tokAModels.complete([CLAUDE_MODEL_A]);                       // refresh-A unblocks; guard must drop the write
     await new Promise(r => setImmediate(r));

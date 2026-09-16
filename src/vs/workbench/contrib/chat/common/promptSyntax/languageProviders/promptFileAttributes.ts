@@ -21,7 +21,7 @@ export namespace ClaudeHeaderAttributes {
 }
 
 export function isTarget(value: unknown): value is Target {
-	return value === Target.VSCode || value === Target.GitHubCopilot || value === Target.Claude || value === Target.Undefined;
+	return value === Target.ZyraxonCode || value === Target.GitHubCopilot || value === Target.Claude || value === Target.Undefined;
 }
 
 
@@ -39,7 +39,7 @@ const booleanAttributeEnumValues: readonly IValueEntry[] = [
 ];
 
 const targetAttributeEnumValues: readonly IValueEntry[] = [
-	{ name: 'vscode' },
+	{ name: 'zyraxoncode' },
 	{ name: 'github-copilot' },
 ];
 
@@ -131,7 +131,7 @@ export const customAgentAttributes: Record<string, IAttributeDefinition> = {
 	},
 	[PromptHeaderAttributes.target]: {
 		type: 'scalar',
-		description: localize('promptHeader.agent.target', 'The target to which the header attributes like tools apply to. Possible values are `github-copilot` and `vscode`.'),
+		description: localize('promptHeader.agent.target', 'The target to which the header attributes like tools apply to. Possible values are `github-copilot` and `zyraxoncode`.'),
 		enums: targetAttributeEnumValues,
 	},
 	[PromptHeaderAttributes.infer]: {
@@ -293,7 +293,7 @@ export const knownClaudeTools = [
 	{ name: 'Skill', description: localize('claude.skill', 'Execute skills'), toolEquivalent: [] },
 	{ name: 'LSP', description: localize('claude.lsp', 'Code intelligence (requires plugin)'), toolEquivalent: [] },
 	{ name: 'NotebookEdit', description: localize('claude.notebookEdit', 'Modify Jupyter notebooks'), toolEquivalent: ['edit/editNotebook'] },
-	{ name: 'AskUserQuestion', description: localize('claude.askUserQuestion', 'Ask multiple-choice questions'), toolEquivalent: ['vscode/askQuestions'] },
+	{ name: 'AskUserQuestion', description: localize('claude.askUserQuestion', 'Ask multiple-choice questions'), toolEquivalent: ['zyraxoncode/askQuestions'] },
 	{ name: 'MCPSearch', description: localize('claude.mcpSearch', 'Searches for MCP tools when tool search is enabled'), toolEquivalent: [] }
 ];
 
@@ -408,8 +408,8 @@ export const claudeRulesAttributes: Record<string, IAttributeDefinition> = {
 	},
 };
 
-export function isVSCodeOrDefaultTarget(target: Target): boolean {
-	return target === Target.VSCode || target === Target.Undefined;
+export function isZyraxonCodeOrDefaultTarget(target: Target): boolean {
+	return target === Target.ZyraxonCode || target === Target.Undefined;
 }
 
 export function getTarget(promptType: PromptsType, header: PromptHeader | URI): Target {
@@ -421,7 +421,7 @@ export function getTarget(promptType: PromptsType, header: PromptHeader | URI): 
 		}
 		if (!(header instanceof URI)) {
 			const target = header.target;
-			if (target === Target.GitHubCopilot || target === Target.VSCode) {
+			if (target === Target.GitHubCopilot || target === Target.ZyraxonCode) {
 				return target;
 			}
 		}

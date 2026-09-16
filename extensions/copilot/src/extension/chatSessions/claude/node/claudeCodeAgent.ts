@@ -5,8 +5,8 @@
 
 import type { EffortLevel, McpServerConfig, Options, PermissionMode, Query, SDKUserMessage, SdkPluginConfig } from '@anthropic-ai/claude-agent-sdk';
 import Anthropic from '@anthropic-ai/sdk';
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IChatDebugFileLoggerService } from '../../../../platform/chat/common/chatDebugFileLoggerService';
 import { INativeEnvService } from '../../../../platform/env/common/envService';
 import { IGitService } from '../../../../platform/git/common/gitService';
@@ -25,7 +25,7 @@ import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
 import { getErrorDetailsFromChatFetchError } from '../../../../platform/chat/common/commonTypes';
 import { IOctoKitService } from '../../../../platform/github/common/githubService';
-import { LanguageModelToolMCPSource } from '../../../../vscodeTypes';
+import { LanguageModelToolMCPSource } from '../../../../zyraxoncodeTypes';
 import { IClaudePluginService } from './claudeSkills';
 import { ExternalEditTracker } from '../../common/externalEditTracker';
 import { resolveAppModulePathSync } from '../../copilotcli/node/appNodeModules';
@@ -68,12 +68,12 @@ export class ClaudeAgentManager extends Disposable {
 
 	public async handleRequest(
 		claudeSessionId: string,
-		request: vscode.ChatRequest,
-		stream: vscode.ChatResponseStream,
-		token: vscode.CancellationToken,
+		request: zyraxoncode.ChatRequest,
+		stream: zyraxoncode.ChatResponseStream,
+		token: zyraxoncode.CancellationToken,
 		isNewSession: boolean,
 		yieldRequested?: () => boolean
-	): Promise<vscode.ChatResult> {
+	): Promise<zyraxoncode.ChatResult> {
 		try {
 			const langModelServer = await this.getLangModelServer();
 
@@ -130,7 +130,7 @@ export class ClaudeAgentManager extends Disposable {
 			const errorMessage = (invokeError instanceof KnownClaudeError) ? invokeError.message : l10n.t('Claude CLI Error: {0}', invokeError.message);
 			stream.markdown(l10n.t('Error: {0}', errorMessage));
 			return {
-				// This currently can't be used by the sessions API https://github.com/microsoft/vscode/issues/263111
+				// This currently can't be used by the sessions API __ZYRAXKEEP__0_
 				errorDetails: { message: errorMessage },
 			};
 		}
@@ -141,9 +141,9 @@ export class ClaudeAgentManager extends Disposable {
  * Represents a queued chat request waiting to be processed by the Claude session
  */
 interface QueuedRequest {
-	readonly request: vscode.ChatRequest;
-	readonly stream: vscode.ChatResponseStream;
-	readonly token: vscode.CancellationToken;
+	readonly request: zyraxoncode.ChatRequest;
+	readonly stream: zyraxoncode.ChatResponseStream;
+	readonly token: zyraxoncode.CancellationToken;
 	readonly yieldRequested?: () => boolean;
 	readonly deferred: DeferredPromise<void>;
 	readonly modelId: ParsedClaudeModelId;
@@ -172,7 +172,7 @@ export class ClaudeCodeSession extends Disposable {
 	private _pendingRestart = false;
 	private _sessionStarting: Promise<void> | undefined;
 	private _currentToolNames: ReadonlySet<string> | undefined;
-	private _gateway: vscode.McpGateway | undefined;
+	private _gateway: zyraxoncode.McpGateway | undefined;
 	private _gatewayIdleTimeout: ReturnType<typeof setTimeout> | undefined;
 	private _otelTracker: ClaudeOTelTracker;
 
@@ -342,10 +342,10 @@ export class ClaudeCodeSession extends Disposable {
 	 * @param token Cancellation token for request cancellation
 	 */
 	public async invoke(
-		request: vscode.ChatRequest,
-		stream: vscode.ChatResponseStream,
+		request: zyraxoncode.ChatRequest,
+		stream: zyraxoncode.ChatResponseStream,
 		yieldRequested: (() => boolean) | undefined,
-		token: vscode.CancellationToken,
+		token: zyraxoncode.CancellationToken,
 	): Promise<void> {
 		if (this._store.isDisposed) {
 			throw new Error('Session disposed');
@@ -396,7 +396,7 @@ export class ClaudeCodeSession extends Disposable {
 	 * Starts a new Claude Code session with the configured options.
 	 * Guards against concurrent starts (e.g., from yield restart racing with a new invoke).
 	 */
-	private async _startSession(token: vscode.CancellationToken): Promise<void> {
+	private async _startSession(token: zyraxoncode.CancellationToken): Promise<void> {
 		// If a session start is already in progress, wait for it rather than starting a second
 		if (this._sessionStarting) {
 			await this._sessionStarting;
@@ -412,7 +412,7 @@ export class ClaudeCodeSession extends Disposable {
 		}
 	}
 
-	private async _doStartSession(token: vscode.CancellationToken): Promise<void> {
+	private async _doStartSession(token: zyraxoncode.CancellationToken): Promise<void> {
 		const folderInfo = this.sessionStateService.getFolderInfoForSession(this.sessionId);
 		if (!folderInfo) {
 			throw new Error(`No folder info found for session ${this.sessionId}. State must be committed before invoking.`);
@@ -440,7 +440,7 @@ export class ClaudeCodeSession extends Disposable {
 			this._gateway ??= await this.mcpService.startMcpGateway(ClaudeSessionUri.forSessionId(this.sessionId)) ?? undefined;
 			if (this._gateway) {
 				for (const server of this._gateway.servers) {
-					const serverId = server.label.toLowerCase().replace(/[^a-z0-9_-]/g, '_').replace(/^_+|_+$/g, '') || `vscode-mcp-server-${Object.keys(mcpServers).length}`;
+					const serverId = server.label.toLowerCase().replace(/[^a-z0-9_-]/g, '_').replace(/^_+|_+$/g, '') || `zyraxoncode-mcp-server-${Object.keys(mcpServers).length}`;
 					mcpServers[serverId] = {
 						type: 'http',
 						url: server.address.toString(),
@@ -496,11 +496,11 @@ export class ClaudeCodeSession extends Disposable {
 			plugins,
 			settings: {
 				env: {
-					ANTHROPIC_BASE_URL: `http://localhost:${serverConfig.port}`,
+					ANTHROPIC_BASE_URL: `__ZYRAXKEEP__1_{serverConfig.port}`,
 					ANTHROPIC_AUTH_TOKEN: `${serverConfig.nonce}.${this.sessionId}`,
 					CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: '1',
 					USE_BUILTIN_RIPGREP: '0',
-					PATH: `${resolveAppModulePathSync(this.envService.appRoot, '@vscode', 'ripgrep-universal', 'bin', `${process.platform}-${process.arch}`)}${pathSep}${process.env.PATH}`,
+					PATH: `${resolveAppModulePathSync(this.envService.appRoot, '@zyraxoncode', 'ripgrep-universal', 'bin', `${process.platform}-${process.arch}`)}${pathSep}${process.env.PATH}`,
 					// Forward OTel configuration to the Claude SDK subprocess
 					...deriveClaudeOTelEnv(this._otelService.config),
 				},
@@ -804,7 +804,7 @@ export class ClaudeCodeSession extends Disposable {
 	/**
 	 * Computes a snapshot of the MCP tool names from a chat request's tools map.
 	 */
-	private _computeToolsSnapshot(tools: vscode.ChatRequest['tools']): ReadonlySet<string> {
+	private _computeToolsSnapshot(tools: zyraxoncode.ChatRequest['tools']): ReadonlySet<string> {
 		// TODO: Handle the enabled/disabled (true/false) state per tool once we have UI for it
 		return new Set(
 			[...tools]

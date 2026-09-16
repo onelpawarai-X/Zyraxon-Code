@@ -383,7 +383,7 @@ export class SinglePaneManagedTabsStrategy extends SinglePaneLayoutStrategy {
 			return false;
 		}
 		const resource = EditorResourceAccessor.getCanonicalUri(editor, { supportSideBySide: SideBySideEditor.PRIMARY });
-		return resource?.scheme === Schemas.file || resource?.scheme === Schemas.vscodeRemote;
+		return resource?.scheme === Schemas.file || resource?.scheme === Schemas.zyraxoncodeRemote;
 	}
 
 	/** Offer the `+` "Changes"/"Files" entries when the session supports them but their tabs are closed. */

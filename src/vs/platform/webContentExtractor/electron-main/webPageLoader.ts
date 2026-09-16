@@ -163,7 +163,7 @@ export class WebPageLoader extends Disposable {
 		headers['Sec-GPC'] = '1';
 
 		// For the main document request, prefer markdown responses from sites that
-		// support agent-friendly content negotiation (e.g. Microsoft Learn, Cloudflare docs).
+		// support agent-friendly content negotiation (e.g. Zyraxon Learn, Cloudflare docs).
 		if (details.resourceType === 'mainFrame') {
 			headers['Accept'] = 'text/markdown, text/html;q=0.9, application/xhtml+xml;q=0.9, application/xml;q=0.8, */*;q=0.7';
 		}
@@ -339,7 +339,7 @@ export class WebPageLoader extends Disposable {
 
 	/**
 	 * Handles debugger messages related to network requests, tracking their lifecycle.
-	 * @note DO NOT add logging to this function, microsoft.com will freeze when too many logs are generated
+	 * @note DO NOT add logging to this function, zyraxon.com will freeze when too many logs are generated
 	 */
 	private onDebugMessage(_event: Event, method: string, params: NetworkRequestEventParams) {
 		if (this._store.isDisposed) {

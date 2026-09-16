@@ -27,7 +27,7 @@
 	left: 0;
 	width: 16px;
 	height: 100%;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	color: inherit;
 	box-sizing: border-box;
 	background-position: center center;
@@ -40,11 +40,11 @@
 }
 
 .monaco-workbench .search-view .search-widget .toggle-replace-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground)
+	background-color: var(--zyraxoncode-toolbar-hoverBackground)
 }
 
 .monaco-workbench .search-view .search-widget .toggle-replace-button:active {
-	background-color: var(--vscode-toolbar-activeBackground)
+	background-color: var(--zyraxoncode-toolbar-activeBackground)
 }
 
 .search-view .search-widget .search-container,
@@ -162,7 +162,7 @@
 .search-view .messages {
 	margin-top: -5px;
 	cursor: default;
-	color: var(--vscode-search-resultsInfoForeground);
+	color: var(--zyraxoncode-search-resultsInfoForeground);
 }
 
 .search-view .message {
@@ -191,12 +191,12 @@
 }
 
 .search-view .message a {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .search-view .message a:hover,
 .search-view .message a:active {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .search-view .message .keyword-refresh {
@@ -207,7 +207,7 @@
 
 .search-view .message .keyword-refresh:hover,
 .search-view .message .keyword-refresh:active {
-	color:  var(--vscode-textLink-activeForeground);
+	color:  var(--zyraxoncode-textLink-activeForeground);
 }
 
 
@@ -345,14 +345,14 @@
 
 .search-view .replace.findInFileMatch {
 	text-decoration: line-through;
-	background-color: var(--vscode-diffEditor-removedTextBackground);
-	border: 1px solid var(--vscode-diffEditor-removedTextBackground);
+	background-color: var(--zyraxoncode-diffEditor-removedTextBackground);
+	border: 1px solid var(--zyraxoncode-diffEditor-removedTextBackground);
 }
 
 /* High Contrast Theming */
 .monaco-workbench.hc-light .search-view .replace.findInFileMatch,
 .monaco-workbench.hc-black .search-view .replace.findInFileMatch {
-	border: 1px dashed var(--vscode-diffEditor-removedTextBackground);
+	border: 1px dashed var(--zyraxoncode-diffEditor-removedTextBackground);
 }
 
 .search-view .findInFileMatch,
@@ -361,18 +361,18 @@
 }
 
 .search-view .findInFileMatch {
-	background-color: var(--vscode-editor-findMatchHighlightBackground);
-	border: 1px solid var(--vscode-editor-findMatchHighlightBorder);
+	background-color: var(--zyraxoncode-editor-findMatchHighlightBackground);
+	border: 1px solid var(--zyraxoncode-editor-findMatchHighlightBorder);
 }
 
 /* High Contrast Theming */
 .monaco-workbench.hc-light .search-view .findInFileMatch,
 .monaco-workbench.hc-black .search-view .findInFileMatch {
-	border: 1px dashed var(--vscode-editor-findMatchHighlightBorder);
+	border: 1px dashed var(--zyraxoncode-editor-findMatchHighlightBorder);
 }
 
 .search-view .replaceMatch {
-	background-color: var(--vscode-diffEditor-insertedTextBackground);
+	background-color: var(--zyraxoncode-diffEditor-insertedTextBackground);
 }
 
 /* High Contrast Theming */
@@ -385,13 +385,13 @@
 }
 
 .search-view .replaceMatch:not(:empty) {
-	border: 1px solid var(--vscode-diffEditor-insertedLineBackground);
+	border: 1px solid var(--zyraxoncode-diffEditor-insertedLineBackground);
 }
 
 /* High Contrast Theming */
 .monaco-workbench.hc-light .search-view .replaceMatch:not(:empty),
 .monaco-workbench.hc-black .search-view .replaceMatch:not(:empty) {
-	border: 1px dashed var(--vscode-diffEditor-insertedLineBackground);
+	border: 1px dashed var(--zyraxoncode-diffEditor-insertedLineBackground);
 }
 
 /* High Contrast Theming */
@@ -420,7 +420,7 @@
 }
 
 .monaco-workbench .search-view .monaco-list.element-focused .monaco-list-row.focused.selected:not(.highlighted) .action-label:focus {
-	outline-color: var(--vscode-list-activeSelectionForeground)
+	outline-color: var(--zyraxoncode-list-activeSelectionForeground)
 }
 
 .monaco-workbench .search-container .monaco-custom-toggle.disabled {

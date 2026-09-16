@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from '../../vscodeTypes';
-import { Location, Position, Range } from '../../vscodeTypes';
+import type * as zyraxoncode from '../../zyraxoncodeTypes';
+import { Location, Position, Range } from '../../zyraxoncodeTypes';
 import { URI } from '../vs/base/common/uri';
 
-export function isUri(thing: any): thing is URI | vscode.Uri {
-	// This check works for URIs from vscode, but doesn't help with type narrowing on its own, so this function exists.
+export function isUri(thing: any): thing is URI | zyraxoncode.Uri {
+	// This check works for URIs from zyraxoncode, but doesn't help with type narrowing on its own, so this function exists.
 	return URI.isUri(thing);
 }
 
-export function isLocation(obj: any): obj is vscode.Location {
+export function isLocation(obj: any): obj is zyraxoncode.Location {
 	return obj && typeof obj === 'object' && 'uri' in obj && 'range' in obj;
 }
 
@@ -28,6 +28,6 @@ export function toLocation(obj: any) {
 	return undefined;
 }
 
-export function isSymbolInformation(obj: any): obj is vscode.SymbolInformation {
+export function isSymbolInformation(obj: any): obj is zyraxoncode.SymbolInformation {
 	return obj && typeof obj === 'object' && 'name' in obj && 'containerName' in obj;
 }

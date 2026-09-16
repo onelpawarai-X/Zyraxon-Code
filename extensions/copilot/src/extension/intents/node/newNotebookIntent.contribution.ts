@@ -2,8 +2,8 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -63,7 +63,7 @@ class NewNotebookPlanningInvocation implements IIntentInvocation {
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 	) { }
 
-	async buildPrompt(promptContext: IBuildPromptContext, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken) {
+	async buildPrompt(promptContext: IBuildPromptContext, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken) {
 		this.context = promptContext;
 
 		const renderer = PromptRenderer.create(this.instantiationService, this.endpoint, NewNotebookPlanningPrompt, {
@@ -74,7 +74,7 @@ class NewNotebookPlanningInvocation implements IIntentInvocation {
 		return await renderer.render(progress, token);
 	}
 
-	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		outputStream.markdown(l10n.t('Creating a new notebook:\n'));
 
 		const responseProcessor = this.instantiationService.createInstance(NewNotebookResponseProcessor, this.endpoint, this.context);

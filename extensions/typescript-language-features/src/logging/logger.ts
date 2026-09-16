@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Lazy } from '../utils/lazy';
 
 export class Logger {
 
-	private readonly output = new Lazy<vscode.LogOutputChannel>(() => {
-		return vscode.window.createOutputChannel('TypeScript', { log: true });
+	private readonly output = new Lazy<zyraxoncode.LogOutputChannel>(() => {
+		return zyraxoncode.window.createOutputChannel('TypeScript', { log: true });
 	});
 
-	public get logLevel(): vscode.LogLevel {
+	public get logLevel(): zyraxoncode.LogLevel {
 		return this.output.value.logLevel;
 	}
 
@@ -25,7 +25,7 @@ export class Logger {
 	}
 
 	public error(message: string, data?: unknown): void {
-		// See https://github.com/microsoft/TypeScript/issues/10496
+		// See __ZYRAXKEEP__0_
 		if (data && (data as { message?: string }).message === 'No content available.') {
 			return;
 		}

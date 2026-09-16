@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 
-import { TelemetryEventMeasurements, TelemetryEventProperties } from '@vscode/extension-telemetry';
-import { RenderPromptResult } from '@vscode/prompt-tsx';
-import type { CancellationToken, Progress } from 'vscode';
+import { TelemetryEventMeasurements, TelemetryEventProperties } from '@zyraxoncode/extension-telemetry';
+import { RenderPromptResult } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, Progress } from 'zyraxoncode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { EditSurvivalReporter, EditSurvivalResult } from '../../../platform/editSurvivalTracking/common/editSurvivalReporter';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -22,7 +22,7 @@ import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { StringEdit } from '../../../util/vs/editor/common/core/edits/stringEdit';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { MarkdownString, Range } from '../../../vscodeTypes';
+import { MarkdownString, Range } from '../../../zyraxoncodeTypes';
 import { PromptRenderer } from '../../prompts/node/base/promptRenderer';
 import { CurrentChangeInput } from '../../prompts/node/feedback/currentChange';
 import { ProvideFeedbackPrompt } from '../../prompts/node/feedback/provideFeedback';
@@ -93,7 +93,7 @@ export class FeedbackGenerator {
 		}
 
 		const request: ReviewRequest = {
-			source: 'vscodeCopilotChat',
+			source: 'zyraxoncodeCopilotChat',
 			promptCount: prompts.length,
 			messageId: generateUuid(),
 			inputType,

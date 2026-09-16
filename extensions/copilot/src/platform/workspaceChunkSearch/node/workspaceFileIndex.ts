@@ -5,7 +5,7 @@
 
 import * as nodeFs from 'fs';
 import { isBinaryFile, isBinaryFileSync } from 'isbinaryfile';
-import type vscode from 'vscode';
+import type zyraxoncode from 'zyraxoncode';
 import { GlobIncludeOptions, shouldInclude } from '../../../util/common/glob';
 import { getLanguageForResource } from '../../../util/common/languages';
 import { createServiceIdentifier } from '../../../util/common/services';
@@ -161,7 +161,7 @@ const EXCLUDED_FOLDERS = [
 	'.yarn',
 
 	'foo.asar',
-	'.vscode-test',
+	'.zyraxoncode-test',
 
 	// JS/TS build outputs
 	'node_modules',
@@ -201,17 +201,17 @@ const EXCLUDED_FILES = [
  * List of file schemes we should never index, even if they are open in the workspace.
  */
 const EXCLUDED_SCHEMES = [
-	Schemas.vscode,
-	Schemas.vscodeUserData,
+	Schemas.zyraxoncode,
+	Schemas.zyraxoncodeUserData,
 	'output',
 	Schemas.inMemory,
 	Schemas.internal,
-	Schemas.vscodeChatCodeBlock,
-	Schemas.vscodeChatCodeCompareBlock,
+	Schemas.zyraxoncodeChatCodeBlock,
+	Schemas.zyraxoncodeChatCodeCompareBlock,
 	Schemas.chatEditingModel,
 	Schemas.chatEditingSnapshotScheme,
 	'git',
-	Schemas.vscodeSourceControl,
+	Schemas.zyraxoncodeSourceControl,
 ];
 
 export function shouldAlwaysIgnoreFile(resource: URI): boolean {
@@ -360,7 +360,7 @@ class FsFileRepresentation extends FileRepresentation {
 class TextDocumentFileRepresentation extends FileRepresentation {
 
 	constructor(
-		private readonly _textDocument: vscode.TextDocument,
+		private readonly _textDocument: zyraxoncode.TextDocument,
 		@IFileSystemService private readonly _fileSystem: IFileSystemService,
 	) {
 		super(_textDocument.uri);
@@ -812,7 +812,7 @@ export class WorkspaceFileIndex extends Disposable implements IWorkspaceFileInde
 		return this._instantiationService.createInstance(FsFileRepresentation, resource, this._fileReadLimiter);
 	}
 
-	private async addOrUpdateTextDocumentEntry(doc: vscode.TextDocument, skipEmit = false): Promise<void> {
+	private async addOrUpdateTextDocumentEntry(doc: zyraxoncode.TextDocument, skipEmit = false): Promise<void> {
 		if (!await this.shouldIndexWorkspaceFile(doc.uri, this._disposeCts.token)) {
 			return;
 		}

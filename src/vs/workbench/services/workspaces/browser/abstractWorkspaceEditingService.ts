@@ -83,7 +83,7 @@ export abstract class AbstractWorkspaceEditingService extends Disposable impleme
 	async pickNewWorkspacePath(): Promise<URI | undefined> {
 		const availableFileSystems = [Schemas.file];
 		if (this.environmentService.remoteAuthority) {
-			availableFileSystems.unshift(Schemas.vscodeRemote);
+			availableFileSystems.unshift(Schemas.zyraxoncodeRemote);
 		}
 		let workspacePath = await this.fileDialogService.showSaveDialog({
 			saveLabel: localize('save', "Save"),
@@ -99,7 +99,7 @@ export abstract class AbstractWorkspaceEditingService extends Disposable impleme
 
 		if (!hasWorkspaceFileExtension(workspacePath)) {
 			// Always ensure we have workspace file extension
-			// (see https://github.com/microsoft/vscode/issues/84818)
+			// (see __ZYRAXKEEP__0_)
 			workspacePath = workspacePath.with({ path: `${workspacePath.path}.${WORKSPACE_EXTENSION}` });
 		}
 
@@ -198,8 +198,8 @@ export abstract class AbstractWorkspaceEditingService extends Disposable impleme
 		const state = this.contextService.getWorkbenchState();
 		const remoteAuthority = this.environmentService.remoteAuthority;
 		if (remoteAuthority) {
-			// https://github.com/microsoft/vscode/issues/94191
-			foldersToAdd = foldersToAdd.filter(folder => folder.uri.scheme !== Schemas.file && (folder.uri.scheme !== Schemas.vscodeRemote || isEqualAuthority(folder.uri.authority, remoteAuthority)));
+			// __ZYRAXKEEP__1_
+			foldersToAdd = foldersToAdd.filter(folder => folder.uri.scheme !== Schemas.file && (folder.uri.scheme !== Schemas.zyraxoncodeRemote || isEqualAuthority(folder.uri.authority, remoteAuthority)));
 		}
 
 		// If we are in no-workspace or single-folder workspace, adding folders has to
@@ -268,7 +268,7 @@ export abstract class AbstractWorkspaceEditingService extends Disposable impleme
 			try {
 				await this.saveWorkspaceAs(untitledWorkspace, path);
 			} finally {
-				await this.workspacesService.deleteUntitledWorkspace(untitledWorkspace); // https://github.com/microsoft/vscode/issues/100276
+				await this.workspacesService.deleteUntitledWorkspace(untitledWorkspace); // __ZYRAXKEEP__2_
 			}
 		} else {
 			path = untitledWorkspace.configPath;

@@ -23,13 +23,13 @@ export interface IAgentHostFileSystemService {
 
 	/**
 	 * Register a mapping from a URI authority to a connection so that
-	 * `vscode-agent-host://[authority]/…` URIs resolve through this connection.
+	 * `zyraxoncode-agent-host://[authority]/…` URIs resolve through this connection.
 	 */
 	registerAuthority(authority: string, connection: IRemoteFilesystemConnection): IDisposable;
 
 	/**
 	 * Ensures the in-memory filesystem provider for synced customizations
-	 * (`vscode-synced-customization:` scheme) is registered. Called lazily
+	 * (`zyraxoncode-synced-customization:` scheme) is registered. Called lazily
 	 * by {@link SyncedCustomizationBundler} — safe to call multiple times.
 	 */
 	ensureSyncedCustomizationProvider(): void;

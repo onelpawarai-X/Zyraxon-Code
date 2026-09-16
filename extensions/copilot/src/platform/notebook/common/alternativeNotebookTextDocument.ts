@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { NotebookCell, NotebookDocument, NotebookDocumentContentChange, TextDocument, TextDocumentContentChangeEvent } from 'vscode';
+import type { NotebookCell, NotebookDocument, NotebookDocumentContentChange, TextDocument, TextDocumentContentChangeEvent } from 'zyraxoncode';
 import { coalesce } from '../../../util/vs/base/common/arrays';
 import { findLastIdxMonotonous } from '../../../util/vs/base/common/arraysFind';
 import { StringEdit } from '../../../util/vs/editor/common/core/edits/stringEdit';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
-import { NotebookCellKind, Position, Range } from '../../../vscodeTypes';
+import { NotebookCellKind, Position, Range } from '../../../zyraxoncodeTypes';
 import { stringEditFromTextContentChange } from '../../editing/common/edit';
 import { PositionOffsetTransformer } from '../../editing/common/positionOffsetTransformer';
 import { generateCellTextMarker, getBlockComment, getLineCommentStart } from './alternativeContentProvider.text';

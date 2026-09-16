@@ -5,8 +5,8 @@ Depends: @@DEPENDS@@
 Recommends: @@RECOMMENDS@@
 Priority: optional
 Architecture: @@ARCHITECTURE@@
-Maintainer: Zyraxon Corporation <vscode-linux@microsoft.com>
-Homepage: https://code.visualstudio.com/
+Maintainer: Zyraxon Corporation <zyraxoncode-linux@zyraxon.com>
+Homepage: __ZYRAXKEEP__0_
 Installed-Size: @@INSTALLEDSIZE@@
 Provides: visual-studio-@@NAME@@
 Conflicts: visual-studio-@@NAME@@
@@ -14,5 +14,5 @@ Replaces: visual-studio-@@NAME@@
 Description: Code editing. Redefined.
  ZYRAXON Code is a new choice of tool that combines the simplicity of
  a code editor with what developers need for the core edit-build-debug cycle.
- See https://code.visualstudio.com/docs/setup/linux for installation
+ See __ZYRAXKEEP__1_ for installation
  instructions and FAQ.

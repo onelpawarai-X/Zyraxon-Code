@@ -68,7 +68,7 @@ function renderWidget(context: ComponentFixtureContext, options: IFixtureOptions
 	context.container.style.width = '420px';
 	context.container.style.height = '64px';
 	context.container.style.padding = '12px';
-	context.container.style.background = 'var(--vscode-editor-background)';
+	context.container.style.background = 'var(--zyraxoncode-editor-background)';
 
 	const instantiationService = createEditorServices(scopedDisposables, {
 		colorTheme: context.theme,

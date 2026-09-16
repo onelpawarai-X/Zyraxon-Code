@@ -22,17 +22,17 @@ function renderSpotlightOverlay({ container, disposableStore }: ComponentFixture
 	container.style.display = 'flex';
 	container.style.alignItems = 'center';
 	container.style.justifyContent = 'center';
-	container.style.background = 'var(--vscode-editor-background)';
-	container.style.color = 'var(--vscode-editor-foreground)';
+	container.style.background = 'var(--zyraxoncode-editor-background)';
+	container.style.color = 'var(--zyraxoncode-editor-foreground)';
 
 	const targetButton = dom.append(container, dom.$<HTMLButtonElement>('button.spotlight-fixture-target'));
 	targetButton.type = 'button';
 	targetButton.textContent = 'Clickable target';
 	targetButton.style.padding = '8px 12px';
-	targetButton.style.borderRadius = 'var(--vscode-cornerRadius-small)';
-	targetButton.style.border = 'var(--vscode-strokeThickness) solid var(--vscode-button-border, transparent)';
-	targetButton.style.background = 'var(--vscode-button-secondaryBackground)';
-	targetButton.style.color = 'var(--vscode-button-secondaryForeground)';
+	targetButton.style.borderRadius = 'var(--zyraxoncode-cornerRadius-small)';
+	targetButton.style.border = 'var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-button-border, transparent)';
+	targetButton.style.background = 'var(--zyraxoncode-button-secondaryBackground)';
+	targetButton.style.color = 'var(--zyraxoncode-button-secondaryForeground)';
 	targetButton.style.cursor = 'pointer';
 	targetButton.style.font = 'inherit';
 

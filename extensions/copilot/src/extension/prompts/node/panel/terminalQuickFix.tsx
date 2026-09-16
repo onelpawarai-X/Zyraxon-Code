@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import { BasePromptElementProps, PromptElement, PromptPiece, SystemMessage, UserMessage, type PromptElementProps } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptPiece, SystemMessage, UserMessage, type PromptElementProps } from '@zyraxoncode/prompt-tsx';
 import { IEnvService } from '../../../../platform/env/common/envService';
 import { ITerminalService } from '../../../../platform/terminal/common/terminalService';
 import { basename, join } from '../../../../util/vs/base/common/path';

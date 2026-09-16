@@ -587,7 +587,7 @@ export class MainThreadEditorTabs implements MainThreadEditorTabsShape {
 			case GroupModelChangeKind.EDITORS_SELECTION:
 				// Multi-select state of editors is workbench-internal and not exposed in the tabs API.
 				// Treat as no-op so we do not rebuild the entire model (which would invalidate
-				// any `vscode.Tab` references the extension is currently holding).
+				// any `zyraxoncode.Tab` references the extension is currently holding).
 				break;
 			case GroupModelChangeKind.EDITOR_MOVE:
 				if (isGroupEditorMoveEvent(event) && event.editor && event.editorIndex !== undefined && event.oldEditorIndex !== undefined) {

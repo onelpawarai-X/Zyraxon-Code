@@ -11,12 +11,12 @@ import type { Mutable } from '../../../../base/common/types.js';
  * by the ZYRAXON Code CLI, asks the CLI to check for a server upgrade and
  * restart the running server if a newer build is available.
  *
- * Servers advertise this method through {@link UnsupportedProtocolVersionErrorMeta.vscodeUpgradeMethod}
+ * Servers advertise this method through {@link UnsupportedProtocolVersionErrorMeta.zyraxoncodeUpgradeMethod}
  * in the `_meta` payload of an `UnsupportedProtocolVersion` error so the
  * client can offer an "Update server" action without hard-coding the method
  * name on the renderer side.
  */
-export const VSCODE_UPGRADE_METHOD = '_vscodeUpgrade' as const;
+export const VSCODE_UPGRADE_METHOD = '_zyraxoncodeUpgrade' as const;
 
 /**
  * Status payload returned by the {@link VSCODE_UPGRADE_METHOD} RPC. The
@@ -67,7 +67,7 @@ export interface UnsupportedProtocolVersionErrorMeta {
 	 * JSON-RPC method name the client MAY invoke on the same transport to
 	 * ask the server to upgrade itself. Currently always {@link VSCODE_UPGRADE_METHOD}.
 	 */
-	readonly vscodeUpgradeMethod?: string;
+	readonly zyraxoncodeUpgradeMethod?: string;
 }
 
 /**
@@ -87,7 +87,7 @@ export interface UnsupportedProtocolVersionErrorDataEx extends UnsupportedProtoc
  * `_meta` bag on an `UnsupportedProtocolVersion` error's data payload. `data` is
  * the raw, untrusted `ProtocolError.data` (typed `unknown`); this validates that
  * it carries a `_meta` object with a string {@link
- * UnsupportedProtocolVersionErrorMeta.vscodeUpgradeMethod} and returns
+ * UnsupportedProtocolVersionErrorMeta.zyraxoncodeUpgradeMethod} and returns
  * `undefined` otherwise. Always read the upgrade `_meta` through this helper
  * rather than casting the error data to a shape that includes `_meta`.
  */
@@ -101,8 +101,8 @@ export function readUnsupportedProtocolVersionErrorMeta(data: unknown): Unsuppor
 	}
 	const raw = meta as Record<string, unknown>;
 	const result: Mutable<UnsupportedProtocolVersionErrorMeta> = {};
-	if (typeof raw['vscodeUpgradeMethod'] === 'string') {
-		result.vscodeUpgradeMethod = raw['vscodeUpgradeMethod'];
+	if (typeof raw['zyraxoncodeUpgradeMethod'] === 'string') {
+		result.zyraxoncodeUpgradeMethod = raw['zyraxoncodeUpgradeMethod'];
 	}
 	return Object.keys(result).length > 0 ? result : undefined;
 }

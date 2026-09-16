@@ -55,7 +55,7 @@ export class TerminalAccessibilityHelpProvider extends Disposable implements IAc
 		@IContextKeyService private readonly _contextKeyService: IContextKeyService,
 	) {
 		super();
-		this._hasShellIntegration = _xterm.shellIntegration.status === ShellIntegrationStatus.VSCode;
+		this._hasShellIntegration = _xterm.shellIntegration.status === ShellIntegrationStatus.ZyraxonCode;
 	}
 	provideContent(): string {
 		const content = [

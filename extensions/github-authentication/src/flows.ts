@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import { ProgressLocation, Uri, commands, env, l10n, window, workspace } from 'vscode';
+import { ProgressLocation, Uri, commands, env, l10n, window, workspace } from 'zyraxoncode';
 import { Log } from './common/logger';
 import { Config } from './config';
 import { UriEventHandler } from './github';
@@ -78,11 +78,11 @@ interface IFlowTriggerOptions {
 	 */
 	extraAuthorizeParameters?: Record<string, string>;
 	/**
-	 * The Uri that the OAuth flow will redirect to. (i.e. vscode.dev/redirect)
+	 * The Uri that the OAuth flow will redirect to. (i.e. zyraxoncode.dev/redirect)
 	 */
 	redirectUri: Uri;
 	/**
-	 * The Uri to redirect to after redirecting to the redirect Uri. (i.e. vscode://....)
+	 * The Uri to redirect to after redirecting to the redirect Uri. (i.e. __ZYRAXKEEP__0_)
 	 */
 	callbackUri: Uri;
 	/**
@@ -359,7 +359,7 @@ class LocalServerFlow implements IFlow {
 
 			let codeToExchange;
 			try {
-				env.openExternal(Uri.parse(`http://127.0.0.1:${port}/signin?nonce=${encodeURIComponent(server.nonce)}`));
+				env.openExternal(Uri.parse(`__ZYRAXKEEP__1_{port}/signin?nonce=${encodeURIComponent(server.nonce)}`));
 				const { code } = await Promise.race([
 					server.waitForOAuthResponse(),
 					new Promise<any>((_, reject) => setTimeout(() => reject(TIMED_OUT_ERROR), 300_000)), // 5min timeout

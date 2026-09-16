@@ -24,13 +24,13 @@
 	width: 31vw;
 	max-width: 600px;
 	height: 22px;
-	border: 1px solid var(--vscode-commandCenter-border);
+	border: 1px solid var(--zyraxoncode-commandCenter-border);
 	background-color: transparent;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 	-webkit-app-region: no-drag;
 	overflow: hidden;
-	color: var(--vscode-commandCenter-foreground);
-	font-size: var(--vscode-agents-fontSize-label1);
+	color: var(--zyraxoncode-commandCenter-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	gap: 6px;
 	cursor: default;
 	opacity: 1;
@@ -38,9 +38,9 @@
 }
 
 .command-center .agent-sessions-titlebar-container:hover {
-	color: var(--vscode-commandCenter-activeForeground);
-	background-color: var(--vscode-commandCenter-activeBackground);
-	border-color: var(--vscode-commandCenter-activeBorder);
+	color: var(--zyraxoncode-commandCenter-activeForeground);
+	background-color: var(--zyraxoncode-commandCenter-activeBackground);
+	border-color: var(--zyraxoncode-commandCenter-activeBorder);
 }
 
 /* Session pill - clickable area for session picker, fills the command center box */
@@ -60,7 +60,7 @@
 }
 
 .command-center .agent-sessions-titlebar-container:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -79,7 +79,7 @@
 	display: flex;
 	align-items: center;
 	flex-shrink: 0;
-	font-size: var(--vscode-codiconFontSize);
+	font-size: var(--zyraxoncode-codiconFontSize);
 }
 
 /* Session title - primary label in the command center box. */
@@ -100,7 +100,7 @@
 }
 
 .command-center > .monaco-toolbar > .monaco-action-bar > .actions-container > .action-item:not(.disabled) > .action-label {
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 /* Separator between the session title and the workspace name. */
@@ -127,12 +127,12 @@
 	padding: 0 4px;
 	box-sizing: border-box;
 	font-size: 9px;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	font-variant-numeric: tabular-nums;
 	text-align: center;
-	border-radius: var(--vscode-cornerRadius-small);
-	background-color: var(--vscode-agentsUnreadBadge-background);
-	color: var(--vscode-agentsUnreadBadge-foreground);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	background-color: var(--zyraxoncode-agentsUnreadBadge-background);
+	color: var(--zyraxoncode-agentsUnreadBadge-foreground);
 	pointer-events: none;
 }
 
@@ -146,15 +146,15 @@
 	one or more sessions' pending actions from the sessions list. It stays
 	clickable (activating whatever the underlying state would do). */
 .command-center .agent-sessions-titlebar-container.agent-sessions-titlebar-approved {
-	color: var(--vscode-charts-green);
-	border-color: var(--vscode-charts-green);
-	background-color: color-mix(in srgb, var(--vscode-charts-green) 14%, transparent);
+	color: var(--zyraxoncode-charts-green);
+	border-color: var(--zyraxoncode-charts-green);
+	background-color: color-mix(in srgb, var(--zyraxoncode-charts-green) 14%, transparent);
 }
 
 .command-center .agent-sessions-titlebar-container.agent-sessions-titlebar-approved:hover {
-	color: var(--vscode-charts-green);
-	border-color: var(--vscode-charts-green);
-	background-color: color-mix(in srgb, var(--vscode-charts-green) 22%, transparent);
+	color: var(--zyraxoncode-charts-green);
+	border-color: var(--zyraxoncode-charts-green);
+	background-color: color-mix(in srgb, var(--zyraxoncode-charts-green) 22%, transparent);
 }
 
 .command-center .agent-sessions-titlebar-container.agent-sessions-titlebar-approved .agent-sessions-titlebar-pill {
@@ -168,5 +168,5 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 }

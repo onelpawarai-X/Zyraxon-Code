@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DocumentContext } from 'vscode-css-languageservice';
+import { DocumentContext } from 'zyraxoncode-css-languageservice';
 import { endsWith, startsWith } from '../utils/strings.js';
-import { WorkspaceFolder } from 'vscode-languageserver';
-import { Utils, URI } from 'vscode-uri';
+import { WorkspaceFolder } from 'zyraxoncode-languageserver';
+import { Utils, URI } from 'zyraxoncode-uri';
 
 export function getDocumentContext(documentUri: string, workspaceFolders: WorkspaceFolder[]): DocumentContext {
 	function getRootFolder(): string | undefined {

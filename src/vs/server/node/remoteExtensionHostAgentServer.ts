@@ -146,7 +146,7 @@ class RemoteExtensionHostAgentServer extends Disposable implements IServerAPI {
 			return serveError(req, res, 403, `Forbidden.`);
 		}
 
-		if (pathname === '/vscode-remote-resource') {
+		if (pathname === '/zyraxoncode-remote-resource') {
 			// Handle HTTP requests for resources rendered in the rich client (images, fonts, etc.)
 			// These resources could be files shipped with extensions or even workspace files.
 			const desiredPath = parsedUrl.query['path'];
@@ -605,7 +605,7 @@ export async function createServer(address: string | net.AddressInfo | null, arg
 
 	function initUnexpectedErrorHandler(handler: (err: any) => void) {
 		setUnexpectedErrorHandler(err => {
-			// See https://github.com/microsoft/vscode-remote-release/issues/6481
+			// See __ZYRAXKEEP__0_
 			// In some circumstances, console.error will throw an asynchronous error. This asynchronous error
 			// will end up here, and then it will be logged again, thus creating an endless asynchronous loop.
 			// Here we try to break the loop by ignoring EPIPE errors that include our own unexpected error handler in the stack.
@@ -623,7 +623,7 @@ export async function createServer(address: string | net.AddressInfo | null, arg
 	});
 	let didLogAboutSIGPIPE = false;
 	process.on('SIGPIPE', () => {
-		// See https://github.com/microsoft/vscode-remote-release/issues/6543
+		// See __ZYRAXKEEP__1_
 		// We would normally install a SIGPIPE listener in bootstrap-node.js
 		// But in certain situations, the console itself can be in a broken pipe state
 		// so logging SIGPIPE to the console will cause an infinite async loop
@@ -680,7 +680,7 @@ export async function createServer(address: string | net.AddressInfo | null, arg
 * ${homeDirModulesPath}
 * ${userDirModulesPath}
 *
-* For more information on the vulnerability https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1416
+* For more information on the vulnerability __ZYRAXKEEP__2_
 *
 
 `;
@@ -714,7 +714,7 @@ export async function createServer(address: string | net.AddressInfo | null, arg
 	if (hasWebClient && address && typeof address !== 'string') {
 		// ships the web ui!
 		const queryPart = (connectionToken.type !== ServerConnectionTokenType.None ? `?${connectionTokenQueryName}=${connectionToken.value}` : '');
-		console.log(`Web UI available at http://localhost${address.port === 80 ? '' : `:${address.port}`}${serverBasePath ?? ''}${queryPart}`);
+		console.log(`Web UI available at __ZYRAXKEEP__3_{address.port === 80 ? '' : `:${address.port}`}${serverBasePath ?? ''}${queryPart}`);
 	}
 
 	const remoteExtensionHostAgentServer = instantiationService.createInstance(RemoteExtensionHostAgentServer, socketServer, connectionToken, vsdaMod, hasWebClient, serverBasePath);
@@ -722,11 +722,11 @@ export async function createServer(address: string | net.AddressInfo | null, arg
 	perf.mark('code/server/ready');
 	const currentTime = performance.now();
 	// eslint-disable-next-line local/code-no-any-casts
-	const vscodeServerStartTime: number = (<any>global).vscodeServerStartTime;
+	const zyraxoncodeServerStartTime: number = (<any>global).zyraxoncodeServerStartTime;
 	// eslint-disable-next-line local/code-no-any-casts
-	const vscodeServerListenTime: number = (<any>global).vscodeServerListenTime;
+	const zyraxoncodeServerListenTime: number = (<any>global).zyraxoncodeServerListenTime;
 	// eslint-disable-next-line local/code-no-any-casts
-	const vscodeServerCodeLoadedTime: number = (<any>global).vscodeServerCodeLoadedTime;
+	const zyraxoncodeServerCodeLoadedTime: number = (<any>global).zyraxoncodeServerCodeLoadedTime;
 
 	instantiationService.invokeFunction(async (accessor) => {
 		const telemetryService = accessor.get(ITelemetryService);
@@ -746,9 +746,9 @@ export async function createServer(address: string | net.AddressInfo | null, arg
 			readyTime: number;
 		};
 		telemetryService.publicLog2<ServerStartEvent, ServerStartClassification>('serverStart', {
-			startTime: vscodeServerStartTime,
-			startedTime: vscodeServerListenTime,
-			codeLoadedTime: vscodeServerCodeLoadedTime,
+			startTime: zyraxoncodeServerStartTime,
+			startedTime: zyraxoncodeServerListenTime,
+			codeLoadedTime: zyraxoncodeServerCodeLoadedTime,
 			readyTime: currentTime
 		});
 
@@ -779,9 +779,9 @@ export async function createServer(address: string | net.AddressInfo | null, arg
 
 	if (args['print-startup-performance']) {
 		let output = '';
-		output += `Start-up time: ${vscodeServerListenTime - vscodeServerStartTime}\n`;
-		output += `Code loading time: ${vscodeServerCodeLoadedTime - vscodeServerStartTime}\n`;
-		output += `Initialized time: ${currentTime - vscodeServerStartTime}\n`;
+		output += `Start-up time: ${zyraxoncodeServerListenTime - zyraxoncodeServerStartTime}\n`;
+		output += `Code loading time: ${zyraxoncodeServerCodeLoadedTime - zyraxoncodeServerStartTime}\n`;
+		output += `Initialized time: ${currentTime - zyraxoncodeServerStartTime}\n`;
 		output += `\n`;
 		console.log(output);
 	}

@@ -500,7 +500,7 @@ export class InlineCompletionsSource extends Disposable {
 		const emptyEndOfLifeEvent: InlineCompletionEndOfLifeEvent = {
 			opportunityId: requestResponseInfo.requestUuid,
 			noSuggestionReason: requestResponseInfo.noSuggestionReason ?? 'unknown',
-			extensionId: 'vscode-core',
+			extensionId: 'zyraxoncode-core',
 			extensionVersion: '0.0.0',
 			groupId: 'empty',
 			shown: false,

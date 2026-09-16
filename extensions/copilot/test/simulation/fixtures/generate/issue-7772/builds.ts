@@ -176,15 +176,15 @@ class Builds {
 				}
 
 			// Every platform has its own name scheme, hilarious right?
-			// - macOS: just the name, nice! (e.g. VSCode-darwin.zip)
+			// - macOS: just the name, nice! (e.g. ZyraxonCode-darwin.zip)
 			// - Linux: includes some unix timestamp (e.g. code-insider-x64-1639979337.tar.gz)
-			// - Windows: includes the version (e.g. VSCode-win32-x64-1.64.0-insider.zip)
+			// - Windows: includes the version (e.g. ZyraxonCode-win32-x64-1.64.0-insider.zip)
 			case Runtime.DesktopLocal:
 				switch (platform) {
 					case Platform.MacOSX64:
-						return 'VSCode-darwin.zip';
+						return 'ZyraxonCode-darwin.zip';
 					case Platform.MacOSArm:
-						return 'VSCode-darwin-arm64.zip';
+						return 'ZyraxonCode-darwin-arm64.zip';
 					case Platform.LinuxX64:
 					case Platform.LinuxArm:
 						return (await this.fetchBuildMeta({ runtime, commit })).url.split('/').pop()!; // e.g. https://az764295.vo.msecnd.net/insider/807bf598bea406dcb272a9fced54697986e87768/code-insider-x64-1639979337.tar.gz
@@ -192,7 +192,7 @@ class Builds {
 					case Platform.WindowsArm: {
 						const buildMeta = await this.fetchBuildMeta({ runtime, commit });
 
-						return platform === Platform.WindowsX64 ? `VSCode-win32-x64-${buildMeta.productVersion}.zip` : `VSCode-win32-arm64-${buildMeta.productVersion}.zip`;
+						return platform === Platform.WindowsX64 ? `ZyraxonCode-win32-x64-${buildMeta.productVersion}.zip` : `ZyraxonCode-win32-arm64-${buildMeta.productVersion}.zip`;
 					}
 				}
 		}
@@ -217,21 +217,21 @@ class Builds {
 				}
 
 			// Here, only Windows does not play by our rules and adds the version number
-			// - Windows: includes the version (e.g. VSCode-win32-x64-1.64.0-insider)
+			// - Windows: includes the version (e.g. ZyraxonCode-win32-x64-1.64.0-insider)
 			case Runtime.DesktopLocal:
 				switch (platform) {
 					case Platform.MacOSX64:
 					case Platform.MacOSArm:
 						return 'ZYRAXON ZYRAXON Code.app';
 					case Platform.LinuxX64:
-						return 'VSCode-linux-x64';
+						return 'ZyraxonCode-linux-x64';
 					case Platform.LinuxArm:
-						return 'VSCode-linux-arm64';
+						return 'ZyraxonCode-linux-arm64';
 					case Platform.WindowsX64:
 					case Platform.WindowsArm: {
 						const buildMeta = await this.fetchBuildMeta({ runtime, commit });
 
-						return platform === Platform.WindowsX64 ? `VSCode-win32-x64-${buildMeta.productVersion}` : `VSCode-win32-arm64-${buildMeta.productVersion}`;
+						return platform === Platform.WindowsX64 ? `ZyraxonCode-win32-x64-${buildMeta.productVersion}` : `ZyraxonCode-win32-arm64-${buildMeta.productVersion}`;
 					}
 				}
 		}

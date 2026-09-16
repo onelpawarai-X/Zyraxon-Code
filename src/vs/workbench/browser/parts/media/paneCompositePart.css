@@ -35,15 +35,15 @@
 .monaco-workbench .pane-composite-part > .header-or-footer {
 	padding-left: 4px;
 	padding-right: 4px;
-	background-color: var(--vscode-activityBarTop-background);
+	background-color: var(--zyraxoncode-activityBarTop-background);
 }
 
 .monaco-workbench .pane-composite-part:not(.empty) > .header {
-	border-bottom: 1px solid var(--vscode-sideBarActivityBarTop-border);
+	border-bottom: 1px solid var(--zyraxoncode-sideBarActivityBarTop-border);
 }
 
 .monaco-workbench .pane-composite-part:not(.empty) > .footer {
-	border-top: 1px solid var(--vscode-sideBarActivityBarTop-border);
+	border-top: 1px solid var(--zyraxoncode-sideBarActivityBarTop-border);
 }
 
 .monaco-workbench .pane-composite-part > .title > .composite-bar-container,
@@ -297,7 +297,7 @@
 
 .monaco-workbench .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon.checked,
 .monaco-workbench .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon.checked {
-	background-color: var(--vscode-activityBarTop-activeBackground);
+	background-color: var(--zyraxoncode-activityBarTop-activeBackground);
 }
 
 .monaco-workbench .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.checked .active-item-indicator:before,
@@ -337,12 +337,12 @@
 
 .monaco-workbench .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:focus .active-item-indicator:before,
 .monaco-workbench .pane-composite-part > .header-or-footer.header > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:focus .active-item-indicator:before {
-	border-top-color: var(--vscode-focusBorder) !important;
+	border-top-color: var(--zyraxoncode-focusBorder) !important;
 	border-top-width: 2px;
 }
 
 .monaco-workbench .pane-composite-part > .header-or-footer.footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:focus .active-item-indicator:before {
-	border-bottom-color: var(--vscode-focusBorder) !important;
+	border-bottom-color: var(--zyraxoncode-focusBorder) !important;
 	border-bottom-width: 2px;
 }
 
@@ -350,12 +350,12 @@
 .monaco-workbench .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:hover .action-label,
 .monaco-workbench .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.checked .action-label,
 .monaco-workbench .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:hover .action-label {
-	outline: var(--vscode-contrastActiveBorder, unset) solid 1px !important;
+	outline: var(--zyraxoncode-contrastActiveBorder, unset) solid 1px !important;
 }
 
 .monaco-workbench .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:not(.checked):hover .action-label,
 .monaco-workbench .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:not(.checked):hover .action-label {
-	outline: var(--vscode-contrastActiveBorder, unset) dashed 1px !important;
+	outline: var(--zyraxoncode-contrastActiveBorder, unset) dashed 1px !important;
 }
 
 /** Empty Pane Message **/

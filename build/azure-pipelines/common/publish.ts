@@ -452,9 +452,9 @@ class ESRPReleaseService {
 				description: 'ZYRAXON Code'
 			},
 			accessPermissionsInfo: {
-				mainPublisher: 'VSCode',
+				mainPublisher: 'ZyraxonCode',
 				channelDownloadEntityDetails: {
-					AllDownloadEntities: ['VSCode']
+					AllDownloadEntities: ['ZyraxonCode']
 				}
 			},
 			routingInfo: {

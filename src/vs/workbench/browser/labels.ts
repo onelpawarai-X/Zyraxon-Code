@@ -436,7 +436,7 @@ class ResourceLabelWidget extends IconLabel {
 			if (descriptionCandidate && descriptionCandidate !== '.') {
 				// omit description if its not significant: a relative path
 				// of '.' just indicates that there is no parent to the path
-				// https://github.com/microsoft/vscode/issues/208692
+				// __ZYRAXKEEP__0_
 				description = descriptionCandidate;
 			}
 		}
@@ -484,7 +484,7 @@ class ResourceLabelWidget extends IconLabel {
 			}
 		}
 
-		if (!options.forceLabel && !isSideBySideEditor && resource?.scheme === Schemas.vscodeNotebookCell) {
+		if (!options.forceLabel && !isSideBySideEditor && resource?.scheme === Schemas.zyraxoncodeNotebookCell) {
 			// Notebook cells are embeded in a notebook document
 			// As such we always ask the actual notebook document
 			// for its position in the document.
@@ -499,7 +499,7 @@ class ResourceLabelWidget extends IconLabel {
 			}
 		}
 
-		if (!options.forceLabel && !isSideBySideEditor && resource?.scheme === Schemas.vscodeNotebookCellOutput) {
+		if (!options.forceLabel && !isSideBySideEditor && resource?.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 			const notebookDocument = this.notebookDocumentService.getNotebook(resource);
 			const outputUriData = extractCellOutputDetails(resource);
 			if (outputUriData?.cellFragment) {
@@ -507,7 +507,7 @@ class ResourceLabelWidget extends IconLabel {
 					return;
 				}
 				const cellUri = outputUriData.notebook.with({
-					scheme: Schemas.vscodeNotebookCell,
+					scheme: Schemas.zyraxoncodeNotebookCell,
 					fragment: outputUriData.cellFragment
 				});
 				const cellIndex = notebookDocument?.getCellIndex(cellUri);

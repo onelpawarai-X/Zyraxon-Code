@@ -99,7 +99,7 @@ class SlashCommandCompletions extends Disposable {
 	) {
 		super();
 
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'globalSlashCommands',
 			triggerCharacters: [chatSubcommandLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, _token: CancellationToken) => {
@@ -170,7 +170,7 @@ class SlashCommandCompletions extends Disposable {
 				};
 			}
 		}));
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'globalSlashCommandsAt',
 			triggerCharacters: [chatAgentLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, _token: CancellationToken) => {
@@ -220,7 +220,7 @@ class SlashCommandCompletions extends Disposable {
 				};
 			}
 		}));
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'promptSlashCommands',
 			triggerCharacters: [chatSubcommandLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, token: CancellationToken) => {
@@ -289,7 +289,7 @@ class SlashCommandCompletions extends Disposable {
 			}
 		}));
 
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'mcpPromptSlashCommands',
 			triggerCharacters: [chatSubcommandLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, _token: CancellationToken) => {
@@ -389,9 +389,9 @@ class AgentCompletions extends Disposable {
 				};
 			}
 		};
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, subCommandProvider));
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, subCommandProvider));
 
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'chatAgentAndSubcommand',
 			triggerCharacters: [chatAgentLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, token: CancellationToken) => {
@@ -495,7 +495,7 @@ class AgentCompletions extends Disposable {
 			}
 		}));
 
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'chatAgentAndSubcommand',
 			triggerCharacters: [chatSubcommandLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, token: CancellationToken) => {
@@ -563,7 +563,7 @@ class AgentCompletions extends Disposable {
 			}
 		}));
 
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'installChatExtensions',
 			triggerCharacters: [chatAgentLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, token: CancellationToken) => {
@@ -991,7 +991,7 @@ class BuiltinDynamicCompletions extends Disposable {
 				sortText: 'z',
 				command: {
 					id: BuiltinDynamicCompletions.addReferenceCommand, title: '', arguments: [new ReferenceArgument(widget, {
-						id: 'vscode.selection',
+						id: 'zyraxoncode.selection',
 						isFile: true,
 						range: { startLineNumber: range.replace.startLineNumber, startColumn: range.replace.startColumn, endLineNumber: range.replace.endLineNumber, endColumn: range.replace.startColumn + text.length },
 						data: { range: currentSelection, uri: currentResource } satisfies Location
@@ -1097,7 +1097,7 @@ class BuiltinDynamicCompletions extends Disposable {
 		const codeEditor = this.codeEditorService.getActiveCodeEditor();
 		if (codeEditor) {
 			const model = codeEditor.getModel();
-			if (model?.uri.scheme === Schemas.vscodeNotebookCell) {
+			if (model?.uri.scheme === Schemas.zyraxoncodeNotebookCell) {
 				return undefined;
 			}
 
@@ -1120,7 +1120,7 @@ class BuiltinDynamicCompletions extends Disposable {
 	}
 
 	private registerVariableCompletions(debugName: string, provider: (details: IVariableCompletionsDetails, token: CancellationToken) => ProviderResult<CompletionList>, wordPattern: RegExp = BuiltinDynamicCompletions.VariableNameDef, includeAgentHost = false) {
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: `chatVarCompletions-${debugName}`,
 			triggerCharacters: [chatVariableLeader, chatAgentLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, context: CompletionContext, token: CancellationToken) => {
@@ -1264,7 +1264,7 @@ class BuiltinDynamicCompletions extends Disposable {
 				sortText,
 				command: {
 					id: BuiltinDynamicCompletions.addReferenceCommand, title: '', arguments: [new ReferenceArgument(widget, {
-						id: `vscode.symbol/${JSON.stringify(symbolItem.location)}`,
+						id: `zyraxoncode.symbol/${JSON.stringify(symbolItem.location)}`,
 						fullName: symbolItem.name,
 						range: { startLineNumber: info.replace.startLineNumber, startColumn: info.replace.startColumn, endLineNumber: info.replace.endLineNumber, endColumn: info.replace.startColumn + text.length },
 						data: symbolItem.location,
@@ -1337,7 +1337,7 @@ class ToolCompletions extends Disposable {
 	) {
 		super();
 
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'chatVariables',
 			triggerCharacters: [chatVariableLeader, chatAgentLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, _token: CancellationToken) => {

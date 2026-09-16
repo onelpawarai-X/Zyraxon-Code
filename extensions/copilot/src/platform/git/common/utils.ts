@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { Remote, Repository } from '../vscode/git';
+import type * as zyraxoncode from 'zyraxoncode';
+import { Remote, Repository } from '../zyraxoncode/git';
 
 interface GitConfigSection {
 	name: string;
@@ -82,7 +82,7 @@ export interface GitUriOptions {
 // As a mitigation for extensions like ESLint showing warnings and errors
 // for git URIs, let's change the file extension of these uris to .git,
 // when `replaceFileExtension` is true.
-export function toGitUri(uri: vscode.Uri, ref: string, options: GitUriOptions = {}): vscode.Uri {
+export function toGitUri(uri: zyraxoncode.Uri, ref: string, options: GitUriOptions = {}): zyraxoncode.Uri {
 	const params: GitUriParams = {
 		path: uri.fsPath,
 		ref

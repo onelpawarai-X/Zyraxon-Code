@@ -317,7 +317,7 @@ export class CodeBlockPart extends Disposable {
 		}
 
 		this._textModel = this._register(this.modelService.createModel('', null,
-			URI.from({ scheme: Schemas.vscodeChatCodeBlock, path: generateUuid() }),
+			URI.from({ scheme: Schemas.zyraxoncodeChatCodeBlock, path: generateUuid() }),
 			this.isSimpleWidget
 		));
 		// Hold a model reference to prevent the TextModelResolverService from
@@ -647,10 +647,10 @@ export class CodeBlockPart extends Disposable {
 	}
 
 	private setLanguage(languageId: string): void {
-		const vscodeLanguageId = this.languageService.getLanguageIdByLanguageName(languageId);
-		if (vscodeLanguageId && vscodeLanguageId !== this._textModel.getLanguageId()) {
-			this._textModel.setLanguage(vscodeLanguageId);
-		} else if (!vscodeLanguageId && this._textModel.getLanguageId() !== PLAINTEXT_LANGUAGE_ID) {
+		const zyraxoncodeLanguageId = this.languageService.getLanguageIdByLanguageName(languageId);
+		if (zyraxoncodeLanguageId && zyraxoncodeLanguageId !== this._textModel.getLanguageId()) {
+			this._textModel.setLanguage(zyraxoncodeLanguageId);
+		} else if (!zyraxoncodeLanguageId && this._textModel.getLanguageId() !== PLAINTEXT_LANGUAGE_ID) {
 			this._textModel.setLanguage(PLAINTEXT_LANGUAGE_ID);
 		}
 	}
@@ -663,7 +663,7 @@ export class ChatCodeBlockContentProvider extends Disposable {
 		@IModelService private readonly _modelService: IModelService,
 	) {
 		super();
-		this._register(textModelService.registerTextModelContentProvider(Schemas.vscodeChatCodeBlock, {
+		this._register(textModelService.registerTextModelContentProvider(Schemas.zyraxoncodeChatCodeBlock, {
 			provideTextContent: (resource: URI) => {
 				return Promise.resolve(this._modelService.getModel(resource));
 			}
@@ -1024,7 +1024,7 @@ export class CodeCompareBlockPart extends Disposable {
 			}
 
 			const listener = Event.any(diffData.original.onWillDispose, diffData.modified.onWillDispose)(() => {
-				// this a bit weird and basically duplicates https://github.com/microsoft/vscode/blob/7cbcafcbcc88298cfdcd0238018fbbba8eb6853e/src/vs/editor/browser/widget/diffEditor/diffEditorWidget.ts#L328
+				// this a bit weird and basically duplicates __ZYRAXKEEP__0_
 				// which cannot call `setModel(null)` without first complaining
 				this.diffEditor.setModel(null);
 			});
@@ -1046,7 +1046,7 @@ export class CodeCompareBlockPart extends Disposable {
 				this.diffEditor.updateOptions({
 					renderSideBySide,
 					// Make it not-compact in side by side mode, otherwise we may not actually
-					// show it side-by-side if it's a simple diff https://github.com/microsoft/vscode/blob/0632563332c7c08656fb47c97bc4328d62ee1d80/src/vs/editor/browser/widget/diffEditor/diffEditorOptions.ts#L35-L39
+					// show it side-by-side if it's a simple diff __ZYRAXKEEP__1_
 					compactMode: !renderSideBySide,
 					useInlineViewWhenSpaceIsLimited: false,
 				});
@@ -1084,7 +1084,7 @@ export class DefaultChatTextEditor {
 					continue;
 				}
 				const model = candidate.getModel();
-				if (!model || !isEqual(model.original.uri, item.uri) || model.modified.uri.scheme !== Schemas.vscodeChatCodeCompareBlock) {
+				if (!model || !isEqual(model.original.uri, item.uri) || model.modified.uri.scheme !== Schemas.zyraxoncodeChatCodeCompareBlock) {
 					diffEditor = candidate;
 					break;
 				}

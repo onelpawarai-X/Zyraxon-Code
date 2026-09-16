@@ -6,10 +6,10 @@
     "Themes"
   ],
   "version": "10.0.0",
-  "publisher": "vscode",
+  "publisher": "zyraxoncode",
   "license": "MIT",
   "engines": {
-    "vscode": "*"
+    "zyraxoncode": "*"
   },
   "contributes": {
     "themes": [
@@ -50,13 +50,13 @@
         "path": "./themes/light_modern.json"
       },
       {
-        "id": "Visual Studio Dark",
+        "id": "ZYRAXON Dark",
         "label": "%darkColorThemeLabel%",
         "uiTheme": "vs-dark",
         "path": "./themes/dark_vs.json"
       },
       {
-        "id": "Visual Studio Light",
+        "id": "ZYRAXON Light",
         "label": "%lightColorThemeLabel%",
         "uiTheme": "vs",
         "path": "./themes/light_vs.json"
@@ -84,6 +84,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/vscode.git"
+    "url": "__ZYRAXKEEP__0_"
   }
 }

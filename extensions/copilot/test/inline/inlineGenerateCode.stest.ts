@@ -8,7 +8,7 @@ import { EditCodeIntent } from '../../src/extension/intents/node/editCodeIntent'
 import { GenerateCodeIntent } from '../../src/extension/intents/node/generateCodeIntent';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';
 import { URI } from '../../src/util/vs/base/common/uri';
-import { Uri } from '../../src/vscodeTypes';
+import { Uri } from '../../src/zyraxoncodeTypes';
 import { NonExtensionConfiguration, ssuite, stest } from '../base/stest';
 import { KnownDiagnosticProviders } from '../simulation/diagnosticProviders';
 import { simulateInlineChat, simulateInlineChatIntent } from '../simulation/inlineChatSimulator';
@@ -416,7 +416,7 @@ forInlineChatIntent((strategy, variant, nonExtensionConfigurations) => {
 		});
 
 		stest({ description: 'issue #2589: IllegalArgument: line must be non-negative', language: 'json', nonExtensionConfigurations }, (testingServiceCollection) => {
-			const uri = Uri.parse('file:///home/.prettierrc');
+			const uri = Uri.parse('__ZYRAXKEEP__0_');
 			return executeEditTestStrategy(strategy, testingServiceCollection, {
 				files: [{
 					kind: 'qualifiedFile',
@@ -607,7 +607,7 @@ forInlineChatIntent((strategy, variant, nonExtensionConfigurations) => {
 					{
 						file: 'strings.ts',
 						selection: [49, 3],
-						wholeRange: [49, 0, 49, 3], // we want to simulate 100% vscode's behavior and vscode is peculiar here
+						wholeRange: [49, 0, 49, 3], // we want to simulate 100% zyraxoncode's behavior and zyraxoncode is peculiar here
 						query: 'avoid using recursion',
 						expectedIntent: EditCodeIntent.ID,
 						validate: async (outcome, workspace, accessor) => {
@@ -937,7 +937,7 @@ forInlineChatIntent((strategy, variant, nonExtensionConfigurations) => {
 					{
 						file: 'top-packages.ts',
 						selection: [4, 0, 4, 0],
-						query: 'generate an interface for this JSON:\n\n```\n{"name":"chalk","version":"5.3.0","description":"Terminal string styling done right","keywords":["color","colour","colors","terminal","console","cli","string","ansi","style","styles","tty","formatting","rgb","256","shell","xterm","log","logging","command-line","text"],"publisher":{"username":"sindresorhus","email":"sindresorhus@gmail.com"},"maintainers":[{"username":"sindresorhus","email":"sindresorhus@gmail.com"},{"username":"qix","email":"josh@junon.me"}],"links":{"npm":"https://www.npmjs.com/package/chalk","homepage":"https://github.com/chalk/chalk#readme","repository":"https://github.com/chalk/chalk"}}\n```',
+						query: 'generate an interface for this JSON:\n\n```\n{"name":"chalk","version":"5.3.0","description":"Terminal string styling done right","keywords":["color","colour","colors","terminal","console","cli","string","ansi","style","styles","tty","formatting","rgb","256","shell","xterm","log","logging","command-line","text"],"publisher":{"username":"sindresorhus","email":"sindresorhus@gmail.com"},"maintainers":[{"username":"sindresorhus","email":"sindresorhus@gmail.com"},{"username":"qix","email":"josh@junon.me"}],"links":{"npm":"__ZYRAXKEEP__1_","homepage":"__ZYRAXKEEP__2_","repository":"__ZYRAXKEEP__3_"}}\n```',
 						diagnostics: 'tsc',
 						expectedIntent: 'generate',
 						validate: async (outcome, workspace, accessor) => {
@@ -997,13 +997,13 @@ forInlineChatIntent((strategy, variant, nonExtensionConfigurations) => {
 			return executeEditTestStrategy(strategy, testingServiceCollection, {
 				files: [toFile({
 					fileName: 'generate/issue-6696/heatmapServiceImpl.ts',
-					fileContents: `/*---------------------------------------------------------------------------------------------\n *  Copyright (c) Zyraxon Corporation and GitHub. All rights reserved.\n *--------------------------------------------------------------------------------------------*/\n\nimport * as vscode from 'vscode';\nimport { DisposableStore } from '../../../util/vs/base/common/lifecycle';\nimport { ResourceMap } from '../../../util/vs/base/common/map';\nimport { IDocumentHeatMap, IDocumentHeatMapEntry, IHeatMapService } from '../common/heatmapService';\n\nclass DocumentHeatMap implements IDocumentHeatMap {\n\n\tprivate readonly _entries: IDocumentHeatMapEntry[] = [];\n\n\t\n\n\tgetEntries(): IDocumentHeatMapEntry[] {\n\t\treturn this._entries;\n\t}\n\n\tmarkClosed(): void {\n\n\t}\n\n\thandleSelectionChange(e: vscode.TextEditorSelectionChangeEvent): void {\n\t\tthis._entries.push({\n\t\t\ttimeStamp: Date.now(),\n\t\t\tposition: e.selections[0].active\n\t\t});\n\t}\n\n\thandleTextDocumentChange(e: vscode.TextDocumentChangeEvent): void {\n\n\t}\n}\n\nexport class HeatMapServiceImpl implements IHeatMapService {\n\n\t_serviceBrand: undefined;\n\n\tprivate readonly _store = new DisposableStore();\n\n\tprivate readonly _map = new ResourceMap<DocumentHeatMap>();\n\n\tconstructor() {\n\t\tthis._store.add(vscode.window.onDidChangeTextEditorSelection(e => {\n\t\t\tthis._ensureHeatMap(e.textEditor.document.uri).handleSelectionChange(e);\n\t\t}));\n\t\tthis._store.add(vscode.workspace.onDidChangeTextDocument(e => {\n\t\t\tthis._ensureHeatMap(e.document.uri).handleTextDocumentChange(e);\n\t\t}));\n\t\tthis._store.add(vscode.workspace.onDidCloseTextDocument(e => {\n\t\t\t//\n\t\t\tthis._map.get(e.uri)?.markClosed();\n\t\t}));\n\t}\n\n\tdispose(): void {\n\t\tthis._store.dispose();\n\t}\n\n\tgetDocumentHeatMap(uri: vscode.Uri): IDocumentHeatMap | undefined {\n\t\treturn this._map.get(uri);\n\t}\n\n\tprivate _ensureHeatMap(uri: vscode.Uri): DocumentHeatMap {\n\t\tlet heatMap = this._map.get(uri);\n\t\tif (!heatMap) {\n\t\t\theatMap = new DocumentHeatMap();\n\t\t\tthis._map.set(uri, heatMap);\n\t\t}\n\t\treturn heatMap;\n\t}\n}\n`
+					fileContents: `/*---------------------------------------------------------------------------------------------\n *  Copyright (c) Zyraxon Corporation and GitHub. All rights reserved.\n *--------------------------------------------------------------------------------------------*/\n\nimport * as zyraxoncode from 'zyraxoncode';\nimport { DisposableStore } from '../../../util/vs/base/common/lifecycle';\nimport { ResourceMap } from '../../../util/vs/base/common/map';\nimport { IDocumentHeatMap, IDocumentHeatMapEntry, IHeatMapService } from '../common/heatmapService';\n\nclass DocumentHeatMap implements IDocumentHeatMap {\n\n\tprivate readonly _entries: IDocumentHeatMapEntry[] = [];\n\n\t\n\n\tgetEntries(): IDocumentHeatMapEntry[] {\n\t\treturn this._entries;\n\t}\n\n\tmarkClosed(): void {\n\n\t}\n\n\thandleSelectionChange(e: zyraxoncode.TextEditorSelectionChangeEvent): void {\n\t\tthis._entries.push({\n\t\t\ttimeStamp: Date.now(),\n\t\t\tposition: e.selections[0].active\n\t\t});\n\t}\n\n\thandleTextDocumentChange(e: zyraxoncode.TextDocumentChangeEvent): void {\n\n\t}\n}\n\nexport class HeatMapServiceImpl implements IHeatMapService {\n\n\t_serviceBrand: undefined;\n\n\tprivate readonly _store = new DisposableStore();\n\n\tprivate readonly _map = new ResourceMap<DocumentHeatMap>();\n\n\tconstructor() {\n\t\tthis._store.add(zyraxoncode.window.onDidChangeTextEditorSelection(e => {\n\t\t\tthis._ensureHeatMap(e.textEditor.document.uri).handleSelectionChange(e);\n\t\t}));\n\t\tthis._store.add(zyraxoncode.workspace.onDidChangeTextDocument(e => {\n\t\t\tthis._ensureHeatMap(e.document.uri).handleTextDocumentChange(e);\n\t\t}));\n\t\tthis._store.add(zyraxoncode.workspace.onDidCloseTextDocument(e => {\n\t\t\t//\n\t\t\tthis._map.get(e.uri)?.markClosed();\n\t\t}));\n\t}\n\n\tdispose(): void {\n\t\tthis._store.dispose();\n\t}\n\n\tgetDocumentHeatMap(uri: zyraxoncode.Uri): IDocumentHeatMap | undefined {\n\t\treturn this._map.get(uri);\n\t}\n\n\tprivate _ensureHeatMap(uri: zyraxoncode.Uri): DocumentHeatMap {\n\t\tlet heatMap = this._map.get(uri);\n\t\tif (!heatMap) {\n\t\t\theatMap = new DocumentHeatMap();\n\t\t\tthis._map.set(uri, heatMap);\n\t\t}\n\t\treturn heatMap;\n\t}\n}\n`
 				})],
 				queries: [
 					{
 						file: 'generate/issue-6696/heatmapServiceImpl.ts',
 						selection: [13, 1, 13, 1],
-						query: 'add constructor that takes the vscode.TextDocument',
+						query: 'add constructor that takes the zyraxoncode.TextDocument',
 						diagnostics: 'tsc',
 						expectedIntent: 'generate',
 						validate: async (outcome, workspace, accessor) => {
@@ -1012,7 +1012,7 @@ forInlineChatIntent((strategy, variant, nonExtensionConfigurations) => {
 							const allNewText = outcome.appliedEdits.map(edit => edit.newText).join('');
 
 							assert.strictEqual(allNewText.includes('TextDocument'), true);
-							assert.strictEqual(allNewText.includes('vscode.TextDocument'), true);
+							assert.strictEqual(allNewText.includes('zyraxoncode.TextDocument'), true);
 							assert.strictEqual(allNewText.includes('store.add'), false);
 							assert.strictEqual(allNewText.includes('onDidChange'), false);
 						}
@@ -1111,11 +1111,11 @@ forInlineChatIntent((strategy, variant, nonExtensionConfigurations) => {
 		stest({ description: 'Issue #7088', language: 'powershell', nonExtensionConfigurations }, (accessor) => {
 			return executeEditTestStrategy(strategy, accessor, {
 				files: [toFile({
-					filePath: fromFixture('generate/issue-7088/Microsoft.PowerShell_profile.ps1')
+					filePath: fromFixture('generate/issue-7088/Zyraxon.PowerShell_profile.ps1')
 				})],
 				queries: [
 					{
-						file: 'Microsoft.PowerShell_profile.ps1',
+						file: 'Zyraxon.PowerShell_profile.ps1',
 						selection: [3, 0, 3, 0],
 						query: 'set alias c to code-insiders',
 						expectedIntent: 'generate',

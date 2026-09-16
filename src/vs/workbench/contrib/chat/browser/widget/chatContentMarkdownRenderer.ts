@@ -88,8 +88,8 @@ export const allowedChatMarkdownHtmlTags = Object.freeze([
 	'a',
 	'img',
 
-	// TODO@roblourens when we sanitize attributes in markdown source, we can ban these elements at that step. microsoft/vscode-copilot#5091
-	// Not in the official list, but used for codicons and other vscode markdown extensions
+	// TODO@roblourens when we sanitize attributes in markdown source, we can ban these elements at that step. zyraxon/zyraxoncode-copilot#5091
+	// Not in the official list, but used for codicons and other zyraxoncode markdown extensions
 	'span',
 	'div',
 
@@ -108,7 +108,7 @@ export function getChatMarkdownRenderOptions(options?: MarkdownRenderOptions): M
 				override: allowedChatMarkdownHtmlTags,
 			},
 			...options?.sanitizerConfig,
-			allowedLinkSchemes: { augment: [product.urlProtocol, 'copilot-skill', Schemas.vscodeBrowser, AGENT_HOST_SCHEME, AGENT_HOST_SESSION_LINK_SCHEME] },
+			allowedLinkSchemes: { augment: [product.urlProtocol, 'copilot-skill', Schemas.zyraxoncodeBrowser, AGENT_HOST_SCHEME, AGENT_HOST_SESSION_LINK_SCHEME] },
 			remoteImageIsAllowed: _remoteImageDisallowed,
 		}
 	};

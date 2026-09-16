@@ -35,7 +35,7 @@ interface DescriptionDiff {
 export const experimental: string[] = []; // 'settings.modifiedItemForeground', 'editorUnnecessary.foreground' ];
 
 
-const knwonVariablesFileName = 'vscode-known-variables.json';
+const knwonVariablesFileName = 'zyraxoncode-known-variables.json';
 
 suite('Color Registry', function () {
 
@@ -119,7 +119,7 @@ suite('Color Registry', function () {
 		// avoid importing the TestEnvironmentService as it brings in a duplicate registration of the file editor input factory.
 		const environmentService = new class extends mock<INativeEnvironmentService>() { override args = { _: [] }; };
 
-		const docUrl = 'https://raw.githubusercontent.com/microsoft/vscode-docs/vnext/api/references/theme-color.md';
+		const docUrl = '__ZYRAXKEEP__0_';
 
 		const reqContext = await new RequestService('local', new TestConfigurationService(), environmentService, new NullLogService()).request({ url: docUrl, callSite: 'colorRegistry.releaseTest' }, CancellationToken.None);
 		const content = (await asTextOrError(reqContext))!;
@@ -182,7 +182,7 @@ suite('Color Registry', function () {
 		}
 
 		if (errorText.length > 0) {
-			assert.fail(`\n\nOpen https://github.dev/microsoft/vscode-docs/blob/vnext/api/references/theme-color.md#50${errorText}`);
+			assert.fail(`\n\nOpen __ZYRAXKEEP__1_{errorText}`);
 		}
 	});
 });

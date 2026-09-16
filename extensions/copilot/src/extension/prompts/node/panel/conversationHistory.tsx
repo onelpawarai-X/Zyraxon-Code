@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AssistantMessage, BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptPiece, PromptSizing, TokenLimit, UserMessage } from '@vscode/prompt-tsx';
+import { AssistantMessage, BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptPiece, PromptSizing, TokenLimit, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { modelPrefersInstructionsAfterHistory } from '../../../../platform/endpoint/common/chatModelCapabilities';
 import { URI } from '../../../../util/vs/base/common/uri';
-import { Location } from '../../../../vscodeTypes';
+import { Location } from '../../../../zyraxoncodeTypes';
 import { ChatVariablesCollection, PromptVariable } from '../../../prompt/common/chatVariablesCollection';
 import { IResultMetadata, Turn, TurnStatus } from '../../../prompt/common/conversation';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
@@ -34,7 +34,7 @@ interface ConversationHistoryProps extends BasePromptElementProps {
  * include any {@link InstructionMessage}, and depending on the model it
  * either includes the history before or after the instruction message.
  *
- * You should use `passPriority` with this: https://github.com/microsoft/vscode-prompt-tsx?tab=readme-ov-file#passing-priority
+ * You should use `passPriority` with this: __ZYRAXKEEP__0_
  *
  * @example
  *

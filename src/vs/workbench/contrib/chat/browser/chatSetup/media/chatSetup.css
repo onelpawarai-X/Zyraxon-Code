@@ -32,7 +32,7 @@
 	.dialog-buttons-row > .dialog-buttons > .monaco-button.link-button {
 		border: 0 !important;
 		background-color: unset !important;
-		color: var(--vscode-textLink-foreground) !important;
+		color: var(--zyraxoncode-textLink-foreground) !important;
 		width: fit-content;
 		margin-left: auto;
 		margin-right: auto;
@@ -40,14 +40,14 @@
 
 	.dialog-buttons-row > .dialog-buttons > .monaco-button.link-button.skip-button {
 		font-size: 11px;
-		color: var(--vscode-descriptionForeground) !important;
+		color: var(--zyraxoncode-descriptionForeground) !important;
 	}
 
 	/* Footer */
 
 	.chat-setup-dialog-footer {
 		font-size: 11px;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 	}
 }
 

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'vscode';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 
 export const VIRTUAL_TOOL_NAME_PREFIX = 'activate_';
 export const EMBEDDINGS_GROUP_NAME = VIRTUAL_TOOL_NAME_PREFIX + 'embeddings';

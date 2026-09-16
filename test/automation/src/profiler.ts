@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-const { decode_bytes } = require('@vscode/v8-heap-parser');
+const { decode_bytes } = require('@zyraxoncode/v8-heap-parser');
 import { Code } from './code';
 import { PlaywrightDriver } from './playwrightDriver';
 
@@ -61,7 +61,7 @@ export class Profiler {
 export function generateUuid(): string {
 	// use `randomUUID` if possible
 	if (typeof crypto.randomUUID === 'function') {
-		// see https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto
+		// see __ZYRAXKEEP__0_
 		// > Although crypto is available on all windows, the returned Crypto object only has one
 		// > usable feature in insecure contexts: the getRandomValues() method.
 		// > In general, you should use this API only in secure contexts.
@@ -115,7 +115,7 @@ export function generateUuid(): string {
  *  The MIT License (MIT)
  *  Copyright (c) 2023-present, Simon Siefke
  *
- *  This code is derived from https://github.com/SimonSiefke/vscode-memory-leak-finder
+ *  This code is derived from __ZYRAXKEEP__1_
  *--------------------------------------------------------------------------------------------*/
 
 const getInstances = async (driver: PlaywrightDriver, classNames: string[]): Promise<{ [key: string]: number }> => {

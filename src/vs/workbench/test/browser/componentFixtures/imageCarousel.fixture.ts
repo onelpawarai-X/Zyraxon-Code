@@ -46,7 +46,7 @@ function createTestImages(): ICarouselImage[] {
 
 function createMockEditorGroup(): IEditorGroup {
 	return new class extends mock<IEditorGroup>() {
-		override windowId = mainWindow.vscodeWindowId;
+		override windowId = mainWindow.zyraxoncodeWindowId;
 	}();
 }
 

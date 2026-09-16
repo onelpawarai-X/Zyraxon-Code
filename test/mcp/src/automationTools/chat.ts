@@ -14,7 +14,7 @@ export function applyChatTools(server: McpServer, appService: ApplicationService
 	const tools: RegisteredTool[] = [];
 
 	tools.push(server.tool(
-		'vscode_automation_chat_send_message',
+		'zyraxoncode_automation_chat_send_message',
 		'Send a message to the ZYRAXON Code chat panel',
 		{
 			message: z.string().describe('The message to send to the chat')

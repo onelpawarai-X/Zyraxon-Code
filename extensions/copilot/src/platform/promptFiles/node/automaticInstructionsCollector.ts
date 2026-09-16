@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
@@ -28,7 +28,7 @@ import { ParsedPromptFile } from '../../../util/vs/workbench/contrib/chat/common
 import { isLocation } from '../../../util/common/types';
 import { getToolName, ToolName } from '../../../extension/tools/common/toolNames';
 import { isCustomizationsIndex, isInstructionFile, toCustomizationsIndexReference, toInstructionFileReference } from '../../../extension/prompt/common/chatVariablesCollection';
-import { getToolReferencePromptContent } from '../../../extension/prompt/vscode-node/promptVariablesService';
+import { getToolReferencePromptContent } from '../../../extension/prompt/zyraxoncode-node/promptVariablesService';
 import { IExperimentationService } from '../../telemetry/common/nullExperimentationService';
 import { getChatSessionType, matchesSessionType } from '../../chat/common/sessionUtils';
 import { CopilotChatAttr, GenAiAttr, GenAiOperationName, IOTelService } from '../../otel/common';
@@ -54,15 +54,15 @@ export interface InstructionsCollectionEvent {
 
 
 export interface IAutomaticInstructionsCollectorContext {
-	readonly tools: Map<vscode.LanguageModelToolInformation, boolean>;
-	readonly modeInstructions2?: vscode.ChatRequestModeInstructions;
+	readonly tools: Map<zyraxoncode.LanguageModelToolInformation, boolean>;
+	readonly modeInstructions2?: zyraxoncode.ChatRequestModeInstructions;
 	readonly sessionResource: URI;
-	readonly references: readonly vscode.ChatPromptReference[];
+	readonly references: readonly zyraxoncode.ChatPromptReference[];
 }
 
 export interface IAutomaticInstructionsCollector {
 	readonly _serviceBrand: undefined;
-	collect(context: IAutomaticInstructionsCollectorContext, token: CancellationToken): Promise<readonly vscode.ChatPromptReference[]>;
+	collect(context: IAutomaticInstructionsCollectorContext, token: CancellationToken): Promise<readonly zyraxoncode.ChatPromptReference[]>;
 }
 
 export const IAutomaticInstructionsCollector = createServiceIdentifier<IAutomaticInstructionsCollector>('IAutomaticInstructionsCollector');
@@ -141,10 +141,10 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 
 
 
-	async collect({ sessionResource, references, tools, modeInstructions2 }: IAutomaticInstructionsCollectorContext, token: CancellationToken): Promise<readonly vscode.ChatPromptReference[]> {
+	async collect({ sessionResource, references, tools, modeInstructions2 }: IAutomaticInstructionsCollectorContext, token: CancellationToken): Promise<readonly zyraxoncode.ChatPromptReference[]> {
 
 		const telemetry = newTelemetryEvent();
-		const newEntries: vscode.ChatPromptReference[] = [];
+		const newEntries: zyraxoncode.ChatPromptReference[] = [];
 		const sessionType = getChatSessionType(sessionResource);
 
 		// Reset per-call parse cache.
@@ -193,12 +193,12 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 
 	// ─── Step 1: applyTo matching ─────────────────────────────────────────
 	private async _addApplyingInstructions(
-		instructionFiles: readonly vscode.ChatInstruction[],
+		instructionFiles: readonly zyraxoncode.ChatInstruction[],
 		attachedFiles: ResourceSet,
 		seenInstructionUris: ResourceSet,
 		sessionType: string,
 		telemetry: InstructionsCollectionEvent,
-		newEntries: vscode.ChatPromptReference[],
+		newEntries: zyraxoncode.ChatPromptReference[],
 		token: CancellationToken,
 	): Promise<void> {
 		const includeApplyingInstructions = this._configurationService.getNonExtensionConfig<boolean>(PromptConfig.INCLUDE_APPLYING_INSTRUCTIONS) === true;
@@ -243,7 +243,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 	private async _addAgentInstructions(
 		seenInstructionUris: ResourceSet,
 		telemetry: InstructionsCollectionEvent,
-		newEntries: vscode.ChatPromptReference[],
+		newEntries: zyraxoncode.ChatPromptReference[],
 		token: CancellationToken,
 	): Promise<void> {
 		const logger = {
@@ -281,7 +281,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 	private async _addReferencedInstructions(
 		startingFrom: ResourceSet,
 		telemetry: InstructionsCollectionEvent,
-		newEntries: vscode.ChatPromptReference[],
+		newEntries: zyraxoncode.ChatPromptReference[],
 		token: CancellationToken,
 		additionalSeen?: ResourceSet,
 	): Promise<void> {
@@ -364,13 +364,13 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 
 	// ─── Step 4: customizations index ─────────────────────────────────────
 	private async _buildCustomizationsIndex(
-		instructionFiles: readonly vscode.ChatInstruction[],
-		tools: Map<vscode.LanguageModelToolInformation, boolean>,
+		instructionFiles: readonly zyraxoncode.ChatInstruction[],
+		tools: Map<zyraxoncode.LanguageModelToolInformation, boolean>,
 		enabledSubagents: readonly string[] | undefined,
 		sessionType: string,
 		telemetry: InstructionsCollectionEvent,
 		token: CancellationToken,
-	): Promise<vscode.ChatPromptReference | undefined> {
+	): Promise<zyraxoncode.ChatPromptReference | undefined> {
 		let readTool, skillTool, runSubagentTool;
 		for (const [tool, enabled] of tools) {
 			if (enabled) {
@@ -538,7 +538,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 		if (runSubagentTool) {
 			const customAgents = (await this._promptsService.getCustomAgents(token)).filter(a => a.enabled);
 
-			const canInvokeAgent = (agent: vscode.ChatCustomAgent): boolean => {
+			const canInvokeAgent = (agent: zyraxoncode.ChatCustomAgent): boolean => {
 				if (!matchesSessionType(agent.sessionTypes, sessionType)) {
 					return false;
 				}
@@ -600,7 +600,7 @@ export class AutomaticInstructionsCollector implements IAutomaticInstructionsCol
 	}
 
 	// Mirror of core's `skillLoadedIntoContext` per-skill telemetry.
-	private _logSkillLoadedTelemetry(skills: readonly vscode.ChatSkill[]): void {
+	private _logSkillLoadedTelemetry(skills: readonly zyraxoncode.ChatSkill[]): void {
 		try {
 			const hashOrEmpty = (value: string | undefined) => value !== undefined ? String(hash(value)) : '';
 			for (const skill of skills) {
@@ -660,7 +660,7 @@ function newTelemetryEvent(): InstructionsCollectionEvent {
 }
 
 /** Splits the existing variable set into attached files vs. instructions. */
-function collectAttachedContext(references: readonly vscode.ChatPromptReference[]): { files: ResourceSet; instructions: ResourceSet } {
+function collectAttachedContext(references: readonly zyraxoncode.ChatPromptReference[]): { files: ResourceSet; instructions: ResourceSet } {
 	const files = new ResourceSet();
 	const instructions = new ResourceSet();
 	for (const reference of references) {
@@ -842,7 +842,7 @@ export class CustomInstructionsReferenceLogger {
 		@ICustomInstructionsService private readonly _customInstructionsService: ICustomInstructionsService
 	) { }
 
-	async logReferences(sessionId: string | undefined, references: readonly vscode.ChatPromptReference[], collectInstructionsInExtension: boolean): Promise<void> {
+	async logReferences(sessionId: string | undefined, references: readonly zyraxoncode.ChatPromptReference[], collectInstructionsInExtension: boolean): Promise<void> {
 		const customInstructionsDebugInfo = await this.toCustomInstructionsDebugInfo(references);
 		const span = this._otelService.startSpan('collect_automatic_instructions', {
 			attributes: {
@@ -879,7 +879,7 @@ export class CustomInstructionsReferenceLogger {
 		this._telemetryService.sendInternalMSFTTelemetryEvent('automaticInstructionsCollectionComparison', { diff: simpleDiff }, { isMatch: isMatch ? 1 : 0 });
 	}
 
-	private async toIndexDebugInfo(content: string, toolReferences: readonly vscode.ChatLanguageModelToolReference[] | undefined): Promise<IndexDebugInfo> {
+	private async toIndexDebugInfo(content: string, toolReferences: readonly zyraxoncode.ChatLanguageModelToolReference[] | undefined): Promise<IndexDebugInfo> {
 		if (toolReferences?.length) {
 			content = await this._promptVariablesService.resolveToolReferencesInPrompt(content, toolReferences);
 		}
@@ -892,7 +892,7 @@ export class CustomInstructionsReferenceLogger {
 		};
 	}
 
-	private async toCustomInstructionsDebugInfo(references: readonly vscode.ChatPromptReference[]): Promise<ICustomInstructionsDebugInfo> {
+	private async toCustomInstructionsDebugInfo(references: readonly zyraxoncode.ChatPromptReference[]): Promise<ICustomInstructionsDebugInfo> {
 		const instructions = references.filter(isInstructionFile).map(ref => ref.value.toString()).sort();
 		const index = references.find(isCustomizationsIndex);
 		const indexInfo = index ? await this.toIndexDebugInfo(index.value, index.toolReferences) : undefined;

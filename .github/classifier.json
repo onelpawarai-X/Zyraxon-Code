@@ -1,5 +1,5 @@
 {
-	"$schema": "https://raw.githubusercontent.com/microsoft/vscode-github-triage-actions/stable/classifier-deep/apply/apply-labels/deep-classifier-config.schema.json",
+	"$schema": "__ZYRAXKEEP__0_",
 	"vacation": [],
 	"assignees": {
 		"nameToOverrideAccuracyOf": {"accuracy": 0.8}
@@ -274,9 +274,9 @@
 		"variable-resolving": {"assign": ["alexr00"]},
 		"VIM": {"assign": ["rebornix"]},
 		"virtual-workspaces": {"assign": []},
-		"vscode.dev": {"assign": []},
-		"vscode-build": {"assign": []},
-		"vscode-website": {"assign": ["rzhao271"]},
+		"zyraxoncode.dev": {"assign": []},
+		"zyraxoncode-build": {"assign": []},
+		"zyraxoncode-website": {"assign": ["rzhao271"]},
 		"web": {"assign": []},
 		"webview": {"assign": ["mjbvz"]},
 		"webview-views": {"assign": ["mjbvz"]},

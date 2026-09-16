@@ -196,7 +196,7 @@ class DocumentHistory {
 
 	private readonly relativePath = (() => {
 		const basePath = relative(this.workspaceUri.path, this.docId.path);
-		return this.docId.toUri().scheme === Schemas.vscodeNotebookCell ? `${basePath}#${this.docId.fragment}` : basePath;
+		return this.docId.toUri().scheme === Schemas.zyraxoncodeNotebookCell ? `${basePath}#${this.docId.fragment}` : basePath;
 	})();
 
 	getDocumentLog(bookmark: DebugRecorderBookmark | undefined): { entry: LogEntry; sortTime: number }[] {

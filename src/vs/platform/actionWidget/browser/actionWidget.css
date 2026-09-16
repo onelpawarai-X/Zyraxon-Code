@@ -10,12 +10,12 @@
 	z-index: 40;
 	display: block;
 	width: 100%;
-	border: 1px solid var(--vscode-editorHoverWidget-border) !important;
-	border-radius: var(--vscode-cornerRadius-large);
-	background-color: var(--vscode-menu-background);
-	color: var(--vscode-menu-foreground);
+	border: 1px solid var(--zyraxoncode-editorHoverWidget-border) !important;
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	background-color: var(--zyraxoncode-menu-background);
+	color: var(--zyraxoncode-menu-foreground);
 	padding: 4px;
-	box-shadow: var(--vscode-shadow-lg);
+	box-shadow: var(--zyraxoncode-shadow-lg);
 }
 
 .style-override.monaco-enable-motion .action-widget:has(.action-widget-dropdown) {
@@ -98,18 +98,18 @@
 	white-space: nowrap;
 	cursor: pointer;
 	touch-action: none;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 }
 
 .action-widget .monaco-list .monaco-list-row.action.focused:not(.option-disabled) {
-	background-color: var(--vscode-list-hoverBackground) !important;
-	color: var(--vscode-list-hoverForeground);
-	outline: 1px solid var(--vscode-menu-selectionBorder, transparent);
+	background-color: var(--zyraxoncode-list-hoverBackground) !important;
+	color: var(--zyraxoncode-list-hoverForeground);
+	outline: 1px solid var(--zyraxoncode-menu-selectionBorder, transparent);
 	outline-offset: -2px;
 }
 
 .action-widget .monaco-list-row.group-header {
-	color: var(--vscode-descriptionForeground) !important;
+	color: var(--zyraxoncode-descriptionForeground) !important;
 	font-weight: 500;
 	font-size: 11px;
 }
@@ -119,8 +119,8 @@
 }
 
 .action-widget .monaco-scrollable-element .monaco-list-rows .monaco-list-row.separator {
-	border-top: 1px solid var(--vscode-editorHoverWidget-border);
-	color: var(--vscode-descriptionForeground);
+	border-top: 1px solid var(--zyraxoncode-editorHoverWidget-border);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 	margin: 4px 6px;
 	width: calc(100% - 12px);
@@ -180,24 +180,24 @@
 
 /* Compact icon modifier: render the leading row codicon at the compact size */
 .action-widget .actionList.compact-icons .monaco-list-row.action .codicon {
-	font-size: var(--vscode-codiconFontSize-compact, 12px);
+	font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 }
 
 /* Toolbar codicons keep the regular codicon size even in compact lists */
 .action-widget .actionList.compact-icons .monaco-list-row.action .action-list-item-toolbar .codicon {
-	font-size: var(--vscode-codiconFontSize, 16px);
+	font-size: var(--zyraxoncode-codiconFontSize, 16px);
 }
 
 /* The submenu indicator keeps the regular codicon size even in compact lists */
 .action-widget .actionList.compact-icons .monaco-list-row.action .action-list-submenu-indicator.codicon {
-	font-size: var(--vscode-codiconFontSize, 16px);
+	font-size: var(--zyraxoncode-codiconFontSize, 16px);
 }
 
 .action-widget .monaco-list-row.action.option-disabled,
 .action-widget .monaco-list:focus .monaco-list-row.focused.action.option-disabled,
 .action-widget .monaco-list-row.action.option-disabled .codicon,
 .action-widget .monaco-list:not(.drop-target):not(.dragging) .monaco-list-row:hover:not(.selected):not(.focused).option-disabled {
-	color: var(--vscode-disabledForeground);
+	color: var(--zyraxoncode-disabledForeground);
 }
 
 
@@ -217,7 +217,7 @@
 	padding-left: 18px;
 	font-size: 11px;
 	line-height: 14px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	opacity: 0.8;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -227,29 +227,29 @@
 .action-widget .monaco-list-row.action .action-item-badge {
 	padding: 0px 6px;
 	border-radius: 10px;
-	background-color: var(--vscode-badge-background);
-	color: var(--vscode-badge-foreground);
+	background-color: var(--zyraxoncode-badge-background);
+	color: var(--zyraxoncode-badge-foreground);
 	font-size: 11px;
 	line-height: 18px;
 	flex-shrink: 0;
 }
 
 .action-widget .monaco-list-row.action .monaco-keybinding > .monaco-keybinding-key {
-	background-color: var(--vscode-keybindingLabel-background);
-	color: var(--vscode-keybindingLabel-foreground);
+	background-color: var(--zyraxoncode-keybindingLabel-background);
+	color: var(--zyraxoncode-keybindingLabel-foreground);
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 3px;
-	border-color: var(--vscode-keybindingLabel-border);
-	border-bottom-color: var(--vscode-keybindingLabel-bottomBorder);
-	box-shadow: inset 0 -1px 0 var(--vscode-widget-shadow);
+	border-color: var(--zyraxoncode-keybindingLabel-border);
+	border-bottom-color: var(--zyraxoncode-keybindingLabel-bottomBorder);
+	box-shadow: inset 0 -1px 0 var(--zyraxoncode-widget-shadow);
 }
 
 /* Action bar */
 
 .action-widget .action-widget-action-bar {
-	background-color: var(--vscode-menu-background);
-	border-top: 1px solid var(--vscode-editorHoverWidget-border);
+	background-color: var(--zyraxoncode-menu-background);
+	border-top: 1px solid var(--zyraxoncode-editorHoverWidget-border);
 	margin-top: 4px;
 }
 
@@ -265,7 +265,7 @@
 }
 
 .action-widget-action-bar .action-label {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 	font-size: 12px;
 	line-height: 22px;
 	padding: 0;
@@ -283,26 +283,26 @@
 
 .monaco-action-bar .actions-container.highlight-toggled .action-label.checked {
 	/* The important gives this rule precedence over the hover rule. */
-	background: var(--vscode-actionBar-toggledBackground) !important;
+	background: var(--zyraxoncode-actionBar-toggledBackground) !important;
 }
 
 .action-widget .monaco-list .monaco-list-row .description {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-left: 0.5em;
 	font-size: 12px;
 }
 
 .action-widget .monaco-list .monaco-list-row .description a {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .action-widget .monaco-list .monaco-list-row .description a:hover,
 .action-widget .monaco-list .monaco-list-row .description a:active {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .action-widget .monaco-list-row.action .group-title {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-left: 0.5em;
 	margin-right: 6px;
 	font-size: 12px;
@@ -352,7 +352,7 @@
 	white-space: nowrap;
 	font-size: 12px;
 	line-height: 16px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 /* Inline pill switch (restyles the base Toggle as an iOS-style switch) */
@@ -364,15 +364,15 @@
 	padding: 0;
 	width: 26px;
 	height: 16px;
-	border-radius: var(--vscode-cornerRadius-circle);
-	border: var(--vscode-strokeThickness) solid var(--vscode-checkbox-border);
-	background-color: var(--vscode-checkbox-background);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-checkbox-border);
+	background-color: var(--zyraxoncode-checkbox-background);
 	overflow: visible;
 	transition: background-color 0.1s ease, border-color 0.1s ease;
 }
 
 .action-widget .action-list-item-inline-toggle .monaco-custom-toggle.action-list-inline-switch:hover {
-	background-color: var(--vscode-checkbox-background);
+	background-color: var(--zyraxoncode-checkbox-background);
 }
 
 .action-widget .action-list-item-inline-toggle .monaco-custom-toggle.action-list-inline-switch::before {
@@ -383,27 +383,27 @@
 	width: 12px;
 	height: 12px;
 	border-radius: 50%;
-	background-color: var(--vscode-checkbox-foreground);
+	background-color: var(--zyraxoncode-checkbox-foreground);
 	transition: left 0.1s ease, background-color 0.1s ease;
 }
 
 .action-widget .action-list-item-inline-toggle .monaco-custom-toggle.action-list-inline-switch.checked {
-	background-color: var(--vscode-button-background);
-	border-color: var(--vscode-button-background);
+	background-color: var(--zyraxoncode-button-background);
+	border-color: var(--zyraxoncode-button-background);
 }
 
 .action-widget .action-list-item-inline-toggle .monaco-custom-toggle.action-list-inline-switch.checked:hover {
-	background-color: var(--vscode-button-hoverBackground, var(--vscode-button-background));
+	background-color: var(--zyraxoncode-button-hoverBackground, var(--zyraxoncode-button-background));
 }
 
 .action-widget .action-list-item-inline-toggle .monaco-custom-toggle.action-list-inline-switch.checked::before {
 	left: 11px;
-	background-color: var(--vscode-button-foreground);
+	background-color: var(--zyraxoncode-button-foreground);
 }
 
 .hc-black .action-widget .action-list-item-inline-toggle .monaco-custom-toggle.action-list-inline-switch,
 .hc-light .action-widget .action-list-item-inline-toggle .monaco-custom-toggle.action-list-inline-switch {
-	border-color: var(--vscode-contrastBorder);
+	border-color: var(--zyraxoncode-contrastBorder);
 }
 
 
@@ -455,7 +455,7 @@
 }
 
 .action-widget .monaco-list-row .action-list-item-toolbar .monaco-action-bar:not(.vertical) .action-label:not(.disabled):hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .action-widget-delegate-label {
@@ -482,7 +482,7 @@
 }
 
 .action-widget .action-list-filter:last-child {
-	border-top: 1px solid var(--vscode-editorHoverWidget-border);
+	border-top: 1px solid var(--zyraxoncode-editorHoverWidget-border);
 }
 
 .action-widget .action-list-filter-input {
@@ -490,20 +490,20 @@
 	flex: 1;
 	box-sizing: border-box;
 	padding: 4px 8px;
-	border: 1px solid var(--vscode-input-border, transparent);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
 	border-radius: 3px;
-	background-color: var(--vscode-input-background);
-	color: var(--vscode-input-foreground);
+	background-color: var(--zyraxoncode-input-background);
+	color: var(--zyraxoncode-input-foreground);
 	/* The themed border below replaces the browser's native focus outline. */
 	outline: none;
 }
 
 .action-widget .action-list-filter-input:focus {
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .action-widget .action-list-filter-input::placeholder {
-	color: var(--vscode-input-placeholderForeground);
+	color: var(--zyraxoncode-input-placeholderForeground);
 }
 
 /* Filter action buttons remain quiet until the pointer reveals them. */
@@ -513,11 +513,11 @@
 }
 
 .action-widget .action-list-filter-actions .action-label:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .action-widget .action-list-filter-label {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 	flex-shrink: 0;
 	margin-right: 2px;
@@ -525,13 +525,13 @@
 
 /* Footer text */
 .action-widget .action-list-footer {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 11px;
 	/* Left padding matches the list row padding so the text aligns with the section headings. */
 	padding: 4px 10px 2px 6px;
 	/* Space between the last list item and the divider above the footer. */
 	margin-top: 4px;
-	border-top: 1px solid var(--vscode-editorHoverWidget-border);
+	border-top: 1px solid var(--zyraxoncode-editorHoverWidget-border);
 }
 
 /* Header banner */
@@ -540,15 +540,15 @@
 	align-items: flex-start;
 	/* Match the row gap so the text aligns with the item labels. */
 	gap: 6px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	font-size: 12px;
 	line-height: 16px;
 	/* Match the row padding so the icon sits in the item icon column and the text aligns with the item labels. Top padding matches the left so the icon is evenly inset. */
 	padding: 6px 12px 6px 6px;
 	/* No horizontal margin so the rounded box matches the item hover outline. */
 	margin-bottom: 2px;
-	background-color: var(--vscode-chat-requestBubbleBackground);
-	border-radius: var(--vscode-cornerRadius-medium);
+	background-color: var(--zyraxoncode-chat-requestBubbleBackground);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 }
 
 /* Give widgets with a header banner more room so the banner text reads well. */
@@ -563,7 +563,7 @@
 	text-align: center;
 	font-size: 12px !important;
 	line-height: 16px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .action-widget .action-list-header .action-list-header-text {
@@ -574,19 +574,19 @@
 .action-widget .action-list-header .action-list-header-dismiss {
 	flex-shrink: 0;
 	cursor: pointer;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 	line-height: 16px;
 }
 
 .action-widget .action-list-header .action-list-header-dismiss:hover {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .action-widget .action-list-header .action-list-header-dismiss:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 /* Anchor for the absolutely-positioned submenu panel */
@@ -614,11 +614,11 @@
 }
 
 .action-list-submenu-panel {
-	background-color: var(--vscode-menu-background);
-	color: var(--vscode-menu-foreground);
-	border: 1px solid var(--vscode-menu-border, var(--vscode-editorHoverWidget-border));
+	background-color: var(--zyraxoncode-menu-background);
+	color: var(--zyraxoncode-menu-foreground);
+	border: 1px solid var(--zyraxoncode-menu-border, var(--zyraxoncode-editorHoverWidget-border));
 	border-radius: 5px;
-	box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+	box-shadow: 0 2px 8px var(--zyraxoncode-widget-shadow);
 	z-index: 50;
 	width: max-content;
 	outline: none;
@@ -635,16 +635,16 @@
 }
 
 .action-list-submenu-hover-header a {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .action-list-submenu-hover-header a:hover,
 .action-list-submenu-hover-header a:active {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .action-list-submenu-hover-header.has-submenu {
-	border-bottom: 1px solid var(--vscode-menu-separatorBackground, var(--vscode-editorWidget-border));
+	border-bottom: 1px solid var(--zyraxoncode-menu-separatorBackground, var(--zyraxoncode-editorWidget-border));
 }
 
 .action-list-submenu-hover-header > p {

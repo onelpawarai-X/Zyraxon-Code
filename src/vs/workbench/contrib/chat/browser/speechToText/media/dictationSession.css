@@ -18,5 +18,5 @@
  * .mtkN`), which are injected into the document after this stylesheet and would
  * otherwise win the tie and paint the text in the normal foreground color. */
 .monaco-editor .view-line span.dictation-interim-processing {
-	color: var(--vscode-input-placeholderForeground);
+	color: var(--zyraxoncode-input-placeholderForeground);
 }

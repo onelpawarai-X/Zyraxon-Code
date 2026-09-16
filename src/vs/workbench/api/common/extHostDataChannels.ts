@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { Emitter, Event } from '../../../base/common/event.js';
 import { Disposable } from '../../../base/common/lifecycle.js';
 import { ExtHostDataChannelsShape } from './extHost.protocol.js';
@@ -13,7 +13,7 @@ import { createDecorator } from '../../../platform/instantiation/common/instanti
 
 export interface IExtHostDataChannels extends ExtHostDataChannelsShape {
 	readonly _serviceBrand: undefined;
-	createDataChannel<T>(extension: IExtensionDescription, channelId: string): vscode.DataChannel<T>;
+	createDataChannel<T>(extension: IExtensionDescription, channelId: string): zyraxoncode.DataChannel<T>;
 }
 
 export const IExtHostDataChannels = createDecorator<IExtHostDataChannels>('IExtHostDataChannels');
@@ -26,7 +26,7 @@ export class ExtHostDataChannels implements IExtHostDataChannels {
 	constructor() {
 	}
 
-	createDataChannel<T>(extension: IExtensionDescription, channelId: string): vscode.DataChannel<T> {
+	createDataChannel<T>(extension: IExtensionDescription, channelId: string): zyraxoncode.DataChannel<T> {
 		checkProposedApiEnabled(extension, 'dataChannels');
 
 		let channel = this._channels.get(channelId);
@@ -45,9 +45,9 @@ export class ExtHostDataChannels implements IExtHostDataChannels {
 	}
 }
 
-class DataChannelImpl<T> extends Disposable implements vscode.DataChannel<T> {
-	private readonly _onDidReceiveData = new Emitter<vscode.DataChannelEvent<T>>();
-	public readonly onDidReceiveData: Event<vscode.DataChannelEvent<T>> = this._onDidReceiveData.event;
+class DataChannelImpl<T> extends Disposable implements zyraxoncode.DataChannel<T> {
+	private readonly _onDidReceiveData = new Emitter<zyraxoncode.DataChannelEvent<T>>();
+	public readonly onDidReceiveData: Event<zyraxoncode.DataChannelEvent<T>> = this._onDidReceiveData.event;
 
 	constructor(private readonly channelId: string) {
 		super();

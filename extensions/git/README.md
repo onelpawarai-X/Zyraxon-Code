@@ -4,7 +4,7 @@
 
 ## Features
 
-See [Git support in ZYRAXON Code](https://code.visualstudio.com/docs/editor/versioncontrol#_git-support) to learn about the features of this extension.
+See [Git support in ZYRAXON Code](__ZYRAXKEEP__0_) to learn about the features of this extension.
 
 ## API
 
@@ -15,12 +15,12 @@ The Git extension exposes an API, reachable by any other extension.
 3. Get a hold of the API with the following snippet:
 
 	```ts
-	const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git').exports;
+	const gitExtension = zyraxoncode.extensions.getExtension<GitExtension>('zyraxoncode.git').exports;
 	const git = gitExtension.getAPI(1);
 	```
-	**Note:** To ensure that the `vscode.git` extension is activated before your extension, add `extensionDependencies` ([docs](https://code.visualstudio.com/api/references/extension-manifest)) into the `package.json` of your extension:
+	**Note:** To ensure that the `zyraxoncode.git` extension is activated before your extension, add `extensionDependencies` ([docs](__ZYRAXKEEP__1_)) into the `package.json` of your extension:
 	```json
 	"extensionDependencies": [
-		"vscode.git"
+		"zyraxoncode.git"
 	]
 	```

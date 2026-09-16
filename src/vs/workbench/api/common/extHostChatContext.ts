@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { CancellationToken } from '../../../base/common/cancellation.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
 import { isEqual } from '../../../base/common/resources.js';
@@ -19,7 +19,7 @@ type ProviderType = 'workspace' | 'explicit' | 'resource';
 
 interface ProviderEntry {
 	type: ProviderType;
-	provider: vscode.ChatWorkspaceContextProvider | vscode.ChatAttachContextProvider | vscode.ChatTabContextProvider;
+	provider: zyraxoncode.ChatWorkspaceContextProvider | zyraxoncode.ChatAttachContextProvider | zyraxoncode.ChatTabContextProvider;
 	disposables: DisposableStore;
 }
 
@@ -31,7 +31,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 	private _providers: Map<number, ProviderEntry> = new Map();
 	private _itemPool: number = 0;
 	/** Global map of itemHandle -> original item for command execution with reference equality */
-	private _globalItems: Map<number, vscode.ChatContextItem> = new Map();
+	private _globalItems: Map<number, zyraxoncode.ChatContextItem> = new Map();
 	/** Track which items belong to which provider for cleanup */
 	private _providerItems: Map<number, Set<number>> = new Map(); // providerHandle -> Set<itemHandle>
 
@@ -52,7 +52,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		if (!entry || entry.type !== 'workspace') {
 			throw new Error('Workspace context provider not found');
 		}
-		const provider = entry.provider as vscode.ChatWorkspaceContextProvider;
+		const provider = entry.provider as zyraxoncode.ChatWorkspaceContextProvider;
 		const result = (await provider.provideWorkspaceChatContext?.(token)) ?? [];
 		return this._convertItems(handle, result);
 	}
@@ -65,7 +65,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		if (!entry || entry.type !== 'explicit') {
 			throw new Error('Explicit context provider not found');
 		}
-		const provider = entry.provider as vscode.ChatAttachContextProvider;
+		const provider = entry.provider as zyraxoncode.ChatAttachContextProvider;
 		const result = (await provider.provideAttachChatContext?.(token)) ?? [];
 		return this._convertItems(handle, result);
 	}
@@ -75,7 +75,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		if (!entry || entry.type !== 'explicit') {
 			throw new Error('Explicit context provider not found');
 		}
-		const provider = entry.provider as vscode.ChatAttachContextProvider;
+		const provider = entry.provider as zyraxoncode.ChatAttachContextProvider;
 		const extItem = this._globalItems.get(context.handle);
 		if (!extItem) {
 			throw new Error('Chat context item not found');
@@ -90,7 +90,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		if (!entry || entry.type !== 'resource') {
 			throw new Error('Resource context provider not found');
 		}
-		const provider = entry.provider as vscode.ChatTabContextProvider;
+		const provider = entry.provider as zyraxoncode.ChatTabContextProvider;
 
 		const resource = URI.revive(options.resource);
 		const tab = this._findTab(resource, options.viewType);
@@ -131,7 +131,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		if (!entry || entry.type !== 'resource') {
 			throw new Error('Resource context provider not found');
 		}
-		const provider = entry.provider as vscode.ChatTabContextProvider;
+		const provider = entry.provider as zyraxoncode.ChatTabContextProvider;
 		const extItem = this._globalItems.get(context.handle);
 		if (!extItem) {
 			throw new Error('Chat context item not found');
@@ -156,7 +156,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 
 	// Registration methods
 
-	registerChatWorkspaceContextProvider(id: string, provider: vscode.ChatWorkspaceContextProvider): vscode.Disposable {
+	registerChatWorkspaceContextProvider(id: string, provider: zyraxoncode.ChatWorkspaceContextProvider): zyraxoncode.Disposable {
 		const handle = this._handlePool++;
 		const disposables = new DisposableStore();
 		this._providers.set(handle, { type: 'workspace', provider, disposables });
@@ -174,7 +174,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		};
 	}
 
-	registerChatAttachContextProvider(id: string, provider: vscode.ChatAttachContextProvider): vscode.Disposable {
+	registerChatAttachContextProvider(id: string, provider: zyraxoncode.ChatAttachContextProvider): zyraxoncode.Disposable {
 		const handle = this._handlePool++;
 		const disposables = new DisposableStore();
 		this._providers.set(handle, { type: 'explicit', provider, disposables });
@@ -191,7 +191,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		};
 	}
 
-	registerChatTabContextProvider(selector: vscode.TabSelector, id: string, provider: vscode.ChatTabContextProvider): vscode.Disposable {
+	registerChatTabContextProvider(selector: zyraxoncode.TabSelector, id: string, provider: zyraxoncode.ChatTabContextProvider): zyraxoncode.Disposable {
 		const handle = this._handlePool++;
 		const disposables = new DisposableStore();
 		this._providers.set(handle, { type: 'resource', provider, disposables });
@@ -209,12 +209,12 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 	}
 
 	/**
-	 * Finds the open {@link vscode.Tab tab} for the given resource. When a `viewType` is provided,
+	 * Finds the open {@link zyraxoncode.Tab tab} for the given resource. When a `viewType` is provided,
 	 * webview and custom editor tabs are matched by their view type; otherwise tabs are matched by
 	 * their input resource. When multiple tabs match by view type, the active tab is preferred.
 	 */
-	private _findTab(resource: URI, viewType?: string): vscode.Tab | undefined {
-		let viewTypeMatch: vscode.Tab | undefined;
+	private _findTab(resource: URI, viewType?: string): zyraxoncode.Tab | undefined {
+		let viewTypeMatch: zyraxoncode.Tab | undefined;
 		for (const group of this._editorTabs.tabGroups.all) {
 			for (const tab of group.tabs) {
 				const input = tab.input as { uri?: unknown; viewType?: unknown } | undefined;
@@ -242,7 +242,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		}
 	}
 
-	private _addTrackedItem(providerHandle: number, item: vscode.ChatContextItem): number {
+	private _addTrackedItem(providerHandle: number, item: zyraxoncode.ChatContextItem): number {
 		const itemHandle = this._itemPool++;
 		this._globalItems.set(itemHandle, item);
 		if (!this._providerItems.has(providerHandle)) {
@@ -252,7 +252,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		return itemHandle;
 	}
 
-	private _convertItems(handle: number, items: vscode.ChatContextItem[]): IChatContextItem[] {
+	private _convertItems(handle: number, items: zyraxoncode.ChatContextItem[]): IChatContextItem[] {
 		const result: IChatContextItem[] = [];
 		for (const item of items) {
 			if (item.label === undefined && item.resourceUri === undefined) {
@@ -274,9 +274,9 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 	}
 
 	private async _doResolve(
-		resolveFn: (item: vscode.ChatContextItem, token: CancellationToken) => vscode.ProviderResult<vscode.ChatContextItem>,
+		resolveFn: (item: zyraxoncode.ChatContextItem, token: CancellationToken) => zyraxoncode.ProviderResult<zyraxoncode.ChatContextItem>,
 		context: IChatContextItem,
-		extItem: vscode.ChatContextItem,
+		extItem: zyraxoncode.ChatContextItem,
 		token: CancellationToken
 	): Promise<IChatContextItem> {
 		const extResult = await resolveFn(extItem, token);
@@ -295,7 +295,7 @@ export class ExtHostChatContext extends Disposable implements ExtHostChatContext
 		return context;
 	}
 
-	private _listenForWorkspaceContextChanges(handle: number, provider: vscode.ChatWorkspaceContextProvider, disposables: DisposableStore): void {
+	private _listenForWorkspaceContextChanges(handle: number, provider: zyraxoncode.ChatWorkspaceContextProvider, disposables: DisposableStore): void {
 		if (!provider.onDidChangeWorkspaceChatContext) {
 			return;
 		}

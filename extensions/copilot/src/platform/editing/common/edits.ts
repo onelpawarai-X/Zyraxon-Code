@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { Range } from '../../../vscodeTypes';
+import type * as zyraxoncode from 'zyraxoncode';
+import { Range } from '../../../zyraxoncodeTypes';
 
 /**
  * For the given initial range, find the approximate range after the edits are applied on it.
@@ -14,8 +14,8 @@ import { Range } from '../../../vscodeTypes';
  * @param edits edits to apply
  * @returns range after the transformation with the edits
  */
-export function computeUpdatedRange(initialRange: vscode.Range, edits: vscode.TextEdit[]) {
-	let range: vscode.Range = initialRange;
+export function computeUpdatedRange(initialRange: zyraxoncode.Range, edits: zyraxoncode.TextEdit[]) {
+	let range: zyraxoncode.Range = initialRange;
 	for (const edit of edits) {
 		const editStart = edit.range.start;
 		const editEnd = edit.range.end;

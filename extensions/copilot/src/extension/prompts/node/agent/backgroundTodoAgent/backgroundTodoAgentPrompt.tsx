@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { BGToolCallRound, ReadOnlyTurnHistory } from './backgroundTodoAgentSessionHistoryStore';
 
 const BACKGROUND_TODO_SYSTEM_MESSAGE = `You are a background task tracker for the main coding agent. Your only job is to maintain a structured todo list for the user's coding request by calling manage_todo_list.

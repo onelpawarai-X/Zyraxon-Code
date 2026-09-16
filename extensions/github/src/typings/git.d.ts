@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Uri, Event, Disposable, ProviderResult, Command, SourceControlHistoryItem } from 'vscode';
-export { ProviderResult } from 'vscode';
+import { Uri, Event, Disposable, ProviderResult, Command, SourceControlHistoryItem } from 'zyraxoncode';
+export { ProviderResult } from 'zyraxoncode';
 
 export interface Git {
 	readonly path: string;

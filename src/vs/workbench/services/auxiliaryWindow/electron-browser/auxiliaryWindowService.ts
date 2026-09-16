@@ -28,7 +28,7 @@ import { assert } from '../../../../base/common/assert.js';
 import { IContextMenuService } from '../../../../platform/contextview/browser/contextView.js';
 
 type NativeCodeWindow = CodeWindow & {
-	readonly vscode: ISandboxGlobals;
+	readonly zyraxoncode: ISandboxGlobals;
 };
 
 export class NativeAuxiliaryWindow extends AuxiliaryWindow {
@@ -65,17 +65,17 @@ export class NativeAuxiliaryWindow extends AuxiliaryWindow {
 
 	private handleMaximizedState(): void {
 		(async () => {
-			this.maximized = await this.nativeHostService.isMaximized({ targetWindowId: this.window.vscodeWindowId });
+			this.maximized = await this.nativeHostService.isMaximized({ targetWindowId: this.window.zyraxoncodeWindowId });
 		})();
 
 		this._register(this.nativeHostService.onDidMaximizeWindow(windowId => {
-			if (windowId === this.window.vscodeWindowId) {
+			if (windowId === this.window.zyraxoncodeWindowId) {
 				this.maximized = true;
 			}
 		}));
 
 		this._register(this.nativeHostService.onDidUnmaximizeWindow(windowId => {
-			if (windowId === this.window.vscodeWindowId) {
+			if (windowId === this.window.zyraxoncodeWindowId) {
 				this.maximized = false;
 			}
 		}));
@@ -83,18 +83,18 @@ export class NativeAuxiliaryWindow extends AuxiliaryWindow {
 
 	private handleAlwaysOnTopState(): void {
 		(async () => {
-			this.alwaysOnTop = await this.nativeHostService.isWindowAlwaysOnTop({ targetWindowId: this.window.vscodeWindowId });
+			this.alwaysOnTop = await this.nativeHostService.isWindowAlwaysOnTop({ targetWindowId: this.window.zyraxoncodeWindowId });
 		})();
 
 		this._register(this.nativeHostService.onDidChangeWindowAlwaysOnTop(({ windowId, alwaysOnTop }) => {
-			if (windowId === this.window.vscodeWindowId) {
+			if (windowId === this.window.zyraxoncodeWindowId) {
 				this.alwaysOnTop = alwaysOnTop;
 			}
 		}));
 	}
 
 	private async handleFullScreenState(): Promise<void> {
-		const fullscreen = await this.nativeHostService.isFullScreen({ targetWindowId: this.window.vscodeWindowId });
+		const fullscreen = await this.nativeHostService.isFullScreen({ targetWindowId: this.window.zyraxoncodeWindowId });
 		if (fullscreen) {
 			setFullscreen(true, this.window);
 		}
@@ -116,7 +116,7 @@ export class NativeAuxiliaryWindow extends AuxiliaryWindow {
 		const confirmed = await this.instantiationService.invokeFunction(accessor => NativeAuxiliaryWindow.confirmOnShutdown(accessor, ShutdownReason.CLOSE));
 		if (confirmed) {
 			this.skipUnloadConfirmation = true;
-			this.nativeHostService.closeWindow({ targetWindowId: this.window.vscodeWindowId });
+			this.nativeHostService.closeWindow({ targetWindowId: this.window.zyraxoncodeWindowId });
 		}
 	}
 
@@ -155,7 +155,7 @@ export class NativeAuxiliaryWindowService extends BrowserAuxiliaryWindowService 
 
 	protected override async resolveWindowId(auxiliaryWindow: NativeCodeWindow): Promise<number> {
 		mark('code/auxiliaryWindow/willResolveWindowId');
-		const windowId = await auxiliaryWindow.vscode.ipcRenderer.invoke('vscode:registerAuxiliaryWindow', this.nativeHostService.windowId);
+		const windowId = await auxiliaryWindow.zyraxoncode.ipcRenderer.invoke('zyraxoncode:registerAuxiliaryWindow', this.nativeHostService.windowId);
 		mark('code/auxiliaryWindow/didResolveWindowId');
 		assert(typeof windowId === 'number');
 

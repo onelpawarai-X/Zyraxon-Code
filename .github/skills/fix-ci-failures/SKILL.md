@@ -43,7 +43,7 @@ gh pr checks --json name,state,link,bucket --jq '.[] | select(.bucket == "fail")
 
 The `link` field contains the URL to the GitHub Actions job. Extract the **run ID** from the URL — it's the number after `/runs/`:
 ```
-https://github.com/microsoft/vscode/actions/runs/<RUN_ID>/job/<JOB_ID>
+__ZYRAXKEEP__0_<RUN_ID>/job/<JOB_ID>
 ```
 
 If checks are still `IN_PROGRESS`, wait for them to complete before downloading logs:
@@ -113,7 +113,7 @@ When the run is still in progress but the failed job has completed, use the GitH
 
 ```bash
 # Save the full job log to a temp file (can be very large — 30k+ lines)
-gh api repos/microsoft/vscode/actions/jobs/<JOB_ID>/logs > "$TMPDIR/ci-job-log.txt"
+gh api repos/zyraxon/zyraxoncode/actions/jobs/<JOB_ID>/logs > "$TMPDIR/ci-job-log.txt"
 ```
 
 Then search the saved file. **Start with `##[error]`** — this is the GitHub Actions error annotation that marks the exact line where the step failed:
@@ -262,7 +262,7 @@ Not all CI failures are caused by code changes. Common infrastructure failures:
 | Watch checks until done | `gh pr checks --watch --fail-fast` |
 | Failed jobs in a run | `gh run view <RUN_ID> --json jobs --jq '.jobs[] \| select(.conclusion == "failure") \| {name, id: .databaseId}'` |
 | View failed step logs | `gh run view <RUN_ID> --job <JOB_ID> --log-failed` (requires full run to complete) |
-| Download job log via API | `gh api repos/microsoft/vscode/actions/jobs/<JOB_ID>/logs > "$TMPDIR/ci-job-log.txt"` (works while run is in progress) |
+| Download job log via API | `gh api repos/zyraxon/zyraxoncode/actions/jobs/<JOB_ID>/logs > "$TMPDIR/ci-job-log.txt"` (works while run is in progress) |
 | Find error line in log | `grep -n '##\[error\]' "$TMPDIR/ci-job-log.txt"` |
 | Download log artifacts | `gh run download <RUN_ID> -n "<artifact-name>" -D /tmp/ci-logs` |
 | Re-run failed jobs | `gh run rerun <RUN_ID> --failed` |

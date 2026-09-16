@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptReference, Raw } from '@vscode/prompt-tsx';
-import type { ChatLanguageModelToolReference, ChatRequest, ChatRequestEditedFileEvent, ChatResponseStream, ChatResult, LanguageModelToolResult } from 'vscode';
+import { PromptReference, Raw } from '@zyraxoncode/prompt-tsx';
+import type { ChatLanguageModelToolReference, ChatRequest, ChatRequestEditedFileEvent, ChatResponseStream, ChatResult, LanguageModelToolResult } from 'zyraxoncode';
 import { FilterReason } from '../../../platform/networking/common/openai';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { isLocation, toLocation } from '../../../util/common/types';
@@ -13,12 +13,12 @@ import { assertType } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { ServicesAccessor } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Location, Range } from '../../../vscodeTypes';
+import { Location, Range } from '../../../zyraxoncodeTypes';
 import { InternalToolReference, IToolCallRound } from '../common/intents';
 import { ChatVariablesCollection } from './chatVariablesCollection';
 import { isContinueOnError, isSwitchToAutoOnRateLimit, isToolCallLimitAcceptance } from './specialRequestTypes';
 import { ToolCallRound } from './toolCallRound';
-export { PromptReference } from '@vscode/prompt-tsx';
+export { PromptReference } from '@zyraxoncode/prompt-tsx';
 
 export enum TurnStatus {
 	InProgress = 'in-progress',

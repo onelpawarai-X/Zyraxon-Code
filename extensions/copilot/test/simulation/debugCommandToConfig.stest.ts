@@ -6,7 +6,7 @@ import * as assert from 'assert';
 import path from 'path';
 import { DebugCommandToConfigConverter } from '../../src/extension/onboardDebug/node/commandToConfigConverter';
 import { IGitExtensionService } from '../../src/platform/git/common/gitExtensionService';
-import { API } from '../../src/platform/git/vscode/git';
+import { API } from '../../src/platform/git/zyraxoncode/git';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';
 import { TestWorkspaceService } from '../../src/platform/test/node/testWorkspaceService';
 import { IWorkspaceService } from '../../src/platform/workspace/common/workspaceService';
@@ -76,11 +76,11 @@ ssuite({ title: 'Debug config to command', location: 'context' }, () => {
 	});
 
 	stest({ description: 'opening a browser' }, async (testingServiceCollection) => {
-		const { accessor, r } = await score(testingServiceCollection, path.join(WORKSPACE_FOLDER.fsPath), ['chrome.exe', 'https://microsoft.com']);
+		const { accessor, r } = await score(testingServiceCollection, path.join(WORKSPACE_FOLDER.fsPath), ['chrome.exe', '__ZYRAXKEEP__0_']);
 
 		rubric(accessor,
 			() => assert.ok(r?.type === 'chrome'),
-			() => assert.deepStrictEqual(r?.url, 'https://microsoft.com'),
+			() => assert.deepStrictEqual(r?.url, '__ZYRAXKEEP__1_'),
 		);
 	});
 

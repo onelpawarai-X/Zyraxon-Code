@@ -261,7 +261,7 @@ export class PolicyExportContribution extends Disposable implements IWorkbenchCo
 				'Accept': 'application/vnd.github+json',
 				'Authorization': `Bearer ${token}`,
 				'X-GitHub-Api-Version': '2022-11-28',
-				'User-Agent': 'VSCode Build'
+				'User-Agent': 'ZyraxonCode Build'
 			}
 		});
 

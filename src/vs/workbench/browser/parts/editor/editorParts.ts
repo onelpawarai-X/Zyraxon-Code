@@ -306,11 +306,11 @@ export class EditorParts extends MultiWindowParts<EditorPart, IEditorPartsMement
 		disposables.add(toDisposable(() => {
 			this.doUpdateMostRecentActive(part);
 
-			if (part.windowId !== mainWindow.vscodeWindowId) {
+			if (part.windowId !== mainWindow.zyraxoncodeWindowId) {
 				// An auxiliary editor part is closing which we have
 				// to treat as group change event for the next editor
 				// part that becomes active.
-				// Refs: https://github.com/microsoft/vscode/issues/257058
+				// Refs: __ZYRAXKEEP__0_
 				this._onDidActiveGroupChange.fire(this.activeGroup);
 			}
 		}));

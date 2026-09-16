@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ReadonlyError, illegalArgument } from '../../../vs/base/common/errors';
 import { Position } from '../../../vs/workbench/api/common/extHostTypes/position';
 import { Range } from '../../../vs/workbench/api/common/extHostTypes/range';
@@ -12,7 +12,7 @@ import { SnippetString } from '../../../vs/workbench/api/common/extHostTypes/sni
 import { EndOfLine } from '../../../vs/workbench/api/common/extHostTypes/textEdit';
 
 interface ITextEditOperation {
-	range: vscode.Range;
+	range: zyraxoncode.Range;
 	text: string | null;
 	forceMoveMarkers: boolean;
 }
@@ -20,22 +20,22 @@ interface ITextEditOperation {
 interface IEditData {
 	documentVersionId: number;
 	edits: ITextEditOperation[];
-	setEndOfLine: vscode.EndOfLine | undefined;
+	setEndOfLine: zyraxoncode.EndOfLine | undefined;
 	undoStopBefore: boolean;
 	undoStopAfter: boolean;
 }
 
 class TextEditorEdit {
 
-	private readonly _document: vscode.TextDocument;
+	private readonly _document: zyraxoncode.TextDocument;
 	private readonly _documentVersionId: number;
 	private readonly _undoStopBefore: boolean;
 	private readonly _undoStopAfter: boolean;
 	private _collectedEdits: ITextEditOperation[] = [];
-	private _setEndOfLine: vscode.EndOfLine | undefined = undefined;
+	private _setEndOfLine: zyraxoncode.EndOfLine | undefined = undefined;
 	private _finalized: boolean = false;
 
-	constructor(document: vscode.TextDocument, options: { undoStopBefore: boolean; undoStopAfter: boolean }) {
+	constructor(document: zyraxoncode.TextDocument, options: { undoStopBefore: boolean; undoStopAfter: boolean }) {
 		this._document = document;
 		this._documentVersionId = document.version;
 		this._undoStopBefore = options.undoStopBefore;
@@ -101,7 +101,7 @@ class TextEditorEdit {
 		});
 	}
 
-	setEndOfLine(endOfLine: vscode.EndOfLine): void {
+	setEndOfLine(endOfLine: zyraxoncode.EndOfLine): void {
 		this._throwIfFinalized();
 		if (endOfLine !== EndOfLine.LF && endOfLine !== EndOfLine.CRLF) {
 			throw illegalArgument('endOfLine');
@@ -113,19 +113,19 @@ class TextEditorEdit {
 
 export class ExtHostTextEditor {
 
-	private _selections: vscode.Selection[];
-	private _options: vscode.TextEditorOptions;
-	private _visibleRanges: vscode.Range[];
-	private _viewColumn: vscode.ViewColumn | undefined;
+	private _selections: zyraxoncode.Selection[];
+	private _options: zyraxoncode.TextEditorOptions;
+	private _visibleRanges: zyraxoncode.Range[];
+	private _viewColumn: zyraxoncode.ViewColumn | undefined;
 
-	readonly value: vscode.TextEditor;
+	readonly value: zyraxoncode.TextEditor;
 
 	constructor(
-		document: vscode.TextDocument,
-		selections: vscode.Selection[],
-		options: vscode.TextEditorOptions,
-		visibleRanges: vscode.Range[],
-		viewColumn: vscode.ViewColumn | undefined
+		document: zyraxoncode.TextDocument,
+		selections: zyraxoncode.Selection[],
+		options: zyraxoncode.TextEditorOptions,
+		visibleRanges: zyraxoncode.Range[],
+		viewColumn: zyraxoncode.ViewColumn | undefined
 	) {
 		this._selections = selections;
 		this._options = options;
@@ -135,14 +135,14 @@ export class ExtHostTextEditor {
 		const that = this;
 
 		this.value = Object.freeze({
-			get document(): vscode.TextDocument {
+			get document(): zyraxoncode.TextDocument {
 				return document;
 			},
 			set document(_value) {
 				throw new ReadonlyError('document');
 			},
 			// --- selection
-			get selection(): vscode.Selection {
+			get selection(): zyraxoncode.Selection {
 				return that._selections && that._selections[0];
 			},
 			set selection(value: Selection) {
@@ -151,7 +151,7 @@ export class ExtHostTextEditor {
 				}
 				that._selections = [value];
 			},
-			get selections(): vscode.Selection[] {
+			get selections(): zyraxoncode.Selection[] {
 				return that._selections;
 			},
 			set selections(value: Selection[]) {
@@ -161,21 +161,21 @@ export class ExtHostTextEditor {
 				that._selections = value;
 			},
 			// --- visible ranges
-			get visibleRanges(): vscode.Range[] {
+			get visibleRanges(): zyraxoncode.Range[] {
 				return that._visibleRanges;
 			},
 			set visibleRanges(_value: Range[]) {
 				throw new ReadonlyError('visibleRanges');
 			},
 			// --- options
-			get options(): vscode.TextEditorOptions {
+			get options(): zyraxoncode.TextEditorOptions {
 				return that._options;
 			},
-			set options(value: vscode.TextEditorOptions) {
+			set options(value: zyraxoncode.TextEditorOptions) {
 				throw new Error('Not implemented');
 			},
 			// --- view column
-			get viewColumn(): vscode.ViewColumn | undefined {
+			get viewColumn(): zyraxoncode.ViewColumn | undefined {
 				return that._viewColumn;
 			},
 			set viewColumn(_value) {
@@ -189,13 +189,13 @@ export class ExtHostTextEditor {
 			insertSnippet(snippet: SnippetString, where?: Position | readonly Position[] | Range | readonly Range[], options: { undoStopBefore: boolean; undoStopAfter: boolean } = { undoStopBefore: true, undoStopAfter: true }): Promise<boolean> {
 				throw new Error('Not implemented');
 			},
-			setDecorations(decorationType: vscode.TextEditorDecorationType, ranges: Range[] | vscode.DecorationOptions[]): void {
+			setDecorations(decorationType: zyraxoncode.TextEditorDecorationType, ranges: Range[] | zyraxoncode.DecorationOptions[]): void {
 				throw new Error('Not implemented');
 			},
-			revealRange(range: Range, revealType: vscode.TextEditorRevealType): void {
+			revealRange(range: Range, revealType: zyraxoncode.TextEditorRevealType): void {
 				throw new Error('Not implemented');
 			},
-			show(column: vscode.ViewColumn) {
+			show(column: zyraxoncode.ViewColumn) {
 				throw new Error('Not implemented');
 			},
 			hide() {
@@ -204,19 +204,19 @@ export class ExtHostTextEditor {
 		});
 	}
 
-	_acceptOptions(options: vscode.TextEditorOptions): void {
+	_acceptOptions(options: zyraxoncode.TextEditorOptions): void {
 		this._options = options;
 	}
 
-	_acceptVisibleRanges(value: readonly vscode.Range[]): void {
+	_acceptVisibleRanges(value: readonly zyraxoncode.Range[]): void {
 		this._visibleRanges = value.slice(0);
 	}
 
-	_acceptViewColumn(value: vscode.ViewColumn) {
+	_acceptViewColumn(value: zyraxoncode.ViewColumn) {
 		this._viewColumn = value;
 	}
 
-	_acceptSelections(selections: vscode.Selection[]): void {
+	_acceptSelections(selections: zyraxoncode.Selection[]): void {
 		this._selections = selections;
 	}
 }

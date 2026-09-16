@@ -129,7 +129,7 @@ export class TunnelAgentHostService extends Disposable implements ITunnelAgentHo
 
 		// Keep an incompatible handshake from tearing down the relay: the
 		// protocol client must remain registered with IRemoteAgentHostService
-		// so `triggerServerUpgrade` can locate it and send `_vscodeUpgrade`
+		// so `triggerServerUpgrade` can locate it and send `_zyraxoncodeUpgrade`
 		// over the still-open transport.
 		let status: RemoteAgentHostConnectionStatus = RemoteAgentHostConnectionStatus.connected;
 		let connectError: unknown;

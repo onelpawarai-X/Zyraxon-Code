@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { cp } from '@vscode/fs-copyfile';
-import TelemetryReporter from '@vscode/extension-telemetry';
+import { cp } from '@zyraxoncode/fs-copyfile';
+import TelemetryReporter from '@zyraxoncode/extension-telemetry';
 import { uniqueNamesGenerator, adjectives, animals, colors, NumberDictionary } from '@joaomoreno/unique-names-generator';
 import * as fs from 'fs';
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
 import picomatch from 'picomatch';
-import { CancellationError, CancellationToken, CancellationTokenSource, Command, commands, CustomExecution, Disposable, Event, EventEmitter, ExcludeSettingOptions, FileDecoration, l10n, LogLevel, LogOutputChannel, Memento, ProcessExecution, ProgressLocation, ProgressOptions, RelativePattern, scm, ShellExecution, SourceControl, SourceControlInputBox, SourceControlInputBoxValidation, SourceControlInputBoxValidationType, SourceControlResourceDecorations, SourceControlResourceGroup, SourceControlResourceState, TabInputNotebookDiff, TabInputTextDiff, TabInputTextMultiDiff, Task, TaskPanelKind, TaskRevealKind, TaskRunOn, tasks, ThemeColor, ThemeIcon, Uri, window, workspace, WorkspaceEdit, WorkspaceFolder } from 'vscode';
+import { CancellationError, CancellationToken, CancellationTokenSource, Command, commands, CustomExecution, Disposable, Event, EventEmitter, ExcludeSettingOptions, FileDecoration, l10n, LogLevel, LogOutputChannel, Memento, ProcessExecution, ProgressLocation, ProgressOptions, RelativePattern, scm, ShellExecution, SourceControl, SourceControlInputBox, SourceControlInputBoxValidation, SourceControlInputBoxValidationType, SourceControlResourceDecorations, SourceControlResourceGroup, SourceControlResourceState, TabInputNotebookDiff, TabInputTextDiff, TabInputTextMultiDiff, Task, TaskPanelKind, TaskRevealKind, TaskRunOn, tasks, ThemeColor, ThemeIcon, Uri, window, workspace, WorkspaceEdit, WorkspaceFolder } from 'zyraxoncode';
 import { ActionButton } from './actionButton';
 import { ApiRepository } from './api/api1';
 import type { Branch, BranchQuery, Change, CommitOptions, DiffChange, FetchOptions, LogOptions, Ref, Remote, RepositoryKind } from './api/git';
@@ -470,8 +470,8 @@ class DotGitWatcher implements IFileWatcher {
 		const rootWatcher = watch(repository.dotGit.path);
 		this.disposables.push(rootWatcher);
 
-		// Ignore changes to the "index.lock" file (including worktree index.lock files), and watchman fsmonitor hook (https://git-scm.com/docs/githooks#_fsmonitor_watchman) cookie files.
-		// Watchman creates a cookie file inside the git directory whenever a query is run (https://facebook.github.io/watchman/docs/cookies.html).
+		// Ignore changes to the "index.lock" file (including worktree index.lock files), and watchman fsmonitor hook (__ZYRAXKEEP__0_) cookie files.
+		// Watchman creates a cookie file inside the git directory whenever a query is run (__ZYRAXKEEP__1_).
 		const filteredRootWatcher = filterEvent(rootWatcher.event, uri => uri.scheme === 'file' && !/\/\.git(\/index\.lock|\/worktrees\/[^/]+\/index\.lock)?$|\/\.watchman-cookie-/.test(uri.path));
 		this.event = anyEvent(filteredRootWatcher, this.emitter.event);
 
@@ -519,7 +519,7 @@ class ResourceCommandResolver {
 
 	resolveFileCommand(resource: Resource): Command {
 		return {
-			command: 'vscode.open',
+			command: 'zyraxoncode.open',
 			title: l10n.t('Open'),
 			arguments: [resource.resourceUri]
 		};
@@ -543,14 +543,14 @@ class ResourceCommandResolver {
 				};
 			} else {
 				return {
-					command: 'vscode.open',
+					command: 'zyraxoncode.open',
 					title: l10n.t('Open'),
 					arguments: [resource.rightUri, { override: bothModified ? false : undefined }, title]
 				};
 			}
 		} else {
 			return {
-				command: 'vscode.diff',
+				command: 'zyraxoncode.diff',
 				title: l10n.t('Open'),
 				arguments: [leftUri, resource.rightUri, title]
 			};
@@ -1065,7 +1065,7 @@ export class Repository implements Disposable {
 			this.disposables.push(trustDisposable);
 		}
 
-		// https://github.com/microsoft/vscode/issues/39039
+		// __ZYRAXKEEP__2_
 		const onSuccessfulPush = filterEvent(this.onDidRunOperation, e => e.operation.kind === OperationKind.Push && !e.error);
 		onSuccessfulPush(() => {
 			const gitConfig = workspace.getConfiguration('git');
@@ -1707,7 +1707,7 @@ export class Repository implements Disposable {
 	async deleteBranch(name: string, force?: boolean): Promise<void> {
 		return this.run(Operation.DeleteBranch, async () => {
 			await this.repository.deleteBranch(name, force);
-			await this.repository.config('unset', 'local', `branch.${name}.vscode-merge-base`);
+			await this.repository.config('unset', 'local', `branch.${name}.zyraxoncode-merge-base`);
 		});
 	}
 
@@ -1764,7 +1764,7 @@ export class Repository implements Disposable {
 		const branch = await this.getBranch(ref);
 
 		// Git config
-		const mergeBaseConfigKey = `branch.${branch.name}.vscode-merge-base`;
+		const mergeBaseConfigKey = `branch.${branch.name}.zyraxoncode-merge-base`;
 
 		try {
 			const mergeBase = await this.getConfig(mergeBaseConfigKey);
@@ -2613,7 +2613,7 @@ export class Repository implements Disposable {
 					return resolve(new Set<string>());
 				}
 
-				// https://git-scm.com/docs/git-check-ignore#git-check-ignore--z
+				// __ZYRAXKEEP__3_
 				const child = this.repository.stream(['check-ignore', '-v', '-z', '--stdin'], { stdio: [null, null, null] });
 
 				if (!child.stdin) {
@@ -2665,7 +2665,7 @@ export class Repository implements Disposable {
 	// Parses output of `git check-ignore -v -z` and returns only those paths
 	// that are actually ignored by git.
 	// Matches to a negative pattern (starting with '!') are filtered out.
-	// See also https://git-scm.com/docs/git-check-ignore#_output.
+	// See also __ZYRAXKEEP__4_
 	private parseIgnoreCheck(raw: string): string[] {
 		const ignored = [];
 		const elements = raw.split('\0');

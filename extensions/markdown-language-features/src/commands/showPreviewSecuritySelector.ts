@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Command } from '../commandManager';
 import { MarkdownPreviewManager } from '../preview/previewManager';
 import { PreviewSecuritySelector } from '../preview/security';
@@ -27,10 +27,10 @@ export class ShowPreviewSecuritySelectorCommand implements Command {
 		if (this.#previewManager.activePreviewResource) {
 			this.#previewSecuritySelector.showSecuritySelectorForResource(this.#previewManager.activePreviewResource);
 		} else if (resource) {
-			const source = vscode.Uri.parse(resource);
-			this.#previewSecuritySelector.showSecuritySelectorForResource(source.query ? vscode.Uri.parse(source.query) : source);
-		} else if (vscode.window.activeTextEditor && isMarkdownFile(vscode.window.activeTextEditor.document)) {
-			this.#previewSecuritySelector.showSecuritySelectorForResource(vscode.window.activeTextEditor.document.uri);
+			const source = zyraxoncode.Uri.parse(resource);
+			this.#previewSecuritySelector.showSecuritySelectorForResource(source.query ? zyraxoncode.Uri.parse(source.query) : source);
+		} else if (zyraxoncode.window.activeTextEditor && isMarkdownFile(zyraxoncode.window.activeTextEditor.document)) {
+			this.#previewSecuritySelector.showSecuritySelectorForResource(zyraxoncode.window.activeTextEditor.document.uri);
 		}
 	}
 }

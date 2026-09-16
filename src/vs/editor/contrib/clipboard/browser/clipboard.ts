@@ -29,8 +29,8 @@ const CLIPBOARD_CONTEXT_MENU_GROUP = '9_cutcopypaste';
 const supportsCut = (platform.isNative || document.queryCommandSupported('cut'));
 const supportsCopy = (platform.isNative || document.queryCommandSupported('copy'));
 // Firefox only supports navigator.clipboard.readText() in browser extensions.
-// See https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/readText#Browser_compatibility
-// When loading over http, navigator.clipboard can be undefined. See https://github.com/microsoft/monaco-editor/issues/2313
+// See __ZYRAXKEEP__0_
+// When loading over http, navigator.clipboard can be undefined. See __ZYRAXKEEP__1_
 const supportsPaste = (typeof navigator.clipboard === 'undefined' || browser.isFirefox) ? document.queryCommandSupported('paste') : true;
 
 function registerCommand<T extends Command>(command: T): T {
@@ -295,7 +295,7 @@ if (PasteAction) {
 			}
 
 			logService.trace('registerExecCommandImpl (before triggerPaste)');
-			const triggerPaste = clipboardService.triggerPaste(getActiveWindow().vscodeWindowId);
+			const triggerPaste = clipboardService.triggerPaste(getActiveWindow().zyraxoncodeWindowId);
 			if (triggerPaste) {
 				logService.trace('registerExecCommandImpl (triggerPaste defined)');
 				return triggerPaste.then(async () => {
@@ -339,7 +339,7 @@ if (PasteAction) {
 	PasteAction.addImplementation(0, 'generic-dom', (accessor: ServicesAccessor, args: unknown) => {
 		const logService = accessor.get(ILogService);
 		logService.trace('registerExecCommandImpl (addImplementation generic-dom for : paste)');
-		const triggerPaste = accessor.get(IClipboardService).triggerPaste(getActiveWindow().vscodeWindowId);
+		const triggerPaste = accessor.get(IClipboardService).triggerPaste(getActiveWindow().zyraxoncodeWindowId);
 		return triggerPaste ?? false;
 	});
 }

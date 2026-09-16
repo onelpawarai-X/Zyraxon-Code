@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptPiece } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptPiece } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IChatDebugFileLoggerService } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { ISessionTranscriptService } from '../../../platform/chat/common/sessionTranscriptService';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -24,7 +24,7 @@ import { extUriBiasedIgnorePathCase, isEqual, normalizePath } from '../../../uti
 import { isString } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService, ServicesAccessor } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelPromptTsxPart, LanguageModelToolResult } from '../../../vscodeTypes';
+import { LanguageModelPromptTsxPart, LanguageModelToolResult } from '../../../zyraxoncodeTypes';
 import { isCustomizationsIndex, isPromptFile } from '../../prompt/common/chatVariablesCollection';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { IChatDiskSessionResources } from '../../prompts/common/chatDiskSessionResources';
@@ -36,7 +36,7 @@ export function checkCancellation(token: CancellationToken): void {
 	}
 }
 
-export async function toolTSX(insta: IInstantiationService, options: vscode.LanguageModelToolInvocationOptions<unknown>, piece: PromptPiece, token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+export async function toolTSX(insta: IInstantiationService, options: zyraxoncode.LanguageModelToolInvocationOptions<unknown>, piece: PromptPiece, token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 	return new LanguageModelToolResult([
 		new LanguageModelPromptTsxPart(
 			await renderPromptElementJSON(insta, class extends PromptElement {
@@ -50,7 +50,7 @@ export async function toolTSX(insta: IInstantiationService, options: vscode.Lang
 
 export interface InputGlobResult {
 	/** The resolved glob patterns to pass to the search API. */
-	readonly patterns: vscode.GlobPattern[];
+	readonly patterns: zyraxoncode.GlobPattern[];
 	/** The workspace folder name if the pattern was scoped to a specific folder, for display. */
 	readonly folderName: string | undefined;
 	/** The glob pattern within the folder (e.g. `src/**`), for display. Only set when folderName is set. */
@@ -67,7 +67,7 @@ export interface InputGlobResult {
  *   are scoped to it so searches target the session's folder.
  */
 export function inputGlobToPattern(query: string, workingDir: WorkingDirectory, modelFamily: string | undefined): InputGlobResult {
-	let pattern: vscode.GlobPattern = query;
+	let pattern: zyraxoncode.GlobPattern = query;
 	let folderName: string | undefined;
 	let folderRelativePattern: string | undefined;
 
@@ -211,7 +211,7 @@ export async function assertFileOkForTool(accessor: ServicesAccessor, uri: URI, 
 	if (sessionTranscriptService.isTranscriptUri(normalizedUri)) {
 		return;
 	}
-	if (normalizedUri.scheme === 'vscode-chat-response-resource') {
+	if (normalizedUri.scheme === 'zyraxoncode-chat-response-resource') {
 		return;
 	}
 	if (await isExternalInstructionsFile(normalizedUri, customInstructionsService, buildPromptContext)) {
@@ -300,7 +300,7 @@ export async function isFileExternalAndNeedsConfirmation(accessor: ServicesAcces
 	if (options?.readOnly && isUriUnderAdditionalReadAccessPaths(normalizedUri, configurationService)) {
 		return false;
 	}
-	if (uri.scheme === Schemas.untitled || uri.scheme === 'vscode-chat-response-resource') {
+	if (uri.scheme === Schemas.untitled || uri.scheme === 'zyraxoncode-chat-response-resource') {
 		return false;
 	}
 	if (await isExternalInstructionsFile(normalizedUri, customInstructionsService, buildPromptContext)) {

@@ -56,8 +56,8 @@ export interface IAgentHostTarget {
 /**
  * The in-tree ZYRAXON Code agent host server (`agentHostServerMain.ts`).
  */
-export const vscodeAgentHostTarget: IAgentHostTarget = {
-	id: 'vscode-agent-host',
+export const zyraxoncodeAgentHostTarget: IAgentHostTarget = {
+	id: 'zyraxoncode-agent-host',
 	launch(options) {
 		return startRealServer({
 			homeDir: options.homeDir,
@@ -71,4 +71,4 @@ export const vscodeAgentHostTarget: IAgentHostTarget = {
 };
 
 /** The target the suite runs against by default. */
-export const defaultAgentHostTarget: IAgentHostTarget = vscodeAgentHostTarget;
+export const defaultAgentHostTarget: IAgentHostTarget = zyraxoncodeAgentHostTarget;

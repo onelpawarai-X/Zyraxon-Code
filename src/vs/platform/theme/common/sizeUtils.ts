@@ -38,12 +38,12 @@ export interface SizeContribution {
 
 /**
  * Returns the css variable name for the given size identifier. Dots (`.`) are replaced with hyphens (`-`) and
- * everything is prefixed with `--vscode-`.
+ * everything is prefixed with `--zyraxoncode-`.
  *
- * @sample `editor.fontSize` is `--vscode-editor-fontSize`.
+ * @sample `editor.fontSize` is `--zyraxoncode-editor-fontSize`.
  */
 export function asCssVariableName(sizeIdent: SizeIdentifier): string {
-	return `--vscode-${sizeIdent.replace(/\./g, '-')}`;
+	return `--zyraxoncode-${sizeIdent.replace(/\./g, '-')}`;
 }
 
 export function asCssVariable(size: SizeIdentifier): string {
@@ -271,7 +271,7 @@ export function getSizeRegistry(): ISizeRegistry {
 	return sizeRegistry;
 }
 
-export const workbenchSizesSchemaId = 'vscode://schemas/workbench-sizes';
+export const workbenchSizesSchemaId = '__ZYRAXKEEP__0_';
 
 const schemaRegistry = platform.Registry.as<IJSONContributionRegistry>(JSONExtensions.JSONContribution);
 schemaRegistry.registerSchema(workbenchSizesSchemaId, sizeRegistry.getSizeSchema());

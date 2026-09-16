@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { ChatSessionWorktreeProperties } from './chatSessionWorktreeService';
 import type { IWorkspaceInfo } from './workspaceInfo';
@@ -40,7 +40,7 @@ export interface StoredModeInstructions {
 
 export interface RequestDetails {
 	/** ZYRAXON Code request ID — always available, serves as primary key. */
-	readonly vscodeRequestId: string;
+	readonly zyraxoncodeRequestId: string;
 	/** Copilot SDK request ID — may not be available until the request completes. */
 	copilotRequestId?: string;
 	/**
@@ -98,7 +98,7 @@ export interface ChatSessionMetadataFile {
 	/** Custom title set by the user or generated for the session. */
 	customTitle?: string;
 	/** The creator of this session. */
-	origin?: 'vscode' | 'other';
+	origin?: 'zyraxoncode' | 'other';
 	/**
 	 * The kind of session, which can be used to determine how the session was created and possibly how it should be displayed in the UI.
 	 */
@@ -121,7 +121,7 @@ export interface ChatSessionMetadataFile {
 }
 
 /**
- * One line in `~/.copilot/vscode.session.worktree.jsonl`. Maps a session id
+ * One line in `~/.copilot/zyraxoncode.session.worktree.jsonl`. Maps a session id
  * to the path of its worktree so folder → session lookups work even when the
  * session has been evicted from the bulk metadata cache.
  */
@@ -135,14 +135,14 @@ export const IChatSessionMetadataStore = createServiceIdentifier<IChatSessionMet
 
 export interface IChatSessionMetadataStore {
 	readonly _serviceBrand: undefined;
-	getMetadataFileUri(sessionId: string): vscode.Uri;
+	getMetadataFileUri(sessionId: string): zyraxoncode.Uri;
 	deleteSessionMetadata(sessionId: string): Promise<void>;
 	storeWorktreeInfo(sessionId: string, properties: ChatSessionWorktreeProperties): Promise<void>;
 	storeWorkspaceFolderInfo(sessionId: string, entry: WorkspaceFolderEntry): Promise<void>;
 	storeRepositoryProperties(sessionId: string, properties: RepositoryProperties): Promise<void>;
 	getRepositoryProperties(sessionId: string): Promise<RepositoryProperties | undefined>;
 	getWorktreeProperties(sessionId: string): Promise<ChatSessionWorktreeProperties | undefined>;
-	getSessionWorkspaceFolder(sessionId: string): Promise<vscode.Uri | undefined>;
+	getSessionWorkspaceFolder(sessionId: string): Promise<zyraxoncode.Uri | undefined>;
 	getSessionWorkspaceFolderEntry(sessionId: string): Promise<WorkspaceFolderEntry | undefined>;
 	getAdditionalWorkspaces(sessionId: string): Promise<IWorkspaceInfo[]>;
 	setAdditionalWorkspaces(sessionId: string, workspaces: IWorkspaceInfo[]): Promise<void>;
@@ -151,7 +151,7 @@ export interface IChatSessionMetadataStore {
 	getCustomTitle(sessionId: string): Promise<string | undefined>;
 	setCustomTitle(sessionId: string, title: string): Promise<void>;
 	getRequestDetails(sessionId: string): Promise<RequestDetails[]>;
-	updateRequestDetails(sessionId: string, details: (Partial<RequestDetails> & { vscodeRequestId: string })[]): Promise<void>;
+	updateRequestDetails(sessionId: string, details: (Partial<RequestDetails> & { zyraxoncodeRequestId: string })[]): Promise<void>;
 	getSessionAgent(sessionId: string): Promise<string | undefined>;
 	/**
 	 * Copy all ZYRAXON Code-specific metadata (workspace info, request details, etc.) from
@@ -159,7 +159,7 @@ export interface IChatSessionMetadataStore {
 	 */
 	storeForkedSessionMetadata(sourceSessionId: string, targetSessionId: string, customTitle: string): Promise<void>;
 	setSessionOrigin(sessionId: string): Promise<void>;
-	getSessionOrigin(sessionId: string): Promise<'vscode' | 'other'>;
+	getSessionOrigin(sessionId: string): Promise<'zyraxoncode' | 'other'>;
 	setSessionParentId(sessionId: string, parentSessionId: string): Promise<void>;
 	/**
 	 * Returns the parent lineage info for a session, distinguishing forked sessions
@@ -184,9 +184,9 @@ export interface IChatSessionMetadataStore {
 	 * Returns session IDs whose working directory (worktree path or workspace folder)
 	 * matches the given folder URI.
 	 */
-	getSessionIdsForFolder(folder: vscode.Uri): string[];
+	getSessionIdsForFolder(folder: zyraxoncode.Uri): string[];
 	/**
 	 * Returns session IDs that have a worktree whose path matches the given folder URI.
 	 */
-	getWorktreeSessions(folder: vscode.Uri): string[];
+	getWorktreeSessions(folder: zyraxoncode.Uri): string[];
 }

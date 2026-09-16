@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import * as http from 'http';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -13,7 +13,7 @@ import { APIUsage } from '../../../platform/networking/common/openai';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { CancellationTokenSource } from '../../../util/vs/base/common/cancellation';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
-import { LanguageModelError } from '../../../vscodeTypes';
+import { LanguageModelError } from '../../../zyraxoncodeTypes';
 import { AnthropicAdapterFactory } from './adapters/anthropicAdapter';
 import { IAgentStreamBlock, IProtocolAdapter, IProtocolAdapterFactory, IStreamingContext } from './adapters/types';
 
@@ -43,7 +43,7 @@ export class LanguageModelServer implements ILanguageModelServer {
 	) {
 		this.config = {
 			port: 0, // Will be set to random available port
-			nonce: 'vscode-lm-' + generateUuid()
+			nonce: 'zyraxoncode-lm-' + generateUuid()
 		};
 		this.adapterFactories = new Map();
 		this.adapterFactories.set('/v1/messages', new AnthropicAdapterFactory());
@@ -115,7 +115,7 @@ export class LanguageModelServer implements ILanguageModelServer {
 
 	private parseUrlPathname(url: string): string {
 		try {
-			const parsedUrl = new URL(url, 'http://localhost');
+			const parsedUrl = new URL(url, '__ZYRAXKEEP__0_');
 			return parsedUrl.pathname;
 		} catch {
 			return url.split('?')[0];
@@ -329,7 +329,7 @@ export class LanguageModelServer implements ILanguageModelServer {
 						...this.config,
 						port: address.port
 					};
-					this.logService.trace(`Language Model Server started on http://localhost:${this.config.port}`);
+					this.logService.trace(`Language Model Server started on __ZYRAXKEEP__1_{this.config.port}`);
 					resolve();
 				}
 			});

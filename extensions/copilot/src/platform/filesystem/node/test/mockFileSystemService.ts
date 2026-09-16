@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { FileStat, FileSystemWatcher } from 'vscode';
+import type { FileStat, FileSystemWatcher } from 'zyraxoncode';
 import { basename, dirname } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IFileSystemService } from '../../common/fileSystemService';

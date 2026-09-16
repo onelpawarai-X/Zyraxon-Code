@@ -7,7 +7,7 @@ import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { IDisposable } from '../../../util/vs/base/common/lifecycle';
 import { URI } from '../../../util/vs/base/common/uri';
-import { ExcludeSettingOptions } from '../../../vscodeTypes';
+import { ExcludeSettingOptions } from '../../../zyraxoncodeTypes';
 import { IAuthenticationService } from '../../authentication/common/authentication';
 import { ICAPIClientService } from '../../endpoint/common/capiClient';
 import { IFileSystemService } from '../../filesystem/common/fileSystemService';

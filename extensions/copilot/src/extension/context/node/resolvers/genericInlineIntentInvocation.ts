@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import { BasePromptElementProps } from '@vscode/prompt-tsx';
-import type { CancellationToken, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, Progress } from 'vscode';
+import { BasePromptElementProps } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, Progress } from 'zyraxoncode';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
@@ -48,7 +48,7 @@ export class GenericInlineIntentInvocation implements IIntentInvocation {
 		token: CancellationToken
 	): Promise<IBuildPromptResult> {
 		let prompt: PromptElementCtor<GenericInlinePromptProps, any>;
-		if (this.documentContext.document.uri.scheme === Schemas.vscodeNotebookCell) {
+		if (this.documentContext.document.uri.scheme === Schemas.zyraxoncodeNotebookCell) {
 			prompt = (this.editStrategy === EditStrategy.ForceInsertion ? InlineChatNotebookGeneratePrompt : InlineChatNotebookEditPrompt);
 		} else if (this.documentContext.document.languageId === 'markdown') {
 			prompt = (this.editStrategy === EditStrategy.ForceInsertion ? InlineChatGenerateMarkdownPrompt : InlineChatEditMarkdownPrompt);

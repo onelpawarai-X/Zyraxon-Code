@@ -13,25 +13,25 @@ import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import { ExtHostTextEditor, TextEditorDecorationType } from './extHostTextEditor.js';
 import * as TypeConverters from './extHostTypeConverters.js';
 import { TextEditorSelectionChangeKind, TextEditorChangeKind } from './extHostTypes.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 export class ExtHostEditors extends Disposable implements ExtHostEditorsShape {
 
-	private readonly _onDidChangeTextEditorSelection = this._register(new Emitter<vscode.TextEditorSelectionChangeEvent>());
-	private readonly _onDidChangeTextEditorOptions = this._register(new Emitter<vscode.TextEditorOptionsChangeEvent>());
-	private readonly _onDidChangeTextEditorVisibleRanges = this._register(new Emitter<vscode.TextEditorVisibleRangesChangeEvent>());
-	private readonly _onDidChangeTextEditorViewColumn = this._register(new Emitter<vscode.TextEditorViewColumnChangeEvent>());
-	private readonly _onDidChangeTextEditorDiffInformation = this._register(new Emitter<vscode.TextEditorDiffInformationChangeEvent>());
-	private readonly _onDidChangeActiveTextEditor = this._register(new Emitter<vscode.TextEditor | undefined>());
-	private readonly _onDidChangeVisibleTextEditors = this._register(new Emitter<readonly vscode.TextEditor[]>());
+	private readonly _onDidChangeTextEditorSelection = this._register(new Emitter<zyraxoncode.TextEditorSelectionChangeEvent>());
+	private readonly _onDidChangeTextEditorOptions = this._register(new Emitter<zyraxoncode.TextEditorOptionsChangeEvent>());
+	private readonly _onDidChangeTextEditorVisibleRanges = this._register(new Emitter<zyraxoncode.TextEditorVisibleRangesChangeEvent>());
+	private readonly _onDidChangeTextEditorViewColumn = this._register(new Emitter<zyraxoncode.TextEditorViewColumnChangeEvent>());
+	private readonly _onDidChangeTextEditorDiffInformation = this._register(new Emitter<zyraxoncode.TextEditorDiffInformationChangeEvent>());
+	private readonly _onDidChangeActiveTextEditor = this._register(new Emitter<zyraxoncode.TextEditor | undefined>());
+	private readonly _onDidChangeVisibleTextEditors = this._register(new Emitter<readonly zyraxoncode.TextEditor[]>());
 
-	readonly onDidChangeTextEditorSelection: Event<vscode.TextEditorSelectionChangeEvent> = this._onDidChangeTextEditorSelection.event;
-	readonly onDidChangeTextEditorOptions: Event<vscode.TextEditorOptionsChangeEvent> = this._onDidChangeTextEditorOptions.event;
-	readonly onDidChangeTextEditorVisibleRanges: Event<vscode.TextEditorVisibleRangesChangeEvent> = this._onDidChangeTextEditorVisibleRanges.event;
-	readonly onDidChangeTextEditorViewColumn: Event<vscode.TextEditorViewColumnChangeEvent> = this._onDidChangeTextEditorViewColumn.event;
-	readonly onDidChangeTextEditorDiffInformation: Event<vscode.TextEditorDiffInformationChangeEvent> = this._onDidChangeTextEditorDiffInformation.event;
-	readonly onDidChangeActiveTextEditor: Event<vscode.TextEditor | undefined> = this._onDidChangeActiveTextEditor.event;
-	readonly onDidChangeVisibleTextEditors: Event<readonly vscode.TextEditor[]> = this._onDidChangeVisibleTextEditors.event;
+	readonly onDidChangeTextEditorSelection: Event<zyraxoncode.TextEditorSelectionChangeEvent> = this._onDidChangeTextEditorSelection.event;
+	readonly onDidChangeTextEditorOptions: Event<zyraxoncode.TextEditorOptionsChangeEvent> = this._onDidChangeTextEditorOptions.event;
+	readonly onDidChangeTextEditorVisibleRanges: Event<zyraxoncode.TextEditorVisibleRangesChangeEvent> = this._onDidChangeTextEditorVisibleRanges.event;
+	readonly onDidChangeTextEditorViewColumn: Event<zyraxoncode.TextEditorViewColumnChangeEvent> = this._onDidChangeTextEditorViewColumn.event;
+	readonly onDidChangeTextEditorDiffInformation: Event<zyraxoncode.TextEditorDiffInformationChangeEvent> = this._onDidChangeTextEditorDiffInformation.event;
+	readonly onDidChangeActiveTextEditor: Event<zyraxoncode.TextEditor | undefined> = this._onDidChangeActiveTextEditor.event;
+	readonly onDidChangeVisibleTextEditors: Event<readonly zyraxoncode.TextEditor[]> = this._onDidChangeVisibleTextEditors.event;
 
 	private readonly _proxy: MainThreadTextEditorsShape;
 
@@ -46,23 +46,23 @@ export class ExtHostEditors extends Disposable implements ExtHostEditorsShape {
 		this._register(this._extHostDocumentsAndEditors.onDidChangeActiveTextEditor(e => this._onDidChangeActiveTextEditor.fire(e)));
 	}
 
-	getActiveTextEditor(): vscode.TextEditor | undefined {
+	getActiveTextEditor(): zyraxoncode.TextEditor | undefined {
 		return this._extHostDocumentsAndEditors.activeEditor();
 	}
 
-	getVisibleTextEditors(): vscode.TextEditor[];
+	getVisibleTextEditors(): zyraxoncode.TextEditor[];
 	getVisibleTextEditors(internal: true): ExtHostTextEditor[];
-	getVisibleTextEditors(internal?: true): ExtHostTextEditor[] | vscode.TextEditor[] {
+	getVisibleTextEditors(internal?: true): ExtHostTextEditor[] | zyraxoncode.TextEditor[] {
 		const editors = this._extHostDocumentsAndEditors.allEditors();
 		return internal
 			? editors
 			: editors.map(editor => editor.value);
 	}
 
-	showTextDocument(document: vscode.TextDocument, column: vscode.ViewColumn, preserveFocus: boolean): Promise<vscode.TextEditor>;
-	showTextDocument(document: vscode.TextDocument, options: { column: vscode.ViewColumn; preserveFocus: boolean; pinned: boolean }): Promise<vscode.TextEditor>;
-	showTextDocument(document: vscode.TextDocument, columnOrOptions: vscode.ViewColumn | vscode.TextDocumentShowOptions | undefined, preserveFocus?: boolean): Promise<vscode.TextEditor>;
-	async showTextDocument(document: vscode.TextDocument, columnOrOptions: vscode.ViewColumn | vscode.TextDocumentShowOptions | undefined, preserveFocus?: boolean): Promise<vscode.TextEditor> {
+	showTextDocument(document: zyraxoncode.TextDocument, column: zyraxoncode.ViewColumn, preserveFocus: boolean): Promise<zyraxoncode.TextEditor>;
+	showTextDocument(document: zyraxoncode.TextDocument, options: { column: zyraxoncode.ViewColumn; preserveFocus: boolean; pinned: boolean }): Promise<zyraxoncode.TextEditor>;
+	showTextDocument(document: zyraxoncode.TextDocument, columnOrOptions: zyraxoncode.ViewColumn | zyraxoncode.TextDocumentShowOptions | undefined, preserveFocus?: boolean): Promise<zyraxoncode.TextEditor>;
+	async showTextDocument(document: zyraxoncode.TextDocument, columnOrOptions: zyraxoncode.ViewColumn | zyraxoncode.TextDocumentShowOptions | undefined, preserveFocus?: boolean): Promise<zyraxoncode.TextEditor> {
 		let options: ITextDocumentShowOptions;
 		if (typeof columnOrOptions === 'number') {
 			options = {
@@ -96,7 +96,7 @@ export class ExtHostEditors extends Disposable implements ExtHostEditorsShape {
 		}
 	}
 
-	createTextEditorDecorationType(extension: IExtensionDescription, options: vscode.DecorationRenderOptions): vscode.TextEditorDecorationType {
+	createTextEditorDecorationType(extension: IExtensionDescription, options: zyraxoncode.DecorationRenderOptions): zyraxoncode.TextEditorDecorationType {
 		return new TextEditorDecorationType(this._proxy, extension, options).value;
 	}
 
@@ -183,7 +183,7 @@ export class ExtHostEditors extends Disposable implements ExtHostEditorsShape {
 			const changes = diff.changes.map(change => {
 				const [originalStartLineNumber, originalEndLineNumberExclusive, modifiedStartLineNumber, modifiedEndLineNumberExclusive] = change;
 
-				let kind: vscode.TextEditorChangeKind;
+				let kind: zyraxoncode.TextEditorChangeKind;
 				if (originalStartLineNumber === originalEndLineNumberExclusive) {
 					kind = TextEditorChangeKind.Addition;
 				} else if (modifiedStartLineNumber === modifiedEndLineNumberExclusive) {
@@ -202,7 +202,7 @@ export class ExtHostEditors extends Disposable implements ExtHostEditorsShape {
 						endLineNumberExclusive: modifiedEndLineNumberExclusive
 					},
 					kind
-				} satisfies vscode.TextEditorChange;
+				} satisfies zyraxoncode.TextEditorChange;
 			});
 
 			return Object.freeze({
@@ -224,7 +224,7 @@ export class ExtHostEditors extends Disposable implements ExtHostEditorsShape {
 		});
 	}
 
-	getDiffInformation(id: string): Promise<vscode.LineChange[]> {
+	getDiffInformation(id: string): Promise<zyraxoncode.LineChange[]> {
 		return Promise.resolve(this._proxy.$getDiffInformation(id));
 	}
 }

@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILanguageFeaturesService } from '../../../platform/languages/common/languageFeaturesService';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { Tag } from '../../prompts/node/base/tag';
 import { ToolName } from '../common/toolNames';
@@ -21,7 +21,7 @@ interface ISearchWorkspaceSymbolsTool {
 	symbolName: string;
 }
 
-class SearchWorkspaceSymbolsTool implements vscode.LanguageModelTool<ISearchWorkspaceSymbolsTool> {
+class SearchWorkspaceSymbolsTool implements zyraxoncode.LanguageModelTool<ISearchWorkspaceSymbolsTool> {
 
 	public static readonly toolName = ToolName.SearchWorkspaceSymbols;
 
@@ -30,7 +30,7 @@ class SearchWorkspaceSymbolsTool implements vscode.LanguageModelTool<ISearchWork
 		@ILanguageFeaturesService private readonly languageFeaturesService: ILanguageFeaturesService
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<ISearchWorkspaceSymbolsTool>, token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<ISearchWorkspaceSymbolsTool>, token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		const symbols = await this.languageFeaturesService.getWorkspaceSymbols(options.input.symbolName);
 		checkCancellation(token);
 		const result = await renderPromptElementJSON(this.instantiationService, WorkspaceSymbolSearchOutput, { symbols }, options.tokenizationOptions, token);
@@ -49,7 +49,7 @@ class SearchWorkspaceSymbolsTool implements vscode.LanguageModelTool<ISearchWork
 		return toolResult;
 	}
 
-	prepareInvocation?(options: vscode.LanguageModelToolInvocationPrepareOptions<ISearchWorkspaceSymbolsTool>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation?(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<ISearchWorkspaceSymbolsTool>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		const query = `\`${options.input.symbolName}\``;
 		return {
 			invocationMessage: l10n.t`Searching for ${query}`,
@@ -62,7 +62,7 @@ ToolRegistry.registerTool(SearchWorkspaceSymbolsTool);
 
 
 interface IWorkspaceSymbolSearchOutputProps extends BasePromptElementProps {
-	symbols: vscode.SymbolInformation[];
+	symbols: zyraxoncode.SymbolInformation[];
 }
 
 class WorkspaceSymbolSearchOutput extends PromptElement<IWorkspaceSymbolSearchOutputProps> {
@@ -73,7 +73,7 @@ class WorkspaceSymbolSearchOutput extends PromptElement<IWorkspaceSymbolSearchOu
 		super(props);
 	}
 
-	override async render(state: void, sizing: PromptSizing, progress?: vscode.Progress<vscode.ChatResponsePart>, token?: vscode.CancellationToken): Promise<PromptPiece | undefined> {
+	override async render(state: void, sizing: PromptSizing, progress?: zyraxoncode.Progress<zyraxoncode.ChatResponsePart>, token?: zyraxoncode.CancellationToken): Promise<PromptPiece | undefined> {
 		if (!this.props.symbols.length) {
 			return <>No symbols found.</>;
 		}

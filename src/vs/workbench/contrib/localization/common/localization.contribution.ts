@@ -26,43 +26,43 @@ export class BaseLocalizationWorkbenchContribution extends Disposable implements
 			extensionPoint: 'localizations',
 			defaultExtensionKind: ['ui', 'workspace'],
 			jsonSchema: {
-				description: localize('vscode.extension.contributes.localizations', "Contributes localizations to the editor"),
+				description: localize('zyraxoncode.extension.contributes.localizations', "Contributes localizations to the editor"),
 				type: 'array',
 				default: [],
 				items: {
 					type: 'object',
 					required: ['languageId', 'translations'],
-					defaultSnippets: [{ body: { languageId: '', languageName: '', localizedLanguageName: '', translations: [{ id: 'vscode', path: '' }] } }],
+					defaultSnippets: [{ body: { languageId: '', languageName: '', localizedLanguageName: '', translations: [{ id: 'zyraxoncode', path: '' }] } }],
 					properties: {
 						languageId: {
-							description: localize('vscode.extension.contributes.localizations.languageId', 'Id of the language into which the display strings are translated.'),
+							description: localize('zyraxoncode.extension.contributes.localizations.languageId', 'Id of the language into which the display strings are translated.'),
 							type: 'string'
 						},
 						languageName: {
-							description: localize('vscode.extension.contributes.localizations.languageName', 'Name of the language in English.'),
+							description: localize('zyraxoncode.extension.contributes.localizations.languageName', 'Name of the language in English.'),
 							type: 'string'
 						},
 						localizedLanguageName: {
-							description: localize('vscode.extension.contributes.localizations.languageNameLocalized', 'Name of the language in contributed language.'),
+							description: localize('zyraxoncode.extension.contributes.localizations.languageNameLocalized', 'Name of the language in contributed language.'),
 							type: 'string'
 						},
 						translations: {
-							description: localize('vscode.extension.contributes.localizations.translations', 'List of translations associated to the language.'),
+							description: localize('zyraxoncode.extension.contributes.localizations.translations', 'List of translations associated to the language.'),
 							type: 'array',
-							default: [{ id: 'vscode', path: '' }],
+							default: [{ id: 'zyraxoncode', path: '' }],
 							items: {
 								type: 'object',
 								required: ['id', 'path'],
 								properties: {
 									id: {
 										type: 'string',
-										description: localize('vscode.extension.contributes.localizations.translations.id', "Id of ZYRAXON Code or Extension for which this translation is contributed to. Id of ZYRAXON Code is always `vscode` and of extension should be in format `publisherId.extensionName`."),
-										pattern: '^((vscode)|([a-z0-9A-Z][a-z0-9A-Z-]*)\\.([a-z0-9A-Z][a-z0-9A-Z-]*))$',
-										patternErrorMessage: localize('vscode.extension.contributes.localizations.translations.id.pattern', "Id should be `vscode` or in format `publisherId.extensionName` for translating ZYRAXON Code or an extension respectively.")
+										description: localize('zyraxoncode.extension.contributes.localizations.translations.id', "Id of ZYRAXON Code or Extension for which this translation is contributed to. Id of ZYRAXON Code is always `zyraxoncode` and of extension should be in format `publisherId.extensionName`."),
+										pattern: '^((zyraxoncode)|([a-z0-9A-Z][a-z0-9A-Z-]*)\\.([a-z0-9A-Z][a-z0-9A-Z-]*))$',
+										patternErrorMessage: localize('zyraxoncode.extension.contributes.localizations.translations.id.pattern', "Id should be `zyraxoncode` or in format `publisherId.extensionName` for translating ZYRAXON Code or an extension respectively.")
 									},
 									path: {
 										type: 'string',
-										description: localize('vscode.extension.contributes.localizations.translations.path', "A relative path to a file containing translations for the language.")
+										description: localize('zyraxoncode.extension.contributes.localizations.translations.path', "A relative path to a file containing translations for the language.")
 									}
 								},
 								defaultSnippets: [{ body: { id: '', path: '' } }],

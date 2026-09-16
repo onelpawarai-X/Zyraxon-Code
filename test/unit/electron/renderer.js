@@ -205,12 +205,12 @@ async function loadTests(opts) {
 		'creates a snapshot', // self-testing
 		'validates a snapshot', // self-testing
 		'cleans up old snapshots', // self-testing
-		'issue #149412: ZYRAXON Code hangs when bad semantic token data is received', // https://github.com/microsoft/vscode/issues/192440
-		'issue #134973: invalid semantic tokens should be handled better', // https://github.com/microsoft/vscode/issues/192440
-		'issue #148651: VSCode UI process can hang if a semantic token with negative values is returned by language service', // https://github.com/microsoft/vscode/issues/192440
-		'issue #149130: vscode freezes because of Bracket Pair Colorization', // https://github.com/microsoft/vscode/issues/192440
-		'property limits', // https://github.com/microsoft/vscode/issues/192443
-		'Error events', // https://github.com/microsoft/vscode/issues/192443
+		'issue #149412: ZYRAXON Code hangs when bad semantic token data is received', // __ZYRAXKEEP__0_
+		'issue #134973: invalid semantic tokens should be handled better', // __ZYRAXKEEP__1_
+		'issue #148651: ZyraxonCode UI process can hang if a semantic token with negative values is returned by language service', // __ZYRAXKEEP__2_
+		'issue #149130: zyraxoncode freezes because of Bracket Pair Colorization', // __ZYRAXKEEP__3_
+		'property limits', // __ZYRAXKEEP__4_
+		'Error events', // __ZYRAXKEEP__5_
 		'fetch returns keybinding with user first if title and id matches', //
 		'throw ListenerLeakError'
 	]);
@@ -409,7 +409,7 @@ const $globalThis = globalThis;
 const setTimeout0IsFaster = (typeof $globalThis.postMessage === 'function' && !$globalThis.importScripts);
 
 /**
- * See https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#:~:text=than%204%2C%20then-,set%20timeout%20to%204,-.
+ * See __ZYRAXKEEP__6_
  *
  * Works similarly to `setTimeout(0)` but doesn't suffer from the 4ms artificial delay
  * that browsers set when the nesting level is > 5.
@@ -419,10 +419,10 @@ const setTimeout0 = (() => {
 		const pending = [];
 
 		$globalThis.addEventListener('message', (e) => {
-			if (e.data && e.data.vscodeScheduleAsyncWork) {
+			if (e.data && e.data.zyraxoncodeScheduleAsyncWork) {
 				for (let i = 0, len = pending.length; i < len; i++) {
 					const candidate = pending[i];
-					if (candidate.id === e.data.vscodeScheduleAsyncWork) {
+					if (candidate.id === e.data.zyraxoncodeScheduleAsyncWork) {
 						pending.splice(i, 1);
 						candidate.callback();
 						return;
@@ -437,7 +437,7 @@ const setTimeout0 = (() => {
 				id: myId,
 				callback: callback
 			});
-			$globalThis.postMessage({ vscodeScheduleAsyncWork: myId }, '*');
+			$globalThis.postMessage({ zyraxoncodeScheduleAsyncWork: myId }, '*');
 		};
 	}
 	return (callback) => setTimeout(callback);

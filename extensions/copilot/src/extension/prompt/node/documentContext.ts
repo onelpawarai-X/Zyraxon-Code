@@ -3,25 +3,25 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { ILanguage, getLanguage } from '../../../util/common/languages';
 import { findLast } from '../../../util/vs/base/common/arraysFind';
 import { Mutable } from '../../../util/vs/base/common/types';
-import { ChatRequestEditorData, ChatRequestNotebookData, Range, Selection } from '../../../vscodeTypes';
+import { ChatRequestEditorData, ChatRequestNotebookData, Range, Selection } from '../../../zyraxoncodeTypes';
 import { CopilotInteractiveEditorResponse } from '../../inlineChat/node/promptCraftingTypes';
 import { Turn } from '../common/conversation';
 
 export interface IDocumentContext {
 	readonly document: TextDocumentSnapshot;
-	readonly fileIndentInfo: vscode.FormattingOptions | undefined;
+	readonly fileIndentInfo: zyraxoncode.FormattingOptions | undefined;
 	readonly language: ILanguage;
-	readonly wholeRange: vscode.Range;
-	readonly selection: vscode.Selection;
+	readonly wholeRange: zyraxoncode.Range;
+	readonly selection: zyraxoncode.Selection;
 }
 
 export namespace IDocumentContext {
-	export function fromEditor(editor: vscode.TextEditor, wholeRange?: vscode.Range): IDocumentContext {
+	export function fromEditor(editor: zyraxoncode.TextEditor, wholeRange?: zyraxoncode.Range): IDocumentContext {
 		const { options, document, selection, visibleRanges } = editor;
 		const docSnapshot = TextDocumentSnapshot.create(document);
 		const fileIndentInfo = {
@@ -44,7 +44,7 @@ export namespace IDocumentContext {
 
 	}
 
-	export function fromTextDocument(document: vscode.TextDocument, selection: vscode.Selection, wholeRange?: vscode.Range): IDocumentContext {
+	export function fromTextDocument(document: zyraxoncode.TextDocument, selection: zyraxoncode.Selection, wholeRange?: zyraxoncode.Range): IDocumentContext {
 		const docSnapshot = TextDocumentSnapshot.create(document);
 		const language = getLanguage(docSnapshot);
 		if (!wholeRange) {
@@ -55,7 +55,7 @@ export namespace IDocumentContext {
 		};
 	}
 
-	export function inferDocumentContext(request: vscode.ChatRequest, activeEditor: vscode.TextEditor | undefined, previousTurns: Turn[]): IDocumentContext | undefined {
+	export function inferDocumentContext(request: zyraxoncode.ChatRequest, activeEditor: zyraxoncode.TextEditor | undefined, previousTurns: Turn[]): IDocumentContext | undefined {
 
 		let result: Mutable<IDocumentContext> | undefined;
 

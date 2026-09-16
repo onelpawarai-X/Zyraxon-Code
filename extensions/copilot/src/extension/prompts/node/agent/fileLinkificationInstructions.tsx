@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement } from '@vscode/prompt-tsx';
+import { PromptElement } from '@zyraxoncode/prompt-tsx';
 import { Tag } from '../base/tag';
 
 export class FileLinkificationInstructions extends PromptElement<{}> {
@@ -25,7 +25,7 @@ export class FileLinkificationInstructions extends PromptElement<{}> {
 			- Without line numbers: Display text must match the target path.<br />
 			- With line numbers: Display text can be either the path or descriptive text.<br />
 			- Use '/' only; strip drive letters and external folders.<br />
-			- Do not use these URI schemes: file://, vscode://<br />
+			- Do not use these URI schemes: __ZYRAXKEEP__0_ zyraxoncode://<br />
 			- Encode spaces only in the target (My File.md → My%20File.md).<br />
 			- Non-contiguous lines require separate links. NEVER use comma-separated line references like #L10-L12, L20.<br />
 			- Valid formats: [file.ts](file.ts#L10) only. Invalid: ([file.ts#L10]) or [file.ts](file.ts)#L10<br />
@@ -64,7 +64,7 @@ export class FileLinkificationInstructionsOptimized extends PromptElement<{}> {
 			Rules:<br />
 			- Without line numbers, display text must match target path<br />
 			- Use '/' only. Strip drive letters and external folders<br />
-			- Do not use file:// or vscode:// schemes<br />
+			- Do not use file:// or zyraxoncode:// schemes<br />
 			- Encode spaces only in target (My%20File.md)<br />
 			- Non-contiguous lines require separate links. NEVER use comma-separated references like #L10-L12, L20<br />
 			- Only link to files that exist in the workspace<br />

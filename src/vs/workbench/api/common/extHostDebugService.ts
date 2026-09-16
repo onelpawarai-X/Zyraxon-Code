@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { coalesce } from '../../../base/common/arrays.js';
 import { asPromise } from '../../../base/common/async.js';
 import { CancellationToken } from '../../../base/common/cancellation.js';
@@ -38,27 +38,27 @@ export interface IExtHostDebugService extends ExtHostDebugServiceShape {
 
 	readonly _serviceBrand: undefined;
 
-	readonly onDidStartDebugSession: Event<vscode.DebugSession>;
-	readonly onDidTerminateDebugSession: Event<vscode.DebugSession>;
-	readonly onDidChangeActiveDebugSession: Event<vscode.DebugSession | undefined>;
-	activeDebugSession: vscode.DebugSession | undefined;
-	activeDebugConsole: vscode.DebugConsole;
-	readonly onDidReceiveDebugSessionCustomEvent: Event<vscode.DebugSessionCustomEvent>;
-	readonly onDidChangeBreakpoints: Event<vscode.BreakpointsChangeEvent>;
-	breakpoints: vscode.Breakpoint[];
-	readonly onDidChangeActiveStackItem: Event<vscode.DebugThread | vscode.DebugStackFrame | undefined>;
-	activeStackItem: vscode.DebugThread | vscode.DebugStackFrame | undefined;
+	readonly onDidStartDebugSession: Event<zyraxoncode.DebugSession>;
+	readonly onDidTerminateDebugSession: Event<zyraxoncode.DebugSession>;
+	readonly onDidChangeActiveDebugSession: Event<zyraxoncode.DebugSession | undefined>;
+	activeDebugSession: zyraxoncode.DebugSession | undefined;
+	activeDebugConsole: zyraxoncode.DebugConsole;
+	readonly onDidReceiveDebugSessionCustomEvent: Event<zyraxoncode.DebugSessionCustomEvent>;
+	readonly onDidChangeBreakpoints: Event<zyraxoncode.BreakpointsChangeEvent>;
+	breakpoints: zyraxoncode.Breakpoint[];
+	readonly onDidChangeActiveStackItem: Event<zyraxoncode.DebugThread | zyraxoncode.DebugStackFrame | undefined>;
+	activeStackItem: zyraxoncode.DebugThread | zyraxoncode.DebugStackFrame | undefined;
 
-	addBreakpoints(breakpoints0: readonly vscode.Breakpoint[]): Promise<void>;
-	removeBreakpoints(breakpoints0: readonly vscode.Breakpoint[]): Promise<void>;
-	startDebugging(folder: vscode.WorkspaceFolder | undefined, nameOrConfig: string | vscode.DebugConfiguration, options: vscode.DebugSessionOptions): Promise<boolean>;
-	stopDebugging(session?: vscode.DebugSession): Promise<void>;
-	registerDebugConfigurationProvider(type: string, provider: vscode.DebugConfigurationProvider, trigger: vscode.DebugConfigurationProviderTriggerKind): vscode.Disposable;
-	registerDebugAdapterDescriptorFactory(extension: IExtensionDescription, type: string, factory: vscode.DebugAdapterDescriptorFactory): vscode.Disposable;
-	registerDebugAdapterTrackerFactory(type: string, factory: vscode.DebugAdapterTrackerFactory): vscode.Disposable;
-	registerDebugVisualizationProvider<T extends vscode.DebugVisualization>(extension: IExtensionDescription, id: string, provider: vscode.DebugVisualizationProvider<T>): vscode.Disposable;
-	registerDebugVisualizationTree<T extends vscode.DebugTreeItem>(extension: IExtensionDescription, id: string, provider: vscode.DebugVisualizationTree<T>): vscode.Disposable;
-	asDebugSourceUri(source: vscode.DebugProtocolSource, session?: vscode.DebugSession): vscode.Uri;
+	addBreakpoints(breakpoints0: readonly zyraxoncode.Breakpoint[]): Promise<void>;
+	removeBreakpoints(breakpoints0: readonly zyraxoncode.Breakpoint[]): Promise<void>;
+	startDebugging(folder: zyraxoncode.WorkspaceFolder | undefined, nameOrConfig: string | zyraxoncode.DebugConfiguration, options: zyraxoncode.DebugSessionOptions): Promise<boolean>;
+	stopDebugging(session?: zyraxoncode.DebugSession): Promise<void>;
+	registerDebugConfigurationProvider(type: string, provider: zyraxoncode.DebugConfigurationProvider, trigger: zyraxoncode.DebugConfigurationProviderTriggerKind): zyraxoncode.Disposable;
+	registerDebugAdapterDescriptorFactory(extension: IExtensionDescription, type: string, factory: zyraxoncode.DebugAdapterDescriptorFactory): zyraxoncode.Disposable;
+	registerDebugAdapterTrackerFactory(type: string, factory: zyraxoncode.DebugAdapterTrackerFactory): zyraxoncode.Disposable;
+	registerDebugVisualizationProvider<T extends zyraxoncode.DebugVisualization>(extension: IExtensionDescription, id: string, provider: zyraxoncode.DebugVisualizationProvider<T>): zyraxoncode.Disposable;
+	registerDebugVisualizationTree<T extends zyraxoncode.DebugTreeItem>(extension: IExtensionDescription, id: string, provider: zyraxoncode.DebugVisualizationTree<T>): zyraxoncode.Disposable;
+	asDebugSourceUri(source: zyraxoncode.DebugProtocolSource, session?: zyraxoncode.DebugSession): zyraxoncode.Uri;
 }
 
 export abstract class ExtHostDebugServiceBase extends DisposableCls implements IExtHostDebugService, ExtHostDebugServiceShape {
@@ -77,43 +77,43 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 	private _debugServiceProxy: MainThreadDebugServiceShape;
 	private _debugSessions: Map<DebugSessionUUID, ExtHostDebugSession> = new Map<DebugSessionUUID, ExtHostDebugSession>();
 
-	private readonly _onDidStartDebugSession: Emitter<vscode.DebugSession>;
-	get onDidStartDebugSession(): Event<vscode.DebugSession> { return this._onDidStartDebugSession.event; }
+	private readonly _onDidStartDebugSession: Emitter<zyraxoncode.DebugSession>;
+	get onDidStartDebugSession(): Event<zyraxoncode.DebugSession> { return this._onDidStartDebugSession.event; }
 
-	private readonly _onDidTerminateDebugSession: Emitter<vscode.DebugSession>;
-	get onDidTerminateDebugSession(): Event<vscode.DebugSession> { return this._onDidTerminateDebugSession.event; }
+	private readonly _onDidTerminateDebugSession: Emitter<zyraxoncode.DebugSession>;
+	get onDidTerminateDebugSession(): Event<zyraxoncode.DebugSession> { return this._onDidTerminateDebugSession.event; }
 
-	private readonly _onDidChangeActiveDebugSession: Emitter<vscode.DebugSession | undefined>;
-	get onDidChangeActiveDebugSession(): Event<vscode.DebugSession | undefined> { return this._onDidChangeActiveDebugSession.event; }
+	private readonly _onDidChangeActiveDebugSession: Emitter<zyraxoncode.DebugSession | undefined>;
+	get onDidChangeActiveDebugSession(): Event<zyraxoncode.DebugSession | undefined> { return this._onDidChangeActiveDebugSession.event; }
 
 	private _activeDebugSession: ExtHostDebugSession | undefined;
-	get activeDebugSession(): vscode.DebugSession | undefined { return this._activeDebugSession?.api; }
+	get activeDebugSession(): zyraxoncode.DebugSession | undefined { return this._activeDebugSession?.api; }
 
-	private readonly _onDidReceiveDebugSessionCustomEvent: Emitter<vscode.DebugSessionCustomEvent>;
-	get onDidReceiveDebugSessionCustomEvent(): Event<vscode.DebugSessionCustomEvent> { return this._onDidReceiveDebugSessionCustomEvent.event; }
+	private readonly _onDidReceiveDebugSessionCustomEvent: Emitter<zyraxoncode.DebugSessionCustomEvent>;
+	get onDidReceiveDebugSessionCustomEvent(): Event<zyraxoncode.DebugSessionCustomEvent> { return this._onDidReceiveDebugSessionCustomEvent.event; }
 
 	private _activeDebugConsole: ExtHostDebugConsole;
-	get activeDebugConsole(): vscode.DebugConsole { return this._activeDebugConsole.value; }
+	get activeDebugConsole(): zyraxoncode.DebugConsole { return this._activeDebugConsole.value; }
 
-	private _breakpoints: Map<string, vscode.Breakpoint>;
+	private _breakpoints: Map<string, zyraxoncode.Breakpoint>;
 
-	private readonly _onDidChangeBreakpoints: Emitter<vscode.BreakpointsChangeEvent>;
+	private readonly _onDidChangeBreakpoints: Emitter<zyraxoncode.BreakpointsChangeEvent>;
 
-	private _activeStackItem: vscode.DebugThread | vscode.DebugStackFrame | undefined;
-	private readonly _onDidChangeActiveStackItem: Emitter<vscode.DebugThread | vscode.DebugStackFrame | undefined>;
+	private _activeStackItem: zyraxoncode.DebugThread | zyraxoncode.DebugStackFrame | undefined;
+	private readonly _onDidChangeActiveStackItem: Emitter<zyraxoncode.DebugThread | zyraxoncode.DebugStackFrame | undefined>;
 
 	private _debugAdapters: Map<number, IDebugAdapter>;
-	private _debugAdaptersTrackers: Map<number, vscode.DebugAdapterTracker>;
+	private _debugAdaptersTrackers: Map<number, zyraxoncode.DebugAdapterTracker>;
 
 	private _debugVisualizationTreeItemIdsCounter = 0;
-	private readonly _debugVisualizationProviders = new Map<string, vscode.DebugVisualizationProvider>();
-	private readonly _debugVisualizationTrees = new Map<string, vscode.DebugVisualizationTree>();
-	private readonly _debugVisualizationTreeItemIds = new WeakMap<vscode.DebugTreeItem, number>();
-	private readonly _debugVisualizationElements = new Map<number, { provider: string; item: vscode.DebugTreeItem; children?: number[] }>();
+	private readonly _debugVisualizationProviders = new Map<string, zyraxoncode.DebugVisualizationProvider>();
+	private readonly _debugVisualizationTrees = new Map<string, zyraxoncode.DebugVisualizationTree>();
+	private readonly _debugVisualizationTreeItemIds = new WeakMap<zyraxoncode.DebugTreeItem, number>();
+	private readonly _debugVisualizationElements = new Map<number, { provider: string; item: zyraxoncode.DebugTreeItem; children?: number[] }>();
 
 	private _signService: ISignService | undefined;
 
-	private readonly _visualizers = new Map<number, { v: vscode.DebugVisualization; provider: vscode.DebugVisualizationProvider; extensionId: string }>();
+	private readonly _visualizers = new Map<number, { v: zyraxoncode.DebugVisualization; provider: zyraxoncode.DebugVisualizationProvider; extensionId: string }>();
 	private _visualizerIdCounter = 0;
 
 	private _telemetryProxy: MainThreadTelemetryShape;
@@ -142,20 +142,20 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		this._debugAdapters = new Map();
 		this._debugAdaptersTrackers = new Map();
 
-		this._onDidStartDebugSession = this._register(new Emitter<vscode.DebugSession>());
-		this._onDidTerminateDebugSession = this._register(new Emitter<vscode.DebugSession>());
-		this._onDidChangeActiveDebugSession = this._register(new Emitter<vscode.DebugSession | undefined>());
-		this._onDidReceiveDebugSessionCustomEvent = this._register(new Emitter<vscode.DebugSessionCustomEvent>());
+		this._onDidStartDebugSession = this._register(new Emitter<zyraxoncode.DebugSession>());
+		this._onDidTerminateDebugSession = this._register(new Emitter<zyraxoncode.DebugSession>());
+		this._onDidChangeActiveDebugSession = this._register(new Emitter<zyraxoncode.DebugSession | undefined>());
+		this._onDidReceiveDebugSessionCustomEvent = this._register(new Emitter<zyraxoncode.DebugSessionCustomEvent>());
 
 		this._debugServiceProxy = extHostRpcService.getProxy(MainContext.MainThreadDebugService);
 
-		this._onDidChangeBreakpoints = this._register(new Emitter<vscode.BreakpointsChangeEvent>());
+		this._onDidChangeBreakpoints = this._register(new Emitter<zyraxoncode.BreakpointsChangeEvent>());
 
-		this._onDidChangeActiveStackItem = this._register(new Emitter<vscode.DebugThread | vscode.DebugStackFrame | undefined>());
+		this._onDidChangeActiveStackItem = this._register(new Emitter<zyraxoncode.DebugThread | zyraxoncode.DebugStackFrame | undefined>());
 
 		this._activeDebugConsole = new ExtHostDebugConsole(this._debugServiceProxy);
 
-		this._breakpoints = new Map<string, vscode.Breakpoint>();
+		this._breakpoints = new Map<string, zyraxoncode.Breakpoint>();
 
 		this._extensionService.getExtensionRegistry().then((extensionRegistry: ExtensionDescriptionRegistry) => {
 			this._register(extensionRegistry.onDidChange(_ => {
@@ -177,7 +177,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return item ? this.convertVisualizerTreeItem(treeId, item) : undefined;
 	}
 
-	public registerDebugVisualizationTree<T extends vscode.DebugTreeItem>(manifest: IExtensionDescription, id: string, provider: vscode.DebugVisualizationTree<T>): vscode.Disposable {
+	public registerDebugVisualizationTree<T extends zyraxoncode.DebugTreeItem>(manifest: IExtensionDescription, id: string, provider: zyraxoncode.DebugVisualizationTree<T>): zyraxoncode.Disposable {
 		const extensionId = ExtensionIdentifier.toKey(manifest.identifier);
 		const key = this.extensionVisKey(extensionId, id);
 		if (this._debugVisualizationProviders.has(key)) {
@@ -227,7 +227,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		}
 	}
 
-	private convertVisualizerTreeItem(treeId: string, item: vscode.DebugTreeItem): IDebugVisualizationTreeItem {
+	private convertVisualizerTreeItem(treeId: string, item: zyraxoncode.DebugTreeItem): IDebugVisualizationTreeItem {
 		let id = this._debugVisualizationTreeItemIds.get(item);
 		if (!id) {
 			id = this._debugVisualizationTreeItemIdsCounter++;
@@ -238,7 +238,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return Convert.DebugTreeItem.from(item, id);
 	}
 
-	public asDebugSourceUri(src: vscode.DebugProtocolSource, session?: vscode.DebugSession): URI {
+	public asDebugSourceUri(src: zyraxoncode.DebugProtocolSource, session?: zyraxoncode.DebugSession): URI {
 
 		// eslint-disable-next-line local/code-no-any-casts
 		const source = <any>src;
@@ -288,20 +288,20 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 	// extension debug API
 
 
-	get activeStackItem(): vscode.DebugThread | vscode.DebugStackFrame | undefined {
+	get activeStackItem(): zyraxoncode.DebugThread | zyraxoncode.DebugStackFrame | undefined {
 		return this._activeStackItem;
 	}
 
-	get onDidChangeActiveStackItem(): Event<vscode.DebugThread | vscode.DebugStackFrame | undefined> {
+	get onDidChangeActiveStackItem(): Event<zyraxoncode.DebugThread | zyraxoncode.DebugStackFrame | undefined> {
 		return this._onDidChangeActiveStackItem.event;
 	}
 
-	get onDidChangeBreakpoints(): Event<vscode.BreakpointsChangeEvent> {
+	get onDidChangeBreakpoints(): Event<zyraxoncode.BreakpointsChangeEvent> {
 		return this._onDidChangeBreakpoints.event;
 	}
 
-	get breakpoints(): vscode.Breakpoint[] {
-		const result: vscode.Breakpoint[] = [];
+	get breakpoints(): zyraxoncode.Breakpoint[] {
+		const result: zyraxoncode.Breakpoint[] = [];
 		this._breakpoints.forEach(bp => result.push(bp));
 		return result;
 	}
@@ -337,7 +337,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		}
 	}
 
-	private hydrateVisualizationContext(context: IDebugVisualizationContext): vscode.DebugVisualizationContext | undefined {
+	private hydrateVisualizationContext(context: IDebugVisualizationContext): zyraxoncode.DebugVisualizationContext | undefined {
 		const session = this._debugSessions.get(context.sessionId);
 		return session && {
 			session: session.api,
@@ -382,7 +382,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		}
 	}
 
-	public registerDebugVisualizationProvider<T extends vscode.DebugVisualization>(manifest: IExtensionDescription, id: string, provider: vscode.DebugVisualizationProvider<T>): vscode.Disposable {
+	public registerDebugVisualizationProvider<T extends zyraxoncode.DebugVisualization>(manifest: IExtensionDescription, id: string, provider: zyraxoncode.DebugVisualizationProvider<T>): zyraxoncode.Disposable {
 		if (!manifest.contributes?.debugVisualizers?.some(r => r.id === id)) {
 			throw new Error(`Extensions may only call registerDebugVisualizationProvider() for renderers they contribute (got ${id})`);
 		}
@@ -401,7 +401,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		});
 	}
 
-	public addBreakpoints(breakpoints0: vscode.Breakpoint[]): Promise<void> {
+	public addBreakpoints(breakpoints0: zyraxoncode.Breakpoint[]): Promise<void> {
 		// filter only new breakpoints
 		const breakpoints = breakpoints0.filter(bp => {
 			const id = bp.id;
@@ -458,7 +458,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return this._debugServiceProxy.$registerBreakpoints(dtos);
 	}
 
-	public removeBreakpoints(breakpoints0: vscode.Breakpoint[]): Promise<void> {
+	public removeBreakpoints(breakpoints0: zyraxoncode.Breakpoint[]): Promise<void> {
 		// remove from array
 		const breakpoints = breakpoints0.filter(b => this._breakpoints.delete(b.id));
 
@@ -472,7 +472,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return this._debugServiceProxy.$unregisterBreakpoints(ids, fids, dids);
 	}
 
-	public startDebugging(folder: vscode.WorkspaceFolder | undefined, nameOrConfig: string | vscode.DebugConfiguration, options: vscode.DebugSessionOptions): Promise<boolean> {
+	public startDebugging(folder: zyraxoncode.WorkspaceFolder | undefined, nameOrConfig: string | zyraxoncode.DebugConfiguration, options: zyraxoncode.DebugSessionOptions): Promise<boolean> {
 		const testRunMeta = options.testRun && this._testing.getMetadataForRun(options.testRun);
 
 		return this._debugServiceProxy.$startDebugging(folder ? folder.uri : undefined, nameOrConfig, {
@@ -497,11 +497,11 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		});
 	}
 
-	public stopDebugging(session?: vscode.DebugSession): Promise<void> {
+	public stopDebugging(session?: zyraxoncode.DebugSession): Promise<void> {
 		return this._debugServiceProxy.$stopDebugging(session ? session.id : undefined);
 	}
 
-	public registerDebugConfigurationProvider(type: string, provider: vscode.DebugConfigurationProvider, trigger: vscode.DebugConfigurationProviderTriggerKind): vscode.Disposable {
+	public registerDebugConfigurationProvider(type: string, provider: zyraxoncode.DebugConfigurationProvider, trigger: zyraxoncode.DebugConfigurationProviderTriggerKind): zyraxoncode.Disposable {
 
 		if (!provider) {
 			return new Disposable(() => { });
@@ -522,7 +522,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		});
 	}
 
-	public registerDebugAdapterDescriptorFactory(extension: IExtensionDescription, type: string, factory: vscode.DebugAdapterDescriptorFactory): vscode.Disposable {
+	public registerDebugAdapterDescriptorFactory(extension: IExtensionDescription, type: string, factory: zyraxoncode.DebugAdapterDescriptorFactory): zyraxoncode.Disposable {
 
 		if (!factory) {
 			return new Disposable(() => { });
@@ -549,7 +549,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		});
 	}
 
-	public registerDebugAdapterTrackerFactory(type: string, factory: vscode.DebugAdapterTrackerFactory): vscode.Disposable {
+	public registerDebugAdapterTrackerFactory(type: string, factory: zyraxoncode.DebugAdapterTrackerFactory): zyraxoncode.Disposable {
 
 		if (!factory) {
 			return new Disposable(() => { });
@@ -583,7 +583,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return variableResolver.resolveAsync(ws, config);
 	}
 
-	protected createDebugAdapter(adapter: vscode.DebugAdapterDescriptor, session: ExtHostDebugSession): AbstractDebugAdapter | undefined {
+	protected createDebugAdapter(adapter: zyraxoncode.DebugAdapterDescriptor, session: ExtHostDebugSession): AbstractDebugAdapter | undefined {
 		if (adapter instanceof DebugAdapterInlineImplementation) {
 			return new DirectDebugAdapter(adapter.implementation);
 		}
@@ -727,9 +727,9 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 
 	public $acceptBreakpointsDelta(delta: IBreakpointsDeltaDto): void {
 
-		const a: vscode.Breakpoint[] = [];
-		const r: vscode.Breakpoint[] = [];
-		const c: vscode.Breakpoint[] = [];
+		const a: zyraxoncode.Breakpoint[] = [];
+		const r: zyraxoncode.Breakpoint[] = [];
+		const c: zyraxoncode.Breakpoint[] = [];
 
 		if (delta.added) {
 			for (const bpd of delta.added) {
@@ -793,7 +793,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 	}
 
 	public async $acceptStackFrameFocus(focusDto: IThreadFocusDto | IStackFrameFocusDto | undefined): Promise<void> {
-		let focus: vscode.DebugThread | vscode.DebugStackFrame | undefined;
+		let focus: zyraxoncode.DebugThread | zyraxoncode.DebugStackFrame | undefined;
 		if (focusDto) {
 			const session = await this.getSession(focusDto.sessionId);
 			if (focusDto.kind === 'thread') {
@@ -807,7 +807,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		this._onDidChangeActiveStackItem.fire(this._activeStackItem);
 	}
 
-	public $provideDebugConfigurations(configProviderHandle: number, folderUri: UriComponents | undefined, token: CancellationToken): Promise<vscode.DebugConfiguration[]> {
+	public $provideDebugConfigurations(configProviderHandle: number, folderUri: UriComponents | undefined, token: CancellationToken): Promise<zyraxoncode.DebugConfiguration[]> {
 		return asPromise(async () => {
 			const provider = this.getConfigProviderByHandle(configProviderHandle);
 			if (!provider) {
@@ -826,7 +826,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		});
 	}
 
-	public $resolveDebugConfiguration(configProviderHandle: number, folderUri: UriComponents | undefined, debugConfiguration: vscode.DebugConfiguration, token: CancellationToken): Promise<vscode.DebugConfiguration | null | undefined> {
+	public $resolveDebugConfiguration(configProviderHandle: number, folderUri: UriComponents | undefined, debugConfiguration: zyraxoncode.DebugConfiguration, token: CancellationToken): Promise<zyraxoncode.DebugConfiguration | null | undefined> {
 		return asPromise(async () => {
 			const provider = this.getConfigProviderByHandle(configProviderHandle);
 			if (!provider) {
@@ -840,7 +840,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		});
 	}
 
-	public $resolveDebugConfigurationWithSubstitutedVariables(configProviderHandle: number, folderUri: UriComponents | undefined, debugConfiguration: vscode.DebugConfiguration, token: CancellationToken): Promise<vscode.DebugConfiguration | null | undefined> {
+	public $resolveDebugConfigurationWithSubstitutedVariables(configProviderHandle: number, folderUri: UriComponents | undefined, debugConfiguration: zyraxoncode.DebugConfiguration, token: CancellationToken): Promise<zyraxoncode.DebugConfiguration | null | undefined> {
 		return asPromise(async () => {
 			const provider = this.getConfigProviderByHandle(configProviderHandle);
 			if (!provider) {
@@ -893,7 +893,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 
 	public async $acceptDebugSessionCustomEvent(sessionDto: IDebugSessionDto, event: any): Promise<void> {
 		const session = await this.getSession(sessionDto);
-		const ee: vscode.DebugSessionCustomEvent = {
+		const ee: zyraxoncode.DebugSessionCustomEvent = {
 			session: session.api,
 			event: event.event,
 			body: event.body
@@ -903,7 +903,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 
 	// private & dto helpers
 
-	private convertToDto(x: vscode.DebugAdapterDescriptor): Dto<IAdapterDescriptor> {
+	private convertToDto(x: zyraxoncode.DebugAdapterDescriptor): Dto<IAdapterDescriptor> {
 		if (x instanceof DebugAdapterExecutable) {
 			return this.convertExecutableToDto(x);
 		} else if (x instanceof DebugAdapterServer) {
@@ -947,7 +947,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		};
 	}
 
-	private getAdapterDescriptorFactoryByType(type: string): vscode.DebugAdapterDescriptorFactory | undefined {
+	private getAdapterDescriptorFactoryByType(type: string): zyraxoncode.DebugAdapterDescriptorFactory | undefined {
 		const results = this._adapterFactories.filter(p => p.type === type);
 		if (results.length > 0) {
 			return results[0].factory;
@@ -955,7 +955,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return undefined;
 	}
 
-	private getAdapterDescriptorFactoryByHandle(handle: number): vscode.DebugAdapterDescriptorFactory | undefined {
+	private getAdapterDescriptorFactoryByHandle(handle: number): zyraxoncode.DebugAdapterDescriptorFactory | undefined {
 		const results = this._adapterFactories.filter(p => p.handle === handle);
 		if (results.length > 0) {
 			return results[0].factory;
@@ -963,7 +963,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return undefined;
 	}
 
-	private getConfigProviderByHandle(handle: number): vscode.DebugConfigurationProvider | undefined {
+	private getConfigProviderByHandle(handle: number): zyraxoncode.DebugConfigurationProvider | undefined {
 		const results = this._configProviders.filter(p => p.handle === handle);
 		if (results.length > 0) {
 			return results[0].provider;
@@ -988,14 +988,14 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return false;
 	}
 
-	private getDebugAdapterTrackers(session: ExtHostDebugSession): Promise<vscode.DebugAdapterTracker | undefined> {
+	private getDebugAdapterTrackers(session: ExtHostDebugSession): Promise<zyraxoncode.DebugAdapterTracker | undefined> {
 
 		const config = session.configuration;
 		const type = config.type;
 
 		const promises = this._trackerFactories
 			.filter(tuple => tuple.type === type || tuple.type === '*')
-			.map(tuple => asPromise<vscode.ProviderResult<vscode.DebugAdapterTracker>>(() => tuple.factory.createDebugAdapterTracker(session.api)).then(p => p, err => null));
+			.map(tuple => asPromise<zyraxoncode.ProviderResult<zyraxoncode.DebugAdapterTracker>>(() => tuple.factory.createDebugAdapterTracker(session.api)).then(p => p, err => null));
 
 		return Promise.race([
 			Promise.all(promises).then(result => {
@@ -1012,7 +1012,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		});
 	}
 
-	private async getAdapterDescriptor(adapterDescriptorFactory: vscode.DebugAdapterDescriptorFactory | undefined, session: ExtHostDebugSession): Promise<vscode.DebugAdapterDescriptor | undefined> {
+	private async getAdapterDescriptor(adapterDescriptorFactory: zyraxoncode.DebugAdapterDescriptorFactory | undefined, session: ExtHostDebugSession): Promise<zyraxoncode.DebugAdapterDescriptor | undefined> {
 
 		// a "debugServer" attribute in the launch config takes precedence
 		const serverPort = session.configuration.debugServer;
@@ -1039,7 +1039,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return undefined;
 	}
 
-	private fireBreakpointChanges(added: vscode.Breakpoint[], removed: vscode.Breakpoint[], changed: vscode.Breakpoint[]) {
+	private fireBreakpointChanges(added: zyraxoncode.Breakpoint[], removed: zyraxoncode.Breakpoint[], changed: zyraxoncode.Breakpoint[]) {
 		if (added.length > 0 || removed.length > 0 || changed.length > 0) {
 			this._onDidChangeBreakpoints.fire(Object.freeze({
 				added,
@@ -1071,7 +1071,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		throw new Error('cannot find session');
 	}
 
-	private getFolder(_folderUri: UriComponents | undefined): Promise<vscode.WorkspaceFolder | undefined> {
+	private getFolder(_folderUri: UriComponents | undefined): Promise<zyraxoncode.WorkspaceFolder | undefined> {
 		if (_folderUri) {
 			const folderURI = URI.revive(_folderUri);
 			return this._workspaceService.resolveWorkspaceFolder(folderURI);
@@ -1083,7 +1083,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		return `${extensionId}\0${id}`;
 	}
 
-	private serializeVisualization(extensionId: string, viz: vscode.DebugVisualization['visualization']): MainThreadDebugVisualization | undefined {
+	private serializeVisualization(extensionId: string, viz: zyraxoncode.DebugVisualization['visualization']): MainThreadDebugVisualization | undefined {
 		if (!viz) {
 			return undefined;
 		}
@@ -1099,7 +1099,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		throw new Error('Unsupported debug visualization type');
 	}
 
-	private getIconPathOrClass(icon: vscode.DebugVisualization['iconPath']) {
+	private getIconPathOrClass(icon: zyraxoncode.DebugVisualization['iconPath']) {
 		const iconPathOrIconClass = this.getIconUris(icon);
 		let iconPath: { dark: URI; light?: URI | undefined } | undefined;
 		let iconClass: string | undefined;
@@ -1115,7 +1115,7 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 		};
 	}
 
-	private getIconUris(iconPath: vscode.DebugVisualization['iconPath']): { dark: URI; light?: URI } | { id: string } {
+	private getIconUris(iconPath: zyraxoncode.DebugVisualization['iconPath']): { dark: URI; light?: URI } | { id: string } {
 		if (iconPath instanceof ThemeIcon) {
 			return { id: iconPath.id };
 		}
@@ -1129,18 +1129,18 @@ export abstract class ExtHostDebugServiceBase extends DisposableCls implements I
 }
 
 export class ExtHostDebugSession {
-	private apiSession?: vscode.DebugSession;
+	private apiSession?: zyraxoncode.DebugSession;
 	constructor(
 		private _debugServiceProxy: MainThreadDebugServiceShape,
 		private _id: DebugSessionUUID,
 		private _type: string,
 		private _name: string,
-		private _workspaceFolder: vscode.WorkspaceFolder | undefined,
-		private _configuration: vscode.DebugConfiguration,
-		private _parentSession: vscode.DebugSession | undefined) {
+		private _workspaceFolder: zyraxoncode.WorkspaceFolder | undefined,
+		private _configuration: zyraxoncode.DebugConfiguration,
+		private _parentSession: zyraxoncode.DebugSession | undefined) {
 	}
 
-	public get api(): vscode.DebugSession {
+	public get api(): zyraxoncode.DebugSession {
 		const that = this;
 		return this.apiSession ??= Object.freeze({
 			id: that._id,
@@ -1158,7 +1158,7 @@ export class ExtHostDebugSession {
 			customRequest(command: string, args: any): Promise<any> {
 				return that._debugServiceProxy.$customDebugAdapterRequest(that._id, command, args);
 			},
-			getDebugProtocolBreakpoint(breakpoint: vscode.Breakpoint): Promise<vscode.DebugProtocolBreakpoint | undefined> {
+			getDebugProtocolBreakpoint(breakpoint: zyraxoncode.Breakpoint): Promise<zyraxoncode.DebugProtocolBreakpoint | undefined> {
 				return that._debugServiceProxy.$getDebugProtocolBreakpoint(that._id, breakpoint.id);
 			}
 		});
@@ -1176,14 +1176,14 @@ export class ExtHostDebugSession {
 		this._name = name;
 	}
 
-	public get configuration(): vscode.DebugConfiguration {
+	public get configuration(): zyraxoncode.DebugConfiguration {
 		return this._configuration;
 	}
 }
 
 export class ExtHostDebugConsole {
 
-	readonly value: vscode.DebugConsole;
+	readonly value: zyraxoncode.DebugConsole;
 
 	constructor(proxy: MainThreadDebugServiceShape) {
 
@@ -1201,24 +1201,24 @@ export class ExtHostDebugConsole {
 interface ConfigProviderTuple {
 	type: string;
 	handle: number;
-	provider: vscode.DebugConfigurationProvider;
+	provider: zyraxoncode.DebugConfigurationProvider;
 }
 
 interface DescriptorFactoryTuple {
 	type: string;
 	handle: number;
-	factory: vscode.DebugAdapterDescriptorFactory;
+	factory: zyraxoncode.DebugAdapterDescriptorFactory;
 }
 
 interface TrackerFactoryTuple {
 	type: string;
 	handle: number;
-	factory: vscode.DebugAdapterTrackerFactory;
+	factory: zyraxoncode.DebugAdapterTrackerFactory;
 }
 
-class MultiTracker implements vscode.DebugAdapterTracker {
+class MultiTracker implements zyraxoncode.DebugAdapterTracker {
 
-	constructor(private trackers: vscode.DebugAdapterTracker[]) {
+	constructor(private trackers: zyraxoncode.DebugAdapterTracker[]) {
 	}
 
 	onWillStartSession(): void {
@@ -1251,10 +1251,10 @@ class MultiTracker implements vscode.DebugAdapterTracker {
  */
 class DirectDebugAdapter extends AbstractDebugAdapter {
 
-	constructor(private implementation: vscode.DebugAdapter) {
+	constructor(private implementation: zyraxoncode.DebugAdapter) {
 		super();
 
-		implementation.onDidSendMessage((message: vscode.DebugProtocolMessage) => {
+		implementation.onDidSendMessage((message: zyraxoncode.DebugProtocolMessage) => {
 			this.acceptMessage(message as DebugProtocol.ProtocolMessage);
 		});
 	}

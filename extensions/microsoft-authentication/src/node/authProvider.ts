@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { AccountInfo, AuthenticationResult, AuthError, ClientAuthError, ClientAuthErrorCodes, ServerError } from '@azure/msal-node';
-import { AuthenticationChallenge, AuthenticationConstraint, AuthenticationGetSessionOptions, AuthenticationProvider, AuthenticationProviderAuthenticationSessionsChangeEvent, AuthenticationProviderSessionOptions, AuthenticationSession, AuthenticationSessionAccountInformation, CancellationError, env, EventEmitter, ExtensionContext, ExtensionKind, l10n, LogOutputChannel, Uri, window } from 'vscode';
+import { AuthenticationChallenge, AuthenticationConstraint, AuthenticationGetSessionOptions, AuthenticationProvider, AuthenticationProviderAuthenticationSessionsChangeEvent, AuthenticationProviderSessionOptions, AuthenticationSession, AuthenticationSessionAccountInformation, CancellationError, env, EventEmitter, ExtensionContext, ExtensionKind, l10n, LogOutputChannel, Uri, window } from 'zyraxoncode';
 import { Environment } from '@azure/ms-rest-azure-env';
 import { CachedPublicClientApplicationManager } from './publicClientCache';
 import { UriEventHandler } from '../UriEventHandler';
@@ -226,7 +226,7 @@ export class MsalAuthProvider implements AuthenticationProvider {
 			}
 		};
 
-		const callbackUri = await env.asExternalUri(Uri.parse(`${env.uriScheme}://vscode.microsoft-authentication`));
+		const callbackUri = await env.asExternalUri(Uri.parse(`${env.uriScheme}:__ZYRAXKEEP__0_`));
 		const flows = getMsalFlows({
 			extensionHost: this._context.extension.extensionKind === ExtensionKind.UI ? ExtensionHost.Local : ExtensionHost.Remote,
 			supportedClient: isSupportedClient(callbackUri),
@@ -339,7 +339,7 @@ export class MsalAuthProvider implements AuthenticationProvider {
 		const claims = this.extractClaimsFromChallenges(constraint.challenges);
 
 		// Use scopes if available, otherwise fall back to default scopes
-		const effectiveScopes = scopes.length > 0 ? scopes : ['https://graph.microsoft.com/User.Read'];
+		const effectiveScopes = scopes.length > 0 ? scopes : ['__ZYRAXKEEP__1_'];
 
 		const scopeData = new ScopeData(effectiveScopes, claims, options.authorizationServer, options.clientId);
 		this._logger.info('[createSessionFromChallenges]', `[${scopeData.scopeStr}]`, 'starting with claims:', claims);
@@ -364,7 +364,7 @@ export class MsalAuthProvider implements AuthenticationProvider {
 			}
 		};
 
-		const callbackUri = await env.asExternalUri(Uri.parse(`${env.uriScheme}://vscode.microsoft-authentication`));
+		const callbackUri = await env.asExternalUri(Uri.parse(`${env.uriScheme}:__ZYRAXKEEP__2_`));
 		const flows = getMsalFlows({
 			extensionHost: this._context.extension.extensionKind === ExtensionKind.UI ? ExtensionHost.Local : ExtensionHost.Remote,
 			isBrokerSupported: cachedPca.isBrokerAvailable,

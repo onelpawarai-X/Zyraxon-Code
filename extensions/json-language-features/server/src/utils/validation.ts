@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CancellationToken, Connection, Diagnostic, Disposable, DocumentDiagnosticParams, DocumentDiagnosticReport, DocumentDiagnosticReportKind, TextDocuments } from 'vscode-languageserver';
-import { TextDocument } from 'vscode-json-languageservice';
+import { CancellationToken, Connection, Diagnostic, Disposable, DocumentDiagnosticParams, DocumentDiagnosticReport, DocumentDiagnosticReportKind, TextDocuments } from 'zyraxoncode-languageserver';
+import { TextDocument } from 'zyraxoncode-json-languageservice';
 import { formatError, runSafeAsync } from './runner.js';
 import { RuntimeEnvironment } from '../jsonServer.js';
 

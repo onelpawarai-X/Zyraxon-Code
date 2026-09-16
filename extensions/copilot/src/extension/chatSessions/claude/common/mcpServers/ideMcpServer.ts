@@ -7,7 +7,7 @@ import type { McpServerConfig } from '@anthropic-ai/claude-agent-sdk';
 import { z } from 'zod';
 import { ILanguageDiagnosticsService } from '../../../../../platform/languages/common/languageDiagnosticsService';
 import { URI } from '../../../../../util/vs/base/common/uri';
-import { DiagnosticSeverity } from '../../../../../vscodeTypes';
+import { DiagnosticSeverity } from '../../../../../zyraxoncodeTypes';
 import { IClaudeAgentSdkLoaderService } from '../claudeAgentSdkLoaderService';
 import { IClaudeMcpServerContributor, registerClaudeMcpServerContributor } from '../claudeMcpServerRegistry';
 
@@ -48,7 +48,7 @@ export function getDiagnosticsHandler(
 		try {
 			fileUri = URI.parse(args.uri);
 		} catch {
-			throw new Error(`Invalid URI: "${args.uri}". Expected an absolute path (e.g., /path/to/file.ts) or a URI with a scheme (e.g., file:///path/to/file.ts, untitled:Untitled-1).`);
+			throw new Error(`Invalid URI: "${args.uri}". Expected an absolute path (e.g., /path/to/file.ts) or a URI with a scheme (e.g., __ZYRAXKEEP__0_ untitled:Untitled-1).`);
 		}
 		entries = [[fileUri, diagnosticsService.getDiagnostics(fileUri)]];
 	} else {

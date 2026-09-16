@@ -403,7 +403,7 @@ export class InstallInRemoteAction extends McpServerAction {
 		@IMcpService private readonly mcpService: IMcpService,
 	) {
 		super('extensions.installRemote', localize('installInRemote', "Install (Remote)"), InstallAction.CLASS, false);
-		const remoteLabel = this.labelService.getHostLabel(Schemas.vscodeRemote, this.environmentService.remoteAuthority);
+		const remoteLabel = this.labelService.getHostLabel(Schemas.zyraxoncodeRemote, this.environmentService.remoteAuthority);
 		this.label = localize('installInRemoteLabel', "Install in {0}", remoteLabel);
 		this.update();
 	}

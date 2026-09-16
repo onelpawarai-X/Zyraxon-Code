@@ -1,95 +1,76 @@
-# ZYRAXON Code - Open Source ("ZYRAXON Code")
-[![Feature Requests](https://img.shields.io/github/issues/onelpawarai/zyraxon-code/feature-request.svg)](https://github.com/onelpawarai/zyraxon-code/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
-[![Bugs](https://img.shields.io/github/issues/onelpawarai/zyraxon-code/bug.svg)](https://github.com/onelpawarai/zyraxon-code/issues?utf8=✓&q=is%3Aissue+is%3Aopen+label%3Abug)
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-yellow.svg)](https://gitter.im/onelpawarai/zyraxon-code)
+# ZYRAXON Code
+
+[![License](https://img.shields.io/github/license/onelpawarai-X/Zyraxon-Code.svg)](https://github.com/onelpawarai-X/Zyraxon-Code/blob/main/LICENSE.txt)
+[![GitHub issues](https://img.shields.io/github/issues/onelpawarai-X/Zyraxon-Code.svg)](https://github.com/onelpawarai-X/Zyraxon-Code/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/onelpawarai-X/Zyraxon-Code.svg)](https://github.com/onelpawarai-X/Zyraxon-Code/pulls)
+
+**ZYRAXON Code** is an AI-first code editor built on the open-source ZYRAXON Code engine — but with a soul. It ships with the **Zyraxon AI Assistant** built in: 9 powerful AI modes, a local OpenCode-compatible bridge, and a free unlimited model catalog that works **without any login, API key, or credit card**.
+
+## The Zyraxon AI Assistant
+
+ZYRAXON Code is not just an editor — it is the desktop companion to the Zyraxon AI ecosystem. Press `Ctrl+Alt+A` (or open the Zyraxon chat panel) and talk to your code.
+
+### 9 AI Modes — one prompt file per mode
+
+Every mode has its own persona prompt file, loaded from `resources/zyraxon/prompts/` and injected as the system message on every chat request:
+
+| Mode | Purpose |
+|------|---------|
+| `auto` | AUTO ORCHESTRATOR — automatic task handling and routing |
+| `build` | BUILD MODE — fast, focused implementation and fixes |
+| `plan` | PLAN MODE — design first, architect before coding |
+| `beast` | BEAST MODE — heavy-lifting, large-context deep work |
+| `pro` | PRO MODE — professional-grade full-stack work |
+| `apex` | APEX PREDATOR — predictive, self-synthesizing intelligence |
+| `dark-emperor` | DARK EMPEROR — maximum capability, no limits |
+| `pro-builder` | PRO BUILDER — production-ready engineering |
+| `vision` | VISION MODE — image/vision-guided assistance |
+
+Switch modes anytime from the Zyraxon chat panel, the `zyraxon.mode` setting, or the command palette (**Zyraxon: Switch Mode**).
+
+### Free, unlimited, no login required
+
+- The **OpenCode family of models** (opencode provider, model prefix `opencode/`) is used from the **Zyraxon model catalog** — a built-in, always-updated JSON list of free models (`zyraxon.ai.openAIModelCatalogBaseUrl`). No account, no key, no billing.
+- **Login is fully optional.** The chat bridge (`http://127.0.0.1:4096`, vendor `opencode`) is local and login-free by default. You can sign in with your GitHub/Copilot account if you want, but you never have to.
+- **Bring your own key:** OpenAI, Anthropic, Google, Groq, and OpenRouter providers are preconfigured under `zyraxon.ai.providers`. Paste a key into the **Zyraxon: Settings** view and your key is stored locally (Electron `safeStorage`), never sent to Zyraxon servers.
+- Toggle the free catalog on/off with the `zyraxon.ai.enableFreeModels` setting.
 
 ## The Repository
 
-This repository ("`ZYRAXON Code`") is where we (Zyraxon) develop the [ZYRAXON Code](https://zyraxon.ai) product together with the community. Not only do we work on code and issues here, but we also publish our [roadmap](https://github.com/onelpawarai/zyraxon-code/wiki/Roadmap), [monthly iteration plans](https://github.com/onelpawarai/zyraxon-code/wiki/Iteration-Plans), and our [endgame plans](https://github.com/onelpawarai/zyraxon-code/wiki/Running-the-Endgame). This source code is available to everyone under the standard [BSL license](https://github.com/onelpawarai/zyraxon-code/blob/main/LICENSE.txt).
+This repository is where Zyraxon develops ZYRAXON Code together with the community. This is a from-scratch fork of the ZYRAXON Code engine — every piece of it is real, reviewable code. The repo includes:
 
-## ZYRAXON Code
+- the **full editor engine** (`src/vs/`) — no black boxes,
+- the **Zyraxon bridge** (`src/vs/workbench/contrib/chat/browser/zyraxonBridge/`) — connects the editor to local and remote AI endpoints,
+- the **9 Zyraxon mode prompt files** (`resources/zyraxon/prompts/`),
+- the **Zyraxon AI provider catalog & settings** (`src/vs/workbench/contrib/zyraxon/`),
+- a **bundled ZYRAXON Code extension gallery** config so you can install thousands of community extensions right from the editor,
+- **packaging for Windows (NSIS installers), macOS, and Linux** with GitHub Actions.
 
-<p align="center">
-  <img alt="ZYRAXON Code in action" src="https://github.com/user-attachments/assets/56af271c-949d-454c-a3ea-16188c063414">
-</p>
+## Getting Started
 
-[ZYRAXON Code](https://zyraxon.ai) is a distribution of the `ZYRAXON Code` repository with Zyraxon-specific customizations released under a traditional [Zyraxon product license](https://zyraxon.ai/License/).
+### Download
 
-[ZYRAXON Code](https://zyraxon.ai) combines the simplicity of a code editor with what developers need for their core edit-build-debug cycle. It provides comprehensive code editing, navigation, and understanding support along with lightweight debugging, a rich extensibility model, and lightweight integration with existing tools.
+Grab the latest installer from the [Releases](https://github.com/onelpawarai-X/Zyraxon-Code/releases) page:
 
-ZYRAXON Code is updated monthly with new features and bug fixes. You can download it for Windows, macOS, and Linux on the [ZYRAXON Code website](https://zyraxon.ai/Download). To get the latest releases every day, install the [Insiders build](https://zyraxon.ai/insiders).
-
-## Contributing
-
-There are many ways in which you can participate in this project, for example:
-
-* [Submit bugs and feature requests](https://github.com/onelpawarai/zyraxon-code/issues), and help us verify them as they are checked in
-* Review [source code changes](https://github.com/onelpawarai/zyraxon-code/pulls)
-* Review the [documentation](https://github.com/onelpawarai/zyraxon-code-docs) and make pull requests for anything from typos to new content.
-
-If you are interested in fixing issues and contributing directly to the codebase, please see the document [How to Contribute](https://github.com/onelpawarai/zyraxon-code/wiki/How-to-Contribute), which covers the following:
-
-* [How to build and run from source](https://github.com/onelpawarai/zyraxon-code/wiki/How-to-Contribute)
-* [The development workflow, including debugging and running tests](https://github.com/onelpawarai/zyraxon-code/wiki/How-to-Contribute#debugging)
-* [Coding guidelines](https://github.com/onelpawarai/zyraxon-code/wiki/Coding-Guidelines)
-* [Submitting pull requests](https://github.com/onelpawarai/zyraxon-code/wiki/How-to-Contribute#pull-requests)
-* [Finding an issue to work on](https://github.com/onelpawarai/zyraxon-code/wiki/How-to-Contribute#where-to-contribute)
-* [Contributing to translations](https://aka.ms/vscodeloc)
-
-## Feedback
-
-* Ask a question on [Stack Overflow](https://stackoverflow.com/questions/tagged/zyraxon-code)
-* [Request a new feature](CONTRIBUTING.md)
-* Upvote [popular feature requests](https://github.com/onelpawarai/zyraxon-code/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
-* [File an issue](https://github.com/onelpawarai/zyraxon-code/issues)
-* Connect with the extension author community on [GitHub Discussions](https://github.com/onelpawarai/zyraxon-code/discussions) or [Slack](https://aka.ms/vscode-dev-community)
-* Follow [@zyraxon](https://x.com/zyraxon) and let us know what you think!
-
-See our [wiki](https://github.com/onelpawarai/zyraxon-code/wiki/Feedback-Channels) for a description of each of these channels and information on some other available community-driven channels.
-
-## Related Projects
-
-Many of the core components and extensions to ZYRAXON Code live in their own repositories on GitHub. For example, the [node debug adapter](https://github.com/onelpawarai/zyraxon-node-debug) and the [mono debug adapter](https://github.com/onelpawarai/zyraxon-mono-debug) repositories are separate from each other. For a complete list, please visit the [Related Projects](https://github.com/onelpawarai/zyraxon-code/wiki/Related-Projects) page on our [wiki](https://github.com/onelpawarai/zyraxon-code/wiki).
-
-## Build from Source
-
-### Prerequisites
-
-- **[Node.js](https://nodejs.org/)** 22+ (required for compilation and native modules)
-- **[npm](https://www.npmjs.com/)** (comes with Node.js — **do NOT use bun**)
-- **[Git](https://git-scm.com/)** (version control)
-
-> **Why npm and not bun?** ZYRAXON Code is built on the VS Code engine, which requires
-> npm lifecycle scripts (`prepublish`, `prepare`) to run during install. These scripts
-> compile native packages (like `@emotion/hash`, `mermaid`, `node-pty`, etc.) and build
-> their `dist/` folders. `bun install` skips these scripts, causing build failures.
+- `ZYRAXON-Code-Setup-<version>.exe` — Windows NSIS installer
+- `.dmg` / `.zip` — macOS
+- `.deb` / `.rpm` / `.tar.gz` — Linux
 
 ### Quick Build (One Command Per Platform)
 
 ```bash
-git clone https://github.com/onelpawarai/zyraxon-code.git
-cd zyraxon-code
+git clone https://github.com/onelpawarai-X/Zyraxon-Code.git
+cd Zyraxon-Code
 
-# Windows x64
-npm run build:win
-
-# Linux x64
-npm run build:linux
-
-# macOS Apple Silicon
-npm run build:mac
-
-# macOS Intel
-npm run build:mac-x64
-
-# Windows ARM64
-npm run build:win-arm64
-
-# Linux ARM64
-npm run build:linux-arm64
+npm run build:win       # Windows x64
+npm run build:linux     # Linux x64
+npm run build:mac       # macOS Apple Silicon
+npm run build:mac-x64   # macOS Intel
+npm run build:win-arm64 # Windows ARM64
+npm run build:linux-arm64 # Linux ARM64
 ```
 
-> Each command above does everything: `npm install` → `postinstall` → `compile` → `gulp package`.
+> Each command does everything: `npm install` → `postinstall` → `compile` → `gulp package`.
 
 ### Step-by-Step Build
 
@@ -104,39 +85,66 @@ node build/npm/postinstall.ts
 npm run compile
 
 # Step 4: Package for your platform
-npm run package:win       # Windows x64
-npm run package:linux     # Linux x64
-npm run package:mac       # macOS ARM64
-npm run package:mac-x64   # macOS Intel
-npm run package:win-arm64 # Windows ARM64
-npm run package:linux-arm64 # Linux ARM64
+npm run package:win          # Windows x64
+npm run package:linux        # Linux x64
+npm run package:mac          # macOS ARM64
+npm run package:mac-x64      # macOS Intel
+npm run package:win-arm64    # Windows ARM64
+npm run package:linux-arm64  # Linux ARM64
 ```
 
-### Output
+### Prerequisites
 
-The packaged application will be created at `../ZYRAXON-code-{platform}-{arch}/` (one directory up from the repo root).
+- **[Node.js](https://nodejs.org/)** 22+ (required for compilation and native modules)
+- **[npm](https://www.npmjs.com/)** — comes with Node.js (**do NOT use bun**; the ZYRAXON Code engine requires npm lifecycle scripts)
 
-## Bundled Extensions
+> The packaged application lands at `../ZYRAXON-code-{platform}-{arch}/` (one directory up from the repo root).
 
-ZYRAXON Code includes a set of built-in extensions located in the [extensions](extensions) folder, including grammars and snippets for many languages. Extensions that provide rich language support (inline suggestions, Go to Definition) for a language have the suffix `language-features`. For example, the `json` extension provides coloring for `JSON` and the `json-language-features` extension provides rich language support for `JSON`.
+## Features
 
-## Development Container
+- **AI chat with 9 modes** — plain language editing, explaining, fixing, and automating your code.
+- **Full editor engine** — IntelliSense, debugging, git integration, remote dev, terminals, and everything else you expect from a ZYRAXON Code-derived editor.
+- **Extension marketplace** — the editor ships with gallery endpoints configured, so you can install thousands of community extensions directly.
+- **Multi-provider AI** — free OpenCode models by default, plus OpenAI/Anthropic/Google/Groq/OpenRouter keys whenever you need them.
+- **Local-first, privacy-respecting** — prompts and keys never leave your machine unless you choose a cloud model.
 
-This repository includes a ZYRAXON Code Dev Containers / GitHub Codespaces development container.
+## Screenshots & Docs
 
-* For [Dev Containers](https://aka.ms/vscode-remote/download/containers), use the **Dev Containers: Clone Repository in Container Volume...** command, which creates a Docker volume for better disk I/O on macOS and Windows.
-  * If you already have ZYRAXON Code and Docker installed, you can also click [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/onelpawarai/zyraxon-code) to get started. This will cause ZYRAXON Code to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.
+Visit the Zyraxon AI website at [zyraxonai.lovable.app](https://zyraxonai.lovable.app) for screenshots, the changelog, and the blog.
 
-* For Codespaces, install the [GitHub Codespaces](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces) extension in ZYRAXON Code, and use the **Codespaces: Create New Codespace** command.
+## Contributing
 
-Docker / the Codespace should have at least **4 cores and 6 GB of RAM (8 GB recommended)** to run a full build. See the [development container README](.devcontainer/README.md) for more information.
+We welcome contributions!
+
+* [Submit bugs and feature requests](https://github.com/onelpawarai-X/Zyraxon-Code/issues), and help us verify them as they are checked in
+* Review [source code changes](https://github.com/onelpawarai-X/Zyraxon-Code/pulls)
+* Discuss ideas in [GitHub Discussions](https://github.com/onelpawarai-X/Zyraxon-Code/discussions)
+
+See [How to Contribute](CONTRIBUTING.md) for the development workflow, debugging, running tests, coding guidelines, and submitting pull requests.
+
+## Feedback
+
+* [Request a new feature](CONTRIBUTING.md)
+* [File an issue](https://github.com/onelpawarai-X/Zyraxon-Code/issues)
+* Follow [@zyraxon](https://x.com/zyraxon) and let us know what you think!
+
+## Related Projects
+
+- **[ZYRAXON AI (main app)](https://github.com/onelpawarai-X/ZYRAXON-AI)** — the full Zyraxon AI assistant platform
+- **[zyraxonai-website](https://github.com/onelpawarai-X/zyraxonai-website)** — the Zyraxon AI website and ecosystem store
 
 ## Code of Conduct
 
-This project has adopted the [Zyraxon Open Source Code of Conduct](https://opensource.zyraxon.ai/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.zyraxon.ai/codeofconduct/faq/) or contact [opencode@zyraxon.ai](mailto:opencode@zyraxon.ai) with any additional questions or comments.
+This project has adopted the [Zyraxon Open Source Code of Conduct](https://github.com/onelpawarai-X/Zyraxon-Code/blob/main/CODE_OF_CONDUCT.md). For questions or comments, contact [opencode@zyraxon.ai](mailto:opencode@zyraxon.ai).
 
 ## License
 
-Copyright (c) Zyraxon Corporation. All rights reserved.
+Copyright (c) 2026 onelpawarai ("Licensor"). All rights reserved.
 
-Licensed under the [BSL](LICENSE.txt) license.
+ZYRAXON Code is licensed under the [Zyraxon Sovereign License — X Edition](LICENSE) (ZSL-X). **Build Without Limits. Respect the Origin.** This license is an original grant of rights; it does not incorporate or reference any third-party open-source license unless explicitly stated in an accompanying NOTICE file. A plain-language summary is available in [LICENSE.txt](LICENSE.txt).
+
+For licensing questions, contact the Licensor via the repository Issues page.
+
+## Third-Party Components
+
+ZYRAXON Code is built on top of the open-source ZYRAXON Code engine and other upstream open-source projects. Those upstream works remain licensed under their own respective licenses (MIT, BSD-3-Clause, Apache-2.0, etc.), which are reproduced on a best-effort basis in the repository as required by those licenses. ZSL-X governs only ZYRAXON Code's own original code and branding; it does not relicense upstream components.

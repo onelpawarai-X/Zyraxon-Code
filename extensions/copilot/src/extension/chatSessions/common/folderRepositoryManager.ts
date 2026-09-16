@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { IWorkspaceInfo } from './workspaceInfo';
 
@@ -24,10 +24,10 @@ export enum IsolationMode {
  */
 export interface InitializeFolderRepositoryOptions {
 	readonly branch?: string;
-	readonly folder: vscode.Uri | undefined;
+	readonly folder: zyraxoncode.Uri | undefined;
 	readonly isolation?: IsolationMode;
-	readonly stream: vscode.ChatResponseStream;
-	readonly toolInvocationToken: vscode.ChatParticipantToolToken;
+	readonly stream: zyraxoncode.ChatResponseStream;
+	readonly toolInvocationToken: zyraxoncode.ChatParticipantToolToken;
 	readonly newBranch?: Promise<string | undefined>;
 }
 
@@ -58,7 +58,7 @@ export interface GetFolderRepositoryOptions {
 	 */
 	readonly promptForTrust: true;
 
-	readonly stream: vscode.ChatResponseStream;
+	readonly stream: zyraxoncode.ChatResponseStream;
 }
 
 /**
@@ -68,12 +68,12 @@ export interface FolderRepositoryMRUEntry {
 	/**
 	 * The folder URI.
 	 */
-	readonly folder: vscode.Uri;
+	readonly folder: zyraxoncode.Uri;
 
 	/**
 	 * The repository URI if this is a git repository, undefined for plain folders.
 	 */
-	readonly repository: vscode.Uri | undefined;
+	readonly repository: zyraxoncode.Uri | undefined;
 
 	/**
 	 * Timestamp of last access (milliseconds since epoch).
@@ -89,7 +89,7 @@ export interface IFolderRepositoryManager {
 	/**
 	 * @deprecated
 	 */
-	setNewSessionFolder(sessionId: string, folderUri: vscode.Uri): void;
+	setNewSessionFolder(sessionId: string, folderUri: zyraxoncode.Uri): void;
 
 	/**
 	 * Delete the tracked folder for an untitled session.
@@ -111,7 +111,7 @@ export interface IFolderRepositoryManager {
 	getFolderRepository(
 		sessionId: string,
 		options: GetFolderRepositoryOptions | undefined,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	): Promise<FolderRepositoryInfo>;
 
 	/**
@@ -129,7 +129,7 @@ export interface IFolderRepositoryManager {
 	initializeFolderRepository(
 		sessionId: string | undefined,
 		options: InitializeFolderRepositoryOptions,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	): Promise<FolderRepositoryInfo>;
 
 	/**
@@ -146,10 +146,10 @@ export interface IFolderRepositoryManager {
 	 */
 	initializeMultiRootFolderRepositories(
 		sessionId: string,
-		primaryFolder: vscode.Uri,
-		additionalFolders: vscode.Uri[],
+		primaryFolder: zyraxoncode.Uri,
+		additionalFolders: zyraxoncode.Uri[],
 		options: InitializeFolderRepositoryOptions,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	): Promise<{ primary: FolderRepositoryInfo; additional: FolderRepositoryInfo[] }>;
 
 	/**
@@ -163,9 +163,9 @@ export interface IFolderRepositoryManager {
 	 * @returns Repository URI and HEAD branch name
 	 */
 	getRepositoryInfo(
-		folder: vscode.Uri,
-		token: vscode.CancellationToken
-	): Promise<{ repository: vscode.Uri | undefined; headBranchName: string | undefined }>;
+		folder: zyraxoncode.Uri,
+		token: zyraxoncode.CancellationToken
+	): Promise<{ repository: zyraxoncode.Uri | undefined; headBranchName: string | undefined }>;
 
 	/**
 	 * @deprecated
@@ -182,7 +182,7 @@ export interface IFolderRepositoryManager {
 
 export interface IChatFolderMruService {
 	readonly _serviceBrand: undefined;
-	getRecentlyUsedFolders(token: vscode.CancellationToken): Promise<FolderRepositoryMRUEntry[]>;
-	deleteRecentlyUsedFolder(folder: vscode.Uri): Promise<void>;
+	getRecentlyUsedFolders(token: zyraxoncode.CancellationToken): Promise<FolderRepositoryMRUEntry[]>;
+	deleteRecentlyUsedFolder(folder: zyraxoncode.Uri): Promise<void>;
 }
 export const IChatFolderMruService = createServiceIdentifier<IChatFolderMruService>('IChatFolderMruService');

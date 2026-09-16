@@ -317,8 +317,8 @@ function generateHTML(analysis: RunAnalysis, outputPath: string, includeRetries:
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Run ${analysis.runId}${analysis.modelName ? ' - ' + analysis.modelName : ''}</title>
-	<script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
-	<script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+	<script src="__ZYRAXKEEP__0_"></script>
+	<script src="__ZYRAXKEEP__1_"></script>
 	<style>
 		* {
 			box-sizing: border-box;
@@ -691,7 +691,7 @@ async function main() {
 	const args = process.argv.slice(2);
 	const runIdArg = args.find(arg => arg.startsWith('--runId='));
 
-	const basePath = path.join('/Users/connor/Github/vscode-copilot-evaluation/.msbenchRun');
+	const basePath = path.join('/Users/connor/Github/zyraxoncode-copilot-evaluation/.msbenchRun');
 
 	let runId: string;
 

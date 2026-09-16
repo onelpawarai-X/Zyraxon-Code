@@ -6,7 +6,7 @@
 export function formatStackTrace(stack: string, trustHtml: boolean): { formattedStack: string; errorLocation?: string } {
 	let cleaned: string;
 	// Ansi colors are described here:
-	// https://en.wikipedia.org/wiki/ANSI_escape_code under the SGR section
+	// __ZYRAXKEEP__0_ under the SGR section
 
 	// Remove background colors. The ones from IPython don't work well with
 	// themes 40-49 sets background color
@@ -69,7 +69,7 @@ function linkifyStack(stack: string): { formattedStack: string; errorLocation?: 
 		} else if (cellRegex.test(original)) {
 			fileOrCell = {
 				kind: 'cell',
-				path: stripFormatting(original.replace(cellRegex, 'vscode-notebook-cell:?execution_count=$<executionCount>'))
+				path: stripFormatting(original.replace(cellRegex, 'zyraxoncode-notebook-cell:?execution_count=$<executionCount>'))
 			};
 			const link = original.replace(cellRegex, `<a href=\'${fileOrCell.path}&line=$<lineNumber>\'>line $<lineNumber></a>`);
 			lines[i] = original.replace(cellRegex, `$<prefix>${link}`);
@@ -79,7 +79,7 @@ function linkifyStack(stack: string): { formattedStack: string; errorLocation?: 
 		} else if (inputRegex.test(original)) {
 			fileOrCell = {
 				kind: 'cell',
-				path: stripFormatting(original.replace(inputRegex, 'vscode-notebook-cell:?execution_count=$<executionCount>'))
+				path: stripFormatting(original.replace(inputRegex, 'zyraxoncode-notebook-cell:?execution_count=$<executionCount>'))
 			};
 			const link = original.replace(inputRegex, `<a href=\'${fileOrCell.path}\'>$<cellLabel></a>`);
 			lines[i] = original.replace(inputRegex, `Input ${link}$<postfix>`);

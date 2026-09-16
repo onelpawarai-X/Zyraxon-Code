@@ -56,8 +56,8 @@ class SelectAgentsFolderContribution extends Disposable implements IWorkbenchCon
 			this._handleOpenIntentAndCaptureInitialState(folderUri, sessionResource)
 				.catch(err => this.logService.error('[AgentsHandoff] handleOpenIntent failed', err));
 		};
-		ipcRenderer.on('vscode:selectAgentsFolder', handleSelectAgentsFolder);
-		this._register({ dispose: () => ipcRenderer.removeListener('vscode:selectAgentsFolder', handleSelectAgentsFolder) });
+		ipcRenderer.on('zyraxoncode:selectAgentsFolder', handleSelectAgentsFolder);
+		this._register({ dispose: () => ipcRenderer.removeListener('zyraxoncode:selectAgentsFolder', handleSelectAgentsFolder) });
 	}
 
 	private _startWindowOpenTelemetry(source: AgentsWindowOpenSource): void {

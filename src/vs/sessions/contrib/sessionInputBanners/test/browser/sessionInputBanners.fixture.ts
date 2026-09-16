@@ -84,7 +84,7 @@ function renderBanners({ container, disposableStore, theme }: ComponentFixtureCo
 	container.style.flexDirection = 'column';
 	container.style.gap = '4px';
 	container.style.padding = '8px';
-	container.style.backgroundColor = 'var(--vscode-editorWidget-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-editorWidget-background)';
 
 	const instantiationService = createEditorServices(disposableStore, { colorTheme: theme });
 

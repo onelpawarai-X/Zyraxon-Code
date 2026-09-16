@@ -12,7 +12,7 @@ import { observableConfigValue } from '../../../../platform/observable/common/pl
 import { ITelemetryService, TelemetryLevel, telemetryLevelEnabled } from '../../../../platform/telemetry/common/telemetry.js';
 import { AnnotatedDocuments } from './helpers/annotatedDocuments.js';
 import { EditTrackingFeature } from './telemetry/editSourceTrackingFeature.js';
-import { VSCodeWorkspace } from './helpers/vscodeObservableWorkspace.js';
+import { ZyraxonCodeWorkspace } from './helpers/zyraxoncodeObservableWorkspace.js';
 import { AiStatsFeature } from './editStats/aiStatsFeature.js';
 import { AI_STATS_SETTING_ID, EDIT_TELEMETRY_SETTING_ID } from './settingIds.js';
 import { IChatEntitlementService } from '../../../services/chat/common/chatEntitlementService.js';
@@ -27,7 +27,7 @@ export class EditTelemetryContribution extends Disposable {
 	) {
 		super();
 
-		const workspace = derived(reader => reader.store.add(instantiationService.createInstance(VSCodeWorkspace)));
+		const workspace = derived(reader => reader.store.add(instantiationService.createInstance(ZyraxonCodeWorkspace)));
 		const annotatedDocuments = derived(reader => reader.store.add(instantiationService.createInstance(AnnotatedDocuments, workspace.read(reader))));
 
 		const editSourceTrackingEnabled = observableConfigValue(EDIT_TELEMETRY_SETTING_ID, true, configurationService);

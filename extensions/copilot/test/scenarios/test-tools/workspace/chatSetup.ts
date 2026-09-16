@@ -132,13 +132,13 @@ class SetupAgent extends Disposable implements IChatAgentImplementation {
 		});
 	}
 
-	static registerVSCodeAgent(instantiationService: IInstantiationService, context: ChatEntitlementContext, controller: Lazy<ChatSetupController>): { agent: SetupAgent; disposable: IDisposable } {
+	static registerZyraxonCodeAgent(instantiationService: IInstantiationService, context: ChatEntitlementContext, controller: Lazy<ChatSetupController>): { agent: SetupAgent; disposable: IDisposable } {
 		return instantiationService.invokeFunction(accessor => {
 			const chatAgentService = accessor.get(IChatAgentService);
 
 			const disposables = new DisposableStore();
 
-			const { agent, disposable } = SetupAgent.doRegisterAgent(instantiationService, chatAgentService, 'setup.vscode', 'vscode', false, localize2('vscodeAgentDescription', "Ask questions about ZYRAXON Code").value, ChatAgentLocation.Panel, undefined, context, controller);
+			const { agent, disposable } = SetupAgent.doRegisterAgent(instantiationService, chatAgentService, 'setup.zyraxoncode', 'zyraxoncode', false, localize2('zyraxoncodeAgentDescription', "Ask questions about ZYRAXON Code").value, ChatAgentLocation.Panel, undefined, context, controller);
 			disposables.add(disposable);
 
 			disposables.add(SetupTool.registerTool(instantiationService, {
@@ -757,7 +757,7 @@ export class ChatSetupContribution extends Disposable implements IWorkbenchContr
 
 	private registerSetupAgents(context: ChatEntitlementContext, controller: Lazy<ChatSetupController>): void {
 		const defaultAgentDisposables = markAsSingleton(new MutableDisposable()); // prevents flicker on window reload
-		const vscodeAgentDisposables = markAsSingleton(new MutableDisposable());
+		const zyraxoncodeAgentDisposables = markAsSingleton(new MutableDisposable());
 
 		const updateRegistration = () => {
 			if (!context.state.hidden && !context.state.disabled) {
@@ -788,19 +788,19 @@ export class ChatSetupContribution extends Disposable implements IWorkbenchContr
 					disposables.add(SetupAgent.registerDefaultAgents(this.instantiationService, ChatAgentLocation.Editor, undefined, context, controller).disposable);
 				}
 
-				// VSCode Agent + Tool (unless installed and enabled)
-				if (!(context.state.installed && !context.state.disabled) && !vscodeAgentDisposables.value) {
-					const disposables = vscodeAgentDisposables.value = new DisposableStore();
+				// ZyraxonCode Agent + Tool (unless installed and enabled)
+				if (!(context.state.installed && !context.state.disabled) && !zyraxoncodeAgentDisposables.value) {
+					const disposables = zyraxoncodeAgentDisposables.value = new DisposableStore();
 
-					disposables.add(SetupAgent.registerVSCodeAgent(this.instantiationService, context, controller).disposable);
+					disposables.add(SetupAgent.registerZyraxonCodeAgent(this.instantiationService, context, controller).disposable);
 				}
 			} else {
 				defaultAgentDisposables.clear();
-				vscodeAgentDisposables.clear();
+				zyraxoncodeAgentDisposables.clear();
 			}
 
 			if (context.state.installed && !context.state.disabled) {
-				vscodeAgentDisposables.clear(); // we need to do this to prevent showing duplicate agent/tool entries in the list
+				zyraxoncodeAgentDisposables.clear(); // we need to do this to prevent showing duplicate agent/tool entries in the list
 			}
 		};
 
@@ -1366,7 +1366,7 @@ class ChatSetupController extends Disposable {
 		let isSingleWord = false;
 		const result = await this.quickInputService.input({
 			prompt: localize('enterpriseInstance', "What is your {0} instance?", defaultChat.enterpriseProviderName),
-			placeHolder: localize('enterpriseInstancePlaceholder', 'i.e. "octocat" or "https://octocat.ghe.com"...'),
+			placeHolder: localize('enterpriseInstancePlaceholder', 'i.e. "octocat" or "__ZYRAXKEEP__0_"...'),
 			ignoreFocusLost: true,
 			value: uri,
 			validateInput: async value => {
@@ -1378,12 +1378,12 @@ class ChatSetupController extends Disposable {
 				if (domainRegEx.test(value)) {
 					isSingleWord = true;
 					return {
-						content: localize('willResolveTo', "Will resolve to {0}", `https://${value}.ghe.com`),
+						content: localize('willResolveTo', "Will resolve to {0}", `__ZYRAXKEEP__1_{value}.ghe.com`),
 						severity: Severity.Info
 					};
 				} if (!fullUriRegEx.test(value)) {
 					return {
-						content: localize('invalidEnterpriseInstance', 'You must enter a valid {0} instance (i.e. "octocat" or "https://octocat.ghe.com")', defaultChat.enterpriseProviderName),
+						content: localize('invalidEnterpriseInstance', 'You must enter a valid {0} instance (i.e. "octocat" or "__ZYRAXKEEP__2_")', defaultChat.enterpriseProviderName),
 						severity: Severity.Error
 					};
 				}
@@ -1408,12 +1408,12 @@ class ChatSetupController extends Disposable {
 
 		let resolvedUri = result;
 		if (isSingleWord) {
-			resolvedUri = `https://${resolvedUri}.ghe.com`;
+			resolvedUri = `__ZYRAXKEEP__3_{resolvedUri}.ghe.com`;
 		} else {
 			const normalizedUri = result.toLowerCase();
 			const hasHttps = normalizedUri.startsWith('https://');
 			if (!hasHttps) {
-				resolvedUri = `https://${result}`;
+				resolvedUri = `__ZYRAXKEEP__4_{result}`;
 			}
 		}
 

@@ -17,14 +17,14 @@
 	border-radius: unset;
 	border: unset;
 	box-shadow: unset;
-	background: var(--vscode-inlineChat-background);
+	background: var(--zyraxoncode-inlineChat-background);
 	position: relative;
 	outline: none;
 
 	border-top-style: solid;
 	border-bottom-style: solid;
-	border-top-color: var(--vscode-inlineChat-border);
-	border-bottom-color: var(--vscode-inlineChat-border);
+	border-top-color: var(--zyraxoncode-inlineChat-border);
+	border-bottom-color: var(--zyraxoncode-inlineChat-border);
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 }
@@ -44,7 +44,7 @@
 
 .monaco-workbench .terminal-inline-chat .inline-chat-input .monaco-editor-background {
 	/* Override the global panel rule for monaco backgrounds */
-	background-color: var(--vscode-inlineChatInput-background) !important;
+	background-color: var(--zyraxoncode-inlineChatInput-background) !important;
 }
 
 @property --inline-chat-frame-progress {
@@ -69,7 +69,7 @@
 
 .monaco-workbench .terminal-inline-chat.busy .inline-chat {
 	--inline-chat-frame-progress: 0%;
-	border-image: linear-gradient(90deg, var(--vscode-editorGutter-addedBackground) var(--inline-chat-frame-progress), var(--vscode-button-background)) 1;
+	border-image: linear-gradient(90deg, var(--zyraxoncode-editorGutter-addedBackground) var(--inline-chat-frame-progress), var(--zyraxoncode-button-background)) 1;
 	animation: 3s shift linear infinite;
 }
 

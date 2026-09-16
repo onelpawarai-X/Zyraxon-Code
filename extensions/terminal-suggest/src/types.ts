@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 export interface ICompletionResource {
-	label: string | vscode.CompletionItemLabel;
+	label: string | zyraxoncode.CompletionItemLabel;
 	/**
 	 * The definition command of the completion, this will be the resolved value of an alias
 	 * completion.
 	 */
 	definitionCommand?: string;
-	documentation?: string | vscode.MarkdownString;
+	documentation?: string | zyraxoncode.MarkdownString;
 	detail?: string;
-	kind?: vscode.TerminalCompletionItemKind;
+	kind?: zyraxoncode.TerminalCompletionItemKind;
 }

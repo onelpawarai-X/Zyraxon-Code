@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AssistantMessage, BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
+import { AssistantMessage, BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { IResultMetadata, Turn } from '../../../prompt/common/conversation';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
 import { Tag } from '../base/tag';

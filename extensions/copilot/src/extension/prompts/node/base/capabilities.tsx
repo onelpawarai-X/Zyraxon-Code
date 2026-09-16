@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement } from '@zyraxoncode/prompt-tsx';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { ICommandService } from '../../../commands/node/commandService';
 import { agentsToCommands } from '../../../common/constants';

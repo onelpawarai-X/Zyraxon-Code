@@ -26,7 +26,7 @@ import { showMobileWorkspacePickerSheet, shouldUseMobileWorkspacePickerSheet } f
 
 /**
  * Web variant of {@link WorkspacePicker} for the Agents window's
- * vscode.dev / insiders.vscode.dev surface. Two responsibilities on
+ * zyraxoncode.dev / insiders.zyraxoncode.dev surface. Two responsibilities on
  * top of the desktop picker:
  *
  *  1. Scopes its contents to the host currently selected in the agent

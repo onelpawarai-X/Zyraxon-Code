@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { IVSCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
+import type * as zyraxoncode from 'zyraxoncode';
+import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { URI } from '../../../util/vs/base/common/uri';
-import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult } from '../../../zyraxoncodeTypes';
 import { ToolName } from '../common/toolNames';
 import { ICopilotTool, ToolRegistry } from '../common/toolsRegistry';
 import { extractSessionId } from './memoryTool';
@@ -21,10 +21,10 @@ export class ResolveMemoryFileUriTool implements ICopilotTool<IResolveMemoryFile
 	public static toolName = ToolName.ResolveMemoryFileUri;
 
 	constructor(
-		@IVSCodeExtensionContext private readonly _extensionContext: vscode.ExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _extensionContext: zyraxoncode.ExtensionContext,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IResolveMemoryFileUriParams>, _token: vscode.CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IResolveMemoryFileUriParams>, _token: zyraxoncode.CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		const memoryPath = options.input.path;
 		if (!memoryPath || !memoryPath.startsWith('/memories/')) {
 			throw new Error('Path must start with /memories/');

@@ -51,7 +51,7 @@
 
 .ai-customization-view .ai-customization-tree-item .description {
 	flex-shrink: 1;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 0.9em;
 	margin-left: 8px;
 	overflow: hidden;
@@ -65,11 +65,11 @@
 	display: flex;
 	align-items: center;
 	height: 22px;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	text-transform: uppercase;
-	font-size: var(--vscode-agents-fontSize-body2);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
 	letter-spacing: 0.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .ai-customization-view .ai-customization-group-header .label {
@@ -84,7 +84,7 @@
 	align-items: center;
 	height: 22px;
 	line-height: 22px;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 }
 
 .ai-customization-view .ai-customization-category .icon {
@@ -111,6 +111,6 @@
 /* Empty state */
 .ai-customization-view .empty-message {
 	padding: 10px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	text-align: center;
 }

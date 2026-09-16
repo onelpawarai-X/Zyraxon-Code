@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { afterEach, beforeEach, expect, suite, test } from 'vitest';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { RelativePattern } from '../../../../platform/filesystem/common/fileTypes';
 import { AbstractSearchService, ISearchService } from '../../../../platform/search/common/searchService';
@@ -37,12 +37,12 @@ suite('FindTextInFiles', () => {
 		accessor.dispose();
 	});
 
-	function setup(expected: vscode.GlobPattern, includeExtraPattern = true, modelFamily?: string) {
+	function setup(expected: zyraxoncode.GlobPattern, includeExtraPattern = true, modelFamily?: string) {
 		if (modelFamily) {
 			collection.define(IEndpointProvider, createMockEndpointProvider(modelFamily));
 		}
 
-		const patterns: vscode.GlobPattern[] = [expected];
+		const patterns: zyraxoncode.GlobPattern[] = [expected];
 		if (includeExtraPattern) {
 			if (typeof expected === 'string' && !expected.endsWith('/**')) {
 				patterns.push(expected + '/**');
@@ -245,7 +245,7 @@ class TestSearchService extends AbstractSearchService {
 	public readonly arr1: string[] = [];
 	public arr2: readonly string[] = [];
 
-	constructor(private readonly expectedIncludePattern: readonly vscode.GlobPattern[]) {
+	constructor(private readonly expectedIncludePattern: readonly zyraxoncode.GlobPattern[]) {
 		super();
 	}
 
@@ -255,11 +255,11 @@ class TestSearchService extends AbstractSearchService {
 		return this.recordedCalls;
 	}
 
-	override async findTextInFiles(query: vscode.TextSearchQuery, options: vscode.FindTextInFilesOptions, progress: vscode.Progress<vscode.TextSearchResult>, token: vscode.CancellationToken): Promise<vscode.TextSearchComplete> {
+	override async findTextInFiles(query: zyraxoncode.TextSearchQuery, options: zyraxoncode.FindTextInFilesOptions, progress: zyraxoncode.Progress<zyraxoncode.TextSearchResult>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.TextSearchComplete> {
 		throw new Error('Method not implemented.');
 	}
 
-	override findTextInFiles2(query: vscode.TextSearchQuery2, options?: vscode.FindTextInFilesOptions2, token?: vscode.CancellationToken): vscode.FindTextInFilesResponse {
+	override findTextInFiles2(query: zyraxoncode.TextSearchQuery2, options?: zyraxoncode.FindTextInFilesOptions2, token?: zyraxoncode.CancellationToken): zyraxoncode.FindTextInFilesResponse {
 		if (this.expectedIncludePattern.length > 0) {
 			const actual = options?.include ?? [];
 			expect(actual.length).toBe(this.expectedIncludePattern.length);
@@ -284,20 +284,20 @@ class TestSearchService extends AbstractSearchService {
 		};
 	}
 
-	override async findFiles(filePattern: vscode.GlobPattern, options?: vscode.FindFiles2Options | undefined, token?: vscode.CancellationToken | undefined): Promise<vscode.Uri[]> {
+	override async findFiles(filePattern: zyraxoncode.GlobPattern, options?: zyraxoncode.FindFiles2Options | undefined, token?: zyraxoncode.CancellationToken | undefined): Promise<zyraxoncode.Uri[]> {
 		throw new Error('Method not implemented.');
 	}
 }
 
 class RecordingSearchService extends AbstractSearchService {
-	public lastInclude: vscode.GlobPattern[] | undefined;
-	public lastOptions: vscode.FindTextInFilesOptions2 | undefined;
+	public lastInclude: zyraxoncode.GlobPattern[] | undefined;
+	public lastOptions: zyraxoncode.FindTextInFilesOptions2 | undefined;
 
-	override async findTextInFiles(query: vscode.TextSearchQuery, options: vscode.FindTextInFilesOptions, progress: vscode.Progress<vscode.TextSearchResult>, token: vscode.CancellationToken): Promise<vscode.TextSearchComplete> {
+	override async findTextInFiles(query: zyraxoncode.TextSearchQuery, options: zyraxoncode.FindTextInFilesOptions, progress: zyraxoncode.Progress<zyraxoncode.TextSearchResult>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.TextSearchComplete> {
 		throw new Error('Method not implemented.');
 	}
 
-	override findTextInFiles2(query: vscode.TextSearchQuery2, options?: vscode.FindTextInFilesOptions2, token?: vscode.CancellationToken): vscode.FindTextInFilesResponse {
+	override findTextInFiles2(query: zyraxoncode.TextSearchQuery2, options?: zyraxoncode.FindTextInFilesOptions2, token?: zyraxoncode.CancellationToken): zyraxoncode.FindTextInFilesResponse {
 		this.lastInclude = options?.include ? [...options.include] : undefined;
 		this.lastOptions = options;
 		return {
@@ -306,7 +306,7 @@ class RecordingSearchService extends AbstractSearchService {
 		};
 	}
 
-	override async findFiles(filePattern: vscode.GlobPattern, options?: vscode.FindFiles2Options | undefined, token?: vscode.CancellationToken | undefined): Promise<vscode.Uri[]> {
+	override async findFiles(filePattern: zyraxoncode.GlobPattern, options?: zyraxoncode.FindFiles2Options | undefined, token?: zyraxoncode.CancellationToken | undefined): Promise<zyraxoncode.Uri[]> {
 		throw new Error('Method not implemented.');
 	}
 }

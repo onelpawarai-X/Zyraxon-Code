@@ -19,20 +19,20 @@ import type { ResourceLabelFormatter } from '../../label/common/label.js';
  * represented without assuming `file://`:
  *
  * ```
- * vscode-agent-host://[connectionAuthority][originalPath]?_ah=[meta]#[originalFragment]
+ * zyraxoncode-agent-host://[connectionAuthority][originalPath]?_ah=[meta]#[originalFragment]
  * ```
  *
  * where `meta` is {@link IAgentHostUriMeta} as url-safe-base64-encoded
  * JSON. Encoding the metadata as a single opaque parameter (rather than
  * raw JSON) keeps the query a well-formed parameter list, so unrelated
- * query parameters such as `vscodeLinkType` can coexist on the wrapped
+ * query parameters such as `zyraxoncodeLinkType` can coexist on the wrapped
  * URI without corrupting the metadata. For example,
- * `file:///home/user/foo.ts` on remote `my-server` becomes:
+ * `__ZYRAXKEEP__0_` on remote `my-server` becomes:
  * ```
- * vscode-agent-host://my-server/home/user/foo.ts?_ah=eyJzY2hlbWUiOiJmaWxlIn0
+ * __ZYRAXKEEP__1_
  * ```
  */
-export const AGENT_HOST_SCHEME = 'vscode-agent-host';
+export const AGENT_HOST_SCHEME = 'zyraxoncode-agent-host';
 
 /**
  * Query parameter that carries the {@link IAgentHostUriMeta} payload.
@@ -56,8 +56,8 @@ interface IAgentHostUriMeta {
  * Wraps a remote URI into a {@link AGENT_HOST_SCHEME} URI that can be
  * resolved through the agent host filesystem provider.
  *
- * @param originalUri The URI on the remote (e.g. `file:///path` or
- *   `agenthost-content:///sessionId/...`)
+ * @param originalUri The URI on the remote (e.g. `__ZYRAXKEEP__2_` or
+ *   `__ZYRAXKEEP__3_`)
  * @param connectionAuthority The sanitized connection identifier used as
  *   the URI authority (from {@link agentHostAuthority}).
  */

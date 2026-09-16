@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import type { CancellationToken, Uri } from 'vscode';
+import type { CancellationToken, Uri } from 'zyraxoncode';
 import { Event } from '../../../../../util/vs/base/common/event';
 import { Disposable, IDisposable } from '../../../../../util/vs/base/common/lifecycle';
 import { URI } from '../../../../../util/vs/base/common/uri';

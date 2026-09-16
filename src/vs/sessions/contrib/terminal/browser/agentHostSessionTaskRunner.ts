@@ -113,7 +113,7 @@ export class AgentHostSessionTaskRunner implements ISessionTaskRunner {
 		if (!cwd) {
 			return undefined;
 		}
-		// Unwrap vscode-agent-host URIs to a host file path; pass file URIs through; omit unknown schemes.
+		// Unwrap zyraxoncode-agent-host URIs to a host file path; pass file URIs through; omit unknown schemes.
 		if (cwd.scheme === AGENT_HOST_SCHEME) {
 			return fromAgentHostUri(cwd);
 		}

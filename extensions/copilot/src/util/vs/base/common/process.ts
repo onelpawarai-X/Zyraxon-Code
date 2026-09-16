@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -11,9 +11,9 @@ let safeProcess: Omit<INodeProcess, 'arch'> & { arch: string | undefined };
 declare const process: INodeProcess;
 
 // Native sandbox environment
-const vscodeGlobal = (globalThis as { vscode?: { process?: INodeProcess } }).vscode;
-if (typeof vscodeGlobal !== 'undefined' && typeof vscodeGlobal.process !== 'undefined') {
-	const sandboxProcess: INodeProcess = vscodeGlobal.process;
+const zyraxoncodeGlobal = (globalThis as { zyraxoncode?: { process?: INodeProcess } }).zyraxoncode;
+if (typeof zyraxoncodeGlobal !== 'undefined' && typeof zyraxoncodeGlobal.process !== 'undefined') {
+	const sandboxProcess: INodeProcess = zyraxoncodeGlobal.process;
 	safeProcess = {
 		get platform() { return sandboxProcess.platform; },
 		get arch() { return sandboxProcess.arch; },

@@ -152,7 +152,7 @@ function renderPills(ctx: ComponentFixtureContext, sessionMock: IMockSessionAndC
 	}
 
 	container.style.padding = '12px';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 }
 
 async function renderChatViewWithPills(ctx: ComponentFixtureContext, mock: IMockSessionAndChat, messages: IFixtureMessage[]): Promise<void> {

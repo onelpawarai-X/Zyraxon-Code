@@ -7,7 +7,7 @@ import {
 	window, languages, Uri, Disposable, commands, QuickPickItem,
 	extensions, workspace, Extension, WorkspaceFolder, QuickPickItemKind,
 	ThemeIcon, TextDocument, LanguageStatusSeverity, l10n, DocumentSelector, Diagnostic
-} from 'vscode';
+} from 'zyraxoncode';
 import { CommandIds, ErrorCodes, isSchemaResolveError, JSONLanguageStatus, JSONSchemaSettings, SettingIds } from './jsonClient';
 
 type ShowSchemasInput = {
@@ -142,7 +142,7 @@ function showSchemaList(input: ShowSchemasInput) {
 	}
 
 	items.push({ label: '', kind: QuickPickItemKind.Separator });
-	items.push({ label: l10n.t('Learn more about JSON schema configuration...'), uri: Uri.parse('https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings') });
+	items.push({ label: l10n.t('Learn more about JSON schema configuration...'), uri: Uri.parse('__ZYRAXKEEP__0_') });
 
 	const quickPick = window.createQuickPick<ShowSchemasItem>();
 	quickPick.placeholder = items.length ? l10n.t('Select the schema to use for {0}', input.uri) : undefined;
@@ -151,7 +151,7 @@ function showSchemaList(input: ShowSchemasInput) {
 	quickPick.onDidAccept(() => {
 		const uri = quickPick.selectedItems[0].uri;
 		if (uri) {
-			commands.executeCommand('vscode.open', uri);
+			commands.executeCommand('zyraxoncode.open', uri);
 			quickPick.dispose();
 		}
 	});

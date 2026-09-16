@@ -41,9 +41,9 @@ export class ElectronPtyHostStarter extends Disposable implements IPtyHostStarte
 
 		this._register(this._lifecycleMainService.onWillShutdown(() => this._onWillShutdown.fire()));
 		// Listen for new windows to establish connection directly to pty host
-		validatedIpcMain.on('vscode:createPtyHostMessageChannel', (e, nonce) => this._onWindowConnection(e, nonce));
+		validatedIpcMain.on('zyraxoncode:createPtyHostMessageChannel', (e, nonce) => this._onWindowConnection(e, nonce));
 		this._register(toDisposable(() => {
-			validatedIpcMain.removeHandler('vscode:createPtyHostMessageChannel');
+			validatedIpcMain.removeHandler('zyraxoncode:createPtyHostMessageChannel');
 		}));
 	}
 
@@ -121,6 +121,6 @@ export class ElectronPtyHostStarter extends Disposable implements IPtyHostStarte
 			return;
 		}
 
-		e.sender.postMessage('vscode:createPtyHostMessageChannelResult', nonce, [port]);
+		e.sender.postMessage('zyraxoncode:createPtyHostMessageChannelResult', nonce, [port]);
 	}
 }

@@ -15,7 +15,7 @@ export function toUniquePath(documentId: DocumentId, workspaceRootPath: string |
 		? filePath.substring(workspaceRootPathWithSlash.length)
 		: filePath;
 
-	return documentId.toUri().scheme === Schemas.vscodeNotebookCell ? `${updatedFilePath}#${documentId.fragment}` : updatedFilePath;
+	return documentId.toUri().scheme === Schemas.zyraxoncodeNotebookCell ? `${updatedFilePath}#${documentId.fragment}` : updatedFilePath;
 }
 
 export function countTokensForLines(page: string[], computeTokens: (s: string) => number): number {

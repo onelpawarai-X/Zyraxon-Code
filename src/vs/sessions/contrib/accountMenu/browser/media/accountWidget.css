@@ -76,14 +76,14 @@
 
 /* Chat status dashboard shown from sidebar footer */
 .monaco-hover .chat-status-bar-entry-tooltip {
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	max-width: 320px;
 	padding: 4px 6px;
 	overflow: hidden;
 }
 
 .monaco-hover .chat-status-bar-entry-tooltip div.header {
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	margin-bottom: 6px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -91,7 +91,7 @@
 }
 
 .monaco-hover .chat-status-bar-entry-tooltip div.description {
-	font-size: var(--vscode-agents-fontSize-body2);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -107,7 +107,7 @@
 }
 
 .monaco-hover .chat-status-bar-entry-tooltip .contribution .body {
-	font-size: var(--vscode-agents-fontSize-body2);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
 	overflow: hidden;
 	min-width: 0;
 }
@@ -131,9 +131,9 @@
 }
 
 .sessions-account-titlebar-panel-content .chat-status-bar-entry-tooltip .quota-indicator .quota-title {
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	margin-bottom: 0;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .sessions-account-titlebar-panel-content .chat-status-bar-entry-tooltip .collapsible-inner {
@@ -144,17 +144,17 @@
 	padding: 0 10px 0 8px;
 	margin-bottom: 0;
 	line-height: 18px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .sessions-account-titlebar-panel-content .chat-status-bar-entry-tooltip div.header .monaco-action-bar {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .sessions-account-titlebar-panel-content .chat-status-bar-entry-tooltip .contribution .body {
 	padding: 0 10px 0 8px;
 	line-height: 16px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .monaco-workbench .part.sidebar > .sidebar-footer .account-widget-update .account-widget-update-button {
@@ -168,40 +168,40 @@
 }
 
 .monaco-workbench .part.sidebar > .sidebar-footer .account-widget-update .account-widget-update-button.account-widget-update-button-ready {
-	background-color: var(--vscode-button-background) !important;
-	color: var(--vscode-button-foreground) !important;
+	background-color: var(--zyraxoncode-button-background) !important;
+	color: var(--zyraxoncode-button-foreground) !important;
 }
 
 .account-widget-update .account-widget-update-button.account-widget-update-button-ready {
-	background-color: var(--vscode-button-background) !important;
-	color: var(--vscode-button-foreground) !important;
+	background-color: var(--zyraxoncode-button-background) !important;
+	color: var(--zyraxoncode-button-foreground) !important;
 }
 
 /* Boxed hint style for embedded app update indicator — outlined, no fill */
 .account-widget-update .account-widget-update-button.account-widget-update-button-hint {
 	background-color: transparent !important;
-	color: var(--vscode-button-background) !important;
-	border: 1px solid var(--vscode-button-background) !important;
+	color: var(--zyraxoncode-button-background) !important;
+	border: 1px solid var(--zyraxoncode-button-background) !important;
 }
 
 .account-widget-update .account-widget-update-button.account-widget-update-button-hint:hover {
-	background-color: color-mix(in srgb, var(--vscode-button-background) 20%, transparent) !important;
+	background-color: color-mix(in srgb, var(--zyraxoncode-button-background) 20%, transparent) !important;
 }
 
 .monaco-workbench .part.sidebar > .sidebar-footer .account-widget-update .account-widget-update-button.account-widget-update-button-ready:hover {
-	background-color: var(--vscode-button-background) !important;
+	background-color: var(--zyraxoncode-button-background) !important;
 }
 
 .account-widget-update .account-widget-update-button.account-widget-update-button-ready:hover {
-	background-color: var(--vscode-button-background) !important;
+	background-color: var(--zyraxoncode-button-background) !important;
 }
 
 .monaco-workbench .part.sidebar > .sidebar-footer .account-widget-update .account-widget-update-button.account-widget-update-button-ready:focus {
-	background-color: var(--vscode-button-background) !important;
+	background-color: var(--zyraxoncode-button-background) !important;
 }
 
 .account-widget-update .account-widget-update-button.account-widget-update-button-ready:focus {
-	background-color: var(--vscode-button-background) !important;
+	background-color: var(--zyraxoncode-button-background) !important;
 }
 
 .monaco-workbench .part.sidebar > .sidebar-footer .account-widget-update .account-widget-update-button.hidden {
@@ -216,7 +216,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	min-width: 0;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 }
 
 .account-widget-account .account-widget-account-button {

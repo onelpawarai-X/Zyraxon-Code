@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { createCancelablePromise, disposableTimeout, firstParallel, RunOnceScheduler, timeout } from '../../../base/common/async.js';
 import { DisposableStore, IDisposable } from '../../../base/common/lifecycle.js';
 import * as platform from '../../../base/common/platform.js';
@@ -49,7 +49,7 @@ export class ExtHostDebugService extends ExtHostDebugServiceBase {
 		super(extHostRpcService, workspaceService, extensionService, configurationService, editorTabs, variableResolver, commands, testing);
 	}
 
-	protected override createDebugAdapter(adapter: vscode.DebugAdapterDescriptor, session: ExtHostDebugSession): AbstractDebugAdapter | undefined {
+	protected override createDebugAdapter(adapter: zyraxoncode.DebugAdapterDescriptor, session: ExtHostDebugSession): AbstractDebugAdapter | undefined {
 		if (adapter instanceof DebugAdapterExecutable) {
 			return new ExecutableDebugAdapter(this.convertExecutableToDto(adapter), session.type);
 		} else if (adapter instanceof DebugAdapterServer) {
@@ -97,7 +97,7 @@ export class ExtHostDebugService extends ExtHostDebugServiceBase {
 			let giveShellTimeToInitialize = false;
 
 			if (!terminal) {
-				const options: vscode.TerminalOptions = {
+				const options: zyraxoncode.TerminalOptions = {
 					shellPath: shell,
 					shellArgs: shellArgs,
 					cwd: args.cwd,
@@ -152,7 +152,7 @@ export class ExtHostDebugService extends ExtHostDebugServiceBase {
 			} else {
 				if (terminal.state.isInteractedWith && !terminal.shellIntegration) {
 					terminal.sendText('\u0003'); // Ctrl+C for #106743. Not part of the same command for #107969
-					await timeout(200); // mirroring https://github.com/microsoft/vscode/blob/c67ccc70ece5f472ec25464d3eeb874cfccee9f1/src/vs/workbench/contrib/terminal/browser/terminalInstance.ts#L852-L857
+					await timeout(200); // mirroring __ZYRAXKEEP__0_
 				}
 
 				if (configProvider.getConfiguration('debug.terminal').get<boolean>('clearBeforeReusing')) {
@@ -237,7 +237,7 @@ class DebugTerminalCollection {
 	 */
 	private static minUseDelay = 1000;
 
-	private _terminalInstances = new Map<vscode.Terminal, { lastUsedAt: number; config: string }>();
+	private _terminalInstances = new Map<zyraxoncode.Terminal, { lastUsedAt: number; config: string }>();
 
 	public async checkout(config: string, name: string, cleanupOthersByName = false) {
 		const entries = [...this._terminalInstances.entries()];
@@ -269,21 +269,21 @@ class DebugTerminalCollection {
 			return terminal;
 		}));
 
-		return await firstParallel(promises, (t): t is vscode.Terminal => !!t);
+		return await firstParallel(promises, (t): t is zyraxoncode.Terminal => !!t);
 	}
 
-	public insert(terminal: vscode.Terminal, termConfig: string) {
+	public insert(terminal: zyraxoncode.Terminal, termConfig: string) {
 		this._terminalInstances.set(terminal, { lastUsedAt: Date.now(), config: termConfig });
 	}
 
-	public free(terminal: vscode.Terminal) {
+	public free(terminal: zyraxoncode.Terminal) {
 		const info = this._terminalInstances.get(terminal);
 		if (info) {
 			info.lastUsedAt = -1;
 		}
 	}
 
-	public onTerminalClosed(terminal: vscode.Terminal) {
+	public onTerminalClosed(terminal: zyraxoncode.Terminal) {
 		this._terminalInstances.delete(terminal);
 	}
 }

@@ -5,7 +5,7 @@
 
 import { ResourceSet } from '../../../util/vs/base/common/map';
 import { URI } from '../../../util/vs/base/common/uri';
-import type { Uri } from '../../../vscodeTypes';
+import type { Uri } from '../../../zyraxoncodeTypes';
 import { Config } from '../../configuration/common/configurationService';
 import { CodeGenerationInstruction, ICustomInstructions, ICustomInstructionsService, IInstructionIndexFile, ISkillInfo, SkillStorage } from '../../customInstructions/common/customInstructionsService';
 

@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ICopilotTokenManager } from '../../../platform/authentication/common/copilotTokenManager';
 import { IChatDebugFileLoggerService } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { ISessionStore } from '../../../platform/chronicle/common/sessionStore';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
-import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult } from '../../../zyraxoncodeTypes';
 import { SessionIndexingPreference } from '../../chronicle/common/sessionIndexingPreference';
 import { CloudSessionStoreClient } from '../../chronicle/node/cloudSessionStoreClient';
 import { reindexSessions } from '../../chronicle/node/sessionReindexer';
@@ -89,9 +89,9 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 	}
 
 	async invoke(
-		options: vscode.LanguageModelToolInvocationOptions<SessionStoreSqlParams>,
+		options: zyraxoncode.LanguageModelToolInvocationOptions<SessionStoreSqlParams>,
 		token: CancellationToken,
-	): Promise<vscode.LanguageModelToolResult> {
+	): Promise<zyraxoncode.LanguageModelToolResult> {
 		const action = options.input.action ?? 'query';
 		const subcommand = options.input.subcommand;
 
@@ -102,7 +102,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 				return this._invokeQuery(options.input.query ?? '', subcommand, token);
 		}
 	}
-	private async _invokeQuery(rawQuery: string, subcommand: SessionStoreSqlParams['subcommand'], token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	private async _invokeQuery(rawQuery: string, subcommand: SessionStoreSqlParams['subcommand'], token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		// Strip trailing semicolons — models often append them
 		const sql = rawQuery.trim().replace(/;+\s*$/, '');
 
@@ -205,7 +205,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 	 * Reindex action: rebuild the local session store from debug logs,
 	 * then trigger cloud sync if enabled.
 	 */
-	private async _invokeReindex(force: boolean, subcommand: NonNullable<SessionStoreSqlParams['subcommand']>, token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	private async _invokeReindex(force: boolean, subcommand: NonNullable<SessionStoreSqlParams['subcommand']>, token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		const startTime = Date.now();
 		const hadCloudConsent = this._indexingPreference.hasCloudConsent();
 		const target: 'local' | 'cloud' = hadCloudConsent ? 'cloud' : 'local';
@@ -319,7 +319,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 	}
 
 	prepareInvocation(
-		options: vscode.LanguageModelToolInvocationPrepareOptions<SessionStoreSqlParams>,
+		options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<SessionStoreSqlParams>,
 		_token: CancellationToken,
 	) {
 		const action = options.input.action ?? 'query';
@@ -337,7 +337,7 @@ class SessionStoreSqlTool implements ICopilotTool<SessionStoreSqlParams> {
 		}
 	}
 
-	alternativeDefinition(tool: vscode.LanguageModelToolInformation): vscode.LanguageModelToolInformation {
+	alternativeDefinition(tool: zyraxoncode.LanguageModelToolInformation): zyraxoncode.LanguageModelToolInformation {
 		const hasCloud = this._indexingPreference.hasCloudConsent();
 		if (!hasCloud) {
 			return tool;

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs/promises';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { createDirectoryIfNotExists, IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { createServiceIdentifier } from '../../../../util/common/services';
@@ -38,7 +38,7 @@ export class CopilotCLIImageSupport implements ICopilotCLIImageSupport {
 	private readonly initialized: Lazy<Promise<void>>;
 	private readonly trustedImages = new ResourceSet();
 	constructor(
-		@IVSCodeExtensionContext private readonly context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly context: IZyraxonCodeExtensionContext,
 		@ILogService private readonly logService: ILogService,
 		@IFileSystemService private readonly fileSystemService: IFileSystemService,
 	) {

@@ -143,11 +143,11 @@ function containsResource(root: URI, resource: URI, uriIdentityService: IUriIden
 
 function normalizeResourcePath(resource: URI): URI {
 	// Rewrite remote uris to a path that the remote file system can understand
-	if (resource.scheme === Schemas.vscodeRemote) {
+	if (resource.scheme === Schemas.zyraxoncodeRemote) {
 		return URI.from({
-			scheme: Schemas.vscodeRemote,
+			scheme: Schemas.zyraxoncodeRemote,
 			authority: resource.authority,
-			path: '/vscode-resource',
+			path: '/zyraxoncode-resource',
 			query: JSON.stringify({
 				requestResourcePath: resource.path
 			})

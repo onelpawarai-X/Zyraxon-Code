@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { IImageService } from '../../../platform/image/common/imageService';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
@@ -12,7 +12,7 @@ import { IWorkspaceService } from '../../../platform/workspace/common/workspaceS
 import { dirname } from '../../../util/vs/base/common/resources';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelDataPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../vscodeTypes';
+import { LanguageModelDataPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { ToolName } from '../common/toolNames';
 import { ICopilotTool, ToolRegistry } from '../common/toolsRegistry';
@@ -38,7 +38,7 @@ export class ViewImageTool implements ICopilotTool<IViewImageParams> {
 		@IImageService private readonly imageService: IImageService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IViewImageParams>, _token: vscode.CancellationToken): Promise<LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IViewImageParams>, _token: zyraxoncode.CancellationToken): Promise<LanguageModelToolResult> {
 		const uri = resolveToolInputPath(options.input.filePath, this.promptPathRepresentationService);
 		const imageMimeType = getImageMimeType(uri);
 		if (!imageMimeType) {
@@ -59,7 +59,7 @@ export class ViewImageTool implements ICopilotTool<IViewImageParams> {
 		]);
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IViewImageParams>, _token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation | undefined> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IViewImageParams>, _token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation | undefined> {
 		const uri = resolveToolInputPath(options.input.filePath, this.promptPathRepresentationService);
 		this.assertImageFile(uri);
 

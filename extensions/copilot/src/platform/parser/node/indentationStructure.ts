@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { CharCode } from '../../../util/vs/base/common/charCode';
 import { BugIndicatingError } from '../../../util/vs/base/common/errors';
-import { Position } from '../../../vscodeTypes';
+import { Position } from '../../../zyraxoncodeTypes';
 import { AbstractDocument } from '../../editing/common/abstractText';
 import { OverlayNode } from './nodes';
 
 export function getStructureUsingIndentation(
 	document: AbstractDocument,
 	languageId: string,
-	formattingOptions: vscode.FormattingOptions | undefined
+	formattingOptions: zyraxoncode.FormattingOptions | undefined
 ): OverlayNode {
 	const lines = document.getText().split(/\r\n|\r|\n/g);
 	const opts = formattingOptions || { tabSize: 4 };

@@ -506,7 +506,7 @@ export class RemoteStatusIndicator extends Disposable implements IWorkbenchContr
 
 		// Show for remote windows on the desktop
 		if (this.remoteAuthority) {
-			const hostLabel = this.labelService.getHostLabel(Schemas.vscodeRemote, this.remoteAuthority) || this.remoteAuthority;
+			const hostLabel = this.labelService.getHostLabel(Schemas.zyraxoncodeRemote, this.remoteAuthority) || this.remoteAuthority;
 			switch (this.connectionState) {
 				case 'initializing':
 					this.renderRemoteStatusIndicator(nls.localize('host.open', "Opening Remote..."), nls.localize('host.open', "Opening Remote..."), undefined, true /* progress */);
@@ -519,7 +519,7 @@ export class RemoteStatusIndicator extends Disposable implements IWorkbenchContr
 					break;
 				default: {
 					const tooltip = new MarkdownString('', { isTrusted: true, supportThemeIcons: true });
-					const hostNameTooltip = this.labelService.getHostTooltip(Schemas.vscodeRemote, this.remoteAuthority);
+					const hostNameTooltip = this.labelService.getHostTooltip(Schemas.zyraxoncodeRemote, this.remoteAuthority);
 					if (hostNameTooltip) {
 						tooltip.appendMarkdown(hostNameTooltip);
 					} else {

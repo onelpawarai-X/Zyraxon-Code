@@ -46,12 +46,12 @@ function createMockWorkspace(): ISessionWorkspace {
 	const root = URI.file('/repo');
 	return {
 		uri: root,
-		label: 'vscode',
+		label: 'zyraxoncode',
 		icon: Codicon.folder,
 		folders: [{
 			root,
 			workingDirectory: root,
-			name: 'vscode',
+			name: 'zyraxoncode',
 			description: undefined,
 			gitRepository: {
 				uri: root,
@@ -113,7 +113,7 @@ function renderDiffStats(ctx: ComponentFixtureContext, changes: readonly ISessio
 	item.render(toolbar);
 
 	container.style.padding = '8px';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 }
 
 // ============================================================================

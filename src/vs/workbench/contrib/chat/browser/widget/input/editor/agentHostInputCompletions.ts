@@ -141,7 +141,7 @@ export class AgentHostInputCompletions extends AgentHostInputCompletionsBase<ICh
 		}
 
 		this._registrations.set(scheme, this._registerProvider(
-			{ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true },
+			{ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true },
 			`agentHostChatInputCompletions[${scheme}]`,
 			triggerCharacters,
 			scheme,

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 export const ILanguageContextService = createServiceIdentifier<ILanguageContextService>('ILanguageContextService');
@@ -39,12 +39,12 @@ export interface SnippetContext {
 	/**
 	 * The main source the snippet is extracted from.
 	 */
-	uri: vscode.Uri;
+	uri: zyraxoncode.Uri;
 
 	/**
 	 * Additional sources if available.
 	 */
-	additionalUris?: vscode.Uri[];
+	additionalUris?: zyraxoncode.Uri[];
 
 	/**
 	 * The actual snippet value.
@@ -102,12 +102,12 @@ export interface DiagnosticBagContext {
 	/**
 	 * The resource the diagnostics are associated with.
 	 */
-	uri: vscode.Uri;
+	uri: zyraxoncode.Uri;
 
 	/**
 	 * The diagnostics.
 	 */
-	values: vscode.Diagnostic[];
+	values: zyraxoncode.Diagnostic[];
 }
 
 export type ContextItem = SnippetContext | TraitContext | DiagnosticBagContext;
@@ -162,7 +162,7 @@ export type RequestContext = {
 	/**
 	 * A list of proposed edits that should be applied before computing the context.
 	 */
-	proposedEdits?: { edit: vscode.TextEdit; source?: 'selectedCompletionInfo' }[];
+	proposedEdits?: { edit: zyraxoncode.TextEdit; source?: 'selectedCompletionInfo' }[];
 
 	/**
 	 * If provided the telemetry will be sampled. A value of 1 will log every request, a value of
@@ -179,7 +179,7 @@ export interface ILanguageContextService {
 	 * Checks whether is language server context is activated for the
 	 * given text document or language.
 	 */
-	isActivated(documentOrLanguageId: vscode.TextDocument | string): Promise<boolean>;
+	isActivated(documentOrLanguageId: zyraxoncode.TextDocument | string): Promise<boolean>;
 
 	/**
 	 * Populates the cache with context information for the given document and position.
@@ -188,7 +188,7 @@ export interface ILanguageContextService {
 	 * @param position The position in the document to populate the cache for.
 	 * @param context The context for the request.
 	 */
-	populateCache(document: vscode.TextDocument, position: vscode.Position, context: RequestContext): Promise<void>;
+	populateCache(document: zyraxoncode.TextDocument, position: zyraxoncode.Position, context: RequestContext): Promise<void>;
 
 	/**
 	 * Retrieves the context for the given document and position.
@@ -199,7 +199,7 @@ export interface ILanguageContextService {
 	 * @param token A cancellation token.
 	 * @returns A promise that resolves to an array of context items.
 	 */
-	getContext(document: vscode.TextDocument, position: vscode.Position, context: RequestContext, token: vscode.CancellationToken): AsyncIterable<ContextItem>;
+	getContext(document: zyraxoncode.TextDocument, position: zyraxoncode.Position, context: RequestContext, token: zyraxoncode.CancellationToken): AsyncIterable<ContextItem>;
 
 	/**
 	 * Retrieves the context for the given document and position when a request timeout is reached.
@@ -214,7 +214,7 @@ export interface ILanguageContextService {
 	 * @param context The context for the request.
 	 * @returns An array of `ContextItem` or `undefined`.
 	 */
-	getContextOnTimeout(document: vscode.TextDocument, position: vscode.Position, context: RequestContext): readonly ContextItem[] | undefined;
+	getContextOnTimeout(document: zyraxoncode.TextDocument, position: zyraxoncode.Position, context: RequestContext): readonly ContextItem[] | undefined;
 }
 
 class EmptyAsyncIterable<T> implements AsyncIterable<T> {

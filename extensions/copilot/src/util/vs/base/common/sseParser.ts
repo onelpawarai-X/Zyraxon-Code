@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -7,7 +7,7 @@
 
 /**
  * Parser for Server-Sent Events (SSE) streams according to the HTML specification.
- * @see https://html.spec.whatwg.org/multipage/server-sent-events.html#event-stream-interpretation
+ * @see __ZYRAXKEEP__0_
  */
 
 /**

@@ -3,23 +3,23 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { DocumentSelector } from '../configuration/documentSelector';
 import type * as Proto from '../tsServer/protocol/protocol';
 import * as typeConverters from '../typeConverters';
 import { ITypeScriptServiceClient } from '../typescriptService';
 
-class TypeScriptDocumentHighlightProvider implements vscode.DocumentHighlightProvider, vscode.MultiDocumentHighlightProvider {
+class TypeScriptDocumentHighlightProvider implements zyraxoncode.DocumentHighlightProvider, zyraxoncode.MultiDocumentHighlightProvider {
 	public constructor(
 		private readonly client: ITypeScriptServiceClient
 	) { }
 
 	public async provideMultiDocumentHighlights(
-		document: vscode.TextDocument,
-		position: vscode.Position,
-		otherDocuments: vscode.TextDocument[],
-		token: vscode.CancellationToken
-	): Promise<vscode.MultiDocumentHighlight[]> {
+		document: zyraxoncode.TextDocument,
+		position: zyraxoncode.Position,
+		otherDocuments: zyraxoncode.TextDocument[],
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.MultiDocumentHighlight[]> {
 		const allFiles = [document, ...otherDocuments].map(doc => this.client.toOpenTsFilePath(doc)).filter(file => !!file) as string[];
 		const file = this.client.toOpenTsFilePath(document);
 
@@ -37,8 +37,8 @@ class TypeScriptDocumentHighlightProvider implements vscode.DocumentHighlightPro
 		}
 
 		const result = response.body.map(highlightItem =>
-			new vscode.MultiDocumentHighlight(
-				vscode.Uri.file(highlightItem.file),
+			new zyraxoncode.MultiDocumentHighlight(
+				zyraxoncode.Uri.file(highlightItem.file),
 				[...convertDocumentHighlight(highlightItem)]
 			)
 		);
@@ -47,10 +47,10 @@ class TypeScriptDocumentHighlightProvider implements vscode.DocumentHighlightPro
 	}
 
 	public async provideDocumentHighlights(
-		document: vscode.TextDocument,
-		position: vscode.Position,
-		token: vscode.CancellationToken
-	): Promise<vscode.DocumentHighlight[]> {
+		document: zyraxoncode.TextDocument,
+		position: zyraxoncode.Position,
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.DocumentHighlight[]> {
 		const file = this.client.toOpenTsFilePath(document);
 		if (!file) {
 			return [];
@@ -69,11 +69,11 @@ class TypeScriptDocumentHighlightProvider implements vscode.DocumentHighlightPro
 	}
 }
 
-function convertDocumentHighlight(highlight: Proto.DocumentHighlightsItem): ReadonlyArray<vscode.DocumentHighlight> {
+function convertDocumentHighlight(highlight: Proto.DocumentHighlightsItem): ReadonlyArray<zyraxoncode.DocumentHighlight> {
 	return highlight.highlightSpans.map(span =>
-		new vscode.DocumentHighlight(
+		new zyraxoncode.DocumentHighlight(
 			typeConverters.Range.fromTextSpan(span),
-			span.kind === 'writtenReference' ? vscode.DocumentHighlightKind.Write : vscode.DocumentHighlightKind.Read));
+			span.kind === 'writtenReference' ? zyraxoncode.DocumentHighlightKind.Write : zyraxoncode.DocumentHighlightKind.Read));
 }
 
 export function register(
@@ -82,8 +82,8 @@ export function register(
 ) {
 	const provider = new TypeScriptDocumentHighlightProvider(client);
 
-	return vscode.Disposable.from(
-		vscode.languages.registerDocumentHighlightProvider(selector.syntax, provider),
-		vscode.languages.registerMultiDocumentHighlightProvider(selector.syntax, provider)
+	return zyraxoncode.Disposable.from(
+		zyraxoncode.languages.registerDocumentHighlightProvider(selector.syntax, provider),
+		zyraxoncode.languages.registerMultiDocumentHighlightProvider(selector.syntax, provider)
 	);
 }

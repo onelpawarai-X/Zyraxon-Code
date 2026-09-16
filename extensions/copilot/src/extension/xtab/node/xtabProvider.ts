@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import { FetchStreamSource } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchError, ChatFetchResponseType, ChatLocation, RESPONSE_CONTAINED_NO_CHOICES } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService, XTabProviderId } from '../../../platform/configuration/common/configurationService';
@@ -55,7 +55,7 @@ import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRa
 import { StringText } from '../../../util/vs/editor/common/core/text/abstractText';
 import { PositionOffsetTransformer } from '../../../util/vs/editor/common/core/text/positionToOffset';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Position as VscodePosition } from '../../../vscodeTypes';
+import { Position as VscodePosition } from '../../../zyraxoncodeTypes';
 import { DelaySession } from '../../inlineEdits/common/delay';
 import { getOrDeduceSelectionFromLastEdit } from '../../inlineEdits/common/nearbyCursorInlineEditProvider';
 import { UserInteractionMonitor } from '../../inlineEdits/common/userInteractionMonitor';

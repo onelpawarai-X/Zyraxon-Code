@@ -18,7 +18,7 @@ export const enum TerminalToolId {
 	KillTerminal = 'kill_terminal',
 	TerminalSelection = 'terminal_selection',
 	TerminalLastCommand = 'terminal_last_command',
-	ConfirmTerminalCommand = 'vscode_get_terminal_confirmation',
+	ConfirmTerminalCommand = 'zyraxoncode_get_terminal_confirmation',
 	CreateAndRunTask = 'create_and_run_task',
 	GetTaskOutput = 'get_task_output',
 	RunTask = 'run_task',

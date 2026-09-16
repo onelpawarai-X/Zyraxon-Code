@@ -11,7 +11,7 @@ import { URI } from '../../../base/common/uri.js';
  */
 export namespace BrowserViewUri {
 
-	export const scheme = Schemas.vscodeBrowser;
+	export const scheme = Schemas.zyraxoncodeBrowser;
 
 	/**
 	 * Creates a resource URI for a browser view with the given ID.

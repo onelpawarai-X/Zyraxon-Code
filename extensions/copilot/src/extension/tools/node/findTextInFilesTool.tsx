@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { OffsetLineColumnConverter } from '../../../platform/editing/common/offsetLineColumnConverter';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -23,7 +23,7 @@ import { count } from '../../../util/vs/base/common/strings';
 import { URI } from '../../../util/vs/base/common/uri';
 import { Position as EditorPosition } from '../../../util/vs/editor/common/core/position';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExcludeSettingOptions, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, Location, MarkdownString, Range } from '../../../vscodeTypes';
+import { ExcludeSettingOptions, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, Location, MarkdownString, Range } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { Tag } from '../../prompts/node/base/tag';
@@ -44,7 +44,7 @@ interface IFindTextInFilesToolParams {
 
 interface FileMatch {
 	path: string;
-	matches: vscode.TextSearchMatch2[];
+	matches: zyraxoncode.TextSearchMatch2[];
 	elidedMatches?: number;
 }
 
@@ -72,7 +72,7 @@ export class FindTextInFilesTool implements ICopilotTool<IFindTextInFilesToolPar
 		@IExperimentationService private readonly experimentationService: IExperimentationService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, token: CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, token: CancellationToken) {
 		// TODO strict input validation
 		// Certain models just really want to pass incorrect input
 		if ((options.input as unknown as Record<string, string>).pattern) {
@@ -159,7 +159,7 @@ Then if you want to include those files you can call the tool again by setting "
 		}
 	}
 
-	private async renderTagStyle(results: vscode.TextSearchResult2[], options: vscode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, maxResults: number, maxResultsCap: number, globResult: InputGlobResult | undefined, askedForTooManyResults: boolean | number | undefined, isRegExp: boolean, noMatchInstructions: string | undefined, token: CancellationToken): Promise<vscode.ExtendedLanguageModelToolResult> {
+	private async renderTagStyle(results: zyraxoncode.TextSearchResult2[], options: zyraxoncode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, maxResults: number, maxResultsCap: number, globResult: InputGlobResult | undefined, askedForTooManyResults: boolean | number | undefined, isRegExp: boolean, noMatchInstructions: string | undefined, token: CancellationToken): Promise<zyraxoncode.ExtendedLanguageModelToolResult> {
 		const prompt = await renderPromptElementJSON(this.instantiationService,
 			FindTextInFilesResult,
 			{ textResults: results, maxResults, maxResultsCap, askedForTooManyResults: Boolean(askedForTooManyResults), noMatchInstructions },
@@ -181,7 +181,7 @@ Then if you want to include those files you can call the tool again by setting "
 		return result;
 	}
 
-	private async renderGrepStyle(results: vscode.TextSearchResult2[], options: vscode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, maxResults: number, globResult: InputGlobResult | undefined, isRegExp: boolean, noMatchInstructions: string | undefined, token: CancellationToken): Promise<vscode.ExtendedLanguageModelToolResult> {
+	private async renderGrepStyle(results: zyraxoncode.TextSearchResult2[], options: zyraxoncode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, maxResults: number, globResult: InputGlobResult | undefined, isRegExp: boolean, noMatchInstructions: string | undefined, token: CancellationToken): Promise<zyraxoncode.ExtendedLanguageModelToolResult> {
 		const groupedMatches = this.createGroupedFileMatches(results, maxResults);
 		if (!groupedMatches) {
 			return this.errorResult(noMatchInstructions ? `No matches found. ${noMatchInstructions}` : 'No matches found.');
@@ -197,7 +197,7 @@ Then if you want to include those files you can call the tool again by setting "
 		return result;
 	}
 
-	private createGroupedFileMatches(results: vscode.TextSearchResult2[], maxResults: number): MatchResult | undefined {
+	private createGroupedFileMatches(results: zyraxoncode.TextSearchResult2[], maxResults: number): MatchResult | undefined {
 		const textMatches = results.filter(isTextSearchMatch);
 		if (!textMatches.length) {
 			return undefined;
@@ -301,13 +301,13 @@ Then if you want to include those files you can call the tool again by setting "
 		};
 	}
 
-	private errorResult(message: string): vscode.ExtendedLanguageModelToolResult {
+	private errorResult(message: string): zyraxoncode.ExtendedLanguageModelToolResult {
 		const result = new ExtendedLanguageModelToolResult([]);
 		result.toolResultMessage = new MarkdownString(message);
 		return result;
 	}
 
-	private async sendSearchToolTelemetry(options: vscode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, globResult: InputGlobResult | undefined, outputFormat: string, requestedMaxResults: number | undefined, defaultMaxResults: number, maxResultsCap: number): Promise<void> {
+	private async sendSearchToolTelemetry(options: zyraxoncode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, globResult: InputGlobResult | undefined, outputFormat: string, requestedMaxResults: number | undefined, defaultMaxResults: number, maxResultsCap: number): Promise<void> {
 		const model = options.model && (await this.endpointProvider.getChatEndpoint(options.model)).model;
 		const isMultiRoot = this.workspaceService.getWorkspaceFolders().length > 1;
 		const includePattern = options.input.includePattern;
@@ -367,8 +367,8 @@ Then if you want to include those files you can call the tool again by setting "
 		}
 	}
 
-	private async searchAndCollectResults(query: string, isRegExp: boolean, patterns: vscode.GlobPattern[] | undefined, maxResults: number, includeIgnoredFiles: boolean | undefined, token: CancellationToken): Promise<vscode.TextSearchResult2[]> {
-		const findOptions: vscode.FindTextInFilesOptions2 = {
+	private async searchAndCollectResults(query: string, isRegExp: boolean, patterns: zyraxoncode.GlobPattern[] | undefined, maxResults: number, includeIgnoredFiles: boolean | undefined, token: CancellationToken): Promise<zyraxoncode.TextSearchResult2[]> {
+		const findOptions: zyraxoncode.FindTextInFilesOptions2 = {
 			include: patterns ? patterns : undefined,
 			maxResults: maxResults + 1,
 			useExcludeSettings: includeIgnoredFiles ? ExcludeSettingOptions.None : ExcludeSettingOptions.SearchAndFilesExclude,
@@ -383,7 +383,7 @@ Then if you want to include those files you can call the tool again by setting "
 			},
 			findOptions,
 			token);
-		const results: vscode.TextSearchResult2[] = [];
+		const results: zyraxoncode.TextSearchResult2[] = [];
 		for await (const item of searchResult.results) {
 			checkCancellation(token);
 			results.push(item);
@@ -395,7 +395,7 @@ Then if you want to include those files you can call the tool again by setting "
 		return results;
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IFindTextInFilesToolParams>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IFindTextInFilesToolParams>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		const isRegExp = options.input.isRegexp ?? true;
 		const globResult = options.input.includePattern ? inputGlobToPattern(options.input.includePattern, new WorkingDirectory(undefined, this.workspaceService), undefined) : undefined;
 		const query = this.formatQueryString(options.input, globResult);
@@ -473,7 +473,7 @@ Then if you want to include those files you can call the tool again by setting "
 
 ToolRegistry.registerTool(FindTextInFilesTool);
 export interface FindTextInFilesResultProps extends BasePromptElementProps {
-	textResults: vscode.TextSearchResult2[];
+	textResults: zyraxoncode.TextSearchResult2[];
 	maxResults: number;
 	maxResultsCap: number;
 	askedForTooManyResults?: boolean;
@@ -652,7 +652,7 @@ export class FindTextInFilesGrepResult extends PromptElement<FindTextInFilesGrep
 	 * `[match at col N, line truncated, M chars]` annotation so the model knows where the match sits in
 	 * the full line and can read the file for the rest. The result is always a single line.
 	 */
-	private static boundMatchPreview(textMatch: vscode.TextSearchMatch2): string {
+	private static boundMatchPreview(textMatch: zyraxoncode.TextSearchMatch2): string {
 		const preview = textMatch.previewText.replace(/\n$/, '').trimEnd();
 		if (preview.length <= this.MAX_LINE_CHARS) {
 			return this.collapseToSingleLine(preview);
@@ -690,6 +690,6 @@ export class FindTextInFilesGrepResult extends PromptElement<FindTextInFilesGrep
 	}
 }
 
-export function isTextSearchMatch(obj: vscode.TextSearchResult2): obj is vscode.TextSearchMatch2 {
+export function isTextSearchMatch(obj: zyraxoncode.TextSearchResult2): obj is zyraxoncode.TextSearchMatch2 {
 	return 'ranges' in obj;
 }

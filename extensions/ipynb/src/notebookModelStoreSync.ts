@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, ExtensionContext, NotebookCellKind, NotebookDocument, NotebookDocumentChangeEvent, NotebookEdit, workspace, WorkspaceEdit, type NotebookCell, type NotebookDocumentWillSaveEvent } from 'vscode';
-import { getCellMetadata, getVSCodeCellLanguageId, removeVSCodeCellLanguageId, setVSCodeCellLanguageId, sortObjectPropertiesRecursively, getNotebookMetadata } from './serializers';
+import { Disposable, ExtensionContext, NotebookCellKind, NotebookDocument, NotebookDocumentChangeEvent, NotebookEdit, workspace, WorkspaceEdit, type NotebookCell, type NotebookDocumentWillSaveEvent } from 'zyraxoncode';
+import { getCellMetadata, getZyraxonCodeCellLanguageId, removeZyraxonCodeCellLanguageId, setZyraxonCodeCellLanguageId, sortObjectPropertiesRecursively, getNotebookMetadata } from './serializers';
 import { CellMetadata } from './common';
 import type * as nbformat from '@jupyterlab/nbformat';
 import { generateUuid } from './helper';
@@ -103,7 +103,7 @@ function cleanup(notebook: NotebookDocument, promise: PromiseLike<void>) {
 		}
 	}
 }
-function trackAndUpdateCellMetadata(notebook: NotebookDocument, updates: { cell: NotebookCell; metadata: CellMetadata & { vscode?: { languageId: string } } }[]) {
+function trackAndUpdateCellMetadata(notebook: NotebookDocument, updates: { cell: NotebookCell; metadata: CellMetadata & { zyraxoncode?: { languageId: string } } }[]) {
 	const pendingUpdates = pendingNotebookCellModelUpdates.get(notebook) ?? new Set<Thenable<void>>();
 	pendingNotebookCellModelUpdates.set(notebook, pendingUpdates);
 	const edit = new WorkspaceEdit();
@@ -134,16 +134,16 @@ function onDidChangeNotebookCells(e: NotebookDocumentChangeEventEx) {
 
 	// use the preferred language from document metadata or the first cell language as the notebook preferred cell language
 	const preferredCellLanguage = notebookMetadata.metadata?.language_info?.name;
-	const updates: { cell: NotebookCell; metadata: CellMetadata & { vscode?: { languageId: string } } }[] = [];
+	const updates: { cell: NotebookCell; metadata: CellMetadata & { zyraxoncode?: { languageId: string } } }[] = [];
 	// When we change the language of a cell,
 	// Ensure the metadata in the notebook cell has been updated as well,
-	// Else model will be out of sync with ipynb https://github.com/microsoft/vscode/issues/207968#issuecomment-2002858596
+	// Else model will be out of sync with ipynb __ZYRAXKEEP__0_
 	e.cellChanges.forEach(e => {
 		if (!preferredCellLanguage || e.cell.kind !== NotebookCellKind.Code) {
 			return;
 		}
 		const currentMetadata = e.metadata ? getCellMetadata({ metadata: e.metadata }) : getCellMetadata({ cell: e.cell });
-		const languageIdInMetadata = getVSCodeCellLanguageId(currentMetadata);
+		const languageIdInMetadata = getZyraxonCodeCellLanguageId(currentMetadata);
 		const metadata: CellMetadata = JSON.parse(JSON.stringify(currentMetadata));
 		metadata.metadata = metadata.metadata || {};
 		let metadataUpdated = false;
@@ -175,13 +175,13 @@ function onDidChangeNotebookCells(e: NotebookDocumentChangeEventEx) {
 		}
 
 		if (e.document?.languageId && e.document?.languageId !== preferredCellLanguage && e.document?.languageId !== languageIdInMetadata) {
-			setVSCodeCellLanguageId(metadata, e.document.languageId);
+			setZyraxonCodeCellLanguageId(metadata, e.document.languageId);
 			metadataUpdated = true;
 		} else if (e.document?.languageId && e.document.languageId === preferredCellLanguage && languageIdInMetadata) {
-			removeVSCodeCellLanguageId(metadata);
+			removeZyraxonCodeCellLanguageId(metadata);
 			metadataUpdated = true;
 		} else if (e.document?.languageId && e.document.languageId === preferredCellLanguage && e.document.languageId === languageIdInMetadata) {
-			removeVSCodeCellLanguageId(metadata);
+			removeZyraxonCodeCellLanguageId(metadata);
 			metadataUpdated = true;
 		}
 
@@ -191,7 +191,7 @@ function onDidChangeNotebookCells(e: NotebookDocumentChangeEventEx) {
 	});
 
 	// Ensure all new cells in notebooks with nbformat >= 4.5 have an id.
-	// Details of the spec can be found here https://jupyter.org/enhancement-proposals/62-cell-id/cell-id.html#
+	// Details of the spec can be found here __ZYRAXKEEP__1_
 	e.contentChanges.forEach(change => {
 		change.addedCells.forEach(cell => {
 			// When ever a cell is added, always update the metadata
@@ -240,8 +240,8 @@ function isCellIdRequired(metadata: Pick<Partial<nbformat.INotebookContent>, 'nb
 
 function generateCellId(notebook: NotebookDocument) {
 	while (true) {
-		// Details of the id can be found here https://jupyter.org/enhancement-proposals/62-cell-id/cell-id.html#adding-an-id-field,
-		// & here https://jupyter.org/enhancement-proposals/62-cell-id/cell-id.html#updating-older-formats
+		// Details of the id can be found here __ZYRAXKEEP__2_
+		// & here __ZYRAXKEEP__3_
 		const id = generateUuid().replace(/-/g, '').substring(0, 8);
 		let duplicate = false;
 		for (let index = 0; index < notebook.cellCount; index++) {

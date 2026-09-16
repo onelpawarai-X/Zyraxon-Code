@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { createConnection, Connection, Disposable } from 'vscode-languageserver/node';
+import { createConnection, Connection, Disposable } from 'zyraxoncode-languageserver/node';
 import { formatError } from '../utils/runner.js';
 import { RequestService, RuntimeEnvironment, startServer } from '../jsonServer.js';
 
 import requestLight, { XHRResponse } from 'request-light';
-import { URI as Uri } from 'vscode-uri';
+import { URI as Uri } from 'zyraxoncode-uri';
 import { promises as fs } from 'fs';
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 
 const { xhr, configure: configureHttpRequests, getErrorStatusDescription } = requestLight;
 

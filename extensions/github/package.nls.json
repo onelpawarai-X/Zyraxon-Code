@@ -1,10 +1,10 @@
 {
 	"displayName": "GitHub",
 	"description": "GitHub features for ZYRAXON Code",
-	"command.copyVscodeDevLink": "Copy vscode.dev Link",
+	"command.copyVscodeDevLink": "Copy zyraxoncode.dev Link",
 	"command.publish": "Publish to GitHub",
 	"command.openOnGitHub": "Open on GitHub",
-	"command.openOnVscodeDev": "Open in vscode.dev",
+	"command.openOnVscodeDev": "Open in zyraxoncode.dev",
 	"command.createPullRequest": "Create PR",
 	"command.openPullRequest": "Open PR",
 	"config.branchProtection": "Controls whether to query repository rules for GitHub repositories",

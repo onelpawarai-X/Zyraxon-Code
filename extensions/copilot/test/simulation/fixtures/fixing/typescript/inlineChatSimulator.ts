@@ -43,7 +43,7 @@ import { ChatLocation, ChatResponseMarkdownPart, ChatResponseTextEditPart, Diagn
 import { SpyingChatMLFetcher } from '../base/spyingChatMLFetcher';
 import { ISimulationTestRuntime } from '../base/stest';
 import { getDiagnostics } from './diagnosticProviders';
-import { convertTestToVSCodeDiagnostics } from './diagnosticProviders/utils';
+import { convertTestToZyraxonCodeDiagnostics } from './diagnosticProviders/utils';
 import { SimulationLanguageFeaturesService } from './language/simulationLanguageFeatureService';
 import { IDiagnostic, IDiagnosticComparison, INLINE_CHANGED_DOC_TAG, INLINE_INITIAL_DOC_TAG, INLINE_STATE_TAG, IRange, IWorkspaceState, IWorkspaceStateFile } from './shared/sharedTypes';
 import { SimulationWorkspace, WORKSPACE_PATH, isNotebook } from './simulationWorkspace';
@@ -531,7 +531,7 @@ function convertToDiagnostics(workspace: SimulationWorkspace, diagnostics: IScen
 async function fetchDiagnostics(accessor: IServicesAccessor, workspace: SimulationWorkspace, providerId: DiagnosticProviderId) {
 	const files = workspace.documents.map(doc => ({ fileName: workspace.getFilePath(doc.document.uri), fileContents: doc.document.getText() }));
 	const diagnostics = await getDiagnostics(accessor, files, providerId);
-	return convertTestToVSCodeDiagnostics(diagnostics, path => workspace.getUriFromFilePath(path));
+	return convertTestToZyraxonCodeDiagnostics(diagnostics, path => workspace.getUriFromFilePath(path));
 }
 
 function toIDiagnostic(diagnostic: vscode.Diagnostic): IDiagnostic {

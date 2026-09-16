@@ -773,9 +773,9 @@ export class AgentSessionsWelcomePage extends EditorPane {
 			isChecked: this.configurationService.getValue(configurationKey) === 'agentSessionsWelcomePage',
 			title: localize('checkboxTitle', "When checked, this page will be shown on startup."),
 			...getToggleStyles({
-				inputActiveOptionBackground: 'var(--vscode-descriptionForeground)',
-				inputActiveOptionForeground: 'var(--vscode-editor-background)',
-				inputActiveOptionBorder: 'var(--vscode-descriptionForeground)',
+				inputActiveOptionBackground: 'var(--zyraxoncode-descriptionForeground)',
+				inputActiveOptionForeground: 'var(--zyraxoncode-editor-background)',
+				inputActiveOptionBorder: 'var(--zyraxoncode-descriptionForeground)',
 			})
 		}));
 		showOnStartupCheckbox.domNode.id = 'showOnStartup';

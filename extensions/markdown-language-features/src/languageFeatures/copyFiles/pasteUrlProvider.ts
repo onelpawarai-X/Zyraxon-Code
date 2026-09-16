@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { IMdParser } from '../../markdownEngine';
 import { Mime } from '../../util/mimes';
 import { UriList } from '../../util/uriList';
@@ -15,7 +15,7 @@ import { InsertMarkdownLink, findValidUriInText, shouldInsertMarkdownLinkByDefau
  *
  * This only applies to `text/plain`. Other mimes like `text/uri-list` are handled by ResourcePasteOrDropProvider.
  */
-class PasteUrlEditProvider implements vscode.DocumentPasteEditProvider {
+class PasteUrlEditProvider implements zyraxoncode.DocumentPasteEditProvider {
 
 	public static readonly kind = linkEditKind;
 
@@ -30,13 +30,13 @@ class PasteUrlEditProvider implements vscode.DocumentPasteEditProvider {
 	}
 
 	async provideDocumentPasteEdits(
-		document: vscode.TextDocument,
-		ranges: readonly vscode.Range[],
-		dataTransfer: vscode.DataTransfer,
-		context: vscode.DocumentPasteEditContext,
-		token: vscode.CancellationToken,
-	): Promise<vscode.DocumentPasteEdit[] | undefined> {
-		const pasteUrlSetting = vscode.workspace.getConfiguration('markdown', document)
+		document: zyraxoncode.TextDocument,
+		ranges: readonly zyraxoncode.Range[],
+		dataTransfer: zyraxoncode.DataTransfer,
+		context: zyraxoncode.DocumentPasteEditContext,
+		token: zyraxoncode.CancellationToken,
+	): Promise<zyraxoncode.DocumentPasteEdit[] | undefined> {
+		const pasteUrlSetting = zyraxoncode.workspace.getConfiguration('markdown', document)
 			.get<InsertMarkdownLink>('editor.pasteUrlAsFormattedLink.enabled', InsertMarkdownLink.SmartWithSelection);
 		if (pasteUrlSetting === InsertMarkdownLink.Never) {
 			return;
@@ -63,15 +63,15 @@ class PasteUrlEditProvider implements vscode.DocumentPasteEditProvider {
 			return;
 		}
 
-		const pasteEdit = new vscode.DocumentPasteEdit('', edit.label, PasteUrlEditProvider.kind);
-		const workspaceEdit = new vscode.WorkspaceEdit();
+		const pasteEdit = new zyraxoncode.DocumentPasteEdit('', edit.label, PasteUrlEditProvider.kind);
+		const workspaceEdit = new zyraxoncode.WorkspaceEdit();
 		workspaceEdit.set(document.uri, edit.edits);
 		pasteEdit.additionalEdit = workspaceEdit;
 
 		if (!(await shouldInsertMarkdownLinkByDefault(this.#parser, document, pasteUrlSetting, ranges, token))) {
 			pasteEdit.yieldTo = [
-				vscode.DocumentDropOrPasteEditKind.Text,
-				vscode.DocumentDropOrPasteEditKind.Empty.append('uri')
+				zyraxoncode.DocumentDropOrPasteEditKind.Text,
+				zyraxoncode.DocumentDropOrPasteEditKind.Empty.append('uri')
 			];
 		}
 
@@ -79,8 +79,8 @@ class PasteUrlEditProvider implements vscode.DocumentPasteEditProvider {
 	}
 }
 
-export function registerPasteUrlSupport(selector: vscode.DocumentSelector, parser: IMdParser) {
-	return vscode.languages.registerDocumentPasteEditProvider(selector, new PasteUrlEditProvider(parser), {
+export function registerPasteUrlSupport(selector: zyraxoncode.DocumentSelector, parser: IMdParser) {
+	return zyraxoncode.languages.registerDocumentPasteEditProvider(selector, new PasteUrlEditProvider(parser), {
 		providedPasteEditKinds: [PasteUrlEditProvider.kind],
 		pasteMimeTypes: PasteUrlEditProvider.pasteMimeTypes,
 	});

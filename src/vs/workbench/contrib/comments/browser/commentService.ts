@@ -238,7 +238,7 @@ export class CommentService extends Disposable implements ICommentService {
 
 		this._register(this.modelService.onModelAdded(model => {
 			// Excluded schemes
-			if ((model.uri.scheme === Schemas.vscodeSourceControl)) {
+			if ((model.uri.scheme === Schemas.zyraxoncodeSourceControl)) {
 				return;
 			}
 			// Allows comment providers to cause their commenting ranges to be prefetched by opening text documents in the background.

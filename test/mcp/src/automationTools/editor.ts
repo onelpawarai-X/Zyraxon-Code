@@ -14,7 +14,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 	const tools: RegisteredTool[] = [];
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_editor_open_file',
+	// 	'zyraxoncode_automation_editor_open_file',
 	// 	'Open a file in the ZYRAXON Code editor through quick open',
 	// 	{
 	// 		fileName: z.string().describe('Name of the file to open (partial names work)')
@@ -33,7 +33,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// This one is critical as Playwright had trouble typing in monaco
 	tools.push(server.tool(
-		'vscode_automation_editor_type_text',
+		'zyraxoncode_automation_editor_type_text',
 		'Type text in the currently active editor',
 		{
 			text: z.string().describe('The text to type'),
@@ -54,7 +54,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Doesn't seem particularly useful
 	// server.tool(
-	// 	'vscode_automation_editor_get_selection',
+	// 	'zyraxoncode_automation_editor_get_selection',
 	// 	'Get the current selection in the editor',
 	// 	{
 	// 		filename: z.string().describe('Filename to target specific editor')
@@ -79,7 +79,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Doesn't seem particularly useful
 	// server.tool(
-	// 	'vscode_automation_editor_go_to_definition',
+	// 	'zyraxoncode_automation_editor_go_to_definition',
 	// 	'Go to definition of symbol at current cursor position',
 	// 	{
 	// 		filename: z.string().describe('File containing the symbol'),
@@ -100,7 +100,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_editor_peek_definition',
+	// 	'zyraxoncode_automation_editor_peek_definition',
 	// 	'Peek definition of symbol at current cursor position',
 	// 	{
 	// 		filename: z.string().describe('File containing the symbol'),
@@ -121,7 +121,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_editor_rename_symbol',
+	// 	'zyraxoncode_automation_editor_rename_symbol',
 	// 	'Rename a symbol in the editor',
 	// 	{
 	// 		filename: z.string().describe('File containing the symbol'),
@@ -143,7 +143,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_editor_find_references',
+	// 	'zyraxoncode_automation_editor_find_references',
 	// 	'Find all references to a symbol',
 	// 	{
 	// 		filename: z.string().describe('File containing the symbol'),
@@ -164,7 +164,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Editor File Management Tools
 	tools.push(server.tool(
-		'vscode_automation_editor_new_untitled_file',
+		'zyraxoncode_automation_editor_new_untitled_file',
 		'Create a new untitled file',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -179,7 +179,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_editor_save_file',
+		'zyraxoncode_automation_editor_save_file',
 		'Save the currently active file',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -195,7 +195,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_editor_select_tab',
+	// 	'zyraxoncode_automation_editor_select_tab',
 	// 	'Select a specific tab by filename',
 	// 	{
 	// 		fileName: z.string().describe('Name of the file tab to select')
@@ -214,7 +214,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_editor_wait_for_tab',
+	// 	'zyraxoncode_automation_editor_wait_for_tab',
 	// 	'Wait for a specific tab to appear',
 	// 	{
 	// 		fileName: z.string().describe('Name of the file tab to wait for'),
@@ -234,7 +234,7 @@ export function applyEditorTools(server: McpServer, appService: ApplicationServi
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_editor_wait_for_focus',
+	// 	'zyraxoncode_automation_editor_wait_for_focus',
 	// 	'Wait for an editor to have focus',
 	// 	{
 	// 		fileName: z.string().describe('Name of the file to wait for focus'),

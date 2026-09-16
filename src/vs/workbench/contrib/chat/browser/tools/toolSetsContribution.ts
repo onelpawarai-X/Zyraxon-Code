@@ -42,7 +42,7 @@ import { ChatContextKeys } from '../../common/actions/chatContextKeys.js';
 const toolEnumValues: string[] = [];
 const toolEnumDescriptions: string[] = [];
 
-const toolSetSchemaId = 'vscode://schemas/toolsets';
+const toolSetSchemaId = '__ZYRAXKEEP__0_';
 const toolSetsSchema: IJSONSchema = {
 	id: toolSetSchemaId,
 	allowComments: true,
@@ -271,7 +271,7 @@ export class UserToolSetsContributions extends Disposable implements IWorkbenchC
 					const toolSets: IToolSet[] = [];
 					value.tools.forEach(name => {
 						// Resolve by full reference name first. This handles qualified names
-						// (e.g. `vscode/memory`, `github/*`) as well as unqualified names
+						// (e.g. `zyraxoncode/memory`, `github/*`) as well as unqualified names
 						// (e.g. `memory`) via their aliases.
 						const toolOrToolSet = this._languageModelToolsService.getToolByFullReferenceName(name);
 						if (isToolSet(toolOrToolSet)) {

@@ -72,7 +72,7 @@ export interface MarkdownSanitizerConfig {
 /**
  * Returns a human-readable tooltip string for a link href.
  * For file:// URIs, converts to a decoded OS file system path to avoid
- * showing raw URL-encoded paths (e.g. "C:\Users\..." instead of "file:///c%3A/Users/...").
+ * showing raw URL-encoded paths (e.g. "C:\Users\..." instead of "__ZYRAXKEEP__0_").
  */
 function getLinkTitle(href: string): string {
 	try {
@@ -120,7 +120,7 @@ const defaultMarkedRenderers = Object.freeze({
 			return '';
 		}
 
-		// Remove markdown escapes. Workaround for https://github.com/chjj/marked/issues/829
+		// Remove markdown escapes. Workaround for __ZYRAXKEEP__1_
 		if (href === text) { // raw link case
 			text = removeMarkdownEscapes(text);
 		}
@@ -129,7 +129,7 @@ const defaultMarkedRenderers = Object.freeze({
 		href = removeMarkdownEscapes(href);
 
 		// For file:// URIs without an explicit title, show the decoded OS path instead of
-		// the raw URL-encoded URI (e.g. display "C:\Users\..." instead of "file:///c%3A/Users/...")
+		// the raw URL-encoded URI (e.g. display "C:\Users\..." instead of "__ZYRAXKEEP__2_")
 		if (!title && href.startsWith(`${Schemas.file}:`)) {
 			title = getLinkTitle(href);
 		}
@@ -155,7 +155,7 @@ const defaultMarkedRenderers = Object.freeze({
  * Blockquote renderer that processes GitHub-style alert syntax.
  * Transforms blockquotes like "> [!NOTE]" into structured alert markup with icons.
  *
- * Based on GitHub's alert syntax: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts
+ * Based on GitHub's alert syntax: __ZYRAXKEEP__3_
  */
 function createAlertBlockquoteRenderer(fallbackRenderer: (this: marked.Renderer, token: marked.Tokens.Blockquote) => string) {
 	return function (this: marked.Renderer, token: marked.Tokens.Blockquote): string {
@@ -607,7 +607,7 @@ export const allowedMarkdownHtmlAttributes = Object.freeze<Array<string | domSan
 		shouldKeep: (element, data) => {
 			if (element.tagName === 'SPAN') {
 				if (data.attrName === 'style') {
-					return /^(color\:(#[0-9a-fA-F]+|var\(--vscode(-[a-zA-Z0-9]+)+\));)?(background-color\:(#[0-9a-fA-F]+|var\(--vscode(-[a-zA-Z0-9]+)+\));)?(border-radius:[0-9]+px;)?$/.test(data.attrValue);
+					return /^(color\:(#[0-9a-fA-F]+|var\(--zyraxoncode(-[a-zA-Z0-9]+)+\));)?(background-color\:(#[0-9a-fA-F]+|var\(--zyraxoncode(-[a-zA-Z0-9]+)+\));)?(border-radius:[0-9]+px;)?$/.test(data.attrValue);
 				}
 			}
 			return false;
@@ -635,10 +635,10 @@ function getDomSanitizerConfig(mdStrConfig: MdStrConfig, options: MarkdownSaniti
 		Schemas.https,
 		Schemas.mailto,
 		Schemas.file,
-		Schemas.vscodeFileResource,
-		Schemas.vscodeRemote,
-		Schemas.vscodeRemoteResource,
-		Schemas.vscodeNotebookCell,
+		Schemas.zyraxoncodeFileResource,
+		Schemas.zyraxoncodeRemote,
+		Schemas.zyraxoncodeRemoteResource,
+		Schemas.zyraxoncodeNotebookCell,
 		// For links that are handled entirely by the action handler
 		Schemas.internal,
 	];
@@ -654,8 +654,8 @@ function getDomSanitizerConfig(mdStrConfig: MdStrConfig, options: MarkdownSaniti
 	return {
 		// allowedTags should included everything that markdown renders to.
 		// Since we have our own sanitize function for marked, it's possible we missed some tag so let dompurify make sure.
-		// HTML tags that can result from markdown are from reading https://spec.commonmark.org/0.29/
-		// HTML table tags that can result from markdown are from https://github.github.com/gfm/#tables-extension-
+		// HTML tags that can result from markdown are from reading __ZYRAXKEEP__4_
+		// HTML table tags that can result from markdown are from __ZYRAXKEEP__5_
 		allowedTags: {
 			override: options.allowedTags?.override ?? allowedMarkdownHtmlTags
 		},
@@ -672,9 +672,9 @@ function getDomSanitizerConfig(mdStrConfig: MdStrConfig, options: MarkdownSaniti
 				Schemas.https,
 				Schemas.data,
 				Schemas.file,
-				Schemas.vscodeFileResource,
-				Schemas.vscodeRemote,
-				Schemas.vscodeRemoteResource,
+				Schemas.zyraxoncodeFileResource,
+				Schemas.zyraxoncodeRemote,
+				Schemas.zyraxoncodeRemoteResource,
 			]
 		},
 		allowRelativeMediaPaths: !!mdStrConfig.baseUri,
@@ -838,8 +838,8 @@ function completeSingleLinePattern(token: marked.Tokens.Text | marked.Tokens.Par
 				const nextTwoSubTokens = token.tokens.slice(i + 1);
 
 				// A markdown link can look like
-				// [link text](https://microsoft.com "more text")
-				// Where "more text" is a title for the link or an argument to a vscode command link
+				// [link text](__ZYRAXKEEP__6_ "more text")
+				// Where "more text" is a title for the link or an argument to a zyraxoncode command link
 				if (
 					// If the link was parsed as a link, then look for a link token and a text token with a quote
 					nextTwoSubTokens[0]?.type === 'link' && nextTwoSubTokens[1]?.type === 'text' && nextTwoSubTokens[1].raw.match(/^ *"[^"]*$/) ||
@@ -1115,7 +1115,7 @@ function completeLinkTargetArg(tokens: marked.Token): marked.Token {
 }
 
 function completeLinkText(tokens: marked.Token): marked.Token {
-	return completeWithString(tokens, '](https://microsoft.com)', false);
+	return completeWithString(tokens, '](__ZYRAXKEEP__7_)', false);
 }
 
 function completeDoublestar(tokens: marked.Token): marked.Token {

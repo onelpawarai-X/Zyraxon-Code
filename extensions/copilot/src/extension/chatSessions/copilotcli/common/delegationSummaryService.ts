@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type { CancellationToken, ChatContext, ChatPromptReference, ChatSummarizer, Uri } from 'vscode';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import * as l10n from '@zyraxoncode/l10n';
+import type { CancellationToken, ChatContext, ChatPromptReference, ChatSummarizer, Uri } from 'zyraxoncode';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { createServiceIdentifier } from '../../../../util/common/services';
 import { Sequencer } from '../../../../util/vs/base/common/async';
 import { ResourceMap } from '../../../../util/vs/base/common/map';
@@ -32,7 +32,7 @@ export class ChatDelegationSummaryService implements IChatDelegationSummaryServi
 	public readonly scheme = SummaryFileScheme;
 	constructor(
 		private readonly _chatSummarizer: ChatSummarizer,
-		@IVSCodeExtensionContext private readonly context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly context: IZyraxonCodeExtensionContext,
 	) { }
 	async summarize(context: ChatContext, token: CancellationToken): Promise<string | undefined> {
 		return (await this._chatSummarizer.provideChatSummary(context, token)) ?? undefined;

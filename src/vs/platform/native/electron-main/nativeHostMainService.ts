@@ -303,7 +303,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 			// not sent to an ambiguous target.
 			const chatSessionToOpen = options.chatSessionToOpen;
 			if (chatSessionToOpen && windows.length === 1) {
-				windows[0].sendWhenReady('vscode:openChatSession', CancellationToken.None, URI.revive(chatSessionToOpen).toString());
+				windows[0].sendWhenReady('zyraxoncode:openChatSession', CancellationToken.None, URI.revive(chatSessionToOpen).toString());
 			}
 		}
 	}
@@ -700,7 +700,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 				// for opening the browser to fallback to the default.
 				// On Windows, unfortunately PowerShell seems to always write
 				// to stderr so we cannot use it there
-				// (see also https://github.com/microsoft/vscode/issues/230636)
+				// (see also __ZYRAXKEEP__0_)
 				res.stderr?.once('data', (data: Buffer) => {
 					this.logService.error(`Error openening external URL '${url}' using browser '${configuredBrowser}': ${data.toString()}`);
 					return this.doOpenShellExternal(windowId, url);
@@ -773,7 +773,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 	}
 
 	async writeElevated(windowId: number | undefined, source: URI, target: URI, options?: { unlock?: boolean }): Promise<void> {
-		const sudoPrompt = await import('@vscode/sudo-prompt');
+		const sudoPrompt = await import('@zyraxoncode/sudo-prompt');
 
 		const argsFile = randomPath(this.environmentMainService.userDataPath, 'code-elevated');
 		await Promises.writeFile(argsFile, JSON.stringify({ source: source.fsPath, target: target.fsPath }));
@@ -905,7 +905,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 		const { net } = await import('electron');
 
 		// Step 1: Get upload policy
-		const policyResponse = await net.fetch('https://api.github.com/mobile/upload/policy', {
+		const policyResponse = await net.fetch('__ZYRAXKEEP__1_', {
 			method: 'POST',
 			headers: {
 				'Authorization': `Bearer ${token}`,
@@ -928,7 +928,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 
 		// Step 2: Upload to S3 (uses net.fetch which bypasses CORS)
 		const formFields = policy.form as Record<string, string>;
-		const boundary = `----VSCodeUpload${Date.now()}`;
+		const boundary = `----ZyraxonCodeUpload${Date.now()}`;
 		let multipartBody = '';
 		for (const [key, value] of Object.entries(formFields)) {
 			multipartBody += `--${boundary}\r\nContent-Disposition: form-data; name="${key}"\r\n\r\n${value}\r\n`;
@@ -957,7 +957,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 		}
 
 		// Step 3: Confirm upload
-		const confirmResponse = await net.fetch(`https://api.github.com${policy.asset_upload_url}`, {
+		const confirmResponse = await net.fetch(`__ZYRAXKEEP__2_{policy.asset_upload_url}`, {
 			method: 'PUT',
 			headers: {
 				'Authorization': `Bearer ${token}`,
@@ -1094,7 +1094,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 			// the reload and rather go back to an empty window. Transient
 			// workspaces should never restore, even when the user wants
 			// to reload.
-			// For: https://github.com/microsoft/vscode/issues/119695
+			// For: __ZYRAXKEEP__3_
 			if (isWorkspaceIdentifier(window.openedWorkspace)) {
 				const configPath = window.openedWorkspace.configPath;
 				if (configPath.scheme === Schemas.file) {
@@ -1147,12 +1147,12 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 	}
 
 	async resolveProxyWithPackage(_windowId: number | undefined, url: string): Promise<IOSProxy[]> {
-		const { resolveProxy } = await import('@vscode/os-proxy-resolver');
+		const { resolveProxy } = await import('@zyraxoncode/os-proxy-resolver');
 		return resolveProxy(url);
 	}
 
 	async readProxyConfigWithPackage(_windowId: number | undefined): Promise<IOSProxyConfig> {
-		const { readProxyConfig } = await import('@vscode/os-proxy-resolver');
+		const { readProxyConfig } = await import('@zyraxoncode/os-proxy-resolver');
 		return readProxyConfig();
 	}
 
@@ -1228,7 +1228,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 		}
 
 		if (typeof this.gpuInfoWindowId !== 'number') {
-			const gpuInfoWindow = this.openChildWindow(parentWindow.win, 'chrome://gpu');
+			const gpuInfoWindow = this.openChildWindow(parentWindow.win, '__ZYRAXKEEP__4_');
 			gpuInfoWindow.once('close', () => this.gpuInfoWindowId = undefined);
 
 			this.gpuInfoWindowId = gpuInfoWindow.id;
@@ -1247,7 +1247,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 		if (typeof this.contentTracingWindowId !== 'number') {
 			// Disable ready-to-show event with paintWhenInitiallyHidden to
 			// customize content tracing window below.
-			const contentTracingWindow = this.openChildWindow(null, 'chrome://tracing', {
+			const contentTracingWindow = this.openChildWindow(null, '__ZYRAXKEEP__5_', {
 				paintWhenInitiallyHidden: false,
 				webPreferences: {
 					backgroundThrottling: false
@@ -1257,7 +1257,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 				// Mock window.prompt to support save action from the tracing UI
 				// since Electron by default doesn't provide the api.
 				// See requestFilename_ implementation under
-				// https://source.chromium.org/chromium/chromium/src/+/main:third_party/catapult/tracing/tracing/ui/extras/about_tracing/profiling_view.html;l=334-379
+				// __ZYRAXKEEP__6_
 				await contentTracingWindow.webContents.executeJavaScript(`
 					window.prompt = () => '';
 					null
@@ -1410,7 +1410,7 @@ export class NativeHostMainService extends Disposable implements INativeHostMain
 			return undefined;
 		}
 
-		const Registry = await import('@vscode/windows-registry');
+		const Registry = await import('@zyraxoncode/windows-registry');
 		try {
 			return Registry.GetStringRegKey(hive, path, name);
 		} catch {

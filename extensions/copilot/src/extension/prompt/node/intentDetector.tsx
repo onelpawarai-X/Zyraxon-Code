@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptMetadata, Raw, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type { CancellationToken, ChatContext, ChatParticipantDetectionProvider, ChatParticipantDetectionResult, ChatParticipantMetadata, ChatRequest, Uri, ChatLocation as VscodeChatLocation } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptMetadata, Raw, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, ChatContext, ChatParticipantDetectionProvider, ChatParticipantDetectionResult, ChatParticipantMetadata, ChatRequest, Uri, ChatLocation as VscodeChatLocation } from 'zyraxoncode';
 import { CHAT_PARTICIPANT_ID_PREFIX, getChatParticipantIdFromName } from '../../../platform/chat/common/chatAgents';
 import { ChatFetchResponseType, ChatLocation, ChatResponse } from '../../../platform/chat/common/commonTypes';
 import { getTextPart, roleToString } from '../../../platform/chat/common/globalStringUtils';
@@ -19,7 +19,7 @@ import { ITelemetryService } from '../../../platform/telemetry/common/telemetry'
 import { isNotebookCellOrNotebookChatInput } from '../../../util/common/notebooks';
 import { isFalsyOrEmpty } from '../../../util/vs/base/common/arrays';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Position, Range } from '../../../vscodeTypes';
+import { Position, Range } from '../../../zyraxoncodeTypes';
 import { getAgentForIntent, GITHUB_PLATFORM_AGENT, Intent } from '../../common/constants';
 import { IIntentService } from '../../intents/node/intentService';
 import { UnknownIntent } from '../../intents/node/unknownIntent';
@@ -166,7 +166,7 @@ export class IntentDetector implements ChatParticipantDetectionProvider {
 	/**
 	 * @param preferredIntent tells the model that this intent is the most likely the developer wants.
 	 * @param currentFilePath file path relative to the workspace root and will be mentioned in the prompt if present
-	 * @param isRerunWithoutIntentDetection for telemetry purposes -- if `undefined`, then intent detection is invoked either from inline chat of an older vscode or from panel chat
+	 * @param isRerunWithoutIntentDetection for telemetry purposes -- if `undefined`, then intent detection is invoked either from inline chat of an older zyraxoncode or from panel chat
 	 */
 	async detectIntent(
 		location: ChatLocation,

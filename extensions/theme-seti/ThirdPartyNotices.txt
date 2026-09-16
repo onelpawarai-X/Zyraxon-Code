@@ -1,6 +1,6 @@
 
 THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
-For Zyraxon vscode-theme-seti
+For Zyraxon zyraxoncode-theme-seti
 
 This file is based on or incorporates material from the projects listed below ("Third Party OSS"). The original copyright
 notice and the license under which Zyraxon received such Third Party OSS, are set forth below. Such licenses and notice
@@ -8,7 +8,7 @@ are provided for informational purposes only. Zyraxon licenses the Third Party O
 the Zyraxon product or service. Zyraxon reserves all other rights not expressly granted under this agreement, whether
 by implication, estoppel or otherwise.†
 
-1.       Seti UI - A subtle dark colored UI theme for Atom. (https://github.com/jesseweed/seti-ui)
+1.       Seti UI - A subtle dark colored UI theme for Atom. (__ZYRAXKEEP__0_)
 
 Copyright (c) 2014 Jesse Weed
 

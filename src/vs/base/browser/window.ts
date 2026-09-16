@@ -4,14 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 export type CodeWindow = Window & typeof globalThis & {
-	readonly vscodeWindowId: number;
+	readonly zyraxoncodeWindowId: number;
 };
 
 export function ensureCodeWindow(targetWindow: Window, fallbackWindowId: number): asserts targetWindow is CodeWindow {
 	const codeWindow = targetWindow as Partial<CodeWindow>;
 
-	if (typeof codeWindow.vscodeWindowId !== 'number') {
-		Object.defineProperty(codeWindow, 'vscodeWindowId', {
+	if (typeof codeWindow.zyraxoncodeWindowId !== 'number') {
+		Object.defineProperty(codeWindow, 'zyraxoncodeWindowId', {
 			get: () => fallbackWindowId
 		});
 	}
@@ -27,5 +27,5 @@ export function isAuxiliaryWindow(obj: Window): obj is CodeWindow {
 
 	const candidate = obj as CodeWindow | undefined;
 
-	return typeof candidate?.vscodeWindowId === 'number';
+	return typeof candidate?.zyraxoncodeWindowId === 'number';
 }

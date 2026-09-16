@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
-import { SettingListItem } from '../../embeddings/common/vscodeIndex';
+import { SettingListItem } from '../../embeddings/common/zyraxoncodeIndex';
 
 export const IWorkbenchService = createServiceIdentifier<IWorkbenchService>('IWorkbenchService');
 
 export interface IWorkbenchService {
 	_serviceBrand: undefined;
-	getAllExtensions(): readonly vscode.Extension<any>[];
+	getAllExtensions(): readonly zyraxoncode.Extension<any>[];
 	getAllCommands(filterByPreCondition?: boolean): Promise<{ label: string; command: string; keybinding: string }[]>;
 	getAllSettings(): Promise<{ [key: string]: SettingListItem }>;
 }

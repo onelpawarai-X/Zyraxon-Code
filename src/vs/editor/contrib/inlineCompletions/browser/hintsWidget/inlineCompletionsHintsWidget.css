@@ -12,17 +12,17 @@
 
 .monaco-editor .inlineSuggestionsHints.withBorder {
 	z-index: 39;
-	color: var(--vscode-editorHoverWidget-foreground);
-	background-color: var(--vscode-editorHoverWidget-background);
-	border: 1px solid var(--vscode-editorHoverWidget-border);
+	color: var(--zyraxoncode-editorHoverWidget-foreground);
+	background-color: var(--zyraxoncode-editorHoverWidget-background);
+	border: 1px solid var(--zyraxoncode-editorHoverWidget-border);
 }
 
 .monaco-editor .inlineSuggestionsHints a {
-	color: var(--vscode-foreground) !important;
+	color: var(--zyraxoncode-foreground) !important;
 }
 
 .monaco-editor .inlineSuggestionsHints a:hover {
-	color: var(--vscode-foreground) !important;
+	color: var(--zyraxoncode-foreground) !important;
 }
 
 .monaco-editor .inlineSuggestionsHints .keybinding {

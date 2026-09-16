@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as path from 'path';
-import * as vscode from 'vscode';
-import { Utils } from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import { Utils } from 'zyraxoncode-uri';
 
 type OverwriteBehavior = 'overwrite' | 'nameIncrementally';
 
@@ -13,15 +13,15 @@ export interface CopyFileConfiguration {
 	readonly overwriteBehavior: OverwriteBehavior;
 }
 
-export function getCopyFileConfiguration(document: vscode.TextDocument): CopyFileConfiguration {
-	const config = vscode.workspace.getConfiguration('markdown', document);
+export function getCopyFileConfiguration(document: zyraxoncode.TextDocument): CopyFileConfiguration {
+	const config = zyraxoncode.workspace.getConfiguration('markdown', document);
 	return {
 		destination: config.get<Record<string, string>>('copyFiles.destination') ?? {},
 		overwriteBehavior: readOverwriteBehavior(config),
 	};
 }
 
-function readOverwriteBehavior(config: vscode.WorkspaceConfiguration): OverwriteBehavior {
+function readOverwriteBehavior(config: zyraxoncode.WorkspaceConfiguration): OverwriteBehavior {
 	switch (config.get('copyFiles.overwriteBehavior')) {
 		case 'overwrite': return 'overwrite';
 		default: return 'nameIncrementally';
@@ -31,7 +31,7 @@ function readOverwriteBehavior(config: vscode.WorkspaceConfiguration): Overwrite
 export function parseGlob(rawGlob: string): Iterable<string> {
 	if (rawGlob.startsWith('/')) {
 		// Anchor to workspace folders
-		return (vscode.workspace.workspaceFolders ?? []).map(folder => vscode.Uri.joinPath(folder.uri, rawGlob).path);
+		return (zyraxoncode.workspace.workspaceFolders ?? []).map(folder => zyraxoncode.Uri.joinPath(folder.uri, rawGlob).path);
 	}
 
 	// Relative path, so implicitly track on ** to match everything
@@ -42,9 +42,9 @@ export function parseGlob(rawGlob: string): Iterable<string> {
 	return [rawGlob];
 }
 
-type GetWorkspaceFolder = (documentUri: vscode.Uri) => vscode.Uri | undefined;
+type GetWorkspaceFolder = (documentUri: zyraxoncode.Uri) => zyraxoncode.Uri | undefined;
 
-export function resolveCopyDestination(documentUri: vscode.Uri, fileName: string, dest: string, getWorkspaceFolder: GetWorkspaceFolder): vscode.Uri {
+export function resolveCopyDestination(documentUri: zyraxoncode.Uri, fileName: string, dest: string, getWorkspaceFolder: GetWorkspaceFolder): zyraxoncode.Uri {
 	const resolvedDest = resolveCopyDestinationSetting(documentUri, fileName, dest, getWorkspaceFolder);
 
 	if (resolvedDest.startsWith('/')) {
@@ -58,7 +58,7 @@ export function resolveCopyDestination(documentUri: vscode.Uri, fileName: string
 }
 
 
-function resolveCopyDestinationSetting(documentUri: vscode.Uri, fileName: string, dest: string, getWorkspaceFolder: GetWorkspaceFolder): string {
+function resolveCopyDestinationSetting(documentUri: zyraxoncode.Uri, fileName: string, dest: string, getWorkspaceFolder: GetWorkspaceFolder): string {
 	let outDest = dest.trim();
 	if (!outDest) {
 		outDest = '${fileName}';

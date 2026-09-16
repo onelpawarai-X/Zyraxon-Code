@@ -53,8 +53,8 @@ updates:
       - dependency-name: "react-dom"
         update-types: ["version-update:semver-major"] # @fluentui/react-components currently requires react <19 (@ulugbekna)
 
-      - dependency-name: "@vscode/tree-sitter-wasm"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"] # @vscode/tree-sitter-wasm 0.0.5 because extension tests fail with newer versions (@alexr00)
+      - dependency-name: "@zyraxoncode/tree-sitter-wasm"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"] # @zyraxoncode/tree-sitter-wasm 0.0.5 because extension tests fail with newer versions (@alexr00)
       - dependency-name: "monaco-editor"
         update-types: ["version-update:semver-major", "version-update:semver-minor"] # monaco-editor 0.44.0 because the simulation workbench fails to launch (@alexdima @hediet)
       - dependency-name: "applicationinsights"

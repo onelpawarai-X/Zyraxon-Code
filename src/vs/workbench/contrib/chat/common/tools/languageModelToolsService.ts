@@ -619,7 +619,7 @@ export type CountTokensCallback = (input: string, token: CancellationToken) => P
 
 export interface ILanguageModelToolsService {
 	_serviceBrand: undefined;
-	readonly vscodeToolSet: ToolSet;
+	readonly zyraxoncodeToolSet: ToolSet;
 	readonly executeToolSet: ToolSet;
 	readonly readToolSet: ToolSet;
 	readonly agentToolSet: ToolSet;
@@ -719,7 +719,7 @@ export function createToolSchemaUri(toolOrId: IToolData | string): URI {
 	if (typeof toolOrId !== 'string') {
 		toolOrId = toolOrId.id;
 	}
-	return URI.from({ scheme: Schemas.vscode, authority: 'schemas', path: `/lm/tool/${toolOrId}` });
+	return URI.from({ scheme: Schemas.zyraxoncode, authority: 'schemas', path: `/lm/tool/${toolOrId}` });
 }
 
 export namespace SpecedToolAliases {
@@ -732,8 +732,8 @@ export namespace SpecedToolAliases {
 	export const todo = 'todo';
 }
 
-export namespace VSCodeToolReference {
+export namespace ZyraxonCodeToolReference {
 	export const runSubagent = 'runSubagent';
-	export const vscode = 'vscode';
+	export const zyraxoncode = 'zyraxoncode';
 
 }

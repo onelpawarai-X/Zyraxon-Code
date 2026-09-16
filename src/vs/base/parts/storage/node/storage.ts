@@ -10,7 +10,7 @@ import { mapToString, setToString } from '../../../common/map.js';
 import { basename } from '../../../common/path.js';
 import { Promises } from '../../../node/pfs.js';
 import { IStorageDatabase, IStorageItemsChangeEvent, IUpdateRequest } from '../common/storage.js';
-import type { Database, Statement } from '@vscode/sqlite3';
+import type { Database, Statement } from '@zyraxoncode/sqlite3';
 
 interface IDatabaseConnection {
 	readonly db: Database;
@@ -327,12 +327,12 @@ export class SQLiteStorageDatabase implements IStorageDatabase {
 
 	private doConnect(path: string): Promise<IDatabaseConnection> {
 		return new Promise((resolve, reject) => {
-			import('@vscode/sqlite3').then(sqlite3 => {
+			import('@zyraxoncode/sqlite3').then(sqlite3 => {
 				const ctor = (this.logger.isTracing ? sqlite3.default.verbose().Database : sqlite3.default.Database);
 				const connection: IDatabaseConnection = {
 					db: new ctor(path, (error: (Error & { code?: string }) | null) => {
 						if (error) {
-							return (connection.db && error.code !== 'SQLITE_CANTOPEN' /* https://github.com/TryGhost/node-sqlite3/issues/1617 */) ? connection.db.close(() => reject(error)) : reject(error);
+							return (connection.db && error.code !== 'SQLITE_CANTOPEN' /* __ZYRAXKEEP__0_ */) ? connection.db.close(() => reject(error)) : reject(error);
 						}
 
 						// The following exec() statement serves two purposes:

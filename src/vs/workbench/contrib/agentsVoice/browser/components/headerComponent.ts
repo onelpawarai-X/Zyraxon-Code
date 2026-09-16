@@ -39,9 +39,9 @@ function hoverButton(className: string, ariaLabel: string, title: string): HTMLE
 	el.tabIndex = 0;
 	el.ariaLabel = ariaLabel;
 	el.title = title;
-	el.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--vscode-descriptionForeground);cursor:pointer;-webkit-app-region:no-drag;padding:2px;`;
-	el.addEventListener('mouseenter', () => { el.style.color = 'var(--vscode-foreground)'; });
-	el.addEventListener('mouseleave', () => { el.style.color = 'var(--vscode-descriptionForeground)'; });
+	el.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--zyraxoncode-descriptionForeground);cursor:pointer;-webkit-app-region:no-drag;padding:2px;`;
+	el.addEventListener('mouseenter', () => { el.style.color = 'var(--zyraxoncode-foreground)'; });
+	el.addEventListener('mouseleave', () => { el.style.color = 'var(--zyraxoncode-descriptionForeground)'; });
 	addKeyboardActivation(el);
 	return el;
 }
@@ -77,11 +77,11 @@ export function createHeader(): HeaderComponent {
 
 	const connDot = dom.$('span.voice-conn-dot.codicon.codicon-debug-connected');
 	connDot.title = localize('agentsVoice.disconnect', "Disconnect");
-	connDot.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--vscode-charts-green);`;
+	connDot.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--zyraxoncode-charts-green);`;
 
 	const connDisc = dom.$('span.voice-conn-disconnect.codicon.codicon-debug-disconnect');
 	connDisc.title = localize('agentsVoice.disconnect', "Disconnect");
-	connDisc.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--vscode-descriptionForeground);display:none;`;
+	connDisc.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--zyraxoncode-descriptionForeground);display:none;`;
 
 	connIndicator.append(connDot, connDisc);
 	addKeyboardActivation(connIndicator);
@@ -90,9 +90,9 @@ export function createHeader(): HeaderComponent {
 	const placeholderText = dom.$('span.voice-placeholder-text');
 	placeholderText.role = 'button';
 	placeholderText.tabIndex = 0;
-	placeholderText.style.cssText = `font-size:${FONT_SIZE.body};color:var(--vscode-input-placeholderForeground, var(--vscode-descriptionForeground));cursor:pointer;-webkit-app-region:no-drag;user-select:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;`;
-	placeholderText.addEventListener('mouseenter', () => { placeholderText.style.color = 'var(--vscode-foreground)'; });
-	placeholderText.addEventListener('mouseleave', () => { placeholderText.style.color = 'var(--vscode-input-placeholderForeground, var(--vscode-descriptionForeground))'; });
+	placeholderText.style.cssText = `font-size:${FONT_SIZE.body};color:var(--zyraxoncode-input-placeholderForeground, var(--zyraxoncode-descriptionForeground));cursor:pointer;-webkit-app-region:no-drag;user-select:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;`;
+	placeholderText.addEventListener('mouseenter', () => { placeholderText.style.color = 'var(--zyraxoncode-foreground)'; });
+	placeholderText.addEventListener('mouseleave', () => { placeholderText.style.color = 'var(--zyraxoncode-input-placeholderForeground, var(--zyraxoncode-descriptionForeground))'; });
 	addKeyboardActivation(placeholderText);
 
 	// Spacer
@@ -118,7 +118,7 @@ export function createHeader(): HeaderComponent {
 	const connStyle = dom.$('style');
 	connStyle.textContent = `
 		.voice-conn-indicator:hover .voice-conn-dot { display: none !important; }
-		.voice-conn-indicator:hover .voice-conn-disconnect { display: inline-block !important; color: var(--vscode-errorForeground, #f44) !important; }
+		.voice-conn-indicator:hover .voice-conn-disconnect { display: inline-block !important; color: var(--zyraxoncode-errorForeground, #f44) !important; }
 		@keyframes agents-voice-icon-pulse {
 			0%, 100% { box-shadow: 0 0 4px rgba(var(--agents-voice-icon-rgb, 88,166,255), 0.45); }
 			50% { box-shadow: 0 0 10px rgba(var(--agents-voice-icon-rgb, 88,166,255), 0.7); }
@@ -143,10 +143,10 @@ export function createHeader(): HeaderComponent {
 
 			// Mic button — shown only when connected
 			micBtn.style.display = showConnected ? '' : 'none';
-			const micColor = props.voiceState === 'error' ? 'var(--vscode-editorError-foreground)'
-				: props.voiceState === 'listening' ? 'var(--vscode-editorInfo-foreground)'
-					: props.voiceState === 'speaking' ? 'var(--vscode-agentsVoice-speakingForeground)'
-						: 'var(--vscode-descriptionForeground)';
+			const micColor = props.voiceState === 'error' ? 'var(--zyraxoncode-editorError-foreground)'
+				: props.voiceState === 'listening' ? 'var(--zyraxoncode-editorInfo-foreground)'
+					: props.voiceState === 'speaking' ? 'var(--zyraxoncode-agentsVoice-speakingForeground)'
+						: 'var(--zyraxoncode-descriptionForeground)';
 			micBtn.style.color = micColor;
 			const micIsActive = props.voiceState === 'listening' || props.voiceState === 'speaking';
 			micBtn.classList.toggle('agents-voice-mode-active', micIsActive);
@@ -155,7 +155,7 @@ export function createHeader(): HeaderComponent {
 			if (!micIsActive) {
 				micBtn.style.boxShadow = 'none';
 			}
-			micBtn.onmouseenter = () => { micBtn.style.color = 'var(--vscode-foreground)'; };
+			micBtn.onmouseenter = () => { micBtn.style.color = 'var(--zyraxoncode-foreground)'; };
 			micBtn.onmouseleave = () => { micBtn.style.color = micColor; };
 			micBtn.onmousedown = (e: MouseEvent) => { if (isSecondaryPointerGesture(e)) { return; } props.onMicDown(e); };
 			micBtn.onmouseup = (e: MouseEvent) => { if (isSecondaryPointerGesture(e)) { return; } props.onMicUp(); };

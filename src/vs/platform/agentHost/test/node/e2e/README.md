@@ -320,7 +320,7 @@ Two constraints when adding a model:
 
 A diff here means the CLI changed (an SDK bump) or the host changed what it hands the CLI. Editing the repository instructions does not, by design. The host's own contribution is included: `resolveSystemMessageConfig` in `node/copilot/prompts/promptRegistry.ts` composes sections that land in this prompt verbatim, so the baseline covers them end to end. What it does *not* reach is a per-model contributor gated behind host configuration — the E2E harness has no seam for setting root config, so those gates stay covered by `test/node/agentHostPromptRegistry.test.ts`.
 
-1. The proxy forwards all traffic to real CAPI (`AGENT_HOST_RECORD_CAPI_URL`, default `https://api.githubcopilot.com`) and GitHub (`AGENT_HOST_RECORD_GITHUB_URL`, default `https://api.github.com`).
+1. The proxy forwards all traffic to real CAPI (`AGENT_HOST_RECORD_CAPI_URL`, default `__ZYRAXKEEP__0_`) and GitHub (`AGENT_HOST_RECORD_GITHUB_URL`, default `__ZYRAXKEEP__1_`).
 2. Auth: `GITHUB_TOKEN` (preferred) or `gh auth token`. The GitHub token is used directly as the CAPI bearer credential (same pattern as the `@github/copilot` CLI). It lives only in request headers and is **never** written to fixtures.
 3. Model responses are captured, normalized (placeholders + redaction), and written to the per-test fixture. Ancillary endpoints are forwarded but **not** stored.
 
@@ -386,7 +386,7 @@ Tests that need imperative setup or filesystem assertions can drive AHP in code 
 
 **Client to server** — the host executes the command against the filesystem it runs on. Note that resource commands are only routed once the connection has a registered client: call `initialize` first, or the server answers `Method not found` rather than a filesystem error.
 
-**Server to client** — the host addresses client-side files through the `vscode-agent-client` scheme (`vscode-agent-client://<clientId>/<scheme>/<authority>/<path>`) and serves them by sending *reverse* JSON-RPC requests back down the connection. `TestProtocolClient` answers those against the real local filesystem, and records them on `servedReverseRequests` so a test can assert the host actually reached back rather than resolving a path locally.
+**Server to client** — the host addresses client-side files through the `zyraxoncode-agent-client` scheme (`zyraxoncode-agent-client://<clientId>/<scheme>/<authority>/<path>`) and serves them by sending *reverse* JSON-RPC requests back down the connection. `TestProtocolClient` answers those against the real local filesystem, and records them on `servedReverseRequests` so a test can assert the host actually reached back rather than resolving a path locally.
 
 Getting the host into that configuration needs a feature that genuinely reaches for client-side files. The suite uses plugin sync: a client publishes a `CustomizationType.Plugin` in the `activeClient` of `session/activeClientSet`, and the host materializes it by copying the directory out of the client. Both processes share a filesystem in the test environment, so what proves the reverse path was used is the assertion on `servedReverseRequests`, not where the directory sits. `session/customizationUpdated` fires on both the success and failure paths, so assert the resulting `load.kind` too — otherwise a sync that reverse-reads and *then* fails still looks green.
 

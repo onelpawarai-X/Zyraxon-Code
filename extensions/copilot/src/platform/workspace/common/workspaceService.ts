@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Event, FileSystem, NotebookData, NotebookDocument, NotebookDocumentChangeEvent, ResourceTrustRequestOptions, TextDocument, TextDocumentChangeEvent, TextEditorSelectionChangeEvent, Uri, WorkspaceEdit, WorkspaceFolder, WorkspaceFoldersChangeEvent, WorkspaceTrustRequestOptions } from 'vscode';
+import type { Event, FileSystem, NotebookData, NotebookDocument, NotebookDocumentChangeEvent, ResourceTrustRequestOptions, TextDocument, TextDocumentChangeEvent, TextEditorSelectionChangeEvent, Uri, WorkspaceEdit, WorkspaceFolder, WorkspaceFoldersChangeEvent, WorkspaceTrustRequestOptions } from 'zyraxoncode';
 import { findNotebook } from '../../../util/common/notebooks';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Emitter } from '../../../util/vs/base/common/event';
@@ -81,7 +81,7 @@ export abstract class AbstractWorkspaceService implements IWorkspaceService {
 	abstract requestWorkspaceTrust(options?: WorkspaceTrustRequestOptions): Thenable<boolean | undefined>;
 
 	asRelativePath(pathOrUri: string | Uri, includeWorkspaceFolder?: boolean): string {
-		// Copied from the implementation in vscode/extHostWorkspace.ts
+		// Copied from the implementation in zyraxoncode/extHostWorkspace.ts
 		let resource: URI | undefined;
 		let path: string = '';
 		if (typeof pathOrUri === 'string') {

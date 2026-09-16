@@ -9,11 +9,11 @@ import { Disposable } from '../../../base/common/lifecycle.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { ExtHostWebview, ExtHostWebviews, toExtensionData, shouldSerializeBuffersForPostMessage } from './extHostWebview.js';
 import { ViewBadge } from './extHostTypeConverters.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import * as extHostProtocol from './extHost.protocol.js';
 import * as extHostTypes from './extHostTypes.js';
 
-class ExtHostWebviewView extends Disposable implements vscode.WebviewView {
+class ExtHostWebviewView extends Disposable implements zyraxoncode.WebviewView {
 
 	readonly #handle: extHostProtocol.WebviewHandle;
 	readonly #proxy: extHostProtocol.MainThreadWebviewViewsShape;
@@ -25,7 +25,7 @@ class ExtHostWebviewView extends Disposable implements vscode.WebviewView {
 	#isVisible: boolean;
 	#title: string | undefined;
 	#description: string | undefined;
-	#badge: vscode.ViewBadge | undefined;
+	#badge: zyraxoncode.ViewBadge | undefined;
 
 	constructor(
 		handle: extHostProtocol.WebviewHandle,
@@ -92,7 +92,7 @@ class ExtHostWebviewView extends Disposable implements vscode.WebviewView {
 
 	public get visible(): boolean { return this.#isVisible; }
 
-	public get webview(): vscode.Webview { return this.#webview; }
+	public get webview(): zyraxoncode.Webview { return this.#webview; }
 
 	public get viewType(): string { return this.#viewType; }
 
@@ -105,12 +105,12 @@ class ExtHostWebviewView extends Disposable implements vscode.WebviewView {
 		this.#onDidChangeVisibility.fire();
 	}
 
-	public get badge(): vscode.ViewBadge | undefined {
+	public get badge(): zyraxoncode.ViewBadge | undefined {
 		this.assertNotDisposed();
 		return this.#badge;
 	}
 
-	public set badge(badge: vscode.ViewBadge | undefined) {
+	public set badge(badge: zyraxoncode.ViewBadge | undefined) {
 		this.assertNotDisposed();
 
 		if (badge?.value === this.#badge?.value &&
@@ -139,7 +139,7 @@ export class ExtHostWebviewViews implements extHostProtocol.ExtHostWebviewViewsS
 	private readonly _proxy: extHostProtocol.MainThreadWebviewViewsShape;
 
 	private readonly _viewProviders = new Map<string, {
-		readonly provider: vscode.WebviewViewProvider;
+		readonly provider: zyraxoncode.WebviewViewProvider;
 		readonly extension: IExtensionDescription;
 	}>();
 
@@ -155,11 +155,11 @@ export class ExtHostWebviewViews implements extHostProtocol.ExtHostWebviewViewsS
 	public registerWebviewViewProvider(
 		extension: IExtensionDescription,
 		viewType: string,
-		provider: vscode.WebviewViewProvider,
+		provider: zyraxoncode.WebviewViewProvider,
 		webviewOptions?: {
 			retainContextWhenHidden?: boolean;
 		},
-	): vscode.Disposable {
+	): zyraxoncode.Disposable {
 		if (this._viewProviders.has(viewType)) {
 			throw new Error(`View provider for '${viewType}' already registered`);
 		}

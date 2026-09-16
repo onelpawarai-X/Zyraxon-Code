@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// import * as vscode from 'vscode';
+// import * as zyraxoncode from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
-import { IVSCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { createServiceIdentifier } from '../../../util/common/services';
@@ -34,7 +34,7 @@ export class DebuggableCommandIdentifier extends Disposable implements IDebuggab
 
 	constructor(
 		@IConfigurationService private readonly configurationService: IConfigurationService,
-		@IVSCodeExtensionContext private readonly context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly context: IZyraxonCodeExtensionContext,
 		@IWorkspaceService workspaceService: IWorkspaceService,
 		@ILanguageToolsProvider private readonly languageToolsProvider: ILanguageToolsProvider,
 		@IFileSystemService private readonly fileSystemService: IFileSystemService,

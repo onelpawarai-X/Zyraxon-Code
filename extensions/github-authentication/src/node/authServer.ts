@@ -7,7 +7,7 @@ import { URL } from 'url';
 import * as fs from 'fs';
 import * as path from 'path';
 import { randomBytes } from 'crypto';
-import { env } from 'vscode';
+import { env } from 'zyraxoncode';
 
 function sendFile(res: http.ServerResponse, filepath: string) {
 	const isSvg = filepath.endsWith('.svg');
@@ -100,7 +100,7 @@ export class LoopbackAuthServer implements ILoopbackServer {
 
 		const appNameQueryParam = `&app_name=${encodeURIComponent(env.appName)}`;
 		this._server = http.createServer((req, res) => {
-			const reqUrl = new URL(req.url!, `http://${req.headers.host}`);
+			const reqUrl = new URL(req.url!, `__ZYRAXKEEP__0_{req.headers.host}`);
 			switch (reqUrl.pathname) {
 				case '/signin': {
 					const receivedNonce = (reqUrl.searchParams.get('nonce') ?? '').replace(/ /g, '+');
@@ -172,8 +172,8 @@ export class LoopbackAuthServer implements ILoopbackServer {
 
 				clearTimeout(portTimeout);
 
-				// set state which will be used to redirect back to vscode
-				this.state = `http://127.0.0.1:${this.port}/callback?nonce=${encodeURIComponent(this.nonce)}`;
+				// set state which will be used to redirect back to zyraxoncode
+				this.state = `__ZYRAXKEEP__1_{this.port}/callback?nonce=${encodeURIComponent(this.nonce)}`;
 
 				resolve(this.port);
 			});

@@ -50,7 +50,7 @@ jobs:
 
       - script: |
           set -e
-          APP_ROOT=$(agent.builddirectory)/VSCode-linux-$(VSCODE_ARCH)
+          APP_ROOT=$(agent.builddirectory)/ZyraxonCode-linux-$(VSCODE_ARCH)
           ELECTRON_ROOT=.build/electron
           sudo chown root $APP_ROOT/chrome-sandbox
           sudo chown root $ELECTRON_ROOT/chrome-sandbox
@@ -109,7 +109,7 @@ jobs:
         - script: |
             set -e
             status=0
-            npm run smoketest-no-compile -- --tracing --build "$(agent.builddirectory)/VSCode-linux-$(VSCODE_ARCH)" || status=$?
+            npm run smoketest-no-compile -- --tracing --build "$(agent.builddirectory)/ZyraxonCode-linux-$(VSCODE_ARCH)" || status=$?
             if [ $status -ne 0 ] && [ -d .build/logs/smoke-tests-electron ]; then
               mv .build/logs/smoke-tests-electron ".build/logs/failed-iteration-${{ i }}"
             fi

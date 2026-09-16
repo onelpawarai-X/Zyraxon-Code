@@ -2,8 +2,8 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { FileChunk } from '../../../../../platform/chunking/common/chunk';
 import { logExecTime } from '../../../../../platform/log/common/logExecTime';
 import { ILogService } from '../../../../../platform/log/common/logService';
@@ -20,7 +20,7 @@ import { CancellationToken } from '../../../../../util/vs/base/common/cancellati
 import { ResourceMap } from '../../../../../util/vs/base/common/map';
 import { URI } from '../../../../../util/vs/base/common/uri';
 import { Range } from '../../../../../util/vs/editor/common/core/range';
-import { Location, Range as VSCodeRange } from '../../../../../vscodeTypes';
+import { Location, Range as ZyraxonCodeRange } from '../../../../../zyraxoncodeTypes';
 import { PromptReference } from '../../../../prompt/common/conversation';
 import { IPromptEndpoint } from '../../base/promptRenderer';
 
@@ -64,7 +64,7 @@ export class WorkspaceChunks extends PromptElement<ChunksToolProps, WorkspaceChu
 		super(props);
 	}
 
-	override async prepare(sizing: PromptSizing, progress: vscode.Progress<vscode.ChatResponsePart> | undefined, token = CancellationToken.None): Promise<WorkspaceChunksState> {
+	override async prepare(sizing: PromptSizing, progress: zyraxoncode.Progress<zyraxoncode.ChatResponsePart> | undefined, token = CancellationToken.None): Promise<WorkspaceChunksState> {
 		if (!await this.workspaceChunkSearch.isAvailable()) {
 			return {};
 		}
@@ -200,7 +200,7 @@ export class WorkspaceChunkList extends PromptElement<WorkspaceChunkListProps> {
 				.sort((a, b) => Range.compareRangesUsingStarts(a.range, b.range)) // compare ranges by starts, then ends
 				.map(chunk => new PromptReference(chunk.isFullFile
 					? chunk.file
-					: new Location(chunk.file, new VSCodeRange(chunk.range.startLineNumber, chunk.range.startColumn, chunk.range.endLineNumber, chunk.range.endColumn)), undefined, { isFromTool: this.props.isToolCall }));
+					: new Location(chunk.file, new ZyraxonCodeRange(chunk.range.startLineNumber, chunk.range.startColumn, chunk.range.endLineNumber, chunk.range.endColumn)), undefined, { isFromTool: this.props.isToolCall }));
 		});
 		return references;
 	}

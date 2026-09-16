@@ -3,21 +3,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { initializeMermaidWebview } from './mermaidWebview';
-import { VsCodeApi } from './vscodeApi';
+import { VsCodeApi } from './zyraxoncodeApi';
 
 declare function acquireVsCodeApi(): VsCodeApi;
-const vscode = acquireVsCodeApi();
+const zyraxoncode = acquireVsCodeApi();
 
 
 async function main() {
-	await initializeMermaidWebview(vscode);
+	await initializeMermaidWebview(zyraxoncode);
 
 	// Set up the "Open in Editor" button
 	const openBtn = document.querySelector('.open-in-editor-btn');
 	if (openBtn) {
 		openBtn.addEventListener('click', e => {
 			e.stopPropagation();
-			vscode.postMessage({ type: 'openInEditor' });
+			zyraxoncode.postMessage({ type: 'openInEditor' });
 		});
 	}
 }

@@ -4,13 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { getLocation, JSONPath, parse, visit, Location } from 'jsonc-parser';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { SettingsDocument } from './settingsDocumentHelper';
 import { provideInstalledExtensionProposals } from './extensionsProposals';
 import './importExportProfiles';
 
-export function activate(context: vscode.ExtensionContext): void {
-	//settings.json suggestions
+export function activate(context: zyraxoncode.ExtensionContext): void {
+	__ZYRAXKEEP__0_ suggestions
 	context.subscriptions.push(registerSettingsCompletions());
 
 	//extensions suggestions
@@ -29,16 +29,16 @@ export function activate(context: vscode.ExtensionContext): void {
 	context.subscriptions.push(registerContextKeyCompletions());
 }
 
-function registerSettingsCompletions(): vscode.Disposable {
-	return vscode.languages.registerCompletionItemProvider({ language: 'jsonc', pattern: '**/settings.json' }, {
+function registerSettingsCompletions(): zyraxoncode.Disposable {
+	return zyraxoncode.languages.registerCompletionItemProvider({ language: 'jsonc', pattern: '**/settings.json' }, {
 		provideCompletionItems(document, position, token) {
 			return new SettingsDocument(document).provideCompletionItems(position, token);
 		}
 	});
 }
 
-function registerVariableCompletions(pattern: string): vscode.Disposable {
-	return vscode.languages.registerCompletionItemProvider({ language: 'jsonc', pattern }, {
+function registerVariableCompletions(pattern: string): zyraxoncode.Disposable {
+	return zyraxoncode.languages.registerCompletionItemProvider({ language: 'jsonc', pattern }, {
 		provideCompletionItems(document, position, _token) {
 			const location = getLocation(document.getText(), document.offsetAt(position));
 			if (isCompletingInsidePropertyStringValue(document, location, position)) {
@@ -48,31 +48,31 @@ function registerVariableCompletions(pattern: string): vscode.Disposable {
 
 				let range = document.getWordRangeAtPosition(position, /\$\{[^"\}]*\}?/);
 				if (!range || range.start.isEqual(position) || range.end.isEqual(position) && document.getText(range).endsWith('}')) {
-					range = new vscode.Range(position, position);
+					range = new zyraxoncode.Range(position, position);
 				}
 
 				return [
-					{ label: 'workspaceFolder', detail: vscode.l10n.t("The path of the folder opened in ZYRAXON Code") },
-					{ label: 'workspaceFolderBasename', detail: vscode.l10n.t("The name of the folder opened in ZYRAXON Code without any slashes (/)") },
-					{ label: 'fileWorkspaceFolderBasename', detail: vscode.l10n.t("The current opened file workspace folder name without any slashes (/)") },
-					{ label: 'relativeFile', detail: vscode.l10n.t("The current opened file relative to ${workspaceFolder}") },
-					{ label: 'relativeFileDirname', detail: vscode.l10n.t("The current opened file's dirname relative to ${workspaceFolder}") },
-					{ label: 'file', detail: vscode.l10n.t("The current opened file") },
-					{ label: 'cwd', detail: vscode.l10n.t("The task runner's current working directory on startup") },
-					{ label: 'lineNumber', detail: vscode.l10n.t("The current selected line number in the active file") },
-					{ label: 'selectedText', detail: vscode.l10n.t("The current selected text in the active file") },
-					{ label: 'fileDirname', detail: vscode.l10n.t("The current opened file's dirname") },
-					{ label: 'fileDirnameBasename', detail: vscode.l10n.t("The current opened file's folder name") },
-					{ label: 'fileExtname', detail: vscode.l10n.t("The current opened file's extension") },
-					{ label: 'fileBasename', detail: vscode.l10n.t("The current opened file's basename") },
-					{ label: 'fileBasenameNoExtension', detail: vscode.l10n.t("The current opened file's basename with no file extension") },
-					{ label: 'defaultBuildTask', detail: vscode.l10n.t("The name of the default build task. If there is not a single default build task then a quick pick is shown to choose the build task.") },
-					{ label: 'pathSeparator', detail: vscode.l10n.t("The character used by the operating system to separate components in file paths. Is also aliased to '/'.") },
-					{ label: 'extensionInstallFolder', detail: vscode.l10n.t("The path where an extension is installed."), param: 'publisher.extension' },
+					{ label: 'workspaceFolder', detail: zyraxoncode.l10n.t("The path of the folder opened in ZYRAXON Code") },
+					{ label: 'workspaceFolderBasename', detail: zyraxoncode.l10n.t("The name of the folder opened in ZYRAXON Code without any slashes (/)") },
+					{ label: 'fileWorkspaceFolderBasename', detail: zyraxoncode.l10n.t("The current opened file workspace folder name without any slashes (/)") },
+					{ label: 'relativeFile', detail: zyraxoncode.l10n.t("The current opened file relative to ${workspaceFolder}") },
+					{ label: 'relativeFileDirname', detail: zyraxoncode.l10n.t("The current opened file's dirname relative to ${workspaceFolder}") },
+					{ label: 'file', detail: zyraxoncode.l10n.t("The current opened file") },
+					{ label: 'cwd', detail: zyraxoncode.l10n.t("The task runner's current working directory on startup") },
+					{ label: 'lineNumber', detail: zyraxoncode.l10n.t("The current selected line number in the active file") },
+					{ label: 'selectedText', detail: zyraxoncode.l10n.t("The current selected text in the active file") },
+					{ label: 'fileDirname', detail: zyraxoncode.l10n.t("The current opened file's dirname") },
+					{ label: 'fileDirnameBasename', detail: zyraxoncode.l10n.t("The current opened file's folder name") },
+					{ label: 'fileExtname', detail: zyraxoncode.l10n.t("The current opened file's extension") },
+					{ label: 'fileBasename', detail: zyraxoncode.l10n.t("The current opened file's basename") },
+					{ label: 'fileBasenameNoExtension', detail: zyraxoncode.l10n.t("The current opened file's basename with no file extension") },
+					{ label: 'defaultBuildTask', detail: zyraxoncode.l10n.t("The name of the default build task. If there is not a single default build task then a quick pick is shown to choose the build task.") },
+					{ label: 'pathSeparator', detail: zyraxoncode.l10n.t("The character used by the operating system to separate components in file paths. Is also aliased to '/'.") },
+					{ label: 'extensionInstallFolder', detail: zyraxoncode.l10n.t("The path where an extension is installed."), param: 'publisher.extension' },
 				].map(variable => ({
 					label: `\${${variable.label}}`,
 					range,
-					insertText: variable.param ? new vscode.SnippetString(`\${${variable.label}:`).appendPlaceholder(variable.param).appendText('}') : (`\${${variable.label}}`),
+					insertText: variable.param ? new zyraxoncode.SnippetString(`\${${variable.label}:`).appendPlaceholder(variable.param).appendText('}') : (`\${${variable.label}}`),
 					detail: variable.detail
 				}));
 			}
@@ -82,7 +82,7 @@ function registerVariableCompletions(pattern: string): vscode.Disposable {
 	});
 }
 
-function isCompletingInsidePropertyStringValue(document: vscode.TextDocument, location: Location, pos: vscode.Position) {
+function isCompletingInsidePropertyStringValue(document: zyraxoncode.TextDocument, location: Location, pos: zyraxoncode.Position) {
 	if (location.isAtPropertyKey) {
 		return false;
 	}
@@ -102,12 +102,12 @@ interface IExtensionsContent {
 	recommendations: string[];
 }
 
-function registerExtensionsCompletions(): vscode.Disposable[] {
+function registerExtensionsCompletions(): zyraxoncode.Disposable[] {
 	return [registerExtensionsCompletionsInExtensionsDocument(), registerExtensionsCompletionsInWorkspaceConfigurationDocument()];
 }
 
-function registerExtensionsCompletionsInExtensionsDocument(): vscode.Disposable {
-	return vscode.languages.registerCompletionItemProvider({ pattern: '**/extensions.json' }, {
+function registerExtensionsCompletionsInExtensionsDocument(): zyraxoncode.Disposable {
+	return zyraxoncode.languages.registerCompletionItemProvider({ pattern: '**/extensions.json' }, {
 		provideCompletionItems(document, position, _token) {
 			const location = getLocation(document.getText(), document.offsetAt(position));
 			if (location.path[0] === 'recommendations') {
@@ -120,8 +120,8 @@ function registerExtensionsCompletionsInExtensionsDocument(): vscode.Disposable 
 	});
 }
 
-function registerExtensionsCompletionsInWorkspaceConfigurationDocument(): vscode.Disposable {
-	return vscode.languages.registerCompletionItemProvider({ pattern: '**/*.code-workspace' }, {
+function registerExtensionsCompletionsInWorkspaceConfigurationDocument(): zyraxoncode.Disposable {
+	return zyraxoncode.languages.registerCompletionItemProvider({ pattern: '**/*.code-workspace' }, {
 		provideCompletionItems(document, position, _token) {
 			const location = getLocation(document.getText(), document.offsetAt(position));
 			if (location.path[0] === 'extensions' && location.path[1] === 'recommendations') {
@@ -134,20 +134,20 @@ function registerExtensionsCompletionsInWorkspaceConfigurationDocument(): vscode
 	});
 }
 
-function getReplaceRange(document: vscode.TextDocument, location: Location, position: vscode.Position) {
+function getReplaceRange(document: zyraxoncode.TextDocument, location: Location, position: zyraxoncode.Position) {
 	const node = location.previousNode;
 	if (node) {
 		const nodeStart = document.positionAt(node.offset), nodeEnd = document.positionAt(node.offset + node.length);
 		if (nodeStart.isBeforeOrEqual(position) && nodeEnd.isAfterOrEqual(position)) {
-			return new vscode.Range(nodeStart, nodeEnd);
+			return new zyraxoncode.Range(nodeStart, nodeEnd);
 		}
 	}
-	return new vscode.Range(position, position);
+	return new zyraxoncode.Range(position, position);
 }
 
-vscode.languages.registerDocumentSymbolProvider({ pattern: '**/launch.json', language: 'jsonc' }, {
-	provideDocumentSymbols(document: vscode.TextDocument, _token: vscode.CancellationToken): vscode.ProviderResult<vscode.SymbolInformation[]> {
-		const result: vscode.SymbolInformation[] = [];
+zyraxoncode.languages.registerDocumentSymbolProvider({ pattern: '**/launch.json', language: 'jsonc' }, {
+	provideDocumentSymbols(document: zyraxoncode.TextDocument, _token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.SymbolInformation[]> {
+		const result: zyraxoncode.SymbolInformation[] = [];
 		let name: string = '';
 		let lastProperty = '';
 		let startOffset = 0;
@@ -170,7 +170,7 @@ vscode.languages.registerDocumentSymbolProvider({ pattern: '**/launch.json', lan
 			},
 			onObjectEnd: (offset: number, _length: number) => {
 				if (name && depthInObjects === 2) {
-					result.push(new vscode.SymbolInformation(name, vscode.SymbolKind.Object, new vscode.Range(document.positionAt(startOffset), document.positionAt(offset))));
+					result.push(new zyraxoncode.SymbolInformation(name, zyraxoncode.SymbolKind.Object, new zyraxoncode.Range(document.positionAt(startOffset), document.positionAt(offset))));
 				}
 				depthInObjects--;
 			},
@@ -180,10 +180,10 @@ vscode.languages.registerDocumentSymbolProvider({ pattern: '**/launch.json', lan
 	}
 }, { label: 'Launch Targets' });
 
-function registerContextKeyCompletions(): vscode.Disposable {
+function registerContextKeyCompletions(): zyraxoncode.Disposable {
 	type ContextKeyInfo = { key: string; type?: string; description?: string };
 
-	const paths = new Map<vscode.DocumentFilter, JSONPath[]>([
+	const paths = new Map<zyraxoncode.DocumentFilter, JSONPath[]>([
 		[{ language: 'jsonc', pattern: '**/keybindings.json' }, [
 			['*', 'when']
 		]],
@@ -196,10 +196,10 @@ function registerContextKeyCompletions(): vscode.Disposable {
 		]]
 	]);
 
-	return vscode.languages.registerCompletionItemProvider(
+	return zyraxoncode.languages.registerCompletionItemProvider(
 		[...paths.keys()],
 		{
-			async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) {
+			async provideCompletionItems(document: zyraxoncode.TextDocument, position: zyraxoncode.Position, token: zyraxoncode.CancellationToken) {
 
 				const location = getLocation(document.getText(), document.offsetAt(position));
 
@@ -209,7 +209,7 @@ function registerContextKeyCompletions(): vscode.Disposable {
 
 				let isValidLocation = false;
 				for (const [key, value] of paths) {
-					if (vscode.languages.match(key, document)) {
+					if (zyraxoncode.languages.match(key, document)) {
 						if (value.some(location.matches.bind(location))) {
 							isValidLocation = true;
 							break;
@@ -221,17 +221,17 @@ function registerContextKeyCompletions(): vscode.Disposable {
 					return;
 				}
 
-				const replacing = document.getWordRangeAtPosition(position, /[a-zA-Z.]+/) || new vscode.Range(position, position);
+				const replacing = document.getWordRangeAtPosition(position, /[a-zA-Z.]+/) || new zyraxoncode.Range(position, position);
 				const inserting = replacing.with(undefined, position);
 
-				const data = await vscode.commands.executeCommand<ContextKeyInfo[]>('getContextKeyInfo');
+				const data = await zyraxoncode.commands.executeCommand<ContextKeyInfo[]>('getContextKeyInfo');
 				if (token.isCancellationRequested || !data) {
 					return;
 				}
 
-				const result = new vscode.CompletionList();
+				const result = new zyraxoncode.CompletionList();
 				for (const item of data) {
-					const completion = new vscode.CompletionItem(item.key, vscode.CompletionItemKind.Constant);
+					const completion = new zyraxoncode.CompletionItem(item.key, zyraxoncode.CompletionItemKind.Constant);
 					completion.detail = item.type;
 					completion.range = { replacing, inserting };
 					completion.documentation = item.description;

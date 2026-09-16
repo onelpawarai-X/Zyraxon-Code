@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, Raw, UserMessage } from '@vscode/prompt-tsx';
+import { PromptElement, Raw, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { afterAll, beforeAll, expect, suite, test } from 'vitest';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { ITestingServicesAccessor } from '../../../../platform/test/node/services';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Range } from '../../../../vscodeTypes';
+import { Range } from '../../../../zyraxoncodeTypes';
 import { PromptRenderer } from '../../../prompts/node/base/promptRenderer';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { FindTextInFilesGrepResult, FindTextInFilesGrepResultProps, FindTextInFilesResult } from '../findTextInFilesTool';
@@ -26,7 +26,7 @@ suite('FindTextInFilesResult', () => {
 		services.dispose();
 	});
 
-	async function toString(results: vscode.TextSearchResult2[]) {
+	async function toString(results: zyraxoncode.TextSearchResult2[]) {
 		const clz = class extends PromptElement {
 			render() {
 				return <UserMessage>

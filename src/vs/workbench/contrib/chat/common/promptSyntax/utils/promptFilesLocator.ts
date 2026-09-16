@@ -592,7 +592,7 @@ export class PromptFilesLocator {
 					if (remoteAuthority) {
 						// if the location is absolute and we are in a remote environment,
 						// we need to convert it to a file URI with the remote authority
-						uri = uri.with({ scheme: Schemas.vscodeRemote, authority: remoteAuthority });
+						uri = uri.with({ scheme: Schemas.zyraxoncodeRemote, authority: remoteAuthority });
 					}
 					if (!seen.has(uri)) {
 						seen.add(uri);

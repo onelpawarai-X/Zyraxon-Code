@@ -76,12 +76,12 @@ export class ChatEditorInput extends EditorInput implements IEditorCloseHandler 
 	) {
 		super();
 
-		if (resource.scheme === Schemas.vscodeChatEditor) {
+		if (resource.scheme === Schemas.zyraxoncodeChatEditor) {
 			const parsed = ChatEditorUri.parse(resource);
 			if (!parsed || typeof parsed !== 'number') {
 				throw new Error('Invalid chat URI');
 			}
-		} else if (resource.scheme === Schemas.vscodeLocalChatSession) {
+		} else if (resource.scheme === Schemas.zyraxoncodeLocalChatSession) {
 			const localSessionId = LocalChatSessionUri.parseLocalSessionId(resource);
 			if (!localSessionId) {
 				throw new Error('Invalid local chat session URI');
@@ -366,7 +366,7 @@ export class ChatEditorModel extends Disposable {
 
 namespace ChatEditorUri {
 
-	const scheme = Schemas.vscodeChatEditor;
+	const scheme = Schemas.zyraxoncodeChatEditor;
 
 	export function getNewEditorUri(): URI {
 		const handle = Math.floor(Math.random() * 1e9);
@@ -432,7 +432,7 @@ export class ChatEditorInputSerializer implements IEditorSerializer {
 
 			// Otherwise check to see if we're a chat editor with a local session id
 			let resource = URI.revive(parsed.resource);
-			if (resource.scheme === Schemas.vscodeChatEditor && parsed.sessionId) {
+			if (resource.scheme === Schemas.zyraxoncodeChatEditor && parsed.sessionId) {
 				resource = LocalChatSessionUri.forSession(parsed.sessionId);
 			}
 

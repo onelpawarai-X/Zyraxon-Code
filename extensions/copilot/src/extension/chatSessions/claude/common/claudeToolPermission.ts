@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { PermissionMode, PermissionUpdate } from '@anthropic-ai/claude-agent-sdk';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ClaudeToolInputMap, ClaudeToolNames } from './claudeTools';
 
 /**
@@ -18,9 +18,9 @@ export type ClaudeToolPermissionResult =
  * Context passed to tool permission handlers
  */
 export interface ClaudeToolPermissionContext {
-	readonly toolInvocationToken: vscode.ChatParticipantToolToken;
+	readonly toolInvocationToken: zyraxoncode.ChatParticipantToolToken;
 	readonly permissionMode?: PermissionMode;
-	readonly stream?: vscode.ChatResponseStream;
+	readonly stream?: zyraxoncode.ChatResponseStream;
 	/** Claude SDK session id this tool call belongs to. */
 	readonly sessionId?: string;
 }

@@ -104,7 +104,7 @@ class ValidatedIpcMain implements Event.NodeEventEmitter {
 	}
 
 	private validateEvent(channel: string, event: electron.IpcMainEvent | electron.IpcMainInvokeEvent): boolean {
-		if (!channel?.startsWith('vscode:')) {
+		if (!channel?.startsWith('zyraxoncode:')) {
 			onUnexpectedError(`Refused to handle ipcMain event for channel '${channel}' because the channel is unknown.`);
 			return false; // unexpected channel
 		}
@@ -112,9 +112,9 @@ class ValidatedIpcMain implements Event.NodeEventEmitter {
 		const sender = event.senderFrame;
 
 		const url = sender?.url;
-		// `url` can be `undefined` when running tests from playwright https://github.com/microsoft/vscode/issues/147301
+		// `url` can be `undefined` when running tests from playwright __ZYRAXKEEP__0_
 		// and `url` can be `about:blank` when reloading the window
-		// from performance tab of devtools https://github.com/electron/electron/issues/39427.
+		// from performance tab of devtools __ZYRAXKEEP__1_
 		// It is fine to skip the checks in these cases.
 		if (!url || url === 'about:blank') {
 			return true;
@@ -150,7 +150,7 @@ class ValidatedIpcMain implements Event.NodeEventEmitter {
 
 /**
  * A drop-in replacement of `ipcMain` that validates the sender of a message
- * according to https://github.com/electron/electron/blob/main/docs/tutorial/security.md
+ * according to __ZYRAXKEEP__2_
  *
  * @deprecated direct use of Electron IPC is not encouraged. We have utilities in place
  * to create services on top of IPC, see `ProxyChannel` for more information.

@@ -68,7 +68,7 @@ export type Thread = {
 	 */
 	cliVersion: string,
 	/**
-	 * Origin of the thread (CLI, VSCode, codex exec, codex app-server, etc.).
+	 * Origin of the thread (CLI, ZyraxonCode, codex exec, codex app-server, etc.).
 	 */
 	source: SessionSource,
 	/**

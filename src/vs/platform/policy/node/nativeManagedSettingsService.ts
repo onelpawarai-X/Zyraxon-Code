@@ -12,7 +12,7 @@ import { IManagedSettingsPolicyDefinitions, ManagedSettingsData } from '../../..
 import { ILogService } from '../../log/common/log.js';
 import { collectManagedSettingsDefinitions, INativeManagedSettingsService } from '../common/copilotManagedSettings.js';
 import { PolicyDefinition, PolicyValue } from '../common/policy.js';
-import type { Watcher } from '@vscode/policy-watcher';
+import type { Watcher } from '@zyraxoncode/policy-watcher';
 
 export interface INativePolicyWatcherOptions {
 	readonly registryPath?: string;
@@ -90,7 +90,7 @@ export class NativeManagedSettingsService extends Disposable implements INativeM
 			return;
 		}
 
-		const { createWatcher } = this.watcherFactory ? { createWatcher: this.watcherFactory } : (await import('@vscode/policy-watcher') as { createWatcher: NativePolicyWatcherFactory });
+		const { createWatcher } = this.watcherFactory ? { createWatcher: this.watcherFactory } : (await import('@zyraxoncode/policy-watcher') as { createWatcher: NativePolicyWatcherFactory });
 		await this.throttler.queue(() => new Promise<void>((c, e) => {
 			try {
 				this.logService.trace(`Creating native managed-settings watcher for productName ${this.productName}`);
@@ -107,7 +107,7 @@ export class NativeManagedSettingsService extends Disposable implements INativeM
 
 	/**
 	 * Project the internal {@link IManagedSettingsPolicyDefinitions} (readonly, and free to grow
-	 * extra fields) down to the minimal `{ type }` payload the external `@vscode/policy-watcher`
+	 * extra fields) down to the minimal `{ type }` payload the external `@zyraxoncode/policy-watcher`
 	 * native module expects. Deliberately a fresh, narrowly-typed copy rather than handing the
 	 * watcher our internal state: it decouples the two shapes so a future field on
 	 * `IManagedSettingPolicyDefinition` cannot silently leak across the native boundary.

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { coalesce } from '../../../base/common/arrays.js';
 import { DeferredPromise } from '../../../base/common/async.js';
 import { CancellationToken, CancellationTokenSource } from '../../../base/common/cancellation.js';
@@ -34,12 +34,12 @@ import { Diagnostic } from './extHostTypeConverters.js';
 import * as extHostTypes from './extHostTypes.js';
 import { isEqual } from '../../../base/common/resources.js';
 
-type ChatSessionTiming = vscode.ChatSessionItem['timing'];
+type ChatSessionTiming = zyraxoncode.ChatSessionItem['timing'];
 
 // #region Chat Session Input State
 
-class ChatSessionInputStateImpl implements vscode.ChatSessionInputState {
-	#groups: readonly vscode.ChatSessionProviderOptionGroup[];
+class ChatSessionInputStateImpl implements zyraxoncode.ChatSessionInputState {
+	#groups: readonly zyraxoncode.ChatSessionProviderOptionGroup[];
 	readonly #onChangedDelegate: (() => void) | undefined;
 
 	readonly #onDidChangeEmitter = new Emitter<void>();
@@ -48,32 +48,32 @@ class ChatSessionInputStateImpl implements vscode.ChatSessionInputState {
 	readonly #onDidDisposeEmitter = new Emitter<void>();
 	readonly onDidDispose = this.#onDidDisposeEmitter.event;
 
-	#sessionResource: vscode.Uri | undefined;
-	get sessionResource(): vscode.Uri | undefined {
+	#sessionResource: zyraxoncode.Uri | undefined;
+	get sessionResource(): zyraxoncode.Uri | undefined {
 		return this.#sessionResource;
 	}
-	set sessionResource(value: vscode.Uri | undefined) {
+	set sessionResource(value: zyraxoncode.Uri | undefined) {
 		this.#sessionResource = value;
 	}
 
-	#untitledSessionResource: vscode.Uri | undefined;
-	get untitledSessionResource(): vscode.Uri | undefined {
+	#untitledSessionResource: zyraxoncode.Uri | undefined;
+	get untitledSessionResource(): zyraxoncode.Uri | undefined {
 		return this.#untitledSessionResource;
 	}
-	set untitledSessionResource(value: vscode.Uri | undefined) {
+	set untitledSessionResource(value: zyraxoncode.Uri | undefined) {
 		this.#untitledSessionResource = value;
 	}
 
-	constructor(groups: readonly vscode.ChatSessionProviderOptionGroup[], onChangedDelegate?: () => void) {
+	constructor(groups: readonly zyraxoncode.ChatSessionProviderOptionGroup[], onChangedDelegate?: () => void) {
 		this.#groups = groups;
 		this.#onChangedDelegate = onChangedDelegate;
 	}
 
-	get groups(): readonly vscode.ChatSessionProviderOptionGroup[] {
+	get groups(): readonly zyraxoncode.ChatSessionProviderOptionGroup[] {
 		return this.#groups;
 	}
 
-	set groups(value: readonly vscode.ChatSessionProviderOptionGroup[]) {
+	set groups(value: readonly zyraxoncode.ChatSessionProviderOptionGroup[]) {
 		this.#groups = value;
 		this.#onChangedDelegate?.();
 	}
@@ -82,7 +82,7 @@ class ChatSessionInputStateImpl implements vscode.ChatSessionInputState {
 		this.#onDidChangeEmitter.fire();
 	}
 
-	_setGroups(groups: readonly vscode.ChatSessionProviderOptionGroup[]): void {
+	_setGroups(groups: readonly zyraxoncode.ChatSessionProviderOptionGroup[]): void {
 		this.#groups = groups;
 	}
 
@@ -97,22 +97,22 @@ class ChatSessionInputStateImpl implements vscode.ChatSessionInputState {
 
 // #region Chat Session Item Controller
 
-class ChatSessionItemImpl implements vscode.ChatSessionItem {
+class ChatSessionItemImpl implements zyraxoncode.ChatSessionItem {
 	#label: string;
-	#iconPath?: vscode.IconPath;
-	#description?: string | vscode.MarkdownString;
-	#badge?: string | vscode.MarkdownString;
-	#status?: vscode.ChatSessionStatus;
+	#iconPath?: zyraxoncode.IconPath;
+	#description?: string | zyraxoncode.MarkdownString;
+	#badge?: string | zyraxoncode.MarkdownString;
+	#status?: zyraxoncode.ChatSessionStatus;
 	#archived?: boolean;
-	#tooltip?: string | vscode.MarkdownString;
+	#tooltip?: string | zyraxoncode.MarkdownString;
 	#timing?: ChatSessionTiming;
-	#changes?: readonly vscode.ChatSessionChangedFile[];
+	#changes?: readonly zyraxoncode.ChatSessionChangedFile[];
 	#metadata?: { readonly [key: string]: unknown };
 	#onChanged: () => void;
 
-	readonly resource: vscode.Uri;
+	readonly resource: zyraxoncode.Uri;
 
-	constructor(resource: vscode.Uri, label: string, onChanged: () => void) {
+	constructor(resource: zyraxoncode.Uri, label: string, onChanged: () => void) {
 		this.resource = resource;
 		this.#label = label;
 		this.#onChanged = onChanged;
@@ -129,44 +129,44 @@ class ChatSessionItemImpl implements vscode.ChatSessionItem {
 		}
 	}
 
-	get iconPath(): vscode.IconPath | undefined {
+	get iconPath(): zyraxoncode.IconPath | undefined {
 		return this.#iconPath;
 	}
 
-	set iconPath(value: vscode.IconPath | undefined) {
+	set iconPath(value: zyraxoncode.IconPath | undefined) {
 		if (this.#iconPath !== value) {
 			this.#iconPath = value;
 			this.#onChanged();
 		}
 	}
 
-	get description(): string | vscode.MarkdownString | undefined {
+	get description(): string | zyraxoncode.MarkdownString | undefined {
 		return this.#description;
 	}
 
-	set description(value: string | vscode.MarkdownString | undefined) {
+	set description(value: string | zyraxoncode.MarkdownString | undefined) {
 		if (this.#description !== value) {
 			this.#description = value;
 			this.#onChanged();
 		}
 	}
 
-	get badge(): string | vscode.MarkdownString | undefined {
+	get badge(): string | zyraxoncode.MarkdownString | undefined {
 		return this.#badge;
 	}
 
-	set badge(value: string | vscode.MarkdownString | undefined) {
+	set badge(value: string | zyraxoncode.MarkdownString | undefined) {
 		if (this.#badge !== value) {
 			this.#badge = value;
 			this.#onChanged();
 		}
 	}
 
-	get status(): vscode.ChatSessionStatus | undefined {
+	get status(): zyraxoncode.ChatSessionStatus | undefined {
 		return this.#status;
 	}
 
-	set status(value: vscode.ChatSessionStatus | undefined) {
+	set status(value: zyraxoncode.ChatSessionStatus | undefined) {
 		if (this.#status !== value) {
 			this.#status = value;
 			this.#onChanged();
@@ -184,11 +184,11 @@ class ChatSessionItemImpl implements vscode.ChatSessionItem {
 		}
 	}
 
-	get tooltip(): string | vscode.MarkdownString | undefined {
+	get tooltip(): string | zyraxoncode.MarkdownString | undefined {
 		return this.#tooltip;
 	}
 
-	set tooltip(value: string | vscode.MarkdownString | undefined) {
+	set tooltip(value: string | zyraxoncode.MarkdownString | undefined) {
 		if (this.#tooltip !== value) {
 			this.#tooltip = value;
 			this.#onChanged();
@@ -206,11 +206,11 @@ class ChatSessionItemImpl implements vscode.ChatSessionItem {
 		}
 	}
 
-	get changes(): readonly vscode.ChatSessionChangedFile[] | undefined {
+	get changes(): readonly zyraxoncode.ChatSessionChangedFile[] | undefined {
 		return this.#changes;
 	}
 
-	set changes(value: readonly vscode.ChatSessionChangedFile[] | undefined) {
+	set changes(value: readonly zyraxoncode.ChatSessionChangedFile[] | undefined) {
 		if (this.#changes !== value) {
 			this.#changes = value;
 			this.#onChanged();
@@ -237,13 +237,13 @@ class ChatSessionItemImpl implements vscode.ChatSessionItem {
 }
 
 interface ChatSessionDelta {
-	readonly addedOrUpdated?: ResourceMap<vscode.ChatSessionItem>;
+	readonly addedOrUpdated?: ResourceMap<zyraxoncode.ChatSessionItem>;
 	readonly removed?: ResourceSet;
 }
 
-function computeItemsDelta(oldItems: ResourceMap<vscode.ChatSessionItem>, newItems: ResourceMap<vscode.ChatSessionItem>): ChatSessionDelta {
+function computeItemsDelta(oldItems: ResourceMap<zyraxoncode.ChatSessionItem>, newItems: ResourceMap<zyraxoncode.ChatSessionItem>): ChatSessionDelta {
 	const delta = {
-		addedOrUpdated: new ResourceMap<vscode.ChatSessionItem>(),
+		addedOrUpdated: new ResourceMap<zyraxoncode.ChatSessionItem>(),
 		removed: new ResourceSet(),
 	} satisfies ChatSessionDelta;
 
@@ -270,8 +270,8 @@ function convertChatSessionDeltaToDto(delta: ChatSessionDelta): { addedOrUpdated
 	};
 }
 
-class ChatSessionItemCollectionImpl implements vscode.ChatSessionItemCollection {
-	#items = new ResourceMap<vscode.ChatSessionItem>();
+class ChatSessionItemCollectionImpl implements zyraxoncode.ChatSessionItemCollection {
+	#items = new ResourceMap<zyraxoncode.ChatSessionItem>();
 	readonly #proxy: Proxied<MainThreadChatSessionsShape>;
 	readonly #controllerHandle: number;
 
@@ -284,7 +284,7 @@ class ChatSessionItemCollectionImpl implements vscode.ChatSessionItemCollection 
 		return this.#items.size;
 	}
 
-	replace(newItems: readonly vscode.ChatSessionItem[]): void {
+	replace(newItems: readonly zyraxoncode.ChatSessionItem[]): void {
 		if (!newItems.length && !this.#items.size) {
 			// No change
 			return;
@@ -302,13 +302,13 @@ class ChatSessionItemCollectionImpl implements vscode.ChatSessionItemCollection 
 		void this.#proxy.$updateChatSessionItems(this.#controllerHandle, convertChatSessionDeltaToDto(delta));
 	}
 
-	forEach(callback: (item: vscode.ChatSessionItem, collection: vscode.ChatSessionItemCollection) => unknown, thisArg?: any): void {
+	forEach(callback: (item: zyraxoncode.ChatSessionItem, collection: zyraxoncode.ChatSessionItemCollection) => unknown, thisArg?: any): void {
 		for (const [_, item] of this.#items) {
 			callback.call(thisArg, item, this);
 		}
 	}
 
-	add(item: vscode.ChatSessionItem): void {
+	add(item: zyraxoncode.ChatSessionItem): void {
 		const existing = this.#items.get(item.resource);
 		if (existing && existing === item) {
 			// We're adding the same item again
@@ -319,7 +319,7 @@ class ChatSessionItemCollectionImpl implements vscode.ChatSessionItemCollection 
 		void this.#proxy.$addOrUpdateChatSessionItem(this.#controllerHandle, typeConvert.ChatSessionItem.from(item));
 	}
 
-	delete(resource: vscode.Uri): void {
+	delete(resource: zyraxoncode.Uri): void {
 		if (this.#items.delete(resource)) {
 			void this.#proxy.$updateChatSessionItems(this.#controllerHandle, {
 				addedOrUpdated: [],
@@ -328,11 +328,11 @@ class ChatSessionItemCollectionImpl implements vscode.ChatSessionItemCollection 
 		}
 	}
 
-	get(resource: vscode.Uri): vscode.ChatSessionItem | undefined {
+	get(resource: zyraxoncode.Uri): zyraxoncode.ChatSessionItem | undefined {
 		return this.#items.get(resource);
 	}
 
-	[Symbol.iterator](): Iterator<readonly [id: URI, chatSessionItem: vscode.ChatSessionItem]> {
+	[Symbol.iterator](): Iterator<readonly [id: URI, chatSessionItem: zyraxoncode.ChatSessionItem]> {
 		return this.#items.entries();
 	}
 }
@@ -345,7 +345,7 @@ class ExtHostChatSession {
 	private readonly _pendingCarouselResolvers = new Map<string, Map<string, DeferredPromise<Record<string, unknown> | undefined>>>();
 
 	constructor(
-		public readonly session: vscode.ChatSession,
+		public readonly session: zyraxoncode.ChatSession,
 		public readonly extension: IExtensionDescription,
 		request: IChatAgentRequest,
 		public readonly proxy: IChatAgentProgressShape,
@@ -370,20 +370,20 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 	private _itemControllerHandlePool = 0;
 	private readonly _chatSessionItemControllers = new Map</* handle */ number, {
 		readonly chatSessionType: string;
-		readonly controller: vscode.ChatSessionItemController;
+		readonly controller: zyraxoncode.ChatSessionItemController;
 		readonly extension: IExtensionDescription;
 		readonly disposable: DisposableStore;
-		readonly onDidChangeChatSessionItemStateEmitter: Emitter<vscode.ChatSessionItem>;
+		readonly onDidChangeChatSessionItemStateEmitter: Emitter<zyraxoncode.ChatSessionItem>;
 		readonly inputStates: Set<ChatSessionInputStateImpl>;
-		optionGroups?: readonly vscode.ChatSessionProviderOptionGroup[];
+		optionGroups?: readonly zyraxoncode.ChatSessionProviderOptionGroup[];
 	}>();
 
 	private _contentProviderHandlePool = 0;
 	private readonly _chatSessionContentProviders = new Map</* handle */ number, {
 		readonly chatSessionScheme: string;
-		readonly provider: vscode.ChatSessionContentProvider;
+		readonly provider: zyraxoncode.ChatSessionContentProvider;
 		readonly extension: IExtensionDescription;
-		readonly capabilities?: vscode.ChatSessionCapabilities;
+		readonly capabilities?: zyraxoncode.ChatSessionCapabilities;
 		readonly disposable: DisposableStore;
 	}>();
 
@@ -427,22 +427,22 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		});
 	}
 
-	registerChatSessionItemProvider(extension: IExtensionDescription, chatSessionType: string, provider: vscode.ChatSessionItemProvider): vscode.Disposable {
+	registerChatSessionItemProvider(extension: IExtensionDescription, chatSessionType: string, provider: zyraxoncode.ChatSessionItemProvider): zyraxoncode.Disposable {
 		// The legacy provider api is implemented using the new controller API on the backend
 		const controllerHandle = this._itemControllerHandlePool++;
 		const disposables = new DisposableStore();
 
-		const onDidChangeChatSessionItemStateEmitter = disposables.add(new Emitter<vscode.ChatSessionItem>());
+		const onDidChangeChatSessionItemStateEmitter = disposables.add(new Emitter<zyraxoncode.ChatSessionItem>());
 
 		const collection = new ChatSessionItemCollectionImpl(controllerHandle, this._proxy);
 
-		const controller: vscode.ChatSessionItemController = {
+		const controller: zyraxoncode.ChatSessionItemController = {
 			id: chatSessionType,
 			items: collection,
-			createChatSessionItem: (_resource: vscode.Uri, _label: string) => {
+			createChatSessionItem: (_resource: zyraxoncode.Uri, _label: string) => {
 				throw new Error('Not implemented for providers');
 			},
-			createChatSessionInputState: (_options: vscode.ChatSessionProviderOptionGroup[]) => {
+			createChatSessionInputState: (_options: zyraxoncode.ChatSessionProviderOptionGroup[]) => {
 				return new ChatSessionInputStateImpl([]);
 			},
 			onDidChangeChatSessionItemState: onDidChangeChatSessionItemStateEmitter.event,
@@ -462,7 +462,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 			dispose: () => {
 				disposables.dispose();
 			},
-			refreshHandler: async (token: vscode.CancellationToken) => {
+			refreshHandler: async (token: zyraxoncode.CancellationToken) => {
 				const items = await provider.provideChatSessionItems(token) ?? [];
 				collection.replace(items);
 			},
@@ -488,7 +488,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 			}));
 		}
 
-		const disposable: vscode.Disposable = {
+		const disposable: zyraxoncode.Disposable = {
 			dispose: () => {
 				this._chatSessionItemControllers.delete(controllerHandle);
 				disposables.dispose();
@@ -501,22 +501,22 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		});
 	}
 
-	createChatSessionItemController(extension: IExtensionDescription, id: string, refreshHandler: (token: vscode.CancellationToken) => Thenable<void>): vscode.ChatSessionItemController {
+	createChatSessionItemController(extension: IExtensionDescription, id: string, refreshHandler: (token: zyraxoncode.CancellationToken) => Thenable<void>): zyraxoncode.ChatSessionItemController {
 		const controllerHandle = this._itemControllerHandlePool++;
 		const disposables = new DisposableStore();
 
 		let isDisposed = false;
-		let newChatSessionItemHandler: vscode.ChatSessionItemController['newChatSessionItemHandler'];
-		let forkHandler: vscode.ChatSessionItemController['forkHandler'];
-		let resolveChatSessionItemHandler: vscode.ChatSessionItemController['resolveChatSessionItem'];
-		let provideChatSessionInputStateHandler: vscode.ChatSessionItemController['getChatSessionInputState'];
-		const onDidChangeChatSessionItemStateEmitter = disposables.add(new Emitter<vscode.ChatSessionItem>());
+		let newChatSessionItemHandler: zyraxoncode.ChatSessionItemController['newChatSessionItemHandler'];
+		let forkHandler: zyraxoncode.ChatSessionItemController['forkHandler'];
+		let resolveChatSessionItemHandler: zyraxoncode.ChatSessionItemController['resolveChatSessionItem'];
+		let provideChatSessionInputStateHandler: zyraxoncode.ChatSessionItemController['getChatSessionInputState'];
+		const onDidChangeChatSessionItemStateEmitter = disposables.add(new Emitter<zyraxoncode.ChatSessionItem>());
 		const inputStates = new Set<ChatSessionInputStateImpl>();
 
 		const collection = new ChatSessionItemCollectionImpl(controllerHandle, this._proxy);
 		const proxy = this._proxy;
 
-		const controller = Object.freeze<vscode.ChatSessionItemController>({
+		const controller = Object.freeze<zyraxoncode.ChatSessionItemController>({
 			id,
 			refreshHandler: async (refreshToken: CancellationToken) => {
 				if (isDisposed) {
@@ -528,7 +528,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 			},
 			items: collection,
 			onDidChangeChatSessionItemState: onDidChangeChatSessionItemStateEmitter.event,
-			createChatSessionItem: (resource: vscode.Uri, label: string) => {
+			createChatSessionItem: (resource: zyraxoncode.Uri, label: string) => {
 				if (isDisposed) {
 					throw new Error('ChatSessionItemController has been disposed');
 				}
@@ -542,11 +542,11 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 				return item;
 			},
 			get newChatSessionItemHandler() { return newChatSessionItemHandler; },
-			set newChatSessionItemHandler(handler: vscode.ChatSessionItemController['newChatSessionItemHandler']) { newChatSessionItemHandler = handler; },
+			set newChatSessionItemHandler(handler: zyraxoncode.ChatSessionItemController['newChatSessionItemHandler']) { newChatSessionItemHandler = handler; },
 			get forkHandler() { return forkHandler; },
-			set forkHandler(handler: vscode.ChatSessionItemController['forkHandler']) { forkHandler = handler; },
+			set forkHandler(handler: zyraxoncode.ChatSessionItemController['forkHandler']) { forkHandler = handler; },
 			get resolveChatSessionItem() { return resolveChatSessionItemHandler; },
-			set resolveChatSessionItem(handler: vscode.ChatSessionItemController['resolveChatSessionItem']) {
+			set resolveChatSessionItem(handler: zyraxoncode.ChatSessionItemController['resolveChatSessionItem']) {
 				const hadHandler = !!resolveChatSessionItemHandler;
 				resolveChatSessionItemHandler = handler;
 				const hasHandler = !!handler;
@@ -555,8 +555,8 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 				}
 			},
 			get getChatSessionInputState() { return provideChatSessionInputStateHandler; },
-			set getChatSessionInputState(handler: vscode.ChatSessionItemController['getChatSessionInputState']) { provideChatSessionInputStateHandler = handler; },
-			createChatSessionInputState: (groups: vscode.ChatSessionProviderOptionGroup[]) => {
+			set getChatSessionInputState(handler: zyraxoncode.ChatSessionItemController['getChatSessionInputState']) { provideChatSessionInputStateHandler = handler; },
+			createChatSessionInputState: (groups: zyraxoncode.ChatSessionProviderOptionGroup[]) => {
 				if (isDisposed) {
 					throw new Error('ChatSessionItemController has been disposed');
 				}
@@ -613,7 +613,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		return controller;
 	}
 
-	registerChatSessionContentProvider(extension: IExtensionDescription, chatSessionScheme: string, chatParticipant: vscode.ChatParticipant, provider: vscode.ChatSessionContentProvider, capabilities?: vscode.ChatSessionCapabilities): vscode.Disposable {
+	registerChatSessionContentProvider(extension: IExtensionDescription, chatSessionScheme: string, chatParticipant: zyraxoncode.ChatParticipant, provider: zyraxoncode.ChatSessionContentProvider, capabilities?: zyraxoncode.ChatSessionCapabilities): zyraxoncode.Disposable {
 		const handle = this._contentProviderHandlePool++;
 		const disposables = new DisposableStore();
 
@@ -652,7 +652,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		const sessionResource = URI.revive(sessionResourceComponents);
 
 		const controllerData = this.getChatSessionItemController(getChatSessionType(sessionResource));
-		let inputState: vscode.ChatSessionInputState;
+		let inputState: zyraxoncode.ChatSessionInputState;
 		if (controllerData?.controller.getChatSessionInputState) {
 			const result = await controllerData.controller.getChatSessionInputState(isUntitledChatSession(sessionResource) ? undefined : sessionResource, {
 				previousInputState: this._createInputStateFromOptions(controllerData.optionGroups ?? [], context.initialSessionOptions),
@@ -920,7 +920,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 	}
 
 	private _createInputStateFromOptions(
-		groups: readonly vscode.ChatSessionProviderOptionGroup[],
+		groups: readonly zyraxoncode.ChatSessionProviderOptionGroup[],
 		sessionOptions?: ReadonlyArray<{ optionId: string; value: string }>,
 	): ChatSessionInputStateImpl {
 		if (!sessionOptions?.length) {
@@ -949,7 +949,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		sessionResource: URI | undefined,
 		initialSessionOptions: ReadonlyArray<{ optionId: string; value: string }> | undefined,
 		token: CancellationToken,
-	): Promise<vscode.ChatSessionInputState> {
+	): Promise<zyraxoncode.ChatSessionInputState> {
 		const sessionType = sessionResource ? getChatSessionType(sessionResource) : undefined;
 		const controllerData = sessionType ? this.getChatSessionItemController(sessionType) : undefined;
 		const resolvedResource = sessionResource && !isUntitledChatSession(sessionResource) ? sessionResource : undefined;
@@ -988,8 +988,8 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 	 */
 	private _wrapOptionGroupCommands(
 		controllerHandle: number,
-		groups: readonly vscode.ChatSessionProviderOptionGroup[],
-	): readonly vscode.ChatSessionProviderOptionGroup[] {
+		groups: readonly zyraxoncode.ChatSessionProviderOptionGroup[],
+	): readonly zyraxoncode.ChatSessionProviderOptionGroup[] {
 		const controllerData = this._chatSessionItemControllers.get(controllerHandle);
 		if (!controllerData?.controller.getChatSessionInputState) {
 			return groups;
@@ -1027,8 +1027,8 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		});
 	}
 
-	private async getModelForRequest(request: IChatAgentRequest, extension: IExtensionDescription): Promise<vscode.LanguageModelChat> {
-		let model: vscode.LanguageModelChat | undefined;
+	private async getModelForRequest(request: IChatAgentRequest, extension: IExtensionDescription): Promise<zyraxoncode.LanguageModelChat> {
+		let model: zyraxoncode.LanguageModelChat | undefined;
 		if (request.userSelectedModelId) {
 			model = await this._languageModels.getLanguageModelByIdentifier(extension, request.userSelectedModelId);
 		}
@@ -1056,9 +1056,9 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		};
 	}
 
-	private convertReferenceToVariable(ref: vscode.ChatPromptReference): IChatRequestVariableEntry {
+	private convertReferenceToVariable(ref: zyraxoncode.ChatPromptReference): IChatRequestVariableEntry {
 		const value = ref.value && typeof ref.value === 'object' && 'uri' in ref.value && 'range' in ref.value
-			? typeConvert.Location.from(ref.value as vscode.Location)
+			? typeConvert.Location.from(ref.value as zyraxoncode.Location)
 			: ref.value;
 		const range = ref.range ? { start: ref.range[0], endExclusive: ref.range[1] } : undefined;
 
@@ -1146,7 +1146,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		}
 
 		const previousInputState = this._createInputStateFromOptions(controllerData.optionGroups ?? [], request.initialSessionOptions);
-		let inputState: vscode.ChatSessionInputState;
+		let inputState: zyraxoncode.ChatSessionInputState;
 		if (controllerData.controller.getChatSessionInputState) {
 			inputState = await controllerData.controller.getChatSessionInputState(undefined, { previousInputState }, token);
 		} else {
@@ -1217,7 +1217,7 @@ export class ExtHostChatSessions extends Disposable implements ExtHostChatSessio
 		return typeConvert.ChatSessionItem.from(updatedItem);
 	}
 
-	async $provideChatSessionInputState(controllerHandle: number, sessionResourceComponents: UriComponents | undefined, token: CancellationToken): Promise<vscode.ChatSessionProviderOptionGroup[] | undefined> {
+	async $provideChatSessionInputState(controllerHandle: number, sessionResourceComponents: UriComponents | undefined, token: CancellationToken): Promise<zyraxoncode.ChatSessionProviderOptionGroup[] | undefined> {
 		const controllerData = this._chatSessionItemControllers.get(controllerHandle);
 		if (!controllerData) {
 			this._logService.warn(`No controller found for handle ${controllerHandle}`);

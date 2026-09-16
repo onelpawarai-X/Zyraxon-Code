@@ -1113,7 +1113,7 @@ export class MaliciousExtensionChecker implements IWorkbenchContribution {
 					if (link) {
 						buttons.push({
 							label: localize('learnMore', "Learn More"),
-							run: () => this.commandService.executeCommand('vscode.open', URI.parse(link))
+							run: () => this.commandService.executeCommand('zyraxoncode.open', URI.parse(link))
 						});
 					}
 					this.notificationService.prompt(

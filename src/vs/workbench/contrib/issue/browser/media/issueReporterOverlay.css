@@ -17,10 +17,10 @@
 	max-height: none;
 	overflow: visible;
 	height: 100%;
-	background: var(--vscode-editor-background, #1e1e1e);
+	background: var(--zyraxoncode-editor-background, #1e1e1e);
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, sans-serif;
 	font-size: 13px;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 }
 
 .issue-reporter-wizard .wizard-toolbar {
@@ -30,8 +30,8 @@
 .issue-reporter-wizard .wizard-update-banner {
 	padding: 8px 16px;
 	text-align: center;
-	color: var(--vscode-button-foreground);
-	background: var(--vscode-button-background);
+	color: var(--zyraxoncode-button-foreground);
+	background: var(--zyraxoncode-button-background);
 	flex-shrink: 0;
 }
 
@@ -56,18 +56,18 @@
 
 .issue-reporter-wizard *::-webkit-scrollbar-thumb,
 .issue-reporter-wizard ::-webkit-scrollbar-thumb {
-	background: var(--vscode-scrollbarSlider-background, rgba(121, 121, 121, 0.4));
+	background: var(--zyraxoncode-scrollbarSlider-background, rgba(121, 121, 121, 0.4));
 	border-radius: 0;
 }
 
 .issue-reporter-wizard *::-webkit-scrollbar-thumb:hover,
 .issue-reporter-wizard ::-webkit-scrollbar-thumb:hover {
-	background: var(--vscode-scrollbarSlider-hoverBackground, rgba(100, 100, 100, 0.7));
+	background: var(--zyraxoncode-scrollbarSlider-hoverBackground, rgba(100, 100, 100, 0.7));
 }
 
 .issue-reporter-wizard *::-webkit-scrollbar-thumb:active,
 .issue-reporter-wizard ::-webkit-scrollbar-thumb:active {
-	background: var(--vscode-scrollbarSlider-activeBackground, rgba(191, 191, 191, 0.4));
+	background: var(--zyraxoncode-scrollbarSlider-activeBackground, rgba(191, 191, 191, 0.4));
 }
 
 .issue-reporter-editor-tab {
@@ -94,15 +94,15 @@
 	align-items: center;
 	gap: 6px;
 	padding: 4px 8px 4px 2px;
-	border-radius: var(--vscode-cornerRadius-large, 6px);
-	background: var(--vscode-debugToolBar-background);
-	border: 1px solid var(--vscode-debugToolBar-border, transparent);
-	box-shadow: var(--vscode-shadow-lg, 0 2px 8px rgba(0, 0, 0, 0.2));
+	border-radius: var(--zyraxoncode-cornerRadius-large, 6px);
+	background: var(--zyraxoncode-debugToolBar-background);
+	border: 1px solid var(--zyraxoncode-debugToolBar-border, transparent);
+	box-shadow: var(--zyraxoncode-shadow-lg, 0 2px 8px rgba(0, 0, 0, 0.2));
 	-webkit-app-region: no-drag;
 	user-select: none;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, sans-serif;
 	font-size: 13px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	/* Lock against compression — the bar's width is determined by its content
 	and stays constant as the window resizes. Position-clamping (in JS)
 	handles keeping it inside the viewport. */
@@ -161,10 +161,10 @@
 .issue-reporter-floating-bar .wizard-floating-delay {
 	height: 24px;
 	padding: 0 6px;
-	border: 1px solid var(--vscode-input-border, #555);
+	border: 1px solid var(--zyraxoncode-input-border, #555);
 	border-radius: 4px;
-	background: var(--vscode-input-background, #3c3c3c);
-	color: var(--vscode-input-foreground, #ccc);
+	background: var(--zyraxoncode-input-background, #3c3c3c);
+	color: var(--zyraxoncode-input-foreground, #ccc);
 	font-size: 12px;
 	cursor: pointer;
 	outline: none;
@@ -186,9 +186,9 @@
 	cursor: pointer;
 	font-size: 12px;
 	border-radius: 4px 0 0 4px;
-	color: var(--vscode-button-foreground, #fff);
-	background: var(--vscode-button-background, #0e639c);
-	border: 1px solid var(--vscode-button-background, #0e639c);
+	color: var(--zyraxoncode-button-foreground, #fff);
+	background: var(--zyraxoncode-button-background, #0e639c);
+	border: 1px solid var(--zyraxoncode-button-background, #0e639c);
 	border-right: none;
 	height: 26px;
 	box-sizing: border-box;
@@ -220,11 +220,11 @@
 }
 
 .issue-reporter-floating-bar .wizard-segmented-main:hover {
-	background: var(--vscode-button-hoverBackground, #1177bb);
+	background: var(--zyraxoncode-button-hoverBackground, #1177bb);
 }
 
 .issue-reporter-floating-bar .wizard-segmented-main.disabled:hover {
-	background: var(--vscode-button-background, #0e639c);
+	background: var(--zyraxoncode-button-background, #0e639c);
 }
 
 .issue-reporter-floating-bar .wizard-segmented-main > * {
@@ -238,9 +238,9 @@
 	padding: 4px 4px;
 	cursor: pointer;
 	border-radius: 0 4px 4px 0;
-	color: var(--vscode-button-foreground, #fff);
-	background: var(--vscode-button-background, #0e639c);
-	border: 1px solid var(--vscode-button-background, #0e639c);
+	color: var(--zyraxoncode-button-foreground, #fff);
+	background: var(--zyraxoncode-button-background, #0e639c);
+	border: 1px solid var(--zyraxoncode-button-background, #0e639c);
 	border-left: 1px solid rgba(255, 255, 255, 0.2);
 	height: 26px;
 	box-sizing: border-box;
@@ -258,11 +258,11 @@
 }
 
 .issue-reporter-floating-bar .wizard-segmented-dropdown:hover {
-	background: var(--vscode-button-hoverBackground, #1177bb);
+	background: var(--zyraxoncode-button-hoverBackground, #1177bb);
 }
 
 .issue-reporter-floating-bar .wizard-segmented-dropdown.disabled:hover {
-	background: var(--vscode-button-background, #0e639c);
+	background: var(--zyraxoncode-button-background, #0e639c);
 }
 
 .issue-reporter-floating-bar .wizard-segmented-dropdown > * {
@@ -285,7 +285,7 @@
 /* Recording state in floating bar */
 .issue-reporter-floating-bar .wizard-nav-btn.recording,
 .issue-reporter-floating-bar .monaco-button.recording {
-	color: var(--vscode-testing-iconErrored, #f14c4c);
+	color: var(--zyraxoncode-testing-iconErrored, #f14c4c);
 	animation: issue-reporter-recording-pulse 1.5s ease-in-out infinite;
 }
 
@@ -296,8 +296,8 @@
 	align-items: flex-start;
 	gap: 10px;
 	padding: 8px 16px;
-	background: var(--vscode-titleBar-activeBackground, #3c3c3c);
-	border-bottom: 1px solid var(--vscode-panel-border, #444);
+	background: var(--zyraxoncode-titleBar-activeBackground, #3c3c3c);
+	border-bottom: 1px solid var(--zyraxoncode-panel-border, #444);
 	flex-shrink: 0;
 }
 
@@ -318,21 +318,21 @@
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
-	border: 2px solid var(--vscode-foreground, #888);
+	border: 2px solid var(--zyraxoncode-foreground, #888);
 	background: transparent;
 	transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 	opacity: 0.4;
 }
 
 .issue-reporter-wizard .wizard-progress-dot.active {
-	border-color: var(--vscode-focusBorder, #007acc);
-	background: var(--vscode-focusBorder, #007acc);
+	border-color: var(--zyraxoncode-focusBorder, #007acc);
+	background: var(--zyraxoncode-focusBorder, #007acc);
 	opacity: 1;
 }
 
 .issue-reporter-wizard .wizard-progress-dot.completed {
-	border-color: var(--vscode-focusBorder, #007acc);
-	background: var(--vscode-focusBorder, #007acc);
+	border-color: var(--zyraxoncode-focusBorder, #007acc);
+	background: var(--zyraxoncode-focusBorder, #007acc);
 	opacity: 0.7;
 }
 
@@ -340,7 +340,7 @@
 	font-size: 12px;
 	font-weight: 600;
 	white-space: nowrap;
-	color: var(--vscode-titleBar-activeForeground, #ccc);
+	color: var(--zyraxoncode-titleBar-activeForeground, #ccc);
 	font-variant-numeric: tabular-nums;
 }
 
@@ -349,7 +349,7 @@
 	width: 2px;
 	height: 14px;
 	margin: 0 10px;
-	background: var(--vscode-titleBar-activeForeground, #888);
+	background: var(--zyraxoncode-titleBar-activeForeground, #888);
 	opacity: 0.6;
 	vertical-align: middle;
 }
@@ -358,7 +358,7 @@
 	font-size: 12px;
 	font-weight: 600;
 	white-space: nowrap;
-	color: var(--vscode-titleBar-activeForeground, #ccc);
+	color: var(--zyraxoncode-titleBar-activeForeground, #ccc);
 }
 
 /* Step Container */
@@ -385,14 +385,14 @@
 	margin: 0;
 	font-size: 22px;
 	font-weight: 600;
-	color: var(--vscode-foreground, #eee);
+	color: var(--zyraxoncode-foreground, #eee);
 	line-height: 1.3;
 }
 
 .issue-reporter-wizard .wizard-subtitle {
 	margin: 0;
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 	line-height: 1.4;
 }
 
@@ -416,9 +416,9 @@
 	font-size: 13px;
 	font-family: inherit;
 	line-height: 1.5;
-	color: var(--vscode-input-foreground, #ccc);
-	background: var(--vscode-input-background, #3c3c3c);
-	border: 1px solid var(--vscode-input-border, #555);
+	color: var(--zyraxoncode-input-foreground, #ccc);
+	background: var(--zyraxoncode-input-background, #3c3c3c);
+	border: 1px solid var(--zyraxoncode-input-border, #555);
 	border-radius: 4px;
 	padding: 10px 12px;
 	outline: none;
@@ -428,16 +428,16 @@
 }
 
 .issue-reporter-wizard .wizard-textarea:focus {
-	border-color: var(--vscode-focusBorder, #007acc);
+	border-color: var(--zyraxoncode-focusBorder, #007acc);
 }
 
 .issue-reporter-wizard .wizard-textarea::placeholder {
-	color: var(--vscode-input-placeholderForeground, #888);
+	color: var(--zyraxoncode-input-placeholderForeground, #888);
 }
 
 .issue-reporter-wizard .wizard-textarea.invalid-input {
-	border-color: var(--vscode-inputValidation-errorBorder, #be1100) !important;
-	background: var(--vscode-inputValidation-errorBackground, rgba(190, 17, 0, 0.1));
+	border-color: var(--zyraxoncode-inputValidation-errorBorder, #be1100) !important;
+	background: var(--zyraxoncode-inputValidation-errorBackground, rgba(190, 17, 0, 0.1));
 }
 
 /* Category Buttons (Step 1) */
@@ -462,7 +462,7 @@ label/control gap, so the buttons must not add their own margin. */
 	gap: 8px;
 	padding: 6px 10px;
 	background: transparent !important;
-	color: var(--vscode-foreground, #ccc) !important;
+	color: var(--zyraxoncode-foreground, #ccc) !important;
 	border: 1px solid transparent;
 	border-radius: 4px;
 	font-size: 13px;
@@ -471,7 +471,7 @@ label/control gap, so the buttons must not add their own margin. */
 }
 
 .issue-reporter-wizard .monaco-button.wizard-type-btn:hover {
-	background: var(--vscode-list-hoverBackground, rgba(255, 255, 255, 0.06)) !important;
+	background: var(--zyraxoncode-list-hoverBackground, rgba(255, 255, 255, 0.06)) !important;
 }
 
 .issue-reporter-wizard .monaco-button.wizard-type-btn .codicon {
@@ -485,20 +485,20 @@ label/control gap, so the buttons must not add their own margin. */
 	width: 14px;
 	height: 14px;
 	border-radius: 50%;
-	border: 2px solid var(--vscode-input-border, #555);
+	border: 2px solid var(--zyraxoncode-input-border, #555);
 	background: transparent;
 	flex-shrink: 0;
 	transition: border-color 0.15s ease;
 }
 
 .issue-reporter-wizard .monaco-button.wizard-type-btn:hover::before {
-	border-color: var(--vscode-focusBorder, #007acc);
+	border-color: var(--zyraxoncode-focusBorder, #007acc);
 }
 
 .issue-reporter-wizard .monaco-button.wizard-type-btn.selected::before {
-	border-color: var(--vscode-focusBorder, #007acc);
-	background: var(--vscode-focusBorder, #007acc);
-	box-shadow: inset 0 0 0 2px var(--vscode-editor-background, #1e1e1e);
+	border-color: var(--zyraxoncode-focusBorder, #007acc);
+	background: var(--zyraxoncode-focusBorder, #007acc);
+	box-shadow: inset 0 0 0 2px var(--zyraxoncode-editor-background, #1e1e1e);
 }
 
 .issue-reporter-wizard .monaco-button.wizard-type-btn.selected {
@@ -507,12 +507,12 @@ label/control gap, so the buttons must not add their own margin. */
 }
 
 .issue-reporter-wizard .monaco-button.wizard-type-btn:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder, #007acc);
+	outline: 1px solid var(--zyraxoncode-focusBorder, #007acc);
 	outline-offset: -1px;
 }
 
 .issue-reporter-wizard .wizard-type-buttons.invalid-input .monaco-button.wizard-type-btn::before {
-	border-color: var(--vscode-inputValidation-errorBorder, #be1100) !important;
+	border-color: var(--zyraxoncode-inputValidation-errorBorder, #be1100) !important;
 }
 
 .issue-reporter-wizard .monaco-button.wizard-type-btn.hidden {
@@ -528,10 +528,10 @@ label/control gap, so the buttons must not add their own margin. */
 	min-width: 18px;
 	height: 18px;
 	border-radius: 4px;
-	border: 1px solid var(--vscode-input-border, #555);
+	border: 1px solid var(--zyraxoncode-input-border, #555);
 	font-size: 11px;
 	font-family: monospace;
-	color: var(--vscode-descriptionForeground, #888);
+	color: var(--zyraxoncode-descriptionForeground, #888);
 	opacity: 0.7;
 	margin-left: 2px;
 }
@@ -539,16 +539,16 @@ label/control gap, so the buttons must not add their own margin. */
 .issue-reporter-wizard .wizard-nav-btn.primary .wizard-shortcut-badge,
 .issue-reporter-wizard .monaco-button .wizard-shortcut-badge {
 	border-color: rgba(255, 255, 255, 0.3);
-	color: var(--vscode-button-foreground, #fff);
+	color: var(--zyraxoncode-button-foreground, #fff);
 	opacity: 0.7;
 }
 
 .issue-reporter-wizard .wizard-type-buttons.invalid-input .wizard-type-btn {
-	border-color: var(--vscode-inputValidation-errorBorder, #be1100);
+	border-color: var(--zyraxoncode-inputValidation-errorBorder, #be1100);
 }
 
 .issue-reporter-wizard .wizard-field-error {
-	color: var(--vscode-inputValidation-errorForeground, var(--vscode-errorForeground, #f48771)) !important;
+	color: var(--zyraxoncode-inputValidation-errorForeground, var(--zyraxoncode-errorForeground, #f48771)) !important;
 	font-size: 12px;
 	line-height: 1.4;
 	min-height: 1.4em;
@@ -562,12 +562,12 @@ label/control gap, so the buttons must not add their own margin. */
 .issue-reporter-wizard .wizard-similar-issues {
 	margin-top: 8px;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 }
 
 .issue-reporter-wizard .wizard-similar-heading {
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 	margin-bottom: 4px;
 }
 
@@ -588,18 +588,18 @@ label/control gap, so the buttons must not add their own margin. */
 }
 
 .issue-reporter-wizard .wizard-similar-link {
-	color: var(--vscode-textLink-foreground, #3794ff);
+	color: var(--zyraxoncode-textLink-foreground, #3794ff);
 	text-decoration: none;
 }
 
 .issue-reporter-wizard .wizard-similar-link:hover {
-	color: var(--vscode-textLink-activeForeground, #3794ff);
+	color: var(--zyraxoncode-textLink-activeForeground, #3794ff);
 	text-decoration: underline;
 }
 
 .issue-reporter-wizard .wizard-similar-state {
 	margin-left: 6px;
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 }
 
 .issue-reporter-wizard .wizard-type-icon {
@@ -618,7 +618,7 @@ label/control gap, so the buttons must not add their own margin. */
 }
 
 .issue-reporter-wizard .wizard-screenshots-empty {
-	color: var(--vscode-descriptionForeground, #888);
+	color: var(--zyraxoncode-descriptionForeground, #888);
 	font-style: italic;
 	display: flex;
 	align-items: center;
@@ -630,7 +630,7 @@ label/control gap, so the buttons must not add their own margin. */
 	height: 75px;
 	border-radius: 6px;
 	overflow: hidden;
-	border: 1px solid var(--vscode-input-border, #555);
+	border: 1px solid var(--zyraxoncode-input-border, #555);
 	cursor: pointer;
 	transition: border-color 0.15s;
 	flex-shrink: 0;
@@ -638,7 +638,7 @@ label/control gap, so the buttons must not add their own margin. */
 
 .issue-reporter-wizard .wizard-screenshot-card:hover,
 .issue-reporter-wizard .wizard-screenshot-card:focus-visible {
-	border-color: var(--vscode-focusBorder, #007acc);
+	border-color: var(--zyraxoncode-focusBorder, #007acc);
 	outline: none;
 }
 
@@ -656,9 +656,9 @@ label/control gap, so the buttons must not add their own margin. */
 	width: 22px;
 	height: 22px;
 	border-radius: 50%;
-	background: var(--vscode-button-background, #0e639c);
-	color: var(--vscode-button-foreground, #fff);
-	border: 1px solid var(--vscode-contrastBorder, transparent);
+	background: var(--zyraxoncode-button-background, #0e639c);
+	color: var(--zyraxoncode-button-foreground, #fff);
+	border: 1px solid var(--zyraxoncode-contrastBorder, transparent);
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, .25);
 	display: flex;
 	align-items: center;
@@ -670,7 +670,7 @@ label/control gap, so the buttons must not add their own margin. */
 }
 
 .issue-reporter-wizard .wizard-screenshot-delete:hover {
-	background: var(--vscode-button-hoverBackground, var(--vscode-button-background, #1177bb));
+	background: var(--zyraxoncode-button-hoverBackground, var(--zyraxoncode-button-background, #1177bb));
 }
 
 .issue-reporter-wizard .wizard-screenshot-delete .codicon {
@@ -692,11 +692,11 @@ label/control gap, so the buttons must not add their own margin. */
 
 .issue-reporter-wizard .wizard-screenshot-plus {
 	font-size: 28px;
-	color: var(--vscode-descriptionForeground, #888);
+	color: var(--zyraxoncode-descriptionForeground, #888);
 }
 
 .issue-reporter-wizard .wizard-screenshot-add:hover .wizard-screenshot-plus {
-	color: var(--vscode-focusBorder, #007acc);
+	color: var(--zyraxoncode-focusBorder, #007acc);
 }
 
 .issue-reporter-wizard .wizard-screenshot-add.disabled {
@@ -705,7 +705,7 @@ label/control gap, so the buttons must not add their own margin. */
 }
 
 .issue-reporter-wizard .wizard-screenshot-add.disabled:hover .wizard-screenshot-plus {
-	color: var(--vscode-descriptionForeground, #888);
+	color: var(--zyraxoncode-descriptionForeground, #888);
 }
 
 /* Screenshot Controls */
@@ -726,7 +726,7 @@ label/control gap, so the buttons must not add their own margin. */
 .issue-reporter-wizard .wizard-delay-label {
 	font-size: 12px;
 	white-space: nowrap;
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 }
 
 .issue-reporter-wizard .wizard-delay-select {
@@ -767,7 +767,7 @@ label/control gap, so the buttons must not add their own margin. */
 .issue-reporter-wizard .wizard-field-label {
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 	margin-top: 8px;
 	margin-bottom: 0;
 	display: block;
@@ -786,13 +786,13 @@ label/control gap, so the buttons must not add their own margin. */
 .issue-reporter-wizard .wizard-field .monaco-inputbox.invalid-input > .ibwrapper,
 .issue-reporter-wizard .wizard-field .monaco-inputbox.invalid-input > .ibwrapper > .input,
 .issue-reporter-wizard .wizard-field .monaco-inputbox.invalid-input .input {
-	border-color: var(--vscode-inputValidation-errorBorder, #be1100) !important;
-	background: var(--vscode-inputValidation-errorBackground, rgba(190, 17, 0, 0.1)) !important;
+	border-color: var(--zyraxoncode-inputValidation-errorBorder, #be1100) !important;
+	background: var(--zyraxoncode-inputValidation-errorBackground, rgba(190, 17, 0, 0.1)) !important;
 }
 
 .issue-reporter-wizard .wizard-extension-field.invalid-input .monaco-select-box {
-	border-color: var(--vscode-inputValidation-errorBorder, #be1100) !important;
-	background: var(--vscode-inputValidation-errorBackground, rgba(190, 17, 0, 0.1)) !important;
+	border-color: var(--zyraxoncode-inputValidation-errorBorder, #be1100) !important;
+	background: var(--zyraxoncode-inputValidation-errorBackground, rgba(190, 17, 0, 0.1)) !important;
 }
 
 .issue-reporter-wizard .wizard-extension-select {
@@ -827,7 +827,7 @@ This keeps the row height constant regardless of which is visible. */
 	left: 0;
 	right: 0;
 	bottom: 0;
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 	font-size: 12px;
 	line-height: 1.4;
 	pointer-events: none;
@@ -916,7 +916,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	max-height: none;
 	overflow: visible;
 	padding: 8px 12px;
-	border: 1px solid var(--vscode-input-border, #444);
+	border: 1px solid var(--zyraxoncode-input-border, #444);
 	border-radius: 4px;
 }
 
@@ -978,7 +978,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	width: 28px;
 	height: 28px;
 	border: 3px solid rgba(255, 255, 255, 0.3);
-	border-top-color: var(--vscode-focusBorder, #007acc);
+	border-top-color: var(--zyraxoncode-focusBorder, #007acc);
 	border-radius: 50%;
 }
 
@@ -998,7 +998,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	width: 28px;
 	height: 28px;
 	border-radius: 50%;
-	background: var(--vscode-testing-runAction, #73c991);
+	background: var(--zyraxoncode-testing-runAction, #73c991);
 	color: #000;
 	font-size: 16px;
 }
@@ -1034,7 +1034,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 
 .issue-reporter-wizard .wizard-submit-btn {
 	padding: 8px 16px;
-	border: 1px solid var(--vscode-button-border, transparent);
+	border: 1px solid var(--zyraxoncode-button-border, transparent);
 	border-radius: 4px;
 	font-size: 13px;
 	cursor: pointer;
@@ -1042,33 +1042,33 @@ extension field is hidden (no fixed-width placeholder needed). */
 }
 
 .issue-reporter-wizard .wizard-submit-gist {
-	background: var(--vscode-button-background, #0e639c);
-	color: var(--vscode-button-foreground, #fff);
+	background: var(--zyraxoncode-button-background, #0e639c);
+	color: var(--zyraxoncode-button-foreground, #fff);
 }
 
 .issue-reporter-wizard .wizard-submit-gist:hover {
-	background: var(--vscode-button-hoverBackground, #1177bb);
+	background: var(--zyraxoncode-button-hoverBackground, #1177bb);
 }
 
 .issue-reporter-wizard .wizard-submit-playwright {
-	background: var(--vscode-button-secondaryBackground, #3a3d41);
-	color: var(--vscode-button-secondaryForeground, #fff);
+	background: var(--zyraxoncode-button-secondaryBackground, #3a3d41);
+	color: var(--zyraxoncode-button-secondaryForeground, #fff);
 }
 
 .issue-reporter-wizard .wizard-submit-playwright:hover {
-	background: var(--vscode-button-secondaryHoverBackground, #45494e);
+	background: var(--zyraxoncode-button-secondaryHoverBackground, #45494e);
 }
 
 .issue-reporter-wizard .wizard-submit-preview,
 .issue-reporter-wizard .wizard-submit-manual {
 	background: transparent;
-	color: var(--vscode-foreground, #ccc);
-	border: 1px solid var(--vscode-input-border, #3c3c3c);
+	color: var(--zyraxoncode-foreground, #ccc);
+	border: 1px solid var(--zyraxoncode-input-border, #3c3c3c);
 }
 
 .issue-reporter-wizard .wizard-submit-preview:hover,
 .issue-reporter-wizard .wizard-submit-manual:hover {
-	background: var(--vscode-list-hoverBackground, #2a2d2e);
+	background: var(--zyraxoncode-list-hoverBackground, #2a2d2e);
 }
 
 .issue-reporter-wizard .wizard-step-review {
@@ -1084,12 +1084,12 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-wizard .review-label {
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 }
 
 .issue-reporter-wizard .review-value {
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 	white-space: pre-wrap;
 	word-break: break-word;
 	max-height: 60px;
@@ -1098,7 +1098,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 }
 
 .issue-reporter-wizard .review-target-repo {
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 	font-size: 12px;
 }
 
@@ -1121,7 +1121,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	margin: 0;
 	font-size: 13px;
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 }
 
 .issue-reporter-wizard .review-diag-bulk-actions {
@@ -1138,13 +1138,13 @@ extension field is hidden (no fixed-width placeholder needed). */
 }
 
 .issue-reporter-wizard .review-diag-group {
-	border: 1px solid var(--vscode-input-border, #444);
+	border: 1px solid var(--zyraxoncode-input-border, #444);
 	border-radius: 4px;
 	padding: 6px 12px;
 }
 
 .issue-reporter-wizard .review-performance-data {
-	border: 1px solid var(--vscode-input-border, #444);
+	border: 1px solid var(--zyraxoncode-input-border, #444);
 	border-radius: 4px;
 	padding: 8px 12px;
 	display: flex;
@@ -1158,7 +1158,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	position: absolute;
 	inset: 0;
 	border-radius: 4px;
-	background: var(--vscode-editor-background, #1e1e1e);
+	background: var(--zyraxoncode-editor-background, #1e1e1e);
 	opacity: 0.6;
 	pointer-events: none;
 	z-index: 1;
@@ -1172,7 +1172,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	width: 18px;
 	height: 18px;
 	margin: -9px 0 0 -9px;
-	border: 2px solid var(--vscode-progressBar-background, var(--vscode-focusBorder, #007acc));
+	border: 2px solid var(--zyraxoncode-progressBar-background, var(--zyraxoncode-focusBorder, #007acc));
 	border-top-color: transparent;
 	border-radius: 50%;
 	animation: issue-reporter-review-performance-spin 0.8s linear infinite;
@@ -1188,7 +1188,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 
 .issue-reporter-wizard .review-performance-data .review-diag-group {
 	border: 0;
-	border-top: 1px solid var(--vscode-input-border, #444);
+	border-top: 1px solid var(--zyraxoncode-input-border, #444);
 	border-radius: 0;
 	padding: 6px 0 0;
 }
@@ -1202,7 +1202,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-wizard .review-performance-title {
 	font-size: 13px;
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 }
 
 .issue-reporter-wizard .review-performance-refresh.monaco-button {
@@ -1214,7 +1214,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 
 .issue-reporter-wizard .review-performance-description {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground, #888);
+	color: var(--zyraxoncode-descriptionForeground, #888);
 }
 
 .issue-reporter-wizard .review-diag-header {
@@ -1239,7 +1239,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 
 .issue-reporter-wizard .review-diag-check-label {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground, #888);
+	color: var(--zyraxoncode-descriptionForeground, #888);
 	cursor: pointer;
 	white-space: nowrap;
 }
@@ -1247,7 +1247,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-wizard .review-diag-title {
 	font-size: 13px;
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 	white-space: nowrap;
 	flex-shrink: 0;
 }
@@ -1263,7 +1263,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-wizard .review-diag-content {
 	margin-top: 6px;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground, #888);
+	color: var(--zyraxoncode-descriptionForeground, #888);
 	max-height: 200px;
 	overflow: auto;
 }
@@ -1284,14 +1284,14 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-wizard .review-diag-key {
 	white-space: nowrap;
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 	width: 120px;
 }
 
 .issue-reporter-wizard .review-ext-table th {
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
-	border-bottom: 1px solid var(--vscode-input-border, #444);
+	color: var(--zyraxoncode-foreground, #ccc);
+	border-bottom: 1px solid var(--zyraxoncode-input-border, #444);
 	padding-bottom: 4px;
 }
 
@@ -1303,7 +1303,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-wizard .review-diag-sublabel {
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 	margin-top: 6px;
 	margin-bottom: 2px;
 }
@@ -1321,7 +1321,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 
 .issue-reporter-wizard .review-diag-loading {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground, #888);
+	color: var(--zyraxoncode-descriptionForeground, #888);
 	font-style: italic;
 	padding: 4px 0;
 }
@@ -1353,31 +1353,31 @@ extension field is hidden (no fixed-width placeholder needed). */
 	font-size: 13px;
 	user-select: none;
 	white-space: nowrap;
-	color: var(--vscode-foreground, #ccc);
-	border: 1px solid var(--vscode-input-border, #555);
+	color: var(--zyraxoncode-foreground, #ccc);
+	border: 1px solid var(--zyraxoncode-input-border, #555);
 	background: transparent;
 	transition: all 0.15s ease;
 }
 
 .issue-reporter-wizard .wizard-nav-btn:hover {
 	background: rgba(255, 255, 255, 0.06);
-	border-color: var(--vscode-foreground, #999);
+	border-color: var(--zyraxoncode-foreground, #999);
 }
 
 .issue-reporter-wizard .wizard-nav-btn.primary {
-	color: var(--vscode-button-foreground, #fff);
-	background: var(--vscode-button-background, #0e639c);
-	border-color: var(--vscode-button-background, #0e639c);
+	color: var(--zyraxoncode-button-foreground, #fff);
+	background: var(--zyraxoncode-button-background, #0e639c);
+	border-color: var(--zyraxoncode-button-background, #0e639c);
 }
 
 .issue-reporter-wizard .wizard-nav-btn.primary:hover {
-	background: var(--vscode-button-hoverBackground, #1177bb);
-	border-color: var(--vscode-button-hoverBackground, #1177bb);
+	background: var(--zyraxoncode-button-hoverBackground, #1177bb);
+	border-color: var(--zyraxoncode-button-hoverBackground, #1177bb);
 }
 
 .issue-reporter-wizard .wizard-nav-btn.submit {
-	background: var(--vscode-testing-runAction, #73c991);
-	border-color: var(--vscode-testing-runAction, #73c991);
+	background: var(--zyraxoncode-testing-runAction, #73c991);
+	border-color: var(--zyraxoncode-testing-runAction, #73c991);
 	color: #000;
 }
 
@@ -1400,12 +1400,12 @@ extension field is hidden (no fixed-width placeholder needed). */
 	position: absolute;
 	inset: 0;
 	z-index: 3;
-	background: var(--vscode-editor-background, #1e1e1e);
+	background: var(--zyraxoncode-editor-background, #1e1e1e);
 	display: flex;
 	flex-direction: column;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, sans-serif;
 	font-size: 13px;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 	outline: none !important;
 }
 
@@ -1424,8 +1424,8 @@ extension field is hidden (no fixed-width placeholder needed). */
 	gap: 3px;
 	padding: 4px 10px;
 	min-height: 34px;
-	background: var(--vscode-titleBar-activeBackground, #3c3c3c);
-	border-bottom: 1px solid var(--vscode-panel-border, #444);
+	background: var(--zyraxoncode-titleBar-activeBackground, #3c3c3c);
+	border-bottom: 1px solid var(--zyraxoncode-panel-border, #444);
 }
 
 .issue-reporter-annotation-overlay .annotation-crop-toolbar {
@@ -1444,7 +1444,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	justify-content: center;
 	border: 1px solid transparent;
 	background: transparent;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 	font-size: 14px;
 	flex-shrink: 0;
 }
@@ -1458,7 +1458,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 }
 
 .issue-reporter-annotation-overlay .annotation-toolbar .tool-btn:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder, #007acc);
+	outline: 1px solid var(--zyraxoncode-focusBorder, #007acc);
 	outline-offset: -1px;
 }
 
@@ -1473,20 +1473,20 @@ extension field is hidden (no fixed-width placeholder needed). */
 }
 
 .issue-reporter-annotation-overlay .annotation-toolbar .tool-btn.active {
-	background: var(--vscode-button-background, #0e639c);
-	color: var(--vscode-button-foreground, #fff);
-	border-color: var(--vscode-button-background, #0e639c);
+	background: var(--zyraxoncode-button-background, #0e639c);
+	color: var(--zyraxoncode-button-foreground, #fff);
+	border-color: var(--zyraxoncode-button-background, #0e639c);
 }
 
 .issue-reporter-annotation-overlay .annotation-toolbar .tool-btn.active,
 .issue-reporter-annotation-overlay .annotation-toolbar .tool-btn.active .codicon {
-	color: var(--vscode-button-foreground, #fff) !important;
+	color: var(--zyraxoncode-button-foreground, #fff) !important;
 }
 
 .issue-reporter-annotation-overlay .annotation-toolbar .toolbar-separator {
 	width: 1px;
 	height: 20px;
-	background: var(--vscode-panel-border, #555);
+	background: var(--zyraxoncode-panel-border, #555);
 	margin: 0 4px;
 }
 
@@ -1514,8 +1514,8 @@ extension field is hidden (no fixed-width placeholder needed). */
 	flex-direction: column;
 	gap: 8px;
 	padding: 10px;
-	background: var(--vscode-editorWidget-background, #2d2d2d);
-	border: 1px solid var(--vscode-editorWidget-border, #555);
+	background: var(--zyraxoncode-editorWidget-background, #2d2d2d);
+	border: 1px solid var(--zyraxoncode-editorWidget-border, #555);
 	border-radius: 6px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 	z-index: 4;
@@ -1530,9 +1530,9 @@ extension field is hidden (no fixed-width placeholder needed). */
 	transform: translateX(-50%) rotate(45deg);
 	width: 10px;
 	height: 10px;
-	background: var(--vscode-editorWidget-background, #2d2d2d);
-	border-left: 1px solid var(--vscode-editorWidget-border, #555);
-	border-top: 1px solid var(--vscode-editorWidget-border, #555);
+	background: var(--zyraxoncode-editorWidget-background, #2d2d2d);
+	border-left: 1px solid var(--zyraxoncode-editorWidget-border, #555);
+	border-top: 1px solid var(--zyraxoncode-editorWidget-border, #555);
 }
 
 .issue-reporter-annotation-overlay .annotation-tool-options-group {
@@ -1543,7 +1543,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 }
 
 .issue-reporter-annotation-overlay .annotation-tool-options-label {
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 	font-size: 11px;
 	min-width: 76px;
 }
@@ -1580,13 +1580,13 @@ extension field is hidden (no fixed-width placeholder needed). */
 
 .issue-reporter-annotation-overlay .annotation-color-swatch:hover,
 .issue-reporter-annotation-overlay .annotation-size-button:hover {
-	border-color: var(--vscode-focusBorder, rgba(255, 255, 255, .5));
+	border-color: var(--zyraxoncode-focusBorder, rgba(255, 255, 255, .5));
 }
 
 .issue-reporter-annotation-overlay .annotation-color-swatch:focus-visible,
 .issue-reporter-annotation-overlay .annotation-size-button:focus-visible,
 .issue-reporter-annotation-overlay .annotation-opacity-slider:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder, #007acc);
+	outline: 1px solid var(--zyraxoncode-focusBorder, #007acc);
 	outline-offset: 2px;
 }
 
@@ -1608,8 +1608,8 @@ extension field is hidden (no fixed-width placeholder needed). */
 }
 
 .issue-reporter-annotation-overlay .annotation-size-button.active {
-	background: var(--vscode-list-activeSelectionBackground, rgba(0, 122, 204, 0.25));
-	color: var(--vscode-list-activeSelectionForeground, var(--vscode-foreground, #fff));
+	background: var(--zyraxoncode-list-activeSelectionBackground, rgba(0, 122, 204, 0.25));
+	color: var(--zyraxoncode-list-activeSelectionForeground, var(--zyraxoncode-foreground, #fff));
 	border-color: transparent;
 }
 
@@ -1618,8 +1618,8 @@ extension field is hidden (no fixed-width placeholder needed). */
 	height: 24px;
 	border-radius: 4px;
 	border: 1px solid transparent;
-	background: var(--vscode-button-secondaryBackground, rgba(255, 255, 255, 0.08));
-	color: var(--vscode-button-secondaryForeground, var(--vscode-foreground, #ccc));
+	background: var(--zyraxoncode-button-secondaryBackground, rgba(255, 255, 255, 0.08));
+	color: var(--zyraxoncode-button-secondaryForeground, var(--zyraxoncode-foreground, #ccc));
 	cursor: pointer;
 	font-size: 11px;
 	padding: 0 6px;
@@ -1632,11 +1632,11 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-annotation-overlay .annotation-opacity-slider {
 	flex: 1;
 	min-width: 92px;
-	accent-color: var(--vscode-focusBorder, #007acc);
+	accent-color: var(--zyraxoncode-focusBorder, #007acc);
 }
 
 .issue-reporter-annotation-overlay .annotation-opacity-value {
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 	font-size: 11px;
 	width: 34px;
 	text-align: right;
@@ -1646,8 +1646,8 @@ extension field is hidden (no fixed-width placeholder needed). */
 	text-align: center;
 	padding: 6px 0;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground, #999);
-	border-bottom: 1px solid var(--vscode-panel-border, #444);
+	color: var(--zyraxoncode-descriptionForeground, #999);
+	border-bottom: 1px solid var(--zyraxoncode-panel-border, #444);
 }
 
 .issue-reporter-annotation-overlay .annotation-canvas-container {
@@ -1657,7 +1657,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	justify-content: center;
 	overflow: hidden;
 	position: relative;
-	background: var(--vscode-editorWidget-background, var(--vscode-editor-background, #1e1e1e));
+	background: var(--zyraxoncode-editorWidget-background, var(--zyraxoncode-editor-background, #1e1e1e));
 }
 
 .issue-reporter-annotation-overlay .annotation-canvas-container canvas {
@@ -1686,28 +1686,28 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-floating-bar .wizard-record-btn .wizard-record-icon {
 	display: flex;
 	font-size: 14px;
-	color: var(--vscode-charts-red, #c33);
+	color: var(--zyraxoncode-charts-red, #c33);
 }
 
 .issue-reporter-floating-bar .wizard-record-btn.recording,
 .issue-reporter-floating-bar .monaco-button.wizard-record-btn.recording {
-	background: var(--vscode-statusBarItem-errorBackground, #c33) !important;
-	border-color: var(--vscode-statusBarItem-errorBackground, #c33) !important;
-	color: var(--vscode-statusBarItem-errorForeground, var(--vscode-button-foreground, #fff)) !important;
+	background: var(--zyraxoncode-statusBarItem-errorBackground, #c33) !important;
+	border-color: var(--zyraxoncode-statusBarItem-errorBackground, #c33) !important;
+	color: var(--zyraxoncode-statusBarItem-errorForeground, var(--zyraxoncode-button-foreground, #fff)) !important;
 	animation: issue-reporter-recording-pulse 1.5s ease-in-out infinite;
 	font-variant-numeric: tabular-nums;
 	min-width: 160px;
 }
 
 .issue-reporter-floating-bar .wizard-record-btn.recording .wizard-record-icon {
-	color: var(--vscode-statusBarItem-errorForeground, var(--vscode-button-foreground, #fff));
+	color: var(--zyraxoncode-statusBarItem-errorForeground, var(--zyraxoncode-button-foreground, #fff));
 }
 
 .issue-reporter-floating-bar .wizard-record-btn.recording:hover,
 .issue-reporter-floating-bar .monaco-button.wizard-record-btn.recording:hover {
-	background: var(--vscode-statusBarItem-errorBackground, #c33) !important;
-	border-color: var(--vscode-statusBarItem-errorBackground, #c33) !important;
-	color: var(--vscode-statusBarItem-errorForeground, var(--vscode-button-foreground, #fff)) !important;
+	background: var(--zyraxoncode-statusBarItem-errorBackground, #c33) !important;
+	border-color: var(--zyraxoncode-statusBarItem-errorBackground, #c33) !important;
+	color: var(--zyraxoncode-statusBarItem-errorForeground, var(--zyraxoncode-button-foreground, #fff)) !important;
 	filter: brightness(1.15);
 }
 
@@ -1731,7 +1731,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 
 /* -- Recording card -- */
 .issue-reporter-wizard .wizard-recording-card {
-	background: var(--vscode-editor-background, #1a1a1a);
+	background: var(--zyraxoncode-editor-background, #1a1a1a);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1774,7 +1774,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 }
 
 .issue-reporter-wizard .wizard-required-marker {
-	color: var(--vscode-inputValidation-errorForeground, var(--vscode-errorForeground, #f48771));
+	color: var(--zyraxoncode-inputValidation-errorForeground, var(--zyraxoncode-errorForeground, #f48771));
 	margin-left: 4px;
 	font-weight: 600;
 }
@@ -1782,16 +1782,16 @@ extension field is hidden (no fixed-width placeholder needed). */
 .issue-reporter-wizard .wizard-issue-guidance {
 	margin: 0 0 12px;
 	padding: 8px 12px;
-	border-radius: var(--vscode-cornerRadius-small);
-	background: var(--vscode-textBlockQuote-background, rgba(127, 127, 127, 0.1));
-	border-left: 3px solid var(--vscode-focusBorder, #007acc);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	background: var(--zyraxoncode-textBlockQuote-background, rgba(127, 127, 127, 0.1));
+	border-left: 3px solid var(--zyraxoncode-focusBorder, #007acc);
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground, #ccc);
+	color: var(--zyraxoncode-descriptionForeground, #ccc);
 }
 .issue-reporter-wizard .wizard-issue-guidance a,
 .issue-reporter-wizard .wizard-issue-guidance a:focus,
 .issue-reporter-wizard .wizard-issue-guidance a:hover {
-	color: var(--vscode-textLink-foreground, #3794ff);
+	color: var(--zyraxoncode-textLink-foreground, #3794ff);
 	text-decoration: underline;
 }
 
@@ -1799,7 +1799,7 @@ extension field is hidden (no fixed-width placeholder needed). */
 	white-space: normal;
 }
 .issue-reporter-wizard .wizard-description-guidance-link {
-	color: var(--vscode-textLink-foreground, #3794ff);
+	color: var(--zyraxoncode-textLink-foreground, #3794ff);
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -1824,29 +1824,29 @@ extension field is hidden (no fixed-width placeholder needed). */
 	opacity: 0.55;
 }
 .issue-reporter-wizard .review-diag-group.excluded .review-diag-title {
-	color: var(--vscode-descriptionForeground, #999);
+	color: var(--zyraxoncode-descriptionForeground, #999);
 }
 .issue-reporter-wizard .review-diag-toggle-area {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
 	padding: 2px 4px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	cursor: pointer;
 	user-select: none;
 	flex: 1;
 }
 .issue-reporter-wizard .review-diag-toggle-area:hover {
-	background: var(--vscode-list-hoverBackground, rgba(255, 255, 255, 0.06));
+	background: var(--zyraxoncode-list-hoverBackground, rgba(255, 255, 255, 0.06));
 }
 .issue-reporter-wizard .review-diag-toggle-area:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder, #007acc);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder, #007acc);
 	outline-offset: -1px;
 }
 .issue-reporter-wizard .review-diag-chevron {
 	display: inline-flex;
 	align-items: center;
-	color: var(--vscode-foreground, #ccc);
+	color: var(--zyraxoncode-foreground, #ccc);
 	flex-shrink: 0;
 }
 

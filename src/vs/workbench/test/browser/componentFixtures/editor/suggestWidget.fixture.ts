@@ -40,7 +40,7 @@ function renderSuggestWidget(options: SuggestFixtureOptions): void {
 	const { container, disposableStore, theme } = options;
 	container.style.width = options.width ?? '500px';
 	container.style.height = options.height ?? '300px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const storageService = options.showDetails ? disposableStore.add(new InMemoryStorageService()) : undefined;
 	storageService?.store('expandSuggestionDocs', true, StorageScope.PROFILE, StorageTarget.USER);
@@ -66,7 +66,7 @@ function renderSuggestWidget(options: SuggestFixtureOptions): void {
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		options.code,
-		URI.parse('inmemory://suggest-fixture.ts'),
+		URI.parse('__ZYRAXKEEP__0_'),
 		'typescript'
 	));
 

@@ -5,9 +5,9 @@
 
 import {
 	Connection, TextDocuments, InitializeParams, InitializeResult, ServerCapabilities, ConfigurationRequest, WorkspaceFolder, TextDocumentSyncKind, NotificationType, Disposable, TextDocumentIdentifier, Range, FormattingOptions, TextEdit, Diagnostic
-} from 'vscode-languageserver';
-import { URI } from 'vscode-uri';
-import { getCSSLanguageService, getSCSSLanguageService, getLESSLanguageService, LanguageSettings, LanguageService, Stylesheet, TextDocument, Position, CodeActionKind } from 'vscode-css-languageservice';
+} from 'zyraxoncode-languageserver';
+import { URI } from 'zyraxoncode-uri';
+import { getCSSLanguageService, getSCSSLanguageService, getLESSLanguageService, LanguageSettings, LanguageService, Stylesheet, TextDocument, Position, CodeActionKind } from 'zyraxoncode-css-languageservice';
 import { getLanguageModelCache } from './languageModelCache.js';
 import { runSafeAsync } from './utils/runner.js';
 import { DiagnosticsSupport, registerDiagnosticsPullSupport, registerDiagnosticsPushSupport } from './utils/validation.js';

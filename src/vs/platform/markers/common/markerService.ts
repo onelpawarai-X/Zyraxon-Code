@@ -15,11 +15,11 @@ import { IMarker, IMarkerData, IMarkerReadOptions, IMarkerService, IResourceMark
 
 export const unsupportedSchemas = new Set([
 	Schemas.inMemory,
-	Schemas.vscodeSourceControl,
+	Schemas.zyraxoncodeSourceControl,
 	Schemas.walkThrough,
 	Schemas.walkThroughSnippet,
-	Schemas.vscodeChatCodeBlock,
-	Schemas.vscodeTerminal
+	Schemas.zyraxoncodeChatCodeBlock,
+	Schemas.zyraxoncodeTerminal
 ]);
 
 class DoubleResourceMap<V> {

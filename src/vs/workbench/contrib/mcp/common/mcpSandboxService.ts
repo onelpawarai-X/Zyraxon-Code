@@ -263,11 +263,11 @@ export class McpSandboxService extends Disposable implements IMcpSandboxService 
 		const appRoot = await this._getAppRoot(remoteAuthority);
 		const execPath = await this._getExecPath(os, appRoot, remoteAuthority);
 		const tempDir = await this._getTempDir(remoteAuthority);
-		const srtPath = this._pathJoin(os, appRoot, 'node_modules', '@vscode', 'sandbox-runtime', 'dist', 'cli.js');
-		// @vscode/ripgrep-universal ships per-platform-arch binaries under bin/{platform}-{arch}/{rg|rg.exe}
+		const srtPath = this._pathJoin(os, appRoot, 'node_modules', '@zyraxoncode', 'sandbox-runtime', 'dist', 'cli.js');
+		// @zyraxoncode/ripgrep-universal ships per-platform-arch binaries under bin/{platform}-{arch}/{rg|rg.exe}
 		// Windows is handled by the early return above, so os is narrowed to Mac/Linux here.
 		const rgPlatform = os === OperatingSystem.Macintosh ? 'darwin' : 'linux';
-		const rgPath = this._pathJoin(os, appRoot, 'node_modules', '@vscode', 'ripgrep-universal', 'bin', `${rgPlatform}-${arch}`, 'rg');
+		const rgPath = this._pathJoin(os, appRoot, 'node_modules', '@zyraxoncode', 'ripgrep-universal', 'bin', `${rgPlatform}-${arch}`, 'rg');
 		const sandboxConfigPath = tempDir ? await this._updateSandboxConfig(tempDir, configTarget, sandboxConfig, launchCwd) : undefined;
 		this._logService.debug(`McpSandboxService: Updated sandbox config path: ${sandboxConfigPath}`);
 		return { execPath, srtPath, rgPath, sandboxConfigPath, tempDir };
@@ -350,7 +350,7 @@ export class McpSandboxService extends Disposable implements IMcpSandboxService 
 		if (this._sandboxConfigPerConfigurationTarget.has(configTargetKey)) {
 			configFileUri = URI.parse(this._sandboxConfigPerConfigurationTarget.get(configTargetKey)!);
 		} else {
-			configFileUri = URI.joinPath(tempDir, `vscode-${configTargetKey}-mcp-sandbox-settings-${this._sandboxSettingsId}.json`);
+			configFileUri = URI.joinPath(tempDir, `zyraxoncode-${configTargetKey}-mcp-sandbox-settings-${this._sandboxSettingsId}.json`);
 			this._sandboxConfigPerConfigurationTarget.set(configTargetKey, configFileUri.toString());
 		}
 		await this._fileService.createFile(configFileUri, VSBuffer.fromString(JSON.stringify(normalizedSandboxConfig, null, '\t')), { overwrite: true });

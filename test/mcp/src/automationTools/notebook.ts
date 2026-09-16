@@ -14,7 +14,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 	const tools: RegisteredTool[] = [];
 
 	tools.push(server.tool(
-		'vscode_automation_notebook_open',
+		'zyraxoncode_automation_notebook_open',
 		'Open a notebook',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -30,7 +30,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_notebook_focus_next_cell',
+	// 	'zyraxoncode_automation_notebook_focus_next_cell',
 	// 	'Focus the next cell in the notebook',
 	// 	async () => {
 	// 		await app.workbench.notebook.focusNextCell();
@@ -45,7 +45,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_notebook_focus_first_cell',
+	// 	'zyraxoncode_automation_notebook_focus_first_cell',
 	// 	'Focus the first cell in the notebook',
 	// 	async () => {
 	// 		await app.workbench.notebook.focusFirstCell();
@@ -59,7 +59,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_notebook_edit_cell',
+		'zyraxoncode_automation_notebook_edit_cell',
 		'Enter edit mode for the current cell',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -75,7 +75,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_notebook_stop_editing_cell',
+	// 	'zyraxoncode_automation_notebook_stop_editing_cell',
 	// 	'Exit edit mode for the current cell',
 	// 	async () => {
 	// 		await app.workbench.notebook.stopEditingCell();
@@ -89,7 +89,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_notebook_type_in_editor',
+		'zyraxoncode_automation_notebook_type_in_editor',
 		'Type text in the notebook cell editor',
 		{
 			text: z.string().describe('Text to type in the cell editor')
@@ -109,7 +109,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_notebook_wait_for_cell_contents',
+	// 	'zyraxoncode_automation_notebook_wait_for_cell_contents',
 	// 	'Wait for specific contents in the active cell editor',
 	// 	{
 	// 		contents: z.string().describe('Expected contents in the active cell')
@@ -128,7 +128,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_notebook_wait_for_markdown_contents',
+	// 	'zyraxoncode_automation_notebook_wait_for_markdown_contents',
 	// 	'Wait for specific text in markdown cell output',
 	// 	{
 	// 		markdownSelector: z.string().describe('CSS selector for the markdown element'),
@@ -148,7 +148,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_notebook_insert_cell',
+	// 	'zyraxoncode_automation_notebook_insert_cell',
 	// 	'Insert a new cell of specified type',
 	// 	{
 	// 		kind: z.enum(['markdown', 'code']).describe('Type of cell to insert')
@@ -167,7 +167,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_notebook_delete_active_cell',
+	// 	'zyraxoncode_automation_notebook_delete_active_cell',
 	// 	'Delete the currently active cell',
 	// 	async () => {
 	// 		await app.workbench.notebook.deleteActiveCell();
@@ -182,7 +182,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_notebook_focus_in_cell_output',
+	// 	'zyraxoncode_automation_notebook_focus_in_cell_output',
 	// 	'Focus inside cell output area',
 	// 	async () => {
 	// 		await app.workbench.notebook.focusInCellOutput();
@@ -197,7 +197,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_notebook_focus_out_cell_output',
+	// 	'zyraxoncode_automation_notebook_focus_out_cell_output',
 	// 	'Focus outside cell output area',
 	// 	async () => {
 	// 		await app.workbench.notebook.focusOutCellOutput();
@@ -212,7 +212,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_notebook_execute_active_cell',
+	// 	'zyraxoncode_automation_notebook_execute_active_cell',
 	// 	'Execute the currently active cell',
 	// 	async () => {
 	// 		await app.workbench.notebook.executeActiveCell();
@@ -227,7 +227,7 @@ export function applyNotebookTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_notebook_execute_cell_action',
+	// 	'zyraxoncode_automation_notebook_execute_cell_action',
 	// 	'Execute a specific cell action using CSS selector',
 	// 	{
 	// 		selector: z.string().describe('CSS selector for the cell action to execute')

@@ -5,7 +5,7 @@
 
 .onboarding-target-pulse {
 	animation: onboarding-target-pulse 1.4s ease-out infinite;
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
 }
 
@@ -17,7 +17,7 @@
 
 @keyframes onboarding-target-pulse {
 	0% {
-		box-shadow: 0 0 0 0 var(--vscode-focusBorder);
+		box-shadow: 0 0 0 0 var(--zyraxoncode-focusBorder);
 	}
 	70% {
 		box-shadow: 0 0 0 6px transparent;

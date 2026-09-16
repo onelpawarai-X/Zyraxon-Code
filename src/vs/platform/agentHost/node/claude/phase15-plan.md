@@ -1,4 +1,4 @@
-# Phase 15 — SDK Distribution via `product.json` + main.vscode-cdn.net
+# Phase 15 — SDK Distribution via `product.json` + main.zyraxoncode-cdn.net
 
 > **Retrospective**, not a forward plan. Phase 15 shipped without a
 > dedicated `phaseN-plan.md`; this file documents what actually landed so
@@ -51,9 +51,9 @@ the right tarball per launch.
   `common.ts` (shared helpers incl. `readAgentSdkResults`).
 - Azure Pipelines integration:
   [`agent-sdk-produce.yml`](../../../../../../build/azure-pipelines/common/agent-sdk-produce.yml)
-  before each `gulp vscode-<platform>-<arch>-min-ci`, and the
+  before each `gulp zyraxoncode-<platform>-<arch>-min-ci`, and the
   `packageTask` `jsonEditor` stamp in
-  [`gulpfile.vscode.ts`](../../../../../../build/gulpfile.vscode.ts#L308).
+  [`gulpfile.zyraxoncode.ts`](../../../../../../build/gulpfile.zyraxoncode.ts#L308).
 
 **Out of scope**
 - Per-tarball sha256 in `product.json` — replaced by `product.checksums`
@@ -81,13 +81,13 @@ the right tarball per launch.
 interface IAgentSdkProductConfig {
     readonly version: string;
     readonly urlTemplate: string; // format2() template, e.g.
-    // https://main.vscode-cdn.net/agent-sdk/claude/0.3.169/{sdkTarget}.tgz
+    // __ZYRAXKEEP__0_{sdkTarget}.tgz
 }
 ```
 
 `urlTemplate` carries a single recognised placeholder, `{sdkTarget}`. The
 same template ships on every platform; the runtime substitutes the
-placeholder per launch. `vscode-distro` and OSS `product.json` both omit
+placeholder per launch. `zyraxoncode-distro` and OSS `product.json` both omit
 `agentSdks` — the build IS the distribution, so only built products carry
 it.
 
@@ -166,14 +166,14 @@ Codex mirrors this in `CodexAgent._startConnection`, resolving
 - **`upload.ts` `uploadOne`** — HEAD-then-decide: absent → upload;
   matching sha → skip (idempotent re-runs); drifted sha → fail loud
   rather than overwrite content-addressed history.
-- **`produce.ts`** — per-`(vscode-platform, arch)` entry. Iterates SDKs
+- **`produce.ts`** — per-`(zyraxoncode-platform, arch)` entry. Iterates SDKs
   in parallel, builds + (conditionally) uploads, writes the results JSON,
   emits `##vso[task.setvariable variable=AGENT_SDK_RESULTS_FILE]`.
   Behaviour splits on `VSCODE_PUBLISH`: `true` → build+upload+stamp;
   unset → build-only (tarballs published as inspection artifacts,
   `product.json` ships without `agentSdks`, runtime falls back to the
   dev-override path — same UX as a local `gulp` build).
-- **`gulpfile.vscode.ts` `packageTask`** — the existing `jsonEditor`
+- **`gulpfile.zyraxoncode.ts` `packageTask`** — the existing `jsonEditor`
   callback (the one that injects `commit`/`date`/`checksums`/`version`)
   calls `readAgentSdkResults()` and, when non-empty, merges
   `json.agentSdks`. REH writes it only for `type === 'reh'`.

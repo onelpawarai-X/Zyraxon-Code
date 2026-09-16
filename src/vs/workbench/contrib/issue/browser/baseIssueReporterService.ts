@@ -37,7 +37,7 @@ const MAX_URL_LENGTH = 7500;
 
 // Github API and issues on web has a limit of 65536. If extension data is too large, we will allow users to downlaod and attach it as a file.
 // We round down to be safe.
-// ref https://github.com/github/issues/issues/12858
+// ref __ZYRAXKEEP__0_
 
 const MAX_EXTENSION_DATA_LENGTH = 60000;
 
@@ -48,7 +48,7 @@ interface SearchResult {
 }
 
 enum IssueSource {
-	VSCode = 'vscode',
+	ZyraxonCode = 'zyraxoncode',
 	Extension = 'extension',
 	Marketplace = 'marketplace',
 	Unknown = 'unknown'
@@ -100,7 +100,7 @@ export class BaseIssueReporterService extends Disposable {
 			...data,
 			issueType: data.issueType || IssueType.Bug,
 			versionInfo: {
-				vscodeVersion: `${product.nameShort} ${!!product.darwinUniversalAssetId ? `${product.version} (Universal)` : product.version} (${product.commit || 'Commit unknown'}, ${product.date || 'Date unknown'})`,
+				zyraxoncodeVersion: `${product.nameShort} ${!!product.darwinUniversalAssetId ? `${product.version} (Universal)` : product.version} (${product.commit || 'Commit unknown'}, ${product.date || 'Date unknown'})`,
 				os: `${this.os.type} ${this.os.arch} ${this.os.release}${isLinuxSnap ? ' snap' : ''}`
 			},
 			extensionsDisabled: !!this.disableExtensions,
@@ -129,7 +129,7 @@ export class BaseIssueReporterService extends Disposable {
 		}));
 
 		const fileOnMarketplace = data.issueSource === IssueSource.Marketplace;
-		const fileOnProduct = data.issueSource === IssueSource.VSCode;
+		const fileOnProduct = data.issueSource === IssueSource.ZyraxonCode;
 		this.issueReporterModel.update({ fileOnMarketplace, fileOnProduct });
 
 		this.createAction = this._register(new Action('issueReporter.create', localize('create', "Create on GitHub"), undefined, true, async () => {
@@ -665,8 +665,8 @@ export class BaseIssueReporterService extends Disposable {
 
 			// eslint-disable-next-line no-restricted-syntax
 			const descriptionTextArea = <HTMLInputElement>this.getElementById('issue-title');
-			if (value === IssueSource.VSCode) {
-				descriptionTextArea.placeholder = localize('vscodePlaceholder', "E.g Workbench is missing problems panel");
+			if (value === IssueSource.ZyraxonCode) {
+				descriptionTextArea.placeholder = localize('zyraxoncodePlaceholder', "E.g Workbench is missing problems panel");
 			} else if (value === IssueSource.Extension) {
 				descriptionTextArea.placeholder = localize('extensionPlaceholder', "E.g. Missing alt text on extension readme image");
 			} else if (value === IssueSource.Marketplace) {
@@ -680,7 +680,7 @@ export class BaseIssueReporterService extends Disposable {
 				fileOnExtension = true;
 			} else if (value === IssueSource.Marketplace) {
 				fileOnMarketplace = true;
-			} else if (value === IssueSource.VSCode) {
+			} else if (value === IssueSource.ZyraxonCode) {
 				fileOnProduct = true;
 			}
 
@@ -700,7 +700,7 @@ export class BaseIssueReporterService extends Disposable {
 			if (this.issueReporterModel.fileOnExtension() === false) {
 				// eslint-disable-next-line no-restricted-syntax
 				const title = (<HTMLInputElement>this.getElementById('issue-title')).value;
-				this.searchVSCodeIssues(title, issueDescription);
+				this.searchZyraxonCodeIssues(title, issueDescription);
 			}
 		});
 
@@ -851,7 +851,7 @@ export class BaseIssueReporterService extends Disposable {
 		return selectedExtension && selectedExtension.bugsUrl;
 	}
 
-	public searchVSCodeIssues(title: string, issueDescription?: string): void {
+	public searchZyraxonCodeIssues(title: string, issueDescription?: string): void {
 		if (title) {
 			this.searchDuplicates(title, issueDescription);
 		} else {
@@ -869,7 +869,7 @@ export class BaseIssueReporterService extends Disposable {
 		}
 
 		const description = this.issueReporterModel.getData().issueDescription;
-		this.searchVSCodeIssues(title, description);
+		this.searchZyraxonCodeIssues(title, description);
 	}
 
 	private searchExtensionIssues(title: string): void {
@@ -918,7 +918,7 @@ export class BaseIssueReporterService extends Disposable {
 		// eslint-disable-next-line no-restricted-syntax
 		const similarIssues = this.getElementById('similar-issues')!;
 
-		fetch(`https://api.github.com/search/issues?q=${query}`).then((response) => {
+		fetch(`__ZYRAXKEEP__1_{query}`).then((response) => {
 			response.json().then(result => {
 				similarIssues.innerText = '';
 				if (result && result.items) {
@@ -934,7 +934,7 @@ export class BaseIssueReporterService extends Disposable {
 
 	@debounce(300)
 	private searchDuplicates(title: string, body?: string): void {
-		const url = 'https://vscode-probot.westus.cloudapp.azure.com:7890/duplicate_candidates';
+		const url = '__ZYRAXKEEP__2_';
 		const init = {
 			method: 'POST',
 			body: JSON.stringify({
@@ -1053,7 +1053,7 @@ export class BaseIssueReporterService extends Disposable {
 
 		sourceSelect.innerText = '';
 		sourceSelect.append(this.makeOption('', localize('selectSource', "Select source"), true));
-		sourceSelect.append(this.makeOption(IssueSource.VSCode, localize('vscode', "ZYRAXON Code"), false));
+		sourceSelect.append(this.makeOption(IssueSource.ZyraxonCode, localize('zyraxoncode', "ZYRAXON Code"), false));
 		sourceSelect.append(this.makeOption(IssueSource.Extension, localize('extension', "A ZYRAXON Code extension"), false));
 		if (this.product.reportMarketplaceIssueUrl) {
 			sourceSelect.append(this.makeOption(IssueSource.Marketplace, localize('marketplace', "Extensions Marketplace"), false));
@@ -1260,7 +1260,7 @@ export class BaseIssueReporterService extends Disposable {
 	}
 
 	public async submitToGitHub(issueTitle: string, issueBody: string, gitHubDetails: { owner: string; repositoryName: string }): Promise<boolean> {
-		const url = `https://api.github.com/repos/${gitHubDetails.owner}/${gitHubDetails.repositoryName}/issues`;
+		const url = `__ZYRAXKEEP__3_{gitHubDetails.owner}/${gitHubDetails.repositoryName}/issues`;
 		const init = {
 			method: 'POST',
 			body: JSON.stringify({
@@ -1380,7 +1380,7 @@ export class BaseIssueReporterService extends Disposable {
 	public addTemplateToUrl(baseUrl: string, owner?: string, repositoryName?: string): string {
 		const isVscode = this.issueReporterModel.getData().fileOnProduct;
 		const isZyraxon = owner?.toLowerCase() === 'Zyraxon';
-		const needsTemplate = isVscode || (isZyraxon && (repositoryName === 'vscode' || repositoryName === 'vscode-python'));
+		const needsTemplate = isVscode || (isZyraxon && (repositoryName === 'zyraxoncode' || repositoryName === 'zyraxoncode-python'));
 
 		if (needsTemplate) {
 			try {
@@ -1410,7 +1410,7 @@ export class BaseIssueReporterService extends Disposable {
 	}
 
 	public parseGitHubUrl(url: string): undefined | { repositoryName: string; owner: string } {
-		// Assumes a GitHub url to a particular repo, https://github.com/repositoryName/owner.
+		// Assumes a GitHub url to a particular repo, __ZYRAXKEEP__4_
 		// Repository name and owner cannot contain '/'
 		const match = /^https?:\/\/github\.com\/([^\/]*)\/([^\/]*).*/.exec(url);
 		if (match && match.length) {
@@ -1431,10 +1431,10 @@ export class BaseIssueReporterService extends Disposable {
 		const extensionUrl = this.getExtensionRepositoryUrl();
 		// If given, try to match the extension's bug url
 		if (bugsUrl && bugsUrl.match(/^https?:\/\/github\.com\/([^\/]*)\/([^\/]*)\/?(\/issues)?$/)) {
-			// matches exactly: https://github.com/owner/repo/issues
+			// matches exactly: __ZYRAXKEEP__5_
 			repositoryUrl = normalizeGitHubUrl(bugsUrl);
 		} else if (extensionUrl && extensionUrl.match(/^https?:\/\/github\.com\/([^\/]*)\/([^\/]*)$/)) {
-			// matches exactly: https://github.com/owner/repo
+			// matches exactly: __ZYRAXKEEP__6_
 			repositoryUrl = normalizeGitHubUrl(extensionUrl);
 		} else {
 			this.nonGitHubIssueUrl = true;

@@ -254,7 +254,7 @@ export class McpAddConfigurationCommand {
 	private async getSSEConfig(): Promise<IMcpRemoteServerConfiguration | undefined> {
 		const url = await this._quickInputService.input({
 			title: localize('mcp.url.title', "Enter Server URL"),
-			placeHolder: localize('mcp.url.placeholder', "URL of the MCP server (e.g., http://localhost:3000)"),
+			placeHolder: localize('mcp.url.placeholder', "URL of the MCP server (e.g., __ZYRAXKEEP__0_)"),
 			ignoreFocusLost: true,
 		});
 
@@ -285,7 +285,7 @@ export class McpAddConfigurationCommand {
 			{ target: ConfigurationTarget.USER_LOCAL, label: localize('mcp.target.user', "Global"), description: localize('mcp.target.user.description', "Available in all workspaces, runs locally") }
 		];
 
-		const raLabel = this._environmentService.remoteAuthority && this._label.getHostLabel(Schemas.vscodeRemote, this._environmentService.remoteAuthority);
+		const raLabel = this._environmentService.remoteAuthority && this._label.getHostLabel(Schemas.zyraxoncodeRemote, this._environmentService.remoteAuthority);
 		if (raLabel) {
 			options.push({ target: ConfigurationTarget.USER_REMOTE, label: localize('mcp.target.remote', "Remote"), description: localize('mcp.target..remote.description', "Available on this remote machine, runs on {0}", raLabel) });
 		}

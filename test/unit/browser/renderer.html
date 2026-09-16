@@ -38,7 +38,7 @@
 		const setTimeout0IsFaster = (typeof $globalThis.postMessage === 'function' && !$globalThis.importScripts);
 
 		/**
-		 * See https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#:~:text=than%204%2C%20then-,set%20timeout%20to%204,-.
+		 * See __ZYRAXKEEP__0_
 		 *
 		 * Works similarly to `setTimeout(0)` but doesn't suffer from the 4ms artificial delay
 		 * that browsers set when the nesting level is > 5.
@@ -48,10 +48,10 @@
 				const pending = [];
 
 				$globalThis.addEventListener('message', (e) => {
-					if (e.data && e.data.vscodeScheduleAsyncWork) {
+					if (e.data && e.data.zyraxoncodeScheduleAsyncWork) {
 						for (let i = 0, len = pending.length; i < len; i++) {
 							const candidate = pending[i];
-							if (candidate.id === e.data.vscodeScheduleAsyncWork) {
+							if (candidate.id === e.data.zyraxoncodeScheduleAsyncWork) {
 								pending.splice(i, 1);
 								candidate.callback();
 								return;
@@ -66,7 +66,7 @@
 						id: myId,
 						callback: callback
 					});
-					$globalThis.postMessage({ vscodeScheduleAsyncWork: myId }, '*');
+					$globalThis.postMessage({ zyraxoncodeScheduleAsyncWork: myId }, '*');
 				};
 			}
 			return (callback) => setTimeout(callback);
@@ -97,7 +97,7 @@
 				sinon: new URL('../../../node_modules/sinon/pkg/sinon-esm.js', baseUrl).href,
 				'sinon-test': new URL('../../../node_modules/sinon-test/dist/sinon-test-es.js', baseUrl).href,
 				'@xterm/xterm': new URL('../../../node_modules/@xterm/xterm/lib/xterm.js', baseUrl).href,
-				'@vscode/iconv-lite-umd': new URL('../../../node_modules/@vscode/iconv-lite-umd/lib/iconv-lite-umd.js', baseUrl).href,
+				'@zyraxoncode/iconv-lite-umd': new URL('../../../node_modules/@zyraxoncode/iconv-lite-umd/lib/iconv-lite-umd.js', baseUrl).href,
 				jschardet: new URL('../../../node_modules/jschardet/dist/jschardet.min.js', baseUrl).href
 			}
 		}
@@ -152,7 +152,7 @@
 		globalThis.require = {
 			paths: {
 				xterm: new URL('../../../node_modules/xterm', baseUrl).href,
-				'@vscode/iconv-lite-umd': new URL('../../../node_modules/@vscode/iconv-lite-umd', baseUrl).href,
+				'@zyraxoncode/iconv-lite-umd': new URL('../../../node_modules/@zyraxoncode/iconv-lite-umd', baseUrl).href,
 				jschardet: new URL('../../../node_modules/jschardet', baseUrl).href
 			}
 		}

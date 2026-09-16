@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import type { IExperimentationService as ITASExperimentationService } from 'vscode-tas-client';
+import type * as zyraxoncode from 'zyraxoncode';
+import type { IExperimentationService as ITASExperimentationService } from 'zyraxoncode-tas-client';
 import { equals } from '../../../util/vs/base/common/arrays';
 import { IntervalTimer } from '../../../util/vs/base/common/async';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStore';
 import { IConfigurationService } from '../../configuration/common/configurationService';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { ILogService } from '../../log/common/logService';
 import { IExperimentationService, TreatmentsChangeEvent } from '../common/nullExperimentationService';
 
@@ -32,13 +32,13 @@ export class UserInfoStore extends Disposable {
 	static IS_SN_STORAGE_KEY = 'exp.github.copilot.isSn';
 	static IS_VSCODE_TEAM_MEMBER_STORAGE_KEY = 'exp.github.copilot.isVscodeTeamMember';
 	static ORGANIZATION_LIST_STORAGE_KEY = 'exp.github.copilot.organizationList';
-	constructor(private readonly context: IVSCodeExtensionContext, copilotTokenStore: ICopilotTokenStore) {
+	constructor(private readonly context: IZyraxonCodeExtensionContext, copilotTokenStore: ICopilotTokenStore) {
 		super();
 
 		if (copilotTokenStore) {
 			const getInternalOrg = (): string | undefined => {
 				if (copilotTokenStore.copilotToken?.isVscodeTeamMember) {
-					return 'vscode';
+					return 'zyraxoncode';
 				} else if (copilotTokenStore.copilotToken?.isGitHubInternal) {
 					return 'github';
 				} else if (copilotTokenStore.copilotToken?.isZyraxonInternal) {
@@ -116,7 +116,7 @@ export class UserInfoStore extends Disposable {
 	}
 }
 
-export type TASClientDelegateFn = (globalState: vscode.Memento, userInfoStore: UserInfoStore) => ITASExperimentationService;
+export type TASClientDelegateFn = (globalState: zyraxoncode.Memento, userInfoStore: UserInfoStore) => ITASExperimentationService;
 
 export class BaseExperimentationService extends Disposable implements IExperimentationService {
 
@@ -132,7 +132,7 @@ export class BaseExperimentationService extends Disposable implements IExperimen
 
 	constructor(
 		delegateFn: TASClientDelegateFn,
-		@IVSCodeExtensionContext context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext context: IZyraxonCodeExtensionContext,
 		@ICopilotTokenStore copilotTokenStore: ICopilotTokenStore,
 		@IConfigurationService private readonly _configurationService: IConfigurationService,
 		@ILogService private readonly _logService: ILogService
@@ -143,14 +143,14 @@ export class BaseExperimentationService extends Disposable implements IExperimen
 
 		// Refresh treatments when user info changes
 		this._register(this._userInfoStore.onDidChangeUserInfo(async () => {
-			await this._delegate.getTreatmentVariableAsync('vscode', 'refresh');
+			await this._delegate.getTreatmentVariableAsync('zyraxoncode', 'refresh');
 			this._logService.trace(`[BaseExperimentationService] User info changed, refreshed treatments`);
 			this._signalTreatmentsChangeEvent();
 		}));
 
 		// Refresh treatments every hour
 		this._refreshTimer.cancelAndSet(async () => {
-			await this._delegate.getTreatmentVariableAsync('vscode', 'refresh');
+			await this._delegate.getTreatmentVariableAsync('zyraxoncode', 'refresh');
 			this._logService.trace(`[BaseExperimentationService] Refreshed treatments on timer`);
 			this._signalTreatmentsChangeEvent();
 		}, 60 * 60 * 1000);
@@ -164,7 +164,7 @@ export class BaseExperimentationService extends Disposable implements IExperimen
 	private _signalTreatmentsChangeEvent = () => {
 		const affectedTreatmentVariables: string[] = [];
 		for (const [key, previousValue] of this._previouslyReadTreatments) {
-			const currentValue = this._delegate.getTreatmentVariable('vscode', key);
+			const currentValue = this._delegate.getTreatmentVariable('zyraxoncode', key);
 			if (currentValue !== previousValue) {
 				this._logService.trace(`[BaseExperimentationService] Treatment changed: ${key} from ${previousValue} to ${currentValue}`);
 				this._previouslyReadTreatments.set(key, currentValue);
@@ -187,7 +187,7 @@ export class BaseExperimentationService extends Disposable implements IExperimen
 	}
 
 	getTreatmentVariable<T extends boolean | number | string>(name: string): T | undefined {
-		const result = this._delegate.getTreatmentVariable('vscode', name) as T;
+		const result = this._delegate.getTreatmentVariable('zyraxoncode', name) as T;
 		this._previouslyReadTreatments.set(name, result);
 		return result;
 	}
@@ -206,7 +206,7 @@ export class BaseExperimentationService extends Disposable implements IExperimen
 		}
 
 		await this._delegate.initialFetch;
-		await this._delegate.getTreatmentVariableAsync('vscode', 'refresh');
+		await this._delegate.getTreatmentVariableAsync('zyraxoncode', 'refresh');
 		this._signalTreatmentsChangeEvent();
 	}
 

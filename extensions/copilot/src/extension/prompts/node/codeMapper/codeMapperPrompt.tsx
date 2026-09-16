@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AssistantMessage, BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptReference, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { AssistantMessage, BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptReference, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 
 import { NotebookDocumentSnapshot } from '../../../../platform/editing/common/notebookDocumentSnapshot';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
@@ -13,7 +13,7 @@ import { getLanguageForResource } from '../../../../util/common/languages';
 import { CharCode } from '../../../../util/vs/base/common/charCode';
 import { StringEdit } from '../../../../util/vs/editor/common/core/edits/stringEdit';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Uri } from '../../../../vscodeTypes';
+import { Uri } from '../../../../zyraxoncodeTypes';
 import { getStructure } from '../../../context/node/resolvers/selectionContextHelpers';
 import { CompositeElement } from '../base/common';
 import { ResponseTranslationRules } from '../base/responseTranslationRules';

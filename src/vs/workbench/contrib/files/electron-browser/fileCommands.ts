@@ -35,9 +35,9 @@ export function revealResourcesInOS(resources: URI[], nativeHostService: INative
 function toLocalFileUri(resource: URI): URI | undefined {
 	switch (resource.scheme) {
 		case Schemas.file:
-		case Schemas.vscodeUserData:
+		case Schemas.zyraxoncodeUserData:
 			return resource.with({ scheme: Schemas.file });
-		case Schemas.vscodeRemote: {
+		case Schemas.zyraxoncodeRemote: {
 			const remoteName = getRemoteName(resource.authority);
 			if (remoteName === 'wsl') {
 				const distro = getRemoteServerRootPath(resource.authority);

@@ -156,7 +156,7 @@ my-node-module
 	If the file is supposed to be empty, please respond with a code comment saying that this file is intentionally left blank.
 	Do not include comments in json files.
 	Do not use code blocks or backticks.
-	Do not include product names such as Visual Studio in the comments.`;
+	Do not include product names such as ZYRAXON in the comments.`;
 }
 
 ssuite({ title: 'new', subtitle: 'prompt', location: 'panel' }, () => {

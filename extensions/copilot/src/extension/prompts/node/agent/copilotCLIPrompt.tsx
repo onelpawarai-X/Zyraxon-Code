@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
-import { ChatCompletionContentPartKind, ChatRole } from '@vscode/prompt-tsx/dist/base/output/rawTypes';
-import type { ChatRequestEditedFileEvent } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
+import { ChatCompletionContentPartKind, ChatRole } from '@zyraxoncode/prompt-tsx/dist/base/output/rawTypes';
+import type { ChatRequestEditedFileEvent } from 'zyraxoncode';
 import { isXAiFamily } from '../../../../platform/endpoint/common/chatModelCapabilities';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
@@ -15,7 +15,7 @@ import { isLocation } from '../../../../util/common/types';
 import { Schemas } from '../../../../util/vs/base/common/network';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatReferenceBinaryData, ChatRequest, FileType } from '../../../../vscodeTypes';
+import { ChatReferenceBinaryData, ChatRequest, FileType } from '../../../../zyraxoncodeTypes';
 import { ChatVariablesCollection, isPromptFile, isSessionReference, PromptVariable, sessionReferenceAttachmentAttrs } from '../../../prompt/common/chatVariablesCollection';
 import { renderPromptElement } from '../base/promptRenderer';
 import { Tag } from '../base/tag';

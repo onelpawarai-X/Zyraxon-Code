@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestMetadata, RequestType } from '@vscode/copilot-api';
-import { AssistantMessage, BasePromptElementProps, Chunk, IfEmpty, Image, JSONTree, PromptElement, PromptElementProps, PromptMetadata, PromptPiece, PromptSizing, TokenLimit, ToolCall, ToolMessage, useKeepWith, UserMessage } from '@vscode/prompt-tsx';
-import type { ChatParticipantToolToken, LanguageModelToolInvocationOptions, LanguageModelToolResult2, LanguageModelToolTokenizationOptions } from 'vscode';
+import { RequestMetadata, RequestType } from '@zyraxoncode/copilot-api';
+import { AssistantMessage, BasePromptElementProps, Chunk, IfEmpty, Image, JSONTree, PromptElement, PromptElementProps, PromptMetadata, PromptPiece, PromptSizing, TokenLimit, ToolCall, ToolMessage, useKeepWith, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { ChatParticipantToolToken, LanguageModelToolInvocationOptions, LanguageModelToolResult2, LanguageModelToolTokenizationOptions } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { IChatHookService, IPreToolUseHookResult } from '../../../../platform/chat/common/chatHookService';
 import { ISessionTranscriptService } from '../../../../platform/chat/common/sessionTranscriptService';
@@ -32,7 +32,7 @@ import { getExtensionForMimeType } from '../../../../util/vs/base/common/mime';
 import { URI, UriComponents } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService, ServicesAccessor } from '../../../../util/vs/platform/instantiation/common/instantiation';
 import { ServiceCollection } from '../../../../util/vs/platform/instantiation/common/serviceCollection';
-import { LanguageModelDataPart, LanguageModelDataPart2, LanguageModelPartAudience, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelTextPart2, LanguageModelToolMCPSource, LanguageModelToolResult } from '../../../../vscodeTypes';
+import { LanguageModelDataPart, LanguageModelDataPart2, LanguageModelPartAudience, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelTextPart2, LanguageModelToolMCPSource, LanguageModelToolResult } from '../../../../zyraxoncodeTypes';
 import { isImageDataPart } from '../../../conversation/common/languageModelChatMessageHelpers';
 import { IResultMetadata } from '../../../prompt/common/conversation';
 import { getSubAgentInvocationId, IBuildPromptContext, IToolCall, IToolCallRound } from '../../../prompt/common/intents';
@@ -306,9 +306,9 @@ function buildToolResultElement(accessor: ServicesAccessor, props: ToolResultOpt
 						tokenizationOptions,
 						chatRequestId: props.requestId,
 						subAgentInvocationId,
-						// Split on `__vscode` so it's the chat stream id
+						// Split on `__zyraxoncode` so it's the chat stream id
 						// TODO @lramos15 - This is a gross hack
-						chatStreamToolCallId: props.toolCall.id.split('__vscode')[0],
+						chatStreamToolCallId: props.toolCall.id.split('__zyraxoncode')[0],
 						preToolUseResult: hookResult ? {
 							permissionDecision: hookResult.permissionDecision,
 							permissionDecisionReason: hookResult.permissionDecisionReason,
@@ -441,7 +441,7 @@ function buildImageUri(sessionId: string | undefined, toolCallId: string | undef
 	if (!sessionId || !toolCallId || imageIndex === undefined) {
 		return undefined;
 	}
-	const coreToolCallId = toolCallId.split('__vscode')[0];
+	const coreToolCallId = toolCallId.split('__zyraxoncode')[0];
 	return buildToolImageResourceUri(sessionId, coreToolCallId, imageIndex, getExtensionForMimeType(mimeType) ?? '.bin');
 }
 
@@ -886,7 +886,7 @@ export interface IToolResultProps extends IPrimitiveToolResultProps {
 
 
 /**
- * Inlined from prompt-tsx. In prompt-tsx it does `require('vscode)` for the instanceof checks which breaks in vitest
+ * Inlined from prompt-tsx. In prompt-tsx it does `require('zyraxoncode)` for the instanceof checks which breaks in vitest
  * and unfortunately I can't figure out how to work around that with the tools we have!
  */
 export class ToolResult extends PrimitiveToolResult<IToolResultProps> {
@@ -994,7 +994,7 @@ export class ToolResult extends PrimitiveToolResult<IToolResultProps> {
 	}
 
 	protected override onResourceLink(data: string) {
-		// https://github.com/microsoft/vscode/blob/34e38b4a78a751d006b99acee1a95d76117fec7b/src/vs/workbench/contrib/mcp/common/mcpTypes.ts#L846
+		// __ZYRAXKEEP__0_
 		let parsed: {
 			uri: UriComponents;
 			underlyingMimeType?: string;
@@ -1118,7 +1118,7 @@ function sendNotebookEditToolValidationTelemetry(invokeOutcome: ToolInvocationOu
 }
 
 export function buildToolImageResourceUri(sessionId: string, coreToolCallId: string, imageIndex: number, ext: string): string {
-	const sessionResource = `vscode-chat-session://local/${Buffer.from(sessionId).toString('base64url')}`;
+	const sessionResource = `__ZYRAXKEEP__1_{Buffer.from(sessionId).toString('base64url')}`;
 	const authority = Buffer.from(sessionResource).toString('hex');
-	return `vscode-chat-response-resource://${authority}/tool/${coreToolCallId}/${imageIndex}/file${ext}`;
+	return `__ZYRAXKEEP__2_{authority}/tool/${coreToolCallId}/${imageIndex}/file${ext}`;
 }

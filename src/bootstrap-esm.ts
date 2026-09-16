@@ -154,7 +154,7 @@ function enableASARSupport(): void {
 				// tree (a closer copy under 'resources/app', e.g. one bundled by a
 				// built-in extension). A resolution ABOVE the app root must not win
 				// over the archive: when the app is nested inside a larger tree (e.g.
-				// '@vscode/test-electron' downloads the packaged app under the repo's
+				// '@zyraxoncode/test-electron' downloads the packaged app under the repo's
 				// own 'node_modules'), the default node_modules walk can escape the app
 				// and find a stale / ABI-mismatched copy. The archive stands in for the
 				// application's own 'node_modules' and must take precedence over

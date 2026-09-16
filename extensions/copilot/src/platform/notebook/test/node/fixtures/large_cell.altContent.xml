@@ -1,9 +1,9 @@
-<VSCode.Cell id="<CELL_ID_0>" language="markdown">
+<ZyraxonCode.Cell id="<CELL_ID_0>" language="markdown">
 # 1. Introduction
 This notebook demonstrates a large code cell with multiple functions.
 We will later update a few lines in the middle of that big cell.
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_1>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_1>" language="python">
 import pandas as pd
 import numpy as np
 
@@ -165,9 +165,9 @@ def run_pipeline():
     data = transform_data(data)
     data = feature_engineer(data)
     return data
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_2>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_2>" language="python">
 # 3. Usage Example
 df_pipeline = run_pipeline()
 df_pipeline
-</VSCode.Cell>
+</ZyraxonCode.Cell>

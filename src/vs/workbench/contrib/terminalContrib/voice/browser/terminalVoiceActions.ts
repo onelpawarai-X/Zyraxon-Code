@@ -53,7 +53,7 @@ export function registerTerminalVoiceActions() {
 				return;
 			}
 			const extensions = await extensionManagementService.getInstalled();
-			const extension = extensions.find(extension => extension.identifier.id === 'ms-vscode.vscode-speech');
+			const extension = extensions.find(extension => extension.identifier.id === 'ms-zyraxoncode.zyraxoncode-speech');
 			const extensionIsDisabled = extension && !workbenchExtensionEnablementService.isEnabled(extension);
 			let run: () => Promise<unknown>;
 			let message: string;
@@ -64,7 +64,7 @@ export function registerTerminalVoiceActions() {
 				run = () => workbenchExtensionEnablementService.setEnablement([extension], EnablementState.EnabledWorkspace);
 			} else {
 				message = localize('terminal.voice.installSpeechExtension', "Would you like to install 'ZYRAXON Code Speech' extension from 'Zyraxon'?");
-				run = () => commandService.executeCommand('workbench.extensions.installExtension', 'ms-vscode.vscode-speech');
+				run = () => commandService.executeCommand('workbench.extensions.installExtension', 'ms-zyraxoncode.zyraxoncode-speech');
 				primaryButton = localize('installExtension', "Install Extension");
 			}
 			const detail = localize('terminal.voice.detail', "Microphone support requires this extension.");

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 .chat-inline-anchor-widget {
-	border: 0.5px solid var(--vscode-chat-requestBorder, var(--vscode-input-background, transparent));
+	border: 0.5px solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-background, transparent));
 	border-radius: 4px;
 	margin: 0 1px;
 	padding: 1px 3px;
@@ -12,14 +12,14 @@
 	width: fit-content;
 	font-weight: normal;
 	text-decoration: none;
-	font-size: var(--vscode-chat-font-size-body-s);
+	font-size: var(--zyraxoncode-chat-font-size-body-s);
 }
 
 .chat-inline-anchor-widget .icon-label {
 	padding: 0 3px;
 
 	.label-suffix {
-		color: var(--vscode-peekViewTitleDescription-foreground);
+		color: var(--zyraxoncode-peekViewTitleDescription-foreground);
 	}
 }
 
@@ -32,7 +32,7 @@
 }
 
 .chat-inline-anchor-widget:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .chat-inline-anchor-widget .icon {
@@ -67,7 +67,7 @@
 	background-color: transparent;
 	padding: 0;
 	margin: 0;
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .chat-inline-references-link-style .chat-inline-anchor-widget:hover {

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type vscode from 'vscode';
+import type zyraxoncode from 'zyraxoncode';
 import { IGitService } from '../../../platform/git/common/gitService';
 import { resolveWorkspaceOTelMetadata, type WorkspaceOTelMetadata } from '../../../platform/otel/common/workspaceOTelMetadata';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
@@ -58,7 +58,7 @@ export class EditSurvivalReporter {
 	 * ```
 	*/
 	constructor(
-		private readonly _document: vscode.TextDocument,
+		private readonly _document: zyraxoncode.TextDocument,
 		private readonly _documentTextBeforeMarkedEdits: string,
 		private readonly _markedEdits: StringEdit,
 		editsOnTop: StringEdit,

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import * as nls from '../../../nls.js';
 import { Emitter, Event } from '../../../base/common/event.js';
 import { MainContext, MainThreadAuthenticationShape, ExtHostAuthenticationShape } from './extHost.protocol.js';
@@ -34,9 +34,9 @@ export const IExtHostAuthentication = createDecorator<IExtHostAuthentication>('I
 
 interface ProviderWithMetadata {
 	label: string;
-	provider: vscode.AuthenticationProvider;
-	disposable?: vscode.Disposable;
-	options: vscode.AuthenticationProviderOptions;
+	provider: zyraxoncode.AuthenticationProvider;
+	disposable?: zyraxoncode.Disposable;
+	options: zyraxoncode.AuthenticationProviderOptions;
 }
 
 export class ExtHostAuthentication implements ExtHostAuthenticationShape {
@@ -50,8 +50,8 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 	private _authenticationProviders: Map<string, ProviderWithMetadata> = new Map<string, ProviderWithMetadata>();
 	private _providerOperations = new SequencerByKey<string>();
 
-	private _onDidChangeSessions = new Emitter<vscode.AuthenticationSessionsChangeEvent & { extensionIdFilter?: string[] }>();
-	private _getSessionTaskSingler = new TaskSingler<vscode.AuthenticationSession | undefined>();
+	private _onDidChangeSessions = new Emitter<zyraxoncode.AuthenticationSessionsChangeEvent & { extensionIdFilter?: string[] }>();
+	private _getSessionTaskSingler = new TaskSingler<zyraxoncode.AuthenticationSession | undefined>();
 
 	private _onDidDynamicAuthProviderTokensChange = new Emitter<{ authProviderId: string; clientId: string; tokens: IAuthorizationToken[] }>();
 
@@ -73,7 +73,7 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 	 * @param extensionId The extension that is interested in the event.
 	 * @returns An event with a built-in filter for the extensionId
 	 */
-	getExtensionScopedSessionsEvent(extensionId: string): Event<vscode.AuthenticationSessionsChangeEvent> {
+	getExtensionScopedSessionsEvent(extensionId: string): Event<zyraxoncode.AuthenticationSessionsChangeEvent> {
 		const normalizedExtensionId = extensionId.toLowerCase();
 		return Event.chain(this._onDidChangeSessions.event, ($) => $
 			.filter(e => !e.extensionIdFilter || e.extensionIdFilter.includes(normalizedExtensionId))
@@ -81,13 +81,13 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 		);
 	}
 
-	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | vscode.AuthenticationWwwAuthenticateRequest, options: vscode.AuthenticationGetSessionOptions & ({ createIfNone: true } | { forceNewSession: true } | { forceNewSession: vscode.AuthenticationForceNewSessionOptions })): Promise<vscode.AuthenticationSession>;
-	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | vscode.AuthenticationWwwAuthenticateRequest, options: vscode.AuthenticationGetSessionOptions & { forceNewSession: true }): Promise<vscode.AuthenticationSession>;
-	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | vscode.AuthenticationWwwAuthenticateRequest, options: vscode.AuthenticationGetSessionOptions & { forceNewSession: vscode.AuthenticationForceNewSessionOptions }): Promise<vscode.AuthenticationSession>;
-	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | vscode.AuthenticationWwwAuthenticateRequest, options: vscode.AuthenticationGetSessionOptions): Promise<vscode.AuthenticationSession | undefined>;
-	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | vscode.AuthenticationWwwAuthenticateRequest, options: vscode.AuthenticationGetSessionOptions = {}): Promise<vscode.AuthenticationSession | undefined> {
+	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | zyraxoncode.AuthenticationWwwAuthenticateRequest, options: zyraxoncode.AuthenticationGetSessionOptions & ({ createIfNone: true } | { forceNewSession: true } | { forceNewSession: zyraxoncode.AuthenticationForceNewSessionOptions })): Promise<zyraxoncode.AuthenticationSession>;
+	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | zyraxoncode.AuthenticationWwwAuthenticateRequest, options: zyraxoncode.AuthenticationGetSessionOptions & { forceNewSession: true }): Promise<zyraxoncode.AuthenticationSession>;
+	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | zyraxoncode.AuthenticationWwwAuthenticateRequest, options: zyraxoncode.AuthenticationGetSessionOptions & { forceNewSession: zyraxoncode.AuthenticationForceNewSessionOptions }): Promise<zyraxoncode.AuthenticationSession>;
+	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | zyraxoncode.AuthenticationWwwAuthenticateRequest, options: zyraxoncode.AuthenticationGetSessionOptions): Promise<zyraxoncode.AuthenticationSession | undefined>;
+	async getSession(requestingExtension: IExtensionDescription, providerId: string, scopesOrRequest: readonly string[] | zyraxoncode.AuthenticationWwwAuthenticateRequest, options: zyraxoncode.AuthenticationGetSessionOptions = {}): Promise<zyraxoncode.AuthenticationSession | undefined> {
 		const extensionId = ExtensionIdentifier.toKey(requestingExtension.identifier);
-		const keys: (keyof vscode.AuthenticationGetSessionOptions)[] = Object.keys(options) as (keyof vscode.AuthenticationGetSessionOptions)[];
+		const keys: (keyof zyraxoncode.AuthenticationGetSessionOptions)[] = Object.keys(options) as (keyof zyraxoncode.AuthenticationGetSessionOptions)[];
 		// TODO: pull this out into a utility function somewhere
 		const optionsStr = keys
 			.map(key => {
@@ -112,7 +112,7 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 
 		let singlerKey: string;
 		if (isAuthenticationWwwAuthenticateRequest(scopesOrRequest)) {
-			const challenge = scopesOrRequest as vscode.AuthenticationWwwAuthenticateRequest;
+			const challenge = scopesOrRequest as zyraxoncode.AuthenticationWwwAuthenticateRequest;
 			const challengeStr = challenge.wwwAuthenticate;
 			const scopesStr = challenge.fallbackScopes ? [...challenge.fallbackScopes].sort().join(' ') : '';
 			singlerKey = `${extensionId} ${providerId} challenge:${challengeStr} ${scopesStr} ${optionsStr}`;
@@ -133,7 +133,7 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 		return await this._proxy.$getAccounts(providerId);
 	}
 
-	registerAuthenticationProvider(id: string, label: string, provider: vscode.AuthenticationProvider, options?: vscode.AuthenticationProviderOptions): vscode.Disposable {
+	registerAuthenticationProvider(id: string, label: string, provider: zyraxoncode.AuthenticationProvider, options?: zyraxoncode.AuthenticationProviderOptions): zyraxoncode.Disposable {
 		// register
 		void this._providerOperations.queue(id, async () => {
 			// This use to be synchronous, but that wasn't an accurate representation because the main thread
@@ -167,7 +167,7 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 		});
 	}
 
-	$createSession(providerId: string, scopes: string[], options: vscode.AuthenticationProviderSessionOptions): Promise<vscode.AuthenticationSession> {
+	$createSession(providerId: string, scopes: string[], options: zyraxoncode.AuthenticationProviderSessionOptions): Promise<zyraxoncode.AuthenticationSession> {
 		return this._providerOperations.queue(providerId, async () => {
 			const providerData = this._authenticationProviders.get(providerId);
 			if (providerData) {
@@ -190,7 +190,7 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 		});
 	}
 
-	$getSessions(providerId: string, scopes: ReadonlyArray<string> | undefined, options: IAuthenticationGetSessionsOptions): Promise<ReadonlyArray<vscode.AuthenticationSession>> {
+	$getSessions(providerId: string, scopes: ReadonlyArray<string> | undefined, options: IAuthenticationGetSessionsOptions): Promise<ReadonlyArray<zyraxoncode.AuthenticationSession>> {
 		return this._providerOperations.queue(providerId, async () => {
 			const providerData = this._authenticationProviders.get(providerId);
 			if (providerData) {
@@ -202,7 +202,7 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 		});
 	}
 
-	$getSessionsFromChallenges(providerId: string, constraint: vscode.AuthenticationConstraint, options: vscode.AuthenticationProviderSessionOptions): Promise<ReadonlyArray<vscode.AuthenticationSession>> {
+	$getSessionsFromChallenges(providerId: string, constraint: zyraxoncode.AuthenticationConstraint, options: zyraxoncode.AuthenticationProviderSessionOptions): Promise<ReadonlyArray<zyraxoncode.AuthenticationSession>> {
 		return this._providerOperations.queue(providerId, async () => {
 			const providerData = this._authenticationProviders.get(providerId);
 			if (providerData) {
@@ -219,7 +219,7 @@ export class ExtHostAuthentication implements ExtHostAuthenticationShape {
 		});
 	}
 
-	$createSessionFromChallenges(providerId: string, constraint: vscode.AuthenticationConstraint, options: vscode.AuthenticationProviderSessionOptions): Promise<vscode.AuthenticationSession> {
+	$createSessionFromChallenges(providerId: string, constraint: zyraxoncode.AuthenticationConstraint, options: zyraxoncode.AuthenticationProviderSessionOptions): Promise<zyraxoncode.AuthenticationSession> {
 		return this._providerOperations.queue(providerId, async () => {
 			const providerData = this._authenticationProviders.get(providerId);
 			if (providerData) {
@@ -432,11 +432,11 @@ class TaskSingler<T> {
 	}
 }
 
-export class DynamicAuthProvider implements vscode.AuthenticationProvider {
+export class DynamicAuthProvider implements zyraxoncode.AuthenticationProvider {
 	id: string;
 	readonly label: string;
 
-	private _onDidChangeSessions = new Emitter<vscode.AuthenticationProviderAuthenticationSessionsChangeEvent>();
+	private _onDidChangeSessions = new Emitter<zyraxoncode.AuthenticationProviderAuthenticationSessionsChangeEvent>();
 	readonly onDidChangeSessions = this._onDidChangeSessions.event;
 
 	private readonly _onDidChangeClientId = new Emitter<void>();
@@ -446,7 +446,7 @@ export class DynamicAuthProvider implements vscode.AuthenticationProvider {
 
 	protected readonly _createFlows: Array<{
 		label: string;
-		handler: (scopes: string[], progress: vscode.Progress<{ message: string }>, token: vscode.CancellationToken) => Promise<IAuthorizationTokenResponse>;
+		handler: (scopes: string[], progress: zyraxoncode.Progress<{ message: string }>, token: zyraxoncode.CancellationToken) => Promise<IAuthorizationTokenResponse>;
 	}>;
 
 	protected readonly _logger: ILogger;
@@ -511,13 +511,13 @@ export class DynamicAuthProvider implements vscode.AuthenticationProvider {
 		return this._clientSecret;
 	}
 
-	async getSessions(scopes: readonly string[] | undefined, options: IAuthenticationProviderSessionOptions): Promise<vscode.AuthenticationSession[]> {
+	async getSessions(scopes: readonly string[] | undefined, options: IAuthenticationProviderSessionOptions): Promise<zyraxoncode.AuthenticationSession[]> {
 		this._logger.info(`Getting sessions for scopes: ${scopes?.join(' ') ?? 'all'}`);
 		if (!scopes) {
 			return this._tokenStore.sessions;
 		}
 		// The oauth spec says tthat order doesn't matter so we sort the scopes for easy comparison
-		// https://datatracker.ietf.org/doc/html/rfc6749#section-3.3
+		// __ZYRAXKEEP__0_
 		// TODO@TylerLeonhardt: Do this for all scope handling in the auth APIs
 		const sortedScopes = [...scopes].sort();
 		const scopeStr = scopes.join(' ');
@@ -570,7 +570,7 @@ export class DynamicAuthProvider implements vscode.AuthenticationProvider {
 		return [];
 	}
 
-	async createSession(scopes: string[], _options: vscode.AuthenticationProviderSessionOptions): Promise<vscode.AuthenticationSession> {
+	async createSession(scopes: string[], _options: zyraxoncode.AuthenticationProviderSessionOptions): Promise<zyraxoncode.AuthenticationSession> {
 		this._logger.info(`Creating session for scopes: ${scopes.join(' ')}`);
 		let token: IAuthorizationTokenResponse | undefined;
 		for (let i = 0; i < this._createFlows.length; i++) {
@@ -638,7 +638,7 @@ export class DynamicAuthProvider implements vscode.AuthenticationProvider {
 		this._disposable.dispose();
 	}
 
-	private async _createWithUrlHandler(scopes: string[], progress: vscode.Progress<IProgressStep>, token: vscode.CancellationToken): Promise<IAuthorizationTokenResponse> {
+	private async _createWithUrlHandler(scopes: string[], progress: zyraxoncode.Progress<IProgressStep>, token: zyraxoncode.CancellationToken): Promise<IAuthorizationTokenResponse> {
 		if (!this._serverMetadata.authorization_endpoint) {
 			throw new Error('Authorization Endpoint required');
 		}
@@ -678,7 +678,7 @@ export class DynamicAuthProvider implements vscode.AuthenticationProvider {
 		}
 
 		// Use a redirect URI that matches what was registered during dynamic registration
-		const redirectUri = 'https://vscode.dev/redirect';
+		const redirectUri = '__ZYRAXKEEP__1_';
 		authorizationUrl.searchParams.append('redirect_uri', redirectUri);
 
 		const promise = this.waitForAuthorizationCode(callbackUri);
@@ -893,9 +893,9 @@ export type IAuthorizationToken = IAuthorizationTokenResponse & {
 
 export class TokenStore implements Disposable {
 	private readonly _tokensObservable: ISettableObservable<IAuthorizationToken[]>;
-	private readonly _sessionsObservable: IObservable<vscode.AuthenticationSession[]>;
+	private readonly _sessionsObservable: IObservable<zyraxoncode.AuthenticationSession[]>;
 
-	private readonly _onDidChangeSessions = new Emitter<vscode.AuthenticationProviderAuthenticationSessionsChangeEvent>();
+	private readonly _onDidChangeSessions = new Emitter<zyraxoncode.AuthenticationProviderAuthenticationSessionsChangeEvent>();
 	readonly onDidChangeSessions = this._onDidChangeSessions.event;
 
 	private readonly _disposable: DisposableStore;
@@ -919,7 +919,7 @@ export class TokenStore implements Disposable {
 		return this._tokensObservable.get();
 	}
 
-	get sessions(): vscode.AuthenticationSession[] {
+	get sessions(): zyraxoncode.AuthenticationSession[] {
 		return this._sessionsObservable.get();
 	}
 
@@ -952,7 +952,7 @@ export class TokenStore implements Disposable {
 	}
 
 	private _registerChangeEventAutorun(): IDisposable {
-		let previousSessions: vscode.AuthenticationSession[] = [];
+		let previousSessions: zyraxoncode.AuthenticationSession[] = [];
 		return autorun((reader) => {
 			this._logger.trace('Checking for session changes...');
 			const currentSessions = this._sessionsObservable.read(reader);
@@ -975,8 +975,8 @@ export class TokenStore implements Disposable {
 				return;
 			}
 
-			const added: vscode.AuthenticationSession[] = [];
-			const removed: vscode.AuthenticationSession[] = [];
+			const added: zyraxoncode.AuthenticationSession[] = [];
+			const removed: zyraxoncode.AuthenticationSession[] = [];
 
 			// Find added sessions
 			for (const current of currentSessions) {
@@ -1005,7 +1005,7 @@ export class TokenStore implements Disposable {
 		});
 	}
 
-	private _getSessionFromToken(token: IAuthorizationTokenResponse): vscode.AuthenticationSession {
+	private _getSessionFromToken(token: IAuthorizationTokenResponse): zyraxoncode.AuthenticationSession {
 		let claims: IAuthorizationJWTClaims | undefined;
 		if (token.id_token) {
 			try {

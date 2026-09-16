@@ -185,7 +185,7 @@ CommandsRegistry.registerCommand({
 });
 
 CommandsRegistry.registerCommand({
-	id: 'vscode.peekTestError',
+	id: 'zyraxoncode.peekTestError',
 	handler: async (accessor: ServicesAccessor, extId: string) => {
 		const lookup = accessor.get(ITestResultService).getStateById(extId);
 		if (!lookup) {
@@ -209,7 +209,7 @@ CommandsRegistry.registerCommand({
 });
 
 CommandsRegistry.registerCommand({
-	id: 'vscode.revealTest',
+	id: 'zyraxoncode.revealTest',
 	handler: async (accessor: ServicesAccessor, extId: string, opts?: { preserveFocus?: boolean; openToSide?: boolean }) => {
 		const test = accessor.get(ITestService).collection.getNodeById(extId);
 		if (!test) {
@@ -259,7 +259,7 @@ CommandsRegistry.registerCommand({
 });
 
 CommandsRegistry.registerCommand({
-	id: 'vscode.runTestsById',
+	id: 'zyraxoncode.runTestsById',
 	handler: async (accessor: ServicesAccessor, group: TestRunProfileBitset, ...testIds: string[]) => {
 		const testService = accessor.get(ITestService);
 		await discoverAndRunTests(
@@ -272,7 +272,7 @@ CommandsRegistry.registerCommand({
 });
 
 CommandsRegistry.registerCommand({
-	id: 'vscode.testing.getControllersWithTests',
+	id: 'zyraxoncode.testing.getControllersWithTests',
 	handler: async (accessor: ServicesAccessor) => {
 		const testService = accessor.get(ITestService);
 		return [...testService.collection.rootItems]
@@ -282,7 +282,7 @@ CommandsRegistry.registerCommand({
 });
 
 CommandsRegistry.registerCommand({
-	id: 'vscode.testing.getTestsInFile',
+	id: 'zyraxoncode.testing.getTestsInFile',
 	handler: async (accessor: ServicesAccessor, uri: URI) => {
 		const testService = accessor.get(ITestService);
 		return [...testService.collection.getNodeByUrl(uri)].map(t => TestId.split(t.item.extId));

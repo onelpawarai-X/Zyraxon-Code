@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import { LanguageModelDataPart } from '../../../vscodeTypes';
+import { LanguageModelDataPart } from '../../../zyraxoncodeTypes';
 
 export enum ChatImageMimeType {
 	PNG = 'image/png',

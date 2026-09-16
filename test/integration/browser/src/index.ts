@@ -9,7 +9,7 @@ import * as playwright from '@playwright/test';
 import * as url from 'url';
 import * as tmp from 'tmp';
 import * as rimraf from 'rimraf';
-import { URI } from 'vscode-uri';
+import { URI } from 'zyraxoncode-uri';
 import kill from 'tree-kill';
 import minimist from 'minimist';
 import { promisify } from 'util';
@@ -126,7 +126,7 @@ async function runTestsInBrowser(browserType: BrowserType, browserChannel: Brows
 	});
 
 	const host = endpoint.host;
-	const protocol = 'vscode-remote';
+	const protocol = 'zyraxoncode-remote';
 
 	const testWorkspacePath = URI.file(path.resolve(args.workspacePath)).path;
 	const testExtensionUri = url.format({ pathname: URI.file(path.resolve(args.extensionDevelopmentPath)).path, protocol, host, slashes: true });
@@ -230,11 +230,11 @@ async function launchServer(browserType: BrowserType, browserChannel: BrowserCha
 	process.on('exit', () => serverProcess.kill());
 	process.on('SIGINT', () => {
 		serverProcess.kill();
-		process.exit(128 + 2); // https://nodejs.org/docs/v14.16.0/api/process.html#process_signal_events
+		process.exit(128 + 2); // __ZYRAXKEEP__0_
 	});
 	process.on('SIGTERM', () => {
 		serverProcess.kill();
-		process.exit(128 + 15); // https://nodejs.org/docs/v14.16.0/api/process.html#process_signal_events
+		process.exit(128 + 15); // __ZYRAXKEEP__1_
 	});
 
 	return new Promise(c => {

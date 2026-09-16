@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { FileChunk } from '../../../../platform/chunking/common/chunk';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { getWorkspaceFileDisplayPath, IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';

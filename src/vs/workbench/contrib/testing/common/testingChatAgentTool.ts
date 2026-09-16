@@ -105,7 +105,7 @@ export class RunTestTool implements IToolImpl {
 		userDescription: localize('runTestTool.userDescription', 'Run unit tests (optionally with coverage)'),
 		source: ToolDataSource.Internal,
 		tags: [
-			'vscode_editing_with_tests',
+			'zyraxoncode_editing_with_tests',
 			'enable_other_tool_copilot_readFile',
 			'enable_other_tool_copilot_listDirectory',
 			'enable_other_tool_copilot_findFiles',
@@ -339,7 +339,7 @@ export class TestFailureTool implements IToolImpl {
 		userDescription: localize('testFailureTool.userDescription', 'Include test failure information'),
 		source: ToolDataSource.Internal,
 		tags: [
-			'vscode_editing_with_tests',
+			'zyraxoncode_editing_with_tests',
 			'enable_other_tool_copilot_readFile',
 			'enable_other_tool_copilot_listDirectory',
 			'enable_other_tool_copilot_findFiles',

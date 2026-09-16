@@ -6,32 +6,32 @@
 .chat-agent-feedback-review-list {
 	display: flex;
 	flex-direction: column;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 }
 
 .chat-agent-feedback-review-empty {
-	color: var(--vscode-descriptionForeground);
-	padding: var(--vscode-spacing-size40) 0;
+	color: var(--zyraxoncode-descriptionForeground);
+	padding: var(--zyraxoncode-spacing-size40) 0;
 }
 
 .chat-agent-feedback-review-row {
 	display: flex;
 	align-items: flex-start;
-	gap: var(--vscode-spacing-size80);
-	padding: var(--vscode-spacing-size60);
-	border: var(--vscode-strokeThickness) solid var(--vscode-widget-border);
-	border-radius: var(--vscode-cornerRadius-small);
+	gap: var(--zyraxoncode-spacing-size80);
+	padding: var(--zyraxoncode-spacing-size60);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-widget-border);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .chat-agent-feedback-review-row .monaco-checkbox {
-	margin-top: var(--vscode-spacing-size20);
+	margin-top: var(--zyraxoncode-spacing-size20);
 	flex: 0 0 auto;
 }
 
 .chat-agent-feedback-review-main {
 	display: flex;
 	flex-direction: column;
-	gap: var(--vscode-spacing-size20);
+	gap: var(--zyraxoncode-spacing-size20);
 	min-width: 0;
 	flex: 1 1 auto;
 }
@@ -39,17 +39,17 @@
 .chat-agent-feedback-review-header {
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size60);
+	gap: var(--zyraxoncode-spacing-size60);
 	min-width: 0;
 }
 
 .chat-agent-feedback-review-kind {
 	flex: 0 0 auto;
-	padding: 0 var(--vscode-spacing-size40);
-	border-radius: var(--vscode-cornerRadius-xSmall);
-	background: color-mix(in srgb, var(--vscode-charts-purple) 22%, var(--vscode-editorWidget-background));
-	color: var(--vscode-charts-purple);
-	font-size: var(--vscode-bodyFontSize-xSmall);
+	padding: 0 var(--zyraxoncode-spacing-size40);
+	border-radius: var(--zyraxoncode-cornerRadius-xSmall);
+	background: color-mix(in srgb, var(--zyraxoncode-charts-purple) 22%, var(--zyraxoncode-editorWidget-background));
+	color: var(--zyraxoncode-charts-purple);
+	font-size: var(--zyraxoncode-bodyFontSize-xSmall);
 	text-transform: uppercase;
 }
 
@@ -57,7 +57,7 @@
 	flex: 1 1 auto;
 	min-width: 0;
 	overflow: hidden;
-	font-size: var(--vscode-bodyFontSize-small);
+	font-size: var(--zyraxoncode-bodyFontSize-small);
 }
 
 .chat-agent-feedback-review-text-container {
@@ -86,7 +86,7 @@
 	bottom: 0;
 	height: 1.4em;
 	pointer-events: none;
-	background: linear-gradient(to bottom, transparent, var(--vscode-chat-requestBackground));
+	background: linear-gradient(to bottom, transparent, var(--zyraxoncode-chat-requestBackground));
 }
 
 .chat-agent-feedback-review-expand-toggle {
@@ -100,9 +100,9 @@
 	height: 18px;
 	padding: 0;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-xSmall);
+	border-radius: var(--zyraxoncode-cornerRadius-xSmall);
 	background: transparent;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 	cursor: pointer;
 	z-index: 1;
 }
@@ -112,11 +112,11 @@
 }
 
 .chat-agent-feedback-review-expand-toggle:hover {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .chat-agent-feedback-review-expand-toggle:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -125,7 +125,7 @@
 }
 
 .chat-agent-feedback-review-actions .monaco-action-bar .action-label {
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 /* The extra :not(:has(.chat-confirmation-message-terminal)) qualifier is a no-op
@@ -135,5 +135,5 @@
  * padding rule in chatConfirmationWidget.css so this override wins regardless of
  * stylesheet concatenation order. */
 .chat-confirmation-widget2 .chat-confirmation-widget-message:has(.chat-agent-feedback-review-list):not(:has(.chat-confirmation-message-terminal)) {
-	padding: var(--vscode-spacing-size60) var(--vscode-spacing-size120) var(--vscode-spacing-size60) var(--vscode-spacing-size60);
+	padding: var(--zyraxoncode-spacing-size60) var(--zyraxoncode-spacing-size120) var(--zyraxoncode-spacing-size60) var(--zyraxoncode-spacing-size60);
 }

@@ -237,7 +237,7 @@ export class TerminalSandboxService extends Disposable implements ITerminalSandb
 	private _getSandboxWindowTempDirName(): string | undefined {
 		const workbenchEnv = this._environmentService as IEnvironmentService & { window?: { id?: number } };
 		const windowId = workbenchEnv.window?.id;
-		return typeof windowId === 'number' ? `tmp_vscode_${windowId}` : undefined;
+		return typeof windowId === 'number' ? `tmp_zyraxoncode_${windowId}` : undefined;
 	}
 
 	private async _resolveSandboxDependencyStatus(): Promise<ISandboxDependencyStatus | undefined> {

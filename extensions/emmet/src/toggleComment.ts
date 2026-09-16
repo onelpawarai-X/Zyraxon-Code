@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { getNodesInBetween, getFlatNode, getHtmlFlatNode, sameNodes, isStyleSheet, validate, offsetRangeToVsRange, offsetRangeToSelection } from './util';
 import { Node, Stylesheet, Rule } from 'EmmetFlatNode';
 import parseStylesheet from '@emmetio/css-parser';
@@ -15,19 +15,19 @@ let startCommentHTML: string;
 let endCommentHTML: string;
 
 export function toggleComment(): Thenable<boolean> | undefined {
-	if (!validate() || !vscode.window.activeTextEditor) {
+	if (!validate() || !zyraxoncode.window.activeTextEditor) {
 		return;
 	}
 	setupCommentSpacing();
 
-	const editor = vscode.window.activeTextEditor;
+	const editor = zyraxoncode.window.activeTextEditor;
 	const rootNode = getRootNode(editor.document, true);
 	if (!rootNode) {
 		return;
 	}
 
 	return editor.edit(editBuilder => {
-		const allEdits: vscode.TextEdit[][] = [];
+		const allEdits: zyraxoncode.TextEdit[][] = [];
 		Array.from(editor.selections).reverse().forEach(selection => {
 			const edits = isStyleSheet(editor.document.languageId) ? toggleCommentStylesheet(editor.document, selection, <Stylesheet>rootNode) : toggleCommentHTML(editor.document, selection, rootNode!);
 			if (edits.length > 0) {
@@ -40,7 +40,7 @@ export function toggleComment(): Thenable<boolean> | undefined {
 			const result = arr1[0].range.start.line - arr2[0].range.start.line;
 			return result === 0 ? arr1[0].range.start.character - arr2[0].range.start.character : result;
 		});
-		let lastEditPosition = new vscode.Position(0, 0);
+		let lastEditPosition = new zyraxoncode.Position(0, 0);
 		for (const edits of allEdits) {
 			if (edits[0].range.end.isAfterOrEqual(lastEditPosition)) {
 				edits.forEach(x => {
@@ -52,7 +52,7 @@ export function toggleComment(): Thenable<boolean> | undefined {
 	});
 }
 
-function toggleCommentHTML(document: vscode.TextDocument, selection: vscode.Selection, rootNode: Node): vscode.TextEdit[] {
+function toggleCommentHTML(document: zyraxoncode.TextDocument, selection: zyraxoncode.Selection, rootNode: Node): zyraxoncode.TextEdit[] {
 	const selectionStart = selection.isReversed ? selection.active : selection.anchor;
 	const selectionEnd = selection.isReversed ? selection.anchor : selection.active;
 	const selectionStartOffset = document.offsetAt(selectionStart);
@@ -77,7 +77,7 @@ function toggleCommentHTML(document: vscode.TextDocument, selection: vscode.Sele
 	}
 
 	const allNodes: Node[] = getNodesInBetween(startNode, endNode);
-	let edits: vscode.TextEdit[] = [];
+	let edits: zyraxoncode.TextEdit[] = [];
 
 	allNodes.forEach(node => {
 		edits = edits.concat(getRangesToUnCommentHTML(node, document));
@@ -88,19 +88,19 @@ function toggleCommentHTML(document: vscode.TextDocument, selection: vscode.Sele
 	}
 
 
-	edits.push(new vscode.TextEdit(offsetRangeToVsRange(document, allNodes[0].start, allNodes[0].start), startCommentHTML));
-	edits.push(new vscode.TextEdit(offsetRangeToVsRange(document, allNodes[allNodes.length - 1].end, allNodes[allNodes.length - 1].end), endCommentHTML));
+	edits.push(new zyraxoncode.TextEdit(offsetRangeToVsRange(document, allNodes[0].start, allNodes[0].start), startCommentHTML));
+	edits.push(new zyraxoncode.TextEdit(offsetRangeToVsRange(document, allNodes[allNodes.length - 1].end, allNodes[allNodes.length - 1].end), endCommentHTML));
 
 	return edits;
 }
 
-function getRangesToUnCommentHTML(node: Node, document: vscode.TextDocument): vscode.TextEdit[] {
-	let unCommentTextEdits: vscode.TextEdit[] = [];
+function getRangesToUnCommentHTML(node: Node, document: zyraxoncode.TextDocument): zyraxoncode.TextEdit[] {
+	let unCommentTextEdits: zyraxoncode.TextEdit[] = [];
 
 	// If current node is commented, then uncomment and return
 	if (node.type === 'comment') {
-		unCommentTextEdits.push(new vscode.TextEdit(offsetRangeToVsRange(document, node.start, node.start + startCommentHTML.length), ''));
-		unCommentTextEdits.push(new vscode.TextEdit(offsetRangeToVsRange(document, node.end - endCommentHTML.length, node.end), ''));
+		unCommentTextEdits.push(new zyraxoncode.TextEdit(offsetRangeToVsRange(document, node.start, node.start + startCommentHTML.length), ''));
+		unCommentTextEdits.push(new zyraxoncode.TextEdit(offsetRangeToVsRange(document, node.end - endCommentHTML.length, node.end), ''));
 		return unCommentTextEdits;
 	}
 
@@ -112,7 +112,7 @@ function getRangesToUnCommentHTML(node: Node, document: vscode.TextDocument): vs
 	return unCommentTextEdits;
 }
 
-function toggleCommentStylesheet(document: vscode.TextDocument, selection: vscode.Selection, rootNode: Stylesheet): vscode.TextEdit[] {
+function toggleCommentStylesheet(document: zyraxoncode.TextDocument, selection: zyraxoncode.Selection, rootNode: Stylesheet): zyraxoncode.TextEdit[] {
 	const selectionStart = selection.isReversed ? selection.active : selection.anchor;
 	const selectionEnd = selection.isReversed ? selection.anchor : selection.active;
 	let selectionStartOffset = document.offsetAt(selectionStart);
@@ -132,14 +132,14 @@ function toggleCommentStylesheet(document: vscode.TextDocument, selection: vscod
 	}
 
 	// Uncomment the comments that intersect with the selection.
-	const rangesToUnComment: vscode.Range[] = [];
-	const edits: vscode.TextEdit[] = [];
+	const rangesToUnComment: zyraxoncode.Range[] = [];
+	const edits: zyraxoncode.TextEdit[] = [];
 	rootNode.comments.forEach(comment => {
 		const commentRange = offsetRangeToVsRange(document, comment.start, comment.end);
 		if (selection.intersection(commentRange)) {
 			rangesToUnComment.push(commentRange);
-			edits.push(new vscode.TextEdit(offsetRangeToVsRange(document, comment.start, comment.start + startCommentStylesheet.length), ''));
-			edits.push(new vscode.TextEdit(offsetRangeToVsRange(document, comment.end - endCommentStylesheet.length, comment.end), ''));
+			edits.push(new zyraxoncode.TextEdit(offsetRangeToVsRange(document, comment.start, comment.start + startCommentStylesheet.length), ''));
+			edits.push(new zyraxoncode.TextEdit(offsetRangeToVsRange(document, comment.end - endCommentStylesheet.length, comment.end), ''));
 		}
 	});
 
@@ -148,13 +148,13 @@ function toggleCommentStylesheet(document: vscode.TextDocument, selection: vscod
 	}
 
 	return [
-		new vscode.TextEdit(new vscode.Range(selection.start, selection.start), startCommentStylesheet),
-		new vscode.TextEdit(new vscode.Range(selection.end, selection.end), endCommentStylesheet)
+		new zyraxoncode.TextEdit(new zyraxoncode.Range(selection.start, selection.start), startCommentStylesheet),
+		new zyraxoncode.TextEdit(new zyraxoncode.Range(selection.end, selection.end), endCommentStylesheet)
 	];
 }
 
 function setupCommentSpacing() {
-	const config: boolean | undefined = vscode.workspace.getConfiguration('editor.comments').get('insertSpace');
+	const config: boolean | undefined = zyraxoncode.workspace.getConfiguration('editor.comments').get('insertSpace');
 	if (config) {
 		startCommentStylesheet = '/* ';
 		endCommentStylesheet = ' */';

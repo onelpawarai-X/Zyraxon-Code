@@ -62,7 +62,7 @@ export class CloseWindowAction extends Action2 {
 	override async run(accessor: ServicesAccessor): Promise<void> {
 		const nativeHostService = accessor.get(INativeHostService);
 
-		return nativeHostService.closeWindow({ targetWindowId: getActiveWindow().vscodeWindowId });
+		return nativeHostService.closeWindow({ targetWindowId: getActiveWindow().zyraxoncodeWindowId });
 	}
 }
 
@@ -81,7 +81,7 @@ export class CloseOtherWindowsAction extends Action2 {
 	override async run(accessor: ServicesAccessor): Promise<void> {
 		const nativeHostService = accessor.get(INativeHostService);
 
-		const currentWindowId = getActiveWindow().vscodeWindowId;
+		const currentWindowId = getActiveWindow().zyraxoncodeWindowId;
 		const windows = await nativeHostService.getWindows({ includeAuxiliaryWindows: false });
 
 		for (const window of windows) {
@@ -129,7 +129,7 @@ abstract class BaseZoomAction extends Action2 {
 		}
 
 		if (level > MAX_ZOOM_LEVEL || level < MIN_ZOOM_LEVEL) {
-			return; // https://github.com/microsoft/vscode/issues/48357
+			return; // __ZYRAXKEEP__0_
 		}
 
 		if (target === ApplyZoomTarget.ALL_WINDOWS) {
@@ -258,7 +258,7 @@ abstract class BaseSwitchWindow extends Action2 {
 		const languageService = accessor.get(ILanguageService);
 		const nativeHostService = accessor.get(INativeHostService);
 
-		const currentWindowId = getActiveWindow().vscodeWindowId;
+		const currentWindowId = getActiveWindow().zyraxoncodeWindowId;
 
 		const windows = await nativeHostService.getWindows({ includeAuxiliaryWindows: true });
 
@@ -403,7 +403,7 @@ export class SwitchToMainWindowAction extends Action2 {
 
 	override async run(accessor: ServicesAccessor): Promise<void> {
 		const nativeHostService = accessor.get(INativeHostService);
-		return nativeHostService.focusWindow({ targetWindowId: mainWindow.vscodeWindowId });
+		return nativeHostService.focusWindow({ targetWindowId: mainWindow.zyraxoncodeWindowId });
 	}
 }
 
@@ -509,7 +509,7 @@ export class ToggleWindowAlwaysOnTopAction extends Action2 {
 			return; // Currently, we only support toggling always on top for auxiliary windows
 		}
 
-		return nativeHostService.toggleWindowAlwaysOnTop({ targetWindowId: getActiveWindow().vscodeWindowId });
+		return nativeHostService.toggleWindowAlwaysOnTop({ targetWindowId: getActiveWindow().zyraxoncodeWindowId });
 	}
 }
 
@@ -539,7 +539,7 @@ export class EnableWindowAlwaysOnTopAction extends Action2 {
 			return; // Currently, we only support toggling always on top for auxiliary windows
 		}
 
-		return nativeHostService.setWindowAlwaysOnTop(true, { targetWindowId: targetWindow.vscodeWindowId });
+		return nativeHostService.setWindowAlwaysOnTop(true, { targetWindowId: targetWindow.zyraxoncodeWindowId });
 	}
 }
 
@@ -569,6 +569,6 @@ export class DisableWindowAlwaysOnTopAction extends Action2 {
 			return; // Currently, we only support toggling always on top for auxiliary windows
 		}
 
-		return nativeHostService.setWindowAlwaysOnTop(false, { targetWindowId: targetWindow.vscodeWindowId });
+		return nativeHostService.setWindowAlwaysOnTop(false, { targetWindowId: targetWindow.zyraxoncodeWindowId });
 	}
 }

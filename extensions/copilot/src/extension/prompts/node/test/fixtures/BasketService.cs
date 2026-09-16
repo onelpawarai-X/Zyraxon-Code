@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using Ardalis.Result;
-using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
-using Microsoft.eShopWeb.ApplicationCore.Interfaces;
-using Microsoft.eShopWeb.ApplicationCore.Specifications;
+using Zyraxon.eShopWeb.ApplicationCore.Entities.BasketAggregate;
+using Zyraxon.eShopWeb.ApplicationCore.Interfaces;
+using Zyraxon.eShopWeb.ApplicationCore.Specifications;
 
-namespace Microsoft.eShopWeb.ApplicationCore.Services;
+namespace Zyraxon.eShopWeb.ApplicationCore.Services;
 
 public class BasketService : IBasketService
 {

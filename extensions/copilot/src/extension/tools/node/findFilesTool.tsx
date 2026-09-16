@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
 import { URI } from '../../../util/vs/base/common/uri';
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { ISearchService } from '../../../platform/search/common/searchService';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
@@ -18,7 +18,7 @@ import { raceTimeoutAndCancellationError } from '../../../util/common/racePromis
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { isAbsolute } from '../../../util/vs/base/common/path';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { ToolName } from '../common/toolNames';
@@ -42,7 +42,7 @@ export class FindFilesTool implements ICopilotTool<IFindFilesToolParams> {
 		@ITelemetryService private readonly telemetryService: ITelemetryService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IFindFilesToolParams>, token: CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IFindFilesToolParams>, token: CancellationToken) {
 		checkCancellation(token);
 
 		// TODO strict input validation
@@ -88,7 +88,7 @@ export class FindFilesTool implements ICopilotTool<IFindFilesToolParams> {
 		return result;
 	}
 
-	private async sendSearchToolTelemetry(options: vscode.LanguageModelToolInvocationOptions<IFindFilesToolParams>, folderName: string | undefined): Promise<void> {
+	private async sendSearchToolTelemetry(options: zyraxoncode.LanguageModelToolInvocationOptions<IFindFilesToolParams>, folderName: string | undefined): Promise<void> {
 		const model = options.model && (await this.endpointProvider.getChatEndpoint(options.model)).model;
 		const isMultiRoot = this.workspaceService.getWorkspaceFolders().length > 1;
 		const query = options.input.query;
@@ -114,7 +114,7 @@ export class FindFilesTool implements ICopilotTool<IFindFilesToolParams> {
 		});
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IFindFilesToolParams>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IFindFilesToolParams>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		const globResult = inputGlobToPattern(options.input.query, new WorkingDirectory(undefined, this.workspaceService), undefined);
 		const query = this.formatQueryLabel(globResult, options.input.query);
 		return {

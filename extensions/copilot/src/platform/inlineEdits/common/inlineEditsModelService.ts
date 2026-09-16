@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Event } from '../../../util/vs/base/common/event';
 import { ModelConfiguration } from './dataTypes/xtabPromptOptions';
@@ -11,7 +11,7 @@ import { ModelConfiguration } from './dataTypes/xtabPromptOptions';
 export interface IInlineEditsModelService {
 	readonly _serviceBrand: undefined;
 
-	readonly modelInfo: vscode.InlineCompletionModelInfo | undefined;
+	readonly modelInfo: zyraxoncode.InlineCompletionModelInfo | undefined;
 
 	readonly onModelListUpdated: Event<void>;
 

@@ -274,7 +274,7 @@ export class BrowserAuxiliaryWindowService extends Disposable implements IAuxili
 			throw new Error(localize('unableToOpenWindowError', "Unable to open a new window."));
 		}
 
-		// Add a `vscodeWindowId` property to identify auxiliary windows
+		// Add a `zyraxoncodeWindowId` property to identify auxiliary windows
 		const resolvedWindowId = await this.resolveWindowId(targetWindow);
 		ensureCodeWindow(targetWindow, resolvedWindowId);
 
@@ -285,8 +285,8 @@ export class BrowserAuxiliaryWindowService extends Disposable implements IAuxili
 		auxiliaryWindow.updateOptions({ compact: options?.compact ?? false });
 
 		const registryDisposables = new DisposableStore();
-		this.windows.set(targetWindow.vscodeWindowId, auxiliaryWindow);
-		registryDisposables.add(toDisposable(() => this.windows.delete(targetWindow.vscodeWindowId)));
+		this.windows.set(targetWindow.zyraxoncodeWindowId, auxiliaryWindow);
+		registryDisposables.add(toDisposable(() => this.windows.delete(targetWindow.zyraxoncodeWindowId)));
 
 		const eventDisposables = new DisposableStore();
 
@@ -381,7 +381,7 @@ export class BrowserAuxiliaryWindowService extends Disposable implements IAuxili
 				type: Severity.Warning,
 				message: localize('unableToOpenWindow', "The browser blocked opening a new window. Press 'Retry' to try again."),
 				custom: {
-					markdownDetails: [{ markdown: new MarkdownString(localize('unableToOpenWindowDetail', "Please allow pop-ups for this website in your [browser settings]({0}).", 'https://aka.ms/allow-vscode-popup'), true) }]
+					markdownDetails: [{ markdown: new MarkdownString(localize('unableToOpenWindowDetail', "Please allow pop-ups for this website in your [browser settings]({0}).", '__ZYRAXKEEP__0_'), true) }]
 				},
 				buttons: [
 					{

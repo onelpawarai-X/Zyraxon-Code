@@ -46,7 +46,7 @@ described delivery slots (native MDM, server-managed, and file-based).
 
 | Channel | Where it's read | Implementation | Lands on |
 |---------|-----------------|----------------|----------|
-| **Native MDM** (Windows registry / macOS plist) | OS managed preferences | `NativeManagedSettingsService` (`src/vs/platform/policy/node/nativeManagedSettingsService.ts`) via `@vscode/policy-watcher` | `INativeManagedSettingsService.managedSettings` |
+| **Native MDM** (Windows registry / macOS plist) | OS managed preferences | `NativeManagedSettingsService` (`src/vs/platform/policy/node/nativeManagedSettingsService.ts`) via `@zyraxoncode/policy-watcher` | `INativeManagedSettingsService.managedSettings` |
 | **Server-managed** (`/copilot_internal/managed_settings`) | GitHub endpoint; per the code comment in `managedSettings.ts`, it returns the enterprise's `.github/copilot/settings.json` content | `adaptManagedSettings` (`src/vs/workbench/services/accounts/browser/managedSettings.ts`) → `DefaultAccountService.policyData` | `accountPolicyData.managedSettings` |
 | **File-based** (`managed-settings.json`) | well-known per-OS disk path (e.g. `/Library/Application Support/GitHubCopilot/` on macOS), read in the main process and exposed to renderer windows over IPC | `FileManagedSettingsService` (`src/vs/platform/policy/common/fileManagedSettingsService.ts`) | `IFileManagedSettingsService.rawManagedSettings` + `.managedSettings` |
 
@@ -259,7 +259,7 @@ the `nativeManagedSettings` channel in `app.ts`. `AccountPolicyService` subscrib
 `onDidChangeManagedSettings` and re-evaluates policy values when managed settings change.
 
 The service only watches keys that some policy declares: `updatePolicyDefinitions`
-calls `collectManagedSettingsDefinitions`, then `@vscode/policy-watcher` watches exactly
+calls `collectManagedSettingsDefinitions`, then `@zyraxoncode/policy-watcher` watches exactly
 those dot-paths. No declared keys ⇒ no watcher.
 
 The **file-based** channel is wired the same way (`src/vs/code/electron-main/main.ts`):
@@ -376,7 +376,7 @@ Rules & internals:
 
 | PR | Change |
 |----|--------|
-| [#318623](https://github.com/microsoft/vscode/pull/318623) | Wire `/copilot_internal/managed_settings` into `AccountPolicyService`/`IPolicyData`; add `chat.plugins.enabledPlugins`/`extraMarketplaces`/`strictMarketplaces` settings + `adaptManagedSettings` shape adaptation. No new `IPolicyService`. |
-| [#320991](https://github.com/microsoft/vscode/pull/320991) | Add native MDM delivery: `NativeManagedSettingsService` + `@vscode/policy-watcher`; let policies declare `managedSettings` mappings; wire the first V0 key `permissions.disableBypassPermissionsMode` → force `ChatToolsAutoApprove=false`. |
-| [#321218](https://github.com/microsoft/vscode/pull/321218) | Make `IPolicyData.managedSettings` the **single** channel: server + native MDM project into one canonical bag; structured settings carried as canonical JSON strings; remove the typed `enabledPlugins`/`extraKnownMarketplaces`/`strictKnownMarketplaces` fields. End-to-end equivalence test. |
-| [#321515](https://github.com/microsoft/vscode/pull/321515) | Add `policyReference` so one policy governs many settings; callback-free serialization; catalog + diagnostics list governed settings. Used to gate Claude (`Claude3PIntegration`) and Codex (`Codex3PIntegration`) across the editor and Agents windows. |
+| [#318623](__ZYRAXKEEP__0_) | Wire `/copilot_internal/managed_settings` into `AccountPolicyService`/`IPolicyData`; add `chat.plugins.enabledPlugins`/`extraMarketplaces`/`strictMarketplaces` settings + `adaptManagedSettings` shape adaptation. No new `IPolicyService`. |
+| [#320991](__ZYRAXKEEP__1_) | Add native MDM delivery: `NativeManagedSettingsService` + `@zyraxoncode/policy-watcher`; let policies declare `managedSettings` mappings; wire the first V0 key `permissions.disableBypassPermissionsMode` → force `ChatToolsAutoApprove=false`. |
+| [#321218](__ZYRAXKEEP__2_) | Make `IPolicyData.managedSettings` the **single** channel: server + native MDM project into one canonical bag; structured settings carried as canonical JSON strings; remove the typed `enabledPlugins`/`extraKnownMarketplaces`/`strictKnownMarketplaces` fields. End-to-end equivalence test. |
+| [#321515](__ZYRAXKEEP__3_) | Add `policyReference` so one policy governs many settings; callback-free serialization; catalog + diagnostics list governed settings. Used to gate Claude (`Claude3PIntegration`) and Codex (`Codex3PIntegration`) across the editor and Agents windows. |

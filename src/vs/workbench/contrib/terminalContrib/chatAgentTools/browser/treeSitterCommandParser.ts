@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Parser, Query, QueryCapture, Tree } from '@vscode/tree-sitter-wasm';
+import type { Parser, Query, QueryCapture, Tree } from '@zyraxoncode/tree-sitter-wasm';
 import { RunOnceScheduler } from '../../../../../base/common/async.js';
 import { BugIndicatingError, ErrorNoTelemetry } from '../../../../../base/common/errors.js';
 import { Lazy } from '../../../../../base/common/lazy.js';
@@ -31,7 +31,7 @@ export interface IAutoApprovalCommandParseResult {
  * (e.g. `git log --format="a|b"`) are parsed as assignment expressions and
  * truncate the surrounding command.
  *
- * See https://github.com/microsoft/vscode/issues/294010
+ * See __ZYRAXKEEP__0_
  * TODO: Remove once upstream tree-sitter PowerShell grammer is updated.
  */
 const pwshFlagEqualsRegex = /(^|\s)(-{1,2}[\w-]+)=/g;

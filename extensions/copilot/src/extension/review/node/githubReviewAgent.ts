@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@vscode/copilot-api';
-import * as l10n from '@vscode/l10n';
+import { RequestType } from '@zyraxoncode/copilot-api';
+import * as l10n from '@zyraxoncode/l10n';
 import * as readline from 'readline';
 import { Readable } from 'stream';
-import type { Selection, TextDocument, TextEditor } from 'vscode';
+import type { Selection, TextDocument, TextEditor } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ConfigKey } from '../../../platform/configuration/common/configurationService';
 import { ICustomInstructionsService } from '../../../platform/customInstructions/common/customInstructionsService';
@@ -16,7 +16,7 @@ import { ICAPIClientService } from '../../../platform/endpoint/common/capiClient
 import { IDomainService } from '../../../platform/endpoint/common/domainService';
 import { IEnvService } from '../../../platform/env/common/envService';
 import { IGitExtensionService } from '../../../platform/git/common/gitExtensionService';
-import { API, Repository } from '../../../platform/git/vscode/git';
+import { API, Repository } from '../../../platform/git/zyraxoncode/git';
 import { IIgnoreService } from '../../../platform/ignore/common/ignoreService';
 import { ILogService } from '../../../platform/log/common/logService';
 import { IFetcherService, Response } from '../../../platform/networking/common/fetcherService';
@@ -26,7 +26,7 @@ import { IWorkspaceService } from '../../../platform/workspace/common/workspaceS
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import * as path from '../../../util/vs/base/common/path';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
-import { MarkdownString, Range, Uri } from '../../../vscodeTypes';
+import { MarkdownString, Range, Uri } from '../../../zyraxoncodeTypes';
 import { FeedbackResult } from '../../prompt/node/feedbackGenerator';
 
 

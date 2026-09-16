@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import { afterAll, beforeAll, beforeEach, expect, suite, test } from 'vitest';
 import { IChatMLFetcher } from '../../../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../../../platform/chat/common/commonTypes';
@@ -24,7 +24,7 @@ import { createTextDocumentData } from '../../../../../util/common/test/shims/te
 import { URI } from '../../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelTextPart, LanguageModelToolResult } from '../../../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult } from '../../../../../zyraxoncodeTypes';
 import { addCacheBreakpoints } from '../../../../intents/node/cacheBreakpoints';
 import { ChatVariablesCollection } from '../../../../prompt/common/chatVariablesCollection';
 import { Conversation, ICopilotChatResultIn, normalizeSummariesOnRounds, Turn, TurnStatus } from '../../../../prompt/common/conversation';
@@ -182,7 +182,7 @@ suite('Agent Summarization', () => {
 		const continuationTurn = new Turn('id2', { type: 'user', message: 'continuation turn message' }, undefined, [], undefined, undefined, true);
 
 		const promptContext: IBuildPromptContext = {
-			chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+			chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 			history: [firstTurn, continuationTurn],
 			query: 'edit this file',
 			toolCallRounds: [],
@@ -202,7 +202,7 @@ suite('Agent Summarization', () => {
 
 	test('cannot summarize with no history', async () => {
 		const promptContextNoHistory: IBuildPromptContext = {
-			chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+			chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 			history: [],
 			query: 'edit this file',
 			toolCallRounds: [],
@@ -232,7 +232,7 @@ suite('Agent Summarization', () => {
 		await expect(await agentPromptToString(
 			accessor,
 			{
-				chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+				chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 				history: [],
 				query: 'edit this file',
 				toolCallRounds,
@@ -260,7 +260,7 @@ suite('Agent Summarization', () => {
 		await expect(await agentPromptToString(
 			accessor,
 			{
-				chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+				chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 				history: [],
 				query: 'edit this file',
 				toolCallRounds: [
@@ -286,7 +286,7 @@ suite('Agent Summarization', () => {
 		await expect(await agentPromptToString(
 			accessor,
 			{
-				chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+				chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 				history: [],
 				query: 'edit this file',
 				toolCallRounds: [
@@ -342,7 +342,7 @@ suite('Agent Summarization', () => {
 		await expect(await agentPromptToString(
 			accessor,
 			{
-				chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+				chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 				history: [previousTurn, turn],
 				query: 'edit this file',
 				toolCallRounds: [(new ToolCallRound('hello next round', [createEditFileToolCall(5)]))],
@@ -392,7 +392,7 @@ suite('Agent Summarization', () => {
 		const rendered = await agentPromptToString(
 			accessor,
 			{
-				chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+				chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 				history: [previousTurn, compactedTurn],
 				query: 'next prompt',
 				toolCallRounds: [],
@@ -426,7 +426,7 @@ suite('Agent Summarization', () => {
 		await expect(await agentPromptToString(
 			accessor,
 			{
-				chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+				chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 				history: [previousTurn1, previousTurn2],
 				query: 'hello',
 				tools
@@ -454,7 +454,7 @@ suite('Agent Summarization', () => {
 		const testConversation = new Conversation('sessionId', [turn]);
 
 		const promptContext: IBuildPromptContext = {
-			chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+			chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 			history: [],
 			query: 'edit this file',
 			toolCallRounds,
@@ -632,7 +632,7 @@ suite('Agent Summarization', () => {
 			endpoint,
 			location: ChatLocation.Panel,
 			promptContext: {
-				chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+				chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 				history: [],
 				query: 'edit this file',
 				toolCallRounds,

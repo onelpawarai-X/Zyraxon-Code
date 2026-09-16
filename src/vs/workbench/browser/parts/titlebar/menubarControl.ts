@@ -291,7 +291,7 @@ export abstract class MenubarControl extends Disposable {
 	}
 }
 
-// This is a bit complex due to the issue https://github.com/microsoft/vscode/issues/205836
+// This is a bit complex due to the issue __ZYRAXKEEP__0_
 let focusMenuBarEmitter: Emitter<void> | undefined = undefined;
 function enableFocusMenuBarAction(): Emitter<void> {
 	if (!focusMenuBarEmitter) {
@@ -742,7 +742,7 @@ export class CustomMenubarControl extends MenubarControl {
 		// Mnemonics require fullscreen in web
 		if (isWeb) {
 			this._register(onDidChangeFullscreen(windowId => {
-				if (windowId === mainWindow.vscodeWindowId) {
+				if (windowId === mainWindow.zyraxoncodeWindowId) {
 					this.updateMenubar();
 				}
 			}));

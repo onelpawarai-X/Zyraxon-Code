@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { getTsNativeExtension, tsNativeExtensionOldId } from '../commands/useTsgo';
 import { ExperimentationService } from '../experimentationService';
 
 const suggestNativePreviewStorageKey = 'typescript.suggestNativePreview.dismissed';
 
 export async function suggestNativePreview(
-	context: vscode.ExtensionContext,
+	context: zyraxoncode.ExtensionContext,
 	experimentationService: ExperimentationService,
 ): Promise<void> {
 	if (context.globalState.get<boolean>(suggestNativePreviewStorageKey)) {
@@ -18,12 +18,12 @@ export async function suggestNativePreview(
 	}
 
 	// Only show when the window is active
-	if (!vscode.window.state.active) {
+	if (!zyraxoncode.window.state.active) {
 		return;
 	}
 
 	// Only show when the nightly extension is installed
-	if (!vscode.extensions.getExtension('ms-vscode.vscode-typescript-next')) {
+	if (!zyraxoncode.extensions.getExtension('ms-zyraxoncode.zyraxoncode-typescript-next')) {
 		return;
 	}
 
@@ -39,12 +39,12 @@ export async function suggestNativePreview(
 		return;
 	}
 
-	const install: vscode.MessageItem = { title: vscode.l10n.t("Install") };
-	const learnMore: vscode.MessageItem = { title: vscode.l10n.t("Learn More") };
-	const dismiss: vscode.MessageItem = { title: vscode.l10n.t("Don't Show Again") };
+	const install: zyraxoncode.MessageItem = { title: zyraxoncode.l10n.t("Install") };
+	const learnMore: zyraxoncode.MessageItem = { title: zyraxoncode.l10n.t("Learn More") };
+	const dismiss: zyraxoncode.MessageItem = { title: zyraxoncode.l10n.t("Don't Show Again") };
 
-	const selection = await vscode.window.showInformationMessage(
-		vscode.l10n.t("Try TypeScript 7 Native Preview for significantly faster type checking and language features."),
+	const selection = await zyraxoncode.window.showInformationMessage(
+		zyraxoncode.l10n.t("Try TypeScript 7 Native Preview for significantly faster type checking and language features."),
 		{},
 		install,
 		learnMore,
@@ -54,8 +54,8 @@ export async function suggestNativePreview(
 	await context.globalState.update(suggestNativePreviewStorageKey, true);
 
 	if (selection === install) {
-		await vscode.commands.executeCommand('workbench.extensions.installExtension', tsNativeExtensionOldId);
+		await zyraxoncode.commands.executeCommand('workbench.extensions.installExtension', tsNativeExtensionOldId);
 	} else if (selection === learnMore) {
-		await vscode.env.openExternal(vscode.Uri.parse('https://aka.ms/vscode-try-ts-7-learn-more'));
+		await zyraxoncode.env.openExternal(zyraxoncode.Uri.parse('__ZYRAXKEEP__0_'));
 	}
 }

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { EditorHighlights } from './highlights';
 import { Navigation } from './navigation';
 import { SymbolItemDragAndDrop, SymbolTreeInput } from './references-view';
@@ -21,14 +21,14 @@ export class SymbolsTree {
 	private readonly _history = new TreeInputHistory(this);
 	private readonly _provider = new TreeDataProviderDelegate();
 	private readonly _dnd = new TreeDndDelegate();
-	private readonly _tree: vscode.TreeView<unknown>;
+	private readonly _tree: zyraxoncode.TreeView<unknown>;
 	private readonly _navigation: Navigation;
 
 	private _input?: SymbolTreeInput<unknown>;
-	private _sessionDisposable?: vscode.Disposable;
+	private _sessionDisposable?: zyraxoncode.Disposable;
 
 	constructor() {
-		this._tree = vscode.window.createTreeView<unknown>(this.viewId, {
+		this._tree = zyraxoncode.window.createTreeView<unknown>(this.viewId, {
 			treeDataProvider: this._provider,
 			showCollapseAll: true,
 			dragAndDropController: this._dnd
@@ -56,7 +56,7 @@ export class SymbolsTree {
 		this._ctxInputSource.set(input.contextValue);
 		this._ctxIsActive.set(true);
 		this._ctxHasResult.set(true);
-		vscode.commands.executeCommand(`${this.viewId}.focus`);
+		zyraxoncode.commands.executeCommand(`${this.viewId}.focus`);
 
 		const newInputKind = !this._input || Object.getPrototypeOf(this._input) !== Object.getPrototypeOf(input);
 		this._input = input;
@@ -93,7 +93,7 @@ export class SymbolsTree {
 			await this._tree.reveal(selection, { select: true, focus: true, expand: true });
 		}
 
-		const disposables: vscode.Disposable[] = [];
+		const disposables: zyraxoncode.Disposable[] = [];
 
 		// editor highlights
 		let highlights: EditorHighlights<unknown> | undefined;
@@ -111,9 +111,9 @@ export class SymbolsTree {
 			}));
 		}
 		if (typeof model.dispose === 'function') {
-			disposables.push(new vscode.Disposable(() => model.dispose!()));
+			disposables.push(new zyraxoncode.Disposable(() => model.dispose!()));
 		}
-		this._sessionDisposable = vscode.Disposable.from(...disposables);
+		this._sessionDisposable = zyraxoncode.Disposable.from(...disposables);
 	}
 
 	clearInput(): void {
@@ -121,10 +121,10 @@ export class SymbolsTree {
 		this._input = undefined;
 		this._ctxHasResult.set(false);
 		this._ctxInputSource.reset();
-		this._tree.title = vscode.l10n.t('References');
+		this._tree.title = zyraxoncode.l10n.t('References');
 		this._tree.message = this._history.size === 0
-			? vscode.l10n.t('No results.')
-			: vscode.l10n.t('No results. Try running a previous search again:');
+			? zyraxoncode.l10n.t('No results.')
+			: zyraxoncode.l10n.t('No results. Try running a previous search again:');
 		this._provider.update(Promise.resolve(this._history));
 	}
 }
@@ -132,19 +132,19 @@ export class SymbolsTree {
 // --- tree data
 
 interface ActiveTreeDataProviderWrapper {
-	provider: Promise<vscode.TreeDataProvider<any>>;
+	provider: Promise<zyraxoncode.TreeDataProvider<any>>;
 }
 
-class TreeDataProviderDelegate implements vscode.TreeDataProvider<undefined> {
+class TreeDataProviderDelegate implements zyraxoncode.TreeDataProvider<undefined> {
 
-	provider?: Promise<vscode.TreeDataProvider<any>>;
+	provider?: Promise<zyraxoncode.TreeDataProvider<any>>;
 
-	private _sessionDispoables?: vscode.Disposable;
-	private _onDidChange = new vscode.EventEmitter<any>();
+	private _sessionDispoables?: zyraxoncode.Disposable;
+	private _onDidChange = new zyraxoncode.EventEmitter<any>();
 
 	readonly onDidChangeTreeData = this._onDidChange.event;
 
-	update(provider: Promise<vscode.TreeDataProvider<any>>) {
+	update(provider: Promise<zyraxoncode.TreeDataProvider<any>>) {
 
 		this._sessionDispoables?.dispose();
 		this._sessionDispoables = undefined;
@@ -188,7 +188,7 @@ class TreeDataProviderDelegate implements vscode.TreeDataProvider<undefined> {
 
 // --- tree dnd
 
-class TreeDndDelegate implements vscode.TreeDragAndDropController<undefined> {
+class TreeDndDelegate implements zyraxoncode.TreeDragAndDropController<undefined> {
 
 	private _delegate: SymbolItemDragAndDrop<undefined> | undefined;
 
@@ -201,7 +201,7 @@ class TreeDndDelegate implements vscode.TreeDragAndDropController<undefined> {
 		delegate.then(value => this._delegate = value);
 	}
 
-	handleDrag(source: undefined[], data: vscode.DataTransfer) {
+	handleDrag(source: undefined[], data: zyraxoncode.DataTransfer) {
 		if (this._delegate) {
 			const urls: string[] = [];
 			for (const item of source) {
@@ -211,7 +211,7 @@ class TreeDndDelegate implements vscode.TreeDragAndDropController<undefined> {
 				}
 			}
 			if (urls.length > 0) {
-				data.set('text/uri-list', new vscode.DataTransferItem(urls.join('\r\n')));
+				data.set('text/uri-list', new zyraxoncode.DataTransferItem(urls.join('\r\n')));
 			}
 		}
 	}
@@ -233,46 +233,46 @@ class HistoryItem {
 		readonly anchor: WordAnchor,
 		readonly input: SymbolTreeInput<unknown>,
 	) {
-		this.description = `${vscode.workspace.asRelativePath(input.location.uri)} • ${input.title.toLocaleLowerCase()}`;
+		this.description = `${zyraxoncode.workspace.asRelativePath(input.location.uri)} • ${input.title.toLocaleLowerCase()}`;
 	}
 }
 
-class TreeInputHistory implements vscode.TreeDataProvider<HistoryItem> {
+class TreeInputHistory implements zyraxoncode.TreeDataProvider<HistoryItem> {
 
-	private readonly _onDidChangeTreeData = new vscode.EventEmitter<HistoryItem | undefined>();
+	private readonly _onDidChangeTreeData = new zyraxoncode.EventEmitter<HistoryItem | undefined>();
 	readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
 
-	private readonly _disposables: vscode.Disposable[] = [];
+	private readonly _disposables: zyraxoncode.Disposable[] = [];
 	private readonly _ctxHasHistory = new ContextKey<boolean>('reference-list.hasHistory');
 	private readonly _inputs = new Map<string, HistoryItem>();
 
 	constructor(private readonly _tree: SymbolsTree) {
 
 		this._disposables.push(
-			vscode.commands.registerCommand('references-view.clear', () => _tree.clearInput()),
-			vscode.commands.registerCommand('references-view.clearHistory', () => {
+			zyraxoncode.commands.registerCommand('references-view.clear', () => _tree.clearInput()),
+			zyraxoncode.commands.registerCommand('references-view.clearHistory', () => {
 				this.clear();
 				_tree.clearInput();
 			}),
-			vscode.commands.registerCommand('references-view.refind', (item) => {
+			zyraxoncode.commands.registerCommand('references-view.refind', (item) => {
 				if (item instanceof HistoryItem) {
 					this._reRunHistoryItem(item);
 				}
 			}),
-			vscode.commands.registerCommand('references-view.refresh', () => {
+			zyraxoncode.commands.registerCommand('references-view.refresh', () => {
 				const item = Array.from(this._inputs.values()).pop();
 				if (item) {
 					this._reRunHistoryItem(item);
 				}
 			}),
-			vscode.commands.registerCommand('_references-view.showHistoryItem', async (item) => {
+			zyraxoncode.commands.registerCommand('_references-view.showHistoryItem', async (item) => {
 				if (item instanceof HistoryItem) {
 					const position = item.anchor.guessedTrackedPosition() ?? item.input.location.range.start;
-					await vscode.commands.executeCommand('vscode.open', item.input.location.uri, { selection: new vscode.Range(position, position) });
+					await zyraxoncode.commands.executeCommand('zyraxoncode.open', item.input.location.uri, { selection: new zyraxoncode.Range(position, position) });
 				}
 			}),
-			vscode.commands.registerCommand('references-view.pickFromHistory', async () => {
-				interface HistoryPick extends vscode.QuickPickItem {
+			zyraxoncode.commands.registerCommand('references-view.pickFromHistory', async () => {
+				interface HistoryPick extends zyraxoncode.QuickPickItem {
 					item: HistoryItem;
 				}
 				const entries = await this.getChildren();
@@ -281,7 +281,7 @@ class TreeInputHistory implements vscode.TreeDataProvider<HistoryItem> {
 					description: item.description,
 					item
 				}));
-				const pick = await vscode.window.showQuickPick(picks, { placeHolder: vscode.l10n.t('Select previous reference search') });
+				const pick = await zyraxoncode.window.showQuickPick(picks, { placeHolder: zyraxoncode.l10n.t('Select previous reference search') });
 				if (pick) {
 					this._reRunHistoryItem(pick.item);
 				}
@@ -290,7 +290,7 @@ class TreeInputHistory implements vscode.TreeDataProvider<HistoryItem> {
 	}
 
 	dispose(): void {
-		vscode.Disposable.from(...this._disposables).dispose();
+		zyraxoncode.Disposable.from(...this._disposables).dispose();
 		this._onDidChangeTreeData.dispose();
 	}
 
@@ -301,14 +301,14 @@ class TreeInputHistory implements vscode.TreeDataProvider<HistoryItem> {
 		// create a new input when having a tracked position which is
 		// different than the original position.
 		if (newPosition && !item.input.location.range.start.isEqual(newPosition)) {
-			newInput = item.input.with(new vscode.Location(item.input.location.uri, newPosition));
+			newInput = item.input.with(new zyraxoncode.Location(item.input.location.uri, newPosition));
 		}
 		this._tree.setInput(newInput);
 	}
 
 	async add(input: SymbolTreeInput<unknown>) {
 
-		const doc = await vscode.workspace.openTextDocument(input.location.uri);
+		const doc = await zyraxoncode.workspace.openTextDocument(input.location.uri);
 
 		const anchor = new WordAnchor(doc, input.location.range.start);
 		const range = doc.getWordRangeAtPosition(input.location.range.start) ?? doc.getWordRangeAtPosition(input.location.range.start, /[^\s]+/);
@@ -333,11 +333,11 @@ class TreeInputHistory implements vscode.TreeDataProvider<HistoryItem> {
 
 	// --- tree data provider
 
-	getTreeItem(item: HistoryItem): vscode.TreeItem {
-		const result = new vscode.TreeItem(item.word);
+	getTreeItem(item: HistoryItem): zyraxoncode.TreeItem {
+		const result = new zyraxoncode.TreeItem(item.word);
 		result.description = item.description;
-		result.command = { command: '_references-view.showHistoryItem', arguments: [item], title: vscode.l10n.t('Rerun') };
-		result.collapsibleState = vscode.TreeItemCollapsibleState.None;
+		result.command = { command: '_references-view.showHistoryItem', arguments: [item], title: zyraxoncode.l10n.t('Rerun') };
+		result.collapsibleState = zyraxoncode.TreeItemCollapsibleState.None;
 		result.contextValue = 'history-item';
 		return result;
 	}

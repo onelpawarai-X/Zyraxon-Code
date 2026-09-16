@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'vscode';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { ConfigKey, HARD_TOOL_LIMIT, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IExperimentationService } from '../../../../platform/telemetry/common/nullExperimentationService';
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
@@ -12,7 +12,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { Iterable } from '../../../../util/vs/base/common/iterator';
 import { IObservable } from '../../../../util/vs/base/common/observableInternal';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelTextPart, LanguageModelToolResult } from '../../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult } from '../../../../zyraxoncodeTypes';
 import { EMBEDDINGS_GROUP_NAME, VIRTUAL_TOOL_NAME_PREFIX, VirtualTool } from './virtualTool';
 import { VirtualToolGrouper } from './virtualToolGrouper';
 import * as Constant from './virtualToolsConstants';

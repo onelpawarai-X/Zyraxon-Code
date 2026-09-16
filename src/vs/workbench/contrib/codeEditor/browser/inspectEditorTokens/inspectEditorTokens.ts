@@ -22,7 +22,7 @@ import { ILanguageService } from '../../../../../editor/common/languages/languag
 import { INotificationService } from '../../../../../platform/notification/common/notification.js';
 import { findMatchingThemeRule } from '../../../../services/textMate/common/TMHelper.js';
 import { ITextMateTokenizationService } from '../../../../services/textMate/browser/textMateTokenizationFeature.js';
-import type { IGrammar, IToken, StateStack } from 'vscode-textmate';
+import type { IGrammar, IToken, StateStack } from 'zyraxoncode-textmate';
 import { IWorkbenchThemeService } from '../../../../services/themes/common/workbenchThemeService.js';
 import { CancellationTokenSource } from '../../../../../base/common/cancellation.js';
 import { ColorThemeData, TokenStyleDefinitions, TokenStyleDefinition, TextMateThemingRuleDefinitions } from '../../../../services/themes/common/colorThemeData.js';
@@ -31,7 +31,7 @@ import { IConfigurationService } from '../../../../../platform/configuration/com
 import { SEMANTIC_HIGHLIGHTING_SETTING_ID, IEditorSemanticHighlightingOptions } from '../../../../../editor/contrib/semanticTokens/common/semanticTokensConfig.js';
 import { Schemas } from '../../../../../base/common/network.js';
 import { ILanguageFeaturesService } from '../../../../../editor/common/services/languageFeatures.js';
-import type * as TreeSitter from '@vscode/tree-sitter-wasm';
+import type * as TreeSitter from '@zyraxoncode/tree-sitter-wasm';
 import { TreeSitterSyntaxTokenBackend } from '../../../../../editor/common/model/tokens/treeSitter/treeSitterSyntaxTokenBackend.js';
 import { TokenizationTextModelPart } from '../../../../../editor/common/model/tokens/tokenizationTextModelPart.js';
 import { TreeSitterTree } from '../../../../../editor/common/model/tokens/treeSitter/treeSitterTree.js';
@@ -91,7 +91,7 @@ export class InspectEditorTokensController extends Disposable implements IEditor
 		if (!this._editor.hasModel()) {
 			return;
 		}
-		if (this._editor.getModel().uri.scheme === Schemas.vscodeNotebookCell) {
+		if (this._editor.getModel().uri.scheme === Schemas.zyraxoncodeNotebookCell) {
 			// disable in notebooks
 			return;
 		}

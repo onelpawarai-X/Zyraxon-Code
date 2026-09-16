@@ -20,7 +20,7 @@ import { CountTokensCallback, IBeginToolCallOptions, ILanguageModelToolsService,
 
 export class MockLanguageModelToolsService extends Disposable implements ILanguageModelToolsService {
 	_serviceBrand: undefined;
-	vscodeToolSet: ToolSet = new ToolSet('vscode', 'vscode', ThemeIcon.fromId(Codicon.code.id), ToolDataSource.Internal, undefined, undefined, undefined, undefined, undefined, new MockContextKeyService());
+	zyraxoncodeToolSet: ToolSet = new ToolSet('zyraxoncode', 'zyraxoncode', ThemeIcon.fromId(Codicon.code.id), ToolDataSource.Internal, undefined, undefined, undefined, undefined, undefined, new MockContextKeyService());
 	executeToolSet: ToolSet = new ToolSet('execute', 'execute', ThemeIcon.fromId(Codicon.terminal.id), ToolDataSource.Internal, undefined, undefined, undefined, undefined, undefined, new MockContextKeyService());
 	readToolSet: ToolSet = new ToolSet('read', 'read', ThemeIcon.fromId(Codicon.book.id), ToolDataSource.Internal, undefined, undefined, undefined, undefined, undefined, new MockContextKeyService());
 	agentToolSet: ToolSet = new ToolSet('agent', 'agent', ThemeIcon.fromId(Codicon.agent.id), ToolDataSource.Internal, undefined, undefined, undefined, undefined, undefined, new MockContextKeyService());

@@ -410,7 +410,7 @@ export class NewChatContextAttachments extends Disposable {
 		const maxFiles = 200;
 
 		// For local file:// URIs, use the search service which respects .gitignore and excludes
-		if (rootUri.scheme === Schemas.file || rootUri.scheme === Schemas.vscodeRemote) {
+		if (rootUri.scheme === Schemas.file || rootUri.scheme === Schemas.zyraxoncodeRemote) {
 			return this._collectFilePicksViaSearch(rootUri, maxFiles, filePattern, token);
 		}
 

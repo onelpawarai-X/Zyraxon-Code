@@ -7,7 +7,7 @@ import { InstantiationType, registerSingleton } from '../../../../../platform/in
 import {
 	CustomizationHarnessServiceBase,
 	ICustomizationHarnessService,
-	createVSCodeHarnessDescriptor,
+	createZyraxonCodeHarnessDescriptor,
 
 } from '../../common/customizationHarnessService.js';
 import { IPromptsService } from '../../common/promptSyntax/service/promptsService.js';
@@ -25,7 +25,7 @@ class CustomizationHarnessService extends CustomizationHarnessServiceBase {
 		@IPromptsService promptsService: IPromptsService,
 	) {
 		super(
-			[createVSCodeHarnessDescriptor()],
+			[createZyraxonCodeHarnessDescriptor()],
 			SessionType.Local,
 			promptsService,
 		);

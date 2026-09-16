@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, Uri } from 'vscode';
-import { Change, Repository } from '../vscode/git';
+import type { CancellationToken, Uri } from 'zyraxoncode';
+import { Change, Repository } from '../zyraxoncode/git';
 import { Diff, IGitDiffService } from './gitDiffService';
 
 export class NullGitDiffService implements IGitDiffService {

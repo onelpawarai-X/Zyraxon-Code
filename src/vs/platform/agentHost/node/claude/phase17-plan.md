@@ -324,7 +324,7 @@ Launch + log skills discovered in this workspace (project scope):
 1. **Hooks surface + fire.** Add a `PostToolUse` hook to `~/.claude/settings.json`. Open a
    Claude session; via the composer's customization modal ("Skills/Agents" → manage), confirm
    a **Hooks** group lists the hook and clicking it opens the real `settings.json` (renderer
-   log: `[text file model] resolve() - enter file://…/.claude/settings.json`). Send "list
+   log: `[text file model] resolve() - enter __ZYRAXKEEP__0_`). Send "list
    files in this directory" (forces a tool) and confirm the hook runs (its side effect / a
    `PreToolUse`/`PostToolUse` entry in `agenthost.log`).
 2. **Native plugin surface (auto-loaded).** With a marketplace plugin installed + enabled via
@@ -718,11 +718,11 @@ the `system/init.plugins` `{name,path}` shape were both verified in `sdk.d.ts` (
 - **Multi-format manifest detection (post-E2E fix).** The manifest-presence check (`hasManifest`
   in the scanner, and the PB-8 skill-scan dedupe) initially hardcoded `.claude-plugin/plugin.json`
   (Claude format) and so **silently skipped Open-Plugins-format plugins** (`.plugin/plugin.json`,
-  e.g. `github-inbox@vscode-team-kit`) — they were absent from the Plugins container even though
+  e.g. `github-inbox@zyraxoncode-team-kit`) — they were absent from the Plugins container even though
   their skills/agents surfaced standalone (the SDK loads them via `settingSources`). Fixed by
   reusing the shared `detectPluginFormat` (probes `.plugin/` → `.claude-plugin/` → `plugin.json`)
   and checking the detected format's `manifestPath`. Regression test added; re-verified E2E
-  (**Plugins 2**: `telegram@claude-plugins-official` + `github-inbox@vscode-team-kit`, both
+  (**Plugins 2**: `telegram@claude-plugins-official` + `github-inbox@zyraxoncode-team-kit`, both
   *Loaded*).
 - **Post-materialize match by `source`, not `path` (post-E2E fix, supersedes PB-3).** The SDK
   `init.plugins` `path` is **unreliable**: for a workspace-`local`-scoped plugin (enabled in

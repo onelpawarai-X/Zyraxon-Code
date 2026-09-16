@@ -62,14 +62,14 @@ class BrowserEditorResolverContribution implements IWorkbenchContribution {
 		@IBrowserViewWorkbenchService browserViewWorkbenchService: IBrowserViewWorkbenchService,
 	) {
 		editorResolverService.registerEditor(
-			`${Schemas.vscodeBrowser}:/**`,
+			`${Schemas.zyraxoncodeBrowser}:/**`,
 			{
 				id: BrowserEditorInput.EDITOR_ID,
 				label: localize('browser.editorLabel', "Browser"),
 				priority: RegisteredEditorPriority.exclusive
 			},
 			{
-				canSupportResource: resource => resource.scheme === Schemas.vscodeBrowser,
+				canSupportResource: resource => resource.scheme === Schemas.zyraxoncodeBrowser,
 				singlePerResource: true
 			},
 			{

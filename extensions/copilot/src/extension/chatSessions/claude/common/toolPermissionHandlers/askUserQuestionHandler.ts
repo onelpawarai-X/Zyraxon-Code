@@ -5,7 +5,7 @@
 
 import { AskUserQuestionInput } from '@anthropic-ai/claude-agent-sdk/sdk-tools';
 import { CancellationToken } from '../../../../../util/vs/base/common/cancellation';
-import { LanguageModelTextPart } from '../../../../../vscodeTypes';
+import { LanguageModelTextPart } from '../../../../../zyraxoncodeTypes';
 import { IAnswerResult } from '../../../../tools/common/askQuestionsTypes';
 import { ToolName } from '../../../../tools/common/toolNames';
 import { IToolsService } from '../../../../tools/common/toolsService';
@@ -19,7 +19,7 @@ import { ClaudeToolNames } from '../claudeTools';
 
 /**
  * Handler for the AskUserQuestion tool.
- * Delegates to the core vscode_askQuestions tool for improved UX with step navigation,
+ * Delegates to the core zyraxoncode_askQuestions tool for improved UX with step navigation,
  * back button support, and custom text input.
  */
 export class AskUserQuestionHandler implements IClaudeToolPermissionHandler<ClaudeToolNames.AskUserQuestion> {

@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatResponseStream, ExtendedChatResponsePart } from 'vscode';
+import type { ChatResponseStream, ExtendedChatResponsePart } from 'zyraxoncode';
 import { PositionOffsetTransformer } from '../../../../platform/editing/common/positionOffsetTransformer';
 import { ChatResponseStreamImpl } from '../../../../util/common/chatResponseStreamImpl';
 import { StringEdit } from '../../../../util/vs/editor/common/core/edits/stringEdit';
-import { ChatResponseTextEditPart, TextEdit } from '../../../../vscodeTypes';
+import { ChatResponseTextEditPart, TextEdit } from '../../../../zyraxoncodeTypes';
 import { ProjectedDocument } from './summarizedDocument/summarizeDocument';
 
 export class WorkingCopyDerivedDocument {

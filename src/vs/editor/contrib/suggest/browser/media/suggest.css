@@ -10,8 +10,8 @@
 	z-index: 40;
 	display: flex;
 	flex-direction: column;
-	border-radius: var(--vscode-cornerRadius-large);
-	box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	box-shadow: 0 2px 8px var(--zyraxoncode-widget-shadow);
 }
 
 .monaco-editor .suggest-widget.message {
@@ -25,8 +25,8 @@
 	width: 100%;
 	border-style: solid;
 	border-width: 1px;
-	border-color: var(--vscode-editorSuggestWidget-border);
-	background-color: var(--vscode-editorSuggestWidget-background);
+	border-color: var(--zyraxoncode-editorSuggestWidget-border);
+	background-color: var(--zyraxoncode-editorSuggestWidget-background);
 }
 
 .monaco-editor.hc-black .suggest-widget,
@@ -52,7 +52,7 @@
 	width: 100%;
 	font-size: 80%;
 	padding: 0 4px 0 4px;
-	border-top: 1px solid var(--vscode-editorSuggestWidget-border);
+	border-top: 1px solid var(--zyraxoncode-editorSuggestWidget-border);
 	overflow: hidden;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .monaco-editor .suggest-widget.with-status-bar .suggest-status-bar .action-label {
-	color: var(--vscode-editorSuggestWidgetStatus-foreground);
+	color: var(--zyraxoncode-editorSuggestWidgetStatus-foreground);
 }
 
 .monaco-editor .suggest-widget.with-status-bar .suggest-status-bar .action-item:not(:last-of-type) .action-label {
@@ -102,7 +102,7 @@
 .monaco-editor .suggest-widget .monaco-list {
 	user-select: none;
 	-webkit-user-select: none;
-	border-radius: var(--vscode-cornerRadius-large);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 }
 
 /** Styles for each row in the list element **/
@@ -120,13 +120,13 @@
 }
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row.focused {
-	color: var(--vscode-editorSuggestWidget-selectedForeground);
-	outline: 1px solid var(--vscode-editorSuggestWidget-focusOutline);
+	color: var(--zyraxoncode-editorSuggestWidget-selectedForeground);
+	outline: 1px solid var(--zyraxoncode-editorSuggestWidget-focusOutline);
 	outline-offset: -1px;
 }
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row.focused .codicon {
-	color: var(--vscode-editorSuggestWidget-selectedIconForeground);
+	color: var(--zyraxoncode-editorSuggestWidget-selectedIconForeground);
 }
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row > .contents {
@@ -150,7 +150,7 @@
 }
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row:not(.focused) > .contents > .main .monaco-icon-label {
-	color: var(--vscode-editorSuggestWidget-foreground);
+	color: var(--zyraxoncode-editorSuggestWidget-foreground);
 }
 
 .monaco-editor .suggest-widget:not(.frozen) .monaco-highlighted-label .highlight {
@@ -158,11 +158,11 @@
 }
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row > .contents > .main .monaco-highlighted-label .highlight {
-	color: var(--vscode-editorSuggestWidget-highlightForeground);
+	color: var(--zyraxoncode-editorSuggestWidget-highlightForeground);
 }
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row.focused > .contents > .main .monaco-highlighted-label .highlight {
-	color: var(--vscode-editorSuggestWidget-focusHighlightForeground);
+	color: var(--zyraxoncode-editorSuggestWidget-focusHighlightForeground);
 }
 
 /** ReadMore Icon styles **/
@@ -189,11 +189,11 @@
 /** signature, qualifier, type/details styling **/
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row > .contents > .main > .right > .details-label {
-	color: var(--vscode-editorSuggestWidget-foreground);
+	color: var(--zyraxoncode-editorSuggestWidget-foreground);
 }
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row.focused > .contents > .main > .right > .details-label {
-	color: var(--vscode-editorSuggestWidget-selectedForeground);
+	color: var(--zyraxoncode-editorSuggestWidget-selectedForeground);
 }
 
 .monaco-editor .suggest-widget .monaco-list .monaco-list-row > .contents > .main > .left > .signature-label {
@@ -371,25 +371,25 @@
 	display: flex;
 	flex-direction: column;
 	cursor: default;
-	color: var(--vscode-editorSuggestWidget-foreground);
-	border-radius: var(--vscode-cornerRadius-large);
+	color: var(--zyraxoncode-editorSuggestWidget-foreground);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 	overflow: hidden;
 }
 
 .monaco-editor .suggest-details:focus {
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .monaco-editor .suggest-details a {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .monaco-editor .suggest-details a:hover {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .monaco-editor .suggest-details code {
-	background-color: var(--vscode-textCodeBlock-background);
+	background-color: var(--zyraxoncode-textCodeBlock-background);
 }
 
 .monaco-editor .suggest-details.no-docs {

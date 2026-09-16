@@ -16,7 +16,7 @@ export interface IBuildModelPickerItemsOptions {
 	readonly recentModelIds: string[];
 	readonly pinnedModelIds: string[];
 	readonly controlModels: IStringDictionary<IModelControlEntry>;
-	readonly currentVSCodeVersion: string;
+	readonly currentZyraxonCodeVersion: string;
 	readonly updateStateType: StateType;
 	readonly manageSettingsUrl: string | undefined;
 	readonly manageModelsAction: IActionWidgetDropdownAction | undefined;

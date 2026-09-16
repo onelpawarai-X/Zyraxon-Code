@@ -30,11 +30,11 @@
 }
 
 .survey-editor-pane .survey-title .survey-title-icon {
-	color: var(--vscode-focusBorder);
+	color: var(--zyraxoncode-focusBorder);
 }
 
 .survey-editor-pane .survey-description {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 28px;
 }
 
@@ -50,14 +50,14 @@
 	display: block;
 }
 
-/* Segmented control — uses --vscode-radio-* tokens from the Radio widget palette */
+/* Segmented control — uses --zyraxoncode-radio-* tokens from the Radio widget palette */
 
 .survey-editor-pane .survey-segment-group {
 	position: relative;
 	display: flex;
 	flex-wrap: nowrap;
-	border: var(--vscode-strokeThickness) solid var(--vscode-radio-inactiveBorder, var(--vscode-input-border, transparent));
-	border-radius: var(--vscode-cornerRadius-small, 4px);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-radio-inactiveBorder, var(--zyraxoncode-input-border, transparent));
+	border-radius: var(--zyraxoncode-cornerRadius-small, 4px);
 }
 
 .survey-editor-pane .survey-segment-group .survey-segment-input {
@@ -78,9 +78,9 @@
 	text-align: center;
 	padding: 8px 6px;
 	cursor: pointer;
-	border-right: var(--vscode-strokeThickness) solid var(--vscode-radio-inactiveBorder, var(--vscode-input-border, transparent));
-	color: var(--vscode-radio-inactiveForeground, inherit);
-	background-color: var(--vscode-radio-inactiveBackground, transparent);
+	border-right: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-radio-inactiveBorder, var(--zyraxoncode-input-border, transparent));
+	color: var(--zyraxoncode-radio-inactiveForeground, inherit);
+	background-color: var(--zyraxoncode-radio-inactiveBackground, transparent);
 	transition: background-color 0.1s;
 	user-select: none;
 	overflow: hidden;
@@ -89,26 +89,26 @@
 }
 
 .survey-editor-pane .survey-segment-group .survey-segment-label:first-of-type {
-	border-radius: var(--vscode-cornerRadius-small, 4px) 0 0 var(--vscode-cornerRadius-small, 4px);
+	border-radius: var(--zyraxoncode-cornerRadius-small, 4px) 0 0 var(--zyraxoncode-cornerRadius-small, 4px);
 }
 
 .survey-editor-pane .survey-segment-group .survey-segment-label:last-of-type {
 	border-right: none;
-	border-radius: 0 var(--vscode-cornerRadius-small, 4px) var(--vscode-cornerRadius-small, 4px) 0;
+	border-radius: 0 var(--zyraxoncode-cornerRadius-small, 4px) var(--zyraxoncode-cornerRadius-small, 4px) 0;
 }
 
 .survey-editor-pane .survey-segment-group .survey-segment-label:hover {
-	background-color: var(--vscode-radio-inactiveHoverBackground, var(--vscode-list-hoverBackground));
+	background-color: var(--zyraxoncode-radio-inactiveHoverBackground, var(--zyraxoncode-list-hoverBackground));
 }
 
 .survey-editor-pane .survey-segment-group .survey-segment-input:checked + .survey-segment-label {
-	background-color: var(--vscode-radio-activeBackground, var(--vscode-list-activeSelectionBackground));
-	color: var(--vscode-radio-activeForeground, var(--vscode-list-activeSelectionForeground));
-	border-color: var(--vscode-radio-activeBorder, transparent);
+	background-color: var(--zyraxoncode-radio-activeBackground, var(--zyraxoncode-list-activeSelectionBackground));
+	color: var(--zyraxoncode-radio-activeForeground, var(--zyraxoncode-list-activeSelectionForeground));
+	border-color: var(--zyraxoncode-radio-activeBorder, transparent);
 }
 
 .survey-editor-pane .survey-segment-group .survey-segment-input:focus-visible + .survey-segment-label {
-	outline: 2px solid var(--vscode-focusBorder);
+	outline: 2px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -2px;
 	z-index: 1;
 	position: relative;
@@ -117,14 +117,14 @@
 /* HC: distinct border on selected segment */
 .hc-black .survey-editor-pane .survey-segment-group .survey-segment-input:checked + .survey-segment-label,
 .hc-light .survey-editor-pane .survey-segment-group .survey-segment-input:checked + .survey-segment-label {
-	outline: 1px solid var(--vscode-contrastActiveBorder, transparent);
+	outline: 1px solid var(--zyraxoncode-contrastActiveBorder, transparent);
 	outline-offset: -1px;
 }
 
 /* HC: focus must be visually distinct from checked */
 .hc-black .survey-editor-pane .survey-segment-group .survey-segment-input:focus-visible + .survey-segment-label,
 .hc-light .survey-editor-pane .survey-segment-group .survey-segment-input:focus-visible + .survey-segment-label {
-	outline: 2px dashed var(--vscode-focusBorder);
+	outline: 2px dashed var(--zyraxoncode-focusBorder);
 	outline-offset: -2px;
 }
 
@@ -143,7 +143,7 @@
 .survey-editor-pane .survey-list-option {
 	display: block;
 	padding: 6px 10px;
-	border: var(--vscode-strokeThickness) solid transparent;
+	border: var(--zyraxoncode-strokeThickness) solid transparent;
 	cursor: pointer;
 	transition: background-color 0.1s;
 	user-select: none;
@@ -162,31 +162,31 @@
 }
 
 .survey-editor-pane .survey-list-option:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .survey-editor-pane .survey-list-option:has(.survey-list-input:checked) {
-	background-color: var(--vscode-list-activeSelectionBackground);
-	color: var(--vscode-list-activeSelectionForeground);
-	border-color: var(--vscode-focusBorder);
+	background-color: var(--zyraxoncode-list-activeSelectionBackground);
+	color: var(--zyraxoncode-list-activeSelectionForeground);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .survey-editor-pane .survey-list-option:has(.survey-list-input:focus-visible) {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
 /* HC: distinct border on selected list row */
 .hc-black .survey-editor-pane .survey-list-option:has(.survey-list-input:checked),
 .hc-light .survey-editor-pane .survey-list-option:has(.survey-list-input:checked) {
-	outline: 1px solid var(--vscode-contrastActiveBorder);
+	outline: 1px solid var(--zyraxoncode-contrastActiveBorder);
 	outline-offset: -1px;
 }
 
 /* HC: focus must be visually distinct from checked */
 .hc-black .survey-editor-pane .survey-list-option:has(.survey-list-input:focus-visible),
 .hc-light .survey-editor-pane .survey-list-option:has(.survey-list-input:focus-visible) {
-	outline: 2px dashed var(--vscode-focusBorder);
+	outline: 2px dashed var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -198,7 +198,7 @@
 
 .survey-editor-pane .survey-submit-hint {
 	margin-top: 8px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 }
 
@@ -215,10 +215,10 @@
 }
 
 .survey-editor-pane .survey-success .survey-success-icon {
-	font-size: var(--vscode-codiconFontSize, 16px);
+	font-size: var(--zyraxoncode-codiconFontSize, 16px);
 	transform: scale(2);
 	transform-origin: center;
-	color: var(--vscode-charts-green);
+	color: var(--zyraxoncode-charts-green);
 	margin-bottom: 24px;
 }
 
@@ -229,7 +229,7 @@
 }
 
 .survey-editor-pane .survey-success .survey-success-detail {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 @keyframes survey-success-appear {
@@ -259,18 +259,18 @@
 
 	.survey-editor-pane .survey-segment-group .survey-segment-label {
 		border-right: none;
-		border-bottom: var(--vscode-strokeThickness) solid var(--vscode-radio-inactiveBorder, var(--vscode-input-border, transparent));
+		border-bottom: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-radio-inactiveBorder, var(--zyraxoncode-input-border, transparent));
 		text-align: left;
 		padding: 8px 12px;
 	}
 
 	.survey-editor-pane .survey-segment-group .survey-segment-label:first-of-type {
-		border-radius: var(--vscode-cornerRadius-small, 4px) var(--vscode-cornerRadius-small, 4px) 0 0;
+		border-radius: var(--zyraxoncode-cornerRadius-small, 4px) var(--zyraxoncode-cornerRadius-small, 4px) 0 0;
 	}
 
 	.survey-editor-pane .survey-segment-group .survey-segment-label:last-of-type {
 		border-bottom: none;
-		border-radius: 0 0 var(--vscode-cornerRadius-small, 4px) var(--vscode-cornerRadius-small, 4px);
+		border-radius: 0 0 var(--zyraxoncode-cornerRadius-small, 4px) var(--zyraxoncode-cornerRadius-small, 4px);
 	}
 }
 

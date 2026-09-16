@@ -10,11 +10,11 @@ EXTS = [
     "html-language-features/server", "ipynb", "jake",
     "json-language-features", "json-language-features/server", "markdown-language-features",
     "markdown-math", "media-preview", "merge-conflict", "mermaid-markdown-features",
-    "microsoft-authentication", "notebook-renderers", "npm", "php-language-features",
+    "zyraxon-authentication", "notebook-renderers", "npm", "php-language-features",
     "references-view", "search-result", "simple-browser", "terminal-suggest",
     "tunnel-forwarding", "typescript-language-features", "typescript-language-features/server",
-    "vscode-api-tests", "vscode-colorize-tests", "vscode-colorize-perf-tests",
-    "vscode-test-resolver",
+    "zyraxoncode-api-tests", "zyraxoncode-colorize-tests", "zyraxoncode-colorize-perf-tests",
+    "zyraxoncode-test-resolver",
 ]
 
 def find_broken():

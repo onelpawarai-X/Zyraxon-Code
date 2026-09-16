@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 
-//        http://www.apache.org/licenses/LICENSE-2.0
+//        __ZYRAXKEEP__0_
 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 // Based on reference implementation from
-// https://cookbook.openai.com/examples/gpt4-1_prompting_guide#reference-implementation-apply_patchpy
+// __ZYRAXKEEP__1_
 
 // eslint-disable-next-line header/header
-import type { TextDocument } from 'vscode';
+import type { TextDocument } from 'zyraxoncode';
 import { AbstractDocumentWithLanguageId } from '../../../../platform/editing/common/abstractText';
 import { getFilepathComment } from '../../../../util/common/markdown';
 import { computeLevenshteinDistance } from '../../../../util/vs/base/common/diff/diff';
@@ -570,7 +570,7 @@ function find_context_core(
 	}
 
 	// Pass 4 normalize explicit \\t and \\n tab chars -------------------------
-	if (context.length === 1) { // https://github.com/microsoft/vscode/issues/253960
+	if (context.length === 1) { // __ZYRAXKEEP__2_
 		const ctxPass4 = replace_explicit_nl(ctxPass3);
 		if (ctxPass4 !== ctxPass3) {
 			const newContextLines = count(ctxPass4, '\n') + 1;

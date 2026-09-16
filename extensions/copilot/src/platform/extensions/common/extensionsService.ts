@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import type { Event, Extension } from 'vscode';
+import type { Event, Extension } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 export const IExtensionsService = createServiceIdentifier<IExtensionsService>('IExtensionsService');

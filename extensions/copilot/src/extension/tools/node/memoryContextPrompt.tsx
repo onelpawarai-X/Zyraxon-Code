@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@vscode/prompt-tsx';
-import { IVSCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { FileType } from '../../../platform/filesystem/common/fileTypes';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
@@ -23,7 +23,7 @@ export interface MemoryContextPromptProps extends BasePromptElementProps {
 export class MemoryContextPrompt extends PromptElement<MemoryContextPromptProps> {
 	constructor(
 		props: any,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 		@IFileSystemService private readonly fileSystemService: IFileSystemService,
 		@ITelemetryService private readonly telemetryService: ITelemetryService,
 	) {

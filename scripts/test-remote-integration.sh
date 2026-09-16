@@ -16,7 +16,7 @@ TESTRESOLVER_DATA_FOLDER=`mktemp -d 2>/dev/null`
 cd $ROOT
 
 if [[ "$1" == "" ]]; then
-	AUTHORITY=vscode-remote://test+test
+	AUTHORITY=__ZYRAXKEEP__0_
 	EXT_PATH=$ROOT/extensions
 	# Load remote node
 	npm run gulp node
@@ -41,8 +41,8 @@ else
 	export VSCODE_CLI=1
 	export ELECTRON_ENABLE_LOGGING=1
 
-	# Running from a build, we need to enable the vscode-test-resolver extension
-	EXTRA_INTEGRATION_TEST_ARGUMENTS="--extensions-dir=$EXT_PATH  --enable-proposed-api=vscode.vscode-test-resolver --enable-proposed-api=vscode.vscode-api-tests"
+	# Running from a build, we need to enable the zyraxoncode-test-resolver extension
+	EXTRA_INTEGRATION_TEST_ARGUMENTS="--extensions-dir=$EXT_PATH  --enable-proposed-api=zyraxoncode.zyraxoncode-test-resolver --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests"
 
 	echo "Running remote integration tests with $INTEGRATION_TEST_ELECTRON_PATH as build."
 fi
@@ -56,7 +56,7 @@ then
 	echo "Using remote server out of sources for integration tests"
 else
 	echo "Using $VSCODE_REMOTE_SERVER_PATH as server path for integration tests"
-	export TESTRESOLVER_INSTALL_BUILTIN_EXTENSION='ms-vscode.vscode-smoketest-check'
+	export TESTRESOLVER_INSTALL_BUILTIN_EXTENSION='ms-zyraxoncode.zyraxoncode-smoketest-check'
 fi
 
 if [ -z "$INTEGRATION_TEST_APP_NAME" ]; then
@@ -76,13 +76,13 @@ echo "Storing log files into '$VSCODELOGSDIR'."
 echo
 echo "### API tests (folder)"
 echo
-"$INTEGRATION_TEST_ELECTRON_PATH" --folder-uri=$REMOTE_VSCODE/vscode-api-tests/testWorkspace --extensionDevelopmentPath=$REMOTE_VSCODE/vscode-api-tests --extensionTestsPath=$REMOTE_VSCODE/vscode-api-tests/out/singlefolder-tests $API_TESTS_EXTRA_ARGS $EXTRA_INTEGRATION_TEST_ARGUMENTS
+"$INTEGRATION_TEST_ELECTRON_PATH" --folder-uri=$REMOTE_VSCODE/zyraxoncode-api-tests/testWorkspace --extensionDevelopmentPath=$REMOTE_VSCODE/zyraxoncode-api-tests --extensionTestsPath=$REMOTE_VSCODE/zyraxoncode-api-tests/out/singlefolder-tests $API_TESTS_EXTRA_ARGS $EXTRA_INTEGRATION_TEST_ARGUMENTS
 kill_app
 
 echo
 echo "### API tests (workspace)"
 echo
-"$INTEGRATION_TEST_ELECTRON_PATH" --file-uri=$REMOTE_VSCODE/vscode-api-tests/testworkspace.code-workspace --extensionDevelopmentPath=$REMOTE_VSCODE/vscode-api-tests --extensionTestsPath=$REMOTE_VSCODE/vscode-api-tests/out/workspace-tests $API_TESTS_EXTRA_ARGS $EXTRA_INTEGRATION_TEST_ARGUMENTS
+"$INTEGRATION_TEST_ELECTRON_PATH" --file-uri=$REMOTE_VSCODE/zyraxoncode-api-tests/testworkspace.code-workspace --extensionDevelopmentPath=$REMOTE_VSCODE/zyraxoncode-api-tests --extensionTestsPath=$REMOTE_VSCODE/zyraxoncode-api-tests/out/workspace-tests $API_TESTS_EXTRA_ARGS $EXTRA_INTEGRATION_TEST_ARGUMENTS
 kill_app
 
 echo

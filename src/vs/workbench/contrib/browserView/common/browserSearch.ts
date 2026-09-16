@@ -73,23 +73,23 @@ export const BROWSER_SEARCH_ENGINES: readonly IBrowserSearchEngine[] = [
 	{
 		id: BrowserSearchEngineId.Bing,
 		label: localize('browser.search.engine.bing', "Bing"),
-		buildSearchUrl: (q) => `https://www.bing.com/search?q=${encodeQuery(q)}`,
+		buildSearchUrl: (q) => `__ZYRAXKEEP__0_{encodeQuery(q)}`,
 	},
 	{
 		id: BrowserSearchEngineId.Google,
 		label: localize('browser.search.engine.google', "Google"),
-		buildSearchUrl: (q) => `https://www.google.com/search?q=${encodeQuery(q)}`,
+		buildSearchUrl: (q) => `__ZYRAXKEEP__1_{encodeQuery(q)}`,
 	},
 	{
 		id: BrowserSearchEngineId.Yahoo,
 		label: localize('browser.search.engine.yahoo', "Yahoo!"),
 		buildSearchUrl: (q) =>
-			`https://search.yahoo.com/search?p=${encodeQuery(q)}`,
+			`__ZYRAXKEEP__2_{encodeQuery(q)}`,
 	},
 	{
 		id: BrowserSearchEngineId.DuckDuckGo,
 		label: localize('browser.search.engine.duckduckgo', "DuckDuckGo"),
-		buildSearchUrl: (q) => `https://duckduckgo.com/?q=${encodeQuery(q)}`,
+		buildSearchUrl: (q) => `__ZYRAXKEEP__3_{encodeQuery(q)}`,
 	},
 ];
 
@@ -120,8 +120,8 @@ const KNOWN_URL_SCHEMES = new Set([
 	'mailto',
 	'chrome',
 	'edge',
-	'vscode',
-	'vscode-insiders',
+	'zyraxoncode',
+	'zyraxoncode-insiders',
 ]);
 
 /**
@@ -159,7 +159,7 @@ function toAsciiHost(host: string): string | undefined {
 		return host;
 	}
 	try {
-		return new URL(`http://${host}`).hostname;
+		return new URL(`__ZYRAXKEEP__4_{host}`).hostname;
 	} catch {
 		return undefined;
 	}
@@ -244,11 +244,11 @@ function hasKnownTld(host: string): boolean {
  * `metrics::OmniboxInputType` values: `empty`, `url`, `query`, or `unknown`.
  *
  * Adapted from Chromium's `AutocompleteInput::Parse`.
- * Reference: https://chromium.googlesource.com/chromium/src/+/1a40eab3d2faacd167cc3d78d20f9da98d55b78e/components/omnibox/browser/autocomplete_input.cc#250
+ * Reference: __ZYRAXKEEP__5_
  *
  * - Empty / whitespace-only input → `empty`.
  * - Recognized non-http(s) scheme (`file:`, `ftp:`, `about:`, `data:`,
- *   `view-source:`, `mailto:`, `chrome:`, `edge:`, `vscode:`, …) → `url`.
+ *   `view-source:`, `mailto:`, `chrome:`, `edge:`, `zyraxoncode:`, …) → `url`.
  * - `javascript:` followed by something that doesn't look like code → `unknown`.
  * - Unknown scheme that looks like `user:password@host…` → `url`. Other
  *   unknown schemes (e.g. `site:foo`) → `unknown`.
@@ -339,7 +339,7 @@ export function resolveAddressBarInputType(rawInput: string): AddressBarInputKin
 	const { userinfo, host: rawHost, port, pathAndRest } = parseHostAndPath(rest);
 
 	// Host-less input that starts with `/` is treated as an absolute path URL
-	// (e.g. `/usr/local/bin`, `//example.com`).
+	// (e.g. `/usr/local/bin`, `__ZYRAXKEEP__6_`).
 	if (rawHost.length === 0) {
 		return pathAndRest.startsWith('/') ? 'url' : 'query';
 	}

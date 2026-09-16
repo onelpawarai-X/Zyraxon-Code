@@ -99,7 +99,7 @@ export class GitHubManager {
 			'user-agent': string;
 			authorization?: string;
 		} = {
-			'user-agent': 'GitHub VSCode Pull Requests',
+			'user-agent': 'GitHub ZyraxonCode Pull Requests',
 		};
 		if (token) {
 			headers.authorization = `token ${token}`;

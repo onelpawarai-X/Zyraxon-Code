@@ -9,7 +9,7 @@ import { ExtHostInteractiveShape, IMainContext } from './extHost.protocol.js';
 import { ApiCommand, ApiCommandArgument, ApiCommandResult, ExtHostCommands } from './extHostCommands.js';
 import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import { ExtHostNotebookController } from './extHostNotebook.js';
-import { NotebookEditor } from 'vscode';
+import { NotebookEditor } from 'zyraxoncode';
 
 export class ExtHostInteractive implements ExtHostInteractiveShape {
 	constructor(

@@ -274,12 +274,12 @@ class SharedProcessMain extends Disposable implements IClientConnectionFilter {
 			// Since user data can change very frequently across multiple
 			// processes, we want a single process handling these operations.
 			this._register(new DiskFileSystemProviderClient(mainProcessService.getChannel(LOCAL_FILE_SYSTEM_CHANNEL_NAME), { pathCaseSensitive: isLinux })),
-			Schemas.vscodeUserData,
+			Schemas.zyraxoncodeUserData,
 			userDataProfilesService,
 			uriIdentityService,
 			logService
 		));
-		fileService.registerProvider(Schemas.vscodeUserData, userDataFileSystemProvider);
+		fileService.registerProvider(Schemas.zyraxoncodeUserData, userDataFileSystemProvider);
 
 		// Configuration
 		const configurationService = this._register(new ConfigurationService(userDataProfilesService.defaultProfile.settingsResource, fileService, policyService, logService));
@@ -555,7 +555,7 @@ class SharedProcessMain extends Disposable implements IClientConnectionFilter {
 					platformIdLike: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'A string identifying the operating system the current OS derivate is closely related to.' };
 					desktopEnvironment: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'A string identifying the desktop environment the user is using.' };
 					displayProtocol: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'A string identifying the users display protocol type.' };
-					codeDisplayProtocol: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'A string identifying the vscode display protocol type.' };
+					codeDisplayProtocol: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'A string identifying the zyraxoncode display protocol type.' };
 					owner: 'benibenj';
 					comment: 'Provides insight into the distro and desktop environment information on Linux.';
 				};

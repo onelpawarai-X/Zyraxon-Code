@@ -3,24 +3,24 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { TextDocumentSnapshot } from '../../editing/common/textDocumentSnapshot';
 
 export const IReviewService = createServiceIdentifier<IReviewService>('IReviewService');
 
 export interface ReviewDiagnosticCollection {
-	get(uri: vscode.Uri): readonly vscode.Diagnostic[] | undefined;
-	set(uri: vscode.Uri, diagnostics: readonly vscode.Diagnostic[] | undefined): void;
+	get(uri: zyraxoncode.Uri): readonly zyraxoncode.Diagnostic[] | undefined;
+	set(uri: zyraxoncode.Uri, diagnostics: readonly zyraxoncode.Diagnostic[] | undefined): void;
 }
 
 export interface ReviewRanges {
-	uri: vscode.Uri;
-	ranges: vscode.Range[];
+	uri: zyraxoncode.Uri;
+	ranges: zyraxoncode.Range[];
 }
 
 export interface ReviewRequest {
-	source: 'vscodeCopilotChat' | 'githubReviewAgent';
+	source: 'zyraxoncodeCopilotChat' | 'githubReviewAgent';
 	promptCount: number;
 	messageId: string;
 	inputType: 'selection' | 'change';
@@ -28,7 +28,7 @@ export interface ReviewRequest {
 }
 
 export interface ReviewSuggestionChange {
-	range: vscode.Range;
+	range: zyraxoncode.Range;
 	newText: string;
 	oldText: string;
 }
@@ -41,10 +41,10 @@ export interface ReviewSuggestion {
 export interface ReviewComment {
 	request: ReviewRequest;
 	document: TextDocumentSnapshot;
-	uri: vscode.Uri;
+	uri: zyraxoncode.Uri;
 	languageId: string;
-	range: vscode.Range;
-	body: string | vscode.MarkdownString;
+	range: zyraxoncode.Range;
+	body: string | zyraxoncode.MarkdownString;
 	kind: string;
 	severity: string;
 	originalIndex: number;
@@ -65,6 +65,6 @@ export interface IReviewService {
 	collapseReviewComment(comment: ReviewComment): void;
 	removeReviewComments(comments: ReviewComment[]): void;
 	updateReviewComment(comment: ReviewComment): void;
-	findReviewComment(threadOrComment: vscode.CommentThread | vscode.Comment): ReviewComment | undefined;
-	findCommentThread(comment: ReviewComment): vscode.CommentThread | undefined;
+	findReviewComment(threadOrComment: zyraxoncode.CommentThread | zyraxoncode.Comment): ReviewComment | undefined;
+	findCommentThread(comment: ReviewComment): zyraxoncode.CommentThread | undefined;
 }

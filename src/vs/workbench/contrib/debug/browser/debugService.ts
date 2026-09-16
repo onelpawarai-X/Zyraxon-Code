@@ -754,7 +754,7 @@ export class DebugService implements IDebugService {
 				this.telemetry.logDebugSessionStop(session, adapterExitEvent);
 			}
 
-			// 'Run without debugging' mode VSCode must terminate the extension host. More details: #3905
+			// 'Run without debugging' mode ZyraxonCode must terminate the extension host. More details: #3905
 			const extensionDebugSession = getExtensionHostDebugSession(session);
 			if (extensionDebugSession && extensionDebugSession.state === State.Running && extensionDebugSession.configuration.noDebug) {
 				this.extensionHostDebugService.close(extensionDebugSession.getId());

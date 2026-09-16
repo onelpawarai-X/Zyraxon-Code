@@ -1304,11 +1304,11 @@ export class ListView<T> implements IListView<T> {
 	}
 
 	private onDragOver(event: IListDragEvent<T>): boolean {
-		event.browserEvent.preventDefault(); // needed so that the drop event fires (https://stackoverflow.com/questions/21339924/drop-event-not-firing-in-chrome)
+		event.browserEvent.preventDefault(); // needed so that the drop event fires (__ZYRAXKEEP__0_)
 
 		this.onDragLeaveTimeout.dispose();
 
-		if (StaticDND.CurrentDragAndDropData && StaticDND.CurrentDragAndDropData.getData() === 'vscode-ui') {
+		if (StaticDND.CurrentDragAndDropData && StaticDND.CurrentDragAndDropData.getData() === 'zyraxoncode-ui') {
 			return false;
 		}
 
@@ -1631,9 +1631,9 @@ export class ListView<T> implements IListView<T> {
 				if (typeof anchorElementIndex === 'number') {
 					// To compute a destination scroll top, we need to take into account the current smooth scrolling
 					// animation, and then reuse it with a new target (to avoid prolonging the scroll)
-					// See https://github.com/microsoft/vscode/issues/104144
-					// See https://github.com/microsoft/vscode/pull/104284
-					// See https://github.com/microsoft/vscode/issues/107704
+					// See __ZYRAXKEEP__1_
+					// See __ZYRAXKEEP__2_
+					// See __ZYRAXKEEP__3_
 					const deltaScrollTop = this.scrollable.getFutureScrollPosition().scrollTop - renderTop;
 					const newScrollTop = this.elementTop(anchorElementIndex) - anchorElementTopDelta! + deltaScrollTop;
 					this.setScrollTop(newScrollTop, inSmoothScrolling);

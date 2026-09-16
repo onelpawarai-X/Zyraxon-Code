@@ -4,13 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 /**
- * Ambient type declarations for @vscode/copilot-api.
+ * Ambient type declarations for @zyraxoncode/copilot-api.
  *
  * The package's .d.ts files use extensionless relative imports which are
  * incompatible with `moduleResolution: "nodenext"`. This file provides
  * the subset of types used by the agent host until the package is fixed.
  */
-declare module '@vscode/copilot-api' {
+declare module '@zyraxoncode/copilot-api' {
 
 	export interface IAbortSignal {
 		readonly aborted: boolean;
@@ -42,7 +42,7 @@ declare module '@vscode/copilot-api' {
 		sessionId: string;
 		machineId: string;
 		deviceId: string;
-		vscodeVersion: string;
+		zyraxoncodeVersion: string;
 		version: string;
 		buildType: 'dev' | 'prod';
 	}

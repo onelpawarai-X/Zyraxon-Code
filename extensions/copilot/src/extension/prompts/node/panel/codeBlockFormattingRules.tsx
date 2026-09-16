@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { filepathCodeBlockMarker } from '../../../../util/common/markdown';
 import { ExampleCodeBlock } from './safeElements';
 

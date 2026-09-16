@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 export const IClaudeWorkspaceFolderService = createServiceIdentifier<IClaudeWorkspaceFolderService>('IClaudeWorkspaceFolderService');
@@ -22,5 +22,5 @@ export interface IClaudeWorkspaceFolderService {
 	 * @param gitBaseBranch The base branch to diff against, or `undefined` to diff against HEAD.
 	 * @param forceRefresh When `true`, bypasses the cache and recomputes changes.
 	 */
-	getWorkspaceChanges(cwd: string, gitBranch: string | undefined, gitBaseBranch: string | undefined, forceRefresh?: boolean): Promise<vscode.ChatSessionChangedFile[]>;
+	getWorkspaceChanges(cwd: string, gitBranch: string | undefined, gitBaseBranch: string | undefined, forceRefresh?: boolean): Promise<zyraxoncode.ChatSessionChangedFile[]>;
 }

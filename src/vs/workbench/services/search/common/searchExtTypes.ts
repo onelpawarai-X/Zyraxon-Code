@@ -168,7 +168,7 @@ export interface TextSearchProviderFolderOptions {
 
 	/**
 	 * Interpret files using this encoding.
-	 * See the vscode setting `"files.encoding"`
+	 * See the zyraxoncode setting `"files.encoding"`
 	 */
 	encoding: string;
 }
@@ -395,7 +395,7 @@ export interface TextSearchComplete2 {
 	 *
 	 * Messages with "Information" style support links in markdown syntax:
 	 * - Click to [run a command](command:workbench.action.OpenQuickPick)
-	 * - Click to [open a website](https://aka.ms)
+	 * - Click to [open a website](__ZYRAXKEEP__0_)
 	 *
 	 * Commands may optionally return { triggerSearch: true } to signal to the editor that the original search should run be again.
 	 */
@@ -474,7 +474,7 @@ export interface TextSearchComplete2 {
 	 *
 	 * Messages with "Information" style support links in markdown syntax:
 	 * - Click to [run a command](command:workbench.action.OpenQuickPick)
-	 * - Click to [open a website](https://aka.ms)
+	 * - Click to [open a website](__ZYRAXKEEP__1_)
 	 *
 	 * Commands may optionally return { triggerSearch: true } to signal to the editor that the original search should run be again.
 	 */

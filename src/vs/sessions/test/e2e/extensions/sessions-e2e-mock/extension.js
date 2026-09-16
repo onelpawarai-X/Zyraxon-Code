@@ -5,7 +5,7 @@
 
 // @ts-check
 
-/// <reference types="vscode" />
+/// <reference types="zyraxoncode" />
 
 /**
  * Mock extension for Sessions E2E testing.
@@ -23,18 +23,18 @@
 // ---------------------------------------------------------------------------
 
 /**
- * @param {import('vscode').ExtensionContext} context
+ * @param {import('zyraxoncode').ExtensionContext} context
  */
 function activate(context) {
-	const vscode = require('vscode');
+	const zyraxoncode = require('zyraxoncode');
 
 	console.log('[sessions-e2e-mock] Activating mock extension');
 
 	// 1. Mock GitHub Authentication Provider
-	context.subscriptions.push(registerMockAuth(vscode));
+	context.subscriptions.push(registerMockAuth(zyraxoncode));
 
 	// 2. Mock command handlers for Code Review and PR actions
-	context.subscriptions.push(...registerMockCommands(vscode));
+	context.subscriptions.push(...registerMockCommands(zyraxoncode));
 
 	// Note: The mock-fs:// FileSystemProvider is registered directly in the
 	// workbench (web.test.ts → registerMockFileSystemProvider) so it is
@@ -49,13 +49,13 @@ function activate(context) {
 // ---------------------------------------------------------------------------
 
 /**
- * @param {typeof import('vscode')} vscode
- * @returns {import('vscode').Disposable}
+ * @param {typeof import('zyraxoncode')} zyraxoncode
+ * @returns {import('zyraxoncode').Disposable}
  */
-function registerMockAuth(vscode) {
-	const sessionChangeEmitter = new vscode.EventEmitter();
+function registerMockAuth(zyraxoncode) {
+	const sessionChangeEmitter = new zyraxoncode.EventEmitter();
 
-	/** @type {import('vscode').AuthenticationSession} */
+	/** @type {import('zyraxoncode').AuthenticationSession} */
 	const mockSession = {
 		id: 'mock-session-1',
 		accessToken: 'gho_mock_e2e_test_token_00000000000000000000',
@@ -66,7 +66,7 @@ function registerMockAuth(vscode) {
 		scopes: ['read:user', 'repo', 'workflow'],
 	};
 
-	/** @type {import('vscode').AuthenticationProvider} */
+	/** @type {import('zyraxoncode').AuthenticationProvider} */
 	const provider = {
 		onDidChangeSessions: sessionChangeEmitter.event,
 		async getSessions(_scopes, _options) {
@@ -82,7 +82,7 @@ function registerMockAuth(vscode) {
 	};
 
 	console.log('[sessions-e2e-mock] Registering mock GitHub auth provider');
-	return vscode.authentication.registerAuthenticationProvider('github', 'GitHub (Mock)', provider, {
+	return zyraxoncode.authentication.registerAuthenticationProvider('github', 'GitHub (Mock)', provider, {
 		supportsMultipleAccounts: false,
 	});
 }
@@ -96,72 +96,72 @@ function registerMockAuth(vscode) {
  * extension commands. These allow the Code Review and Create PR buttons to
  * function in the e2e test environment.
  *
- * @param {typeof import('vscode')} vscode
- * @returns {import('vscode').Disposable[]}
+ * @param {typeof import('zyraxoncode')} zyraxoncode
+ * @returns {import('zyraxoncode').Disposable[]}
  */
-function registerMockCommands(vscode) {
+function registerMockCommands(zyraxoncode) {
 	const disposables = [];
 
 	// Mock create PR — simulates successful PR creation
-	disposables.push(vscode.commands.registerCommand(
+	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.createPullRequestCopilotCLIAgentSession.createPR',
 		() => {
 			console.log('[sessions-e2e-mock] Mock Create PR invoked');
-			vscode.window.showInformationMessage('Mock: Pull request created successfully');
+			zyraxoncode.window.showInformationMessage('Mock: Pull request created successfully');
 		}
 	));
 
 	// Mock open PR — simulates opening a PR URL
-	disposables.push(vscode.commands.registerCommand(
+	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.openPullRequestCopilotCLIAgentSession.openPR',
 		() => {
 			console.log('[sessions-e2e-mock] Mock Open PR invoked');
-			vscode.window.showInformationMessage('Mock: Opening pull request');
+			zyraxoncode.window.showInformationMessage('Mock: Opening pull request');
 		}
 	));
 
 	// Mock merge — simulates merging changes
-	disposables.push(vscode.commands.registerCommand(
+	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.mergeCopilotCLIAgentSessionChanges.merge',
 		() => {
 			console.log('[sessions-e2e-mock] Mock Merge invoked');
-			vscode.window.showInformationMessage('Mock: Changes merged successfully');
+			zyraxoncode.window.showInformationMessage('Mock: Changes merged successfully');
 		}
 	));
 
 	// Mock merge and sync — simulates merging and syncing
-	disposables.push(vscode.commands.registerCommand(
+	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.mergeCopilotCLIAgentSessionChanges.mergeAndSync',
 		() => {
 			console.log('[sessions-e2e-mock] Mock Merge and Sync invoked');
-			vscode.window.showInformationMessage('Mock: Changes merged and synced successfully');
+			zyraxoncode.window.showInformationMessage('Mock: Changes merged and synced successfully');
 		}
 	));
 
 	// Mock apply changes — simulates applying session changes
-	disposables.push(vscode.commands.registerCommand(
+	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.applyCopilotCLIAgentSessionChanges.apply',
 		() => {
 			console.log('[sessions-e2e-mock] Mock Apply Changes invoked');
-			vscode.window.showInformationMessage('Mock: Changes applied successfully');
+			zyraxoncode.window.showInformationMessage('Mock: Changes applied successfully');
 		}
 	));
 
 	// Mock checkout PR reroute — simulates checkout PR flow
-	disposables.push(vscode.commands.registerCommand(
+	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.checkoutPullRequestReroute',
 		() => {
 			console.log('[sessions-e2e-mock] Mock Checkout PR Reroute invoked');
-			vscode.window.showInformationMessage('Mock: Checking out pull request');
+			zyraxoncode.window.showInformationMessage('Mock: Checking out pull request');
 		}
 	));
 
 	// Mock update changes — simulates updating session changes
-	disposables.push(vscode.commands.registerCommand(
+	disposables.push(zyraxoncode.commands.registerCommand(
 		'github.copilot.chat.updateCopilotCLIAgentSessionChanges.update',
 		() => {
 			console.log('[sessions-e2e-mock] Mock Update Changes invoked');
-			vscode.window.showInformationMessage('Mock: Changes updated successfully',);
+			zyraxoncode.window.showInformationMessage('Mock: Changes updated successfully',);
 		}
 	));
 

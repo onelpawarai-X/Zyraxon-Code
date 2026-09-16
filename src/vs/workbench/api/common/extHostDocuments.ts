@@ -10,7 +10,7 @@ import { ExtHostDocumentsShape, IMainContext, MainContext, MainThreadDocumentsSh
 import { ExtHostDocumentData, setWordDefinitionFor } from './extHostDocumentData.js';
 import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import * as TypeConverters from './extHostTypeConverters.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { assertReturnsDefined } from '../../../base/common/types.js';
 import { deepFreeze } from '../../../base/common/objects.js';
 import { TextDocumentChangeReason } from './extHostTypes.js';
@@ -20,17 +20,17 @@ export class ExtHostDocuments implements ExtHostDocumentsShape {
 
 	private readonly _toDispose = new DisposableStore();
 
-	private readonly _onDidAddDocument = this._toDispose.add(new Emitter<vscode.TextDocument>());
-	private readonly _onDidRemoveDocument = this._toDispose.add(new Emitter<vscode.TextDocument>());
-	private readonly _onDidChangeDocument = this._toDispose.add(new Emitter<Omit<vscode.TextDocumentChangeEvent, 'detailedReason'>>());
-	private readonly _onDidChangeDocumentWithReason = this._toDispose.add(new Emitter<vscode.TextDocumentChangeEvent>());
-	private readonly _onDidSaveDocument = this._toDispose.add(new Emitter<vscode.TextDocument>());
+	private readonly _onDidAddDocument = this._toDispose.add(new Emitter<zyraxoncode.TextDocument>());
+	private readonly _onDidRemoveDocument = this._toDispose.add(new Emitter<zyraxoncode.TextDocument>());
+	private readonly _onDidChangeDocument = this._toDispose.add(new Emitter<Omit<zyraxoncode.TextDocumentChangeEvent, 'detailedReason'>>());
+	private readonly _onDidChangeDocumentWithReason = this._toDispose.add(new Emitter<zyraxoncode.TextDocumentChangeEvent>());
+	private readonly _onDidSaveDocument = this._toDispose.add(new Emitter<zyraxoncode.TextDocument>());
 
-	readonly onDidAddDocument: Event<vscode.TextDocument> = this._onDidAddDocument.event;
-	readonly onDidRemoveDocument: Event<vscode.TextDocument> = this._onDidRemoveDocument.event;
-	readonly onDidChangeDocument: Event<vscode.TextDocumentChangeEvent> = this._onDidChangeDocument.event as Event<vscode.TextDocumentChangeEvent>;
-	readonly onDidChangeDocumentWithReason: Event<vscode.TextDocumentChangeEvent> = this._onDidChangeDocumentWithReason.event;
-	readonly onDidSaveDocument: Event<vscode.TextDocument> = this._onDidSaveDocument.event;
+	readonly onDidAddDocument: Event<zyraxoncode.TextDocument> = this._onDidAddDocument.event;
+	readonly onDidRemoveDocument: Event<zyraxoncode.TextDocument> = this._onDidRemoveDocument.event;
+	readonly onDidChangeDocument: Event<zyraxoncode.TextDocumentChangeEvent> = this._onDidChangeDocument.event as Event<zyraxoncode.TextDocumentChangeEvent>;
+	readonly onDidChangeDocumentWithReason: Event<zyraxoncode.TextDocumentChangeEvent> = this._onDidChangeDocumentWithReason.event;
+	readonly onDidSaveDocument: Event<zyraxoncode.TextDocument> = this._onDidSaveDocument.event;
 	private _proxy: MainThreadDocumentsShape;
 	private _documentsAndEditors: ExtHostDocumentsAndEditors;
 	private _documentLoader = new Map<string, Promise<ExtHostDocumentData>>();
@@ -59,7 +59,7 @@ export class ExtHostDocuments implements ExtHostDocumentsShape {
 		return [...this._documentsAndEditors.allDocuments()];
 	}
 
-	public getDocumentData(resource: vscode.Uri): ExtHostDocumentData | undefined {
+	public getDocumentData(resource: zyraxoncode.Uri): ExtHostDocumentData | undefined {
 		if (!resource) {
 			return undefined;
 		}
@@ -70,7 +70,7 @@ export class ExtHostDocuments implements ExtHostDocumentsShape {
 		return undefined;
 	}
 
-	public getDocument(resource: vscode.Uri): vscode.TextDocument {
+	public getDocument(resource: zyraxoncode.Uri): zyraxoncode.TextDocument {
 		const data = this.getDocumentData(resource);
 		if (!data?.document) {
 			throw new Error(`Unable to retrieve document from URI '${resource}'`);
@@ -186,14 +186,14 @@ export class ExtHostDocuments implements ExtHostDocumentsShape {
 		data._acceptIsDirty(isDirty);
 		data.onEvents(events);
 
-		let reason: vscode.TextDocumentChangeReason | undefined = undefined;
+		let reason: zyraxoncode.TextDocumentChangeReason | undefined = undefined;
 		if (events.isUndoing) {
 			reason = TextDocumentChangeReason.Undo;
 		} else if (events.isRedoing) {
 			reason = TextDocumentChangeReason.Redo;
 		}
 
-		this._onDidChangeDocument.fire(deepFreeze<Omit<vscode.TextDocumentChangeEvent, 'detailedReason'>>({
+		this._onDidChangeDocument.fire(deepFreeze<Omit<zyraxoncode.TextDocumentChangeEvent, 'detailedReason'>>({
 			document: data.document,
 			contentChanges: events.changes.map((change) => {
 				return {
@@ -205,7 +205,7 @@ export class ExtHostDocuments implements ExtHostDocumentsShape {
 			}),
 			reason,
 		}));
-		this._onDidChangeDocumentWithReason.fire(deepFreeze<vscode.TextDocumentChangeEvent>({
+		this._onDidChangeDocumentWithReason.fire(deepFreeze<zyraxoncode.TextDocumentChangeEvent>({
 			document: data.document,
 			contentChanges: events.changes.map((change) => {
 				return {

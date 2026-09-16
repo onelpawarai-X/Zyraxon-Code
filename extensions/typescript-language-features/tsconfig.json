@@ -13,11 +13,11 @@
 	},
 	"include": [
 		"src/**/*",
-		"../../src/vscode-dts/vscode.d.ts",
-		"../../src/vscode-dts/vscode.proposed.codeActionAI.d.ts",
-		"../../src/vscode-dts/vscode.proposed.codeActionRanges.d.ts",
-		"../../src/vscode-dts/vscode.proposed.multiDocumentHighlightProvider.d.ts",
-		"../../src/vscode-dts/vscode.proposed.workspaceTrust.d.ts",
-		"../../src/vscode-dts/vscode.proposed.editorHoverVerbosityLevel.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.codeActionAI.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.codeActionRanges.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.multiDocumentHighlightProvider.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.workspaceTrust.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.editorHoverVerbosityLevel.d.ts",
 	]
 }

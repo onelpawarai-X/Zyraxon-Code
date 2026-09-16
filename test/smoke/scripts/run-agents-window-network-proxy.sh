@@ -9,13 +9,13 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 FIXTURE_DIR="$ROOT/test/smoke/network-proxy"
 LOG_DIR="$ROOT/.build/logs/agents-window-network-proxy"
-TEMP_ROOT="${RUNNER_TEMP:-${AGENT_TEMPDIRECTORY:-${TMPDIR:-/tmp}}}/vscode-agents-window-network-proxy-$$"
-TEST_REPO="$TEMP_ROOT/vscode-smoketest-express"
-PROXY_GROUP="vscodeproxytest"
-PF_ANCHOR="com.apple/vscodeproxytest"
-MOCK_HOST="vscode-smoke.test"
-PROXY_HEADER_VALUE="vscode-smoke-network-proxy-$$"
-PAC_URL="http://127.0.0.1:44444/test.pac"
+TEMP_ROOT="${RUNNER_TEMP:-${AGENT_TEMPDIRECTORY:-${TMPDIR:-/tmp}}}/zyraxoncode-agents-window-network-proxy-$$"
+TEST_REPO="$TEMP_ROOT/zyraxoncode-smoketest-express"
+PROXY_GROUP="zyraxoncodeproxytest"
+PF_ANCHOR="com.apple/zyraxoncodeproxytest"
+MOCK_HOST="zyraxoncode-smoke.test"
+PROXY_HEADER_VALUE="zyraxoncode-smoke-network-proxy-$$"
+PAC_URL="__ZYRAXKEEP__0_"
 PAC_LOG="$LOG_DIR/pac-server.log"
 SQUID_ACCESS_LOG="$LOG_DIR/squid-access.log"
 SQUID_LOG="$LOG_DIR/squid.log"
@@ -95,7 +95,7 @@ saved_pac_enabled="$(printf '%s\n' "$saved_pac_state" | sed -n 's/^Enabled: //p'
 
 mkdir -p "$LOG_DIR" "$TEMP_ROOT"
 rm -f "$PAC_LOG" "$SQUID_ACCESS_LOG" "$SQUID_LOG"
-git clone --depth 1 https://github.com/microsoft/vscode-smoketest-express "$TEST_REPO"
+git clone --depth 1 __ZYRAXKEEP__1_ "$TEST_REPO"
 
 if [[ -z "$SQUID_PREFIX" || ! -x "$SQUID_BIN" ]]; then
 	echo "Squid is required; install it with 'brew install squid'" >&2
@@ -106,12 +106,12 @@ cat > "$TEMP_ROOT/hosts" <<EOF
 127.0.0.1 $MOCK_HOST
 EOF
 cat > "$TEMP_ROOT/squid.conf" <<EOF
-visible_hostname vscode-smoke-proxy
+visible_hostname zyraxoncode-smoke-proxy
 http_port 127.0.0.1:43144
 hosts_file $TEMP_ROOT/hosts
 acl all src all
 http_access allow all
-request_header_add X-VSCode-Smoke-Proxy $PROXY_HEADER_VALUE all
+request_header_add X-ZyraxonCode-Smoke-Proxy $PROXY_HEADER_VALUE all
 cache deny all
 cache_store_log none
 access_log stdio:$SQUID_ACCESS_LOG
@@ -214,7 +214,7 @@ if ! run_restricted curl --fail --silent --connect-timeout 3 --noproxy '*' "$PAC
 	exit 1
 fi
 
-if run_restricted curl --fail --silent --connect-timeout 3 --noproxy '*' http://1.1.1.1 >/dev/null 2>&1; then
+if run_restricted curl --fail --silent --connect-timeout 3 --noproxy '*' __ZYRAXKEEP__2_ >/dev/null 2>&1; then
 	echo "Direct network access was not blocked for group $PROXY_GROUP" >&2
 	exit 1
 fi

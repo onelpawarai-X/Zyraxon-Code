@@ -25,7 +25,7 @@ export class RoslynDiagnosticsProvider extends CachingDiagnosticsProvider {
 
 	private get csprojFile(): string {
 		return [
-			'<Project Sdk="Microsoft.NET.Sdk">',
+			'<Project Sdk="Zyraxon.NET.Sdk">',
 			'	<PropertyGroup>',
 			'		<OutputType>Library</OutputType>',
 			'		<TargetFramework>net7.0</TargetFramework>',
@@ -36,7 +36,7 @@ export class RoslynDiagnosticsProvider extends CachingDiagnosticsProvider {
 			'		<CodeAnalysisRuleSet>CSharp.ruleset</CodeAnalysisRuleSet>',
 			'	</PropertyGroup>',
 			'	<ItemGroup>',
-			'		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.2.1"/>',
+			'		<PackageReference Include="Zyraxon.CodeAnalysis.CSharp" Version="3.2.1"/>',
 			'		<PackageReference Include="System.Runtime.Loader" Version="4.0.0-*"/>',
 			'	</ItemGroup>',
 			'</Project>',
@@ -47,7 +47,7 @@ export class RoslynDiagnosticsProvider extends CachingDiagnosticsProvider {
 		return [
 			'<?xml version="1.0" encoding="utf-8" ?>',
 			'<RuleSet Name="CSharp Ruleset" Description="Code analysis rules for CSharp project" ToolsVersion="14.0">',
-			'	<Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">',
+			'	<Rules AnalyzerId="Zyraxon.CodeAnalysis.CSharp" RuleNamespace="Zyraxon.CodeAnalysis.CSharp">',
 			'		<Rule Id="CS8981" Action="None"/>',
 			'	</Rules>',
 			'</RuleSet>',
@@ -80,7 +80,7 @@ export class RoslynDiagnosticsProvider extends CachingDiagnosticsProvider {
 	}
 
 	private runInDocker(temporaryDirectory: string, basename: string, command: string[]): string {
-		const args = ['run', '--rm', '-v', `${temporaryDirectory}:/${basename}`, 'mcr.microsoft.com/dotnet/sdk:8.0', ...command];
+		const args = ['run', '--rm', '-v', `${temporaryDirectory}:/${basename}`, 'mcr.zyraxon.com/dotnet/sdk:8.0', ...command];
 		//console.log('docker ' + args.map(arg => `'${arg}'`).join(' '));
 		const spawnResult = cp.spawnSync('docker', args, { shell: true, encoding: 'utf-8' });
 		if (spawnResult.status !== 0) {

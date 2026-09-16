@@ -7,7 +7,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	background-color: var(--vscode-welcomePage-background);
+	background-color: var(--zyraxoncode-welcomePage-background);
 	overflow: hidden;
 }
 
@@ -53,7 +53,7 @@
 	font-weight: 400;
 	line-height: 1;
 	margin: 0 0 12px 0;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agentSessionsWelcome-startEntries {
@@ -72,17 +72,17 @@
 	border: none;
 	border-radius: 4px;
 	background-color: transparent;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 13px;
 	cursor: pointer;
 }
 
 .agentSessionsWelcome-startEntry:hover {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .agentSessionsWelcome-startEntry .codicon {
-	color: var(--vscode-descriptionForeground) !important;
+	color: var(--zyraxoncode-descriptionForeground) !important;
 }
 
 /* Chat widget section */
@@ -130,17 +130,17 @@
 
 .agentSessionsWelcome-suggestedPrompt {
 	padding: 8px 16px;
-	border: 1px solid var(--vscode-button-border, var(--vscode-contrastBorder, transparent));
+	border: 1px solid var(--zyraxoncode-button-border, var(--zyraxoncode-contrastBorder, transparent));
 	border-radius: 20px;
-	background-color: var(--vscode-button-secondaryBackground);
-	color: var(--vscode-button-secondaryForeground);
+	background-color: var(--zyraxoncode-button-secondaryBackground);
+	color: var(--zyraxoncode-button-secondaryForeground);
 	font-size: 13px;
 	cursor: pointer;
 	transition: background-color 0.1s;
 }
 
 .agentSessionsWelcome-suggestedPrompt:hover {
-	background-color: var(--vscode-button-secondaryHoverBackground);
+	background-color: var(--zyraxoncode-button-secondaryHoverBackground);
 }
 
 /* Sessions grid */
@@ -213,7 +213,7 @@
 }
 
 .agentSessionsWelcome-sessionsGrid .agent-session-item:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 /* Hide toolbar on items in welcome page for cleaner look */
@@ -237,8 +237,8 @@
 	padding: 6px 10px;
 	border: none;
 	border-radius: 6px;
-	background-color: var(--vscode-toolbar-hoverBackground);
-	color: var(--vscode-foreground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
 	font-size: 13px;
 	cursor: pointer;
 	font-family: inherit;
@@ -248,11 +248,11 @@
 }
 
 .agentSessionsWelcome-agentsBanner .codicon {
-	color: var(--vscode-textLink-foreground) !important;
+	color: var(--zyraxoncode-textLink-foreground) !important;
 }
 
 .agentSessionsWelcome-agentsBanner .agents-banner-button:hover {
-	background-color: var(--vscode-toolbar-activeBackground);
+	background-color: var(--zyraxoncode-toolbar-activeBackground);
 }
 
 .agentSessionsWelcome-agentsBanner .icon-widget {
@@ -276,7 +276,7 @@
 	display: flex;
 	align-items: center;
 	padding: 15px;
-	border: 1px solid var(--vscode-welcomePage-tileBorder, var(--vscode-contrastBorder, transparent));
+	border: 1px solid var(--zyraxoncode-welcomePage-tileBorder, var(--zyraxoncode-contrastBorder, transparent));
 	border-radius: 8px;
 	background-color: transparent;
 	cursor: pointer;
@@ -285,7 +285,7 @@
 }
 
 .agentSessionsWelcome-walkthroughCard:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .agentSessionsWelcome-walkthroughCard-icon {
@@ -299,7 +299,7 @@
 
 .agentSessionsWelcome-walkthroughCard-icon .codicon {
 	font-size: 20px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agentSessionsWelcome-walkthroughCard-content {
@@ -310,14 +310,14 @@
 .agentSessionsWelcome-walkthroughCard-title {
 	font-size: 13px;
 	font-weight: 600;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	margin: 0;
 	line-height: 1.4;
 }
 
 .agentSessionsWelcome-walkthroughCard-description {
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin: 0;
 	line-height: 1.4;
 }
@@ -336,12 +336,12 @@
 	border: none;
 	border-radius: 4px;
 	background-color: transparent;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	cursor: pointer;
 }
 
 .agentSessionsWelcome-walkthroughCard-nav .nav-button:hover:not(:disabled) {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .agentSessionsWelcome-walkthroughCard-nav .nav-button:disabled {
@@ -368,17 +368,17 @@
 	border: none;
 	border-radius: 4px;
 	background-color: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	font-size: 13px;
 	cursor: pointer;
 }
 
 .agentSessionsWelcome-footerLink:hover {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .agentSessionsWelcome-footerLink .codicon {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agentSessionsWelcome-showOnStartup {
@@ -386,7 +386,7 @@
 	align-items: center;
 	gap: 8px;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agentSessionsWelcome-showOnStartup label {
@@ -398,17 +398,17 @@
 	height: 18px;
 	float: none;
 	margin-left: 0;
-	border: 1px solid var(--vscode-checkbox-border) !important;
+	border: 1px solid var(--zyraxoncode-checkbox-border) !important;
 	border-radius: 3px;
 	padding: 0;
-	background-color: var(--vscode-checkbox-background) !important;
-	color: var(--vscode-checkbox-foreground) !important;
+	background-color: var(--zyraxoncode-checkbox-background) !important;
+	color: var(--zyraxoncode-checkbox-foreground) !important;
 }
 
 .agentSessionsWelcome-checkbox.checked {
-	background-color: var(--vscode-descriptionForeground) !important;
-	border-color: var(--vscode-descriptionForeground) !important;
-	color: var(--vscode-editor-background) !important;
+	background-color: var(--zyraxoncode-descriptionForeground) !important;
+	border-color: var(--zyraxoncode-descriptionForeground) !important;
+	color: var(--zyraxoncode-editor-background) !important;
 }
 
 .agentSessionsWelcome-checkbox.codicon:not(.checked)::before {
@@ -425,13 +425,13 @@
 	padding: 15px;
 	box-sizing: border-box;
 	cursor: default;
-	border: 1px solid var(--vscode-welcomePage-tileBorder, var(--vscode-contrastBorder, transparent));
+	border: 1px solid var(--zyraxoncode-welcomePage-tileBorder, var(--zyraxoncode-contrastBorder, transparent));
 	border-radius: 8px;
 	background-color: transparent;
 }
 
 .agentSessionsWelcome-tosCard:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .agentSessionsWelcome-tosCard .agentSessionsWelcome-walkthroughCard-icon {
@@ -442,7 +442,7 @@
 
 .agentSessionsWelcome-tosCard .agentSessionsWelcome-walkthroughCard-icon .codicon {
 	font-size: 20px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agentSessionsWelcome-tosCard .agentSessionsWelcome-walkthroughCard-content {
@@ -467,7 +467,7 @@
 }
 
 .agentSessionsWelcome-tosCard .agentSessionsWelcome-walkthroughCard-description a {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .agentSessionsWelcome-tosCard-dismiss {
@@ -479,7 +479,7 @@
 	border: none;
 	border-radius: 4px;
 	background-color: transparent;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	cursor: pointer;
 	flex-shrink: 0;
 	opacity: 0;
@@ -491,12 +491,12 @@
 }
 
 .agentSessionsWelcome-tosCard-dismiss:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
-	color: var(--vscode-foreground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agentSessionsWelcome-tosLink {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	text-decoration: none;
 }
 
@@ -526,7 +526,7 @@
 	width: 20px;
 	height: 20px;
 	border-radius: 4px;
-	background: var(--vscode-welcomePage-tileBorder, var(--vscode-contrastBorder, rgba(128, 128, 128, 0.2)));
+	background: var(--zyraxoncode-welcomePage-tileBorder, var(--zyraxoncode-contrastBorder, rgba(128, 128, 128, 0.2)));
 	animation: agentSessionsWelcome-shimmer 1.5s ease-in-out infinite;
 }
 
@@ -540,7 +540,7 @@
 .agentSessionsWelcome-sessionSkeleton-title {
 	height: 12px;
 	border-radius: 2px;
-	background: var(--vscode-welcomePage-tileBorder, var(--vscode-contrastBorder, rgba(128, 128, 128, 0.2)));
+	background: var(--zyraxoncode-welcomePage-tileBorder, var(--zyraxoncode-contrastBorder, rgba(128, 128, 128, 0.2)));
 	animation: agentSessionsWelcome-shimmer 1.5s ease-in-out infinite;
 	animation-delay: 0.1s;
 }
@@ -549,7 +549,7 @@
 	height: 10px;
 	width: 60%;
 	border-radius: 2px;
-	background: var(--vscode-welcomePage-tileBorder, var(--vscode-contrastBorder, rgba(128, 128, 128, 0.2)));
+	background: var(--zyraxoncode-welcomePage-tileBorder, var(--zyraxoncode-contrastBorder, rgba(128, 128, 128, 0.2)));
 	animation: agentSessionsWelcome-shimmer 1.5s ease-in-out infinite;
 	animation-delay: 0.2s;
 }

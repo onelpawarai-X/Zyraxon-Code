@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { RequestMetadata } from '@vscode/copilot-api';
-import { HTMLTracer, IChatEndpointInfo, Raw, RenderPromptResult } from '@vscode/prompt-tsx';
-import type { Event } from 'vscode';
+import type { RequestMetadata } from '@zyraxoncode/copilot-api';
+import { HTMLTracer, IChatEndpointInfo, Raw, RenderPromptResult } from '@zyraxoncode/prompt-tsx';
+import type { Event } from 'zyraxoncode';
 import { ChatFetchError, ChatFetchResponseType, ChatLocation, ChatResponses, FetchSuccess } from '../../../platform/chat/common/commonTypes';
 import { IResponseDelta, OptionalChatRequestParams } from '../../../platform/networking/common/fetch';
 import { IChatEndpoint, IEndpointBody } from '../../../platform/networking/common/networking';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { ThemeIcon } from '../../../util/vs/base/common/themables';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
-import type { LanguageModelToolResult2 } from '../../../vscodeTypes';
+import type { LanguageModelToolResult2 } from '../../../zyraxoncodeTypes';
 import type { IModelAPIResponse } from '../../endpoint/common/endpointProvider';
 import { APIUsage } from '../../networking/common/openai';
 import { ThinkingData } from '../../thinking/common/thinking';

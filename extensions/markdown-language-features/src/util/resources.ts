@@ -3,29 +3,29 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import { Utils } from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import { Utils } from 'zyraxoncode-uri';
 
 export interface WebviewResourceProvider {
-	asWebviewUri(resource: vscode.Uri): vscode.Uri;
+	asWebviewUri(resource: zyraxoncode.Uri): zyraxoncode.Uri;
 
 	readonly cspSource: string;
 }
 
 export function getMarkdownLocalResourceRoots(
-	resource: vscode.Uri,
-	baseRoots: readonly vscode.Uri[],
+	resource: zyraxoncode.Uri,
+	baseRoots: readonly zyraxoncode.Uri[],
 	options: {
 		readonly includeWorkspaceResources?: boolean;
-		readonly workspaceContext?: Pick<typeof vscode.workspace, 'getWorkspaceFolder' | 'workspaceFolders'>;
+		readonly workspaceContext?: Pick<typeof zyraxoncode.workspace, 'getWorkspaceFolder' | 'workspaceFolders'>;
 	} = {},
-): vscode.Uri[] {
+): zyraxoncode.Uri[] {
 	const roots = [...baseRoots];
 	if (options.includeWorkspaceResources === false) {
 		return roots;
 	}
 
-	const workspaceContext = options.workspaceContext ?? vscode.workspace;
+	const workspaceContext = options.workspaceContext ?? zyraxoncode.workspace;
 	if (workspaceContext.getWorkspaceFolder(resource)) {
 		roots.push(...workspaceContext.workspaceFolders?.map(folder => folder.uri) ?? []);
 	} else {
@@ -35,7 +35,7 @@ export function getMarkdownLocalResourceRoots(
 	return roots;
 }
 
-export function areUrisEqual(uri1: vscode.Uri, uri2: vscode.Uri): boolean {
+export function areUrisEqual(uri1: zyraxoncode.Uri, uri2: zyraxoncode.Uri): boolean {
 	if (uri1.scheme !== uri2.scheme) {
 		return false;
 	}

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { stringHash } from '../../../base/common/hash.js';
 import { buildIdJagExchangeBody, buildResourceRedemptionBody, fetchAuthorizationServerMetadata, getClaimsFromJWT, IAuthorizationJWTClaims, IAuthorizationTokenResponse, isAuthorizationTokenResponse } from '../../../base/common/oauth.js';
 import { DynamicAuthProvider } from './extHostAuthentication.js';
@@ -26,7 +26,7 @@ interface IResourceCacheEntry {
 	readonly scopes: readonly string[];
 	readonly token: IAuthorizationTokenResponse;
 	/** Fallback identity (the IdP login account) for sessions built from this token, used when the resource token has no id_token of its own. */
-	readonly account: vscode.AuthenticationSessionAccountInformation;
+	readonly account: zyraxoncode.AuthenticationSessionAccountInformation;
 	readonly created_at: number;
 }
 
@@ -77,7 +77,7 @@ export function isExpired(entry: { token: { expires_in?: number }; created_at: n
  *
  * The resource indicator is read from `options.resource` (RFC 8707) and the
  * resource's authorization server URL from `options.audience` on
- * {@link vscode.AuthenticationProviderSessionOptions}.
+ * {@link zyraxoncode.AuthenticationProviderSessionOptions}.
  */
 export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base: TBase): TBase {
 	return class XaaAuthenticationProvider extends Base {
@@ -106,7 +106,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 			this._logger.trace(`[XAA] Provider constructed for issuer ${issuer.toString(true)}. authorization_endpoint=${this._serverMetadata.authorization_endpoint}, token_endpoint=${this._serverMetadata.token_endpoint}`);
 		}
 
-		override async getSessions(scopes: readonly string[] | undefined, options: vscode.AuthenticationProviderSessionOptions): Promise<vscode.AuthenticationSession[]> {
+		override async getSessions(scopes: readonly string[] | undefined, options: zyraxoncode.AuthenticationProviderSessionOptions): Promise<zyraxoncode.AuthenticationSession[]> {
 			const resource = options.resource;
 			const audience = options.audience;
 			// Account-enumeration call (getAccounts): no resource to mint against, so surface the IdP
@@ -150,7 +150,7 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 			}
 		}
 
-		override async createSession(scopes: string[], options: vscode.AuthenticationProviderSessionOptions): Promise<vscode.AuthenticationSession> {
+		override async createSession(scopes: string[], options: zyraxoncode.AuthenticationProviderSessionOptions): Promise<zyraxoncode.AuthenticationSession> {
 			const audience = options.audience;
 			const resource = options.resource;
 			this._logger.trace(`[XAA] createSession scopes=[${scopes.join(' ')}] audience=${audience} resource=${resource}`);
@@ -194,11 +194,11 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 		 * Caches the resulting token in `_resourceTokens` so subsequent getSessions are O(1).
 		 */
 		private async _mintResourceToken(
-			idpSession: vscode.AuthenticationSession,
+			idpSession: zyraxoncode.AuthenticationSession,
 			scopes: string[],
 			audience: string,
 			resource: string,
-			options: vscode.AuthenticationProviderSessionOptions,
+			options: zyraxoncode.AuthenticationProviderSessionOptions,
 			silent: boolean,
 		): Promise<IResourceCacheEntry | undefined> {
 			// Leg 2: id_token → ID-JAG
@@ -289,13 +289,13 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
 		 * `undefined`. Critically does NOT call `super.createSession`, so this is safe to use
 		 * from {@link getSessions}.
 		 */
-		private async _tryGetSilentIdpSession(): Promise<vscode.AuthenticationSession | undefined> {
-			const cleanOptions: vscode.AuthenticationProviderSessionOptions = {};
+		private async _tryGetSilentIdpSession(): Promise<zyraxoncode.AuthenticationSession | undefined> {
+			const cleanOptions: zyraxoncode.AuthenticationProviderSessionOptions = {};
 			const existing = await super.getSessions(IDP_SCOPES as string[], cleanOptions);
 			return existing.length ? existing[0] : undefined;
 		}
 
-		private async _ensureIdpSession(): Promise<vscode.AuthenticationSession> {
+		private async _ensureIdpSession(): Promise<zyraxoncode.AuthenticationSession> {
 			this._logger.trace(`[XAA] _ensureIdpSession: scopes=[${IDP_SCOPES.join(' ')}] authorization_endpoint=${this._serverMetadata.authorization_endpoint}`);
 			const silent = await this._tryGetSilentIdpSession();
 			if (silent?.idToken) {
@@ -370,8 +370,8 @@ export function XaaifyAuthProvider<TBase extends Ctor<DynamicAuthProvider>>(Base
  * `fallbackAccount` (the IdP login identity), then a generic default. Never the `access_token`, which
  * for XAA is an opaque resource credential. Exported for testing.
  */
-export function toSession(token: IAuthorizationTokenResponse, scopes: readonly string[], fallbackAccount?: vscode.AuthenticationSessionAccountInformation): vscode.AuthenticationSession {
-	let account: vscode.AuthenticationSessionAccountInformation | undefined;
+export function toSession(token: IAuthorizationTokenResponse, scopes: readonly string[], fallbackAccount?: zyraxoncode.AuthenticationSessionAccountInformation): zyraxoncode.AuthenticationSession {
+	let account: zyraxoncode.AuthenticationSessionAccountInformation | undefined;
 	if (token.id_token) {
 		try {
 			const claims: IAuthorizationJWTClaims = getClaimsFromJWT(token.id_token);

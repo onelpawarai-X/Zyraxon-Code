@@ -448,10 +448,10 @@ export class IssueReporterEditorPane extends EditorPane {
 
 		try {
 			// Version info
-			const vscodeVersion = `${product.nameShort} ${!!product.darwinUniversalAssetId ? `${product.version} (Universal)` : product.version} (${product.commit || 'Commit unknown'}, ${product.date || 'Date unknown'})`;
+			const zyraxoncodeVersion = `${product.nameShort} ${!!product.darwinUniversalAssetId ? `${product.version} (Universal)` : product.version} (${product.commit || 'Commit unknown'}, ${product.date || 'Date unknown'})`;
 			const systemInfo = await this.processService.getSystemInfo();
 			this.wizard.updateModel({
-				versionInfo: { vscodeVersion, os: systemInfo.os },
+				versionInfo: { zyraxoncodeVersion, os: systemInfo.os },
 				systemInfo,
 				systemInfoWeb: navigator.userAgent,
 			});
@@ -555,7 +555,7 @@ export class IssueReporterEditorPane extends EditorPane {
 	private async saveRecordingAndAdd(data: IRecordingData): Promise<void> {
 		try {
 			const extension = data.mimeType.startsWith('video/mp4') ? 'mp4' : 'webm';
-			const fileName = `vscode-recording-${new Date().toISOString().replace(/[:.]/g, '-')}.${extension}`;
+			const fileName = `zyraxoncode-recording-${new Date().toISOString().replace(/[:.]/g, '-')}.${extension}`;
 			// Write to the OS temp folder so artifacts are cleaned up automatically.
 			const folder = URI.joinPath(this.environmentService.tmpDir, 'issue-recordings');
 			const target = URI.joinPath(folder, fileName);
@@ -567,7 +567,7 @@ export class IssueReporterEditorPane extends EditorPane {
 
 			// Generate thumbnail from the saved file — blob URLs are blocked by
 			// Electron's CSP for media elements, so we use the saved file via
-			// the vscode-file:// protocol which the renderer can load.
+			// the zyraxoncode-file:// protocol which the renderer can load.
 			const thumbnailDataUrl = await this.generateVideoThumbnail(target);
 			this.wizard?.addRecording(target.fsPath, data.durationMs, thumbnailDataUrl);
 		} catch (err) {
@@ -576,8 +576,8 @@ export class IssueReporterEditorPane extends EditorPane {
 	}
 
 	private generateVideoThumbnail(fileUri: URI): Promise<string | undefined> {
-		// The fileUri may use the vscode-userdata: scheme. Convert to a real
-		// file:// URI via fsPath, then to vscode-file://vscode-app/ so the
+		// The fileUri may use the zyraxoncode-userdata: scheme. Convert to a real
+		// file:// URI via fsPath, then to __ZYRAXKEEP__0_ so the
 		// renderer's CSP allows loading it as a media source.
 		const browserUri = FileAccess.uriToBrowserUri(URI.file(fileUri.fsPath));
 

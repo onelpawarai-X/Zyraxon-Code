@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { Raw } from '@vscode/prompt-tsx';
-import type { ChatErrorDetails, MappedEditsResponseStream, NotebookCell, NotebookDocument, Uri } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { ChatErrorDetails, MappedEditsResponseStream, NotebookCell, NotebookDocument, Uri } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { FetchStreamSource, IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatLocation, ChatResponse, getErrorDetailsFromChatFetchError, getFilteredMessage } from '../../../../platform/chat/common/commonTypes';
@@ -44,7 +44,7 @@ import { isEqual } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../../util/vs/base/common/uuid';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { NotebookEdit, Position, Range, TextEdit } from '../../../../vscodeTypes';
+import { NotebookEdit, Position, Range, TextEdit } from '../../../../zyraxoncodeTypes';
 import { OutcomeAnnotation, OutcomeAnnotationLabel } from '../../../inlineChat/node/promptCraftingTypes';
 import { Lines, LinesEdit } from '../../../prompt/node/editGeneration';
 import { LineOfText, PartialAsyncTextReader } from '../../../prompt/node/streamingEdits';

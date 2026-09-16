@@ -4,17 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 .inline-chat-content-widget {
-	background-color: var(--vscode-panel-background);
+	background-color: var(--zyraxoncode-panel-background);
 	padding: 0 1px;
 	border-radius: 8px;
 	display: flex;
 	align-items: center;
-	box-shadow: var(--vscode-shadow-lg);
+	box-shadow: var(--zyraxoncode-shadow-lg);
 	cursor: pointer;
-	min-width: var(--vscode-inline-chat-affordance-height);
-	min-height: var(--vscode-inline-chat-affordance-height);
-	line-height: var(--vscode-inline-chat-affordance-height);
-	border: 1px solid var(--vscode-input-border, transparent);
+	min-width: var(--zyraxoncode-inline-chat-affordance-height);
+	min-height: var(--zyraxoncode-inline-chat-affordance-height);
+	line-height: var(--zyraxoncode-inline-chat-affordance-height);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
 	z-index: 100;
 }
 
@@ -23,7 +23,7 @@
 .inline-edits-view-gutter-indicator .codicon.codicon-light-bulb,
 .inline-edits-view-gutter-indicator .codicon.codicon-lightbulb-sparkle {
 	margin: 0;
-	color: var(--vscode-editorLightBulb-foreground);
+	color: var(--zyraxoncode-editorLightBulb-foreground);
 }
 
 .inline-chat-content-widget .action-label.codicon.codicon-lightbulb-autofix,
@@ -31,13 +31,13 @@
 .inline-edits-view-gutter-indicator .codicon.codicon-lightbulb-autofix,
 .inline-edits-view-gutter-indicator .codicon.codicon-lightbulb-sparkle-autofix {
 	margin: 0;
-	color: var(--vscode-editorLightBulbAutoFix-foreground, var(--vscode-editorLightBulb-foreground));
+	color: var(--zyraxoncode-editorLightBulbAutoFix-foreground, var(--zyraxoncode-editorLightBulb-foreground));
 }
 
 .inline-chat-content-widget .action-label.codicon.codicon-sparkle-filled,
 .inline-edits-view-gutter-indicator .codicon.codicon-sparkle-filled {
 	margin: 0;
-	color: var(--vscode-editorLightBulbAi-foreground, var(--vscode-icon-foreground));
+	color: var(--zyraxoncode-editorLightBulbAi-foreground, var(--zyraxoncode-icon-foreground));
 }
 
 .inline-chat-content-widget .inline-chat-keybinding {

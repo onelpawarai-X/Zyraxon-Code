@@ -19,7 +19,7 @@ import { IConfigurationService } from '../../../../../platform/configuration/com
 import { observableConfigValue } from '../../../../../platform/observable/common/platformObservableUtils.js';
 import { MonotonousIndexTransformer } from '../indexTransformer.js';
 import type { StateDeltas, TextMateTokenizationWorker } from './worker/textMateTokenizationWorker.worker.js';
-import type { applyStateStackDiff, StateStack } from 'vscode-textmate';
+import type { applyStateStackDiff, StateStack } from 'zyraxoncode-textmate';
 import { linesLengthEditFromModelContentChange } from '../../../../../editor/common/model/textModelStringEdit.js';
 import { StringEdit } from '../../../../../editor/common/core/edits/stringEdit.js';
 import { OffsetRange } from '../../../../../editor/common/core/ranges/offsetRange.js';
@@ -190,7 +190,7 @@ export class TextMateWorkerTokenizerController extends Disposable {
 		);
 
 		if (!this._applyStateStackDiffFn || !this._initialState) {
-			const { applyStateStackDiff, INITIAL } = await importAMDNodeModule<typeof import('vscode-textmate')>('vscode-textmate', 'release/main.js');
+			const { applyStateStackDiff, INITIAL } = await importAMDNodeModule<typeof import('zyraxoncode-textmate')>('zyraxoncode-textmate', 'release/main.js');
 			this._applyStateStackDiffFn = applyStateStackDiff;
 			this._initialState = INITIAL;
 		}

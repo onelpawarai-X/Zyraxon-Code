@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, ExtensionContext, Uri, l10n } from 'vscode';
-import { LanguageClientOptions } from 'vscode-languageclient';
+import { Disposable, ExtensionContext, Uri, l10n } from 'zyraxoncode';
+import { LanguageClientOptions } from 'zyraxoncode-languageclient';
 import { startClient, LanguageClientConstructor, AsyncDisposable } from '../htmlClient';
-import { LanguageClient } from 'vscode-languageclient/browser';
+import { LanguageClient } from 'zyraxoncode-languageclient/browser';
 
 let client: AsyncDisposable | undefined;
 

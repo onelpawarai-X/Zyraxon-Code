@@ -118,7 +118,7 @@ import type { ConfigWriteResponse } from './protocol/generated/v2/ConfigWriteRes
 import { formatGuardianDenialNotification, summarizeGuardianReviewAction, toGuardianAssessmentEventJson } from './codexGuardianReview.js';
 
 const CLIENT_INFO = {
-	name: 'vscode_agent_host',
+	name: 'zyraxoncode_agent_host',
 	title: 'ZYRAXON Code Agent Host',
 	// The codex `clientInfo.version` is informational. Hardcoded to a
 	// non-empty placeholder; bumping it isn't required when our code
@@ -131,17 +131,17 @@ const CODEX_THINKING_LEVEL_KEY = 'thinkingLevel';
 /**
  * User-agent prefix applied to the Codex agent's outbound CAPI calls (e.g. the
  * model-list fetch) so the traffic is identifiable server-side. Mirrors
- * `claudeAgent.ts` and the `vscode_codex` prefix used by `codexProxyService.ts`
+ * `claudeAgent.ts` and the `zyraxoncode_codex` prefix used by `codexProxyService.ts`
  * and `oaiLanguageModelServer.ts`.
  */
-const USER_AGENT_PREFIX = 'vscode_codex';
+const USER_AGENT_PREFIX = 'zyraxoncode_codex';
 
 const CODEX_REASONING_EFFORTS: readonly ReasoningEffort[] = ['minimal', 'low', 'medium', 'high'];
 
 /**
  * MCP App capabilities advertised on every codex MCP server. Mirrors
  * {@link DEFAULT_MCP_APP_CAPABILITIES} but omits `sampling`: codex owns
- * the model connection (through the `vscode-proxy` provider) and exposes
+ * the model connection (through the `zyraxoncode-proxy` provider) and exposes
  * no app-server RPC for App-initiated `sampling/createMessage`, so the
  * host cannot serve that capability for codex.
  */
@@ -169,7 +169,7 @@ const MCP_TOOL_APPROVAL_ANSWER_DECLINE = '__codex_mcp_decline__';
 /**
  * `supported_endpoints` value (on a Copilot CAPI {@link CCAModel}) that marks
  * a model as reachable through CAPI's OpenAI-shaped Responses endpoint. Codex
- * only drives models via this endpoint (the `vscode-proxy` provider uses
+ * only drives models via this endpoint (the `zyraxoncode-proxy` provider uses
  * `wire_api="responses"`), so the model picker is filtered to models that
  * advertise it. Confirmed against the live CAPI catalog: gpt-5.x / gpt-5*-codex
  * / mai-code carry `/responses`; Anthropic models carry `/v1/messages` and
@@ -802,7 +802,7 @@ export class CodexAgent extends Disposable implements IAgent {
 	 * Association from a normalized OAuth `resource` (what the workbench
 	 * authenticates) to the normalized MCP server URL(s) it unlocks. RFC 9728
 	 * discovery can return a `resource` that differs from the configured server
-	 * URL (e.g. root `https://host/` for a `https://host/mcp` endpoint), so the
+	 * URL (e.g. root `__ZYRAXKEEP__0_` for a `__ZYRAXKEEP__1_` endpoint), so the
 	 * token the workbench pushes back is keyed by the resource, not the server
 	 * URL. Recorded in {@link _surfaceMcpAuthRequired} at discovery time and
 	 * read by {@link handleAuthenticationToken} to route the token to the right
@@ -1307,7 +1307,7 @@ export class CodexAgent extends Disposable implements IAgent {
 				return;
 			}
 			const configSchema = this._createReasoningEffortConfigSchema();
-			// Codex talks to every model through the `vscode-proxy` custom model
+			// Codex talks to every model through the `zyraxoncode-proxy` custom model
 			// provider with `wire_api="responses"` (see CodexProxyService), so it
 			// can only drive models that expose Copilot CAPI's OpenAI-shaped
 			// Responses endpoint. Filter the catalog to those advertising
@@ -3110,7 +3110,7 @@ export class CodexAgent extends Disposable implements IAgent {
 			// No working directory was supplied (e.g. an editor window with no
 			// workspace folder open). Codex requires one, so create a managed
 			// per-session temp folder and remember it for cleanup on dispose.
-			const dir = join(os.tmpdir(), 'vscode-agent-codex', session.sessionId);
+			const dir = join(os.tmpdir(), 'zyraxoncode-agent-codex', session.sessionId);
 			await fs.promises.mkdir(dir, { recursive: true });
 			session.workingDirectory = URI.file(dir);
 			session.managedWorkingDirectory = session.workingDirectory;

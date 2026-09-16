@@ -38,7 +38,7 @@ const PUBLIC_DIR = path.join(__dirname, 'public');
 /**
  * Default location of the managed-settings JSON schema, resolved against the
  * app's current working directory (i.e. where `npm run mock-policy-server` is
- * invoked — normally the vscode repo root). On dev machines the schema sits at
+ * invoked — normally the zyraxoncode repo root). On dev machines the schema sits at
  * `./copilot-agent-runtime/schema/managed-settings-schema.json`. Override with
  * `--schema <url|file-uri|path>` or the `MANAGED_SETTINGS_SCHEMA` env var; web
  * (`http(s)://`) and `file://` URIs are both accepted.
@@ -59,7 +59,7 @@ for (const endpoint of endpoints) {
 }
 
 const server = http.createServer((req, res) => {
-	const url = new URL(req.url || '/', `http://${req.headers.host}`);
+	const url = new URL(req.url || '/', `__ZYRAXKEEP__0_{req.headers.host}`);
 	const pathname = url.pathname;
 
 	try {
@@ -89,7 +89,7 @@ const server = http.createServer((req, res) => {
 		}
 
 		if (pathname === '/api/schema' && req.method === 'GET') {
-			const url = new URL(req.url, `http://${req.headers.host}`);
+			const url = new URL(req.url, `__ZYRAXKEEP__1_{req.headers.host}`);
 			const sourceParam = url.searchParams.get('source') || undefined;
 			return loadSchema(sourceParam)
 				.then(result => sendJson(res, 200, result))
@@ -145,7 +145,7 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-	const base = `http://${HOST}:${PORT}`;
+	const base = `__ZYRAXKEEP__2_{HOST}:${PORT}`;
 	console.log('');
 	console.log('  Mock Copilot policy endpoints dev server');
 	console.log('  ----------------------------------------');
@@ -163,7 +163,7 @@ server.listen(PORT, HOST, () => {
 
 /** The URL ZYRAXON Code should call for a given endpoint. */
 function endpointUrl(endpoint: EndpointDef): string {
-	return `http://${HOST}:${PORT}${endpoint.path}`;
+	return `__ZYRAXKEEP__3_{HOST}:${PORT}${endpoint.path}`;
 }
 
 /**
@@ -175,7 +175,7 @@ function endpointUrl(endpoint: EndpointDef): string {
 async function loadSchema(sourceOverride?: string): Promise<{ source: string; resolved: string; ok: boolean; schema?: unknown; error?: string }> {
 	const source = sourceOverride || SCHEMA_SOURCE;
 	try {
-		if (/^https?:\/\//i.test(source)) {
+		if (/^https?:\/\__ZYRAXKEEP__4_(source)) {
 			const res = await fetch(source);
 			if (!res.ok) {
 				return { source, resolved: source, ok: false, error: `HTTP ${res.status} ${res.statusText}` };

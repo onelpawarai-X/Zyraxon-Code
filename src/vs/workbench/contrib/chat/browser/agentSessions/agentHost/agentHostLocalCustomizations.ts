@@ -219,7 +219,7 @@ export function shouldSyncWorkspaceDotMcp(sessionType: string, workspaceFolderCo
  *
  * Workspace-discovered servers are also excluded by default: the agent host
  * discovers workspace `.mcp.json` itself, so syncing them would duplicate. The
- * exception is `.vscode/mcp.json`, which the agent host does not discover
+ * exception is `.zyraxoncode/mcp.json`, which the agent host does not discover
  * (despite what the SDK's `enableConfigDiscovery` docs imply) — those are
  * synced, but only when their config can be resolved without requiring user
  * interaction.
@@ -264,7 +264,7 @@ export async function collectNonPluginMcpServers(mcpService: IMcpService, config
 				// Intentional tradeoff: servers are keyed by name in the flat synced bundle
 				// (`SyncedCustomizationBundler`), so two folders defining the same server name
 				// collide and the last one wins. Accepted — matches the existing behavior for
-				// same-named `.vscode/mcp.json` servers across folders.
+				// same-named `.zyraxoncode/mcp.json` servers across folders.
 			} else {
 				// `.cursor/mcp.json`, the `.code-workspace` workspace-level config,
 				// or the gate is off — leave discovery to the agent host.

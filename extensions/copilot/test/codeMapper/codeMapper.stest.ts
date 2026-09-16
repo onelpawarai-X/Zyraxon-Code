@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import assert from 'assert';
-import type { MappedEditsResponseStream } from 'vscode';
+import type { MappedEditsResponseStream } from 'zyraxoncode';
 import { Intent } from '../../src/extension/common/constants';
 import { IDocumentContext } from '../../src/extension/prompt/node/documentContext';
 import { CodeMapper, ICodeMapperExistingDocument } from '../../src/extension/prompts/node/codeMapper/codeMapper';
@@ -13,7 +13,7 @@ import { ITestingServicesAccessor, TestingServiceCollection } from '../../src/pl
 import { IFile, SimulationWorkspace } from '../../src/platform/test/node/simulationWorkspace';
 import { isEqual } from '../../src/util/vs/base/common/resources';
 import { IInstantiationService } from '../../src/util/vs/platform/instantiation/common/instantiation';
-import { CancellationTokenSource, Selection, TextEdit } from '../../src/vscodeTypes';
+import { CancellationTokenSource, Selection, TextEdit } from '../../src/zyraxoncodeTypes';
 import { Configuration, ISimulationTestRuntime, ssuite, stest } from '../base/stest';
 import { KnownDiagnosticProviders } from '../simulation/diagnosticProviders';
 import { setupSimulationWorkspace, teardownSimulationWorkspace, toIRange } from '../simulation/inlineChatSimulator';
@@ -225,11 +225,11 @@ forEditsAndAgent((variant, model, configurations) => {
 				codeBlock: [
 					`"keywords": [ 'ai' ],`,
 					`"devDependencies": {`,
-					`	"@microsoft/tiktokenizer": "^1.0.6",`,
+					`	"@zyraxon/tiktokenizer": "^1.0.6",`,
 					`	"@types/node": "^20.11.30",`,
-					`	"@vscode/test-cli": "^0.0.9",`,
-					`	"@vscode/test-electron": "^2.4.1",`,
-					`	"@types/vscode": "^1.89.0",`,
+					`	"@zyraxoncode/test-cli": "^0.0.9",`,
+					`	"@zyraxoncode/test-electron": "^2.4.1",`,
+					`	"@types/zyraxoncode": "^1.89.0",`,
 					`	"esbuild": "0.25.0",`,
 					`	"npm-dts": "^1.3.12",`, // removed mocha
 					`	"prettier": "^2.8.7",`,
@@ -477,7 +477,7 @@ forEditsAndAgent((variant, model, configurations) => {
 				codeBlock: [
 					`    - script: |`,
 					`        set -e`,
-					`        npm run gulp "vscode-linux-$(VSCODE_ARCH)-prepare-snap"`,
+					`        npm run gulp "zyraxoncode-linux-$(VSCODE_ARCH)-prepare-snap"`,
 					``,
 					`        # Create a tarball of the snap content`,
 					`        SNAP_ROOT="$(pwd)/.build/linux/snap/$(VSCODE_ARCH)"`,

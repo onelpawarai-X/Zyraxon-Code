@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { MarkdownPreviewManager } from './previewManager';
 
 
@@ -15,11 +15,11 @@ export const enum MarkdownPreviewSecurityLevel {
 }
 
 export interface ContentSecurityPolicyArbiter {
-	getSecurityLevelForResource(resource: vscode.Uri): MarkdownPreviewSecurityLevel;
+	getSecurityLevelForResource(resource: zyraxoncode.Uri): MarkdownPreviewSecurityLevel;
 
-	setSecurityLevelForResource(resource: vscode.Uri, level: MarkdownPreviewSecurityLevel): Thenable<void>;
+	setSecurityLevelForResource(resource: zyraxoncode.Uri, level: MarkdownPreviewSecurityLevel): Thenable<void>;
 
-	shouldAllowSvgsForResource(resource: vscode.Uri): void;
+	shouldAllowSvgsForResource(resource: zyraxoncode.Uri): void;
 
 	shouldDisableSecurityWarnings(): boolean;
 
@@ -31,18 +31,18 @@ export class ExtensionContentSecurityPolicyArbiter implements ContentSecurityPol
 	readonly #security_level_key = 'preview_security_level:';
 	readonly #should_disable_security_warning_key = 'preview_should_show_security_warning:';
 
-	readonly #globalState: vscode.Memento;
-	readonly #workspaceState: vscode.Memento;
+	readonly #globalState: zyraxoncode.Memento;
+	readonly #workspaceState: zyraxoncode.Memento;
 
 	constructor(
-		globalState: vscode.Memento,
-		workspaceState: vscode.Memento
+		globalState: zyraxoncode.Memento,
+		workspaceState: zyraxoncode.Memento
 	) {
 		this.#globalState = globalState;
 		this.#workspaceState = workspaceState;
 	}
 
-	public getSecurityLevelForResource(resource: vscode.Uri): MarkdownPreviewSecurityLevel {
+	public getSecurityLevelForResource(resource: zyraxoncode.Uri): MarkdownPreviewSecurityLevel {
 		// Use new security level setting first
 		const level = this.#globalState.get<MarkdownPreviewSecurityLevel | undefined>(this.#security_level_key + this.#getRoot(resource), undefined);
 		if (typeof level !== 'undefined') {
@@ -56,11 +56,11 @@ export class ExtensionContentSecurityPolicyArbiter implements ContentSecurityPol
 		return MarkdownPreviewSecurityLevel.Strict;
 	}
 
-	public setSecurityLevelForResource(resource: vscode.Uri, level: MarkdownPreviewSecurityLevel): Thenable<void> {
+	public setSecurityLevelForResource(resource: zyraxoncode.Uri, level: MarkdownPreviewSecurityLevel): Thenable<void> {
 		return this.#globalState.update(this.#security_level_key + this.#getRoot(resource), level);
 	}
 
-	public shouldAllowSvgsForResource(resource: vscode.Uri) {
+	public shouldAllowSvgsForResource(resource: zyraxoncode.Uri) {
 		const securityLevel = this.getSecurityLevelForResource(resource);
 		return securityLevel === MarkdownPreviewSecurityLevel.AllowInsecureContent || securityLevel === MarkdownPreviewSecurityLevel.AllowScriptsAndAllContent;
 	}
@@ -73,15 +73,15 @@ export class ExtensionContentSecurityPolicyArbiter implements ContentSecurityPol
 		return this.#workspaceState.update(this.#should_disable_security_warning_key, disabled);
 	}
 
-	#getRoot(resource: vscode.Uri): vscode.Uri {
-		if (vscode.workspace.workspaceFolders) {
-			const folderForResource = vscode.workspace.getWorkspaceFolder(resource);
+	#getRoot(resource: zyraxoncode.Uri): zyraxoncode.Uri {
+		if (zyraxoncode.workspace.workspaceFolders) {
+			const folderForResource = zyraxoncode.workspace.getWorkspaceFolder(resource);
 			if (folderForResource) {
 				return folderForResource.uri;
 			}
 
-			if (vscode.workspace.workspaceFolders.length) {
-				return vscode.workspace.workspaceFolders[0].uri;
+			if (zyraxoncode.workspace.workspaceFolders.length) {
+				return zyraxoncode.workspace.workspaceFolders[0].uri;
 			}
 		}
 
@@ -102,8 +102,8 @@ export class PreviewSecuritySelector {
 		this.#webviewManager = webviewManager;
 	}
 
-	public async showSecuritySelectorForResource(resource: vscode.Uri): Promise<void> {
-		interface PreviewSecurityPickItem extends vscode.QuickPickItem {
+	public async showSecuritySelectorForResource(resource: zyraxoncode.Uri): Promise<void> {
+		interface PreviewSecurityPickItem extends zyraxoncode.QuickPickItem {
 			readonly type: 'moreinfo' | 'toggle' | MarkdownPreviewSecurityLevel;
 		}
 
@@ -112,44 +112,44 @@ export class PreviewSecuritySelector {
 		}
 
 		const currentSecurityLevel = this.#cspArbiter.getSecurityLevelForResource(resource);
-		const selection = await vscode.window.showQuickPick<PreviewSecurityPickItem>(
+		const selection = await zyraxoncode.window.showQuickPick<PreviewSecurityPickItem>(
 			[
 				{
 					type: MarkdownPreviewSecurityLevel.Strict,
-					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.Strict) + vscode.l10n.t("Strict"),
-					description: vscode.l10n.t("Only load secure content"),
+					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.Strict) + zyraxoncode.l10n.t("Strict"),
+					description: zyraxoncode.l10n.t("Only load secure content"),
 				}, {
 					type: MarkdownPreviewSecurityLevel.AllowInsecureLocalContent,
-					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.AllowInsecureLocalContent) + vscode.l10n.t("Allow insecure local content"),
-					description: vscode.l10n.t("Enable loading content over http served from localhost"),
+					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.AllowInsecureLocalContent) + zyraxoncode.l10n.t("Allow insecure local content"),
+					description: zyraxoncode.l10n.t("Enable loading content over http served from localhost"),
 				}, {
 					type: MarkdownPreviewSecurityLevel.AllowInsecureContent,
-					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.AllowInsecureContent) + vscode.l10n.t("Allow insecure content"),
-					description: vscode.l10n.t("Enable loading content over http"),
+					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.AllowInsecureContent) + zyraxoncode.l10n.t("Allow insecure content"),
+					description: zyraxoncode.l10n.t("Enable loading content over http"),
 				}, {
 					type: MarkdownPreviewSecurityLevel.AllowScriptsAndAllContent,
-					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.AllowScriptsAndAllContent) + vscode.l10n.t("Disable"),
-					description: vscode.l10n.t("Allow all content and script execution. Not recommended"),
+					label: markActiveWhen(currentSecurityLevel === MarkdownPreviewSecurityLevel.AllowScriptsAndAllContent) + zyraxoncode.l10n.t("Disable"),
+					description: zyraxoncode.l10n.t("Allow all content and script execution. Not recommended"),
 				}, {
 					type: 'moreinfo',
-					label: vscode.l10n.t("More Information"),
+					label: zyraxoncode.l10n.t("More Information"),
 					description: ''
 				}, {
 					type: 'toggle',
 					label: this.#cspArbiter.shouldDisableSecurityWarnings()
-						? vscode.l10n.t("Enable preview security warnings in this workspace")
-						: vscode.l10n.t("Disable preview security warning in this workspace"),
-					description: vscode.l10n.t("Does not affect the content security level")
+						? zyraxoncode.l10n.t("Enable preview security warnings in this workspace")
+						: zyraxoncode.l10n.t("Disable preview security warning in this workspace"),
+					description: zyraxoncode.l10n.t("Does not affect the content security level")
 				},
 			], {
-			placeHolder: vscode.l10n.t("Select security settings for Markdown previews in this workspace"),
+			placeHolder: zyraxoncode.l10n.t("Select security settings for Markdown previews in this workspace"),
 		});
 		if (!selection) {
 			return;
 		}
 
 		if (selection.type === 'moreinfo') {
-			vscode.commands.executeCommand('vscode.open', vscode.Uri.parse('https://go.microsoft.com/fwlink/?linkid=854414'));
+			zyraxoncode.commands.executeCommand('zyraxoncode.open', zyraxoncode.Uri.parse('__ZYRAXKEEP__0_'));
 			return;
 		}
 

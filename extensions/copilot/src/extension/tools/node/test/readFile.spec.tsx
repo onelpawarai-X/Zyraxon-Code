@@ -20,7 +20,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { URI } from '../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { MarkdownString } from '../../../../vscodeTypes';
+import { MarkdownString } from '../../../../zyraxoncodeTypes';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { ToolName } from '../../common/toolNames';
 import { IToolsService } from '../../common/toolsService';
@@ -325,8 +325,8 @@ suite('ReadFile', () => {
 			);
 
 			expect(result).toBeDefined();
-			expect((result!.invocationMessage as MarkdownString).value).toBe('Reading skill [workspace](file:///workspace/test.skill.md?vscodeLinkType%3Dskill)');
-			expect((result!.pastTenseMessage as MarkdownString).value).toBe('Read skill [workspace](file:///workspace/test.skill.md?vscodeLinkType%3Dskill)');
+			expect((result!.invocationMessage as MarkdownString).value).toBe('Reading skill [workspace](__ZYRAXKEEP__0_)');
+			expect((result!.pastTenseMessage as MarkdownString).value).toBe('Read skill [workspace](__ZYRAXKEEP__1_)');
 
 			testAccessor.dispose();
 		});
@@ -360,8 +360,8 @@ suite('ReadFile', () => {
 			);
 
 			expect(result).toBeDefined();
-			expect((result!.invocationMessage as MarkdownString).value).toBe('Reading [](file:///workspace/test.ts)');
-			expect((result!.pastTenseMessage as MarkdownString).value).toBe('Read [](file:///workspace/test.ts)');
+			expect((result!.invocationMessage as MarkdownString).value).toBe('Reading [](__ZYRAXKEEP__2_)');
+			expect((result!.pastTenseMessage as MarkdownString).value).toBe('Read [](__ZYRAXKEEP__3_)');
 
 			testAccessor.dispose();
 		});
@@ -398,8 +398,8 @@ suite('ReadFile', () => {
 
 			expect(result).toBeDefined();
 			// When reading a partial range of a skill file, it should say "Reading skill"
-			expect((result!.invocationMessage as MarkdownString).value).toBe('Reading skill [workspace](file:///workspace/test.skill.md?vscodeLinkType%3Dskill#2-2), lines 2 to 4');
-			expect((result!.pastTenseMessage as MarkdownString).value).toBe('Read skill [workspace](file:///workspace/test.skill.md?vscodeLinkType%3Dskill#2-2), lines 2 to 4');
+			expect((result!.invocationMessage as MarkdownString).value).toBe('Reading skill [workspace](__ZYRAXKEEP__4_), lines 2 to 4');
+			expect((result!.pastTenseMessage as MarkdownString).value).toBe('Read skill [workspace](__ZYRAXKEEP__5_), lines 2 to 4');
 
 			testAccessor.dispose();
 		});
@@ -434,8 +434,8 @@ suite('ReadFile', () => {
 
 			expect(result).toBeDefined();
 			// For non-.md skill files, skill name should be in backticks
-			expect((result!.invocationMessage as MarkdownString).value).toContain('Reading skill `workspace`: [](file:///workspace/test.skill)');
-			expect((result!.pastTenseMessage as MarkdownString).value).toContain('Read skill `workspace`: [](file:///workspace/test.skill)');
+			expect((result!.invocationMessage as MarkdownString).value).toContain('Reading skill `workspace`: [](__ZYRAXKEEP__6_)');
+			expect((result!.pastTenseMessage as MarkdownString).value).toContain('Read skill `workspace`: [](__ZYRAXKEEP__7_)');
 
 			testAccessor.dispose();
 		});
@@ -472,8 +472,8 @@ suite('ReadFile', () => {
 
 			expect(result).toBeDefined();
 			// For non-.md skill files with range, skill name should be in backticks
-			expect((result!.invocationMessage as MarkdownString).value).toContain('Reading skill `workspace`: [](file:///workspace/test.skill#2-2), lines 2 to 4');
-			expect((result!.pastTenseMessage as MarkdownString).value).toContain('Read skill `workspace`: [](file:///workspace/test.skill#2-2), lines 2 to 4');
+			expect((result!.invocationMessage as MarkdownString).value).toContain('Reading skill `workspace`: [](__ZYRAXKEEP__8_), lines 2 to 4');
+			expect((result!.pastTenseMessage as MarkdownString).value).toContain('Read skill `workspace`: [](__ZYRAXKEEP__9_), lines 2 to 4');
 
 			testAccessor.dispose();
 		});
@@ -510,8 +510,8 @@ suite('ReadFile', () => {
 
 			expect(result).toBeDefined();
 			// When reading a partial range of a non-skill file, it should say "Reading"
-			expect((result!.invocationMessage as MarkdownString).value).toBe('Reading [](file:///workspace/test.ts#2-2), lines 2 to 4');
-			expect((result!.pastTenseMessage as MarkdownString).value).toBe('Read [](file:///workspace/test.ts#2-2), lines 2 to 4');
+			expect((result!.invocationMessage as MarkdownString).value).toBe('Reading [](__ZYRAXKEEP__10_), lines 2 to 4');
+			expect((result!.pastTenseMessage as MarkdownString).value).toBe('Read [](__ZYRAXKEEP__11_), lines 2 to 4');
 
 			testAccessor.dispose();
 		});

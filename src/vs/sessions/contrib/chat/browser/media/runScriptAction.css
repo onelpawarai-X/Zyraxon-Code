@@ -17,8 +17,8 @@
 }
 
 .run-script-action-label {
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 }
 
 .run-script-action-input .monaco-inputbox {
@@ -44,21 +44,21 @@
 	max-width: 100%;
 	gap: 2px;
 	padding: 2px;
-	border: 1px solid var(--vscode-widget-border, rgba(255, 255, 255, 0.06));
-	border-radius: var(--vscode-cornerRadius-medium);
-	background-color: var(--vscode-input-background);
+	border: 1px solid var(--zyraxoncode-widget-border, rgba(255, 255, 255, 0.06));
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
+	background-color: var(--zyraxoncode-input-background);
 }
 
 .run-script-action-section .monaco-custom-radio > .monaco-button {
 	width: fit-content;
 	min-width: 76px;
 	padding: 4px 8px;
-	border: var(--vscode-strokeThickness) solid transparent;
-	border-radius: var(--vscode-cornerRadius-small);
+	border: var(--zyraxoncode-strokeThickness) solid transparent;
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background: transparent;
-	color: var(--vscode-foreground);
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	line-height: 14px;
 	opacity: 0.9;
 	transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, opacity 120ms ease;
@@ -66,26 +66,26 @@
 
 .run-script-action-section .monaco-custom-radio > .monaco-button:first-child,
 .run-script-action-section .monaco-custom-radio > .monaco-button:last-child {
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .run-script-action-section .monaco-custom-radio > .monaco-button:not(.active):not(:last-child),
 .run-script-action-section .monaco-custom-radio > .monaco-button.previous-active {
-	border-right: var(--vscode-strokeThickness) solid transparent;
-	border-left: var(--vscode-strokeThickness) solid transparent;
+	border-right: var(--zyraxoncode-strokeThickness) solid transparent;
+	border-left: var(--zyraxoncode-strokeThickness) solid transparent;
 }
 
 .run-script-action-section .monaco-custom-radio > .monaco-button:hover:not(.active):not(.disabled) {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 	border-color: rgba(255, 255, 255, 0.06);
 	opacity: 1;
 }
 
 .run-script-action-section .monaco-custom-radio > .monaco-button.active,
 .run-script-action-section .monaco-custom-radio > .monaco-button.active:hover {
-	background-color: var(--vscode-quickInputList-focusBackground);
-	color: var(--vscode-quickInputList-focusForeground);
-	border-color: var(--vscode-focusBorder, transparent);
+	background-color: var(--zyraxoncode-quickInputList-focusBackground);
+	color: var(--zyraxoncode-quickInputList-focusForeground);
+	border-color: var(--zyraxoncode-focusBorder, transparent);
 	opacity: 1;
 }
 
@@ -101,16 +101,16 @@
 .run-script-action-section .monaco-custom-radio.run-script-action-radio-disabled > .monaco-button:hover:not(.active) {
 	background-color: transparent;
 	border-color: transparent;
-	color: var(--vscode-disabledForeground);
+	color: var(--zyraxoncode-disabledForeground);
 	opacity: 1;
 	cursor: default;
 }
 
 .run-script-action-section .monaco-custom-radio.run-script-action-radio-disabled > .monaco-button.active,
 .run-script-action-section .monaco-custom-radio.run-script-action-radio-disabled > .monaco-button.active:hover {
-	background-color: var(--vscode-quickInputList-focusBackground);
-	color: var(--vscode-quickInputList-focusForeground);
-	border-color: var(--vscode-focusBorder, transparent);
+	background-color: var(--zyraxoncode-quickInputList-focusBackground);
+	color: var(--zyraxoncode-quickInputList-focusForeground);
+	border-color: var(--zyraxoncode-focusBorder, transparent);
 	opacity: 0.9;
 	cursor: default;
 }
@@ -121,8 +121,8 @@
 }
 
 .run-script-action-hint {
-	font-size: var(--vscode-agents-fontSize-label1);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .run-script-action-buttons {
@@ -136,18 +136,18 @@
 	width: fit-content;
 	min-height: 28px;
 	padding: 6px 12px;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 }
 
 .agent-sessions-workbench.run-script-action-modal-visible .quick-input-widget .quick-input-titlebar {
 	gap: 8px;
 	height: 32px;
 	padding: 0 6px 0 0;
-	border-top-left-radius: var(--vscode-cornerRadius-large);
-	border-top-right-radius: var(--vscode-cornerRadius-large);
-	border-bottom: 1px solid var(--vscode-titleBar-border, var(--vscode-widget-border, transparent));
+	border-top-left-radius: var(--zyraxoncode-cornerRadius-large);
+	border-top-right-radius: var(--zyraxoncode-cornerRadius-large);
+	border-bottom: 1px solid var(--zyraxoncode-titleBar-border, var(--zyraxoncode-widget-border, transparent));
 	box-sizing: border-box;
-	background-color: var(--vscode-titleBar-activeBackground);
+	background-color: var(--zyraxoncode-titleBar-activeBackground);
 }
 
 .agent-sessions-workbench.run-script-action-modal-visible .quick-input-widget .quick-input-right-action-bar {
@@ -157,25 +157,25 @@
 .agent-sessions-workbench.run-script-action-modal-visible .quick-input-widget .quick-input-title {
 	padding: 0;
 	text-align: left;
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-titleBar-activeForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-titleBar-activeForeground);
 }
 
 .agent-sessions-workbench.run-script-action-modal-visible .quick-input-widget {
-	border-radius: var(--vscode-cornerRadius-large);
-	box-shadow: var(--vscode-shadow-xl);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	box-shadow: var(--zyraxoncode-shadow-xl);
 }
 
 .agent-sessions-workbench.run-script-action-modal-visible .quick-input-widget .quick-input-html-widget {
-	border-bottom-left-radius: var(--vscode-cornerRadius-large);
-	border-bottom-right-radius: var(--vscode-cornerRadius-large);
+	border-bottom-left-radius: var(--zyraxoncode-cornerRadius-large);
+	border-bottom-right-radius: var(--zyraxoncode-cornerRadius-large);
 	overflow: hidden;
 }
 
 .agent-sessions-workbench.run-script-action-modal-visible .quick-input-widget .quick-input-header,
 .agent-sessions-workbench.run-script-action-modal-visible .quick-input-widget .run-script-action-widget {
-	background-color: var(--vscode-editor-background);
+	background-color: var(--zyraxoncode-editor-background);
 }
 
 .run-script-action-modal-backdrop {

@@ -23,7 +23,7 @@ import { autorun, autorunHandleChanges } from '../../../util/vs/base/common/obse
 import { StringEdit, StringReplacement } from '../../../util/vs/editor/common/core/edits/stringEdit';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
 import { StringText } from '../../../util/vs/editor/common/core/text/abstractText';
-import { Uri } from '../../../vscodeTypes';
+import { Uri } from '../../../zyraxoncodeTypes';
 import { DebugRecorder } from './debugRecorder';
 import { INesConfigs } from './nesConfigs';
 import { INextEditDisplayLocation, INextEditResult } from './nextEditResult';
@@ -183,7 +183,7 @@ export class LlmNESTelemetryBuilder extends Disposable {
 			activeDocumentEditsCount = activeDoc.recentEdits.edits.length;
 			activeDocumentLanguageId = activeDoc.languageId;
 			activeDocumentOriginalLineCount = activeDoc.documentAfterEditsLines.length;
-			isNotebook = activeDoc.id.toUri().scheme === Schemas.vscodeNotebookCell || this._notebookService?.hasSupportedNotebooks(activeDoc.id.toUri()) || false;
+			isNotebook = activeDoc.id.toUri().scheme === Schemas.zyraxoncodeNotebookCell || this._notebookService?.hasSupportedNotebooks(activeDoc.id.toUri()) || false;
 			notebookType = this._workspaceService === undefined ? undefined : findNotebook(activeDoc.id.toUri(), this._workspaceService.notebookDocuments)?.notebookType;
 			const git = this._gitExtensionService?.getExtensionApi();
 			if (git) {

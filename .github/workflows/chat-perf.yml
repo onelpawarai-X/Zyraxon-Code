@@ -348,9 +348,9 @@ jobs:
         if: always() && steps.scenarios.outputs.skip != 'true'
         run: |
           # Clean up tmp dirs used by ZYRAXON Code instances
-          rm -rf /tmp/vscode-chat-simulation 2>/dev/null || true
+          rm -rf /tmp/zyraxoncode-chat-simulation 2>/dev/null || true
           # Remove the production build to free space for artifact upload
-          rm -rf ../VSCode-* 2>/dev/null || true
+          rm -rf ../ZyraxonCode-* 2>/dev/null || true
           echo "Disk usage after cleanup:"
           df -h . | tail -1
 
@@ -472,7 +472,7 @@ jobs:
       - name: Clean up temporary files
         if: always()
         run: |
-          rm -rf /tmp/vscode-chat-simulation 2>/dev/null || true
+          rm -rf /tmp/zyraxoncode-chat-simulation 2>/dev/null || true
 
       - name: Upload leak results
         if: always()

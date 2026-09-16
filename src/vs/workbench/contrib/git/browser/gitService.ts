@@ -28,7 +28,7 @@ export class GitService extends Disposable implements IGitService {
 	}
 
 	setDelegate(delegate: IGitExtensionDelegate): IDisposable {
-		// The delegate can only be set once, since the vscode.git
+		// The delegate can only be set once, since the zyraxoncode.git
 		// extension can only run in one extension host process per
 		// window.
 		if (this._delegate) {

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Command, CommandManager } from '../commands/commandManager';
 import { isSupportedLanguageMode } from '../configuration/languageIds';
 import { API } from '../tsServer/api';
@@ -22,33 +22,33 @@ class FileReferencesCommand implements Command {
 		private readonly client: ITypeScriptServiceClient
 	) { }
 
-	public async execute(resource?: vscode.Uri) {
+	public async execute(resource?: zyraxoncode.Uri) {
 		if (this.client.apiVersion.lt(FileReferencesCommand.minVersion)) {
-			vscode.window.showErrorMessage(vscode.l10n.t("Find file references failed. Requires TypeScript 4.2+."));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t("Find file references failed. Requires TypeScript 4.2+."));
 			return;
 		}
 
-		resource ??= vscode.window.activeTextEditor?.document.uri;
+		resource ??= zyraxoncode.window.activeTextEditor?.document.uri;
 		if (!resource) {
-			vscode.window.showErrorMessage(vscode.l10n.t("Find file references failed. No resource provided."));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t("Find file references failed. No resource provided."));
 			return;
 		}
 
-		const document = await vscode.workspace.openTextDocument(resource);
+		const document = await zyraxoncode.workspace.openTextDocument(resource);
 		if (!isSupportedLanguageMode(document)) {
-			vscode.window.showErrorMessage(vscode.l10n.t("Find file references failed. Unsupported file type."));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t("Find file references failed. Unsupported file type."));
 			return;
 		}
 
 		const openedFiledPath = this.client.toOpenTsFilePath(document);
 		if (!openedFiledPath) {
-			vscode.window.showErrorMessage(vscode.l10n.t("Find file references failed. Unknown file type."));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t("Find file references failed. Unknown file type."));
 			return;
 		}
 
-		await vscode.window.withProgress({
-			location: vscode.ProgressLocation.Window,
-			title: vscode.l10n.t("Finding file references")
+		await zyraxoncode.window.withProgress({
+			location: zyraxoncode.ProgressLocation.Window,
+			title: zyraxoncode.l10n.t("Finding file references")
 		}, async (_progress, token) => {
 
 			const response = await this.client.execute('fileReferences', {
@@ -58,15 +58,15 @@ class FileReferencesCommand implements Command {
 				return;
 			}
 
-			const locations: vscode.Location[] = response.body.refs.map(reference =>
+			const locations: zyraxoncode.Location[] = response.body.refs.map(reference =>
 				typeConverters.Location.fromTextSpan(this.client.toResource(reference.file), reference));
 
-			const config = vscode.workspace.getConfiguration('references');
+			const config = zyraxoncode.workspace.getConfiguration('references');
 			const existingSetting = config.inspect<string>('preferredLocation');
 
 			await config.update('preferredLocation', 'view');
 			try {
-				await vscode.commands.executeCommand('editor.action.showReferences', resource, new vscode.Position(0, 0), locations);
+				await zyraxoncode.commands.executeCommand('editor.action.showReferences', resource, new zyraxoncode.Position(0, 0), locations);
 			} finally {
 				await config.update('preferredLocation', existingSetting?.workspaceFolderValue ?? existingSetting?.workspaceValue);
 			}
@@ -80,13 +80,13 @@ export function register(
 	commandManager: CommandManager
 ) {
 	function updateContext(overrideValue?: boolean) {
-		vscode.commands.executeCommand('setContext', FileReferencesCommand.context, overrideValue ?? client.apiVersion.gte(FileReferencesCommand.minVersion));
+		zyraxoncode.commands.executeCommand('setContext', FileReferencesCommand.context, overrideValue ?? client.apiVersion.gte(FileReferencesCommand.minVersion));
 	}
 	updateContext();
 
 	commandManager.register(new FileReferencesCommand(client));
-	return vscode.Disposable.from(
+	return zyraxoncode.Disposable.from(
 		client.onTsServerStarted(() => updateContext()),
-		new vscode.Disposable(() => updateContext(false)),
+		new zyraxoncode.Disposable(() => updateContext(false)),
 	);
 }

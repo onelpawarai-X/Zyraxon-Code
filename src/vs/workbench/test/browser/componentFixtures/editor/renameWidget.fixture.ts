@@ -38,14 +38,14 @@ function renderRenameWidget(options: RenameFixtureOptions): void {
 	const { container, disposableStore, theme } = options;
 	container.style.width = '500px';
 	container.style.height = '280px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const instantiationService = createEditorServices(disposableStore, { colorTheme: theme });
 
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		SAMPLE_CODE,
-		URI.parse('inmemory://rename-fixture.ts'),
+		URI.parse('__ZYRAXKEEP__0_'),
 		'typescript'
 	));
 

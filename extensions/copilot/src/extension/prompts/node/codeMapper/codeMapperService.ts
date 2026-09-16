@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 import { NotebookDocumentSnapshot } from '../../../../platform/editing/common/notebookDocumentSnapshot';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
@@ -25,14 +25,14 @@ import { Disposable, toDisposable } from '../../../../util/vs/base/common/lifecy
 import { ResourceMap } from '../../../../util/vs/base/common/map';
 import { isEqual } from '../../../../util/vs/base/common/resources';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Range, TextEdit } from '../../../../vscodeTypes';
+import { Range, TextEdit } from '../../../../zyraxoncodeTypes';
 import { OutcomeAnnotation } from '../../../inlineChat/node/promptCraftingTypes';
 import { IWorkingSet } from '../../../prompt/common/intents';
 import { EXISTING_CODE_MARKER } from '../panel/codeBlockFormattingRules';
 import { CodeMapper, CodeMapperOutcomeTelemetry, ICodeMapperDocument, ICodeMapperRequestInput, processFullRewriteNewNotebook } from './codeMapper';
 
-export type CodeBlock = { readonly code: string; readonly resource: vscode.Uri; readonly markdownBeforeBlock?: string };
-export type ResourceTextEdits = { readonly target: vscode.Uri; readonly edits: TextEdit | TextEdit[] };
+export type CodeBlock = { readonly code: string; readonly resource: zyraxoncode.Uri; readonly markdownBeforeBlock?: string };
+export type ResourceTextEdits = { readonly target: zyraxoncode.Uri; readonly edits: TextEdit | TextEdit[] };
 
 export interface ICodeMapperTelemetryInfo {
 	readonly isAgent?: boolean;
@@ -51,14 +51,14 @@ export interface IMapCodeRequest {
 }
 
 export interface IMapCodeResult {
-	readonly errorDetails?: vscode.ChatErrorDetails;
+	readonly errorDetails?: zyraxoncode.ChatErrorDetails;
 	readonly annotations?: OutcomeAnnotation[];
 	readonly telemetry?: CodeMapperOutcomeTelemetry;
 }
 
 export interface ICodeMapperService {
 	readonly _serviceBrand: undefined;
-	mapCode(request: IMapCodeRequest, responseStream: vscode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: vscode.CancellationToken): Promise<IMapCodeResult | undefined>;
+	mapCode(request: IMapCodeRequest, responseStream: zyraxoncode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: zyraxoncode.CancellationToken): Promise<IMapCodeResult | undefined>;
 }
 
 export class CodeMapperService extends Disposable implements ICodeMapperService {
@@ -75,7 +75,7 @@ export class CodeMapperService extends Disposable implements ICodeMapperService 
 		this._register(toDisposable(() => this._queues.clear()));
 	}
 
-	async mapCode(request: IMapCodeRequest, responseStream: vscode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: vscode.CancellationToken): Promise<IMapCodeResult | undefined> {
+	async mapCode(request: IMapCodeRequest, responseStream: zyraxoncode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: zyraxoncode.CancellationToken): Promise<IMapCodeResult | undefined> {
 		let queue = this._queues.get(request.codeBlock.resource);
 		if (!queue) {
 			queue = new Queue<IMapCodeResult | undefined>();
@@ -85,7 +85,7 @@ export class CodeMapperService extends Disposable implements ICodeMapperService 
 		return queue.queue(() => this._doMapCode(request, responseStream, telemetryInfo, token));
 	}
 
-	private async _doMapCode(request: IMapCodeRequest, responseStream: vscode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: vscode.CancellationToken): Promise<IMapCodeResult | undefined> {
+	private async _doMapCode(request: IMapCodeRequest, responseStream: zyraxoncode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: zyraxoncode.CancellationToken): Promise<IMapCodeResult | undefined> {
 		const codeMapper = this.notebookService.hasSupportedNotebooks(request.codeBlock.resource) ?
 			this.instantiationService.createInstance(NotebookCodeMapper) :
 			this.instantiationService.createInstance(DocumentCodeMapper);
@@ -110,7 +110,7 @@ class DocumentCodeMapper extends Disposable implements ICodeMapperService {
 		this.codeMapper = this.instantiationService.createInstance(CodeMapper);
 	}
 
-	async mapCode(request: IMapCodeRequest, responseStream: vscode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: vscode.CancellationToken): Promise<IMapCodeResult | undefined> {
+	async mapCode(request: IMapCodeRequest, responseStream: zyraxoncode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: zyraxoncode.CancellationToken): Promise<IMapCodeResult | undefined> {
 		const { codeBlock } = request;
 		const documentContext = await this._getDocumentContextForCodeBlock(codeBlock);
 		if (token.isCancellationRequested) {
@@ -185,7 +185,7 @@ class NotebookCodeMapper extends Disposable implements ICodeMapperService {
 		this.codeMapper = this.instantiationService.createInstance(CodeMapper);
 	}
 
-	async mapCode(request: IMapCodeRequest, responseStream: vscode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: vscode.CancellationToken): Promise<IMapCodeResult | undefined> {
+	async mapCode(request: IMapCodeRequest, responseStream: zyraxoncode.MappedEditsResponseStream, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: zyraxoncode.CancellationToken): Promise<IMapCodeResult | undefined> {
 		const { codeBlock } = request;
 		const documentContext = await this._getDocumentContextForCodeBlock(codeBlock);
 		if (token.isCancellationRequested) {
@@ -232,7 +232,7 @@ class NotebookCodeMapper extends Disposable implements ICodeMapperService {
 
 }
 
-async function mapCode(request: IMapCodeRequest, responseStream: vscode.MappedEditsResponseStream, documentContext: ICodeMapperDocument | undefined, codeMapper: CodeMapper, telemetryService: ITelemetryService, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: vscode.CancellationToken): Promise<IMapCodeResult | undefined> {
+async function mapCode(request: IMapCodeRequest, responseStream: zyraxoncode.MappedEditsResponseStream, documentContext: ICodeMapperDocument | undefined, codeMapper: CodeMapper, telemetryService: ITelemetryService, telemetryInfo: ICodeMapperTelemetryInfo | undefined, token: zyraxoncode.CancellationToken): Promise<IMapCodeResult | undefined> {
 	const { codeBlock, workingSet, location } = request;
 	const requestInput: ICodeMapperRequestInput = (documentContext && (documentContext.getText().length > 0)) ?
 		{
@@ -283,9 +283,9 @@ function reportTelemetry(telemetryService: ITelemetryService, { telemetry, annot
 	});
 }
 
-function spyResponseStream(responseStream: vscode.MappedEditsResponseStream, callback: (target: vscode.Uri, edits: TextEdit | TextEdit[]) => void): vscode.MappedEditsResponseStream {
+function spyResponseStream(responseStream: zyraxoncode.MappedEditsResponseStream, callback: (target: zyraxoncode.Uri, edits: TextEdit | TextEdit[]) => void): zyraxoncode.MappedEditsResponseStream {
 	return {
-		textEdit: (target: vscode.Uri, edits: TextEdit | TextEdit[]) => {
+		textEdit: (target: zyraxoncode.Uri, edits: TextEdit | TextEdit[]) => {
 			callback(target, edits);
 			responseStream.textEdit(target, edits);
 		},

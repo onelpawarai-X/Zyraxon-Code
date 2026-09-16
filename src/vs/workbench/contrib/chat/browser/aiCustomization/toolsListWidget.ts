@@ -237,7 +237,7 @@ export class ToolsListWidget extends Disposable {
 
 		const learnMore = DOM.append(description, $('a.section-title-link')) as HTMLAnchorElement;
 		learnMore.textContent = localize('learnMoreTools', "Learn more about tools");
-		learnMore.href = 'https://code.visualstudio.com/docs/agent-customization/tools?referrer=in-product';
+		learnMore.href = '__ZYRAXKEEP__0_';
 		this._register(DOM.addDisposableListener(learnMore, 'click', e => {
 			e.preventDefault();
 			void this._openerService.open(URI.parse(learnMore.href));
@@ -979,7 +979,7 @@ export class ToolsListWidget extends Disposable {
 /**
  * The Copilot CLI's built-in tools, surfaced read-only for reference. Mirrored from the published
  * "Tool availability values" table (the SDK does not expose this list at runtime); keep in sync:
- * https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference#tool-availability-values
+ * __ZYRAXKEEP__1_
  */
 const COPILOT_CLI_TOOLS: readonly { readonly name: string; readonly description: string }[] = [
 	// Shell tools
@@ -1007,10 +1007,10 @@ const COPILOT_CLI_TOOLS: readonly { readonly name: string; readonly description:
 
 const CUSTOM_TOOL_SET_ORDER: Record<string, number> = {
 	'copilot-cli': 0,
-	'vscode-general': 1,
-	'vscode-tasks': 2,
-	'vscode-browser': 3,
-	'vscode-notebooks': 4,
+	'zyraxoncode-general': 1,
+	'zyraxoncode-tasks': 2,
+	'zyraxoncode-browser': 3,
+	'zyraxoncode-notebooks': 4,
 };
 
 function sortKey(toolSet: IToolSet): string {

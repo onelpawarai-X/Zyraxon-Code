@@ -27,8 +27,8 @@
 	left: calc((var(--activity-bar-width, 36px) - var(--activity-bar-action-height, 36px) + 4px) / 2);
 	width: calc(var(--activity-bar-action-height, 36px) - 4px);
 	height: calc(var(--activity-bar-action-height, 36px) - 4px);
-	border-radius: var(--vscode-cornerRadius-medium);
-	background-color: var(--vscode-activityBar-activeBackground, var(--vscode-list-inactiveSelectionBackground));
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
+	background-color: var(--zyraxoncode-activityBar-activeBackground, var(--zyraxoncode-list-inactiveSelectionBackground));
 }
 
 /* Compact: minimal horizontal inset — 24×24px box centered in the 28px item. */
@@ -50,19 +50,19 @@
  * gain a filled background box.
  */
 .style-override .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .action-item.checked .action-label.codicon {
-	color: var(--vscode-foreground) !important;
+	color: var(--zyraxoncode-foreground) !important;
 }
 
 .style-override .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .action-item:not(.checked) .action-label.codicon {
-	color: var(--vscode-icon-foreground) !important;
+	color: var(--zyraxoncode-icon-foreground) !important;
 }
 
 .style-override .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .action-item.checked .action-label:not(.codicon) {
-	background-color: var(--vscode-foreground) !important;
+	background-color: var(--zyraxoncode-foreground) !important;
 }
 
 .style-override .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .action-item:not(.checked) .action-label:not(.codicon) {
-	background-color: var(--vscode-icon-foreground) !important;
+	background-color: var(--zyraxoncode-icon-foreground) !important;
 }
 
 /*
@@ -88,8 +88,8 @@
 	left: calc((var(--activity-bar-width, 36px) - var(--activity-bar-action-height, 36px) + 4px) / 2);
 	width: calc(var(--activity-bar-action-height, 36px) - 4px);
 	height: calc(var(--activity-bar-action-height, 36px) - 4px);
-	border-radius: var(--vscode-cornerRadius-medium);
-	background-color: var(--vscode-list-hoverBackground);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 /* Compact: minimal horizontal inset — 24×24px box centered in the 28px item. */
@@ -100,10 +100,10 @@
 }
 
 :is(.hc-black, .hc-light).style-override .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .action-item.checked .active-item-indicator {
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background-color: transparent;
-	outline: var(--vscode-strokeThickness) solid var(--vscode-contrastActiveBorder);
-	outline-offset: calc(-1 * var(--vscode-strokeThickness));
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-contrastActiveBorder);
+	outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
 }
 
 :is(.hc-black, .hc-light).style-override.monaco-workbench .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .action-item.checked:not(:focus) .active-item-indicator {
@@ -111,10 +111,10 @@
 }
 
 :is(.hc-black, .hc-light).style-override .activitybar > .content:not(.dragged-over):not(.dragged-over-head):not(.dragged-over-tail) :not(.monaco-menu) > .monaco-action-bar .action-item:not(.checked):hover::before {
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background-color: transparent;
-	outline: var(--vscode-strokeThickness) dashed var(--vscode-contrastActiveBorder);
-	outline-offset: calc(-1 * var(--vscode-strokeThickness));
+	outline: var(--zyraxoncode-strokeThickness) dashed var(--zyraxoncode-contrastActiveBorder);
+	outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
 }
 
 /*
@@ -170,7 +170,7 @@
 	left: 0;
 	width: 24px;
 	height: 24px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background-color:  var(--modern-ui-tab-active-background);
 	transform: translateY(-50%);
 }
@@ -187,8 +187,8 @@
 	left: 0;
 	width: 24px;
 	height: 24px;
-	border-radius: var(--vscode-cornerRadius-small);
-	background-color: var(--vscode-list-hoverBackground);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 	transform: translateY(-50%);
 }
 
@@ -200,12 +200,12 @@
  */
 .style-override .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon.checked .action-label.codicon,
 .style-override .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon.checked .action-label.codicon {
-	color: var(--vscode-foreground) !important;
+	color: var(--zyraxoncode-foreground) !important;
 }
 
 .style-override .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon:not(.checked) .action-label.codicon,
 .style-override .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon:not(.checked) .action-label.codicon {
-	color: var(--vscode-descriptionForeground) !important;
+	color: var(--zyraxoncode-descriptionForeground) !important;
 }
 
 .style-override .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon .action-label.uri-icon,
@@ -222,12 +222,12 @@
 
 .style-override .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon.checked .action-label.uri-icon,
 .style-override .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon.checked .action-label.uri-icon {
-	background-color: var(--vscode-foreground) !important;
+	background-color: var(--zyraxoncode-foreground) !important;
 }
 
 .style-override .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon:not(.checked) .action-label.uri-icon,
 .style-override .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon:not(.checked) .action-label.uri-icon {
-	background-color: var(--vscode-descriptionForeground) !important;
+	background-color: var(--zyraxoncode-descriptionForeground) !important;
 }
 
 /* Render the composite icons at the standard 16px size. */
@@ -235,7 +235,7 @@
 .style-override .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon .action-label.codicon {
 	font-size: 16px;
 	line-height: 12px;
-	font-weight: var(--vscode-fontWeight-regular);
+	font-weight: var(--zyraxoncode-fontWeight-regular);
 }
 
 /*
@@ -284,7 +284,7 @@
 .style-override.monaco-workbench .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon,
 .style-override.monaco-workbench .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon {
 	padding: 0 4px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 /*
@@ -327,7 +327,7 @@
 
 .style-override.monaco-workbench .part.auxiliarybar > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon .codicon,
 .style-override.monaco-workbench .pane-composite-part.basepanel > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon .codicon {
-	font-weight: var(--vscode-fontWeight-regular);
+	font-weight: var(--zyraxoncode-fontWeight-regular);
 }
 
 /* Space the composite items apart with a small gap in the auxiliary bar and base panel. */
@@ -350,7 +350,7 @@
 .style-override.monaco-workbench .pane-composite-part > .title > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon .badge.compact .badge-content:empty,
 .style-override.monaco-workbench .pane-composite-part > .header-or-footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.icon .badge.compact .badge-content:empty {
 	padding: 0;
-	border-radius: var(--vscode-cornerRadius-circle);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
 }
 
 .style-override.monaco-workbench .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .badge .badge-content {
@@ -360,7 +360,7 @@
 
 .style-override.monaco-workbench .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .badge .badge-content:empty {
 	padding: 0;
-	border-radius: var(--vscode-cornerRadius-circle);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
 	width: 16px;
 }
 
@@ -371,7 +371,7 @@
 
 .style-override.monaco-workbench .activitybar.compact > .content :not(.monaco-menu) > .monaco-action-bar .badge .badge-content:empty {
 	padding: 0;
-	border-radius: var(--vscode-cornerRadius-circle);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
 	width: 13px;
 }
 
@@ -381,7 +381,7 @@
 
 .style-override.monaco-workbench .pane-composite-part > .header-or-footer.header > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:focus .active-item-indicator:before {
 	bottom: 8px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .style-override.monaco-workbench .pane-composite-part > .header-or-footer.header > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item.checked:focus .active-item-indicator:before {
@@ -389,7 +389,7 @@
 }
 
 .style-override.monaco-workbench .pane-composite-part > .header-or-footer.footer > .composite-bar-container > .composite-bar > .monaco-action-bar .action-item:focus .active-item-indicator:before {
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	top: 3px;
 }
 

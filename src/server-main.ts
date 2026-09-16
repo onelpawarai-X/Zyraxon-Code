@@ -21,7 +21,7 @@ import { INLSConfiguration } from './vs/nls.js';
 import { IServerAPI } from './vs/server/node/remoteExtensionHostAgentServer.js';
 
 perf.mark('code/server/start');
-(globalThis as { vscodeServerStartTime?: number }).vscodeServerStartTime = performance.now();
+(globalThis as { zyraxoncodeServerStartTime?: number }).zyraxoncodeServerStartTime = performance.now();
 
 // Do a quick parse to determine if a server or the cli needs to be started
 const parsedArgs = minimist(process.argv.slice(2), {
@@ -141,7 +141,7 @@ if (shouldSpawnCli) {
 		console.log(output);
 
 		perf.mark('code/server/started');
-		(globalThis as { vscodeServerListenTime?: number }).vscodeServerListenTime = performance.now();
+		(globalThis as { zyraxoncodeServerListenTime?: number }).zyraxoncodeServerListenTime = performance.now();
 
 		await getRemoteExtensionHostAgentServer();
 	});
@@ -352,7 +352,7 @@ async function loadCode(nlsConfiguration: INLSConfiguration) {
 	// required for `bootstrap-esm` to pick up NLS messages
 	process.env['VSCODE_NLS_CONFIG'] = JSON.stringify(nlsConfiguration);
 
-	// See https://github.com/microsoft/vscode-remote-release/issues/6543
+	// See __ZYRAXKEEP__0_
 	// We would normally install a SIGPIPE listener in bootstrap-node.js
 	// But in certain situations, the console itself can be in a broken pipe state
 	// so logging SIGPIPE to the console will cause an infinite async loop
@@ -379,9 +379,9 @@ async function loadCode(nlsConfiguration: INLSConfiguration) {
 
 function hasStdinWithoutTty(): boolean {
 	try {
-		return !process.stdin.isTTY; // Via https://twitter.com/MylesBorins/status/782009479382626304
+		return !process.stdin.isTTY; // Via __ZYRAXKEEP__1_
 	} catch (error) {
-		// Windows workaround for https://github.com/nodejs/node/issues/11656
+		// Windows workaround for __ZYRAXKEEP__2_
 	}
 	return false;
 }

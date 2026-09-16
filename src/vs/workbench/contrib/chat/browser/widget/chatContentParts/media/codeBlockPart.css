@@ -19,9 +19,9 @@
 	top: -15px;
 	height: 26px;
 	line-height: 26px;
-	background-color: var(--vscode-interactive-result-editor-background-color, var(--vscode-editor-background));
-	border: 1px solid var(--vscode-chat-requestBorder);
-	border-radius: var(--vscode-cornerRadius-medium);
+	background-color: var(--zyraxoncode-interactive-result-editor-background-color, var(--zyraxoncode-editor-background));
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 	z-index: 100;
 	max-width: 70%;
 	text-overflow: ellipsis;
@@ -63,22 +63,22 @@
 }
 
 .interactive-session .interactive-request .interactive-result-code-block {
-	border: 1px solid var(--vscode-chat-requestCodeBorder);
+	border: 1px solid var(--zyraxoncode-chat-requestCodeBorder);
 }
 
 .interactive-session .interactive-response .interactive-result-code-block {
-	border: 1px solid var(--vscode-input-border, transparent);
-	background-color: var(--vscode-interactive-result-editor-background-color);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
+	background-color: var(--zyraxoncode-interactive-result-editor-background-color);
 }
 
 .interactive-result-code-block:has(.monaco-editor.focused) {
-	border-color: var(--vscode-focusBorder, transparent);
+	border-color: var(--zyraxoncode-focusBorder, transparent);
 }
 
 .interactive-result-code-block,
 .interactive-result-code-block .monaco-editor,
 .interactive-result-code-block .monaco-editor .overflow-guard {
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 }
 
 .interactive-result-code-block .interactive-result-vulns {
@@ -122,7 +122,7 @@
 	padding: 0;
 	text-align: initial;
 	justify-content: initial;
-	color: var(--vscode-foreground) !important; /* This is inside .rendered-markdown */
+	color: var(--zyraxoncode-foreground) !important; /* This is inside .rendered-markdown */
 	user-select: none;
 }
 
@@ -131,7 +131,7 @@
 }
 
 .interactive-result-code-block .interactive-result-vulns-header .monaco-text-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 }
 
 /* compare code block */
@@ -147,12 +147,12 @@
 
 
 .interactive-result-code-block.compare .message A {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	cursor: pointer;
 }
 
 .interactive-result-code-block.compare .message A > CODE {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .interactive-result-code-block.compare {
@@ -162,7 +162,7 @@
 		align-items: center;
 		padding: 0 3px;
 		box-sizing: border-box;
-		border-bottom: solid 1px var(--vscode-chat-requestBorder);
+		border-bottom: solid 1px var(--zyraxoncode-chat-requestBorder);
 
 		& .monaco-icon-label {
 			flex: 1;

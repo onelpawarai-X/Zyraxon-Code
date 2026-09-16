@@ -5,10 +5,10 @@
 
 import { AgentInput, BashInput, FileReadInput, GlobInput, GrepInput } from '@anthropic-ai/claude-agent-sdk/sdk-tools';
 import Anthropic from '@anthropic-ai/sdk';
-import * as l10n from '@vscode/l10n';
-import type { ChatSimpleToolResultData, ChatTerminalToolInvocationData } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { ChatSimpleToolResultData, ChatTerminalToolInvocationData } from 'zyraxoncode';
 import { URI } from '../../../../util/vs/base/common/uri';
-import { ChatSubagentToolInvocationData, ChatToolInvocationPart, MarkdownString } from '../../../../vscodeTypes';
+import { ChatSubagentToolInvocationData, ChatToolInvocationPart, MarkdownString } from '../../../../zyraxoncodeTypes';
 import { ClaudeToolNames, ExitPlanModeInput, LSInput } from './claudeTools';
 
 // #region Tool Result Content Extraction

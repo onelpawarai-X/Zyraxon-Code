@@ -264,7 +264,7 @@ export class Menu extends ActionBar {
 		}));
 
 		this._register(addDisposableListener(scrollElement, EventType.MOUSE_UP, e => {
-			// Absorb clicks in menu dead space https://github.com/microsoft/vscode/issues/63575
+			// Absorb clicks in menu dead space __ZYRAXKEEP__0_
 			// We do this on the scroll element so the scroll bar doesn't dismiss the menu either
 			e.preventDefault();
 		}));
@@ -321,7 +321,7 @@ export class Menu extends ActionBar {
 
 		const fgColor = style.foregroundColor ?? '';
 		const bgColor = style.backgroundColor ?? '';
-		const borderRadius = 'var(--vscode-cornerRadius-large)';
+		const borderRadius = 'var(--zyraxoncode-cornerRadius-large)';
 
 		scrollElement.style.borderRadius = borderRadius;
 		scrollElement.style.color = fgColor;
@@ -378,7 +378,7 @@ export class Menu extends ActionBar {
 
 		if (typeof this.focusedItem !== 'undefined') {
 			// Workaround for #80047 caused by an issue in chromium
-			// https://bugs.chromium.org/p/chromium/issues/detail?id=414283
+			// __ZYRAXKEEP__1_
 			// When that's fixed, just call this.scrollableElement.scanDomNode()
 			this.scrollableElement.setScrollPosition({
 				scrollTop: Math.round(this.menuElement.scrollTop)
@@ -484,7 +484,7 @@ class BaseMenuActionViewItem extends BaseActionViewItem {
 				// add back if issues arise and link new issue
 				EventHelper.stop(e, true);
 
-				// See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Interact_with_the_clipboard
+				// See __ZYRAXKEEP__2_
 				// > Writing to the clipboard
 				// > You can use the "cut" and "copy" commands without any special
 				// permission if you are using them in a short-lived event handler
@@ -1016,13 +1016,13 @@ export function formatRule(c: ThemeIcon) {
 }
 
 export function getMenuWidgetCSS(style: IMenuStyles, isForShadowDom: boolean): string {
-	const borderColor = style.borderColor ?? 'var(--vscode-menu-border)';
-	const menuShadow = `var(--vscode-shadow-lg${style.shadowColor ? `, 0 0 12px ${style.shadowColor}` : ''})`;
+	const borderColor = style.borderColor ?? 'var(--zyraxoncode-menu-border)';
+	const menuShadow = `var(--zyraxoncode-shadow-lg${style.shadowColor ? `, 0 0 12px ${style.shadowColor}` : ''})`;
 	let result = /* css */`
 .monaco-menu {
 	font-size: 13px;
-	border-radius: var(--vscode-cornerRadius-large);
-	border: var(--vscode-strokeThickness) solid ${borderColor};
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	border: var(--zyraxoncode-strokeThickness) solid ${borderColor};
 	min-width: 160px;
 }
 
@@ -1079,7 +1079,7 @@ ${formatRule(Codicon.menuSubmenu)}
 
 .monaco-menu .monaco-action-bar .action-item.disabled .action-label,
 .monaco-menu .monaco-action-bar .action-item.disabled .action-label:hover {
-	color: var(--vscode-disabledForeground);
+	color: var(--zyraxoncode-disabledForeground);
 }
 
 /* Vertical actions */
@@ -1094,7 +1094,7 @@ ${formatRule(Codicon.menuSubmenu)}
 
 .monaco-menu .monaco-action-bar.vertical .action-label.separator {
 	display: block;
-	border-bottom: 1px solid var(--vscode-menu-separatorBackground);
+	border-bottom: 1px solid var(--zyraxoncode-menu-separatorBackground);
 	padding-top: 1px;
 	padding: 30px;
 }
@@ -1141,7 +1141,7 @@ ${formatRule(Codicon.menuSubmenu)}
 	align-items: center;
 	position: relative;
 	margin: 0 4px;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 }
 
 .monaco-menu .monaco-action-bar.vertical .action-menu-item:hover .keybinding,
@@ -1243,7 +1243,7 @@ ${formatRule(Codicon.menuSubmenu)}
 	animation: fadeIn 0.083s linear;
 	-webkit-app-region: no-drag;
 	box-shadow: var(${CONTEXT_VIEW_MENU_MOTION_SHADOW_VARIABLE});
-	border-radius: var(--vscode-cornerRadius-large);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 	overflow: hidden;
 }
 
@@ -1277,14 +1277,14 @@ ${formatRule(Codicon.menuSubmenu)}
 /* High contrast themes always show the selection border to indicate the focused item, regardless of input modality. The duplicated .monaco-menu raises specificity above the keyboard-only suppression rule above so this wins independent of declaration order. */
 .hc-black .monaco-menu.monaco-menu .monaco-action-bar.vertical .action-item.focused > .action-menu-item,
 .hc-light .monaco-menu.monaco-menu .monaco-action-bar.vertical .action-item.focused > .action-menu-item {
-	outline: 1px solid var(--vscode-menu-selectionBorder) !important;
+	outline: 1px solid var(--zyraxoncode-menu-selectionBorder) !important;
 	outline-offset: -1px !important;
 }
 
 /* Keep :host-context separate because WebKit otherwise rejects the valid selectors above. */
 :host-context(.hc-black) .monaco-menu.monaco-menu .monaco-action-bar.vertical .action-item.focused > .action-menu-item,
 :host-context(.hc-light) .monaco-menu.monaco-menu .monaco-action-bar.vertical .action-item.focused > .action-menu-item {
-	outline: 1px solid var(--vscode-menu-selectionBorder) !important;
+	outline: 1px solid var(--zyraxoncode-menu-selectionBorder) !important;
 	outline-offset: -1px !important;
 }
 
@@ -1391,7 +1391,7 @@ ${formatRule(Codicon.menuSubmenu)}
 				height: 3px;
 				width: 3px;
 			}
-			/* Fix for https://github.com/microsoft/vscode/issues/103170 */
+			/* Fix for __ZYRAXKEEP__3_ */
 			.monaco-menu .action-item .monaco-submenu {
 				z-index: 1;
 			}

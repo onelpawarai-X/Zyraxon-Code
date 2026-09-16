@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
-export function fileTreePartToMarkdown(fileTree: vscode.ChatResponseFileTreePart) {
-	const printTree = (node: vscode.ChatResponseFileTree, depth: number, isLastChild: boolean): string => {
+export function fileTreePartToMarkdown(fileTree: zyraxoncode.ChatResponseFileTreePart) {
+	const printTree = (node: zyraxoncode.ChatResponseFileTree, depth: number, isLastChild: boolean): string => {
 		let output: string = '';
 		const indent = isLastChild ? '└── ' : '├── ';
 		if (depth === 1) {

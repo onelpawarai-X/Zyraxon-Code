@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelChat } from 'vscode';
+import type { LanguageModelChat } from 'zyraxoncode';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
-import { IVSCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../platform/extContext/common/extensionContext';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
 import { createServiceIdentifier } from '../../../util/common/services';
@@ -49,7 +49,7 @@ export class EditToolLearningService implements IEditToolLearningService {
 	private _cache?: LRUCache<string, IEditToolLearningData>;
 
 	constructor(
-		@IVSCodeExtensionContext private readonly _context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _context: IZyraxonCodeExtensionContext,
 		@IEndpointProvider private readonly _endpointProvider: IEndpointProvider,
 		@ITelemetryService private readonly _telemetryService: ITelemetryService,
 	) { }

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { TypeScriptServiceConfiguration } from './configuration/configuration';
 import { API } from './tsServer/api';
 import type * as Proto from './tsServer/protocol/protocol';
@@ -72,7 +72,7 @@ function inferredProjectConfigSnippet(
 	}
 
 	const compilerOptions = Object.keys(baseConfig).map(key => `"${key}": ${JSON.stringify(baseConfig[key])}`);
-	return new vscode.SnippetString(`{
+	return new zyraxoncode.SnippetString(`{
 	"compilerOptions": {
 		${compilerOptions.join(',\n\t\t')}$0
 	},
@@ -86,17 +86,17 @@ function inferredProjectConfigSnippet(
 export async function openOrCreateConfig(
 	version: API,
 	projectType: ProjectType,
-	rootPath: vscode.Uri,
+	rootPath: zyraxoncode.Uri,
 	configuration: TypeScriptServiceConfiguration,
-): Promise<vscode.TextEditor | null> {
-	const configFile = vscode.Uri.joinPath(rootPath, projectType === ProjectType.TypeScript ? 'tsconfig.json' : 'jsconfig.json');
-	const col = vscode.window.activeTextEditor?.viewColumn;
+): Promise<zyraxoncode.TextEditor | null> {
+	const configFile = zyraxoncode.Uri.joinPath(rootPath, projectType === ProjectType.TypeScript ? 'tsconfig.json' : 'jsconfig.json');
+	const col = zyraxoncode.window.activeTextEditor?.viewColumn;
 	try {
-		const doc = await vscode.workspace.openTextDocument(configFile);
-		return vscode.window.showTextDocument(doc, col);
+		const doc = await zyraxoncode.workspace.openTextDocument(configFile);
+		return zyraxoncode.window.showTextDocument(doc, col);
 	} catch {
-		const doc = await vscode.workspace.openTextDocument(configFile.with({ scheme: 'untitled' }));
-		const editor = await vscode.window.showTextDocument(doc, col);
+		const doc = await zyraxoncode.workspace.openTextDocument(configFile.with({ scheme: 'untitled' }));
+		const editor = await zyraxoncode.window.showTextDocument(doc, col);
 		if (editor.document.getText().length === 0) {
 			await editor.insertSnippet(inferredProjectConfigSnippet(version, projectType, configuration));
 		}
@@ -107,25 +107,25 @@ export async function openOrCreateConfig(
 export async function openProjectConfigOrPromptToCreate(
 	projectType: ProjectType,
 	client: ITypeScriptServiceClient,
-	rootPath: vscode.Uri,
+	rootPath: zyraxoncode.Uri,
 	configFilePath: string,
 ): Promise<void> {
 	if (!isImplicitProjectConfigFile(configFilePath)) {
-		const doc = await vscode.workspace.openTextDocument(client.toResource(configFilePath));
-		vscode.window.showTextDocument(doc, vscode.window.activeTextEditor?.viewColumn);
+		const doc = await zyraxoncode.workspace.openTextDocument(client.toResource(configFilePath));
+		zyraxoncode.window.showTextDocument(doc, zyraxoncode.window.activeTextEditor?.viewColumn);
 		return;
 	}
 
-	const CreateConfigItem: vscode.MessageItem = {
+	const CreateConfigItem: zyraxoncode.MessageItem = {
 		title: projectType === ProjectType.TypeScript
-			? vscode.l10n.t("Configure tsconfig.json")
-			: vscode.l10n.t("Configure jsconfig.json"),
+			? zyraxoncode.l10n.t("Configure tsconfig.json")
+			: zyraxoncode.l10n.t("Configure jsconfig.json"),
 	};
 
-	const selected = await vscode.window.showInformationMessage(
+	const selected = await zyraxoncode.window.showInformationMessage(
 		(projectType === ProjectType.TypeScript
-			? vscode.l10n.t("File is not part of a TypeScript project. View the [tsconfig.json documentation]({0}) to learn more.", 'https://go.microsoft.com/fwlink/?linkid=841896')
-			: vscode.l10n.t("File is not part of a JavaScript project. View the [jsconfig.json documentation]({0}) to learn more.", 'https://go.microsoft.com/fwlink/?linkid=759670')
+			? zyraxoncode.l10n.t("File is not part of a TypeScript project. View the [tsconfig.json documentation]({0}) to learn more.", '__ZYRAXKEEP__0_')
+			: zyraxoncode.l10n.t("File is not part of a JavaScript project. View the [jsconfig.json documentation]({0}) to learn more.", '__ZYRAXKEEP__1_')
 		),
 		CreateConfigItem);
 
@@ -139,20 +139,20 @@ export async function openProjectConfigOrPromptToCreate(
 export async function openProjectConfigForFile(
 	projectType: ProjectType,
 	client: ITypeScriptServiceClient,
-	resource: vscode.Uri,
+	resource: zyraxoncode.Uri,
 ): Promise<void> {
 	const rootPath = client.getWorkspaceRootForResource(resource);
 	if (!rootPath) {
-		vscode.window.showInformationMessage(
-			vscode.l10n.t("Please open a folder in ZYRAXON Code to use a TypeScript or JavaScript project"));
+		zyraxoncode.window.showInformationMessage(
+			zyraxoncode.l10n.t("Please open a folder in ZYRAXON Code to use a TypeScript or JavaScript project"));
 		return;
 	}
 
 	const file = client.toTsFilePath(resource);
 	// TSServer errors when 'projectInfo' is invoked on a non js/ts file
 	if (!file || !client.toTsFilePath(resource)) {
-		vscode.window.showWarningMessage(
-			vscode.l10n.t("Could not determine TypeScript or JavaScript project. Unsupported file type"));
+		zyraxoncode.window.showWarningMessage(
+			zyraxoncode.l10n.t("Could not determine TypeScript or JavaScript project. Unsupported file type"));
 		return;
 	}
 
@@ -164,7 +164,7 @@ export async function openProjectConfigForFile(
 	}
 
 	if (res?.type !== 'response' || !res.body) {
-		vscode.window.showWarningMessage(vscode.l10n.t("Could not determine TypeScript or JavaScript project"));
+		zyraxoncode.window.showWarningMessage(zyraxoncode.l10n.t("Could not determine TypeScript or JavaScript project"));
 		return;
 	}
 	return openProjectConfigOrPromptToCreate(projectType, client, rootPath, res.body.configFileName);

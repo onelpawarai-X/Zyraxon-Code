@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, type PromptSizing } from '@vscode/prompt-tsx';
-import type { CancellationToken, ChatResponsePart, Position, Progress } from 'vscode';
+import { PromptElement, PromptElementProps, type PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, ChatResponsePart, Position, Progress } from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';

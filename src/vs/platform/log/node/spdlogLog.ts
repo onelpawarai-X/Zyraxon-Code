@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as spdlog from '@vscode/spdlog';
+import type * as spdlog from '@zyraxoncode/spdlog';
 import { ByteSize } from '../../files/common/files.js';
 import { AbstractMessageLogger, ILogger, LogLevel } from '../common/log.js';
 
@@ -20,7 +20,7 @@ enum SpdLogLevel {
 async function createSpdLogLogger(name: string, logfilePath: string, filesize: number, filecount: number, donotUseFormatters: boolean): Promise<spdlog.Logger | null> {
 	// Do not crash if spdlog cannot be loaded
 	try {
-		const _spdlog = await import('@vscode/spdlog');
+		const _spdlog = await import('@zyraxoncode/spdlog');
 		_spdlog.setFlushOn(SpdLogLevel.Trace);
 		const logger = await _spdlog.createAsyncRotatingLogger(name, logfilePath, filesize, filecount);
 		if (donotUseFormatters) {

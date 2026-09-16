@@ -1,16 +1,16 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { SnippetString } from './snippetString';
 import { Position } from './position';
 import { Range } from './range';
 
-export class SnippetTextEdit implements vscode.SnippetTextEdit {
+export class SnippetTextEdit implements zyraxoncode.SnippetTextEdit {
 
 	static isSnippetTextEdit(thing: unknown): thing is SnippetTextEdit {
 		if (thing instanceof SnippetTextEdit) {

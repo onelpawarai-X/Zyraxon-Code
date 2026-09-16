@@ -20,7 +20,7 @@ export namespace Schemas {
 	/**
 	 * A schema that is used for setting files
 	 */
-	export const vscode = 'vscode';
+	export const zyraxoncode = 'zyraxoncode';
 
 	/**
 	 * A schema that is used for internal private files
@@ -51,47 +51,47 @@ export namespace Schemas {
 
 	export const command = 'command';
 
-	export const vscodeRemote = 'vscode-remote';
+	export const zyraxoncodeRemote = 'zyraxoncode-remote';
 
-	export const vscodeRemoteResource = 'vscode-remote-resource';
+	export const zyraxoncodeRemoteResource = 'zyraxoncode-remote-resource';
 
-	export const vscodeManagedRemoteResource = 'vscode-managed-remote-resource';
+	export const zyraxoncodeManagedRemoteResource = 'zyraxoncode-managed-remote-resource';
 
-	export const vscodeUserData = 'vscode-userdata';
+	export const zyraxoncodeUserData = 'zyraxoncode-userdata';
 
-	export const vscodeCustomEditor = 'vscode-custom-editor';
+	export const zyraxoncodeCustomEditor = 'zyraxoncode-custom-editor';
 
-	export const vscodeNotebookCell = 'vscode-notebook-cell';
-	export const vscodeNotebookCellMetadata = 'vscode-notebook-cell-metadata';
-	export const vscodeNotebookCellMetadataDiff = 'vscode-notebook-cell-metadata-diff';
-	export const vscodeNotebookCellOutput = 'vscode-notebook-cell-output';
-	export const vscodeNotebookCellOutputDiff = 'vscode-notebook-cell-output-diff';
-	export const vscodeNotebookMetadata = 'vscode-notebook-metadata';
-	export const vscodeInteractiveInput = 'vscode-interactive-input';
+	export const zyraxoncodeNotebookCell = 'zyraxoncode-notebook-cell';
+	export const zyraxoncodeNotebookCellMetadata = 'zyraxoncode-notebook-cell-metadata';
+	export const zyraxoncodeNotebookCellMetadataDiff = 'zyraxoncode-notebook-cell-metadata-diff';
+	export const zyraxoncodeNotebookCellOutput = 'zyraxoncode-notebook-cell-output';
+	export const zyraxoncodeNotebookCellOutputDiff = 'zyraxoncode-notebook-cell-output-diff';
+	export const zyraxoncodeNotebookMetadata = 'zyraxoncode-notebook-metadata';
+	export const zyraxoncodeInteractiveInput = 'zyraxoncode-interactive-input';
 
-	export const vscodeSettings = 'vscode-settings';
+	export const zyraxoncodeSettings = 'zyraxoncode-settings';
 
-	export const vscodeWorkspaceTrust = 'vscode-workspace-trust';
+	export const zyraxoncodeWorkspaceTrust = 'zyraxoncode-workspace-trust';
 
-	export const vscodeTerminal = 'vscode-terminal';
+	export const zyraxoncodeTerminal = 'zyraxoncode-terminal';
 
 	/** Scheme used for the image carousel editor. */
-	export const vscodeImageCarousel = 'vscode-image-carousel';
+	export const zyraxoncodeImageCarousel = 'zyraxoncode-image-carousel';
 
 	/** Scheme used for code blocks in chat. */
-	export const vscodeChatCodeBlock = 'vscode-chat-code-block';
+	export const zyraxoncodeChatCodeBlock = 'zyraxoncode-chat-code-block';
 
 	/** Scheme used for LHS of code compare (aka diff) blocks in chat. */
-	export const vscodeChatCodeCompareBlock = 'vscode-chat-code-compare-block';
+	export const zyraxoncodeChatCodeCompareBlock = 'zyraxoncode-chat-code-compare-block';
 
 	/** Scheme used for the chat input editor. */
-	export const vscodeChatEditor = 'vscode-chat-editor';
+	export const zyraxoncodeChatEditor = 'zyraxoncode-chat-editor';
 
 	/** Scheme used for the chat input part */
-	export const vscodeChatInput = 'chatSessionInput';
+	export const zyraxoncodeChatInput = 'chatSessionInput';
 
 	/** Scheme used for local chat session content */
-	export const vscodeLocalChatSession = 'vscode-chat-session';
+	export const zyraxoncodeLocalChatSession = 'zyraxoncode-chat-session';
 
 	/**
 	 * Scheme used internally for webviews that aren't linked to a resource (i.e. not custom editors)
@@ -101,12 +101,12 @@ export namespace Schemas {
 	/**
 	 * Scheme used for loading the wrapper html and script in webviews.
 	 */
-	export const vscodeWebview = 'vscode-webview';
+	export const zyraxoncodeWebview = 'zyraxoncode-webview';
 
 	/**
 	 * Scheme used for integrated browser tabs using WebContentsView.
 	 */
-	export const vscodeBrowser = 'vscode-browser';
+	export const zyraxoncodeBrowser = 'zyraxoncode-browser';
 
 	/**
 	 * Scheme used for extension pages
@@ -117,7 +117,7 @@ export namespace Schemas {
 	 * Scheme used as a replacement of `file` scheme to load
 	 * files with our custom protocol handler (desktop only).
 	 */
-	export const vscodeFileResource = 'vscode-file';
+	export const zyraxoncodeFileResource = 'zyraxoncode-file';
 
 	/**
 	 * Scheme used for temporary resources
@@ -132,7 +132,7 @@ export namespace Schemas {
 	/**
 	 * Scheme used for the Source Control commit input's text document
 	 */
-	export const vscodeSourceControl = 'vscode-scm';
+	export const zyraxoncodeSourceControl = 'zyraxoncode-scm';
 
 	/**
 	 * Scheme used for input box for creating comments.
@@ -178,7 +178,7 @@ export function matchesSomeScheme(target: URI | string, ...schemes: string[]): b
 	return schemes.some(scheme => matchesScheme(target, scheme));
 }
 
-export const connectionTokenCookieName = 'vscode-tkn';
+export const connectionTokenCookieName = 'zyraxoncode-tkn';
 export const connectionTokenQueryName = 'tkn';
 
 class RemoteAuthoritiesImpl {
@@ -206,7 +206,7 @@ class RemoteAuthoritiesImpl {
 	}
 
 	private get _remoteResourcesPath(): string {
-		return paths.posix.join(this._serverRootPath, Schemas.vscodeRemoteResource);
+		return paths.posix.join(this._serverRootPath, Schemas.zyraxoncodeRemoteResource);
 	}
 
 	set(authority: string, host: string, port: number): void {
@@ -243,7 +243,7 @@ class RemoteAuthoritiesImpl {
 			query += `&${connectionTokenQueryName}=${encodeURIComponent(connectionToken)}`;
 		}
 		return URI.from({
-			scheme: platform.isWeb ? this._preferredWebSchema : Schemas.vscodeRemoteResource,
+			scheme: platform.isWeb ? this._preferredWebSchema : Schemas.zyraxoncodeRemoteResource,
 			authority: `${host}:${port}`,
 			path: this._remoteResourcesPath,
 			query
@@ -273,7 +273,7 @@ export const nodeModulesPath: AppResourcePath = 'vs/../../node_modules';
 export const nodeModulesAsarPath: AppResourcePath = 'vs/../../node_modules.asar';
 export const nodeModulesAsarUnpackedPath: AppResourcePath = 'vs/../../node_modules.asar.unpacked';
 
-export const VSCODE_AUTHORITY = 'vscode-app';
+export const VSCODE_AUTHORITY = 'zyraxoncode-app';
 
 class FileAccessImpl {
 
@@ -298,11 +298,11 @@ class FileAccessImpl {
 	 */
 	uriToBrowserUri(uri: URI): URI {
 		// Handle remote URIs via `RemoteAuthorities`
-		if (uri.scheme === Schemas.vscodeRemote) {
+		if (uri.scheme === Schemas.zyraxoncodeRemote) {
 			return RemoteAuthorities.rewrite(uri);
 		}
 
-		// Convert to `vscode-file` resource..
+		// Convert to `zyraxoncode-file` resource..
 		if (
 			// ...only ever for `file` resources
 			uri.scheme === Schemas.file &&
@@ -310,11 +310,11 @@ class FileAccessImpl {
 				// ...and we run in native environments
 				platform.isNative ||
 				// ...or web worker extensions on desktop
-				(platform.webWorkerOrigin === `${Schemas.vscodeFileResource}://${FileAccessImpl.FALLBACK_AUTHORITY}`)
+				(platform.webWorkerOrigin === `${Schemas.zyraxoncodeFileResource}://${FileAccessImpl.FALLBACK_AUTHORITY}`)
 			)
 		) {
 			return uri.with({
-				scheme: Schemas.vscodeFileResource,
+				scheme: Schemas.zyraxoncodeFileResource,
 				// We need to provide an authority here so that it can serve
 				// as origin for network and loading matters in chromium.
 				// If the URI is not coming with an authority already, we
@@ -342,8 +342,8 @@ class FileAccessImpl {
 	 * is responsible for loading.
 	 */
 	uriToFileUri(uri: URI): URI {
-		// Only convert the URI if it is `vscode-file:` scheme
-		if (uri.scheme === Schemas.vscodeFileResource) {
+		// Only convert the URI if it is `zyraxoncode-file:` scheme
+		if (uri.scheme === Schemas.zyraxoncodeFileResource) {
 			return uri.with({
 				scheme: Schemas.file,
 				// Only preserve the `authority` if it is different from
@@ -400,10 +400,10 @@ export namespace COI {
 
 	export const CoopAndCoep = Object.freeze(coiHeaders.get('3'));
 
-	const coiSearchParamName = 'vscode-coi';
+	const coiSearchParamName = 'zyraxoncode-coi';
 
 	/**
-	 * Extract desired headers from `vscode-coi` invocation
+	 * Extract desired headers from `zyraxoncode-coi` invocation
 	 */
 	export function getHeadersFromQuery(url: string | URI | URL): Record<string, string> | undefined {
 		let params: URLSearchParams | undefined;
@@ -422,7 +422,7 @@ export namespace COI {
 	}
 
 	/**
-	 * Add the `vscode-coi` query attribute based on wanting `COOP` and `COEP`. Will be a noop when `crossOriginIsolated`
+	 * Add the `zyraxoncode-coi` query attribute based on wanting `COOP` and `COEP`. Will be a noop when `crossOriginIsolated`
 	 * isn't enabled the current context
 	 */
 	export function addSearchParam(urlOrSearch: URLSearchParams | Record<string, string>, coop: boolean, coep: boolean): void {

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { TreeSitterOffsetRange } from '../../../../platform/parser/node/nodes';
 import { ITabsAndEditorsService } from '../../../../platform/tabs/common/tabsAndEditorsService';
@@ -12,7 +12,7 @@ import { IWorkspaceService } from '../../../../platform/workspace/common/workspa
 import { ILanguage, getLanguage } from '../../../../util/common/languages';
 import { findCell, findNotebook } from '../../../../util/common/notebooks';
 import { Schemas } from '../../../../util/vs/base/common/network';
-import { Position, Range } from '../../../../vscodeTypes';
+import { Position, Range } from '../../../../zyraxoncodeTypes';
 import { CodeContextRegion, CodeContextTracker } from '../../../inlineChat/node/codeContextRegion';
 import { IDocumentContext } from '../../../prompt/node/documentContext';
 
@@ -26,9 +26,9 @@ import { IDocumentContext } from '../../../prompt/node/documentContext';
  */
 export function getSelectionAndCodeAroundSelection(
 	document: TextDocumentSnapshot,
-	selection: vscode.Range,
-	range: vscode.Range,
-	limitRange: vscode.Range,
+	selection: zyraxoncode.Range,
+	range: zyraxoncode.Range,
+	limitRange: zyraxoncode.Range,
 	language: ILanguage,
 	tracker: CodeContextTracker
 ): {
@@ -184,11 +184,11 @@ export function generateNotebookCellContext(
 		aboveCells: [],
 		belowCells: [],
 	};
-	let notebook: vscode.NotebookDocument | undefined;
+	let notebook: zyraxoncode.NotebookDocument | undefined;
 	let aboveCellIndex: number | undefined;
 	let belowCellIndex: number | undefined;
 
-	if (documentContext.document.uri.scheme === Schemas.vscodeNotebookCell) {
+	if (documentContext.document.uri.scheme === Schemas.zyraxoncodeNotebookCell) {
 		// inline
 		notebook = findNotebook(documentContext.document.uri, workspaceService.notebookDocuments);
 

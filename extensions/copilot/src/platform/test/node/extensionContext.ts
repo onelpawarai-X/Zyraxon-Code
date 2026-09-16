@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
-import type { Memento, Uri } from 'vscode';
+import type { Memento, Uri } from 'zyraxoncode';
 import { ExtensionMode } from '../../../util/common/test/shims/enums';
 import { dirname } from '../../../util/vs/base/common/path';
 import { URI } from '../../../util/vs/base/common/uri';

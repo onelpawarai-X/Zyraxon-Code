@@ -203,7 +203,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 				}
 
 				this._sendMessageToWebview({
-					__vscode_notebook_message: true,
+					__zyraxoncode_notebook_message: true,
 					type: 'customRendererMessage',
 					rendererId: rendererId,
 					message: message
@@ -331,11 +331,11 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 				">` : ''}
 				<style nonce="${this.nonce}">
 					::highlight(find-highlight) {
-						background-color: var(--vscode-editor-findMatchBackground, ${findMatchHighlight});
+						background-color: var(--zyraxoncode-editor-findMatchBackground, ${findMatchHighlight});
 					}
 
 					::highlight(current-find-highlight) {
-						background-color: var(--vscode-editor-findMatchHighlightBackground, ${currentHighlight});
+						background-color: var(--zyraxoncode-editor-findMatchHighlightBackground, ${currentHighlight});
 					}
 
 					#container .cell_container {
@@ -347,7 +347,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 					}
 
 					#container .cell_container.nb-insertHighlight div.output_container div.output {
-						background-color: var(--vscode-diffEditor-insertedLineBackground, var(--vscode-diffEditor-insertedTextBackground));
+						background-color: var(--zyraxoncode-diffEditor-insertedLineBackground, var(--zyraxoncode-diffEditor-insertedTextBackground));
 					}
 
 					#container > div > div > div.output {
@@ -408,7 +408,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 					}
 
 					#container .markup > div.nb-insertHighlight {
-						background-color: var(--vscode-diffEditor-insertedLineBackground, var(--vscode-diffEditor-insertedTextBackground));
+						background-color: var(--zyraxoncode-diffEditor-insertedLineBackground, var(--zyraxoncode-diffEditor-insertedTextBackground));
 					}
 
 					#container .nb-symbolHighlight .output_container .output {
@@ -424,7 +424,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 					}
 
 					#container .nb-chatGenerationHighlight .output_container .output {
-						background-color: var(--vscode-notebook-selectedCellBackground);
+						background-color: var(--zyraxoncode-notebook-selectedCellBackground);
 					}
 
 					#container > div.nb-cellDeleted .output_container {
@@ -440,7 +440,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 					}
 
 					#container .no-renderer-error {
-						color: var(--vscode-editorError-foreground);
+						color: var(--zyraxoncode-editorError-foreground);
 					}
 
 					body {
@@ -479,16 +479,16 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 					}
 
 					.find-match {
-						background-color: var(--vscode-editor-findMatchHighlightBackground);
+						background-color: var(--zyraxoncode-editor-findMatchHighlightBackground);
 					}
 
 					.current-find-match {
-						background-color: var(--vscode-editor-findMatchBackground);
+						background-color: var(--zyraxoncode-editor-findMatchBackground);
 					}
 
 					#_defaultColorPalatte {
-						color: var(--vscode-editor-findMatchHighlightBackground);
-						background-color: var(--vscode-editor-findMatchBackground);
+						color: var(--zyraxoncode-editor-findMatchHighlightBackground);
+						background-color: var(--zyraxoncode-editor-findMatchBackground);
 					}
 				</style>
 			</head>
@@ -524,12 +524,12 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 	}
 
 	private asWebviewUri(uri: URI, fromExtension: URI | undefined) {
-		return asWebviewUri(uri, fromExtension?.scheme === Schemas.vscodeRemote ? { isRemote: true, authority: fromExtension.authority } : undefined);
+		return asWebviewUri(uri, fromExtension?.scheme === Schemas.zyraxoncodeRemote ? { isRemote: true, authority: fromExtension.authority } : undefined);
 	}
 
 	postKernelMessage(message: any) {
 		this._sendMessageToWebview({
-			__vscode_notebook_message: true,
+			__zyraxoncode_notebook_message: true,
 			type: 'customKernelMessage',
 			message,
 		});
@@ -605,12 +605,12 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 		}));
 
 		this._register(this.webview.onMessage(async (message) => {
-			const data: FromWebviewMessage | { readonly __vscode_notebook_message: undefined } = message.message;
+			const data: FromWebviewMessage | { readonly __zyraxoncode_notebook_message: undefined } = message.message;
 			if (this._disposed) {
 				return;
 			}
 
-			if (!data.__vscode_notebook_message) {
+			if (!data.__zyraxoncode_notebook_message) {
 				return;
 			}
 
@@ -806,7 +806,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 
 					if (matchesSomeScheme(data.href, Schemas.http, Schemas.https, Schemas.mailto)) {
 						this.openerService.open(data.href, { fromUserGesture: true, fromWorkspace: true });
-					} else if (matchesScheme(data.href, Schemas.vscodeNotebookCell)) {
+					} else if (matchesScheme(data.href, Schemas.zyraxoncodeNotebookCell)) {
 						const uri = URI.parse(data.href);
 						await this._handleNotebookCellResource(uri);
 					} else if (!/^[\w\-]+:/.test(data.href)) {
@@ -938,7 +938,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 				}
 				case 'notebookPerformanceMessage': {
 					this.notebookEditor.updatePerformanceMetadata(data.cellId, data.executionId, data.duration, data.rendererId);
-					if (data.outputSize && data.rendererId === 'vscode.builtin-renderer') {
+					if (data.outputSize && data.rendererId === 'zyraxoncode.builtin-renderer') {
 						this._sendPerformanceData(data.outputSize, data.duration);
 					}
 					break;
@@ -1582,7 +1582,7 @@ export class BackLayerWebView<T extends ICommonCellInfo> extends Themable {
 			const buffer = output.outputs.find(out => out.mime === 'text/plain')?.data.buffer;
 			if (buffer?.length && buffer?.length > 0) {
 				const altText = new TextDecoder().decode(buffer);
-				return { ...output.metadata, vscode_altText: altText };
+				return { ...output.metadata, zyraxoncode_altText: altText };
 			}
 		}
 		return output.metadata;

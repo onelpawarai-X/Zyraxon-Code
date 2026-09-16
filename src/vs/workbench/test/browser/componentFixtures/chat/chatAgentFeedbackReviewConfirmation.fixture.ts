@@ -174,7 +174,7 @@ function renderConfirmations(context: ComponentFixtureContext, commentSets: read
 	// side bar / panel background; reproduce that backdrop on the host element
 	// so the carousel reads correctly in place instead of on a transparent
 	// surface.
-	container.style.backgroundColor = 'var(--vscode-sideBar-background, var(--vscode-editor-background))';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background, var(--zyraxoncode-editor-background))';
 
 	// The carousel layout/visibility CSS keys off
 	// `.interactive-session .interactive-input-part > .chat-tool-confirmation-carousel-container`,

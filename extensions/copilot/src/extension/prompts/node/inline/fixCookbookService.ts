@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { Diagnostic } from '../../../../vscodeTypes';
+import { Diagnostic } from '../../../../zyraxoncodeTypes';
 
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
 import { createServiceIdentifier } from '../../../../util/common/services';

@@ -2142,7 +2142,7 @@ const completionSpec: Fig.Spec = {
 								},
 								{
 									name: ['--project-resource-id', '-p'],
-									description: 'ARM resource ID of the Zyraxon Foundry Project (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.CognitiveServices/accounts/{account}/projects/{project})',
+									description: 'ARM resource ID of the Zyraxon Foundry Project (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Zyraxon.CognitiveServices/accounts/{account}/projects/{project})',
 									args: [
 										{
 											name: 'project-resource-id',

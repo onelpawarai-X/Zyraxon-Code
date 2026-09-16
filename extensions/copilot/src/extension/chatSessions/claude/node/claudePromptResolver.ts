@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import Anthropic from '@anthropic-ai/sdk';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { isLocation } from '../../../../util/common/types';
 import { URI } from '../../../../util/vs/base/common/uri';
-import { ChatReferenceBinaryData } from '../../../../vscodeTypes';
+import { ChatReferenceBinaryData } from '../../../../zyraxoncodeTypes';
 import { toAnthropicImageMediaType } from './sessionParser/claudeSessionSchema';
 
 // #region Prompt Resolution
@@ -17,14 +17,14 @@ function uriToString(uri: URI): string {
 }
 
 /**
- * Converts a `vscode.ChatRequest` into an array of Anthropic content blocks.
+ * Converts a `zyraxoncode.ChatRequest` into an array of Anthropic content blocks.
  *
  * - Inline references (`ref.range`) are substituted directly into the prompt text.
  * - Non-inline references are appended as a `<system-reminder>` text block.
  * - Binary image references become `image` content blocks.
  * - Slash-command prompts (starting with `/`) are passed through unmodified.
  */
-export async function resolvePromptToContentBlocks(request: vscode.ChatRequest): Promise<Anthropic.ContentBlockParam[]> {
+export async function resolvePromptToContentBlocks(request: zyraxoncode.ChatRequest): Promise<Anthropic.ContentBlockParam[]> {
 	if (request.prompt.startsWith('/')) {
 		return [{ type: 'text', text: request.prompt }];
 	}

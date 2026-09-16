@@ -9,16 +9,16 @@
 	flex-direction: column;
 	width: 520px;
 	max-width: 100%;
-	color: var(--vscode-editorHoverWidget-foreground);
+	color: var(--zyraxoncode-editorHoverWidget-foreground);
 }
 
 .sessions-pr-hover-header {
 	display: flex;
 	align-items: baseline;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
-	padding: var(--vscode-spacing-size120) var(--vscode-spacing-size160) 0;
-	font-size: var(--vscode-agents-fontSize-body1);
+	padding: var(--zyraxoncode-spacing-size120) var(--zyraxoncode-spacing-size160) 0;
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 1.4;
 }
 
@@ -31,13 +31,13 @@
 
 .sessions-pr-hover-date {
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .sessions-pr-hover-title {
-	padding: var(--vscode-spacing-size40) var(--vscode-spacing-size160) var(--vscode-spacing-size120);
-	font-size: var(--vscode-agents-fontSize-heading2, 18px);
-	font-weight: var(--vscode-agents-fontWeight-semiBold, 600);
+	padding: var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-size160) var(--zyraxoncode-spacing-size120);
+	font-size: var(--zyraxoncode-agents-fontSize-heading2, 18px);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold, 600);
 	line-height: 1.25;
 	overflow-wrap: anywhere;
 }
@@ -48,20 +48,20 @@
 	-webkit-line-clamp: 3;
 	line-clamp: 3;
 	overflow: hidden;
-	padding: var(--vscode-spacing-size120) var(--vscode-spacing-size160) 0 var(--vscode-spacing-size160);
-	border-top: var(--vscode-strokeThickness) solid var(--vscode-editorHoverWidget-border);
-	font-size: var(--vscode-agents-fontSize-body1);
+	padding: var(--zyraxoncode-spacing-size120) var(--zyraxoncode-spacing-size160) 0 var(--zyraxoncode-spacing-size160);
+	border-top: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-editorHoverWidget-border);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 1.4;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow-wrap: anywhere;
 }
 
 .sessions-pr-hover-branches {
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size80);
+	gap: var(--zyraxoncode-spacing-size80);
 	min-width: 0;
-	padding: var(--vscode-spacing-size120) var(--vscode-spacing-size160);
+	padding: var(--zyraxoncode-spacing-size120) var(--zyraxoncode-spacing-size160);
 }
 
 .sessions-pr-hover-branch {
@@ -70,17 +70,17 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	padding: var(--vscode-spacing-size20) var(--vscode-spacing-size80);
-	border-radius: var(--vscode-cornerRadius-circle);
-	background-color: var(--vscode-textCodeBlock-background);
-	border: var(--vscode-strokeThickness) solid var(--vscode-editorHoverWidget-border);
-	color: var(--vscode-textLink-foreground);
+	padding: var(--zyraxoncode-spacing-size20) var(--zyraxoncode-spacing-size80);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
+	background-color: var(--zyraxoncode-textCodeBlock-background);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-editorHoverWidget-border);
+	color: var(--zyraxoncode-textLink-foreground);
 	font-family: var(--monaco-monospace-font);
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	line-height: 1.4;
 }
 
 .sessions-pr-hover-branch-arrow {
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }

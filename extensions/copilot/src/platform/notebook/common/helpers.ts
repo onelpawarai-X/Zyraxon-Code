@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatRequest, NotebookCell, NotebookDocument, TextDocument, Uri } from 'vscode';
+import type { ChatRequest, NotebookCell, NotebookDocument, TextDocument, Uri } from 'zyraxoncode';
 import { isLocation, isUri } from '../../../util/common/types';
 import { StringSHA1 } from '../../../util/vs/base/common/hash';
 import { removeAnsiEscapeCodes } from '../../../util/vs/base/common/strings';
 import { isUriComponents, URI } from '../../../util/vs/base/common/uri';
-import { NotebookCellData, NotebookCellKind } from '../../../vscodeTypes';
+import { NotebookCellData, NotebookCellKind } from '../../../zyraxoncodeTypes';
 import { INotebookService } from './notebookService';
 
 
@@ -121,7 +121,7 @@ export function normalizeCellId(cellId: string): string {
 	if (cellId.startsWith('#V-') && cellId.length === (CELL_ID_HASH_LENGTH + 3)) {
 		return `${CELL_ID_PREFIX}${cellId.substring(3)}`;
 	}
-	if (cellId.toLowerCase().startsWith('vscode-') && cellId.length === (CELL_ID_HASH_LENGTH + 7)) {
+	if (cellId.toLowerCase().startsWith('zyraxoncode-') && cellId.length === (CELL_ID_HASH_LENGTH + 7)) {
 		return `${CELL_ID_PREFIX}${cellId.substring(7)}`;
 	}
 	if (cellId.startsWith('-')) {

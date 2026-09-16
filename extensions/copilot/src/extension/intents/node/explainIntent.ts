@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
@@ -36,14 +36,14 @@ class ExplainIntentInvocation extends RendererIntentInvocation implements IInten
 		super(intent, location, endpoint);
 	}
 
-	override async buildPrompt(promptParams: IBuildPromptContext, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken) {
+	override async buildPrompt(promptParams: IBuildPromptContext, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken) {
 		if (promptParams.query === '') {
 			promptParams = { ...promptParams, query: this.defaultQuery };
 		}
 		return super.buildPrompt(promptParams, progress, token);
 	}
 
-	createRenderer(promptContext: IBuildPromptContext, endpoint: IChatEndpoint, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken) {
+	createRenderer(promptContext: IBuildPromptContext, endpoint: IChatEndpoint, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken) {
 		const editor = this.tabsAndEditorsService.activeTextEditor;
 		return PromptRenderer.create(this.instantiationService, endpoint, ExplainPrompt, {
 			promptContext,
@@ -59,7 +59,7 @@ class InlineExplainIntentInvocation extends ExplainIntentInvocation implements I
 
 	protected override readonly defaultQuery = explainIntentPromptSnippet;
 
-	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		const replyInterpreter = new StreamingMarkdownReplyInterpreter();
 		return replyInterpreter.processResponse(context, inputStream, outputStream, token);
 	}

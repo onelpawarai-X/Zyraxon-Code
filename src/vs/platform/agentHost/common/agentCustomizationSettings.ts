@@ -5,7 +5,7 @@
 
 import type { ConfigPropertySchema, RootState } from './state/protocol/state.js';
 
-export const AGENT_CUSTOMIZATION_SETTINGS_META_KEY = 'vscode.agentCustomizationSettings';
+export const AGENT_CUSTOMIZATION_SETTINGS_META_KEY = 'zyraxoncode.agentCustomizationSettings';
 
 export interface IAgentCustomizationSettingDescriptor {
 	readonly key: string;

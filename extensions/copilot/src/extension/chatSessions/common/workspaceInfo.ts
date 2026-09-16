@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { extUriBiasedIgnorePathCase } from '../../../util/vs/base/common/resources';
 import { RepositoryProperties } from './chatSessionMetadataStore';
 import { ChatSessionWorktreeProperties } from './chatSessionWorktreeService';
@@ -13,13 +13,13 @@ export interface IWorkspaceInfo {
 	 * The folder URI selected for this session.
 	 * This could be a workspace folder or a git repository root.
 	 */
-	readonly folder: vscode.Uri | undefined;
+	readonly folder: zyraxoncode.Uri | undefined;
 
 	/**
 	 * The git repository root URI if the selected folder contains a git repository.
 	 * `undefined` if the folder is not a git repository.
 	 */
-	readonly repository: vscode.Uri | undefined;
+	readonly repository: zyraxoncode.Uri | undefined;
 
 	/**
 	 * The git repository properties associated with this session.
@@ -30,7 +30,7 @@ export interface IWorkspaceInfo {
 	 * The worktree path if a worktree was created for this session.
 	 * `undefined` if no worktree exists (e.g., plain folder or worktree creation failed).
 	 */
-	readonly worktree: vscode.Uri | undefined;
+	readonly worktree: zyraxoncode.Uri | undefined;
 
 	/**
 	 * The worktree properties associated with this session.
@@ -38,7 +38,7 @@ export interface IWorkspaceInfo {
 	readonly worktreeProperties: ChatSessionWorktreeProperties | undefined;
 }
 
-export function getWorkingDirectory(workspaceInfo: IWorkspaceInfo): vscode.Uri | undefined {
+export function getWorkingDirectory(workspaceInfo: IWorkspaceInfo): zyraxoncode.Uri | undefined {
 	// Give the folder higher priority over repository, as the user may have selected the folder directly,
 	// & if we don't create a worktree, then the folder is the working directory.
 	return workspaceInfo.worktree ?? workspaceInfo.folder ?? workspaceInfo.repository;
@@ -63,7 +63,7 @@ export function emptyWorkspaceInfo(): IWorkspaceInfo {
  * Returns the matching IWorkspaceInfo or undefined if no match.
  */
 export function findOwningWorkspace(
-	file: vscode.Uri,
+	file: zyraxoncode.Uri,
 	primaryWorkspace: IWorkspaceInfo,
 	additionalWorkspaces: IWorkspaceInfo[]
 ): IWorkspaceInfo | undefined {

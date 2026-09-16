@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { FileChunkAndScore } from '../../../platform/chunking/common/chunk';
 import { IRunCommandExecutionService } from '../../../platform/commands/common/runCommandExecutionService';
 import { GithubRepoId, toGithubNwo } from '../../../platform/git/common/gitService';
@@ -20,7 +20,7 @@ import { raceCancellationError, timeout } from '../../../util/vs/base/common/asy
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { getUniqueReferences } from '../../prompt/common/conversation';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { WorkspaceChunkList } from '../../prompts/node/panel/workspace/workspaceContext';
@@ -49,7 +49,7 @@ export class GithubRepoSemanticSearchTool implements ICopilotTool<GithubRepoTool
 		@ITelemetryService private readonly _telemetryService: ITelemetryService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<GithubRepoToolParams>, token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<GithubRepoToolParams>, token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		const githubRepoId = GithubRepoId.parse(options.input.repo);
 		if (!githubRepoId) {
 			throw new Error('Invalid input. Could not parse repo');
@@ -63,7 +63,7 @@ export class GithubRepoSemanticSearchTool implements ICopilotTool<GithubRepoTool
 		const searchResults = await this._githubCodeSearch.semanticSearch({ silent: true }, embeddingType, { kind: 'repo', githubRepoId, localRepoRoot: undefined, indexedCommit: undefined }, options.input.query, 64, {}, new TelemetryCorrelationId('github-repo-tool'), token);
 
 		// Map the chunks to URIs using the remote URL and ref from the search response
-		const repoBaseUrl = searchResults.remoteUrl ?? `https://github.com/${toGithubNwo(githubRepoId)}`;
+		const repoBaseUrl = searchResults.remoteUrl ?? `__ZYRAXKEEP__0_{toGithubNwo(githubRepoId)}`;
 		const ref = searchResults.refName ?? 'main';
 		const chunks = searchResults.chunks.map((entry): FileChunkAndScore => ({
 			chunk: {
@@ -96,7 +96,7 @@ export class GithubRepoSemanticSearchTool implements ICopilotTool<GithubRepoTool
 		return result;
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<GithubRepoToolParams>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<GithubRepoToolParams>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation> {
 		const prepareResult = await raceCancellationError(this.doPrepare(options, token), token);
 		if (prepareResult.isOk()) {
 			return {
@@ -120,7 +120,7 @@ export class GithubRepoSemanticSearchTool implements ICopilotTool<GithubRepoTool
 		throw new Error(prepareResult.err.message);
 	}
 
-	private async doPrepare(options: vscode.LanguageModelToolInvocationPrepareOptions<GithubRepoToolParams>, token: vscode.CancellationToken): Promise<Result<GithubRepoId, PrepareError>> {
+	private async doPrepare(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<GithubRepoToolParams>, token: zyraxoncode.CancellationToken): Promise<Result<GithubRepoId, PrepareError>> {
 		if (!options.input.repo) {
 			return Result.error<PrepareError>({
 				message: l10n.t`Invalid input. No 'repo' argument provided`,
@@ -219,7 +219,7 @@ class GithubChunkSearchResults extends PromptElement<GithubChunkSearchResultsPro
 		super(props);
 	}
 
-	override render(_state: void, _sizing: PromptSizing, _progress?: vscode.Progress<vscode.ChatResponsePart>, _token?: vscode.CancellationToken): Promise<PromptPiece | undefined> | PromptPiece | undefined {
+	override render(_state: void, _sizing: PromptSizing, _progress?: zyraxoncode.Progress<zyraxoncode.ChatResponsePart>, _token?: zyraxoncode.CancellationToken): Promise<PromptPiece | undefined> | PromptPiece | undefined {
 		return <WorkspaceChunkList
 			result={{ chunks: this.props.chunks }}
 			referencesOut={this.props.referencesOut}

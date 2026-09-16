@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation, LanguageModelToolResult } from 'vscode';
+import type { LanguageModelToolInformation, LanguageModelToolResult } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../../util/common/services';
 import { CancellationToken } from '../../../../util/vs/base/common/cancellation';
 import { IObservable } from '../../../../util/vs/base/common/observableInternal';

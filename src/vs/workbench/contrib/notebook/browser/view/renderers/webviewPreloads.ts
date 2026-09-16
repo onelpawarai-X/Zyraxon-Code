@@ -7,7 +7,7 @@ import type { Event } from '../../../../../../base/common/event.js';
 import type { IDisposable } from '../../../../../../base/common/lifecycle.js';
 import type * as webviewMessages from './webviewMessages.js';
 import type { NotebookCellMetadata } from '../../../common/notebookCommon.js';
-import type * as rendererApi from 'vscode-notebook-renderer';
+import type * as rendererApi from 'zyraxoncode-notebook-renderer';
 import type { NotebookCellOutputTransferData } from '../../../../../../platform/dnd/browser/dnd.js';
 
 // !! IMPORTANT !! ----------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ async function webviewPreloads(ctx: PreloadContext) {
 	const settingChange: EmitterLike<RenderOptions> = createEmitter<RenderOptions>();
 
 	const acquireVsCodeApi = globalThis.acquireVsCodeApi;
-	const vscode = acquireVsCodeApi();
+	const zyraxoncode = acquireVsCodeApi();
 	delete (globalThis as { acquireVsCodeApi: unknown }).acquireVsCodeApi;
 
 	const tokenizationStyle = new CSSStyleSheet();
@@ -649,7 +649,7 @@ async function webviewPreloads(ctx: PreloadContext) {
 
 			// scroll down
 			if (event.deltaY > 0 && node.scrollTop + node.clientHeight < node.scrollHeight) {
-				// per https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+				// per __ZYRAXKEEP__0_
 				// scrollTop is not rounded but scrollHeight and clientHeight are
 				// so we need to check if the difference is less than some threshold
 				if (node.scrollHeight - node.scrollTop - node.clientHeight < 2) {
@@ -683,7 +683,7 @@ async function webviewPreloads(ctx: PreloadContext) {
 				deltaX: event.deltaX,
 				deltaY: event.deltaY,
 				deltaZ: event.deltaZ,
-				// Refs https://github.com/microsoft/vscode/issues/146403#issuecomment-1854538928
+				// Refs __ZYRAXKEEP__1_
 				wheelDelta: event.wheelDelta && isChrome ? (event.wheelDelta / window.devicePixelRatio) : event.wheelDelta,
 				wheelDeltaX: event.wheelDeltaX && isChrome ? (event.wheelDeltaX / window.devicePixelRatio) : event.wheelDeltaX,
 				wheelDeltaY: event.wheelDeltaY && isChrome ? (event.wheelDeltaY / window.devicePixelRatio) : event.wheelDeltaY,
@@ -730,7 +730,7 @@ async function webviewPreloads(ctx: PreloadContext) {
 	}
 
 	function _internalHighlightRange(range: Range, tagName = 'mark', attributes = {}) {
-		// derived from https://github.com/Treora/dom-highlight-range/blob/master/highlight-range.js
+		// derived from __ZYRAXKEEP__2_
 
 		// Return an array of the text nodes in the range. Split the start and end nodes if required.
 		function _textNodesInRange(range: Range): Text[] {
@@ -1395,7 +1395,7 @@ async function webviewPreloads(ctx: PreloadContext) {
 		return textOffset - selectionOffset;
 	}
 
-	// modified from https://stackoverflow.com/a/68583466/16253823
+	// modified from __ZYRAXKEEP__3_
 	function findFirstCommonAncestor(nodeA: Node, nodeB: Node) {
 		const range = new Range();
 		range.setStart(nodeA, 0);
@@ -1417,7 +1417,7 @@ async function webviewPreloads(ctx: PreloadContext) {
 		return length;
 	}
 
-	// modified from https://stackoverflow.com/a/48812529/16253823
+	// modified from __ZYRAXKEEP__4_
 	function getSelectionOffsetRelativeTo(parentElement: Node, currentNode: Node | null): number {
 		if (!currentNode) {
 			return 0;
@@ -1878,7 +1878,7 @@ async function webviewPreloads(ctx: PreloadContext) {
 		}
 	});
 
-	const renderFallbackErrorName = 'vscode.fallbackToNextRenderer';
+	const renderFallbackErrorName = 'zyraxoncode.fallbackToNextRenderer';
 
 	class Renderer {
 
@@ -1937,9 +1937,9 @@ async function webviewPreloads(ctx: PreloadContext) {
 		private createRendererContext(): RendererContext {
 			const { id, messaging } = this.data;
 			const context: RendererContext = {
-				setState: newState => vscode.setState({ ...vscode.getState(), [id]: newState }),
+				setState: newState => zyraxoncode.setState({ ...zyraxoncode.getState(), [id]: newState }),
 				getState: <T>() => {
-					const state = vscode.getState();
+					const state = zyraxoncode.getState();
 					return typeof state === 'object' && state ? state[id] as T : undefined;
 				},
 				getRenderer: async (id: string) => {
@@ -2481,8 +2481,8 @@ async function webviewPreloads(ctx: PreloadContext) {
 		public static requestHighlightCodeBlock(root: HTMLElement | ShadowRoot) {
 			const codeBlocks: Array<{ value: string; lang: string; id: string }> = [];
 			let i = 0;
-			for (const el of root.querySelectorAll('.vscode-code-block')) {
-				const lang = el.getAttribute('data-vscode-code-block-lang');
+			for (const el of root.querySelectorAll('.zyraxoncode-code-block')) {
+				const lang = el.getAttribute('data-zyraxoncode-code-block-lang');
 				if (el.textContent && lang) {
 					const id = `${Date.now()}-${i++}`;
 					codeBlocks.push({ value: el.textContent, lang: lang, id });
@@ -2850,7 +2850,7 @@ async function webviewPreloads(ctx: PreloadContext) {
 		) {
 			this.element = document.createElement('div');
 			this.element.classList.add('output_container');
-			this.element.setAttribute('data-vscode-context', JSON.stringify({ 'preventDefaultContextMenuItems': true }));
+			this.element.setAttribute('data-zyraxoncode-context', JSON.stringify({ 'preventDefaultContextMenuItems': true }));
 			this.element.style.position = 'absolute';
 			this.element.style.overflow = 'hidden';
 		}
@@ -2891,8 +2891,8 @@ async function webviewPreloads(ctx: PreloadContext) {
 		}
 	}
 
-	vscode.postMessage({
-		__vscode_notebook_message: true,
+	zyraxoncode.postMessage({
+		__zyraxoncode_notebook_message: true,
 		type: 'initialized'
 	});
 
@@ -2902,10 +2902,10 @@ async function webviewPreloads(ctx: PreloadContext) {
 
 	function postNotebookMessage<T extends webviewMessages.FromWebviewMessage>(
 		type: T['type'],
-		properties: Omit<T, '__vscode_notebook_message' | 'type'>
+		properties: Omit<T, '__zyraxoncode_notebook_message' | 'type'>
 	) {
-		vscode.postMessage({
-			__vscode_notebook_message: true,
+		zyraxoncode.postMessage({
+			__zyraxoncode_notebook_message: true,
 			type,
 			...properties
 		});

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import { LanguageClient, ServerOptions, TransportKind } from 'vscode-languageclient/node';
+import * as zyraxoncode from 'zyraxoncode';
+import { LanguageClient, ServerOptions, TransportKind } from 'zyraxoncode-languageclient/node';
 import { MdLanguageClient, startClient } from './client/client';
 import { activateShared } from './extension.shared';
 import { VsCodeOutputLogger } from './logging';
@@ -12,7 +12,7 @@ import { IMdParser, MarkdownItEngine } from './markdownEngine';
 import { getMarkdownExtensionContributions } from './markdownExtensions';
 import { githubSlugifier } from './slugify';
 
-export async function activate(context: vscode.ExtensionContext) {
+export async function activate(context: zyraxoncode.ExtensionContext) {
 	const contributions = getMarkdownExtensionContributions(context);
 	context.subscriptions.push(contributions);
 
@@ -26,14 +26,14 @@ export async function activate(context: vscode.ExtensionContext) {
 	activateShared(context, client, engine, logger, contributions);
 }
 
-function startServer(context: vscode.ExtensionContext, parser: IMdParser): Promise<MdLanguageClient> {
+function startServer(context: zyraxoncode.ExtensionContext, parser: IMdParser): Promise<MdLanguageClient> {
 	const isDebugBuild = context.extension.packageJSON.main.includes('/out/');
 
 	const serverModule = context.asAbsolutePath(
 		isDebugBuild
-			// For local non bundled version of vscode-markdown-languageserver
-			// ? './node_modules/vscode-markdown-languageserver/out/node/workerMain'
-			? './node_modules/vscode-markdown-languageserver/dist/node/workerMain'
+			// For local non bundled version of zyraxoncode-markdown-languageserver
+			// ? './node_modules/zyraxoncode-markdown-languageserver/out/node/workerMain'
+			? './node_modules/zyraxoncode-markdown-languageserver/dist/node/workerMain'
 			: './dist/serverWorkerMain'
 	);
 
@@ -48,7 +48,7 @@ function startServer(context: vscode.ExtensionContext, parser: IMdParser): Promi
 	};
 
 	// pass the location of the localization bundle to the server
-	process.env['VSCODE_L10N_BUNDLE_LOCATION'] = vscode.l10n.uri?.toString() ?? '';
+	process.env['VSCODE_L10N_BUNDLE_LOCATION'] = zyraxoncode.l10n.uri?.toString() ?? '';
 
 	return startClient((id, name, clientOptions) => {
 		return new LanguageClient(id, name, serverOptions, clientOptions);

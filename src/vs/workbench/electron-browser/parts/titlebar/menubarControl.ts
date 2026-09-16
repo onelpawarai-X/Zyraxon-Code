@@ -108,7 +108,7 @@ export class NativeMenubarControl extends MenubarControl {
 	private populateMenuItems(menuActions: readonly IAction[], menuToPopulate: IMenubarMenu, keybindings: { [id: string]: IMenubarKeybinding | undefined }) {
 		for (const menuItem of menuActions) {
 			if (menuItem instanceof Separator) {
-				menuToPopulate.items.push({ id: 'vscode.menubar.separator' });
+				menuToPopulate.items.push({ id: 'zyraxoncode.menubar.separator' });
 			} else if (menuItem instanceof MenuItemAction || menuItem instanceof SubmenuItemAction) {
 
 				// use mnemonicTitle whenever possible
@@ -162,7 +162,7 @@ export class NativeMenubarControl extends MenubarControl {
 
 	private transformOpenRecentAction(action: Separator | IOpenRecentAction): MenubarMenuItem {
 		if (action instanceof Separator) {
-			return { id: 'vscode.menubar.separator' };
+			return { id: 'zyraxoncode.menubar.separator' };
 		}
 
 		return {

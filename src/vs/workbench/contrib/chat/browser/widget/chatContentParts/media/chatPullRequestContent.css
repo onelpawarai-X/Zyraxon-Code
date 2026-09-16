@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 .chat-pull-request-content-part {
-	border: 1px solid var(--vscode-chat-requestBorder);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
 	border-radius: 6px;
 	margin: 4px 0;
 	overflow: hidden;

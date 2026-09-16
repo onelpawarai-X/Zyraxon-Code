@@ -7,10 +7,10 @@ import * as cp from 'child_process';
 import { spawnSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ITestingServicesAccessor } from '../../../src/platform/test/node/services';
 import { ResourceMap } from '../../../src/util/vs/base/common/map';
-import { Diagnostic, DiagnosticRelatedInformation, Location, Range } from '../../../src/vscodeTypes';
+import { Diagnostic, DiagnosticRelatedInformation, Location, Range } from '../../../src/zyraxoncodeTypes';
 import { computeSHA256 } from '../../base/hash';
 import { CacheScope, ICachingResourceFetcher } from '../../base/simulationContext';
 import { CACHING_DIAGNOSTICS_PROVIDER_CACHE_SALT } from '../../cacheSalt';
@@ -90,8 +90,8 @@ export async function setupTemporaryWorkspace(workspacePath: string, _files: IFi
 	return files;
 }
 
-export function convertTestToVSCodeDiagnostics(diagnostics: ITestDiagnostic[], pathToUri: (path: string) => vscode.Uri): ResourceMap<vscode.Diagnostic[]> {
-	const result = new ResourceMap<vscode.Diagnostic[]>();
+export function convertTestToZyraxonCodeDiagnostics(diagnostics: ITestDiagnostic[], pathToUri: (path: string) => zyraxoncode.Uri): ResourceMap<zyraxoncode.Diagnostic[]> {
+	const result = new ResourceMap<zyraxoncode.Diagnostic[]>();
 	for (const d of diagnostics) {
 		const diagnostic = new Diagnostic(new Range(d.startLine, d.startCharacter, d.endLine, d.endCharacter), d.message);
 		diagnostic.code = d.code;

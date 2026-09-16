@@ -299,7 +299,7 @@ export class TestNativeWorkingCopyBackupService extends NativeWorkingCopyBackupS
 		this._register(fileService.registerProvider(Schemas.inMemory, inMemoryFileSystemProvider));
 		const uriIdentityService = this._register(new UriIdentityService(fileService));
 		const userDataProfilesService = this._register(new UserDataProfilesService(environmentService, fileService, uriIdentityService, logService));
-		this._register(fileService.registerProvider(Schemas.vscodeUserData, this._register(new FileUserDataProvider(Schemas.file, inMemoryFileSystemProvider, Schemas.vscodeUserData, userDataProfilesService, uriIdentityService, logService))));
+		this._register(fileService.registerProvider(Schemas.zyraxoncodeUserData, this._register(new FileUserDataProvider(Schemas.file, inMemoryFileSystemProvider, Schemas.zyraxoncodeUserData, userDataProfilesService, uriIdentityService, logService))));
 
 		this.backupResourceJoiners = [];
 		this.discardBackupJoiners = [];
@@ -375,7 +375,7 @@ export class TestIPCFileSystemProvider implements IFileSystemProvider {
 
 	async stat(resource: URI): Promise<IStat> {
 		const { ipcRenderer } = require('electron');
-		const stats = await ipcRenderer.invoke('vscode:statFile', resource.fsPath);
+		const stats = await ipcRenderer.invoke('zyraxoncode:statFile', resource.fsPath);
 		return {
 			type: stats.isDirectory ? FileType.Directory : (stats.isFile ? FileType.File : FileType.Unknown),
 			ctime: stats.ctimeMs,
@@ -387,7 +387,7 @@ export class TestIPCFileSystemProvider implements IFileSystemProvider {
 
 	async readFile(resource: URI): Promise<Uint8Array> {
 		const { ipcRenderer } = require('electron');
-		const result = await ipcRenderer.invoke('vscode:readFile', resource.fsPath);
+		const result = await ipcRenderer.invoke('zyraxoncode:readFile', resource.fsPath);
 		return VSBuffer.wrap(result).buffer;
 	}
 

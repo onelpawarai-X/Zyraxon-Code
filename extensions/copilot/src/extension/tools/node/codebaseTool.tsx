@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { PromptElement, PromptReference, TokenLimit } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { PromptElement, PromptReference, TokenLimit } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
@@ -19,7 +19,7 @@ import { StopWatch } from '../../../util/vs/base/common/stopwatch';
 import { URI } from '../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../vscodeTypes';
+import { ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString } from '../../../zyraxoncodeTypes';
 import { getUniqueReferences } from '../../prompt/common/conversation';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { CodebaseToolCallingLoop } from '../../prompt/node/codebaseToolCalling';
@@ -36,7 +36,7 @@ export interface ICodebaseToolParams {
 	scopedDirectories?: string[]; // Allows to scope the search to a specific set of directories.
 }
 
-export class CodebaseTool implements vscode.LanguageModelTool<ICodebaseToolParams> {
+export class CodebaseTool implements zyraxoncode.LanguageModelTool<ICodebaseToolParams> {
 	public static readonly toolName = ToolName.Codebase;
 	public static readonly nonDeferred = true;
 
@@ -48,7 +48,7 @@ export class CodebaseTool implements vscode.LanguageModelTool<ICodebaseToolParam
 		@ITelemetryService private readonly telemetryService: ITelemetryService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<ICodebaseToolParams>, token: CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<ICodebaseToolParams>, token: CancellationToken) {
 		if (this._input && this._isCodebaseAgentCall(options)) {
 			const input = this._input;
 			this._input = undefined; // consumed
@@ -151,7 +151,7 @@ export class CodebaseTool implements vscode.LanguageModelTool<ICodebaseToolParam
 		return promptContext;
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<ICodebaseToolParams>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<ICodebaseToolParams>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		if (this._input && this._isCodebaseAgentCall(options)) {
 			return {
 				presentation: 'hidden'
@@ -176,7 +176,7 @@ export class CodebaseTool implements vscode.LanguageModelTool<ICodebaseToolParam
 		return targetSearch;
 	}
 
-	private _isCodebaseAgentCall(options: vscode.LanguageModelToolInvocationPrepareOptions<ICodebaseToolParams> | vscode.LanguageModelToolInvocationOptions<ICodebaseToolParams>): boolean {
+	private _isCodebaseAgentCall(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<ICodebaseToolParams> | zyraxoncode.LanguageModelToolInvocationOptions<ICodebaseToolParams>): boolean {
 		const input = options.input;
 		const agentEnabled = this.configurationService.getConfig(ConfigKey.CodeSearchAgentEnabled);
 		const noScopedDirectories = input.scopedDirectories === undefined || input.scopedDirectories.length === 0;

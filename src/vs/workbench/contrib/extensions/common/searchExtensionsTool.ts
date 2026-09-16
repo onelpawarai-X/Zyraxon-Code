@@ -12,7 +12,7 @@ import { EXTENSION_CATEGORIES } from '../../../../platform/extensions/common/ext
 import { CountTokensCallback, IToolData, IToolImpl, IToolInvocation, IToolResult, ToolDataSource, ToolProgress } from '../../chat/common/tools/languageModelToolsService.js';
 import { ExtensionState, IExtension, IExtensionsWorkbenchService } from '../common/extensions.js';
 
-export const SearchExtensionsToolId = 'vscode_searchExtensions_internal';
+export const SearchExtensionsToolId = 'zyraxoncode_searchExtensions_internal';
 
 export const SearchExtensionsToolData: IToolData = {
 	id: SearchExtensionsToolId,
@@ -139,7 +139,7 @@ export class SearchExtensionsTool implements IToolImpl {
 		return {
 			content: [{
 				kind: 'text',
-				value: `Here are the list of extensions:\n${JSON.stringify(result)}\n. Important: Use the following format to display extensions to the user because there is a renderer available to parse these extensions in this format and display them with all details. So, do not describe about the extensions to the user.\n\`\`\`vscode-extensions\nextensionId1,extensionId2\n\`\`\`\n.`
+				value: `Here are the list of extensions:\n${JSON.stringify(result)}\n. Important: Use the following format to display extensions to the user because there is a renderer available to parse these extensions in this format and display them with all details. So, do not describe about the extensions to the user.\n\`\`\`zyraxoncode-extensions\nextensionId1,extensionId2\n\`\`\`\n.`
 			}],
 			toolResultDetails: {
 				input: JSON.stringify(params),

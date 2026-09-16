@@ -2,14 +2,14 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { BasePromptElementProps, PromptElement, PromptReference, PromptSizing } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptReference, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILogService } from '../../../../platform/log/common/logService';
-import { IParserService, treeSitterOffsetRangeToVSCodeRange, treeSitterToVSCodeRange, vscodeToTreeSitterOffsetRange, vscodeToTreeSitterRange } from '../../../../platform/parser/node/parserService';
+import { IParserService, treeSitterOffsetRangeToZyraxonCodeRange, treeSitterToZyraxonCodeRange, zyraxoncodeToTreeSitterOffsetRange, zyraxoncodeToTreeSitterRange } from '../../../../platform/parser/node/parserService';
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
-import { Diagnostic, Location, Range, Uri } from '../../../../vscodeTypes';
+import { Diagnostic, Location, Range, Uri } from '../../../../zyraxoncodeTypes';
 import { asyncComputeWithTimeBudget } from '../../../context/node/resolvers/selectionContextHelpers';
 import { IDocumentContext } from '../../../prompt/node/documentContext';
 import { Tag } from '../base/tag';
@@ -171,9 +171,9 @@ export class DiagnosticRelatedInfo extends PromptElement<DiagnosticRelatedInfoPr
 					const treeSitterAST = this.parserService.getTreeSitterAST(document);
 					let relatedCodeText: string | undefined;
 					if (treeSitterAST) {
-						const treeSitterLocationRange = vscodeToTreeSitterRange(locationRange);
+						const treeSitterLocationRange = zyraxoncodeToTreeSitterRange(locationRange);
 						const rangeOfInterest = await treeSitterAST.getCoarseParentScope(treeSitterLocationRange);
-						relatedCodeText = document.getText(treeSitterToVSCodeRange(rangeOfInterest));
+						relatedCodeText = document.getText(treeSitterToZyraxonCodeRange(rangeOfInterest));
 					}
 					if (!relatedCodeText || relatedCodeText.length > RELATED_INFO_MAX_SIZE) {
 						relatedCodeText = document.getText(locationRange);
@@ -192,10 +192,10 @@ export class DiagnosticRelatedInfo extends PromptElement<DiagnosticRelatedInfoPr
 				case ContextLocation.ParentCallDefinition: {
 					const treeSitterAST = this.parserService.getTreeSitterAST(this.props.document);
 					if (treeSitterAST) {
-						const diagnosticOffsetRange = vscodeToTreeSitterOffsetRange(this.props.diagnostic.range, this.props.document);
+						const diagnosticOffsetRange = zyraxoncodeToTreeSitterOffsetRange(this.props.diagnostic.range, this.props.document);
 						const expressionInfos = await asyncComputeWithTimeBudget(this.logService, this.telemetryService, this.props.document, 500, () => treeSitterAST.getCallExpressions(diagnosticOffsetRange), []);
 						for (const expressionInfo of expressionInfos) {
-							const expressionRange = treeSitterOffsetRangeToVSCodeRange(this.props.document, expressionInfo);
+							const expressionRange = treeSitterOffsetRangeToZyraxonCodeRange(this.props.document, expressionInfo);
 							definitionRanges.push(expressionRange);
 						}
 					}

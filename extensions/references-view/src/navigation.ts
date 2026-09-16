@@ -3,26 +3,26 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { SymbolItemNavigation } from './references-view';
 import { ContextKey } from './utils';
 
 export class Navigation {
 
-	private readonly _disposables: vscode.Disposable[] = [];
+	private readonly _disposables: zyraxoncode.Disposable[] = [];
 	private readonly _ctxCanNavigate = new ContextKey<boolean>('references-view.canNavigate');
 
 	private _delegate?: SymbolItemNavigation<unknown>;
 
-	constructor(private readonly _view: vscode.TreeView<unknown>) {
+	constructor(private readonly _view: zyraxoncode.TreeView<unknown>) {
 		this._disposables.push(
-			vscode.commands.registerCommand('references-view.next', () => this.next(false)),
-			vscode.commands.registerCommand('references-view.prev', () => this.previous(false)),
+			zyraxoncode.commands.registerCommand('references-view.next', () => this.next(false)),
+			zyraxoncode.commands.registerCommand('references-view.prev', () => this.previous(false)),
 		);
 	}
 
 	dispose(): void {
-		vscode.Disposable.from(...this._disposables).dispose();
+		zyraxoncode.Disposable.from(...this._disposables).dispose();
 	}
 
 	update(delegate: SymbolItemNavigation<unknown> | undefined) {
@@ -38,15 +38,15 @@ export class Navigation {
 		if (sel) {
 			return sel;
 		}
-		if (!vscode.window.activeTextEditor) {
+		if (!zyraxoncode.window.activeTextEditor) {
 			return undefined;
 		}
-		return this._delegate.nearest(vscode.window.activeTextEditor.document.uri, vscode.window.activeTextEditor.selection.active);
+		return this._delegate.nearest(zyraxoncode.window.activeTextEditor.document.uri, zyraxoncode.window.activeTextEditor.selection.active);
 	}
 
-	private _open(loc: vscode.Location, preserveFocus: boolean) {
-		vscode.commands.executeCommand('vscode.open', loc.uri, {
-			selection: new vscode.Selection(loc.range.start, loc.range.start),
+	private _open(loc: zyraxoncode.Location, preserveFocus: boolean) {
+		zyraxoncode.commands.executeCommand('zyraxoncode.open', loc.uri, {
+			selection: new zyraxoncode.Selection(loc.range.start, loc.range.start),
 			preserveFocus
 		});
 	}

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement } from '@vscode/prompt-tsx';
+import { PromptElement } from '@zyraxoncode/prompt-tsx';
 
 export class JupyterNotebookRules extends PromptElement {
 	render() {

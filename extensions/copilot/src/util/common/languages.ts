@@ -38,7 +38,7 @@ export interface ILanguage extends ILanguageInfo {
 }
 
 /**
- * Well known language [from VSCode](https://code.visualstudio.com/docs/languages/identifiers#_known-language-identifiers)
+ * Well known language [from ZyraxonCode](https://code.visualstudio.com/docs/languages/identifiers#_known-language-identifiers)
  * Markdown ids from https://raw.githubusercontent.com/highlightjs/highlight.js/refs/heads/main/SUPPORTED_LANGUAGES.md
  */
 const languages = Object.freeze({

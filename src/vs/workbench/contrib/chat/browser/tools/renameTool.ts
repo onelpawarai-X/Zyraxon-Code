@@ -25,7 +25,7 @@ import { CountTokensCallback, ILanguageModelToolsService, IPreparedToolInvocatio
 import { createToolSimpleTextResult } from '../../common/tools/builtinTools/toolHelpers.js';
 import { errorResult, findLineNumber, findSymbolColumn, ISymbolToolInput, resolveSymbolToolFileUri } from './toolHelpers.js';
 
-export const RenameToolId = 'vscode_renameSymbol';
+export const RenameToolId = 'zyraxoncode_renameSymbol';
 
 interface IRenameToolInput extends ISymbolToolInput {
 	newName: string;
@@ -36,7 +36,7 @@ const BaseModelDescription = `Rename a code symbol across the workspace using th
 Input:
 - "symbol": The exact current name of the symbol to rename.
 - "newName": The new name for the symbol.
-- "uri": A full URI (e.g. "file:///path/to/file.ts") of a file where the symbol appears. Provide either "uri" or "filePath".
+- "uri": A full URI (e.g. "__ZYRAXKEEP__0_") of a file where the symbol appears. Provide either "uri" or "filePath".
 - "filePath": A workspace-relative file path (e.g. "src/utils/helpers.ts") of a file where the symbol appears. Provide either "uri" or "filePath".
 - "lineContent": A substring of the line of code where the symbol appears. This is used to locate the exact position in the file. Must be the actual text from the file - do NOT fabricate it.
 
@@ -95,7 +95,7 @@ export class RenameTool extends Disposable implements IToolImpl {
 					},
 					uri: {
 						type: 'string',
-						description: 'A full URI of a file where the symbol appears (e.g. "file:///path/to/file.ts"). Provide either "uri" or "filePath".'
+						description: 'A full URI of a file where the symbol appears (e.g. "__ZYRAXKEEP__1_"). Provide either "uri" or "filePath".'
 					},
 					filePath: {
 						type: 'string',

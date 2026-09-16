@@ -442,16 +442,16 @@ class CellInfoContentProvider {
 		@ILabelService private readonly _labelService: ILabelService,
 		@INotebookEditorModelResolverService private readonly _notebookModelResolverService: INotebookEditorModelResolverService,
 	) {
-		this._disposables.push(textModelService.registerTextModelContentProvider(Schemas.vscodeNotebookCellMetadata, {
+		this._disposables.push(textModelService.registerTextModelContentProvider(Schemas.zyraxoncodeNotebookCellMetadata, {
 			provideTextContent: this.provideMetadataTextContent.bind(this)
 		}));
 
-		this._disposables.push(textModelService.registerTextModelContentProvider(Schemas.vscodeNotebookCellOutput, {
+		this._disposables.push(textModelService.registerTextModelContentProvider(Schemas.zyraxoncodeNotebookCellOutput, {
 			provideTextContent: this.provideOutputTextContent.bind(this)
 		}));
 
 		this._disposables.push(this._labelService.registerFormatter({
-			scheme: Schemas.vscodeNotebookCellMetadata,
+			scheme: Schemas.zyraxoncodeNotebookCellMetadata,
 			formatting: {
 				label: '${path} (metadata)',
 				separator: '/'
@@ -459,7 +459,7 @@ class CellInfoContentProvider {
 		}));
 
 		this._disposables.push(this._labelService.registerFormatter({
-			scheme: Schemas.vscodeNotebookCellOutput,
+			scheme: Schemas.zyraxoncodeNotebookCellOutput,
 			formatting: {
 				label: '${path} (output)',
 				separator: '/'
@@ -477,7 +477,7 @@ class CellInfoContentProvider {
 			return existing;
 		}
 
-		const data = CellUri.parseCellPropertyUri(resource, Schemas.vscodeNotebookCellMetadata);
+		const data = CellUri.parseCellPropertyUri(resource, Schemas.zyraxoncodeNotebookCellMetadata);
 		if (!data) {
 			return null;
 		}
@@ -575,7 +575,7 @@ class CellInfoContentProvider {
 			return existing;
 		}
 
-		const data = CellUri.parseCellPropertyUri(resource, Schemas.vscodeNotebookCellOutput);
+		const data = CellUri.parseCellPropertyUri(resource, Schemas.zyraxoncodeNotebookCellOutput);
 		if (!data) {
 			return null;
 		}
@@ -663,12 +663,12 @@ class NotebookMetadataContentProvider {
 		@ILabelService private readonly _labelService: ILabelService,
 		@INotebookEditorModelResolverService private readonly _notebookModelResolverService: INotebookEditorModelResolverService,
 	) {
-		this._disposables.push(textModelService.registerTextModelContentProvider(Schemas.vscodeNotebookMetadata, {
+		this._disposables.push(textModelService.registerTextModelContentProvider(Schemas.zyraxoncodeNotebookMetadata, {
 			provideTextContent: this.provideMetadataTextContent.bind(this)
 		}));
 
 		this._disposables.push(this._labelService.registerFormatter({
-			scheme: Schemas.vscodeNotebookMetadata,
+			scheme: Schemas.zyraxoncodeNotebookMetadata,
 			formatting: {
 				label: '${path} (metadata)',
 				separator: '/'
@@ -751,7 +751,7 @@ class RegisterSchemasContribution extends Disposable implements IWorkbenchContri
 			allowComments: true
 		};
 
-		jsonRegistry.registerSchema('vscode://schemas/notebook/cellmetadata', metadataSchema);
+		jsonRegistry.registerSchema('__ZYRAXKEEP__0_', metadataSchema);
 	}
 }
 

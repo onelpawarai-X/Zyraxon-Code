@@ -13,17 +13,17 @@
 	/* Enable absolute positioning for child elements */
 
 	/* 11px when base font is 13px */
-	--vscode-chat-font-size-body-xs: 0.846em;
+	--zyraxoncode-chat-font-size-body-xs: 0.846em;
 	/* 12px when base font is 13px */
-	--vscode-chat-font-size-body-s: 0.923em;
+	--zyraxoncode-chat-font-size-body-s: 0.923em;
 	/* 13px when base font is 13px */
-	--vscode-chat-font-size-body-m: 1em;
+	--zyraxoncode-chat-font-size-body-m: 1em;
 	/* 14px when base font is 13px */
-	--vscode-chat-font-size-body-l: 1.077em;
+	--zyraxoncode-chat-font-size-body-l: 1.077em;
 	/* 16px when base font is 13px */
-	--vscode-chat-font-size-body-xl: 1.231em;
+	--zyraxoncode-chat-font-size-body-xl: 1.231em;
 	/* 20px when base font is 13px */
-	--vscode-chat-font-size-body-xxl: 1.538em;
+	--zyraxoncode-chat-font-size-body-xxl: 1.538em;
 }
 
 .interactive-list > .monaco-list > .monaco-scrollable-element > .monaco-list-rows > .monaco-list-row > .monaco-tl-row > .monaco-tl-twistie {
@@ -39,7 +39,7 @@
 	padding: 12px 16px;
 	display: flex;
 	flex-direction: column;
-	color: var(--vscode-interactive-session-foreground);
+	color: var(--zyraxoncode-interactive-session-foreground);
 
 	cursor: default;
 	user-select: text;
@@ -84,15 +84,15 @@
 }
 
 .interactive-item-container .detail-container {
-	font-family: var(--vscode-chat-font-family, inherit);
-	font-size: var(--vscode-chat-font-size-body-s);
-	color: var(--vscode-descriptionForeground);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
+	font-size: var(--zyraxoncode-chat-font-size-body-s);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 }
 
 .interactive-item-container .detail-container .detail .agentOrSlashCommandDetected A {
 	cursor: pointer;
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .interactive-item-container .chat-animated-ellipsis {
@@ -157,11 +157,11 @@
 	width: 24px;
 	height: 24px;
 	border-radius: 50%;
-	outline: 1px solid var(--vscode-chat-requestBorder);
+	outline: 1px solid var(--zyraxoncode-chat-requestBorder);
 }
 
 .interactive-item-container .header .avatar.codicon-avatar {
-	background: var(--vscode-chat-avatarBackground);
+	background: var(--zyraxoncode-chat-avatarBackground);
 }
 
 .interactive-item-container .header .avatar + .avatar {
@@ -172,11 +172,11 @@
 	width: 24px;
 	height: 24px;
 	border-radius: 50%;
-	background-color: var(--vscode-chat-list-background);
+	background-color: var(--zyraxoncode-chat-list-background);
 }
 
 .interactive-item-container .header .avatar .codicon {
-	color: var(--vscode-chat-avatarForeground) !important;
+	color: var(--zyraxoncode-chat-avatarForeground) !important;
 	font-size: 14px;
 }
 
@@ -197,7 +197,7 @@
 .interactive-item-container.interactive-response .header .monaco-toolbar {
 	position: absolute;
 	left: 0px;
-	background-color: var(--vscode-chat-list-background);
+	background-color: var(--zyraxoncode-chat-list-background);
 }
 
 .interactive-item-container.interactive-request .header .monaco-toolbar {
@@ -264,9 +264,9 @@
 
 .interactive-item-container .chat-footer-toolbar .checked.action-label,
 .interactive-item-container .chat-footer-toolbar .checked.action-label:hover {
-	color: var(--vscode-inputOption-activeForeground) !important;
-	border-color: var(--vscode-inputOption-activeBorder);
-	background-color: var(--vscode-inputOption-activeBackground);
+	color: var(--zyraxoncode-inputOption-activeForeground) !important;
+	border-color: var(--zyraxoncode-inputOption-activeBorder);
+	background-color: var(--zyraxoncode-inputOption-activeBackground);
 }
 
 .interactive-item-container.interactive-response:not(.chat-response-loading) .chat-footer-toolbar,
@@ -299,9 +299,9 @@
 .interactive-item-container .chat-footer-details {
 	display: none;
 	padding: 0;
-	font-size: var(--vscode-chat-font-size-body-xs);
+	font-size: var(--zyraxoncode-chat-font-size-body-xs);
 	opacity: 0.7;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 16px;
 	margin-left: auto;
 	overflow: hidden;
@@ -312,13 +312,13 @@
 .interactive-item-container.interactive-response:not(.chat-response-loading) .chat-footer-toolbar .chat-footer-details:not(.hidden) {
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
 }
 
 .interactive-item-container .chat-footer-details:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-	outline-offset: var(--vscode-spacing-size20);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+	outline-offset: var(--zyraxoncode-spacing-size20);
 }
 
 .interactive-item-container .chat-response-timing {
@@ -369,8 +369,8 @@
 }
 
 .interactive-item-container .chat-request-timestamp:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-	outline-offset: var(--vscode-spacing-size20);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+	outline-offset: var(--zyraxoncode-spacing-size20);
 }
 
 .interactive-item-container .chat-request-timing > * {
@@ -451,12 +451,12 @@
 
 .monaco-workbench:not(.agent-sessions-workbench) .interactive-item-container.interactive-request.editing .chat-request-timestamp-container {
 	box-sizing: border-box;
-	padding-inline-end: var(--vscode-spacing-size160);
+	padding-inline-end: var(--zyraxoncode-spacing-size160);
 }
 
 .interactive-item-container .completed-response-disclosure {
 	width: 100%;
-	margin-bottom: var(--vscode-spacing-size80);
+	margin-bottom: var(--zyraxoncode-spacing-size80);
 	interpolate-size: allow-keywords;
 
 	&::details-content {
@@ -464,10 +464,10 @@
 		box-sizing: border-box;
 		overflow: hidden;
 		opacity: 0;
-		margin-inline-start: var(--vscode-spacing-size60);
-		padding-inline-start: var(--vscode-spacing-size120);
-		border-inline-start: var(--vscode-strokeThickness) solid var(--vscode-chat-requestBorder);
-		border-image: linear-gradient(to bottom, var(--vscode-chat-requestBorder) 0 calc(100% - var(--vscode-spacing-size80)), transparent calc(100% - var(--vscode-spacing-size80))) 1;
+		margin-inline-start: var(--zyraxoncode-spacing-size60);
+		padding-inline-start: var(--zyraxoncode-spacing-size120);
+		border-inline-start: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-chat-requestBorder);
+		border-image: linear-gradient(to bottom, var(--zyraxoncode-chat-requestBorder) 0 calc(100% - var(--zyraxoncode-spacing-size80)), transparent calc(100% - var(--zyraxoncode-spacing-size80))) 1;
 		transition:
 			block-size 180ms cubic-bezier(0.2, 0, 0, 1),
 			opacity 140ms cubic-bezier(0.2, 0, 0, 1),
@@ -481,14 +481,14 @@
 }
 
 .interactive-item-container .completed-response-disclosure:not([open]) {
-	margin-bottom: var(--vscode-spacing-size160);
+	margin-bottom: var(--zyraxoncode-spacing-size160);
 }
 
 .interactive-item-container .completed-response-summary {
 	width: fit-content;
 	max-width: 100%;
 	padding: 0;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	cursor: pointer;
 	font-variant-numeric: tabular-nums;
 	font-feature-settings: "tnum";
@@ -504,16 +504,16 @@
 }
 
 .interactive-item-container .completed-response-summary:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-	outline-offset: calc(-1 * var(--vscode-strokeThickness));
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+	outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
 }
 
 .interactive-item-container .completed-response-disclosure[open] .completed-response-summary .monaco-button {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .interactive-item-container .completed-response-disclosure[open] .completed-response-summary {
-	padding-bottom: var(--vscode-spacing-size80);
+	padding-bottom: var(--zyraxoncode-spacing-size80);
 }
 
 .interactive-item-container .completed-response-disclosure > :last-child,
@@ -556,8 +556,8 @@
 	border-left-width: 5px;
 	border-left-style: solid;
 	border-radius: 2px;
-	background: var(--vscode-textBlockQuote-background);
-	border-color: var(--vscode-textBlockQuote-border);
+	background: var(--zyraxoncode-textBlockQuote-background);
+	border-color: var(--zyraxoncode-textBlockQuote-border);
 }
 
 .interactive-item-container .value .rendered-markdown strong {
@@ -571,16 +571,16 @@
 
 .interactive-item-container .value .rendered-markdown table {
 	text-align: left;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 	overflow: hidden;
 	border-collapse: separate;
 	border-spacing: 0;
-	border: 1px solid var(--vscode-chat-requestBorder);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
 }
 
 .interactive-item-container .value .rendered-markdown table td,
 .interactive-item-container .value .rendered-markdown table th {
-	border: 1px solid var(--vscode-chat-requestBorder);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
 	border-top: none;
 	border-left: none;
 	padding: 4px 6px;
@@ -603,7 +603,7 @@
 .interactive-item-container .value .rendered-markdown a,
 .interactive-item-container .value .interactive-session-followups,
 .interactive-item-container .value .rendered-markdown a code {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .interactive-item-container .value .rendered-markdown .chat-extensions-content-part a {
@@ -616,12 +616,12 @@
 
 .interactive-item-container .value .rendered-markdown a:hover,
 .interactive-item-container .value .rendered-markdown a:active {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .hc-black .interactive-item-container .value .rendered-markdown a code,
 .hc-light .interactive-item-container .value .rendered-markdown a code {
-	color: var(--vscode-textPreformat-foreground);
+	color: var(--zyraxoncode-textPreformat-foreground);
 }
 
 .interactive-list {
@@ -632,8 +632,8 @@
 
 .hc-black .interactive-request,
 .hc-light .interactive-request {
-	border-left: 3px solid var(--vscode-chat-requestBorder);
-	border-right: 3px solid var(--vscode-chat-requestBorder);
+	border-left: 3px solid var(--zyraxoncode-chat-requestBorder);
+	border-right: 3px solid var(--zyraxoncode-chat-requestBorder);
 }
 
 .interactive-item-container .value {
@@ -660,25 +660,25 @@
 }
 
 .interactive-item-container .value .rendered-markdown h1 {
-	font-size: var(--vscode-chat-font-size-body-xxl);
+	font-size: var(--zyraxoncode-chat-font-size-body-xxl);
 	font-weight: 600;
 	margin: 1.5em 0 0.875em 0;
-	font-family: var(--vscode-chat-font-family, inherit);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
 
 }
 
 .interactive-item-container .value .rendered-markdown h2 {
-	font-size: var(--vscode-chat-font-size-body-xl);
+	font-size: var(--zyraxoncode-chat-font-size-body-xl);
 	font-weight: 600;
 	margin: 1.5em 0 0.875em 0;
-	font-family: var(--vscode-chat-font-family, inherit);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
 }
 
 .interactive-item-container .value .rendered-markdown h3 {
-	font-size: var(--vscode-chat-font-size-body-l);
+	font-size: var(--zyraxoncode-chat-font-size-body-l);
 	font-weight: 600;
 	margin: 1.5em 0 0.875em 0;
-	font-family: var(--vscode-chat-font-family, inherit);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
 }
 
 .interactive-item-container.editing-session .value .rendered-markdown p:has(+ [data-code] > .chat-codeblock-pill-widget) {
@@ -686,7 +686,7 @@
 }
 
 .interactive-item-container.editing-session .value .rendered-markdown h3 {
-	font-size: var(--vscode-chat-font-size-body-m);
+	font-size: var(--zyraxoncode-chat-font-size-body-m);
 	margin: 1.5em 0 0.875em 0;
 }
 
@@ -743,8 +743,8 @@
 
 .interactive-item-container .value .rendered-markdown {
 	line-height: 1.5em;
-	font-size: var(--vscode-chat-font-size-body-m);
-	font-family: var(--vscode-chat-font-family, inherit);
+	font-size: var(--zyraxoncode-chat-font-size-body-m);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
 }
 
 .interactive-item-container.terminal-command-request > .value > .rendered-markdown {
@@ -779,7 +779,7 @@
 		bottom: 0;
 
 		a {
-			color: var(--vscode-textLink-foreground);
+			color: var(--zyraxoncode-textLink-foreground);
 			text-decoration: underline;
 			cursor: pointer;
 		}
@@ -833,17 +833,17 @@
 	}
 
 	.tool-output-part {
-		border: 1px solid var(--vscode-widget-border);
-		border-radius: var(--vscode-cornerRadius-medium);
-		background: var(--vscode-editor-background);
+		border: 1px solid var(--zyraxoncode-widget-border);
+		border-radius: var(--zyraxoncode-cornerRadius-medium);
+		background: var(--zyraxoncode-editor-background);
 		margin: 4px 0;
 		overflow: hidden;
 
 		.output-title {
 			padding: 8px 12px;
-			background: var(--vscode-editorWidget-background);
-			border-bottom: 1px solid var(--vscode-widget-border);
-			font-size: var(--vscode-chat-font-size-body-m);
+			background: var(--zyraxoncode-editorWidget-background);
+			border-bottom: 1px solid var(--zyraxoncode-widget-border);
+			font-size: var(--zyraxoncode-chat-font-size-body-m);
 		}
 
 		.webview-output {
@@ -863,7 +863,7 @@
 
 		.output-error {
 			margin: 6px 4px;
-			color: var(--vscode-errorForeground);
+			color: var(--zyraxoncode-errorForeground);
 
 			.output-error-header {
 				display: flex;
@@ -872,13 +872,13 @@
 				margin-bottom: 4px;
 
 				.codicon-error {
-					color: var(--vscode-errorForeground) !important;
+					color: var(--zyraxoncode-errorForeground) !important;
 				}
 			}
 
 			.output-error-details {
 				font-family: var(--monaco-monospace-font);
-				font-size: var(--vscode-chat-font-size-body-xs);
+				font-size: var(--zyraxoncode-chat-font-size-body-xs);
 			}
 		}
 	}
@@ -954,12 +954,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	.monaco-tokenized-source,
 	code {
 		font-family: var(--monaco-monospace-font);
-		font-size: var(--vscode-chat-font-size-body-xs);
-		color: var(--vscode-textPreformat-foreground);
-		background-color: var(--vscode-textPreformat-background);
+		font-size: var(--zyraxoncode-chat-font-size-body-xs);
+		color: var(--zyraxoncode-textPreformat-foreground);
+		background-color: var(--zyraxoncode-textPreformat-background);
 		padding: 1px 3px;
 		border-radius: 4px;
-		border: 1px solid var(--vscode-textPreformat-border);
+		border: 1px solid var(--zyraxoncode-textPreformat-border);
 		white-space: pre-wrap;
 	}
 }
@@ -1085,9 +1085,9 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .monaco-workbench .interactive-session .chat-input-container {
 	box-sizing: border-box;
 	cursor: text;
-	background-color: var(--vscode-input-background);
-	border: 1px solid var(--vscode-input-border, transparent);
-	border-radius: var(--vscode-cornerRadius-large);
+	background-color: var(--zyraxoncode-input-background);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 	padding: 0 6px 6px 6px;
 	/* top padding is inside the editor widget */
 	width: 100%;
@@ -1100,7 +1100,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	--chat-input-anim-duration: 4s;
 	/* Allow host surfaces (like inactive sessions) to tone down the animation
 		accent without overriding the global chat theme token. */
-	--chat-input-working-border-color1: var(--vscode-chat-inputWorkingBorderColor1);
+	--chat-input-working-border-color1: var(--zyraxoncode-chat-inputWorkingBorderColor1);
 }
 
 /* Prevent contents from covering border corners. Not applied in compact mode
@@ -1115,7 +1115,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	working or thinking. Toggled by the `chat.progressBorder.enabled`
 	setting and the chat widget's request-in-progress state.
 
-	Inspired by https://github.com/Jakubantalik/border-beam — a small bright
+	Inspired by __ZYRAXKEEP__0_ — a small bright
 	comet travels around the perimeter, leaving a short fading trail. The
 	ring is rendered as a `::before` pseudo-element so it can fade in/out
 	via `opacity` when the `.working` class is toggled, without disturbing
@@ -1211,7 +1211,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		input throughout the animation (including the dim portion of the
 		perimeter behind the comet) and improves contrast for users who
 		rely on a visible focus/container outline for accessibility. */
-	border-color: var(--vscode-input-border, transparent);
+	border-color: var(--zyraxoncode-input-border, transparent);
 	overflow: visible;
 
 	> .chat-editor-container {
@@ -1220,7 +1220,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .monaco-workbench .interactive-session .chat-input-container.working.focused {
-	border-color: color-mix(in srgb, var(--vscode-focusBorder) 40%, transparent);
+	border-color: color-mix(in srgb, var(--zyraxoncode-focusBorder) 40%, transparent);
 }
 
 .monaco-workbench .interactive-session .chat-input-container.working .interactive-input-editor .monaco-editor,
@@ -1288,12 +1288,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .actions-container {
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 }
 
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .action-item.chat-submit-button {
 	position: relative;
-	border-radius: var(--vscode-cornerRadius-circle);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
 }
 
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .action-item.chat-submit-button > .action-label {
@@ -1301,10 +1301,10 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	width: 22px;
 	height: 22px;
 	justify-content: center;
-	font-size: var(--vscode-codiconFontSize-compact);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 	/* Keep the fully-rounded shape in both states — the enabled rule below only
 		adds the filled background, it shouldn't be what defines the shape. */
-	border-radius: var(--vscode-cornerRadius-circle);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
 	transition: background-color 250ms ease, color 250ms ease;
 }
 
@@ -1321,9 +1321,9 @@ have to be updated for changes to the rules above, or to support more deeply nes
 /* Focus indicator drawn on the action-item wrapper so it sits cleanly around
 	the button surface with a small offset. */
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .action-item.chat-submit-button:not(.disabled):has(> .action-label:focus-visible) {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
-	border-radius: var(--vscode-cornerRadius-circle);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
 }
 
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .action-item.chat-submit-button > .action-label:focus,
@@ -1333,14 +1333,14 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 /* Idle: solid primary button background. */
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .action-item.chat-submit-button:not(.disabled) > .action-label {
-	background: var(--vscode-button-background);
-	color: var(--vscode-button-foreground) !important;
+	background: var(--zyraxoncode-button-background);
+	color: var(--zyraxoncode-button-foreground) !important;
 	transition: background-color 120ms ease;
 }
 
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .action-item.chat-submit-button:not(.disabled) > .action-label:hover,
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .action-item.chat-submit-button:not(.disabled) > .action-label:focus-visible {
-	background: var(--vscode-button-hoverBackground);
+	background: var(--zyraxoncode-button-hoverBackground);
 }
 
 .interactive-input-part:has(.chat-editing-session > .chat-editing-session-container) .chat-input-container,
@@ -1364,10 +1364,10 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .monaco-workbench .interactive-session .chat-editing-session .chat-editing-session-container {
 	padding: 4px 3px 4px 3px;
 	box-sizing: border-box;
-	background-color: var(--vscode-editor-background);
-	border: 1px solid var(--vscode-input-border, transparent);
+	background-color: var(--zyraxoncode-editor-background);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
 	border-bottom: none;
-	border-radius: var(--vscode-cornerRadius-large) var(--vscode-cornerRadius-large) 0 0;
+	border-radius: var(--zyraxoncode-cornerRadius-large) var(--zyraxoncode-cornerRadius-large) 0 0;
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
@@ -1400,7 +1400,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 /* Toggled in chatInputPart.ts when the working set overflows. Do not replace
- * with :has(): workbench-wide invalidation hazard (microsoft/vscode#324985). */
+ * with :has(): workbench-wide invalidation hazard (zyraxon/zyraxoncode#324985). */
 .interactive-session .chat-editing-session .chat-editing-session-container.show-file-icons .chat-editing-session-list.overflowing .monaco-list-row .monaco-icon-label {
 	padding-right: 12px;
 }
@@ -1417,7 +1417,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-container .chat-editing-session-overview > .working-set-title {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 	white-space: nowrap;
 	overflow: hidden;
@@ -1426,7 +1426,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-container .chat-editing-session-overview > .working-set-title .working-set-count.file-limit-reached {
-	color: var(--vscode-notificationsWarningIcon-foreground);
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 }
 
 /* Inline added/removed line count styling */
@@ -1439,11 +1439,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-container .chat-editing-session-overview .working-set-line-counts .working-set-lines-added {
-	color: var(--vscode-chat-linesAddedForeground);
+	color: var(--zyraxoncode-chat-linesAddedForeground);
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-container .chat-editing-session-overview .working-set-line-counts .working-set-lines-removed {
-	color: var(--vscode-chat-linesRemovedForeground);
+	color: var(--zyraxoncode-chat-linesRemovedForeground);
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-list .working-set-line-counts {
@@ -1454,11 +1454,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-list .working-set-line-counts .working-set-lines-added {
-	color: var(--vscode-chat-linesAddedForeground);
+	color: var(--zyraxoncode-chat-linesAddedForeground);
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-list .working-set-line-counts .working-set-lines-removed {
-	color: var(--vscode-chat-linesRemovedForeground);
+	color: var(--zyraxoncode-chat-linesRemovedForeground);
 }
 
 .interactive-session .chat-editing-session .working-set-title {
@@ -1468,7 +1468,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		border-radius: 2px;
 		border: none;
 		background-color: unset;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 	}
 
 	.monaco-button:focus-visible {
@@ -1500,7 +1500,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-toolbar-actions .monaco-button:hover {
-	background-color: var(--vscode-button-hoverBackground);
+	background-color: var(--zyraxoncode-button-hoverBackground);
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-actions-group {
@@ -1517,7 +1517,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	align-items: center;
 	justify-content: center;
 	font-size: 16px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	background-color: transparent;
 	border: none;
 	padding: 0;
@@ -1526,7 +1526,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-toolbar-actions .monaco-button.secondary {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	background-color: transparent;
 	border: none;
 	height: 22px;
@@ -1553,22 +1553,22 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-actions .monaco-button.secondary.monaco-text-button {
-	background-color: var(--vscode-button-secondaryBackground);
-	color: var(--vscode-button-secondaryForeground);
+	background-color: var(--zyraxoncode-button-secondaryBackground);
+	color: var(--zyraxoncode-button-secondaryForeground);
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-actions .monaco-button.secondary:hover {
-	background-color: var(--vscode-button-secondaryHoverBackground);
-	color: var(--vscode-button-secondaryForeground);
+	background-color: var(--zyraxoncode-button-secondaryHoverBackground);
+	color: var(--zyraxoncode-button-secondaryForeground);
 }
 
 /* The Add Files button is currently implemented as a secondary button but should not have the secondary button background */
 .interactive-session .chat-editing-session .chat-editing-session-toolbar-actions .monaco-button.secondary:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-toolbar-actions .monaco-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-toolbar-actions .monaco-button,
@@ -1596,11 +1596,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-toolbar-actions .monaco-button-dropdown.sidebyside-button:hover > .separator {
-	border-color: var(--vscode-input-border, transparent);
+	border-color: var(--zyraxoncode-input-border, transparent);
 }
 
 .interactive-session .chat-editing-session .chat-editing-session-toolbar-actions .monaco-button-dropdown.sidebyside-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .interactive-input-part > .chat-input-widgets-container {
@@ -1628,10 +1628,10 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget {
 	padding: 4px 3px 4px 3px;
 	box-sizing: border-box;
-	border: 1px solid var(--vscode-input-border, transparent);
-	background-color: var(--vscode-editor-background);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
+	background-color: var(--zyraxoncode-editor-background);
 	border-bottom: none;
-	border-radius: var(--vscode-cornerRadius-large) var(--vscode-cornerRadius-large) 0 0;
+	border-radius: var(--zyraxoncode-cornerRadius-large) var(--zyraxoncode-cornerRadius-large) 0 0;
 	flex-direction: column;
 	gap: 2px;
 	overflow: hidden;
@@ -1650,7 +1650,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	width: 100%;
 	background-color: transparent;
 	border-color: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	padding: 0;
 	min-width: unset;
 }
@@ -1688,7 +1688,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget .todo-clear-button-container .monaco-button {
 	background-color: transparent;
 	border-color: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 	height: 16px;
 	padding: 3px;
@@ -1700,17 +1700,17 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget .todo-clear-button-container .monaco-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget .todo-clear-button-container .monaco-button:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
 }
 
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget .todo-clear-button-container .monaco-button .codicon {
 	font-size: 10px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 
@@ -1755,7 +1755,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	gap: 6px;
 	scroll-snap-align: start;
 	min-height: 22px;
-	font-size: var(--vscode-chat-font-size-body-m);
+	font-size: var(--zyraxoncode-chat-font-size-body-m);
 	padding: 0px 3px;
 	border-radius: 2px;
 	cursor: pointer;
@@ -1763,12 +1763,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget .todo-item:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget .todo-item.focused {
-	background-color: var(--vscode-list-focusBackground);
+	background-color: var(--zyraxoncode-list-focusBackground);
 }
 
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget .todo-item > .todo-status-icon.codicon {
@@ -1785,7 +1785,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .interactive-input-part > .chat-todo-list-widget-container .chat-todo-list-widget .monaco-scrollable-element .monaco-list-rows .monaco-list-row {
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .interactive-session .interactive-input-part.compact .chat-input-container {
@@ -1794,7 +1794,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	padding-bottom: 0;
 	/* no scrollbar */
 	padding-right: 6px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .interactive-session .interactive-input-and-side-toolbar {
@@ -1805,7 +1805,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-input-container.focused {
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .chat-editor-container {
@@ -1827,7 +1827,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-editor-container .monaco-editor .mtk1 {
-	color: var(--vscode-input-foreground);
+	color: var(--zyraxoncode-input-foreground);
 }
 
 /* Truncate the chat input placeholder with an ellipsis in narrow views
@@ -1847,7 +1847,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	vertical-align: bottom;
-	color: var(--vscode-input-placeholderForeground);
+	color: var(--zyraxoncode-input-placeholderForeground);
 }
 
 .interactive-session .chat-editor-container .monaco-editor .chat-prompt-spinner {
@@ -1857,7 +1857,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-session .interactive-input-part .chat-editor-container .interactive-input-editor .monaco-editor,
 .interactive-session .interactive-input-part .chat-editor-container .interactive-input-editor .monaco-editor .monaco-editor-background {
-	background-color: var(--vscode-input-background);
+	background-color: var(--zyraxoncode-input-background);
 }
 
 .interactive-session .interactive-input-part.editing .chat-input-container .chat-editor-container .monaco-editor,
@@ -1869,7 +1869,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-session .interactive-input-part.editing .chat-input-container,
 .interactive-session .interactive-request.editing .interactive-input-part .chat-input-container {
-	background-color: var(--vscode-chat-requestBubbleBackground);
+	background-color: var(--zyraxoncode-chat-requestBubbleBackground);
 }
 
 
@@ -1906,11 +1906,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	overflow: hidden;
 	min-width: 0px;
 	flex: 1 1 0;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 
 	.monaco-action-bar .action-item .codicon {
-		color: var(--vscode-icon-foreground);
-		font-size: var(--vscode-codiconFontSize-compact);
+		color: var(--zyraxoncode-icon-foreground);
+		font-size: var(--zyraxoncode-codiconFontSize-compact);
 		width: auto;
 		height: auto;
 	}
@@ -1950,23 +1950,23 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	border-radius: 4px;
 	display: flex;
 	align-items: center;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .interactive-session .chat-secondary-toolbar .chat-input-picker-item .action-label.warning {
-	color: var(--vscode-problemsWarningIcon-foreground);
+	color: var(--zyraxoncode-problemsWarningIcon-foreground);
 }
 
 .interactive-session .chat-secondary-toolbar .chat-input-picker-item .action-label.warning .codicon {
-	color: var(--vscode-problemsWarningIcon-foreground) !important;
+	color: var(--zyraxoncode-problemsWarningIcon-foreground) !important;
 }
 
 .interactive-session .chat-secondary-toolbar .chat-input-picker-item .action-label.info {
-	color: var(--vscode-problemsInfoIcon-foreground);
+	color: var(--zyraxoncode-problemsInfoIcon-foreground);
 }
 
 .interactive-session .chat-secondary-toolbar .chat-input-picker-item .action-label.info .codicon {
-	color: var(--vscode-problemsInfoIcon-foreground) !important;
+	color: var(--zyraxoncode-problemsInfoIcon-foreground) !important;
 }
 
 .monaco-workbench .interactive-session .chat-secondary-toolbar .chat-input-picker-item .action-label .codicon-chevron-down {
@@ -1988,8 +1988,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	bottom: 0;
 	right: 0;
 	font-size: 12px !important;
-	color: var(--vscode-problemsWarningIcon-foreground);
-	background: var(--vscode-input-background);
+	color: var(--zyraxoncode-problemsWarningIcon-foreground);
+	background: var(--zyraxoncode-input-background);
 	width: fit-content;
 	height: fit-content;
 	border-radius: 100%;
@@ -2000,10 +2000,10 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	overflow: hidden;
 	min-width: 0px;
 	width: 100%;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 
 	.monaco-action-bar .action-item .codicon {
-		color: var(--vscode-icon-foreground);
+		color: var(--zyraxoncode-icon-foreground);
 	}
 
 	.chat-input-picker-item {
@@ -2028,11 +2028,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 				font-size: 12px;
 
 				.codicon.codicon-info {
-					color: var(--vscode-problemsInfoIcon-foreground) !important;
+					color: var(--zyraxoncode-problemsInfoIcon-foreground) !important;
 				}
 
 				.codicon.codicon-warning {
-					color: var(--vscode-problemsWarningIcon-foreground) !important;
+					color: var(--zyraxoncode-problemsWarningIcon-foreground) !important;
 				}
 			}
 
@@ -2047,7 +2047,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 		.action-label.disabled {
 			.codicon {
-				color: var(--vscode-disabledForeground);
+				color: var(--zyraxoncode-disabledForeground);
 			}
 		}
 
@@ -2063,7 +2063,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	padding: 3px 6px;
 	display: flex;
 	align-items: center;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .interactive-session .chat-secondary-input-toolbar .chat-sessionPicker-item .action-label {
@@ -2072,13 +2072,13 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	border-radius: 4px;
 	display: flex;
 	align-items: center;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 /* Keep hover background while picker dropdown is open */
 .interactive-session .chat-input-toolbar .action-label[aria-expanded="true"],
 .interactive-session .chat-secondary-toolbar .action-label[aria-expanded="true"] {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 /* When chevrons are hidden and only showing an icon (no label), size to 22x22 with centered icon */
@@ -2110,7 +2110,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	codicons, so the text chips (mode / model pickers) keep their own type size. */
 .monaco-workbench .interactive-session .chat-input-toolbar .monaco-action-bar .action-item > .action-label.codicon[class*='codicon-'] {
 	justify-content: center;
-	font-size: var(--vscode-codiconFontSize-compact);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 }
 
 .monaco-workbench .interactive-session .chat-input-toolbar .chat-input-picker-item .action-label .codicon-chevron-down,
@@ -2136,22 +2136,22 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .monaco-workbench .interactive-session .chat-input-toolbars .monaco-action-bar .action-item .codicon,
 .monaco-workbench .interactive-session .chat-input-toolbars .action-label .codicon {
-	color: var(--vscode-icon-foreground) !important;
+	color: var(--zyraxoncode-icon-foreground) !important;
 }
 
 .monaco-workbench .interactive-session .chat-input-toolbars .monaco-action-bar .action-item.disabled .codicon,
 .monaco-workbench .interactive-session .chat-input-toolbars .action-label.disabled .codicon {
-	color: var(--vscode-disabledForeground) !important;
+	color: var(--zyraxoncode-disabledForeground) !important;
 }
 
 .interactive-session .chat-input-toolbars .codicon-debug-stop {
-	color: var(--vscode-icon-foreground) !important;
+	color: var(--zyraxoncode-icon-foreground) !important;
 }
 
 .interactive-response .interactive-result-code-block .interactive-result-editor .monaco-editor,
 .interactive-response .interactive-result-code-block .interactive-result-editor .monaco-editor .margin,
 .interactive-response .interactive-result-code-block .interactive-result-editor .monaco-editor .monaco-editor-background {
-	background-color: var(--vscode-interactive-result-editor-background-color) !important;
+	background-color: var(--zyraxoncode-interactive-result-editor-background-color) !important;
 }
 
 .interactive-item-compact .interactive-result-code-block {
@@ -2176,20 +2176,20 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .monaco-editor .chat-editing-atomic-edit {
 	z-index: 1;
 	opacity: 0.8;
-	background-color: var(--vscode-editor-background);
+	background-color: var(--zyraxoncode-editor-background);
 	animation: 350ms kf-chat-editing-atomic-edit ease-out;
 }
 
 .monaco-editor .chat-editing-pending-edit {
 	z-index: 1;
 	opacity: 0.6;
-	background-color: var(--vscode-editor-background);
+	background-color: var(--zyraxoncode-editor-background);
 }
 
 .monaco-editor .chat-editing-last-edit {
-	background-color: var(--vscode-editor-rangeHighlightBackground);
+	background-color: var(--zyraxoncode-editor-rangeHighlightBackground);
 	box-sizing: border-box;
-	border: 1px solid var(--vscode-editor-rangeHighlightBorder);
+	border: 1px solid var(--zyraxoncode-editor-rangeHighlightBorder);
 }
 
 @property --chat-editing-last-edit-shift {
@@ -2214,7 +2214,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .monaco-editor .chat-editing-last-edit-line {
 	--chat-editing-last-edit-shift: 100%;
-	background: linear-gradient(45deg, var(--vscode-editor-rangeHighlightBackground), var(--chat-editing-last-edit-shift), transparent);
+	background: linear-gradient(45deg, var(--zyraxoncode-editor-rangeHighlightBackground), var(--chat-editing-last-edit-shift), transparent);
 	animation: 2.3s kf-chat-editing-last-edit-shift ease-in-out infinite;
 	animation-delay: 330ms;
 }
@@ -2247,25 +2247,25 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-used-context-list .codicon-warning {
-	color: var(--vscode-notificationsWarningIcon-foreground);
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 	/* Have to override default styles which apply to all lists */
 }
 
 .chat-used-context-list .monaco-icon-label-container {
-	color: var(--vscode-interactive-session-foreground);
+	color: var(--zyraxoncode-interactive-session-foreground);
 }
 
 .chat-attached-context .chat-attached-context-attachment .monaco-icon-name-container.warning,
 .chat-attached-context .chat-attached-context-attachment .monaco-icon-suffix-container.warning,
 .chat-used-context-list .monaco-icon-name-container.warning,
 .chat-used-context-list .monaco-icon-suffix-container.warning {
-	color: var(--vscode-notificationsWarningIcon-foreground);
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 }
 
 .chat-attached-context .chat-attached-context-attachment.show-file-icons.warning,
 .chat-attached-context .chat-attached-context-attachment.show-file-icons.partial-warning,
 .chat-attached-context .chat-attached-context-attachment.show-file-icons.auto-image-warning {
-	border-color: var(--vscode-notificationsWarningIcon-foreground);
+	border-color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 }
 
 /**
@@ -2278,38 +2278,38 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-attached-context-attachment.warning {
-	color: var(--vscode-notificationsWarningIcon-foreground);
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 }
 
 .chat-attached-context-attachment.error {
-	color: var(--vscode-notificationsErrorIcon-foreground);
+	color: var(--zyraxoncode-notificationsErrorIcon-foreground);
 }
 
 .chat-attached-context-attachment .monaco-icon-label > .monaco-icon-label-container > .monaco-icon-suffix-container > .label-suffix {
-	color: var(--vscode-peekViewTitleDescription-foreground);
+	color: var(--zyraxoncode-peekViewTitleDescription-foreground);
 	opacity: 1;
 }
 
 .chat-notification-widget .chat-warning-codicon .codicon-warning,
 .chat-quota-error-widget .codicon-warning {
-	color: var(--vscode-notificationsWarningIcon-foreground) !important;
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground) !important;
 	/* Have to override default styles which apply to all lists */
 }
 
 .chat-rate-limited-widget .codicon-info {
-	color: var(--vscode-notificationsInfoIcon-foreground) !important;
+	color: var(--zyraxoncode-notificationsInfoIcon-foreground) !important;
 	/* Have to override default styles which apply to all lists */
 }
 
 .chat-notification-widget .chat-error-codicon .codicon-error,
 .interactive-response .interactive-response-error-details .codicon-error {
-	color: var(--vscode-errorForeground) !important;
+	color: var(--zyraxoncode-errorForeground) !important;
 	/* Have to override default styles which apply to all lists */
 }
 
 .chat-notification-widget .chat-info-codicon .codicon-info,
 .interactive-response .interactive-response-error-details .codicon-info {
-	color: var(--vscode-notificationsInfoIcon-foreground) !important;
+	color: var(--zyraxoncode-notificationsInfoIcon-foreground) !important;
 	/* Have to override default styles which apply to all lists */
 }
 
@@ -2344,7 +2344,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	overflow: hidden;
 	font-size: 11px;
 	padding: 0 4px 0 0;
-	border: 1px solid var(--vscode-chat-requestBorder, var(--vscode-input-background, transparent));
+	border: 1px solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-background, transparent));
 	border-radius: 4px;
 	height: 18px;
 	max-width: 100%;
@@ -2352,8 +2352,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .interactive-list .chat-attached-context .chat-attached-context-attachment {
-	font-family: var(--vscode-chat-font-family, inherit);
-	font-size: var(--vscode-chat-font-size-body-xs);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
+	font-size: var(--zyraxoncode-chat-font-size-body-xs);
 }
 
 .action-item.chat-mcp {
@@ -2364,22 +2364,22 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		bottom: 0;
 		left: 12px;
 		font-size: 12px !important;
-		background: var(--vscode-input-background);
+		background: var(--zyraxoncode-input-background);
 		width: fit-content;
 		height: fit-content;
 		border-radius: 100%;
 		pointer-events: none;
 
 		&.chat-mcp-state-new {
-			color: var(--vscode-button-foreground);
+			color: var(--zyraxoncode-button-foreground);
 		}
 
 		&.chat-mcp-state-error {
-			color: var(--vscode-problemsErrorIcon-foreground);
+			color: var(--zyraxoncode-problemsErrorIcon-foreground);
 		}
 
 		&.chat-mcp-state-refreshing {
-			color: var(--vscode-button-foreground);
+			color: var(--zyraxoncode-button-foreground);
 		}
 	}
 }
@@ -2407,7 +2407,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .action-item.chat-attached-context-attachment.chat-add-files:hover,
 .interactive-session .chat-attached-context .chat-attached-context-attachment .monaco-button:hover {
 	cursor: pointer;
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .chat-attached-context .chat-attached-context-attachment.implicit.disabled .monaco-button:hover {
@@ -2437,7 +2437,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .interactive-session .chat-attached-context .chat-attached-context-attachment .monaco-button.codicon.codicon-close,
 .interactive-session .chat-attached-context .chat-attached-context-attachment .monaco-icon-label .monaco-button.codicon.codicon-plus,
 .interactive-session .chat-attached-context .chat-attached-context-attachment .monaco-button.codicon.codicon-plus {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	cursor: pointer;
 }
 
@@ -2485,7 +2485,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-session .chat-attached-context .chat-attached-context-attachment.implicit.disabled:focus {
 	outline: none;
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .interactive-session .chat-attached-context .chat-attached-context-attachment.implicit.disabled .monaco-icon-label .label-name {
@@ -2544,7 +2544,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-session .interactive-input-part .interactive-input-followups .interactive-session-followups .monaco-button {
 	display: block;
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	font-size: 12px;
 
 	/* clamp to max 3 lines */
@@ -2571,7 +2571,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-item-container .monaco-toolbar .codicon {
 	/* Very aggressive list styles try to apply focus colors to every codicon in a list row. */
-	color: var(--vscode-icon-foreground) !important;
+	color: var(--zyraxoncode-icon-foreground) !important;
 }
 
 /* #region Quick Chat */
@@ -2612,11 +2612,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .quick-input-widget .interactive-session .disclaimer {
 	margin: 8px 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 
 	a {
-		color: var(--vscode-textLink-foreground);
+		color: var(--zyraxoncode-textLink-foreground);
 	}
 
 	p {
@@ -2627,7 +2627,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 /* #endregion */
 
 .interactive-response-progress-tree .monaco-list-row:not(.selected) .monaco-tl-row:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .interactive-response-progress-tree {
@@ -2635,15 +2635,15 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-response-progress-tree.focused {
-	border-color: var(--vscode-focusBorder, transparent);
+	border-color: var(--zyraxoncode-focusBorder, transparent);
 }
 
 .interactive-item-container .value .interactive-response-placeholder-codicon .codicon {
-	color: var(--vscode-editorGhostText-foreground);
+	color: var(--zyraxoncode-editorGhostText-foreground);
 }
 
 .interactive-item-container .value .interactive-response-placeholder-content {
-	color: var(--vscode-editorGhostText-foreground);
+	color: var(--zyraxoncode-editorGhostText-foreground);
 	font-size: 12px;
 	margin-bottom: 16px;
 }
@@ -2665,8 +2665,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-item-container .chat-resource-widget {
-	background-color: var(--vscode-chat-slashCommandBackground);
-	color: var(--vscode-chat-slashCommandForeground);
+	background-color: var(--zyraxoncode-chat-slashCommandBackground);
+	color: var(--zyraxoncode-chat-slashCommandForeground);
 }
 
 
@@ -2677,8 +2677,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-item-container .chat-agent-command {
-	background-color: var(--vscode-chat-slashCommandBackground);
-	color: var(--vscode-chat-slashCommandForeground);
+	background-color: var(--zyraxoncode-chat-slashCommandBackground);
+	color: var(--zyraxoncode-chat-slashCommandForeground);
 	display: inline-flex;
 	align-items: center;
 	margin-right: 0.5ch;
@@ -2698,7 +2698,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-item-container .chat-agent-command > .monaco-button:hover {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-item-container .chat-agent-widget .monaco-text-button {
@@ -2710,10 +2710,10 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .chat-artifacts-widget {
 	padding: 4px 3px 4px 3px;
 	box-sizing: border-box;
-	border: 1px solid var(--vscode-input-border, transparent);
-	background-color: var(--vscode-editor-background);
+	border: 1px solid var(--zyraxoncode-input-border, transparent);
+	background-color: var(--zyraxoncode-editor-background);
 	border-bottom: none;
-	border-radius: var(--vscode-cornerRadius-large) var(--vscode-cornerRadius-large) 0 0;
+	border-radius: var(--zyraxoncode-cornerRadius-large) var(--zyraxoncode-cornerRadius-large) 0 0;
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
@@ -2733,7 +2733,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	width: 100%;
 	background-color: transparent;
 	border-color: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	padding: 0;
 	min-width: unset;
 }
@@ -2768,11 +2768,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-artifacts-widget .chat-artifacts-list .monaco-list .monaco-list-row {
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .chat-artifacts-widget .chat-artifacts-list .monaco-list .monaco-list-row:hover {
-	background-color: var(--vscode-list-hoverBackground) !important;
+	background-color: var(--zyraxoncode-list-hoverBackground) !important;
 }
 
 .chat-artifacts-widget .chat-artifacts-list-row {
@@ -2831,7 +2831,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-artifacts-widget .chat-artifacts-list-actions .action-item .action-label:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .checkpoint-file-changes-summary {
@@ -2840,7 +2840,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	flex-wrap: wrap;
 	align-items: center;
 	border-radius: 4px;
-	border: 1px solid var(--vscode-chat-requestBorder);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
 
 	.chat-view-changes-icon {
 		padding: 3px;
@@ -2850,7 +2850,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 	.chat-view-changes-icon:hover {
 		border-radius: 5px;
-		background-color: var(--vscode-toolbar-hoverBackground);
+		background-color: var(--zyraxoncode-toolbar-hoverBackground);
 	}
 
 	.insertions-and-deletions {
@@ -2908,14 +2908,14 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	}
 
 	.insertions {
-		color: var(--vscode-chat-linesAddedForeground);
+		color: var(--zyraxoncode-chat-linesAddedForeground);
 		font-weight: bold;
 		padding-left: 5px;
 		padding-right: 5px;
 	}
 
 	.deletions {
-		color: var(--vscode-chat-linesRemovedForeground);
+		color: var(--zyraxoncode-chat-linesRemovedForeground);
 		font-weight: bold;
 	}
 }
@@ -2953,30 +2953,30 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		flex: none;
 		width: 20px;
 		height: 20px;
-		padding: var(--vscode-spacing-size20);
+		padding: var(--zyraxoncode-spacing-size20);
 		border: none;
-		border-radius: var(--vscode-cornerRadius-small);
+		border-radius: var(--zyraxoncode-cornerRadius-small);
 		color: inherit;
 		background: transparent;
-		font-size: var(--vscode-codiconFontSize-compact);
+		font-size: var(--zyraxoncode-codiconFontSize-compact);
 		cursor: pointer;
 	}
 
 	.chat-view-changes-icon:hover {
-		background-color: var(--vscode-toolbar-hoverBackground);
+		background-color: var(--zyraxoncode-toolbar-hoverBackground);
 	}
 
 	.chat-view-changes-icon:focus-visible,
 	.checkpoint-file-changes-summary-header:focus-visible {
-		outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-		outline-offset: calc(-1 * var(--vscode-strokeThickness));
+		outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+		outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
 	}
 
 	.insertions-and-deletions {
 		display: flex;
-		gap: var(--vscode-spacing-size80);
-		margin-right: var(--vscode-spacing-size40);
-		font-size: var(--vscode-bodyFontSize-small);
+		gap: var(--zyraxoncode-spacing-size80);
+		margin-right: var(--zyraxoncode-spacing-size40);
+		font-size: var(--zyraxoncode-bodyFontSize-small);
 	}
 
 	.checkpoint-file-changes-summary-header {
@@ -2985,13 +2985,13 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		width: fit-content;
 		padding: 0;
 		display: flex;
-		gap: var(--vscode-spacing-size40);
+		gap: var(--zyraxoncode-spacing-size40);
 		align-items: center;
 		box-sizing: border-box;
 		justify-content: initial;
-		border-radius: var(--vscode-cornerRadius-small);
-		color: var(--vscode-descriptionForeground);
-		font-size: var(--vscode-chat-font-size-body-s);
+		border-radius: var(--zyraxoncode-cornerRadius-small);
+		color: var(--zyraxoncode-descriptionForeground);
+		font-size: var(--zyraxoncode-chat-font-size-body-s);
 		font-weight: normal;
 		line-height: 1.5em;
 		cursor: pointer;
@@ -3004,12 +3004,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 	.checkpoint-file-changes-summary-header:hover,
 	.checkpoint-file-changes-summary-header:focus-visible {
-		color: var(--vscode-foreground);
+		color: var(--zyraxoncode-foreground);
 	}
 
 	.chat-file-changes-chevron {
 		flex: none;
-		font-size: var(--vscode-codiconFontSize-compact);
+		font-size: var(--zyraxoncode-codiconFontSize-compact);
 		opacity: 0;
 	}
 
@@ -3021,7 +3021,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	.chat-file-changes-label {
 		width: auto;
 		float: none;
-		margin-right: var(--vscode-spacing-size40);
+		margin-right: var(--zyraxoncode-spacing-size40);
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -3030,28 +3030,28 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	.chat-file-changes-counts {
 		display: flex;
 		flex: none;
-		gap: var(--vscode-spacing-sizeNone);
+		gap: var(--zyraxoncode-spacing-sizeNone);
 
 		.insertions,
 		.deletions {
 			font-weight: normal;
-			padding: var(--vscode-spacing-sizeNone);
+			padding: var(--zyraxoncode-spacing-sizeNone);
 		}
 
 		.deletions {
-			padding-left: var(--vscode-spacing-size40);
+			padding-left: var(--zyraxoncode-spacing-size40);
 		}
 	}
 
 	.chat-summary-list {
 		width: 100%;
 		max-width: 100%;
-		padding: var(--vscode-spacing-size40);
-		margin-top: var(--vscode-spacing-size40);
-		margin-bottom: var(--vscode-spacing-size80);
-		border: var(--vscode-strokeThickness) solid var(--vscode-chat-requestBorder);
+		padding: var(--zyraxoncode-spacing-size40);
+		margin-top: var(--zyraxoncode-spacing-size40);
+		margin-bottom: var(--zyraxoncode-spacing-size80);
+		border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-chat-requestBorder);
 		box-sizing: border-box;
-		border-radius: var(--vscode-cornerRadius-small);
+		border-radius: var(--zyraxoncode-cornerRadius-small);
 	}
 
 	.chat-summary-list .monaco-icon-label {
@@ -3059,15 +3059,15 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	}
 
 	.chat-summary-list .monaco-scrollable-element {
-		border-radius: var(--vscode-cornerRadius-small);
+		border-radius: var(--zyraxoncode-cornerRadius-small);
 	}
 
 	.insertions {
-		color: var(--vscode-chat-linesAddedForeground);
+		color: var(--zyraxoncode-chat-linesAddedForeground);
 	}
 
 	.deletions {
-		color: var(--vscode-chat-linesRemovedForeground);
+		color: var(--zyraxoncode-chat-linesRemovedForeground);
 	}
 }
 
@@ -3094,9 +3094,9 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	so reset the native button chrome and add the standard toolbar hover/focus affordances. */
 .interactive-session .chat-turn-pills-part .chat-file-changes-counts {
 	align-items: center;
-	padding: var(--vscode-spacing-sizeNone) var(--vscode-spacing-size20);
+	padding: var(--zyraxoncode-spacing-sizeNone) var(--zyraxoncode-spacing-size20);
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	color: inherit;
 	background: transparent;
 	font: inherit;
@@ -3104,12 +3104,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-turn-pills-part .chat-file-changes-counts:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .chat-turn-pills-part .chat-file-changes-counts:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-	outline-offset: calc(-1 * var(--vscode-strokeThickness));
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+	outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
 }
 
 /* The pill header already spaces its children with `gap`, so the label's own
@@ -3125,7 +3125,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	display: flex;
 	align-items: center;
 	flex: 0 1 auto;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
 	overflow: hidden;
 }
@@ -3137,10 +3137,10 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-session .chat-turn-pills-part .chat-turn-preview-separator {
 	flex: none;
-	width: var(--vscode-strokeThickness);
+	width: var(--zyraxoncode-strokeThickness);
 	align-self: stretch;
-	margin: var(--vscode-spacing-size20) 0;
-	background-color: var(--vscode-chat-requestBorder);
+	margin: var(--zyraxoncode-spacing-size20) 0;
+	background-color: var(--zyraxoncode-chat-requestBorder);
 }
 
 /* In preview-only mode the changes summary (and its label) is hidden, leaving the
@@ -3155,11 +3155,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .interactive-session .chat-turn-pills-part .chat-turn-preview-action {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
-	padding: var(--vscode-spacing-sizeNone) var(--vscode-spacing-size40) var(--vscode-spacing-sizeNone) var(--vscode-spacing-size20);
+	padding: var(--zyraxoncode-spacing-sizeNone) var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-sizeNone) var(--zyraxoncode-spacing-size20);
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	color: inherit;
 	background: transparent;
 	font: inherit;
@@ -3168,13 +3168,13 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-turn-pills-part .chat-turn-preview-action:hover {
-	color: var(--vscode-foreground);
-	background-color: var(--vscode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .chat-turn-pills-part .chat-turn-preview-action:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-	outline-offset: calc(-1 * var(--vscode-strokeThickness));
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+	outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
 }
 
 .interactive-session .chat-turn-pills-part .chat-turn-preview-action .monaco-icon-label {
@@ -3205,16 +3205,16 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-session .chat-summary-list-row-with-actions > .chat-summary-list-actions {
 	flex: 0 0 auto;
-	padding-right: var(--vscode-spacing-size40);
+	padding-right: var(--zyraxoncode-spacing-size40);
 }
 
 .interactive-session .chat-summary-list-actions .action-label {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	cursor: pointer;
 }
 
 .interactive-session .chat-summary-list-actions .action-label:hover {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .interactive-session .chat-used-context {
@@ -3230,7 +3230,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .chat-used-context-list,
 .chat-quota-error-widget,
 .chat-rate-limited-widget {
-	border: 1px solid var(--vscode-chat-requestBorder);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
 	border-radius: 4px;
 	margin-bottom: 8px;
 }
@@ -3245,7 +3245,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		gap: 2px;
 
 		&::before {
-			width: var(--vscode-chat-font-size-body-s);
+			width: var(--zyraxoncode-chat-font-size-body-s);
 			padding-right: 0;
 		}
 	}
@@ -3258,7 +3258,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	}
 
 	.monaco-icon-label.excluded {
-		color: var(--vscode-notificationsWarningIcon-foreground)
+		color: var(--zyraxoncode-notificationsWarningIcon-foreground)
 	}
 }
 
@@ -3271,7 +3271,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-summary-list .monaco-list .monaco-list-row:hover {
-	background-color: var(--vscode-list-hoverBackground) !important;
+	background-color: var(--zyraxoncode-list-hoverBackground) !important;
 }
 
 .interactive-session .chat-used-context-list .monaco-list .monaco-list-row {
@@ -3284,16 +3284,16 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-session .chat-used-context-label {
 	font-size: 13px;
-	font-family: var(--vscode-chat-font-family, inherit);
-	color: var(--vscode-descriptionForeground);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
+	color: var(--zyraxoncode-descriptionForeground);
 	user-select: none;
 
 	a {
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 	}
 
 	code {
-		font-size: var(--vscode-chat-font-size-body-xs);
+		font-size: var(--zyraxoncode-chat-font-size-body-xs);
 	}
 }
 
@@ -3324,7 +3324,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .interactive-session .chat-used-context-label .monaco-button {
 	padding: 2px 6px 2px 2px;
 	margin-left: -2px;
-	font-size: var(--vscode-chat-font-size-body-s);
+	font-size: var(--zyraxoncode-chat-font-size-body-s);
 	line-height: unset;
 }
 
@@ -3334,12 +3334,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-session .chat-file-changes-label .monaco-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .interactive-session .chat-used-context:not(.chat-used-context-collapsed) .chat-used-context-label .monaco-button,
 .interactive-session .chat-used-context-label .monaco-button:hover {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .interactive-session .chat-file-changes-label .monaco-text-button:focus,
@@ -3349,13 +3349,13 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .interactive-session .chat-file-changes-label .monaco-text-button:focus-visible,
 .interactive-session .chat-used-context-label .monaco-text-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 }
 
 .interactive-session .chat-file-changes-label .monaco-button .codicon,
 .interactive-session .chat-used-context-label .monaco-button .codicon {
 	font-size: 12px;
-	color: var(--vscode-icon-foreground) !important;
+	color: var(--zyraxoncode-icon-foreground) !important;
 }
 
 /* Hide the leading icon on collapsible parts by default; show-checkmarks restores it */
@@ -3376,7 +3376,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	transition:
 		opacity 100ms ease-in-out,
 		transform 180ms cubic-bezier(0.2, 0, 0, 1);
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .chat-collapsible-hover-chevron.expanded {
@@ -3424,12 +3424,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 	.codicon {
 		/* Very aggressive list styles try to apply focus colors to every codicon in a list row. */
-		color: var(--vscode-icon-foreground) !important;
+		color: var(--zyraxoncode-icon-foreground) !important;
 		/* Matching the margin on all .monaco-text-button .codicon */
 		margin: 0 .2em;
 
 		&.codicon-error {
-			color: var(--vscode-editorError-foreground) !important;
+			color: var(--zyraxoncode-editorError-foreground) !important;
 		}
 	}
 
@@ -3437,12 +3437,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		white-space: normal;
 
 		& > p {
-			color: var(--vscode-descriptionForeground);
-			font-size: var(--vscode-chat-font-size-body-s);
+			color: var(--zyraxoncode-descriptionForeground);
+			font-size: var(--zyraxoncode-chat-font-size-body-s);
 			margin: 0;
 
 			code {
-				font-size: var(--vscode-chat-font-size-body-xs);
+				font-size: var(--zyraxoncode-chat-font-size-body-xs);
 			}
 		}
 
@@ -3460,11 +3460,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	&.shimmer-progress .rendered-markdown.progress-step:not(.chat-progress-partial-shimmer) > p,
 	&.shimmer-progress .rendered-markdown.progress-step.chat-progress-partial-shimmer .chat-progress-shimmer-text {
 		background: linear-gradient(90deg,
-				var(--vscode-descriptionForeground) 0%,
-				var(--vscode-descriptionForeground) 30%,
-				var(--vscode-chat-thinkingShimmer) 50%,
-				var(--vscode-descriptionForeground) 70%,
-				var(--vscode-descriptionForeground) 100%);
+				var(--zyraxoncode-descriptionForeground) 0%,
+				var(--zyraxoncode-descriptionForeground) 30%,
+				var(--zyraxoncode-chat-thinkingShimmer) 50%,
+				var(--zyraxoncode-descriptionForeground) 70%,
+				var(--zyraxoncode-descriptionForeground) 100%);
 		background-size: 400% 100%;
 		background-clip: text;
 		-webkit-background-clip: text;
@@ -3518,7 +3518,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	display: inline;
 	border: none;
 	padding: 0;
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .chat-attached-context-hover {
@@ -3537,8 +3537,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-attached-context-hover .chat-attached-context-image-container.clickable:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
-	outline-offset: var(--vscode-spacing-size20);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
+	outline-offset: var(--zyraxoncode-spacing-size20);
 }
 
 .chat-attached-context-hover .chat-attached-context-image-container .chat-attached-context-image {
@@ -3554,7 +3554,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-attached-context-hover .chat-attached-context-url {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	cursor: pointer;
 	margin-top: 4px;
 	padding: 2px 0;
@@ -3567,7 +3567,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-attached-context-hover .chat-attached-context-url-separator {
-	border-top: 1px solid var(--vscode-chat-requestBorder);
+	border-top: 1px solid var(--zyraxoncode-chat-requestBorder);
 	left: 0;
 	right: 0;
 	position: absolute;
@@ -3604,7 +3604,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-element-hover .chat-element-hover-section + .chat-element-hover-section {
-	border-top: 1px solid var(--vscode-editorWidget-border, rgba(127, 127, 127, 0.2));
+	border-top: 1px solid var(--zyraxoncode-editorWidget-border, rgba(127, 127, 127, 0.2));
 }
 
 .chat-element-hover .chat-element-hover-screenshot .chat-attached-context-hover {
@@ -3631,7 +3631,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	font-size: 11px;
 	font-weight: 600;
 	text-transform: uppercase;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	letter-spacing: 0.5px;
 	margin-bottom: 4px;
 }
@@ -3639,14 +3639,14 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .chat-element-hover .chat-element-hover-code {
 	margin: 0;
 	padding: 4px 6px;
-	background: var(--vscode-textCodeBlock-background);
+	background: var(--zyraxoncode-textCodeBlock-background);
 	border-radius: 3px;
 	font-family: var(--monaco-monospace-font);
 	font-size: 12px;
 	line-height: 1.5;
 	white-space: pre;
 	overflow: hidden;
-	color: var(--vscode-editor-foreground);
+	color: var(--zyraxoncode-editor-foreground);
 }
 
 .chat-element-hover .chat-element-hover-code code {
@@ -3671,14 +3671,14 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .chat-element-hover .chat-element-hover-label {
 	font-family: var(--monaco-monospace-font);
 	font-size: 12px;
-	color: var(--vscode-debugTokenExpression-name);
+	color: var(--zyraxoncode-debugTokenExpression-name);
 	white-space: nowrap;
 }
 
 .chat-element-hover .chat-element-hover-value {
 	font-family: var(--monaco-monospace-font);
 	font-size: 12px;
-	color: var(--vscode-editor-foreground);
+	color: var(--zyraxoncode-editor-foreground);
 	word-break: break-all;
 	display: flex;
 	align-items: center;
@@ -3689,7 +3689,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	display: inline-block;
 	width: 12px;
 	height: 12px;
-	border: 1px solid var(--vscode-editorWidget-border, rgba(127, 127, 127, 0.4));
+	border: 1px solid var(--zyraxoncode-editorWidget-border, rgba(127, 127, 127, 0.4));
 	border-radius: 2px;
 	flex-shrink: 0;
 }
@@ -3697,7 +3697,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .chat-element-hover .chat-element-hover-text {
 	font-family: var(--monaco-monospace-font);
 	font-size: 12px;
-	color: var(--vscode-editor-foreground);
+	color: var(--zyraxoncode-editor-foreground);
 	white-space: pre-wrap;
 	word-break: break-word;
 }
@@ -3707,7 +3707,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	border: none;
 	padding: 0;
 	margin-top: 6px;
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	cursor: pointer;
 	font-size: 12px;
 	text-decoration: none;
@@ -3715,7 +3715,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .chat-element-hover .chat-element-hover-show-more:hover,
 .chat-element-hover .chat-element-hover-show-more:focus-visible {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 
@@ -3764,12 +3764,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-attached-context-attachment.show-file-icons.warning .chat-attached-context-custom-text {
-	color: var(--vscode-notificationsWarningIcon-foreground);
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 	text-decoration: line-through;
 }
 
 .chat-attached-context-attachment.show-file-icons.partial-warning .chat-attached-context-custom-text {
-	color: var(--vscode-notificationsWarningIcon-foreground);
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 }
 
 .chat-collapsible-io-resource-group {
@@ -3789,8 +3789,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	height: 88px;
 	border-radius: 8px;
 	padding: 0;
-	background-color: var(--vscode-input-background);
-	border-color: var(--vscode-chat-requestBorder, var(--vscode-input-border, transparent));
+	background-color: var(--zyraxoncode-input-background);
+	border-color: var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-border, transparent));
 	overflow: hidden;
 	justify-content: center;
 }
@@ -3898,8 +3898,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	}
 
 	.interactive-item-container.interactive-request .value .rendered-markdown {
-		background-color: var(--vscode-chat-requestBubbleBackground);
-		border-radius: var(--vscode-cornerRadius-xLarge);
+		background-color: var(--zyraxoncode-chat-requestBubbleBackground);
+		border-radius: var(--zyraxoncode-cornerRadius-xLarge);
 		padding: 8px 12px;
 		max-width: 90%;
 		margin-left: auto;
@@ -3914,12 +3914,12 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 	.interactive-item-container.interactive-request .value .rendered-markdown.clickable:hover {
 		cursor: pointer;
-		background-color: var(--vscode-chat-requestBubbleHoverBackground);
+		background-color: var(--zyraxoncode-chat-requestBubbleHoverBackground);
 	}
 
 	.hc-black .interactive-item-container.interactive-request .value .rendered-markdown,
 	.hc-light .interactive-item-container.interactive-request .value .rendered-markdown {
-		border: 1px dotted var(--vscode-focusBorder);
+		border: 1px dotted var(--zyraxoncode-focusBorder);
 	}
 
 	.interactive-item-container.interactive-request .value .rendered-markdown > :first-child {
@@ -3935,9 +3935,9 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	}
 
 	.interactive-item-container.interactive-request .chat-request-timestamp {
-		color: var(--vscode-descriptionForeground);
-		font-size: var(--vscode-fontSize-label3);
-		line-height: var(--vscode-fontSize-label3);
+		color: var(--zyraxoncode-descriptionForeground);
+		font-size: var(--zyraxoncode-fontSize-label3);
+		line-height: var(--zyraxoncode-fontSize-label3);
 		opacity: 0.7;
 		transition: opacity 0.1s ease-in-out;
 	}
@@ -4022,7 +4022,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		align-items: center;
 		justify-content: center;
 		background: transparent;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 		border-radius: 4px;
 		z-index: 1;
 		transition: opacity 80ms ease-out;
@@ -4035,7 +4035,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	}
 
 	.interactive-item-container.interactive-request .value .chat-request-file-attachments .chat-attached-context-attachment .chat-attached-context-download-button:hover {
-		background-color: var(--vscode-toolbar-hoverBackground);
+		background-color: var(--zyraxoncode-toolbar-hoverBackground);
 	}
 
 	.interactive-item-container.interactive-request .value .chat-request-attachment-cards .chat-attached-context-attachment.image-attachment {
@@ -4044,8 +4044,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		height: 88px;
 		border-radius: 8px;
 		padding: 0;
-		background-color: var(--vscode-input-background);
-		border-color: var(--vscode-chat-requestBorder, var(--vscode-input-border, transparent));
+		background-color: var(--zyraxoncode-input-background);
+		border-color: var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-border, transparent));
 		overflow: hidden;
 		justify-content: center;
 	}
@@ -4053,7 +4053,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	.interactive-item-container.interactive-request .value .chat-request-attachment-cards .chat-attached-context-attachment.image-attachment.warning,
 	.interactive-item-container.interactive-request .value .chat-request-attachment-cards .chat-attached-context-attachment.image-attachment.partial-warning,
 	.interactive-item-container.interactive-request .value .chat-request-attachment-cards .chat-attached-context-attachment.image-attachment.auto-image-warning {
-		border-color: var(--vscode-notificationsWarningIcon-foreground);
+		border-color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 	}
 
 	.interactive-item-container.interactive-request .value .chat-request-attachment-cards .chat-attached-context-attachment.image-attachment .chat-attached-context-pill {
@@ -4069,7 +4069,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 	.interactive-item-container.interactive-request .value .chat-request-attachment-cards .chat-attached-context-attachment.image-attachment.warning .chat-attached-context-pill .codicon-warning {
 		margin: 0;
-		font-size: var(--vscode-codiconFontSize);
+		font-size: var(--zyraxoncode-codiconFontSize);
 	}
 
 	.interactive-item-container.interactive-request .value .chat-request-attachment-cards .chat-attached-context-attachment.image-attachment .chat-attached-context-pill-image {
@@ -4097,9 +4097,9 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		margin: 0 !important;
 		padding: 0 !important;
 		border-radius: 50%;
-		background-color: var(--vscode-input-background);
-		color: var(--vscode-foreground);
-		border: 1px solid var(--vscode-input-border, var(--vscode-contrastBorder, transparent));
+		background-color: var(--zyraxoncode-input-background);
+		color: var(--zyraxoncode-foreground);
+		border: 1px solid var(--zyraxoncode-input-border, var(--zyraxoncode-contrastBorder, transparent));
 		box-shadow: 0 1px 4px rgb(0 0 0 / 45%);
 		align-items: center;
 		justify-content: center;
@@ -4107,7 +4107,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	}
 
 	.interactive-item-container.interactive-request .value .chat-request-attachment-cards .chat-attached-context-attachment.image-attachment .chat-attached-context-download-button .codicon {
-		color: var(--vscode-foreground) !important;
+		color: var(--zyraxoncode-foreground) !important;
 		font-size: 16px;
 		margin: 0 !important;
 	}
@@ -4171,8 +4171,8 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		position: absolute;
 		overflow: hidden;
 		z-index: 100;
-		background-color: var(--vscode-interactive-result-editor-background-color, var(--vscode-editor-background));
-		border: 1px solid var(--vscode-chat-requestBorder);
+		background-color: var(--zyraxoncode-interactive-result-editor-background-color, var(--zyraxoncode-editor-background));
+		border: 1px solid var(--zyraxoncode-chat-requestBorder);
 		top: -13px;
 		right: 20px;
 		border-radius: 3px;
@@ -4225,7 +4225,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		.checkpoint-line-right {
 			flex: 1;
 			height: 1px;
-			background-color: var(--vscode-chat-requestBorder, var(--vscode-input-background));
+			background-color: var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-background));
 		}
 
 		.checkpoint-line-left {
@@ -4249,7 +4249,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		.monaco-toolbar .action-label {
 			font-size: 12px;
 			line-height: 18px;
-			color: var(--vscode-descriptionForeground);
+			color: var(--zyraxoncode-descriptionForeground);
 			border: 1px solid transparent;
 			background-color: transparent;
 			padding: 1px 5px;
@@ -4275,13 +4275,13 @@ have to be updated for changes to the rules above, or to support more deeply nes
 			content: '\00B7';
 			font-size: 12px;
 			line-height: 18px;
-			color: var(--vscode-descriptionForeground);
+			color: var(--zyraxoncode-descriptionForeground);
 		}
 
 		.monaco-toolbar .action-label:hover {
-			color: var(--vscode-foreground);
-			border-color: var(--vscode-chat-requestBorder, var(--vscode-input-background));
-			background-color: var(--vscode-sideBar-background);
+			color: var(--zyraxoncode-foreground);
+			border-color: var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-background));
+			background-color: var(--zyraxoncode-sideBar-background);
 		}
 
 		.monaco-toolbar .action-item.chat-restore-checkpoint-item {
@@ -4291,16 +4291,16 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		}
 
 		.monaco-toolbar .action-item.chat-restore-checkpoint-item.confirming {
-			border: var(--vscode-strokeThickness) solid var(--vscode-chat-requestBorder, var(--vscode-input-background));
-			background-color: var(--vscode-sideBar-background);
-			border-radius: var(--vscode-cornerRadius-medium);
+			border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-background));
+			background-color: var(--zyraxoncode-sideBar-background);
+			border-radius: var(--zyraxoncode-cornerRadius-medium);
 			overflow: hidden;
 			margin-right: 5px;
 		}
 
 		.monaco-toolbar .action-item.chat-restore-checkpoint-item.confirming .action-label:first-child,
 		.monaco-toolbar .action-item.chat-restore-checkpoint-item.confirming .action-label.chat-restore-checkpoint-cancel {
-			color: var(--vscode-foreground);
+			color: var(--zyraxoncode-foreground);
 			border: none;
 			border-radius: 0;
 			margin: 0;
@@ -4311,11 +4311,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 			align-items: center;
 			padding: 1px 10px;
 			background: linear-gradient(90deg,
-					var(--vscode-foreground) 0%,
-					var(--vscode-foreground) 30%,
-					var(--vscode-focusBorder) 50%,
-					var(--vscode-foreground) 70%,
-					var(--vscode-foreground) 100%);
+					var(--zyraxoncode-foreground) 0%,
+					var(--zyraxoncode-foreground) 30%,
+					var(--zyraxoncode-focusBorder) 50%,
+					var(--zyraxoncode-foreground) 70%,
+					var(--zyraxoncode-foreground) 100%);
 			background-size: 400% 100%;
 			background-clip: text;
 			-webkit-background-clip: text;
@@ -4333,15 +4333,15 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		}
 
 		.monaco-toolbar .action-item.chat-restore-checkpoint-item.confirming .action-label.chat-restore-checkpoint-cancel {
-			border-left: var(--vscode-strokeThickness) solid var(--vscode-chat-requestBorder, var(--vscode-input-background));
+			border-left: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-background));
 		}
 
 		.monaco-toolbar .action-item.chat-restore-checkpoint-item.confirming .action-label:first-child:hover {
-			box-shadow: inset 0 0 0 100px var(--vscode-toolbar-hoverBackground);
+			box-shadow: inset 0 0 0 100px var(--zyraxoncode-toolbar-hoverBackground);
 		}
 
 		.monaco-toolbar .action-item.chat-restore-checkpoint-item.confirming .action-label.chat-restore-checkpoint-cancel:hover {
-			background-color: var(--vscode-toolbar-hoverBackground);
+			background-color: var(--zyraxoncode-toolbar-hoverBackground);
 		}
 
 		.monaco-toolbar .action-label.chat-restore-checkpoint-cancel {
@@ -4370,7 +4370,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		.checkpoint-label-text {
 			font-size: 12px;
 			line-height: 18px;
-			color: var(--vscode-descriptionForeground);
+			color: var(--zyraxoncode-descriptionForeground);
 			display: flex;
 			align-items: center;
 			flex-shrink: 0;
@@ -4381,7 +4381,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		.checkpoint-dot-separator {
 			font-size: 12px;
 			line-height: 18px;
-			color: var(--vscode-descriptionForeground);
+			color: var(--zyraxoncode-descriptionForeground);
 			flex-shrink: 0;
 		}
 	}
@@ -4419,7 +4419,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 		outline: none !important;
 
 		.interactive-item-container .value .rendered-markdown {
-			outline: 1px solid var(--vscode-focusBorder);
+			outline: 1px solid var(--zyraxoncode-focusBorder);
 		}
 	}
 
@@ -4429,7 +4429,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	}
 
 	.interactive-request.editing-input .rendered-markdown {
-		outline: 1px solid var(--vscode-focusBorder);
+		outline: 1px solid var(--zyraxoncode-focusBorder);
 	}
 
 	.interactive-request.editing {
@@ -4445,7 +4445,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 	.checkpoint-label-text,
 	.monaco-toolbar {
-		background-color: var(--vscode-editor-background);
+		background-color: var(--zyraxoncode-editor-background);
 	}
 }
 
@@ -4487,7 +4487,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .chat-input-overlay.disabled {
 	position: absolute;
 	inset: 0;
-	background-color: var(--vscode-sideBar-background);
+	background-color: var(--zyraxoncode-sideBar-background);
 	opacity: 0.6;
 	display: flex;
 	z-index: 101;
@@ -4506,7 +4506,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .interactive-session .chat-attached-context .chat-attached-context-attachment.implicit.disabled:hover {
 	cursor: pointer;
 	border-style: solid;
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 /* Chat Suggest Next Widget */
@@ -4550,11 +4550,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .chat-welcome-view-suggested-prompt > .chat-suggest-next-dropdown:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .chat-welcome-view-suggested-prompt > .chat-suggest-next-dropdown:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -4589,17 +4589,17 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .chat-attachments-show-more-button:hover {
 	opacity: 1;
-	background-color: var(--vscode-list-hoverBackground) !important;
+	background-color: var(--zyraxoncode-list-hoverBackground) !important;
 }
 
 .chat-attachments-show-more-button:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
 .chat-attachments-show-more-button .chat-attached-context-custom-text {
 	font-style: italic;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 /* Pending request styles */
@@ -4624,7 +4624,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	cursor: grab;
 	opacity: 0;
 	transition: opacity 0.15s;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-top: -4px;
 	/* visually center with overlaid top controls */
 }
@@ -4642,15 +4642,15 @@ have to be updated for changes to the rules above, or to support more deeply nes
 .chat-pending-insert-indicator {
 	position: absolute;
 	height: 2px;
-	background: var(--vscode-focusBorder);
+	background: var(--zyraxoncode-focusBorder);
 	pointer-events: none;
 	z-index: 100;
 	display: none;
 }
 
 .interactive-item-container .chat-request-status {
-	color: var(--vscode-descriptionForeground);
-	font-size: var(--vscode-chat-font-size-body-xs);
+	color: var(--zyraxoncode-descriptionForeground);
+	font-size: var(--zyraxoncode-chat-font-size-body-xs);
 	margin-top: 2px;
 	text-align: right;
 }
@@ -4667,11 +4667,11 @@ have to be updated for changes to the rules above, or to support more deeply nes
 }
 
 .interactive-item-container.pending-divider .pending-divider-label {
-	font-size: var(--vscode-chat-font-size-body-xs);
+	font-size: var(--zyraxoncode-chat-font-size-body-xs);
 	font-weight: 500;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 /* Outline removal except for HC themes */
@@ -4703,9 +4703,9 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	width: 22px;
 	height: 22px;
 	justify-content: center;
-	border: var(--vscode-strokeThickness) solid var(--vscode-input-border, var(--vscode-editorWidget-border));
-	border-radius: var(--vscode-cornerRadius-circle);
-	font-size: var(--vscode-codiconFontSize-compact);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-input-border, var(--zyraxoncode-editorWidget-border));
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 }
 
 @keyframes chat-voice-icon-glow {
@@ -4724,9 +4724,9 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	button's resting shape — only its color and the pulse change between states, so
 	the control never morphs from a circle into a rounded square mid-session. */
 .chat-input-container.voice-active .chat-input-toolbars .action-label.codicon-voice-mode-compact {
-	--chat-voice-icon-glow-color: color-mix(in srgb, var(--voice-accent, var(--vscode-charts-blue, #58a6ff)) 40%, transparent);
-	color: var(--voice-accent, var(--vscode-charts-blue, #58a6ff)) !important;
-	border-radius: var(--vscode-cornerRadius-circle);
+	--chat-voice-icon-glow-color: color-mix(in srgb, var(--voice-accent, var(--zyraxoncode-charts-blue, #58a6ff)) 40%, transparent);
+	color: var(--voice-accent, var(--zyraxoncode-charts-blue, #58a6ff)) !important;
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
 }
 
 .monaco-workbench.monaco-enable-motion .chat-input-container.voice-active.voice-listening .chat-input-toolbars .action-label.codicon-voice-mode-compact,
@@ -4740,7 +4740,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	prefix — with equal `!important` the higher specificity wins, and the short
 	form silently lost the cascade and rendered grey. */
 .interactive-session .chat-input-toolbars > .chat-execute-toolbar .monaco-action-bar .action-item > .action-label.codicon-debug-disconnect-compact {
-	color: var(--vscode-charts-green, #3fb950) !important;
+	color: var(--zyraxoncode-charts-green, #3fb950) !important;
 }
 
 /*
@@ -4769,7 +4769,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 	animation: none;
 	background: none;
 	-webkit-text-fill-color: currentColor;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 /* Dictation model download: while the on-device speech-to-text model downloads
@@ -4793,7 +4793,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .monaco-action-bar .action-item.dictation-download-item > .dictation-download-ring .dictation-download-ring-track {
 	fill: none;
-	stroke: var(--vscode-progressBar-background);
+	stroke: var(--zyraxoncode-progressBar-background);
 	stroke-width: 1.5;
 	opacity: 0.25;
 }
@@ -4807,7 +4807,7 @@ have to be updated for changes to the rules above, or to support more deeply nes
 
 .monaco-action-bar .action-item.dictation-download-item > .dictation-download-ring .dictation-download-ring-progress {
 	fill: none;
-	stroke: var(--vscode-progressBar-background);
+	stroke: var(--zyraxoncode-progressBar-background);
 	stroke-width: 1.5;
 	stroke-linecap: round;
 }

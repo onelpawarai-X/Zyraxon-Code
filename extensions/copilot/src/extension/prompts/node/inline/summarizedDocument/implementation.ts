@@ -12,13 +12,13 @@ import { Position } from '../../../../../util/vs/editor/common/core/position';
 import { OffsetRange } from '../../../../../util/vs/editor/common/core/ranges/offsetRange';
 import { PositionOffsetTransformer } from '../../../../../util/vs/editor/common/core/text/positionToOffset';
 import { TextLength } from '../../../../../util/vs/editor/common/core/text/textLength';
-import { Range } from '../../../../../vscodeTypes';
+import { Range } from '../../../../../zyraxoncodeTypes';
 import { IAstVisualization, subtractRange, toAstNode } from '../visualization';
 import { ConcatenatedStringFragment, LiteralStringFragment, OriginalStringFragment, pushFragment, StringFragment } from './fragments';
 import { ProjectedText } from './projectedText';
 
-// Please avoid using vscode API types in this file!
-// This makes testing and reusing much easier (e.g. for inline edits, where the original document is before the edits, which means vscode.TextDocument is not sufficient).
+// Please avoid using zyraxoncode API types in this file!
+// This makes testing and reusing much easier (e.g. for inline edits, where the original document is before the edits, which means zyraxoncode.TextDocument is not sufficient).
 
 export interface IDocumentToSummarize<TDocument extends AbstractDocument> {
 	document: TDocument;

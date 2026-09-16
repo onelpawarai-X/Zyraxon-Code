@@ -39,8 +39,8 @@
 	max-height: 80vh;
 	display: flex;
 	flex-direction: column;
-	background: var(--vscode-menu-background, var(--vscode-editor-background));
-	color: var(--vscode-menu-foreground, var(--vscode-foreground));
+	background: var(--zyraxoncode-menu-background, var(--zyraxoncode-editor-background));
+	color: var(--zyraxoncode-menu-foreground, var(--zyraxoncode-foreground));
 	border-top-left-radius: 16px;
 	border-top-right-radius: 16px;
 	padding-bottom: env(safe-area-inset-bottom);
@@ -59,8 +59,8 @@
 	width: 36px;
 	height: 4px;
 	margin: 8px auto 4px;
-	border-radius: var(--vscode-cornerRadius-xSmall);
-	background: color-mix(in srgb, var(--vscode-foreground) 30%, transparent);
+	border-radius: var(--zyraxoncode-cornerRadius-xSmall);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 30%, transparent);
 	flex-shrink: 0;
 }
 
@@ -90,7 +90,7 @@
 	height: 36px;
 	border: none;
 	background: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 	border-radius: 50%;
 	flex-shrink: 0;
@@ -100,7 +100,7 @@
 }
 
 .mobile-sort-group-sheet-close:active {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .mobile-sort-group-sheet-list {
@@ -116,13 +116,13 @@
 	font-weight: 500;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .mobile-sort-group-sheet-divider {
 	height: 1px;
 	margin: 8px 16px;
-	background: color-mix(in srgb, var(--vscode-foreground) 12%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 12%, transparent);
 }
 
 .mobile-sort-group-sheet-item {
@@ -147,16 +147,16 @@
 }
 
 .mobile-sort-group-sheet-item:focus-visible {
-	outline: 2px solid var(--vscode-focusBorder);
+	outline: 2px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -2px;
 }
 
 .mobile-sort-group-sheet-item:active {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .mobile-sort-group-sheet-item.checked {
-	color: var(--vscode-menu-selectionForeground, var(--vscode-foreground));
+	color: var(--zyraxoncode-menu-selectionForeground, var(--zyraxoncode-foreground));
 	font-weight: 600;
 }
 
@@ -166,7 +166,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--vscode-textLink-foreground, var(--vscode-button-background));
+	color: var(--zyraxoncode-textLink-foreground, var(--zyraxoncode-button-background));
 	font-size: 14px;
 	flex-shrink: 0;
 }

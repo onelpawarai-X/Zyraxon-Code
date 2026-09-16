@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import type { CancellationToken, OpenDialogOptions, QuickPickItem, QuickPickOptions, Selection, TextEditor, Uri } from 'vscode';
+import type { CancellationToken, OpenDialogOptions, QuickPickItem, QuickPickOptions, Selection, TextEditor, Uri } from 'zyraxoncode';
 import { IInstantiationServiceBuilder, ServiceIdentifier } from '../../../util/common/services';
 import { DisposableStore, IDisposable } from '../../../util/vs/base/common/lifecycle';
 import { SyncDescriptor } from '../../../util/vs/platform/instantiation/common/descriptors';
@@ -43,7 +43,7 @@ import { CAPIClientImpl } from '../../endpoint/node/capiClientImpl';
 import { DomainService } from '../../endpoint/node/domainServiceImpl';
 import { IEnvService, INativeEnvService } from '../../env/common/envService';
 import { NullEnvService, NullNativeEnvService } from '../../env/common/nullEnvService';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { IExtensionsService } from '../../extensions/common/extensionsService';
 import { IFileSystemService } from '../../filesystem/common/fileSystemService';
 import { MockFileSystemService } from '../../filesystem/node/test/mockFileSystemService';
@@ -249,7 +249,7 @@ export function createPlatformServices(disposables: Pick<DisposableStore, 'add'>
 	testingServiceCollection.define(ICAPIClientService, new SyncDescriptor(CAPIClientImpl));
 	testingServiceCollection.define(INotificationService, new SyncDescriptor(NullNotificationService));
 	testingServiceCollection.define(IGithubApiFetcherService, new SyncDescriptor(GithubApiFetcherService));
-	testingServiceCollection.define(IVSCodeExtensionContext, new SyncDescriptor(MockExtensionContext));
+	testingServiceCollection.define(IZyraxonCodeExtensionContext, new SyncDescriptor(MockExtensionContext));
 	testingServiceCollection.define(IIgnoreService, new SyncDescriptor(NullIgnoreService));
 	testingServiceCollection.define(ITerminalService, new SyncDescriptor(NullTerminalService));
 	testingServiceCollection.define(IDialogService, new SyncDescriptor(class implements IDialogService {

@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { PackageDocument } from './packageDocumentHelper';
 import { PackageDocumentL10nSupport } from './packageDocumentL10nSupport';
 import { ExtensionLinter } from './extensionLinter';
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: zyraxoncode.ExtensionContext) {
 
-	//package.json suggestions
+	__ZYRAXKEEP__0_ suggestions
 	context.subscriptions.push(registerPackageDocumentCompletions());
 
-	//package.json code actions for lint warnings
+	__ZYRAXKEEP__1_ code actions for lint warnings
 	context.subscriptions.push(registerCodeActionsProvider());
 
 	// package.json l10n support
@@ -22,16 +22,16 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(new ExtensionLinter());
 }
 
-function registerPackageDocumentCompletions(): vscode.Disposable {
-	return vscode.languages.registerCompletionItemProvider({ language: 'json', pattern: '**/package.json' }, {
+function registerPackageDocumentCompletions(): zyraxoncode.Disposable {
+	return zyraxoncode.languages.registerCompletionItemProvider({ language: 'json', pattern: '**/package.json' }, {
 		provideCompletionItems(document, position, token) {
 			return new PackageDocument(document).provideCompletionItems(position, token);
 		}
 	});
 }
 
-function registerCodeActionsProvider(): vscode.Disposable {
-	return vscode.languages.registerCodeActionsProvider({ language: 'json', pattern: '**/package.json' }, {
+function registerCodeActionsProvider(): zyraxoncode.Disposable {
+	return zyraxoncode.languages.registerCodeActionsProvider({ language: 'json', pattern: '**/package.json' }, {
 		provideCodeActions(document, range, context, token) {
 			return new PackageDocument(document).provideCodeActions(range, context, token);
 		}

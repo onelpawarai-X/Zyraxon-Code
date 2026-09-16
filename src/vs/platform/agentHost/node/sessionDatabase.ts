@@ -5,7 +5,7 @@
 
 import * as fs from 'fs';
 import { Sequencer, SequencerByKey } from '../../../base/common/async.js';
-import type { Database, RunResult } from '@vscode/sqlite3';
+import type { Database, RunResult } from '@zyraxoncode/sqlite3';
 import type { IFileEditContent, IFileEditRecord, ILocalTurnRecord, IReviewedFileRecord, ISessionDatabase } from '../common/sessionDataService.js';
 import { dirname } from '../../../base/common/path.js';
 import { URI } from '../../../base/common/uri.js';
@@ -137,7 +137,7 @@ export const sessionDatabaseMigrations: readonly ISessionDatabaseMigration[] = [
 	},
 ];
 
-// ---- Promise wrappers around callback-based @vscode/sqlite3 API -----------
+// ---- Promise wrappers around callback-based @zyraxoncode/sqlite3 API -----------
 
 function dbExec(db: Database, sql: string): Promise<void> {
 	return new Promise((resolve, reject) => {
@@ -186,7 +186,7 @@ function dbClose(db: Database): Promise<void> {
 
 function dbOpen(path: string): Promise<Database> {
 	return new Promise((resolve, reject) => {
-		import('@vscode/sqlite3').then(sqlite3 => {
+		import('@zyraxoncode/sqlite3').then(sqlite3 => {
 			const db = new sqlite3.default.Database(path, (err: Error | null) => {
 				if (err) {
 					return reject(err);
@@ -234,7 +234,7 @@ export async function runMigrations(db: Database, migrations: readonly ISessionD
 }
 
 /**
- * A wrapper around a `@vscode/sqlite3` {@link Database} instance with
+ * A wrapper around a `@zyraxoncode/sqlite3` {@link Database} instance with
  * lazy initialisation.
  *
  * The underlying connection is opened on the first async method call
@@ -250,7 +250,7 @@ export class SessionDatabase implements ISessionDatabase {
 	private readonly _fileEditSequencer = new SequencerByKey<string>();
 
 	/**
-	 * Serializes `setMetadata` writes per key. `@vscode/sqlite3` runs in
+	 * Serializes `setMetadata` writes per key. `@zyraxoncode/sqlite3` runs in
 	 * parallelized mode, so two `db.run()` calls on the same connection
 	 * can be dispatched to the libuv thread pool and complete out of
 	 * submission order. For "last writer wins" keys (notably `configValues`
@@ -264,7 +264,7 @@ export class SessionDatabase implements ISessionDatabase {
 
 	/**
 	 * Serializes every `turn_usage` access — writes, prunes, the fork remap, and the restore read
-	 * alike. `@vscode/sqlite3` runs in parallelized mode (see {@link _metadataSequencer}), so a
+	 * alike. `@zyraxoncode/sqlite3` runs in parallelized mode (see {@link _metadataSequencer}), so a
 	 * fire-and-forget `setTurnUsage` submitted before a truncation can otherwise complete *after*
 	 * it and resurrect a row the truncation was meant to remove, and a read can otherwise overtake
 	 * a write it was submitted after. Mutations must go through {@link _mutateTurnUsage} rather
@@ -420,7 +420,7 @@ export class SessionDatabase implements ISessionDatabase {
 
 	async getTurnUsages(): Promise<Map<string, string>> {
 		// Queued on the same sequencer as the writes, not run directly: `setTurnUsage` is
-		// fire-and-forget and `@vscode/sqlite3` is parallelized, so a restore that reads straight
+		// fire-and-forget and `@zyraxoncode/sqlite3` is parallelized, so a restore that reads straight
 		// through can miss a write submitted before it and permanently rebuild that turn without
 		// its cost. Read-after-write ordering is what makes the overlay deterministic.
 		return this._turnUsageSequencer.queue(async () => {

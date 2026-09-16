@@ -1,16 +1,16 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// NOTE: VSCode's copy of nodejs path library to be usable in common (non-node) namespace
-// Copied from: https://github.com/nodejs/node/commits/v22.15.0/lib/path.js
+// NOTE: ZyraxonCode's copy of nodejs path library to be usable in common (non-node) namespace
+// Copied from: __ZYRAXKEEP__0_
 // Excluding: the change that adds primordials
-// (https://github.com/nodejs/node/commit/187a862d221dec42fa9a5c4214e7034d9092792f and others)
+// (__ZYRAXKEEP__1_ and others)
 // Excluding: the change that adds glob matching
-// (https://github.com/nodejs/node/commit/57b8b8e18e5e2007114c63b71bf0baedc01936a6)
+// (__ZYRAXKEEP__2_)
 
 /**
  * Copyright Joyent, Inc. and other Node contributors.

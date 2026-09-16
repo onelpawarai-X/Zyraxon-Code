@@ -18,7 +18,7 @@ import { CancellationError } from '../../../base/common/errors.js';
  * and native core libraries (Foundry Local Core + ONNX Runtime + ONNX Runtime
  * GenAI). The addon requires a newer glibc than ZYRAXON Code's minimum supported
  * Linux distros, so we deliberately do NOT bundle any of this native payload
- * with the product (see `build/gulpfile.vscode.ts`). Instead we republish a
+ * with the product (see `build/gulpfile.zyraxoncode.ts`). Instead we republish a
  * per-target tarball of the addon + core libraries to ZYRAXON Code's CDN at build
  * time (see `build/dictation-runtime/`) and download it here, at runtime, only
  * on supported platforms, into a per-user writable cache — keeping the shipped
@@ -272,7 +272,7 @@ function detectGlibcVersion(): [number, number] | undefined {
  */
 async function downloadAndExtractTarball(url: string, stagingDir: string, token: CancellationToken): Promise<void> {
 	await fs.promises.mkdir(stagingDir, { recursive: true });
-	const tmpDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'vscode-foundry-runtime-'));
+	const tmpDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'zyraxoncode-foundry-runtime-'));
 	try {
 		const tarballPath = join(tmpDir, 'runtime.tgz');
 		await downloadFile(url, tarballPath, token);
@@ -291,7 +291,7 @@ export function requiredCoreLibraryNames(): string[] {
 	const ext = process.platform === 'win32' ? '.dll' : process.platform === 'darwin' ? '.dylib' : '.so';
 	const prefix = process.platform === 'win32' ? '' : 'lib';
 	return [
-		`Microsoft.AI.Foundry.Local.Core${ext}`,
+		`Zyraxon.AI.Foundry.Local.Core${ext}`,
 		`${prefix}onnxruntime${ext}`,
 		`${prefix}onnxruntime-genai${ext}`,
 	];

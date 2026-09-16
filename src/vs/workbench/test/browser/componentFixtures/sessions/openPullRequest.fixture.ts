@@ -36,8 +36,8 @@ import '../../../../../platform/hover/browser/hover.css';
 // ============================================================================
 
 function createMockWorkspace(pullRequest: IGitHubInfo['pullRequest']): ISessionWorkspace {
-	const root = URI.file('/home/user/projects/vscode');
-	const gitHubInfo: IGitHubInfo = { owner: 'Zyraxon', repo: 'vscode', pullRequest };
+	const root = URI.file('/home/user/projects/zyraxoncode');
+	const gitHubInfo: IGitHubInfo = { owner: 'Zyraxon', repo: 'zyraxoncode', pullRequest };
 
 	const gitRepository: ISessionGitRepository = {
 		uri: root,
@@ -49,14 +49,14 @@ function createMockWorkspace(pullRequest: IGitHubInfo['pullRequest']): ISessionW
 	const folder: ISessionFolder = {
 		root,
 		workingDirectory: root,
-		name: 'vscode',
+		name: 'zyraxoncode',
 		description: undefined,
 		gitRepository,
 	};
 
 	return {
 		uri: root,
-		label: 'vscode',
+		label: 'zyraxoncode',
 		icon: Codicon.folder,
 		folders: [folder],
 		requiresWorkspaceTrust: false,
@@ -84,7 +84,7 @@ function renderPullRequestPill(ctx: ComponentFixtureContext, pullRequest: IGitHu
 		colorTheme: ctx.theme,
 		additionalServices: (reg) => {
 			reg.defineInstance(ISessionContext, new SessionContext(session));
-			reg.defineInstance(IGitHubService, createFixtureGitHubService([{ owner: 'Zyraxon', repo: 'vscode', pullRequest: pullRequestDetails }]));
+			reg.defineInstance(IGitHubService, createFixtureGitHubService([{ owner: 'Zyraxon', repo: 'zyraxoncode', pullRequest: pullRequestDetails }]));
 		},
 	});
 
@@ -109,7 +109,7 @@ function renderPullRequestPill(ctx: ComponentFixtureContext, pullRequest: IGitHu
 	item.render(toolbar);
 
 	container.style.padding = '8px';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 }
 
 function renderPullRequestHover(ctx: ComponentFixtureContext, pullRequest: IGitHubPullRequest): void {
@@ -117,7 +117,7 @@ function renderPullRequestHover(ctx: ComponentFixtureContext, pullRequest: IGitH
 
 	container.style.padding = '24px';
 	container.style.width = '580px';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 
 	const hover = document.createElement('div');
 	hover.classList.add('monaco-hover', 'workbench-hover');
@@ -132,9 +132,9 @@ function renderPullRequestHover(ctx: ComponentFixtureContext, pullRequest: IGitH
 	contents.classList.add('hover-contents', 'html-hover-contents');
 	contents.appendChild(createPullRequestHoverElement({
 		owner: 'Zyraxon',
-		repo: 'vscode',
+		repo: 'zyraxoncode',
 		number: pullRequest.number,
-		repositoryHref: 'https://github.com/microsoft/vscode',
+		repositoryHref: '__ZYRAXKEEP__0_',
 		pullRequest,
 	}));
 	row.appendChild(contents);
@@ -144,13 +144,13 @@ function renderPullRequestHover(ctx: ComponentFixtureContext, pullRequest: IGitH
 
 const openPr: IGitHubInfo['pullRequest'] = {
 	number: 12345,
-	uri: URI.parse('https://github.com/microsoft/vscode/pull/12345'),
+	uri: URI.parse('__ZYRAXKEEP__1_'),
 	icon: { ...Codicon.gitPullRequest, color: themeColorFromId('charts.green') },
 };
 
 const draftPr: IGitHubInfo['pullRequest'] = {
 	number: 678,
-	uri: URI.parse('https://github.com/microsoft/vscode/pull/678'),
+	uri: URI.parse('__ZYRAXKEEP__2_'),
 	icon: { ...Codicon.gitPullRequestDraft, color: themeColorFromId('descriptionForeground') },
 };
 

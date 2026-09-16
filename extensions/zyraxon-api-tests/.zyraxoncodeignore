@@ -1,0 +1,7 @@
+.zyraxoncode/**
+typings/**
+**/*.ts
+**/*.map
+.gitignore
+tsconfig*.json
+**/*.tsbuildinfo

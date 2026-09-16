@@ -8,7 +8,7 @@
  *
  * Localizes which two bundled CSS source files form a cascade-order dependency
  * in a component fixture, by binary-searching over stylesheet-document reversal
- * windows. It drives `@vscode/component-explorer`'s `render` command against an
+ * windows. It drives `@zyraxoncode/component-explorer`'s `render` command against an
  * already-running `serve` (see `component-explorer-attach.json`) and uses the
  * rendered image hash as an oracle: reversing the document order of the bundled
  * CSS flips cascade ties that are decided purely by source order, so a hash

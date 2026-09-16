@@ -13,7 +13,7 @@ import { z } from 'zod';
 export function applyTerminalTools(server: McpServer, appService: ApplicationService): RegisteredTool[] {
 	const tools: RegisteredTool[] = [];
 	tools.push(server.tool(
-		'vscode_automation_terminal_create',
+		'zyraxoncode_automation_terminal_create',
 		'Create a new terminal',
 		{
 			expectedLocation: z.enum(['editor', 'panel']).optional().describe('Expected location of terminal (editor or panel)')
@@ -32,7 +32,7 @@ export function applyTerminalTools(server: McpServer, appService: ApplicationSer
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_terminal_run_command',
+		'zyraxoncode_automation_terminal_run_command',
 		'Run a command in the terminal',
 		{
 			command: z.string().describe('Command to run in the terminal'),
@@ -53,7 +53,7 @@ export function applyTerminalTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_terminal_wait_for_text',
+	// 	'zyraxoncode_automation_terminal_wait_for_text',
 	// 	'Wait for specific text to appear in terminal output',
 	// 	{
 	// 		acceptFunction: z.string().describe('JavaScript function body that takes buffer array and returns boolean'),
@@ -76,7 +76,7 @@ export function applyTerminalTools(server: McpServer, appService: ApplicationSer
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_terminal_get_groups',
+		'zyraxoncode_automation_terminal_get_groups',
 		'Get current terminal groups information',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -92,7 +92,7 @@ export function applyTerminalTools(server: McpServer, appService: ApplicationSer
 
 	// Seems too niche and redundant with runCommand tool
 	// server.tool(
-	// 	'vscode_automation_terminal_run_command_by_id',
+	// 	'zyraxoncode_automation_terminal_run_command_by_id',
 	// 	'Run a terminal command by ID',
 	// 	{
 	// 		commandId: z.enum([
@@ -126,7 +126,7 @@ export function applyTerminalTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_terminal_split',
+	// 	'zyraxoncode_automation_terminal_split',
 	// 	'Split the current terminal',
 	// 	async () => {
 	// 		await app.workbench.terminal.clickSplitButton();

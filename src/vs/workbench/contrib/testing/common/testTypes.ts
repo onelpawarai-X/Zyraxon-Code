@@ -31,7 +31,7 @@ export const testResultStateToContextValues: { [K in TestResultState]: string } 
 	[TestResultState.Errored]: 'errored',
 };
 
-/** note: keep in sync with TestRunProfileKind in vscode.d.ts */
+/** note: keep in sync with TestRunProfileKind in zyraxoncode.d.ts */
 export const enum ExtTestRunProfileKind {
 	Run = 1,
 	Debug = 2,

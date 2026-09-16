@@ -9,14 +9,14 @@ import * as extHostProtocol from './extHost.protocol.js';
 import { ExtHostNotebookController } from './extHostNotebook.js';
 import { NotebookDocumentMetadata } from '../../contrib/notebook/common/notebookCommon.js';
 import { SerializableObjectWithBuffers } from '../../services/extensions/common/proxyIdentifier.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 export class ExtHostNotebookDocuments implements extHostProtocol.ExtHostNotebookDocumentsShape {
 
-	private readonly _onDidSaveNotebookDocument = new Emitter<vscode.NotebookDocument>();
+	private readonly _onDidSaveNotebookDocument = new Emitter<zyraxoncode.NotebookDocument>();
 	readonly onDidSaveNotebookDocument = this._onDidSaveNotebookDocument.event;
 
-	private readonly _onDidChangeNotebookDocument = new Emitter<vscode.NotebookDocumentChangeEvent>();
+	private readonly _onDidChangeNotebookDocument = new Emitter<zyraxoncode.NotebookDocumentChangeEvent>();
 	readonly onDidChangeNotebookDocument = this._onDidChangeNotebookDocument.event;
 
 	constructor(

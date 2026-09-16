@@ -18,7 +18,7 @@ import { createTextDocumentData } from '../../../../../util/common/test/shims/te
 import { URI } from '../../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestEditedFileEventKind, LanguageModelTextPart, LanguageModelToolResult } from '../../../../../vscodeTypes';
+import { ChatRequestEditedFileEventKind, LanguageModelTextPart, LanguageModelToolResult } from '../../../../../zyraxoncodeTypes';
 import { addCacheBreakpoints } from '../../../../intents/node/cacheBreakpoints';
 import { ChatVariablesCollection } from '../../../../prompt/common/chatVariablesCollection';
 import { Conversation, ICopilotChatResultIn, Turn, TurnStatus } from '../../../../prompt/common/conversation';
@@ -277,7 +277,7 @@ testFamilies.forEach(family => {
 
 		test('one attachment', async () => {
 			await expect(await agentPromptToString(accessor, {
-				chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+				chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 				history: [],
 				query: 'hello',
 			}, undefined)).toMatchFileSnapshot(getSnapshotFile('one_attachment'));
@@ -293,7 +293,7 @@ testFamilies.forEach(family => {
 			await expect(await agentPromptToString(
 				accessor,
 				{
-					chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+					chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 					history: [],
 					query: 'edit this file',
 					toolCallRounds: [
@@ -308,7 +308,7 @@ testFamilies.forEach(family => {
 			await expect(await agentPromptToString(
 				accessor,
 				{
-					chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+					chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 					history: [],
 					query: 'edit this file',
 				},
@@ -371,7 +371,7 @@ testFamilies.forEach(family => {
 			await expect(await agentPromptToString(
 				accessor,
 				{
-					chatVariables: new ChatVariablesCollection([{ id: 'vscode.file', name: 'file', value: fileTsUri }]),
+					chatVariables: new ChatVariablesCollection([{ id: 'zyraxoncode.file', name: 'file', value: fileTsUri }]),
 					history: [],
 					query: 'edit this file',
 				},

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatRequest, LanguageModelChat } from 'vscode';
+import type { ChatRequest, LanguageModelChat } from 'zyraxoncode';
 import { CacheableRequest, SQLiteCache } from '../../../../../test/base/cache';
 import { TestingCacheSalts } from '../../../../../test/base/salts';
 import { CurrentTestRunInfo } from '../../../../../test/base/simulationContext';

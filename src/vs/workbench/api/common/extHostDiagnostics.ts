@@ -6,7 +6,7 @@
 import { localize } from '../../../nls.js';
 import { IMarkerData, MarkerSeverity } from '../../../platform/markers/common/markers.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { MainContext, MainThreadDiagnosticsShape, ExtHostDiagnosticsShape, IMainContext } from './extHost.protocol.js';
 import { DiagnosticSeverity } from './extHostTypes.js';
 import * as converter from './extHostTypeConverters.js';
@@ -19,11 +19,11 @@ import { IExtHostFileSystemInfo } from './extHostFileSystemInfo.js';
 import { IExtUri } from '../../../base/common/resources.js';
 import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 
-export class DiagnosticCollection implements vscode.DiagnosticCollection {
+export class DiagnosticCollection implements zyraxoncode.DiagnosticCollection {
 
 	readonly #proxy: MainThreadDiagnosticsShape | undefined;
-	readonly #onDidChangeDiagnostics: Emitter<readonly vscode.Uri[]>;
-	readonly #data: ResourceMap<vscode.Diagnostic[]>;
+	readonly #onDidChangeDiagnostics: Emitter<readonly zyraxoncode.Uri[]>;
+	readonly #data: ResourceMap<zyraxoncode.Diagnostic[]>;
 
 	private _isDisposed = false;
 
@@ -35,7 +35,7 @@ export class DiagnosticCollection implements vscode.DiagnosticCollection {
 		private readonly _modelVersionIdProvider: (uri: URI) => number | undefined,
 		extUri: IExtUri,
 		proxy: MainThreadDiagnosticsShape | undefined,
-		onDidChangeDiagnostics: Emitter<readonly vscode.Uri[]>
+		onDidChangeDiagnostics: Emitter<readonly zyraxoncode.Uri[]>
 	) {
 		this._maxDiagnosticsTotal = Math.max(_maxDiagnosticsPerFile, _maxDiagnosticsTotal);
 		this.#data = new ResourceMap(uri => extUri.getComparisonKey(uri));
@@ -57,9 +57,9 @@ export class DiagnosticCollection implements vscode.DiagnosticCollection {
 		return this._name;
 	}
 
-	set(uri: vscode.Uri, diagnostics: ReadonlyArray<vscode.Diagnostic>): void;
-	set(entries: ReadonlyArray<[vscode.Uri, ReadonlyArray<vscode.Diagnostic>]>): void;
-	set(first: vscode.Uri | ReadonlyArray<[vscode.Uri, ReadonlyArray<vscode.Diagnostic>]>, diagnostics?: ReadonlyArray<vscode.Diagnostic>) {
+	set(uri: zyraxoncode.Uri, diagnostics: ReadonlyArray<zyraxoncode.Diagnostic>): void;
+	set(entries: ReadonlyArray<[zyraxoncode.Uri, ReadonlyArray<zyraxoncode.Diagnostic>]>): void;
+	set(first: zyraxoncode.Uri | ReadonlyArray<[zyraxoncode.Uri, ReadonlyArray<zyraxoncode.Diagnostic>]>, diagnostics?: ReadonlyArray<zyraxoncode.Diagnostic>) {
 
 		if (!first) {
 			// this set-call is a clear-call
@@ -70,7 +70,7 @@ export class DiagnosticCollection implements vscode.DiagnosticCollection {
 		// the actual implementation for #set
 
 		this._checkDisposed();
-		let toSync: vscode.Uri[] = [];
+		let toSync: zyraxoncode.Uri[] = [];
 
 		if (URI.isUri(first)) {
 
@@ -87,7 +87,7 @@ export class DiagnosticCollection implements vscode.DiagnosticCollection {
 		} else if (Array.isArray(first)) {
 			// update many rows
 			toSync = [];
-			let lastUri: vscode.Uri | undefined;
+			let lastUri: zyraxoncode.Uri | undefined;
 
 			// ensure stable-sort
 			first = [...first].sort(DiagnosticCollection._compareIndexedTuplesByUri);
@@ -170,7 +170,7 @@ export class DiagnosticCollection implements vscode.DiagnosticCollection {
 		this.#proxy.$changeMany(this._owner, entries);
 	}
 
-	delete(uri: vscode.Uri): void {
+	delete(uri: zyraxoncode.Uri): void {
 		this._checkDisposed();
 		this.#onDidChangeDiagnostics.fire([uri]);
 		this.#data.delete(uri);
@@ -184,21 +184,21 @@ export class DiagnosticCollection implements vscode.DiagnosticCollection {
 		this.#proxy?.$clear(this._owner);
 	}
 
-	forEach(callback: (uri: URI, diagnostics: ReadonlyArray<vscode.Diagnostic>, collection: DiagnosticCollection) => unknown, thisArg?: unknown): void {
+	forEach(callback: (uri: URI, diagnostics: ReadonlyArray<zyraxoncode.Diagnostic>, collection: DiagnosticCollection) => unknown, thisArg?: unknown): void {
 		this._checkDisposed();
 		for (const [uri, values] of this) {
 			callback.call(thisArg, uri, values, this);
 		}
 	}
 
-	*[Symbol.iterator](): IterableIterator<[uri: vscode.Uri, diagnostics: readonly vscode.Diagnostic[]]> {
+	*[Symbol.iterator](): IterableIterator<[uri: zyraxoncode.Uri, diagnostics: readonly zyraxoncode.Diagnostic[]]> {
 		this._checkDisposed();
 		for (const uri of this.#data.keys()) {
 			yield [uri, this.get(uri)];
 		}
 	}
 
-	get(uri: URI): ReadonlyArray<vscode.Diagnostic> {
+	get(uri: URI): ReadonlyArray<zyraxoncode.Diagnostic> {
 		this._checkDisposed();
 		const result = this.#data.get(uri);
 		if (Array.isArray(result)) {
@@ -218,7 +218,7 @@ export class DiagnosticCollection implements vscode.DiagnosticCollection {
 		}
 	}
 
-	private static _compareIndexedTuplesByUri(a: [vscode.Uri, readonly vscode.Diagnostic[]], b: [vscode.Uri, readonly vscode.Diagnostic[]]): number {
+	private static _compareIndexedTuplesByUri(a: [zyraxoncode.Uri, readonly zyraxoncode.Diagnostic[]], b: [zyraxoncode.Uri, readonly zyraxoncode.Diagnostic[]]): number {
 		if (a[0].toString() < b[0].toString()) {
 			return -1;
 		} else if (a[0].toString() > b[0].toString()) {
@@ -237,17 +237,17 @@ export class ExtHostDiagnostics implements ExtHostDiagnosticsShape {
 
 	private readonly _proxy: MainThreadDiagnosticsShape;
 	private readonly _collections = new Map<string, DiagnosticCollection>();
-	private readonly _onDidChangeDiagnostics = new DebounceEmitter<readonly vscode.Uri[]>({ merge: all => all.flat(), delay: 50 });
+	private readonly _onDidChangeDiagnostics = new DebounceEmitter<readonly zyraxoncode.Uri[]>({ merge: all => all.flat(), delay: 50 });
 
-	static _mapper(last: readonly vscode.Uri[]): { uris: readonly vscode.Uri[] } {
-		const map = new ResourceMap<vscode.Uri>();
+	static _mapper(last: readonly zyraxoncode.Uri[]): { uris: readonly zyraxoncode.Uri[] } {
+		const map = new ResourceMap<zyraxoncode.Uri>();
 		for (const uri of last) {
 			map.set(uri, uri);
 		}
 		return { uris: Object.freeze(Array.from(map.values())) };
 	}
 
-	readonly onDidChangeDiagnostics: Event<vscode.DiagnosticChangeEvent> = Event.map(this._onDidChangeDiagnostics.event, ExtHostDiagnostics._mapper);
+	readonly onDidChangeDiagnostics: Event<zyraxoncode.DiagnosticChangeEvent> = Event.map(this._onDidChangeDiagnostics.event, ExtHostDiagnostics._mapper);
 
 	constructor(
 		mainContext: IMainContext,
@@ -258,7 +258,7 @@ export class ExtHostDiagnostics implements ExtHostDiagnosticsShape {
 		this._proxy = mainContext.getProxy(MainContext.MainThreadDiagnostics);
 	}
 
-	createDiagnosticCollection(extensionId: ExtensionIdentifier, name?: string): vscode.DiagnosticCollection {
+	createDiagnosticCollection(extensionId: ExtensionIdentifier, name?: string): zyraxoncode.DiagnosticCollection {
 
 		const { _collections, _proxy, _onDidChangeDiagnostics, _logService, _fileSystemInfoService, _extHostDocumentsAndEditors } = this;
 
@@ -310,15 +310,15 @@ export class ExtHostDiagnostics implements ExtHostDiagnosticsShape {
 		return result;
 	}
 
-	getDiagnostics(resource: vscode.Uri): ReadonlyArray<vscode.Diagnostic>;
-	getDiagnostics(): ReadonlyArray<[vscode.Uri, ReadonlyArray<vscode.Diagnostic>]>;
-	getDiagnostics(resource?: vscode.Uri): ReadonlyArray<vscode.Diagnostic> | ReadonlyArray<[vscode.Uri, ReadonlyArray<vscode.Diagnostic>]>;
-	getDiagnostics(resource?: vscode.Uri): ReadonlyArray<vscode.Diagnostic> | ReadonlyArray<[vscode.Uri, ReadonlyArray<vscode.Diagnostic>]> {
+	getDiagnostics(resource: zyraxoncode.Uri): ReadonlyArray<zyraxoncode.Diagnostic>;
+	getDiagnostics(): ReadonlyArray<[zyraxoncode.Uri, ReadonlyArray<zyraxoncode.Diagnostic>]>;
+	getDiagnostics(resource?: zyraxoncode.Uri): ReadonlyArray<zyraxoncode.Diagnostic> | ReadonlyArray<[zyraxoncode.Uri, ReadonlyArray<zyraxoncode.Diagnostic>]>;
+	getDiagnostics(resource?: zyraxoncode.Uri): ReadonlyArray<zyraxoncode.Diagnostic> | ReadonlyArray<[zyraxoncode.Uri, ReadonlyArray<zyraxoncode.Diagnostic>]> {
 		if (resource) {
 			return this._getDiagnostics(resource);
 		} else {
 			const index = new Map<string, number>();
-			const res: [vscode.Uri, vscode.Diagnostic[]][] = [];
+			const res: [zyraxoncode.Uri, zyraxoncode.Diagnostic[]][] = [];
 			for (const collection of this._collections.values()) {
 				collection.forEach((uri, diagnostics) => {
 					let idx = index.get(uri.toString());
@@ -334,8 +334,8 @@ export class ExtHostDiagnostics implements ExtHostDiagnosticsShape {
 		}
 	}
 
-	private _getDiagnostics(resource: vscode.Uri): ReadonlyArray<vscode.Diagnostic> {
-		let res: vscode.Diagnostic[] = [];
+	private _getDiagnostics(resource: zyraxoncode.Uri): ReadonlyArray<zyraxoncode.Diagnostic> {
+		let res: zyraxoncode.Diagnostic[] = [];
 		for (const collection of this._collections.values()) {
 			if (collection.has(resource)) {
 				res = res.concat(collection.get(resource));
@@ -344,7 +344,7 @@ export class ExtHostDiagnostics implements ExtHostDiagnosticsShape {
 		return res;
 	}
 
-	private _mirrorCollection: vscode.DiagnosticCollection | undefined;
+	private _mirrorCollection: zyraxoncode.DiagnosticCollection | undefined;
 
 	$acceptMarkersChange(data: [UriComponents, IMarkerData[]][]): void {
 

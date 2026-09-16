@@ -43,8 +43,8 @@
 	max-height: 80vh;
 	display: flex;
 	flex-direction: column;
-	background: var(--vscode-menu-background, var(--vscode-editor-background));
-	color: var(--vscode-menu-foreground, var(--vscode-foreground));
+	background: var(--zyraxoncode-menu-background, var(--zyraxoncode-editor-background));
+	color: var(--zyraxoncode-menu-foreground, var(--zyraxoncode-foreground));
 	border-top-left-radius: 16px;
 	border-top-right-radius: 16px;
 	padding-bottom: env(safe-area-inset-bottom);
@@ -64,8 +64,8 @@
 	width: 36px;
 	height: 5px;
 	margin: 6px auto 2px;
-	border-radius: var(--vscode-cornerRadius-small);
-	background: color-mix(in srgb, var(--vscode-foreground) 28%, transparent);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 28%, transparent);
 	flex-shrink: 0;
 }
 
@@ -101,7 +101,7 @@
 	padding: 0 8px;
 	border: none;
 	background: transparent;
-	color: var(--vscode-textLink-foreground, var(--vscode-button-background));
+	color: var(--zyraxoncode-textLink-foreground, var(--zyraxoncode-button-background));
 	font-family: inherit;
 	font-size: 17px;
 	font-weight: 600;
@@ -129,7 +129,7 @@
 	padding: 0;
 	border: none;
 	background: transparent;
-	color: var(--vscode-textLink-foreground, var(--vscode-button-background));
+	color: var(--zyraxoncode-textLink-foreground, var(--zyraxoncode-button-background));
 	cursor: pointer;
 	flex-shrink: 0;
 	touch-action: manipulation;
@@ -141,12 +141,12 @@
 	position: absolute;
 	inset: 6px;
 	border-radius: 50%;
-	background: color-mix(in srgb, var(--vscode-foreground) 8%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 8%, transparent);
 	pointer-events: none;
 }
 
 .mobile-picker-sheet-header-action:active::before {
-	background: color-mix(in srgb, var(--vscode-foreground) 16%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 16%, transparent);
 }
 
 .mobile-picker-sheet-header-action-icon {
@@ -164,7 +164,7 @@
 .mobile-picker-sheet-caption {
 	padding: 0 16px 12px;
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	flex-shrink: 0;
 }
 
@@ -178,8 +178,8 @@
 	margin: 4px 16px 10px;
 	padding: 0 10px;
 	height: 36px;
-	border-radius: var(--vscode-cornerRadius-circle);
-	background: color-mix(in srgb, var(--vscode-foreground) 10%, transparent);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 10%, transparent);
 	flex-shrink: 0;
 }
 
@@ -187,7 +187,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	flex-shrink: 0;
 }
 
@@ -210,7 +210,7 @@
 }
 
 .mobile-picker-sheet-search-input::placeholder {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .mobile-picker-sheet-search-input::-webkit-search-cancel-button {
@@ -226,7 +226,7 @@
 .mobile-picker-sheet-search-empty {
 	padding: 12px 12px;
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .mobile-picker-sheet-list {
@@ -263,12 +263,12 @@
 	padding: 10px 12px;
 	margin: 2px 0;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-xLarge);
+	border-radius: var(--zyraxoncode-cornerRadius-xLarge);
 	/* Emphasized but lightweight: a low-opacity `textLink-foreground` tint
 	 * rather than a saturated filled button, so the action reads as the
 	 * primary choice while staying consistent with the muted rows below. */
-	background: color-mix(in srgb, var(--vscode-textLink-foreground) 14%, transparent);
-	color: var(--vscode-textLink-foreground);
+	background: color-mix(in srgb, var(--zyraxoncode-textLink-foreground) 14%, transparent);
+	color: var(--zyraxoncode-textLink-foreground);
 	font-family: inherit;
 	font-size: 16px;
 	text-align: left;
@@ -282,12 +282,12 @@
 }
 
 .mobile-picker-sheet-primary-action:focus-visible {
-	outline: 2px solid var(--vscode-focusBorder);
+	outline: 2px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -2px;
 }
 
 .mobile-picker-sheet-primary-action:active {
-	background: color-mix(in srgb, var(--vscode-textLink-foreground) 22%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-textLink-foreground) 22%, transparent);
 }
 
 .mobile-picker-sheet-primary-action-icon {
@@ -296,12 +296,12 @@
 	justify-content: center;
 	width: 36px;
 	height: 36px;
-	border-radius: var(--vscode-cornerRadius-large);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 	/* Accent-tinted tile with an accent glyph: emphasized without the
 	 * glare of a solid white tile, and it fills the 36px slot so the icon
 	 * column lines up with the folder rows below. */
-	background: color-mix(in srgb, var(--vscode-textLink-foreground) 22%, transparent);
-	color: var(--vscode-textLink-foreground);
+	background: color-mix(in srgb, var(--zyraxoncode-textLink-foreground) 22%, transparent);
+	color: var(--zyraxoncode-textLink-foreground);
 	flex-shrink: 0;
 }
 
@@ -357,7 +357,7 @@
 .mobile-content-sheet-detail {
 	padding: 6px 16px 0;
 	font-size: 13px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 1.35;
 	overflow-wrap: anywhere;
 }
@@ -401,13 +401,13 @@
 	padding: 14px 12px 6px;
 	font-size: 13px;
 	font-weight: 400;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .mobile-picker-sheet-divider {
 	height: 1px;
 	margin: 8px 8px;
-	background: color-mix(in srgb, var(--vscode-foreground) 12%, transparent);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 12%, transparent);
 }
 
 .mobile-picker-sheet-item {
@@ -419,7 +419,7 @@
 	padding: 8px 12px;
 	margin: 2px 0;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-xLarge);
+	border-radius: var(--zyraxoncode-cornerRadius-xLarge);
 	background: transparent;
 	color: inherit;
 	font-family: inherit;
@@ -439,17 +439,17 @@
 }
 
 .mobile-picker-sheet-item:focus-visible {
-	outline: 2px solid var(--vscode-focusBorder);
+	outline: 2px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -2px;
 }
 
 .mobile-picker-sheet-item:active {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .mobile-picker-sheet-item.checked {
-	background: var(--vscode-list-activeSelectionBackground, var(--vscode-toolbar-hoverBackground));
-	color: var(--vscode-list-activeSelectionForeground, inherit);
+	background: var(--zyraxoncode-list-activeSelectionBackground, var(--zyraxoncode-toolbar-hoverBackground));
+	color: var(--zyraxoncode-list-activeSelectionForeground, inherit);
 }
 
 .mobile-picker-sheet-item.disabled {
@@ -469,10 +469,10 @@
 	justify-content: center;
 	width: 36px;
 	height: 36px;
-	border-radius: var(--vscode-cornerRadius-large);
-	background: color-mix(in srgb, var(--vscode-foreground) 8%, transparent);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 8%, transparent);
 	flex-shrink: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .mobile-picker-sheet-icon-glyph {
@@ -481,8 +481,8 @@
 }
 
 .mobile-picker-sheet-item.checked .mobile-picker-sheet-icon {
-	background: color-mix(in srgb, var(--vscode-textLink-foreground, var(--vscode-button-background)) 18%, transparent);
-	color: var(--vscode-textLink-foreground, var(--vscode-button-background));
+	background: color-mix(in srgb, var(--zyraxoncode-textLink-foreground, var(--zyraxoncode-button-background)) 18%, transparent);
+	color: var(--zyraxoncode-textLink-foreground, var(--zyraxoncode-button-background));
 }
 
 .mobile-picker-sheet-text {
@@ -505,7 +505,7 @@
 .mobile-picker-sheet-description {
 	font-size: 12px;
 	line-height: 1.2;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -517,7 +517,7 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	color: var(--vscode-textLink-foreground, var(--vscode-button-background));
+	color: var(--zyraxoncode-textLink-foreground, var(--zyraxoncode-button-background));
 	flex-shrink: 0;
 }
 
@@ -534,7 +534,7 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	flex-shrink: 0;
 	opacity: 0.8;
 }

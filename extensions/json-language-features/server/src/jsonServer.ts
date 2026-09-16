@@ -7,14 +7,14 @@ import {
 	Connection,
 	TextDocuments, InitializeParams, InitializeResult, NotificationType, RequestType, ResponseError,
 	DocumentRangeFormattingRequest, Disposable, ServerCapabilities, TextDocumentSyncKind, TextEdit, DocumentFormattingRequest, TextDocumentIdentifier, FormattingOptions, Diagnostic, CodeAction, CodeActionKind
-} from 'vscode-languageserver';
+} from 'zyraxoncode-languageserver';
 
 import { runSafe, runSafeAsync } from './utils/runner.js';
 import { DiagnosticsSupport, registerDiagnosticsPullSupport, registerDiagnosticsPushSupport } from './utils/validation.js';
-import { TextDocument, JSONDocument, JSONSchema, getLanguageService, DocumentLanguageSettings, SchemaConfiguration, ClientCapabilities, Range, Position, SortOptions, SeverityLevel } from 'vscode-json-languageservice';
+import { TextDocument, JSONDocument, JSONSchema, getLanguageService, DocumentLanguageSettings, SchemaConfiguration, ClientCapabilities, Range, Position, SortOptions, SeverityLevel } from 'zyraxoncode-json-languageservice';
 import { getLanguageModelCache } from './languageModelCache.js';
-import { Utils, URI } from 'vscode-uri';
-import * as l10n from '@vscode/l10n';
+import { Utils, URI } from 'zyraxoncode-uri';
+import * as l10n from '@zyraxoncode/l10n';
 
 type ISchemaAssociations = Record<string, string[]>;
 
@@ -24,8 +24,8 @@ namespace SchemaAssociationNotification {
 	export const type: NotificationType<ISchemaAssociations | SchemaConfiguration[]> = new NotificationType('json/schemaAssociations');
 }
 
-namespace VSCodeContentRequest {
-	export const type: RequestType<string, string, any> = new RequestType('vscode/content');
+namespace ZyraxonCodeContentRequest {
+	export const type: RequestType<string, string, any> = new RequestType('zyraxoncode/content');
 }
 
 namespace SchemaContentChangeNotification {
@@ -104,7 +104,7 @@ export function startServer(connection: Connection, runtime: RuntimeEnvironment)
 			if (builtInHandler) {
 				return builtInHandler.getContent(uri);
 			}
-			return connection.sendRequest(VSCodeContentRequest.type, uri).then(responseText => {
+			return connection.sendRequest(ZyraxonCodeContentRequest.type, uri).then(responseText => {
 				return responseText;
 			}, (error: ResponseError<any>) => {
 				return Promise.reject(error);
@@ -330,7 +330,7 @@ export function startServer(connection: Connection, runtime: RuntimeEnvironment)
 	});
 
 	connection.onRequest(ValidateContentRequest.type, async ({ schemaUri, content }) => {
-		const docURI = 'vscode://schemas/temp/' + new Date().getTime();
+		const docURI = '__ZYRAXKEEP__0_' + new Date().getTime();
 		const document = TextDocument.create(docURI, 'json', 1, content);
 		updateConfiguration([{ uri: schemaUri, fileMatch: [docURI] }]);
 		return await validateTextDocument(document);
@@ -381,7 +381,7 @@ export function startServer(connection: Connection, runtime: RuntimeEnvironment)
 			jsonConfigurationSettings.forEach((schema, index) => {
 				let uri = schema.url;
 				if (!uri && schema.schema) {
-					uri = schema.schema.id || `vscode://schemas/custom/${index}`;
+					uri = schema.schema.id || `__ZYRAXKEEP__1_{index}`;
 				}
 				if (uri) {
 					languageSettings.schemas.push({ uri, fileMatch: schema.fileMatch, schema: schema.schema, folderUri: schema.folderUri });
@@ -412,7 +412,7 @@ export function startServer(connection: Connection, runtime: RuntimeEnvironment)
 	}
 
 	connection.onDidChangeWatchedFiles((change) => {
-		// Monitored files have changed in VSCode
+		// Monitored files have changed in ZyraxonCode
 		let hasChanges = false;
 		for (const c of change.changes) {
 			if (languageService.resetSchema(c.uri)) {

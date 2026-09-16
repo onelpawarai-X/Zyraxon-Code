@@ -9,7 +9,7 @@ import { URI, UriComponents } from '../../../base/common/uri.js';
 import { findExecutable } from '../../../base/node/processes.js';
 import * as types from '../common/extHostTypes.js';
 import { IExtHostWorkspace } from '../common/extHostWorkspace.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import * as tasks from '../common/shared/tasks.js';
 import { IExtHostDocumentsAndEditors } from '../common/extHostDocumentsAndEditors.js';
 import { IExtHostConfiguration } from '../common/extHostConfiguration.js';
@@ -40,8 +40,8 @@ export class ExtHostTask extends ExtHostTaskBase {
 	) {
 		super(extHostRpc, initData, workspaceService, editorService, configurationService, extHostTerminalService, logService, deprecationService);
 		if (initData.remote.isRemote && initData.remote.authority) {
-			this.registerTaskSystem(Schemas.vscodeRemote, {
-				scheme: Schemas.vscodeRemote,
+			this.registerTaskSystem(Schemas.zyraxoncodeRemote, {
+				scheme: Schemas.zyraxoncodeRemote,
 				authority: initData.remote.authority,
 				platform: process.platform
 			});
@@ -55,7 +55,7 @@ export class ExtHostTask extends ExtHostTaskBase {
 		this._proxy.$registerSupportedExecutions(true, true, true);
 	}
 
-	public async executeTask(extension: IExtensionDescription, task: vscode.Task): Promise<vscode.TaskExecution> {
+	public async executeTask(extension: IExtensionDescription, task: zyraxoncode.Task): Promise<zyraxoncode.TaskExecution> {
 		const tTask = (task as types.Task);
 
 		if (!task.execution && (tTask._id === undefined)) {
@@ -92,7 +92,7 @@ export class ExtHostTask extends ExtHostTaskBase {
 		}
 	}
 
-	protected provideTasksInternal(validTypes: { [key: string]: boolean }, taskIdPromises: Promise<void>[], handler: HandlerData, value: vscode.Task[] | null | undefined): { tasks: tasks.ITaskDTO[]; extension: IExtensionDescription } {
+	protected provideTasksInternal(validTypes: { [key: string]: boolean }, taskIdPromises: Promise<void>[], handler: HandlerData, value: zyraxoncode.Task[] | null | undefined): { tasks: tasks.ITaskDTO[]; extension: IExtensionDescription } {
 		const taskDTOs: tasks.ITaskDTO[] = [];
 		if (value) {
 			for (const task of value) {
@@ -125,7 +125,7 @@ export class ExtHostTask extends ExtHostTaskBase {
 		return resolvedTaskDTO;
 	}
 
-	private async getAFolder(workspaceFolders: vscode.WorkspaceFolder[] | undefined): Promise<IWorkspaceFolder> {
+	private async getAFolder(workspaceFolders: zyraxoncode.WorkspaceFolder[] | undefined): Promise<IWorkspaceFolder> {
 		let folder = (workspaceFolders && workspaceFolders.length > 0) ? workspaceFolders[0] : undefined;
 		if (!folder) {
 			const userhome = URI.file(homedir());

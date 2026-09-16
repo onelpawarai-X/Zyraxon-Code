@@ -34,7 +34,7 @@ export class NativeLifecycleService extends AbstractLifecycleService {
 		const windowId = this.nativeHostService.windowId;
 
 		// Main side indicates that window is about to unload, check for vetos
-		ipcRenderer.on('vscode:onBeforeUnload', async (event: unknown, ...args: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:onBeforeUnload', async (event: unknown, ...args: unknown[]) => {
 			const reply = args[0] as { okChannel: string; cancelChannel: string; reason: ShutdownReason };
 			this.logService.trace(`[lifecycle] onBeforeUnload (reason: ${reply.reason})`);
 
@@ -61,7 +61,7 @@ export class NativeLifecycleService extends AbstractLifecycleService {
 		});
 
 		// Main side indicates that we will indeed shutdown
-		ipcRenderer.on('vscode:onWillUnload', async (event: unknown, ...args: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:onWillUnload', async (event: unknown, ...args: unknown[]) => {
 			const reply = args[0] as { replyChannel: string; reason: ShutdownReason };
 			this.logService.trace(`[lifecycle] onWillUnload (reason: ${reply.reason})`);
 

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IDisposable, toDisposable } from '../../../base/common/lifecycle.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostSearchShape, MainThreadSearchShape, MainContext } from './extHost.protocol.js';
 import { createDecorator } from '../../../platform/instantiation/common/instantiation.js';
 import { FileSearchManager } from '../../services/search/common/fileSearchManager.js';
@@ -19,11 +19,11 @@ import { revive } from '../../../base/common/marshalling.js';
 import { OldFileSearchProviderConverter, OldTextSearchProviderConverter } from '../../services/search/common/searchExtConversionTypes.js';
 
 export interface IExtHostSearch extends ExtHostSearchShape {
-	registerTextSearchProviderOld(scheme: string, provider: vscode.TextSearchProvider): IDisposable;
-	registerFileSearchProviderOld(scheme: string, provider: vscode.FileSearchProvider): IDisposable;
-	registerTextSearchProvider(scheme: string, provider: vscode.TextSearchProvider2): IDisposable;
-	registerAITextSearchProvider(scheme: string, provider: vscode.AITextSearchProvider): IDisposable;
-	registerFileSearchProvider(scheme: string, provider: vscode.FileSearchProvider2): IDisposable;
+	registerTextSearchProviderOld(scheme: string, provider: zyraxoncode.TextSearchProvider): IDisposable;
+	registerFileSearchProviderOld(scheme: string, provider: zyraxoncode.FileSearchProvider): IDisposable;
+	registerTextSearchProvider(scheme: string, provider: zyraxoncode.TextSearchProvider2): IDisposable;
+	registerAITextSearchProvider(scheme: string, provider: zyraxoncode.AITextSearchProvider): IDisposable;
+	registerFileSearchProvider(scheme: string, provider: zyraxoncode.FileSearchProvider2): IDisposable;
 	doInternalFileSearchWithCustomCallback(query: IFileQuery, token: CancellationToken, handleFileMatch: (data: URI[]) => void): Promise<ISearchCompleteStats>;
 }
 
@@ -34,13 +34,13 @@ export class ExtHostSearch implements IExtHostSearch {
 	protected readonly _proxy: MainThreadSearchShape;
 	protected _handlePool: number;
 
-	private readonly _textSearchProvider: Map<number, vscode.TextSearchProvider2>;
+	private readonly _textSearchProvider: Map<number, zyraxoncode.TextSearchProvider2>;
 	private readonly _textSearchUsedSchemes: Set<string>;
 
-	private readonly _aiTextSearchProvider: Map<number, vscode.AITextSearchProvider>;
+	private readonly _aiTextSearchProvider: Map<number, zyraxoncode.AITextSearchProvider>;
 	private readonly _aiTextSearchUsedSchemes: Set<string>;
 
-	private readonly _fileSearchProvider: Map<number, vscode.FileSearchProvider2>;
+	private readonly _fileSearchProvider: Map<number, zyraxoncode.FileSearchProvider2>;
 	private readonly _fileSearchUsedSchemes: Set<string>;
 
 	private readonly _fileSearchManager: FileSearchManager;
@@ -52,11 +52,11 @@ export class ExtHostSearch implements IExtHostSearch {
 	) {
 		this._proxy = this.extHostRpc.getProxy(MainContext.MainThreadSearch);
 		this._handlePool = 0;
-		this._textSearchProvider = new Map<number, vscode.TextSearchProvider2>();
+		this._textSearchProvider = new Map<number, zyraxoncode.TextSearchProvider2>();
 		this._textSearchUsedSchemes = new Set<string>();
-		this._aiTextSearchProvider = new Map<number, vscode.AITextSearchProvider>();
+		this._aiTextSearchProvider = new Map<number, zyraxoncode.AITextSearchProvider>();
 		this._aiTextSearchUsedSchemes = new Set<string>();
-		this._fileSearchProvider = new Map<number, vscode.FileSearchProvider2>();
+		this._fileSearchProvider = new Map<number, zyraxoncode.FileSearchProvider2>();
 		this._fileSearchUsedSchemes = new Set<string>();
 		this._fileSearchManager = new FileSearchManager();
 	}
@@ -65,7 +65,7 @@ export class ExtHostSearch implements IExtHostSearch {
 		return this._uriTransformer.transformOutgoingScheme(scheme);
 	}
 
-	registerTextSearchProviderOld(scheme: string, provider: vscode.TextSearchProvider): IDisposable {
+	registerTextSearchProviderOld(scheme: string, provider: zyraxoncode.TextSearchProvider): IDisposable {
 		if (this._textSearchUsedSchemes.has(scheme)) {
 			throw new Error(`a text search provider for the scheme '${scheme}' is already registered`);
 		}
@@ -81,7 +81,7 @@ export class ExtHostSearch implements IExtHostSearch {
 		});
 	}
 
-	registerTextSearchProvider(scheme: string, provider: vscode.TextSearchProvider2): IDisposable {
+	registerTextSearchProvider(scheme: string, provider: zyraxoncode.TextSearchProvider2): IDisposable {
 		if (this._textSearchUsedSchemes.has(scheme)) {
 			throw new Error(`a text search provider for the scheme '${scheme}' is already registered`);
 		}
@@ -97,7 +97,7 @@ export class ExtHostSearch implements IExtHostSearch {
 		});
 	}
 
-	registerAITextSearchProvider(scheme: string, provider: vscode.AITextSearchProvider): IDisposable {
+	registerAITextSearchProvider(scheme: string, provider: zyraxoncode.AITextSearchProvider): IDisposable {
 		if (this._aiTextSearchUsedSchemes.has(scheme)) {
 			throw new Error(`an AI text search provider for the scheme '${scheme}'is already registered`);
 		}
@@ -113,7 +113,7 @@ export class ExtHostSearch implements IExtHostSearch {
 		});
 	}
 
-	registerFileSearchProviderOld(scheme: string, provider: vscode.FileSearchProvider): IDisposable {
+	registerFileSearchProviderOld(scheme: string, provider: zyraxoncode.FileSearchProvider): IDisposable {
 		if (this._fileSearchUsedSchemes.has(scheme)) {
 			throw new Error(`a file search provider for the scheme '${scheme}' is already registered`);
 		}
@@ -129,7 +129,7 @@ export class ExtHostSearch implements IExtHostSearch {
 		});
 	}
 
-	registerFileSearchProvider(scheme: string, provider: vscode.FileSearchProvider2): IDisposable {
+	registerFileSearchProvider(scheme: string, provider: zyraxoncode.FileSearchProvider2): IDisposable {
 		if (this._fileSearchUsedSchemes.has(scheme)) {
 			throw new Error(`a file search provider for the scheme '${scheme}' is already registered`);
 		}
@@ -145,7 +145,7 @@ export class ExtHostSearch implements IExtHostSearch {
 		});
 	}
 
-	$provideFileSearchResults(handle: number, session: number, rawQuery: IRawFileQuery, token: vscode.CancellationToken): Promise<ISearchCompleteStats> {
+	$provideFileSearchResults(handle: number, session: number, rawQuery: IRawFileQuery, token: zyraxoncode.CancellationToken): Promise<ISearchCompleteStats> {
 		const query = reviveQuery(rawQuery);
 		const provider = this._fileSearchProvider.get(handle);
 		if (provider) {
@@ -167,7 +167,7 @@ export class ExtHostSearch implements IExtHostSearch {
 		return Promise.resolve(undefined);
 	}
 
-	$provideTextSearchResults(handle: number, session: number, rawQuery: IRawTextQuery, token: vscode.CancellationToken): Promise<ISearchCompleteStats> {
+	$provideTextSearchResults(handle: number, session: number, rawQuery: IRawTextQuery, token: zyraxoncode.CancellationToken): Promise<ISearchCompleteStats> {
 		const provider = this._textSearchProvider.get(handle);
 		if (!provider || !provider.provideTextSearchResults) {
 			throw new Error(`Unknown Text Search Provider ${handle}`);
@@ -178,7 +178,7 @@ export class ExtHostSearch implements IExtHostSearch {
 		return engine.search(progress => this._proxy.$handleTextMatch(handle, session, progress), token);
 	}
 
-	$provideAITextSearchResults(handle: number, session: number, rawQuery: IRawAITextQuery, token: vscode.CancellationToken): Promise<ISearchCompleteStats> {
+	$provideAITextSearchResults(handle: number, session: number, rawQuery: IRawAITextQuery, token: zyraxoncode.CancellationToken): Promise<ISearchCompleteStats> {
 		const provider = this._aiTextSearchProvider.get(handle);
 		if (!provider || !provider.provideAITextSearchResults) {
 			throw new Error(`Unknown AI Text Search Provider ${handle}`);
@@ -201,14 +201,14 @@ export class ExtHostSearch implements IExtHostSearch {
 		return provider.name ?? 'AI';
 	}
 
-	protected createTextSearchManager(query: ITextQuery, provider: vscode.TextSearchProvider2): TextSearchManager {
+	protected createTextSearchManager(query: ITextQuery, provider: zyraxoncode.TextSearchProvider2): TextSearchManager {
 		return new TextSearchManager({ query, provider }, {
 			readdir: resource => Promise.resolve([]),
 			toCanonicalName: encoding => encoding
 		}, 'textSearchProvider');
 	}
 
-	protected createAITextSearchManager(query: IAITextQuery, provider: vscode.AITextSearchProvider): TextSearchManager {
+	protected createAITextSearchManager(query: IAITextQuery, provider: zyraxoncode.AITextSearchProvider): TextSearchManager {
 		return new TextSearchManager({ query, provider }, {
 			readdir: resource => Promise.resolve([]),
 			toCanonicalName: encoding => encoding

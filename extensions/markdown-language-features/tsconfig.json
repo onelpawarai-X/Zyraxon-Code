@@ -10,11 +10,11 @@
 	},
 	"include": [
 		"src/**/*",
-		"../../src/vscode-dts/vscode.d.ts",
-		"../../src/vscode-dts/vscode.proposed.agentEditorComments.d.ts",
-		"../../src/vscode-dts/vscode.proposed.customEditorDiffs.d.ts",
-		"../../src/vscode-dts/vscode.proposed.documentDiff.d.ts",
-		"../../src/vscode-dts/vscode.proposed.documentSyntaxHighlighting.d.ts",
-		"../../src/vscode-dts/vscode.proposed.textEditorDiffInformation.d.ts"
+		"../../src/zyraxoncode-dts/zyraxoncode.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.agentEditorComments.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.customEditorDiffs.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.documentDiff.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.documentSyntaxHighlighting.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.textEditorDiffInformation.d.ts"
 	]
 }

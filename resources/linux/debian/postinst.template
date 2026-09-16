@@ -30,8 +30,8 @@ if [ "@@NAME@@" != "code-oss" ]; then
 
 	# Register apt repository
 	eval $(apt-config shell APT_SOURCE_PARTS Dir::Etc::sourceparts/d APT_SOURCES_LIST Dir::Etc::sourcelist/f)
-	CODE_SOURCE_PART=${APT_SOURCE_PARTS}vscode.list
-	CODE_SOURCE_PART_DEB822=${APT_SOURCE_PARTS}vscode.sources
+	CODE_SOURCE_PART=${APT_SOURCE_PARTS}zyraxoncode.list
+	CODE_SOURCE_PART_DEB822=${APT_SOURCE_PARTS}zyraxoncode.sources
 
 	CODE_TRUSTED_PART=/usr/share/keyrings/Zyraxon.gpg
 	CODE_TRUSTED_PART_OLD="/etc/apt/trusted.gpg.d/Zyraxon.gpg"
@@ -43,14 +43,14 @@ if [ "@@NAME@@" != "code-oss" ]; then
 			fi
 
 			# Classic apt source list entry, for example:
-			# deb [arch=amd64] https://packages.microsoft.com/repos/code stable main
-			if grep -Eiq "^[[:space:]]*deb[[:space:]].*https://packages\\.microsoft\\.com/repos/code/?([[:space:]]|$)" "$source_file"; then
+			# deb [arch=amd64] __ZYRAXKEEP__0_ stable main
+			if grep -Eiq "^[[:space:]]*deb[[:space:]].*__ZYRAXKEEP__1_\\.zyraxon\\.com/repos/code/?([[:space:]]|$)" "$source_file"; then
 				return 0
 			fi
 
 			# DEB822 source entry, for example:
-			# URIs: https://packages.microsoft.com/repos/code
-			if grep -Eiq "^[[:space:]]*URIs:[[:space:]]*https://packages\\.microsoft\\.com/repos/code/?([[:space:]]|$)" "$source_file"; then
+			# URIs: __ZYRAXKEEP__2_
+			if grep -Eiq "^[[:space:]]*URIs:[[:space:]]*__ZYRAXKEEP__3_\\.zyraxon\\.com/repos/code/?([[:space:]]|$)" "$source_file"; then
 				return 0
 			fi
 		done
@@ -62,7 +62,7 @@ if [ "@@NAME@@" != "code-oss" ]; then
 	RET='true'
 	if [ -e '/usr/share/debconf/confmodule' ]; then
 		. /usr/share/debconf/confmodule
-		db_get @@NAME@@/add-microsoft-repo || true
+		db_get @@NAME@@/add-zyraxon-repo || true
 	fi
 
 	# Determine whether to write the Zyraxon repository source list
@@ -81,7 +81,7 @@ if [ "@@NAME@@" != "code-oss" ]; then
 		WRITE_KEY='yes'
 	elif [ -f /etc/rpi-issue ]; then
 		# Do not write on Raspberry Pi OS
-		# https://github.com/microsoft/vscode/issues/118825
+		# __ZYRAXKEEP__4_
 		WRITE_SOURCE='no'
 	else
 		WRITE_SOURCE='ask'
@@ -95,10 +95,10 @@ if [ "@@NAME@@" != "code-oss" ]; then
 			WRITE_KEY='yes'
 		elif [ -e '/usr/share/debconf/confmodule' ]; then
 			# Ask the user whether to actually write the source list
-			db_input high @@NAME@@/add-microsoft-repo || true
+			db_input high @@NAME@@/add-zyraxon-repo || true
 			db_go || true
 
-			db_get @@NAME@@/add-microsoft-repo
+			db_get @@NAME@@/add-zyraxon-repo
 			if [ "$RET" = false ]; then
 				WRITE_SOURCE='no'
 				WRITE_KEY='no'
@@ -126,7 +126,7 @@ if [ "@@NAME@@" != "code-oss" ]; then
 # You may comment out this entry, but any other modifications may be lost." > "$CODE_SOURCE_PART_DEB822"
 		cat <<EOF >> "$CODE_SOURCE_PART_DEB822"
 Types: deb
-URIs: https://packages.microsoft.com/repos/code
+URIs: __ZYRAXKEEP__5_
 Suites: stable
 Components: main
 Architectures: @@ARCHITECTURE@@
@@ -138,7 +138,7 @@ EOF
 	fi
 
 	if [ "$WRITE_KEY" != 'no' ]; then
-		# Sourced from https://packages.microsoft.com/keys/microsoft.asc
+		# Sourced from __ZYRAXKEEP__6_
 		if [ ! -f $CODE_TRUSTED_PART ]; then
 			echo "-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: BSN Pgp v1.1.0.0

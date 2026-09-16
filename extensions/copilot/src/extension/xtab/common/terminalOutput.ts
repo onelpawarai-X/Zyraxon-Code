@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ITerminalService } from '../../../platform/terminal/common/terminalService';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { URI } from '../../../util/vs/base/common/uri';
@@ -11,7 +11,7 @@ import { URI } from '../../../util/vs/base/common/uri';
 const MAX_BUFFER_CHARS = 2000;
 
 interface LastTerminalActivity {
-	readonly terminal: vscode.Terminal;
+	readonly terminal: zyraxoncode.Terminal;
 	readonly terminalName: string;
 	readonly commandLine: string | undefined;
 	readonly cwd: string | undefined;
@@ -46,7 +46,7 @@ export class TerminalMonitor extends Disposable {
 		}));
 	}
 
-	private _recordTerminalActivity(event: vscode.TerminalShellExecutionEndEvent): void {
+	private _recordTerminalActivity(event: zyraxoncode.TerminalShellExecutionEndEvent): void {
 		const executedCommand = event.execution;
 
 		this._lastActivity = {

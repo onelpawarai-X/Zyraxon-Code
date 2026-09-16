@@ -64,7 +64,7 @@ type ContentRefData =
 	};
 
 type InlineAnchorWidgetMetadata = {
-	vscodeLinkType: string;
+	zyraxoncodeLinkType: string;
 	linkText?: string;
 };
 
@@ -83,7 +83,7 @@ export function renderFileWidgets(element: HTMLElement, instantiationService: II
 	const links = element.querySelectorAll('a');
 	links.forEach(a => {
 		// Empty link text -> render file widget
-		// Also support metadata format: [linkText](file:///...uri?vscodeLinkType=...)
+		// Also support metadata format: [linkText](__ZYRAXKEEP__0_)
 		const linkText = a.textContent?.trim();
 		let shouldRenderWidget = false;
 		let metadata: InlineAnchorWidgetMetadata | undefined;
@@ -101,18 +101,18 @@ export function renderFileWidgets(element: HTMLElement, instantiationService: II
 		if (!linkText) {
 			shouldRenderWidget = true;
 		} else if (uri) {
-			// Check for vscodeLinkType in query parameters
+			// Check for zyraxoncodeLinkType in query parameters
 			const searchParams = new URLSearchParams(uri.query);
-			const vscodeLinkType = searchParams.get('vscodeLinkType');
-			if (vscodeLinkType) {
+			const zyraxoncodeLinkType = searchParams.get('zyraxoncodeLinkType');
+			if (zyraxoncodeLinkType) {
 				metadata = {
-					vscodeLinkType,
+					zyraxoncodeLinkType,
 					linkText
 				};
 				shouldRenderWidget = true;
 
-				// Strip vscodeLinkType from the URI once we've extracted the metadata for better compatibility with different FS
-				searchParams.delete('vscodeLinkType');
+				// Strip zyraxoncodeLinkType from the URI once we've extracted the metadata for better compatibility with different FS
+				searchParams.delete('zyraxoncodeLinkType');
 				const remainingQuery = searchParams.toString();
 				uri = uri.with({ query: remainingQuery });
 			}
@@ -189,9 +189,9 @@ export class InlineAnchorWidget extends Disposable {
 					: `:${location.range.startLineNumber}-${location.range.endLineNumber}`;
 
 				iconText = [filePathLabel, dom.$('span.label-suffix', undefined, suffix)];
-			} else if (location.uri.scheme === 'vscode-notebook-cell' && this.data.kind !== 'symbol') {
+			} else if (location.uri.scheme === 'zyraxoncode-notebook-cell' && this.data.kind !== 'symbol') {
 				iconText = [`${filePathLabel} • cell${this.getCellIndex(location.uri)}`];
-			} else if (location.uri.scheme === Schemas.vscodeBrowser) {
+			} else if (location.uri.scheme === Schemas.zyraxoncodeBrowser) {
 				defaultIcon = Codicon.globe;
 				const editorName = this.editorService.findEditors(location.uri)[0]?.editor?.getName() ?? BrowserEditorInput.DEFAULT_LABEL;
 				iconText = [editorName];

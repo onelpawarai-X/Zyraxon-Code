@@ -562,7 +562,7 @@ function centerLayout(layout: { nodes: LayoutNode[]; edges: LayoutEdge[]; subgra
 
 // ---- SVG Rendering ----
 
-const SVG_NS = 'http://www.w3.org/2000/svg';
+const SVG_NS = '__ZYRAXKEEP__0_';
 
 function svgEl<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string, string | number>): SVGElementTagNameMap[K] {
 	const el = document.createElementNS(SVG_NS, tag);
@@ -574,29 +574,29 @@ function svgEl<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<strin
 
 function getNodeColor(kind: IChatDebugEvent['kind'], isError?: boolean): string {
 	if (isError) {
-		return 'var(--vscode-errorForeground)';
+		return 'var(--zyraxoncode-errorForeground)';
 	}
 	switch (kind) {
 		case 'userMessage':
-			return 'var(--vscode-textLink-foreground)';
+			return 'var(--zyraxoncode-textLink-foreground)';
 		case 'modelTurn':
-			return 'var(--vscode-charts-blue, var(--vscode-textLink-foreground))';
+			return 'var(--zyraxoncode-charts-blue, var(--zyraxoncode-textLink-foreground))';
 		case 'toolCall':
-			return 'var(--vscode-testing-iconPassed, #73c991)';
+			return 'var(--zyraxoncode-testing-iconPassed, #73c991)';
 		case 'subagentInvocation':
-			return 'var(--vscode-charts-purple, #b267e6)';
+			return 'var(--zyraxoncode-charts-purple, #b267e6)';
 		case 'agentResponse':
-			return 'var(--vscode-foreground)';
+			return 'var(--zyraxoncode-foreground)';
 		case 'generic':
-			return 'var(--vscode-descriptionForeground)';
+			return 'var(--zyraxoncode-descriptionForeground)';
 	}
 }
 
 const SUBGRAPH_COLORS = [
-	'var(--vscode-charts-purple, #b267e6)',
-	'var(--vscode-charts-blue, #3dc9b0)',
-	'var(--vscode-charts-yellow, #e5c07b)',
-	'var(--vscode-charts-orange, #d19a66)',
+	'var(--zyraxoncode-charts-purple, #b267e6)',
+	'var(--zyraxoncode-charts-blue, #3dc9b0)',
+	'var(--zyraxoncode-charts-yellow, #e5c07b)',
+	'var(--zyraxoncode-charts-orange, #d19a66)',
 ];
 
 export function renderFlowChartSVG(layout: FlowLayout): FlowChartRenderResult {
@@ -702,7 +702,7 @@ function renderSubgraphs(svg: SVGElement, subgraphs: readonly SubgraphRect[], fo
 			y: sg.y + SUBGRAPH_HEADER_HEIGHT / 2 + 4,
 			'font-size': SUBLABEL_FONT_SIZE,
 			fill: color,
-			'font-family': 'var(--vscode-font-family, sans-serif)',
+			'font-family': 'var(--zyraxoncode-font-family, sans-serif)',
 			'font-weight': '600',
 		});
 		headerText.textContent = `${chevron} ${sg.label}`;
@@ -716,8 +716,8 @@ function renderSubgraphs(svg: SVGElement, subgraphs: readonly SubgraphRect[], fo
 				x: sg.x + sg.width / 2,
 				y: sg.y + SUBGRAPH_HEADER_HEIGHT + SUBGRAPH_PADDING + 4,
 				'font-size': SUBLABEL_FONT_SIZE,
-				fill: 'var(--vscode-descriptionForeground)',
-				'font-family': 'var(--vscode-font-family, sans-serif)',
+				fill: 'var(--zyraxoncode-descriptionForeground)',
+				'font-family': 'var(--zyraxoncode-font-family, sans-serif)',
 				'font-style': 'italic',
 				'text-anchor': 'middle',
 			});
@@ -730,7 +730,7 @@ function renderSubgraphs(svg: SVGElement, subgraphs: readonly SubgraphRect[], fo
 }
 
 function renderEdges(svg: SVGElement, edges: readonly LayoutEdge[]): void {
-	const strokeAttrs = { fill: 'none', stroke: 'var(--vscode-descriptionForeground)', 'stroke-width': EDGE_STROKE_WIDTH, 'stroke-linecap': 'round' };
+	const strokeAttrs = { fill: 'none', stroke: 'var(--zyraxoncode-descriptionForeground)', 'stroke-width': EDGE_STROKE_WIDTH, 'stroke-linecap': 'round' };
 	// allow-any-unicode-next-line
 	const r = 6; // corner radius for 90° bends
 
@@ -788,8 +788,8 @@ function renderEdges(svg: SVGElement, edges: readonly LayoutEdge[]): void {
 }
 
 function renderNodes(svg: SVGElement, nodes: readonly LayoutNode[], focusableElements: Map<string, SVGElement>): void {
-	const fontFamily = 'var(--vscode-font-family, sans-serif)';
-	const nodeFill = 'var(--vscode-editor-background, var(--vscode-editorWidget-background))';
+	const fontFamily = 'var(--zyraxoncode-font-family, sans-serif)';
+	const nodeFill = 'var(--zyraxoncode-editor-background, var(--zyraxoncode-editorWidget-background))';
 
 	for (const node of nodes) {
 		const g = document.createElementNS(SVG_NS, 'g');
@@ -829,7 +829,7 @@ function renderNodes(svg: SVGElement, nodes: readonly LayoutNode[], focusableEle
 			rx: NODE_BORDER_RADIUS + focusOffset,
 			ry: NODE_BORDER_RADIUS + focusOffset,
 			fill: 'none',
-			stroke: 'var(--vscode-focusBorder)',
+			stroke: 'var(--zyraxoncode-focusBorder)',
 			'stroke-width': 2,
 		}));
 
@@ -844,23 +844,23 @@ function renderNodes(svg: SVGElement, nodes: readonly LayoutNode[], focusableEle
 		const isMessage = isMessageKind(node.kind);
 		if (isMessage && node.sublabel) {
 			// Message nodes: small header label + larger message text
-			const header = svgEl('text', { x: textX, y: node.y + NODE_PADDING_V + SUBLABEL_FONT_SIZE, 'font-size': SUBLABEL_FONT_SIZE, fill: 'var(--vscode-descriptionForeground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
+			const header = svgEl('text', { x: textX, y: node.y + NODE_PADDING_V + SUBLABEL_FONT_SIZE, 'font-size': SUBLABEL_FONT_SIZE, fill: 'var(--zyraxoncode-descriptionForeground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
 			header.textContent = node.label;
 			g.appendChild(header);
 
-			const msg = svgEl('text', { x: textX, y: node.y + node.height - NODE_PADDING_V - 2, 'font-size': FONT_SIZE, fill: 'var(--vscode-foreground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
+			const msg = svgEl('text', { x: textX, y: node.y + node.height - NODE_PADDING_V - 2, 'font-size': FONT_SIZE, fill: 'var(--zyraxoncode-foreground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
 			msg.textContent = node.sublabel;
 			g.appendChild(msg);
 		} else if (node.sublabel) {
-			const label = svgEl('text', { x: textX, y: node.y + NODE_PADDING_V + FONT_SIZE, 'font-size': FONT_SIZE, fill: 'var(--vscode-foreground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
+			const label = svgEl('text', { x: textX, y: node.y + NODE_PADDING_V + FONT_SIZE, 'font-size': FONT_SIZE, fill: 'var(--zyraxoncode-foreground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
 			label.textContent = node.label;
 			g.appendChild(label);
 
-			const sub = svgEl('text', { x: textX, y: node.y + node.height - NODE_PADDING_V, 'font-size': SUBLABEL_FONT_SIZE, fill: 'var(--vscode-descriptionForeground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
+			const sub = svgEl('text', { x: textX, y: node.y + node.height - NODE_PADDING_V, 'font-size': SUBLABEL_FONT_SIZE, fill: 'var(--zyraxoncode-descriptionForeground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
 			sub.textContent = node.sublabel;
 			g.appendChild(sub);
 		} else {
-			const label = svgEl('text', { x: textX, y: node.y + node.height / 2 + FONT_SIZE / 2 - 1, 'font-size': FONT_SIZE, fill: 'var(--vscode-foreground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
+			const label = svgEl('text', { x: textX, y: node.y + node.height / 2 + FONT_SIZE / 2 - 1, 'font-size': FONT_SIZE, fill: 'var(--zyraxoncode-foreground)', 'font-family': fontFamily, 'clip-path': `url(#${clipId})` });
 			label.textContent = node.label;
 			g.appendChild(label);
 		}
@@ -885,7 +885,7 @@ function renderMergedToggle(g: Element, node: LayoutNode, color: string, fontFam
 	toggleGroup.appendChild(svgEl('line', {
 		x1: toggleX, y1: node.y + 4,
 		x2: toggleX, y2: node.y + node.height - 4,
-		stroke: 'var(--vscode-descriptionForeground)',
+		stroke: 'var(--zyraxoncode-descriptionForeground)',
 		'stroke-width': 0.5,
 		opacity: 0.4,
 	}));

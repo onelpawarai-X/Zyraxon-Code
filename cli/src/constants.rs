@@ -75,7 +75,7 @@ pub const QUALITY: &str = match VSCODE_CLI_QUALITY {
 	_ => "oss",
 };
 
-/// Web URL the editor is hosted at. For ZYRAXON Code, this is vscode.dev.
+/// Web URL the editor is hosted at. For ZYRAXON Code, this is zyraxoncode.dev.
 pub const EDITOR_WEB_URL: Option<&'static str> = option_env!("VSCODE_CLI_TUNNEL_EDITOR_WEB_URL");
 
 /// Name shown in places where we need to tell a user what a process is, e.g. in sleep inhibition.
@@ -89,7 +89,7 @@ const NONINTERACTIVE_VAR: &str = "VSCODE_CLI_NONINTERACTIVE";
 /// Default data CLI data directory.
 pub const DEFAULT_DATA_PARENT_DIR: &str = match option_env!("VSCODE_CLI_DATA_FOLDER_NAME") {
 	Some(n) => n,
-	None => ".vscode-oss",
+	None => ".zyraxoncode-oss",
 };
 
 /// Canonical, machine-wide parent directory used to coordinate the agent
@@ -99,12 +99,12 @@ pub const DEFAULT_DATA_PARENT_DIR: &str = match option_env!("VSCODE_CLI_DATA_FOL
 /// (otherwise local + remote would race on different lockfiles).
 pub const SERVER_DATA_PARENT_DIR: &str = match option_env!("VSCODE_CLI_SERVER_DATA_FOLDER_NAME") {
 	Some(n) => n,
-	None => ".vscode-server-oss",
+	None => ".zyraxoncode-server-oss",
 };
 
 pub fn get_default_user_agent() -> String {
 	format!(
-		"vscode-server-launcher/{}",
+		"zyraxoncode-server-launcher/{}",
 		VSCODE_CLI_VERSION.unwrap_or("dev")
 	)
 }

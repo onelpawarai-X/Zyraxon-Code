@@ -157,7 +157,7 @@ _None remaining._ All grilling-phase questions resolved — see Decisions. The o
 - Architecture context: [./CONTEXT.md](./CONTEXT.md) (M7 transcript grouping, M9 provisional/materialize lifecycle, glossary `Turn.id`)
 - Phase 13 plan (mapper + `getSessionMessages` binding, id-correctness note): [./phase13-plan.md](./phase13-plan.md)
 - Copilot fork reference (NOT directly portable — uses `getNextTurnEventId` + DB `vacuumInto` + `remapTurnIds`): [../copilot/copilotAgent.ts](../copilot/copilotAgent.ts) (`createSession` fork branch ~1108-1170)
-- Production-extension reference (NOT portable — message-index + EXCLUSIVE "fork before request"): [`extensions/copilot/src/extension/chatSessions/vscode-node/claudeChatSessionContentProvider.ts`](../../../../../../extensions/copilot/src/extension/chatSessions/vscode-node/claudeChatSessionContentProvider.ts#L387)
+- Production-extension reference (NOT portable — message-index + EXCLUSIVE "fork before request"): [`extensions/copilot/src/extension/chatSessions/zyraxoncode-node/claudeChatSessionContentProvider.ts`](../../../../../../extensions/copilot/src/extension/chatSessions/zyraxoncode-node/claudeChatSessionContentProvider.ts#L387)
 - SDK contract: [`forkSession`](../../../../../../node_modules/@anthropic-ai/claude-agent-sdk/sdk.d.ts#L685) / [`ForkSessionOptions`](../../../../../../node_modules/@anthropic-ai/claude-agent-sdk/sdk.d.ts#L690) / [`ForkSessionResult`](../../../../../../node_modules/@anthropic-ai/claude-agent-sdk/sdk.d.ts#L700)
 - E2E skills: [launch](../../../../../../.agents/skills/launch/SKILL.md), [code-oss-logs](../../../../../../.github/skills/code-oss-logs/SKILL.md)
 - Council models consulted: GPT-5.5, Claude Opus 4.6, GPT-5.3-Codex (3 independent plans synthesized)

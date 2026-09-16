@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { VsCodeTextDocument } from '../../../../platform/editing/common/abstractText';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { getStructureUsingIndentation } from '../../../../platform/parser/node/indentationStructure';
@@ -15,7 +15,7 @@ import { createTextDocumentData } from '../../../../util/common/test/shims/textD
 import * as path from '../../../../util/vs/base/common/path';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { OffsetRange } from '../../../../util/vs/editor/common/core/ranges/offsetRange';
-import { Range, Selection } from '../../../../vscodeTypes';
+import { Range, Selection } from '../../../../zyraxoncodeTypes';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { getAdjustedSelection } from '../inline/adjustSelection';
 import { IProjectedDocumentDebugInfo } from '../inline/summarizedDocument/implementation';
@@ -43,7 +43,7 @@ interface FixtureData {
 	languageId: 'typescript' | string;
 }
 
-/** See https://github.com/microsoft/vscode-ts-file-path-support */
+/** See __ZYRAXKEEP__0_ */
 export type RelativeFilePath<T extends string> = string & { baseDir?: T };
 
 export function fixture(relativePath: RelativeFilePath<'$dir/fixtures'>): string {
@@ -65,7 +65,7 @@ function addSecondaryExtension(filePath: string, extension: string): string {
 export async function fromFixtureOld(
 	pathWithinFixturesDir: string,
 	languageId: WASMLanguage | string,
-	formattingOptions?: vscode.FormattingOptions
+	formattingOptions?: zyraxoncode.FormattingOptions
 ): Promise<ITestFile> {
 	const filePath = path.join(__dirname, 'fixtures', pathWithinFixturesDir);
 	const contents = (await fs.promises.readFile(filePath)).toString();
@@ -94,7 +94,7 @@ interface ITestFile {
 	contents: string;
 	filePath: string;
 	languageId: WASMLanguage | string;
-	formattingOptions?: vscode.FormattingOptions;
+	formattingOptions?: zyraxoncode.FormattingOptions;
 }
 export async function generateSummarizedDocument(
 	filePromise: ITestFile | Promise<ITestFile>,
@@ -274,7 +274,7 @@ export async function generateSummarizedDocumentAndExtractGoodSelection(
 }
 function toSelection(
 	selection: [number, number] | [number, number, number, number]
-): vscode.Selection {
+): zyraxoncode.Selection {
 	if (selection.length === 2) {
 		return new Selection(
 			selection[0],

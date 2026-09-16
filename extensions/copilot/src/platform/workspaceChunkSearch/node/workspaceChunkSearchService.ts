@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createFencedCodeBlock, getLanguageId } from '../../../util/common/markdown';
 import { Result } from '../../../util/common/result';
 import { createServiceIdentifier } from '../../../util/common/services';
@@ -17,12 +17,12 @@ import { Emitter, Event } from '../../../util/vs/base/common/event';
 import { Disposable, IDisposable } from '../../../util/vs/base/common/lifecycle';
 import { StopWatch } from '../../../util/vs/base/common/stopwatch';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseProgressPart2, ChatResponseWarningPart } from '../../../vscodeTypes';
+import { ChatResponseProgressPart2, ChatResponseWarningPart } from '../../../zyraxoncodeTypes';
 import { IAuthenticationService } from '../../authentication/common/authentication';
 import { FileChunk, FileChunkAndScore } from '../../chunking/common/chunk';
 import { MAX_CHUNK_SIZE_TOKENS } from '../../chunking/node/naiveChunker';
 import { distance, Embedding, EmbeddingDistance, Embeddings, EmbeddingType, IEmbeddingsComputer } from '../../embeddings/common/embeddingsComputer';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { IIgnoreService } from '../../ignore/common/ignoreService.js';
 import { logExecTime, LogExecTime } from '../../log/common/logExecTime';
 import { ILogService } from '../../log/common/logService';
@@ -76,7 +76,7 @@ export interface IWorkspaceChunkSearchService extends IDisposable {
 		query: WorkspaceChunkQuery,
 		options: WorkspaceChunkSearchOptions,
 		telemetryInfo: TelemetryCorrelationId,
-		progress: vscode.Progress<vscode.ChatResponsePart> | undefined,
+		progress: zyraxoncode.Progress<zyraxoncode.ChatResponsePart> | undefined,
 		token: CancellationToken,
 	): Promise<WorkspaceChunkSearchResult>;
 
@@ -194,7 +194,7 @@ export class WorkspaceChunkSearchService extends Disposable implements IWorkspac
 		return this._impl.isAvailable();
 	}
 
-	async searchFileChunks(sizing: WorkspaceChunkSearchSizing, query: WorkspaceChunkQuery, options: WorkspaceChunkSearchOptions, telemetryInfo: TelemetryCorrelationId, progress: vscode.Progress<vscode.ChatResponsePart> | undefined, token: CancellationToken): Promise<WorkspaceChunkSearchResult> {
+	async searchFileChunks(sizing: WorkspaceChunkSearchSizing, query: WorkspaceChunkQuery, options: WorkspaceChunkSearchOptions, telemetryInfo: TelemetryCorrelationId, progress: zyraxoncode.Progress<zyraxoncode.ChatResponsePart> | undefined, token: CancellationToken): Promise<WorkspaceChunkSearchResult> {
 		const impl = await this.tryInit(false);
 		if (!impl) {
 			throw new Error('Workspace chunk search service not available');
@@ -259,7 +259,7 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 		@IRerankerService private readonly _rerankerService: IRerankerService,
 		@ISimulationTestContext private readonly _simulationTestContext: ISimulationTestContext,
 		@ITelemetryService private readonly _telemetryService: ITelemetryService,
-		@IVSCodeExtensionContext private readonly _extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _extensionContext: IZyraxonCodeExtensionContext,
 		@IWorkspaceService private readonly _workspaceService: IWorkspaceService,
 		@IWorkspaceFileIndex private readonly _workspaceFileIndex: IWorkspaceFileIndex,
 	) {
@@ -324,7 +324,7 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 		query: WorkspaceChunkQuery,
 		options: WorkspaceChunkSearchOptions,
 		telemetryInfo: TelemetryCorrelationId,
-		progress: vscode.Progress<vscode.ChatResponsePart> | undefined,
+		progress: zyraxoncode.Progress<zyraxoncode.ChatResponsePart> | undefined,
 		token: CancellationToken
 	): Promise<WorkspaceChunkSearchResult> {
 		const wasFirstSearchInWorkspace = !this._extensionContext.workspaceState.get(this.shouldEagerlyIndexKey, false);
@@ -538,7 +538,7 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 	}
 
 	@LogExecTime(self => self._logService, 'WorkspaceChunkSearch::rerankResultIfNeeded')
-	private async rerankResultIfNeeded(query: WorkspaceChunkQueryWithEmbeddings, result: StrategySearchResult, maxResults: number, telemetryInfo: TelemetryCorrelationId, progress: vscode.Progress<vscode.ChatResponsePart> | undefined, token: CancellationToken): Promise<WorkspaceChunkSearchResult> {
+	private async rerankResultIfNeeded(query: WorkspaceChunkQueryWithEmbeddings, result: StrategySearchResult, maxResults: number, telemetryInfo: TelemetryCorrelationId, progress: zyraxoncode.Progress<zyraxoncode.ChatResponsePart> | undefined, token: CancellationToken): Promise<WorkspaceChunkSearchResult> {
 		const chunks = result.chunks;
 		const orderedChunks = await this.rerankChunks(query, chunks, maxResults, telemetryInfo, progress, token);
 		return {
@@ -548,7 +548,7 @@ class WorkspaceChunkSearchServiceImpl extends Disposable implements IWorkspaceCh
 	}
 
 	@LogExecTime(self => self._logService, 'WorkspaceChunkSearch::rerankChunks')
-	private async rerankChunks(query: WorkspaceChunkQueryWithEmbeddings, inChunks: readonly FileChunkAndScore[], maxResults: number, telemetryInfo: TelemetryCorrelationId, progress: vscode.Progress<vscode.ChatResponsePart> | undefined, token: CancellationToken): Promise<FileChunkAndScore[]> {
+	private async rerankChunks(query: WorkspaceChunkQueryWithEmbeddings, inChunks: readonly FileChunkAndScore[], maxResults: number, telemetryInfo: TelemetryCorrelationId, progress: zyraxoncode.Progress<zyraxoncode.ChatResponsePart> | undefined, token: CancellationToken): Promise<FileChunkAndScore[]> {
 		if (!inChunks.length) {
 			return [];
 		}
@@ -691,7 +691,7 @@ export class NullWorkspaceChunkSearchService implements IWorkspaceChunkSearchSer
 	getIndexState(): Promise<WorkspaceIndexState> {
 		throw new Error('Method not implemented.');
 	}
-	searchFileChunks(sizing: WorkspaceChunkSearchSizing, query: WorkspaceChunkQuery, options: WorkspaceChunkSearchOptions, telemetryInfo: TelemetryCorrelationId, progress: vscode.Progress<vscode.ChatResponsePart> | undefined, token: CancellationToken): Promise<WorkspaceChunkSearchResult> {
+	searchFileChunks(sizing: WorkspaceChunkSearchSizing, query: WorkspaceChunkQuery, options: WorkspaceChunkSearchOptions, telemetryInfo: TelemetryCorrelationId, progress: zyraxoncode.Progress<zyraxoncode.ChatResponsePart> | undefined, token: CancellationToken): Promise<WorkspaceChunkSearchResult> {
 		throw new Error('Method not implemented.');
 	}
 	triggerIndexing(_trigger?: BuildIndexTriggerReason, _onProgress?: (message: string) => void, _telemetryInfo?: TelemetryCorrelationId, _token?: CancellationToken): Promise<Result<true, TriggerIndexingError>> {

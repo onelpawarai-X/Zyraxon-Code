@@ -29,7 +29,7 @@ import { IMicCaptureService } from '../../../../../workbench/contrib/chat/browse
 import { URI } from '../../../../../base/common/uri.js';
 
 // The new-session input box styling lives in these stylesheets; `style.css`
-// provides the `--vscode-agentsChatInput-*` theme variables and the
+// provides the `--zyraxoncode-agentsChatInput-*` theme variables and the
 // `.agent-sessions-workbench` scope.
 import '../../browser/media/chatInput.css';
 import '../../browser/media/newChatInSession.css';

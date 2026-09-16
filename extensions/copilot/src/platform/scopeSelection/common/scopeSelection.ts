@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Selection, TextEditor } from 'vscode';
+import type { Selection, TextEditor } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 export const IScopeSelector = createServiceIdentifier<IScopeSelector>('IScopeSelector');

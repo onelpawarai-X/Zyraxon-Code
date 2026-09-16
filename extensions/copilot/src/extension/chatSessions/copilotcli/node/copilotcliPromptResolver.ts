@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { Attachment } from '@github/copilot/sdk';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -17,14 +17,14 @@ import * as path from '../../../../util/vs/base/common/path';
 import { extUriBiasedIgnorePathCase, relativePath } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatReferenceBinaryData, ChatReferenceDiagnostic, FileType, Location } from '../../../../vscodeTypes';
+import { ChatReferenceBinaryData, ChatReferenceDiagnostic, FileType, Location } from '../../../../zyraxoncodeTypes';
 import { ChatVariablesCollection, isCustomizationsIndex, isInstructionFile, isPromptFile } from '../../../prompt/common/chatVariablesCollection';
 import { generateUserPrompt } from '../../../prompts/node/agent/copilotCLIPrompt';
 import { getWorkingDirectory, isIsolationEnabled, IWorkspaceInfo } from '../../common/workspaceInfo';
 import { ICopilotCLIImageSupport, isImageMimeType } from './copilotCLIImageSupport';
 import { ICopilotCLISkills } from './copilotCLISkills';
 import { CancellationToken } from '../../../../util/vs/base/common/cancellation';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 
 export class CopilotCLIPromptResolver {
 	constructor(
@@ -35,14 +35,14 @@ export class CopilotCLIPromptResolver {
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 		@IIgnoreService private readonly ignoreService: IIgnoreService,
 		@ICopilotCLISkills private readonly skillsService: ICopilotCLISkills,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 	) { }
 
 	/**
 	 * Generates the final prompt for the Copilot CLI agent, resolving variables and preparing attachments.
 	 * @param prompt Provide a prompt to override the request prompt
 	 */
-	public async resolvePrompt(request: vscode.ChatRequest, prompt: string | undefined, additionalReferences: vscode.ChatPromptReference[], workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], token: vscode.CancellationToken): Promise<{ prompt: string; attachments: Attachment[]; references: vscode.ChatPromptReference[] }> {
+	public async resolvePrompt(request: zyraxoncode.ChatRequest, prompt: string | undefined, additionalReferences: zyraxoncode.ChatPromptReference[], workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], token: zyraxoncode.CancellationToken): Promise<{ prompt: string; attachments: Attachment[]; references: zyraxoncode.ChatPromptReference[] }> {
 		const allReferences = new ChatVariablesCollection(request.references.concat(additionalReferences.filter(ref => !request.references.includes(ref))));
 		prompt = prompt ?? request.prompt;
 		const [variables, attachments] = await this.constructChatVariablesAndAttachments(allReferences, workspaceInfo, additionalWorkspaces, token);
@@ -58,8 +58,8 @@ export class CopilotCLIPromptResolver {
 	 * Builds a map from workspace folder URIs to their corresponding worktree URIs.
 	 * Used for multi-folder path translation when isolation is enabled.
 	 */
-	private buildFolderToWorktreeMap(primaryWorkspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[]): ResourceMap<vscode.Uri> {
-		const map = new ResourceMap<vscode.Uri>();
+	private buildFolderToWorktreeMap(primaryWorkspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[]): ResourceMap<zyraxoncode.Uri> {
+		const map = new ResourceMap<zyraxoncode.Uri>();
 		if (primaryWorkspaceInfo.worktree && primaryWorkspaceInfo.repository) {
 			map.set(primaryWorkspaceInfo.repository, primaryWorkspaceInfo.worktree);
 		}
@@ -71,10 +71,10 @@ export class CopilotCLIPromptResolver {
 		return map;
 	}
 
-	private async constructChatVariablesAndAttachments(variables: ChatVariablesCollection, workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], token: vscode.CancellationToken): Promise<[variables: ChatVariablesCollection, Attachment[]]> {
-		const validReferences: vscode.ChatPromptReference[] = [];
-		const fileFolderReferences: vscode.ChatPromptReference[] = [];
-		const builtinSlashCommandReferences: vscode.ChatPromptReference[] = [];
+	private async constructChatVariablesAndAttachments(variables: ChatVariablesCollection, workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], token: zyraxoncode.CancellationToken): Promise<[variables: ChatVariablesCollection, Attachment[]]> {
+		const validReferences: zyraxoncode.ChatPromptReference[] = [];
+		const fileFolderReferences: zyraxoncode.ChatPromptReference[] = [];
+		const builtinSlashCommandReferences: zyraxoncode.ChatPromptReference[] = [];
 		const isolationEnabled = isIsolationEnabled(workspaceInfo) || additionalWorkspaces.some(ws => isIsolationEnabled(ws));
 		const folderToWorktreeMap = this.buildFolderToWorktreeMap(workspaceInfo, additionalWorkspaces);
 		const hasAnyWorkingDirectory = getWorkingDirectory(workspaceInfo) || additionalWorkspaces.some(ws => getWorkingDirectory(ws));
@@ -133,7 +133,7 @@ export class CopilotCLIPromptResolver {
 				if (await this.ignoreService.isCopilotIgnored(variableRef.value)) {
 					return;
 				}
-				if (variableRef.value.scheme === Schemas.vscodeNotebookCellOutput || variableRef.value.scheme === Schemas.vscodeNotebookCellOutput) {
+				if (variableRef.value.scheme === Schemas.zyraxoncodeNotebookCellOutput || variableRef.value.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 					return;
 				}
 
@@ -184,7 +184,7 @@ export class CopilotCLIPromptResolver {
 	}
 
 
-	private async constructFileOrFolderAttachments(fileOrFolderReferences: vscode.ChatPromptReference[], token: vscode.CancellationToken): Promise<[Attachment[], image: Attachment[]]> {
+	private async constructFileOrFolderAttachments(fileOrFolderReferences: zyraxoncode.ChatPromptReference[], token: zyraxoncode.CancellationToken): Promise<[Attachment[], image: Attachment[]]> {
 		const attachments: Attachment[] = [];
 		const images: Attachment[] = [];
 		await Promise.all(fileOrFolderReferences.map(async ref => {
@@ -276,7 +276,7 @@ export class CopilotCLIPromptResolver {
 		return [attachments, images];
 	}
 
-	private async translateWorkspaceRefToWorkingDirectoryRef(ref: vscode.ChatPromptReference, workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], folderToWorktreeMap: ResourceMap<vscode.Uri>, token: vscode.CancellationToken): Promise<vscode.ChatPromptReference> {
+	private async translateWorkspaceRefToWorkingDirectoryRef(ref: zyraxoncode.ChatPromptReference, workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], folderToWorktreeMap: ResourceMap<zyraxoncode.Uri>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.ChatPromptReference> {
 		try {
 			if (ref.value instanceof ChatReferenceBinaryData) {
 				return ref;
@@ -298,7 +298,7 @@ export class CopilotCLIPromptResolver {
 			} else if (ref.value instanceof ChatReferenceDiagnostic) {
 				const diagnostics = await Promise.all(ref.value.diagnostics.map(async ([uri, diags]) => {
 					const translatedUri = await this.translateWorkspaceUriToWorkingDirectoryUri(uri, workspaceInfo, additionalWorkspaces, folderToWorktreeMap, token);
-					return [translatedUri, diags] as [vscode.Uri, vscode.Diagnostic[]];
+					return [translatedUri, diags] as [zyraxoncode.Uri, zyraxoncode.Diagnostic[]];
 				}));
 				return {
 					...ref,
@@ -312,7 +312,7 @@ export class CopilotCLIPromptResolver {
 		}
 	}
 
-	private async translateWorkspaceUriToWorkingDirectoryUri(uri: vscode.Uri, workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], folderToWorktreeMap: ResourceMap<vscode.Uri>, token: vscode.CancellationToken): Promise<vscode.Uri> {
+	private async translateWorkspaceUriToWorkingDirectoryUri(uri: zyraxoncode.Uri, workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], folderToWorktreeMap: ResourceMap<zyraxoncode.Uri>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.Uri> {
 		const workspaceFolder = this.workspaceService.getWorkspaceFolder(uri);
 		const matchingWorktree = workspaceFolder ? folderToWorktreeMap.get(workspaceFolder) : undefined;
 		if (!workspaceFolder || !matchingWorktree) {
@@ -330,7 +330,7 @@ export class CopilotCLIPromptResolver {
 		return candidateStat ? candidate : uri;
 	}
 
-	private async findMatchingWorktree(uri: vscode.Uri, workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], token: vscode.CancellationToken): Promise<vscode.Uri | undefined> {
+	private async findMatchingWorktree(uri: zyraxoncode.Uri, workspaceInfo: IWorkspaceInfo, additionalWorkspaces: IWorkspaceInfo[], token: zyraxoncode.CancellationToken): Promise<zyraxoncode.Uri | undefined> {
 		// Assume the uri is `/user/abc/projects/project_abc/file.ts` and one of the items in workspaceInfo or additionalWorkspaces has a folder/repositoryUri that is /user/abc/projects/project_abc and that has a worktree at `/user/abc/projects/project_abc-worktree`, we want to translate the file uri to `/user/abc/projects/project_abc-worktree/file.ts`.
 		for (const ws of [workspaceInfo, ...additionalWorkspaces]) {
 			if (ws.repository && ws.worktree) {
@@ -350,9 +350,9 @@ export class CopilotCLIPromptResolver {
 /**
  * Never include this variable in Copilot CLI prompts when using git worktrees (isolation).
  * This causes issues as the repository information will not match the worktree state.
- * https://github.com/microsoft/vscode/issues/279865
+ * __ZYRAXKEEP__0_
  */
-function isWorkspaceRepoInformationItem(ref: vscode.ChatPromptReference): boolean {
+function isWorkspaceRepoInformationItem(ref: zyraxoncode.ChatPromptReference): boolean {
 	if (typeof ref.value !== 'string') {
 		return false;
 	}
@@ -365,10 +365,10 @@ function isWorkspaceRepoInformationItem(ref: vscode.ChatPromptReference): boolea
 		ref.value.startsWith('Repository name:');
 }
 
-function isGitHubPullRequestReference(ref: vscode.ChatPromptReference): boolean {
+function isGitHubPullRequestReference(ref: zyraxoncode.ChatPromptReference): boolean {
 	return ref.id === 'github-pull-request';
 }
 
-function isGitMergeChangesReference(ref: vscode.ChatPromptReference): boolean {
+function isGitMergeChangesReference(ref: zyraxoncode.ChatPromptReference): boolean {
 	return ref.id === 'git-merge-changes';
 }

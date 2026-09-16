@@ -21,13 +21,13 @@ import { createDecorator } from '../../../instantiation/common/instantiation.js'
  * in other layers) can import it without pulling in the node-only concrete
  * implementation and its transitive native dependencies (`node:sqlite`).
  */
-export const AgentHostOTelServiceNamespace = 'vscode.agent-host';
-export const AgentHostOTelServiceName = 'vscode-agent-host';
-export const AgentHostSessionSpanName = 'vscode.agent_host.session';
-export const AgentHostSessionTitleSpanName = 'vscode.agent_host.session.title_changed';
+export const AgentHostOTelServiceNamespace = 'zyraxoncode.agent-host';
+export const AgentHostOTelServiceName = 'zyraxoncode-agent-host';
+export const AgentHostSessionSpanName = 'zyraxoncode.agent_host.session';
+export const AgentHostSessionTitleSpanName = 'zyraxoncode.agent_host.session.title_changed';
 
-export const AgentHostSessionTitleAttribute = 'vscode.agent_host.session.title';
-export const AgentHostSessionUriAttribute = 'vscode.agent_host.session.uri';
+export const AgentHostSessionTitleAttribute = 'zyraxoncode.agent_host.session.title';
+export const AgentHostSessionUriAttribute = 'zyraxoncode.agent_host.session.uri';
 
 export interface IAgentHostTraceContext {
 	readonly traceId: string;

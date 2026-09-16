@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { filterMap } from '../../../util/common/arrays';
 import { TaskQueue } from '../../../util/common/async';
 import { ErrorUtils } from '../../../util/common/errors';
@@ -15,7 +15,7 @@ import { derived, IObservable, observableFromEvent } from '../../../util/vs/base
 import { CopilotToken } from '../../authentication/common/copilotToken';
 import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStore';
 import { ConfigKey, ExperimentBasedConfig, IConfigurationService } from '../../configuration/common/configurationService';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { ILogger, ILogService } from '../../log/common/logService';
 import { IProxyModelsService } from '../../proxyModels/common/proxyModelsService';
 import { IExperimentationService } from '../../telemetry/common/nullExperimentationService';
@@ -138,8 +138,8 @@ export class InlineEditsModelService extends Disposable implements IInlineEditsM
 		this.onModelListUpdated = Event.fromObservableLight(this._modelInfoObs);
 	}
 
-	get modelInfo(): vscode.InlineCompletionModelInfo | undefined {
-		const models: vscode.InlineCompletionModel[] = this._modelsObs.get().map(m => ({
+	get modelInfo(): zyraxoncode.InlineCompletionModelInfo | undefined {
+		const models: zyraxoncode.InlineCompletionModel[] = this._modelsObs.get().map(m => ({
 			id: m.modelName,
 			name: m.modelName,
 		}));
@@ -420,7 +420,7 @@ export namespace UndesiredModels {
 		private readonly _queue = new TaskQueue();
 
 		constructor(
-			@IVSCodeExtensionContext private readonly _vscodeExtensionContext: IVSCodeExtensionContext,
+			@IZyraxonCodeExtensionContext private readonly _zyraxoncodeExtensionContext: IZyraxonCodeExtensionContext,
 		) {
 			super();
 		}
@@ -454,12 +454,12 @@ export namespace UndesiredModels {
 		}
 
 		private _getModels(): string[] {
-			return this._vscodeExtensionContext.globalState.get<UndesiredModelsValue>(UNDESIRED_MODELS_KEY) ?? [];
+			return this._zyraxoncodeExtensionContext.globalState.get<UndesiredModelsValue>(UNDESIRED_MODELS_KEY) ?? [];
 		}
 
 		private _setModels(models: string[]): Promise<void> {
 			return new Promise((resolve, reject) => {
-				this._vscodeExtensionContext.globalState.update(UNDESIRED_MODELS_KEY, models).then(resolve, reject);
+				this._zyraxoncodeExtensionContext.globalState.update(UNDESIRED_MODELS_KEY, models).then(resolve, reject);
 			});
 		}
 	}

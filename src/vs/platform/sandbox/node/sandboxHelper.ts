@@ -109,7 +109,7 @@ export class SandboxHelperService implements ISandboxHelperService {
 			return undefined;
 		}
 
-		const { getAvailableToolsPolicy, getUserProfilePolicy, getTemporaryFilesPolicy } = await import('@microsoft/mxc-sdk');
+		const { getAvailableToolsPolicy, getUserProfilePolicy, getTemporaryFilesPolicy } = await import('@zyraxon/mxc-sdk');
 		const availableToolsPolicy = getAvailableToolsPolicy(process.env, { containerType: 'processcontainer' });
 		const userProfilePolicy = getUserProfilePolicy();
 		const temporaryFilesPolicy = getTemporaryFilesPolicy(process.env);
@@ -157,7 +157,7 @@ export class SandboxHelperService implements ISandboxHelperService {
 			return undefined;
 		}
 
-		const { buildSandboxPayload } = await import('@microsoft/mxc-sdk');
+		const { buildSandboxPayload } = await import('@zyraxon/mxc-sdk');
 		return buildSandboxPayload(commandLine, policy, workingDirectory, containerName, containment);
 	}
 

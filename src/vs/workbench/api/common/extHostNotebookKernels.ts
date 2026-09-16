@@ -24,18 +24,18 @@ import { INotebookKernelSourceAction } from '../../contrib/notebook/common/noteb
 import { CellExecutionUpdateType } from '../../contrib/notebook/common/notebookExecutionService.js';
 import { checkProposedApiEnabled } from '../../services/extensions/common/extensions.js';
 import { SerializableObjectWithBuffers } from '../../services/extensions/common/proxyIdentifier.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { variablePageSize } from '../../contrib/notebook/common/notebookKernelService.js';
 
 interface IKernelData {
 	extensionId: ExtensionIdentifier;
-	controller: vscode.NotebookController;
-	onDidChangeSelection: Emitter<{ selected: boolean; notebook: vscode.NotebookDocument }>;
-	onDidReceiveMessage: Emitter<{ editor: vscode.NotebookEditor; message: unknown }>;
+	controller: zyraxoncode.NotebookController;
+	onDidChangeSelection: Emitter<{ selected: boolean; notebook: zyraxoncode.NotebookDocument }>;
+	onDidReceiveMessage: Emitter<{ editor: zyraxoncode.NotebookEditor; message: unknown }>;
 	associatedNotebooks: ResourceMap<boolean>;
 }
 
-type ExtHostSelectKernelArgs = ControllerInfo | { notebookEditor: vscode.NotebookEditor } | ControllerInfo & { notebookEditor: vscode.NotebookEditor } | undefined;
+type ExtHostSelectKernelArgs = ControllerInfo | { notebookEditor: zyraxoncode.NotebookEditor } | ControllerInfo & { notebookEditor: zyraxoncode.NotebookEditor } | undefined;
 type SelectKernelReturnArgs = ControllerInfo | { notebookEditorId: string } | ControllerInfo & { notebookEditorId: string } | undefined;
 type ControllerInfo = { id: string; extension: string };
 
@@ -46,10 +46,10 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 	private readonly _activeExecutions = new ResourceMap<NotebookCellExecutionTask>();
 	private readonly _activeNotebookExecutions = new ResourceMap<[NotebookExecutionTask, IDisposable]>();
 
-	private _kernelDetectionTask = new Map<number, vscode.NotebookControllerDetectionTask>();
+	private _kernelDetectionTask = new Map<number, zyraxoncode.NotebookControllerDetectionTask>();
 	private _kernelDetectionTaskHandlePool: number = 0;
 
-	private _kernelSourceActionProviders = new Map<number, vscode.NotebookKernelSourceActionProvider>();
+	private _kernelSourceActionProviders = new Map<number, zyraxoncode.NotebookKernelSourceActionProvider>();
 	private _kernelSourceActionProviderHandlePool: number = 0;
 
 	private readonly _kernelData = new Map<number, IKernelData>();
@@ -92,11 +92,11 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 			ApiCommandResult.Void);
 
 		const requestKernelVariablesApiCommand = new ApiCommand(
-			'vscode.executeNotebookVariableProvider',
+			'zyraxoncode.executeNotebookVariableProvider',
 			'_executeNotebookVariableProvider',
 			'Execute notebook variable provider',
 			[ApiCommandArgument.Uri],
-			new ApiCommandResult<VariablesResult[], vscode.VariablesResult[]>('A promise that resolves to an array of variables', (value, apiArgs) => {
+			new ApiCommandResult<VariablesResult[], zyraxoncode.VariablesResult[]>('A promise that resolves to an array of variables', (value, apiArgs) => {
 				return value.map(variable => {
 					return {
 						variable: {
@@ -116,7 +116,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 		this._commands.registerApiCommand(requestKernelVariablesApiCommand);
 	}
 
-	createNotebookController(extension: IExtensionDescription, id: string, viewType: string, label: string, handler?: (cells: vscode.NotebookCell[], notebook: vscode.NotebookDocument, controller: vscode.NotebookController) => void | Thenable<void>, preloads?: vscode.NotebookRendererScript[]): vscode.NotebookController {
+	createNotebookController(extension: IExtensionDescription, id: string, viewType: string, label: string, handler?: (cells: zyraxoncode.NotebookCell[], notebook: zyraxoncode.NotebookDocument, controller: zyraxoncode.NotebookController) => void | Thenable<void>, preloads?: zyraxoncode.NotebookRendererScript[]): zyraxoncode.NotebookController {
 
 		for (const data of this._kernelData.values()) {
 			if (data.controller.id === id && ExtensionIdentifier.equals(extension.identifier, data.extensionId)) {
@@ -134,8 +134,8 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 
 		let isDisposed = false;
 
-		const onDidChangeSelection = new Emitter<{ selected: boolean; notebook: vscode.NotebookDocument }>();
-		const onDidReceiveMessage = new Emitter<{ editor: vscode.NotebookEditor; message: unknown }>();
+		const onDidChangeSelection = new Emitter<{ selected: boolean; notebook: zyraxoncode.NotebookDocument }>();
+		const onDidReceiveMessage = new Emitter<{ editor: zyraxoncode.NotebookEditor; message: unknown }>();
 
 		const data: INotebookKernelDto2 = {
 			id: createKernelId(extension.identifier, id),
@@ -148,8 +148,8 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 
 		//
 		let _executeHandler = handler ?? _defaultExecutHandler;
-		let _interruptHandler: ((this: vscode.NotebookController, notebook: vscode.NotebookDocument) => void | Thenable<void>) | undefined;
-		let _variableProvider: vscode.NotebookVariableProvider | undefined;
+		let _interruptHandler: ((this: zyraxoncode.NotebookController, notebook: zyraxoncode.NotebookDocument) => void | Thenable<void>) | undefined;
+		let _variableProvider: zyraxoncode.NotebookVariableProvider | undefined;
 		let _variableProviderDisposable: IDisposable | undefined;
 
 		this._proxy.$addKernel(handle, data).catch(err => {
@@ -177,7 +177,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 		// notebook documents that are associated to this controller
 		const associatedNotebooks = new ResourceMap<boolean>();
 
-		const controller: vscode.NotebookController = {
+		const controller: zyraxoncode.NotebookController = {
 			get id() { return id; },
 			get notebookType() { return data.notebookType; },
 			onDidChangeSelectedNotebooks: onDidChangeSelection.event,
@@ -307,7 +307,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 		return controller;
 	}
 
-	getIdByController(controller: vscode.NotebookController) {
+	getIdByController(controller: zyraxoncode.NotebookController) {
 		for (const [_, candidate] of this._kernelData) {
 			if (candidate.controller === controller) {
 				return createKernelId(candidate.extensionId, controller.id);
@@ -316,14 +316,14 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 		return null;
 	}
 
-	createNotebookControllerDetectionTask(extension: IExtensionDescription, viewType: string): vscode.NotebookControllerDetectionTask {
+	createNotebookControllerDetectionTask(extension: IExtensionDescription, viewType: string): zyraxoncode.NotebookControllerDetectionTask {
 		const handle = this._kernelDetectionTaskHandlePool++;
 		const that = this;
 
 		this._logService.trace(`NotebookControllerDetectionTask[${handle}], CREATED by ${extension.identifier.value}`);
 		this._proxy.$addKernelDetectionTask(handle, viewType);
 
-		const detectionTask: vscode.NotebookControllerDetectionTask = {
+		const detectionTask: zyraxoncode.NotebookControllerDetectionTask = {
 			dispose: () => {
 				this._kernelDetectionTask.delete(handle);
 				that._proxy.$removeKernelDetectionTask(handle);
@@ -334,7 +334,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 		return detectionTask;
 	}
 
-	registerKernelSourceActionProvider(extension: IExtensionDescription, viewType: string, provider: vscode.NotebookKernelSourceActionProvider) {
+	registerKernelSourceActionProvider(extension: IExtensionDescription, viewType: string, provider: zyraxoncode.NotebookKernelSourceActionProvider) {
 		const handle = this._kernelSourceActionProviderHandlePool++;
 		const eventHandle = typeof provider.onDidChangeNotebookKernelSourceActions === 'function' ? handle : undefined;
 		const that = this;
@@ -343,7 +343,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 		this._logService.trace(`NotebookKernelSourceActionProvider[${handle}], CREATED by ${extension.identifier.value}`);
 		this._proxy.$addKernelSourceActionProvider(handle, handle, viewType);
 
-		let subscription: vscode.Disposable | undefined;
+		let subscription: zyraxoncode.Disposable | undefined;
 		if (eventHandle !== undefined) {
 			subscription = provider.onDidChangeNotebookKernelSourceActions!(_ => this._proxy.$emitNotebookKernelSourceActionsChangeEvent(eventHandle));
 		}
@@ -393,7 +393,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 			return;
 		}
 		const document = this._extHostNotebook.getNotebookDocument(URI.revive(uri));
-		const cells: vscode.NotebookCell[] = [];
+		const cells: zyraxoncode.NotebookCell[] = [];
 		for (const cellHandle of handles) {
 			const cell = document.getCell(cellHandle);
 			if (cell) {
@@ -444,7 +444,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 	}
 
 	private id = 0;
-	private variableStore: Record<string, vscode.Variable> = {};
+	private variableStore: Record<string, zyraxoncode.Variable> = {};
 
 	async $provideVariables(handle: number, requestId: string, notebookUri: UriComponents, parentId: number | undefined, kind: 'named' | 'indexed', start: number, token: CancellationToken): Promise<void> {
 		const obj = this._kernelData.get(handle);
@@ -458,7 +458,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 			return;
 		}
 
-		let parent: vscode.Variable | undefined = undefined;
+		let parent: zyraxoncode.Variable | undefined = undefined;
 		if (parentId !== undefined) {
 			parent = this.variableStore[parentId];
 			if (!parent) {
@@ -514,7 +514,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 
 	// ---
 
-	_createNotebookCellExecution(cell: vscode.NotebookCell, controllerId: string): vscode.NotebookCellExecution {
+	_createNotebookCellExecution(cell: zyraxoncode.NotebookCell, controllerId: string): zyraxoncode.NotebookCellExecution {
 		if (cell.index < 0) {
 			throw new Error('CANNOT execute cell that has been REMOVED from notebook');
 		}
@@ -540,7 +540,7 @@ export class ExtHostNotebookKernels implements ExtHostNotebookKernelsShape {
 
 	// ---
 
-	_createNotebookExecution(nb: vscode.NotebookDocument, controllerId: string): vscode.NotebookExecution {
+	_createNotebookExecution(nb: zyraxoncode.NotebookDocument, controllerId: string): zyraxoncode.NotebookExecution {
 		const notebook = this._extHostNotebook.getNotebookDocument(nb.uri);
 		const runningCell = nb.getCells().find(cell => {
 			const apiCell = notebook.getCellFromApiCell(cell);
@@ -624,7 +624,7 @@ class NotebookCellExecutionTask extends Disposable {
 		}
 	}
 
-	private cellIndexToHandle(cellOrCellIndex: vscode.NotebookCell | undefined): number {
+	private cellIndexToHandle(cellOrCellIndex: zyraxoncode.NotebookCell | undefined): number {
 		let cell: ExtHostCell | undefined = this._cell;
 		if (cellOrCellIndex) {
 			cell = this._cell.notebook.getCellFromApiCell(cellOrCellIndex);
@@ -635,7 +635,7 @@ class NotebookCellExecutionTask extends Disposable {
 		return cell.handle;
 	}
 
-	private validateAndConvertOutputs(items: vscode.NotebookCellOutput[]): NotebookOutputDto[] {
+	private validateAndConvertOutputs(items: zyraxoncode.NotebookCellOutput[]): NotebookOutputDto[] {
 		return items.map(output => {
 			const newOutput = NotebookCellOutput.ensureUniqueMimeTypes(output.items, true);
 			if (newOutput === output.items) {
@@ -649,7 +649,7 @@ class NotebookCellExecutionTask extends Disposable {
 		});
 	}
 
-	private async updateOutputs(outputs: vscode.NotebookCellOutput | vscode.NotebookCellOutput[], cell: vscode.NotebookCell | undefined, append: boolean): Promise<void> {
+	private async updateOutputs(outputs: zyraxoncode.NotebookCellOutput | zyraxoncode.NotebookCellOutput[], cell: zyraxoncode.NotebookCell | undefined, append: boolean): Promise<void> {
 		const handle = this.cellIndexToHandle(cell);
 		const outputDtos = this.validateAndConvertOutputs(asArray(outputs));
 		return this.updateSoon(
@@ -661,7 +661,7 @@ class NotebookCellExecutionTask extends Disposable {
 			});
 	}
 
-	private async updateOutputItems(items: vscode.NotebookCellOutputItem | vscode.NotebookCellOutputItem[], output: vscode.NotebookCellOutput, append: boolean): Promise<void> {
+	private async updateOutputItems(items: zyraxoncode.NotebookCellOutputItem | zyraxoncode.NotebookCellOutputItem[], output: zyraxoncode.NotebookCellOutput, append: boolean): Promise<void> {
 		items = NotebookCellOutput.ensureUniqueMimeTypes(asArray(items), true);
 		return this.updateSoon({
 			editType: CellExecutionUpdateType.OutputItems,
@@ -671,9 +671,9 @@ class NotebookCellExecutionTask extends Disposable {
 		});
 	}
 
-	asApiObject(): vscode.NotebookCellExecution {
+	asApiObject(): zyraxoncode.NotebookCellExecution {
 		const that = this;
-		const result: vscode.NotebookCellExecution = {
+		const result: zyraxoncode.NotebookCellExecution = {
 			get token() { return that._tokenSource.token; },
 			get cell() { return that._cell.apiCell; },
 			get executionOrder() { return that._executionOrder; },
@@ -699,7 +699,7 @@ class NotebookCellExecutionTask extends Disposable {
 				});
 			},
 
-			end(success: boolean | undefined, endTime?: number, executionError?: vscode.CellExecutionError): void {
+			end(success: boolean | undefined, endTime?: number, executionError?: zyraxoncode.CellExecutionError): void {
 				if (that._state === NotebookCellExecutionTaskState.Resolved) {
 					throw new Error('Cannot call resolve twice');
 				}
@@ -720,27 +720,27 @@ class NotebookCellExecutionTask extends Disposable {
 				}));
 			},
 
-			clearOutput(cell?: vscode.NotebookCell): Thenable<void> {
+			clearOutput(cell?: zyraxoncode.NotebookCell): Thenable<void> {
 				that.verifyStateForOutput();
 				return that.updateOutputs([], cell, false);
 			},
 
-			appendOutput(outputs: vscode.NotebookCellOutput | vscode.NotebookCellOutput[], cell?: vscode.NotebookCell): Promise<void> {
+			appendOutput(outputs: zyraxoncode.NotebookCellOutput | zyraxoncode.NotebookCellOutput[], cell?: zyraxoncode.NotebookCell): Promise<void> {
 				that.verifyStateForOutput();
 				return that.updateOutputs(outputs, cell, true);
 			},
 
-			replaceOutput(outputs: vscode.NotebookCellOutput | vscode.NotebookCellOutput[], cell?: vscode.NotebookCell): Promise<void> {
+			replaceOutput(outputs: zyraxoncode.NotebookCellOutput | zyraxoncode.NotebookCellOutput[], cell?: zyraxoncode.NotebookCell): Promise<void> {
 				that.verifyStateForOutput();
 				return that.updateOutputs(outputs, cell, false);
 			},
 
-			appendOutputItems(items: vscode.NotebookCellOutputItem | vscode.NotebookCellOutputItem[], output: vscode.NotebookCellOutput): Promise<void> {
+			appendOutputItems(items: zyraxoncode.NotebookCellOutputItem | zyraxoncode.NotebookCellOutputItem[], output: zyraxoncode.NotebookCellOutput): Promise<void> {
 				that.verifyStateForOutput();
 				return that.updateOutputItems(items, output, true);
 			},
 
-			replaceOutputItems(items: vscode.NotebookCellOutputItem | vscode.NotebookCellOutputItem[], output: vscode.NotebookCellOutput): Promise<void> {
+			replaceOutputItems(items: zyraxoncode.NotebookCellOutputItem | zyraxoncode.NotebookCellOutputItem[], output: zyraxoncode.NotebookCellOutput): Promise<void> {
 				that.verifyStateForOutput();
 				return that.updateOutputItems(items, output, false);
 			}
@@ -749,15 +749,15 @@ class NotebookCellExecutionTask extends Disposable {
 	}
 }
 
-function createSerializeableError(executionError: vscode.CellExecutionError | undefined) {
-	const convertRange = (range: vscode.Range | undefined) => (range ? {
+function createSerializeableError(executionError: zyraxoncode.CellExecutionError | undefined) {
+	const convertRange = (range: zyraxoncode.Range | undefined) => (range ? {
 		startLineNumber: range.start.line,
 		startColumn: range.start.character,
 		endLineNumber: range.end.line,
 		endColumn: range.end.character
 	} : undefined);
 
-	const convertStackFrame = (frame: vscode.CellErrorStackFrame) => ({
+	const convertStackFrame = (frame: zyraxoncode.CellErrorStackFrame) => ({
 		uri: frame.uri,
 		position: frame.position,
 		label: frame.label
@@ -807,8 +807,8 @@ class NotebookExecutionTask extends Disposable {
 	cancel(): void {
 		this._tokenSource.cancel();
 	}
-	asApiObject(): vscode.NotebookExecution {
-		const result: vscode.NotebookExecution = {
+	asApiObject(): zyraxoncode.NotebookExecution {
+		const result: zyraxoncode.NotebookExecution = {
 			start: () => {
 				if (this._state === NotebookExecutionTaskState.Resolved || this._state === NotebookExecutionTaskState.Started) {
 					throw new Error('Cannot call start again');

@@ -8,7 +8,7 @@ import assert from 'assert';
 import * as fs from 'fs/promises';
 import { platform, tmpdir } from 'os';
 import * as path from 'path';
-import type { ChatParticipantToolToken, ChatPromptReference } from 'vscode';
+import type { ChatParticipantToolToken, ChatPromptReference } from 'zyraxoncode';
 import { IAgentSessionsWorkspace } from '../../src/extension/chatSessions/common/agentSessionsWorkspace';
 import { IChatSessionMetadataStore } from '../../src/extension/chatSessions/common/chatSessionMetadataStore';
 import { IChatSessionWorkspaceFolderService } from '../../src/extension/chatSessions/common/chatSessionWorkspaceFolderService';
@@ -45,14 +45,14 @@ import { DisposableStore, IReference } from '../../src/util/vs/base/common/lifec
 import { URI } from '../../src/util/vs/base/common/uri';
 import { SyncDescriptor } from '../../src/util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../src/util/vs/platform/instantiation/common/instantiation';
-import { ChatRequest, ChatSessionStatus, ChatToolInvocationPart, Diagnostic, DiagnosticSeverity, LanguageModelTextPart, LanguageModelToolResult2, Location, Range, Uri } from '../../src/vscodeTypes';
+import { ChatRequest, ChatSessionStatus, ChatToolInvocationPart, Diagnostic, DiagnosticSeverity, LanguageModelTextPart, LanguageModelToolResult2, Location, Range, Uri } from '../../src/zyraxoncodeTypes';
 import { ssuite, stest } from '../base/stest';
 
 const permissionConfirmationInvocations: Array<{ name: string; input: unknown }> = [];
 
 class TestCopilotCLIToolsService extends TestToolsService {
 	override async invokeTool(name: string, options: any, token: CancellationToken): Promise<LanguageModelToolResult2> {
-		if (name === 'vscode_get_confirmation' || name === 'vscode_get_terminal_confirmation') {
+		if (name === 'zyraxoncode_get_confirmation' || name === 'zyraxoncode_get_terminal_confirmation') {
 			permissionConfirmationInvocations.push({ name, input: options.input });
 			return new LanguageModelToolResult2([new LanguageModelTextPart('yes')]);
 		}
@@ -90,7 +90,7 @@ function getGitHubTokenFromEnv(): string {
 // the GITHUB_OAUTH_TOKEN, instead of getting an empty list and cascading into
 // "No model available."
 if (!process.env.COPILOT_API_URL) {
-	process.env.COPILOT_API_URL = 'https://api.githubcopilot.com';
+	process.env.COPILOT_API_URL = '__ZYRAXKEEP__0_';
 }
 
 // Force the SDK to route Anthropic models to `/v1/messages` instead of
@@ -151,7 +151,7 @@ async function registerChatServices(testingServiceCollection: TestingServiceColl
 			return {
 				type: 'token',
 				token: getGitHubTokenFromEnv(),
-				host: 'https://github.com',
+				host: '__ZYRAXKEEP__1_',
 				// Without `copilotUser.endpoints.api` the runtime's `getCopilotApiUrl()`
 				// returns undefined, `retrieveAvailableModels()` short-circuits to an
 				// empty list, and every model check below fails. Pointing it at the
@@ -159,7 +159,7 @@ async function registerChatServices(testingServiceCollection: TestingServiceColl
 				// CAPI for the user's enabled models.
 				copilotUser: {
 					endpoints: {
-						api: 'https://api.githubcopilot.com',
+						api: '__ZYRAXKEEP__2_',
 					},
 				},
 			};
@@ -295,7 +295,7 @@ function testRunner(cb: (services: { sessionService: ICopilotCLISessionService; 
 		const disposables = new DisposableStore();
 		// Temp folder can be `/var/folders/....` in our code we use `realpath` to resolve any symlinks.
 		// That results in these temp folders being resolved as `/private/var/folders/...` on macOS.
-		const scenariosPath = path.join(tmpdir() + tmpDirCounter++, 'vscode-copilot-chat', 'test-cli');
+		const scenariosPath = path.join(tmpdir() + tmpDirCounter++, 'zyraxoncode-copilot-chat', 'test-cli');
 		await fs.rm(scenariosPath, { recursive: true, force: true }).catch(() => { /* Ignore */ });
 		await fs.mkdir(scenariosPath, { recursive: true });
 		await fs.cp(sourcePath, scenariosPath, { recursive: true, force: true, errorOnExist: false });
@@ -643,7 +643,7 @@ ssuite.skip({ title: '@cli', location: 'external' }, async (_) => {
 			assertNoErrorsInStream(stream);
 			assert.strictEqual(session.object.status, ChatSessionStatus.Completed);
 			assertStreamContains(stream, 'wkspc1');
-			assert.ok(permissionConfirmationInvocations.some(invocation => invocation.name === 'vscode_get_terminal_confirmation'));
+			assert.ok(permissionConfirmationInvocations.some(invocation => invocation.name === 'zyraxoncode_get_terminal_confirmation'));
 		})
 	);
 });

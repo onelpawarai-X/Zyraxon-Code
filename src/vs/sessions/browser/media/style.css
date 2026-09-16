@@ -9,7 +9,7 @@
  * agents window. Components that need a different shape (e.g. circular avatars
  * or the workspace profile icon) override this with higher-specificity rules. */
 .agent-sessions-workbench .monaco-action-bar .action-label {
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .agent-sessions-workbench .monaco-action-bar .action-item .action-label.separator {
@@ -17,7 +17,7 @@
 }
 
 .agent-sessions-workbench .monaco-dropdown-with-default {
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 /* ---- Scrollbars ---- */
@@ -36,27 +36,27 @@
 	content: '';
 	position: absolute;
 	inset: 1px;
-	border-radius: var(--vscode-cornerRadius-circle);
-	background: var(--vscode-scrollbarSlider-background);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
+	background: var(--zyraxoncode-scrollbarSlider-background);
 }
 
 .agent-sessions-workbench .monaco-scrollable-element > .scrollbar > .slider:hover::before {
-	background: var(--vscode-scrollbarSlider-hoverBackground);
+	background: var(--zyraxoncode-scrollbarSlider-hoverBackground);
 }
 
 .agent-sessions-workbench .monaco-scrollable-element > .scrollbar > .slider.active::before {
-	background: var(--vscode-scrollbarSlider-activeBackground);
+	background: var(--zyraxoncode-scrollbarSlider-activeBackground);
 }
 
 /* ---- Sessions Action Widget Pickers ---- */
 
 .agent-sessions-workbench .action-widget {
-	background-color: var(--vscode-agentsPanel-background);
+	background-color: var(--zyraxoncode-agentsPanel-background);
 }
 
 .agent-sessions-workbench .action-widget .action-widget-action-bar,
 .agent-sessions-workbench .action-widget .action-list-filter {
-	background-color: var(--vscode-agentsPanel-background);
+	background-color: var(--zyraxoncode-agentsPanel-background);
 }
 
 .agent-sessions-workbench .action-widget .action-list-filter-row {
@@ -64,25 +64,25 @@
 }
 
 .agent-sessions-workbench .action-widget .monaco-scrollable-element > .monaco-list-rows {
-	background-color: var(--vscode-agentsPanel-background) !important;
+	background-color: var(--zyraxoncode-agentsPanel-background) !important;
 }
 
 /* ---- Sessions Quick Picks ---- */
 
 .agent-sessions-workbench .quick-input-widget,
 .agent-sessions-workbench .quick-input-titlebar {
-	background-color: var(--vscode-agentsPanel-background) !important;
+	background-color: var(--zyraxoncode-agentsPanel-background) !important;
 }
 
 .agent-sessions-workbench .quick-input-header,
 .agent-sessions-workbench .quick-input-html-widget,
 .agent-sessions-workbench .quick-input-list .monaco-scrollable-element > .monaco-list-rows,
 .agent-sessions-workbench .quick-input-tree .monaco-scrollable-element > .monaco-list-rows {
-	background-color: var(--vscode-agentsPanel-background) !important;
+	background-color: var(--zyraxoncode-agentsPanel-background) !important;
 }
 
 .agent-sessions-workbench .quick-input-header {
-	border-radius: var(--vscode-cornerRadius-xLarge);
+	border-radius: var(--zyraxoncode-cornerRadius-xLarge);
 }
 
 /* ---- Sessions Context Menus ---- */
@@ -90,7 +90,7 @@
 .agent-sessions-workbench .context-view.monaco-menu-container,
 .agent-sessions-workbench .context-view.monaco-menu-container .monaco-menu,
 .agent-sessions-workbench .context-view.monaco-menu-container .monaco-scrollable-element {
-	background-color: var(--vscode-agentsPanel-background) !important;
+	background-color: var(--zyraxoncode-agentsPanel-background) !important;
 }
 
 /* ---- Widget Customizations ---- */
@@ -102,5 +102,5 @@
 
 /* Badge */
 .agent-sessions-workbench .badge > .badge-content {
-	border-radius: var(--vscode-cornerRadius-small) !important;
+	border-radius: var(--zyraxoncode-cornerRadius-small) !important;
 }

@@ -165,7 +165,7 @@ export class WorkspaceTrustManagementService extends Disposable implements IWork
 			this.remoteAuthorityResolverService.resolveAuthority(this.environmentService.remoteAuthority)
 				.then(async result => {
 					this._remoteAuthority = result;
-					await this.fileService.activateProvider(Schemas.vscodeRemote);
+					await this.fileService.activateProvider(Schemas.zyraxoncodeRemote);
 					await this.updateWorkspaceTrust();
 				})
 				.finally(() => {
@@ -202,9 +202,9 @@ export class WorkspaceTrustManagementService extends Disposable implements IWork
 
 	private async getCanonicalUri(uri: URI): Promise<URI> {
 		let canonicalUri = uri;
-		if (this.environmentService.remoteAuthority && uri.scheme === Schemas.vscodeRemote) {
+		if (this.environmentService.remoteAuthority && uri.scheme === Schemas.zyraxoncodeRemote) {
 			canonicalUri = await this.remoteAuthorityResolverService.getCanonicalURI(uri);
-		} else if (uri.scheme === 'vscode-vfs') {
+		} else if (uri.scheme === 'zyraxoncode-vfs') {
 			const index = uri.authority.indexOf('+');
 			if (index !== -1) {
 				canonicalUri = uri.with({ authority: uri.authority.substr(0, index) });
@@ -447,11 +447,11 @@ export class WorkspaceTrustManagementService extends Disposable implements IWork
 	}
 
 	private isTrustedVirtualResource(uri: URI): boolean {
-		// `vscode-vfs` (e.g. GitHub Repositories) and `vscode-agent-host`
+		// `zyraxoncode-vfs` (e.g. GitHub Repositories) and `zyraxoncode-agent-host`
 		// (remote agent host folders) represent real, writable resources where
 		// code can run or files can change, so they must go through normal
 		// workspace trust rather than being auto-trusted as virtual resources.
-		return isVirtualResource(uri) && uri.scheme !== 'vscode-vfs' && uri.scheme !== AGENT_HOST_SCHEME;
+		return isVirtualResource(uri) && uri.scheme !== 'zyraxoncode-vfs' && uri.scheme !== AGENT_HOST_SCHEME;
 	}
 
 	private isTrustedByRemote(uri: URI): boolean {
@@ -526,7 +526,7 @@ export class WorkspaceTrustManagementService extends Disposable implements IWork
 			return false;
 		}
 
-		if (workspaceIdentifier.uri.scheme !== Schemas.file && workspaceIdentifier.uri.scheme !== Schemas.vscodeRemote) {
+		if (workspaceIdentifier.uri.scheme !== Schemas.file && workspaceIdentifier.uri.scheme !== Schemas.zyraxoncodeRemote) {
 			return false;
 		}
 
@@ -577,7 +577,7 @@ export class WorkspaceTrustManagementService extends Disposable implements IWork
 		}
 
 		// Can only be untrusted in certain schemes
-		if (workspaceIdentifier.uri.scheme !== Schemas.file && workspaceIdentifier.uri.scheme !== 'vscode-vfs') {
+		if (workspaceIdentifier.uri.scheme !== Schemas.file && workspaceIdentifier.uri.scheme !== 'zyraxoncode-vfs') {
 			return false;
 		}
 

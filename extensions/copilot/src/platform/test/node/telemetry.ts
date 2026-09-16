@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CopilotToken, FetchOptions, IDomainChangeResponse, RequestMetadata } from '@vscode/copilot-api';
+import { CopilotToken, FetchOptions, IDomainChangeResponse, RequestMetadata } from '@zyraxoncode/copilot-api';
 import assert from 'assert';
 import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStore';
 import { IConfigurationService } from '../../configuration/common/configurationService';
@@ -136,7 +136,7 @@ async function _withTelemetryCapture<T>(
 	delete process.env.http_proxy;
 	delete process.env.https_proxy;
 
-	const telemetryUrl = `http://localhost:${fakeTelemetryServer.port}/${endpoint}`;
+	const telemetryUrl = `__ZYRAXKEEP__0_{fakeTelemetryServer.port}/${endpoint}`;
 
 	const testingServiceCollection = _testingServiceCollection.clone();
 	testingServiceCollection.define(ICAPIClientService, {

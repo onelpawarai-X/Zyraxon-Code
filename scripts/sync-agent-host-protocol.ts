@@ -253,7 +253,7 @@ function main() {
 	if (!fs.existsSync(TYPES_DIR)) {
 		console.error(`ERROR: Cannot find ${TYPES_DIR}`);
 		console.error('Clone agent-host-protocol as a sibling of the ZYRAXON Code repo:');
-		console.error('  git clone git@github.com:microsoft/agent-host-protocol.git ../agent-host-protocol');
+		console.error('  git clone git@github.com:zyraxon/agent-host-protocol.git ../agent-host-protocol');
 		process.exit(1);
 	}
 

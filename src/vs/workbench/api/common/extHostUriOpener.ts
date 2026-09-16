@@ -9,7 +9,7 @@ import { Schemas } from '../../../base/common/network.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
 import * as languages from '../../../editor/common/languages.js';
 import { ExtensionIdentifier } from '../../../platform/extensions/common/extensions.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostUriOpenersShape, IMainContext, MainContext, MainThreadUriOpenersShape } from './extHost.protocol.js';
 
 
@@ -19,7 +19,7 @@ export class ExtHostUriOpeners implements ExtHostUriOpenersShape {
 
 	private readonly _proxy: MainThreadUriOpenersShape;
 
-	private readonly _openers = new Map<string, vscode.ExternalUriOpener>();
+	private readonly _openers = new Map<string, zyraxoncode.ExternalUriOpener>();
 
 	constructor(
 		mainContext: IMainContext,
@@ -30,9 +30,9 @@ export class ExtHostUriOpeners implements ExtHostUriOpenersShape {
 	registerExternalUriOpener(
 		extensionId: ExtensionIdentifier,
 		id: string,
-		opener: vscode.ExternalUriOpener,
-		metadata: vscode.ExternalUriOpenerMetadata,
-	): vscode.Disposable {
+		opener: zyraxoncode.ExternalUriOpener,
+		metadata: zyraxoncode.ExternalUriOpenerMetadata,
+	): zyraxoncode.Disposable {
 		if (this._openers.has(id)) {
 			throw new Error(`Opener with id '${id}' already registered`);
 		}

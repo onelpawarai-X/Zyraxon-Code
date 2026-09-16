@@ -886,7 +886,7 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 		this._register(this._processManager.onProcessReady(async (processTraits) => {
 			// Respond to DA1 with basic conformance. Note that including this is required to avoid
 			// a long delay in conpty 1.22+ where it waits for the response.
-			// Reference: https://github.com/microsoft/terminal/blob/3760caed97fa9140a40777a8fbc1c95785e6d2ab/src/terminal/adapter/adaptDispatch.cpp#L1471-L1495
+			// Reference: __ZYRAXKEEP__0_
 			if (processTraits?.windowsPty?.backend === 'conpty') {
 				this._register(xterm.raw.parser.registerCsiHandler({ final: 'c' }, params => {
 					if (params.length === 0 || params.length === 1 && params[0] === 0) {
@@ -900,7 +900,7 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 				lineDataEventAddon.setOperatingSystem(this._processManager.os);
 			}
 			xterm.raw.options.windowsPty = processTraits.windowsPty;
-			// Enable reflow cursor to avoid prompt loss: https://github.com/microsoft/vscode/issues/274372
+			// Enable reflow cursor to avoid prompt loss: __ZYRAXKEEP__1_
 			xterm.raw.options.reflowCursorLine = processTraits?.windowsPty?.backend === 'conpty' && !!this._terminalConfigurationService.config.windowsUseConptyDll;
 		}));
 		this._register(this._processManager.onRestoreCommands(e => this.xterm?.shellIntegration.deserialize(e)));
@@ -1177,7 +1177,7 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 			}
 
 			// Prevent default when shift+tab is being sent to the terminal to avoid it bubbling up
-			// and changing focus https://github.com/microsoft/vscode/issues/188329
+			// and changing focus __ZYRAXKEEP__2_
 			if (event.key === 'Tab' && event.shiftKey) {
 				event.preventDefault();
 				return true;
@@ -1252,7 +1252,7 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 
 	private _setShellIntegrationContextKey(): void {
 		if (this.xterm) {
-			this._terminalShellIntegrationEnabledContextKey.set(this.xterm.shellIntegration.status === ShellIntegrationStatus.VSCode);
+			this._terminalShellIntegrationEnabledContextKey.set(this.xterm.shellIntegration.status === ShellIntegrationStatus.ZyraxonCode);
 		}
 	}
 
@@ -1321,13 +1321,13 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 		try {
 			this.xterm?.dispose();
 		} catch (err: unknown) {
-			// See https://github.com/microsoft/vscode/issues/153486
+			// See __ZYRAXKEEP__3_
 			this._logService.error('Exception occurred during xterm disposal', err);
 		}
 
-		// HACK: Workaround for Firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=559561,
+		// HACK: Workaround for Firefox bug __ZYRAXKEEP__4_
 		// as 'blur' event in xterm.raw.textarea is not triggered on xterm.dispose()
-		// See https://github.com/microsoft/vscode/issues/138358
+		// See __ZYRAXKEEP__5_
 		if (isFirefox) {
 			this.resetFocusContextKey();
 			this._terminalHasTextContextKey.reset();
@@ -1398,7 +1398,7 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 		}
 
 		// Send it to the process
-		this._logService.debug('sending data (vscode)', text);
+		this._logService.debug('sending data (zyraxoncode)', text);
 		await this._processManager.write(text);
 		this._onDidInputData.fire(text);
 		this._onDidSendText.fire(text);
@@ -1409,7 +1409,7 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 	}
 
 	async sendSignal(signal: string): Promise<void> {
-		this._logService.debug('sending signal (vscode)', signal);
+		this._logService.debug('sending signal (zyraxoncode)', signal);
 		await this._processManager.sendSignal(signal);
 	}
 
@@ -1803,7 +1803,7 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 				commandId: TerminalCommandId.ShellIntegrationLearnMore,
 				label: nls.localize('shellIntegration.learnMore', "Learn more about shell integration"),
 				run: () => {
-					this._openerService.open('https://code.visualstudio.com/docs/terminal/shell-integration?referrer=in-product');
+					this._openerService.open('__ZYRAXKEEP__6_');
 				}
 			}, {
 				commandId: 'workbench.action.openSettings',
@@ -2278,7 +2278,7 @@ export class TerminalInstance extends Disposable implements ITerminalInstance {
 		});
 		this._horizontalScrollbar.getDomNode().style.paddingBottom = '16px';
 
-		// work around for https://github.com/xtermjs/xterm.js/issues/3482
+		// work around for __ZYRAXKEEP__7_
 		if (isWindows) {
 			for (let i = this.xterm.raw.buffer.active.viewportY; i < this.xterm.raw.buffer.active.length; i++) {
 				interface ILineWithInternals extends IBufferLine {

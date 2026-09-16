@@ -4,21 +4,21 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { RefType } from './api/git.constants';
 import { Model } from './model';
 
-export class GitEditSessionIdentityProvider implements vscode.EditSessionIdentityProvider, vscode.Disposable {
+export class GitEditSessionIdentityProvider implements zyraxoncode.EditSessionIdentityProvider, zyraxoncode.Disposable {
 
-	private providerRegistration: vscode.Disposable;
+	private providerRegistration: zyraxoncode.Disposable;
 
 	constructor(private model: Model) {
-		this.providerRegistration = vscode.Disposable.from(
-			vscode.workspace.registerEditSessionIdentityProvider('file', this),
-			vscode.workspace.onWillCreateEditSessionIdentity((e) => {
+		this.providerRegistration = zyraxoncode.Disposable.from(
+			zyraxoncode.workspace.registerEditSessionIdentityProvider('file', this),
+			zyraxoncode.workspace.onWillCreateEditSessionIdentity((e) => {
 				e.waitUntil(
 					this._onWillCreateEditSessionIdentity(e.workspaceFolder).catch(err => {
-						if (err instanceof vscode.CancellationError) {
+						if (err instanceof zyraxoncode.CancellationError) {
 							throw err;
 						}
 					})
@@ -31,7 +31,7 @@ export class GitEditSessionIdentityProvider implements vscode.EditSessionIdentit
 		this.providerRegistration.dispose();
 	}
 
-	async provideEditSessionIdentity(workspaceFolder: vscode.WorkspaceFolder, token: vscode.CancellationToken): Promise<string | undefined> {
+	async provideEditSessionIdentity(workspaceFolder: zyraxoncode.WorkspaceFolder, token: zyraxoncode.CancellationToken): Promise<string | undefined> {
 		await this.model.openRepository(path.dirname(workspaceFolder.uri.fsPath));
 
 		const repository = this.model.getRepository(workspaceFolder.uri);
@@ -41,8 +41,8 @@ export class GitEditSessionIdentityProvider implements vscode.EditSessionIdentit
 			return undefined;
 		}
 
-		const remoteUrl = repository.remotes.find((remote) => remote.name === repository.HEAD?.upstream?.remote)?.pushUrl?.replace(/^(git@[^\/:]+)(:)/i, 'ssh://$1/');
-		const remote = remoteUrl ? await vscode.workspace.getCanonicalUri(vscode.Uri.parse(remoteUrl), { targetScheme: 'https' }, token) : null;
+		const remoteUrl = repository.remotes.find((remote) => remote.name === repository.HEAD?.upstream?.remote)?.pushUrl?.replace(/^(git@[^\/:]+)(:)/i, '__ZYRAXKEEP__0_');
+		const remote = remoteUrl ? await zyraxoncode.workspace.getCanonicalUri(zyraxoncode.Uri.parse(remoteUrl), { targetScheme: 'https' }, token) : null;
 
 		return JSON.stringify({
 			remote: remote?.toString() ?? remoteUrl,
@@ -51,7 +51,7 @@ export class GitEditSessionIdentityProvider implements vscode.EditSessionIdentit
 		});
 	}
 
-	provideEditSessionIdentityMatch(identity1: string, identity2: string): vscode.EditSessionIdentityMatch {
+	provideEditSessionIdentityMatch(identity1: string, identity2: string): zyraxoncode.EditSessionIdentityMatch {
 		try {
 			const normalizedIdentity1 = normalizeEditSessionIdentity(identity1);
 			const normalizedIdentity2 = normalizeEditSessionIdentity(identity2);
@@ -60,25 +60,25 @@ export class GitEditSessionIdentityProvider implements vscode.EditSessionIdentit
 				normalizedIdentity1.ref === normalizedIdentity2.ref &&
 				normalizedIdentity1.sha === normalizedIdentity2.sha) {
 				// This is a perfect match
-				return vscode.EditSessionIdentityMatch.Complete;
+				return zyraxoncode.EditSessionIdentityMatch.Complete;
 			} else if (normalizedIdentity1.remote === normalizedIdentity2.remote &&
 				normalizedIdentity1.ref === normalizedIdentity2.ref &&
 				normalizedIdentity1.sha !== normalizedIdentity2.sha) {
 				// Same branch and remote but different SHA
-				return vscode.EditSessionIdentityMatch.Partial;
+				return zyraxoncode.EditSessionIdentityMatch.Partial;
 			} else {
-				return vscode.EditSessionIdentityMatch.None;
+				return zyraxoncode.EditSessionIdentityMatch.None;
 			}
 		} catch (ex) {
-			return vscode.EditSessionIdentityMatch.Partial;
+			return zyraxoncode.EditSessionIdentityMatch.Partial;
 		}
 	}
 
-	private async _onWillCreateEditSessionIdentity(workspaceFolder: vscode.WorkspaceFolder): Promise<void> {
+	private async _onWillCreateEditSessionIdentity(workspaceFolder: zyraxoncode.WorkspaceFolder): Promise<void> {
 		await this._doPublish(workspaceFolder);
 	}
 
-	private async _doPublish(workspaceFolder: vscode.WorkspaceFolder) {
+	private async _doPublish(workspaceFolder: zyraxoncode.WorkspaceFolder) {
 		await this.model.openRepository(path.dirname(workspaceFolder.uri.fsPath));
 
 		const repository = this.model.getRepository(workspaceFolder.uri);
@@ -91,32 +91,32 @@ export class GitEditSessionIdentityProvider implements vscode.EditSessionIdentit
 		if (!repository.HEAD?.commit) {
 			// Handle publishing empty repository with no commits
 
-			const yes = vscode.l10n.t('Yes');
-			const selection = await vscode.window.showInformationMessage(
-				vscode.l10n.t('Would you like to publish this repository to continue working on it elsewhere?'),
+			const yes = zyraxoncode.l10n.t('Yes');
+			const selection = await zyraxoncode.window.showInformationMessage(
+				zyraxoncode.l10n.t('Would you like to publish this repository to continue working on it elsewhere?'),
 				{ modal: true },
 				yes
 			);
 			if (selection !== yes) {
-				throw new vscode.CancellationError();
+				throw new zyraxoncode.CancellationError();
 			}
 			await repository.commit('Initial commit', { all: true });
-			await vscode.commands.executeCommand('git.publish');
+			await zyraxoncode.commands.executeCommand('git.publish');
 		} else if (!repository.HEAD?.upstream && repository.HEAD?.type === RefType.Head) {
 			// If this branch hasn't been published to the remote yet,
 			// ensure that it is published before Continue On is invoked
 
-			const publishBranch = vscode.l10n.t('Publish Branch');
-			const selection = await vscode.window.showInformationMessage(
-				vscode.l10n.t('The current branch is not published to the remote. Would you like to publish it to access your changes elsewhere?'),
+			const publishBranch = zyraxoncode.l10n.t('Publish Branch');
+			const selection = await zyraxoncode.window.showInformationMessage(
+				zyraxoncode.l10n.t('The current branch is not published to the remote. Would you like to publish it to access your changes elsewhere?'),
 				{ modal: true },
 				publishBranch
 			);
 			if (selection !== publishBranch) {
-				throw new vscode.CancellationError();
+				throw new zyraxoncode.CancellationError();
 			}
 
-			await vscode.commands.executeCommand('git.publish');
+			await zyraxoncode.commands.executeCommand('git.publish');
 		}
 	}
 }

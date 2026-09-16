@@ -35,7 +35,7 @@ import '../../../../contrib/chat/browser/agentSessions/media/agentsessionsviewer
 function createMockSession(overrides: Partial<IAgentSession> & { label: string; status: AgentSessionStatus; providerType: string }): IAgentSession {
 	const now = Date.now();
 	return new class extends mock<IAgentSession>() {
-		override readonly resource = overrides.resource ?? URI.parse(`vscode-chat-session://${overrides.providerType}/session-${Math.random().toString(36).slice(2)}`);
+		override readonly resource = overrides.resource ?? URI.parse(`__ZYRAXKEEP__0_{overrides.providerType}/session-${Math.random().toString(36).slice(2)}`);
 		override readonly label = overrides.label;
 		override readonly status = overrides.status;
 		override readonly providerType = overrides.providerType;
@@ -104,7 +104,7 @@ function renderSessionItem(ctx: ComponentFixtureContext, session: IAgentSession,
 			registerWorkbenchServices(reg);
 			reg.define(IMarkdownRendererService, MarkdownRendererService);
 			reg.defineInstance(IProductService, new class extends mock<IProductService>() {
-				override readonly urlProtocol = 'vscode';
+				override readonly urlProtocol = 'zyraxoncode';
 			}());
 			reg.defineInstance(IChatSessionsService, new class extends mock<IChatSessionsService>() {
 				override readonly onDidChangeItemsProviders = Event.None;
@@ -135,7 +135,7 @@ function renderSessionItem(ctx: ComponentFixtureContext, session: IAgentSession,
 
 	container.style.width = '350px';
 	container.style.height = 'auto';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 	container.classList.add('agent-sessions-viewer');
 
 	const listRow = document.createElement('div');
@@ -166,7 +166,7 @@ function renderSectionItem(ctx: ComponentFixtureContext, section: IAgentSessionS
 
 	container.style.width = '350px';
 	container.style.height = 'auto';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 	container.classList.add('agent-sessions-viewer');
 
 	const listRow = document.createElement('div');
@@ -606,7 +606,7 @@ export default defineThemedFixtureGroup({
 	ApprovalRowJson: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-json');
+			const resource = URI.parse('__ZYRAXKEEP__1_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Other,
@@ -632,7 +632,7 @@ export default defineThemedFixtureGroup({
 	ApprovalRowBash: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-bash');
+			const resource = URI.parse('__ZYRAXKEEP__2_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Terminal,
@@ -658,7 +658,7 @@ export default defineThemedFixtureGroup({
 	ApprovalRowPowerShell: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-powershell');
+			const resource = URI.parse('__ZYRAXKEEP__3_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Terminal,
@@ -684,7 +684,7 @@ export default defineThemedFixtureGroup({
 	ApprovalRowLongLabel: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-long');
+			const resource = URI.parse('__ZYRAXKEEP__4_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Terminal,
@@ -712,7 +712,7 @@ export default defineThemedFixtureGroup({
 	ApprovalRow1Line: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-1line');
+			const resource = URI.parse('__ZYRAXKEEP__5_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Terminal,
@@ -738,7 +738,7 @@ export default defineThemedFixtureGroup({
 	ApprovalRow2Lines: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-2lines');
+			const resource = URI.parse('__ZYRAXKEEP__6_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Terminal,
@@ -764,7 +764,7 @@ export default defineThemedFixtureGroup({
 	ApprovalRow3Lines: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-3lines');
+			const resource = URI.parse('__ZYRAXKEEP__7_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Terminal,
@@ -790,7 +790,7 @@ export default defineThemedFixtureGroup({
 	ApprovalRow4Lines: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-4lines');
+			const resource = URI.parse('__ZYRAXKEEP__8_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Terminal,
@@ -816,11 +816,11 @@ export default defineThemedFixtureGroup({
 	ApprovalRow3LongLines: defineComponentFixture({
 		render: (ctx) => {
 			const now = Date.now();
-			const resource = URI.parse('vscode-chat-session://local/approval-3longlines');
+			const resource = URI.parse('__ZYRAXKEEP__9_');
 			const approvalModel = createMockApprovalModel(resource, {
 				approvalId: resource.toString(),
 				kind: AgentSessionApprovalKind.Terminal,
-				label: 'RUSTFLAGS="-C target-cpu=native -C opt-level=3" cargo build --release --target x86_64-unknown-linux-gnu\nfind ./target/release -name "*.so" -exec strip --strip-unneeded {} \\; && tar czf release-bundle.tar.gz -C target/release .\ncurl -X POST https://deploy.internal.example.com/api/v2/artifacts/upload --header "Authorization: Bearer $DEPLOY_TOKEN" --form "bundle=@release-bundle.tar.gz"',
+				label: 'RUSTFLAGS="-C target-cpu=native -C opt-level=3" cargo build --release --target x86_64-unknown-linux-gnu\nfind ./target/release -name "*.so" -exec strip --strip-unneeded {} \\; && tar czf release-bundle.tar.gz -C target/release .\ncurl -X POST __ZYRAXKEEP__10_ --header "Authorization: Bearer $DEPLOY_TOKEN" --form "bundle=@release-bundle.tar.gz"',
 				languageId: 'sh',
 				since: new Date(),
 				confirm: () => { },

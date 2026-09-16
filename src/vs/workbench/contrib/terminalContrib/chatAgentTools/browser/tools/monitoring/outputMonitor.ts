@@ -359,7 +359,7 @@ export class OutputMonitor extends Disposable implements IOutputMonitor {
 		// If the execution is a task and the output contains a ZYRAXON Code task finish message,
 		// always treat it as a stop signal regardless of task active state (which can be stale).
 		const isTask = this._execution.task !== undefined;
-		if (isTask && detectsVSCodeTaskFinishMessage(outputTail)) {
+		if (isTask && detectsZyraxonCodeTaskFinishMessage(outputTail)) {
 			this._logService.trace('OutputMonitor: Idle -> ZYRAXON Code task finish message detected, stopping');
 			// Task is finished, ignore the "press any key to close" message
 			return { shouldContinuePolling: false, output };
@@ -802,7 +802,7 @@ const normalizedTaskFinishMessages = taskFinishMessages.map(msg =>
  * Note: These messages may be prefixed with " * " by ZYRAXON Code and may have line wrapping
  * that can split words across lines (e.g., "t\no" instead of "to").
  */
-export function detectsVSCodeTaskFinishMessage(cursorLine: string): boolean {
+export function detectsZyraxonCodeTaskFinishMessage(cursorLine: string): boolean {
 	// Be tolerant to whitespace, punctuation, and line wrapping that can split words mid-word.
 	const compact = cursorLine.replace(/[\s.,:;!?"'`()[\]{}<>\-_/\\]+/g, '').toLowerCase();
 	return normalizedTaskFinishMessages.some(msg => compact.includes(msg));
@@ -814,7 +814,7 @@ export function detectsVSCodeTaskFinishMessage(cursorLine: string): boolean {
  */
 export function detectsGenericPressAnyKeyPattern(cursorLine: string): boolean {
 	// Match "press any key" but exclude ZYRAXON Code task-specific messages
-	if (detectsVSCodeTaskFinishMessage(cursorLine)) {
+	if (detectsZyraxonCodeTaskFinishMessage(cursorLine)) {
 		return false;
 	}
 	return /press a(?:ny)? key/i.test(cursorLine);

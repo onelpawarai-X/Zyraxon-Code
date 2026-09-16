@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptPiece, PromptSizing } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, PromptPiece, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { isScenarioAutomation } from '../../../../platform/env/common/envService';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILanguageFeaturesService, isLocationLink } from '../../../../platform/languages/common/languageFeaturesService';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -17,7 +17,7 @@ import { ITelemetryService } from '../../../../platform/telemetry/common/telemet
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { getLanguage } from '../../../../util/common/languages';
 import * as arrays from '../../../../util/vs/base/common/arrays';
-import { ExtensionMode, Selection, Uri } from '../../../../vscodeTypes';
+import { ExtensionMode, Selection, Uri } from '../../../../zyraxoncodeTypes';
 import { asyncComputeWithTimeBudget } from '../../../context/node/resolvers/selectionContextHelpers';
 import { determineNodeToDocument } from '../../../prompt/node/definitionAroundCursor';
 import { CodeBlock } from './safeElements';
@@ -28,7 +28,7 @@ type Props = PromptElementProps<{
 	 * Range of interest for which definitions are to be found.
 	 * @remark if not provided, will use active selection in currently active editor
 	 */
-	position: vscode.Position;
+	position: zyraxoncode.Position;
 	/**
 	 * Timeout for finding implementations in milliseconds. Defaults to 200ms.
 	 */
@@ -39,7 +39,7 @@ type CodeExcerpt = {
 	languageId: string;
 	uri: Uri;
 	code: string;
-	excerptRange: vscode.Range;
+	excerptRange: zyraxoncode.Range;
 };
 
 export type State =
@@ -65,7 +65,7 @@ export class DefinitionAtPosition extends PromptElement<Props, State> {
 		props: Props,
 		@ILanguageFeaturesService private readonly _languageFeaturesService: ILanguageFeaturesService,
 		@IWorkspaceService private readonly _workspaceService: IWorkspaceService,
-		@IVSCodeExtensionContext private readonly _vscodeExtensionCtxService: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _zyraxoncodeExtensionCtxService: IZyraxonCodeExtensionContext,
 		@IIgnoreService private readonly _ignoreService: IIgnoreService,
 		@ILogService private readonly _logService: ILogService,
 		@IParserService private readonly _parserService: IParserService,
@@ -79,7 +79,7 @@ export class DefinitionAtPosition extends PromptElement<Props, State> {
 			return { k: 'ignored' };
 		}
 
-		const timeout = this._vscodeExtensionCtxService.extensionMode === ExtensionMode.Test && !isScenarioAutomation
+		const timeout = this._zyraxoncodeExtensionCtxService.extensionMode === ExtensionMode.Test && !isScenarioAutomation
 			? 0
 			: (this.props.timeoutMs === undefined ? DefinitionAtPosition.DEFAULT_TIMEOUT_MS : this.props.timeoutMs);
 
@@ -137,7 +137,7 @@ export class DefinitionAtPosition extends PromptElement<Props, State> {
 		const { document, position } = this.props;
 
 		// find implementation or, if not found, definition
-		const findImplOrDefinition = async (position: vscode.Position) => {
+		const findImplOrDefinition = async (position: zyraxoncode.Position) => {
 			try {
 				const impls = await this._languageFeaturesService.getImplementations(document.uri, position);
 
@@ -186,7 +186,7 @@ export class DefinitionAtPosition extends PromptElement<Props, State> {
 				const wasmLanguage = getWasmLanguage(docContainingDef.languageId);
 
 				let code: string;
-				let excerptRange: vscode.Range;
+				let excerptRange: zyraxoncode.Range;
 				if (wasmLanguage === undefined) { // capture at least the line of the definition
 					const line = docContainingDef.lineAt(range.start.line);
 					code = line.text;

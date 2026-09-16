@@ -431,7 +431,7 @@ export class SCMService implements ISCMService {
 		}
 
 		if (idOrResource.scheme !== Schemas.file &&
-			idOrResource.scheme !== Schemas.vscodeRemote) {
+			idOrResource.scheme !== Schemas.zyraxoncodeRemote) {
 			return undefined;
 		}
 

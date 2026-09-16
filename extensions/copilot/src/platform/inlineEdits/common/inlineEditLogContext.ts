@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
-import type { InlineCompletionContext } from 'vscode';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { InlineCompletionContext } from 'zyraxoncode';
 import * as yaml from 'yaml';
 import { ErrorUtils } from '../../../util/common/errors';
 import { isCancellationError } from '../../../util/vs/base/common/errors';

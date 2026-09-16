@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { splitLines } from '../../../vs/base/common/strings';
 import { URI as Uri, UriComponents } from '../../../vs/base/common/uri';
 import { IModelChangedEvent } from '../../../vs/editor/common/model/mirrorTextModel';
@@ -11,7 +11,7 @@ import { ExtHostDocumentData, IExtHostDocumentSaveDelegate } from '../../../vs/w
 import { EndOfLine } from '../../../vs/workbench/api/common/extHostTypes/textEdit';
 
 export interface IExtHostDocumentData {
-	readonly document: vscode.TextDocument;
+	readonly document: zyraxoncode.TextDocument;
 	getText(): string;
 	onEvents(e: IModelChangedEvent): void;
 }

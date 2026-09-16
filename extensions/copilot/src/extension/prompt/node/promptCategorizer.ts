@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ICopilotTokenStore } from '../../../platform/authentication/common/copilotTokenStore';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -40,7 +40,7 @@ export interface IPromptCategorizerService {
 	 *
 	 * @param telemetryMessageId The extension-generated request ID (shared with panel.request telemetry)
 	 */
-	categorizePrompt(request: vscode.ChatRequest, context: vscode.ChatContext, telemetryMessageId: string): void;
+	categorizePrompt(request: zyraxoncode.ChatRequest, context: zyraxoncode.ChatContext, telemetryMessageId: string): void;
 }
 
 // Categorization outcome values for telemetry
@@ -135,7 +135,7 @@ export class PromptCategorizerService implements IPromptCategorizerService {
 		@IRequestLogger private readonly requestLogger: IRequestLogger,
 	) { }
 
-	categorizePrompt(request: vscode.ChatRequest, context: vscode.ChatContext, telemetryMessageId: string): void {
+	categorizePrompt(request: zyraxoncode.ChatRequest, context: zyraxoncode.ChatContext, telemetryMessageId: string): void {
 		// Always enable for internal users; external users require experiment flag
 		const isInternal = this.copilotTokenStore.copilotToken?.isInternal === true;
 		if (!isInternal && !this.experimentationService.getTreatmentVariable<boolean>(EXP_FLAG_PROMPT_CATEGORIZATION)) {
@@ -165,7 +165,7 @@ export class PromptCategorizerService implements IPromptCategorizerService {
 		});
 	}
 
-	private async _categorizePromptAsync(request: vscode.ChatRequest, _context: vscode.ChatContext, telemetryMessageId: string, parentChatSessionId: string | undefined): Promise<void> {
+	private async _categorizePromptAsync(request: zyraxoncode.ChatRequest, _context: zyraxoncode.ChatContext, telemetryMessageId: string, parentChatSessionId: string | undefined): Promise<void> {
 		const startTime = Date.now();
 		let outcome: typeof CATEGORIZATION_OUTCOMES[keyof typeof CATEGORIZATION_OUTCOMES] = CATEGORIZATION_OUTCOMES.ERROR;
 		let errorDetail = '';
@@ -313,7 +313,7 @@ export class PromptCategorizerService implements IPromptCategorizerService {
 				"taxonomyVersion": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The taxonomy version used for classification (e.g. v2). Used to segment data when taxonomy keys change." },
 				"sessionId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The chat session identifier" },
 				"requestId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The extension-generated request identifier, matches panel.request requestId" },
-				"vscodeRequestId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The ZYRAXON Code chat request id, for joining with ZYRAXON Code telemetry events" },
+				"zyraxoncodeRequestId": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The ZYRAXON Code chat request id, for joining with ZYRAXON Code telemetry events" },
 				"modeName": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The chat mode name being used" },
 				"currentLanguage": { "classification": "SystemMetaData", "purpose": "FeatureInsight", "comment": "The language ID of the active editor" },
 				"outcome": { "classification": "SystemMetaData", "purpose": "PerformanceAndHealth", "comment": "Classification outcome: empty string for success, partialClassification for recovered core fields, or error kind (timeout, requestFailed, noToolCall, parseError, invalidClassification, error)" },
@@ -335,7 +335,7 @@ export class PromptCategorizerService implements IPromptCategorizerService {
 				taxonomyVersion: 'v2',
 				sessionId: request.sessionId ?? '',
 				requestId: telemetryMessageId,
-				vscodeRequestId: request.id ?? '',
+				zyraxoncodeRequestId: request.id ?? '',
 				modeName: getModeNameForTelemetry(request.modeInstructions2) ?? 'custom',
 				currentLanguage: currentLanguage ?? '',
 				outcome,
@@ -367,7 +367,7 @@ export class PromptCategorizerService implements IPromptCategorizerService {
 				taxonomyVersion: 'v2',
 				sessionId: request.sessionId ?? '',
 				requestId: telemetryMessageId,
-				vscodeRequestId: request.id ?? '',
+				zyraxoncodeRequestId: request.id ?? '',
 				modeName: getModeNameForTelemetry(request.modeInstructions2) ?? 'custom',
 				currentLanguage: currentLanguage ?? '',
 				outcome,

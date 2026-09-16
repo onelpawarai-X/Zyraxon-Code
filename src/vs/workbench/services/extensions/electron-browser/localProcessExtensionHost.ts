@@ -248,7 +248,7 @@ export class NativeLocalProcessExtensionHost extends Disposable implements IExte
 
 		const opts: IExtensionHostProcessOptions = {
 			responseWindowId: this._nativeHostService.windowId,
-			responseChannel: 'vscode:startExtensionHostMessagePortResult',
+			responseChannel: 'zyraxoncode:startExtensionHostMessagePortResult',
 			responseNonce: generateUuid(),
 			env,
 			// We only detach the extension host on windows. Linux and Mac orphan by default
@@ -278,7 +278,7 @@ export class NativeLocalProcessExtensionHost extends Disposable implements IExte
 			opts.execArgv.unshift('--prof');
 		}
 
-		// Refs https://github.com/microsoft/vscode/issues/189805
+		// Refs __ZYRAXKEEP__0_
 		//
 		// Enable experimental network inspection
 		// inspector agent is always setup hence add this flag
@@ -321,7 +321,7 @@ export class NativeLocalProcessExtensionHost extends Disposable implements IExte
 			const inspectorUrlMatch = output.data && output.data.match(/ws:\/\/([^\s]+):(\d+)\/([^\s]+)/);
 			if (inspectorUrlMatch) {
 				const [, host, port, auth] = inspectorUrlMatch;
-				const devtoolsUrl = `devtools://devtools/bundled/js_app.html?v8only=true&ws=${host}:${port}/${auth}`;
+				const devtoolsUrl = `__ZYRAXKEEP__1_{host}:${port}/${auth}`;
 				if (!this._environmentService.isBuilt && !this._isExtensionDevTestFromCli) {
 					console.debug(`%c[Extension Host] %cdebugger inspector at ${devtoolsUrl}`, 'color: blue', 'color:');
 				}
@@ -597,7 +597,7 @@ export class NativeLocalProcessExtensionHost extends Disposable implements IExte
 		const event = new Emitter<string>();
 		stream((chunk) => {
 			// not a fancy approach, but this is the same approach used by the split2
-			// module which is well-optimized (https://github.com/mcollina/split2)
+			// module which is well-optimized (__ZYRAXKEEP__2_)
 			last += chunk;
 			const lines = last.split(/\r?\n/g);
 			last = lines.pop()!;

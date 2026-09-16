@@ -14,7 +14,7 @@ export function applyLocalizationTools(server: McpServer, appService: Applicatio
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_localization_get_locale_info',
+	// 	'zyraxoncode_automation_localization_get_locale_info',
 	// 	'Get current locale information',
 	// 	async () => {
 	// 		const localeInfo = await app.workbench.localization.getLocaleInfo();
@@ -29,7 +29,7 @@ export function applyLocalizationTools(server: McpServer, appService: Applicatio
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_localization_get_localized_strings',
+	// 	'zyraxoncode_automation_localization_get_localized_strings',
 	// 	'Get all localized strings',
 	// 	async () => {
 	// 		const localizedStrings = await app.workbench.localization.getLocalizedStrings();

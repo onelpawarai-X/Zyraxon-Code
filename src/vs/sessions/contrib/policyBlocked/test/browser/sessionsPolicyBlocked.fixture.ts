@@ -19,7 +19,7 @@ function createOverlay(ctx: ComponentFixtureContext, options: ISessionsBlockedOv
 		additionalServices: (reg) => {
 			reg.defineInstance(IProductService, new class extends mock<IProductService>() {
 				override readonly quality = 'insider';
-				override readonly urlProtocol = 'vscode-insiders';
+				override readonly urlProtocol = 'zyraxoncode-insiders';
 			}());
 			reg.definePartialInstance(IWorkbenchLayoutService, { mainContainer: ctx.container });
 		},

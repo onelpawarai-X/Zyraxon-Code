@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type Anthropic from '@anthropic-ai/sdk';
-import { CAPIClient, RequestType, type CCAModel, type IExtensionInformation } from '@vscode/copilot-api';
+import { CAPIClient, RequestType, type CCAModel, type IExtensionInformation } from '@zyraxoncode/copilot-api';
 import { generateUuid } from '../../../../base/common/uuid.js';
 import { getDevDeviceId, getMachineId } from '../../../../base/node/id.js';
 import { createDecorator } from '../../../instantiation/common/instantiation.js';
@@ -34,9 +34,9 @@ export interface ICopilotApiServiceRequestOptions {
 	/**
 	 * Suppress the `Copilot-Integration-Id` header on this request.
 	 *
-	 * When unset, `@vscode/copilot-api` derives the integration id from the
+	 * When unset, `@zyraxoncode/copilot-api` derives the integration id from the
 	 * discovered Copilot SKU: a `no_auth_limited_copilot` SKU maps to
-	 * `vscode-nl`, which the CAPI backend treats as the limited/no-auth
+	 * `zyraxoncode-nl`, which the CAPI backend treats as the limited/no-auth
 	 * integration and refuses premium models such as `claude-opus-4.7`.
 	 * Setting this to `true` omits the header so CAPI authorizes against the
 	 * token's real entitlement. Mirrors the Copilot Chat extension's
@@ -172,12 +172,12 @@ const USER_API_VERSION = '2025-04-01';
  * set in production, so normal per-token discovery is unchanged.
  *
  * The override is restricted to loopback hosts, plus the reserved
- * `vscode-smoke.test` host when the smoke proxy marker is present. Subsequent
+ * `zyraxoncode-smoke.test` host when the smoke proxy marker is present. Subsequent
  * CAPI calls carry the user's GitHub bearer token, so every other non-loopback
  * or unparseable value is ignored to prevent token exfiltration.
  */
 const CAPI_URL_OVERRIDE_ENV = 'VSCODE_AGENT_HOST_CAPI_URL_OVERRIDE';
-const CAPI_URL_OVERRIDE_SMOKE_TEST_HOST = 'vscode-smoke.test';
+const CAPI_URL_OVERRIDE_SMOKE_TEST_HOST = 'zyraxoncode-smoke.test';
 const CAPI_URL_OVERRIDE_SMOKE_TEST_ENV = 'VSCODE_SMOKE_TEST_PROXY_HEADER';
 
 /** True iff `url` parses and its host is a loopback address (localhost / 127.0.0.0/8 / ::1). */
@@ -763,7 +763,7 @@ export class CopilotApiService implements ICopilotApiService {
 			sessionId: generateUuid(),
 			machineId,
 			deviceId,
-			vscodeVersion: this._productService.version,
+			zyraxoncodeVersion: this._productService.version,
 			version: this._productService.version,
 			buildType: this._productService.quality === 'stable' ? 'prod' : 'dev',
 		};
@@ -1004,7 +1004,7 @@ export class CopilotApiService implements ICopilotApiService {
 
 		capiClient.updateDomains(
 			{ endpoints: envelope.endpoints ?? {}, sku: envelope.access_type_sku ?? '' },
-			// Enterprise base URI (e.g. `https://acme.ghe.com`), or `undefined` for
+			// Enterprise base URI (e.g. `__ZYRAXKEEP__0_`), or `undefined` for
 			// github.com. The package derives the GitHub API host (`api.<host>`) from
 			// this for `copilot_internal` endpoints - notably the Copilot session
 			// token mint (`/copilot_internal/v2/token`). Omitting it strands the mint

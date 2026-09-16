@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionEvent, ToolExecutionCompleteEvent, ToolExecutionStartEvent } from '@github/copilot/sdk';
-import * as l10n from '@vscode/l10n';
-import type { CancellationToken, ChatParticipantToolToken, ChatPromptReference, ChatSimpleToolResultData, ChatTerminalToolInvocationData, LanguageModelToolDefinition, LanguageModelToolInformation, LanguageModelToolInvocationOptions, LanguageModelToolResult2 } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { CancellationToken, ChatParticipantToolToken, ChatPromptReference, ChatSimpleToolResultData, ChatTerminalToolInvocationData, LanguageModelToolDefinition, LanguageModelToolInformation, LanguageModelToolInvocationOptions, LanguageModelToolResult2 } from 'zyraxoncode';
 import { ILogger } from '../../../../platform/log/common/logService';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { isLocation } from '../../../../util/common/types';
@@ -16,7 +16,7 @@ import { ResourceMap } from '../../../../util/vs/base/common/map';
 import { constObservable, IObservable } from '../../../../util/vs/base/common/observable';
 import { isAbsolutePath, isEqual } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
-import { ChatMcpToolInvocationData, ChatReferenceBinaryData, ChatRequestTurn2, ChatResponseMarkdownPart, ChatResponseThinkingProgressPart, ChatResponseTurn2, ChatSubagentToolInvocationData, ChatToolInvocationPart, LanguageModelTextPart, Location, MarkdownString, McpToolInvocationContentData, Range, Uri } from '../../../../vscodeTypes';
+import { ChatMcpToolInvocationData, ChatReferenceBinaryData, ChatRequestTurn2, ChatResponseMarkdownPart, ChatResponseThinkingProgressPart, ChatResponseTurn2, ChatSubagentToolInvocationData, ChatToolInvocationPart, LanguageModelTextPart, Location, MarkdownString, McpToolInvocationContentData, Range, Uri } from '../../../../zyraxoncodeTypes';
 import type { MCP } from '../../../common/modelContextProtocol';
 import { ToolName } from '../../../tools/common/toolNames';
 import { ICopilotTool } from '../../../tools/common/toolsRegistry';
@@ -497,7 +497,7 @@ export interface RequestIdDetails {
  * Build chat history from SDK events for ZYRAXON Code chat session
  * Converts SDKEvents into ChatRequestTurn2 and ChatResponseTurn2 objects
  */
-export function buildChatHistoryFromEvents(sessionId: string, modelId: string | undefined, events: readonly SessionEvent[], getVSCodeRequestId: (sdkRequestId: string) => RequestIdDetails | undefined, delegationSummaryService: IChatDelegationSummaryService, logger: ILogger, workingDirectory?: URI, defaultModeInstructionsForLastRequest?: StoredModeInstructions, modelDetailsById?: ReadonlyMap<string, ModelDetailsInfo>): (ChatRequestTurn2 | ChatResponseTurn2)[] {
+export function buildChatHistoryFromEvents(sessionId: string, modelId: string | undefined, events: readonly SessionEvent[], getZyraxonCodeRequestId: (sdkRequestId: string) => RequestIdDetails | undefined, delegationSummaryService: IChatDelegationSummaryService, logger: ILogger, workingDirectory?: URI, defaultModeInstructionsForLastRequest?: StoredModeInstructions, modelDetailsById?: ReadonlyMap<string, ModelDetailsInfo>): (ChatRequestTurn2 | ChatResponseTurn2)[] {
 	const turns: (ChatRequestTurn2 | ChatResponseTurn2)[] = [];
 
 	let details: RequestIdDetails | undefined;
@@ -589,10 +589,10 @@ export function buildChatHistoryFromEvents(sessionId: string, modelId: string | 
 				if (isSyntheticUserMessage(event)) {
 					continue;
 				}
-				details = getVSCodeRequestId(event.id);
+				details = getZyraxonCodeRequestId(event.id);
 				flushPendingAssistantMessage(ctx);
 				flushResponseParts();
-				// Filter out vscode instruction files from references when building session history
+				// Filter out zyraxoncode instruction files from references when building session history
 				// TODO@rebornix filter instructions should be rendered as "references" in chat response like normal chat.
 				const references: ChatPromptReference[] = [];
 
@@ -1681,7 +1681,7 @@ export class FakeToolsService implements IToolsService {
 			};
 		}
 
-		if (name === 'vscode_reviewPlan') {
+		if (name === 'zyraxoncode_reviewPlan') {
 			if (this._confirmationResult === 'no') {
 				return { content: [new LanguageModelTextPart(JSON.stringify({ rejected: true }))] };
 			}

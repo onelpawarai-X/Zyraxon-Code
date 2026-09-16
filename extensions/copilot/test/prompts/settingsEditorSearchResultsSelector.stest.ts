@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import assert from 'assert';
 import { SettingsEditorSearchResultsSelector } from '../../src/extension/prompt/node/settingsEditorSearchResultsSelector';
-import { SettingListItem } from '../../src/platform/embeddings/common/vscodeIndex';
+import { SettingListItem } from '../../src/platform/embeddings/common/zyraxoncodeIndex';
 import { IEndpointProvider } from '../../src/platform/endpoint/common/endpointProvider';
 import { CancellationToken } from '../../src/util/vs/base/common/cancellation';
 import { IInstantiationService } from '../../src/util/vs/platform/instantiation/common/instantiation';

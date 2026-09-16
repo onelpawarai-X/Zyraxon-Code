@@ -13,7 +13,7 @@ const outDir = path.join(import.meta.dirname, 'dist');
  * Copy the language server worker main file to the output directory.
  */
 async function copyServerWorkerMain(outDir: string): Promise<void> {
-	const srcPath = path.join(import.meta.dirname, 'node_modules', 'vscode-markdown-languageserver', 'dist', 'node', 'workerMain.js');
+	const srcPath = path.join(import.meta.dirname, 'node_modules', 'zyraxoncode-markdown-languageserver', 'dist', 'node', 'workerMain.js');
 	const destPath = path.join(outDir, 'serverWorkerMain.js');
 	await fs.promises.copyFile(srcPath, destPath);
 }

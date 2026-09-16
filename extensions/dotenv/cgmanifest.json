@@ -4,8 +4,8 @@
 			"component": {
 				"type": "git",
 				"git": {
-					"name": "dotenv-org/dotenv-vscode",
-					"repositoryUrl": "https://github.com/dotenv-org/dotenv-vscode",
+					"name": "dotenv-org/dotenv-zyraxoncode",
+					"repositoryUrl": "__ZYRAXKEEP__0_",
 					"commitHash": "e7e41baa5b23e01c1ff0567a4e596c24860e7def"
 				}
 			},

@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -16,7 +16,7 @@ export const generateUuid = (function (): () => string {
 
 	// use `randomUUID` if possible
 	if (typeof crypto.randomUUID === 'function') {
-		// see https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto
+		// see __ZYRAXKEEP__0_
 		// > Although crypto is available on all windows, the returned Crypto object only has one
 		// > usable feature in insecure contexts: the getRandomValues() method.
 		// > In general, you should use this API only in secure contexts.

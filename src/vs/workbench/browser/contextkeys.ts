@@ -239,7 +239,7 @@ export class WorkbenchContextKeysHandler extends Disposable {
 		this._register(this.layoutService.onDidChangeZenMode(enabled => this.inZenModeContext.set(enabled)));
 		this._register(this.layoutService.onDidChangeActiveContainer(() => this.isAuxiliaryWindowFocusedContext.set(this.layoutService.activeContainer !== this.layoutService.mainContainer)));
 		this._register(onDidChangeFullscreen(windowId => {
-			if (windowId === mainWindow.vscodeWindowId) {
+			if (windowId === mainWindow.zyraxoncodeWindowId) {
 				this.isMainWindowFullscreenContext.set(isFullscreen(mainWindow));
 			}
 		}));

@@ -2,9 +2,9 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
-export function escapeAttribute(value: string | vscode.Uri): string {
+export function escapeAttribute(value: string | zyraxoncode.Uri): string {
 	return value.toString()
 		.replace(/&/g, '&amp;')
 		.replace(/"/g, '&quot;')

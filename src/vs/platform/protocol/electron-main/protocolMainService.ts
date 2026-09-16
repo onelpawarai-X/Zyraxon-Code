@@ -24,7 +24,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 	declare readonly _serviceBrand: undefined;
 
 	private readonly validRoots = TernarySearchTree.forPaths<boolean>(!isLinux);
-	private readonly validExtensions = new Set(['.svg', '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.mp4', '.otf', '.ttf']); // https://github.com/microsoft/vscode/issues/119384
+	private readonly validExtensions = new Set(['.svg', '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.mp4', '.otf', '.ttf']); // __ZYRAXKEEP__0_
 
 	constructor(
 		@INativeEnvironmentService private readonly environmentService: INativeEnvironmentService,
@@ -36,7 +36,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 		// Define an initial set of roots we allow loading from
 		// - appRoot	: all files installed as part of the app
 		// - extensions : all files shipped from extensions
-		// - storage    : all files in global and workspace storage (https://github.com/microsoft/vscode/issues/116735)
+		// - storage    : all files in global and workspace storage (__ZYRAXKEEP__1_)
 		this.addValidFileRoot(environmentService.appRoot);
 		this.addValidFileRoot(environmentService.extensionsPath);
 		this.addValidFileRoot(userDataProfilesService.defaultProfile.globalStorageHome.with({ scheme: Schemas.file }).fsPath);
@@ -49,15 +49,15 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 	private handleProtocols(): void {
 		const { defaultSession } = session;
 
-		// Register vscode-file:// handler
-		defaultSession.protocol.registerFileProtocol(Schemas.vscodeFileResource, (request, callback) => this.handleResourceRequest(request, callback));
+		// Register zyraxoncode-file:// handler
+		defaultSession.protocol.registerFileProtocol(Schemas.zyraxoncodeFileResource, (request, callback) => this.handleResourceRequest(request, callback));
 
 		// Block any file:// access
 		defaultSession.protocol.interceptFileProtocol(Schemas.file, (request, callback) => this.handleFileRequest(request, callback));
 
 		// Cleanup
 		this._register(toDisposable(() => {
-			defaultSession.protocol.unregisterProtocol(Schemas.vscodeFileResource);
+			defaultSession.protocol.unregisterProtocol(Schemas.zyraxoncodeFileResource);
 			defaultSession.protocol.uninterceptProtocol(Schemas.file);
 		}));
 	}
@@ -89,7 +89,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 
 	//#endregion
 
-	//#region vscode-file://
+	//#region zyraxoncode-file://
 
 	private handleResourceRequest(request: Electron.ProtocolRequest, callback: ProtocolCallback): void {
 		const path = this.requestToNormalizedFilePath(request);
@@ -105,7 +105,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 		}
 
 		// In OSS, evict resources from the memory cache in the renderer process
-		// Refs https://github.com/microsoft/vscode/issues/148541#issuecomment-2670891511
+		// Refs __ZYRAXKEEP__2_
 		if (!this.environmentService.isBuilt) {
 			headers = {
 				...headers,
@@ -114,8 +114,8 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 		}
 
 		// Document-policy header is needed for collecting
-		// JavaScript callstacks via https://www.electronjs.org/docs/latest/api/web-frame-main#framecollectjavascriptcallstack-experimental
-		// until https://github.com/electron/electron/issues/45356 is resolved.
+		// JavaScript callstacks via __ZYRAXKEEP__3_
+		// until __ZYRAXKEEP__4_ is resolved.
 		if (pathBasename === 'workbench.html' || pathBasename === 'workbench-dev.html') {
 			headers = {
 				...headers,
@@ -134,7 +134,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 		}
 
 		// finally block to load the resource
-		this.logService.error(`${Schemas.vscodeFileResource}: Refused to load resource ${path} from ${Schemas.vscodeFileResource}: protocol (original URL: ${request.url})`);
+		this.logService.error(`${Schemas.zyraxoncodeFileResource}: Refused to load resource ${path} from ${Schemas.zyraxoncodeFileResource}: protocol (original URL: ${request.url})`);
 
 		return callback({ error: -3 /* ABORTED */ });
 	}
@@ -146,7 +146,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 		const requestUri = URI.parse(request.url);
 
 		// 2.) Use `FileAccess.asFileUri` to convert back from a
-		//     `vscode-file:` URI to a `file:` URI.
+		//     `zyraxoncode-file:` URI to a `file:` URI.
 		const unnormalizedFileUri = FileAccess.uriToFileUri(requestUri);
 
 		// 3.) Strip anything from the URI that could result in
@@ -163,7 +163,7 @@ export class ProtocolMainService extends Disposable implements IProtocolMainServ
 
 		// Create unique URI
 		const resource = URI.from({
-			scheme: 'vscode', // used for all our IPC communication (vscode:<channel>)
+			scheme: 'zyraxoncode', // used for all our IPC communication (zyraxoncode:<channel>)
 			path: generateUuid()
 		});
 

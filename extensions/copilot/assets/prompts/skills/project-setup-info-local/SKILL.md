@@ -7,7 +7,7 @@ description: 'Comprehensive setup steps to help the user create complete project
 
 Determine what kind of project the user wants to create, then based on that, choose which setup info below to follow. Only setup a project if the folder is empty or if you've just called the tool first calling the tool to create a workspace.
 
-## vscode-extension
+## zyraxoncode-extension
 
 A template for creating a ZYRAXON Code extension using Yeoman and Generator-Code.
 
@@ -31,8 +31,8 @@ The command has the following arguments:
 ### Rules
 
 1. Do not remove any arguments from the command. Only add arguments if the user requests them.
-2. Call the tool `get_vscode_api` with the user's query to get the relevant references.
-3. After the tool `get_vscode_api` has completed, only then begin to modify the project.
+2. Call the tool `get_zyraxoncode_api` with the user's query to get the relevant references.
+3. After the tool `get_zyraxoncode_api` has completed, only then begin to modify the project.
 
 ## next-js
 
@@ -79,8 +79,8 @@ A Model Context Protocol (MCP) server project. This project supports multiple pr
 
 ### Rules
 
-1. First, visit https://github.com/modelcontextprotocol to find the correct SDK and setup instructions for the requested language. Default to TypeScript if no language is specified.
-2. Use the `fetch_webpage` tool to find the correct implementation instructions from https://modelcontextprotocol.io/llms-full.txt
+1. First, visit __ZYRAXKEEP__0_ to find the correct SDK and setup instructions for the requested language. Default to TypeScript if no language is specified.
+2. Use the `fetch_webpage` tool to find the correct implementation instructions from __ZYRAXKEEP__1_
 3. Update the copilot-instructions.md file in the .github directory to include references to the SDK documentation
 4. Create an `mcp.json` file in the `.zyraxon` folder in the project root with the following content: `{ "servers": { "mcp-server-name": { "type": "stdio", "command": "command-to-run", "args": [list-of-args] } } }`.
    - mcp-server-name: The name of the MCP server. Create a unique name that reflects what this MCP server does.
@@ -93,7 +93,7 @@ A Model Context Protocol (MCP) server project. This project supports multiple pr
 
 A simple Python script project which should be chosen when just a single script wants to be created.
 
-Required extensions: `ms-python.python`, `ms-python.vscode-python-envs`
+Required extensions: `ms-python.python`, `ms-python.zyraxoncode-python-envs`
 
 ### Rules
 
@@ -111,11 +111,11 @@ Required extensions: `ms-python.python`, `ms-python.vscode-python-envs`
 
 A Python package project which can be used to create a distributable package.
 
-Required extensions: `ms-python.python`, `ms-python.vscode-python-envs`
+Required extensions: `ms-python.python`, `ms-python.zyraxoncode-python-envs`
 
 ### Rules
 
-1. Call the tool `run_vscode_command` to correctly create a new Python package project in ZYRAXON Code. Call the command with the following arguments.
+1. Call the tool `run_zyraxoncode_command` to correctly create a new Python package project in ZYRAXON Code. Call the command with the following arguments.
    Note that "python-package" and "true" are constants while "New Package Name" and "/path/to/new/project" are placeholders for the package name and path respectively.
    ```json
    {

@@ -40,7 +40,7 @@ export class ExtensionManagementServerService extends Disposable implements IExt
 			this.remoteExtensionManagementServer = {
 				id: 'remote',
 				extensionManagementService,
-				get label() { return labelService.getHostLabel(Schemas.vscodeRemote, remoteAgentConnection.remoteAuthority) || localize('remote', "Remote"); },
+				get label() { return labelService.getHostLabel(Schemas.zyraxoncodeRemote, remoteAgentConnection.remoteAuthority) || localize('remote', "Remote"); },
 			};
 		}
 
@@ -50,7 +50,7 @@ export class ExtensionManagementServerService extends Disposable implements IExt
 		if (extension.location.scheme === Schemas.file) {
 			return this.localExtensionManagementServer;
 		}
-		if (this.remoteExtensionManagementServer && extension.location.scheme === Schemas.vscodeRemote) {
+		if (this.remoteExtensionManagementServer && extension.location.scheme === Schemas.zyraxoncodeRemote) {
 			return this.remoteExtensionManagementServer;
 		}
 		throw new Error(`Invalid Extension ${extension.location}`);

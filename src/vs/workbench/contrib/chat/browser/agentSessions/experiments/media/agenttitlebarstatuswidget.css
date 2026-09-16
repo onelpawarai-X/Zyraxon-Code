@@ -42,7 +42,7 @@
 	gap: 4px;
 	-webkit-app-region: no-drag;
 	overflow: visible;
-	color: var(--vscode-commandCenter-foreground);
+	color: var(--zyraxoncode-commandCenter-foreground);
 }
 
 /* Pill - shared styles */
@@ -56,13 +56,13 @@
 	flex: 1;
 	min-width: 0;
 	-webkit-app-region: no-drag;
-	background-color: var(--vscode-agentStatusIndicator-background);
-	border: 1px solid var(--vscode-commandCenter-border, transparent);
+	background-color: var(--zyraxoncode-agentStatusIndicator-background);
+	border: 1px solid var(--zyraxoncode-commandCenter-border, transparent);
 }
 
 .agent-status-pill:hover {
-	background-color: var(--vscode-commandCenter-activeBackground);
-	border-color: var(--vscode-commandCenter-activeBorder, transparent);
+	background-color: var(--zyraxoncode-commandCenter-activeBackground);
+	border-color: var(--zyraxoncode-commandCenter-activeBorder, transparent);
 }
 
 /* Compact mode: pill hover is handled by individual sections, not the whole pill */
@@ -74,7 +74,7 @@
 
 .agent-status-pill.compact-mode:hover {
 	background-color: transparent;
-	border-color: var(--vscode-commandCenter-border, transparent);
+	border-color: var(--zyraxoncode-commandCenter-border, transparent);
 }
 
 .agent-status-pill.chat-input-mode:not(.compact-mode) {
@@ -92,8 +92,8 @@
 }
 
 .agent-status-pill.session-mode {
-	background-color: var(--vscode-commandCenter-activeBackground);
-	border-color: var(--vscode-commandCenter-activeBorder, transparent);
+	background-color: var(--zyraxoncode-commandCenter-activeBackground);
+	border-color: var(--zyraxoncode-commandCenter-activeBorder, transparent);
 }
 
 .agent-status-pill.session-mode:hover {
@@ -103,7 +103,7 @@
 /* Active/needs-attention states - use active foreground */
 .agent-status-pill.chat-input-mode.has-active .agent-status-label,
 .agent-status-pill.chat-input-mode.needs-attention .agent-status-label {
-	color: var(--vscode-commandCenter-activeForeground);
+	color: var(--zyraxoncode-commandCenter-activeForeground);
 }
 
 /* Label - styled as placeholder text */
@@ -138,7 +138,7 @@
 	border-radius: 5px 0 0 5px;
 	height: 100%;
 	padding: 0 10px;
-	background-color: var(--vscode-agentStatusIndicator-background);
+	background-color: var(--zyraxoncode-agentStatusIndicator-background);
 }
 
 /* When preceded by a toolbar/separator, remove left border-radius */
@@ -147,11 +147,11 @@
 }
 
 .agent-status-pill .agent-status-input-area:hover {
-	background-color: var(--vscode-commandCenter-activeBackground);
+	background-color: var(--zyraxoncode-commandCenter-activeBackground);
 }
 
 .agent-status-pill .agent-status-input-area:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -194,7 +194,7 @@
 
 .agent-status-send.hidden { display: none; }
 .agent-status-search:hover { opacity: 1; }
-.agent-status-search:focus { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+.agent-status-search:focus { outline: 1px solid var(--zyraxoncode-focusBorder); outline-offset: -1px; }
 
 /* Text elements */
 .agent-status-text,
@@ -224,7 +224,7 @@
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
-	border: 1px solid color-mix(in srgb, var(--vscode-descriptionForeground) 50%, transparent);
+	border: 1px solid color-mix(in srgb, var(--zyraxoncode-descriptionForeground) 50%, transparent);
 	border-radius: 3px;
 	height: 16px;
 	line-height: 14px;
@@ -232,20 +232,20 @@
 	padding: 0 6px;
 	margin: 0 2px 0 6px;
 	background-color: transparent;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	cursor: pointer;
 	-webkit-app-region: no-drag;
 }
 
 .agent-status-esc-button:hover,
 .agent-status-enter-button:hover {
-	color: var(--vscode-commandCenter-foreground);
-	border-color: color-mix(in srgb, var(--vscode-commandCenter-foreground) 60%, transparent);
+	color: var(--zyraxoncode-commandCenter-foreground);
+	border-color: color-mix(in srgb, var(--zyraxoncode-commandCenter-foreground) 60%, transparent);
 }
 
 .agent-status-esc-button:focus,
 .agent-status-enter-button:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
 }
 
@@ -255,7 +255,7 @@
 	align-items: center;
 	-webkit-app-region: no-drag;
 	height: 100%;
-	background-color: var(--vscode-agentStatusIndicator-background);
+	background-color: var(--zyraxoncode-agentStatusIndicator-background);
 	border-radius: 5px 0 0 5px;
 }
 
@@ -271,7 +271,7 @@
 	width: 1px;
 	align-self: stretch;
 	margin: 4px 0;
-	background-color: var(--vscode-commandCenter-border, rgba(128, 128, 128, 0.35));
+	background-color: var(--zyraxoncode-commandCenter-border, rgba(128, 128, 128, 0.35));
 	flex-shrink: 0;
 	pointer-events: none;
 }
@@ -282,12 +282,12 @@
 	align-items: center;
 	height: 22px;
 	border-radius: 6px;
-	background-color: var(--vscode-agentStatusIndicator-background);
-	border: 1px solid var(--vscode-commandCenter-border, transparent);
+	background-color: var(--zyraxoncode-agentStatusIndicator-background);
+	border: 1px solid var(--zyraxoncode-commandCenter-border, transparent);
 	flex-shrink: 0;
 	-webkit-app-region: no-drag;
 	margin-left: auto;
-	color: var(--vscode-commandCenter-foreground);
+	color: var(--zyraxoncode-commandCenter-foreground);
 }
 
 /* Badge sections */
@@ -299,25 +299,25 @@
 	height: 100%;
 	position: relative;
 	cursor: pointer;
-	background-color: var(--vscode-agentStatusIndicator-background);
+	background-color: var(--zyraxoncode-agentStatusIndicator-background);
 }
 
 .agent-status-badge-section:first-child { border-radius: 5px 0 0 5px; }
 .agent-status-badge-section:last-child { border-radius: 0 5px 5px 0; }
 .agent-status-badge-section:only-child { border-radius: 5px; }
-.agent-status-badge-section:hover { background-color: var(--vscode-commandCenter-activeBackground); }
+.agent-status-badge-section:hover { background-color: var(--zyraxoncode-commandCenter-activeBackground); }
 .agent-status-badge-section:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
 .agent-status-badge-section.filtered {
-	color: var(--vscode-inputOption-activeForeground);
-	background-color: var(--vscode-inputOption-activeBackground);
+	color: var(--zyraxoncode-inputOption-activeForeground);
+	background-color: var(--zyraxoncode-inputOption-activeBackground);
 }
 
 .agent-status-badge-section.filtered .agent-status-icon .codicon {
-	color: var(--vscode-inputOption-activeForeground);
+	color: var(--zyraxoncode-inputOption-activeForeground);
 }
 
 .agent-status-badge-section.filtered:hover {
@@ -328,14 +328,14 @@
 .hc-light .agent-status-badge-section:hover,
 .hc-black .agent-status-badge-section:hover {
 	background-color: transparent;
-	outline: 1px dashed var(--vscode-contrastActiveBorder);
+	outline: 1px dashed var(--zyraxoncode-contrastActiveBorder);
 	outline-offset: -1px;
 }
 
 .hc-light .agent-status-badge-section.filtered,
 .hc-black .agent-status-badge-section.filtered {
 	background-color: transparent;
-	outline: 1px solid var(--vscode-contrastActiveBorder);
+	outline: 1px solid var(--zyraxoncode-contrastActiveBorder);
 	outline-offset: -1px;
 }
 
@@ -354,7 +354,7 @@
 	top: 4px;
 	bottom: 4px;
 	width: 1px;
-	background-color: var(--vscode-commandCenter-border, rgba(128, 128, 128, 0.35));
+	background-color: var(--zyraxoncode-commandCenter-border, rgba(128, 128, 128, 0.35));
 }
 
 /* Sparkle section */
@@ -406,12 +406,12 @@
 
 .agent-status-badge-section.sparkle .action-container:hover,
 .agent-status-badge-section.sparkle .dropdown-action-container:hover {
-	background-color: var(--vscode-commandCenter-activeBackground);
+	background-color: var(--zyraxoncode-commandCenter-activeBackground);
 }
 
 .agent-status-badge-section.sparkle .action-container:focus-within,
 .agent-status-badge-section.sparkle .dropdown-action-container:focus-within {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -446,7 +446,7 @@
 }
 
 .agent-status-badge-section.sparkle .action-label:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -461,5 +461,5 @@
 
 /* Active section in needs-input state - uses report icon with warning color */
 .agent-status-badge-section.active.needs-input .agent-status-icon {
-	color: var(--vscode-notificationsWarningIcon-foreground);
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 }

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import Ajv, { ValidateFunction } from 'ajv';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILogService } from '../../../platform/log/common/logService';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { LRUCache } from '../../../util/common/cache';
@@ -36,7 +36,7 @@ export function isToolValidationError(result: IToolValidationResult): result is 
 }
 
 export class ToolCallCancelledError extends Error {
-	constructor(cause: vscode.CancellationError) {
+	constructor(cause: zyraxoncode.CancellationError) {
 		super(cause.message, { cause });
 	}
 }
@@ -51,9 +51,9 @@ export interface IToolsService {
 	onWillInvokeTool: Event<IOnWillInvokeToolEvent>;
 
 	/**
-	 * All registered LanguageModelToolInformations (vscode.lm.tools)
+	 * All registered LanguageModelToolInformations (zyraxoncode.lm.tools)
 	 */
-	tools: ReadonlyArray<vscode.LanguageModelToolInformation>;
+	tools: ReadonlyArray<zyraxoncode.LanguageModelToolInformation>;
 
 	/**
 	 * Tool implementations from tools in this extension
@@ -64,7 +64,7 @@ export interface IToolsService {
 	 * Model-specific tool instances. These are NOT included in the
 	 * {@link copilotTools} map, and may update at runtime.
 	 */
-	modelSpecificTools: IObservable<{ definition: vscode.LanguageModelToolDefinition; tool: ICopilotTool<unknown> }[]>;
+	modelSpecificTools: IObservable<{ definition: zyraxoncode.LanguageModelToolDefinition; tool: ICopilotTool<unknown> }[]>;
 
 	getCopilotTool(name: string): ICopilotTool<unknown> | undefined;
 
@@ -72,17 +72,17 @@ export interface IToolsService {
 	 * Invokes a tool by name with the given options.
 	 * Note that `invokeToolWithEndpoint` should be preferred for most usages.
 	 */
-	invokeTool(name: string, options: vscode.LanguageModelToolInvocationOptions<unknown>, token: vscode.CancellationToken): Thenable<vscode.LanguageModelToolResult2>;
+	invokeTool(name: string, options: zyraxoncode.LanguageModelToolInvocationOptions<unknown>, token: zyraxoncode.CancellationToken): Thenable<zyraxoncode.LanguageModelToolResult2>;
 
 	/**
 	 * Invokes a tool by name with the given options. Uses any endpoint-specific tool
 	 * overrides as appropriate.
 	 */
-	invokeToolWithEndpoint(name: string, options: vscode.LanguageModelToolInvocationOptions<unknown>, endpoint: IChatEndpoint | undefined, token: vscode.CancellationToken): Thenable<vscode.LanguageModelToolResult2>;
+	invokeToolWithEndpoint(name: string, options: zyraxoncode.LanguageModelToolInvocationOptions<unknown>, endpoint: IChatEndpoint | undefined, token: zyraxoncode.CancellationToken): Thenable<zyraxoncode.LanguageModelToolResult2>;
 
 
-	getTool(name: string): vscode.LanguageModelToolInformation | undefined;
-	getToolByToolReferenceName(name: string): vscode.LanguageModelToolInformation | undefined;
+	getTool(name: string): zyraxoncode.LanguageModelToolInformation | undefined;
+	getToolByToolReferenceName(name: string): zyraxoncode.LanguageModelToolInformation | undefined;
 
 	/**
 	 * Validates the input to the tool, returning an error if it's invalid.
@@ -96,7 +96,7 @@ export interface IToolsService {
 	 * pass `filter` function that can explicitl enable (true) or disable (false)
 	 * a tool, or use the default logic (undefined).
 	 */
-	getEnabledTools(request: vscode.ChatRequest, endpoint: IChatEndpoint, filter?: (tool: vscode.LanguageModelToolInformation) => boolean | undefined): vscode.LanguageModelToolInformation[];
+	getEnabledTools(request: zyraxoncode.ChatRequest, endpoint: IChatEndpoint, filter?: (tool: zyraxoncode.LanguageModelToolInformation) => boolean | undefined): zyraxoncode.LanguageModelToolInformation[];
 }
 
 /**
@@ -291,28 +291,28 @@ export abstract class BaseToolsService extends Disposable implements IToolsServi
 	protected readonly _onWillInvokeTool = this._register(new Emitter<IOnWillInvokeToolEvent>());
 	public get onWillInvokeTool() { return this._onWillInvokeTool.event; }
 
-	abstract tools: ReadonlyArray<vscode.LanguageModelToolInformation>;
+	abstract tools: ReadonlyArray<zyraxoncode.LanguageModelToolInformation>;
 	abstract copilotTools: ReadonlyMap<ToolName, ICopilotTool<unknown>>;
 
 	private readonly ajv = new Ajv({ coerceTypes: true });
 	private didWarnAboutValidationError?: Set<string>;
 	private readonly schemaCache = new LRUCache<ValidateFunction>(16);
 
-	protected readonly _modelSpecificTools = new ObservableMap</* tool name */string, { definition: vscode.LanguageModelToolDefinition; tool: ICopilotModelSpecificTool<unknown> }>();
+	protected readonly _modelSpecificTools = new ObservableMap</* tool name */string, { definition: zyraxoncode.LanguageModelToolDefinition; tool: ICopilotModelSpecificTool<unknown> }>();
 	public get modelSpecificTools() {
 		return this._modelSpecificTools.observable.map(v => [...v.values()]);
 	}
 
 	abstract getCopilotTool(name: string): ICopilotTool<unknown> | undefined;
-	abstract invokeTool(name: string, options: vscode.LanguageModelToolInvocationOptions<Object>, token: vscode.CancellationToken): Thenable<vscode.LanguageModelToolResult2>;
+	abstract invokeTool(name: string, options: zyraxoncode.LanguageModelToolInvocationOptions<Object>, token: zyraxoncode.CancellationToken): Thenable<zyraxoncode.LanguageModelToolResult2>;
 
-	invokeToolWithEndpoint(name: string, options: vscode.LanguageModelToolInvocationOptions<Object>, endpoint: IChatEndpoint | undefined, token: vscode.CancellationToken): Thenable<vscode.LanguageModelToolResult2> {
+	invokeToolWithEndpoint(name: string, options: zyraxoncode.LanguageModelToolInvocationOptions<Object>, endpoint: IChatEndpoint | undefined, token: zyraxoncode.CancellationToken): Thenable<zyraxoncode.LanguageModelToolResult2> {
 		return this.invokeTool(name, options, token);
 	}
 
-	abstract getTool(name: string): vscode.LanguageModelToolInformation | undefined;
-	abstract getToolByToolReferenceName(name: string): vscode.LanguageModelToolInformation | undefined;
-	abstract getEnabledTools(request: vscode.ChatRequest, endpoint: IChatEndpoint, filter?: (tool: vscode.LanguageModelToolInformation) => boolean | undefined): vscode.LanguageModelToolInformation[];
+	abstract getTool(name: string): zyraxoncode.LanguageModelToolInformation | undefined;
+	abstract getToolByToolReferenceName(name: string): zyraxoncode.LanguageModelToolInformation | undefined;
+	abstract getEnabledTools(request: zyraxoncode.ChatRequest, endpoint: IChatEndpoint, filter?: (tool: zyraxoncode.LanguageModelToolInformation) => boolean | undefined): zyraxoncode.LanguageModelToolInformation[];
 
 	constructor(
 		@ILogService private readonly logService: ILogService
@@ -369,16 +369,16 @@ export abstract class BaseToolsService extends Disposable implements IToolsServi
 
 export class NullToolsService extends BaseToolsService implements IToolsService {
 	_serviceBrand: undefined;
-	tools: readonly vscode.LanguageModelToolInformation[] = [];
+	tools: readonly zyraxoncode.LanguageModelToolInformation[] = [];
 	copilotTools = new Map();
 
-	async invokeTool(id: string, options: vscode.LanguageModelToolInvocationOptions<Object>, token: vscode.CancellationToken): Promise<vscode.LanguageModelToolResult2> {
+	async invokeTool(id: string, options: zyraxoncode.LanguageModelToolInvocationOptions<Object>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.LanguageModelToolResult2> {
 		return {
 			content: [],
 		};
 	}
 
-	getTool(id: string): vscode.LanguageModelToolInformation | undefined {
+	getTool(id: string): zyraxoncode.LanguageModelToolInformation | undefined {
 		return undefined;
 	}
 
@@ -386,11 +386,11 @@ export class NullToolsService extends BaseToolsService implements IToolsService 
 		return undefined;
 	}
 
-	getToolByToolReferenceName(name: string): vscode.LanguageModelToolInformation | undefined {
+	getToolByToolReferenceName(name: string): zyraxoncode.LanguageModelToolInformation | undefined {
 		return undefined;
 	}
 
-	getEnabledTools(): vscode.LanguageModelToolInformation[] {
+	getEnabledTools(): zyraxoncode.LanguageModelToolInformation[] {
 		return [];
 	}
 }

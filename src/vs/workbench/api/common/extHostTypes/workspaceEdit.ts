@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { coalesceInPlace } from '../../../../base/common/arrays.js';
 import { ResourceMap } from '../../../../base/common/map.js';
 import { URI } from '../../../../base/common/uri.js';
@@ -20,7 +20,7 @@ export interface IFileOperationOptions {
 	readonly ignoreIfExists?: boolean;
 	readonly ignoreIfNotExists?: boolean;
 	readonly recursive?: boolean;
-	readonly contents?: Uint8Array | vscode.DataTransferFile;
+	readonly contents?: Uint8Array | zyraxoncode.DataTransferFile;
 }
 
 export const enum FileEditType {
@@ -36,22 +36,22 @@ export interface IFileOperation {
 	readonly from?: URI;
 	readonly to?: URI;
 	readonly options?: IFileOperationOptions;
-	readonly metadata?: vscode.WorkspaceEditEntryMetadata;
+	readonly metadata?: zyraxoncode.WorkspaceEditEntryMetadata;
 }
 
 export interface IFileTextEdit {
 	readonly _type: FileEditType.Text;
 	readonly uri: URI;
 	readonly edit: TextEdit;
-	readonly metadata?: vscode.WorkspaceEditEntryMetadata;
+	readonly metadata?: zyraxoncode.WorkspaceEditEntryMetadata;
 }
 
 export interface IFileSnippetTextEdit {
 	readonly _type: FileEditType.Snippet;
 	readonly uri: URI;
-	readonly range: vscode.Range;
-	readonly edit: vscode.SnippetString;
-	readonly metadata?: vscode.WorkspaceEditEntryMetadata;
+	readonly range: zyraxoncode.Range;
+	readonly edit: zyraxoncode.SnippetString;
+	readonly metadata?: zyraxoncode.WorkspaceEditEntryMetadata;
 	readonly keepWhitespace?: boolean;
 }
 
@@ -59,22 +59,22 @@ export interface IFileCellEdit {
 	readonly _type: FileEditType.Cell;
 	readonly uri: URI;
 	readonly edit?: ICellMetadataEdit | IDocumentMetadataEdit;
-	readonly metadata?: vscode.WorkspaceEditEntryMetadata;
+	readonly metadata?: zyraxoncode.WorkspaceEditEntryMetadata;
 }
 
 export interface ICellEdit {
 	readonly _type: FileEditType.CellReplace;
-	readonly metadata?: vscode.WorkspaceEditEntryMetadata;
+	readonly metadata?: zyraxoncode.WorkspaceEditEntryMetadata;
 	readonly uri: URI;
 	readonly index: number;
 	readonly count: number;
-	readonly cells: vscode.NotebookCellData[];
+	readonly cells: zyraxoncode.NotebookCellData[];
 }
 
 export type WorkspaceEditEntry = IFileOperation | IFileTextEdit | IFileSnippetTextEdit | IFileCellEdit | ICellEdit;
 
 @es5ClassCompat
-export class WorkspaceEdit implements vscode.WorkspaceEdit {
+export class WorkspaceEdit implements zyraxoncode.WorkspaceEdit {
 
 	private readonly _edits: WorkspaceEditEntry[] = [];
 
@@ -84,24 +84,24 @@ export class WorkspaceEdit implements vscode.WorkspaceEdit {
 	}
 
 	// --- file
-	renameFile(from: vscode.Uri, to: vscode.Uri, options?: { readonly overwrite?: boolean; readonly ignoreIfExists?: boolean }, metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	renameFile(from: zyraxoncode.Uri, to: zyraxoncode.Uri, options?: { readonly overwrite?: boolean; readonly ignoreIfExists?: boolean }, metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		this._edits.push({ _type: FileEditType.File, from, to, options, metadata });
 	}
 
-	createFile(uri: vscode.Uri, options?: { readonly overwrite?: boolean; readonly ignoreIfExists?: boolean; readonly contents?: Uint8Array | vscode.DataTransferFile }, metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	createFile(uri: zyraxoncode.Uri, options?: { readonly overwrite?: boolean; readonly ignoreIfExists?: boolean; readonly contents?: Uint8Array | zyraxoncode.DataTransferFile }, metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		this._edits.push({ _type: FileEditType.File, from: undefined, to: uri, options, metadata });
 	}
 
-	deleteFile(uri: vscode.Uri, options?: { readonly recursive?: boolean; readonly ignoreIfNotExists?: boolean }, metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	deleteFile(uri: zyraxoncode.Uri, options?: { readonly recursive?: boolean; readonly ignoreIfNotExists?: boolean }, metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		this._edits.push({ _type: FileEditType.File, from: uri, to: undefined, options, metadata });
 	}
 
 	// --- notebook
-	private replaceNotebookMetadata(uri: URI, value: Record<string, unknown>, metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	private replaceNotebookMetadata(uri: URI, value: Record<string, unknown>, metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		this._edits.push({ _type: FileEditType.Cell, metadata, uri, edit: { editType: CellEditType.DocumentMetadata, metadata: value } });
 	}
 
-	private replaceNotebookCells(uri: URI, startOrRange: vscode.NotebookRange, cellData: vscode.NotebookCellData[], metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	private replaceNotebookCells(uri: URI, startOrRange: zyraxoncode.NotebookRange, cellData: zyraxoncode.NotebookCellData[], metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		const start = startOrRange.start;
 		const end = startOrRange.end;
 
@@ -110,20 +110,20 @@ export class WorkspaceEdit implements vscode.WorkspaceEdit {
 		}
 	}
 
-	private replaceNotebookCellMetadata(uri: URI, index: number, cellMetadata: Record<string, unknown>, metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	private replaceNotebookCellMetadata(uri: URI, index: number, cellMetadata: Record<string, unknown>, metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		this._edits.push({ _type: FileEditType.Cell, metadata, uri, edit: { editType: CellEditType.Metadata, index, metadata: cellMetadata } });
 	}
 
 	// --- text
-	replace(uri: URI, range: Range, newText: string, metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	replace(uri: URI, range: Range, newText: string, metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		this._edits.push({ _type: FileEditType.Text, uri, edit: new TextEdit(range, newText), metadata });
 	}
 
-	insert(resource: URI, position: Position, newText: string, metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	insert(resource: URI, position: Position, newText: string, metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		this.replace(resource, new Range(position, position), newText, metadata);
 	}
 
-	delete(resource: URI, range: Range, metadata?: vscode.WorkspaceEditEntryMetadata): void {
+	delete(resource: URI, range: Range, metadata?: zyraxoncode.WorkspaceEditEntryMetadata): void {
 		this.replace(resource, range, '', metadata);
 	}
 
@@ -133,11 +133,11 @@ export class WorkspaceEdit implements vscode.WorkspaceEdit {
 	}
 
 	set(uri: URI, edits: ReadonlyArray<TextEdit | SnippetTextEdit>): void;
-	set(uri: URI, edits: ReadonlyArray<[TextEdit | SnippetTextEdit, vscode.WorkspaceEditEntryMetadata | undefined]>): void;
+	set(uri: URI, edits: ReadonlyArray<[TextEdit | SnippetTextEdit, zyraxoncode.WorkspaceEditEntryMetadata | undefined]>): void;
 	set(uri: URI, edits: readonly NotebookEdit[]): void;
-	set(uri: URI, edits: ReadonlyArray<[NotebookEdit, vscode.WorkspaceEditEntryMetadata | undefined]>): void;
+	set(uri: URI, edits: ReadonlyArray<[NotebookEdit, zyraxoncode.WorkspaceEditEntryMetadata | undefined]>): void;
 
-	set(uri: URI, edits: null | undefined | ReadonlyArray<TextEdit | SnippetTextEdit | NotebookEdit | [NotebookEdit, vscode.WorkspaceEditEntryMetadata | undefined] | [TextEdit | SnippetTextEdit, vscode.WorkspaceEditEntryMetadata | undefined]>): void {
+	set(uri: URI, edits: null | undefined | ReadonlyArray<TextEdit | SnippetTextEdit | NotebookEdit | [NotebookEdit, zyraxoncode.WorkspaceEditEntryMetadata | undefined] | [TextEdit | SnippetTextEdit, zyraxoncode.WorkspaceEditEntryMetadata | undefined]>): void {
 		if (!edits) {
 			// remove all text, snippet, or notebook edits for `uri`
 			for (let i = 0; i < this._edits.length; i++) {
@@ -161,7 +161,7 @@ export class WorkspaceEdit implements vscode.WorkspaceEdit {
 					continue;
 				}
 				let edit: TextEdit | SnippetTextEdit | NotebookEdit;
-				let metadata: vscode.WorkspaceEditEntryMetadata | undefined;
+				let metadata: zyraxoncode.WorkspaceEditEntryMetadata | undefined;
 				if (Array.isArray(editOrTuple)) {
 					edit = editOrTuple[0];
 					metadata = editOrTuple[1];

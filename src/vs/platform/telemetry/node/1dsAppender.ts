@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { IPayloadData, IXHROverride } from '@microsoft/1ds-post-js';
+import type { IPayloadData, IXHROverride } from '@zyraxon/1ds-post-js';
 import { streamToBuffer } from '../../../base/common/buffer.js';
 import { CancellationToken } from '../../../base/common/cancellation.js';
 import { IRequestOptions } from '../../../base/parts/request/common/request.js';
@@ -42,7 +42,7 @@ async function makeTelemetryRequest(options: IRequestOptions, requestService: IR
  * @returns An object containing the headers, statusCode, and responseData
  */
 async function makeLegacyTelemetryRequest(options: IRequestOptions): Promise<IResponseData> {
-	const https = await import('https'); // Lazy due to https://github.com/nodejs/node/issues/59686
+	const https = await import('https'); // Lazy due to __ZYRAXKEEP__0_
 	const httpsOptions = {
 		method: options.type,
 		headers: options.headers

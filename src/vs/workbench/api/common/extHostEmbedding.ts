@@ -8,13 +8,13 @@ import { Emitter, Event } from '../../../base/common/event.js';
 import { IDisposable, toDisposable } from '../../../base/common/lifecycle.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { ExtHostEmbeddingsShape, IMainContext, MainContext, MainThreadEmbeddingsShape } from './extHost.protocol.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 
 export class ExtHostEmbeddings implements ExtHostEmbeddingsShape {
 
 	private readonly _proxy: MainThreadEmbeddingsShape;
-	private readonly _provider = new Map<number, { id: string; provider: vscode.EmbeddingsProvider }>();
+	private readonly _provider = new Map<number, { id: string; provider: zyraxoncode.EmbeddingsProvider }>();
 	private readonly _registeredModels = new Set<string>();
 
 	private readonly _onDidChange = new Emitter<void>();
@@ -29,7 +29,7 @@ export class ExtHostEmbeddings implements ExtHostEmbeddingsShape {
 		this._proxy = mainContext.getProxy(MainContext.MainThreadEmbeddings);
 	}
 
-	registerEmbeddingsProvider(_extension: IExtensionDescription, embeddingsModel: string, provider: vscode.EmbeddingsProvider): IDisposable {
+	registerEmbeddingsProvider(_extension: IExtensionDescription, embeddingsModel: string, provider: zyraxoncode.EmbeddingsProvider): IDisposable {
 		if (this._registeredModels.has(embeddingsModel)) {
 			throw new Error(`An embeddings provider for model '${embeddingsModel}' is already registered`);
 		}
@@ -47,9 +47,9 @@ export class ExtHostEmbeddings implements ExtHostEmbeddingsShape {
 		});
 	}
 
-	async computeEmbeddings(embeddingsModel: string, input: string, token?: vscode.CancellationToken): Promise<vscode.Embedding>;
-	async computeEmbeddings(embeddingsModel: string, input: string[], token?: vscode.CancellationToken): Promise<vscode.Embedding[]>;
-	async computeEmbeddings(embeddingsModel: string, input: string | string[], token?: vscode.CancellationToken): Promise<vscode.Embedding[] | vscode.Embedding> {
+	async computeEmbeddings(embeddingsModel: string, input: string, token?: zyraxoncode.CancellationToken): Promise<zyraxoncode.Embedding>;
+	async computeEmbeddings(embeddingsModel: string, input: string[], token?: zyraxoncode.CancellationToken): Promise<zyraxoncode.Embedding[]>;
+	async computeEmbeddings(embeddingsModel: string, input: string | string[], token?: zyraxoncode.CancellationToken): Promise<zyraxoncode.Embedding[] | zyraxoncode.Embedding> {
 
 		token ??= CancellationToken.None;
 

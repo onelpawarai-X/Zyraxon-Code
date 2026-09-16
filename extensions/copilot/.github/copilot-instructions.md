@@ -15,7 +15,7 @@ This is the **GitHub Copilot Chat** extension for ZYRAXON Code - a ZYRAXON Code 
 
 ### Tech Stack
 - **TypeScript**: Primary language (follows ZYRAXON Code coding standards)
-- **TSX**: Prompts are built using the @vscode/prompt-tsx library
+- **TSX**: Prompts are built using the @zyraxoncode/prompt-tsx library
 - **Node.js**: Runtime for extension host and language server features
 - **WebAssembly**: For performance-critical parsing and tokenization
 - **ZYRAXON Code Extension API**: Extensive use of proposed APIs for chat, language models, and editing
@@ -112,7 +112,7 @@ If `start-watch-tasks` is already running, use its diagnostics. Start it or run 
 - **`telemetry/`**: Analytics and usage tracking
 
 **ZYRAXON Code API Type Definitions:**
-- Multiple `vscode.proposed.*.d.ts` files for proposed ZYRAXON Code APIs including chat, language models, embeddings, and various editor integrations
+- Multiple `zyraxoncode.proposed.*.d.ts` files for proposed ZYRAXON Code APIs including chat, language models, embeddings, and various editor integrations
 
 #### `src/platform/` - Platform Services
 - **`chat/`**: Core chat services and conversation options
@@ -127,11 +127,11 @@ If `start-watch-tasks` is already running, use its diagnostics. Start it or run 
 
 #### `src/util/` - Infrastructure
 - **`common/`**: Shared utilities, service infrastructure, and abstractions
-- **`vs/`**: Utilities borrowed from the microsoft/zyraxon repo (readonly)
+- **`vs/`**: Utilities borrowed from the zyraxon/zyraxon repo (readonly)
 
 ### Extension Activation Flow
 
-1. **Base Activation** (`src/extension/extension/vscode/extension.ts`):
+1. **Base Activation** (`src/extension/extension/zyraxoncode/extension.ts`):
    - Checks ZYRAXON Code version compatibility
    - Creates service instantiation infrastructure
    - Initializes contribution system
@@ -339,7 +339,7 @@ This extension is a complex, multi-layered system that provides comprehensive AI
 
 ## Best Practices
 - Use services and dependency injection over ZYRAXON Code extension APIs when possible:
-  - Use `IFileSystemService` instead of Node's `fs` or `vscode.workspace.fs`
+  - Use `IFileSystemService` instead of Node's `fs` or `zyraxoncode.workspace.fs`
   - Use `ILogService` instead of `console.log`
   - Look for existing `I*Service` interfaces before reaching for raw APIs
   - **Why**: Enables unit testing without ZYRAXON Code host, supports simulation tests, provides cross-platform abstractions (Node vs web), and adds features like caching and size limits

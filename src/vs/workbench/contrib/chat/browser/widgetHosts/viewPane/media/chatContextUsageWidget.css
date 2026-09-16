@@ -24,18 +24,18 @@
 }
 
 .chat-context-usage-widget:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
-	outline: 1px dashed var(--vscode-toolbar-hoverOutline);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
+	outline: 1px dashed var(--zyraxoncode-toolbar-hoverOutline);
 	outline-offset: -1px;
 }
 
 .chat-context-usage-widget:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
 .chat-context-usage-widget:active {
-	background-color: var(--vscode-toolbar-activeBackground);
+	background-color: var(--zyraxoncode-toolbar-activeBackground);
 }
 
 .chat-context-usage-widget .circular-progress {
@@ -46,14 +46,14 @@
 
 .chat-context-usage-widget .progress-bg {
 	fill: none;
-	stroke: var(--vscode-disabledForeground);
+	stroke: var(--zyraxoncode-disabledForeground);
 	stroke-width: 4;
 	opacity: 0.5;
 }
 
 .chat-context-usage-widget .progress-arc {
 	fill: none;
-	stroke: var(--vscode-icon-foreground);
+	stroke: var(--zyraxoncode-icon-foreground);
 	stroke-width: 4;
 	stroke-linecap: round;
 	transform: rotate(-90deg);
@@ -62,17 +62,17 @@
 }
 
 .chat-context-usage-widget.warning .progress-arc {
-	stroke: var(--vscode-editorWarning-foreground);
+	stroke: var(--zyraxoncode-editorWarning-foreground);
 }
 
 .chat-context-usage-widget.error .progress-arc {
-	stroke: var(--vscode-editorError-foreground);
+	stroke: var(--zyraxoncode-editorError-foreground);
 }
 
 .chat-context-usage-widget .percentage-label {
 	font-size: 11px;
 	line-height: 1;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: nowrap;
 	max-width: 0;
 	opacity: 0;

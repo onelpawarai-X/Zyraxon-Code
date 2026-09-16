@@ -2,12 +2,12 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILanguageFeaturesService, NoopLanguageFeaturesService } from '../../../src/platform/languages/common/languageFeaturesService';
 import { SimulationWorkspace } from '../../../src/platform/test/node/simulationWorkspace';
 import { getLanguageForResource } from '../../../src/util/common/languages';
 import { URI } from '../../../src/util/vs/base/common/uri';
-import { Range, Uri } from '../../../src/vscodeTypes';
+import { Range, Uri } from '../../../src/zyraxoncodeTypes';
 import { computeSHA256 } from '../../base/hash';
 import { TestingCacheSalts } from '../../base/salts';
 import { CacheScope, ICachingResourceFetcher } from '../../base/simulationContext';
@@ -28,7 +28,7 @@ export class SimulationLanguageFeaturesService implements ILanguageFeaturesServi
 	}
 
 
-	private getLanguageFeatures(uri: vscode.Uri) {
+	private getLanguageFeatures(uri: zyraxoncode.Uri) {
 		const language = getLanguageForResource(uri);
 		switch (language?.languageId) {
 			case 'javascript':
@@ -41,22 +41,22 @@ export class SimulationLanguageFeaturesService implements ILanguageFeaturesServi
 		}
 	}
 
-	getDocumentSymbols(uri: vscode.Uri): Promise<vscode.DocumentSymbol[]> {
+	getDocumentSymbols(uri: zyraxoncode.Uri): Promise<zyraxoncode.DocumentSymbol[]> {
 		return this.getLanguageFeatures(uri).getDocumentSymbols(uri);
 	}
-	getDefinitions(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.LocationLink | vscode.Location)[]> {
+	getDefinitions(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.LocationLink | zyraxoncode.Location)[]> {
 		return this.getLanguageFeatures(uri).getDefinitions(uri, position);
 	}
-	getImplementations(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.LocationLink | vscode.Location)[]> {
+	getImplementations(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.LocationLink | zyraxoncode.Location)[]> {
 		return this.getLanguageFeatures(uri).getImplementations(uri, position);
 	}
-	getReferences(uri: vscode.Uri, position: vscode.Position): Promise<vscode.Location[]> {
+	getReferences(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<zyraxoncode.Location[]> {
 		return this.getLanguageFeatures(uri).getReferences(uri, position);
 	}
-	getDiagnostics(uri: vscode.Uri): vscode.Diagnostic[] {
+	getDiagnostics(uri: zyraxoncode.Uri): zyraxoncode.Diagnostic[] {
 		return this.getLanguageFeatures(uri).getDiagnostics(uri);
 	}
-	getWorkspaceSymbols(query: string): Promise<vscode.SymbolInformation[]> {
+	getWorkspaceSymbols(query: string): Promise<zyraxoncode.SymbolInformation[]> {
 		return Promise.resolve([]);
 	}
 	dispose(): void {
@@ -88,7 +88,7 @@ class TSServerLanguageFeaturesService implements ILanguageFeaturesService {
 		}
 	}
 
-	public async getDefinitions(uri: vscode.Uri, position: vscode.Position): Promise<vscode.LocationLink[]> {
+	public async getDefinitions(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<zyraxoncode.LocationLink[]> {
 		return (await this.cachedGetFromTSServer(uri, position, 'def', async (tsserver, currentFile, position) => {
 			const definitions = await tsserver.findDefinitions(currentFile, position);
 			return definitions.map(def => {
@@ -106,7 +106,7 @@ class TSServerLanguageFeaturesService implements ILanguageFeaturesService {
 		});
 	}
 
-	public async getReferences(uri: vscode.Uri, position: vscode.Position): Promise<vscode.Location[]> {
+	public async getReferences(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<zyraxoncode.Location[]> {
 		return (await this.cachedGetFromTSServer(uri, position, 'ref', async (tsserver, currentFile, position) => {
 			const references = await tsserver.findReferences(currentFile, position);
 			return references.map(ref => {
@@ -124,11 +124,11 @@ class TSServerLanguageFeaturesService implements ILanguageFeaturesService {
 		});
 	}
 
-	private async cachedGetFromTSServer<T extends vscode.LocationLink | vscode.Location>(
-		uri: vscode.Uri,
-		position: vscode.Position,
+	private async cachedGetFromTSServer<T extends zyraxoncode.LocationLink | zyraxoncode.Location>(
+		uri: zyraxoncode.Uri,
+		position: zyraxoncode.Position,
 		target: 'ref' | 'def',
-		f: (tsserver: TSServerClient, currentFile: string, pos: vscode.Position) => Promise<T[]>): Promise<T[]> {
+		f: (tsserver: TSServerClient, currentFile: string, pos: zyraxoncode.Position) => Promise<T[]>): Promise<T[]> {
 		const currentFile = this._workspace.getFilePath(uri);
 		const files = this._workspace.documents.map(d => ({ fileName: this._workspace.getFilePath(d.document.uri), fileContents: d.getText() }));
 		const serializablePosition = { line: position.line, character: position.character };
@@ -149,16 +149,16 @@ class TSServerLanguageFeaturesService implements ILanguageFeaturesService {
 		return this._cachingResourceFetcher.invokeWithCache(CacheScope.TSC, undefined, TestingCacheSalts.tscCacheSalt, cacheKey, getFromTSServer);
 	}
 
-	getImplementations(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.Location | vscode.LocationLink)[]> {
+	getImplementations(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.Location | zyraxoncode.LocationLink)[]> {
 		return Promise.resolve([]);
 	}
-	getWorkspaceSymbols(query: string): Promise<vscode.SymbolInformation[]> {
+	getWorkspaceSymbols(query: string): Promise<zyraxoncode.SymbolInformation[]> {
 		return Promise.resolve([]);
 	}
-	getDocumentSymbols(uri: vscode.Uri): Promise<vscode.DocumentSymbol[]> {
+	getDocumentSymbols(uri: zyraxoncode.Uri): Promise<zyraxoncode.DocumentSymbol[]> {
 		return Promise.resolve([]);
 	}
-	getDiagnostics(uri: vscode.Uri): vscode.Diagnostic[] {
+	getDiagnostics(uri: zyraxoncode.Uri): zyraxoncode.Diagnostic[] {
 		return [];
 	}
 }

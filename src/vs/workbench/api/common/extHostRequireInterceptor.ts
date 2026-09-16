@@ -8,7 +8,7 @@ import { URI } from '../../../base/common/uri.js';
 import { MainThreadTelemetryShape, MainContext } from './extHost.protocol.js';
 import { ExtHostConfigProvider, IExtHostConfiguration } from './extHostConfiguration.js';
 import { nullExtensionDescription } from '../../services/extensions/common/extensions.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { ExtensionIdentifierMap } from '../../../platform/extensions/common/extensions.js';
 import { IExtensionApiFactory, IExtensionRegistries } from './extHost.api.impl.js';
 import { IExtHostRpcService } from './extHostRpcService.js';
@@ -59,7 +59,7 @@ export abstract class RequireInterceptor {
 		performance.mark('code/extHost/didWaitForConfig');
 		const extensionPaths = await this._extHostExtensionService.getExtensionPathIndex();
 
-		this.register(new VSCodeNodeModuleFactory(this._apiFactory, extensionPaths, this._extensionRegistry, configProvider, this._logService));
+		this.register(new ZyraxonCodeNodeModuleFactory(this._apiFactory, extensionPaths, this._extensionRegistry, configProvider, this._logService));
 		this.register(this._instaService.createInstance(NodeModuleAliasingModuleFactory));
 		if (this._initData.remote.isRemote) {
 			this.register(this._instaService.createInstance(OpenNodeModuleFactory, extensionPaths, this._initData.environment.appUriScheme));
@@ -95,9 +95,9 @@ class NodeModuleAliasingModuleFactory implements IAlternativeModuleProvider {
 	 * renamed without breaking extensions. In the form "original -> new name".
 	 */
 	private static readonly aliased: ReadonlyMap<string, string> = new Map([
-		['vscode-ripgrep', '@vscode/ripgrep-universal'],
-		['@vscode/ripgrep', '@vscode/ripgrep-universal'],
-		['vscode-windows-registry', '@vscode/windows-registry'],
+		['zyraxoncode-ripgrep', '@zyraxoncode/ripgrep-universal'],
+		['@zyraxoncode/ripgrep', '@zyraxoncode/ripgrep-universal'],
+		['zyraxoncode-windows-registry', '@zyraxoncode/windows-registry'],
 	]);
 
 	private readonly re?: RegExp;
@@ -107,7 +107,7 @@ class NodeModuleAliasingModuleFactory implements IAlternativeModuleProvider {
 			const root = escapeRegExpCharacters(this.forceForwardSlashes(initData.environment.appRoot.fsPath));
 			// decompose ${appRoot}/node_modules/foo/bin to ['${appRoot}/node_modules/', 'foo', '/bin'],
 			// and likewise the more complex form ${appRoot}/node_modules.asar.unpacked/@vcode/foo/bin
-			// to ['${appRoot}/node_modules.asar.unpacked/',' @vscode/foo', '/bin'].
+			// to ['${appRoot}/node_modules.asar.unpacked/',' @zyraxoncode/foo', '/bin'].
 			const npmIdChrs = `[a-z0-9_.-]`;
 			const npmModuleName = `@${npmIdChrs}+\\/${npmIdChrs}+|${npmIdChrs}+`;
 			const moduleFolders = 'node_modules|node_modules\\.asar(?:\\.unpacked)?';
@@ -143,13 +143,13 @@ class NodeModuleAliasingModuleFactory implements IAlternativeModuleProvider {
 
 //#endregion
 
-//#region --- vscode-module
+//#region --- zyraxoncode-module
 
-class VSCodeNodeModuleFactory implements INodeModuleFactory {
-	public readonly nodeModuleName = 'vscode';
+class ZyraxonCodeNodeModuleFactory implements INodeModuleFactory {
+	public readonly nodeModuleName = 'zyraxoncode';
 
-	private readonly _extApiImpl = new ExtensionIdentifierMap<typeof vscode>();
-	private _defaultApiImpl?: typeof vscode;
+	private readonly _extApiImpl = new ExtensionIdentifierMap<typeof zyraxoncode>();
+	private _defaultApiImpl?: typeof zyraxoncode;
 
 	constructor(
 		private readonly _apiFactory: IExtensionApiFactory,
@@ -177,7 +177,7 @@ class VSCodeNodeModuleFactory implements INodeModuleFactory {
 		if (!this._defaultApiImpl) {
 			let extensionPathsPretty = '';
 			this._extensionPaths.forEach((value, index) => extensionPathsPretty += `\t${index} -> ${value.identifier.value}\n`);
-			this._logService.warn(`Could not identify extension for 'vscode' require call from ${parent}. These are the extension path mappings: \n${extensionPathsPretty}`);
+			this._logService.warn(`Could not identify extension for 'zyraxoncode' require call from ${parent}. These are the extension path mappings: \n${extensionPathsPretty}`);
 			this._defaultApiImpl = this._apiFactory(nullExtensionDescription, this._extensionRegistry, this._configProvider);
 		}
 		return this._defaultApiImpl;

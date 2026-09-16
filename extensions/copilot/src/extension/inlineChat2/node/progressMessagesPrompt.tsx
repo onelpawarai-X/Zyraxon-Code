@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptReference, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type { Uri } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptReference, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { Uri } from 'zyraxoncode';
 import { SafetyRules } from '../../prompts/node/base/safetyRules';
 import { ResponseTranslationRules } from '../../prompts/node/base/responseTranslationRules';
 import { Tag } from '../../prompts/node/base/tag';

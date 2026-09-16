@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'vscode';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IEmbeddingsComputer } from '../../../../platform/embeddings/common/embeddingsComputer';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
@@ -15,7 +15,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { groupBy } from '../../../../util/vs/base/common/collections';
 import { StopWatch } from '../../../../util/vs/base/common/stopwatch';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelToolExtensionSource, LanguageModelToolMCPSource } from '../../../../vscodeTypes';
+import { LanguageModelToolExtensionSource, LanguageModelToolMCPSource } from '../../../../zyraxoncodeTypes';
 import { ToolName } from '../toolNames';
 import { BuiltInToolGroupHandler } from './builtInToolGroupHandler';
 import { EMBEDDING_TYPE_FOR_TOOL_GROUPING } from './preComputedToolEmbeddingsCache';

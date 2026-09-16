@@ -32,13 +32,13 @@
 }
 
 .monaco-action-bar .action-item .action-label.extension-action.built-in-status {
-	border-color: var(--vscode-foreground);
+	border-color: var(--zyraxoncode-foreground);
 }
 
 .monaco-action-bar .action-item .action-label.extension-action.label,
 .monaco-action-bar .action-item.action-dropdown-item > .action-dropdown-item-separator {
-	background-color: var(--vscode-extensionButton-background);
-	border: 1px solid var(--vscode-extensionButton-border, transparent);
+	background-color: var(--zyraxoncode-extensionButton-background);
+	border: 1px solid var(--zyraxoncode-extensionButton-border, transparent);
 }
 
 .monaco-action-bar .action-item.action-dropdown-item > .action-label.extension-action.label {
@@ -65,44 +65,44 @@
 .monaco-list-row.focused .extension-list-item .monaco-action-bar .action-item .action-label.extension-action.label,
 .monaco-list-row.selected .extension-list-item .monaco-action-bar .action-item .action-label.extension-action.label,
 .monaco-action-bar .action-item .action-label.extension-action.label {
-	color: var(--vscode-extensionButton-foreground);
+	color: var(--zyraxoncode-extensionButton-foreground);
 }
 
 .monaco-action-bar .action-item:not(.disabled) .action-label.extension-action.label:hover {
-	background-color: var(--vscode-extensionButton-hoverBackground);
+	background-color: var(--zyraxoncode-extensionButton-hoverBackground);
 }
 
 .monaco-action-bar .action-item.action-dropdown-item > .action-dropdown-item-separator > div {
-	background-color: var(--vscode-extensionButton-separator, var(--vscode-extensionButton-border));
+	background-color: var(--zyraxoncode-extensionButton-separator, var(--zyraxoncode-extensionButton-border));
 }
 
-.vscode-high-contrast .monaco-action-bar .action-item.action-dropdown-item > .action-dropdown-item-separator > div {
-	background-color: var(--vscode-button-border);
+.zyraxoncode-high-contrast .monaco-action-bar .action-item.action-dropdown-item > .action-dropdown-item-separator > div {
+	background-color: var(--zyraxoncode-button-border);
 }
 
 .monaco-action-bar .action-item .action-label.extension-action.label.prominent,
 .monaco-action-bar .action-item.action-dropdown-item > .action-dropdown-item-separator.prominent {
-	background-color: var(--vscode-extensionButton-prominentBackground);
+	background-color: var(--zyraxoncode-extensionButton-prominentBackground);
 }
 
 .monaco-action-bar .action-item .action-label.extension-action.label.prominent {
-	color: var(--vscode-extensionButton-prominentForeground) !important;
+	color: var(--zyraxoncode-extensionButton-prominentForeground) !important;
 }
 
 .monaco-action-bar .action-item.action-item:not(.disabled) .action-label.extension-action.label.prominent:hover {
-	background-color: var(--vscode-extensionButton-prominentHoverBackground);
+	background-color: var(--zyraxoncode-extensionButton-prominentHoverBackground);
 }
 
 .monaco-action-bar .action-item .action-label.extension-action.extension-status-error::before {
-	color: var(--vscode-editorError-foreground);
+	color: var(--zyraxoncode-editorError-foreground);
 }
 
 .monaco-action-bar .action-item .action-label.extension-action.extension-status-warning::before {
-	color: var(--vscode-editorWarning-foreground);
+	color: var(--zyraxoncode-editorWarning-foreground);
 }
 
 .monaco-action-bar .action-item .action-label.extension-action.extension-status-info::before {
-	color: var(--vscode-editorInfo-foreground);
+	color: var(--zyraxoncode-editorInfo-foreground);
 }
 
 .monaco-action-bar .action-item:not(.disabled) .action-label.extension-action.text,

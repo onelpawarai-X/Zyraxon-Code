@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { Diff, IGitDiffService } from '../../../platform/git/common/gitDiffService';
 import { IGitService } from '../../../platform/git/common/gitService';
-import { Change } from '../../../platform/git/vscode/git';
+import { Change } from '../../../platform/git/zyraxoncode/git';
 import { ILogService } from '../../../platform/log/common/logService';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
 import { raceTimeout } from '../../../util/vs/base/common/async';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../vscodeTypes';
+import { LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../zyraxoncodeTypes';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { GitChanges } from '../../prompts/node/git/gitChanges';
 import { ToolName } from '../common/toolNames';
@@ -49,7 +49,7 @@ class GetScmChangesTool implements ICopilotTool<IGetScmChangesToolParams> {
 		@IPromptPathRepresentationService private readonly promptPathRepresentationService: IPromptPathRepresentationService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IGetScmChangesToolParams>, token: CancellationToken): Promise<vscode.LanguageModelToolResult | null | undefined> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IGetScmChangesToolParams>, token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult | null | undefined> {
 		checkCancellation(token);
 		await this.gitService.initialize();
 
@@ -162,7 +162,7 @@ class GetScmChangesTool implements ICopilotTool<IGetScmChangesToolParams> {
 		return new LanguageModelToolResult(resultParts);
 	}
 
-	prepareInvocation?(options: vscode.LanguageModelToolInvocationPrepareOptions<IGetScmChangesToolParams>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation?(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IGetScmChangesToolParams>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		checkCancellation(token);
 
 		const uri = options.input.repositoryPath

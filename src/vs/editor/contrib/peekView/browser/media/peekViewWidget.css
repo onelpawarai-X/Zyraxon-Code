@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 .monaco-editor .peekview-widget {
-	box-shadow: var(--vscode-shadow-lg);
+	box-shadow: var(--zyraxoncode-shadow-lg);
 }
 
 .monaco-editor .peekview-widget .head {

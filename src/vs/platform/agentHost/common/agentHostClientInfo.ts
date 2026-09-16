@@ -5,8 +5,8 @@
 
 import type { Implementation } from './state/protocol/common/commands.js';
 
-const EDITOR_WINDOW_CLIENT_NAME = 'vscode-editor-window';
-const AGENTS_WINDOW_CLIENT_NAME = 'vscode-agents-window';
+const EDITOR_WINDOW_CLIENT_NAME = 'zyraxoncode-editor-window';
+const AGENTS_WINDOW_CLIENT_NAME = 'zyraxoncode-agents-window';
 
 export const enum AgentHostClientType {
 	EditorWindow = 'editor_window',

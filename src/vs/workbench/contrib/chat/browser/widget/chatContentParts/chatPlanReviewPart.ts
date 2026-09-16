@@ -40,7 +40,7 @@ import { ChatTreeItem } from '../../chat.js';
 import { IChatContentPart, IChatContentPartRenderContext } from './chatContentParts.js';
 import './media/chatPlanReview.css';
 
-const MARKDOWN_EDITOR_ID = 'vscode.markdown.editor';
+const MARKDOWN_EDITOR_ID = 'zyraxoncode.markdown.editor';
 
 export interface IChatPlanReviewPartOptions {
 	onSubmit: (result: IChatPlanReviewResult) => void;

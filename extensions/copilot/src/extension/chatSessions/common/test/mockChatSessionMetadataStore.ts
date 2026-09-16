@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IChatSessionMetadataStore, RepositoryProperties, RequestDetails, WorkspaceFolderEntry } from '../chatSessionMetadataStore';
 import { ChatSessionWorktreeProperties } from '../chatSessionWorktreeService';
 import { IWorkspaceInfo } from '../workspaceInfo';
 
 export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
-	getMetadataFileUri(sessionId: string): vscode.Uri {
+	getMetadataFileUri(sessionId: string): zyraxoncode.Uri {
 		throw new Error('Method not implemented.');
 	}
 	declare _serviceBrand: undefined;
@@ -20,7 +20,7 @@ export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
 	private readonly _firstUserMessages = new Map<string, string>();
 	private readonly _customTitles = new Map<string, string>();
 	private readonly _requestDetails = new Map<string, RequestDetails[]>();
-	private readonly _sessionOrigins = new Map<string, 'vscode' | 'other'>();
+	private readonly _sessionOrigins = new Map<string, 'zyraxoncode' | 'other'>();
 
 	async deleteSessionMetadata(sessionId: string): Promise<void> {
 		this._worktreeProperties.delete(sessionId);
@@ -50,7 +50,7 @@ export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
 		return undefined;
 	}
 
-	async getSessionIdForWorktree(_folder: vscode.Uri): Promise<string | undefined> {
+	async getSessionIdForWorktree(_folder: zyraxoncode.Uri): Promise<string | undefined> {
 		return undefined;
 	}
 
@@ -58,7 +58,7 @@ export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
 		return this._worktreeProperties.get(sessionId);
 	}
 
-	async getSessionWorkspaceFolder(_sessionId: string): Promise<vscode.Uri | undefined> {
+	async getSessionWorkspaceFolder(_sessionId: string): Promise<zyraxoncode.Uri | undefined> {
 		return undefined;
 	}
 
@@ -94,10 +94,10 @@ export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
 		return this._requestDetails.get(sessionId) ?? [];
 	}
 
-	async updateRequestDetails(sessionId: string, details: (Partial<RequestDetails> & { vscodeRequestId: string })[]): Promise<void> {
+	async updateRequestDetails(sessionId: string, details: (Partial<RequestDetails> & { zyraxoncodeRequestId: string })[]): Promise<void> {
 		const existing = this._requestDetails.get(sessionId) ?? [];
 		for (const item of details) {
-			const entry = existing.find(e => e.vscodeRequestId === item.vscodeRequestId);
+			const entry = existing.find(e => e.zyraxoncodeRequestId === item.zyraxoncodeRequestId);
 			if (entry) {
 				Object.assign(entry, item);
 			} else {
@@ -138,11 +138,11 @@ export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
 	}
 
 	async setSessionOrigin(sessionId: string): Promise<void> {
-		this._sessionOrigins.set(sessionId, 'vscode');
+		this._sessionOrigins.set(sessionId, 'zyraxoncode');
 	}
 
-	async getSessionOrigin(sessionId: string): Promise<'vscode' | 'other'> {
-		return this._sessionOrigins.get(sessionId) ?? 'vscode';
+	async getSessionOrigin(sessionId: string): Promise<'zyraxoncode' | 'other'> {
+		return this._sessionOrigins.get(sessionId) ?? 'zyraxoncode';
 	}
 
 	setSessionParentId(_sessionId: string, _parentSessionId: string): Promise<void> {
@@ -167,7 +167,7 @@ export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
 		return this._archived.has(sessionId);
 	}
 
-	getSessionIdsForFolder(folder: vscode.Uri): string[] {
+	getSessionIdsForFolder(folder: zyraxoncode.Uri): string[] {
 		const folderPath = folder.fsPath;
 		const sessionIds: string[] = [];
 		for (const [sessionId, props] of this._worktreeProperties) {
@@ -183,7 +183,7 @@ export class MockChatSessionMetadataStore implements IChatSessionMetadataStore {
 		return sessionIds;
 	}
 
-	getWorktreeSessions(folder: vscode.Uri): string[] {
+	getWorktreeSessions(folder: zyraxoncode.Uri): string[] {
 		const folderPath = folder.fsPath;
 		const sessionIds: string[] = [];
 		for (const [sessionId, props] of this._worktreeProperties) {

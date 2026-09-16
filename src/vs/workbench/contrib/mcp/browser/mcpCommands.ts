@@ -1107,7 +1107,7 @@ export class AddConfigurationAction extends Action2 {
 			menu: {
 				id: MenuId.EditorContent,
 				when: ContextKeyExpr.and(
-					ContextKeyExpr.regex(ResourceContextKey.Path.key, /\.vscode[/\\]mcp\.json$/),
+					ContextKeyExpr.regex(ResourceContextKey.Path.key, /\.zyraxoncode[/\\]mcp\.json$/),
 					ActiveEditorContext.isEqualTo(TEXT_FILE_EDITOR_ID),
 					ContextKeyExpr.and(ChatContextKeys.Setup.hidden.negate(), ChatContextKeys.Setup.disabledInWorkspace.negate()),
 				)

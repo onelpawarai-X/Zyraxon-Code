@@ -6,7 +6,7 @@
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { autorunWithStore, IObservable, ISettableObservable, mapObservableArrayCached, observableFromEvent, observableValue, waitForState } from '../../../util/vs/base/common/observable';
 import { IGitExtensionService } from '../../git/common/gitExtensionService';
-import { API } from '../../git/vscode/git';
+import { API } from '../../git/zyraxoncode/git';
 
 export class ObservableGit extends Disposable {
 

@@ -47,7 +47,7 @@ This folder contains the Copilot CLI integration for ZYRAXON Code Chat. It enabl
                           ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    MCP Server (In-Process)                        │
-│  (vscode-node/contribution.ts, vscode-node/inProcHttpServer.ts)  │
+│  (zyraxoncode-node/contribution.ts, zyraxoncode-node/inProcHttpServer.ts)  │
 │  - Provides ZYRAXON Code-specific tools to the SDK via MCP protocol   │
 │  - Runs as an in-process HTTP server (InProcHttpServer)           │
 │  - Exposes diff, diagnostics, selection, and session tools        │
@@ -84,7 +84,7 @@ copilotcli/
 │   ├── ripgrepShim.ts          # Copies ZYRAXON Code's ripgrep for SDK use
 │   └── test/
 │
-└── vscode-node/                # ZYRAXON Code API-dependent (commands, MCP tools, UI)
+└── zyraxoncode-node/                # ZYRAXON Code API-dependent (commands, MCP tools, UI)
     ├── copilotCLIFolderMru.ts  # Folder MRU (most-recently-used) service
     └── test/
 ```
@@ -95,9 +95,9 @@ Strict import dependency rules — violations will cause build failures:
 
 | Layer | Can import from | Cannot import from |
 |-------|----------------|--------------------|
-| `common/` | `src/util/common/`, `src/platform/`, sibling `../common/` | `node/`, `vscode-node/`, `vscode` module |
-| `node/` | `common/`, `src/util/`, `src/platform/`, Node.js builtins | `vscode-node/`, `vscode` module |
-| `vscode-node/` | `common/`, `node/`, `src/util/`, `src/platform/`, `vscode` module | (top layer — no restrictions) |
+| `common/` | `src/util/common/`, `src/platform/`, sibling `../common/` | `node/`, `zyraxoncode-node/`, `zyraxoncode` module |
+| `node/` | `common/`, `src/util/`, `src/platform/`, Node.js builtins | `zyraxoncode-node/`, `zyraxoncode` module |
+| `zyraxoncode-node/` | `common/`, `node/`, `src/util/`, `src/platform/`, `zyraxoncode` module | (top layer — no restrictions) |
 
 
 ## Key Components
@@ -257,7 +257,7 @@ Handles workspace folder tracking for sessions **without** Git worktree isolatio
 
 Orchestrates the full folder/repository initialization flow for a session. This is the high-level coordinator that brings together worktree creation, trust verification, uncommitted change handling, and folder tracking.
 
-### `ISessionRequestLifecycle` (`../vscode-node/sessionRequestLifecycle.ts`)
+### `ISessionRequestLifecycle` (`../zyraxoncode-node/sessionRequestLifecycle.ts`)
 
 Orchestrates the start and end of each chat request turn, coordinating worktree commits, checkpoint creation, PR detection, and metadata updates. Handles the complexity of **steering** — where multiple requests can be in-flight for the same session simultaneously.
 
@@ -331,7 +331,7 @@ Orchestrates the start and end of each chat request turn, coordinating worktree 
 **Built-in custom slash commands** (user-facing):
 `/commit`, `/sync`, `/merge`, `/create-pr`, `/create-draft-pr`, `/update-pr`
 
-**ZYRAXON Code Session commands** (registered via `registerCLIChatCommands` in `vscode-node/copilotCLIChatSessions.ts`):
+**ZYRAXON Code Session commands** (registered via `registerCLIChatCommands` in `zyraxoncode-node/copilotCLIChatSessions.ts`):
 
 ## Configuration
 
@@ -359,4 +359,4 @@ The integration respects these ZYRAXON Code settings (all under `github.copilot.
 
 ## Deprecated Code
 
-V1 registration in `../vscode-node/copilotCLIChatSessionsContribution.ts` and `registerCopilotCLIServicesV1` are deprecated. All new development should use `CopilotCLISessionService` and the controller-based V2 API.
+V1 registration in `../zyraxoncode-node/copilotCLIChatSessionsContribution.ts` and `registerCopilotCLIServicesV1` are deprecated. All new development should use `CopilotCLISessionService` and the controller-based V2 API.

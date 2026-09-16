@@ -8,7 +8,7 @@ export type OTelExporterType = 'otlp-grpc' | 'otlp-http' | 'console' | 'file';
 export type OTelEnabledVia = 'policy' | 'envVar' | 'setting' | 'otlpEndpointEnvVar' | 'dbSpanExporterOnly' | 'disabled';
 
 /** Default OTLP endpoint used when no env var or setting overrides it. */
-export const DEFAULT_OTLP_ENDPOINT = 'http://localhost:4318';
+export const DEFAULT_OTLP_ENDPOINT = '__ZYRAXKEEP__0_';
 
 export interface OTelConfig {
 	readonly enabled: boolean;
@@ -67,7 +67,7 @@ function parseResourceAttributes(raw: string | undefined): Record<string, string
 
 /**
  * Parse and validate an OTLP endpoint URL.
- * For gRPC: returns origin (scheme://host:port).
+ * For gRPC: returns origin (__ZYRAXKEEP__1_).
  * For HTTP: returns full href.
  */
 function parseOtlpEndpoint(raw: string | undefined, protocol: 'grpc' | 'http'): string | undefined {
@@ -115,7 +115,7 @@ export interface OTelConfigInput {
 	policyHeaders?: Record<string, string>;
 	extensionVersion: string;
 	sessionId: string;
-	vscodeTelemetryLevel?: string;
+	zyraxoncodeTelemetryLevel?: string;
 }
 
 /**
@@ -130,7 +130,7 @@ export function resolveOTelConfig(input: OTelConfigInput): OTelConfig {
 	const { env } = input;
 
 	// Kill switch: respect ZYRAXON Code telemetry level
-	if (input.vscodeTelemetryLevel === 'off') {
+	if (input.zyraxoncodeTelemetryLevel === 'off') {
 		return createDisabledConfig(input);
 	}
 

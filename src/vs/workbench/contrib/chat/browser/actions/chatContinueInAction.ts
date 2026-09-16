@@ -55,7 +55,7 @@ import type { ModelSelection } from '../../../../../platform/agentHost/common/st
 
 /**
  * Extracts the "owner/repo" name-with-owner from a git remote URL.
- * Supports HTTPS (https://github.com/owner/repo.git) and SSH (git@github.com:owner/repo.git) formats.
+ * Supports HTTPS (__ZYRAXKEEP__0_) and SSH (git@github.com:owner/repo.git) formats.
  */
 function extractNwoFromRemoteUrl(remoteUrl: string): string | undefined {
 	const match = remoteUrl.match(/(?:github\.com)[/:](?<owner>[^/]+)\/(?<repo>[^/.]+)/);
@@ -182,7 +182,7 @@ export class ChatContinueInSessionActionItem extends ActionWidgetDropdownActionV
 	}
 
 	protected static getActionBarActions(openerService: IOpenerService) {
-		const learnMoreUrl = 'https://aka.ms/vscode-continue-chat-in';
+		const learnMoreUrl = '__ZYRAXKEEP__1_';
 		return [{
 			id: 'workbench.action.chat.continueChatInSession.learnMore',
 			label: localize('chat.learnMore', "Learn More"),
@@ -424,7 +424,7 @@ export class CreateRemoteAgentJobAction {
 					if (nwo) {
 						return nwo;
 					}
-					// Try parsing as URI (e.g. github-remote-file://github/owner/repo/...)
+					// Try parsing as URI (e.g. __ZYRAXKEEP__2_)
 					try {
 						const uri = URI.parse(optionValue);
 						if (uri.authority === 'github') {
@@ -502,7 +502,7 @@ export class CreateRemoteAgentJobAction {
 					if (activeEditorUri && selection) {
 						attachedContext.add({
 							kind: 'file',
-							id: 'vscode.implicit.selection',
+							id: 'zyraxoncode.implicit.selection',
 							name: basename(activeEditorUri),
 							value: {
 								uri: activeEditorUri,

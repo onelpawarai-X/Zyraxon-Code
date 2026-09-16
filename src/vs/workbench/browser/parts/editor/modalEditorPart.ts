@@ -284,7 +284,7 @@ export class ModalEditorPart {
 		)));
 		const editorPart = disposables.add(modalInstantiationService.createInstance(
 			ModalEditorPartImpl,
-			mainWindow.vscodeWindowId,
+			mainWindow.zyraxoncodeWindowId,
 			this.editorPartsView,
 			modalElement,
 			options,

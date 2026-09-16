@@ -110,7 +110,7 @@ ssuite({ title: 'intent', location: 'inline' }, () => {
 
 	generateIntentTest({
 		location: ChatLocation.Editor,
-		name: `create a vscode launch task`,
+		name: `create a zyraxoncode launch task`,
 		query: `create a launch task that invokes MOCHA_GREP='Edit Generation' make test-extension`,
 		expectedIntent: [EditCodeIntent.ID, GenerateCodeIntent.ID],
 	});

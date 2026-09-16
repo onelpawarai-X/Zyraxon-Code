@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import * as assert from 'assert';
 import * as path from 'path';
-import type { ChatResponseFileTree } from 'vscode';
+import type { ChatResponseFileTree } from 'zyraxoncode';
 import { createTextDocumentData } from '../../src/util/common/test/shims/textDocument';
 import { URI } from '../../src/util/vs/base/common/uri';
 import { rubric } from '../base/rubric';

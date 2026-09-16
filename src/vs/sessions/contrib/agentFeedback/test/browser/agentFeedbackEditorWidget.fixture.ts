@@ -22,8 +22,8 @@ import { ISessionEditorComment, SessionEditorCommentSource } from '../../browser
 import { ISessionsManagementService } from '../../../../services/sessions/common/sessionsManagement.js';
 import { ISession } from '../../../../services/sessions/common/session.js';
 
-const sessionResource = URI.parse('vscode-agent-session://fixture/session-1');
-const fileResource = URI.parse('inmemory://model/agent-feedback-widget.ts');
+const sessionResource = URI.parse('__ZYRAXKEEP__0_');
+const fileResource = URI.parse('__ZYRAXKEEP__1_');
 
 const sampleCode = [
 	'function alpha() {',
@@ -180,8 +180,8 @@ function renderWidget(context: ComponentFixtureContext, options: IFixtureOptions
 	const scopedDisposables = context.disposableStore.add(new DisposableStore());
 	context.container.style.width = '760px';
 	context.container.style.height = '420px';
-	context.container.style.border = '1px solid var(--vscode-editorWidget-border)';
-	context.container.style.background = 'var(--vscode-editor-background)';
+	context.container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
+	context.container.style.background = 'var(--zyraxoncode-editor-background)';
 
 	ensureTokenColorMap();
 
@@ -255,8 +255,8 @@ function renderViaContribution(context: ComponentFixtureContext, code: string, c
 	const scopedDisposables = context.disposableStore.add(new DisposableStore());
 	context.container.style.width = '760px';
 	context.container.style.height = '420px';
-	context.container.style.border = '1px solid var(--vscode-editorWidget-border)';
-	context.container.style.background = 'var(--vscode-editor-background)';
+	context.container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
+	context.container.style.background = 'var(--zyraxoncode-editor-background)';
 
 	ensureTokenColorMap();
 

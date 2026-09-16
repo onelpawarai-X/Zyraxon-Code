@@ -74,13 +74,13 @@ for (const testConfig of testConfigs) {
 			loadFile({ filePath: inlineEditsFixture('2-helloworld-sample-remove-generic-parameter/recording.w.json') }),
 		));
 
-		stest({ description: '[MustHave] 6-vscode-remote-try-java-part-1', language: 'java', attributes: { [CompScore1]: 1, [CompScore2]: 1, [CompScore3]: 0.75 } }, collection => tester.runAndScoreTestFromRecording(collection,
-			loadFile({ filePath: inlineEditsFixture('6-vscode-remote-try-java-part-1/recording.w.json') }),
+		stest({ description: '[MustHave] 6-zyraxoncode-remote-try-java-part-1', language: 'java', attributes: { [CompScore1]: 1, [CompScore2]: 1, [CompScore3]: 0.75 } }, collection => tester.runAndScoreTestFromRecording(collection,
+			loadFile({ filePath: inlineEditsFixture('6-zyraxoncode-remote-try-java-part-1/recording.w.json') }),
 		));
 
 		// TODO: this test case is weird, it overspecifies like directing via comments
-		stest({ description: '[MustHave] 6-vscode-remote-try-java-part-2', language: 'java', attributes: { [CompScore1]: 1, [CompScore2]: 1, [CompScore3]: 0.75 } }, collection => tester.runAndScoreTestFromRecording(collection,
-			loadFile({ filePath: inlineEditsFixture('6-vscode-remote-try-java-part-2/recording.w.json') })
+		stest({ description: '[MustHave] 6-zyraxoncode-remote-try-java-part-2', language: 'java', attributes: { [CompScore1]: 1, [CompScore2]: 1, [CompScore3]: 0.75 } }, collection => tester.runAndScoreTestFromRecording(collection,
+			loadFile({ filePath: inlineEditsFixture('6-zyraxoncode-remote-try-java-part-2/recording.w.json') })
 		));
 
 		// 7 covered in "From codium"

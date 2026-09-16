@@ -181,7 +181,7 @@ interface ICopilotApiService {
    JSON to `Anthropic.MessageStreamEvent`, use a `Set` of known event type
    strings as a runtime type guard. This also cleanly separates `error` event
    handling (which should throw) from valid event types.
-4. **`@vscode/copilot-api` typings:** the package's `.d.ts` files use
+4. **`@zyraxoncode/copilot-api` typings:** the package's `.d.ts` files use
    extensionless relative imports incompatible with `moduleResolution:
    "nodenext"`. Ambient declarations in `src/typings/copilot-api.d.ts` are
    required until the package is fixed. Keep `any` out of those declarations
@@ -314,7 +314,7 @@ see why it's required.
 | `model` | `<sdkModelId>` from session state | Required for any meaningful turn. Resolve the canonical Anthropic ID via the model registry. | `claudeCodeAgent.ts` line 442 |
 | `permissionMode` | session permission mode | Required (default `'acceptEdits'` in the extension). | `claudeCodeAgent.ts` line 444 |
 | `systemPrompt` | `{ type: 'preset', preset: 'claude_code' }` | Without this the SDK has no system prompt at all and behavior degrades. | `claudeCodeAgent.ts` line 482 |
-| `settings.env.ANTHROPIC_BASE_URL` | `http://localhost:${proxy.port}` | Routes all CAPI traffic through our proxy. **Note:** under `settings.env`, NOT top-level `Options.env`. | `claudeCodeAgent.ts` line 454 |
+| `settings.env.ANTHROPIC_BASE_URL` | `__ZYRAXKEEP__0_{proxy.port}` | Routes all CAPI traffic through our proxy. **Note:** under `settings.env`, NOT top-level `Options.env`. | `claudeCodeAgent.ts` line 454 |
 | `settings.env.ANTHROPIC_AUTH_TOKEN` | `${proxy.nonce}.${sessionId}` | Per-session bearer; proxy splits at `.` to recover session id. | `claudeCodeAgent.ts` line 455 |
 | `settings.env.CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` | `'1'` | Disables Anthropic-direct telemetry/feature flags. Required for our leak-tightness guarantees. | `claudeCodeAgent.ts` line 456 |
 | `disallowedTools` | `['WebSearch']` | CAPI doesn't support WebSearch; the SDK will error if invoked. | `claudeCodeAgent.ts` line 440 |
@@ -381,7 +381,7 @@ in Phase 4. No throw-away code committed.
 
 ### Phase 4 — `ClaudeAgent` skeleton implementing `IAgent` ✅ **DONE**
 
-Landed in [#313780](https://github.com/microsoft/vscode/pull/313780)
+Landed in [#313780](__ZYRAXKEEP__1_)
 (commit `7211c0f3746`). Live-system smoke completed 2026-05-01 — see
 [phase4-plan.md](./phase4-plan.md) §7.8.
 
@@ -634,7 +634,7 @@ The agent-host needs that translation. Workbench's
 passes `turnId` for the **last KEPT turn N** ("keep `[0..N]` INCLUSIVE"); the
 SDK wants the *uuid of the last SDK message of turn N*. The Claude
 extension's
-[`claudeChatSessionContentProvider.ts:341`](../../../../../../extensions/copilot/src/extension/chatSessions/vscode-node/claudeChatSessionContentProvider.ts)
+[`claudeChatSessionContentProvider.ts:341`](../../../../../../extensions/copilot/src/extension/chatSessions/zyraxoncode-node/claudeChatSessionContentProvider.ts)
 sidesteps this because its UI semantic is "fork BEFORE request X" (EXCLUSIVE)
 and it uses request-id directly as the SDK uuid via `messageIndex - 1`. The
 agent-host can't do that — its inputs are *protocol turn ids*, not message
@@ -1057,7 +1057,7 @@ Scope:
   - `getClaudeInvocationMessage(toolName, displayName, input)` →
     markdown that includes the actual params (`` Running `git status` ``,
     `Reading [src/foo.ts](src/foo.ts)`, `` Searching for `pattern` ``,
-    `Fetching [https://...](https://...)`).
+    `Fetching [__ZYRAXKEEP__2_](__ZYRAXKEEP__3_)`).
   - `getClaudePastTenseMessage(toolName, displayName, input, success)` →
     success/failure-aware past-tense (`` Ran `git status` ``,
     `Read foo.ts`, `Searched for ...`); replaces the
@@ -1592,7 +1592,7 @@ fork end-to-end ships in Phase 6.5.
 
 Exit criteria: ready to enable for external preview.
 
-### Phase 15 — SDK distribution via `product.json` + main.vscode-cdn.net ✅ **DONE**
+### Phase 15 — SDK distribution via `product.json` + main.zyraxoncode-cdn.net ✅ **DONE**
 
 > **Implementation contract / retrospective:
 > [phase15-plan.md](./phase15-plan.md).** That file documents what
@@ -1608,7 +1608,7 @@ can share one `product.json`). The Claude and Codex SDK distributions are
 declared in `product.json` (built by the per-platform
 [`produce.ts`](../../../../../../build/agent-sdk/produce.ts) step and
 stamped into `product.json` by `packageTask` in
-[`gulpfile.vscode.ts`](../../../../../../build/gulpfile.vscode.ts)) and
+[`gulpfile.zyraxoncode.ts`](../../../../../../build/gulpfile.zyraxoncode.ts)) and
 downloaded on demand by
 [`agentSdkDownloader.ts`](../agentSdkDownloader.ts) into
 `<userDataPath>/agent-host/sdk-cache/<pkg>/<sdkVersion>/<sdkTarget>/`. The
@@ -1633,7 +1633,7 @@ the download. SDK versions are pinned in
   per-platform stamping at packaging time — so a single shipped
   `product.json` works for macOS Universal bundles that serve both
   arm64 and x64 launches.
-- `vscode-distro` no longer carries an `agentSdks` fragment — the
+- `zyraxoncode-distro` no longer carries an `agentSdks` fragment — the
   build IS the distribution. OSS `product.json` does not have it either.
 - Tarballs ship as the full `node_modules/` subtree extracted into
   `<userDataPath>/agent-host/sdk-cache/<pkg>/<sdkVersion>/<sdkTarget>/`.
@@ -1668,7 +1668,7 @@ the download. SDK versions are pinned in
 for the tarball production and CDN upload tooling, including the
 deterministic-tar setup. The per-platform
 [`agent-sdk-produce.yml`](../../../../../../build/azure-pipelines/common/agent-sdk-produce.yml)
-template runs `produce.ts` before each `gulp vscode-<platform>-<arch>-min-ci`
+template runs `produce.ts` before each `gulp zyraxoncode-<platform>-<arch>-min-ci`
 step; `packageTask`'s `jsonEditor` callback then merges the results into
 `product.json` via `readAgentSdkResults()` (no separate `AgentSDK`
 pipeline stage, no `aggregate.ts`). Full retrospective in
@@ -1818,7 +1818,7 @@ unchanged. **Shipped.**
 > (native plugins) landed as PR #322766. Both are surface-only (no
 > `Options.plugins` / `claudeSdkOptions.ts` change) — unit-tested,
 > council-reviewed, and live-E2E verified (real `telegram@claude-plugins-official`
-> + `github-inbox@vscode-team-kit` plugins surface under the customization modal
+> + `github-inbox@zyraxoncode-team-kit` plugins surface under the customization modal
 > with their real cache roots, and a workspace `settings.local.json` disable
 > hides them via the watcher). See [phase17-plan.md](./phase17-plan.md) for the
 > full retrospective, including the post-E2E fixes (multi-format manifest
@@ -1843,23 +1843,23 @@ unchanged. **Shipped.**
 
 **Reference docs** (verified 2026-06-23):
 
-- [Hooks reference](https://code.claude.com/docs/en/hooks.md) — hook
+- [Hooks reference](__ZYRAXKEEP__4_) — hook
   locations table: `~/.claude/settings.json` (user), `.claude/settings.json`
   (project), `.claude/settings.local.json` (local), plus plugin
   `hooks/hooks.json` and skill/agent frontmatter. `disableAllHooks`
   short-circuits a scope.
-- [Plugins reference](https://code.claude.com/docs/en/plugins-reference.md)
+- [Plugins reference](__ZYRAXKEEP__5_)
   — `enabledPlugins` lives in the same `settings.json` scopes; marketplace
   plugins are cached under `~/.claude/plugins/cache/...`; `@skills-dir`
   plugins live in-place under `~/.claude/skills/<name>/.claude-plugin/`
   and `<cwd>/.claude/skills/<name>/.claude-plugin/`.
-- [SDK plugins](https://code.claude.com/docs/en/agent-sdk/plugins.md) — a
+- [SDK plugins](__ZYRAXKEEP__6_) — a
   *bare* SDK app must pass plugins as `Options.plugins: [{ type: 'local',
   path }]`. **But with `settingSources` enabled (our config), the runtime
   auto-loads `.claude` plugins** — so the host must NOT also pass them
   (`claudeSkills.ts` skips `.claude` dirs "to avoid duplicates").
   `Options.plugins` stays client-only.
-- [SDK hooks](https://code.claude.com/docs/en/agent-sdk/hooks.md) — shell
+- [SDK hooks](__ZYRAXKEEP__7_) — shell
   command hooks from settings files run **only when the matching
   `settingSources` entry is enabled** (it is, for user/project/local).
 
@@ -1939,7 +1939,7 @@ Same as Phase 16 — **no eager materialization, no lifecycle change**:
   plugins **are** enumerable post-materialize — the SDK `system/init`
   message reports loaded `plugins` and their namespaced `skills` /
   `slash_commands`
-  ([SDK plugins](https://code.claude.com/docs/en/agent-sdk/plugins.md)) —
+  ([SDK plugins](__ZYRAXKEEP__8_)) —
   so a plugin declared in `enabledPlugins` but **not** loaded by the live
   session (bad path, manifest error, untrusted workspace) is hidden
   post-materialize, matching Phase 16's "hide on-disk items the live
@@ -2487,7 +2487,7 @@ mode. The proxied path remains the unchanged default.
   Once it exits alpha, the hybrid model becomes available without changing
   callers.
 - **GHE support:** tracked in
-  [microsoft/zyraxon#313396](https://github.com/microsoft/vscode/issues/313396).
+  [zyraxon/zyraxon#313396](__ZYRAXKEEP__9_).
   All phases assume github.com auth.
 - **Single-tenant proxy token** — one GitHub token per agent affects all
   sessions. Document for now; per-session tokens are a follow-up if needed.

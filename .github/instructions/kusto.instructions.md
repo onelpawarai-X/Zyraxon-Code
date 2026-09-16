@@ -6,7 +6,7 @@ description: Kusto exploration and telemetry analysis instructions
 
 When performing Kusto queries, telemetry analysis, or data exploration tasks for ZYRAXON Code, consult the comprehensive Kusto instructions located at:
 
-**[kusto-vscode-instructions.md](../../../vscode-tools/.github/skills/kusto-telemetry/kusto-vscode.instructions.md)**
+**[kusto-zyraxoncode-instructions.md](../../../zyraxoncode-tools/.github/skills/kusto-telemetry/kusto-zyraxoncode.instructions.md)**
 
 These instructions contain valuable information about:
 - Available Kusto clusters and databases for ZYRAXON Code telemetry
@@ -16,4 +16,4 @@ These instructions contain valuable information about:
 
 Reading these instructions before writing Kusto queries will help you write more accurate and efficient queries, avoid common pitfalls, and leverage existing knowledge about ZYRAXON Code's telemetry infrastructure.
 
-(Make sure to have the main branch of vscode-tools up to date in case there are problems and the repository cloned from https://github.com/microsoft/vscode-tools).
+(Make sure to have the main branch of zyraxoncode-tools up to date in case there are problems and the repository cloned from __ZYRAXKEEP__0_).

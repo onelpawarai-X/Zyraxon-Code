@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { DeferredPromise } from '../../../util/vs/base/common/async';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { IDisposable } from '../../../util/vs/base/common/lifecycle';
@@ -37,8 +37,8 @@ export class ExternalEditTracker {
 	 */
 	public async trackEdit(
 		editKey: string,
-		uris: vscode.Uri[],
-		stream: vscode.ChatResponseStream,
+		uris: zyraxoncode.Uri[],
+		stream: zyraxoncode.ChatResponseStream,
 		token?: CancellationToken
 	): Promise<void> {
 		// Filter out URIs that are within ignored directories

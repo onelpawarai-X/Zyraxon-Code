@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { asArray, coalesce, isNonEmptyArray } from '../../../base/common/arrays.js';
 import { VSBuffer, decodeBase64, encodeBase64 } from '../../../base/common/buffer.js';
 import { IStringDictionary } from '../../../base/common/collections.js';
@@ -77,8 +77,8 @@ import { LanguageModelDataPart, LanguageModelPromptTsxPart, LanguageModelTextPar
 export namespace Command {
 
 	export interface ICommandsConverter {
-		fromInternal(command: extHostProtocol.ICommandDto): vscode.Command | undefined;
-		toInternal(command: vscode.Command | undefined, disposables: DisposableStore): extHostProtocol.ICommandDto | undefined;
+		fromInternal(command: extHostProtocol.ICommandDto): zyraxoncode.Command | undefined;
+		toInternal(command: zyraxoncode.Command | undefined, disposables: DisposableStore): extHostProtocol.ICommandDto | undefined;
 	}
 }
 
@@ -147,14 +147,14 @@ export namespace Range {
 
 export namespace Location {
 
-	export function from(location: vscode.Location): Dto<languages.Location> {
+	export function from(location: zyraxoncode.Location): Dto<languages.Location> {
 		return {
 			uri: location.uri,
 			range: Range.from(location.range)
 		};
 	}
 
-	export function to(location: Dto<languages.Location>): vscode.Location {
+	export function to(location: Dto<languages.Location>): zyraxoncode.Location {
 		return new types.Location(URI.revive(location.uri), Range.to(location.range));
 	}
 }
@@ -174,18 +174,18 @@ export namespace Position {
 	export function to(position: IPosition): types.Position {
 		return new types.Position(position.lineNumber - 1, position.column - 1);
 	}
-	export function from(position: types.Position | vscode.Position): IPosition {
+	export function from(position: types.Position | zyraxoncode.Position): IPosition {
 		return { lineNumber: position.line + 1, column: position.character + 1 };
 	}
 }
 
 export namespace DocumentSelector {
 
-	export function from(value: vscode.DocumentSelector, uriTransformer?: IURITransformer, extension?: IExtensionDescription): extHostProtocol.IDocumentFilterDto[] {
+	export function from(value: zyraxoncode.DocumentSelector, uriTransformer?: IURITransformer, extension?: IExtensionDescription): extHostProtocol.IDocumentFilterDto[] {
 		return coalesce(asArray(value).map(sel => _doTransformDocumentSelector(sel, uriTransformer, extension)));
 	}
 
-	function _doTransformDocumentSelector(selector: string | vscode.DocumentFilter, uriTransformer: IURITransformer | undefined, extension: IExtensionDescription | undefined): extHostProtocol.IDocumentFilterDto | undefined {
+	function _doTransformDocumentSelector(selector: string | zyraxoncode.DocumentFilter, uriTransformer: IURITransformer | undefined, extension: IExtensionDescription | undefined): extHostProtocol.IDocumentFilterDto | undefined {
 		if (typeof selector === 'string') {
 			return {
 				$serialized: true,
@@ -219,11 +219,11 @@ export namespace DocumentSelector {
 
 export namespace TabSelector {
 
-	function isViewTypeSelector(value: vscode.TabSelector): value is { viewType: string } {
+	function isViewTypeSelector(value: zyraxoncode.TabSelector): value is { viewType: string } {
 		return (value as { viewType?: string }).viewType !== undefined;
 	}
 
-	export function from(value: vscode.TabSelector, uriTransformer?: IURITransformer, extension?: IExtensionDescription): extHostProtocol.ITabSelectorDto {
+	export function from(value: zyraxoncode.TabSelector, uriTransformer?: IURITransformer, extension?: IExtensionDescription): extHostProtocol.ITabSelectorDto {
 		if (isViewTypeSelector(value)) {
 			return { viewType: value.viewType };
 		}
@@ -232,7 +232,7 @@ export namespace TabSelector {
 }
 
 export namespace DiagnosticTag {
-	export function from(value: vscode.DiagnosticTag): MarkerTag | undefined {
+	export function from(value: zyraxoncode.DiagnosticTag): MarkerTag | undefined {
 		switch (value) {
 			case types.DiagnosticTag.Unnecessary:
 				return MarkerTag.Unnecessary;
@@ -241,7 +241,7 @@ export namespace DiagnosticTag {
 		}
 		return undefined;
 	}
-	export function to(value: MarkerTag): vscode.DiagnosticTag | undefined {
+	export function to(value: MarkerTag): zyraxoncode.DiagnosticTag | undefined {
 		switch (value) {
 			case MarkerTag.Unnecessary:
 				return types.DiagnosticTag.Unnecessary;
@@ -254,7 +254,7 @@ export namespace DiagnosticTag {
 }
 
 export namespace Diagnostic {
-	export function from(value: vscode.Diagnostic): IMarkerData {
+	export function from(value: zyraxoncode.Diagnostic): IMarkerData {
 		let code: string | { value: string; target: URI } | undefined;
 
 		if (value.code) {
@@ -279,7 +279,7 @@ export namespace Diagnostic {
 		};
 	}
 
-	export function to(value: IMarkerData): vscode.Diagnostic {
+	export function to(value: IMarkerData): zyraxoncode.Diagnostic {
 		const res = new types.Diagnostic(Range.to(value), value.message, DiagnosticSeverity.to(value.severity));
 		res.source = value.source;
 		res.code = isString(value.code) ? value.code : value.code?.value;
@@ -290,7 +290,7 @@ export namespace Diagnostic {
 }
 
 export namespace DiagnosticRelatedInformation {
-	export function from(value: vscode.DiagnosticRelatedInformation): IRelatedInformation {
+	export function from(value: zyraxoncode.DiagnosticRelatedInformation): IRelatedInformation {
 		return {
 			...Range.from(value.location.range),
 			message: value.message,
@@ -334,7 +334,7 @@ export namespace DiagnosticSeverity {
 }
 
 export namespace ViewColumn {
-	export function from(column?: vscode.ViewColumn): EditorGroupColumn {
+	export function from(column?: zyraxoncode.ViewColumn): EditorGroupColumn {
 		if (typeof column === 'number' && column >= types.ViewColumn.One) {
 			return column - 1; // adjust zero index (ViewColumn.ONE => 0)
 		}
@@ -346,7 +346,7 @@ export namespace ViewColumn {
 		return ACTIVE_GROUP; // default is always the active group
 	}
 
-	export function to(position: EditorGroupColumn): vscode.ViewColumn {
+	export function to(position: EditorGroupColumn): zyraxoncode.ViewColumn {
 		if (typeof position === 'number' && position >= 0) {
 			return position + 1; // adjust to index (ViewColumn.ONE => 1)
 		}
@@ -355,11 +355,11 @@ export namespace ViewColumn {
 	}
 }
 
-function isDecorationOptions(something: any): something is vscode.DecorationOptions {
+function isDecorationOptions(something: any): something is zyraxoncode.DecorationOptions {
 	return (typeof something.range !== 'undefined');
 }
 
-export function isDecorationOptionsArr(something: vscode.Range[] | vscode.DecorationOptions[]): something is vscode.DecorationOptions[] {
+export function isDecorationOptionsArr(something: zyraxoncode.Range[] | zyraxoncode.DecorationOptions[]): something is zyraxoncode.DecorationOptions[] {
 	if (something.length === 0) {
 		return true;
 	}
@@ -368,7 +368,7 @@ export function isDecorationOptionsArr(something: vscode.Range[] | vscode.Decora
 
 export namespace MarkdownString {
 
-	export function fromMany(markup: (vscode.MarkdownString | vscode.MarkedString)[]): htmlContent.IMarkdownString[] {
+	export function fromMany(markup: (zyraxoncode.MarkdownString | zyraxoncode.MarkedString)[]): htmlContent.IMarkdownString[] {
 		return markup.map(MarkdownString.from);
 	}
 
@@ -383,7 +383,7 @@ export namespace MarkdownString {
 			&& typeof (<Codeblock>thing).value === 'string';
 	}
 
-	export function from(markup: vscode.MarkdownString | vscode.MarkedString): htmlContent.IMarkdownString {
+	export function from(markup: zyraxoncode.MarkdownString | zyraxoncode.MarkedString): htmlContent.IMarkdownString {
 		let res: htmlContent.IMarkdownString;
 		if (isCodeblock(markup)) {
 			const { language, value } = markup;
@@ -456,7 +456,7 @@ export namespace MarkdownString {
 		return JSON.stringify(data);
 	}
 
-	export function to(value: htmlContent.IMarkdownString): vscode.MarkdownString {
+	export function to(value: htmlContent.IMarkdownString): zyraxoncode.MarkdownString {
 		const result = new types.MarkdownString(value.value, value.supportThemeIcons);
 		result.isTrusted = value.isTrusted;
 		result.supportHtml = value.supportHtml;
@@ -465,7 +465,7 @@ export namespace MarkdownString {
 		return result;
 	}
 
-	export function fromStrict(value: string | vscode.MarkdownString | undefined | null): undefined | string | htmlContent.IMarkdownString {
+	export function fromStrict(value: string | zyraxoncode.MarkdownString | undefined | null): undefined | string | htmlContent.IMarkdownString {
 		if (!value) {
 			return undefined;
 		}
@@ -473,7 +473,7 @@ export namespace MarkdownString {
 	}
 }
 
-export function fromRangeOrRangeWithMessage(ranges: vscode.Range[] | vscode.DecorationOptions[]): IDecorationOptions[] {
+export function fromRangeOrRangeWithMessage(ranges: zyraxoncode.Range[] | zyraxoncode.DecorationOptions[]): IDecorationOptions[] {
 	if (isDecorationOptionsArr(ranges)) {
 		return ranges.map((r): IDecorationOptions => {
 			return {
@@ -506,7 +506,7 @@ export function pathOrURIToURI(value: string | URI): URI {
 }
 
 export namespace ThemableDecorationAttachmentRenderOptions {
-	export function from(options: vscode.ThemableDecorationAttachmentRenderOptions): IContentDecorationRenderOptions {
+	export function from(options: zyraxoncode.ThemableDecorationAttachmentRenderOptions): IContentDecorationRenderOptions {
 		if (typeof options === 'undefined') {
 			return options;
 		}
@@ -528,7 +528,7 @@ export namespace ThemableDecorationAttachmentRenderOptions {
 }
 
 export namespace ThemableDecorationRenderOptions {
-	export function from(options: vscode.ThemableDecorationRenderOptions): IThemeDecorationRenderOptions {
+	export function from(options: zyraxoncode.ThemableDecorationRenderOptions): IThemeDecorationRenderOptions {
 		if (typeof options === 'undefined') {
 			return options;
 		}
@@ -579,7 +579,7 @@ export namespace DecorationRangeBehavior {
 }
 
 export namespace DecorationRenderOptions {
-	export function from(options: vscode.DecorationRenderOptions): IDecorationRenderOptions {
+	export function from(options: zyraxoncode.DecorationRenderOptions): IDecorationRenderOptions {
 		return {
 			isWholeLine: options.isWholeLine,
 			rangeBehavior: options.rangeBehavior ? DecorationRangeBehavior.from(options.rangeBehavior) : undefined,
@@ -616,7 +616,7 @@ export namespace DecorationRenderOptions {
 
 export namespace TextEdit {
 
-	export function from(edit: vscode.TextEdit): languages.TextEdit {
+	export function from(edit: zyraxoncode.TextEdit): languages.TextEdit {
 		return {
 			text: edit.newText,
 			eol: edit.newEol && EndOfLine.from(edit.newEol),
@@ -638,7 +638,7 @@ export namespace WorkspaceEdit {
 		getNotebookDocumentVersion(uri: URI): number | undefined;
 	}
 
-	export function from(value: vscode.WorkspaceEdit, versionInfo?: IVersionInformationProvider): extHostProtocol.IWorkspaceEditDto {
+	export function from(value: zyraxoncode.WorkspaceEdit, versionInfo?: IVersionInformationProvider): extHostProtocol.IWorkspaceEditDto {
 		const result: extHostProtocol.IWorkspaceEditDto = {
 			edits: []
 		};
@@ -796,11 +796,11 @@ export namespace SymbolKind {
 	_fromMapping[types.SymbolKind.Operator] = languages.SymbolKind.Operator;
 	_fromMapping[types.SymbolKind.TypeParameter] = languages.SymbolKind.TypeParameter;
 
-	export function from(kind: vscode.SymbolKind): languages.SymbolKind {
+	export function from(kind: zyraxoncode.SymbolKind): languages.SymbolKind {
 		return typeof _fromMapping[kind] === 'number' ? _fromMapping[kind] : languages.SymbolKind.Property;
 	}
 
-	export function to(kind: languages.SymbolKind): vscode.SymbolKind {
+	export function to(kind: languages.SymbolKind): zyraxoncode.SymbolKind {
 		for (const k in _fromMapping) {
 			if (_fromMapping[k] === kind) {
 				return Number(k);
@@ -826,7 +826,7 @@ export namespace SymbolTag {
 }
 
 export namespace WorkspaceSymbol {
-	export function from(info: vscode.SymbolInformation): search.IWorkspaceSymbol {
+	export function from(info: zyraxoncode.SymbolInformation): search.IWorkspaceSymbol {
 		return {
 			name: info.name,
 			kind: SymbolKind.from(info.kind),
@@ -848,7 +848,7 @@ export namespace WorkspaceSymbol {
 }
 
 export namespace DocumentSymbol {
-	export function from(info: vscode.DocumentSymbol): languages.DocumentSymbol {
+	export function from(info: zyraxoncode.DocumentSymbol): languages.DocumentSymbol {
 		const result: languages.DocumentSymbol = {
 			name: info.name || '!!MISSING: name!!',
 			detail: info.detail,
@@ -862,7 +862,7 @@ export namespace DocumentSymbol {
 		}
 		return result;
 	}
-	export function to(info: languages.DocumentSymbol): vscode.DocumentSymbol {
+	export function to(info: languages.DocumentSymbol): zyraxoncode.DocumentSymbol {
 		const result = new types.DocumentSymbol(
 			info.name,
 			info.detail,
@@ -899,7 +899,7 @@ export namespace CallHierarchyItem {
 		return result;
 	}
 
-	export function from(item: vscode.CallHierarchyItem, sessionId?: string, itemId?: string): extHostProtocol.ICallHierarchyItemDto {
+	export function from(item: zyraxoncode.CallHierarchyItem, sessionId?: string, itemId?: string): extHostProtocol.ICallHierarchyItemDto {
 
 		sessionId = sessionId ?? (<types.CallHierarchyItem>item)._sessionId;
 		itemId = itemId ?? (<types.CallHierarchyItem>item)._itemId;
@@ -944,7 +944,7 @@ export namespace CallHierarchyOutgoingCall {
 
 
 export namespace location {
-	export function from(value: vscode.Location): languages.Location {
+	export function from(value: zyraxoncode.Location): languages.Location {
 		return {
 			range: value.range && Range.from(value.range),
 			uri: value.uri
@@ -957,9 +957,9 @@ export namespace location {
 }
 
 export namespace DefinitionLink {
-	export function from(value: vscode.Location | vscode.DefinitionLink): languages.LocationLink {
-		const definitionLink = <vscode.DefinitionLink>value;
-		const location = <vscode.Location>value;
+	export function from(value: zyraxoncode.Location | zyraxoncode.DefinitionLink): languages.LocationLink {
+		const definitionLink = <zyraxoncode.DefinitionLink>value;
+		const location = <zyraxoncode.Location>value;
 		return {
 			originSelectionRange: definitionLink.originSelectionRange
 				? Range.from(definitionLink.originSelectionRange)
@@ -971,7 +971,7 @@ export namespace DefinitionLink {
 				: undefined,
 		};
 	}
-	export function to(value: extHostProtocol.ILocationLinkDto): vscode.LocationLink {
+	export function to(value: extHostProtocol.ILocationLinkDto): zyraxoncode.LocationLink {
 		return {
 			targetUri: URI.revive(value.uri),
 			targetRange: Range.to(value.range),
@@ -986,7 +986,7 @@ export namespace DefinitionLink {
 }
 
 export namespace Hover {
-	export function from(hover: vscode.VerboseHover): languages.Hover {
+	export function from(hover: zyraxoncode.VerboseHover): languages.Hover {
 		const convertedHover: languages.Hover = {
 			range: Range.from(hover.range),
 			contents: MarkdownString.fromMany(hover.contents),
@@ -1006,7 +1006,7 @@ export namespace Hover {
 }
 
 export namespace EvaluatableExpression {
-	export function from(expression: vscode.EvaluatableExpression): languages.EvaluatableExpression {
+	export function from(expression: zyraxoncode.EvaluatableExpression): languages.EvaluatableExpression {
 		return {
 			range: Range.from(expression.range),
 			expression: expression.expression
@@ -1019,7 +1019,7 @@ export namespace EvaluatableExpression {
 }
 
 export namespace InlineValue {
-	export function from(inlineValue: vscode.InlineValue): languages.InlineValue {
+	export function from(inlineValue: zyraxoncode.InlineValue): languages.InlineValue {
 		if (inlineValue instanceof types.InlineValueText) {
 			return {
 				type: 'text',
@@ -1044,30 +1044,30 @@ export namespace InlineValue {
 		}
 	}
 
-	export function to(inlineValue: languages.InlineValue): vscode.InlineValue {
+	export function to(inlineValue: languages.InlineValue): zyraxoncode.InlineValue {
 		switch (inlineValue.type) {
 			case 'text':
 				return {
 					range: Range.to(inlineValue.range),
 					text: inlineValue.text
-				} satisfies vscode.InlineValueText;
+				} satisfies zyraxoncode.InlineValueText;
 			case 'variable':
 				return {
 					range: Range.to(inlineValue.range),
 					variableName: inlineValue.variableName,
 					caseSensitiveLookup: inlineValue.caseSensitiveLookup
-				} satisfies vscode.InlineValueVariableLookup;
+				} satisfies zyraxoncode.InlineValueVariableLookup;
 			case 'expression':
 				return {
 					range: Range.to(inlineValue.range),
 					expression: inlineValue.expression
-				} satisfies vscode.InlineValueEvaluatableExpression;
+				} satisfies zyraxoncode.InlineValueEvaluatableExpression;
 		}
 	}
 }
 
 export namespace InlineValueContext {
-	export function from(inlineValueContext: vscode.InlineValueContext): extHostProtocol.IInlineValueContextDto {
+	export function from(inlineValueContext: zyraxoncode.InlineValueContext): extHostProtocol.IInlineValueContextDto {
 		return {
 			frameId: inlineValueContext.frameId,
 			stoppedLocation: Range.from(inlineValueContext.stoppedLocation)
@@ -1080,7 +1080,7 @@ export namespace InlineValueContext {
 }
 
 export namespace DocumentHighlight {
-	export function from(documentHighlight: vscode.DocumentHighlight): languages.DocumentHighlight {
+	export function from(documentHighlight: zyraxoncode.DocumentHighlight): languages.DocumentHighlight {
 		return {
 			range: Range.from(documentHighlight.range),
 			kind: documentHighlight.kind
@@ -1092,7 +1092,7 @@ export namespace DocumentHighlight {
 }
 
 export namespace MultiDocumentHighlight {
-	export function from(multiDocumentHighlight: vscode.MultiDocumentHighlight): languages.MultiDocumentHighlight {
+	export function from(multiDocumentHighlight: zyraxoncode.MultiDocumentHighlight): languages.MultiDocumentHighlight {
 		return {
 			uri: multiDocumentHighlight.uri,
 			highlights: multiDocumentHighlight.highlights.map(DocumentHighlight.from)
@@ -1143,7 +1143,7 @@ export namespace CompletionItemTag {
 }
 
 export namespace CompletionCommand {
-	export function from(c: vscode.Command | { command: vscode.Command; icon: vscode.ThemeIcon }, converter: CommandsConverter, disposables: DisposableStore): { command: extHostProtocol.ICommandDto; icon?: languages.IconPath } {
+	export function from(c: zyraxoncode.Command | { command: zyraxoncode.Command; icon: zyraxoncode.ThemeIcon }, converter: CommandsConverter, disposables: DisposableStore): { command: extHostProtocol.ICommandDto; icon?: languages.IconPath } {
 		if ('icon' in c && 'command' in c) {
 			return {
 				command: converter.toInternal(c.command, disposables),
@@ -1325,7 +1325,7 @@ export namespace SignatureHelp {
 
 export namespace InlayHint {
 
-	export function to(converter: Command.ICommandsConverter, hint: languages.InlayHint): vscode.InlayHint {
+	export function to(converter: Command.ICommandsConverter, hint: languages.InlayHint): zyraxoncode.InlayHint {
 		const res = new types.InlayHint(
 			Position.to(hint.position),
 			typeof hint.label === 'string' ? hint.label : hint.label.map(InlayHintLabelPart.to.bind(undefined, converter)),
@@ -1357,17 +1357,17 @@ export namespace InlayHintLabelPart {
 }
 
 export namespace InlayHintKind {
-	export function from(kind: vscode.InlayHintKind): languages.InlayHintKind {
+	export function from(kind: zyraxoncode.InlayHintKind): languages.InlayHintKind {
 		return kind;
 	}
-	export function to(kind: languages.InlayHintKind): vscode.InlayHintKind {
+	export function to(kind: languages.InlayHintKind): zyraxoncode.InlayHintKind {
 		return kind;
 	}
 }
 
 export namespace DocumentLink {
 
-	export function from(link: vscode.DocumentLink): languages.ILink {
+	export function from(link: zyraxoncode.DocumentLink): languages.ILink {
 		return {
 			range: Range.from(link.range),
 			url: link.target,
@@ -1375,7 +1375,7 @@ export namespace DocumentLink {
 		};
 	}
 
-	export function to(link: languages.ILink): vscode.DocumentLink {
+	export function to(link: languages.ILink): zyraxoncode.DocumentLink {
 		let target: URI | undefined = undefined;
 		if (link.url) {
 			try {
@@ -1402,7 +1402,7 @@ export namespace ColorPresentation {
 		return cp;
 	}
 
-	export function from(colorPresentation: vscode.ColorPresentation): languages.IColorPresentation {
+	export function from(colorPresentation: zyraxoncode.ColorPresentation): languages.IColorPresentation {
 		return {
 			label: colorPresentation.label,
 			textEdit: colorPresentation.textEdit ? TextEdit.from(colorPresentation.textEdit) : undefined,
@@ -1422,18 +1422,18 @@ export namespace Color {
 
 
 export namespace SelectionRange {
-	export function from(obj: vscode.SelectionRange): languages.SelectionRange {
+	export function from(obj: zyraxoncode.SelectionRange): languages.SelectionRange {
 		return { range: Range.from(obj.range) };
 	}
 
-	export function to(obj: languages.SelectionRange): vscode.SelectionRange {
+	export function to(obj: languages.SelectionRange): zyraxoncode.SelectionRange {
 		return new types.SelectionRange(Range.to(obj.range));
 	}
 }
 
 export namespace TextDocumentSaveReason {
 
-	export function to(reason: SaveReason): vscode.TextDocumentSaveReason {
+	export function to(reason: SaveReason): zyraxoncode.TextDocumentSaveReason {
 		switch (reason) {
 			case SaveReason.AUTO:
 				return types.TextDocumentSaveReason.AfterDelay;
@@ -1447,7 +1447,7 @@ export namespace TextDocumentSaveReason {
 }
 
 export namespace TextEditorLineNumbersStyle {
-	export function from(style: vscode.TextEditorLineNumbersStyle): RenderLineNumbersType {
+	export function from(style: zyraxoncode.TextEditorLineNumbersStyle): RenderLineNumbersType {
 		switch (style) {
 			case types.TextEditorLineNumbersStyle.Off:
 				return RenderLineNumbersType.Off;
@@ -1460,7 +1460,7 @@ export namespace TextEditorLineNumbersStyle {
 				return RenderLineNumbersType.On;
 		}
 	}
-	export function to(style: RenderLineNumbersType): vscode.TextEditorLineNumbersStyle {
+	export function to(style: RenderLineNumbersType): zyraxoncode.TextEditorLineNumbersStyle {
 		switch (style) {
 			case RenderLineNumbersType.Off:
 				return types.TextEditorLineNumbersStyle.Off;
@@ -1477,7 +1477,7 @@ export namespace TextEditorLineNumbersStyle {
 
 export namespace EndOfLine {
 
-	export function from(eol: vscode.EndOfLine): EndOfLineSequence | undefined {
+	export function from(eol: zyraxoncode.EndOfLine): EndOfLineSequence | undefined {
 		if (eol === types.EndOfLine.CRLF) {
 			return EndOfLineSequence.CRLF;
 		} else if (eol === types.EndOfLine.LF) {
@@ -1486,7 +1486,7 @@ export namespace EndOfLine {
 		return undefined;
 	}
 
-	export function to(eol: EndOfLineSequence): vscode.EndOfLine | undefined {
+	export function to(eol: EndOfLineSequence): zyraxoncode.EndOfLine | undefined {
 		if (eol === EndOfLineSequence.CRLF) {
 			return types.EndOfLine.CRLF;
 		} else if (eol === EndOfLineSequence.LF) {
@@ -1497,7 +1497,7 @@ export namespace EndOfLine {
 }
 
 export namespace ProgressLocation {
-	export function from(loc: vscode.ProgressLocation | { viewId: string }): MainProgressLocation | string {
+	export function from(loc: zyraxoncode.ProgressLocation | { viewId: string }): MainProgressLocation | string {
 		if (typeof loc === 'object') {
 			return loc.viewId;
 		}
@@ -1512,15 +1512,15 @@ export namespace ProgressLocation {
 }
 
 export namespace FoldingRange {
-	export function from(r: vscode.FoldingRange): languages.FoldingRange {
+	export function from(r: zyraxoncode.FoldingRange): languages.FoldingRange {
 		const range: languages.FoldingRange = { start: r.start + 1, end: r.end + 1 };
 		if (r.kind) {
 			range.kind = FoldingRangeKind.from(r.kind);
 		}
 		return range;
 	}
-	export function to(r: languages.FoldingRange): vscode.FoldingRange {
-		const range: vscode.FoldingRange = { start: r.start - 1, end: r.end - 1 };
+	export function to(r: languages.FoldingRange): zyraxoncode.FoldingRange {
+		const range: zyraxoncode.FoldingRange = { start: r.start - 1, end: r.end - 1 };
 		if (r.kind) {
 			range.kind = FoldingRangeKind.to(r.kind);
 		}
@@ -1529,7 +1529,7 @@ export namespace FoldingRange {
 }
 
 export namespace FoldingRangeKind {
-	export function from(kind: vscode.FoldingRangeKind | undefined): languages.FoldingRangeKind | undefined {
+	export function from(kind: zyraxoncode.FoldingRangeKind | undefined): languages.FoldingRangeKind | undefined {
 		if (kind) {
 			switch (kind) {
 				case types.FoldingRangeKind.Comment:
@@ -1542,7 +1542,7 @@ export namespace FoldingRangeKind {
 		}
 		return undefined;
 	}
-	export function to(kind: languages.FoldingRangeKind | undefined): vscode.FoldingRangeKind | undefined {
+	export function to(kind: languages.FoldingRangeKind | undefined): zyraxoncode.FoldingRangeKind | undefined {
 		if (kind) {
 			switch (kind.value) {
 				case languages.FoldingRangeKind.Comment.value:
@@ -1557,7 +1557,7 @@ export namespace FoldingRangeKind {
 	}
 }
 
-export interface TextEditorOpenOptions extends vscode.TextDocumentShowOptions {
+export interface TextEditorOpenOptions extends zyraxoncode.TextDocumentShowOptions {
 	background?: boolean;
 	override?: boolean;
 }
@@ -1582,11 +1582,11 @@ export namespace TextEditorOpenOptions {
 
 export namespace GlobPattern {
 
-	export function from(pattern: vscode.GlobPattern): string | extHostProtocol.IRelativePatternDto;
+	export function from(pattern: zyraxoncode.GlobPattern): string | extHostProtocol.IRelativePatternDto;
 	export function from(pattern: undefined): undefined;
 	export function from(pattern: null): null;
-	export function from(pattern: vscode.GlobPattern | undefined | null): string | extHostProtocol.IRelativePatternDto | undefined | null;
-	export function from(pattern: vscode.GlobPattern | undefined | null): string | extHostProtocol.IRelativePatternDto | undefined | null {
+	export function from(pattern: zyraxoncode.GlobPattern | undefined | null): string | extHostProtocol.IRelativePatternDto | undefined | null;
+	export function from(pattern: zyraxoncode.GlobPattern | undefined | null): string | extHostProtocol.IRelativePatternDto | undefined | null {
 		if (pattern instanceof types.RelativePattern) {
 			return pattern.toJSON();
 		}
@@ -1596,10 +1596,10 @@ export namespace GlobPattern {
 		}
 
 		// This is slightly bogus because we declare this method to accept
-		// `vscode.GlobPattern` which can be `vscode.RelativePattern` class,
-		// but given we cannot enforce classes from our vscode.d.ts, we have
+		// `zyraxoncode.GlobPattern` which can be `zyraxoncode.RelativePattern` class,
+		// but given we cannot enforce classes from our zyraxoncode.d.ts, we have
 		// to probe for objects too
-		// Refs: https://github.com/microsoft/vscode/issues/140771
+		// Refs: __ZYRAXKEEP__0_
 		if (isRelativePatternShape(pattern) || isLegacyRelativePatternShape(pattern)) {
 			return new types.RelativePattern(pattern.baseUri ?? pattern.base, pattern.pattern).toJSON();
 		}
@@ -1620,7 +1620,7 @@ export namespace GlobPattern {
 
 		// Before 1.64.x, `RelativePattern` did not have any `baseUri: Uri`
 		// property. To preserve backwards compatibility with older extensions
-		// we allow this old format when creating the `vscode.RelativePattern`.
+		// we allow this old format when creating the `zyraxoncode.RelativePattern`.
 
 		const rp = obj as { base: string; pattern: string } | undefined | null;
 		if (!rp) {
@@ -1630,7 +1630,7 @@ export namespace GlobPattern {
 		return typeof rp.base === 'string' && typeof rp.pattern === 'string';
 	}
 
-	export function to(pattern: string | extHostProtocol.IRelativePatternDto): vscode.GlobPattern {
+	export function to(pattern: string | extHostProtocol.IRelativePatternDto): zyraxoncode.GlobPattern {
 		if (typeof pattern === 'string') {
 			return pattern;
 		}
@@ -1642,9 +1642,9 @@ export namespace GlobPattern {
 export namespace LanguageSelector {
 
 	export function from(selector: undefined): undefined;
-	export function from(selector: vscode.DocumentSelector): languageSelector.LanguageSelector;
-	export function from(selector: vscode.DocumentSelector | undefined): languageSelector.LanguageSelector | undefined;
-	export function from(selector: vscode.DocumentSelector | undefined): languageSelector.LanguageSelector | undefined {
+	export function from(selector: zyraxoncode.DocumentSelector): languageSelector.LanguageSelector;
+	export function from(selector: zyraxoncode.DocumentSelector | undefined): languageSelector.LanguageSelector | undefined;
+	export function from(selector: zyraxoncode.DocumentSelector | undefined): languageSelector.LanguageSelector | undefined {
 		if (!selector) {
 			return undefined;
 		} else if (Array.isArray(selector)) {
@@ -1652,7 +1652,7 @@ export namespace LanguageSelector {
 		} else if (typeof selector === 'string') {
 			return selector;
 		} else {
-			const filter = selector as vscode.DocumentFilter; // TODO: microsoft/TypeScript#42768
+			const filter = selector as zyraxoncode.DocumentFilter; // TODO: zyraxon/TypeScript#42768
 			return {
 				language: filter.language,
 				scheme: filter.scheme,
@@ -1666,7 +1666,7 @@ export namespace LanguageSelector {
 
 export namespace NotebookRange {
 
-	export function from(range: vscode.NotebookRange): ICellRange {
+	export function from(range: zyraxoncode.NotebookRange): ICellRange {
 		return { start: range.start, end: range.end };
 	}
 
@@ -1676,7 +1676,7 @@ export namespace NotebookRange {
 }
 
 export namespace NotebookCellExecutionSummary {
-	export function to(data: notebooks.NotebookCellInternalMetadata): vscode.NotebookCellExecutionSummary {
+	export function to(data: notebooks.NotebookCellInternalMetadata): zyraxoncode.NotebookCellExecutionSummary {
 		return {
 			timing: typeof data.runStartTime === 'number' && typeof data.runEndTime === 'number' ? { startTime: data.runStartTime, endTime: data.runEndTime } : undefined,
 			executionOrder: data.executionOrder,
@@ -1684,7 +1684,7 @@ export namespace NotebookCellExecutionSummary {
 		};
 	}
 
-	export function from(data: vscode.NotebookCellExecutionSummary): Partial<notebooks.NotebookCellInternalMetadata> {
+	export function from(data: zyraxoncode.NotebookCellExecutionSummary): Partial<notebooks.NotebookCellInternalMetadata> {
 		return {
 			lastRunSuccess: data.success,
 			runStartTime: data.timing?.startTime,
@@ -1695,7 +1695,7 @@ export namespace NotebookCellExecutionSummary {
 }
 
 export namespace NotebookCellKind {
-	export function from(data: vscode.NotebookCellKind): notebooks.CellKind {
+	export function from(data: zyraxoncode.NotebookCellKind): notebooks.CellKind {
 		switch (data) {
 			case types.NotebookCellKind.Markup:
 				return notebooks.CellKind.Markup;
@@ -1705,7 +1705,7 @@ export namespace NotebookCellKind {
 		}
 	}
 
-	export function to(data: notebooks.CellKind): vscode.NotebookCellKind {
+	export function to(data: notebooks.CellKind): zyraxoncode.NotebookCellKind {
 		switch (data) {
 			case notebooks.CellKind.Markup:
 				return types.NotebookCellKind.Markup;
@@ -1718,7 +1718,7 @@ export namespace NotebookCellKind {
 
 export namespace NotebookData {
 
-	export function from(data: vscode.NotebookData): extHostProtocol.NotebookDataDto {
+	export function from(data: zyraxoncode.NotebookData): extHostProtocol.NotebookDataDto {
 		const res: extHostProtocol.NotebookDataDto = {
 			metadata: data.metadata ?? Object.create(null),
 			cells: [],
@@ -1730,7 +1730,7 @@ export namespace NotebookData {
 		return res;
 	}
 
-	export function to(data: extHostProtocol.NotebookDataDto): vscode.NotebookData {
+	export function to(data: extHostProtocol.NotebookDataDto): zyraxoncode.NotebookData {
 		const res = new types.NotebookData(
 			data.cells.map(NotebookCellData.to),
 		);
@@ -1743,7 +1743,7 @@ export namespace NotebookData {
 
 export namespace NotebookCellData {
 
-	export function from(data: vscode.NotebookCellData): extHostProtocol.NotebookCellDataDto {
+	export function from(data: zyraxoncode.NotebookCellData): extHostProtocol.NotebookCellDataDto {
 		return {
 			cellKind: NotebookCellKind.from(data.kind),
 			language: data.languageId,
@@ -1755,7 +1755,7 @@ export namespace NotebookCellData {
 		};
 	}
 
-	export function to(data: extHostProtocol.NotebookCellDataDto): vscode.NotebookCellData {
+	export function to(data: extHostProtocol.NotebookCellDataDto): zyraxoncode.NotebookCellData {
 		return new types.NotebookCellData(
 			NotebookCellKind.to(data.cellKind),
 			data.source,
@@ -1782,7 +1782,7 @@ export namespace NotebookCellOutputItem {
 }
 
 export namespace NotebookCellOutput {
-	export function from(output: vscode.NotebookCellOutput): extHostProtocol.NotebookOutputDto {
+	export function from(output: zyraxoncode.NotebookCellOutput): extHostProtocol.NotebookOutputDto {
 		return {
 			outputId: output.id,
 			items: output.items.map(NotebookCellOutputItem.from),
@@ -1790,7 +1790,7 @@ export namespace NotebookCellOutput {
 		};
 	}
 
-	export function to(output: extHostProtocol.NotebookOutputDto): vscode.NotebookCellOutput {
+	export function to(output: extHostProtocol.NotebookOutputDto): zyraxoncode.NotebookCellOutput {
 		const items = output.items.map(NotebookCellOutputItem.to);
 		return new types.NotebookCellOutput(items, output.outputId, output.metadata);
 	}
@@ -1798,11 +1798,11 @@ export namespace NotebookCellOutput {
 
 
 export namespace NotebookExclusiveDocumentPattern {
-	export function from(pattern: { include: vscode.GlobPattern | undefined; exclude: vscode.GlobPattern | undefined }): { include: string | extHostProtocol.IRelativePatternDto | undefined; exclude: string | extHostProtocol.IRelativePatternDto | undefined };
-	export function from(pattern: vscode.GlobPattern): string | extHostProtocol.IRelativePatternDto;
+	export function from(pattern: { include: zyraxoncode.GlobPattern | undefined; exclude: zyraxoncode.GlobPattern | undefined }): { include: string | extHostProtocol.IRelativePatternDto | undefined; exclude: string | extHostProtocol.IRelativePatternDto | undefined };
+	export function from(pattern: zyraxoncode.GlobPattern): string | extHostProtocol.IRelativePatternDto;
 	export function from(pattern: undefined): undefined;
-	export function from(pattern: { include: vscode.GlobPattern | undefined | null; exclude: vscode.GlobPattern | undefined } | vscode.GlobPattern | undefined): string | extHostProtocol.IRelativePatternDto | { include: string | extHostProtocol.IRelativePatternDto | undefined; exclude: string | extHostProtocol.IRelativePatternDto | undefined } | undefined;
-	export function from(pattern: { include: vscode.GlobPattern | undefined | null; exclude: vscode.GlobPattern | undefined } | vscode.GlobPattern | undefined): string | extHostProtocol.IRelativePatternDto | { include: string | extHostProtocol.IRelativePatternDto | undefined; exclude: string | extHostProtocol.IRelativePatternDto | undefined } | undefined {
+	export function from(pattern: { include: zyraxoncode.GlobPattern | undefined | null; exclude: zyraxoncode.GlobPattern | undefined } | zyraxoncode.GlobPattern | undefined): string | extHostProtocol.IRelativePatternDto | { include: string | extHostProtocol.IRelativePatternDto | undefined; exclude: string | extHostProtocol.IRelativePatternDto | undefined } | undefined;
+	export function from(pattern: { include: zyraxoncode.GlobPattern | undefined | null; exclude: zyraxoncode.GlobPattern | undefined } | zyraxoncode.GlobPattern | undefined): string | extHostProtocol.IRelativePatternDto | { include: string | extHostProtocol.IRelativePatternDto | undefined; exclude: string | extHostProtocol.IRelativePatternDto | undefined } | undefined {
 		if (isExclusivePattern(pattern)) {
 			return {
 				include: GlobPattern.from(pattern.include) ?? undefined,
@@ -1813,7 +1813,7 @@ export namespace NotebookExclusiveDocumentPattern {
 		return GlobPattern.from(pattern) ?? undefined;
 	}
 
-	export function to(pattern: string | extHostProtocol.IRelativePatternDto | { include: string | extHostProtocol.IRelativePatternDto; exclude: string | extHostProtocol.IRelativePatternDto }): { include: vscode.GlobPattern; exclude: vscode.GlobPattern } | vscode.GlobPattern {
+	export function to(pattern: string | extHostProtocol.IRelativePatternDto | { include: string | extHostProtocol.IRelativePatternDto; exclude: string | extHostProtocol.IRelativePatternDto }): { include: zyraxoncode.GlobPattern; exclude: zyraxoncode.GlobPattern } | zyraxoncode.GlobPattern {
 		if (isExclusivePattern(pattern)) {
 			return {
 				include: GlobPattern.to(pattern.include),
@@ -1834,7 +1834,7 @@ export namespace NotebookExclusiveDocumentPattern {
 }
 
 export namespace NotebookStatusBarItem {
-	export function from(item: vscode.NotebookCellStatusBarItem, commandsConverter: Command.ICommandsConverter, disposables: DisposableStore): notebooks.INotebookCellStatusBarItem {
+	export function from(item: zyraxoncode.NotebookCellStatusBarItem, commandsConverter: Command.ICommandsConverter, disposables: DisposableStore): notebooks.INotebookCellStatusBarItem {
 		const command = typeof item.command === 'string' ? { title: '', command: item.command } : item.command;
 		return {
 			alignment: item.alignment === types.NotebookCellStatusBarAlignment.Left ? notebooks.CellStatusbarAlignment.Left : notebooks.CellStatusbarAlignment.Right,
@@ -1848,7 +1848,7 @@ export namespace NotebookStatusBarItem {
 }
 
 export namespace NotebookKernelSourceAction {
-	export function from(item: vscode.NotebookKernelSourceAction, commandsConverter: Command.ICommandsConverter, disposables: DisposableStore): notebooks.INotebookKernelSourceAction {
+	export function from(item: zyraxoncode.NotebookKernelSourceAction, commandsConverter: Command.ICommandsConverter, disposables: DisposableStore): notebooks.INotebookKernelSourceAction {
 		const command = typeof item.command === 'string' ? { title: '', command: item.command } : item.command;
 
 		return {
@@ -1862,7 +1862,7 @@ export namespace NotebookKernelSourceAction {
 }
 
 export namespace NotebookDocumentContentOptions {
-	export function from(options: vscode.NotebookDocumentContentOptions | undefined): notebooks.TransientOptions {
+	export function from(options: zyraxoncode.NotebookDocumentContentOptions | undefined): notebooks.TransientOptions {
 		return {
 			transientOutputs: options?.transientOutputs ?? false,
 			transientCellMetadata: options?.transientCellMetadata ?? {},
@@ -1873,20 +1873,20 @@ export namespace NotebookDocumentContentOptions {
 }
 
 export namespace NotebookRendererScript {
-	export function from(preload: vscode.NotebookRendererScript): { uri: UriComponents; provides: readonly string[] } {
+	export function from(preload: zyraxoncode.NotebookRendererScript): { uri: UriComponents; provides: readonly string[] } {
 		return {
 			uri: preload.uri,
 			provides: preload.provides
 		};
 	}
 
-	export function to(preload: { uri: UriComponents; provides: readonly string[] }): vscode.NotebookRendererScript {
+	export function to(preload: { uri: UriComponents; provides: readonly string[] }): zyraxoncode.NotebookRendererScript {
 		return new types.NotebookRendererScript(URI.revive(preload.uri), preload.provides);
 	}
 }
 
 export namespace TestMessage {
-	export function from(message: vscode.TestMessage): ITestErrorMessage.Serialized {
+	export function from(message: zyraxoncode.TestMessage): ITestErrorMessage.Serialized {
 		return {
 			message: MarkdownString.fromStrict(message.message) || '',
 			type: TestMessageType.Error,
@@ -1902,7 +1902,7 @@ export namespace TestMessage {
 		};
 	}
 
-	export function to(item: ITestErrorMessage.Serialized): vscode.TestMessage {
+	export function to(item: ITestErrorMessage.Serialized): zyraxoncode.TestMessage {
 		const message = new types.TestMessage(typeof item.message === 'string' ? item.message : MarkdownString.to(item.message));
 		message.actualOutput = item.actual;
 		message.expectedOutput = item.expected;
@@ -1929,7 +1929,7 @@ export namespace TestRunProfile {
 }
 
 export namespace TestRunProfileKind {
-	const profileGroupToBitset: { [K in vscode.TestRunProfileKind]: TestRunProfileBitset } = {
+	const profileGroupToBitset: { [K in zyraxoncode.TestRunProfileKind]: TestRunProfileBitset } = {
 		[types.TestRunProfileKind.Coverage]: TestRunProfileBitset.Coverage,
 		[types.TestRunProfileKind.Debug]: TestRunProfileBitset.Debug,
 		[types.TestRunProfileKind.Run]: TestRunProfileBitset.Run,
@@ -1941,9 +1941,9 @@ export namespace TestRunProfileKind {
 }
 
 export namespace TestItem {
-	export type Raw = vscode.TestItem;
+	export type Raw = zyraxoncode.TestItem;
 
-	export function from(item: vscode.TestItem): ITestItem {
+	export function from(item: zyraxoncode.TestItem): ITestItem {
 		const ctrlId = getPrivateApiFor(item).controllerId;
 		return {
 			extId: TestId.fromExtHostTestItem(item, ctrlId).toString(),
@@ -1958,7 +1958,7 @@ export namespace TestItem {
 		};
 	}
 
-	export function toPlain(item: ITestItem.Serialized): vscode.TestItem {
+	export function toPlain(item: ITestItem.Serialized): zyraxoncode.TestItem {
 		return {
 			parent: undefined,
 			error: undefined,
@@ -1988,23 +1988,23 @@ export namespace TestItem {
 }
 
 export namespace TestTag {
-	export function from(tag: vscode.TestTag): ITestTag {
+	export function from(tag: zyraxoncode.TestTag): ITestTag {
 		return { id: tag.id };
 	}
 
-	export function to(tag: ITestTag): vscode.TestTag {
+	export function to(tag: ITestTag): zyraxoncode.TestTag {
 		return new types.TestTag(tag.id);
 	}
 }
 
 export namespace TestResults {
-	const convertTestResultItem = (node: IPrefixTreeNode<TestResultItem.Serialized>, parent?: vscode.TestResultSnapshot): vscode.TestResultSnapshot | undefined => {
+	const convertTestResultItem = (node: IPrefixTreeNode<TestResultItem.Serialized>, parent?: zyraxoncode.TestResultSnapshot): zyraxoncode.TestResultSnapshot | undefined => {
 		const item = node.value;
 		if (!item) {
 			return undefined; // should be unreachable
 		}
 
-		const snapshot: vscode.TestResultSnapshot = ({
+		const snapshot: zyraxoncode.TestResultSnapshot = ({
 			...TestItem.toPlain(item.item),
 			parent,
 			taskStates: item.tasks.map(t => ({
@@ -2029,7 +2029,7 @@ export namespace TestResults {
 		return snapshot;
 	};
 
-	export function to(serialized: ISerializedTestResults): vscode.TestRunResult {
+	export function to(serialized: ISerializedTestResults): zyraxoncode.TestRunResult {
 		const tree = new WellDefinedPrefixTree<TestResultItem.Serialized>();
 		for (const item of serialized.items) {
 			tree.insert(TestId.fromString(item.item.extId).path, item);
@@ -2056,11 +2056,11 @@ export namespace TestResults {
 }
 
 export namespace TestCoverage {
-	function fromCoverageCount(count: vscode.TestCoverageCount): ICoverageCount {
+	function fromCoverageCount(count: zyraxoncode.TestCoverageCount): ICoverageCount {
 		return { covered: count.covered, total: count.total };
 	}
 
-	function fromLocation(location: vscode.Range | vscode.Position) {
+	function fromLocation(location: zyraxoncode.Range | zyraxoncode.Position) {
 		return 'line' in location ? Position.from(location) : Range.from(location);
 	}
 
@@ -2071,9 +2071,9 @@ export namespace TestCoverage {
 		return 'endLineNumber' in location ? Range.to(location) : Position.to(location);
 	}
 
-	export function to(serialized: CoverageDetails.Serialized): vscode.FileCoverageDetail {
+	export function to(serialized: CoverageDetails.Serialized): zyraxoncode.FileCoverageDetail {
 		if (serialized.type === DetailType.Statement) {
-			const branches: vscode.BranchCoverage[] = [];
+			const branches: zyraxoncode.BranchCoverage[] = [];
 			if (serialized.branches) {
 				for (const branch of serialized.branches) {
 					branches.push({
@@ -2101,7 +2101,7 @@ export namespace TestCoverage {
 		}
 	}
 
-	export function fromDetails(coverage: vscode.FileCoverageDetail): CoverageDetails.Serialized {
+	export function fromDetails(coverage: zyraxoncode.FileCoverageDetail): CoverageDetails.Serialized {
 		if (typeof coverage.executed === 'number' && coverage.executed < 0) {
 			throw new Error(`Invalid coverage count ${coverage.executed}`);
 		}
@@ -2125,7 +2125,7 @@ export namespace TestCoverage {
 		}
 	}
 
-	export function fromFile(controllerId: string, id: string, coverage: vscode.FileCoverage): IFileCoverage.Serialized {
+	export function fromFile(controllerId: string, id: string, coverage: zyraxoncode.FileCoverage): IFileCoverage.Serialized {
 		types.validateTestCoverageCount(coverage.statementCoverage);
 		types.validateTestCoverageCount(coverage.branchCoverage);
 		types.validateTestCoverageCount(coverage.declarationCoverage);
@@ -2173,7 +2173,7 @@ export namespace TypeHierarchyItem {
 		return result;
 	}
 
-	export function from(item: vscode.TypeHierarchyItem, sessionId?: string, itemId?: string): extHostProtocol.ITypeHierarchyItemDto {
+	export function from(item: zyraxoncode.TypeHierarchyItem, sessionId?: string, itemId?: string): extHostProtocol.ITypeHierarchyItemDto {
 
 		sessionId = sessionId ?? (<types.TypeHierarchyItem>item)._sessionId;
 		itemId = itemId ?? (<types.TypeHierarchyItem>item)._itemId;
@@ -2197,7 +2197,7 @@ export namespace TypeHierarchyItem {
 }
 
 export namespace ViewBadge {
-	export function from(badge: vscode.ViewBadge | undefined): IViewBadge | undefined {
+	export function from(badge: zyraxoncode.ViewBadge | undefined): IViewBadge | undefined {
 		if (!badge) {
 			return undefined;
 		}
@@ -2224,7 +2224,7 @@ export namespace DataTransferItem {
 		return new types.InternalDataTransferItem(item.asString);
 	}
 
-	export async function from(mime: string, item: vscode.DataTransferItem | IDataTransferItem, id: string = generateUuid()): Promise<extHostProtocol.DataTransferItemDTO> {
+	export async function from(mime: string, item: zyraxoncode.DataTransferItem | IDataTransferItem, id: string = generateUuid()): Promise<extHostProtocol.DataTransferItemDTO> {
 		const stringValue = await item.asString();
 
 		if (mime === Mimes.uriList) {
@@ -2279,7 +2279,7 @@ export namespace DataTransfer {
 		return new types.DataTransfer(init);
 	}
 
-	export async function from(dataTransfer: vscode.DataTransfer): Promise<extHostProtocol.DataTransferDTO> {
+	export async function from(dataTransfer: zyraxoncode.DataTransfer): Promise<extHostProtocol.DataTransferDTO> {
 		const items = await Promise.all(Array.from(dataTransfer, async ([mime, value]) => {
 			return [mime, await DataTransferItem.from(mime, value)] as const;
 		}));
@@ -2297,7 +2297,7 @@ export namespace DataTransfer {
 }
 
 export namespace ChatFollowup {
-	export function from(followup: vscode.ChatFollowup, request: IChatAgentRequest | undefined): IChatFollowup {
+	export function from(followup: zyraxoncode.ChatFollowup, request: IChatAgentRequest | undefined): IChatFollowup {
 		return {
 			kind: 'reply',
 			agentId: followup.participant ?? request?.agentId ?? '',
@@ -2307,7 +2307,7 @@ export namespace ChatFollowup {
 		};
 	}
 
-	export function to(followup: IChatFollowup): vscode.ChatFollowup {
+	export function to(followup: IChatFollowup): zyraxoncode.ChatFollowup {
 		return {
 			prompt: followup.message,
 			label: followup.title,
@@ -2318,7 +2318,7 @@ export namespace ChatFollowup {
 }
 
 export namespace LanguageModelChatMessageRole {
-	export function to(role: chatProvider.ChatMessageRole): vscode.LanguageModelChatMessageRole {
+	export function to(role: chatProvider.ChatMessageRole): zyraxoncode.LanguageModelChatMessageRole {
 		switch (role) {
 			case chatProvider.ChatMessageRole.System: return types.LanguageModelChatMessageRole.System;
 			case chatProvider.ChatMessageRole.User: return types.LanguageModelChatMessageRole.User;
@@ -2326,7 +2326,7 @@ export namespace LanguageModelChatMessageRole {
 		}
 	}
 
-	export function from(role: vscode.LanguageModelChatMessageRole): chatProvider.ChatMessageRole {
+	export function from(role: zyraxoncode.LanguageModelChatMessageRole): chatProvider.ChatMessageRole {
 		switch (role) {
 			case types.LanguageModelChatMessageRole.System: return chatProvider.ChatMessageRole.System;
 			case types.LanguageModelChatMessageRole.User: return chatProvider.ChatMessageRole.User;
@@ -2338,7 +2338,7 @@ export namespace LanguageModelChatMessageRole {
 
 export namespace LanguageModelChatMessage {
 
-	export function to(message: chatProvider.IChatMessage): vscode.LanguageModelChatMessage {
+	export function to(message: chatProvider.IChatMessage): zyraxoncode.LanguageModelChatMessage {
 		const content = message.content.map(c => {
 			if (c.type === 'text') {
 				return new LanguageModelTextPart(c.value, c.audience);
@@ -2371,7 +2371,7 @@ export namespace LanguageModelChatMessage {
 		return result;
 	}
 
-	export function from(message: vscode.LanguageModelChatMessage): chatProvider.IChatMessage {
+	export function from(message: zyraxoncode.LanguageModelChatMessage): chatProvider.IChatMessage {
 
 		const role = LanguageModelChatMessageRole.from(message.role);
 		const name = message.name;
@@ -2465,7 +2465,7 @@ export namespace LanguageModelChatMessage {
 
 export namespace LanguageModelChatMessage2 {
 
-	export function to(message: chatProvider.IChatMessage): vscode.LanguageModelChatMessage2 {
+	export function to(message: chatProvider.IChatMessage): zyraxoncode.LanguageModelChatMessage2 {
 		const content = message.content.map(c => {
 			if (c.type === 'text') {
 				return new LanguageModelTextPart(c.value, c.audience);
@@ -2495,7 +2495,7 @@ export namespace LanguageModelChatMessage2 {
 		return result;
 	}
 
-	export function from(message: vscode.LanguageModelChatMessage2): chatProvider.IChatMessage {
+	export function from(message: zyraxoncode.LanguageModelChatMessage2): chatProvider.IChatMessage {
 
 		const role = LanguageModelChatMessageRole.from(message.role);
 		const name = message.name;
@@ -2611,19 +2611,19 @@ function isImageDataPart(part: types.LanguageModelDataPart): boolean {
 }
 
 export namespace ChatResponseMarkdownPart {
-	export function from(part: vscode.ChatResponseMarkdownPart): Dto<IChatMarkdownContent> {
+	export function from(part: zyraxoncode.ChatResponseMarkdownPart): Dto<IChatMarkdownContent> {
 		return {
 			kind: 'markdownContent',
 			content: MarkdownString.from(part.value)
 		};
 	}
-	export function to(part: Dto<IChatMarkdownContent>): vscode.ChatResponseMarkdownPart {
+	export function to(part: Dto<IChatMarkdownContent>): zyraxoncode.ChatResponseMarkdownPart {
 		return new types.ChatResponseMarkdownPart(MarkdownString.to(part.content));
 	}
 }
 
 export namespace ChatResponseCodeblockUriPart {
-	export function from(part: vscode.ChatResponseCodeblockUriPart): Dto<IChatResponseCodeblockUriPart> {
+	export function from(part: zyraxoncode.ChatResponseCodeblockUriPart): Dto<IChatResponseCodeblockUriPart> {
 		return {
 			kind: 'codeblockUri',
 			uri: part.value,
@@ -2631,26 +2631,26 @@ export namespace ChatResponseCodeblockUriPart {
 			undoStopId: part.undoStopId
 		};
 	}
-	export function to(part: Dto<IChatResponseCodeblockUriPart>): vscode.ChatResponseCodeblockUriPart {
+	export function to(part: Dto<IChatResponseCodeblockUriPart>): zyraxoncode.ChatResponseCodeblockUriPart {
 		return new types.ChatResponseCodeblockUriPart(URI.revive(part.uri), part.isEdit, part.undoStopId);
 	}
 }
 
 export namespace ChatResponseMarkdownWithVulnerabilitiesPart {
-	export function from(part: vscode.ChatResponseMarkdownWithVulnerabilitiesPart): Dto<IChatAgentMarkdownContentWithVulnerability> {
+	export function from(part: zyraxoncode.ChatResponseMarkdownWithVulnerabilitiesPart): Dto<IChatAgentMarkdownContentWithVulnerability> {
 		return {
 			kind: 'markdownVuln',
 			content: MarkdownString.from(part.value),
 			vulnerabilities: part.vulnerabilities,
 		};
 	}
-	export function to(part: Dto<IChatAgentMarkdownContentWithVulnerability>): vscode.ChatResponseMarkdownWithVulnerabilitiesPart {
+	export function to(part: Dto<IChatAgentMarkdownContentWithVulnerability>): zyraxoncode.ChatResponseMarkdownWithVulnerabilitiesPart {
 		return new types.ChatResponseMarkdownWithVulnerabilitiesPart(MarkdownString.to(part.content), part.vulnerabilities);
 	}
 }
 
 export namespace ChatResponseConfirmationPart {
-	export function from(part: vscode.ChatResponseConfirmationPart): Dto<IChatConfirmation> {
+	export function from(part: zyraxoncode.ChatResponseConfirmationPart): Dto<IChatConfirmation> {
 		return {
 			kind: 'confirmation',
 			title: part.title,
@@ -2662,7 +2662,7 @@ export namespace ChatResponseConfirmationPart {
 }
 
 export namespace ChatResponseQuestionCarouselPart {
-	function questionTypeToString(type: vscode.ChatQuestionType): 'text' | 'singleSelect' | 'multiSelect' {
+	function questionTypeToString(type: zyraxoncode.ChatQuestionType): 'text' | 'singleSelect' | 'multiSelect' {
 		switch (type) {
 			case types.ChatQuestionType.Text: return 'text';
 			case types.ChatQuestionType.SingleSelect: return 'singleSelect';
@@ -2671,7 +2671,7 @@ export namespace ChatResponseQuestionCarouselPart {
 		}
 	}
 
-	function stringToQuestionType(type: 'text' | 'singleSelect' | 'multiSelect'): vscode.ChatQuestionType {
+	function stringToQuestionType(type: 'text' | 'singleSelect' | 'multiSelect'): zyraxoncode.ChatQuestionType {
 		switch (type) {
 			case 'text': return types.ChatQuestionType.Text;
 			case 'singleSelect': return types.ChatQuestionType.SingleSelect;
@@ -2680,7 +2680,7 @@ export namespace ChatResponseQuestionCarouselPart {
 		}
 	}
 
-	export function from(part: vscode.ChatResponseQuestionCarouselPart): Dto<IChatQuestionCarousel> {
+	export function from(part: zyraxoncode.ChatResponseQuestionCarouselPart): Dto<IChatQuestionCarousel> {
 		return {
 			kind: 'questionCarousel',
 			questions: part.questions.map(q => ({
@@ -2696,7 +2696,7 @@ export namespace ChatResponseQuestionCarouselPart {
 		};
 	}
 
-	export function to(part: Dto<IChatQuestionCarousel>): vscode.ChatResponseQuestionCarouselPart {
+	export function to(part: Dto<IChatQuestionCarousel>): zyraxoncode.ChatResponseQuestionCarouselPart {
 		const questions = part.questions.map(q => new types.ChatQuestion(
 			q.id,
 			stringToQuestionType(q.type),
@@ -2717,9 +2717,9 @@ export namespace ChatResponseQuestionCarouselPart {
 }
 
 export namespace ChatResponseFilesPart {
-	export function from(part: vscode.ChatResponseFileTreePart): IChatTreeData {
+	export function from(part: zyraxoncode.ChatResponseFileTreePart): IChatTreeData {
 		const { value, baseUri } = part;
-		function convert(items: vscode.ChatResponseFileTree[], baseUri: URI): extHostProtocol.IChatResponseProgressFileTreeData[] {
+		function convert(items: zyraxoncode.ChatResponseFileTree[], baseUri: URI): extHostProtocol.IChatResponseProgressFileTreeData[] {
 			return items.map(item => {
 				const myUri = URI.joinPath(baseUri, item.name);
 				return {
@@ -2738,9 +2738,9 @@ export namespace ChatResponseFilesPart {
 			}
 		};
 	}
-	export function to(part: Dto<IChatTreeData>): vscode.ChatResponseFileTreePart {
+	export function to(part: Dto<IChatTreeData>): zyraxoncode.ChatResponseFileTreePart {
 		const treeData = revive<extHostProtocol.IChatResponseProgressFileTreeData>(part.treeData);
-		function convert(items: extHostProtocol.IChatResponseProgressFileTreeData[]): vscode.ChatResponseFileTree[] {
+		function convert(items: extHostProtocol.IChatResponseProgressFileTreeData[]): zyraxoncode.ChatResponseFileTree[] {
 			return items.map(item => {
 				return {
 					name: item.label,
@@ -2756,7 +2756,7 @@ export namespace ChatResponseFilesPart {
 }
 
 export namespace ChatResponseMultiDiffPart {
-	export function from(part: vscode.ChatResponseMultiDiffPart): IChatMultiDiffDataSerialized {
+	export function from(part: zyraxoncode.ChatResponseMultiDiffPart): IChatMultiDiffDataSerialized {
 		return {
 			kind: 'multiDiffData',
 			multiDiffData: {
@@ -2772,7 +2772,7 @@ export namespace ChatResponseMultiDiffPart {
 			readOnly: part.readOnly
 		};
 	}
-	export function to(part: IChatMultiDiffDataSerialized): vscode.ChatResponseMultiDiffPart {
+	export function to(part: IChatMultiDiffDataSerialized): zyraxoncode.ChatResponseMultiDiffPart {
 		const resources = part.multiDiffData.resources.map(resource => ({
 			originalUri: resource.originalUri ? URI.revive(resource.originalUri) : undefined,
 			modifiedUri: resource.modifiedUri ? URI.revive(resource.modifiedUri) : undefined,
@@ -2785,10 +2785,10 @@ export namespace ChatResponseMultiDiffPart {
 }
 
 export namespace ChatResponseAnchorPart {
-	export function from(part: vscode.ChatResponseAnchorPart): Dto<IChatContentInlineReference> {
-		// Work around type-narrowing confusion between vscode.Uri and URI
-		const isUri = (thing: unknown): thing is vscode.Uri => URI.isUri(thing);
-		const isSymbolInformation = (thing: object): thing is vscode.SymbolInformation => 'name' in thing;
+	export function from(part: zyraxoncode.ChatResponseAnchorPart): Dto<IChatContentInlineReference> {
+		// Work around type-narrowing confusion between zyraxoncode.Uri and URI
+		const isUri = (thing: unknown): thing is zyraxoncode.Uri => URI.isUri(thing);
+		const isSymbolInformation = (thing: object): thing is zyraxoncode.SymbolInformation => 'name' in thing;
 
 		return {
 			kind: 'inlineReference',
@@ -2801,13 +2801,13 @@ export namespace ChatResponseAnchorPart {
 		};
 	}
 
-	export function to(part: Dto<IChatContentInlineReference>): vscode.ChatResponseAnchorPart {
+	export function to(part: Dto<IChatContentInlineReference>): zyraxoncode.ChatResponseAnchorPart {
 		const value = revive<IChatContentInlineReference>(part);
 		return new types.ChatResponseAnchorPart(
 			URI.isUri(value.inlineReference)
 				? value.inlineReference
 				: 'location' in value.inlineReference
-					? WorkspaceSymbol.to(value.inlineReference) as vscode.SymbolInformation
+					? WorkspaceSymbol.to(value.inlineReference) as zyraxoncode.SymbolInformation
 					: Location.to(value.inlineReference),
 			part.name
 		);
@@ -2815,19 +2815,19 @@ export namespace ChatResponseAnchorPart {
 }
 
 export namespace ChatResponseProgressPart {
-	export function from(part: vscode.ChatResponseProgressPart): Dto<IChatProgressMessage> {
+	export function from(part: zyraxoncode.ChatResponseProgressPart): Dto<IChatProgressMessage> {
 		return {
 			kind: 'progressMessage',
 			content: MarkdownString.from(part.value)
 		};
 	}
-	export function to(part: Dto<IChatProgressMessage>): vscode.ChatResponseProgressPart {
+	export function to(part: Dto<IChatProgressMessage>): zyraxoncode.ChatResponseProgressPart {
 		return new types.ChatResponseProgressPart(part.content.value);
 	}
 }
 
 export namespace ChatResponseThinkingProgressPart {
-	export function from(part: vscode.ChatResponseThinkingProgressPart): Dto<IChatThinkingPart> {
+	export function from(part: zyraxoncode.ChatResponseThinkingProgressPart): Dto<IChatThinkingPart> {
 		return {
 			kind: 'thinking',
 			value: part.value,
@@ -2835,13 +2835,13 @@ export namespace ChatResponseThinkingProgressPart {
 			metadata: part.metadata
 		};
 	}
-	export function to(part: Dto<IChatThinkingPart>): vscode.ChatResponseThinkingProgressPart {
+	export function to(part: Dto<IChatThinkingPart>): zyraxoncode.ChatResponseThinkingProgressPart {
 		return new types.ChatResponseThinkingProgressPart(part.value ?? '', part.id, part.metadata);
 	}
 }
 
 export namespace ChatResponseHookPart {
-	export function from(part: vscode.ChatResponseHookPart): Dto<IChatHookPart> {
+	export function from(part: zyraxoncode.ChatResponseHookPart): Dto<IChatHookPart> {
 		return {
 			kind: 'hook',
 			hookType: part.hookType,
@@ -2850,13 +2850,13 @@ export namespace ChatResponseHookPart {
 			metadata: part.metadata
 		};
 	}
-	export function to(part: Dto<IChatHookPart>): vscode.ChatResponseHookPart {
+	export function to(part: Dto<IChatHookPart>): zyraxoncode.ChatResponseHookPart {
 		return new types.ChatResponseHookPart(part.hookType, part.stopReason, part.systemMessage, part.metadata);
 	}
 }
 
 export namespace ChatResponseVoiceProgressPart {
-	export function from(part: vscode.ChatResponseVoiceProgressPart): Dto<IChatVoiceProgressPart> {
+	export function from(part: zyraxoncode.ChatResponseVoiceProgressPart): Dto<IChatVoiceProgressPart> {
 		return {
 			kind: 'voiceProgress',
 			id: part.id,
@@ -2868,7 +2868,7 @@ export namespace ChatResponseVoiceProgressPart {
 export namespace ChatResponseAutoModeResolutionPart {
 	const validLabels = new Set<IChatAutoModeResolutionPart['predictedLabel']>(['needs_reasoning', 'no_reasoning', 'fallback']);
 
-	export function from(part: vscode.ChatResponseAutoModeResolutionPart): Dto<IChatAutoModeResolutionPart> {
+	export function from(part: zyraxoncode.ChatResponseAutoModeResolutionPart): Dto<IChatAutoModeResolutionPart> {
 		const label = validLabels.has(part.predictedLabel as IChatAutoModeResolutionPart['predictedLabel'])
 			? part.predictedLabel as IChatAutoModeResolutionPart['predictedLabel']
 			: 'fallback';
@@ -2880,37 +2880,37 @@ export namespace ChatResponseAutoModeResolutionPart {
 			confidence: Math.max(0, Math.min(1, part.confidence)),
 		};
 	}
-	export function to(part: Dto<IChatAutoModeResolutionPart>): vscode.ChatResponseAutoModeResolutionPart {
+	export function to(part: Dto<IChatAutoModeResolutionPart>): zyraxoncode.ChatResponseAutoModeResolutionPart {
 		return new types.ChatResponseAutoModeResolutionPart(part.resolvedModel, part.resolvedModelName, part.predictedLabel, part.confidence);
 	}
 }
 
 export namespace ChatResponseWarningPart {
-	export function from(part: vscode.ChatResponseWarningPart): Dto<IChatWarningMessage> {
+	export function from(part: zyraxoncode.ChatResponseWarningPart): Dto<IChatWarningMessage> {
 		return {
 			kind: 'warning',
 			content: MarkdownString.from(part.value)
 		};
 	}
-	export function to(part: Dto<IChatWarningMessage>): vscode.ChatResponseWarningPart {
+	export function to(part: Dto<IChatWarningMessage>): zyraxoncode.ChatResponseWarningPart {
 		return new types.ChatResponseWarningPart(part.content.value);
 	}
 }
 
 export namespace ChatResponseInfoPart {
-	export function from(part: vscode.ChatResponseInfoPart): Dto<IChatInfoMessage> {
+	export function from(part: zyraxoncode.ChatResponseInfoPart): Dto<IChatInfoMessage> {
 		return {
 			kind: 'info',
 			content: MarkdownString.from(part.value)
 		};
 	}
-	export function to(part: Dto<IChatInfoMessage>): vscode.ChatResponseInfoPart {
+	export function to(part: Dto<IChatInfoMessage>): zyraxoncode.ChatResponseInfoPart {
 		return new types.ChatResponseInfoPart(part.content.value);
 	}
 }
 
 export namespace ChatResponseExtensionsPart {
-	export function from(part: vscode.ChatResponseExtensionsPart): Dto<IChatExtensionsContent> {
+	export function from(part: zyraxoncode.ChatResponseExtensionsPart): Dto<IChatExtensionsContent> {
 		return {
 			kind: 'extensions',
 			extensions: part.extensions
@@ -2919,7 +2919,7 @@ export namespace ChatResponseExtensionsPart {
 }
 
 export namespace ChatResponsePullRequestPart {
-	export function from(part: Omit<vscode.ChatResponsePullRequestPart, 'command'> & { command?: vscode.Command }, commandsConverter: CommandsConverter, commandDisposables: DisposableStore): Dto<IChatPullRequestContent> {
+	export function from(part: Omit<zyraxoncode.ChatResponsePullRequestPart, 'command'> & { command?: zyraxoncode.Command }, commandsConverter: CommandsConverter, commandDisposables: DisposableStore): Dto<IChatPullRequestContent> {
 		// If the command isn't in the converter, then this session may have been restored, and the command args don't exist anymore
 		let command: extHostProtocol.ICommandDto;
 		if (!part.command) {
@@ -2928,7 +2928,7 @@ export namespace ChatResponsePullRequestPart {
 			}
 			command = {
 				title: 'Open Pull Request',
-				id: 'vscode.open',
+				id: 'zyraxoncode.open',
 				arguments: [part.uri]
 			};
 		} else {
@@ -2947,20 +2947,20 @@ export namespace ChatResponsePullRequestPart {
 }
 
 export namespace ChatResponseMovePart {
-	export function from(part: vscode.ChatResponseMovePart): Dto<IChatMoveMessage> {
+	export function from(part: zyraxoncode.ChatResponseMovePart): Dto<IChatMoveMessage> {
 		return {
 			kind: 'move',
 			uri: part.uri,
 			range: Range.from(part.range),
 		};
 	}
-	export function to(part: Dto<IChatMoveMessage>): vscode.ChatResponseMovePart {
+	export function to(part: Dto<IChatMoveMessage>): zyraxoncode.ChatResponseMovePart {
 		return new types.ChatResponseMovePart(URI.revive(part.uri), Range.to(part.range));
 	}
 }
 
 export namespace ChatToolInvocationPart {
-	export function from(part: vscode.ChatToolInvocationPart): IChatToolInvocationSerialized | IChatExternalToolInvocationUpdate {
+	export function from(part: zyraxoncode.ChatToolInvocationPart): IChatToolInvocationSerialized | IChatExternalToolInvocationUpdate {
 		// Check if toolSpecificData is ChatMcpToolInvocationData (has input and output)
 		// If so, convert to resultDetails for rendering via ChatInputOutputMarkdownProgressPart
 		let resultDetails: IToolResultInputOutputDetails | undefined;
@@ -3016,13 +3016,13 @@ export namespace ChatToolInvocationPart {
 		};
 	}
 
-	function isChatMcpToolInvocationData(data: any): data is vscode.ChatMcpToolInvocationData {
+	function isChatMcpToolInvocationData(data: any): data is zyraxoncode.ChatMcpToolInvocationData {
 		return data !== null && typeof data === 'object' &&
 			'input' in data && typeof data.input === 'string' &&
 			'output' in data && Array.isArray(data.output);
 	}
 
-	function convertMcpToResultDetails(data: vscode.ChatMcpToolInvocationData, isError?: boolean): IToolResultInputOutputDetails {
+	function convertMcpToResultDetails(data: zyraxoncode.ChatMcpToolInvocationData, isError?: boolean): IToolResultInputOutputDetails {
 		return {
 			input: data.input,
 			output: data.output.map((o) => {
@@ -3136,7 +3136,7 @@ export namespace ChatToolInvocationPart {
 		}
 	}
 
-	export function to(part: any): vscode.ChatToolInvocationPart {
+	export function to(part: any): zyraxoncode.ChatToolInvocationPart {
 		const toolInvocation = new types.ChatToolInvocationPart(
 			part.toolId || part.toolName,
 			part.toolCallId,
@@ -3226,7 +3226,7 @@ export namespace ChatToolInvocationPart {
 }
 
 export namespace ChatTask {
-	export function from(part: vscode.ChatResponseProgressPart2): IChatTaskDto {
+	export function from(part: zyraxoncode.ChatResponseProgressPart2): IChatTaskDto {
 		return {
 			kind: 'progressTask',
 			content: MarkdownString.from(part.value),
@@ -3244,7 +3244,7 @@ export namespace ChatTaskResult {
 }
 
 export namespace ChatResponseCommandButtonPart {
-	export function from(part: vscode.ChatResponseCommandButtonPart, commandsConverter: CommandsConverter, commandDisposables: DisposableStore): Dto<IChatCommandButton> {
+	export function from(part: zyraxoncode.ChatResponseCommandButtonPart, commandsConverter: CommandsConverter, commandDisposables: DisposableStore): Dto<IChatCommandButton> {
 		// If the command isn't in the converter, then this session may have been restored, and the command args don't exist anymore
 		const command = commandsConverter.toInternal(part.value, commandDisposables) ?? { command: part.value.command, title: part.value.title };
 		return {
@@ -3252,14 +3252,14 @@ export namespace ChatResponseCommandButtonPart {
 			command
 		};
 	}
-	export function to(part: Dto<IChatCommandButton>, commandsConverter: CommandsConverter): vscode.ChatResponseCommandButtonPart {
+	export function to(part: Dto<IChatCommandButton>, commandsConverter: CommandsConverter): zyraxoncode.ChatResponseCommandButtonPart {
 		// If the command isn't in the converter, then this session may have been restored, and the command args don't exist anymore
 		return new types.ChatResponseCommandButtonPart(commandsConverter.fromInternal(part.command) ?? { command: part.command.id, title: part.command.title });
 	}
 }
 
 export namespace ChatResponseTextEditPart {
-	export function from(part: vscode.ChatResponseTextEditPart): Dto<IChatTextEdit> {
+	export function from(part: zyraxoncode.ChatResponseTextEditPart): Dto<IChatTextEdit> {
 		return {
 			kind: 'textEdit',
 			uri: part.uri,
@@ -3267,7 +3267,7 @@ export namespace ChatResponseTextEditPart {
 			done: part.isDone
 		};
 	}
-	export function to(part: Dto<IChatTextEdit>): vscode.ChatResponseTextEditPart {
+	export function to(part: Dto<IChatTextEdit>): zyraxoncode.ChatResponseTextEditPart {
 		const result = new types.ChatResponseTextEditPart(URI.revive(part.uri), part.edits.map(e => TextEdit.to(e)));
 		result.isDone = part.done;
 		return result;
@@ -3276,7 +3276,7 @@ export namespace ChatResponseTextEditPart {
 }
 
 export namespace NotebookEdit {
-	export function from(edit: vscode.NotebookEdit): extHostProtocol.ICellEditOperationDto {
+	export function from(edit: zyraxoncode.NotebookEdit): extHostProtocol.ICellEditOperationDto {
 		if (edit.newCellMetadata) {
 			return {
 				editType: CellEditType.Metadata,
@@ -3301,7 +3301,7 @@ export namespace NotebookEdit {
 
 
 export namespace ChatResponseNotebookEditPart {
-	export function from(part: vscode.ChatResponseNotebookEditPart): extHostProtocol.IChatNotebookEditDto {
+	export function from(part: zyraxoncode.ChatResponseNotebookEditPart): extHostProtocol.IChatNotebookEditDto {
 		return {
 			kind: 'notebookEdit',
 			uri: part.uri,
@@ -3312,7 +3312,7 @@ export namespace ChatResponseNotebookEditPart {
 }
 
 export namespace ChatResponseWorkspaceEditPart {
-	export function from(part: vscode.ChatResponseWorkspaceEditPart): IChatWorkspaceEdit {
+	export function from(part: zyraxoncode.ChatResponseWorkspaceEditPart): IChatWorkspaceEdit {
 		return {
 			kind: 'workspaceEdit',
 			edits: part.edits.map(e => ({
@@ -3337,7 +3337,7 @@ export namespace ChatResponseReferencePart {
 					variableName: part.value.variableName,
 					value: URI.isUri(part.value.value) || !part.value.value ?
 						part.value.value :
-						Location.from(part.value.value as vscode.Location)
+						Location.from(part.value.value as zyraxoncode.Location)
 				},
 				iconPath,
 				options: part.options
@@ -3348,15 +3348,15 @@ export namespace ChatResponseReferencePart {
 			kind: 'reference',
 			reference: URI.isUri(part.value) || typeof part.value === 'string' ?
 				part.value :
-				Location.from(<vscode.Location>part.value),
+				Location.from(<zyraxoncode.Location>part.value),
 			iconPath,
 			options: part.options
 		};
 	}
-	export function to(part: Dto<IChatContentReference>): vscode.ChatResponseReferencePart {
+	export function to(part: Dto<IChatContentReference>): zyraxoncode.ChatResponseReferencePart {
 		const value = revive<IChatContentReference>(part);
 
-		const mapValue = (value: URI | languages.Location): vscode.Uri | vscode.Location => URI.isUri(value) ?
+		const mapValue = (value: URI | languages.Location): zyraxoncode.Uri | zyraxoncode.Location => URI.isUri(value) ?
 			value :
 			Location.to(value);
 
@@ -3366,12 +3366,12 @@ export namespace ChatResponseReferencePart {
 				value: value.reference.value && mapValue(value.reference.value)
 			} :
 				mapValue(value.reference)
-		) as vscode.ChatResponseReferencePart; // 'value' is extended with variableName
+		) as zyraxoncode.ChatResponseReferencePart; // 'value' is extended with variableName
 	}
 }
 
 export namespace ChatResponseCodeCitationPart {
-	export function from(part: vscode.ChatResponseCodeCitationPart): Dto<IChatCodeCitation> {
+	export function from(part: zyraxoncode.ChatResponseCodeCitationPart): Dto<IChatCodeCitation> {
 		return {
 			kind: 'codeCitation',
 			value: part.value,
@@ -3383,7 +3383,7 @@ export namespace ChatResponseCodeCitationPart {
 
 export namespace ChatResponsePart {
 
-	export function from(part: vscode.ExtendedChatResponsePart, commandsConverter: CommandsConverter, commandDisposables: DisposableStore): extHostProtocol.IChatProgressDto {
+	export function from(part: zyraxoncode.ExtendedChatResponsePart, commandsConverter: CommandsConverter, commandDisposables: DisposableStore): extHostProtocol.IChatProgressDto {
 		if (part instanceof types.ChatResponseMarkdownPart) {
 			return ChatResponseMarkdownPart.from(part);
 		} else if (part instanceof types.ChatResponseAnchorPart) {
@@ -3442,7 +3442,7 @@ export namespace ChatResponsePart {
 		};
 	}
 
-	export function to(part: extHostProtocol.IChatProgressDto, commandsConverter: CommandsConverter): vscode.ChatResponsePart | undefined {
+	export function to(part: extHostProtocol.IChatProgressDto, commandsConverter: CommandsConverter): zyraxoncode.ChatResponsePart | undefined {
 		switch (part.kind) {
 			case 'reference': return ChatResponseReferencePart.to(part);
 			case 'markdownContent':
@@ -3455,7 +3455,7 @@ export namespace ChatResponsePart {
 		return undefined;
 	}
 
-	export function toContent(part: extHostProtocol.IChatContentProgressDto, commandsConverter: CommandsConverter): vscode.ChatResponseMarkdownPart | vscode.ChatResponseFileTreePart | vscode.ChatResponseAnchorPart | vscode.ChatResponseCommandButtonPart | undefined {
+	export function toContent(part: extHostProtocol.IChatContentProgressDto, commandsConverter: CommandsConverter): zyraxoncode.ChatResponseMarkdownPart | zyraxoncode.ChatResponseFileTreePart | zyraxoncode.ChatResponseAnchorPart | zyraxoncode.ChatResponseCommandButtonPart | undefined {
 		switch (part.kind) {
 			case 'markdownContent': return ChatResponseMarkdownPart.to(part);
 			case 'inlineReference': return ChatResponseAnchorPart.to(part);
@@ -3469,7 +3469,7 @@ export namespace ChatResponsePart {
 }
 
 export namespace ChatAgentRequest {
-	export function to(request: IChatAgentRequest, location2: vscode.ChatRequestEditorData | vscode.ChatRequestNotebookData | undefined, model: vscode.LanguageModelChat, modelConfiguration: IStringDictionary<unknown> | undefined, diagnostics: readonly [vscode.Uri, readonly vscode.Diagnostic[]][], tools: Map<vscode.LanguageModelToolInformation, boolean>, extension: IRelaxedExtensionDescription, logService: ILogService): vscode.ChatRequest {
+	export function to(request: IChatAgentRequest, location2: zyraxoncode.ChatRequestEditorData | zyraxoncode.ChatRequestNotebookData | undefined, model: zyraxoncode.LanguageModelChat, modelConfiguration: IStringDictionary<unknown> | undefined, diagnostics: readonly [zyraxoncode.Uri, readonly zyraxoncode.Diagnostic[]][], tools: Map<zyraxoncode.LanguageModelToolInformation, boolean>, extension: IRelaxedExtensionDescription, logService: ILogService): zyraxoncode.ChatRequest {
 
 		const toolReferences: IChatRequestVariableEntry[] = [];
 		const variableReferences: IChatRequestVariableEntry[] = [];
@@ -3484,7 +3484,7 @@ export namespace ChatAgentRequest {
 		}
 
 		const sessionId = LocalChatSessionUri.parseLocalSessionId(request.sessionResource) ?? request.sessionResource.toString();
-		const requestWithAllProps: vscode.ChatRequest = {
+		const requestWithAllProps: zyraxoncode.ChatRequest = {
 			id: request.requestId,
 			prompt: request.message,
 			command: request.command,
@@ -3599,7 +3599,7 @@ export namespace ChatSessionCustomizationType {
 }
 
 export namespace ChatPromptReference {
-	export function toReferences(variable: IChatRequestVariableEntry, diagnostics: readonly [vscode.Uri, readonly vscode.Diagnostic[]][], logService: ILogService): vscode.ChatPromptReference[] {
+	export function toReferences(variable: IChatRequestVariableEntry, diagnostics: readonly [zyraxoncode.Uri, readonly zyraxoncode.Diagnostic[]][], logService: ILogService): zyraxoncode.ChatPromptReference[] {
 		const reference = to(variable, diagnostics, logService);
 		if (!reference) {
 			return [];
@@ -3628,8 +3628,8 @@ export namespace ChatPromptReference {
 		];
 	}
 
-	export function to(variable: IChatRequestVariableEntry, diagnostics: readonly [vscode.Uri, readonly vscode.Diagnostic[]][], logService: ILogService): vscode.ChatPromptReference | undefined {
-		let value: vscode.ChatPromptReference['value'] = variable.value;
+	export function to(variable: IChatRequestVariableEntry, diagnostics: readonly [zyraxoncode.Uri, readonly zyraxoncode.Diagnostic[]][], logService: ILogService): zyraxoncode.ChatPromptReference | undefined {
+		let value: zyraxoncode.ChatPromptReference['value'] = variable.value;
 		if (!value) {
 			let varStr: string;
 			try {
@@ -3658,7 +3658,7 @@ export namespace ChatPromptReference {
 		} else if (variable.kind === 'diagnostic') {
 			const filterSeverity = variable.filterSeverity && DiagnosticSeverity.to(variable.filterSeverity);
 			const filterUri = variable.filterUri && URI.revive(variable.filterUri).toString();
-			value = new types.ChatReferenceDiagnostic(diagnostics.map(([uri, d]): [vscode.Uri, vscode.Diagnostic[]] => {
+			value = new types.ChatReferenceDiagnostic(diagnostics.map(([uri, d]): [zyraxoncode.Uri, zyraxoncode.Diagnostic[]] => {
 				if (variable.filterUri && uri.toString() !== filterUri) {
 					return [uri, []];
 				}
@@ -3694,7 +3694,7 @@ export namespace ChatPromptReference {
 }
 
 export namespace ChatLanguageModelToolReference {
-	export function to(variable: IChatRequestVariableEntry): vscode.ChatLanguageModelToolReference {
+	export function to(variable: IChatRequestVariableEntry): zyraxoncode.ChatLanguageModelToolReference {
 		const value = variable.value;
 		if (value) {
 			throw new Error('Invalid tool reference');
@@ -3708,7 +3708,7 @@ export namespace ChatLanguageModelToolReference {
 }
 
 namespace ChatLanguageModelToolReferences {
-	export function to(variables: readonly ChatRequestToolReferenceEntry[]): vscode.ChatLanguageModelToolReference[] {
+	export function to(variables: readonly ChatRequestToolReferenceEntry[]): zyraxoncode.ChatLanguageModelToolReference[] {
 		const toolReferences = [];
 		for (const v of variables) {
 			if (v.kind === 'tool') {
@@ -3724,7 +3724,7 @@ namespace ChatLanguageModelToolReferences {
 }
 
 export namespace ChatRequestModeInstructions {
-	export function to(mode: IChatRequestModeInstructions | Dto<IChatRequestModeInstructions> | undefined): vscode.ChatRequestModeInstructions | undefined {
+	export function to(mode: IChatRequestModeInstructions | Dto<IChatRequestModeInstructions> | undefined): zyraxoncode.ChatRequestModeInstructions | undefined {
 		if (mode) {
 			return {
 				uri: URI.revive(mode.uri),
@@ -3739,7 +3739,7 @@ export namespace ChatRequestModeInstructions {
 		return undefined;
 	}
 
-	export function from(mode: vscode.ChatRequestModeInstructions | undefined): IChatRequestModeInstructions | undefined {
+	export function from(mode: zyraxoncode.ChatRequestModeInstructions | undefined): IChatRequestModeInstructions | undefined {
 		if (mode) {
 			return {
 				uri: mode.uri,
@@ -3762,7 +3762,7 @@ export namespace ChatRequestModeInstructions {
 }
 
 export namespace ChatAgentCompletionItem {
-	export function from(item: vscode.ChatCompletionItem, commandsConverter: CommandsConverter, disposables: DisposableStore): extHostProtocol.IChatAgentCompletionItem {
+	export function from(item: zyraxoncode.ChatCompletionItem, commandsConverter: CommandsConverter, disposables: DisposableStore): extHostProtocol.IChatAgentCompletionItem {
 		return {
 			id: item.id,
 			label: item.label,
@@ -3778,7 +3778,7 @@ export namespace ChatAgentCompletionItem {
 }
 
 export namespace ChatAgentResult {
-	export function to(result: IChatAgentResult): vscode.ChatResult {
+	export function to(result: IChatAgentResult): zyraxoncode.ChatResult {
 		return {
 			errorDetails: result.errorDetails,
 			metadata: reviveMetadata(result.metadata),
@@ -3786,7 +3786,7 @@ export namespace ChatAgentResult {
 			details: result.details,
 		};
 	}
-	export function from(result: vscode.ChatResult): Dto<IChatAgentResult> {
+	export function from(result: zyraxoncode.ChatResult): Dto<IChatAgentResult> {
 		return {
 			errorDetails: result.errorDetails,
 			metadata: result.metadata,
@@ -3829,7 +3829,7 @@ export namespace ChatAgentResult {
 }
 
 export namespace ChatAgentUserActionEvent {
-	export function to(result: IChatAgentResult, event: IChatUserActionEvent, commandsConverter: CommandsConverter): vscode.ChatUserActionEvent | undefined {
+	export function to(result: IChatAgentResult, event: IChatUserActionEvent, commandsConverter: CommandsConverter): zyraxoncode.ChatUserActionEvent | undefined {
 		if (event.action.kind === 'vote') {
 			// Is the "feedback" type
 			return;
@@ -3841,10 +3841,10 @@ export namespace ChatAgentUserActionEvent {
 			const commandButton = {
 				command: commandsConverter.fromInternal(command) ?? { command: command.id, title: command.title },
 			};
-			const commandAction: vscode.ChatCommandAction = { kind: 'command', commandButton };
+			const commandAction: zyraxoncode.ChatCommandAction = { kind: 'command', commandButton };
 			return { action: commandAction, result: ehResult };
 		} else if (event.action.kind === 'followUp') {
-			const followupAction: vscode.ChatFollowupAction = { kind: 'followUp', followup: ChatFollowup.to(event.action.followup) };
+			const followupAction: zyraxoncode.ChatFollowupAction = { kind: 'followUp', followup: ChatFollowup.to(event.action.followup) };
 			return { action: followupAction, result: ehResult };
 		} else if (event.action.kind === 'inlineChat') {
 			return { action: { kind: 'editor', accepted: event.action.action === 'accepted' }, result: ehResult };
@@ -3888,7 +3888,7 @@ export namespace ChatAgentUserActionEvent {
 }
 
 export namespace TerminalQuickFix {
-	export function from(quickFix: vscode.TerminalQuickFixTerminalCommand | vscode.TerminalQuickFixOpener | vscode.Command, converter: Command.ICommandsConverter, disposables: DisposableStore): extHostProtocol.ITerminalQuickFixTerminalCommandDto | extHostProtocol.ITerminalQuickFixOpenerDto | extHostProtocol.ICommandDto | undefined {
+	export function from(quickFix: zyraxoncode.TerminalQuickFixTerminalCommand | zyraxoncode.TerminalQuickFixOpener | zyraxoncode.Command, converter: Command.ICommandsConverter, disposables: DisposableStore): extHostProtocol.ITerminalQuickFixTerminalCommandDto | extHostProtocol.ITerminalQuickFixOpenerDto | extHostProtocol.ICommandDto | undefined {
 		if ('terminalCommand' in quickFix) {
 			return { terminalCommand: quickFix.terminalCommand, shouldExecute: quickFix.shouldExecute };
 		}
@@ -3899,7 +3899,7 @@ export namespace TerminalQuickFix {
 	}
 }
 export namespace TerminalCompletionItemDto {
-	export function from(item: vscode.TerminalCompletionItem): extHostProtocol.ITerminalCompletionItemDto {
+	export function from(item: zyraxoncode.TerminalCompletionItem): extHostProtocol.ITerminalCompletionItemDto {
 		return {
 			...item,
 			documentation: MarkdownString.fromStrict(item.documentation),
@@ -3908,7 +3908,7 @@ export namespace TerminalCompletionItemDto {
 }
 
 export namespace TerminalCompletionList {
-	export function from(completions: vscode.TerminalCompletionList | vscode.TerminalCompletionItem[], pathSeparator: string): extHostProtocol.TerminalCompletionListDto {
+	export function from(completions: zyraxoncode.TerminalCompletionList | zyraxoncode.TerminalCompletionItem[], pathSeparator: string): extHostProtocol.TerminalCompletionListDto {
 		if (Array.isArray(completions)) {
 			return {
 				items: completions.map(i => TerminalCompletionItemDto.from(i)),
@@ -3922,7 +3922,7 @@ export namespace TerminalCompletionList {
 }
 
 export namespace TerminalCompletionResourceOptions {
-	export function from(resourceOptions: vscode.TerminalCompletionResourceOptions, pathSeparator: string): extHostProtocol.TerminalCompletionResourceOptionsDto {
+	export function from(resourceOptions: zyraxoncode.TerminalCompletionResourceOptions, pathSeparator: string): extHostProtocol.TerminalCompletionResourceOptionsDto {
 		return {
 			...resourceOptions,
 			pathSeparator,
@@ -3957,7 +3957,7 @@ export namespace PartialAcceptTriggerKind {
 }
 
 export namespace InlineCompletionEndOfLifeReason {
-	export function to<T>(reason: languages.InlineCompletionEndOfLifeReason<T>, convertFn: (item: T) => vscode.InlineCompletionItem | undefined): vscode.InlineCompletionEndOfLifeReason {
+	export function to<T>(reason: languages.InlineCompletionEndOfLifeReason<T>, convertFn: (item: T) => zyraxoncode.InlineCompletionItem | undefined): zyraxoncode.InlineCompletionEndOfLifeReason {
 		if (reason.kind === languages.InlineCompletionEndOfLifeReasonKind.Ignored) {
 			const supersededBy = reason.supersededBy ? convertFn(reason.supersededBy) : undefined;
 			return {
@@ -3977,7 +3977,7 @@ export namespace InlineCompletionEndOfLifeReason {
 }
 
 export namespace InlineCompletionHintStyle {
-	export function from(value: vscode.InlineCompletionDisplayLocationKind): languages.InlineCompletionHintStyle {
+	export function from(value: zyraxoncode.InlineCompletionDisplayLocationKind): languages.InlineCompletionHintStyle {
 		if (value === types.InlineCompletionDisplayLocationKind.Label) {
 			return languages.InlineCompletionHintStyle.Label;
 		} else {
@@ -3996,7 +3996,7 @@ export namespace InlineCompletionHintStyle {
 }
 
 export namespace DebugTreeItem {
-	export function from(item: vscode.DebugTreeItem, id: number): IDebugVisualizationTreeItem {
+	export function from(item: zyraxoncode.DebugTreeItem, id: number): IDebugVisualizationTreeItem {
 		return {
 			id,
 			label: item.label,
@@ -4009,7 +4009,7 @@ export namespace DebugTreeItem {
 }
 
 export namespace LanguageModelToolSource {
-	export function to(source: Dto<ToolDataSource>): vscode.LanguageModelToolInformation['source'] {
+	export function to(source: Dto<ToolDataSource>): zyraxoncode.LanguageModelToolInformation['source'] {
 		if (source.type === 'mcp') {
 			return new types.LanguageModelToolMCPSource(source.label, source.serverLabel || source.label, source.instructions);
 		} else if (source.type === 'extension') {
@@ -4021,7 +4021,7 @@ export namespace LanguageModelToolSource {
 }
 
 export namespace LanguageModelToolResult {
-	export function to(result: IToolResult): vscode.ExtendedLanguageModelToolResult {
+	export function to(result: IToolResult): zyraxoncode.ExtendedLanguageModelToolResult {
 		const toolResult = new types.LanguageModelToolResult(result.content.map(item => {
 			if (item.kind === 'text') {
 				return new types.LanguageModelTextPart(item.value, item.audience);
@@ -4030,7 +4030,7 @@ export namespace LanguageModelToolResult {
 			} else {
 				return new types.LanguageModelPromptTsxPart(item.value);
 			}
-		})) as vscode.ExtendedLanguageModelToolResult;
+		})) as zyraxoncode.ExtendedLanguageModelToolResult;
 		if (result.toolMetadata !== undefined) {
 			toolResult.toolMetadata = result.toolMetadata;
 		}
@@ -4040,7 +4040,7 @@ export namespace LanguageModelToolResult {
 		return toolResult;
 	}
 
-	export function from(result: vscode.ExtendedLanguageModelToolResult2, extension: IExtensionDescription): Dto<IToolResult> | SerializableObjectWithBuffers<Dto<IToolResult>> {
+	export function from(result: zyraxoncode.ExtendedLanguageModelToolResult2, extension: IExtensionDescription): Dto<IToolResult> | SerializableObjectWithBuffers<Dto<IToolResult>> {
 		if (result.toolResultMessage) {
 			checkProposedApiEnabled(extension, 'chatParticipantPrivate');
 		}
@@ -4055,15 +4055,15 @@ export namespace LanguageModelToolResult {
 		let detailsDto: Dto<Array<URI | types.Location> | IToolResultInputOutputDetails | IToolResultOutputDetails | undefined> = undefined;
 		if (Array.isArray(result.toolResultDetails)) {
 			detailsDto = result.toolResultDetails?.map(detail => {
-				return URI.isUri(detail) ? detail : Location.from(detail as vscode.Location);
+				return URI.isUri(detail) ? detail : Location.from(detail as zyraxoncode.Location);
 			});
 		} else {
 			if (result.toolResultDetails2) {
 				detailsDto = {
 					output: {
 						type: 'data',
-						mimeType: (result.toolResultDetails2 as vscode.ToolResultDataOutput).mime,
-						value: VSBuffer.wrap((result.toolResultDetails2 as vscode.ToolResultDataOutput).value),
+						mimeType: (result.toolResultDetails2 as zyraxoncode.ToolResultDataOutput).mime,
+						value: VSBuffer.wrap((result.toolResultDetails2 as zyraxoncode.ToolResultDataOutput).value),
 					}
 				} satisfies IToolResultOutputDetails;
 				hasBuffers = true;
@@ -4110,20 +4110,20 @@ export namespace LanguageModelToolResult {
 }
 
 export namespace IconPath {
-	export function fromThemeIcon(iconPath: vscode.ThemeIcon): languages.IconPath {
+	export function fromThemeIcon(iconPath: zyraxoncode.ThemeIcon): languages.IconPath {
 		return iconPath;
 	}
 
 	/**
-	 * Converts a {@link vscode.IconPath} to an {@link extHostProtocol.IconPathDto}.
+	 * Converts a {@link zyraxoncode.IconPath} to an {@link extHostProtocol.IconPathDto}.
 	 * @note This function will tolerate strings specified instead of URIs in IconPath for historical reasons.
 	 * Such strings are treated as file paths and converted using {@link URI.file} function, not {@link URI.from}.
-	 * See https://github.com/microsoft/vscode/issues/110432#issuecomment-726144556 for context.
+	 * See __ZYRAXKEEP__1_ for context.
 	 */
 	export function from(value: undefined): undefined;
-	export function from(value: vscode.IconPath): extHostProtocol.IconPathDto;
-	export function from(value: vscode.IconPath | undefined): extHostProtocol.IconPathDto | undefined;
-	export function from(value: vscode.IconPath | undefined): extHostProtocol.IconPathDto | undefined {
+	export function from(value: zyraxoncode.IconPath): extHostProtocol.IconPathDto;
+	export function from(value: zyraxoncode.IconPath | undefined): extHostProtocol.IconPathDto | undefined;
+	export function from(value: zyraxoncode.IconPath | undefined): extHostProtocol.IconPathDto | undefined {
 		if (!value) {
 			return undefined;
 		} else if (ThemeIcon.isThemeIcon(value)) {
@@ -4142,13 +4142,13 @@ export namespace IconPath {
 	}
 
 	/**
-	 * Converts a {@link extHostProtocol.IconPathDto} to a {@link vscode.IconPath}.
+	 * Converts a {@link extHostProtocol.IconPathDto} to a {@link zyraxoncode.IconPath}.
 	 * @note This is a strict conversion and we assume types are correct in this case.
 	 */
 	export function to(value: undefined): undefined;
-	export function to(value: extHostProtocol.IconPathDto): vscode.IconPath;
-	export function to(value: extHostProtocol.IconPathDto | undefined): vscode.IconPath | undefined;
-	export function to(value: extHostProtocol.IconPathDto | undefined): vscode.IconPath | undefined {
+	export function to(value: extHostProtocol.IconPathDto): zyraxoncode.IconPath;
+	export function to(value: extHostProtocol.IconPathDto | undefined): zyraxoncode.IconPath | undefined;
+	export function to(value: extHostProtocol.IconPathDto | undefined): zyraxoncode.IconPath | undefined {
 		if (!value) {
 			return undefined;
 		} else if (ThemeIcon.isThemeIcon(value)) {
@@ -4166,7 +4166,7 @@ export namespace IconPath {
 }
 
 export namespace AiSettingsSearch {
-	export function fromSettingsSearchResult(result: vscode.SettingsSearchResult): AiSettingsSearchResult {
+	export function fromSettingsSearchResult(result: zyraxoncode.SettingsSearchResult): AiSettingsSearchResult {
 		return {
 			query: result.query,
 			kind: fromSettingsSearchResultKind(result.kind),
@@ -4189,20 +4189,20 @@ export namespace AiSettingsSearch {
 }
 
 export namespace McpServerDefinition {
-	function isHttpConfig(candidate: vscode.McpServerDefinition): candidate is vscode.McpHttpServerDefinition {
-		return !!(candidate as vscode.McpHttpServerDefinition).uri;
+	function isHttpConfig(candidate: zyraxoncode.McpServerDefinition): candidate is zyraxoncode.McpHttpServerDefinition {
+		return !!(candidate as zyraxoncode.McpHttpServerDefinition).uri;
 	}
 
-	export function from(item: vscode.McpServerDefinition): McpServerLaunch.Serialized {
+	export function from(item: zyraxoncode.McpServerDefinition): McpServerLaunch.Serialized {
 		return McpServerLaunch.toSerialized(
 			isHttpConfig(item)
 				? {
 					type: McpServerTransportType.HTTP,
 					uri: item.uri,
 					headers: Object.entries(item.headers),
-					authentication: (item as vscode.McpHttpServerDefinition2).authentication ? {
-						providerId: (item as vscode.McpHttpServerDefinition2).authentication!.providerId,
-						scopes: (item as vscode.McpHttpServerDefinition2).authentication!.scopes
+					authentication: (item as zyraxoncode.McpHttpServerDefinition2).authentication ? {
+						providerId: (item as zyraxoncode.McpHttpServerDefinition2).authentication!.providerId,
+						scopes: (item as zyraxoncode.McpHttpServerDefinition2).authentication!.scopes
 					} : undefined,
 				}
 				: {
@@ -4218,7 +4218,7 @@ export namespace McpServerDefinition {
 	}
 
 	/** Converts from the IPC DTO to the API type. */
-	export function to(dto: McpServerDefinitionType.Serialized): vscode.McpServerDefinition {
+	export function to(dto: McpServerDefinitionType.Serialized): zyraxoncode.McpServerDefinition {
 		const launch = McpServerLaunch.fromSerialized(dto.launch);
 		if (launch.type === McpServerTransportType.HTTP) {
 			return new types.McpHttpServerDefinition(
@@ -4259,13 +4259,13 @@ export namespace SourceControlInputBoxValidationType {
 }
 
 export namespace ChatRequestHooksConverter {
-	export function to(hooks: ChatRequestHooks): vscode.ChatRequestHooks {
-		const result: Record<string, vscode.ChatHookCommand[]> = {};
+	export function to(hooks: ChatRequestHooks): zyraxoncode.ChatRequestHooks {
+		const result: Record<string, zyraxoncode.ChatHookCommand[]> = {};
 		for (const [hookType, commands] of Object.entries(hooks)) {
 			if (!commands || commands.length === 0) {
 				continue;
 			}
-			const converted: vscode.ChatHookCommand[] = [];
+			const converted: zyraxoncode.ChatHookCommand[] = [];
 			for (const cmd of commands) {
 				const resolved = ChatHookCommand.to(cmd);
 				if (resolved) {
@@ -4281,7 +4281,7 @@ export namespace ChatRequestHooksConverter {
 }
 
 export namespace ChatHookCommand {
-	export function to(hook: IParsedHookCommand): vscode.ChatHookCommand | undefined {
+	export function to(hook: IParsedHookCommand): zyraxoncode.ChatHookCommand | undefined {
 		const command = resolveEffectiveCommand(hook, OS);
 		if (!command) {
 			return undefined;
@@ -4297,26 +4297,26 @@ export namespace ChatHookCommand {
 
 export namespace ChatSessionItem {
 
-	function convertStatus(status: vscode.ChatSessionStatus | undefined): ChatSessionStatus | undefined {
+	function convertStatus(status: zyraxoncode.ChatSessionStatus | undefined): ChatSessionStatus | undefined {
 		if (status === undefined) {
 			return undefined;
 		}
 
 		switch (status) {
-			case 0: // vscode.ChatSessionStatus.Failed
+			case 0: // zyraxoncode.ChatSessionStatus.Failed
 				return ChatSessionStatus.Failed;
-			case 1: // vscode.ChatSessionStatus.Completed
+			case 1: // zyraxoncode.ChatSessionStatus.Completed
 				return ChatSessionStatus.Completed;
-			case 2: // vscode.ChatSessionStatus.InProgress
+			case 2: // zyraxoncode.ChatSessionStatus.InProgress
 				return ChatSessionStatus.InProgress;
-			case 3: // vscode.ChatSessionStatus.NeedsInput
+			case 3: // zyraxoncode.ChatSessionStatus.NeedsInput
 				return ChatSessionStatus.NeedsInput;
 			default:
 				return undefined;
 		}
 	}
 
-	export function from(sessionContent: vscode.ChatSessionItem): Dto<IChatSessionItem> {
+	export function from(sessionContent: zyraxoncode.ChatSessionItem): Dto<IChatSessionItem> {
 		// Support both new (created, lastRequestStarted, lastRequestEnded) and old (startTime, endTime) timing properties
 		const timing = sessionContent.timing;
 		const created = timing?.created ?? timing?.startTime ?? 0;

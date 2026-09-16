@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import ingestUtils = require('@github/blackbird-external-ingest-utils');
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import crypto from 'crypto';
-import { CancellationToken } from 'vscode-languageserver-protocol';
+import { CancellationToken } from 'zyraxoncode-languageserver-protocol';
 import { toErrorMessage } from '../../../../util/common/errorMessage';
 import { Result } from '../../../../util/common/result';
 import { CallTracker } from '../../../../util/common/telemetryCorrelationId';
@@ -99,7 +99,7 @@ interface CodedSymbolRange {
 
 export class ExternalIngestClient extends Disposable implements IExternalIngestClient {
 	private static readonly PROMISE_POOL_SIZE = 64;
-	private static baseUrl = 'https://api.github.com';
+	private static baseUrl = '__ZYRAXKEEP__0_';
 
 	private readonly _ingestFilter = new ingestUtils.IngestFilter();
 

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Position, TestItem, Uri } from 'vscode';
+import type { Position, TestItem, Uri } from 'zyraxoncode';
 import { Event } from '../../../util/vs/base/common/event';
 import { ITestFailure, ITestProvider } from './testProvider';
 

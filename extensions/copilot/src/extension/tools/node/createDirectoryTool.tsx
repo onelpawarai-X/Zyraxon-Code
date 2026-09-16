@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
 import { createFencedCodeBlock } from '../../../util/common/markdown';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../zyraxoncodeTypes';
 import { ToolName } from '../common/toolNames';
 import { ICopilotTool, ToolRegistry } from '../common/toolsRegistry';
 import { formatUriForFileWidget } from '../common/toolUtils';
@@ -29,7 +29,7 @@ export class CreateDirectoryTool implements ICopilotTool<ICreateDirectoryParams>
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<ICreateDirectoryParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<ICreateDirectoryParams>, token: zyraxoncode.CancellationToken) {
 		const uri = this.promptPathRepresentationService.resolveFilePath(options.input.dirPath);
 		if (!uri) {
 			throw new Error(`Invalid directory path`);
@@ -44,7 +44,7 @@ export class CreateDirectoryTool implements ICopilotTool<ICreateDirectoryParams>
 		]);
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<ICreateDirectoryParams>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<ICreateDirectoryParams>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation> {
 		const uri = resolveToolInputPath(options.input.dirPath, this.promptPathRepresentationService);
 
 		const confirmation = await this.instantiationService.invokeFunction(

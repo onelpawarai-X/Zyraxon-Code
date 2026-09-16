@@ -619,7 +619,7 @@ stages:
               - job: ApproveRelease
                 displayName: "Approve Release"
                 variables:
-                  - group: VSCodePeerApproval
+                  - group: ZyraxonCodePeerApproval
                   - name: skipComponentGovernanceDetection
                     value: true
 

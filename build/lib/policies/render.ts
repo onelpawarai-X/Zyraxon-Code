@@ -54,7 +54,7 @@ export function renderADMX(regKey: string, versions: string[], categories: Categ
 	return `<?xml version="1.0" encoding="utf-8"?>
 <policyDefinitions revision="1.1" schemaVersion="1.0">
 	<policyNamespaces>
-		<target prefix="${regKey}" namespace="Microsoft.Policies.${regKey}" />
+		<target prefix="${regKey}" namespace="Zyraxon.Policies.${regKey}" />
 	</policyNamespaces>
 	<resources minRequiredRevision="1.0" />
 	<supportedOn>

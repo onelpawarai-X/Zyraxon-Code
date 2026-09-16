@@ -188,7 +188,7 @@ export class PromptValidator {
 		}
 
 		// Validate variable references (tool or toolset names)
-		if (body.variableReferences.length && isVSCodeOrDefaultTarget(target)) {
+		if (body.variableReferences.length && isZyraxonCodeOrDefaultTarget(target)) {
 			const headerTools = promptAST.header?.tools;
 			const headerToolsMap = headerTools ? this.languageModelToolsService.toToolAndToolSetEnablementMap(headerTools, undefined) : undefined;
 
@@ -266,7 +266,7 @@ export class PromptValidator {
 				this.validateDisableModelInvocation(attributes, report);
 				this.validateTools(attributes, ChatModeKind.Agent, target, report);
 				this.validateHooks(attributes, target, report);
-				if (isVSCodeOrDefaultTarget(target)) {
+				if (isZyraxonCodeOrDefaultTarget(target)) {
 					this.validateModel(attributes, ChatModeKind.Agent, report);
 					this.validateHandoffs(attributes, report);
 					await this.validateAgentsAttribute(attributes, header, report);
@@ -306,9 +306,9 @@ export class PromptValidator {
 							// ignore for now as we don't have a full list of supported attributes for claude target
 						} else {
 							if (validGithubCopilotAttributeNames.value.has(attribute.key)) {
-								report(toMarker(localize('promptValidator.ignoredAttribute.vscode-agent', "Attribute '{0}' is ignored when running locally in ZYRAXON Code.", attribute.key), attribute.range, MarkerSeverity.Hint, [MarkerTag.Unnecessary]));
+								report(toMarker(localize('promptValidator.ignoredAttribute.zyraxoncode-agent', "Attribute '{0}' is ignored when running locally in ZYRAXON Code.", attribute.key), attribute.range, MarkerSeverity.Hint, [MarkerTag.Unnecessary]));
 							} else {
-								report(toMarker(localize('promptValidator.unknownAttribute.vscode-agent', "Attribute '{0}' is not supported in ZYRAXON Code agent files. Supported: {1}.", attribute.key, supportedNames.value), attribute.range, MarkerSeverity.Hint, [MarkerTag.Unnecessary]));
+								report(toMarker(localize('promptValidator.unknownAttribute.zyraxoncode-agent', "Attribute '{0}' is not supported in ZYRAXON Code agent files. Supported: {1}.", attribute.key, supportedNames.value), attribute.range, MarkerSeverity.Hint, [MarkerTag.Unnecessary]));
 							}
 						}
 						break;
@@ -522,11 +522,11 @@ export class PromptValidator {
 		if (target === Target.GitHubCopilot || target === Target.Claude) {
 			// no validation for github-copilot target and claude
 		} else {
-			this.validateVSCodeTools(value, report);
+			this.validateZyraxonCodeTools(value, report);
 		}
 	}
 
-	private validateVSCodeTools(valueItem: ISequenceValue, report: (markers: IMarkerData) => void) {
+	private validateZyraxonCodeTools(valueItem: ISequenceValue, report: (markers: IMarkerData) => void) {
 		if (valueItem.items.length > 0) {
 			const available = new Set<string>(this.languageModelToolsService.getFullReferenceNames());
 			const deprecatedNames = this.languageModelToolsService.getDeprecatedFullReferenceNames();
@@ -932,7 +932,7 @@ export class PromptValidator {
 			report(toMarker(localize('promptValidator.targetMustBeNonEmpty', "The 'target' attribute must be a non-empty string."), attribute.value.range, MarkerSeverity.Error));
 			return;
 		}
-		const validTargets = ['github-copilot', 'vscode'];
+		const validTargets = ['github-copilot', 'zyraxoncode'];
 		if (!validTargets.includes(targetValue)) {
 			report(toMarker(localize('promptValidator.targetInvalidValue', "The 'target' attribute must be one of: {0}.", validTargets.join(', ')), attribute.value.range, MarkerSeverity.Error));
 		}
@@ -1138,7 +1138,7 @@ export function getAttributeDescription(attributeName: string, promptType: Promp
 				case PromptHeaderAttributes.handOffs:
 					return localize('promptHeader.agent.handoffs', 'Possible handoff actions when the agent has completed its task.');
 				case PromptHeaderAttributes.target:
-					return localize('promptHeader.agent.target', 'The target to which the header attributes like tools apply to. Possible values are `github-copilot` and `vscode`.');
+					return localize('promptHeader.agent.target', 'The target to which the header attributes like tools apply to. Possible values are `github-copilot` and `zyraxoncode`.');
 				case PromptHeaderAttributes.infer:
 					return localize('promptHeader.agent.infer', 'Controls visibility of the agent.');
 				case PromptHeaderAttributes.agents:
@@ -1201,7 +1201,7 @@ export const knownClaudeTools = [
 	{ name: 'Skill', description: localize('claude.skill', 'Execute skills'), toolEquivalent: [] },
 	{ name: 'LSP', description: localize('claude.lsp', 'Code intelligence (requires plugin)'), toolEquivalent: [] },
 	{ name: 'NotebookEdit', description: localize('claude.notebookEdit', 'Modify Jupyter notebooks'), toolEquivalent: ['edit/editNotebook'] },
-	{ name: 'AskUserQuestion', description: localize('claude.askUserQuestion', 'Ask multiple-choice questions'), toolEquivalent: ['vscode/askQuestions'] },
+	{ name: 'AskUserQuestion', description: localize('claude.askUserQuestion', 'Ask multiple-choice questions'), toolEquivalent: ['zyraxoncode/askQuestions'] },
 	{ name: 'MCPSearch', description: localize('claude.mcpSearch', 'Searches for MCP tools when tool search is enabled'), toolEquivalent: [] }
 ];
 
@@ -1316,8 +1316,8 @@ export const claudeRulesAttributes: Record<string, { type: string; description: 
 	},
 };
 
-export function isVSCodeOrDefaultTarget(target: Target): boolean {
-	return target === Target.VSCode || target === Target.Undefined;
+export function isZyraxonCodeOrDefaultTarget(target: Target): boolean {
+	return target === Target.ZyraxonCode || target === Target.Undefined;
 }
 
 export function getTarget(promptType: PromptsType, header: PromptHeader | URI): Target {
@@ -1329,7 +1329,7 @@ export function getTarget(promptType: PromptsType, header: PromptHeader | URI): 
 		}
 		if (!(header instanceof URI)) {
 			const target = header.target;
-			if (target === Target.GitHubCopilot || target === Target.VSCode) {
+			if (target === Target.GitHubCopilot || target === Target.ZyraxonCode) {
 				return target;
 			}
 		}

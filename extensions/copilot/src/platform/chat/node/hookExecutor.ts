@@ -5,7 +5,7 @@
 
 import { spawn } from 'child_process';
 import { homedir } from 'os';
-import type { CancellationToken, ChatHookCommand, Uri } from 'vscode';
+import type { CancellationToken, ChatHookCommand, Uri } from 'zyraxoncode';
 import { join, win32 } from '../../../util/vs/base/common/path';
 import { isWindows } from '../../../util/vs/base/common/platform';
 import { removeAnsiEscapeCodes } from '../../../util/vs/base/common/strings';
@@ -171,7 +171,7 @@ function isUriLike(value: unknown): value is Uri {
 }
 
 function uriToFsPath(uri: Uri): string {
-	// vscode.Uri has an fsPath getter
+	// zyraxoncode.Uri has an fsPath getter
 	if ('fsPath' in uri && typeof uri.fsPath === 'string') {
 		return uri.fsPath;
 	}

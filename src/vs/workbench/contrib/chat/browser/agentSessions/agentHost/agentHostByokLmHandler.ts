@@ -30,7 +30,7 @@ import {
 
 const STATEFUL_MARKER_MIME_TYPE = 'stateful_marker';
 const USAGE_MIME_TYPE = 'usage';
-const REASONING_METADATA_PREFIX = 'vscode-reasoning-metadata:';
+const REASONING_METADATA_PREFIX = 'zyraxoncode-reasoning-metadata:';
 
 /**
  * Renderer-side {@link IAgentHostByokLmHandler}. Services BYOK chat requests
@@ -309,7 +309,7 @@ export class AgentHostByokLmHandler extends Disposable implements IAgentHostByok
 	}
 
 	private _appendReasoningOutput(output: IByokLmOutputItem[], part: Extract<IChatMessagePart, { type: 'thinking' }>): void {
-		if (part.metadata?.vscode_reasoning_done === true) {
+		if (part.metadata?.zyraxoncode_reasoning_done === true) {
 			return;
 		}
 		const summary = Array.isArray(part.value) ? part.value : [part.value];

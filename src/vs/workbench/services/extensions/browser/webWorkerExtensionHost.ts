@@ -151,8 +151,8 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 		iframe.setAttribute('aria-hidden', 'true');
 		iframe.style.display = 'none';
 
-		const vscodeWebWorkerExtHostId = generateUuid();
-		iframe.setAttribute('src', `${webWorkerExtensionHostIframeSrc}&vscodeWebWorkerExtHostId=${vscodeWebWorkerExtHostId}`);
+		const zyraxoncodeWebWorkerExtHostId = generateUuid();
+		iframe.setAttribute('src', `${webWorkerExtensionHostIframeSrc}&zyraxoncodeWebWorkerExtHostId=${zyraxoncodeWebWorkerExtHostId}`);
 
 		const barrier = new Barrier();
 		let port!: MessagePort;
@@ -183,7 +183,7 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 			if (event.source !== iframe.contentWindow) {
 				return;
 			}
-			if (event.data.vscodeWebWorkerExtHostId !== vscodeWebWorkerExtHostId) {
+			if (event.data.zyraxoncodeWebWorkerExtHostId !== zyraxoncodeWebWorkerExtHostId) {
 				return;
 			}
 			if (event.data.error) {
@@ -194,7 +194,7 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 				err.stack = stack;
 				return rejectBarrier(ExtensionHostExitCode.UnexpectedError, err);
 			}
-			if (event.data.type === 'vscode.bootstrap.nls') {
+			if (event.data.type === 'zyraxoncode.bootstrap.nls') {
 				iframe.contentWindow!.postMessage({
 					type: event.data.type,
 					data: {
@@ -230,7 +230,7 @@ export class WebWorkerExtensionHost extends Disposable implements IExtensionHost
 
 		// Send over message ports for extension API
 		const messagePorts = this._environmentService.options?.messagePorts ?? new Map();
-		iframe.contentWindow!.postMessage({ type: 'vscode.init', data: messagePorts }, '*', [...messagePorts.values()]);
+		iframe.contentWindow!.postMessage({ type: 'zyraxoncode.init', data: messagePorts }, '*', [...messagePorts.values()]);
 
 		port.onmessage = (event) => {
 			const { data } = event;

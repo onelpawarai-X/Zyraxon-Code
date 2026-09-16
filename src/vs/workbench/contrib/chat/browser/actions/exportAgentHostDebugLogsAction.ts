@@ -276,7 +276,7 @@ export async function exportAgentHostDebugLogs(
 		const saved = await exportService.save(logs.exportName, logs.files);
 		if (saved) {
 			notificationService.warn(chatEntitlementService.isInternal
-				? localize('exportDebugLogs.privacyWarning.internal', "Note: This log may contain personal information such as auth tokens, file contents, or terminal output. It MUST be shared privately via Slack or in an issue filed on the microsoft/vscode-internalbacklog repo.")
+				? localize('exportDebugLogs.privacyWarning.internal', "Note: This log may contain personal information such as auth tokens, file contents, or terminal output. It MUST be shared privately via Slack or in an issue filed on the zyraxon/zyraxoncode-internalbacklog repo.")
 				: localize('exportDebugLogs.privacyWarning', "Note: This log may contain personal information such as auth tokens, file contents, or terminal output. Please consider sharing privately or reviewing the contents carefully before sharing."));
 		}
 	} catch (error) {
@@ -289,7 +289,7 @@ export async function exportAgentHostDebugLogs(
 
 /**
  * Workbench-side action. Uses the last-focused chat widget's view model to
- * find the active Copilot CLI chat session. Suitable for vscode where the
+ * find the active Copilot CLI chat session. Suitable for zyraxoncode where the
  * agents-window-specific `ISessionsManagementService` is not present.
  */
 export class ExportAgentHostDebugLogsAction extends Action2 {

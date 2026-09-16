@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// This should be the only place that is allowed to import from @vscode/component-explorer
+// This should be the only place that is allowed to import from @zyraxoncode/component-explorer
 // eslint-disable-next-line local/code-import-patterns
-import { defineFixture, defineFixtureGroup, defineFixtureVariants } from '@vscode/component-explorer';
+import { defineFixture, defineFixtureGroup, defineFixtureVariants } from '@zyraxoncode/component-explorer';
 // eslint-disable-next-line local/code-import-patterns, local/code-amd-node-module
 import { z } from 'zod';
 import { DisposableStore, DisposableTracker, IDisposable, IReference, MutableDisposable, setDisposableTracker, toDisposable } from '../../../../base/common/lifecycle.js';
@@ -17,7 +17,7 @@ import '../../../browser/media/style.css';
 // Import auxiliaryBarPart.css here (before any contrib/chat CSS) so the cascade
 // matches the product: chat.css loads later and overrides the auxiliarybar
 // rules where applicable. Fixtures that wrap content in `.part.auxiliarybar`
-// rely on these rules to recolor inline editors with `--vscode-sideBar-background`.
+// rely on these rules to recolor inline editors with `--zyraxoncode-sideBar-background`.
 import '../../../browser/parts/auxiliarybar/media/auxiliaryBarPart.css';
 
 // Theme
@@ -287,11 +287,11 @@ const fixtureExtensionResourceLoaderService = new class implements IExtensionRes
 };
 
 function createBuiltInTheme(themePath: string, uiTheme: ThemeTypeSelector): ColorThemeData {
-	const location = URI.parse(`file://${themePath}`);
+	const location = URI.parse(`__ZYRAXKEEP__0_{themePath}`);
 	return ColorThemeData.fromExtensionTheme(
 		{ id: themePath, path: themePath, uiTheme, _watch: false },
 		location,
-		ExtensionData.fromName('vscode', 'theme-defaults', true)
+		ExtensionData.fromName('zyraxoncode', 'theme-defaults', true)
 	);
 }
 
@@ -592,7 +592,7 @@ export function createEditorServices(disposables: DisposableStore, options?: Cre
 		managedSettingsRawResponse: null,
 		getDefaultAccount: async () => null,
 		getDefaultAccountAuthenticationProvider: () => ({ id: 'test', name: 'Test', scopes: [], enterprise: false }),
-		resolveGitHubUrl: (path: string) => `https://github.com/${path}`,
+		resolveGitHubUrl: (path: string) => `__ZYRAXKEEP__1_{path}`,
 		setDefaultAccountProvider: () => { },
 		refresh: async () => null,
 		signIn: async () => null,

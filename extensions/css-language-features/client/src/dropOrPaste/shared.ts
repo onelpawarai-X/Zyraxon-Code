@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import { Utils } from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import { Utils } from 'zyraxoncode-uri';
 
 export const Schemes = Object.freeze({
 	file: 'file',
-	notebookCell: 'vscode-notebook-cell',
+	notebookCell: 'zyraxoncode-notebook-cell',
 	untitled: 'untitled',
 });
 
@@ -18,18 +18,18 @@ export const Mimes = Object.freeze({
 });
 
 
-export function getDocumentDir(uri: vscode.Uri): vscode.Uri | undefined {
+export function getDocumentDir(uri: zyraxoncode.Uri): zyraxoncode.Uri | undefined {
 	const docUri = getParentDocumentUri(uri);
 	if (docUri.scheme === Schemes.untitled) {
-		return vscode.workspace.workspaceFolders?.[0]?.uri;
+		return zyraxoncode.workspace.workspaceFolders?.[0]?.uri;
 	}
 	return Utils.dirname(docUri);
 }
 
-function getParentDocumentUri(uri: vscode.Uri): vscode.Uri {
+function getParentDocumentUri(uri: zyraxoncode.Uri): zyraxoncode.Uri {
 	if (uri.scheme === Schemes.notebookCell) {
 		// is notebook documents necessary?
-		for (const notebook of vscode.workspace.notebookDocuments) {
+		for (const notebook of zyraxoncode.workspace.notebookDocuments) {
 			for (const cell of notebook.getCells()) {
 				if (cell.document.uri.toString() === uri.toString()) {
 					return notebook.uri;

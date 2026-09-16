@@ -396,7 +396,7 @@ async function sleep(ms: number): Promise<void> {
 export function getGithubMetadataHeaders(callerInfo: CallTracker, envService: IEnvService): Record<string, string> | undefined {
 	const editorInfo = envService.getEditorInfo();
 
-	// Try converting vscode/1.xxx-insiders to vscode-insiders/1.xxx
+	// Try converting zyraxoncode/1.xxx-insiders to zyraxoncode-insiders/1.xxx
 	const versionNumberAndSubName = editorInfo.version.match(/^(?<version>.+?)(\-(?<subName>\w+?))?$/);
 	const application = versionNumberAndSubName && versionNumberAndSubName.groups?.subName
 		? `${editorInfo.name}-${versionNumberAndSubName.groups.subName}/${versionNumberAndSubName.groups.version}`

@@ -155,7 +155,7 @@ export class NativeWindow extends BaseWindow {
 		}
 
 		// Support `runAction` event
-		ipcRenderer.on('vscode:runAction', async (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:runAction', async (event: unknown, ...argsRaw: unknown[]) => {
 			const request = argsRaw[0] as INativeRunActionInWindowRequest;
 			const args: unknown[] = request.args || [];
 
@@ -188,7 +188,7 @@ export class NativeWindow extends BaseWindow {
 		});
 
 		// Support runKeybinding event
-		ipcRenderer.on('vscode:runKeybinding', (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:runKeybinding', (event: unknown, ...argsRaw: unknown[]) => {
 			const request = argsRaw[0] as INativeRunKeybindingInWindowRequest;
 			const activeElement = getActiveElement();
 			if (activeElement) {
@@ -197,7 +197,7 @@ export class NativeWindow extends BaseWindow {
 		});
 
 		// Shared Process crash reported from main
-		ipcRenderer.on('vscode:reportSharedProcessCrash', (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:reportSharedProcessCrash', (event: unknown, ...argsRaw: unknown[]) => {
 			this.notificationService.prompt(
 				Severity.Error,
 				localize('sharedProcessCrash', "A shared background process terminated unexpectedly. Please restart the application to recover."),
@@ -212,16 +212,16 @@ export class NativeWindow extends BaseWindow {
 		});
 
 		// Support openFiles event for existing and new files
-		ipcRenderer.on('vscode:openFiles', (event: unknown, ...argsRaw: unknown[]) => { this.onOpenFiles(argsRaw[0] as IOpenFileRequest); });
+		ipcRenderer.on('zyraxoncode:openFiles', (event: unknown, ...argsRaw: unknown[]) => { this.onOpenFiles(argsRaw[0] as IOpenFileRequest); });
 
 		// Support addRemoveFolders event for workspace management
-		ipcRenderer.on('vscode:addRemoveFolders', (event: unknown, ...argsRaw: unknown[]) => this.onAddRemoveFoldersRequest(argsRaw[0] as IAddRemoveFoldersRequest));
+		ipcRenderer.on('zyraxoncode:addRemoveFolders', (event: unknown, ...argsRaw: unknown[]) => this.onAddRemoveFoldersRequest(argsRaw[0] as IAddRemoveFoldersRequest));
 
 		// Message support
-		ipcRenderer.on('vscode:showInfoMessage', (event: unknown, ...argsRaw: unknown[]) => this.notificationService.info(argsRaw[0] as string));
+		ipcRenderer.on('zyraxoncode:showInfoMessage', (event: unknown, ...argsRaw: unknown[]) => this.notificationService.info(argsRaw[0] as string));
 
 		// Shell Environment Issue Notifications
-		ipcRenderer.on('vscode:showResolveShellEnvError', (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:showResolveShellEnvError', (event: unknown, ...argsRaw: unknown[]) => {
 			const message = argsRaw[0] as string;
 			this.notificationService.prompt(
 				Severity.Error,
@@ -236,24 +236,24 @@ export class NativeWindow extends BaseWindow {
 				},
 				{
 					label: localize('learnMore', "Learn More"),
-					run: () => this.openerService.open('https://go.microsoft.com/fwlink/?linkid=2149667')
+					run: () => this.openerService.open('__ZYRAXKEEP__0_')
 				}]
 			);
 		});
 
-		ipcRenderer.on('vscode:showCredentialsError', (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:showCredentialsError', (event: unknown, ...argsRaw: unknown[]) => {
 			const message = argsRaw[0] as string;
 			this.notificationService.prompt(
 				Severity.Error,
 				localize('keychainWriteError', "Writing login information to the keychain failed with error '{0}'.", message),
 				[{
 					label: localize('troubleshooting', "Troubleshooting Guide"),
-					run: () => this.openerService.open('https://go.microsoft.com/fwlink/?linkid=2190713')
+					run: () => this.openerService.open('__ZYRAXKEEP__1_')
 				}]
 			);
 		});
 
-		ipcRenderer.on('vscode:showTranslatedBuildWarning', () => {
+		ipcRenderer.on('zyraxoncode:showTranslatedBuildWarning', () => {
 			this.notificationService.prompt(
 				Severity.Warning,
 				localize("runningTranslated", "You are running an emulated version of {0}. For better performance download the native arm64 version of {0} build for your machine.", this.productService.nameLong),
@@ -261,8 +261,8 @@ export class NativeWindow extends BaseWindow {
 					label: localize('downloadArmBuild', "Download"),
 					run: () => {
 						const quality = this.productService.quality;
-						const stableURL = 'https://code.visualstudio.com/docs/?dv=osx';
-						const insidersURL = 'https://code.visualstudio.com/docs/?dv=osx&build=insiders';
+						const stableURL = '__ZYRAXKEEP__2_';
+						const insidersURL = '__ZYRAXKEEP__3_';
 						this.openerService.open(quality === 'stable' ? stableURL : insidersURL);
 					}
 				}],
@@ -272,7 +272,7 @@ export class NativeWindow extends BaseWindow {
 			);
 		});
 
-		ipcRenderer.on('vscode:showArgvParseWarning', () => {
+		ipcRenderer.on('zyraxoncode:showArgvParseWarning', () => {
 			this.notificationService.prompt(
 				Severity.Warning,
 				localize("showArgvParseWarning", "The runtime arguments file 'argv.json' contains errors. Please correct them and restart."),
@@ -287,11 +287,11 @@ export class NativeWindow extends BaseWindow {
 		});
 
 		// Fullscreen Events
-		ipcRenderer.on('vscode:enterFullScreen', () => setFullscreen(true, mainWindow));
-		ipcRenderer.on('vscode:leaveFullScreen', () => setFullscreen(false, mainWindow));
+		ipcRenderer.on('zyraxoncode:enterFullScreen', () => setFullscreen(true, mainWindow));
+		ipcRenderer.on('zyraxoncode:leaveFullScreen', () => setFullscreen(false, mainWindow));
 
 		// Proxy Login Dialog
-		ipcRenderer.on('vscode:openProxyAuthenticationDialog', async (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:openProxyAuthenticationDialog', async (event: unknown, ...argsRaw: unknown[]) => {
 			const payload = argsRaw[0] as { authInfo: AuthInfo; username?: string; password?: string; replyChannel: string };
 			const rememberCredentialsKey = 'window.rememberProxyCredentials';
 			const rememberCredentials = this.storageService.getBoolean(rememberCredentialsKey, StorageScope.APPLICATION);
@@ -334,13 +334,13 @@ export class NativeWindow extends BaseWindow {
 		});
 
 		// Accessibility support changed event
-		ipcRenderer.on('vscode:accessibilitySupportChanged', (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:accessibilitySupportChanged', (event: unknown, ...argsRaw: unknown[]) => {
 			const accessibilitySupportEnabled = argsRaw[0] as boolean;
 			this.accessibilityService.setAccessibilitySupport(accessibilitySupportEnabled ? AccessibilitySupport.Enabled : AccessibilitySupport.Disabled);
 		});
 
 		// Allow to update security settings around allowed UNC Host
-		ipcRenderer.on('vscode:configureAllowedUNCHost', async (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:configureAllowedUNCHost', async (event: unknown, ...argsRaw: unknown[]) => {
 			const host = argsRaw[0] as string;
 			if (!isWindows) {
 				return; // only supported on Windows
@@ -366,7 +366,7 @@ export class NativeWindow extends BaseWindow {
 		});
 
 		// Allow to update security settings around protocol handlers
-		ipcRenderer.on('vscode:disablePromptForProtocolHandling', (event: unknown, ...argsRaw: unknown[]) => {
+		ipcRenderer.on('zyraxoncode:disablePromptForProtocolHandling', (event: unknown, ...argsRaw: unknown[]) => {
 			const kind = argsRaw[0] as 'local' | 'remote';
 			const setting = kind === 'local' ? 'security.promptForLocalFileProtocolHandling' : 'security.promptForRemoteFileProtocolHandling';
 			this.configurationService.updateValue(setting, false);
@@ -460,7 +460,7 @@ export class NativeWindow extends BaseWindow {
 		this.nativeHostService.setRepresentedFilename(file?.fsPath ?? '', { targetWindowId });
 
 		// Custom title menu (main window only currently)
-		if (targetWindowId === mainWindow.vscodeWindowId) {
+		if (targetWindowId === mainWindow.zyraxoncodeWindowId) {
 			this.provideCustomTitleContextMenu(file?.fsPath);
 		}
 	}
@@ -771,7 +771,7 @@ export class NativeWindow extends BaseWindow {
 					message,
 					[{
 						label: localize('learnMore', "Learn More"),
-						run: () => this.openerService.open(URI.parse('https://aka.ms/vscode-faq-old-macOS'))
+						run: () => this.openerService.open(URI.parse('__ZYRAXKEEP__4_'))
 					}],
 					{
 						neverShowAgain: { id: 'macoseol', isSecondary: true, scope: NeverShowAgainScope.APPLICATION },
@@ -789,7 +789,7 @@ export class NativeWindow extends BaseWindow {
 			location: ProgressLocation.Window,
 			delay: 1600,
 			buttons: [localize('learnMore', "Learn More")]
-		}, () => shellEnv, () => this.openerService.open('https://go.microsoft.com/fwlink/?linkid=2149667'));
+		}, () => shellEnv, () => this.openerService.open('__ZYRAXKEEP__5_'));
 	}
 
 	async resolveExternalUri(uri: URI, options?: OpenOptions): Promise<IResolvedExternalUri | undefined> {
@@ -1106,7 +1106,7 @@ export class NativeWindow extends BaseWindow {
 		this.updateWindowZoomStatusEntry(targetWindowId);
 
 		// Notify main process about a custom zoom level
-		if (targetWindowId === mainWindow.vscodeWindowId) {
+		if (targetWindowId === mainWindow.zyraxoncodeWindowId) {
 			const currentWindowZoomLevel = getZoomLevel(mainWindow);
 
 			let notifyZoomLevel: number | undefined = undefined;
@@ -1114,7 +1114,7 @@ export class NativeWindow extends BaseWindow {
 				notifyZoomLevel = currentWindowZoomLevel;
 			}
 
-			ipcRenderer.invoke('vscode:notifyZoomLevel', notifyZoomLevel);
+			ipcRenderer.invoke('zyraxoncode:notifyZoomLevel', notifyZoomLevel);
 		}
 	}
 

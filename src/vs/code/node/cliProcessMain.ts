@@ -112,7 +112,7 @@ class CliMain extends Disposable {
 			this.registerErrorHandler(logService);
 
 			// DNS result order
-			// Refs https://github.com/microsoft/vscode/issues/264136
+			// Refs __ZYRAXKEEP__0_
 			setDefaultResultOrder('ipv4first');
 
 			// Run based on argv
@@ -175,7 +175,7 @@ class CliMain extends Disposable {
 
 		// Use FileUserDataProvider for user data to
 		// enable atomic read / write operations.
-		fileService.registerProvider(Schemas.vscodeUserData, new FileUserDataProvider(Schemas.file, diskFileSystemProvider, Schemas.vscodeUserData, userDataProfilesService, uriIdentityService, logService));
+		fileService.registerProvider(Schemas.zyraxoncodeUserData, new FileUserDataProvider(Schemas.file, diskFileSystemProvider, Schemas.zyraxoncodeUserData, userDataProfilesService, uriIdentityService, logService));
 
 		// Policy
 		let policyService: IPolicyService | undefined;

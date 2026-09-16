@@ -103,7 +103,7 @@ export const defaultAllowedAttrs = Object.freeze([
 ]);
 
 
-const fakeRelativeUrlProtocol = 'vscode-relative-path';
+const fakeRelativeUrlProtocol = 'zyraxoncode-relative-path';
 
 interface AllowedLinksConfig {
 	readonly override: readonly string[] | '*';
@@ -344,7 +344,7 @@ const replaceWithPlainTextHook: DomPurifyTypes.UponSanitizeElementHook = (node, 
 		const replacement = convertTagToPlaintext(node);
 		if (replacement) {
 			if (node.nodeType === Node.COMMENT_NODE) {
-				// Workaround for https://github.com/cure53/DOMPurify/issues/1005
+				// Workaround for __ZYRAXKEEP__0_
 				// The comment will be deleted in the next phase. However if we try to remove it now, it will cause
 				// an exception. Instead we insert the text node before the comment.
 				node.parentElement?.insertBefore(replacement, node);

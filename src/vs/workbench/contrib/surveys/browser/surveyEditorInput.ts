@@ -47,7 +47,7 @@ export class SurveyEditorInput extends EditorInput {
 	}
 
 	override get resource(): URI | undefined {
-		return URI.from({ scheme: 'vscode-survey', path: `/${this.survey.id}` });
+		return URI.from({ scheme: 'zyraxoncode-survey', path: `/${this.survey.id}` });
 	}
 
 	override getName(): string {

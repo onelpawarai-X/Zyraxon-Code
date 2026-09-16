@@ -3,26 +3,26 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { BinarySizeStatusBarEntry } from './binarySizeStatusBarEntry';
 import { MediaPreview, isGitLfsPointer, reopenAsText } from './mediaPreview';
 import { escapeAttribute } from './util/dom';
 import { generateUuid } from './util/uuid';
 
-class AudioPreviewProvider implements vscode.CustomReadonlyEditorProvider {
+class AudioPreviewProvider implements zyraxoncode.CustomReadonlyEditorProvider {
 
-	public static readonly viewType = 'vscode.audioPreview';
+	public static readonly viewType = 'zyraxoncode.audioPreview';
 
 	constructor(
-		private readonly extensionRoot: vscode.Uri,
+		private readonly extensionRoot: zyraxoncode.Uri,
 		private readonly binarySizeStatusBarEntry: BinarySizeStatusBarEntry,
 	) { }
 
-	public async openCustomDocument(uri: vscode.Uri) {
+	public async openCustomDocument(uri: zyraxoncode.Uri) {
 		return { uri, dispose: () => { } };
 	}
 
-	public async resolveCustomEditor(document: vscode.CustomDocument, webviewEditor: vscode.WebviewPanel): Promise<void> {
+	public async resolveCustomEditor(document: zyraxoncode.CustomDocument, webviewEditor: zyraxoncode.WebviewPanel): Promise<void> {
 		new AudioPreview(this.extensionRoot, document.uri, webviewEditor, this.binarySizeStatusBarEntry);
 	}
 }
@@ -31,9 +31,9 @@ class AudioPreviewProvider implements vscode.CustomReadonlyEditorProvider {
 class AudioPreview extends MediaPreview {
 
 	constructor(
-		private readonly extensionRoot: vscode.Uri,
-		resource: vscode.Uri,
-		webviewEditor: vscode.WebviewPanel,
+		private readonly extensionRoot: zyraxoncode.Uri,
+		resource: zyraxoncode.Uri,
+		webviewEditor: zyraxoncode.WebviewPanel,
 		binarySizeStatusBarEntry: BinarySizeStatusBarEntry,
 	) {
 		super(extensionRoot, resource, webviewEditor, binarySizeStatusBarEntry);
@@ -79,22 +79,22 @@ class AudioPreview extends MediaPreview {
 	<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data: ${cspSource}; media-src ${cspSource}; script-src 'nonce-${nonce}'; style-src ${cspSource} 'nonce-${nonce}';">
 	<meta id="settings" data-settings="${escapeAttribute(JSON.stringify(settings))}">
 </head>
-<body class="container loading" data-vscode-context='{ "preventDefaultContextMenuItems": true }'>
+<body class="container loading" data-zyraxoncode-context='{ "preventDefaultContextMenuItems": true }'>
 	<div class="loading-indicator"></div>
 	<div class="loading-error">
-		<p>${vscode.l10n.t("An error occurred while loading the audio file.")}</p>
-		<a href="#" class="open-file-link">${vscode.l10n.t("Open file using ZYRAXON Code's standard text/binary editor?")}</a>
+		<p>${zyraxoncode.l10n.t("An error occurred while loading the audio file.")}</p>
+		<a href="#" class="open-file-link">${zyraxoncode.l10n.t("Open file using ZYRAXON Code's standard text/binary editor?")}</a>
 	</div>
 	<div class="git-lfs-info">
-		<p>${vscode.l10n.t("The audio file is stored with Git LFS and is not available for preview.")}</p>
-		<a href="#" class="open-file-link">${vscode.l10n.t("Open file using ZYRAXON Code's standard text/binary editor?")}</a>
+		<p>${zyraxoncode.l10n.t("The audio file is stored with Git LFS and is not available for preview.")}</p>
+		<a href="#" class="open-file-link">${zyraxoncode.l10n.t("Open file using ZYRAXON Code's standard text/binary editor?")}</a>
 	</div>
 	<script src="${escapeAttribute(this.extensionResource('media', 'audioPreview.js'))}" nonce="${nonce}"></script>
 </body>
 </html>`;
 	}
 
-	private async getResourcePath(webviewEditor: vscode.WebviewPanel, resource: vscode.Uri, version: string): Promise<string | null> {
+	private async getResourcePath(webviewEditor: zyraxoncode.WebviewPanel, resource: zyraxoncode.Uri, version: string): Promise<string | null> {
 		if (await isGitLfsPointer(resource)) {
 			return null;
 		}
@@ -107,13 +107,13 @@ class AudioPreview extends MediaPreview {
 	}
 
 	private extensionResource(...parts: string[]) {
-		return this._webviewEditor.webview.asWebviewUri(vscode.Uri.joinPath(this.extensionRoot, ...parts));
+		return this._webviewEditor.webview.asWebviewUri(zyraxoncode.Uri.joinPath(this.extensionRoot, ...parts));
 	}
 }
 
-export function registerAudioPreviewSupport(context: vscode.ExtensionContext, binarySizeStatusBarEntry: BinarySizeStatusBarEntry): vscode.Disposable {
+export function registerAudioPreviewSupport(context: zyraxoncode.ExtensionContext, binarySizeStatusBarEntry: BinarySizeStatusBarEntry): zyraxoncode.Disposable {
 	const provider = new AudioPreviewProvider(context.extensionUri, binarySizeStatusBarEntry);
-	return vscode.window.registerCustomEditorProvider(AudioPreviewProvider.viewType, provider, {
+	return zyraxoncode.window.registerCustomEditorProvider(AudioPreviewProvider.viewType, provider, {
 		supportsMultipleEditorsPerDocument: true,
 		webviewOptions: {
 			retainContextWhenHidden: true,

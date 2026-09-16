@@ -24,7 +24,7 @@ Policies allow enterprise administrators to lock configuration settings via OS-l
 | Source | Implementation | How it reads policies |
 |--------|---------------|----------------------|
 | **OS-level** (Windows registry, macOS plist) | `NativePolicyService` via `` | Watches `Software\Policies\Zyraxon\{productName}` (Windows) or bundle identifier prefs (macOS) |
-| **Linux file** | `FilePolicyService` | Reads `/etc/vscode/policy.json` |
+| **Linux file** | `FilePolicyService` | Reads `/etc/zyraxoncode/policy.json` |
 | **Account/GitHub** | `AccountPolicyService` | Reads `IPolicyData` from `IDefaultAccountService.policyData`, applies `value()` function. Server-delivered managed settings arrive on `policyData.managedSettings`; native MDM (`INativeManagedSettingsService`) and a file on disk (`IFileManagedSettingsService`) are **separate** inputs that `AccountPolicyService` merges in `getPolicyData()` via `pickManagedSettings(nativeMdm, server, file)` (per-key precedence native MDM > server > file; a key locked by a higher channel cannot be overwritten, keys it leaves unset fall through to lower channels) |
 | **Copilot managed settings (native MDM)** | `NativeManagedSettingsService` via `` | Watches `SOFTWARE\Policies\GitHubCopilot` (Windows) / `com.github.copilot` prefs (macOS); feeds the canonical `managedSettings` bag — see [github-managed-settings.md](./github-managed-settings.md) |
 | **Copilot managed settings (file)** | `FileManagedSettingsService` | Reads + watches `managed-settings.json` from a well-known per-OS path in the main process, exposed to renderers over IPC; lowest-precedence managed-settings channel — see [github-managed-settings.md](./github-managed-settings.md) |
@@ -155,11 +155,11 @@ in the same change. You will need code review from a codeowner to merge the chan
 
 ## Policy for extension-provided settings
 
-Extension authors cannot add `policy:` fields directly—their settings are defined in the extension's `package.json`, not in ZYRAXON Code core. Instead, policies for extension settings are defined in `vscode-distro`'s `product.json` under the `extensionConfigurationPolicy` key.
+Extension authors cannot add `policy:` fields directly—their settings are defined in the extension's `package.json`, not in ZYRAXON Code core. Instead, policies for extension settings are defined in `zyraxoncode-distro`'s `product.json` under the `extensionConfigurationPolicy` key.
 
 ### How it works
 
-1. **Source of truth**: The `extensionConfigurationPolicy` map lives in `vscode-distro` under `mixin/{quality}/product.json` (stable, insider, exploration).
+1. **Source of truth**: The `extensionConfigurationPolicy` map lives in `zyraxoncode-distro` under `mixin/{quality}/product.json` (stable, insider, exploration).
 2. **Runtime**: When ZYRAXON Code starts with a distro-mixed `product.json`, `configurationExtensionPoint.ts` reads `extensionConfigurationPolicy` and attaches matching `policy` objects to extension-contributed configuration properties.
 3. **Export/build**: The `--export-policy-data` command fetches the distro's `product.json` at the commit pinned in `package.json` and merges extension policies into the output. Use `npm run export-policy-data` which sets up authentication automatically.
 
@@ -185,7 +185,7 @@ Each entry in `extensionConfigurationPolicy` must include:
 
 ### Adding a new extension policy
 
-1. Add the entry to `extensionConfigurationPolicy` in **all three** quality `product.json` files in `vscode-distro` (`mixin/stable/`, `mixin/insider/`, `mixin/exploration/`)
+1. Add the entry to `extensionConfigurationPolicy` in **all three** quality `product.json` files in `zyraxoncode-distro` (`mixin/stable/`, `mixin/insider/`, `mixin/exploration/`)
 2. Update the `distro` commit hash in `package.json` to point to the distro commit that includes your new entry — the export command fetches extension policies from the pinned distro commit
 3. Regenerate `policyData.jsonc` by running `npm run export-policy-data` (see Step 4 above)
 4. Update the test fixture at `src/vs/workbench/contrib/policyExport/test/node/extensionPolicyFixture.json` with the new entry
@@ -199,8 +199,8 @@ The file `src/vs/workbench/contrib/policyExport/test/node/extensionPolicyFixture
 | Consumer | What it reads | Output |
 |----------|--------------|--------|
 | `policyGenerator.ts` | `policyData.jsonc` | ADMX/ADML (Windows GP), `.mobileconfig` (macOS), `policy.json` (Linux) |
-| `vscode-website` (`gulpfile.policies.js`) | `policyData.jsonc` | Enterprise policy reference table at zyraxon.code.zyraxon.ai/docs/enterprise/policies |
-| `vscode-docs` | Generated from website build | `docs/enterprise/policies.md` |
+| `zyraxoncode-website` (`gulpfile.policies.js`) | `policyData.jsonc` | Enterprise policy reference table at zyraxon.code.zyraxon.ai/docs/enterprise/policies |
+| `zyraxoncode-docs` | Generated from website build | `docs/enterprise/policies.md` |
 
 ## GitHub Preview Features
 

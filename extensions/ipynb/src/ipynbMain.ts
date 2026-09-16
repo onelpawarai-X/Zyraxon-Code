@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { activate as keepNotebookModelStoreInSync } from './notebookModelStoreSync';
 import { notebookImagePasteSetup } from './notebookImagePaste';
 import { AttachmentCleaner } from './notebookAttachmentCleaner';
@@ -29,10 +29,10 @@ type NotebookMetadata = {
 	[propName: string]: unknown;
 };
 
-type OptionsWithCellContentMetadata = vscode.NotebookDocumentContentOptions & { cellContentMetadata: { attachments: boolean } };
+type OptionsWithCellContentMetadata = zyraxoncode.NotebookDocumentContentOptions & { cellContentMetadata: { attachments: boolean } };
 
 
-export function activate(context: vscode.ExtensionContext, serializer: vscode.NotebookSerializer) {
+export function activate(context: zyraxoncode.ExtensionContext, serializer: zyraxoncode.NotebookSerializer) {
 	keepNotebookModelStoreInSync(context);
 	const notebookSerializerOptions: OptionsWithCellContentMetadata = {
 		transientOutputs: false,
@@ -50,7 +50,7 @@ export function activate(context: vscode.ExtensionContext, serializer: vscode.No
 			attachments: true
 		}
 	};
-	context.subscriptions.push(vscode.workspace.registerNotebookSerializer('jupyter-notebook', serializer, notebookSerializerOptions));
+	context.subscriptions.push(zyraxoncode.workspace.registerNotebookSerializer('jupyter-notebook', serializer, notebookSerializerOptions));
 
 	const interactiveSerializeOptions: OptionsWithCellContentMetadata = {
 		transientOutputs: false,
@@ -64,47 +64,47 @@ export function activate(context: vscode.ExtensionContext, serializer: vscode.No
 			attachments: true
 		}
 	};
-	context.subscriptions.push(vscode.workspace.registerNotebookSerializer('interactive', serializer, interactiveSerializeOptions));
+	context.subscriptions.push(zyraxoncode.workspace.registerNotebookSerializer('interactive', serializer, interactiveSerializeOptions));
 
-	vscode.languages.registerCodeLensProvider({ pattern: '**/*.ipynb' }, {
+	zyraxoncode.languages.registerCodeLensProvider({ pattern: '**/*.ipynb' }, {
 		provideCodeLenses: (document) => {
 			if (
-				document.uri.scheme === 'vscode-notebook-cell' ||
-				document.uri.scheme === 'vscode-notebook-cell-metadata' ||
-				document.uri.scheme === 'vscode-notebook-cell-output'
+				document.uri.scheme === 'zyraxoncode-notebook-cell' ||
+				document.uri.scheme === 'zyraxoncode-notebook-cell-metadata' ||
+				document.uri.scheme === 'zyraxoncode-notebook-cell-output'
 			) {
 				return [];
 			}
-			const codelens = new vscode.CodeLens(new vscode.Range(0, 0, 0, 0), { title: 'Open in Notebook Editor', command: 'ipynb.openIpynbInNotebookEditor', arguments: [document.uri] });
+			const codelens = new zyraxoncode.CodeLens(new zyraxoncode.Range(0, 0, 0, 0), { title: 'Open in Notebook Editor', command: 'ipynb.openIpynbInNotebookEditor', arguments: [document.uri] });
 			return [codelens];
 		}
 	});
 
-	context.subscriptions.push(vscode.commands.registerCommand('ipynb.newUntitledIpynb', async () => {
+	context.subscriptions.push(zyraxoncode.commands.registerCommand('ipynb.newUntitledIpynb', async () => {
 		const language = 'python';
-		const cell = new vscode.NotebookCellData(vscode.NotebookCellKind.Code, '', language);
-		const data = new vscode.NotebookData([cell]);
+		const cell = new zyraxoncode.NotebookCellData(zyraxoncode.NotebookCellKind.Code, '', language);
+		const data = new zyraxoncode.NotebookData([cell]);
 		data.metadata = {
 			cells: [],
 			metadata: {},
 			nbformat: defaultNotebookFormat.major,
 			nbformat_minor: defaultNotebookFormat.minor,
 		};
-		const doc = await vscode.workspace.openNotebookDocument('jupyter-notebook', data);
-		await vscode.window.showNotebookDocument(doc);
+		const doc = await zyraxoncode.workspace.openNotebookDocument('jupyter-notebook', data);
+		await zyraxoncode.window.showNotebookDocument(doc);
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('ipynb.openIpynbInNotebookEditor', async (uri: vscode.Uri) => {
-		if (vscode.window.activeTextEditor?.document.uri.toString() === uri.toString()) {
-			await vscode.commands.executeCommand('workbench.action.closeActiveEditor');
+	context.subscriptions.push(zyraxoncode.commands.registerCommand('ipynb.openIpynbInNotebookEditor', async (uri: zyraxoncode.Uri) => {
+		if (zyraxoncode.window.activeTextEditor?.document.uri.toString() === uri.toString()) {
+			await zyraxoncode.commands.executeCommand('workbench.action.closeActiveEditor');
 		}
-		const document = await vscode.workspace.openNotebookDocument(uri);
-		await vscode.window.showNotebookDocument(document);
+		const document = await zyraxoncode.workspace.openNotebookDocument(uri);
+		await zyraxoncode.window.showNotebookDocument(document);
 	}));
 
 	context.subscriptions.push(notebookImagePasteSetup());
 
-	const enabled = vscode.workspace.getConfiguration('ipynb').get('pasteImagesAsAttachments.enabled', false);
+	const enabled = zyraxoncode.workspace.getConfiguration('ipynb').get('pasteImagesAsAttachments.enabled', false);
 	if (enabled) {
 		const cleaner = new AttachmentCleaner();
 		context.subscriptions.push(cleaner);
@@ -114,24 +114,24 @@ export function activate(context: vscode.ExtensionContext, serializer: vscode.No
 		get dropCustomMetadata() {
 			return true;
 		},
-		exportNotebook: (notebook: vscode.NotebookData): Promise<string> => {
+		exportNotebook: (notebook: zyraxoncode.NotebookData): Promise<string> => {
 			return Promise.resolve(serializeNotebookToString(notebook));
 		},
-		setNotebookMetadata: async (resource: vscode.Uri, metadata: Partial<NotebookMetadata>): Promise<boolean> => {
-			const document = vscode.workspace.notebookDocuments.find(doc => doc.uri.toString() === resource.toString());
+		setNotebookMetadata: async (resource: zyraxoncode.Uri, metadata: Partial<NotebookMetadata>): Promise<boolean> => {
+			const document = zyraxoncode.workspace.notebookDocuments.find(doc => doc.uri.toString() === resource.toString());
 			if (!document) {
 				return false;
 			}
 
-			const edit = new vscode.WorkspaceEdit();
-			edit.set(resource, [vscode.NotebookEdit.updateNotebookMetadata({
+			const edit = new zyraxoncode.WorkspaceEdit();
+			edit.set(resource, [zyraxoncode.NotebookEdit.updateNotebookMetadata({
 				...document.metadata,
 				metadata: {
 					...(document.metadata.metadata ?? {}),
 					...metadata
 				} satisfies NotebookMetadata,
 			})]);
-			return vscode.workspace.applyEdit(edit);
+			return zyraxoncode.workspace.applyEdit(edit);
 		},
 	};
 }

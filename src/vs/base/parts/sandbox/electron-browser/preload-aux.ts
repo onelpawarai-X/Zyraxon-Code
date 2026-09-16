@@ -8,7 +8,7 @@
 	const { ipcRenderer, webFrame, contextBridge } = require('electron');
 
 	function validateIPC(channel: string): true | never {
-		if (!channel?.startsWith('vscode:')) {
+		if (!channel?.startsWith('zyraxoncode:')) {
 			throw new Error(`Unsupported event IPC channel '${channel}'`);
 		}
 
@@ -50,7 +50,7 @@
 	};
 
 	try {
-		contextBridge.exposeInMainWorld('vscode', globals);
+		contextBridge.exposeInMainWorld('zyraxoncode', globals);
 	} catch (error) {
 		console.error(error);
 	}

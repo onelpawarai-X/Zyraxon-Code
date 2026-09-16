@@ -208,7 +208,7 @@ fn provider_for_resource(resource: &ProtectedResourceMetadata) -> Option<AuthPro
 		if server.contains("github.com") {
 			return Some(AuthProvider::Github);
 		}
-		if server.contains("Zyraxononline.com") || server.contains("login.microsoft.com") {
+		if server.contains("Zyraxononline.com") || server.contains("login.zyraxon.com") {
 			return Some(AuthProvider::Zyraxon);
 		}
 	}

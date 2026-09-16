@@ -12,8 +12,8 @@
 	-webkit-user-select: text;
 	word-break: break-all;
 	white-space: pre;
-	border-radius: var(--vscode-cornerRadius-large);
-	box-shadow: var(--vscode-shadow-lg);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	box-shadow: var(--zyraxoncode-shadow-lg);
 }
 
 .monaco-editor .debug-hover-widget .complex-value {

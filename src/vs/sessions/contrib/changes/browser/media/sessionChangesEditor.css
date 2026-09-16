@@ -7,8 +7,8 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	background: var(--vscode-editor-background);
-	color: var(--vscode-agentsPanel-foreground);
+	background: var(--zyraxoncode-editor-background);
+	color: var(--zyraxoncode-agentsPanel-foreground);
 }
 
 .session-changes-editor-header {
@@ -18,8 +18,8 @@
 	height: 35px;
 	min-height: 35px;
 	min-width: 0;
-	padding: 0 var(--vscode-spacing-size80);
-	gap: var(--vscode-spacing-size80);
+	padding: 0 var(--zyraxoncode-spacing-size80);
+	gap: var(--zyraxoncode-spacing-size80);
 }
 
 .session-changes-editor-header-left,
@@ -32,7 +32,7 @@
 
 .session-changes-editor-header-left {
 	flex: 1 1 auto;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 }
 
 .session-changes-editor-header-left > .monaco-toolbar,
@@ -58,7 +58,7 @@
 }
 
 .session-changes-editor-header-left .action-label {
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	align-items: center;
 	min-width: 0;
 	max-width: 100%;
@@ -68,8 +68,8 @@
 	}
 
 	> .codicon {
-		font-size: var(--vscode-codiconFontSize-compact) !important;
-		padding-left: var(--vscode-spacing-size40);
+		font-size: var(--zyraxoncode-codiconFontSize-compact) !important;
+		padding-left: var(--zyraxoncode-spacing-size40);
 		width: 12px;
 		height: 12px;
 		flex-shrink: 0;
@@ -89,15 +89,15 @@
 .changes-diff-stats-action-rich .action-label {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	max-width: 100%;
 	min-width: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	padding: 3px;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 /* Reset the picker-chevron overrides so the diff-stats icon/labels lay out via `gap`. */
@@ -107,7 +107,7 @@
 }
 
 .changes-diff-stats-action-rich .action-label > .codicon {
-	font-size: var(--vscode-codiconFontSize-compact) !important;
+	font-size: var(--zyraxoncode-codiconFontSize-compact) !important;
 	padding-left: 0;
 	width: auto;
 	height: auto;
@@ -123,12 +123,12 @@
 }
 
 .changes-diff-stats-action-rich .working-set-lines-added {
-	color: var(--vscode-chat-linesAddedForeground);
+	color: var(--zyraxoncode-chat-linesAddedForeground);
 	flex-shrink: 0;
 }
 
 .changes-diff-stats-action-rich .working-set-lines-removed {
-	color: var(--vscode-chat-linesRemovedForeground);
+	color: var(--zyraxoncode-chat-linesRemovedForeground);
 	flex-shrink: 0;
 }
 
@@ -138,10 +138,10 @@
 .changes-picker-action-rich .action-label {
 	display: inline-flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
 	max-width: 100%;
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 }
 
 .changes-picker-action-rich .action-label > span:not(.codicon) {
@@ -152,7 +152,7 @@
 }
 
 .changes-picker-action-rich .action-label > .codicon {
-	font-size: var(--vscode-codiconFontSize-compact) !important;
+	font-size: var(--zyraxoncode-codiconFontSize-compact) !important;
 	width: auto;
 	height: auto;
 	padding-left: 0;
@@ -167,7 +167,7 @@
 	flex-wrap: nowrap;
 	align-items: center;
 	justify-content: flex-end;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 }
 
 .session-changes-editor-header-right .monaco-button,
@@ -179,9 +179,9 @@
 
 .session-changes-editor-header-right .monaco-button {
 	height: 26px;
-	padding: var(--vscode-spacing-size40) var(--vscode-spacing-size80);
+	padding: var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-size80);
 	box-sizing: border-box;
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	line-height: 18px;
 	white-space: nowrap;
 }
@@ -222,15 +222,15 @@
 
 .session-changes-editor-header-right .monaco-button-dropdown > .monaco-button.monaco-dropdown-button {
 	flex: 0 0 auto;
-	padding: var(--vscode-spacing-size40);
+	padding: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
-	border-radius: 0 var(--vscode-cornerRadius-small) var(--vscode-cornerRadius-small) 0;
+	border-radius: 0 var(--zyraxoncode-cornerRadius-small) var(--zyraxoncode-cornerRadius-small) 0;
 }
 
 .session-changes-editor-header-right .monaco-button.secondary.monaco-text-button.codicon {
 	flex: 0 0 auto;
-	padding: var(--vscode-spacing-size20) var(--vscode-spacing-size60);
-	font-size: var(--vscode-codiconFontSize) !important;
+	padding: var(--zyraxoncode-spacing-size20) var(--zyraxoncode-spacing-size60);
+	font-size: var(--zyraxoncode-codiconFontSize) !important;
 }
 
 /* Compact the ChangesActionsBar buttons to 24px (2px shorter than the classic
@@ -254,11 +254,11 @@
 .monaco-action-bar .action-item.changes-actions-bar {
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 	min-width: 0;
 	/* Small breathing room so the button isn't flush against neighbouring toolbar icons. */
-	margin-left: var(--vscode-spacing-size20);
-	margin-right: var(--vscode-spacing-size20);
+	margin-left: var(--zyraxoncode-spacing-size20);
+	margin-right: var(--zyraxoncode-spacing-size20);
 }
 
 /* Normalize the button bar height so it sits comfortably in the editor tabs title. Overrides the
@@ -307,7 +307,7 @@
 	width: auto;
 	height: 24px;
 	flex-shrink: 0;
-	color: var(--vscode-button-foreground) !important;
+	color: var(--zyraxoncode-button-foreground) !important;
 }
 
 .session-changes-editor-body {

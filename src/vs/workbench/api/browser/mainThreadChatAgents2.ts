@@ -371,12 +371,12 @@ export class MainThreadChatAgents2 extends Disposable implements MainThreadChatA
 					// Suppress expected operational errors (rate limiting, quota exceeded, and other
 					// user-actionable conditions flagged via `isExpectedError`) from error telemetry
 					// to avoid noise in error reporting.
-					// See https://github.com/microsoft/vscode/issues/311582 (rate-limited precedent),
-					// https://github.com/microsoft/vscode/issues/311583 (spawn git ENOENT),
-					// https://github.com/microsoft/vscode/issues/311584 (network connectivity),
-					// https://github.com/microsoft/vscode/issues/311585 (EPERM/permission errors),
-					// https://github.com/microsoft/vscode/issues/311586 (UNC host access),
-					// https://github.com/microsoft/vscode/issues/311587 (cloud agent not enabled).
+					// See __ZYRAXKEEP__0_ (rate-limited precedent),
+					// __ZYRAXKEEP__1_ (spawn git ENOENT),
+					// __ZYRAXKEEP__2_ (network connectivity),
+					// __ZYRAXKEEP__3_ (EPERM/permission errors),
+					// __ZYRAXKEEP__4_ (UNC host access),
+					// __ZYRAXKEEP__5_ (cloud agent not enabled).
 					if (rpcResult?.errorCallstack && !rpcResult.errorDetails?.isRateLimited && !rpcResult.errorDetails?.isQuotaExceeded && !rpcResult.errorDetails?.isExpectedError) {
 						type ChatAgentErrorEvent = { callstack: string; msg: string; errorName: string; agent: string; agentExtensionId: string };
 						type ChatAgentErrorClassification = {
@@ -635,7 +635,7 @@ export class MainThreadChatAgents2 extends Disposable implements MainThreadChatA
 		};
 		this._agentIdsToCompletionProviders.set(id, this._chatAgentService.registerAgentCompletionProvider(id, provide));
 
-		this._agentCompletionProviders.set(handle, this._languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._agentCompletionProviders.set(handle, this._languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'chatAgentCompletions:' + handle,
 			triggerCharacters,
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, token: CancellationToken) => {

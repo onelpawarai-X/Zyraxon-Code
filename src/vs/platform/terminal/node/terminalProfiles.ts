@@ -132,7 +132,7 @@ async function detectAvailableWindowsProfiles(
 			icon: Codicon.terminalBash,
 			isAutoDetected: true
 		});
-		const cmderPath = `${process.env['CMDER_ROOT'] || `${process.env['HOMEDRIVE']}\\cmder`}\\vendor\\bin\\vscode_init.cmd`;
+		const cmderPath = `${process.env['CMDER_ROOT'] || `${process.env['HOMEDRIVE']}\\cmder`}\\vendor\\bin\\zyraxoncode_init.cmd`;
 		detectedProfiles.set('Cmder', {
 			path: `${system32Path}\\cmd.exe`,
 			args: ['/K', cmderPath],
@@ -348,7 +348,7 @@ async function getWslProfiles(wslPath: string, defaultProfileName: string | unde
 	const profiles: ITerminalProfile[] = [];
 	const distroOutput = await new Promise<string>((resolve, reject) => {
 		// wsl.exe output is encoded in utf16le (ie. A -> 0x4100) by default, force it in case the
-		// user changed https://github.com/microsoft/vscode/issues/276253
+		// user changed __ZYRAXKEEP__0_
 		cp.exec('wsl.exe -l -q', { encoding: 'utf16le', env: { ...process.env, WSL_UTF8: '0' }, timeout: 1000 }, (err, stdout) => {
 			if (err) {
 				return reject('Problem occurred when getting wsl distros');

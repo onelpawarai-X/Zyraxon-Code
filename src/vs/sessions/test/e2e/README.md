@@ -2,7 +2,7 @@
 
 Automated dogfooding tests for the Agent Sessions window using a
 **compile-and-replay** architecture powered by
-[`playwright-cli`](https://github.com/microsoft/playwright-cli) and Copilot CLI.
+[`playwright-cli`](__ZYRAXKEEP__0_) and Copilot CLI.
 
 ## Mocking Architecture
 
@@ -77,7 +77,7 @@ The `mock-fs://` `InMemoryFileSystemProvider` is registered directly on
 the mock extension. This is critical because several workbench services
 (SnippetsService, AgenticPromptFilesLocator, MCP, etc.) try to resolve files
 in the workspace folder **before** the extension host activates. If the
-provider were only registered via `vscode.workspace.registerFileSystemProvider()`
+provider were only registered via `zyraxoncode.workspace.registerFileSystemProvider()`
 in the extension, these services would see `ENOPRO: No file system provider`
 errors and fail silently.
 
@@ -98,7 +98,7 @@ Mock edits target files that exist in the `mock-fs://` file store so the
 
 ### Mock Workspace Folder
 
-The workspace folder URI is `mock-fs://mock-repo/mock-repo`. The path
+The workspace folder URI is `__ZYRAXKEEP__1_`. The path
 `/mock-repo` (not root `/`) is used so that `basename(folderUri)` returns
 `"mock-repo"` — this is what the folder picker displays. All mock files are
 stored under this path in the in-memory file store.

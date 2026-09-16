@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ModelOperations, ModelResult } from '@vscode/vscode-languagedetection';
+import type { ModelOperations, ModelResult } from '@zyraxoncode/zyraxoncode-languagedetection';
 import { importAMDNodeModule } from '../../../../amdX.js';
 import { StopWatch } from '../../../../base/common/stopwatch.js';
 import { IWebWorkerServerRequestHandler, IWebWorkerServer } from '../../../../base/common/worker/webWorker.js';
@@ -144,7 +144,7 @@ export class LanguageDetectionWorker implements ILanguageDetectionWorker {
 		}
 
 		const uri: string = await this._host.$getIndexJsUri();
-		const { ModelOperations } = await importAMDNodeModule(uri, '') as typeof import('@vscode/vscode-languagedetection');
+		const { ModelOperations } = await importAMDNodeModule(uri, '') as typeof import('@zyraxoncode/zyraxoncode-languagedetection');
 		this._modelOperations = new ModelOperations({
 			modelJsonLoaderFunc: async () => {
 				const response = await fetch(await this._host.$getModelJsonUri());

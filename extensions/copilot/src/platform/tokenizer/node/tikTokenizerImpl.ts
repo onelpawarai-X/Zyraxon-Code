@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { createTokenizer, getRegexByEncoder, getSpecialTokensByEncoder, TikTokenizer } from '@microsoft/tiktokenizer';
+import { createTokenizer, getRegexByEncoder, getSpecialTokensByEncoder, TikTokenizer } from '@zyraxon/tiktokenizer';
 import { MovingAverage } from '../../../util/vs/base/common/numbers';
 import { StopWatch } from '../../../util/vs/base/common/stopwatch';
 import { parseTikTokenBinary } from './parseTikTokens';

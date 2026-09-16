@@ -28,7 +28,7 @@ export class CspAlerter {
 		});
 
 		window.addEventListener('message', (event) => {
-			if (event?.data && event.data.name === 'vscode-did-block-svg') {
+			if (event?.data && event.data.name === 'zyraxoncode-did-block-svg') {
 				this.#onCspWarning();
 			}
 		});

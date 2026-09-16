@@ -12,15 +12,15 @@ import { URI } from '../../../base/common/uri.js';
  * this scheme to address files that live on the connected client.
  *
  * ```
- * vscode-agent-client://[clientId]/[originalScheme]/[originalAuthority]/[originalPath]
+ * zyraxoncode-agent-client://[clientId]/[originalScheme]/[originalAuthority]/[originalPath]
  * ```
  *
- * For example, `file:///Users/user/plugins/my-plugin` on client `client-1` becomes:
+ * For example, `__ZYRAXKEEP__0_` on client `client-1` becomes:
  * ```
- * vscode-agent-client://client-1/file/-/Users/user/plugins/my-plugin
+ * __ZYRAXKEEP__1_
  * ```
  */
-export const AGENT_CLIENT_SCHEME = 'vscode-agent-client';
+export const AGENT_CLIENT_SCHEME = 'zyraxoncode-agent-client';
 
 /**
  * Wraps a client-side URI into a {@link AGENT_CLIENT_SCHEME} URI that
@@ -31,7 +31,7 @@ export const AGENT_CLIENT_SCHEME = 'vscode-agent-client';
  * so the decoder can restore them faithfully. Scheme names are
  * alphanumeric + `+.-` per RFC 3986, so `!` cannot collide.
  *
- * @param originalUri The URI on the client (e.g. `file:///path`)
+ * @param originalUri The URI on the client (e.g. `__ZYRAXKEEP__2_`)
  * @param clientId The client identifier (from the protocol `clientId`)
  */
 export function toAgentClientUri(originalUri: URI, clientId: string): URI {

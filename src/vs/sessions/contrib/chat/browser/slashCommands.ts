@@ -160,9 +160,9 @@ export class SlashCommandHandler extends Disposable implements IChatSubmitReques
 			() => this.commandService.executeCommand(AICustomizationManagementCommands.OpenEditor, section);
 
 		this._slashCommands.push({
-			command: 'vscode-pet',
-			detail: localize('slashCommand.vscodePet', "Toggle an interactive ZYRAXON Code pet (Experimental)"),
-			sortText: 'z3_vscodePet',
+			command: 'zyraxoncode-pet',
+			detail: localize('slashCommand.zyraxoncodePet', "Toggle an interactive ZYRAXON Code pet (Experimental)"),
+			sortText: 'z3_zyraxoncodePet',
 			executeImmediately: true,
 			execute: () => this.chatPetService.toggle(),
 		});

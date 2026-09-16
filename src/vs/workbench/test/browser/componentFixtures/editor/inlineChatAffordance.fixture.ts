@@ -35,7 +35,7 @@ greet("World");
 function renderInlineChatAffordance({ container, disposableStore, theme }: ComponentFixtureContext, withSelection: boolean): void {
 	container.style.width = '500px';
 	container.style.height = '180px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	// Register fake menu items scoped to this fixture's lifetime
 	disposableStore.add(MenuRegistry.appendMenuItem(MenuId.InlineChatEditorAffordance, {
@@ -55,7 +55,7 @@ function renderInlineChatAffordance({ container, disposableStore, theme }: Compo
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		SAMPLE_CODE,
-		URI.parse('inmemory://inline-chat.ts'),
+		URI.parse('__ZYRAXKEEP__0_'),
 		'typescript'
 	));
 

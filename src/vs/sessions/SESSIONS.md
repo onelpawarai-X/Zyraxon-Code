@@ -113,7 +113,7 @@ The sessions-layer `AgentHostCustomizationService` adapts the workbench customiz
 
 `IAgentSessionsService` (`vs/workbench/contrib/chat/browser/agentSessions/agentSessionsService`) is a **Copilot-provider internal** and must be consumed **only** by the Copilot chat sessions provider (`contrib/providers/copilotChatSessions/`). The rest of the Agents window — core, services, and non-provider contribs (e.g. the sessions list, the visible-sessions grid) — must stay **provider-agnostic** and interact with sessions exclusively through `ISession`/`ISessionsManagementService`. Reaching into `IAgentSessionsService` from shared code (for example to call `model.observeSession(...)` for lazy loading) couples the whole window to one provider and is prohibited. If a provider needs to react to provider-agnostic signals (such as a session becoming visible), surface that signal on the shared services and subscribe to it **inside the provider**. This rule is enforced by an ESLint `no-restricted-imports` ban scoped to `src/vs/sessions/**` (with the Copilot provider folder exempted).
 
-> **Temporary exception (tracked by [#320480](https://github.com/microsoft/vscode/issues/320480)):** the sessions list (`contrib/sessions/browser/views/sessionsList.ts`) currently keeps one deliberate `IAgentSessionsService` usage to trigger lazy resolution of expensive session properties for rows scrolling into view. It carries a prominent comment and a localized `eslint-disable-next-line no-restricted-imports`. This must be moved into the Copilot provider; do not add further usages or copy the suppression.
+> **Temporary exception (tracked by [#320480](__ZYRAXKEEP__0_)):** the sessions list (`contrib/sessions/browser/views/sessionsList.ts`) currently keeps one deliberate `IAgentSessionsService` usage to trigger lazy resolution of expensive session properties for rows scrolling into view. It carries a prominent comment and a localized `eslint-disable-next-line no-restricted-imports`. This must be moved into the Copilot provider; do not add further usages or copy the suppression.
 
 ### Provider-Specific Documentation
 
@@ -175,7 +175,7 @@ Subagent chats **persist** in the session catalog after the subagent completes (
 
 The pill reads live status, timing, title/model metadata, and active-tool data from the parent invocation; history enrichment restores the same data after recreation. Inline model text is hidden only when it matches the parent, while hover/ARIA always include the child model. Streaming tools do not replace the current formed tool; same-tool updates render in place, and only a new `toolCallId` animates. Hover, pointer cursor, and click are scoped to the bordered pill, not its attached tool row.
 
-Editor opening carries the exact upstream `ahp-chat://subagent/...` channel on the editor resource. `AgentHostSessionHandler` validates its chat id and owning session before subscribing, avoiding a dependency on `SessionState.chats` hydration. The pill itself never acquires the child `ChatModel`; only explicit opening does.
+Editor opening carries the exact upstream `__ZYRAXKEEP__1_` channel on the editor resource. `AgentHostSessionHandler` validates its chat id and owning session before subscribing, avoiding a dependency on `SessionState.chats` hydration. The pill itself never acquires the child `ChatModel`; only explicit opening does.
 
 **Confirmations in read-only subagent chats.** Read-only hides the composer, but the tool-confirmation carousel remains visible and keeps the input part in layout. This lets multi-chat/side-chat subagent views resolve their own confirmations without making the chat message composer interactive.
 
@@ -183,7 +183,7 @@ A terminal parent response is authoritative for active subagent timing. Stop can
 
 **Subagent terminal progress.** When the last meaningful response part is the parent subagent invocation, its pill is the active progress affordance and `ChatListItemRenderer` must not append a second generic shimmering working-progress phrase below it. Child tool/hook updates can arrive later in the raw response array while still rendering inside an earlier pill, so they must not suppress progress that visually follows normal markdown. Subagent-tagged or regular markdown is supporting output, not the pill itself; if markdown follows the pill, normal working-progress rules apply.
 
-**Restoring subagent chats.** Subagent chats are in-memory only; on restart the agent host restores them as separate sessions but no longer re-adds them to the parent catalog. `AgentService._registerRestoredSubagent` mirrors the live `_handleSubagentStarted` flow on restore — it re-adds the subagent to the parent session's catalog (same `ahp-chat://subagent/...` chat URI, `origin: Tool`, `interactivity: ReadOnly`, restored turns) so it remains available to reopen as a read-only tab.
+**Restoring subagent chats.** Subagent chats are in-memory only; on restart the agent host restores them as separate sessions but no longer re-adds them to the parent catalog. `AgentService._registerRestoredSubagent` mirrors the live `_handleSubagentStarted` flow on restore — it re-adds the subagent to the parent session's catalog (same `__ZYRAXKEEP__2_` chat URI, `origin: Tool`, `interactivity: ReadOnly`, restored turns) so it remains available to reopen as a read-only tab.
 
 History restoration must also repair parent tool calls whose persisted `_meta`/subagent result content was lost. `AgentHostSessionHandler._enrichHistoryWithSubagentCalls` treats the session's tool-origin chat catalog as the canonical spawn record: a serialized tool call whose id matches `origin.toolCallId` is upgraded to `toolSpecificData.kind === "subagent"` with the catalog title/resource, so reload renders the pill instead of a generic "Delegating task" row.
 
@@ -342,9 +342,9 @@ replacement.
 
 The new-session view mounts the aquarium action outside
 `.new-chat-widget-content`. Its surrounding surface has checked **Aquarium** and
-**Pet (/vscode-pet)** context-menu items. `AquariumService` owns the
+**Pet (/zyraxoncode-pet)** context-menu items. `AquariumService` owns the
 application-scoped action visibility preference; `IChatPetService` owns the same
-persisted pet state used by `/vscode-pet`. Context-menu events from inside
+persisted pet state used by `/zyraxoncode-pet`. Context-menu events from inside
 `.new-chat-widget-content` are left untouched so the composer retains its own
 context-menu behavior. The aquarium preference is also keyboard-accessible
 through the **Developer: Toggle Aquarium Action Visibility** command.
@@ -776,7 +776,7 @@ sessions. When a `subagent_started` signal arrives, the host adds a subagent cha
 to the parent session and dispatches the subagent turn on that chat URI; restoring
 a standalone subagent session would create only session state and leave chat
 actions with no `_chatStates` entry. Subagent chat URIs use the stable
-`ahp-chat://subagent/...` authority and store the case-sensitive tool call id in
+`__ZYRAXKEEP__3_` authority and store the case-sensitive tool call id in
 the path (`buildSubagentChatUri`), because URI authorities are case-insensitive.
 Subagent chats are created with `origin.kind === "tool"` and are hidden from the
 chat tab strip; the parent tool invocation is their visible UI entry point.

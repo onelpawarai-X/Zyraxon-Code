@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Log } from './logger';
 
 export class Keychain {
 	constructor(
-		private readonly context: vscode.ExtensionContext,
+		private readonly context: zyraxoncode.ExtensionContext,
 		private readonly serviceId: string,
 		private readonly Logger: Log
 	) { }

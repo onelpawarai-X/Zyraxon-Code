@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { TelemetryReporter } from '../logging/telemetry';
 import { isImplicitProjectConfigFile, openOrCreateConfig, ProjectType } from '../tsconfig';
 import { ITypeScriptServiceClient } from '../typescriptService';
@@ -15,14 +15,14 @@ interface Hint {
 
 class ExcludeHintItem {
 	public configFileName?: string;
-	private readonly _item: vscode.StatusBarItem;
+	private readonly _item: zyraxoncode.StatusBarItem;
 	private _currentHint?: Hint;
 
 	constructor(
 		private readonly telemetryReporter: TelemetryReporter
 	) {
-		this._item = vscode.window.createStatusBarItem('status.typescript.exclude', vscode.StatusBarAlignment.Right, 98 /* to the right of typescript version status (99) */);
-		this._item.name = vscode.l10n.t("TypeScript: Configure Excludes");
+		this._item = zyraxoncode.window.createStatusBarItem('status.typescript.exclude', zyraxoncode.StatusBarAlignment.Right, 98 /* to the right of typescript version status (99) */);
+		this._item.name = zyraxoncode.l10n.t("TypeScript: Configure Excludes");
 		this._item.command = 'js.projectStatus.command';
 	}
 
@@ -37,12 +37,12 @@ class ExcludeHintItem {
 	public show(largeRoots?: string) {
 		this._currentHint = {
 			message: largeRoots
-				? vscode.l10n.t("To enable project-wide JavaScript/TypeScript language features, exclude folders with many files, like: {0}", largeRoots)
-				: vscode.l10n.t("To enable project-wide JavaScript/TypeScript language features, exclude large folders with source files that you do not work on.")
+				? zyraxoncode.l10n.t("To enable project-wide JavaScript/TypeScript language features, exclude folders with many files, like: {0}", largeRoots)
+				: zyraxoncode.l10n.t("To enable project-wide JavaScript/TypeScript language features, exclude large folders with source files that you do not work on.")
 		};
 		this._item.tooltip = this._currentHint.message;
-		this._item.text = vscode.l10n.t("Configure Excludes");
-		this._item.tooltip = vscode.l10n.t("To enable project-wide JavaScript/TypeScript language features, exclude large folders with source files that you do not work on.");
+		this._item.text = zyraxoncode.l10n.t("Configure Excludes");
+		this._item.tooltip = zyraxoncode.l10n.t("To enable project-wide JavaScript/TypeScript language features, exclude large folders with source files that you do not work on.");
 		this._item.color = '#A5DF3B';
 		this._item.show();
 		/* __GDPR__
@@ -58,9 +58,9 @@ class ExcludeHintItem {
 }
 
 
-function createLargeProjectMonitorFromTypeScript(item: ExcludeHintItem, client: ITypeScriptServiceClient): vscode.Disposable {
+function createLargeProjectMonitorFromTypeScript(item: ExcludeHintItem, client: ITypeScriptServiceClient): zyraxoncode.Disposable {
 
-	interface LargeProjectMessageItem extends vscode.MessageItem {
+	interface LargeProjectMessageItem extends zyraxoncode.MessageItem {
 		index: number;
 	}
 
@@ -72,9 +72,9 @@ function createLargeProjectMonitorFromTypeScript(item: ExcludeHintItem, client: 
 			const configFileName = body.projectName;
 			if (configFileName) {
 				item.configFileName = configFileName;
-				vscode.window.showWarningMessage<LargeProjectMessageItem>(item.getCurrentHint().message,
+				zyraxoncode.window.showWarningMessage<LargeProjectMessageItem>(item.getCurrentHint().message,
 					{
-						title: vscode.l10n.t("Configure Excludes"),
+						title: zyraxoncode.l10n.t("Configure Excludes"),
 						index: 0
 					}).then(selected => {
 						if (selected && selected.index === 0) {
@@ -91,10 +91,10 @@ function onConfigureExcludesSelected(
 	configFileName: string
 ) {
 	if (!isImplicitProjectConfigFile(configFileName)) {
-		vscode.workspace.openTextDocument(configFileName)
-			.then(vscode.window.showTextDocument);
+		zyraxoncode.workspace.openTextDocument(configFileName)
+			.then(zyraxoncode.window.showTextDocument);
 	} else {
-		const root = client.getWorkspaceRootForResource(vscode.Uri.file(configFileName));
+		const root = client.getWorkspaceRootForResource(zyraxoncode.Uri.file(configFileName));
 		if (root) {
 			openOrCreateConfig(
 				client.apiVersion,
@@ -107,19 +107,19 @@ function onConfigureExcludesSelected(
 
 export function create(
 	client: ITypeScriptServiceClient,
-): vscode.Disposable {
-	const toDispose: vscode.Disposable[] = [];
+): zyraxoncode.Disposable {
+	const toDispose: zyraxoncode.Disposable[] = [];
 
 	const item = new ExcludeHintItem(client.telemetryReporter);
-	toDispose.push(vscode.commands.registerCommand('js.projectStatus.command', () => {
+	toDispose.push(zyraxoncode.commands.registerCommand('js.projectStatus.command', () => {
 		if (item.configFileName) {
 			onConfigureExcludesSelected(client, item.configFileName);
 		}
 		const { message } = item.getCurrentHint();
-		return vscode.window.showInformationMessage(message);
+		return zyraxoncode.window.showInformationMessage(message);
 	}));
 
 	toDispose.push(createLargeProjectMonitorFromTypeScript(item, client));
 
-	return vscode.Disposable.from(...toDispose);
+	return zyraxoncode.Disposable.from(...toDispose);
 }

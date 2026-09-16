@@ -76,7 +76,7 @@ class AMDModuleImporter {
 					if (value.startsWith(window.location.origin)) {
 						return value;
 					}
-					if (value.startsWith(`${Schemas.vscodeFileResource}://${VSCODE_AUTHORITY}`)) {
+					if (value.startsWith(`${Schemas.zyraxoncodeFileResource}://${VSCODE_AUTHORITY}`)) {
 						return value;
 					}
 					throw new Error(`[trusted_script_src] Invalid script url: ${value}`);
@@ -205,12 +205,12 @@ const cache = new Map<string, Promise<any>>();
  * Utility for importing an AMD node module. This util supports AMD and ESM contexts and should be used while the ESM adoption
  * is on its way.
  *
- * e.g. pass in `vscode-textmate/release/main.js`
+ * e.g. pass in `zyraxoncode-textmate/release/main.js`
  */
 export async function importAMDNodeModule<T>(nodeModuleName: string, pathInsideNodeModule: string, isBuilt?: boolean): Promise<T> {
 	if (isBuilt === undefined) {
 		const product = globalThis._VSCODE_PRODUCT_JSON as unknown as IProductConfiguration;
-		isBuilt = Boolean((product ?? globalThis.vscode?.context?.configuration()?.product)?.commit);
+		isBuilt = Boolean((product ?? globalThis.zyraxoncode?.context?.configuration()?.product)?.commit);
 	}
 
 	const nodeModulePath = pathInsideNodeModule ? `${nodeModuleName}/${pathInsideNodeModule}` : nodeModuleName;
@@ -235,7 +235,7 @@ export async function importAMDNodeModule<T>(nodeModuleName: string, pathInsideN
 
 export function resolveAmdNodeModulePath(nodeModuleName: string, pathInsideNodeModule: string): string {
 	const product = globalThis._VSCODE_PRODUCT_JSON as unknown as IProductConfiguration;
-	const isBuilt = Boolean((product ?? globalThis.vscode?.context?.configuration()?.product)?.commit);
+	const isBuilt = Boolean((product ?? globalThis.zyraxoncode?.context?.configuration()?.product)?.commit);
 	const useASAR = (isBuilt && (platform.isElectron || (platform.isWebWorker && platform.hasElectronUserAgent)));
 
 	const nodeModulePath = `${nodeModuleName}/${pathInsideNodeModule}`;

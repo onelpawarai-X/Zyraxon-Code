@@ -12,18 +12,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(--vscode-spacing-size40, 4px);
+	gap: var(--zyraxoncode-spacing-size40, 4px);
 	box-sizing: border-box;
 	/* Match the ZYRAXON Code editor read-only banner: 26px tall, 12px text. */
 	height: 26px;
 	/* Match the tab strip's insets so the banner starts and ends flush with the
 		tabs; the extra left inset accounts for the header's status-icon column. */
-	margin: calc(-1 * var(--vscode-spacing-size20, 2px)) var(--vscode-spacing-size100, 10px) 0 calc(var(--vscode-spacing-size100, 10px) + var(--vscode-codiconFontSize, 16px) + var(--vscode-spacing-size60, 6px));
-	padding: 0 var(--vscode-spacing-size100, 10px);
-	background-color: color-mix(in srgb, var(--vscode-focusBorder) 4%, var(--vscode-editorWidget-background));
-	color: var(--vscode-descriptionForeground);
-	font-size: var(--vscode-agents-fontSize-label1, 12px);
-	font-family: var(--vscode-chat-font-family, inherit);
+	margin: calc(-1 * var(--zyraxoncode-spacing-size20, 2px)) var(--zyraxoncode-spacing-size100, 10px) 0 calc(var(--zyraxoncode-spacing-size100, 10px) + var(--zyraxoncode-codiconFontSize, 16px) + var(--zyraxoncode-spacing-size60, 6px));
+	padding: 0 var(--zyraxoncode-spacing-size100, 10px);
+	background-color: color-mix(in srgb, var(--zyraxoncode-focusBorder) 4%, var(--zyraxoncode-editorWidget-background));
+	color: var(--zyraxoncode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label1, 12px);
+	font-family: var(--zyraxoncode-chat-font-family, inherit);
 }
 
 .session-readonly-banner.hidden {
@@ -35,11 +35,11 @@
 	flex-shrink: 0;
 	display: flex;
 	align-items: center;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .session-readonly-banner .session-readonly-banner-icon .codicon {
-	font-size: var(--vscode-codiconFontSize, 16px);
+	font-size: var(--zyraxoncode-codiconFontSize, 16px);
 }
 
 .session-readonly-banner .session-readonly-banner-text {
@@ -57,18 +57,18 @@
 }
 
 .session-readonly-banner .session-readonly-banner-action-link {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	cursor: pointer;
 }
 
 .session-readonly-banner .session-readonly-banner-action-link:hover {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 	text-decoration: underline;
 }
 
 .session-readonly-banner .session-readonly-banner-action-link:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
-	border-radius: var(--vscode-cornerRadius-small, 2px);
+	border-radius: var(--zyraxoncode-cornerRadius-small, 2px);
 }
 

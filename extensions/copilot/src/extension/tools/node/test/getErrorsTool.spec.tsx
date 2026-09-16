@@ -17,7 +17,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { URI } from '../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { DiagnosticSeverity, Range } from '../../../../vscodeTypes';
+import { DiagnosticSeverity, Range } from '../../../../zyraxoncodeTypes';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { GetErrorsTool } from '../getErrorsTool';
 import { toolResultToString } from './toolTestUtils';

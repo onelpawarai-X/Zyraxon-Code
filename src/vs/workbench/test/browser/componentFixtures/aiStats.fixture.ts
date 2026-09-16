@@ -77,10 +77,10 @@ interface RenderAiStatsOptions extends ComponentFixtureContext {
 function renderAiStatsHover({ container, disposableStore, data }: RenderAiStatsOptions): void {
 	container.style.width = '320px';
 	container.style.padding = '8px';
-	container.style.backgroundColor = 'var(--vscode-editorHoverWidget-background)';
-	container.style.border = '1px solid var(--vscode-editorHoverWidget-border)';
+	container.style.backgroundColor = 'var(--zyraxoncode-editorHoverWidget-background)';
+	container.style.border = '1px solid var(--zyraxoncode-editorHoverWidget-border)';
 	container.style.borderRadius = '4px';
-	container.style.color = 'var(--vscode-editorHoverWidget-foreground)';
+	container.style.color = 'var(--zyraxoncode-editorHoverWidget-foreground)';
 
 	const hover = createAiStatsHover({
 		data,

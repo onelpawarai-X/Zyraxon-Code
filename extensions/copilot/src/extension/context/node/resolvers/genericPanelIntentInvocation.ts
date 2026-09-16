@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import { BasePromptElementProps } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
@@ -37,8 +37,8 @@ export class GenericPanelIntentInvocation extends RendererIntentInvocation imple
 	createRenderer(
 		promptContext: IBuildPromptContext,
 		endpoint: IChatEndpoint,
-		progress: vscode.Progress<vscode.ChatResponseReferencePart | vscode.ChatResponseProgressPart>,
-		token: vscode.CancellationToken
+		progress: zyraxoncode.Progress<zyraxoncode.ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart>,
+		token: zyraxoncode.CancellationToken
 	) {
 		return PromptRenderer.create(this.instantiationService, endpoint, this.prompt, {
 			documentContext: this.documentContext,

@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { Raw, RenderPromptResult } from '@vscode/prompt-tsx';
-import { BudgetExceededError } from '@vscode/prompt-tsx/dist/base/materialized';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { Raw, RenderPromptResult } from '@zyraxoncode/prompt-tsx';
+import { BudgetExceededError } from '@zyraxoncode/prompt-tsx/dist/base/materialized';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IChatSessionService } from '../../../platform/chat/common/chatSessionService';
 import { ChatFetchResponseType, ChatLocation, ChatResponse } from '../../../platform/chat/common/commonTypes';
 import { getTextPart } from '../../../platform/chat/common/globalStringUtils';
@@ -42,7 +42,7 @@ import { DisposableMap, DisposableStore } from '../../../util/vs/base/common/lif
 import { IInstantiationService, ServicesAccessor } from '../../../util/vs/platform/instantiation/common/instantiation';
 
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
-import { ChatResponseAutoModeResolutionPart, ChatResponseProgressPart2 } from '../../../vscodeTypes';
+import { ChatResponseAutoModeResolutionPart, ChatResponseProgressPart2 } from '../../../zyraxoncodeTypes';
 import { ICommandService } from '../../commands/node/commandService';
 import { Intent } from '../../common/constants';
 import { ChatVariablesCollection } from '../../prompt/common/chatVariablesCollection';
@@ -92,7 +92,7 @@ function isResponsesCompactionContextManagementEnabled(endpoint: IChatEndpoint, 
  * tier is not propagated to the request endpoint, the server compacts against
  * the model's full window and the stateful conversation grows far past the
  * user's selection — billing them for the larger context. Mirrors the override
- * applied on the `vscode.lm` path in `languageModelAccess.ts`.
+ * applied on the `zyraxoncode.lm` path in `languageModelAccess.ts`.
  *
  * Only clamps when the selection is strictly smaller than the model window so
  * the full tier ("Longer sessions") stays uncompacted.
@@ -101,9 +101,9 @@ function isResponsesCompactionContextManagementEnabled(endpoint: IChatEndpoint, 
  *
  * @internal - exported for testing
  */
-export function applyContextSizeOverride(endpoint: IChatEndpoint, request: vscode.ChatRequest, preferLongContext: boolean = false): IChatEndpoint {
+export function applyContextSizeOverride(endpoint: IChatEndpoint, request: zyraxoncode.ChatRequest, preferLongContext: boolean = false): IChatEndpoint {
 	const contextSize = request.modelConfiguration?.contextSize;
-	// Prefer a valid explicit selection; otherwise fall back to the default tier. Guard against non-positive / non-finite selections (0, -1, NaN, Infinity). When tiers cost the same and the user prefers long context, skip the fallback and use the full window. See microsoft/vscode#322950, microsoft/vscode#323116.
+	// Prefer a valid explicit selection; otherwise fall back to the default tier. Guard against non-positive / non-finite selections (0, -1, NaN, Infinity). When tiers cost the same and the user prefers long context, skip the fallback and use the full window. See zyraxon/zyraxoncode#322950, zyraxon/zyraxoncode#323116.
 	const hasLongContextSurcharge = !!endpoint.tokenPricing?.longContext;
 	const useDefaultTierFallback = !preferLongContext || hasLongContextSurcharge;
 	const effectiveSize = (typeof contextSize === 'number' && Number.isFinite(contextSize) && contextSize > 0)
@@ -124,7 +124,7 @@ export function applyContextSizeOverride(endpoint: IChatEndpoint, request: vscod
  *
  * @internal - exported for testing
  */
-export function isTodoToolExplicitlyEnabled(request: vscode.ChatRequest): boolean {
+export function isTodoToolExplicitlyEnabled(request: zyraxoncode.ChatRequest): boolean {
 	const todoReferenceName = 'todo';
 	return request.toolReferences.some(ref =>
 		ref.name === todoReferenceName
@@ -143,7 +143,7 @@ export function isBackgroundTodoAgentEnabled(
 	configurationService: IConfigurationService,
 	experimentationService: IExperimentationService,
 	authenticationService: IAuthenticationService,
-	request: vscode.ChatRequest): boolean {
+	request: zyraxoncode.ChatRequest): boolean {
 	const token = authenticationService.copilotToken;
 
 	// Disable background todo agent for experimental models temporarily
@@ -193,7 +193,7 @@ export function resolveSummarizeThresholdTokens(value: number | undefined, effec
 	return value;
 }
 
-export const getAgentTools = async (accessor: ServicesAccessor, request: vscode.ChatRequest, model?: IChatEndpoint) => {
+export const getAgentTools = async (accessor: ServicesAccessor, request: zyraxoncode.ChatRequest, model?: IChatEndpoint) => {
 	const toolsService = accessor.get<IToolsService>(IToolsService);
 	const testService = accessor.get<ITestProvider>(ITestProvider);
 	const tasksService = accessor.get<ITasksService>(ITasksService);
@@ -240,7 +240,7 @@ export const getAgentTools = async (accessor: ServicesAccessor, request: vscode.
 	// agent is on CAPI. semantic_search relies on embeddings that require a
 	// Copilot token source, so on BYOK / custom endpoints it can abort the chat
 	// turn (e.g. when the GitHub auth provider is unavailable). Keep it off
-	// there. See https://github.com/microsoft/vscode/issues/322525.
+	// there. See __ZYRAXKEEP__0_
 	if (!isCAPIEndpoint(model)) {
 		allowTools[ToolName.SearchSubagent] = false;
 		allowTools[ToolName.ExploreSubagent] = false;
@@ -427,7 +427,7 @@ export class AgentIntent extends EditCodeIntent {
 		return processor;
 	}
 
-	protected override getIntentHandlerOptions(request: vscode.ChatRequest): IDefaultIntentRequestHandlerOptions | undefined {
+	protected override getIntentHandlerOptions(request: zyraxoncode.ChatRequest): IDefaultIntentRequestHandlerOptions | undefined {
 		return {
 			maxToolCallIterations: getRequestedToolCallIterationLimit(request) ??
 				this.instantiationService.invokeFunction(getAgentMaxRequests),
@@ -438,15 +438,15 @@ export class AgentIntent extends EditCodeIntent {
 
 	override async handleRequest(
 		conversation: Conversation,
-		request: vscode.ChatRequest,
-		stream: vscode.ChatResponseStream,
-		token: vscode.CancellationToken,
+		request: zyraxoncode.ChatRequest,
+		stream: zyraxoncode.ChatResponseStream,
+		token: zyraxoncode.CancellationToken,
 		documentContext: IDocumentContext | undefined,
 		agentName: string,
 		location: ChatLocation,
 		chatTelemetry: ChatTelemetryBuilder,
 		yieldRequested: () => boolean
-	): Promise<vscode.ChatResult> {
+	): Promise<zyraxoncode.ChatResult> {
 		if (request.command === 'compact') {
 			return this.handleSummarizeCommand(conversation, request, stream, token);
 		}
@@ -471,7 +471,7 @@ export class AgentIntent extends EditCodeIntent {
 	 * this final pass runs before we return, while the request's tool invocation
 	 * token is (hopefully) still valid.
 	 */
-	private async _runFinalBackgroundTodoPass(conversation: Conversation, request: vscode.ChatRequest): Promise<void> {
+	private async _runFinalBackgroundTodoPass(conversation: Conversation, request: zyraxoncode.ChatRequest): Promise<void> {
 		if (request.subAgentInvocationId !== undefined || request.subAgentName !== undefined) {
 			return;
 		}
@@ -495,10 +495,10 @@ export class AgentIntent extends EditCodeIntent {
 
 	private async handleSummarizeCommand(
 		conversation: Conversation,
-		request: vscode.ChatRequest,
-		stream: vscode.ChatResponseStream,
-		token: vscode.CancellationToken
-	): Promise<vscode.ChatResult> {
+		request: zyraxoncode.ChatRequest,
+		stream: zyraxoncode.ChatResponseStream,
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.ChatResult> {
 		normalizeSummariesOnRounds(conversation.turns);
 
 		// Exclude the current /compact turn.
@@ -557,7 +557,7 @@ export class AgentIntent extends EditCodeIntent {
 
 			stream.progress(l10n.t('Compacting conversation...'));
 
-			const progress: vscode.Progress<vscode.ChatResponseReferencePart | vscode.ChatResponseProgressPart> = {
+			const progress: zyraxoncode.Progress<zyraxoncode.ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart> = {
 				report: () => { }
 			};
 			const renderer = PromptRenderer.create(this.instantiationService, endpoint, SummarizedConversationHistory, {
@@ -586,7 +586,7 @@ export class AgentIntent extends EditCodeIntent {
 			// Next turn if using auto will select a new endpoint
 			this._automodeService.invalidateRouterCache(request);
 
-			const chatResult: vscode.ChatResult = {
+			const chatResult: zyraxoncode.ChatResult = {
 				metadata: {
 					summary: {
 						toolCallRoundId: summaryMetadata.toolCallRoundId,
@@ -644,7 +644,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		intent: IIntent,
 		location: ChatLocation,
 		endpoint: IChatEndpoint,
-		request: vscode.ChatRequest,
+		request: zyraxoncode.ChatRequest,
 		intentOptions: EditCodeIntentInvocationOptions,
 		@IInstantiationService instantiationService: IInstantiationService,
 		@ICodeMapperService codeMapperService: ICodeMapperService,
@@ -673,14 +673,14 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		super(intent, location, applyContextSizeOverride(endpoint, request, configurationService.getConfig(ConfigKey.PreferLongContext)), request, intentOptions, instantiationService, codeMapperService, envService, promptPathRepresentationService, endpointProvider, workspaceService, toolsService, configurationService, editLogService, commandService, telemetryService, notebookService, otelService);
 	}
 
-	public override getAvailableTools(): Promise<vscode.LanguageModelToolInformation[]> {
+	public override getAvailableTools(): Promise<zyraxoncode.LanguageModelToolInformation[]> {
 		return this.instantiationService.invokeFunction(getAgentTools, this.request);
 	}
 
 	override async buildPrompt(
 		promptContext: IBuildPromptContext,
-		progress: vscode.Progress<vscode.ChatResponseReferencePart | vscode.ChatResponseProgressPart>,
-		token: vscode.CancellationToken
+		progress: zyraxoncode.Progress<zyraxoncode.ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart>,
+		token: zyraxoncode.CancellationToken
 	): Promise<IBuildPromptResult> {
 		this._resolvedCustomizations = await PromptRegistry.resolveAllCustomizations(this.instantiationService, this.endpoint);
 
@@ -702,7 +702,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		const codebase = await this._getCodebaseReferences(promptContext, token);
 
 		let variables = promptContext.chatVariables;
-		let toolReferences: vscode.ChatPromptReference[] = [];
+		let toolReferences: zyraxoncode.ChatPromptReference[] = [];
 		if (codebase) {
 			toolReferences = toNewChatReferences(variables, codebase.references);
 			variables = new ChatVariablesCollection([...variables.references, ...toolReferences]);
@@ -1080,7 +1080,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		};
 	}
 
-	modifyErrorDetails(errorDetails: vscode.ChatErrorDetails, response: ChatResponse): vscode.ChatErrorDetails {
+	modifyErrorDetails(errorDetails: zyraxoncode.ChatErrorDetails, response: ChatResponse): zyraxoncode.ChatErrorDetails {
 		if (!errorDetails.responseIsFiltered) {
 			errorDetails.confirmationButtons = [
 				...(errorDetails.confirmationButtons ?? []),
@@ -1098,7 +1098,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 
 		// Search backwards to find the first real request and return those variables too.
 		// Variables aren't re-attached to requests from confirmations.
-		// TODO https://github.com/microsoft/vscode/issues/262858, more to do here
+		// TODO __ZYRAXKEEP__1_ more to do here
 		if (lastTurn.acceptedConfirmationData) {
 			const turns = promptContext.conversation!.turns.slice(0, -1);
 			for (const turn of Iterable.reverse(turns)) {
@@ -1114,7 +1114,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		mainRenderMessages: Raw.ChatMessage[],
 		promptContext: IBuildPromptContext,
 		props: AgentPromptProps,
-		token: vscode.CancellationToken,
+		token: zyraxoncode.CancellationToken,
 		contextRatio: number,
 	): void {
 		// Snapshot rounds so telemetry reflects state at kick-off time, not at
@@ -1429,7 +1429,7 @@ export class AgentIntentInvocation extends EditCodeIntentInvocation implements I
 		}
 		return this.intent.getOrCreateBackgroundTodoProcessor(promptContext);
 	}
-	private _maybeStartBackgroundTodoAgentPass(endpoint: IChatEndpoint, promptContext: IBuildPromptContext, token: vscode.CancellationToken) {
+	private _maybeStartBackgroundTodoAgentPass(endpoint: IChatEndpoint, promptContext: IBuildPromptContext, token: zyraxoncode.CancellationToken) {
 		if (
 			!isBackgroundTodoAgentEnabled(endpoint, this.configurationService, this.expService, this.authenticationService, this.request) ||
 			isTodoToolExplicitlyEnabled(this.request) ||

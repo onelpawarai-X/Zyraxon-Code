@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CCAModel } from '@vscode/copilot-api';
+import type { CCAModel } from '@zyraxoncode/copilot-api';
 import type { ModelInfo, OnElicitation, Options, SDKSessionInfo, SDKUserMessage } from '@anthropic-ai/claude-agent-sdk';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 import { SequencerByKey } from '../../../../base/common/async.js';
@@ -56,7 +56,7 @@ import { ClaudeSessionMetadataStore, IClaudeSessionOverlay } from './claudeSessi
 import { AgentHostStateManager, IAgentHostStateManager } from '../agentHostStateManager.js';
 import { IAgentHostOTelService } from '../../common/otel/agentHostOTelService.js';
 
-const USER_AGENT_PREFIX = 'vscode_claude_code';
+const USER_AGENT_PREFIX = 'zyraxoncode_claude_code';
 
 /**
  * Returns true if `m` is a Claude-family model that should be advertised
@@ -78,10 +78,10 @@ function isClaudeModel(m: CCAModel): boolean {
 }
 
 /**
- * Augments the published `@vscode/copilot-api` `CCAModelSupports` with the
+ * Augments the published `@zyraxoncode/copilot-api` `CCAModelSupports` with the
  * per-model `adaptive_thinking` / `reasoning_effort` fields the runtime
  * CAPI `/models` payload already carries but the SDK type doesn't yet
- * declare. Tracked at microsoft/vscode-capi#85; remove this when the SDK
+ * declare. Tracked at zyraxon/zyraxoncode-capi#85; remove this when the SDK
  * catches up. Mirror of the same pattern at
  * `extensions/copilot/src/platform/endpoint/common/endpointProvider.ts`
  * (its locally-declared `IChatModelCapabilities`).
@@ -2158,7 +2158,7 @@ export class ClaudeAgent extends Disposable implements IAgent {
 	 * the mode so a later rebind / send re-applies it.
 	 *
 	 * TODO: adopt per-chat config when the protocol allows for such — see
-	 * https://github.com/microsoft/agent-host-protocol/issues/335 — so a picker
+	 * __ZYRAXKEEP__0_ — so a picker
 	 * change scopes to its own chat instead of the whole session.
 	 */
 	onSessionConfigChanged(session: URI, values: Record<string, unknown>): void {

@@ -27,7 +27,7 @@ import { getListStyles } from 'vs/platform/theme/browser/defaultStyles';
 import type { IXtermCore } from 'vs/workbench/contrib/terminal/browser/xterm-private';
 import { terminalSuggestConfigSection, type ITerminalSuggestConfiguration } from 'vs/workbench/contrib/terminalContrib/suggest/common/terminalSuggestConfiguration';
 
-export const enum VSCodeSuggestOscPt {
+export const enum ZyraxonCodeSuggestOscPt {
 	Completions = 'Completions',
 	CompletionsPwshCommands = 'CompletionsPwshCommands',
 	CompletionsBash = 'CompletionsBash',
@@ -156,8 +156,8 @@ export class SuggestAddon extends Disposable implements ITerminalAddon, ISuggest
 
 	activate(xterm: Terminal): void {
 		this._terminal = xterm;
-		this._register(xterm.parser.registerOscHandler(ShellIntegrationOscPs.VSCode, data => {
-			return this._handleVSCodeSequence(data);
+		this._register(xterm.parser.registerOscHandler(ShellIntegrationOscPs.ZyraxonCode, data => {
+			return this._handleZyraxonCodeSequence(data);
 		}));
 		this._register(xterm.onData(e => {
 			if (!e.startsWith('\x1b[')) {
@@ -261,7 +261,7 @@ export class SuggestAddon extends Disposable implements ITerminalAddon, ISuggest
 		});
 	}
 
-	private _handleVSCodeSequence(data: string): boolean | Promise<boolean> {
+	private _handleZyraxonCodeSequence(data: string): boolean | Promise<boolean> {
 		if (!this._terminal) {
 			return false;
 		}
@@ -269,13 +269,13 @@ export class SuggestAddon extends Disposable implements ITerminalAddon, ISuggest
 		// Pass the sequence along to the capability
 		const [command, ...args] = data.split(';');
 		switch (command) {
-			case VSCodeSuggestOscPt.Completions:
+			case ZyraxonCodeSuggestOscPt.Completions:
 				this._handleCompletionsSequence(this._terminal, data, command, args);
 				return true;
-			case VSCodeSuggestOscPt.CompletionsBash:
+			case ZyraxonCodeSuggestOscPt.CompletionsBash:
 				this._handleCompletionsBashSequence(this._terminal, data, command, args);
 				return true;
-			case VSCodeSuggestOscPt.CompletionsBashFirstWord:
+			case ZyraxonCodeSuggestOscPt.CompletionsBashFirstWord:
 				return this._handleCompletionsBashFirstWordSequence(this._terminal, data, command, args);
 		}
 

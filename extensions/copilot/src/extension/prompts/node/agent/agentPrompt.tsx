@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, Chunk, Document, PromptElement, PromptPiece, PromptPieceChild, PromptSizing, Raw, SystemMessage, TokenLimit, UserMessage } from '@vscode/prompt-tsx';
-import type { ChatLanguageModelToolReference, ChatRequestEditedFileEvent, LanguageModelToolInformation, NotebookEditor, TaskDefinition, TextEditor } from 'vscode';
+import { BasePromptElementProps, Chunk, Document, PromptElement, PromptPiece, PromptPieceChild, PromptSizing, Raw, SystemMessage, TokenLimit, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { ChatLanguageModelToolReference, ChatRequestEditedFileEvent, LanguageModelToolInformation, NotebookEditor, TaskDefinition, TextEditor } from 'zyraxoncode';
 import { sessionResourceToId } from '../../../../platform/chat/common/chatDebugFileLoggerService';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
@@ -24,7 +24,7 @@ import { WorkingDirectory } from '../../../../platform/workspace/common/workingD
 import { isDefined, isString } from '../../../../util/vs/base/common/types';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestEditedFileEventKind, Position, Range } from '../../../../vscodeTypes';
+import { ChatRequestEditedFileEventKind, Position, Range } from '../../../../zyraxoncodeTypes';
 import { GenericBasePromptElementProps } from '../../../context/node/resolvers/genericPanelIntentInvocation';
 import { ChatVariablesCollection, extractDebugTargetSessionIds, isCustomizationsIndex } from '../../../prompt/common/chatVariablesCollection';
 import { CustomizationsIndexMetadata, getGlobalContextCacheKey, GlobalContextMessageMetadata, RenderedUserMessageMetadata, Turn } from '../../../prompt/common/conversation';
@@ -849,7 +849,7 @@ export class AgentTasksInstructions extends PromptElement<AgentTasksInstructions
 
 		const taskGroupsRaw = this._tasksService.getTasks();
 		const taskGroups = (await Promise.all(taskGroupsRaw.map(async ([folder, tasks]) => {
-			const tasksFile = URI.joinPath(folder, '.vscode', 'tasks.json');
+			const tasksFile = URI.joinPath(folder, '.zyraxoncode', 'tasks.json');
 			if (await this._ignoreService.isCopilotIgnored(tasksFile)) {
 				return undefined;
 			}

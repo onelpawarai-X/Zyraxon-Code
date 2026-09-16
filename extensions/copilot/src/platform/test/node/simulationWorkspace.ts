@@ -5,7 +5,7 @@
 
 import assert from 'assert';
 import * as fs from 'fs';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { getLanguage, getLanguageForResource, ILanguage } from '../../../util/common/languages';
 import { getLanguageId } from '../../../util/common/markdown';
 import { ExtHostNotebookDocumentData } from '../../../util/common/test/shims/notebookDocument';
@@ -21,7 +21,7 @@ import * as path from '../../../util/vs/base/common/path';
 import { isString } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../util/vs/platform/instantiation/common/descriptors';
-import { Range, Selection, Uri } from '../../../vscodeTypes';
+import { Range, Selection, Uri } from '../../../zyraxoncodeTypes';
 import { IDebugOutputService } from '../../debug/common/debugOutputService';
 import { IDialogService } from '../../dialog/common/dialogService';
 import { IDiffService } from '../../diff/common/diffService';
@@ -79,21 +79,21 @@ function getWorkspaceFolderPath(workspaceFolders: Uri[] | undefined): string {
 	return workspaceFolder;
 }
 
-function filePathToUri(filePath: string, workspaceFolders: Uri[] | undefined): vscode.Uri {
+function filePathToUri(filePath: string, workspaceFolders: Uri[] | undefined): zyraxoncode.Uri {
 	const workspaceFolder = getWorkspaceFolderPath(workspaceFolders);
 	if (filePath.includes('#index')) {
 		// this is a notebook cell. filePath: errors#index2.py
 		const parts = filePath.split('#');
 		const fileName = parts[0] + '.ipynb';
 		const index = parts[1].replace('.py', '');
-		return Uri.file(path.join(workspaceFolder, fileName)).with({ scheme: Schemas.vscodeNotebookCell, fragment: index });
+		return Uri.file(path.join(workspaceFolder, fileName)).with({ scheme: Schemas.zyraxoncodeNotebookCell, fragment: index });
 	}
 	return Uri.file(path.join(workspaceFolder, filePath));
 }
 
-function uriToFilePath(uri: vscode.Uri, workspaceFolders: Uri[] | undefined): string {
+function uriToFilePath(uri: zyraxoncode.Uri, workspaceFolders: Uri[] | undefined): string {
 	const workspaceFolder = getWorkspaceFolderPath(workspaceFolders);
-	if (uri.scheme === Schemas.vscodeNotebookCell) {
+	if (uri.scheme === Schemas.zyraxoncodeNotebookCell) {
 		// we need to append fragment to the path
 		const filePathWithoutSuffix = uri.fsPath.substring(workspaceFolder.length, uri.fsPath.length - '.ipynb'.length);
 		return `${filePathWithoutSuffix}#${uri.fragment}.py`;
@@ -102,7 +102,7 @@ function uriToFilePath(uri: vscode.Uri, workspaceFolders: Uri[] | undefined): st
 	return uri.fsPath.substring(workspaceFolder.length);
 }
 
-export function isNotebook(file: string | vscode.Uri | vscode.TextDocument) {
+export function isNotebook(file: string | zyraxoncode.Uri | zyraxoncode.TextDocument) {
 	if (typeof file === 'string') {
 		return file.endsWith('.ipynb');
 	}
@@ -111,19 +111,19 @@ export function isNotebook(file: string | vscode.Uri | vscode.TextDocument) {
 		return file.path.endsWith('.ipynb');
 	}
 
-	return file.uri.scheme === Schemas.vscodeNotebookCell || file.uri.fsPath.endsWith('.ipynb');
+	return file.uri.scheme === Schemas.zyraxoncodeNotebookCell || file.uri.fsPath.endsWith('.ipynb');
 }
 
 export class SimulationWorkspace extends Disposable {
 
-	private readonly _onDidChangeDiagnostics = this._register(new Emitter<vscode.DiagnosticChangeEvent>());
+	private readonly _onDidChangeDiagnostics = this._register(new Emitter<zyraxoncode.DiagnosticChangeEvent>());
 	public readonly onDidChangeDiagnostics = this._onDidChangeDiagnostics.event;
 
 	private _workspaceState: IDeserializedWorkspaceState | undefined;
 	private _workspaceFolders: Uri[] | undefined;
 	private readonly _docs = new ResourceMap<IExtHostDocumentData>();
 	private readonly _notebooks = new ResourceMap<ExtHostNotebookDocumentData>();
-	private _diagnostics = new ResourceMap<vscode.Diagnostic[]>();
+	private _diagnostics = new ResourceMap<zyraxoncode.Diagnostic[]>();
 	private currentEditor: ExtHostTextEditor | undefined = undefined;
 	private currentNotebookEditor: ExtHostNotebookEditor | undefined = undefined;
 
@@ -143,11 +143,11 @@ export class SimulationWorkspace extends Disposable {
 		return Array.from(this._docs.values());
 	}
 
-	public get activeTextEditor(): vscode.TextEditor | undefined {
+	public get activeTextEditor(): zyraxoncode.TextEditor | undefined {
 		return this.currentEditor?.value;
 	}
 
-	public get activeNotebookEditor(): vscode.NotebookEditor | undefined {
+	public get activeNotebookEditor(): zyraxoncode.NotebookEditor | undefined {
 		return this.currentNotebookEditor?.apiEditor;
 	}
 
@@ -155,7 +155,7 @@ export class SimulationWorkspace extends Disposable {
 		return this._workspaceFolders ?? [filePathToUri('/', this._workspaceFolders)];
 	}
 
-	public get activeFileDiagnostics(): vscode.Diagnostic[] {
+	public get activeFileDiagnostics(): zyraxoncode.Diagnostic[] {
 		const uri = this.currentEditor?.value.document.uri;
 		if (!uri) {
 			return [];
@@ -181,7 +181,7 @@ export class SimulationWorkspace extends Disposable {
 		this._workspaceFolders = undefined;
 		this._docs.clear();
 		this._notebooks.clear();
-		this._diagnostics = new ResourceMap<vscode.Diagnostic[]>();
+		this._diagnostics = new ResourceMap<zyraxoncode.Diagnostic[]>();
 		this.currentEditor = undefined;
 		this.currentNotebookEditor = undefined;
 	}
@@ -241,7 +241,7 @@ export class SimulationWorkspace extends Disposable {
 				if (!workspaceState.activeTextEditor) {
 					throw new Error(`Cannot have active file diagnostics without an active text editor!`);
 				}
-				this.setDiagnostics(new ResourceMap<vscode.Diagnostic[]>([
+				this.setDiagnostics(new ResourceMap<zyraxoncode.Diagnostic[]>([
 					[workspaceState.activeTextEditor.document.uri, workspaceState.activeFileDiagnostics]
 				]));
 			}
@@ -291,7 +291,7 @@ export class SimulationWorkspace extends Disposable {
 		}
 	}
 
-	private _setNotebookFile(uri: vscode.Uri, contents: string) {
+	private _setNotebookFile(uri: zyraxoncode.Uri, contents: string) {
 		const notebook = ExtHostNotebookDocumentData.createJupyterNotebook(uri, contents);
 		for (let index = 0; index < notebook.cells.length; index++) {
 			const cell = notebook.cellAt(index);
@@ -307,7 +307,7 @@ export class SimulationWorkspace extends Disposable {
 		this._docs.set(doc.document.uri, doc);
 	}
 
-	public setCurrentDocument(uri: vscode.Uri): void {
+	public setCurrentDocument(uri: zyraxoncode.Uri): void {
 		if (uri.toString() === this.currentEditor?.value.document.uri.toString()) {
 			// no change
 			return;
@@ -322,49 +322,49 @@ export class SimulationWorkspace extends Disposable {
 		);
 	}
 
-	public setCurrentDocumentIndentInfo(options: vscode.FormattingOptions): void {
+	public setCurrentDocumentIndentInfo(options: zyraxoncode.FormattingOptions): void {
 		if (!this.currentEditor) {
 			throw new Error('cannot set doc indent info before there is a document');
 		}
 		this.currentEditor?._acceptOptions(options);
 	}
 
-	public setCurrentSelection(selection: vscode.Selection): void {
+	public setCurrentSelection(selection: zyraxoncode.Selection): void {
 		if (this.currentEditor) {
 			this.currentEditor._acceptSelections([selection]);
 		}
 	}
 
-	public setCurrentVisibleRanges(visibleRanges: readonly vscode.Range[]): void {
+	public setCurrentVisibleRanges(visibleRanges: readonly zyraxoncode.Range[]): void {
 		if (this.currentEditor) {
 			this.currentEditor._acceptVisibleRanges(visibleRanges);
 		}
 	}
 
-	public setDiagnostics(diagnostics: ResourceMap<vscode.Diagnostic[]>): void {
-		const changedUris = new ResourceMap<vscode.Uri>();
+	public setDiagnostics(diagnostics: ResourceMap<zyraxoncode.Diagnostic[]>): void {
+		const changedUris = new ResourceMap<zyraxoncode.Uri>();
 		for (const uri of this._diagnostics.keys()) {
 			changedUris.set(uri, uri);
 		}
 		for (const uri of diagnostics.keys()) {
 			changedUris.set(uri, uri);
 		}
-		const changeEvent: vscode.DiagnosticChangeEvent = {
+		const changeEvent: zyraxoncode.DiagnosticChangeEvent = {
 			uris: Array.from(changedUris.values())
 		};
 		this._diagnostics = diagnostics;
 		this._onDidChangeDiagnostics.fire(changeEvent);
 	}
 
-	public getDiagnostics(uri: Uri): vscode.Diagnostic[] {
+	public getDiagnostics(uri: Uri): zyraxoncode.Diagnostic[] {
 		return this._diagnostics.get(uri) ?? [];
 	}
 
-	public getAllDiagnostics(): [vscode.Uri, vscode.Diagnostic[]][] {
+	public getAllDiagnostics(): [zyraxoncode.Uri, zyraxoncode.Diagnostic[]][] {
 		return Array.from(this._diagnostics.entries());
 	}
 
-	public getDocument(filePathOrUri: string | vscode.Uri): IExtHostDocumentData {
+	public getDocument(filePathOrUri: string | zyraxoncode.Uri): IExtHostDocumentData {
 		const queryUri = typeof filePathOrUri === 'string' ? this.getUriFromFilePath(filePathOrUri) : filePathOrUri;
 		const candidateFile = this._docs.get(queryUri);
 		if (!candidateFile) {
@@ -373,7 +373,7 @@ export class SimulationWorkspace extends Disposable {
 		return candidateFile;
 	}
 
-	public hasDocument(uri: vscode.Uri): boolean {
+	public hasDocument(uri: zyraxoncode.Uri): boolean {
 		return this._docs.has(uri);
 	}
 
@@ -381,11 +381,11 @@ export class SimulationWorkspace extends Disposable {
 		this._docs.set(doc.document.uri, doc);
 	}
 
-	public hasNotebookDocument(uri: vscode.Uri): boolean {
+	public hasNotebookDocument(uri: zyraxoncode.Uri): boolean {
 		return this._notebooks.has(uri);
 	}
 
-	public getNotebookDocuments(): readonly vscode.NotebookDocument[] {
+	public getNotebookDocuments(): readonly zyraxoncode.NotebookDocument[] {
 		return Array.from(this._notebooks.values()).map(data => data.document);
 	}
 
@@ -393,9 +393,9 @@ export class SimulationWorkspace extends Disposable {
 		this._notebooks.set(notebook.uri, notebook);
 	}
 
-	public tryGetNotebook(filePathOrUri: string | vscode.Uri): ExtHostNotebookDocumentData | undefined {
+	public tryGetNotebook(filePathOrUri: string | zyraxoncode.Uri): ExtHostNotebookDocumentData | undefined {
 		const queryUri = typeof filePathOrUri === 'string' ? this.getUriFromFilePath(filePathOrUri) : filePathOrUri;
-		if (queryUri.scheme === Schemas.vscodeNotebookCell) {
+		if (queryUri.scheme === Schemas.zyraxoncodeNotebookCell) {
 			// loop through notebooks to find the one matching the path
 			for (const notebook of this._notebooks.values()) {
 				if (notebook.uri.path === queryUri.path) {
@@ -408,7 +408,7 @@ export class SimulationWorkspace extends Disposable {
 		return this._notebooks.get(queryUri);
 	}
 
-	public getNotebook(filePathOrUri: string | vscode.Uri): ExtHostNotebookDocumentData {
+	public getNotebook(filePathOrUri: string | zyraxoncode.Uri): ExtHostNotebookDocumentData {
 		const candidateFile = this.tryGetNotebook(filePathOrUri);
 		if (!candidateFile) {
 			throw new Error(`Missing file ${JSON.stringify(filePathOrUri, null, '\t')}\n\nHave ${Array.from(this._docs.keys()).map(k => k.toString()).join('\n')}`);
@@ -425,22 +425,22 @@ export class SimulationWorkspace extends Disposable {
 		this.currentNotebookEditor = new ExtHostNotebookEditor(doc, []);
 	}
 
-	public setCurrentNotebookSelection(selections: readonly vscode.NotebookRange[]): void {
+	public setCurrentNotebookSelection(selections: readonly zyraxoncode.NotebookRange[]): void {
 		if (this.currentNotebookEditor) {
 			this.currentNotebookEditor.apiEditor.selections = selections;
 			this.currentNotebookEditor.apiEditor.selection = selections[0];
 		}
 	}
 
-	public getFilePath(uri: vscode.Uri): string {
+	public getFilePath(uri: zyraxoncode.Uri): string {
 		return uriToFilePath(uri, this.workspaceFolders);
 	}
 
-	public getUriFromFilePath(filePath: string): vscode.Uri {
+	public getUriFromFilePath(filePath: string): zyraxoncode.Uri {
 		return filePathToUri(filePath, this.workspaceFolders);
 	}
 
-	public applyEdits(uri: vscode.Uri, edits: vscode.TextEdit[], initialRange?: vscode.Range): vscode.Range {
+	public applyEdits(uri: zyraxoncode.Uri, edits: zyraxoncode.TextEdit[], initialRange?: zyraxoncode.Range): zyraxoncode.Range {
 		if (uri.toString() === this.currentEditor?.value.document.uri.toString()) {
 			return this._applyEditsOnCurrentEditor(this.currentEditor, edits, initialRange);
 		}
@@ -453,7 +453,7 @@ export class SimulationWorkspace extends Disposable {
 		return range;
 	}
 
-	public applyNotebookEdits(uri: vscode.Uri, edits: vscode.NotebookEdit[]) {
+	public applyNotebookEdits(uri: zyraxoncode.Uri, edits: zyraxoncode.NotebookEdit[]) {
 		applyNotebookEdits(
 			this.getNotebook(uri),
 			edits,
@@ -461,7 +461,7 @@ export class SimulationWorkspace extends Disposable {
 		);
 	}
 
-	private _applyEditsOnCurrentEditor(editor: ExtHostTextEditor, edits: vscode.TextEdit[], initialRange: vscode.Range | undefined): vscode.Range {
+	private _applyEditsOnCurrentEditor(editor: ExtHostTextEditor, edits: zyraxoncode.TextEdit[], initialRange: zyraxoncode.Range | undefined): zyraxoncode.Range {
 		const { range, selection } = applyEdits(
 			this.getDocument(editor.value.document.uri),
 			edits,
@@ -489,10 +489,10 @@ export class SimulationWorkspace extends Disposable {
  */
 export function applyEdits(
 	doc: IExtHostDocumentData,
-	edits: vscode.TextEdit[],
-	range: vscode.Range,
-	selection: vscode.Range
-): { range: vscode.Range; selection: vscode.Selection } {
+	edits: zyraxoncode.TextEdit[],
+	range: zyraxoncode.Range,
+	selection: zyraxoncode.Range
+): { range: zyraxoncode.Range; selection: zyraxoncode.Selection } {
 	const offsetBasedEdits: OffsetBasedEdit[] = edits.map(edit => {
 		return {
 			range: convertRangeToOffsetBasedRange(doc.document, edit.range),
@@ -521,7 +521,7 @@ export function applyEdits(
  */
 function applyNotebookEdits(
 	doc: ExtHostNotebookDocumentData,
-	edits: vscode.NotebookEdit[],
+	edits: zyraxoncode.NotebookEdit[],
 	simulationWorkspace?: SimulationWorkspace
 ) {
 	ExtHostNotebookDocumentData.applyEdits(doc, edits, simulationWorkspace);
@@ -532,7 +532,7 @@ interface OffsetBasedRange {
 	readonly length: number;
 }
 
-function convertRangeToOffsetBasedRange(doc: vscode.TextDocument, range: vscode.Range): OffsetBasedRange {
+function convertRangeToOffsetBasedRange(doc: zyraxoncode.TextDocument, range: zyraxoncode.Range): OffsetBasedRange {
 	const startOffset = doc.offsetAt(range.start);
 	const endOffset = doc.offsetAt(range.end);
 	return {
@@ -541,7 +541,7 @@ function convertRangeToOffsetBasedRange(doc: vscode.TextDocument, range: vscode.
 	};
 }
 
-function convertOffsetBasedRangeToSelection(doc: vscode.TextDocument, range: OffsetBasedRange): vscode.Selection {
+function convertOffsetBasedRangeToSelection(doc: zyraxoncode.TextDocument, range: OffsetBasedRange): zyraxoncode.Selection {
 	const start = doc.positionAt(range.offset);
 	const end = doc.positionAt(range.offset + range.length);
 	return new Selection(start, end);

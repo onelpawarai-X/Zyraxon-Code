@@ -3,25 +3,25 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { SymbolItemEditorHighlights } from './references-view';
 
 export class EditorHighlights<T> {
 
-	private readonly _decorationType = vscode.window.createTextEditorDecorationType({
-		backgroundColor: new vscode.ThemeColor('editor.findMatchHighlightBackground'),
-		rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
-		overviewRulerLane: vscode.OverviewRulerLane.Center,
-		overviewRulerColor: new vscode.ThemeColor('editor.findMatchHighlightBackground'),
+	private readonly _decorationType = zyraxoncode.window.createTextEditorDecorationType({
+		backgroundColor: new zyraxoncode.ThemeColor('editor.findMatchHighlightBackground'),
+		rangeBehavior: zyraxoncode.DecorationRangeBehavior.ClosedClosed,
+		overviewRulerLane: zyraxoncode.OverviewRulerLane.Center,
+		overviewRulerColor: new zyraxoncode.ThemeColor('editor.findMatchHighlightBackground'),
 	});
 
-	private readonly disposables: vscode.Disposable[] = [];
+	private readonly disposables: zyraxoncode.Disposable[] = [];
 	private readonly _ignore = new Set<string>();
 
-	constructor(private readonly _view: vscode.TreeView<T>, private readonly _delegate: SymbolItemEditorHighlights<T>) {
+	constructor(private readonly _view: zyraxoncode.TreeView<T>, private readonly _delegate: SymbolItemEditorHighlights<T>) {
 		this.disposables.push(
-			vscode.workspace.onDidChangeTextDocument(e => this._ignore.add(e.document.uri.toString())),
-			vscode.window.onDidChangeActiveTextEditor(() => _view.visible && this.update()),
+			zyraxoncode.workspace.onDidChangeTextDocument(e => this._ignore.add(e.document.uri.toString())),
+			zyraxoncode.window.onDidChangeActiveTextEditor(() => _view.visible && this.update()),
 			_view.onDidChangeVisibility(e => e.visible ? this._show() : this._hide()),
 			_view.onDidChangeSelection(() => {
 				if (_view.visible) {
@@ -33,14 +33,14 @@ export class EditorHighlights<T> {
 	}
 
 	dispose() {
-		vscode.Disposable.from(...this.disposables).dispose();
-		for (const editor of vscode.window.visibleTextEditors) {
+		zyraxoncode.Disposable.from(...this.disposables).dispose();
+		for (const editor of zyraxoncode.window.visibleTextEditors) {
 			editor.setDecorations(this._decorationType, []);
 		}
 	}
 
 	private _show(): void {
-		const { activeTextEditor: editor } = vscode.window;
+		const { activeTextEditor: editor } = zyraxoncode.window;
 		if (!editor || !editor.viewColumn) {
 			return;
 		}
@@ -58,7 +58,7 @@ export class EditorHighlights<T> {
 	}
 
 	private _hide(): void {
-		for (const editor of vscode.window.visibleTextEditors) {
+		for (const editor of zyraxoncode.window.visibleTextEditors) {
 			editor.setDecorations(this._decorationType, []);
 		}
 	}

@@ -104,7 +104,7 @@ function createBlockedSession(options: IBlockedSessionOptions, approvals?: Map<s
 	// approval model keys the pending approval on.
 	let chats: readonly IChat[] = [];
 	if (options.approvalCommand !== undefined && approvals) {
-		const chatResource = URI.parse(`vscode-chat://chat/${Math.random().toString(36).slice(2)}`);
+		const chatResource = URI.parse(`__ZYRAXKEEP__0_{Math.random().toString(36).slice(2)}`);
 		approvals.set(chatResource.toString(), {
 			approvalId: chatResource.toString(),
 			kind: AgentSessionApprovalKind.Terminal,
@@ -120,7 +120,7 @@ function createBlockedSession(options: IBlockedSessionOptions, approvals?: Map<s
 
 	return new class extends mock<ISession>() {
 		override readonly sessionId = `local:${options.title}`;
-		override readonly resource = URI.parse(`vscode-session://session/${Math.random().toString(36).slice(2)}`);
+		override readonly resource = URI.parse(`__ZYRAXKEEP__1_{Math.random().toString(36).slice(2)}`);
 		override readonly providerId = 'local';
 		override readonly sessionType = 'local';
 		override readonly icon = Codicon.account;
@@ -211,13 +211,13 @@ function createMockListModelService(): ISessionsListModelService {
 // (yellow) — the two non-needs-input reasons a session counts as blocked.
 const failingChecksPr: IGitHubInfo['pullRequest'] = {
 	number: 4821,
-	uri: URI.parse('https://github.com/microsoft/vscode/pull/4821'),
+	uri: URI.parse('__ZYRAXKEEP__2_'),
 	icon: { ...Codicon.gitPullRequest, color: themeColorFromId('charts.red') },
 };
 
 const unresolvedCommentsPr: IGitHubInfo['pullRequest'] = {
 	number: 4750,
-	uri: URI.parse('https://github.com/microsoft/vscode/pull/4750'),
+	uri: URI.parse('__ZYRAXKEEP__3_'),
 	icon: { ...Codicon.gitPullRequest, color: themeColorFromId('charts.yellow') },
 };
 
@@ -282,7 +282,7 @@ function renderBlockedList(ctx: ComponentFixtureContext, sessions: readonly ISes
 	// they do in production.
 	container.style.width = '392px';
 	container.style.padding = '16px';
-	container.style.backgroundColor = 'var(--vscode-titleBar-activeBackground, var(--vscode-editor-background))';
+	container.style.backgroundColor = 'var(--zyraxoncode-titleBar-activeBackground, var(--zyraxoncode-editor-background))';
 
 	const list = disposableStore.add(instantiationService.createInstance(BlockedSessionsList, container, {
 		onSessionOpen: () => { },
@@ -310,21 +310,21 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 				title: 'Fix authentication redirect loop',
 				status: SessionStatus.NeedsInput,
 				minutesAgo: 3,
-				workspace: createMockWorkspace('vscode', 'feature/auth-fix'),
+				workspace: createMockWorkspace('zyraxoncode', 'feature/auth-fix'),
 				description: 'Waiting for you to confirm running the database migration.',
 			}),
 			createBlockedSession({
 				title: 'Add telemetry for startup performance',
 				status: SessionStatus.Completed,
 				minutesAgo: 62,
-				workspace: createMockWorkspace('vscode', 'perf/startup-telemetry', failingChecksPr),
+				workspace: createMockWorkspace('zyraxoncode', 'perf/startup-telemetry', failingChecksPr),
 				changesSummary: createMockChangesSummary(8, 240, 58),
 			}),
 			createBlockedSession({
 				title: 'Refactor the notification service',
 				status: SessionStatus.Completed,
 				minutesAgo: 184,
-				workspace: createMockWorkspace('vscode', 'refactor/notifications', unresolvedCommentsPr),
+				workspace: createMockWorkspace('zyraxoncode', 'refactor/notifications', unresolvedCommentsPr),
 				changesSummary: createMockChangesSummary(12, 96, 140),
 			}),
 		]),
@@ -337,7 +337,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 				title: 'Update the onboarding walkthrough copy',
 				status: SessionStatus.NeedsInput,
 				minutesAgo: 1,
-				workspace: createMockWorkspace('vscode', 'docs/onboarding'),
+				workspace: createMockWorkspace('zyraxoncode', 'docs/onboarding'),
 				description: 'Which tone should the welcome step use — formal or friendly?',
 			}),
 		]),
@@ -346,12 +346,12 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	// Enough sessions to fill the dropdown and show the bounded, scrollable height.
 	BlockedSessionsList_Many: defineComponentFixture({
 		render: (ctx) => renderBlockedList(ctx, [
-			createBlockedSession({ title: 'Fix authentication redirect loop', status: SessionStatus.NeedsInput, minutesAgo: 3, workspace: createMockWorkspace('vscode', 'feature/auth-fix'), description: 'Waiting for you to confirm running the database migration.' }),
-			createBlockedSession({ title: 'Add telemetry for startup performance', status: SessionStatus.Completed, minutesAgo: 62, workspace: createMockWorkspace('vscode', 'perf/startup-telemetry', failingChecksPr), changesSummary: createMockChangesSummary(8, 240, 58) }),
-			createBlockedSession({ title: 'Refactor the notification service', status: SessionStatus.Completed, minutesAgo: 184, workspace: createMockWorkspace('vscode', 'refactor/notifications', unresolvedCommentsPr), changesSummary: createMockChangesSummary(12, 96, 140) }),
-			createBlockedSession({ title: 'Migrate settings sync to the new store', status: SessionStatus.NeedsInput, minutesAgo: 240, workspace: createMockWorkspace('vscode', 'feature/settings-store'), description: 'Should I keep the legacy keys for one more release?' }),
-			createBlockedSession({ title: 'Investigate flaky terminal integration test', status: SessionStatus.Completed, minutesAgo: 320, workspace: createMockWorkspace('vscode', 'fix/flaky-terminal-test', failingChecksPr), changesSummary: createMockChangesSummary(3, 41, 12) }),
-			createBlockedSession({ title: 'Polish the command center hover states', status: SessionStatus.Completed, minutesAgo: 600, workspace: createMockWorkspace('vscode', 'polish/command-center', unresolvedCommentsPr), changesSummary: createMockChangesSummary(5, 64, 9) }),
+			createBlockedSession({ title: 'Fix authentication redirect loop', status: SessionStatus.NeedsInput, minutesAgo: 3, workspace: createMockWorkspace('zyraxoncode', 'feature/auth-fix'), description: 'Waiting for you to confirm running the database migration.' }),
+			createBlockedSession({ title: 'Add telemetry for startup performance', status: SessionStatus.Completed, minutesAgo: 62, workspace: createMockWorkspace('zyraxoncode', 'perf/startup-telemetry', failingChecksPr), changesSummary: createMockChangesSummary(8, 240, 58) }),
+			createBlockedSession({ title: 'Refactor the notification service', status: SessionStatus.Completed, minutesAgo: 184, workspace: createMockWorkspace('zyraxoncode', 'refactor/notifications', unresolvedCommentsPr), changesSummary: createMockChangesSummary(12, 96, 140) }),
+			createBlockedSession({ title: 'Migrate settings sync to the new store', status: SessionStatus.NeedsInput, minutesAgo: 240, workspace: createMockWorkspace('zyraxoncode', 'feature/settings-store'), description: 'Should I keep the legacy keys for one more release?' }),
+			createBlockedSession({ title: 'Investigate flaky terminal integration test', status: SessionStatus.Completed, minutesAgo: 320, workspace: createMockWorkspace('zyraxoncode', 'fix/flaky-terminal-test', failingChecksPr), changesSummary: createMockChangesSummary(3, 41, 12) }),
+			createBlockedSession({ title: 'Polish the command center hover states', status: SessionStatus.Completed, minutesAgo: 600, workspace: createMockWorkspace('zyraxoncode', 'polish/command-center', unresolvedCommentsPr), changesSummary: createMockChangesSummary(5, 64, 9) }),
 		]),
 	}),
 
@@ -359,7 +359,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	BlockedSessionsList_OneApproval: defineComponentFixture({
 		render: (ctx) => {
 			const { sessions, approvalModel } = buildApprovalScenario([
-				{ title: 'Build the production bundle', status: SessionStatus.NeedsInput, minutesAgo: 1, workspace: createMockWorkspace('vscode', 'release/prod-build'), approvalCommand: 'npm run build:prod' },
+				{ title: 'Build the production bundle', status: SessionStatus.NeedsInput, minutesAgo: 1, workspace: createMockWorkspace('zyraxoncode', 'release/prod-build'), approvalCommand: 'npm run build:prod' },
 			]);
 			renderBlockedList(ctx, sessions, approvalModel);
 		},
@@ -369,8 +369,8 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	BlockedSessionsList_TwoApprovals: defineComponentFixture({
 		render: (ctx) => {
 			const { sessions, approvalModel } = buildApprovalScenario([
-				{ title: 'Push the auth fix', status: SessionStatus.NeedsInput, minutesAgo: 2, workspace: createMockWorkspace('vscode', 'feature/auth-fix'), approvalCommand: 'git push --force-with-lease origin feature/auth-fix' },
-				{ title: 'Publish the release image', status: SessionStatus.NeedsInput, minutesAgo: 6, workspace: createMockWorkspace('vscode', 'release/docker'), approvalCommand: 'docker run --rm -it -v "$(pwd)":/workspace -w /workspace -e NODE_ENV=production -e REGISTRY=ghcr.io/Zyraxon --network host node:20-alpine npm run build:image -- --push --tag latest --no-cache' },
+				{ title: 'Push the auth fix', status: SessionStatus.NeedsInput, minutesAgo: 2, workspace: createMockWorkspace('zyraxoncode', 'feature/auth-fix'), approvalCommand: 'git push --force-with-lease origin feature/auth-fix' },
+				{ title: 'Publish the release image', status: SessionStatus.NeedsInput, minutesAgo: 6, workspace: createMockWorkspace('zyraxoncode', 'release/docker'), approvalCommand: 'docker run --rm -it -v "$(pwd)":/workspace -w /workspace -e NODE_ENV=production -e REGISTRY=ghcr.io/Zyraxon --network host node:20-alpine npm run build:image -- --push --tag latest --no-cache' },
 			]);
 			renderBlockedList(ctx, sessions, approvalModel);
 		},
@@ -381,11 +381,11 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	BlockedSessionsList_FiveApprovals: defineComponentFixture({
 		render: (ctx) => {
 			const { sessions, approvalModel } = buildApprovalScenario([
-				{ title: 'Install dependencies', status: SessionStatus.NeedsInput, minutesAgo: 1, workspace: createMockWorkspace('vscode', 'chore/deps'), approvalCommand: 'npm ci' },
-				{ title: 'Rebase onto main', status: SessionStatus.NeedsInput, minutesAgo: 3, workspace: createMockWorkspace('vscode', 'feature/rebase'), approvalCommand: 'git rebase --onto main feature/old-base feature/new-work' },
-				{ title: 'Provision the review environment', status: SessionStatus.NeedsInput, minutesAgo: 7, workspace: createMockWorkspace('vscode', 'infra/review-env'), approvalCommand: 'kubectl apply -f ./deploy/review.yaml --namespace review-pr-4821 && kubectl rollout status deployment/web --namespace review-pr-4821 --timeout=180s && kubectl get pods --namespace review-pr-4821 -o wide' },
-				{ title: 'Format changed files', status: SessionStatus.NeedsInput, minutesAgo: 12, workspace: createMockWorkspace('vscode', 'chore/format'), approvalCommand: 'for f in $(git diff --name-only main); do\n  npx prettier --write "$f"\n  git add "$f"\ndone' },
-				{ title: 'Reset and reinstall', status: SessionStatus.NeedsInput, minutesAgo: 20, workspace: createMockWorkspace('vscode', 'fix/clean-install'), approvalCommand: 'rm -rf node_modules\nrm -f package-lock.json\nnpm cache clean --force\nnpm install\nnpm run test:integration' },
+				{ title: 'Install dependencies', status: SessionStatus.NeedsInput, minutesAgo: 1, workspace: createMockWorkspace('zyraxoncode', 'chore/deps'), approvalCommand: 'npm ci' },
+				{ title: 'Rebase onto main', status: SessionStatus.NeedsInput, minutesAgo: 3, workspace: createMockWorkspace('zyraxoncode', 'feature/rebase'), approvalCommand: 'git rebase --onto main feature/old-base feature/new-work' },
+				{ title: 'Provision the review environment', status: SessionStatus.NeedsInput, minutesAgo: 7, workspace: createMockWorkspace('zyraxoncode', 'infra/review-env'), approvalCommand: 'kubectl apply -f ./deploy/review.yaml --namespace review-pr-4821 && kubectl rollout status deployment/web --namespace review-pr-4821 --timeout=180s && kubectl get pods --namespace review-pr-4821 -o wide' },
+				{ title: 'Format changed files', status: SessionStatus.NeedsInput, minutesAgo: 12, workspace: createMockWorkspace('zyraxoncode', 'chore/format'), approvalCommand: 'for f in $(git diff --name-only main); do\n  npx prettier --write "$f"\n  git add "$f"\ndone' },
+				{ title: 'Reset and reinstall', status: SessionStatus.NeedsInput, minutesAgo: 20, workspace: createMockWorkspace('zyraxoncode', 'fix/clean-install'), approvalCommand: 'rm -rf node_modules\nrm -f package-lock.json\nnpm cache clean --force\nnpm install\nnpm run test:integration' },
 			]);
 			renderBlockedList(ctx, sessions, approvalModel);
 		},
@@ -395,7 +395,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	BlockedSessionsList_OneFixCI: defineComponentFixture({
 		render: (ctx) => {
 			const { sessions, ciFixModel } = buildCIFixScenario([
-				{ title: 'Add telemetry for startup performance', status: SessionStatus.Completed, minutesAgo: 62, workspace: createMockWorkspace('vscode', 'perf/startup-telemetry', failingChecksPr), changesSummary: createMockChangesSummary(8, 240, 58), ci: { failed: 2, pending: 3 } },
+				{ title: 'Add telemetry for startup performance', status: SessionStatus.Completed, minutesAgo: 62, workspace: createMockWorkspace('zyraxoncode', 'perf/startup-telemetry', failingChecksPr), changesSummary: createMockChangesSummary(8, 240, 58), ci: { failed: 2, pending: 3 } },
 			]);
 			renderBlockedList(ctx, sessions, undefined, ciFixModel);
 		},
@@ -406,11 +406,11 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	BlockedSessionsList_FixCIAndApproval: defineComponentFixture({
 		render: (ctx) => {
 			const { sessions: ciSessions, ciFixModel } = buildCIFixScenario([
-				{ title: 'Add telemetry for startup performance', status: SessionStatus.Completed, minutesAgo: 62, workspace: createMockWorkspace('vscode', 'perf/startup-telemetry', failingChecksPr), changesSummary: createMockChangesSummary(8, 240, 58), ci: { failed: 5, pending: 0 } },
-				{ title: 'Investigate flaky terminal integration test', status: SessionStatus.Completed, minutesAgo: 320, workspace: createMockWorkspace('vscode', 'fix/flaky-terminal-test', failingChecksPr), changesSummary: createMockChangesSummary(3, 41, 12), ci: { failed: 1, pending: 7 } },
+				{ title: 'Add telemetry for startup performance', status: SessionStatus.Completed, minutesAgo: 62, workspace: createMockWorkspace('zyraxoncode', 'perf/startup-telemetry', failingChecksPr), changesSummary: createMockChangesSummary(8, 240, 58), ci: { failed: 5, pending: 0 } },
+				{ title: 'Investigate flaky terminal integration test', status: SessionStatus.Completed, minutesAgo: 320, workspace: createMockWorkspace('zyraxoncode', 'fix/flaky-terminal-test', failingChecksPr), changesSummary: createMockChangesSummary(3, 41, 12), ci: { failed: 1, pending: 7 } },
 			]);
 			const { sessions: approvalSessions, approvalModel } = buildApprovalScenario([
-				{ title: 'Push the auth fix', status: SessionStatus.NeedsInput, minutesAgo: 2, workspace: createMockWorkspace('vscode', 'feature/auth-fix'), approvalCommand: 'git push --force-with-lease origin feature/auth-fix' },
+				{ title: 'Push the auth fix', status: SessionStatus.NeedsInput, minutesAgo: 2, workspace: createMockWorkspace('zyraxoncode', 'feature/auth-fix'), approvalCommand: 'git push --force-with-lease origin feature/auth-fix' },
 			]);
 			renderBlockedList(ctx, [...ciSessions, ...approvalSessions], approvalModel, ciFixModel);
 		},

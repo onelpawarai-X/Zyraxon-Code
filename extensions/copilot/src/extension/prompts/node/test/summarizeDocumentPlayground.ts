@@ -7,7 +7,7 @@ import { OverlayNode } from '../../../../platform/parser/node/nodes';
 import { DisposableStore } from '../../../../util/vs/base/common/lifecycle';
 import { autorun, derived, IObservable, observableFromPromise, observableValue, transaction } from '../../../../util/vs/base/common/observable';
 import { isDefined } from '../../../../util/vs/base/common/types';
-import { Range } from '../../../../vscodeTypes';
+import { Range } from '../../../../zyraxoncodeTypes';
 import { IProjectedDocumentDebugInfo } from '../inline/summarizedDocument/implementation';
 
 export class SummarizeDocumentPlayground {

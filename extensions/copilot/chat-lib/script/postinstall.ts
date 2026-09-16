@@ -53,7 +53,7 @@ async function platformDir(): Promise<string> {
 }
 
 function treeSitterWasmDir(): string {
-	const modulePath = path.dirname(require.resolve('@vscode/tree-sitter-wasm'));
+	const modulePath = path.dirname(require.resolve('@zyraxoncode/tree-sitter-wasm'));
 	return path.relative(REPO_ROOT, modulePath);
 }
 

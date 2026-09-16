@@ -374,7 +374,7 @@ function registerEditorGroupsLayoutCommands(): void {
 
 	// API Commands
 	CommandsRegistry.registerCommand({
-		id: 'vscode.setEditorLayout',
+		id: 'zyraxoncode.setEditorLayout',
 		handler: (accessor: ServicesAccessor, args: EditorGroupLayout) => applyEditorLayout(accessor, args),
 		metadata: {
 			'description': `Set the editor layout. Editor layout is represented as a tree of groups in which the first group is the root group of the layout.
@@ -411,7 +411,7 @@ function registerEditorGroupsLayoutCommands(): void {
 	});
 
 	CommandsRegistry.registerCommand({
-		id: 'vscode.getEditorLayout',
+		id: 'zyraxoncode.getEditorLayout',
 		handler: (accessor: ServicesAccessor) => {
 			const editorGroupsService = accessor.get(IEditorGroupsService);
 
@@ -420,7 +420,7 @@ function registerEditorGroupsLayoutCommands(): void {
 		metadata: {
 			description: 'Get Editor Layout',
 			args: [],
-			returns: 'An editor layout object, in the same format as vscode.setEditorLayout'
+			returns: 'An editor layout object, in the same format as zyraxoncode.setEditorLayout'
 		}
 	});
 }
@@ -440,9 +440,9 @@ function registerOpenEditorAPICommands(): void {
 
 	// partial, renderer-side API command to open editor only supporting
 	// arguments that do not need to be converted from the extension host
-	// complements https://github.com/microsoft/vscode/blob/2b164efb0e6a5de3826bff62683eaeafe032284f/src/vs/workbench/api/common/extHostApiCommands.ts#L373
+	// complements __ZYRAXKEEP__0_
 	CommandsRegistry.registerCommand({
-		id: 'vscode.open',
+		id: 'zyraxoncode.open',
 		handler: (accessor, arg) => {
 			accessor.get(ICommandService).executeCommand(API_OPEN_EDITOR_COMMAND_ID, arg);
 		},
@@ -499,9 +499,9 @@ function registerOpenEditorAPICommands(): void {
 
 	// partial, renderer-side API command to open diff editor only supporting
 	// arguments that do not need to be converted from the extension host
-	// complements https://github.com/microsoft/vscode/blob/2b164efb0e6a5de3826bff62683eaeafe032284f/src/vs/workbench/api/common/extHostApiCommands.ts#L397
+	// complements __ZYRAXKEEP__1_
 	CommandsRegistry.registerCommand({
-		id: 'vscode.diff',
+		id: 'zyraxoncode.diff',
 		handler: (accessor, left, right, label) => {
 			accessor.get(ICommandService).executeCommand(API_OPEN_DIFF_EDITOR_COMMAND_ID, left, right, label);
 		},
@@ -553,9 +553,9 @@ function registerOpenEditorAPICommands(): void {
 
 	// partial, renderer-side API command to open diff editor only supporting
 	// arguments that do not need to be converted from the extension host
-	// complements https://github.com/microsoft/vscode/blob/2b164efb0e6a5de3826bff62683eaeafe032284f/src/vs/workbench/api/common/extHostApiCommands.ts#L397
+	// complements __ZYRAXKEEP__2_
 	CommandsRegistry.registerCommand({
-		id: 'vscode.changes',
+		id: 'zyraxoncode.changes',
 		handler: (accessor, title: string, resources: [UriComponents, UriComponents?, UriComponents?][]) => {
 			accessor.get(ICommandService).executeCommand('_workbench.changes', title, resources);
 		},
@@ -1682,7 +1682,7 @@ function isModalEditorPart(obj: unknown): obj is IModalEditorPart {
 		&& typeof part.maximized === 'boolean'
 		&& typeof part.updateOptions === 'function'
 		&& !!part.modalElement
-		&& part.windowId === mainWindow.vscodeWindowId;
+		&& part.windowId === mainWindow.zyraxoncodeWindowId;
 }
 
 export function setup(): void {

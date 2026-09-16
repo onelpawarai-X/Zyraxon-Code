@@ -63,7 +63,7 @@
 			let isFocused = document.hasFocus();
 			setInterval(() => {
 				const target = getActiveFrame();
-				const isCurrentlyFocused = document.hasFocus() || !!(target && target.contentDocument && target.contentDocument.body.classList.contains('vscode-context-menu-visible'));
+				const isCurrentlyFocused = document.hasFocus() || !!(target && target.contentDocument && target.contentDocument.body.classList.contains('zyraxoncode-context-menu-visible'));
 				if (isCurrentlyFocused === isFocused) {
 					return;
 				}
@@ -96,23 +96,23 @@
 			return obj;
 		}
 
-		const vscodePostMessageFuncName = '__vscode_post_message__';
+		const zyraxoncodePostMessageFuncName = '__zyraxoncode_post_message__';
 
 		const defaultStyles = document.createElement('style');
 		defaultStyles.id = '_defaultStyles';
 		defaultStyles.textContent = `
-		@layer vscode-default {
+		@layer zyraxoncode-default {
 			html {
-				scrollbar-color: var(--vscode-scrollbarSlider-background) var(--vscode-editor-background);
+				scrollbar-color: var(--zyraxoncode-scrollbarSlider-background) var(--zyraxoncode-editor-background);
 			}
 
 			body {
 				overscroll-behavior-x: none;
 				background-color: transparent;
-				color: var(--vscode-editor-foreground);
-				font-family: var(--vscode-font-family);
-				font-weight: var(--vscode-font-weight);
-				font-size: var(--vscode-font-size);
+				color: var(--zyraxoncode-editor-foreground);
+				font-family: var(--zyraxoncode-font-family);
+				font-weight: var(--zyraxoncode-font-weight);
+				font-size: var(--zyraxoncode-font-size);
 				margin: 0;
 				padding: 0 20px;
 			}
@@ -123,7 +123,7 @@
 			}
 
 			a, a code {
-				color: var(--vscode-textLink-foreground);
+				color: var(--zyraxoncode-textLink-foreground);
 			}
 
 			p > a {
@@ -131,7 +131,7 @@
 			}
 
 			a:hover {
-				color: var(--vscode-textLink-activeForeground);
+				color: var(--zyraxoncode-textLink-activeForeground);
 			}
 
 			a:focus,
@@ -144,8 +144,8 @@
 
 			code {
 				font-family: var(--monaco-monospace-font);
-				color: var(--vscode-textPreformat-foreground);
-				background-color: var(--vscode-textPreformat-background);
+				color: var(--zyraxoncode-textPreformat-foreground);
+				background-color: var(--zyraxoncode-textPreformat-background);
 				padding: 1px 3px;
 				border-radius: 4px;
 			}
@@ -155,19 +155,19 @@
 			}
 
 			blockquote {
-				background: var(--vscode-textBlockQuote-background);
-				border-color: var(--vscode-textBlockQuote-border);
+				background: var(--zyraxoncode-textBlockQuote-background);
+				border-color: var(--zyraxoncode-textBlockQuote-border);
 			}
 
 			kbd {
-				background-color: var(--vscode-keybindingLabel-background);
-				color: var(--vscode-keybindingLabel-foreground);
+				background-color: var(--zyraxoncode-keybindingLabel-background);
+				color: var(--zyraxoncode-keybindingLabel-foreground);
 				border-style: solid;
 				border-width: 1px;
 				border-radius: 3px;
-				border-color: var(--vscode-keybindingLabel-border);
-				border-bottom-color: var(--vscode-keybindingLabel-bottomBorder);
-				box-shadow: inset 0 -1px 0 var(--vscode-widget-shadow);
+				border-color: var(--zyraxoncode-keybindingLabel-border);
+				border-bottom-color: var(--zyraxoncode-keybindingLabel-bottomBorder);
+				box-shadow: inset 0 -1px 0 var(--zyraxoncode-widget-shadow);
 				vertical-align: middle;
 				padding: 1px 3px;
 			}
@@ -178,23 +178,23 @@
 			}
 
 			::-webkit-scrollbar-corner {
-				background-color: var(--vscode-editor-background);
+				background-color: var(--zyraxoncode-editor-background);
 			}
 
 			::-webkit-scrollbar-thumb {
-				background-color: var(--vscode-scrollbarSlider-background);
+				background-color: var(--zyraxoncode-scrollbarSlider-background);
 			}
 			::-webkit-scrollbar-thumb:hover {
-				background-color: var(--vscode-scrollbarSlider-hoverBackground);
+				background-color: var(--zyraxoncode-scrollbarSlider-hoverBackground);
 			}
 			::-webkit-scrollbar-thumb:active {
-				background-color: var(--vscode-scrollbarSlider-activeBackground);
+				background-color: var(--zyraxoncode-scrollbarSlider-activeBackground);
 			}
 			::highlight(find-highlight) {
-				background-color: var(--vscode-editor-findMatchHighlightBackground);
+				background-color: var(--zyraxoncode-editor-findMatchHighlightBackground);
 			}
 			::highlight(current-find-highlight) {
-				background-color: var(--vscode-editor-findMatchBackground);
+				background-color: var(--zyraxoncode-editor-findMatchBackground);
 			}
 		}`;
 
@@ -207,7 +207,7 @@
 			const encodedState = state ? encodeURIComponent(state) : undefined;
 			return /* js */`
 					globalThis.acquireVsCodeApi = (function() {
-						const originalPostMessage = window.parent['${vscodePostMessageFuncName}'].bind(window.parent);
+						const originalPostMessage = window.parent['${zyraxoncodePostMessageFuncName}'].bind(window.parent);
 						const doPostMessage = (channel, data, transfer) => {
 							originalPostMessage(channel, data, transfer);
 						};
@@ -252,7 +252,7 @@
 				return reject(new Error('Service Workers are not enabled. Webviews will not work. Try disabling private/incognito mode.'));
 			}
 
-			const swPath = encodeURI(`service-worker.js?v=${expectedWorkerVersion}&vscode-resource-base-authority=${searchParams.get('vscode-resource-base-authority')}&remoteAuthority=${searchParams.get('remoteAuthority') ?? ''}&platform=${searchParams.get('platform')}`);
+			const swPath = encodeURI(`service-worker.js?v=${expectedWorkerVersion}&zyraxoncode-resource-base-authority=${searchParams.get('zyraxoncode-resource-base-authority')}&remoteAuthority=${searchParams.get('remoteAuthority') ?? ''}&platform=${searchParams.get('platform')}`);
 			navigator.serviceWorker.register(swPath, { type: 'module', updateViaCache: 'none' })
 				.then(async registration => {
 					if (navigator.serviceWorker.controller) {
@@ -334,7 +334,7 @@
 
 				if (!crypto.subtle) {
 					// cannot validate, not running in a secure context
-					throw new Error(`'crypto.subtle' is not available so webviews will not work. This is likely because the editor is not running in a secure context (https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts).`);
+					throw new Error(`'crypto.subtle' is not available so webviews will not work. This is likely because the editor is not running in a secure context (__ZYRAXKEEP__0_).`);
 				}
 
 				// Here the `parentOriginHash()` function from `src/vs/workbench/common/webview.ts` is inlined
@@ -485,28 +485,28 @@
 			}
 
 			if (body) {
-				body.classList.remove('vscode-light', 'vscode-dark', 'vscode-high-contrast', 'vscode-high-contrast-light', 'vscode-reduce-motion', 'vscode-using-screen-reader');
+				body.classList.remove('zyraxoncode-light', 'zyraxoncode-dark', 'zyraxoncode-high-contrast', 'zyraxoncode-high-contrast-light', 'zyraxoncode-reduce-motion', 'zyraxoncode-using-screen-reader');
 
 				if (initData.activeTheme) {
 					body.classList.add(initData.activeTheme);
-					if (initData.activeTheme === 'vscode-high-contrast-light') {
+					if (initData.activeTheme === 'zyraxoncode-high-contrast-light') {
 						// backwards compatibility
-						body.classList.add('vscode-high-contrast');
+						body.classList.add('zyraxoncode-high-contrast');
 					}
 				}
 
 				if (initData.reduceMotion) {
-					body.classList.add('vscode-reduce-motion');
+					body.classList.add('zyraxoncode-reduce-motion');
 				}
 
 				if (initData.screenReader) {
-					body.classList.add('vscode-using-screen-reader');
+					body.classList.add('zyraxoncode-using-screen-reader');
 				}
 
-				body.dataset.vscodeThemeKind = initData.activeTheme;
-				/** @deprecated data-vscode-theme-name will be removed, use data-vscode-theme-id instead */
-				body.dataset.vscodeThemeName = initData.themeLabel || '';
-				body.dataset.vscodeThemeId = initData.themeId || '';
+				body.dataset.zyraxoncodeThemeKind = initData.activeTheme;
+				/** @deprecated data-zyraxoncode-theme-name will be removed, use data-zyraxoncode-theme-id instead */
+				body.dataset.zyraxoncodeThemeName = initData.themeLabel || '';
+				body.dataset.zyraxoncodeThemeId = initData.themeId || '';
 			}
 
 			if (initData.styles) {
@@ -517,7 +517,7 @@
 					const property = documentStyle[i];
 
 					// Don't remove properties that the webview might have added separately
-					if (property && property.startsWith('--vscode-')) {
+					if (property && property.startsWith('--zyraxoncode-')) {
 						documentStyle.removeProperty(property);
 					}
 				}
@@ -799,7 +799,7 @@
 		function handleInnerDragEvent(/** @type {DragEvent} */ e) {
 			/**
 			 * To ensure that the drop event always fires as expected, you should always include a preventDefault() call in the part of your code which handles the dragover event.
-			 * source: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
+			 * source: __ZYRAXKEEP__1_
 			 **/
 			e.preventDefault();
 
@@ -866,7 +866,7 @@
 			// Inject default script
 			if (options.allowScripts) {
 				const defaultScript = newDocument.createElement('script');
-				defaultScript.id = '_vscodeApiScript';
+				defaultScript.id = '_zyraxoncodeApiScript';
 				defaultScript.textContent = getVsCodeApiScript(options.allowMultipleAPIAcquire, data.state);
 				newDocument.head.prepend(defaultScript);
 			}
@@ -894,7 +894,7 @@
 					// Attempt to rewrite CSPs that hardcode old-style resource endpoint
 					const cspContent = csp.getAttribute('content');
 					if (cspContent) {
-						const newCsp = cspContent.replace(/(vscode-webview-resource|vscode-resource):(?=(\s|;|$))/g, data.cspSource);
+						const newCsp = cspContent.replace(/(zyraxoncode-webview-resource|zyraxoncode-resource):(?=(\s|;|$))/g, data.cspSource);
 						csp.setAttribute('content', newCsp);
 					}
 				} catch (e) {
@@ -1042,7 +1042,7 @@
 				// into it to get around this.
 				const fakeUrlParams = new URLSearchParams({ id: ID });
 				if (globalThis.crossOriginIsolated) {
-					fakeUrlParams.set('vscode-coi', '3'); /*COOP+COEP*/
+					fakeUrlParams.set('zyraxoncode-coi', '3'); /*COOP+COEP*/
 				}
 				newFrame.src = `./fake.html?${fakeUrlParams.toString()}`;
 
@@ -1058,7 +1058,7 @@
 				function onFrameLoaded(contentDocument) {
 					perfMark('content/innerFrameLoaded')
 
-					// Workaround for https://bugs.chromium.org/p/chromium/issues/detail?id=978325
+					// Workaround for __ZYRAXKEEP__2_
 					setTimeout(() => {
 						contentDocument.open();
 						contentDocument.write(newDocument);
@@ -1073,7 +1073,7 @@
 				}
 
 				if (!options.allowScripts && isSafari) {
-					// On Safari for iframes with scripts disabled, the `DOMContentLoaded` never seems to be fired: https://bugs.webkit.org/show_bug.cgi?id=33604
+					// On Safari for iframes with scripts disabled, the `DOMContentLoaded` never seems to be fired: __ZYRAXKEEP__3_
 					// Use polling instead.
 					const interval = setInterval(() => {
 						// If the frame is no longer mounted, loading has stopped
@@ -1101,7 +1101,7 @@
 				 */
 				const onLoad = (contentDocument, contentWindow) => {
 					if (contentDocument && contentDocument.body) {
-						// Workaround for https://github.com/microsoft/vscode/issues/12865
+						// Workaround for __ZYRAXKEEP__4_
 						// check new scrollY and reset if necessary
 						setInitialScrollPosition(contentDocument.body, contentWindow);
 					}
@@ -1195,15 +1195,15 @@
 							}
 
 							// Search self/ancestors for the closest context data attribute
-							el = el.closest('[data-vscode-context]');
+							el = el.closest('[data-zyraxoncode-context]');
 							if (!el) {
 								break;
 							}
 
 							try {
-								context = { ...JSON.parse(el.dataset.vscodeContext), ...context };
+								context = { ...JSON.parse(el.dataset.zyraxoncodeContext), ...context };
 							} catch (e) {
-								console.error(`Error parsing 'data-vscode-context' as json`, el, e);
+								console.error(`Error parsing 'data-zyraxoncode-context' as json`, el, e);
 							}
 
 							el = el.parentElement;
@@ -1226,11 +1226,11 @@
 
 			});
 
-			// propagate vscode-context-menu-visible class
+			// propagate zyraxoncode-context-menu-visible class
 			hostMessaging.onMessage('set-context-menu-visible', (_event, data) => {
 				const target = getActiveFrame();
 				if (target && target.contentDocument) {
-					target.contentDocument.body.classList.toggle('vscode-context-menu-visible', data.visible);
+					target.contentDocument.body.classList.toggle('zyraxoncode-context-menu-visible', data.visible);
 				}
 			});
 
@@ -1318,7 +1318,7 @@
 				onBlur: () => hostMessaging.postMessage('did-blur', undefined)
 			});
 
-			(/** @type {any} */ (window))[vscodePostMessageFuncName] = (/** @type {string} */ command, /** @type {any} */ data) => {
+			(/** @type {any} */ (window))[zyraxoncodePostMessageFuncName] = (/** @type {string} */ command, /** @type {any} */ data) => {
 				switch (command) {
 					case 'onmessage':
 					case 'do-update-state':

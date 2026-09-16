@@ -117,9 +117,9 @@ export class SetupAgent extends Disposable implements IChatAgentImplementation {
 
 			const disposables = new DisposableStore();
 
-			// Register VSCode agent
-			const { disposable: vscodeDisposable } = SetupAgent.doRegisterAgent(instantiationService, chatAgentService, 'setup.vscode', 'vscode', false, localize2('vscodeAgentDescription', "Ask questions about ZYRAXON Code").value, ChatAgentLocation.Chat, ChatModeKind.Agent, context, controller);
-			disposables.add(vscodeDisposable);
+			// Register ZyraxonCode agent
+			const { disposable: zyraxoncodeDisposable } = SetupAgent.doRegisterAgent(instantiationService, chatAgentService, 'setup.zyraxoncode', 'zyraxoncode', false, localize2('zyraxoncodeAgentDescription', "Ask questions about ZYRAXON Code").value, ChatAgentLocation.Chat, ChatModeKind.Agent, context, controller);
+			disposables.add(zyraxoncodeDisposable);
 
 			// Register workspace agent
 			const { disposable: workspaceDisposable } = SetupAgent.doRegisterAgent(instantiationService, chatAgentService, 'setup.workspace', 'workspace', false, localize2('workspaceAgentDescription', "Ask about your workspace").value, ChatAgentLocation.Chat, ChatModeKind.Agent, context, controller);

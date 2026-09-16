@@ -19,7 +19,7 @@ const issueReporterIcon = registerIcon('issue-reporter', Codicon.report, localiz
 export class IssueReporterEditorInput extends EditorInput {
 
 	static readonly ID = 'workbench.input.issueReporter';
-	static readonly RESOURCE = URI.from({ scheme: 'vscode-issue-reporter', path: 'reporter' });
+	static readonly RESOURCE = URI.from({ scheme: 'zyraxoncode-issue-reporter', path: 'reporter' });
 
 	readonly data: IssueReporterData | undefined;
 

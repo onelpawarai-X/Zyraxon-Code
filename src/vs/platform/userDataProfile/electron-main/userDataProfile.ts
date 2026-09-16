@@ -77,14 +77,14 @@ function getAgentPluginsPath(args: NativeParsedArgs, userHome: URI): string {
 		return resolve(cliAgentPluginsDir);
 	}
 
-	const vscodeAgentPlugins = env['VSCODE_AGENT_PLUGINS'];
-	if (vscodeAgentPlugins) {
-		return vscodeAgentPlugins;
+	const zyraxoncodeAgentPlugins = env['VSCODE_AGENT_PLUGINS'];
+	if (zyraxoncodeAgentPlugins) {
+		return zyraxoncodeAgentPlugins;
 	}
 
-	const vscodePortable = env['VSCODE_PORTABLE'];
-	if (vscodePortable) {
-		return join(vscodePortable, 'agent-plugins');
+	const zyraxoncodePortable = env['VSCODE_PORTABLE'];
+	if (zyraxoncodePortable) {
+		return join(zyraxoncodePortable, 'agent-plugins');
 	}
 
 	return joinPath(userHome, 'agent-plugins').fsPath;

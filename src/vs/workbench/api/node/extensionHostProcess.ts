@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import minimist from 'minimist';
-import * as nativeWatchdog from '@vscode/native-watchdog';
+import * as nativeWatchdog from '@zyraxoncode/native-watchdog';
 import * as net from 'net';
 import { ProcessTimeRunOnceScheduler } from '../../../base/common/async.js';
 import { VSBuffer } from '../../../base/common/buffer.js';
@@ -51,7 +51,7 @@ if (process.env.VSCODE_DEV) {
 	});
 }
 
-// workaround for https://github.com/microsoft/vscode/issues/85490
+// workaround for __ZYRAXKEEP__0_
 // remove --inspect-port=0 after start so that it doesn't trigger LSP debugging
 (function removeInspectPort() {
 	for (let i = 0; i < process.execArgv.length; i++) {
@@ -74,8 +74,8 @@ const args = minimist(process.argv.slice(2), {
 }) as ParsedExtHostArgs;
 
 // With Electron 2.x and node.js 8.x the "natives" module
-// can cause a native crash (see https://github.com/nodejs/node/issues/19891 and
-// https://github.com/electron/electron/issues/10905). To prevent this from
+// can cause a native crash (see __ZYRAXKEEP__1_ and
+// __ZYRAXKEEP__2_). To prevent this from
 // happening we essentially blocklist this module from getting loaded in any
 // extension by patching the node require() function.
 (function () {
@@ -84,7 +84,7 @@ const args = minimist(process.argv.slice(2), {
 
 	Module._load = function (request: string) {
 		if (request === 'natives') {
-			throw new Error('Either the extension or an NPM dependency is using the [unsupported "natives" node module](https://go.microsoft.com/fwlink/?linkid=871887).');
+			throw new Error('Either the extension or an NPM dependency is using the [unsupported "natives" node module](__ZYRAXKEEP__3_).');
 		}
 
 		return originalLoad.apply(this, arguments);
@@ -114,7 +114,7 @@ function patchProcess(allowExit: boolean) {
 	// Set ELECTRON_RUN_AS_NODE environment variable for extensions that use
 	// child_process.spawn with process.execPath and expect to run as node process
 	// on the desktop.
-	// Refs https://github.com/microsoft/vscode/issues/151012#issuecomment-1156593228
+	// Refs __ZYRAXKEEP__4_
 	process.env['ELECTRON_RUN_AS_NODE'] = '1';
 
 	// eslint-disable-next-line local/code-no-any-casts
@@ -142,7 +142,7 @@ function patchProcess(allowExit: boolean) {
 if (!args.supportGlobalNavigator) {
 	Object.defineProperty(globalThis, 'navigator', {
 		get: () => {
-			onUnexpectedExternalError(new PendingMigrationError('navigator is now a global in nodejs, please see https://aka.ms/vscode-extensions/navigator for additional info on this error.'));
+			onUnexpectedExternalError(new PendingMigrationError('navigator is now a global in nodejs, please see __ZYRAXKEEP__5_ for additional info on this error.'));
 			return undefined;
 		}
 	});
@@ -375,7 +375,7 @@ function connectToRenderer(protocol: IMessagePassingProtocol): Promise<IRenderer
 				// So also use the native node module to do it from a separate thread
 				let watchdog: typeof nativeWatchdog;
 				try {
-					watchdog = require('@vscode/native-watchdog');
+					watchdog = require('@zyraxoncode/native-watchdog');
 					watchdog.start(initData.parentPid);
 				} catch (err) {
 					// no problem...
@@ -397,8 +397,8 @@ function connectToRenderer(protocol: IMessagePassingProtocol): Promise<IRenderer
 async function startExtensionHostProcess(): Promise<void> {
 
 	// Print a console message when rejection isn't handled within N seconds. For details:
-	// see https://nodejs.org/api/process.html#process_event_unhandledrejection
-	// and https://nodejs.org/api/process.html#process_event_rejectionhandled
+	// see __ZYRAXKEEP__6_
+	// and __ZYRAXKEEP__7_
 	const unhandledPromises: Promise<any>[] = [];
 	process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
 		unhandledPromises.push(promise);
@@ -442,7 +442,7 @@ async function startExtensionHostProcess(): Promise<void> {
 	performance.mark(`code/extHost/didWaitForInitData`);
 	const { initData } = renderer;
 	// setup things
-	patchProcess(!!initData.environment.extensionTestsLocationURI); // to support other test frameworks like Jasmin that use process.exit (https://github.com/microsoft/vscode/issues/37708)
+	patchProcess(!!initData.environment.extensionTestsLocationURI); // to support other test frameworks like Jasmin that use process.exit (__ZYRAXKEEP__8_)
 	initData.environment.useHostProxy = args.useHostProxy !== undefined ? args.useHostProxy !== 'false' : undefined;
 	initData.environment.skipWorkspaceStorageLock = boolean(args.skipWorkspaceStorageLock, false);
 

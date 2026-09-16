@@ -9,7 +9,7 @@
 .extensions-viewlet > .extensions .codicon.codicon-error,
 .extension-editor .codicon.codicon-error,
 .chat-attached-context-attachment .codicon.codicon-error {
-	color: var(--vscode-problemsErrorIcon-foreground);
+	color: var(--zyraxoncode-problemsErrorIcon-foreground);
 }
 
 .monaco-editor .zone-widget .codicon.codicon-warning,
@@ -18,7 +18,7 @@
 .extensions-viewlet > .extensions .codicon.codicon-warning,
 .extension-editor .codicon.codicon-warning,
 .preferences-editor .codicon.codicon-warning {
-	color: var(--vscode-problemsWarningIcon-foreground);
+	color: var(--zyraxoncode-problemsWarningIcon-foreground);
 }
 
 .monaco-editor .zone-widget .codicon.codicon-info,
@@ -26,5 +26,5 @@
 .text-search-provider-messages .providerMessage .codicon.codicon-info,
 .extensions-viewlet > .extensions .codicon.codicon-info,
 .extension-editor .codicon.codicon-info {
-	color: var(--vscode-problemsInfoIcon-foreground);
+	color: var(--zyraxoncode-problemsInfoIcon-foreground);
 }

@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -43,7 +43,7 @@ export function toPosixPath(osPath: string) {
 
 /**
  * Computes the _root_ this path, like `getRoot('c:\files') === c:\`,
- * `getRoot('files:///files/path') === files:///`,
+ * `getRoot('__ZYRAXKEEP__0_') === __ZYRAXKEEP__1_`,
  * or `getRoot('\\server\shares\path') === \\server\shares\`
  */
 export function getRoot(path: string, sep: string = posix.sep): string {
@@ -98,7 +98,7 @@ export function getRoot(path: string, sep: string = posix.sep): string {
 	}
 
 	// check for URI
-	// scheme://authority/path
+	// __ZYRAXKEEP__2_
 	// ^^^^^^^^^^^^^^^^^^^
 	let pos = path.indexOf('://');
 	if (pos !== -1) {
@@ -116,7 +116,7 @@ export function getRoot(path: string, sep: string = posix.sep): string {
 /**
  * Check if the path follows this pattern: `\\hostname\sharename`.
  *
- * @see https://msdn.microsoft.com/en-us/library/gg465305.aspx
+ * @see __ZYRAXKEEP__3_
  * @return A boolean indication if the path is a UNC path, on none-windows
  * always false.
  */
@@ -164,7 +164,7 @@ export function isUNC(path: string): boolean {
 	return true;
 }
 
-// Reference: https://en.wikipedia.org/wiki/Filename
+// Reference: __ZYRAXKEEP__4_
 const WINDOWS_INVALID_FILE_CHARS = /[\\/:\*\?"<>\|]/g;
 const UNIX_INVALID_FILE_CHARS = /[/]/g;
 const WINDOWS_FORBIDDEN_NAMES = /^(con|prn|aux|clock\$|nul|lpt[0-9]|com[0-9])(\.(.*?))?$/i;

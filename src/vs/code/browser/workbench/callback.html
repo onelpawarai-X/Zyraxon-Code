@@ -18,9 +18,9 @@
 
 			const url = new URL(window.location.href);
 			const params = url.searchParams;
-			const id = decode(params.get('vscode-reqid'));
-			const scheme = decode(params.get('vscode-scheme'));
-			const authority = decode(params.get('vscode-authority'));
+			const id = decode(params.get('zyraxoncode-reqid'));
+			const scheme = decode(params.get('zyraxoncode-scheme'));
+			const authority = decode(params.get('zyraxoncode-authority'));
 
 			if (!id) {
 				throw new Error('Missing id');
@@ -30,16 +30,16 @@
 				throw new Error('Missing authority');
 			}
 
-			const path = decode(params.get('vscode-path'));
-			const query = decode(params.get('vscode-query'));
-			const fragment = decode(params.get('vscode-fragment'));
+			const path = decode(params.get('zyraxoncode-path'));
+			const query = decode(params.get('zyraxoncode-query'));
+			const fragment = decode(params.get('zyraxoncode-fragment'));
 
-			params.delete('vscode-reqid');
-			params.delete('vscode-scheme');
-			params.delete('vscode-authority');
-			params.delete('vscode-path');
-			params.delete('vscode-query');
-			params.delete('vscode-fragment');
+			params.delete('zyraxoncode-reqid');
+			params.delete('zyraxoncode-scheme');
+			params.delete('zyraxoncode-authority');
+			params.delete('zyraxoncode-path');
+			params.delete('zyraxoncode-query');
+			params.delete('zyraxoncode-fragment');
 
 			let uri = { scheme, authority };
 
@@ -61,7 +61,7 @@
 				uri.fragment = fragment;
 			}
 
-			localStorage.setItem(`vscode-web.url-callbacks[${id}]`, JSON.stringify(uri));
+			localStorage.setItem(`zyraxoncode-web.url-callbacks[${id}]`, JSON.stringify(uri));
 		</script>
 
 		<!-- Styling -->

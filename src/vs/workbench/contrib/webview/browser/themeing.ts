@@ -64,7 +64,7 @@ export class WebviewThemeDataProvider extends Disposable {
 			const exportedColors = colorRegistry.getColorRegistry().getColors().reduce<Record<string, string>>((colors, entry) => {
 				const color = theme.getColor(entry.id);
 				if (color) {
-					colors['vscode-' + entry.id.replace('.', '-')] = color.toString();
+					colors['zyraxoncode-' + entry.id.replace('.', '-')] = color.toString();
 				}
 				return colors;
 			}, {});
@@ -73,22 +73,22 @@ export class WebviewThemeDataProvider extends Disposable {
 			const exportedSizes = sizeRegistry.getSizes().reduce<Record<string, string>>((sizes, entry) => {
 				const sizeValue = sizeRegistry.resolveDefaultSize(entry.id, theme);
 				if (sizeValue) {
-					sizes['vscode-' + entry.id.replace(/\./g, '-')] = sizeValueToCss(sizeValue);
+					sizes['zyraxoncode-' + entry.id.replace(/\./g, '-')] = sizeValueToCss(sizeValue);
 				}
 				return sizes;
 			}, {});
 
 			const styles = {
-				'vscode-font-family': DEFAULT_FONT_FAMILY,
-				'vscode-font-weight': 'normal',
-				'vscode-font-size': '13px',
-				'vscode-editor-font-family': editorFontFamily,
-				'vscode-editor-font-weight': editorFontWeight,
-				'vscode-editor-font-size': editorFontSize + 'px',
+				'zyraxoncode-font-family': DEFAULT_FONT_FAMILY,
+				'zyraxoncode-font-weight': 'normal',
+				'zyraxoncode-font-size': '13px',
+				'zyraxoncode-editor-font-family': editorFontFamily,
+				'zyraxoncode-editor-font-weight': editorFontWeight,
+				'zyraxoncode-editor-font-size': editorFontSize + 'px',
 				'text-link-decoration': linkUnderlines ? 'underline' : 'none',
 				...exportedColors,
 				...exportedSizes,
-				'vscode-editor-font-feature-settings': editorFontLigatures,
+				'zyraxoncode-editor-font-feature-settings': editorFontLigatures,
 			};
 
 			const activeTheme = ApiThemeClassName.fromTheme(theme);
@@ -105,10 +105,10 @@ export class WebviewThemeDataProvider extends Disposable {
 }
 
 enum ApiThemeClassName {
-	light = 'vscode-light',
-	dark = 'vscode-dark',
-	highContrast = 'vscode-high-contrast',
-	highContrastLight = 'vscode-high-contrast-light',
+	light = 'zyraxoncode-light',
+	dark = 'zyraxoncode-dark',
+	highContrast = 'zyraxoncode-high-contrast',
+	highContrastLight = 'zyraxoncode-high-contrast-light',
 }
 
 namespace ApiThemeClassName {

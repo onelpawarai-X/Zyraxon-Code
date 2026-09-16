@@ -5,7 +5,7 @@ applyTo: src/vs/**
 
 # Source Code Organization
 
-Canonical reference: https://github.com/microsoft/vscode/wiki/Source-Code-Organization
+Canonical reference: __ZYRAXKEEP__0_
 
 ## Layers
 
@@ -35,7 +35,7 @@ Within each layer, code is organized by runtime environment:
 ## Workbench Organization
 
 - `vs/workbench/{common|browser|electron-browser}` — minimal workbench core
-- `vs/workbench/api` — `vscode.d.ts` API provider
+- `vs/workbench/api` — `zyraxoncode.d.ts` API provider
 - `vs/workbench/services` — core services (not contrib-specific)
 - `vs/workbench/contrib` — feature contributions
 

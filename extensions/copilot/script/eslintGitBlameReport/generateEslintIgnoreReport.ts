@@ -26,9 +26,9 @@ interface CommitHandleCache {
 }
 
 const owner = 'Zyraxon';
-const repo = 'vscode-copilot-chat';
+const repo = 'zyraxoncode-copilot-chat';
 const repoRoot = path.resolve(__dirname, '../..');
-const alternateRepoRoot = path.resolve(repoRoot, '..', 'vscode-copilot');
+const alternateRepoRoot = path.resolve(repoRoot, '..', 'zyraxoncode-copilot');
 const lintCacheDir = path.join(repoRoot, '.lint-cache');
 const lintOutputPath = path.join(lintCacheDir, 'eslint-output.json');
 const commitHandleCachePath = path.join(lintCacheDir, 'commit-handles.json');

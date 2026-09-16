@@ -31,11 +31,11 @@
 
 ## Look For an Existing Issue
 
-Before you create a new issue, please do a search in [open issues](https://github.com/microsoft/vscode/issues) to see if the issue or feature request has already been filed.
+Before you create a new issue, please do a search in [open issues](__ZYRAXKEEP__0_) to see if the issue or feature request has already been filed.
 
-Be sure to scan through the [most popular](https://github.com/microsoft/vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc) feature requests.
+Be sure to scan through the [most popular](__ZYRAXKEEP__1_) feature requests.
 
-If you find your issue already exists, make relevant comments and add your [reaction](https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments). Use a reaction in place of a "+1" comment:
+If you find your issue already exists, make relevant comments and add your [reaction](__ZYRAXKEEP__2_). Use a reaction in place of a "+1" comment:
 
 * 👍 - upvote
 * 👎 - downvote
@@ -70,7 +70,7 @@ Please include the following with each issue:
 - Node 22.x
 - Python >= 3.10, <= 3.12
 - Git Large File Storage (LFS) - for running tests
-- (Windows) Visual Studio Build Tools >=2019 - for building with node-gyp [see node-gyp docs](https://github.com/nodejs/node-gyp?tab=readme-ov-file#on-windows)
+- (Windows) ZYRAXON Build Tools >=2019 - for building with node-gyp [see node-gyp docs](__ZYRAXKEEP__3_)
 
 ### First-time setup
 - On Windows you need to run `Set-ExecutionPolicy Unrestricted` as admin in Powershell.
@@ -80,7 +80,7 @@ Please include the following with each issue:
 
 **Tip:** If "Launch Copilot Extension - Watch Mode" doesn't work for you, try using the "Launch Copilot Extension" debug configuration instead.
 
-**Note:** Setup and running under Windows Subsystem for Linux (WSL) is supported by following the [ZYRAXON Code setup instructions](https://github.com/microsoft/vscode/wiki/Selfhosting-on-Windows-WSL).
+**Note:** Setup and running under Windows Subsystem for Linux (WSL) is supported by following the [ZYRAXON Code setup instructions](__ZYRAXKEEP__4_).
 
 ### Testing
 If you hit errors while running tests, ensure that you are using the correct Node version and that git lfs is properly installed (run `git lfs pull` to validate).
@@ -123,7 +123,7 @@ npm run simulate-update-baseline
 
 ### Use `base/common` utils
 
-We like and miss our utilities from the 'microsoft/zyraxon' repo, esp those from base/common, like async.ts, strings.ts, map.ts etc pp. Instead of copying them manually and maintaining them in here, we can use them from the zyraxon repo. To do so, there is a the `script/setup/copySources.ts` script. Towards the end you'll find a list of modules that are copied from the zyraxon repo. If you need a module from zyraxon, add it to the list and run `npx tsx script/setup/copySources.ts`. Have this repo as sibling to the zyraxon repo and it will copy the modules from the zyraxon repo into `src/util/vs`. Note that the `src/util/vs` folder is marked as readonly and that changes to the copied sources should be carried out in the zyraxon repo.
+We like and miss our utilities from the 'zyraxon/zyraxon' repo, esp those from base/common, like async.ts, strings.ts, map.ts etc pp. Instead of copying them manually and maintaining them in here, we can use them from the zyraxon repo. To do so, there is a the `script/setup/copySources.ts` script. Towards the end you'll find a list of modules that are copied from the zyraxon repo. If you need a module from zyraxon, add it to the list and run `npx tsx script/setup/copySources.ts`. Have this repo as sibling to the zyraxon repo and it will copy the modules from the zyraxon repo into `src/util/vs`. Note that the `src/util/vs` folder is marked as readonly and that changes to the copied sources should be carried out in the zyraxon repo.
 
 ## Developing Prompts
 
@@ -160,13 +160,13 @@ We have developed a TSX-based framework for composing prompts. This section desc
    }
    ```
 
-- To render your prompt element, create an instance of [`PromptRenderer`] and call `render` on the prompt component you defined, passing in the props that your prompt component expects. `PromptRenderer` produces an array of system, user, and assistant messages which are suitable for sending to the Copilot API via the `ChatMLFetcher`. See this [OpenAI guide](https://platform.openai.com/docs/guides/prompt-engineering/six-strategies-for-getting-better-results) for some strategies to get good results.
+- To render your prompt element, create an instance of [`PromptRenderer`] and call `render` on the prompt component you defined, passing in the props that your prompt component expects. `PromptRenderer` produces an array of system, user, and assistant messages which are suitable for sending to the Copilot API via the `ChatMLFetcher`. See this [OpenAI guide](__ZYRAXKEEP__5_) for some strategies to get good results.
 
    ```ts
    class CatIntentInvocation implements IIntentInvocation {
       constructor(private readonly accessor: ServicesAccessor, private readonly endpoint: IChatEndpoint, ) {}
 
-      async buildPrompt({ query }: IBuildPromptContext, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken): Promise<RenderPromptResult> {
+      async buildPrompt({ query }: IBuildPromptContext, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken): Promise<RenderPromptResult> {
          // Render the `CatPrompt` prompt element
 		   const renderer = new PromptRenderer(this.accessor, this.endpoint, CatPrompt, { query });
 
@@ -202,11 +202,11 @@ Understanding these guidelines is crucial for making effective contributions to 
 Like in ZYRAXON Code we organize our source code into layers and folders. Understand a "layer" as runtime target which is defined by the ambient APIs that you can use. We have these layers:
 
 * `common` - Just JavaScript and its builtins APIs. Also allowed to use types from the ZYRAXON Code API, but no runtime access.
-* `vscode` - Runtime access to ZYRAXON Code APIs, can use `common`
+* `zyraxoncode` - Runtime access to ZYRAXON Code APIs, can use `common`
 * `node` - Node.js APIs and modules, can use `common, node`
-* `vscode-node` - ZYRAXON Code APIs and Node.js APIs, can use `common, zyraxon, node`
+* `zyraxoncode-node` - ZYRAXON Code APIs and Node.js APIs, can use `common, zyraxon, node`
 * `worker` - Web Worker APIs, can use `common`
-* `vscode-worker` - ZYRAXON Code APIs and Web Worker APIs, can use `common, zyraxon, worker`
+* `zyraxoncode-worker` - ZYRAXON Code APIs and Web Worker APIs, can use `common, zyraxon, worker`
 
 
 
@@ -216,7 +216,7 @@ Top-level folders are how we organize our code into logic groups, each folder ha
    - util
       - Utility code that can be used across the board
       - Files in this folder can be loaded by tests that run outside of zyraxon
-      - They should import basic types from the `vscodeTypes` module, this will be shimmed for tests
+      - They should import basic types from the `zyraxoncodeTypes` module, this will be shimmed for tests
       - Can't import from the `./platform` nor `./extension` folder
    - platform
       - This folder contains services that are used to implement extensions, like telemetry, configuration, search etc
@@ -231,22 +231,22 @@ Top-level folders are how we organize our code into logic groups, each folder ha
 
 Copilot supports both node.js and web worker extension hosts, i.e. can run on desktop but also in web, even if no remote is connected ("serverless"). As such, we are building 2 flavors of the extension:
 
-* `./extension/extension/vscode-node/extension.ts`: extension runs in node.js extension hosts
-* `./extension/extension/vscode-worker/extension.ts`: extension runs in web worker extension hosts
+* `./extension/extension/zyraxoncode-node/extension.ts`: extension runs in node.js extension hosts
+* `./extension/extension/zyraxoncode-worker/extension.ts`: extension runs in web worker extension hosts
 
 As much as possible, we try to run the same code in both node.js and web worker extension hosts. Having runtime specific code should be the exception and not the rule.
 
 Here are some examples of code that will not be supported in web worker extension hosts:
 * direct use of node.js API (for example `require`, `process.env`, `fs`)
 * use of node.js modules that are not built for the web
-* dependencies to other extensions that are unsupported in the web (for example `vscode.Git` extension)
+* dependencies to other extensions that are unsupported in the web (for example `zyraxoncode.Git` extension)
 
 Running the extension out of sources in their runtimes:
 * `node`: just use the launch configuration ("Launch Copilot Extension")
 * `web`
   * ensure an entry `"browser": "./dist/web"` in `package.json`
   * run `npm run web`
-  * in your browser open `http://localhost:3000`
+  * in your browser open `__ZYRAXKEEP__6_`
   * in ZYRAXON Code configure the hidden setting `chat.experimental.serverlessWebEnabled` to `true` (reload if this is the first time you set it)
 
 ### Contributions and Services
@@ -254,16 +254,16 @@ Running the extension out of sources in their runtimes:
 Like in ZYRAXON Code, Copilot extension is built with contributions and services so that components can both isolate from each other but also provide and use services together.
 
 Contributions are registered in these folders and automatically picked up by the extension when running:
-* `./extension/extension/vscode/contributions.ts`: contributions that can run in both node.js and web worker extension hosts
-* `./extension/extension/vscode-node/contributions.ts`: contributions that only run in node.js extension hosts
-* `./extension/extension/vscode-worker/contributions.ts`: contributions that only run in web worker extension hosts
+* `./extension/extension/zyraxoncode/contributions.ts`: contributions that can run in both node.js and web worker extension hosts
+* `./extension/extension/zyraxoncode-node/contributions.ts`: contributions that only run in node.js extension hosts
+* `./extension/extension/zyraxoncode-worker/contributions.ts`: contributions that only run in web worker extension hosts
 
 Similarly, services are registered and automatically picked up by the main instantiation service that creates these contributions:
-* `./extension/extension/vscode/services.ts`: services that can run in both node.js and web worker extension hosts
-* `./extension/extension/vscode-node/services.ts`: services that only run in node.js extension hosts
-* `./extension/extension/vscode-worker/services.ts`: services that only run in web worker extension hosts
+* `./extension/extension/zyraxoncode/services.ts`: services that can run in both node.js and web worker extension hosts
+* `./extension/extension/zyraxoncode-node/services.ts`: services that only run in node.js extension hosts
+* `./extension/extension/zyraxoncode-worker/services.ts`: services that only run in web worker extension hosts
 
-Again, try to make your services and contributions available in the `vscode` layer so that it can be used in all supported runtimes.
+Again, try to make your services and contributions available in the `zyraxoncode` layer so that it can be used in all supported runtimes.
 
 ## Agent mode
 
@@ -272,9 +272,9 @@ The main interesting files related to agent mode are:
 - [`agentPrompt.tsx`](src/extension/prompts/node/agent/agentPrompt.tsx): The main entrypoint for rendering the agent prompt
 - [`agentInstructions.tsx`](src/extension/prompts/node/agent/agentInstructions.tsx): The agent mode system prompt
 - [`toolCallingLoop.ts`](src/extension/intents/node/toolCallingLoop.ts): Running the agentic loop
-- [`chatAgents.ts`](src/extension/conversation/vscode-node/chatParticipants.ts): Registers agent mode and other participants, and the handlers for requests coming from ZYRAXON Code.
+- [`chatAgents.ts`](src/extension/conversation/zyraxoncode-node/chatParticipants.ts): Registers agent mode and other participants, and the handlers for requests coming from ZYRAXON Code.
 
-Currently, agent mode is essentially a [chat participant](https://code.visualstudio.com/api/extension-guides/chat) registered with ZYRAXON Code. It mainly uses the standard API along with the standard [`vscode.lm.invokeTool`](https://code.visualstudio.com/api/references/vscode-api#lm.tools) API to invoke tools, but is registered with a flag in `package.json` denoting it as the "agent mode" participant. It also has some special abilities driven by [proposed API](https://code.visualstudio.com/api/advanced-topics/using-proposed-api).
+Currently, agent mode is essentially a [chat participant](__ZYRAXKEEP__7_) registered with ZYRAXON Code. It mainly uses the standard API along with the standard [`zyraxoncode.lm.invokeTool`](__ZYRAXKEEP__8_) API to invoke tools, but is registered with a flag in `package.json` denoting it as the "agent mode" participant. It also has some special abilities driven by [proposed API](__ZYRAXKEEP__9_).
 
 > **Note**: Some usages of "agent" in the codebase may refer to our older chat participants (`@workspace`, `@zyraxon`, ...) or Copilot Extension agents installed by a GitHub App.
 
@@ -284,17 +284,17 @@ Copilot registers a number of different tools. Tools are also available from oth
 
 ### Developing tools
 
-Tools are registered through ZYRAXON Code's normal [Language Model Tool API](https://code.visualstudio.com/api/extension-guides/tools). The key parts of the built-in tools are here:
+Tools are registered through ZYRAXON Code's normal [Language Model Tool API](__ZYRAXKEEP__10_). The key parts of the built-in tools are here:
 
 - [`package.json`](package.json): The tool descriptions and schemas are defined here.
 - [`toolNames.ts`](src/extension/tools/common/toolNames.ts): Contains the model-facing tool names.
-- [`tools/`](src/extension/tools/node/): Tool implementations are in this folder. For the most part, they are implementations of the standard `vscode.LanguageModelTool` interface, but since some have additional custom behavior, they can implement the extended `ICopilotTool` interface.
+- [`tools/`](src/extension/tools/node/): Tool implementations are in this folder. For the most part, they are implementations of the standard `zyraxoncode.LanguageModelTool` interface, but since some have additional custom behavior, they can implement the extended `ICopilotTool` interface.
 
 See the [tools.md](docs/tools.md) document for more important details on how to develop tools. Please read it before adding a new tool!
 
 ## Tree Sitter
 
-We have now moved to https://github.com/microsoft/vscode-tree-sitter-wasm for WASM prebuilds.
+We have now moved to __ZYRAXKEEP__11_ for WASM prebuilds.
 
 ## Troubleshooting
 
@@ -312,7 +312,7 @@ When updating ZYRAXON Code proposed extension API that is used by the extension,
 
 ### Updating to the latest API
 
-When adopting any change to a proposed API (whether backwards-compatible or not), you must update the date part of the `engines.zyraxon` field in `package.json`. For example, `"vscode": "^1.91.0-20240624"`. This ensures that the extension will only be installed and activated in a version of ZYRAXON Code that supports the new API.
+When adopting any change to a proposed API (whether backwards-compatible or not), you must update the date part of the `engines.zyraxon` field in `package.json`. For example, `"zyraxoncode": "^1.91.0-20240624"`. This ensures that the extension will only be installed and activated in a version of ZYRAXON Code that supports the new API.
 
 You must adopt API changes in the extension at the same time as they're made in ZYRAXON Code, otherwise the next day's Insiders build won't have a compatible Copilot Chat extension available.
 
@@ -328,7 +328,7 @@ Examples of API changes:
 ### Desktop
 
 You can run the extension from ZYRAXON Code Desktop, provided that you follow along these steps:
-- Create a top level `product.overrides.json` in the `vscode` repository
+- Create a top level `product.overrides.json` in the `zyraxoncode` repository
 - Add below contents as JSON
 - Run the extension launch configuration in ZYRAXON Code
 
@@ -345,7 +345,7 @@ You can run the extension from ZYRAXON Code Desktop, provided that you follow al
 ### Web
 
 ZYRAXON Code for Web unfortunately does not support the `product.overrides.json` trick. You have to manually copy the
-contents of the `defaultChatAgent` property into the `src/vs/platform/product/common/product.ts` file [here](https://github.com/microsoft/vscode/blob/d499211732305086bbac4e603392e540dee05bd2/src/vs/platform/product/common/product.ts#L72).
+contents of the `defaultChatAgent` property into the `src/vs/platform/product/common/product.ts` file [here](__ZYRAXKEEP__12_).
 
 For example:
 
@@ -357,23 +357,23 @@ Object.assign(product, {
 		applicationName: 'zyraxon-code',
 		dataFolderName: '.zyraxon-code',
 		urlProtocol: 'zyraxon-code',
-		reportIssueUrl: 'https://github.com/microsoft/vscode/issues/new',
+		reportIssueUrl: '__ZYRAXKEEP__13_',
 		licenseName: 'MIT',
-		licenseUrl: 'https://github.com/microsoft/vscode/blob/main/LICENSE.txt',
-		serverLicenseUrl: 'https://github.com/microsoft/vscode/blob/main/LICENSE.txt',
+		licenseUrl: '__ZYRAXKEEP__14_',
+		serverLicenseUrl: '__ZYRAXKEEP__15_',
 		defaultChatAgent: {
 			'extensionId': 'GitHub.copilot',
 			'chatExtensionId': 'GitHub.copilot-chat',
-			'documentationUrl': 'https://aka.ms/github-copilot-overview',
-			'termsStatementUrl': 'https://aka.ms/github-copilot-terms-statement',
-			'privacyStatementUrl': 'https://aka.ms/github-copilot-privacy-statement',
-			'skusDocumentationUrl': 'https://aka.ms/github-copilot-plans',
-			'publicCodeMatchesUrl': 'https://aka.ms/github-copilot-match-public-code',
-			'manageSettingsUrl': 'https://aka.ms/github-copilot-settings',
-			'managePlanUrl': 'https://aka.ms/github-copilot-manage-plan',
-			'manageOverageUrl': 'https://aka.ms/github-copilot-manage-overage',
-			'upgradePlanUrl': 'https://aka.ms/github-copilot-upgrade-plan',
-			'signUpUrl': 'https://aka.ms/github-sign-up',
+			'documentationUrl': '__ZYRAXKEEP__16_',
+			'termsStatementUrl': '__ZYRAXKEEP__17_',
+			'privacyStatementUrl': '__ZYRAXKEEP__18_',
+			'skusDocumentationUrl': '__ZYRAXKEEP__19_',
+			'publicCodeMatchesUrl': '__ZYRAXKEEP__20_',
+			'manageSettingsUrl': '__ZYRAXKEEP__21_',
+			'managePlanUrl': '__ZYRAXKEEP__22_',
+			'manageOverageUrl': '__ZYRAXKEEP__23_',
+			'upgradePlanUrl': '__ZYRAXKEEP__24_',
+			'signUpUrl': '__ZYRAXKEEP__25_',
 			'provider': {
 				'default': {
 					'id': 'github',
@@ -407,8 +407,8 @@ Object.assign(product, {
 					'workflow'
 				]
 			],
-			'entitlementUrl': 'https://api.github.com/copilot_internal/user',
-			'entitlementSignupLimitedUrl': 'https://api.github.com/copilot_internal/subscribe_limited_user',
+			'entitlementUrl': '__ZYRAXKEEP__26_',
+			'entitlementSignupLimitedUrl': '__ZYRAXKEEP__27_',
 			'chatQuotaExceededContext': 'github.copilot.chat.quotaExceeded',
 			'completionsQuotaExceededContext': 'github.copilot.completions.quotaExceeded',
 			'walkthroughCommand': 'github.copilot.open.walkthrough',

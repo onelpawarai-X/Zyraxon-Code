@@ -4,8 +4,8 @@
 			"component": {
 				"type": "git",
 				"git": {
-					"name": "microsoft/vscode-mssql",
-					"repositoryUrl": "https://github.com/microsoft/vscode-mssql",
+					"name": "zyraxon/zyraxoncode-mssql",
+					"repositoryUrl": "__ZYRAXKEEP__0_",
 					"commitHash": "c002f514dd81fa71fa304d4c36f8d2767dbf2f9d"
 				}
 			},

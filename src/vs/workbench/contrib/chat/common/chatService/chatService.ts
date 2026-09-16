@@ -750,7 +750,7 @@ export function isLegacyChatTerminalToolInvocationData(data: unknown): data is I
 export type ChatMcpAppData =
 	| {
 		kind: 'local';
-		/** URI of the UI resource for rendering (e.g., "ui://weather-server/dashboard") */
+		/** URI of the UI resource for rendering (e.g., "__ZYRAXKEEP__0_") */
 		resourceUri: string;
 		/** Reference to the server definition for reconnection */
 		serverDefinitionId: string;
@@ -759,7 +759,7 @@ export type ChatMcpAppData =
 	}
 	| {
 		kind: 'agentHost';
-		/** URI of the UI resource for rendering (e.g., "ui://weather-server/dashboard") */
+		/** URI of the UI resource for rendering (e.g., "__ZYRAXKEEP__1_") */
 		resourceUri: string;
 		/** AHP `mcp://` channel URI for the originating server. */
 		channel: string;
@@ -2092,7 +2092,7 @@ export type ChatStopCancellationNoopClassification = {
 	reason: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The no-op reason when stop cancellation did not dispatch fully.' };
 	requestInProgress: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether request-in-progress was true, false, or unknown at no-op time.' };
 	pendingRequests: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The number of queued pending requests at no-op time when known.'; isMeasurement: true };
-	sessionScheme?: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The URI scheme of the session resource (e.g. vscodeLocalChatSession vs remote).' };
+	sessionScheme?: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The URI scheme of the session resource (e.g. zyraxoncodeLocalChatSession vs remote).' };
 	lastRequestId?: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The ID of the last request in the session, for correlating with tool invocations.' };
 	chatSessionId?: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The chat session ID.' };
 	owner: 'roblourens';

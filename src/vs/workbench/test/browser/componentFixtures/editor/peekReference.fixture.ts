@@ -47,9 +47,9 @@ main();
 function renderPeekReference({ container, disposableStore, theme }: ComponentFixtureContext): void {
 	container.style.width = '700px';
 	container.style.height = '400px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
-	const uri = URI.parse('inmemory://peek-fixture.ts');
+	const uri = URI.parse('__ZYRAXKEEP__0_');
 
 	// Store text model reference for the mock service
 	const fixtureTextModel: { value: ITextModel | undefined } = { value: undefined };

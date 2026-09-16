@@ -12,9 +12,9 @@
 	z-index: 1000;
 
 	/* Default styles */
-	background-color: var(--vscode-list-activeSelectionBackground);
-	color: var(--vscode-list-activeSelectionForeground);
-	outline: 1px solid var(--vscode-list-focusOutline);
+	background-color: var(--zyraxoncode-list-activeSelectionBackground);
+	color: var(--zyraxoncode-list-activeSelectionForeground);
+	outline: 1px solid var(--zyraxoncode-list-focusOutline);
 	outline-offset: -1px;
 
 	/*

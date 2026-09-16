@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { getLanguage } from '../../../util/common/languages';
 import { SyncDescriptor } from '../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Selection } from '../../../vscodeTypes';
+import { Selection } from '../../../zyraxoncodeTypes';
 import { DefinitionAroundCursor, State as DefinitionAroundCursorState } from '../../prompt/node/definitionAroundCursor';
 import { IDocumentContext } from '../../prompt/node/documentContext';
 import { LegacySafetyRules } from '../../prompts/node/base/safetyRules';
@@ -22,7 +22,7 @@ type Props = PromptElementProps<{
 	document: TextDocumentSnapshot;
 
 	/** Range corresponding to the symbol that's being renamed */
-	range: vscode.Range;
+	range: zyraxoncode.Range;
 }>;
 
 type State = {
@@ -47,7 +47,7 @@ export class RenameSuggestionsPrompt extends PromptElement<Props, State> {
 		this._defAtPos = instaService.createInstance(new SyncDescriptor(DefinitionAtPosition, [{ document, position: range.start }]));
 	}
 
-	override async prepare(sizing: PromptSizing, progress?: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart> | undefined, token?: vscode.CancellationToken | undefined): Promise<State> {
+	override async prepare(sizing: PromptSizing, progress?: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart> | undefined, token?: zyraxoncode.CancellationToken | undefined): Promise<State> {
 
 		const { document, range } = this.props;
 

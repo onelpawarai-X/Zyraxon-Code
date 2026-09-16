@@ -45,7 +45,7 @@ type IRawChatViewsWelcomeContribution = TypeFromJsonSchema<typeof chatViewsWelco
 const chatViewsWelcomeExtensionPoint = extensionsRegistry.ExtensionsRegistry.registerExtensionPoint<IRawChatViewsWelcomeContribution[]>({
 	extensionPoint: 'chatViewsWelcome',
 	jsonSchema: {
-		description: localize('vscode.extension.contributes.chatViewsWelcome', 'Contributes a welcome message to a chat view'),
+		description: localize('zyraxoncode.extension.contributes.chatViewsWelcome', 'Contributes a welcome message to a chat view'),
 		type: 'array',
 		items: chatViewsWelcomeJsonSchema,
 	},

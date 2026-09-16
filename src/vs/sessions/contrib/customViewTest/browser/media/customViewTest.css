@@ -4,6 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 .custom-view-test-item {
-	padding: var(--vscode-spacing-size60, 6px) 0;
+	padding: var(--zyraxoncode-spacing-size60, 6px) 0;
 	border-bottom: 1px solid color-mix(in srgb, var(--session-view-foreground) 8%, transparent);
 }

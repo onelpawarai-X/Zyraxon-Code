@@ -28,11 +28,11 @@ export function createOnboarding(): OnboardingComponent {
 	container.style.cssText = 'display:flex;flex-direction:column;gap:12px;padding:8px 0;';
 
 	const title = dom.$('span');
-	title.style.cssText = 'font-size:14px;font-weight:600;color:var(--vscode-foreground);';
+	title.style.cssText = 'font-size:14px;font-weight:600;color:var(--zyraxoncode-foreground);';
 	title.textContent = localize('agentsVoice.welcomeTitle', "Welcome to Voice Chat");
 
 	const descSection = dom.$('div');
-	descSection.style.cssText = `display:flex;flex-direction:column;gap:10px;font-size:${ONBOARDING_FONT};color:var(--vscode-foreground);line-height:1.5;`;
+	descSection.style.cssText = `display:flex;flex-direction:column;gap:10px;font-size:${ONBOARDING_FONT};color:var(--zyraxoncode-foreground);line-height:1.5;`;
 
 	// Welcome description row
 	const welcomeRow = dom.$('div');
@@ -55,7 +55,7 @@ export function createOnboarding(): OnboardingComponent {
 	pttKeyChip.role = 'button';
 	pttKeyChip.tabIndex = 0;
 	pttKeyChip.ariaLabel = localize('agentsVoice.changePttKey', "Change push-to-talk key");
-	pttKeyChip.style.cssText = `font-size:${FONT_SIZE.micro};padding:1px 4px;border:1px solid var(--vscode-descriptionForeground);border-radius:3px;line-height:1;color:var(--vscode-descriptionForeground);cursor:pointer;-webkit-app-region:no-drag;`;
+	pttKeyChip.style.cssText = `font-size:${FONT_SIZE.micro};padding:1px 4px;border:1px solid var(--zyraxoncode-descriptionForeground);border-radius:3px;line-height:1;color:var(--zyraxoncode-descriptionForeground);cursor:pointer;-webkit-app-region:no-drag;`;
 	addKeyboardActivation(pttKeyChip);
 	pttIconWrap.append(pttKeyChip);
 
@@ -65,7 +65,7 @@ export function createOnboarding(): OnboardingComponent {
 	const pttHold = document.createTextNode(' ' + localize('agentsVoice.pttHoldDesc', "— hold the key while speaking, release when done.") + ' ');
 	const pttLink = document.createElement('a');
 	pttLink.href = '#';
-	pttLink.style.cssText = 'color:var(--vscode-textLink-foreground);cursor:pointer;text-decoration:none;';
+	pttLink.style.cssText = 'color:var(--zyraxoncode-textLink-foreground);cursor:pointer;text-decoration:none;';
 	pttLink.textContent = localize('agentsVoice.configureHotkey', "Configure a keybinding");
 	const pttSuffix = document.createTextNode(' ' + localize('agentsVoice.changeHotkeySuffix', "to use it from any app."));
 	pttTextSpan.append(pttStrong, pttHold, pttLink, pttSuffix);
@@ -94,7 +94,7 @@ export function createOnboarding(): OnboardingComponent {
 	const miniViewTextSpan = dom.$('span');
 	const miniViewLink = document.createElement('a');
 	miniViewLink.href = '#';
-	miniViewLink.style.cssText = 'color:var(--vscode-textLink-foreground);cursor:pointer;text-decoration:none;';
+	miniViewLink.style.cssText = 'color:var(--zyraxoncode-textLink-foreground);cursor:pointer;text-decoration:none;';
 	miniViewLink.textContent = localize('agentsVoice.openMiniView', "Open the mini-view");
 	const miniViewSuffix = document.createTextNode(' ' + localize('agentsVoice.miniViewSuffix', "to multitask while ZYRAXON Code is not in the foreground."));
 	miniViewTextSpan.append(miniViewLink, miniViewSuffix);
@@ -104,9 +104,9 @@ export function createOnboarding(): OnboardingComponent {
 
 	// Get Started button
 	const button = document.createElement('button');
-	button.style.cssText = `-webkit-app-region:no-drag;background:var(--vscode-button-background);border:none;color:var(--vscode-button-foreground);font-size:${ONBOARDING_FONT};padding:6px 14px;border-radius:3px;font-weight:500;align-self:stretch;margin-top:2px;`;
-	button.addEventListener('mouseenter', () => { if (!button.disabled) { button.style.background = 'var(--vscode-button-hoverBackground)'; } });
-	button.addEventListener('mouseleave', () => { button.style.background = 'var(--vscode-button-background)'; });
+	button.style.cssText = `-webkit-app-region:no-drag;background:var(--zyraxoncode-button-background);border:none;color:var(--zyraxoncode-button-foreground);font-size:${ONBOARDING_FONT};padding:6px 14px;border-radius:3px;font-weight:500;align-self:stretch;margin-top:2px;`;
+	button.addEventListener('mouseenter', () => { if (!button.disabled) { button.style.background = 'var(--zyraxoncode-button-hoverBackground)'; } });
+	button.addEventListener('mouseleave', () => { button.style.background = 'var(--zyraxoncode-button-background)'; });
 
 	container.append(title, descSection, button);
 

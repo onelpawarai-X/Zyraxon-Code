@@ -4,18 +4,18 @@
  *--------------------------------------------------------------------------------------------*/
 
 .session-chat-pills-debug-dialog .dialog-message-row {
-	min-width: min(560px, calc(100vw - var(--vscode-spacing-size400)));
+	min-width: min(560px, calc(100vw - var(--zyraxoncode-spacing-size400)));
 }
 
 .session-chat-pills-debug-form,
 .session-chat-pills-debug-row {
 	display: flex;
 	flex-direction: column;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 }
 
 .session-chat-pills-debug-form {
-	gap: var(--vscode-spacing-size120);
+	gap: var(--zyraxoncode-spacing-size120);
 }
 
 .session-chat-pills-debug-description {
@@ -25,7 +25,7 @@
 .session-chat-pills-debug-checkbox-row {
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size80);
+	gap: var(--zyraxoncode-spacing-size80);
 }
 
 .session-chat-pills-debug-checkbox-label {
@@ -35,11 +35,11 @@
 .session-chat-pills-debug-stats {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: var(--vscode-spacing-size80);
+	gap: var(--zyraxoncode-spacing-size80);
 }
 
 .session-chat-pills-debug-label {
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 }
 
 .session-chat-pills-debug-input {
@@ -49,11 +49,11 @@
 .session-chat-pills-debug-banner-stats {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: var(--vscode-spacing-size80);
+	gap: var(--zyraxoncode-spacing-size80);
 }
 
 .session-chat-pills-debug-heading {
 	margin: 0;
-	font-size: var(--vscode-agents-fontSize-heading3);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-agents-fontSize-heading3);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 }

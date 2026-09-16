@@ -1,17 +1,17 @@
-<VSCode.Cell id="<CELL_ID_0>" language="markdown">
+<ZyraxonCode.Cell id="<CELL_ID_0>" language="markdown">
 # Data Visualization Notebook
 
 This notebook demonstrates how to visualize and analyze sales data using reusable functions.
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_1>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_1>" language="python">
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_2>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_2>" language="markdown">
 ## Data Loading
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_3>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_3>" language="python">
 # Load sample sales data
 data = pd.DataFrame({
     'month': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
@@ -19,11 +19,11 @@ data = pd.DataFrame({
     'region': ['North', 'North', 'East', 'East', 'West']
 })
 data.head()
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_4>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_4>" language="markdown">
 ## Visualization
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_5>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_5>" language="python">
 # Reusable function for plotting
 def plot_sales(df, region=None, title='Sales Data'):
     """
@@ -46,16 +46,16 @@ def plot_sales(df, region=None, title='Sales Data'):
     plt.ylabel('Sales')
     plt.title(title)
     plt.show()
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_6>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_6>" language="markdown">
 ### Plot sales for the North region
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_7>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_7>" language="python">
 plot_sales(data, region='North', title='Sales for North Region')
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_8>" language="markdown">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_8>" language="markdown">
 ### Plot sales for all regions
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_9>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_9>" language="python">
 plot_sales(data, title='Sales for All Regions')
-</VSCode.Cell>
+</ZyraxonCode.Cell>

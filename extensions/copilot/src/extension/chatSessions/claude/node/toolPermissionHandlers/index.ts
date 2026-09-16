@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 // Import all node-specific handlers to trigger self-registration
-// ZYRAXON Code-specific handlers are in ../vscode-node/toolPermissionHandlers/index
+// ZYRAXON Code-specific handlers are in ../zyraxoncode-node/toolPermissionHandlers/index
 import '../../common/toolPermissionHandlers/index';
 
 import './editToolHandler';

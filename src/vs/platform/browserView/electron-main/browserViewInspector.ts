@@ -36,7 +36,7 @@ export interface IElementHandle extends IDisposable {
 }
 
 /**
- * Well-known ids understood by `__vscode_helpers.getElement(id)` in
+ * Well-known ids understood by `__zyraxoncode_helpers.getElement(id)` in
  * `preload-browserView.ts`. Any other string is treated as the id of a
  * dynamically tracked element.
  */
@@ -121,7 +121,7 @@ export class BrowserViewInspector extends Disposable {
 		// Preload ready — the key correlation point between WebFrameMain and CDP target
 		const onIpcMessage = (_event: Electron.Event, channel: string, ...args: unknown[]) => {
 			const senderFrame = (_event as { senderFrame?: Electron.WebFrameMain }).senderFrame;
-			if (channel === 'vscode:browserView:preloadReady') {
+			if (channel === 'zyraxoncode:browserView:preloadReady') {
 				if (!senderFrame) {
 					return;
 				}
@@ -131,8 +131,8 @@ export class BrowserViewInspector extends Disposable {
 				}
 
 				// Apply theme immediately regardless of inspector state
-				senderFrame.postMessage('vscode:browserView:setTheme', this._theme);
-				senderFrame.postMessage('vscode:browserView:setLocalizedStrings', localizedStrings);
+				senderFrame.postMessage('zyraxoncode:browserView:setTheme', this._theme);
+				senderFrame.postMessage('zyraxoncode:browserView:setLocalizedStrings', localizedStrings);
 
 				this._registry.notifyFrameReady(senderFrame, frameToken);
 
@@ -143,12 +143,12 @@ export class BrowserViewInspector extends Disposable {
 				// of leaving the model reporting active with no visible overlay.
 				if (senderFrame === webContents.mainFrame && this._activeAreaSelection.value) {
 					try {
-						senderFrame.postMessage('vscode:browserView:startAreaPicker', undefined);
+						senderFrame.postMessage('zyraxoncode:browserView:startAreaPicker', undefined);
 					} catch {
 						// Frame may be gone — ignore.
 					}
 				}
-			} else if (channel === 'vscode:browserView:areaPicked') {
+			} else if (channel === 'zyraxoncode:browserView:areaPicked') {
 				// Area selection is scoped to the top frame — the user-drawn
 				// rectangle is in main-frame viewport coordinates.
 				if (senderFrame !== webContents.mainFrame) {
@@ -157,7 +157,7 @@ export class BrowserViewInspector extends Disposable {
 				const rect = args[0] as IBrowserViewRect | undefined;
 				const validRect = rect && rect.width > 0 && rect.height > 0 ? rect : undefined;
 				this._finishAreaPick(validRect);
-			} else if (channel === 'vscode:browserView:areaPickStopped') {
+			} else if (channel === 'zyraxoncode:browserView:areaPickStopped') {
 				if (senderFrame !== webContents.mainFrame) {
 					return;
 				}
@@ -210,7 +210,7 @@ export class BrowserViewInspector extends Disposable {
 				// Probe for the preload token in this context
 				try {
 					const { result } = await session.sendCommand('Runtime.evaluate', {
-						expression: 'window.__vscode_helpers?.getFrameToken?.()',
+						expression: 'window.__zyraxoncode_helpers?.getFrameToken?.()',
 						returnByValue: true,
 						uniqueContextId,
 					}) as { result: { value?: string } };
@@ -389,8 +389,8 @@ export class BrowserViewInspector extends Disposable {
 		this._activeSelection.clear();
 
 		const mainFrame = this.browser.webContents.mainFrame;
-		const start = () => { mainFrame.postMessage('vscode:browserView:startAreaPicker', undefined); };
-		const stop = () => { try { mainFrame.postMessage('vscode:browserView:stopAreaPicker', undefined); } catch { /* frame may be gone */ } };
+		const start = () => { mainFrame.postMessage('zyraxoncode:browserView:startAreaPicker', undefined); };
+		const stop = () => { try { mainFrame.postMessage('zyraxoncode:browserView:stopAreaPicker', undefined); } catch { /* frame may be gone */ } };
 
 		const selection: IActiveAreaSelection = {
 			dispose: () => {

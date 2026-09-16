@@ -6,10 +6,10 @@
 .agent-feedback-input-widget {
 	position: absolute;
 	z-index: 10000;
-	background-color: var(--vscode-panel-background);
-	border: 1px solid var(--vscode-agentFeedbackInputWidget-border, var(--vscode-editorWidget-border, var(--vscode-contrastBorder)));
-	box-shadow: var(--vscode-shadow-lg);
-	border-radius: var(--vscode-cornerRadius-large);
+	background-color: var(--zyraxoncode-panel-background);
+	border: 1px solid var(--zyraxoncode-agentFeedbackInputWidget-border, var(--zyraxoncode-editorWidget-border, var(--zyraxoncode-contrastBorder)));
+	box-shadow: var(--zyraxoncode-shadow-lg);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 	padding: 4px;
 	display: flex;
 	flex-direction: row;
@@ -35,11 +35,11 @@
 	}
 }
 .agent-feedback-input-widget textarea {
-	background-color: var(--vscode-panel-background);
+	background-color: var(--zyraxoncode-panel-background);
 	border: none;
-	color: var(--vscode-input-foreground);
+	color: var(--zyraxoncode-input-foreground);
 	font: inherit;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	padding: 0 0 0 6px;
 	outline: none;
 	min-width: 150px;
@@ -54,12 +54,12 @@
 }
 
 .agent-feedback-input-widget textarea:focus {
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 	outline: none !important;
 }
 
 .agent-feedback-input-widget textarea::placeholder {
-	color: var(--vscode-input-placeholderForeground);
+	color: var(--zyraxoncode-input-placeholderForeground);
 }
 
 .agent-feedback-input-widget .agent-feedback-input-measure {
@@ -69,7 +69,7 @@
 	overflow: hidden;
 	white-space: pre;
 	font: inherit;
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 }
 
 .agent-feedback-input-widget .agent-feedback-input-actions {
@@ -89,7 +89,7 @@
 
 .agent-feedback-input-widget .agent-feedback-input-actions .monaco-action-bar .action-item .action-label.codicon-arrow-up-compact {
 	justify-content: center;
-	font-size: var(--vscode-codiconFontSize-compact);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 }
 
 .agent-feedback-input-widget textarea:disabled {
@@ -106,7 +106,7 @@
 	box-sizing: border-box;
 	margin-left: 2px;
 	flex-shrink: 0;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -121,17 +121,17 @@
 }
 
 .monaco-editor .line-numbers.agent-feedback-glyph.line-hover::before {
-	content: var(--vscode-icon-plus-content);
-	font-family: var(--vscode-icon-plus-font-family);
-	font-size: var(--vscode-codiconFontSize);
+	content: var(--zyraxoncode-icon-plus-content);
+	font-family: var(--zyraxoncode-icon-plus-font-family);
+	font-size: var(--zyraxoncode-codiconFontSize);
 	position: absolute;
 	inset: 0;
 	z-index: 10;
-	color: var(--vscode-editorGutter-commentGlyphForeground, var(--vscode-foreground));
-	background-color: var(--vscode-editorGutter-commentRangeForeground);
+	color: var(--zyraxoncode-editorGutter-commentGlyphForeground, var(--zyraxoncode-foreground));
+	background-color: var(--zyraxoncode-editorGutter-commentRangeForeground);
 	text-align: center;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }

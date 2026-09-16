@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
-import type { Uri } from 'vscode';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { Uri } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { VSBuffer } from '../../../util/vs/base/common/buffer';
 import { URI } from '../../../util/vs/base/common/uri';
 import { ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { IFileSystemService } from '../../filesystem/common/fileSystemService';
 import { ILogService } from '../../log/common/logService';
 
@@ -65,12 +65,12 @@ interface IEditLogEntry {
 export class EditLogService implements IEditLogService {
 	declare readonly _serviceBrand: undefined;
 
-	public readonly LOG_DIR = URI.joinPath(this._vscodeExtensionContext.globalStorageUri, 'editRecordings');
+	public readonly LOG_DIR = URI.joinPath(this._zyraxoncodeExtensionContext.globalStorageUri, 'editRecordings');
 
 	private readonly _edits = new Map<string, IEditLogEntry>();
 
 	constructor(
-		@IVSCodeExtensionContext private readonly _vscodeExtensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _zyraxoncodeExtensionContext: IZyraxonCodeExtensionContext,
 		@IFileSystemService private readonly _fileSystemService: IFileSystemService,
 		@IConfigurationService private readonly _configurationService: IConfigurationService,
 		@ILogService private readonly _logService: ILogService,

@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -28,7 +28,7 @@ const _enableDisposeWithListenerWarning = false
 
 // -----------------------------------------------------------------------------------------------------------------------
 // Uncomment the next line to print warnings whenever a snapshotted event is used repeatedly without cleanup.
-// See https://github.com/microsoft/vscode/issues/142851
+// See __ZYRAXKEEP__0_
 // -----------------------------------------------------------------------------------------------------------------------
 const _enableSnapshotPotentialLeakWarning = false
 	// || Boolean("TRUE") // causes a linter warning so that it cannot be pushed

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { Range, TextEdit } from '../../../vscodeTypes';
+import type * as zyraxoncode from 'zyraxoncode';
+import { Range, TextEdit } from '../../../zyraxoncodeTypes';
 
 export type Lines = readonly string[];
 
@@ -40,7 +40,7 @@ export namespace Lines {
 		}
 		return code.split(/\r\n|\r|\n/g);
 	}
-	export function fromDocument(doc: vscode.TextDocument): Lines {
+	export function fromDocument(doc: zyraxoncode.TextDocument): Lines {
 		if (doc.lineCount === 0) {
 			return [];
 		}

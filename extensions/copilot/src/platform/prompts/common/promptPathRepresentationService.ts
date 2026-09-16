@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Uri } from 'vscode';
+import type { Uri } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { getDriveLetter, hasDriveLetter } from '../../../util/vs/base/common/extpath';
 import { Schemas } from '../../../util/vs/base/common/network';
@@ -49,7 +49,7 @@ export class PromptPathRepresentationService implements IPromptPathRepresentatio
 	constructor(@IWorkspaceService private readonly workspaceService: IWorkspaceService) { }
 
 	getFilePath(uri: Uri, makeRelative?: boolean): string {
-		if (uri.scheme === Schemas.file || uri.scheme === Schemas.vscodeRemote) {
+		if (uri.scheme === Schemas.file || uri.scheme === Schemas.zyraxoncodeRemote) {
 			if (makeRelative === true) {
 				const folders = this.workspaceService.getWorkspaceFolders();
 				if (folders.length === 1) {
@@ -116,9 +116,9 @@ export class PromptPathRepresentationService implements IPromptPathRepresentatio
 
 	getExampleFilePath(absolutePosixFilePath: string): string {
 		if (this.isWindows()) {
-			return this.getFilePath(URI.parse(`file:///C:${absolutePosixFilePath}`));
+			return this.getFilePath(URI.parse(`__ZYRAXKEEP__0_{absolutePosixFilePath}`));
 		} else {
-			return this.getFilePath(URI.parse(`file://${absolutePosixFilePath}`));
+			return this.getFilePath(URI.parse(`__ZYRAXKEEP__1_{absolutePosixFilePath}`));
 		}
 	}
 }
@@ -127,13 +127,13 @@ export class PromptPathRepresentationService implements IPromptPathRepresentatio
  */
 export class TestPromptPathRepresentationService extends PromptPathRepresentationService {
 	override getFilePath(uri: Uri): string {
-		if (uri.scheme === Schemas.file || uri.scheme === Schemas.vscodeRemote) {
+		if (uri.scheme === Schemas.file || uri.scheme === Schemas.zyraxoncodeRemote) {
 			return uri.path;
 		}
 		return uri.toString();
 	}
 
 	override getExampleFilePath(absolutePosixFilePath: string): string {
-		return this.getFilePath(URI.parse(`file://${absolutePosixFilePath}`));
+		return this.getFilePath(URI.parse(`__ZYRAXKEEP__2_{absolutePosixFilePath}`));
 	}
 }

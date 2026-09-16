@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { TelemetrySender } from 'vscode';
+import type { TelemetrySender } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { IDisposable } from '../../../util/vs/base/common/lifecycle';
 import type { CopilotToken } from '../../authentication/common/copilotToken';
@@ -10,16 +10,16 @@ import { ICopilotTokenStore } from '../../authentication/common/copilotTokenStor
 import type { TelemetryData } from './telemetryData';
 
 
-// Interfaces taken from and should match `@vscode/extension-telemetry` package
+// Interfaces taken from and should match `@zyraxoncode/extension-telemetry` package
 export interface TelemetryEventMeasurements {
 	readonly [key: string]: number | undefined;
 }
 
 export interface TelemetryEventProperties {
-	readonly [key: string]: string | import('vscode').TelemetryTrustedValue<string> | undefined;
+	readonly [key: string]: string | import('zyraxoncode').TelemetryTrustedValue<string> | undefined;
 }
 
-// Interfaces taken from and should match `vscode-tas-client`
+// Interfaces taken from and should match `zyraxoncode-tas-client`
 /**
  * Telemetry for the experimentation service.
  */
@@ -175,18 +175,18 @@ export interface IGHTelemetryService {
 	/**
 	 * Enhanced telemetry events contain additional data such as user prompts and suggestions. Like standard telemetry events, it can disabled with ZYRAXON Code's telemetry settings or the Copilot settings page.
 	 *
-	 * You can manage this setting on the Copilot settings page https://github.com/settings/copilot/features
-	 * Learn about configuring this telemetry at https://docs.github.com/en/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber/managing-your-copilot-plan/managing-copilot-policies-as-an-individual-subscriber#enabling-or-disabling-prompt-and-suggestion-collection
-	 * Learn more about the data collected at https://github.com/features/copilot/#faq
+	 * You can manage this setting on the Copilot settings page __ZYRAXKEEP__0_
+	 * Learn about configuring this telemetry at __ZYRAXKEEP__1_
+	 * Learn more about the data collected at __ZYRAXKEEP__2_
 	 */
 	sendEnhancedTelemetry(name: string, telemetryData?: TelemetryData): Promise<void>;
 
 	/**
 	 * Enhanced telemetry events contain additional data such as user prompts and suggestions. Like standard telemetry events, it can disabled with ZYRAXON Code's telemetry settings or the Copilot settings page.
 	 *
-	 * You can manage this setting on the Copilot settings page https://github.com/settings/copilot/features
-	 * Learn about configuring this telemetry at https://docs.github.com/en/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber/managing-your-copilot-plan/managing-copilot-policies-as-an-individual-subscriber#enabling-or-disabling-prompt-and-suggestion-collection
-	 * Learn more about the data collected at https://github.com/features/copilot/#faq
+	 * You can manage this setting on the Copilot settings page __ZYRAXKEEP__3_
+	 * Learn about configuring this telemetry at __ZYRAXKEEP__4_
+	 * Learn more about the data collected at __ZYRAXKEEP__5_
 	 */
 	sendEnhancedErrorTelemetry(name: string, telemetryData?: TelemetryData): Promise<void>;
 
@@ -196,8 +196,8 @@ export interface IGHTelemetryService {
 }
 
 /**
- * Borrowed from https://github.com/microsoft/vscode/blob/9e560ad042bbc97e98f241f58cd08ddde0458a30/src/vs/platform/telemetry/common/telemetryUtils.ts#L21-L25
- * Used as an API type in the vscode.d.ts as well to indicate properties that are exempt from cleaning.
+ * Borrowed from __ZYRAXKEEP__6_
+ * Used as an API type in the zyraxoncode.d.ts as well to indicate properties that are exempt from cleaning.
  */
 export class TelemetryTrustedValue<T> {
 	// This is merely used as an identifier as the instance will be lost during serialization over the exthost

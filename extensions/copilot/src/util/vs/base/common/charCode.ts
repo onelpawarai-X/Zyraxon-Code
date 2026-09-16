@@ -1,11 +1,11 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// Names from https://blog.codinghorror.com/ascii-pronunciation-rules-for-programmers/
+// Names from __ZYRAXKEEP__0_
 
 /**
  * An inlined enum containing useful character codes (to be used with String.charCodeAt).
@@ -348,21 +348,21 @@ export const enum CharCode {
 
 	/**
 	 * Unicode Character 'LINE SEPARATOR' (U+2028)
-	 * http://www.fileformat.info/info/unicode/char/2028/index.htm
+	 * __ZYRAXKEEP__1_
 	 */
 	LINE_SEPARATOR = 0x2028,
 	/**
 	 * Unicode Character 'PARAGRAPH SEPARATOR' (U+2029)
-	 * http://www.fileformat.info/info/unicode/char/2029/index.htm
+	 * __ZYRAXKEEP__2_
 	 */
 	PARAGRAPH_SEPARATOR = 0x2029,
 	/**
 	 * Unicode Character 'NEXT LINE' (U+0085)
-	 * http://www.fileformat.info/info/unicode/char/0085/index.htm
+	 * __ZYRAXKEEP__3_
 	 */
 	NEXT_LINE = 0x0085,
 
-	// http://www.fileformat.info/info/unicode/category/Sk/list.htm
+	// __ZYRAXKEEP__4_
 	U_CIRCUMFLEX = 0x005E,									// U+005E	CIRCUMFLEX
 	U_GRAVE_ACCENT = 0x0060,								// U+0060	GRAVE ACCENT
 	U_DIAERESIS = 0x00A8,									// U+00A8	DIAERESIS
@@ -443,7 +443,7 @@ export const enum CharCode {
 	/**
 	 * UTF-8 BOM
 	 * Unicode Character 'ZERO WIDTH NO-BREAK SPACE' (U+FEFF)
-	 * http://www.fileformat.info/info/unicode/char/feff/index.htm
+	 * __ZYRAXKEEP__5_
 	 */
 	UTF8_BOM = 65279,
 

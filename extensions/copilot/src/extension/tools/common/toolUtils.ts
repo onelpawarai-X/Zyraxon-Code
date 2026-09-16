@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { URI } from '../../../util/vs/base/common/uri';
-import { Location } from '../../../vscodeTypes';
+import { Location } from '../../../zyraxoncodeTypes';
 
 type FileUriMetadata = {
-	vscodeLinkType: 'skill';
+	zyraxoncodeLinkType: 'skill';
 	linkText: string;
 };
 
@@ -18,7 +18,7 @@ export function formatUriForFileWidget(uriOrLocation: URI | Location, metadata?:
 		`#${uriOrLocation.range.start.line + 1}-${uriOrLocation.range.end.line + 1}`;
 
 	if (metadata) {
-		const uriWithQuery = uri.with({ query: `vscodeLinkType=${metadata.vscodeLinkType}` });
+		const uriWithQuery = uri.with({ query: `zyraxoncodeLinkType=${metadata.zyraxoncodeLinkType}` });
 		return `[${metadata.linkText}](${uriWithQuery.toString()}${rangePart})`;
 	}
 
@@ -41,7 +41,7 @@ export function encodeUrlHostname(url: string): { encoded: string; isDifferent: 
 	let encodedUrl = urlObj.href;
 
 	// URL constructor adds trailing slash or slash before query/hash when original doesn't have path
-	// e.g., "https://example.com?foo" becomes "https://example.com/?foo"
+	// e.g., "__ZYRAXKEEP__0_" becomes "__ZYRAXKEEP__1_"
 	const hasNoPath = !url.includes('/', url.indexOf('://') + 3);
 	if (hasNoPath) {
 		// Remove slash before query or hash that was added by URL constructor

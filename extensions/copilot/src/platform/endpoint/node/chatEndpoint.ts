@@ -2,9 +2,9 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { RequestMetadata, RequestType } from '@vscode/copilot-api';
-import { OpenAI, Raw } from '@vscode/prompt-tsx';
-import type { CancellationToken } from 'vscode';
+import { RequestMetadata, RequestType } from '@zyraxoncode/copilot-api';
+import { OpenAI, Raw } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken } from 'zyraxoncode';
 import { ITokenizer, TokenizerType } from '../../../util/common/tokenizer';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
 import { deepClone, mixin } from '../../../util/vs/base/common/objects';
@@ -113,7 +113,7 @@ export async function defaultNonStreamChatResponseProcessor(response: Response, 
 			content: choice.message.content,
 			name: choice.message.name,
 			// Normalize property name: OpenAI API uses snake_case (tool_calls) but our types expect camelCase (toolCalls)
-			// See: https://platform.openai.com/docs/api-reference/chat/object#chat-object-choices-message-tool_calls
+			// See: __ZYRAXKEEP__0_
 			toolCalls: choice.message.toolCalls ?? choice.message.tool_calls,
 		};
 		const messageText = getTextPart(message.content);

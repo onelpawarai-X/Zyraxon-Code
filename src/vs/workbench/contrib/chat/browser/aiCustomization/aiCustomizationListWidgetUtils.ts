@@ -30,7 +30,7 @@ export function getCustomizationSecondaryText(description: string | undefined, f
 
 /**
  * Extracts an extension ID from a file path if the path is inside either
- * an extension install directory (e.g. `~/.vscode/extensions/<id>-<version>/...`)
+ * an extension install directory (e.g. `~/.zyraxoncode/extensions/<id>-<version>/...`)
  * or an extension's globalStorage directory
  * (e.g. `~/<userdata>/User/globalStorage/<id>/...`). The latter is used by
  * extensions like Copilot Chat that materialize prompt files under their
@@ -58,7 +58,7 @@ export function extractExtensionIdFromPath(uriPath: string): string | undefined 
 		}
 	}
 
-	// `~/.vscode/extensions/<extensionId>-<version>/...`
+	// `~/.zyraxoncode/extensions/<extensionId>-<version>/...`
 	const extensionsIdx = segments.lastIndexOf('extensions');
 	if (extensionsIdx < 0 || extensionsIdx + 1 >= segments.length) {
 		return undefined;

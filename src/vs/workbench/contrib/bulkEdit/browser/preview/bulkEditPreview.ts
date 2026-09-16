@@ -360,7 +360,7 @@ export class BulkFileOperations {
 
 export class BulkEditPreviewProvider implements ITextModelContentProvider {
 
-	private static readonly Schema = 'vscode-bulkeditpreview-editor';
+	private static readonly Schema = 'zyraxoncode-bulkeditpreview-editor';
 
 	static emptyPreview = URI.from({ scheme: this.Schema, fragment: 'empty' });
 

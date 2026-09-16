@@ -17,7 +17,7 @@ export async function getServer(appService: ApplicationService): Promise<Server>
 	}, { capabilities: { logging: {} } });
 
 	server.tool(
-		'vscode_automation_start',
+		'zyraxoncode_automation_start',
 		'Start ZYRAXON Code Build. If workspacePath is not provided, ZYRAXON Code will open with the last used workspace or an empty window.',
 		{
 			recordVideo: z.boolean().optional().describe('Whether to record a video of the session'),

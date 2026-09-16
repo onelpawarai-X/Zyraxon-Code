@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 export const typescript = 'typescript';
 export const typescriptreact = 'typescriptreact';
@@ -18,10 +18,10 @@ export const jsTsLanguageModes = [
 	typescriptreact,
 ];
 
-export function isSupportedLanguageMode(doc: vscode.TextDocument) {
-	return vscode.languages.match([typescript, typescriptreact, javascript, javascriptreact], doc) > 0;
+export function isSupportedLanguageMode(doc: zyraxoncode.TextDocument) {
+	return zyraxoncode.languages.match([typescript, typescriptreact, javascript, javascriptreact], doc) > 0;
 }
 
-export function isTypeScriptDocument(doc: vscode.TextDocument) {
-	return vscode.languages.match([typescript, typescriptreact], doc) > 0;
+export function isTypeScriptDocument(doc: zyraxoncode.TextDocument) {
+	return zyraxoncode.languages.match([typescript, typescriptreact], doc) > 0;
 }

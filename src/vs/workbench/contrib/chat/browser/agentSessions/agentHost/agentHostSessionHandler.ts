@@ -703,9 +703,9 @@ export interface IAgentHostSessionHandlerConfig {
 	readonly description: string;
 	/** The agent connection to use for this handler. */
 	readonly connection: IAgentConnection;
-	/** Sanitized connection authority for constructing vscode-agent-host:// URIs. */
+	/** Sanitized connection authority for constructing zyraxoncode-agent-host:// URIs. */
 	readonly connectionAuthority: string;
-	/** Extension identifier for the registered agent. Defaults to 'vscode.agent-host'. */
+	/** Extension identifier for the registered agent. Defaults to 'zyraxoncode.agent-host'. */
 	readonly extensionId?: string;
 	/** Extension display name for the registered agent. Defaults to 'Agent Host'. */
 	readonly extensionDisplayName?: string;
@@ -1335,9 +1335,9 @@ export class AgentHostSessionHandler extends Disposable implements IChatSessionC
 			name: this._config.agentId,
 			fullName: this._config.fullName,
 			description: this._config.description,
-			extensionId: new ExtensionIdentifier(this._config.extensionId ?? 'vscode.agent-host'),
+			extensionId: new ExtensionIdentifier(this._config.extensionId ?? 'zyraxoncode.agent-host'),
 			extensionVersion: undefined,
-			extensionPublisherId: 'vscode',
+			extensionPublisherId: 'zyraxoncode',
 			extensionDisplayName: this._config.extensionDisplayName ?? 'Agent Host',
 			isDefault: false,
 			isDynamic: true,
@@ -4774,7 +4774,7 @@ export class AgentHostSessionHandler extends Disposable implements IChatSessionC
 			if (entry.value === undefined) {
 				continue;
 			}
-			if (entry.uri?.scheme === Schemas.vscodeBrowser) {
+			if (entry.uri?.scheme === Schemas.zyraxoncodeBrowser) {
 				continue;
 			}
 			if (skipUntitled && entry.uri?.scheme === Schemas.untitled) {
@@ -4971,7 +4971,7 @@ export class AgentHostSessionHandler extends Disposable implements IChatSessionC
 		}
 		// Browser views are live pages rather than filesystem resources. Preserve
 		// the page ID as model-readable context so the agent can address the page
-		// with browser tools without trying to read the vscode-browser URI.
+		// with browser tools without trying to read the zyraxoncode-browser URI.
 		if (isBrowserViewVariableEntry(v)) {
 			return this._toSimpleAttachment(
 				v.name,

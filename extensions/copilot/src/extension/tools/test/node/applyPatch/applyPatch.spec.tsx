@@ -16,7 +16,7 @@ import { assertType } from '../../../../../util/vs/base/common/types';
 import { URI } from '../../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseTextEditPart } from '../../../../../vscodeTypes';
+import { ChatResponseTextEditPart } from '../../../../../zyraxoncodeTypes';
 import { ChatVariablesCollection } from '../../../../prompt/common/chatVariablesCollection';
 import { WorkingCopyOriginalDocument } from '../../../../prompts/node/inline/workingCopies';
 import { createExtensionUnitTestingServices } from '../../../../test/node/services';

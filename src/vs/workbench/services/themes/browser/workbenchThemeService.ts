@@ -49,9 +49,9 @@ import { toAction } from '../../../../base/common/actions.js';
 
 // implementation
 
-const defaultThemeExtensionId = 'vscode-theme-defaults';
+const defaultThemeExtensionId = 'zyraxoncode-theme-defaults';
 
-const DEFAULT_FILE_ICON_THEME_ID = 'vscode.vscode-theme-seti-vs-seti';
+const DEFAULT_FILE_ICON_THEME_ID = 'zyraxoncode.zyraxoncode-theme-seti-vs-seti';
 const fileIconsEnabledClass = 'file-icons-enabled';
 
 const colorThemeRulesClassName = 'contributedColorTheme';

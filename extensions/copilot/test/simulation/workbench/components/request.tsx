@@ -12,7 +12,7 @@ import { ISerialisedChatMessage, ISerialisedChatResponse, InterceptedRequest } f
 import { DiffEditor } from './diffEditor';
 import { Editor } from './editor';
 import { isToolCall } from '../utils/utils';
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 
 type Props = {
 	readonly request: InterceptedRequest;

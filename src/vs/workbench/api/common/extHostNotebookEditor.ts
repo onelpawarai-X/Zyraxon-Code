@@ -7,29 +7,29 @@ import { illegalArgument } from '../../../base/common/errors.js';
 import { MainThreadNotebookEditorsShape } from './extHost.protocol.js';
 import * as extHostConverter from './extHostTypeConverters.js';
 import * as extHostTypes from './extHostTypes.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { ExtHostNotebookDocument } from './extHostNotebookDocument.js';
 import { NotebookRange } from './extHostTypes.js';
 
 export class ExtHostNotebookEditor {
 
-	public static readonly apiEditorsToExtHost = new WeakMap<vscode.NotebookEditor, ExtHostNotebookEditor>();
+	public static readonly apiEditorsToExtHost = new WeakMap<zyraxoncode.NotebookEditor, ExtHostNotebookEditor>();
 
 	private _visible: boolean = false;
 
-	private _editor?: vscode.NotebookEditor;
+	private _editor?: zyraxoncode.NotebookEditor;
 
 	constructor(
 		readonly id: string,
 		private readonly _proxy: MainThreadNotebookEditorsShape,
 		readonly notebookData: ExtHostNotebookDocument,
-		private _visibleRanges: vscode.NotebookRange[],
-		private _selections: vscode.NotebookRange[],
-		private _viewColumn: vscode.ViewColumn | undefined,
+		private _visibleRanges: zyraxoncode.NotebookRange[],
+		private _selections: zyraxoncode.NotebookRange[],
+		private _viewColumn: zyraxoncode.ViewColumn | undefined,
 		private readonly viewType: string
 	) { }
 
-	get apiEditor(): vscode.NotebookEditor {
+	get apiEditor(): zyraxoncode.NotebookEditor {
 		if (!this._editor) {
 			const that = this;
 			this._editor = {
@@ -39,13 +39,13 @@ export class ExtHostNotebookEditor {
 				get selection() {
 					return that._selections[0];
 				},
-				set selection(selection: vscode.NotebookRange) {
+				set selection(selection: zyraxoncode.NotebookRange) {
 					this.selections = [selection];
 				},
 				get selections() {
 					return that._selections;
 				},
-				set selections(value: vscode.NotebookRange[]) {
+				set selections(value: zyraxoncode.NotebookRange[]) {
 					if (!Array.isArray(value) || !value.every(extHostTypes.NotebookRange.isNotebookRange)) {
 						throw illegalArgument('selections');
 					}
@@ -89,19 +89,19 @@ export class ExtHostNotebookEditor {
 		this._visible = value;
 	}
 
-	_acceptVisibleRanges(value: vscode.NotebookRange[]): void {
+	_acceptVisibleRanges(value: zyraxoncode.NotebookRange[]): void {
 		this._visibleRanges = value;
 	}
 
-	_acceptSelections(selections: vscode.NotebookRange[]): void {
+	_acceptSelections(selections: zyraxoncode.NotebookRange[]): void {
 		this._selections = selections;
 	}
 
-	private _trySetSelections(value: vscode.NotebookRange[]): void {
+	private _trySetSelections(value: zyraxoncode.NotebookRange[]): void {
 		this._proxy.$trySetSelections(this.id, value.map(extHostConverter.NotebookRange.from));
 	}
 
-	_acceptViewColumn(value: vscode.ViewColumn | undefined) {
+	_acceptViewColumn(value: zyraxoncode.ViewColumn | undefined) {
 		this._viewColumn = value;
 	}
 }

@@ -1789,9 +1789,9 @@ const EXTERNAL_LINK_SCHEMES: ReadonlySet<string> = new Set([
 	'blob',
 	'javascript',
 	'command',
-	'vscode',
-	'vscode-insiders',
-	Schemas.vscodeBrowser,
+	'zyraxoncode',
+	'zyraxoncode-insiders',
+	Schemas.zyraxoncodeBrowser,
 	'copilot-skill',
 	product.urlProtocol,
 	AGENT_HOST_SCHEME,
@@ -1799,9 +1799,9 @@ const EXTERNAL_LINK_SCHEMES: ReadonlySet<string> = new Set([
 
 /**
  * Rewrites inline markdown link URIs so that non-external schemes are wrapped
- * in the `vscode-agent-host://` scheme, mirroring {@link toAgentHostUri}.
+ * in the `zyraxoncode-agent-host://` scheme, mirroring {@link toAgentHostUri}.
  * This allows links in markdown content streamed from a remote agent host
- * (e.g. `file:///...` or `agenthost-content:///...`) to resolve correctly on
+ * (e.g. `__ZYRAXKEEP__0_` or `__ZYRAXKEEP__1_`) to resolve correctly on
  * the client through the agent host filesystem provider.
  *
  * Links with external schemes (http, https, mailto, command, etc.) and
@@ -1879,13 +1879,13 @@ function rewriteLinkTokenRaw(token: Tokens.Link | Tokens.Image, connectionAuthor
 	const isSkill = isSkillFileUri(parsed);
 	// VS-Code-specific: links pointing at a `SKILL.md` file are rendered as a
 	// rich skill pill rather than a plain markdown link. The chat renderer's
-	// inline anchor widget keys off the `vscodeLinkType` query parameter (see
+	// inline anchor widget keys off the `zyraxoncodeLinkType` query parameter (see
 	// `chatInlineAnchorWidget.ts`), so we tag the URI here on the client side
 	// rather than at the agent host. We do this whether or not the link came
 	// in pre-tagged so older sessions and other agent providers also benefit.
-	if (isSkill && !agentHostUri.query.includes('vscodeLinkType=')) {
+	if (isSkill && !agentHostUri.query.includes('zyraxoncodeLinkType=')) {
 		const existing = agentHostUri.query;
-		agentHostUri = agentHostUri.with({ query: existing ? `${existing}&vscodeLinkType=skill` : 'vscodeLinkType=skill' });
+		agentHostUri = agentHostUri.with({ query: existing ? `${existing}&zyraxoncodeLinkType=skill` : 'zyraxoncodeLinkType=skill' });
 	}
 	const prefix = token.type === 'image' ? '![' : '[';
 	// Preserve the label for skill links (so the skill pill renderer can show
@@ -2014,9 +2014,9 @@ export function rewriteAgentHostLinkTarget(href: string, connectionAuthority: st
 	} catch {
 		return href;
 	}
-	if (isSkillFileUri(parsed) && !agentHostUri.query.includes('vscodeLinkType=')) {
+	if (isSkillFileUri(parsed) && !agentHostUri.query.includes('zyraxoncodeLinkType=')) {
 		const existing = agentHostUri.query;
-		agentHostUri = agentHostUri.with({ query: existing ? `${existing}&vscodeLinkType=skill` : 'vscodeLinkType=skill' });
+		agentHostUri = agentHostUri.with({ query: existing ? `${existing}&zyraxoncodeLinkType=skill` : 'zyraxoncodeLinkType=skill' });
 	}
 	return agentHostUri.toString();
 }
@@ -2121,7 +2121,7 @@ function addCommentReference(tc: ToolCallState): IMarkdownString | undefined {
  * state. Used during active turns to represent running tool calls in the UI.
  *
  * @param connectionAuthority Sanitized connection identifier used when
- *   wrapping remote file URIs into `vscode-agent-host:` URIs. Omit to skip
+ *   wrapping remote file URIs into `zyraxoncode-agent-host:` URIs. Omit to skip
  *   URI wrapping (e.g. in tests that don't exercise the confirmation UI).
  */
 export function toolCallStateToInvocation(tc: ToolCallState, subAgentInvocationId: string | undefined, sessionResource: URI, connectionAuthority: string, mcpServerAuthority = sessionResource.authority, options?: IAgentHostToolInvocationOptions): ChatToolInvocation {

@@ -863,7 +863,7 @@ class TestingExplorerViewModel extends Disposable {
 
 			if (!e.element.children.size && e.element.test.item.uri) {
 				if (!this.tryPeekError(e.element)) {
-					commandService.executeCommand('vscode.revealTest', e.element.test.item.extId, {
+					commandService.executeCommand('zyraxoncode.revealTest', e.element.test.item.extId, {
 						openToSide: e.sideBySide,
 						preserveFocus: true,
 					});

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 /** Registered name of the PCM capture audio worklet processor. */
-const PCM_CAPTURE_PROCESSOR = 'vscode-pcm-capture';
+const PCM_CAPTURE_PROCESSOR = 'zyraxoncode-pcm-capture';
 
 /**
  * Control message the main thread posts to the worklet to ask it to emit any
@@ -12,10 +12,10 @@ const PCM_CAPTURE_PROCESSOR = 'vscode-pcm-capture';
  * chunk size) and acknowledge. Used to flush the trailing audio before capture
  * is torn down so the final spoken words are not dropped.
  */
-export const PCM_FLUSH_REQUEST = 'vscode-pcm-flush';
+export const PCM_FLUSH_REQUEST = 'zyraxoncode-pcm-flush';
 
 /** Control message the worklet posts back after emitting its buffered tail. */
-export const PCM_FLUSH_ACK = 'vscode-pcm-flushed';
+export const PCM_FLUSH_ACK = 'zyraxoncode-pcm-flushed';
 
 /**
  * How long the main thread waits for the worklet's flush acknowledgment before

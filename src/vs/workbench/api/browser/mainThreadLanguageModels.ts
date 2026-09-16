@@ -71,7 +71,7 @@ export class MainThreadLanguageModels implements MainThreadLanguageModelsShape {
 	) {
 		this._proxy = extHostContext.getProxy(ExtHostContext.ExtHostChatProvider);
 
-		// Bridge workbench-side language-model changes to extensions via `vscode.lm.onDidChangeChatModels`.
+		// Bridge workbench-side language-model changes to extensions via `zyraxoncode.lm.onDidChangeChatModels`.
 		// Only forward when the set of model identifiers changes. Providers (e.g. BYOK utility aliases) can
 		// re-publish models with metadata-only diffs many times per second; firing on those lets listeners
 		// that re-resolve models (e.g. `selectChatModels`) spin an unbounded CPU-pinning feedback loop.

@@ -5,7 +5,7 @@
 
 import * as http from 'http';
 import * as https from 'https';
-import { workspace } from 'vscode';
+import { workspace } from 'zyraxoncode';
 import { Log } from '../common/logger';
 import { Readable } from 'stream';
 
@@ -258,6 +258,6 @@ class NodeFetcherResponse {
 }
 
 function makeAbortError(signal: AbortSignal): Error {
-	// see https://github.com/nodejs/node/issues/38361#issuecomment-1683839467
+	// see __ZYRAXKEEP__0_
 	return signal.reason;
 }

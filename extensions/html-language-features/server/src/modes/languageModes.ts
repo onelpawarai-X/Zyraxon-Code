@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { getCSSLanguageService } from 'vscode-css-languageservice';
+import { getCSSLanguageService } from 'zyraxoncode-css-languageservice';
 import {
 	DocumentContext, IHTMLDataProvider, ClientCapabilities as HtmlClientCapabilities, getLanguageService as getHTMLLanguageService, ClientCapabilities, TokenType
-} from 'vscode-html-languageservice';
+} from 'zyraxoncode-html-languageservice';
 
 import {
 	SelectionRange,
@@ -14,8 +14,8 @@ import {
 	Hover, Location, Position, Range, SignatureHelp, SymbolInformation, TextEdit,
 	Color, ColorInformation, ColorPresentation, WorkspaceEdit,
 	WorkspaceFolder
-} from 'vscode-languageserver';
-import { DocumentUri, TextDocument } from 'vscode-languageserver-textdocument';
+} from 'zyraxoncode-languageserver';
+import { DocumentUri, TextDocument } from 'zyraxoncode-languageserver-textdocument';
 
 import { getLanguageModelCache, LanguageModelCache } from '../languageModelCache.js';
 import { getCSSMode } from './cssMode.js';
@@ -31,12 +31,12 @@ export {
 	Color, ColorInformation, ColorPresentation, WorkspaceEdit,
 	SignatureInformation, ParameterInformation, DiagnosticSeverity,
 	SelectionRange, TextDocumentIdentifier
-} from 'vscode-languageserver';
+} from 'zyraxoncode-languageserver';
 
-export type { DocumentContext, LanguageService, HTMLDocument, HTMLFormatConfiguration } from 'vscode-html-languageservice';
+export type { DocumentContext, LanguageService, HTMLDocument, HTMLFormatConfiguration } from 'zyraxoncode-html-languageservice';
 export { ClientCapabilities, TokenType };
 
-export { TextDocument, DocumentUri } from 'vscode-languageserver-textdocument';
+export { TextDocument, DocumentUri } from 'zyraxoncode-languageserver-textdocument';
 
 export interface Settings {
 	readonly css?: any;

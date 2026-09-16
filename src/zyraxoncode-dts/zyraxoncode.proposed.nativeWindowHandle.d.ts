@@ -1,0 +1,17 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Zyraxon Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+// __ZYRAXKEEP__0_
+
+declare module 'zyraxoncode' {
+
+	export namespace window {
+		/**
+		 * Retrieves the native window handle of the current active window.
+		 * This will be updated when the active window changes.
+		 */
+		export const nativeHandle: Uint8Array | undefined;
+	}
+}

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { randomUUID } from 'crypto';
-import type { CancellationToken, ChatRequest, ChatResponseStream, LanguageModelToolInformation, Progress } from 'vscode';
+import type { CancellationToken, ChatRequest, ChatResponseStream, LanguageModelToolInformation, Progress } from 'zyraxoncode';
 import { IAuthenticationChatUpgradeService } from '../../../platform/authentication/common/authenticationUpgrade';
 import { IChatHookService } from '../../../platform/chat/common/chatHookService';
 import { ChatLocation, ChatResponse } from '../../../platform/chat/common/commonTypes';
@@ -22,7 +22,7 @@ import { IExperimentationService } from '../../../platform/telemetry/common/null
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
 import { ITerminalService } from '../../../platform/terminal/common/terminalService';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseProgressPart, ChatResponseReferencePart, LanguageModelToolResult2 } from '../../../vscodeTypes';
+import { ChatResponseProgressPart, ChatResponseReferencePart, LanguageModelToolResult2 } from '../../../zyraxoncodeTypes';
 import { IToolCallingLoopOptions, ToolCallingLoop, ToolCallingLoopFetchOptions } from '../../intents/node/toolCallingLoop';
 import { ExecutionSubagentPrompt } from '../../prompts/node/agent/executionSubagentPrompt';
 import { PromptRenderer } from '../../prompts/node/base/promptRenderer';
@@ -304,7 +304,7 @@ export class ExecutionSubagentToolCallingLoop extends ToolCallingLoop<IExecution
 	/**
 	 * Returns the configured timeout (ms) if the result indicates a sync
 	 * `run_in_terminal` call timed out and was moved to the background; returns
-	 * `undefined` otherwise. See vscode core: runInTerminalTool.ts which sets
+	 * `undefined` otherwise. See zyraxoncode core: runInTerminalTool.ts which sets
 	 * `timedOut: true` and `timeoutMs` on `toolMetadata` for that case.
 	 */
 	private getTimeoutMsIfTimedOut(toolResult: LanguageModelToolResult2): number | undefined {

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
-import type { LanguageModelToolInformation } from 'vscode';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { afterAll, beforeAll, expect, suite, test } from 'vitest';
 import { IChatMLFetcher } from '../../../../../platform/chat/common/chatMLFetcher';
 import { StaticChatMLFetcher } from '../../../../../platform/chat/test/common/staticChatMLFetcher';

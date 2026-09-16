@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ConfigurationChangeEvent, ConfigurationScope } from 'vscode';
+import type { ConfigurationChangeEvent, ConfigurationScope } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { BugIndicatingError } from '../../../util/vs/base/common/errors';
 import { Emitter, Event } from '../../../util/vs/base/common/event';
@@ -84,7 +84,7 @@ export interface IConfigurationService {
 	readonly _serviceBrand: undefined;
 
 	/**
-	 * Gets user configuration for a key from vscode (which if not defined, pulls default value from package.json).
+	 * Gets user configuration for a key from zyraxoncode (which if not defined, pulls default value from package.json).
 	 * If not defined, returns the default value.
 	 *
 	 * @remark For object values, the user config will replace the default config.
@@ -92,7 +92,7 @@ export interface IConfigurationService {
 	getConfig<T>(key: Config<T>, scope?: ConfigurationScope): T;
 
 	/**
-	 * Gets an observable for the configuration of a key from vscode (which if not defined, pulls default value from package.json).
+	 * Gets an observable for the configuration of a key from zyraxoncode (which if not defined, pulls default value from package.json).
 	 * If not defined, returns the default value.
 	 *
 	 * @remark For object values, the user config will replace the default config.
@@ -114,18 +114,18 @@ export interface IConfigurationService {
 	isConfigured<T>(key: BaseConfig<T>, scope?: ConfigurationScope): boolean;
 
 	/**
-	 * Proxies vscode.workspace.getConfiguration to allow getting a configuration value that is not in the Copilot namespace.
+	 * Proxies zyraxoncode.workspace.getConfiguration to allow getting a configuration value that is not in the Copilot namespace.
 	 * @param configKey The config key to look up
 	 */
 	getNonExtensionConfig<T>(configKey: string): T | undefined;
 
 	/**
-	 * Sets user configuration for a key in vscode.
+	 * Sets user configuration for a key in zyraxoncode.
 	 */
 	setConfig<T>(key: BaseConfig<T>, value: T, target?: ConfigTarget): Thenable<void>;
 
 	/**
-	 * Gets user configuration for a key from vscode (which if not defined, pulls default value from package.json).
+	 * Gets user configuration for a key from zyraxoncode (which if not defined, pulls default value from package.json).
 	 * If not defined, returns the experimentation based value or falls back to the default value.
 	 *
 	 * @remark For object values, the user config will replace the default config.
@@ -133,7 +133,7 @@ export interface IConfigurationService {
 	getExperimentBasedConfig<T extends ExperimentBasedConfigType>(key: ExperimentBasedConfig<T>, experimentationService: IExperimentationService, scope?: ConfigurationScope): T;
 
 	/**
-	 * Gets the observable of a user configuration for a key from vscode (which if not defined, pulls default value from package.json).
+	 * Gets the observable of a user configuration for a key from zyraxoncode (which if not defined, pulls default value from package.json).
 	 * If not defined, returns the experimentation based value or falls back to the default value.
 	 *
 	 * @remark For object values, the user config will replace the default config.
@@ -378,7 +378,7 @@ export interface ConfigOptions {
 	/**
 	 * When true, only reads from user (global) scope, ignoring workspace and folder values.
 	 * Use for security-sensitive settings (e.g., API endpoint overrides) that must not be
-	 * controllable via a workspace's .vscode/settings.json.
+	 * controllable via a workspace's .zyraxoncode/settings.json.
 	 */
 	readonly userScopeOnly?: boolean;
 }
@@ -565,7 +565,7 @@ export namespace AzureAuthMode {
 	/** Zyraxon authentication provider ID for ZYRAXON Code authentication API */
 	export const Zyraxon_AUTH_PROVIDER = 'Zyraxon';
 	/** Azure Cognitive Services scope for Entra ID authentication */
-	export const COGNITIVE_SERVICES_SCOPE = 'https://cognitiveservices.azure.com/.default';
+	export const COGNITIVE_SERVICES_SCOPE = '__ZYRAXKEEP__0_';
 }
 
 export type CodeGenerationImportInstruction = { language?: string; file: string };
@@ -670,7 +670,7 @@ export namespace ConfigKey {
 		export const SearchSubagentToolEnabled = defineSetting<boolean>('chat.searchSubagent.enabled', ConfigType.ExperimentBased, false);
 		/** Use the agentic proxy for the search subagent tool */
 		export const SearchSubagentUseAgenticProxy = defineSetting<boolean>('chat.searchSubagent.useAgenticProxy', ConfigType.ExperimentBased, false);
-		/** Model to use for the search subagent. When useAgenticProxy is true, defaults to 'vscode-agentic-search-router-a'. When false, defaults to the main agent model. */
+		/** Model to use for the search subagent. When useAgenticProxy is true, defaults to 'zyraxoncode-agentic-search-router-a'. When false, defaults to the main agent model. */
 		export const SearchSubagentModel = defineSetting<string>('chat.searchSubagent.model', ConfigType.ExperimentBased, '');
 		/** Maximum number of tool calls the search subagent can make */
 		export const SearchSubagentToolCallLimit = defineSetting<number>('chat.searchSubagent.toolCallLimit', ConfigType.ExperimentBased, 4);
@@ -735,7 +735,7 @@ export namespace ConfigKey {
 		export const OTelEnabled = defineSetting<boolean>('chat.otel.enabled', ConfigType.Simple, false);
 		export const OTelExporterType = defineSetting<string>('chat.otel.exporterType', ConfigType.Simple, 'otlp-http');
 		export const OTelProtocol = defineSetting<string>('chat.otel.protocol', ConfigType.Simple, '');
-		export const OTelOtlpEndpoint = defineSetting<string>('chat.otel.otlpEndpoint', ConfigType.Simple, 'http://localhost:4318');
+		export const OTelOtlpEndpoint = defineSetting<string>('chat.otel.otlpEndpoint', ConfigType.Simple, '__ZYRAXKEEP__1_');
 		export const OTelCaptureContent = defineSetting<boolean>('chat.otel.captureContent', ConfigType.Simple, false);
 		export const OTelServiceName = defineSetting<string>('chat.otel.serviceName', ConfigType.Simple, '');
 		export const OTelResourceAttributes = defineSetting<Record<string, string>>('chat.otel.resourceAttributes', ConfigType.Simple, {});
@@ -822,7 +822,7 @@ export namespace ConfigKey {
 		export const DebugShowNetworkStatus = defineTeamInternalSetting<boolean>('chat.advanced.debug.showNetworkStatus', ConfigType.ExperimentBased, false);
 		export const GeminiFunctionCallingMode = defineTeamInternalSetting<'auto' | 'none' | 'required' | 'validated' | undefined>('chat.advanced.gemini.functionCallingMode', ConfigType.ExperimentBased, 'validated');
 		export const ModelProviderPreference = defineTeamInternalSetting<string | undefined>('chat.advanced.modelProviderPreference', ConfigType.Simple, undefined, vString());
-		export const UseVSCodeTelemetryLibForGH = defineTeamInternalSetting<boolean>('chat.advanced.telemetry.useVSCodeTelemetryLibForGH', ConfigType.ExperimentBased, false);
+		export const UseZyraxonCodeTelemetryLibForGH = defineTeamInternalSetting<boolean>('chat.advanced.telemetry.useZyraxonCodeTelemetryLibForGH', ConfigType.ExperimentBased, false);
 
 		export const DebugExpUseNodeFetchFetcher = defineTeamInternalSetting<boolean | undefined>('chat.advanced.debug.useNodeFetchFetcher', ConfigType.ExperimentBased, undefined);
 		export const DebugExpUseNodeFetcher = defineTeamInternalSetting<boolean | undefined>('chat.advanced.debug.useNodeFetcher', ConfigType.ExperimentBased, undefined);
@@ -952,7 +952,7 @@ export namespace ConfigKey {
 	export namespace Deprecated {
 		/** Model override for Plan agent — migrated to core `chat.planAgent.defaultModel` */
 		export const PlanAgentModel = defineSetting<string>('chat.planAgent.model', ConfigType.Simple, '');
-		export const OllamaEndpoint = defineSetting<string>('chat.byok.ollamaEndpoint', ConfigType.Simple, 'http://localhost:11434');
+		export const OllamaEndpoint = defineSetting<string>('chat.byok.ollamaEndpoint', ConfigType.Simple, '__ZYRAXKEEP__2_');
 		export const AzureModels = defineSetting<Record<string, { name: string; url: string; toolCalling: boolean; vision: boolean; maxInputTokens: number; maxOutputTokens: number; requiresAPIKey?: boolean; thinking?: boolean; streaming?: boolean; zeroDataRetentionEnabled?: boolean }>>('chat.azureModels', ConfigType.Simple, {});
 		export const CustomOAIModels = defineSetting<Record<string, { name: string; url: string; toolCalling: boolean; vision: boolean; maxInputTokens: number; maxOutputTokens: number; requiresAPIKey?: boolean; thinking?: boolean; streaming?: boolean; requestHeaders?: Record<string, string>; zeroDataRetentionEnabled?: boolean }>>('chat.customOAIModels', ConfigType.Simple, {});
 		export const AzureAuthType = defineSetting<AzureAuthMode>('chat.azureAuthType', ConfigType.Simple, AzureAuthMode.EntraId);

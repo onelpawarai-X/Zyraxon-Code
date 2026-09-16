@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { BasePromptElementProps, PromptElement } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement } from '@zyraxoncode/prompt-tsx';
 import { Diff } from '../../../../platform/git/common/gitDiffService';
 import { basename } from '../../../../util/vs/base/common/path';
 import { FilePathMode, FileVariable } from '../panel/fileVariable';

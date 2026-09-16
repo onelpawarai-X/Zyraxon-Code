@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { Emitter } from '../../../base/common/event.js';
 import { ExtHostAgentEditorCommentsShape, IAgentEditorCommentDto, IMainContext, MainContext, MainThreadAgentEditorCommentsShape } from './extHost.protocol.js';
 import * as typeConvert from './extHostTypeConverters.js';
 
-class ExtHostAgentEditorCommentsProvider implements vscode.AgentEditorCommentsProvider {
+class ExtHostAgentEditorCommentsProvider implements zyraxoncode.AgentEditorCommentsProvider {
 
 	private readonly _onDidChange = new Emitter<void>();
 	readonly onDidChange = this._onDidChange.event;
 	private readonly _onDidRevealComment = new Emitter<string>();
 	readonly onDidRevealComment = this._onDidRevealComment.event;
 
-	private _comments: readonly vscode.AgentEditorComment[] = [];
-	get comments(): readonly vscode.AgentEditorComment[] { return this._comments; }
+	private _comments: readonly zyraxoncode.AgentEditorComment[] = [];
+	get comments(): readonly zyraxoncode.AgentEditorComment[] { return this._comments; }
 
 	private _acceptsComments = false;
 	get acceptsComments(): boolean { return this._acceptsComments; }
@@ -33,7 +33,7 @@ class ExtHostAgentEditorCommentsProvider implements vscode.AgentEditorCommentsPr
 			range: typeConvert.Range.to(comment.range),
 			body: comment.body,
 			author: comment.author,
-		} satisfies vscode.AgentEditorComment));
+		} satisfies zyraxoncode.AgentEditorComment));
 		this._acceptsComments = acceptsComments;
 		this._onDidChange.fire();
 	}
@@ -42,7 +42,7 @@ class ExtHostAgentEditorCommentsProvider implements vscode.AgentEditorCommentsPr
 		this._onDidRevealComment.fire(id);
 	}
 
-	addComment(range: vscode.Range, body: string): void {
+	addComment(range: zyraxoncode.Range, body: string): void {
 		this.proxy.$addComment(this.handle, typeConvert.Range.from(range), body);
 	}
 
@@ -68,7 +68,7 @@ export class ExtHostAgentEditorComments implements ExtHostAgentEditorCommentsSha
 		this.proxy = mainContext.getProxy(MainContext.MainThreadAgentEditorComments);
 	}
 
-	createAgentEditorComments(uri: vscode.Uri): vscode.AgentEditorCommentsProvider {
+	createAgentEditorComments(uri: zyraxoncode.Uri): zyraxoncode.AgentEditorCommentsProvider {
 		const handle = ExtHostAgentEditorComments.handlePool++;
 		const provider = new ExtHostAgentEditorCommentsProvider(handle, this.proxy, h => this.providers.delete(h));
 		this.providers.set(handle, provider);

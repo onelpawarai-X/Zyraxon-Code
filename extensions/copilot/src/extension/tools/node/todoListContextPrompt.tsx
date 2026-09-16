@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement } from '@zyraxoncode/prompt-tsx';
 import { ITodoListContextProvider } from '../../prompt/node/todoListContextProvider';
 import { Tag } from '../../prompts/node/base/tag';
 

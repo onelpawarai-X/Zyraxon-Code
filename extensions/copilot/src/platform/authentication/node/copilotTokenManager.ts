@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@vscode/copilot-api';
+import { RequestType } from '@zyraxoncode/copilot-api';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { Disposable, toDisposable } from '../../../util/vs/base/common/lifecycle';
 import { SyncDescriptor } from '../../../util/vs/platform/instantiation/common/descriptors';
@@ -17,7 +17,7 @@ import { ILogService } from '../../log/common/logService';
 import { FetchOptions, IFetcherService, Response, jsonVerboseError } from '../../networking/common/fetcherService';
 import { ITelemetryService } from '../../telemetry/common/telemetry';
 import { TelemetryData } from '../../telemetry/common/telemetryData';
-import { CopilotToken, CopilotUserInfo, ErrorEnvelope, ExtendedTokenInfo, StandardErrorEnvelope, TokenEnvelope, TokenInfoOrError, TokenValidationResult, containsVSCodeOrg, createTestExtendedTokenInfo, isErrorEnvelope, isStandardErrorEnvelope, validateTokenEnvelope } from '../common/copilotToken';
+import { CopilotToken, CopilotUserInfo, ErrorEnvelope, ExtendedTokenInfo, StandardErrorEnvelope, TokenEnvelope, TokenInfoOrError, TokenValidationResult, containsZyraxonCodeOrg, createTestExtendedTokenInfo, isErrorEnvelope, isStandardErrorEnvelope, validateTokenEnvelope } from '../common/copilotToken';
 import { CheckCopilotToken, ICopilotTokenManager, NotGitHubLoginFailed, nowSeconds } from '../common/copilotTokenManager';
 
 /**
@@ -238,7 +238,7 @@ export abstract class BaseCopilotTokenManager extends Disposable implements ICop
 			token_based_billing: userInfo?.token_based_billing,
 			organization_login_list: userInfo?.organization_login_list ?? [],
 			username: login,
-			isVscodeTeamMember: containsVSCodeOrg(tokenInfo.organization_list ?? []),
+			isVscodeTeamMember: containsZyraxonCodeOrg(tokenInfo.organization_list ?? []),
 		};
 		const telemetryData = TelemetryData.createAndMarkAsIssued(
 			{},

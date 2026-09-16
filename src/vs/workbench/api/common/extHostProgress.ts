@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ProgressOptions } from 'vscode';
+import { ProgressOptions } from 'zyraxoncode';
 import { MainThreadProgressShape, ExtHostProgressShape, MainContext } from './extHost.protocol.js';
 import { ProgressLocation } from './extHostTypeConverters.js';
 import { Progress, IProgressStep } from '../../../platform/progress/common/progress.js';

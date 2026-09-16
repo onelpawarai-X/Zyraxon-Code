@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptPiece, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptPiece, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { StringTextDocumentWithLanguageId } from '../../../platform/editing/common/abstractText';
 import { NotebookDocumentSnapshot } from '../../../platform/editing/common/notebookDocumentSnapshot';
@@ -36,7 +36,7 @@ import { count } from '../../../util/vs/base/common/strings';
 import { isDefined } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestEditorData, ChatResponseTextEditPart, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString, Position, Range, WorkspaceEdit } from '../../../vscodeTypes';
+import { ChatRequestEditorData, ChatResponseTextEditPart, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString, Position, Range, WorkspaceEdit } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { ApplyPatchFormatInstructions } from '../../prompts/node/agent/defaultAgentInstructions';
 import { PromptRenderer, renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
@@ -163,7 +163,7 @@ export class ApplyPatchTool implements ICopilotTool<IApplyPatchToolParams> {
 			removeLeadingFilepathComment(change.newContent ?? '', 'text', file),
 		].reduce((a, b) => a.length < b.length ? a : b);
 
-		const edits: (vscode.NotebookEdit | [vscode.Uri, vscode.TextEdit[]])[] = [];
+		const edits: (zyraxoncode.NotebookEdit | [zyraxoncode.Uri, zyraxoncode.TextEdit[]])[] = [];
 		if (change.movePath) {
 			const newPath = resolveToolInputPath(change.movePath, this.promptPathRepresentationService);
 			// workspaceEdit.renameFile(path, newPath, { overwrite: true });
@@ -189,7 +189,7 @@ export class ApplyPatchTool implements ICopilotTool<IApplyPatchToolParams> {
 		return { path: uri, edits };
 	}
 
-	async handleToolStream(options: vscode.LanguageModelToolInvocationStreamOptions<IApplyPatchToolParams>, _token: vscode.CancellationToken): Promise<vscode.LanguageModelToolStreamResult> {
+	async handleToolStream(options: zyraxoncode.LanguageModelToolInvocationStreamOptions<IApplyPatchToolParams>, _token: zyraxoncode.CancellationToken): Promise<zyraxoncode.LanguageModelToolStreamResult> {
 		const partialInput = options.rawInput as Partial<IApplyPatchToolParams> | undefined;
 
 		let invocationMessage: MarkdownString;
@@ -212,7 +212,7 @@ export class ApplyPatchTool implements ICopilotTool<IApplyPatchToolParams> {
 		return { invocationMessage };
 	}
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IApplyPatchToolParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IApplyPatchToolParams>, token: zyraxoncode.CancellationToken) {
 		if (!options.input.input || !this._promptContext?.stream) {
 			this.sendApplyPatchTelemetry('invalidInput', options, undefined, false, undefined);
 			throw new Error('Missing patch text or stream');
@@ -289,7 +289,7 @@ export class ApplyPatchTool implements ICopilotTool<IApplyPatchToolParams> {
 
 			const resourceToOperation = new ResourceMap<{ action: ActionType.ADD | ActionType.DELETE } | { action: ActionType.UPDATE; updated: TextDocumentSnapshot | NotebookDocumentSnapshot | undefined }>();
 			const workspaceEdit = new WorkspaceEdit();
-			const notebookEdits = new ResourceMap<(vscode.NotebookEdit | [vscode.Uri, vscode.TextEdit[]])[]>();
+			const notebookEdits = new ResourceMap<(zyraxoncode.NotebookEdit | [zyraxoncode.Uri, zyraxoncode.TextEdit[]])[]>();
 			const deletedFiles = new ResourceSet();
 			for (const [file, changes] of Object.entries(commit.changes)) {
 				let path = resolveToolInputPath(file, this.promptPathRepresentationService);
@@ -561,7 +561,7 @@ export class ApplyPatchTool implements ICopilotTool<IApplyPatchToolParams> {
 		return healed;
 	}
 
-	private async buildCommitWithHealing(model: vscode.LanguageModelChat | undefined, patch: string, docText: DocText, explanation: string, token: CancellationToken): Promise<{ commit: Commit; healed?: string }> {
+	private async buildCommitWithHealing(model: zyraxoncode.LanguageModelChat | undefined, patch: string, docText: DocText, explanation: string, token: CancellationToken): Promise<{ commit: Commit; healed?: string }> {
 		try {
 			const result = await this.buildCommit(patch, docText);
 			if (model) {
@@ -611,22 +611,22 @@ export class ApplyPatchTool implements ICopilotTool<IApplyPatchToolParams> {
 
 	private async buildCommit(patch: string, docText: DocText): Promise<{ commit: Commit; docTexts: DocText }> {
 		const commit = await processPatch(patch, async (uri) => {
-			const vscodeUri = resolveToolInputPath(uri, this.promptPathRepresentationService);
-			if (this.notebookService.hasSupportedNotebooks(vscodeUri)) {
-				const notebookUri = findNotebook(vscodeUri, this.workspaceService.notebookDocuments)?.uri || vscodeUri;
+			const zyraxoncodeUri = resolveToolInputPath(uri, this.promptPathRepresentationService);
+			if (this.notebookService.hasSupportedNotebooks(zyraxoncodeUri)) {
+				const notebookUri = findNotebook(zyraxoncodeUri, this.workspaceService.notebookDocuments)?.uri || zyraxoncodeUri;
 				const altDoc = await this.workspaceService.openNotebookDocumentAndSnapshot(notebookUri, this.alternativeNotebookContent.getFormat(this._promptContext?.request?.model));
-				docText[vscodeUri.toString()] = { text: altDoc.getText(), notebookUri };
+				docText[zyraxoncodeUri.toString()] = { text: altDoc.getText(), notebookUri };
 				return new StringTextDocumentWithLanguageId(altDoc.getText(), altDoc.languageId);
 			} else {
-				const textDocument = await this.workspaceService.openTextDocument(vscodeUri);
-				docText[vscodeUri.toString()] = { text: textDocument.getText() };
+				const textDocument = await this.workspaceService.openTextDocument(zyraxoncodeUri);
+				docText[zyraxoncodeUri.toString()] = { text: textDocument.getText() };
 				return textDocument;
 			}
 		});
 		return { commit, docTexts: docText };
 	}
 
-	private async sendApplyPatchTelemetry(outcome: string, options: vscode.LanguageModelToolInvocationOptions<IApplyPatchToolParams>, file: string | undefined, healed: boolean, isNotebook: boolean | undefined, unexpectedError?: Error) {
+	private async sendApplyPatchTelemetry(outcome: string, options: zyraxoncode.LanguageModelToolInvocationOptions<IApplyPatchToolParams>, file: string | undefined, healed: boolean, isNotebook: boolean | undefined, unexpectedError?: Error) {
 		const model = options.model && (await this.endpointProvider.getChatEndpoint(options.model)).model;
 
 		/* __GDPR__
@@ -671,7 +671,7 @@ export class ApplyPatchTool implements ICopilotTool<IApplyPatchToolParams> {
 		return input;
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IApplyPatchToolParams>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IApplyPatchToolParams>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation> {
 		const uris = [...identify_files_affected(options.input.input)].map(f => URI.file(f));
 
 		return this.instantiationService.invokeFunction(
@@ -686,7 +686,7 @@ export class ApplyPatchTool implements ICopilotTool<IApplyPatchToolParams> {
 	}
 
 	private async generatePatchConfirmationDetails(
-		options: vscode.LanguageModelToolInvocationPrepareOptions<IApplyPatchToolParams>,
+		options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IApplyPatchToolParams>,
 		urisNeedingConfirmation: readonly URI[],
 		token: CancellationToken
 	): Promise<string> {

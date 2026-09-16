@@ -63,7 +63,7 @@ const MANAGED_CONFIRMATION_OPTIONS: readonly ConfirmationOption[] = [ALLOW_ONCE_
 /** Default write-path glob rules applied to auto-approved edits. */
 const DEFAULT_EDIT_AUTO_APPROVE_PATTERNS: Readonly<Record<string, boolean>> = {
 	'**/*': true,
-	'**/.vscode/*.json': false,
+	'**/.zyraxoncode/*.json': false,
 	'**/.git/**': false,
 	'**/{package.json,server.xml,build.rs,web.config,.gitattributes,.env}': false,
 	'**/*.{code-workspace,csproj,fsproj,vbproj,vcxproj,proj,targets,props}': false,
@@ -504,8 +504,8 @@ export class SessionPermissionManager extends Disposable {
 	 * expansions, and `~` in a position {@link untildify} does not handle.
 	 * Mirrors the workbench's file-write analyzer guard.
 	 *
-	 * See https://github.com/microsoft/vscode/issues/274166 and
-	 * https://github.com/microsoft/vscode/issues/274167
+	 * See __ZYRAXKEEP__0_ and
+	 * __ZYRAXKEEP__1_
 	 */
 	private static readonly _dynamicRedirectDestRegex = /[$(){}`~%]/;
 

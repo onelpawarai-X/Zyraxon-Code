@@ -69,7 +69,7 @@ export class PasteImageProvider implements DocumentPasteEditProvider {
 		@IEnvironmentService private readonly environmentService: IEnvironmentService,
 		@ILogService private readonly logService: ILogService,
 	) {
-		this.imagesFolder = joinPath(this.environmentService.workspaceStorageHome, 'vscode-chat-images');
+		this.imagesFolder = joinPath(this.environmentService.workspaceStorageHome, 'zyraxoncode-chat-images');
 		cleanupOldImages(this.fileService, this.logService, this.imagesFolder,);
 	}
 
@@ -201,7 +201,7 @@ export class CopyTextProvider implements DocumentPasteEditProvider {
 	) { }
 
 	async prepareDocumentPaste(model: ITextModel, ranges: readonly IRange[], dataTransfer: IReadonlyVSDataTransfer, token: CancellationToken): Promise<undefined | IReadonlyVSDataTransfer> {
-		if (model.uri.scheme === Schemas.vscodeChatInput) {
+		if (model.uri.scheme === Schemas.zyraxoncodeChatInput) {
 			return;
 		}
 
@@ -351,11 +351,11 @@ export class PasteTextProvider implements DocumentPasteEditProvider {
 	) { }
 
 	async provideDocumentPasteEdits(model: ITextModel, ranges: readonly IRange[], dataTransfer: IReadonlyVSDataTransfer, _context: DocumentPasteContext, token: CancellationToken): Promise<DocumentPasteEditsSession | undefined> {
-		if (model.uri.scheme !== Schemas.vscodeChatInput) {
+		if (model.uri.scheme !== Schemas.zyraxoncodeChatInput) {
 			return;
 		}
 		const text = dataTransfer.get(Mimes.text);
-		const editorData = dataTransfer.get('vscode-editor-data');
+		const editorData = dataTransfer.get('zyraxoncode-editor-data');
 		const additionalEditorData = dataTransfer.get(COPY_MIME_TYPES);
 
 		if (!editorData || !text || !additionalEditorData) {
@@ -562,7 +562,7 @@ async function resolveSymbolReference(
 	}
 
 	return {
-		id: `vscode.symbol/${JSON.stringify(defLocation)}`,
+		id: `zyraxoncode.symbol/${JSON.stringify(defLocation)}`,
 		fullName: pastedText,
 		data: defLocation,
 		icon
@@ -585,7 +585,7 @@ class PasteSymbolProvider implements DocumentPasteEditProvider {
 	) { }
 
 	async provideDocumentPasteEdits(model: ITextModel, ranges: readonly IRange[], dataTransfer: IReadonlyVSDataTransfer, _context: DocumentPasteContext, token: CancellationToken): Promise<DocumentPasteEditsSession | undefined> {
-		if (model.uri.scheme !== Schemas.vscodeChatInput) {
+		if (model.uri.scheme !== Schemas.zyraxoncodeChatInput) {
 			return;
 		}
 
@@ -689,7 +689,7 @@ class PasteHtmlProvider implements DocumentPasteEditProvider {
 	public readonly pasteMimeTypes = [Mimes.html];
 
 	async provideDocumentPasteEdits(model: ITextModel, _ranges: readonly IRange[], dataTransfer: IReadonlyVSDataTransfer, context: DocumentPasteContext, token: CancellationToken): Promise<DocumentPasteEditsSession | undefined> {
-		if (model.uri.scheme !== Schemas.vscodeChatInput) {
+		if (model.uri.scheme !== Schemas.zyraxoncodeChatInput) {
 			return;
 		}
 
@@ -742,11 +742,11 @@ export class ChatPasteProvidersFeature extends Disposable {
 		@ILogService logService: ILogService,
 	) {
 		super();
-		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.vscodeChatInput, pattern: '*', hasAccessToAllModels: true }, instaService.createInstance(CopyAttachmentsProvider)));
-		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.vscodeChatInput, pattern: '*', hasAccessToAllModels: true }, new PasteImageProvider(chatWidgetService, extensionService, fileService, environmentService, logService)));
-		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.vscodeChatInput, pattern: '*', hasAccessToAllModels: true }, new PasteTextProvider(chatWidgetService, modelService)));
-		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.vscodeChatInput, pattern: '*', hasAccessToAllModels: true }, new PasteHtmlProvider()));
-		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.vscodeChatInput, pattern: '*', hasAccessToAllModels: true }, instaService.createInstance(PasteSymbolProvider)));
+		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.zyraxoncodeChatInput, pattern: '*', hasAccessToAllModels: true }, instaService.createInstance(CopyAttachmentsProvider)));
+		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.zyraxoncodeChatInput, pattern: '*', hasAccessToAllModels: true }, new PasteImageProvider(chatWidgetService, extensionService, fileService, environmentService, logService)));
+		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.zyraxoncodeChatInput, pattern: '*', hasAccessToAllModels: true }, new PasteTextProvider(chatWidgetService, modelService)));
+		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.zyraxoncodeChatInput, pattern: '*', hasAccessToAllModels: true }, new PasteHtmlProvider()));
+		this._register(languageFeaturesService.documentPasteEditProvider.register({ scheme: Schemas.zyraxoncodeChatInput, pattern: '*', hasAccessToAllModels: true }, instaService.createInstance(PasteSymbolProvider)));
 		this._register(languageFeaturesService.documentPasteEditProvider.register('*', instaService.createInstance(CopyTextProvider)));
 	}
 }

@@ -12,9 +12,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(--vscode-spacing-size60);
+	gap: var(--zyraxoncode-spacing-size60);
 	min-width: 0;
-	padding: var(--vscode-spacing-size20) 0 var(--vscode-spacing-size60) 0;
+	padding: var(--zyraxoncode-spacing-size20) 0 var(--zyraxoncode-spacing-size60) 0;
 }
 
 /* The turn pills size to their content and deliberately don't shrink internally,

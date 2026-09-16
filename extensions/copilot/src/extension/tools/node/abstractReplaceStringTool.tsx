@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IEditSurvivalTrackerService, IEditSurvivalTrackingSession } from '../../../platform/editSurvivalTracking/common/editSurvivalTrackerService';
 import { NotebookDocumentSnapshot } from '../../../platform/editing/common/notebookDocumentSnapshot';
@@ -31,7 +31,7 @@ import { extUriBiasedIgnorePathCase } from '../../../util/vs/base/common/resourc
 import { isDefined } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestEditorData, ChatResponseTextEditPart, EndOfLine, ExtendedLanguageModelToolResult, Position as ExtPosition, LanguageModelPromptTsxPart, LanguageModelToolResult, TextEdit } from '../../../vscodeTypes';
+import { ChatRequestEditorData, ChatResponseTextEditPart, EndOfLine, ExtendedLanguageModelToolResult, Position as ExtPosition, LanguageModelPromptTsxPart, LanguageModelToolResult, TextEdit } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { CellOrNotebookEdit, processFullRewriteNotebookEdits } from '../../prompts/node/codeMapper/codeMapper';
@@ -58,7 +58,7 @@ export interface IPrepareEdit {
 	healed?: IAbstractReplaceStringInput;
 	input: IAbstractReplaceStringInput;
 	generatedEdit:
-	| { success: true; textEdits: vscode.TextEdit[]; notebookEdits?: CellOrNotebookEdit[]; updated: NotebookDocumentSnapshot | TextDocumentSnapshot | undefined }
+	| { success: true; textEdits: zyraxoncode.TextEdit[]; notebookEdits?: CellOrNotebookEdit[]; updated: NotebookDocumentSnapshot | TextDocumentSnapshot | undefined }
 	| { success: false; errorMessage: string };
 }
 
@@ -88,7 +88,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		@IOTelService private readonly _otelService: IOTelService,
 	) { }
 
-	public abstract invoke(options: vscode.LanguageModelToolInvocationOptions<T>, token: vscode.CancellationToken): Promise<LanguageModelToolResult>;
+	public abstract invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<T>, token: zyraxoncode.CancellationToken): Promise<LanguageModelToolResult>;
 
 	protected abstract toolName(): ToolName;
 
@@ -99,7 +99,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 	 */
 	protected abstract extractReplaceInputs(input: T): IAbstractReplaceStringInput[];
 
-	protected prepareEdits(options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>, token: vscode.CancellationToken): Promise<IPrepareEdit[]> {
+	protected prepareEdits(options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>, token: zyraxoncode.CancellationToken): Promise<IPrepareEdit[]> {
 		const input = this.extractReplaceInputs(options.input);
 		const cacheKey = JSON.stringify(input);
 		if (this.lastOperation?.inputKey !== cacheKey) {
@@ -112,7 +112,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		return this.lastOperation.operation;
 	}
 
-	private async _prepareEdits(options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>, input: IAbstractReplaceStringInput[], token: vscode.CancellationToken) {
+	private async _prepareEdits(options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>, input: IAbstractReplaceStringInput[], token: zyraxoncode.CancellationToken) {
 		const results = await Promise.all(input.map(i => this._prepareEditsForFile(options, i, token)));
 		this._errorConflictingEdits(results);
 		return results;
@@ -153,7 +153,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		}
 	}
 
-	private async _prepareEditsForFile(options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>, input: IAbstractReplaceStringInput, token: vscode.CancellationToken): Promise<IPrepareEdit> {
+	private async _prepareEditsForFile(options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>, input: IAbstractReplaceStringInput, token: zyraxoncode.CancellationToken): Promise<IPrepareEdit> {
 		const uri = resolveToolInputPath(input.filePath, this.promptPathRepresentationService);
 
 		const disallowedUriError = getDisallowedEditUriError(uri, this._promptContext?.allowedEditUris, this.promptPathRepresentationService);
@@ -205,7 +205,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 			}
 
 			const { updatedFile, edits } = await this.generateEdit(uri, document, options, input, didHealRef, token);
-			let notebookEdits: (vscode.NotebookEdit | [URI, vscode.TextEdit[]])[] | undefined;
+			let notebookEdits: (zyraxoncode.NotebookEdit | [URI, zyraxoncode.TextEdit[]])[] | undefined;
 			let updated: NotebookDocumentSnapshot | TextDocumentSnapshot;
 			if (document instanceof NotebookDocumentSnapshot) {
 				const model = await this.modelForTelemetry(options);
@@ -258,7 +258,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		}
 	}
 
-	protected async applyAllEdits(options: vscode.LanguageModelToolInvocationOptions<T>, edits: IPrepareEdit[], token: vscode.CancellationToken) {
+	protected async applyAllEdits(options: zyraxoncode.LanguageModelToolInvocationOptions<T>, edits: IPrepareEdit[], token: zyraxoncode.CancellationToken) {
 		if (!this._promptContext?.stream) {
 			throw new Error('no prompt context found');
 		}
@@ -266,7 +266,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		logEditToolResult(this.logService, options.chatRequestId, ...edits.map(e => ({ input: e.input, success: e.generatedEdit.success, healed: e.healed })));
 
 		const fileResults: IEditedFile[] = [];
-		const existingDiagnosticMap = new ResourceMap<vscode.Diagnostic[]>();
+		const existingDiagnosticMap = new ResourceMap<zyraxoncode.Diagnostic[]>();
 
 		for (const { document, uri, generatedEdit, healed } of edits) {
 			if (document && !existingDiagnosticMap.has(document.uri)) {
@@ -410,7 +410,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		return result;
 	}
 
-	protected doGenerateEdit(uri: URI, oldString: string, newString: string, options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>) {
+	protected doGenerateEdit(uri: URI, oldString: string, newString: string, options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>) {
 		return applyEdit(
 			uri,
 			oldString,
@@ -422,7 +422,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		);
 	}
 
-	private async generateEdit(uri: URI, document: TextDocumentSnapshot | NotebookDocumentSnapshot, options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>, input: IAbstractReplaceStringInput, didHealRef: { healed?: IAbstractReplaceStringInput }, token: vscode.CancellationToken) {
+	private async generateEdit(uri: URI, document: TextDocumentSnapshot | NotebookDocumentSnapshot, options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>, input: IAbstractReplaceStringInput, didHealRef: { healed?: IAbstractReplaceStringInput }, token: zyraxoncode.CancellationToken) {
 		const model = this.modelObjectForTelemetry(options);
 		const filePath = this.promptPathRepresentationService.getFilePath(document.uri);
 		const eol = document instanceof TextDocumentSnapshot && document.eol === EndOfLine.CRLF ? '\r\n' : '\n';
@@ -431,7 +431,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 
 		// Apply the edit using the improved applyEdit function that uses ZYRAXON Code APIs
 		let updatedFile: string;
-		let edits: vscode.TextEdit[] = [];
+		let edits: zyraxoncode.TextEdit[] = [];
 		try {
 			const result = await this.doGenerateEdit(uri, oldString, newString, options);
 			updatedFile = result.updatedFile;
@@ -493,7 +493,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		return { edits, updatedFile };
 	}
 
-	private async sendReplaceTelemetry(outcome: string, options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>, input: IAbstractReplaceStringInput, file: string | undefined, isNotebookDocument: boolean | undefined, didHeal: boolean | undefined) {
+	private async sendReplaceTelemetry(outcome: string, options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>, input: IAbstractReplaceStringInput, file: string | undefined, isNotebookDocument: boolean | undefined, didHeal: boolean | undefined) {
 		const model = await this.modelForTelemetry(options);
 		const isNotebook = isNotebookDocument ? 1 : (isNotebookDocument === false ? 0 : -1);
 		const isMulti = this.toolName() === ToolName.MultiReplaceString ? 1 : 0;
@@ -528,7 +528,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		}).then(properties => this.telemetryService.sendEnhancedGHTelemetryEvent('replaceStringTool', properties, { isNotebook })).catch(() => { /* best-effort telemetry */ });
 	}
 
-	private async sendHealingTelemetry(options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>, healError: string | undefined, applicationError: string | undefined) {
+	private async sendHealingTelemetry(options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>, healError: string | undefined, applicationError: string | undefined) {
 		/* __GDPR__
 			"replaceStringHealingStat" : {
 				"owner": "roblourens",
@@ -553,17 +553,17 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		);
 	}
 
-	protected async modelForTelemetry(options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>) {
+	protected async modelForTelemetry(options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>) {
 		const model = this.modelObjectForTelemetry(options);
 		return model && (await this.endpointProvider.getChatEndpoint(model)).model;
 	}
 
-	protected modelObjectForTelemetry(options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>) {
+	protected modelObjectForTelemetry(options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>) {
 		const model = 'model' in options ? options.model : this._promptContext?.request?.model;
 		return model;
 	}
 
-	private async recordEditSuccess(options: vscode.LanguageModelToolInvocationOptions<T> | vscode.LanguageModelToolInvocationPrepareOptions<T>, success: boolean) {
+	private async recordEditSuccess(options: zyraxoncode.LanguageModelToolInvocationOptions<T> | zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>, success: boolean) {
 		const model = this.modelObjectForTelemetry(options);
 		if (model) {
 			this.editToolLearningService.didMakeEdit(model, this.toolName() as EditTools, success);
@@ -575,7 +575,7 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 		return input;
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<T>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation> {
 		// Extract all replace inputs from the tool input
 		const replaceInputs = this.extractReplaceInputs(options.input);
 		const allUris = replaceInputs.map(input => resolveToolInputPath(input.filePath, this.promptPathRepresentationService));
@@ -594,8 +594,8 @@ export abstract class AbstractReplaceStringTool<T extends { explanation: string 
 	private async generateConfirmationDetails(
 		replaceInputs: IAbstractReplaceStringInput[],
 		urisNeedingConfirmation: readonly URI[],
-		options: vscode.LanguageModelToolInvocationPrepareOptions<T>,
-		token: vscode.CancellationToken
+		options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<T>,
+		token: zyraxoncode.CancellationToken
 	): Promise<string> {
 		const urisNeedingConfirmationSet = new ResourceSet(urisNeedingConfirmation);
 

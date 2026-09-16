@@ -84,7 +84,7 @@ export class NativeTitlebarPart extends BrowserTitlebarPart {
 
 		this.tahoeOrNewer = isTahoeOrNewer(environmentService.os.release);
 
-		this.handleWindowsAlwaysOnTop(targetWindow.vscodeWindowId);
+		this.handleWindowsAlwaysOnTop(targetWindow.zyraxoncodeWindowId);
 	}
 
 	private async handleWindowsAlwaysOnTop(targetWindowId: number): Promise<void> {
@@ -214,7 +214,7 @@ export class NativeTitlebarPart extends BrowserTitlebarPart {
 		}
 
 		// Window System Context Menu
-		// See https://github.com/electron/electron/issues/24893
+		// See __ZYRAXKEEP__0_
 		if (isWindows && !hasNativeTitlebar(this.configurationService)) {
 			this._register(this.nativeHostService.onDidTriggerWindowSystemContextMenu(({ windowId, x, y }) => {
 				if (targetWindowId !== windowId) {

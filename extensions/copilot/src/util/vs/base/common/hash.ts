@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -77,7 +77,7 @@ function objectHash(obj: object, initialHashVal: number): number {
 export const hashAsync = (input: string | ArrayBufferView | VSBuffer) => {
 	// Note: I would very much like to expose a streaming interface for hashing
 	// generally, but this is not available in web crypto yet, see
-	// https://github.com/w3c/webcrypto/issues/73
+	// __ZYRAXKEEP__0_
 
 	// StringSHA1 is faster for small string input, use it since we have it:
 	if (typeof input === 'string' && input.length < 250) {

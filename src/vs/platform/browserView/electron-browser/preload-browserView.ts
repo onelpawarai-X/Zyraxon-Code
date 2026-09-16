@@ -38,7 +38,7 @@ function init() {
 	// ###                                                                 ###
 	// ###       !!! DO NOT USE GET/SET PROPERTIES ANYWHERE HERE !!!       ###
 	// ###       !!!  UNLESS THE ACCESS IS WITHOUT SIDE EFFECTS  !!!       ###
-	// ###       (https://github.com/electron/electron/issues/25516)       ###
+	// ###       (__ZYRAXKEEP__0_)       ###
 	// ###                                                                 ###
 	// #######################################################################
 
@@ -123,7 +123,7 @@ function init() {
 		// Everything else should be forwarded to the workbench for potential shortcut handling.
 		event.preventDefault();
 		event.stopPropagation();
-		ipcRenderer.send('vscode:browserView:keydown', {
+		ipcRenderer.send('zyraxoncode:browserView:keydown', {
 			key: event.key,
 			keyCode: event.keyCode,
 			code: event.code,
@@ -138,16 +138,16 @@ function init() {
 	const elementPicker = new ElementPicker(
 		(el, comment) => {
 			const elementId = track(el);
-			ipcRenderer.send('vscode:browserView:elementPicked', { elementId, comment });
+			ipcRenderer.send('zyraxoncode:browserView:elementPicked', { elementId, comment });
 			return elementId;
 		},
-		elementId => ipcRenderer.send('vscode:browserView:elementCommentRemoved', elementId),
-		() => ipcRenderer.send('vscode:browserView:elementPickStopped')
+		elementId => ipcRenderer.send('zyraxoncode:browserView:elementCommentRemoved', elementId),
+		() => ipcRenderer.send('zyraxoncode:browserView:elementPickStopped')
 	);
 
 	const areaPicker = new AreaPicker(
-		rect => ipcRenderer.send('vscode:browserView:areaPicked', rect),
-		() => ipcRenderer.send('vscode:browserView:areaPickStopped')
+		rect => ipcRenderer.send('zyraxoncode:browserView:areaPicked', rect),
+		() => ipcRenderer.send('zyraxoncode:browserView:areaPickStopped')
 	);
 
 	const trackedElementsById = new Map<string, WeakRef<Element>>();
@@ -184,42 +184,42 @@ function init() {
 	}, { capture: true });
 
 	// Invoked over IPC to support frames (executeJavaScriptInIsolatedWorld doesn't exist on WebFrameMain).
-	ipcRenderer.on('vscode:browserView:setTheme', (_event: unknown, theme: IBrowserViewTheme) => {
+	ipcRenderer.on('zyraxoncode:browserView:setTheme', (_event: unknown, theme: IBrowserViewTheme) => {
 		elementPicker.setTheme(theme);
 		areaPicker.setTheme(theme);
 	});
-	ipcRenderer.on('vscode:browserView:setLocalizedStrings', (_event: unknown, strings: IBrowserViewPreloadLocalizedStrings) => {
+	ipcRenderer.on('zyraxoncode:browserView:setLocalizedStrings', (_event: unknown, strings: IBrowserViewPreloadLocalizedStrings) => {
 		localizedStrings = strings;
 		elementPicker.updateLocalizedStrings();
 	});
-	ipcRenderer.on('vscode:browserView:startElementPicker', (_event: unknown, options: IBrowserElementSelectionOptions) => {
+	ipcRenderer.on('zyraxoncode:browserView:startElementPicker', (_event: unknown, options: IBrowserElementSelectionOptions) => {
 		elementPicker.start(options);
 	});
-	ipcRenderer.on('vscode:browserView:stopElementPicker', (_event: unknown) => {
+	ipcRenderer.on('zyraxoncode:browserView:stopElementPicker', (_event: unknown) => {
 		elementPicker.stop();
 	});
-	ipcRenderer.on('vscode:browserView:startAreaPicker', (_event: unknown) => {
+	ipcRenderer.on('zyraxoncode:browserView:startAreaPicker', (_event: unknown) => {
 		areaPicker.start();
 	});
-	ipcRenderer.on('vscode:browserView:stopAreaPicker', (_event: unknown) => {
+	ipcRenderer.on('zyraxoncode:browserView:stopAreaPicker', (_event: unknown) => {
 		areaPicker.stop();
 	});
-	ipcRenderer.on('vscode:browserView:highlightElement', (_event: unknown, { elementId }: { elementId: string }) => {
+	ipcRenderer.on('zyraxoncode:browserView:highlightElement', (_event: unknown, { elementId }: { elementId: string }) => {
 		const element = getElement(elementId);
 		if (element) {
 			elementPicker.highlight(element);
 		}
 	});
-	ipcRenderer.on('vscode:browserView:showElementComment', (_event: unknown, { elementId }: { elementId: string }) => {
+	ipcRenderer.on('zyraxoncode:browserView:showElementComment', (_event: unknown, { elementId }: { elementId: string }) => {
 		const element = getElement(elementId);
 		if (element) {
 			elementPicker.comment(element, elementId === 'context-menu-target' ? contextMenuTarget?.anchor : undefined);
 		}
 	});
-	ipcRenderer.on('vscode:browserView:hideHighlight', (_event: unknown) => {
+	ipcRenderer.on('zyraxoncode:browserView:hideHighlight', (_event: unknown) => {
 		elementPicker.hideHighlight();
 	});
-	ipcRenderer.on('vscode:browserView:setElementComments', (_event: unknown, update: IBrowserElementCommentsUpdate) => {
+	ipcRenderer.on('zyraxoncode:browserView:setElementComments', (_event: unknown, update: IBrowserElementCommentsUpdate) => {
 		elementPicker.updateComments(update);
 	});
 
@@ -266,14 +266,14 @@ function init() {
 		// The isolatedHelpers object will be recursively frozen (and for functions also proxied) by Electron to prevent
 		// modification within the given context.
 		contextBridge.exposeInIsolatedWorld(999, 'browserViewAPI', isolatedHelpers);
-		// Expose helpers on `window.__vscode_helpers` in the page's main world
+		// Expose helpers on `window.__zyraxoncode_helpers` in the page's main world
 		// for CDP `Runtime.evaluate` (which runs against the main world) to use.
-		contextBridge.exposeInMainWorld('__vscode_helpers', mainWorldHelpers);
+		contextBridge.exposeInMainWorld('__zyraxoncode_helpers', mainWorldHelpers);
 	} catch (error) {
 		console.error(error);
 	}
 
-	ipcRenderer.send('vscode:browserView:preloadReady', frameToken);
+	ipcRenderer.send('zyraxoncode:browserView:preloadReady', frameToken);
 }
 
 /**
@@ -398,16 +398,16 @@ class ElementPicker {
 		// Build the shadow DOM tree once. The host is appended/removed from the
 		// document on start/stop so the overlay only captures events when active.
 		const shadowHost = document.createElement('div');
-		shadowHost.setAttribute('data-vscode-pick-host', '');
+		shadowHost.setAttribute('data-zyraxoncode-pick-host', '');
 		shadowHost.style.cssText = 'position: absolute; top: 0; left: 0; width: 0; height: 0; z-index: 2147483647; pointer-events: none;';
 		const root = shadowHost.attachShadow({ mode: 'closed' });
 		root.appendChild(ElementPicker._buildStyle());
 		this._shadowHost = shadowHost;
 
-		const svgNamespace = 'http://www.w3.org/2000/svg';
+		const svgNamespace = '__ZYRAXKEEP__1_';
 		const commentBackdrop = document.createElementNS(svgNamespace, 'svg');
 		commentBackdrop.classList.add('comment-backdrop');
-		const backdropMaskId = `vscode-comment-cutout-${Math.random().toString(36).slice(2)}`;
+		const backdropMaskId = `zyraxoncode-comment-cutout-${Math.random().toString(36).slice(2)}`;
 		const backdropDefinitions = document.createElementNS(svgNamespace, 'defs');
 		const backdropMask = document.createElementNS(svgNamespace, 'mask');
 		backdropMask.id = backdropMaskId;
@@ -1591,7 +1591,7 @@ class ElementPicker {
 				z-index: 2;
 			}
 			.comment-backdrop-fill {
-				fill: var(--vscode-widget-shadow, transparent);
+				fill: var(--zyraxoncode-widget-shadow, transparent);
 				opacity: 0;
 				transition: opacity 120ms linear;
 			}
@@ -1599,8 +1599,8 @@ class ElementPicker {
 				opacity: 1;
 			}
 			.highlight-shape {
-				fill: color-mix(in srgb, var(--vscode-focusBorder, #0078d4) 12%, transparent);
-				stroke: var(--vscode-focusBorder, #0078d4);
+				fill: color-mix(in srgb, var(--zyraxoncode-focusBorder, #0078d4) 12%, transparent);
+				stroke: var(--zyraxoncode-focusBorder, #0078d4);
 				stroke-width: 2px;
 			}
 			.overlay {
@@ -1615,11 +1615,11 @@ class ElementPicker {
 				position: fixed;
 				box-sizing: border-box;
 				width: min(320px, calc(100vw - 16px));
-				border: var(--vscode-strokeThickness, 1px) solid var(--vscode-editorWidget-border, var(--vscode-contrastBorder, #454545));
-				border-radius: var(--vscode-cornerRadius-large, 8px);
-				background: var(--vscode-editorWidget-background, #252526);
-				color: var(--vscode-editorWidget-foreground, #cccccc);
-				box-shadow: 0 2px 6px var(--vscode-widget-shadow, transparent);
+				border: var(--zyraxoncode-strokeThickness, 1px) solid var(--zyraxoncode-editorWidget-border, var(--zyraxoncode-contrastBorder, #454545));
+				border-radius: var(--zyraxoncode-cornerRadius-large, 8px);
+				background: var(--zyraxoncode-editorWidget-background, #252526);
+				color: var(--zyraxoncode-editorWidget-foreground, #cccccc);
+				box-shadow: 0 2px 6px var(--zyraxoncode-widget-shadow, transparent);
 				font-size: 13px;
 				font-weight: 400;
 				z-index: 3;
@@ -1685,19 +1685,19 @@ class ElementPicker {
 				margin-block: -2px;
 				padding: 0;
 				border: 0;
-				border-radius: var(--vscode-cornerRadius-small, 4px);
+				border-radius: var(--zyraxoncode-cornerRadius-small, 4px);
 				background: transparent;
-				color: var(--vscode-editorWidget-foreground, inherit);
+				color: var(--zyraxoncode-editorWidget-foreground, inherit);
 				cursor: pointer;
 				font-family: inherit;
 			}
 			.comment-preview-remove svg {
 				display: block;
-				width: var(--vscode-codiconFontSize, 16px);
-				height: var(--vscode-codiconFontSize, 16px);
+				width: var(--zyraxoncode-codiconFontSize, 16px);
+				height: var(--zyraxoncode-codiconFontSize, 16px);
 			}
 			.comment-preview-remove:hover {
-				background: var(--vscode-toolbar-hoverBackground, transparent);
+				background: var(--zyraxoncode-toolbar-hoverBackground, transparent);
 			}
 			.comment-composer {
 				align-items: flex-end; gap: 6px; padding: 6px;
@@ -1709,18 +1709,18 @@ class ElementPicker {
 				scrollbar-width: none;
 				box-sizing: border-box; margin: 0; padding: 2px 6px;
 				background: transparent; color: inherit;
-				border: var(--vscode-strokeThickness, 1px) solid var(--vscode-editorWidget-border, var(--vscode-contrastBorder, #454545));
-				border-radius: var(--vscode-cornerRadius-small, 4px);
+				border: var(--zyraxoncode-strokeThickness, 1px) solid var(--zyraxoncode-editorWidget-border, var(--zyraxoncode-contrastBorder, #454545));
+				border-radius: var(--zyraxoncode-cornerRadius-small, 4px);
 				outline: 0;
 				font: inherit;
 				line-height: 20px;
-				caret-color: var(--vscode-focusBorder, currentColor);
+				caret-color: var(--zyraxoncode-focusBorder, currentColor);
 			}
 			.comment-input::-webkit-scrollbar {
 				display: none;
 			}
 			.comment-input::placeholder {
-				color: var(--vscode-input-placeholderForeground, var(--vscode-descriptionForeground, #ccccccb3));
+				color: var(--zyraxoncode-input-placeholderForeground, var(--zyraxoncode-descriptionForeground, #ccccccb3));
 				opacity: 1;
 			}
 			.comment-send {
@@ -1728,19 +1728,19 @@ class ElementPicker {
 			}
 			.comment-send {
 				flex: none; width: 24px; height: 24px; padding: 0;
-				border-radius: var(--vscode-cornerRadius-small, 4px);
+				border-radius: var(--zyraxoncode-cornerRadius-small, 4px);
 				background: transparent;
-				color: var(--vscode-editorWidget-foreground, #cccccc);
+				color: var(--zyraxoncode-editorWidget-foreground, #cccccc);
 				display: grid;
 				place-items: center;
 			}
 			.comment-send svg {
 				display: block;
-				width: var(--vscode-codiconFontSize, 16px);
-				height: var(--vscode-codiconFontSize, 16px);
+				width: var(--zyraxoncode-codiconFontSize, 16px);
+				height: var(--zyraxoncode-codiconFontSize, 16px);
 			}
 			.comment-send:hover {
-				background: var(--vscode-toolbar-hoverBackground, transparent);
+				background: var(--zyraxoncode-toolbar-hoverBackground, transparent);
 			}
 			.comment-pin {
 				position: absolute;
@@ -1769,11 +1769,11 @@ class ElementPicker {
 				width: 22px;
 				height: 22px;
 				padding: 0;
-				border: var(--vscode-strokeThickness, 1px) solid var(--vscode-editorWidget-background, #252526);
-				border-radius: var(--vscode-cornerRadius-circle, 9999px);
-				background: var(--vscode-button-background, #0078d4);
-				color: var(--vscode-button-foreground, white);
-				box-shadow: 0 2px 6px var(--vscode-widget-shadow, transparent);
+				border: var(--zyraxoncode-strokeThickness, 1px) solid var(--zyraxoncode-editorWidget-background, #252526);
+				border-radius: var(--zyraxoncode-cornerRadius-circle, 9999px);
+				background: var(--zyraxoncode-button-background, #0078d4);
+				color: var(--zyraxoncode-button-foreground, white);
+				box-shadow: 0 2px 6px var(--zyraxoncode-widget-shadow, transparent);
 			}
 			.comment-pin-number {
 				display: block;
@@ -1784,7 +1784,7 @@ class ElementPicker {
 				text-align: center;
 			}
 			.comment-send:focus-visible, .comment-preview-remove:focus-visible, .comment-pin:focus-visible, .comment-input:focus-visible {
-				outline: 2px solid var(--vscode-focusBorder, #0078d4);
+				outline: 2px solid var(--zyraxoncode-focusBorder, #0078d4);
 				outline-offset: 2px;
 			}
 			:host(.reduce-motion) .comment-backdrop-fill {
@@ -1794,8 +1794,8 @@ class ElementPicker {
 				position: fixed; box-sizing: border-box;
 				display: inline-flex; align-items: center; gap: 6px; height: 20px; padding: 0 6px;
 				max-width: min(100%, 320px);
-				background: var(--vscode-button-background, #0078d4);
-				color: var(--vscode-button-foreground, white);
+				background: var(--zyraxoncode-button-background, #0078d4);
+				color: var(--zyraxoncode-button-foreground, white);
 				font-family: inherit;
 				font-size: 11px; line-height: 20px;
 				white-space: nowrap;
@@ -1814,7 +1814,7 @@ class ElementPicker {
 			}
 			.dragbox {
 				position: fixed; box-sizing: border-box;
-				border: 1px dotted var(--vscode-focusBorder, #a0aabe);
+				border: 1px dotted var(--zyraxoncode-focusBorder, #a0aabe);
 				background: transparent;
 				z-index: 2;
 			}
@@ -1823,17 +1823,17 @@ class ElementPicker {
 	}
 
 	private static _applyTheme(host: HTMLElement, theme: IBrowserViewTheme | undefined): void {
-		host.style.setProperty('--vscode-focusBorder', theme?.focusBorder ?? null);
-		host.style.setProperty('--vscode-button-background', theme?.buttonBackground ?? null);
-		host.style.setProperty('--vscode-button-foreground', theme?.buttonForeground ?? null);
-		host.style.setProperty('--vscode-editorWidget-background', theme?.widgetBackground ?? null);
-		host.style.setProperty('--vscode-editorWidget-foreground', theme?.widgetForeground ?? null);
-		host.style.setProperty('--vscode-editorWidget-border', theme?.widgetBorder ?? null);
-		host.style.setProperty('--vscode-widget-shadow', theme?.widgetShadow ?? null);
-		host.style.setProperty('--vscode-contrastBorder', theme?.contrastBorder ?? null);
-		host.style.setProperty('--vscode-descriptionForeground', theme?.descriptionForeground ?? null);
-		host.style.setProperty('--vscode-input-placeholderForeground', theme?.inputPlaceholderForeground ?? null);
-		host.style.setProperty('--vscode-toolbar-hoverBackground', theme?.toolbarHoverBackground ?? null);
+		host.style.setProperty('--zyraxoncode-focusBorder', theme?.focusBorder ?? null);
+		host.style.setProperty('--zyraxoncode-button-background', theme?.buttonBackground ?? null);
+		host.style.setProperty('--zyraxoncode-button-foreground', theme?.buttonForeground ?? null);
+		host.style.setProperty('--zyraxoncode-editorWidget-background', theme?.widgetBackground ?? null);
+		host.style.setProperty('--zyraxoncode-editorWidget-foreground', theme?.widgetForeground ?? null);
+		host.style.setProperty('--zyraxoncode-editorWidget-border', theme?.widgetBorder ?? null);
+		host.style.setProperty('--zyraxoncode-widget-shadow', theme?.widgetShadow ?? null);
+		host.style.setProperty('--zyraxoncode-contrastBorder', theme?.contrastBorder ?? null);
+		host.style.setProperty('--zyraxoncode-descriptionForeground', theme?.descriptionForeground ?? null);
+		host.style.setProperty('--zyraxoncode-input-placeholderForeground', theme?.inputPlaceholderForeground ?? null);
+		host.style.setProperty('--zyraxoncode-toolbar-hoverBackground', theme?.toolbarHoverBackground ?? null);
 		host.style.setProperty('--pick-font', theme?.font ?? null);
 	}
 }
@@ -1862,7 +1862,7 @@ class AreaPicker {
 		private readonly _onStopped: () => void
 	) {
 		const shadowHost = document.createElement('div');
-		shadowHost.setAttribute('data-vscode-area-pick-host', '');
+		shadowHost.setAttribute('data-zyraxoncode-area-pick-host', '');
 		shadowHost.style.cssText = 'position: absolute; top: 0; left: 0; width: 0; height: 0; z-index: 2147483647; pointer-events: none;';
 		const root = shadowHost.attachShadow({ mode: 'closed' });
 		root.appendChild(AreaPicker._buildStyle());
@@ -1893,7 +1893,7 @@ class AreaPicker {
 
 		// Force a crosshair cursor across the whole page while picking.
 		const cursorStyle = document.createElement('style');
-		cursorStyle.setAttribute('data-vscode-area-pick-cursor', '');
+		cursorStyle.setAttribute('data-zyraxoncode-area-pick-cursor', '');
 		cursorStyle.textContent = AreaPicker._CURSOR_CROSSHAIR;
 		document.head.appendChild(cursorStyle);
 		this._cursorStylesheet = cursorStyle;
@@ -1943,7 +1943,7 @@ class AreaPicker {
 	}
 
 	setTheme(theme: IBrowserViewTheme): void {
-		this._shadowHost.style.setProperty('--vscode-focusBorder', theme?.focusBorder ?? null);
+		this._shadowHost.style.setProperty('--zyraxoncode-focusBorder', theme?.focusBorder ?? null);
 	}
 
 	private _onPointerDown = (e: PointerEvent): void => {
@@ -2055,8 +2055,8 @@ class AreaPicker {
 			}
 			.dragbox {
 				position: fixed; box-sizing: border-box;
-				border: 1px dashed var(--vscode-focusBorder, #0078d4);
-				background: color-mix(in srgb, var(--vscode-focusBorder, #0078d4) 12%, transparent);
+				border: 1px dashed var(--zyraxoncode-focusBorder, #0078d4);
+				background: color-mix(in srgb, var(--zyraxoncode-focusBorder, #0078d4) 12%, transparent);
 				z-index: 2;
 				pointer-events: auto;
 			}

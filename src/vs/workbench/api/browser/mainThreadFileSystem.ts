@@ -56,7 +56,7 @@ export class MainThreadFileSystem implements MainThreadFileSystemShape {
 	}
 
 
-	// --- consumer fs, vscode.workspace.fs
+	// --- consumer fs, zyraxoncode.workspace.fs
 
 	async $stat(uri: UriComponents): Promise<IStat> {
 		try {

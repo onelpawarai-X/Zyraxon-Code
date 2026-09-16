@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptSizing } from '@vscode/prompt-tsx';
+import { PromptElement, PromptElementProps, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { ITestDepsResolver } from '../../../../platform/testing/node/testDepsResolver';
 import { Tag } from '../../../prompts/node/base/tag';
 

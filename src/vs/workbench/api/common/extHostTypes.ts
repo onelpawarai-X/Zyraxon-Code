@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { asArray } from '../../../base/common/arrays.js';
 import { encodeBase64, VSBuffer } from '../../../base/common/buffer.js';
 import { illegalArgument, SerializedError } from '../../../base/common/errors.js';
@@ -137,7 +137,7 @@ export class ManagedResolvedAuthority {
 			&& (resolvedAuthority.connectionToken === undefined || typeof resolvedAuthority.connectionToken === 'string');
 	}
 
-	constructor(public readonly makeConnection: () => Thenable<vscode.ManagedMessagePassing>, public readonly connectionToken?: string) {
+	constructor(public readonly makeConnection: () => Thenable<zyraxoncode.ManagedMessagePassing>, public readonly connectionToken?: string) {
 		if (typeof connectionToken !== 'undefined') {
 			validateConnectionToken(connectionToken);
 		}
@@ -166,7 +166,7 @@ export class RemoteAuthorityResolverError extends Error {
 		this._detail = detail;
 
 		// workaround when extending builtin objects and when compiling to ES5, see:
-		// https://github.com/microsoft/TypeScript-wiki/blob/master/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
+		// __ZYRAXKEEP__0_
 		Object.setPrototypeOf(this, RemoteAuthorityResolverError.prototype);
 	}
 }
@@ -180,11 +180,11 @@ export enum EnvironmentVariableMutatorType {
 @es5ClassCompat
 export class Hover {
 
-	public contents: (vscode.MarkdownString | vscode.MarkedString)[];
+	public contents: (zyraxoncode.MarkdownString | zyraxoncode.MarkedString)[];
 	public range: Range | undefined;
 
 	constructor(
-		contents: vscode.MarkdownString | vscode.MarkedString | (vscode.MarkdownString | vscode.MarkedString)[],
+		contents: zyraxoncode.MarkdownString | zyraxoncode.MarkedString | (zyraxoncode.MarkdownString | zyraxoncode.MarkedString)[],
 		range?: Range
 	) {
 		if (!contents) {
@@ -206,7 +206,7 @@ export class VerboseHover extends Hover {
 	public canDecreaseVerbosity: boolean | undefined;
 
 	constructor(
-		contents: vscode.MarkdownString | vscode.MarkedString | (vscode.MarkdownString | vscode.MarkedString)[],
+		contents: zyraxoncode.MarkdownString | zyraxoncode.MarkedString | (zyraxoncode.MarkdownString | zyraxoncode.MarkedString)[],
 		range?: Range,
 		canIncreaseVerbosity?: boolean,
 		canDecreaseVerbosity?: boolean,
@@ -309,7 +309,7 @@ export enum CodeActionTriggerKind {
 export class CodeAction {
 	title: string;
 
-	command?: vscode.Command;
+	command?: zyraxoncode.Command;
 
 	edit?: WorkspaceEdit;
 
@@ -366,20 +366,20 @@ export class CallHierarchyItem {
 
 export class CallHierarchyIncomingCall {
 
-	from: vscode.CallHierarchyItem;
-	fromRanges: vscode.Range[];
+	from: zyraxoncode.CallHierarchyItem;
+	fromRanges: zyraxoncode.Range[];
 
-	constructor(item: vscode.CallHierarchyItem, fromRanges: vscode.Range[]) {
+	constructor(item: zyraxoncode.CallHierarchyItem, fromRanges: zyraxoncode.Range[]) {
 		this.fromRanges = fromRanges;
 		this.from = item;
 	}
 }
 export class CallHierarchyOutgoingCall {
 
-	to: vscode.CallHierarchyItem;
-	fromRanges: vscode.Range[];
+	to: zyraxoncode.CallHierarchyItem;
+	fromRanges: zyraxoncode.Range[];
 
-	constructor(item: vscode.CallHierarchyItem, fromRanges: vscode.Range[]) {
+	constructor(item: zyraxoncode.CallHierarchyItem, fromRanges: zyraxoncode.Range[]) {
 		this.fromRanges = fromRanges;
 		this.to = item;
 	}
@@ -397,9 +397,9 @@ export class CodeLens {
 
 	range: Range;
 
-	command: vscode.Command | undefined;
+	command: zyraxoncode.Command | undefined;
 
-	constructor(range: Range, command?: vscode.Command) {
+	constructor(range: Range, command?: zyraxoncode.Command) {
 		this.range = range;
 		this.command = command;
 	}
@@ -413,9 +413,9 @@ export class CodeLens {
 export class ParameterInformation {
 
 	label: string | [number, number];
-	documentation?: string | vscode.MarkdownString;
+	documentation?: string | zyraxoncode.MarkdownString;
 
-	constructor(label: string | [number, number], documentation?: string | vscode.MarkdownString) {
+	constructor(label: string | [number, number], documentation?: string | zyraxoncode.MarkdownString) {
 		this.label = label;
 		this.documentation = documentation;
 	}
@@ -425,11 +425,11 @@ export class ParameterInformation {
 export class SignatureInformation {
 
 	label: string;
-	documentation?: string | vscode.MarkdownString;
+	documentation?: string | zyraxoncode.MarkdownString;
 	parameters: ParameterInformation[];
 	activeParameter?: number;
 
-	constructor(label: string, documentation?: string | vscode.MarkdownString) {
+	constructor(label: string, documentation?: string | zyraxoncode.MarkdownString) {
 		this.label = label;
 		this.documentation = documentation;
 		this.parameters = [];
@@ -464,9 +464,9 @@ export enum InlayHintKind {
 export class InlayHintLabelPart {
 
 	value: string;
-	tooltip?: string | vscode.MarkdownString;
+	tooltip?: string | zyraxoncode.MarkdownString;
 	location?: Location;
-	command?: vscode.Command;
+	command?: zyraxoncode.Command;
 
 	constructor(value: string) {
 		this.value = value;
@@ -474,17 +474,17 @@ export class InlayHintLabelPart {
 }
 
 @es5ClassCompat
-export class InlayHint implements vscode.InlayHint {
+export class InlayHint implements zyraxoncode.InlayHint {
 
 	label: string | InlayHintLabelPart[];
-	tooltip?: string | vscode.MarkdownString;
+	tooltip?: string | zyraxoncode.MarkdownString;
 	position: Position;
 	textEdits?: TextEdit[];
-	kind?: vscode.InlayHintKind;
+	kind?: zyraxoncode.InlayHintKind;
 	paddingLeft?: boolean;
 	paddingRight?: boolean;
 
-	constructor(position: Position, label: string | InlayHintLabelPart[], kind?: vscode.InlayHintKind) {
+	constructor(position: Position, label: string | InlayHintLabelPart[], kind?: zyraxoncode.InlayHintKind) {
 		this.position = position;
 		this.label = label;
 		this.kind = kind;
@@ -543,13 +543,13 @@ export interface CompletionItemLabel {
 }
 
 @es5ClassCompat
-export class CompletionItem implements vscode.CompletionItem {
+export class CompletionItem implements zyraxoncode.CompletionItem {
 
 	label: string | CompletionItemLabel;
 	kind?: CompletionItemKind;
 	tags?: CompletionItemTag[];
 	detail?: string;
-	documentation?: string | vscode.MarkdownString;
+	documentation?: string | zyraxoncode.MarkdownString;
 	sortText?: string;
 	filterText?: string;
 	preselect?: boolean;
@@ -559,7 +559,7 @@ export class CompletionItem implements vscode.CompletionItem {
 	commitCharacters?: string[];
 	textEdit?: TextEdit;
 	additionalTextEdits?: TextEdit[];
-	command?: vscode.Command;
+	command?: zyraxoncode.Command;
 
 	constructor(label: string | CompletionItemLabel, kind?: CompletionItemKind) {
 		this.label = label;
@@ -585,23 +585,23 @@ export class CompletionItem implements vscode.CompletionItem {
 export class CompletionList {
 
 	isIncomplete?: boolean;
-	items: vscode.CompletionItem[];
+	items: zyraxoncode.CompletionItem[];
 
-	constructor(items: vscode.CompletionItem[] = [], isIncomplete: boolean = false) {
+	constructor(items: zyraxoncode.CompletionItem[] = [], isIncomplete: boolean = false) {
 		this.items = items;
 		this.isIncomplete = isIncomplete;
 	}
 }
 
 @es5ClassCompat
-export class InlineSuggestion implements vscode.InlineCompletionItem {
+export class InlineSuggestion implements zyraxoncode.InlineCompletionItem {
 
 	filterText?: string;
 	insertText: string;
 	range?: Range;
-	command?: vscode.Command;
+	command?: zyraxoncode.Command;
 
-	constructor(insertText: string, range?: Range, command?: vscode.Command) {
+	constructor(insertText: string, range?: Range, command?: zyraxoncode.Command) {
 		this.insertText = insertText;
 		this.range = range;
 		this.command = command;
@@ -609,14 +609,14 @@ export class InlineSuggestion implements vscode.InlineCompletionItem {
 }
 
 @es5ClassCompat
-export class InlineSuggestionList implements vscode.InlineCompletionList {
-	items: vscode.InlineCompletionItem[];
+export class InlineSuggestionList implements zyraxoncode.InlineCompletionList {
+	items: zyraxoncode.InlineCompletionItem[];
 
-	commands: (vscode.Command | { command: vscode.Command; icon: vscode.ThemeIcon })[] | undefined = undefined;
+	commands: (zyraxoncode.Command | { command: zyraxoncode.Command; icon: zyraxoncode.ThemeIcon })[] | undefined = undefined;
 
 	suppressSuggestions: boolean | undefined = undefined;
 
-	constructor(items: vscode.InlineCompletionItem[]) {
+	constructor(items: zyraxoncode.InlineCompletionItem[]) {
 		this.items = items;
 	}
 }
@@ -871,7 +871,7 @@ export enum TerminalShellType {
 	Xonsh = 14
 }
 
-export class TerminalLink implements vscode.TerminalLink {
+export class TerminalLink implements zyraxoncode.TerminalLink {
 	constructor(
 		public startIndex: number,
 		public length: number,
@@ -890,8 +890,8 @@ export class TerminalLink implements vscode.TerminalLink {
 }
 
 export class TerminalQuickFixOpener {
-	uri: vscode.Uri;
-	constructor(uri: vscode.Uri) {
+	uri: zyraxoncode.Uri;
+	constructor(uri: zyraxoncode.Uri) {
 		this.uri = uri;
 	}
 }
@@ -908,9 +908,9 @@ export enum TerminalLocation {
 	Editor = 2,
 }
 
-export class TerminalProfile implements vscode.TerminalProfile {
+export class TerminalProfile implements zyraxoncode.TerminalProfile {
 	constructor(
-		public options: vscode.TerminalOptions | vscode.ExtensionTerminalOptions
+		public options: zyraxoncode.TerminalOptions | zyraxoncode.ExtensionTerminalOptions
 	) {
 		if (typeof options !== 'object') {
 			throw illegalArgument('options');
@@ -938,17 +938,17 @@ export enum TerminalCompletionItemKind {
 	PullRequestDone = 16,
 }
 
-export class TerminalCompletionItem implements vscode.TerminalCompletionItem {
+export class TerminalCompletionItem implements zyraxoncode.TerminalCompletionItem {
 	label: string | CompletionItemLabel;
 	replacementRange: readonly [number, number];
 	detail?: string | undefined;
-	documentation?: string | vscode.MarkdownString | undefined;
+	documentation?: string | zyraxoncode.MarkdownString | undefined;
 	kind?: TerminalCompletionItemKind | undefined;
 	isFile?: boolean | undefined;
 	isDirectory?: boolean | undefined;
 	isKeyword?: boolean | undefined;
 
-	constructor(label: string | CompletionItemLabel, replacementRange: readonly [number, number], kind?: TerminalCompletionItemKind, detail?: string, documentation?: string | vscode.MarkdownString, isFile?: boolean, isDirectory?: boolean, isKeyword?: boolean) {
+	constructor(label: string | CompletionItemLabel, replacementRange: readonly [number, number], kind?: TerminalCompletionItemKind, detail?: string, documentation?: string | zyraxoncode.MarkdownString, isFile?: boolean, isDirectory?: boolean, isKeyword?: boolean) {
 		this.label = label;
 		this.replacementRange = replacementRange;
 		this.kind = kind;
@@ -992,7 +992,7 @@ export interface TerminalCompletionResourceOptions {
 	showFiles?: boolean;
 	showDirectories?: boolean;
 	fileExtensions?: string[];
-	cwd?: vscode.Uri;
+	cwd?: zyraxoncode.Uri;
 }
 
 export enum TaskRevealKind {
@@ -1054,7 +1054,7 @@ export enum TaskPanelKind {
 }
 
 @es5ClassCompat
-export class TaskGroup implements vscode.TaskGroup {
+export class TaskGroup implements zyraxoncode.TaskGroup {
 
 	isDefault: boolean | undefined;
 	private _id: string;
@@ -1106,15 +1106,15 @@ function computeTaskExecutionId(values: string[]): string {
 }
 
 @es5ClassCompat
-export class ProcessExecution implements vscode.ProcessExecution {
+export class ProcessExecution implements zyraxoncode.ProcessExecution {
 
 	private _process: string;
 	private _args: string[];
-	private _options: vscode.ProcessExecutionOptions | undefined;
+	private _options: zyraxoncode.ProcessExecutionOptions | undefined;
 
-	constructor(process: string, options?: vscode.ProcessExecutionOptions);
-	constructor(process: string, args: string[], options?: vscode.ProcessExecutionOptions);
-	constructor(process: string, varg1?: string[] | vscode.ProcessExecutionOptions, varg2?: vscode.ProcessExecutionOptions) {
+	constructor(process: string, options?: zyraxoncode.ProcessExecutionOptions);
+	constructor(process: string, args: string[], options?: zyraxoncode.ProcessExecutionOptions);
+	constructor(process: string, varg1?: string[] | zyraxoncode.ProcessExecutionOptions, varg2?: zyraxoncode.ProcessExecutionOptions) {
 		if (typeof process !== 'string') {
 			throw illegalArgument('process');
 		}
@@ -1153,11 +1153,11 @@ export class ProcessExecution implements vscode.ProcessExecution {
 		this._args = value;
 	}
 
-	get options(): vscode.ProcessExecutionOptions | undefined {
+	get options(): zyraxoncode.ProcessExecutionOptions | undefined {
 		return this._options;
 	}
 
-	set options(value: vscode.ProcessExecutionOptions | undefined) {
+	set options(value: zyraxoncode.ProcessExecutionOptions | undefined) {
 		this._options = value;
 	}
 
@@ -1177,16 +1177,16 @@ export class ProcessExecution implements vscode.ProcessExecution {
 }
 
 @es5ClassCompat
-export class ShellExecution implements vscode.ShellExecution {
+export class ShellExecution implements zyraxoncode.ShellExecution {
 
 	private _commandLine: string | undefined;
-	private _command: string | vscode.ShellQuotedString | undefined;
-	private _args: (string | vscode.ShellQuotedString)[] = [];
-	private _options: vscode.ShellExecutionOptions | undefined;
+	private _command: string | zyraxoncode.ShellQuotedString | undefined;
+	private _args: (string | zyraxoncode.ShellQuotedString)[] = [];
+	private _options: zyraxoncode.ShellExecutionOptions | undefined;
 
-	constructor(commandLine: string, options?: vscode.ShellExecutionOptions);
-	constructor(command: string | vscode.ShellQuotedString, args: (string | vscode.ShellQuotedString)[], options?: vscode.ShellExecutionOptions);
-	constructor(arg0: string | vscode.ShellQuotedString, arg1?: vscode.ShellExecutionOptions | (string | vscode.ShellQuotedString)[], arg2?: vscode.ShellExecutionOptions) {
+	constructor(commandLine: string, options?: zyraxoncode.ShellExecutionOptions);
+	constructor(command: string | zyraxoncode.ShellQuotedString, args: (string | zyraxoncode.ShellQuotedString)[], options?: zyraxoncode.ShellExecutionOptions);
+	constructor(arg0: string | zyraxoncode.ShellQuotedString, arg1?: zyraxoncode.ShellExecutionOptions | (string | zyraxoncode.ShellQuotedString)[], arg2?: zyraxoncode.ShellExecutionOptions) {
 		if (Array.isArray(arg1)) {
 			if (!arg0) {
 				throw illegalArgument('command can\'t be undefined or null');
@@ -1219,30 +1219,30 @@ export class ShellExecution implements vscode.ShellExecution {
 		this._commandLine = value;
 	}
 
-	get command(): string | vscode.ShellQuotedString {
+	get command(): string | zyraxoncode.ShellQuotedString {
 		return this._command ? this._command : '';
 	}
 
-	set command(value: string | vscode.ShellQuotedString) {
+	set command(value: string | zyraxoncode.ShellQuotedString) {
 		if (typeof value !== 'string' && typeof value.value !== 'string') {
 			throw illegalArgument('command');
 		}
 		this._command = value;
 	}
 
-	get args(): (string | vscode.ShellQuotedString)[] {
+	get args(): (string | zyraxoncode.ShellQuotedString)[] {
 		return this._args;
 	}
 
-	set args(value: (string | vscode.ShellQuotedString)[] | undefined) {
+	set args(value: (string | zyraxoncode.ShellQuotedString)[] | undefined) {
 		this._args = value || [];
 	}
 
-	get options(): vscode.ShellExecutionOptions | undefined {
+	get options(): zyraxoncode.ShellExecutionOptions | undefined {
 		return this._options;
 	}
 
-	set options(value: vscode.ShellExecutionOptions | undefined) {
+	set options(value: zyraxoncode.ShellExecutionOptions | undefined) {
 		this._options = value;
 	}
 
@@ -1281,26 +1281,26 @@ export enum TaskRunOn {
 	WorktreeCreated = 3,
 }
 
-export class CustomExecution implements vscode.CustomExecution {
-	private _callback: (resolvedDefinition: vscode.TaskDefinition) => Thenable<vscode.Pseudoterminal>;
-	constructor(callback: (resolvedDefinition: vscode.TaskDefinition) => Thenable<vscode.Pseudoterminal>) {
+export class CustomExecution implements zyraxoncode.CustomExecution {
+	private _callback: (resolvedDefinition: zyraxoncode.TaskDefinition) => Thenable<zyraxoncode.Pseudoterminal>;
+	constructor(callback: (resolvedDefinition: zyraxoncode.TaskDefinition) => Thenable<zyraxoncode.Pseudoterminal>) {
 		this._callback = callback;
 	}
 	public computeId(): string {
 		return 'customExecution' + generateUuid();
 	}
 
-	public set callback(value: (resolvedDefinition: vscode.TaskDefinition) => Thenable<vscode.Pseudoterminal>) {
+	public set callback(value: (resolvedDefinition: zyraxoncode.TaskDefinition) => Thenable<zyraxoncode.Pseudoterminal>) {
 		this._callback = value;
 	}
 
-	public get callback(): ((resolvedDefinition: vscode.TaskDefinition) => Thenable<vscode.Pseudoterminal>) {
+	public get callback(): ((resolvedDefinition: zyraxoncode.TaskDefinition) => Thenable<zyraxoncode.Pseudoterminal>) {
 		return this._callback;
 	}
 }
 
 @es5ClassCompat
-export class Task implements vscode.Task {
+export class Task implements zyraxoncode.Task {
 
 	private static ExtensionCallbackType: string = 'customExecution';
 	private static ProcessType: string = 'process';
@@ -1310,8 +1310,8 @@ export class Task implements vscode.Task {
 	private __id: string | undefined;
 	private __deprecated: boolean = false;
 
-	private _definition: vscode.TaskDefinition;
-	private _scope: vscode.TaskScope.Global | vscode.TaskScope.Workspace | vscode.WorkspaceFolder | undefined;
+	private _definition: zyraxoncode.TaskDefinition;
+	private _scope: zyraxoncode.TaskScope.Global | zyraxoncode.TaskScope.Workspace | zyraxoncode.WorkspaceFolder | undefined;
 	private _name: string;
 	private _execution: ProcessExecution | ShellExecution | CustomExecution | undefined;
 	private _problemMatchers: string[];
@@ -1319,13 +1319,13 @@ export class Task implements vscode.Task {
 	private _isBackground: boolean;
 	private _source: string;
 	private _group: TaskGroup | undefined;
-	private _presentationOptions: vscode.TaskPresentationOptions;
-	private _runOptions: vscode.RunOptions;
+	private _presentationOptions: zyraxoncode.TaskPresentationOptions;
+	private _runOptions: zyraxoncode.RunOptions;
 	private _detail: string | undefined;
 
-	constructor(definition: vscode.TaskDefinition, name: string, source: string, execution?: ProcessExecution | ShellExecution | CustomExecution, problemMatchers?: string | string[]);
-	constructor(definition: vscode.TaskDefinition, scope: vscode.TaskScope.Global | vscode.TaskScope.Workspace | vscode.WorkspaceFolder, name: string, source: string, execution?: ProcessExecution | ShellExecution | CustomExecution, problemMatchers?: string | string[]);
-	constructor(definition: vscode.TaskDefinition, arg2: string | (vscode.TaskScope.Global | vscode.TaskScope.Workspace) | vscode.WorkspaceFolder, arg3: any, arg4?: any, arg5?: any, arg6?: any) {
+	constructor(definition: zyraxoncode.TaskDefinition, name: string, source: string, execution?: ProcessExecution | ShellExecution | CustomExecution, problemMatchers?: string | string[]);
+	constructor(definition: zyraxoncode.TaskDefinition, scope: zyraxoncode.TaskScope.Global | zyraxoncode.TaskScope.Workspace | zyraxoncode.WorkspaceFolder, name: string, source: string, execution?: ProcessExecution | ShellExecution | CustomExecution, problemMatchers?: string | string[]);
+	constructor(definition: zyraxoncode.TaskDefinition, arg2: string | (zyraxoncode.TaskScope.Global | zyraxoncode.TaskScope.Workspace) | zyraxoncode.WorkspaceFolder, arg3: any, arg4?: any, arg5?: any, arg6?: any) {
 		this._definition = this.definition = definition;
 		let problemMatchers: string | string[];
 		if (typeof arg2 === 'string') {
@@ -1407,11 +1407,11 @@ export class Task implements vscode.Task {
 		}
 	}
 
-	get definition(): vscode.TaskDefinition {
+	get definition(): zyraxoncode.TaskDefinition {
 		return this._definition;
 	}
 
-	set definition(value: vscode.TaskDefinition) {
+	set definition(value: zyraxoncode.TaskDefinition) {
 		if (value === undefined || value === null) {
 			throw illegalArgument('Kind can\'t be undefined or null');
 		}
@@ -1419,11 +1419,11 @@ export class Task implements vscode.Task {
 		this._definition = value;
 	}
 
-	get scope(): vscode.TaskScope.Global | vscode.TaskScope.Workspace | vscode.WorkspaceFolder | undefined {
+	get scope(): zyraxoncode.TaskScope.Global | zyraxoncode.TaskScope.Workspace | zyraxoncode.WorkspaceFolder | undefined {
 		return this._scope;
 	}
 
-	set target(value: vscode.TaskScope.Global | vscode.TaskScope.Workspace | vscode.WorkspaceFolder) {
+	set target(value: zyraxoncode.TaskScope.Global | zyraxoncode.TaskScope.Workspace | zyraxoncode.WorkspaceFolder) {
 		this.clear();
 		this._scope = value;
 	}
@@ -1524,11 +1524,11 @@ export class Task implements vscode.Task {
 		this._detail = value;
 	}
 
-	get presentationOptions(): vscode.TaskPresentationOptions {
+	get presentationOptions(): zyraxoncode.TaskPresentationOptions {
 		return this._presentationOptions;
 	}
 
-	set presentationOptions(value: vscode.TaskPresentationOptions) {
+	set presentationOptions(value: zyraxoncode.TaskPresentationOptions) {
 		if (value === null || value === undefined) {
 			value = Object.create(null);
 		}
@@ -1536,11 +1536,11 @@ export class Task implements vscode.Task {
 		this._presentationOptions = value;
 	}
 
-	get runOptions(): vscode.RunOptions {
+	get runOptions(): zyraxoncode.RunOptions {
 		return this._runOptions;
 	}
 
-	set runOptions(value: vscode.RunOptions) {
+	set runOptions(value: zyraxoncode.RunOptions) {
 		if (value === null || value === undefined) {
 			value = Object.create(null);
 		}
@@ -1557,8 +1557,8 @@ export enum ProgressLocation {
 }
 
 export namespace ViewBadge {
-	export function isViewBadge(thing: any): thing is vscode.ViewBadge {
-		const viewBadgeThing = thing as vscode.ViewBadge;
+	export function isViewBadge(thing: any): thing is zyraxoncode.ViewBadge {
+		const viewBadgeThing = thing as zyraxoncode.ViewBadge;
 
 		if (!isNumber(viewBadgeThing.value)) {
 			console.log('INVALID view badge, invalid value', viewBadgeThing.value);
@@ -1575,16 +1575,16 @@ export namespace ViewBadge {
 @es5ClassCompat
 export class TreeItem {
 
-	label?: string | vscode.TreeItemLabel;
+	label?: string | zyraxoncode.TreeItemLabel;
 	resourceUri?: URI;
 	iconPath?: string | URI | { light: string | URI; dark: string | URI } | ThemeIcon;
-	command?: vscode.Command;
+	command?: zyraxoncode.Command;
 	contextValue?: string;
-	tooltip?: string | vscode.MarkdownString;
-	checkboxState?: vscode.TreeItemCheckboxState;
+	tooltip?: string | zyraxoncode.MarkdownString;
+	checkboxState?: zyraxoncode.TreeItemCheckboxState;
 
 	static isTreeItem(thing: any, extension: IExtensionDescription): thing is TreeItem {
-		const treeItemThing = thing as vscode.TreeItem;
+		const treeItemThing = thing as zyraxoncode.TreeItem;
 
 		if (treeItemThing.checkboxState !== undefined) {
 			const checkbox = isNumber(treeItemThing.checkboxState) ? treeItemThing.checkboxState :
@@ -1608,7 +1608,7 @@ export class TreeItem {
 			console.log('INVALID tree item, invalid id', treeItemThing.id);
 			return false;
 		}
-		if ((treeItemThing.iconPath !== undefined) && !isString(treeItemThing.iconPath) && !URI.isUri(treeItemThing.iconPath) && (!treeItemThing.iconPath || !isString((treeItemThing.iconPath as vscode.ThemeIcon).id))) {
+		if ((treeItemThing.iconPath !== undefined) && !isString(treeItemThing.iconPath) && !URI.isUri(treeItemThing.iconPath) && (!treeItemThing.iconPath || !isString((treeItemThing.iconPath as zyraxoncode.ThemeIcon).id))) {
 			const asLightAndDarkThing = treeItemThing.iconPath as { light: string | URI; dark: string | URI } | null;
 			if (!asLightAndDarkThing || (!isString(asLightAndDarkThing.light) && !URI.isUri(asLightAndDarkThing.light) && !isString(asLightAndDarkThing.dark) && !URI.isUri(asLightAndDarkThing.dark))) {
 				console.log('INVALID tree item, invalid iconPath', treeItemThing.iconPath);
@@ -1647,9 +1647,9 @@ export class TreeItem {
 		return true;
 	}
 
-	constructor(label: string | vscode.TreeItemLabel, collapsibleState?: vscode.TreeItemCollapsibleState);
-	constructor(resourceUri: URI, collapsibleState?: vscode.TreeItemCollapsibleState);
-	constructor(arg1: string | vscode.TreeItemLabel | URI, public collapsibleState: vscode.TreeItemCollapsibleState = TreeItemCollapsibleState.None) {
+	constructor(label: string | zyraxoncode.TreeItemLabel, collapsibleState?: zyraxoncode.TreeItemCollapsibleState);
+	constructor(resourceUri: URI, collapsibleState?: zyraxoncode.TreeItemCollapsibleState);
+	constructor(arg1: string | zyraxoncode.TreeItemLabel | URI, public collapsibleState: zyraxoncode.TreeItemCollapsibleState = TreeItemCollapsibleState.None) {
 		if (URI.isUri(arg1)) {
 			this.resourceUri = arg1;
 		} else {
@@ -1671,13 +1671,13 @@ export enum TreeItemCheckboxState {
 }
 
 @es5ClassCompat
-export class DataTransferItem implements vscode.DataTransferItem {
+export class DataTransferItem implements zyraxoncode.DataTransferItem {
 
 	async asString(): Promise<string> {
 		return typeof this.value === 'string' ? this.value : JSON.stringify(this.value);
 	}
 
-	asFile(): undefined | vscode.DataTransferFile {
+	asFile(): undefined | zyraxoncode.DataTransferFile {
 		return undefined;
 	}
 
@@ -1700,9 +1700,9 @@ export class InternalDataTransferItem extends DataTransferItem { }
  */
 export class InternalFileDataTransferItem extends InternalDataTransferItem {
 
-	readonly #file: vscode.DataTransferFile;
+	readonly #file: zyraxoncode.DataTransferFile;
 
-	constructor(file: vscode.DataTransferFile) {
+	constructor(file: zyraxoncode.DataTransferFile) {
 		super('');
 		this.#file = file;
 	}
@@ -1715,15 +1715,15 @@ export class InternalFileDataTransferItem extends InternalDataTransferItem {
 /**
  * Intentionally not exported to extensions
  */
-export class DataTransferFile implements vscode.DataTransferFile {
+export class DataTransferFile implements zyraxoncode.DataTransferFile {
 
 	public readonly name: string;
-	public readonly uri: vscode.Uri | undefined;
+	public readonly uri: zyraxoncode.Uri | undefined;
 
 	public readonly _itemId: string;
 	private readonly _getData: () => Promise<Uint8Array>;
 
-	constructor(name: string, uri: vscode.Uri | undefined, itemId: string, getData: () => Promise<Uint8Array>) {
+	constructor(name: string, uri: zyraxoncode.Uri | undefined, itemId: string, getData: () => Promise<Uint8Array>) {
 		this.name = name;
 		this.uri = uri;
 		this._itemId = itemId;
@@ -1736,10 +1736,10 @@ export class DataTransferFile implements vscode.DataTransferFile {
 }
 
 @es5ClassCompat
-export class DataTransfer implements vscode.DataTransfer {
-	#items = new Map<string, vscode.DataTransferItem[]>();
+export class DataTransfer implements zyraxoncode.DataTransfer {
+	#items = new Map<string, zyraxoncode.DataTransferItem[]>();
 
-	constructor(init?: Iterable<readonly [string, vscode.DataTransferItem]>) {
+	constructor(init?: Iterable<readonly [string, zyraxoncode.DataTransferItem]>) {
 		for (const [mime, item] of init ?? []) {
 			const existing = this.#items.get(this.#normalizeMime(mime));
 			if (existing) {
@@ -1750,17 +1750,17 @@ export class DataTransfer implements vscode.DataTransfer {
 		}
 	}
 
-	get(mimeType: string): vscode.DataTransferItem | undefined {
+	get(mimeType: string): zyraxoncode.DataTransferItem | undefined {
 		return this.#items.get(this.#normalizeMime(mimeType))?.[0];
 	}
 
-	set(mimeType: string, value: vscode.DataTransferItem): void {
+	set(mimeType: string, value: zyraxoncode.DataTransferItem): void {
 		// This intentionally overwrites all entries for a given mimetype.
 		// This is similar to how the DOM DataTransfer type works
 		this.#items.set(this.#normalizeMime(mimeType), [value]);
 	}
 
-	forEach(callbackfn: (value: vscode.DataTransferItem, key: string, dataTransfer: DataTransfer) => void, thisArg?: unknown): void {
+	forEach(callbackfn: (value: zyraxoncode.DataTransferItem, key: string, dataTransfer: DataTransfer) => void, thisArg?: unknown): void {
 		for (const [mime, items] of this.#items) {
 			for (const item of items) {
 				callbackfn.call(thisArg, item, mime, this);
@@ -1768,7 +1768,7 @@ export class DataTransfer implements vscode.DataTransfer {
 		}
 	}
 
-	*[Symbol.iterator](): IterableIterator<[mimeType: string, item: vscode.DataTransferItem]> {
+	*[Symbol.iterator](): IterableIterator<[mimeType: string, item: zyraxoncode.DataTransferItem]> {
 		for (const [mime, items] of this.#items) {
 			for (const item of items) {
 				yield [mime, item];
@@ -1911,7 +1911,7 @@ export class RelativePattern implements IRelativePattern {
 		this._base = baseUri.fsPath;
 	}
 
-	constructor(base: vscode.WorkspaceFolder | URI | string, pattern: string) {
+	constructor(base: zyraxoncode.WorkspaceFolder | URI | string, pattern: string) {
 		if (typeof base !== 'string') {
 			if (!base || !URI.isUri(base) && !URI.isUri(base.uri)) {
 				throw illegalArgument('base');
@@ -2032,12 +2032,12 @@ export class DataBreakpoint extends Breakpoint {
 }
 
 @es5ClassCompat
-export class DebugAdapterExecutable implements vscode.DebugAdapterExecutable {
+export class DebugAdapterExecutable implements zyraxoncode.DebugAdapterExecutable {
 	readonly command: string;
 	readonly args: string[];
-	readonly options?: vscode.DebugAdapterExecutableOptions;
+	readonly options?: zyraxoncode.DebugAdapterExecutableOptions;
 
-	constructor(command: string, args: string[], options?: vscode.DebugAdapterExecutableOptions) {
+	constructor(command: string, args: string[], options?: zyraxoncode.DebugAdapterExecutableOptions) {
 		this.command = command;
 		this.args = args || [];
 		this.options = options;
@@ -2045,7 +2045,7 @@ export class DebugAdapterExecutable implements vscode.DebugAdapterExecutable {
 }
 
 @es5ClassCompat
-export class DebugAdapterServer implements vscode.DebugAdapterServer {
+export class DebugAdapterServer implements zyraxoncode.DebugAdapterServer {
 	readonly port: number;
 	readonly host?: string;
 
@@ -2056,41 +2056,41 @@ export class DebugAdapterServer implements vscode.DebugAdapterServer {
 }
 
 @es5ClassCompat
-export class DebugAdapterNamedPipeServer implements vscode.DebugAdapterNamedPipeServer {
+export class DebugAdapterNamedPipeServer implements zyraxoncode.DebugAdapterNamedPipeServer {
 	constructor(public readonly path: string) {
 	}
 }
 
 @es5ClassCompat
-export class DebugAdapterInlineImplementation implements vscode.DebugAdapterInlineImplementation {
-	readonly implementation: vscode.DebugAdapter;
+export class DebugAdapterInlineImplementation implements zyraxoncode.DebugAdapterInlineImplementation {
+	readonly implementation: zyraxoncode.DebugAdapter;
 
-	constructor(impl: vscode.DebugAdapter) {
+	constructor(impl: zyraxoncode.DebugAdapter) {
 		this.implementation = impl;
 	}
 }
 
 
-export class DebugStackFrame implements vscode.DebugStackFrame {
+export class DebugStackFrame implements zyraxoncode.DebugStackFrame {
 	constructor(
-		public readonly session: vscode.DebugSession,
+		public readonly session: zyraxoncode.DebugSession,
 		readonly threadId: number,
 		readonly frameId: number) { }
 }
 
-export class DebugThread implements vscode.DebugThread {
+export class DebugThread implements zyraxoncode.DebugThread {
 	constructor(
-		public readonly session: vscode.DebugSession,
+		public readonly session: zyraxoncode.DebugSession,
 		readonly threadId: number) { }
 }
 
 
 @es5ClassCompat
-export class EvaluatableExpression implements vscode.EvaluatableExpression {
-	readonly range: vscode.Range;
+export class EvaluatableExpression implements zyraxoncode.EvaluatableExpression {
+	readonly range: zyraxoncode.Range;
 	readonly expression?: string;
 
-	constructor(range: vscode.Range, expression?: string) {
+	constructor(range: zyraxoncode.Range, expression?: string) {
 		this.range = range;
 		this.expression = expression;
 	}
@@ -2110,7 +2110,7 @@ export enum InlineCompletionsDisposeReasonKind {
 }
 
 @es5ClassCompat
-export class InlineValueText implements vscode.InlineValueText {
+export class InlineValueText implements zyraxoncode.InlineValueText {
 	readonly range: Range;
 	readonly text: string;
 
@@ -2121,7 +2121,7 @@ export class InlineValueText implements vscode.InlineValueText {
 }
 
 @es5ClassCompat
-export class InlineValueVariableLookup implements vscode.InlineValueVariableLookup {
+export class InlineValueVariableLookup implements zyraxoncode.InlineValueVariableLookup {
 	readonly range: Range;
 	readonly variableName?: string;
 	readonly caseSensitiveLookup: boolean;
@@ -2134,7 +2134,7 @@ export class InlineValueVariableLookup implements vscode.InlineValueVariableLook
 }
 
 @es5ClassCompat
-export class InlineValueEvaluatableExpression implements vscode.InlineValueEvaluatableExpression {
+export class InlineValueEvaluatableExpression implements zyraxoncode.InlineValueEvaluatableExpression {
 	readonly range: Range;
 	readonly expression?: string;
 
@@ -2145,12 +2145,12 @@ export class InlineValueEvaluatableExpression implements vscode.InlineValueEvalu
 }
 
 @es5ClassCompat
-export class InlineValueContext implements vscode.InlineValueContext {
+export class InlineValueContext implements zyraxoncode.InlineValueContext {
 
 	readonly frameId: number;
-	readonly stoppedLocation: vscode.Range;
+	readonly stoppedLocation: zyraxoncode.Range;
 
-	constructor(frameId: number, range: vscode.Range) {
+	constructor(frameId: number, range: zyraxoncode.Range) {
 		this.frameId = frameId;
 		this.stoppedLocation = range;
 	}
@@ -2165,9 +2165,9 @@ export enum NewSymbolNameTriggerKind {
 	Automatic = 1,
 }
 
-export class NewSymbolName implements vscode.NewSymbolName {
+export class NewSymbolName implements zyraxoncode.NewSymbolName {
 	readonly newSymbolName: string;
-	readonly tags?: readonly vscode.NewSymbolNameTag[] | undefined;
+	readonly tags?: readonly zyraxoncode.NewSymbolNameTag[] | undefined;
 
 	constructor(
 		newSymbolName: string,
@@ -2220,7 +2220,7 @@ export class FileSystemError extends Error {
 		markAsFileSystemProviderError(this, code);
 
 		// workaround when extending builtin objects and when compiling to ES5, see:
-		// https://github.com/microsoft/TypeScript-wiki/blob/master/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
+		// __ZYRAXKEEP__1_
 		Object.setPrototypeOf(this, FileSystemError.prototype);
 
 		if (typeof Error.captureStackTrace === 'function' && typeof terminator === 'function') {
@@ -2324,7 +2324,7 @@ export class SemanticTokensBuilder {
 	private _tokenModifierStrToInt: Map<string, number>;
 	private _hasLegend: boolean;
 
-	constructor(legend?: vscode.SemanticTokensLegend) {
+	constructor(legend?: zyraxoncode.SemanticTokensLegend) {
 		this._prevLine = 0;
 		this._prevChar = 0;
 		this._dataIsSortedAndDeltaEncoded = true;
@@ -2361,7 +2361,7 @@ export class SemanticTokensBuilder {
 		throw illegalArgument();
 	}
 
-	private _push(range: vscode.Range, tokenType: string, tokenModifiers?: string[]): void {
+	private _push(range: zyraxoncode.Range, tokenType: string, tokenModifiers?: string[]): void {
 		if (!this._hasLegend) {
 			throw new Error('Legend must be provided in constructor');
 		}
@@ -2539,7 +2539,7 @@ export enum DebugConsoleMode {
 
 export class DebugVisualization {
 	iconPath?: URI | { light: URI; dark: URI } | ThemeIcon;
-	visualization?: vscode.Command | vscode.TreeDataProvider<unknown>;
+	visualization?: zyraxoncode.Command | zyraxoncode.TreeDataProvider<unknown>;
 
 	constructor(public name: string) { }
 }
@@ -2555,7 +2555,7 @@ export enum QuickInputButtonLocation {
 @es5ClassCompat
 export class QuickInputButtons {
 
-	static readonly Back: vscode.QuickInputButton = { iconPath: new ThemeIcon('arrow-left') };
+	static readonly Back: zyraxoncode.QuickInputButton = { iconPath: new ThemeIcon('arrow-left') };
 
 	private constructor() { }
 }
@@ -2598,9 +2598,9 @@ export class FileDecoration {
 		return true;
 	}
 
-	badge?: string | vscode.ThemeIcon;
+	badge?: string | zyraxoncode.ThemeIcon;
 	tooltip?: string;
-	color?: vscode.ThemeColor;
+	color?: zyraxoncode.ThemeColor;
 	propagate?: boolean;
 
 	constructor(badge?: string | ThemeIcon, tooltip?: string, color?: ThemeColor) {
@@ -2613,7 +2613,7 @@ export class FileDecoration {
 //#region Theming
 
 @es5ClassCompat
-export class ColorTheme implements vscode.ColorTheme {
+export class ColorTheme implements zyraxoncode.ColorTheme {
 	constructor(public readonly kind: ColorThemeKind) {
 	}
 }
@@ -2636,7 +2636,7 @@ export class CellErrorStackFrame {
 	 */
 	constructor(
 		public label: string,
-		public uri?: vscode.Uri,
+		public uri?: zyraxoncode.Uri,
 		public position?: Position,
 	) { }
 }
@@ -2682,7 +2682,7 @@ export class NotebookRendererScript {
 	public provides: readonly string[];
 
 	constructor(
-		public uri: vscode.Uri,
+		public uri: zyraxoncode.Uri,
 		provides: string | readonly string[] = []
 	) {
 		this.provides = asArray(provides);
@@ -2692,7 +2692,7 @@ export class NotebookRendererScript {
 export class NotebookKernelSourceAction {
 	description?: string;
 	detail?: string;
-	command?: vscode.Command;
+	command?: zyraxoncode.Command;
 	constructor(
 		public label: string
 	) { }
@@ -2708,7 +2708,7 @@ export enum NotebookVariablesRequestKind {
 //#region Timeline
 
 @es5ClassCompat
-export class TimelineItem implements vscode.TimelineItem {
+export class TimelineItem implements zyraxoncode.TimelineItem {
 	constructor(public label: string, public timestamp: number) { }
 }
 
@@ -2804,43 +2804,43 @@ export class TestRunProfileBase {
 	constructor(
 		public readonly controllerId: string,
 		public readonly profileId: number,
-		public readonly kind: vscode.TestRunProfileKind,
+		public readonly kind: zyraxoncode.TestRunProfileKind,
 	) { }
 }
 
 @es5ClassCompat
-export class TestRunRequest implements vscode.TestRunRequest {
+export class TestRunRequest implements zyraxoncode.TestRunRequest {
 	constructor(
-		public readonly include: vscode.TestItem[] | undefined = undefined,
-		public readonly exclude: vscode.TestItem[] | undefined = undefined,
-		public readonly profile: vscode.TestRunProfile | undefined = undefined,
+		public readonly include: zyraxoncode.TestItem[] | undefined = undefined,
+		public readonly exclude: zyraxoncode.TestItem[] | undefined = undefined,
+		public readonly profile: zyraxoncode.TestRunProfile | undefined = undefined,
 		public readonly continuous = false,
 		public readonly preserveFocus = true,
 	) { }
 }
 
 @es5ClassCompat
-export class TestMessage implements vscode.TestMessage {
+export class TestMessage implements zyraxoncode.TestMessage {
 	public expectedOutput?: string;
 	public actualOutput?: string;
-	public location?: vscode.Location;
+	public location?: zyraxoncode.Location;
 	public contextValue?: string;
 
 	/** proposed: */
 	public stackTrace?: TestMessageStackFrame[];
 
-	public static diff(message: string | vscode.MarkdownString, expected: string, actual: string) {
+	public static diff(message: string | zyraxoncode.MarkdownString, expected: string, actual: string) {
 		const msg = new TestMessage(message);
 		msg.expectedOutput = expected;
 		msg.actualOutput = actual;
 		return msg;
 	}
 
-	constructor(public message: string | vscode.MarkdownString) { }
+	constructor(public message: string | zyraxoncode.MarkdownString) { }
 }
 
 @es5ClassCompat
-export class TestTag implements vscode.TestTag {
+export class TestTag implements zyraxoncode.TestTag {
 	constructor(public readonly id: string) { }
 }
 
@@ -2852,7 +2852,7 @@ export class TestMessageStackFrame {
 	 */
 	constructor(
 		public label: string,
-		public uri?: vscode.Uri,
+		public uri?: zyraxoncode.Uri,
 		public position?: Position,
 	) { }
 }
@@ -2860,13 +2860,13 @@ export class TestMessageStackFrame {
 //#endregion
 
 //#region Test Coverage
-export class TestCoverageCount implements vscode.TestCoverageCount {
+export class TestCoverageCount implements zyraxoncode.TestCoverageCount {
 	constructor(public covered: number, public total: number) {
 		validateTestCoverageCount(this);
 	}
 }
 
-export function validateTestCoverageCount(cc?: vscode.TestCoverageCount) {
+export function validateTestCoverageCount(cc?: zyraxoncode.TestCoverageCount) {
 	if (!cc) {
 		return;
 	}
@@ -2880,8 +2880,8 @@ export function validateTestCoverageCount(cc?: vscode.TestCoverageCount) {
 	}
 }
 
-export class FileCoverage implements vscode.FileCoverage {
-	public static fromDetails(uri: vscode.Uri, details: vscode.FileCoverageDetail[]): vscode.FileCoverage {
+export class FileCoverage implements zyraxoncode.FileCoverage {
+	public static fromDetails(uri: zyraxoncode.Uri, details: zyraxoncode.FileCoverageDetail[]): zyraxoncode.FileCoverage {
 		const statements = new TestCoverageCount(0, 0);
 		const branches = new TestCoverageCount(0, 0);
 		const decl = new TestCoverageCount(0, 0);
@@ -2913,19 +2913,19 @@ export class FileCoverage implements vscode.FileCoverage {
 		return coverage;
 	}
 
-	detailedCoverage?: vscode.FileCoverageDetail[];
+	detailedCoverage?: zyraxoncode.FileCoverageDetail[];
 
 	constructor(
-		public readonly uri: vscode.Uri,
-		public statementCoverage: vscode.TestCoverageCount,
-		public branchCoverage?: vscode.TestCoverageCount,
-		public declarationCoverage?: vscode.TestCoverageCount,
-		public includesTests: vscode.TestItem[] = [],
+		public readonly uri: zyraxoncode.Uri,
+		public statementCoverage: zyraxoncode.TestCoverageCount,
+		public branchCoverage?: zyraxoncode.TestCoverageCount,
+		public declarationCoverage?: zyraxoncode.TestCoverageCount,
+		public includesTests: zyraxoncode.TestItem[] = [],
 	) {
 	}
 }
 
-export class StatementCoverage implements vscode.StatementCoverage {
+export class StatementCoverage implements zyraxoncode.StatementCoverage {
 	// back compat until finalization:
 	get executionCount() { return +this.executed; }
 	set executionCount(n: number) { this.executed = n; }
@@ -2933,11 +2933,11 @@ export class StatementCoverage implements vscode.StatementCoverage {
 	constructor(
 		public executed: number | boolean,
 		public location: Position | Range,
-		public branches: vscode.BranchCoverage[] = [],
+		public branches: zyraxoncode.BranchCoverage[] = [],
 	) { }
 }
 
-export class BranchCoverage implements vscode.BranchCoverage {
+export class BranchCoverage implements zyraxoncode.BranchCoverage {
 	// back compat until finalization:
 	get executionCount() { return +this.executed; }
 	set executionCount(n: number) { this.executed = n; }
@@ -2949,7 +2949,7 @@ export class BranchCoverage implements vscode.BranchCoverage {
 	) { }
 }
 
-export class DeclarationCoverage implements vscode.DeclarationCoverage {
+export class DeclarationCoverage implements zyraxoncode.DeclarationCoverage {
 	// back compat until finalization:
 	get executionCount() { return +this.executed; }
 	set executionCount(n: number) { this.executed = n; }
@@ -3070,18 +3070,18 @@ export enum ChatVariableLevel {
 	Full = 3
 }
 
-export class ChatCompletionItem implements vscode.ChatCompletionItem {
+export class ChatCompletionItem implements zyraxoncode.ChatCompletionItem {
 	id: string;
 	label: string | CompletionItemLabel;
 	fullName?: string | undefined;
-	icon?: vscode.ThemeIcon;
+	icon?: zyraxoncode.ThemeIcon;
 	insertText?: string;
-	values: vscode.ChatVariableValue[];
+	values: zyraxoncode.ChatVariableValue[];
 	detail?: string;
 	documentation?: string | MarkdownString;
-	command?: vscode.Command;
+	command?: zyraxoncode.Command;
 
-	constructor(id: string, label: string | CompletionItemLabel, values: vscode.ChatVariableValue[]) {
+	constructor(id: string, label: string | CompletionItemLabel, values: zyraxoncode.ChatVariableValue[]) {
 		this.id = id;
 		this.label = label;
 		this.values = values;
@@ -3118,8 +3118,8 @@ export enum ChatResultFeedbackKind {
 }
 
 export class ChatResponseMarkdownPart {
-	value: vscode.MarkdownString;
-	constructor(value: string | vscode.MarkdownString) {
+	value: zyraxoncode.MarkdownString;
+	constructor(value: string | zyraxoncode.MarkdownString) {
 		if (typeof value !== 'string' && value.isTrusted === true) {
 			throw new Error('The boolean form of MarkdownString.isTrusted is NOT supported for chat participants.');
 		}
@@ -3133,9 +3133,9 @@ export class ChatResponseMarkdownPart {
  * vulnerabilities in a seperate API proposal in a clean way.
  */
 export class ChatResponseMarkdownWithVulnerabilitiesPart {
-	value: vscode.MarkdownString;
-	vulnerabilities: vscode.ChatVulnerability[];
-	constructor(value: string | vscode.MarkdownString, vulnerabilities: vscode.ChatVulnerability[]) {
+	value: zyraxoncode.MarkdownString;
+	vulnerabilities: zyraxoncode.ChatVulnerability[];
+	constructor(value: string | zyraxoncode.MarkdownString, vulnerabilities: zyraxoncode.ChatVulnerability[]) {
 		if (typeof value !== 'string' && value.isTrusted === true) {
 			throw new Error('The boolean form of MarkdownString.isTrusted is NOT supported for chat participants.');
 		}
@@ -3147,11 +3147,11 @@ export class ChatResponseMarkdownWithVulnerabilitiesPart {
 
 export class ChatResponseConfirmationPart {
 	title: string;
-	message: string | vscode.MarkdownString;
+	message: string | zyraxoncode.MarkdownString;
 	data: any;
 	buttons?: string[];
 
-	constructor(title: string, message: string | vscode.MarkdownString, data: any, buttons?: string[]) {
+	constructor(title: string, message: string | zyraxoncode.MarkdownString, data: any, buttons?: string[]) {
 		this.title = title;
 		this.message = message;
 		this.data = data;
@@ -3160,19 +3160,19 @@ export class ChatResponseConfirmationPart {
 }
 
 export class ChatResponseFileTreePart {
-	value: vscode.ChatResponseFileTree[];
-	baseUri: vscode.Uri;
-	constructor(value: vscode.ChatResponseFileTree[], baseUri: vscode.Uri) {
+	value: zyraxoncode.ChatResponseFileTree[];
+	baseUri: zyraxoncode.Uri;
+	constructor(value: zyraxoncode.ChatResponseFileTree[], baseUri: zyraxoncode.Uri) {
 		this.value = value;
 		this.baseUri = baseUri;
 	}
 }
 
 export class ChatResponseMultiDiffPart {
-	value: vscode.ChatResponseDiffEntry[];
+	value: zyraxoncode.ChatResponseDiffEntry[];
 	title: string;
 	readOnly?: boolean;
-	constructor(value: vscode.ChatResponseDiffEntry[], title: string, readOnly?: boolean) {
+	constructor(value: zyraxoncode.ChatResponseDiffEntry[], title: string, readOnly?: boolean) {
 		this.value = value;
 		this.title = title;
 		this.readOnly = readOnly;
@@ -3207,7 +3207,7 @@ export class ChatResponseExternalEditPart {
 	didGetApplied!: (value: string) => void;
 
 	constructor(
-		public uris: vscode.Uri[],
+		public uris: zyraxoncode.Uri[],
 		public callback: () => Thenable<unknown>,
 	) {
 		this.applied = new Promise<string>((resolve) => {
@@ -3216,14 +3216,14 @@ export class ChatResponseExternalEditPart {
 	}
 }
 
-export class ChatResponseAnchorPart implements vscode.ChatResponseAnchorPart {
-	value: vscode.Uri | vscode.Location;
+export class ChatResponseAnchorPart implements zyraxoncode.ChatResponseAnchorPart {
+	value: zyraxoncode.Uri | zyraxoncode.Location;
 	title?: string;
 
-	value2: vscode.Uri | vscode.Location | vscode.SymbolInformation;
-	resolve?(token: vscode.CancellationToken): Thenable<void>;
+	value2: zyraxoncode.Uri | zyraxoncode.Location | zyraxoncode.SymbolInformation;
+	resolve?(token: zyraxoncode.CancellationToken): Thenable<void>;
 
-	constructor(value: vscode.Uri | vscode.Location | vscode.SymbolInformation, title?: string) {
+	constructor(value: zyraxoncode.Uri | zyraxoncode.Location | zyraxoncode.SymbolInformation, title?: string) {
 		// eslint-disable-next-line local/code-no-any-casts
 		this.value = value as any;
 		this.value2 = value;
@@ -3240,8 +3240,8 @@ export class ChatResponseProgressPart {
 
 export class ChatResponseProgressPart2 {
 	value: string;
-	task?: (progress: vscode.Progress<vscode.ChatResponseWarningPart>) => Thenable<string | void>;
-	constructor(value: string, task?: (progress: vscode.Progress<vscode.ChatResponseWarningPart>) => Thenable<string | void>) {
+	task?: (progress: zyraxoncode.Progress<zyraxoncode.ChatResponseWarningPart>) => Thenable<string | void>;
+	constructor(value: string, task?: (progress: zyraxoncode.Progress<zyraxoncode.ChatResponseWarningPart>) => Thenable<string | void>) {
 		this.value = value;
 		this.task = task;
 	}
@@ -3296,8 +3296,8 @@ export class ChatResponseAutoModeResolutionPart {
 }
 
 export class ChatResponseWarningPart {
-	value: vscode.MarkdownString;
-	constructor(value: string | vscode.MarkdownString) {
+	value: zyraxoncode.MarkdownString;
+	constructor(value: string | zyraxoncode.MarkdownString) {
 		if (typeof value !== 'string' && value.isTrusted === true) {
 			throw new Error('The boolean form of MarkdownString.isTrusted is NOT supported for chat participants.');
 		}
@@ -3307,8 +3307,8 @@ export class ChatResponseWarningPart {
 }
 
 export class ChatResponseInfoPart {
-	value: vscode.MarkdownString;
-	constructor(value: string | vscode.MarkdownString) {
+	value: zyraxoncode.MarkdownString;
+	constructor(value: string | zyraxoncode.MarkdownString) {
 		if (typeof value !== 'string' && value.isTrusted === true) {
 			throw new Error('The boolean form of MarkdownString.isTrusted is NOT supported for chat participants.');
 		}
@@ -3318,17 +3318,17 @@ export class ChatResponseInfoPart {
 }
 
 export class ChatResponseCommandButtonPart {
-	value: vscode.Command;
-	constructor(value: vscode.Command) {
+	value: zyraxoncode.Command;
+	constructor(value: zyraxoncode.Command) {
 		this.value = value;
 	}
 }
 
 export class ChatResponseReferencePart {
-	value: vscode.Uri | vscode.Location | { variableName: string; value?: vscode.Uri | vscode.Location } | string;
-	iconPath?: vscode.Uri | vscode.ThemeIcon | { light: vscode.Uri; dark: vscode.Uri };
-	options?: { status?: { description: string; kind: vscode.ChatResponseReferencePartStatusKind }; diffMeta?: { added: number; removed: number } };
-	constructor(value: vscode.Uri | vscode.Location | { variableName: string; value?: vscode.Uri | vscode.Location } | string, iconPath?: vscode.Uri | vscode.ThemeIcon | { light: vscode.Uri; dark: vscode.Uri }, options?: { status?: { description: string; kind: vscode.ChatResponseReferencePartStatusKind } }) {
+	value: zyraxoncode.Uri | zyraxoncode.Location | { variableName: string; value?: zyraxoncode.Uri | zyraxoncode.Location } | string;
+	iconPath?: zyraxoncode.Uri | zyraxoncode.ThemeIcon | { light: zyraxoncode.Uri; dark: zyraxoncode.Uri };
+	options?: { status?: { description: string; kind: zyraxoncode.ChatResponseReferencePartStatusKind }; diffMeta?: { added: number; removed: number } };
+	constructor(value: zyraxoncode.Uri | zyraxoncode.Location | { variableName: string; value?: zyraxoncode.Uri | zyraxoncode.Location } | string, iconPath?: zyraxoncode.Uri | zyraxoncode.ThemeIcon | { light: zyraxoncode.Uri; dark: zyraxoncode.Uri }, options?: { status?: { description: string; kind: zyraxoncode.ChatResponseReferencePartStatusKind } }) {
 		this.value = value;
 		this.iconPath = iconPath;
 		this.options = options;
@@ -3338,8 +3338,8 @@ export class ChatResponseReferencePart {
 export class ChatResponseCodeblockUriPart {
 	isEdit?: boolean;
 	undoStopId?: string;
-	value: vscode.Uri;
-	constructor(value: vscode.Uri, isEdit?: boolean, undoStopId?: string) {
+	value: zyraxoncode.Uri;
+	constructor(value: zyraxoncode.Uri, isEdit?: boolean, undoStopId?: string) {
 		this.value = value;
 		this.isEdit = isEdit;
 		this.undoStopId = undoStopId;
@@ -3347,10 +3347,10 @@ export class ChatResponseCodeblockUriPart {
 }
 
 export class ChatResponseCodeCitationPart {
-	value: vscode.Uri;
+	value: zyraxoncode.Uri;
 	license: string;
 	snippet: string;
-	constructor(value: vscode.Uri, license: string, snippet: string) {
+	constructor(value: zyraxoncode.Uri, license: string, snippet: string) {
 		this.value = value;
 		this.license = license;
 		this.snippet = snippet;
@@ -3359,8 +3359,8 @@ export class ChatResponseCodeCitationPart {
 
 export class ChatResponseMovePart {
 	constructor(
-		public readonly uri: vscode.Uri,
-		public readonly range: vscode.Range,
+		public readonly uri: zyraxoncode.Uri,
+		public readonly range: zyraxoncode.Range,
 	) {
 	}
 }
@@ -3373,21 +3373,21 @@ export class ChatResponseExtensionsPart {
 }
 
 export class ChatResponsePullRequestPart {
-	public readonly uri?: vscode.Uri;
-	public readonly command: vscode.Command;
+	public readonly uri?: zyraxoncode.Uri;
+	public readonly command: zyraxoncode.Command;
 
 	constructor(
-		uriOrCommand: vscode.Uri | vscode.Command,
+		uriOrCommand: zyraxoncode.Uri | zyraxoncode.Command,
 		public readonly title: string,
 		public readonly description: string,
 		public readonly author: string,
 		public readonly linkTag: string
 	) {
 		if (isUriComponents(uriOrCommand)) {
-			this.uri = uriOrCommand as vscode.Uri;
+			this.uri = uriOrCommand as zyraxoncode.Uri;
 			this.command = {
 				title: 'Open Pull Request',
-				command: 'vscode.open',
+				command: 'zyraxoncode.open',
 				arguments: [uriOrCommand]
 			};
 		} else {
@@ -3437,7 +3437,7 @@ export class ChatQuestion {
 	/** The title/header of the question. */
 	title: string;
 	/** Optional detailed message or description for the question. */
-	message?: string | vscode.MarkdownString;
+	message?: string | zyraxoncode.MarkdownString;
 	/** Options for singleSelect or multiSelect questions. */
 	options?: { id: string; label: string; value: unknown }[];
 	/** The id(s) of the default selected option(s). */
@@ -3450,7 +3450,7 @@ export class ChatQuestion {
 		type: ChatQuestionType,
 		title: string,
 		options?: {
-			message?: string | vscode.MarkdownString;
+			message?: string | zyraxoncode.MarkdownString;
 			options?: { id: string; label: string; value: unknown }[];
 			defaultValue?: string | string[];
 			allowFreeformInput?: boolean;
@@ -3482,11 +3482,11 @@ export class ChatResponseQuestionCarouselPart {
 	}
 }
 
-export class ChatResponseTextEditPart implements vscode.ChatResponseTextEditPart {
-	uri: vscode.Uri;
-	edits: vscode.TextEdit[];
+export class ChatResponseTextEditPart implements zyraxoncode.ChatResponseTextEditPart {
+	uri: zyraxoncode.Uri;
+	edits: zyraxoncode.TextEdit[];
 	isDone?: boolean;
-	constructor(uri: vscode.Uri, editsOrDone: vscode.TextEdit | vscode.TextEdit[] | true) {
+	constructor(uri: zyraxoncode.Uri, editsOrDone: zyraxoncode.TextEdit | zyraxoncode.TextEdit[] | true) {
 		this.uri = uri;
 		if (editsOrDone === true) {
 			this.isDone = true;
@@ -3497,11 +3497,11 @@ export class ChatResponseTextEditPart implements vscode.ChatResponseTextEditPart
 	}
 }
 
-export class ChatResponseNotebookEditPart implements vscode.ChatResponseNotebookEditPart {
-	uri: vscode.Uri;
-	edits: vscode.NotebookEdit[];
+export class ChatResponseNotebookEditPart implements zyraxoncode.ChatResponseNotebookEditPart {
+	uri: zyraxoncode.Uri;
+	edits: zyraxoncode.NotebookEdit[];
 	isDone?: boolean;
-	constructor(uri: vscode.Uri, editsOrDone: vscode.NotebookEdit | vscode.NotebookEdit[] | true) {
+	constructor(uri: zyraxoncode.Uri, editsOrDone: zyraxoncode.NotebookEdit | zyraxoncode.NotebookEdit[] | true) {
 		this.uri = uri;
 		if (editsOrDone === true) {
 			this.isDone = true;
@@ -3513,9 +3513,9 @@ export class ChatResponseNotebookEditPart implements vscode.ChatResponseNotebook
 	}
 }
 
-export class ChatResponseWorkspaceEditPart implements vscode.ChatResponseWorkspaceEditPart {
-	edits: vscode.ChatWorkspaceFileEdit[];
-	constructor(edits: vscode.ChatWorkspaceFileEdit[]) {
+export class ChatResponseWorkspaceEditPart implements zyraxoncode.ChatResponseWorkspaceEditPart {
+	edits: zyraxoncode.ChatWorkspaceFileEdit[];
+	constructor(edits: zyraxoncode.ChatWorkspaceFileEdit[]) {
 		this.edits = edits;
 	}
 }
@@ -3545,9 +3545,9 @@ export class ChatToolInvocationPart {
 	toolName: string;
 	toolCallId: string;
 	errorMessage?: string;
-	invocationMessage?: string | vscode.MarkdownString;
-	originMessage?: string | vscode.MarkdownString;
-	pastTenseMessage?: string | vscode.MarkdownString;
+	invocationMessage?: string | zyraxoncode.MarkdownString;
+	originMessage?: string | zyraxoncode.MarkdownString;
+	pastTenseMessage?: string | zyraxoncode.MarkdownString;
 	isConfirmed?: boolean;
 	isComplete?: boolean;
 	toolSpecificData?: ChatTerminalToolInvocationData2;
@@ -3564,35 +3564,35 @@ export class ChatToolInvocationPart {
 	}
 }
 
-export class ChatRequestTurn implements vscode.ChatRequestTurn2 {
+export class ChatRequestTurn implements zyraxoncode.ChatRequestTurn2 {
 	constructor(
 		readonly prompt: string,
 		readonly command: string | undefined,
-		readonly references: vscode.ChatPromptReference[],
+		readonly references: zyraxoncode.ChatPromptReference[],
 		readonly participant: string,
-		readonly toolReferences: vscode.ChatLanguageModelToolReference[],
-		readonly editedFileEvents?: vscode.ChatRequestEditedFileEvent[],
+		readonly toolReferences: zyraxoncode.ChatLanguageModelToolReference[],
+		readonly editedFileEvents?: zyraxoncode.ChatRequestEditedFileEvent[],
 		readonly id?: string,
 		readonly modelId?: string,
-		readonly modeInstructions2?: vscode.ChatRequestModeInstructions,
+		readonly modeInstructions2?: zyraxoncode.ChatRequestModeInstructions,
 	) { }
 }
 
-export class ChatResponseTurn implements vscode.ChatResponseTurn {
+export class ChatResponseTurn implements zyraxoncode.ChatResponseTurn {
 
 	constructor(
 		readonly response: ReadonlyArray<ChatResponseMarkdownPart | ChatResponseFileTreePart | ChatResponseAnchorPart | ChatResponseCommandButtonPart>,
-		readonly result: vscode.ChatResult,
+		readonly result: zyraxoncode.ChatResult,
 		readonly participant: string,
 		readonly command?: string
 	) { }
 }
 
-export class ChatResponseTurn2 implements vscode.ChatResponseTurn2 {
+export class ChatResponseTurn2 implements zyraxoncode.ChatResponseTurn2 {
 
 	constructor(
 		readonly response: ReadonlyArray<ChatResponseMarkdownPart | ChatResponseFileTreePart | ChatResponseAnchorPart | ChatResponseCommandButtonPart | ChatResponseExtensionsPart | ChatToolInvocationPart>,
-		readonly result: vscode.ChatResult,
+		readonly result: zyraxoncode.ChatResult,
 		readonly participant: string,
 		readonly command?: string
 	) { }
@@ -3644,7 +3644,7 @@ export enum ChatDebugHookResult {
 export class ChatDebugToolCallEvent {
 	readonly _kind = 'toolCall';
 	id?: string;
-	sessionResource?: vscode.Uri;
+	sessionResource?: zyraxoncode.Uri;
 	created: Date;
 	parentEventId?: string;
 	toolName: string;
@@ -3663,7 +3663,7 @@ export class ChatDebugToolCallEvent {
 export class ChatDebugModelTurnEvent {
 	readonly _kind = 'modelTurn';
 	id?: string;
-	sessionResource?: vscode.Uri;
+	sessionResource?: zyraxoncode.Uri;
 	created: Date;
 	parentEventId?: string;
 	model?: string;
@@ -3684,7 +3684,7 @@ export class ChatDebugModelTurnEvent {
 export class ChatDebugGenericEvent {
 	readonly _kind = 'generic';
 	id?: string;
-	sessionResource?: vscode.Uri;
+	sessionResource?: zyraxoncode.Uri;
 	created: Date;
 	parentEventId?: string;
 	name: string;
@@ -3702,7 +3702,7 @@ export class ChatDebugGenericEvent {
 export class ChatDebugSubagentInvocationEvent {
 	readonly _kind = 'subagentInvocation';
 	id?: string;
-	sessionResource?: vscode.Uri;
+	sessionResource?: zyraxoncode.Uri;
 	created: Date;
 	parentEventId?: string;
 	agentName: string;
@@ -3731,7 +3731,7 @@ export class ChatDebugMessageSection {
 export class ChatDebugUserMessageEvent {
 	readonly _kind = 'userMessage';
 	id?: string;
-	sessionResource?: vscode.Uri;
+	sessionResource?: zyraxoncode.Uri;
 	created: Date;
 	parentEventId?: string;
 	message: string;
@@ -3747,7 +3747,7 @@ export class ChatDebugUserMessageEvent {
 export class ChatDebugAgentResponseEvent {
 	readonly _kind = 'agentResponse';
 	id?: string;
-	sessionResource?: vscode.Uri;
+	sessionResource?: zyraxoncode.Uri;
 	created: Date;
 	parentEventId?: string;
 	message: string;
@@ -3840,7 +3840,7 @@ export class ChatDebugEventHookContent {
 }
 
 export class ChatSessionChangedFile {
-	constructor(public readonly uri: vscode.Uri, public readonly originalUri: vscode.Uri | undefined, public readonly modifiedUri: vscode.Uri | undefined, public readonly insertions: number, public readonly deletions: number) { }
+	constructor(public readonly uri: zyraxoncode.Uri, public readonly originalUri: zyraxoncode.Uri | undefined, public readonly modifiedUri: zyraxoncode.Uri | undefined, public readonly insertions: number, public readonly deletions: number) { }
 }
 
 export enum ChatResponseReferencePartStatusKind {
@@ -3855,28 +3855,28 @@ export enum ChatResponseClearToPreviousToolInvocationReason {
 	CopyrightContentRetry = 2,
 }
 
-export class ChatRequestEditorData implements vscode.ChatRequestEditorData {
+export class ChatRequestEditorData implements zyraxoncode.ChatRequestEditorData {
 	constructor(
-		readonly editor: vscode.TextEditor,
-		readonly document: vscode.TextDocument,
-		readonly selection: vscode.Selection,
-		readonly wholeRange: vscode.Range,
+		readonly editor: zyraxoncode.TextEditor,
+		readonly document: zyraxoncode.TextDocument,
+		readonly selection: zyraxoncode.Selection,
+		readonly wholeRange: zyraxoncode.Range,
 	) { }
 }
 
-export class ChatRequestNotebookData implements vscode.ChatRequestNotebookData {
+export class ChatRequestNotebookData implements zyraxoncode.ChatRequestNotebookData {
 	constructor(
-		readonly cell: vscode.TextDocument
+		readonly cell: zyraxoncode.TextDocument
 	) { }
 }
 
-export class ChatReferenceBinaryData implements vscode.ChatReferenceBinaryData {
+export class ChatReferenceBinaryData implements zyraxoncode.ChatReferenceBinaryData {
 	mimeType: string;
 	data: () => Thenable<Uint8Array>;
-	reference?: vscode.Uri;
+	reference?: zyraxoncode.Uri;
 	isPasted?: boolean;
 	isURL?: boolean;
-	constructor(mimeType: string, data: () => Thenable<Uint8Array>, reference?: vscode.Uri, isPasted?: boolean, isURL?: boolean) {
+	constructor(mimeType: string, data: () => Thenable<Uint8Array>, reference?: zyraxoncode.Uri, isPasted?: boolean, isURL?: boolean) {
 		this.mimeType = mimeType;
 		this.data = data;
 		this.reference = reference;
@@ -3885,8 +3885,8 @@ export class ChatReferenceBinaryData implements vscode.ChatReferenceBinaryData {
 	}
 }
 
-export class ChatReferenceDiagnostic implements vscode.ChatReferenceDiagnostic {
-	constructor(public readonly diagnostics: [vscode.Uri, vscode.Diagnostic[]][]) { }
+export class ChatReferenceDiagnostic implements zyraxoncode.ChatReferenceDiagnostic {
+	constructor(public readonly diagnostics: [zyraxoncode.Uri, zyraxoncode.Diagnostic[]][]) { }
 }
 
 export enum LanguageModelChatMessageRole {
@@ -3895,7 +3895,7 @@ export enum LanguageModelChatMessageRole {
 	System = 3
 }
 
-export class LanguageModelToolResultPart implements vscode.LanguageModelToolResultPart {
+export class LanguageModelToolResultPart implements zyraxoncode.LanguageModelToolResultPart {
 
 	callId: string;
 	content: (LanguageModelTextPart | LanguageModelPromptTsxPart | unknown)[];
@@ -3921,7 +3921,7 @@ export enum ChatInputNotificationSeverity {
 	Error = 2,
 }
 
-export class LanguageModelChatMessage implements vscode.LanguageModelChatMessage {
+export class LanguageModelChatMessage implements zyraxoncode.LanguageModelChatMessage {
 
 	static User(content: string | (LanguageModelTextPart | LanguageModelToolResultPart | LanguageModelToolCallPart | LanguageModelDataPart)[], name?: string): LanguageModelChatMessage {
 		return new LanguageModelChatMessage(LanguageModelChatMessageRole.User, content, name);
@@ -3931,7 +3931,7 @@ export class LanguageModelChatMessage implements vscode.LanguageModelChatMessage
 		return new LanguageModelChatMessage(LanguageModelChatMessageRole.Assistant, content, name);
 	}
 
-	role: vscode.LanguageModelChatMessageRole;
+	role: zyraxoncode.LanguageModelChatMessageRole;
 
 	private _content: (LanguageModelTextPart | LanguageModelToolResultPart | LanguageModelToolCallPart | LanguageModelDataPart)[] = [];
 
@@ -3951,14 +3951,14 @@ export class LanguageModelChatMessage implements vscode.LanguageModelChatMessage
 
 	name: string | undefined;
 
-	constructor(role: vscode.LanguageModelChatMessageRole, content: string | (LanguageModelTextPart | LanguageModelToolResultPart | LanguageModelToolCallPart | LanguageModelDataPart)[], name?: string) {
+	constructor(role: zyraxoncode.LanguageModelChatMessageRole, content: string | (LanguageModelTextPart | LanguageModelToolResultPart | LanguageModelToolCallPart | LanguageModelDataPart)[], name?: string) {
 		this.role = role;
 		this.content = content;
 		this.name = name;
 	}
 }
 
-export class LanguageModelChatMessage2 implements vscode.LanguageModelChatMessage2 {
+export class LanguageModelChatMessage2 implements zyraxoncode.LanguageModelChatMessage2 {
 
 	static User(content: string | (LanguageModelTextPart | LanguageModelToolResultPart | LanguageModelToolCallPart | LanguageModelDataPart)[], name?: string): LanguageModelChatMessage2 {
 		return new LanguageModelChatMessage2(LanguageModelChatMessageRole.User, content, name);
@@ -3968,7 +3968,7 @@ export class LanguageModelChatMessage2 implements vscode.LanguageModelChatMessag
 		return new LanguageModelChatMessage2(LanguageModelChatMessageRole.Assistant, content, name);
 	}
 
-	role: vscode.LanguageModelChatMessageRole;
+	role: zyraxoncode.LanguageModelChatMessageRole;
 
 	private _content: (LanguageModelTextPart | LanguageModelToolResultPart | LanguageModelToolCallPart | LanguageModelDataPart | LanguageModelThinkingPart)[] = [];
 
@@ -4009,7 +4009,7 @@ export class LanguageModelChatMessage2 implements vscode.LanguageModelChatMessag
 
 	name: string | undefined;
 
-	constructor(role: vscode.LanguageModelChatMessageRole, content: string | (LanguageModelTextPart | LanguageModelToolResultPart | LanguageModelToolCallPart | LanguageModelDataPart | LanguageModelThinkingPart)[], name?: string) {
+	constructor(role: zyraxoncode.LanguageModelChatMessageRole, content: string | (LanguageModelTextPart | LanguageModelToolResultPart | LanguageModelToolCallPart | LanguageModelDataPart | LanguageModelThinkingPart)[], name?: string) {
 		this.role = role;
 		this.content = content;
 		this.name = name;
@@ -4017,7 +4017,7 @@ export class LanguageModelChatMessage2 implements vscode.LanguageModelChatMessag
 }
 
 
-export class LanguageModelToolCallPart implements vscode.LanguageModelToolCallPart {
+export class LanguageModelToolCallPart implements zyraxoncode.LanguageModelToolCallPart {
 	callId: string;
 	name: string;
 	input: any;
@@ -4036,11 +4036,11 @@ export enum LanguageModelPartAudience {
 	Extension = 2,
 }
 
-export class LanguageModelTextPart implements vscode.LanguageModelTextPart2 {
+export class LanguageModelTextPart implements zyraxoncode.LanguageModelTextPart2 {
 	value: string;
-	audience: vscode.LanguageModelPartAudience[] | undefined;
+	audience: zyraxoncode.LanguageModelPartAudience[] | undefined;
 
-	constructor(value: string, audience?: vscode.LanguageModelPartAudience[]) {
+	constructor(value: string, audience?: zyraxoncode.LanguageModelPartAudience[]) {
 		this.value = value;
 		audience = audience;
 	}
@@ -4054,27 +4054,27 @@ export class LanguageModelTextPart implements vscode.LanguageModelTextPart2 {
 	}
 }
 
-export class LanguageModelDataPart implements vscode.LanguageModelDataPart2 {
+export class LanguageModelDataPart implements zyraxoncode.LanguageModelDataPart2 {
 	mimeType: string;
 	data: Uint8Array<ArrayBufferLike>;
-	audience: vscode.LanguageModelPartAudience[] | undefined;
+	audience: zyraxoncode.LanguageModelPartAudience[] | undefined;
 
-	constructor(data: Uint8Array<ArrayBufferLike>, mimeType: string, audience?: vscode.LanguageModelPartAudience[]) {
+	constructor(data: Uint8Array<ArrayBufferLike>, mimeType: string, audience?: zyraxoncode.LanguageModelPartAudience[]) {
 		this.mimeType = mimeType;
 		this.data = data;
 		this.audience = audience;
 	}
 
-	static image(data: Uint8Array<ArrayBufferLike>, mimeType: string): vscode.LanguageModelDataPart {
+	static image(data: Uint8Array<ArrayBufferLike>, mimeType: string): zyraxoncode.LanguageModelDataPart {
 		return new LanguageModelDataPart(data, mimeType);
 	}
 
-	static json(value: object, mime: string = 'text/x-json'): vscode.LanguageModelDataPart {
+	static json(value: object, mime: string = 'text/x-json'): zyraxoncode.LanguageModelDataPart {
 		const rawStr = JSON.stringify(value, undefined, '\t');
 		return new LanguageModelDataPart(VSBuffer.fromString(rawStr).buffer, mime);
 	}
 
-	static text(value: string, mime: string = Mimes.text): vscode.LanguageModelDataPart {
+	static text(value: string, mime: string = Mimes.text): zyraxoncode.LanguageModelDataPart {
 		return new LanguageModelDataPart(VSBuffer.fromString(value).buffer, mime);
 	}
 
@@ -4096,7 +4096,7 @@ export enum ChatImageMimeType {
 	BMP = 'image/bmp',
 }
 
-export class LanguageModelThinkingPart implements vscode.LanguageModelThinkingPart {
+export class LanguageModelThinkingPart implements zyraxoncode.LanguageModelThinkingPart {
 	value: string | string[];
 	id?: string;
 	metadata?: { readonly [key: string]: any };
@@ -4238,11 +4238,11 @@ export enum LanguageModelChatToolMode {
 	Required = 2
 }
 
-export class LanguageModelToolExtensionSource implements vscode.LanguageModelToolExtensionSource {
+export class LanguageModelToolExtensionSource implements zyraxoncode.LanguageModelToolExtensionSource {
 	constructor(public readonly id: string, public readonly label: string) { }
 }
 
-export class LanguageModelToolMCPSource implements vscode.LanguageModelToolMCPSource {
+export class LanguageModelToolMCPSource implements zyraxoncode.LanguageModelToolMCPSource {
 	constructor(public readonly label: string, public readonly name: string, public readonly instructions: string | undefined) { }
 }
 
@@ -4294,7 +4294,7 @@ export enum McpToolAvailability {
 	Dynamic = 1,
 }
 
-export class McpStdioServerDefinition implements vscode.McpStdioServerDefinition {
+export class McpStdioServerDefinition implements zyraxoncode.McpStdioServerDefinition {
 	cwd?: URI;
 
 	constructor(
@@ -4303,17 +4303,17 @@ export class McpStdioServerDefinition implements vscode.McpStdioServerDefinition
 		public args: string[],
 		public env: Record<string, string | number | null> = {},
 		public version?: string,
-		public metadata?: vscode.McpServerMetadata,
+		public metadata?: zyraxoncode.McpServerMetadata,
 	) { }
 }
 
-export class McpHttpServerDefinition implements vscode.McpHttpServerDefinition {
+export class McpHttpServerDefinition implements zyraxoncode.McpHttpServerDefinition {
 	constructor(
 		public label: string,
 		public uri: URI,
 		public headers: Record<string, string> = {},
 		public version?: string,
-		public metadata?: vscode.McpServerMetadata,
+		public metadata?: zyraxoncode.McpServerMetadata,
 		public authentication?: { providerId: string; scopes: string[] },
 	) { }
 }

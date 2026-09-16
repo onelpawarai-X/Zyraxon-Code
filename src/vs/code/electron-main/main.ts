@@ -134,12 +134,12 @@ class CodeMain {
 				const mainProcessNodeIpcServer = await this.claimInstance(logService, environmentMainService, lifecycleMainService, instantiationService, productService, true);
 
 				// Write a lockfile to indicate an instance is running
-				// (https://github.com/microsoft/vscode/issues/127861#issuecomment-877417451)
+				// (__ZYRAXKEEP__0_)
 				FSPromises.writeFile(environmentMainService.mainLockfile, String(process.pid)).catch(err => {
 					logService.warn(`app#startup(): Error writing main lockfile: ${err.stack}`);
 				});
 
-				// Delay creation of spdlog for perf reasons (https://github.com/microsoft/vscode/issues/72906)
+				// Delay creation of spdlog for perf reasons (__ZYRAXKEEP__1_)
 				bufferLogger.logger = loggerService.createLogger('main', { name: localize('mainLog', "Main") });
 
 				// Lifecycle
@@ -184,7 +184,7 @@ class CodeMain {
 
 		// Log: We need to buffer the spdlog logs until we are sure
 		// we are the only instance running, otherwise we'll have concurrent
-		// log file access on Windows (https://github.com/microsoft/vscode/issues/41218)
+		// log file access on Windows (__ZYRAXKEEP__2_)
 		const bufferLogger = new BufferLogger(loggerService.getLogLevel());
 		const logService = disposables.add(new LogService(bufferLogger, [new ConsoleMainLogger(loggerService.getLogLevel())]));
 		if (!environmentMainService.isBuilt && isDevConsoleLogForwardingEnabled) {
@@ -213,7 +213,7 @@ class CodeMain {
 
 		// Use FileUserDataProvider for user data to
 		// enable atomic read / write operations.
-		fileService.registerProvider(Schemas.vscodeUserData, new FileUserDataProvider(Schemas.file, diskFileSystemProvider, Schemas.vscodeUserData, userDataProfilesMainService, uriIdentityService, logService));
+		fileService.registerProvider(Schemas.zyraxoncodeUserData, new FileUserDataProvider(Schemas.file, diskFileSystemProvider, Schemas.zyraxoncodeUserData, userDataProfilesMainService, uriIdentityService, logService));
 
 		// Policy
 		let policyService: IPolicyService | undefined;
@@ -495,7 +495,7 @@ class CodeMain {
 
 		// use sync variant here because we likely exit after this method
 		// due to startup issues and otherwise the dialog seems to disappear
-		// https://github.com/microsoft/vscode/issues/104493
+		// __ZYRAXKEEP__3_
 
 		dialog.showMessageBoxSync(massageMessageBoxOptions({
 			type: 'warning',
@@ -551,7 +551,7 @@ class CodeMain {
 
 		try {
 			const updatingMutexName = `${productService.win32MutexName}-updating`;
-			const mutex = await import('@vscode/windows-mutex');
+			const mutex = await import('@zyraxoncode/windows-mutex');
 
 			if (!mutex.isActive(updatingMutexName)) {
 				return false;
@@ -684,7 +684,7 @@ class CodeMain {
 
 		// Trim trailing quotes
 		if (isWindows) {
-			path = rtrim(path, '"'); // https://github.com/microsoft/vscode/issues/1498
+			path = rtrim(path, '"'); // __ZYRAXKEEP__4_
 		}
 
 		// Trim whitespaces

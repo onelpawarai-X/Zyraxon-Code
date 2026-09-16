@@ -92,7 +92,7 @@ namespace snippetExt {
 	}
 
 	export const snippetsContribution: IJSONSchema = {
-		description: localize('vscode.extension.contributes.snippets', 'Contributes snippets.'),
+		description: localize('zyraxoncode.extension.contributes.snippets', 'Contributes snippets.'),
 		type: 'array',
 		defaultSnippets: [{ body: [{ language: '', path: '' }] }],
 		items: {
@@ -100,11 +100,11 @@ namespace snippetExt {
 			defaultSnippets: [{ body: { language: '${1:id}', path: './snippets/${2:id}.json.' } }],
 			properties: {
 				language: {
-					description: localize('vscode.extension.contributes.snippets-language', 'Language identifier for which this snippet is contributed to.'),
+					description: localize('zyraxoncode.extension.contributes.snippets-language', 'Language identifier for which this snippet is contributed to.'),
 					type: 'string'
 				},
 				path: {
-					description: localize('vscode.extension.contributes.snippets-path', 'Path of the snippets file. The path is relative to the extension folder and typically starts with \'./snippets/\'.'),
+					description: localize('zyraxoncode.extension.contributes.snippets-path', 'Path of the snippets file. The path is relative to the extension folder and typically starts with \'./snippets/\'.'),
 					type: 'string'
 				}
 			}
@@ -397,7 +397,7 @@ export class SnippetsService implements ISnippetsService {
 								if (file.data.some(snippet => snippet.isBogous)) {
 									extension.collector.warn(localize(
 										'badVariableUse',
-										"One or more snippets from the extension '{0}' very likely confuse snippet-variables and snippet-placeholders (see https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax for more details)",
+										"One or more snippets from the extension '{0}' very likely confuse snippet-variables and snippet-placeholders (see __ZYRAXKEEP__0_ for more details)",
 										extension.description.name
 									));
 								}
@@ -432,7 +432,7 @@ export class SnippetsService implements ISnippetsService {
 
 	private async _initWorkspaceFolderSnippets(workspace: IWorkspace, bucket: DisposableStore): Promise<any> {
 		const promises = workspace.folders.map(async folder => {
-			const snippetFolder = folder.toResource('.vscode');
+			const snippetFolder = folder.toResource('.zyraxoncode');
 			const value = await this._fileService.exists(snippetFolder);
 			if (value) {
 				this._initFolderSnippets(SnippetSource.Workspace, snippetFolder, bucket);

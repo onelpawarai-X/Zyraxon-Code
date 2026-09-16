@@ -55,7 +55,7 @@ export const markdownDefaultEditorAgentsWindowSettingId = 'workbench.editor.mark
  */
 export function editorsAssociationsAgentsWindowDefault(options?: { markdownDefaultEditor?: boolean }): Record<string, string> {
 	return {
-		'*.md': options?.markdownDefaultEditor === true ? 'vscode.markdown.editor' : 'vscode.markdown.preview.editor'
+		'*.md': options?.markdownDefaultEditor === true ? 'zyraxoncode.markdown.editor' : 'zyraxoncode.markdown.preview.editor'
 	};
 }
 
@@ -77,7 +77,7 @@ const editorAssociationsConfigurationNode: IConfigurationNode = {
 		},
 		[editorsAssociationsSettingId]: {
 			type: 'object',
-			markdownDescription: localize('editor.editorAssociations', "Configure [glob patterns](https://aka.ms/vscode-glob-patterns) to editors (for example `\"*.hex\": \"hexEditor.hexedit\"`). These have precedence over the default behavior."),
+			markdownDescription: localize('editor.editorAssociations', "Configure [glob patterns](__ZYRAXKEEP__0_) to editors (for example `\"*.hex\": \"hexEditor.hexedit\"`). These have precedence over the default behavior."),
 			additionalProperties: {
 				type: 'string'
 			},
@@ -87,7 +87,7 @@ const editorAssociationsConfigurationNode: IConfigurationNode = {
 		},
 		[diffEditorsAssociationsSettingId]: {
 			type: 'object',
-			markdownDescription: localize('editor.diffEditorAssociations', "Configure [glob patterns](https://aka.ms/vscode-glob-patterns) to editors for diff views (for example `\"*.md\": \"vscode.markdown.preview.editor\"`). These override `workbench.editorAssociations` for diffs."),
+			markdownDescription: localize('editor.diffEditorAssociations', "Configure [glob patterns](__ZYRAXKEEP__1_) to editors for diff views (for example `\"*.md\": \"zyraxoncode.markdown.preview.editor\"`). These override `workbench.editorAssociations` for diffs."),
 			additionalProperties: {
 				type: 'string'
 			},
@@ -316,8 +316,8 @@ export function globMatchesResource(globPattern: string | glob.IRelativePattern,
 	const excludedSchemes = new Set([
 		Schemas.extension,
 		Schemas.webviewPanel,
-		Schemas.vscodeWorkspaceTrust,
-		Schemas.vscodeSettings
+		Schemas.zyraxoncodeWorkspaceTrust,
+		Schemas.zyraxoncodeSettings
 	]);
 	// We want to say that the above schemes match no glob patterns
 	if (excludedSchemes.has(resource.scheme)) {

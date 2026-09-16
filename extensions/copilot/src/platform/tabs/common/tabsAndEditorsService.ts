@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 export interface TabInfo {
-	readonly tab: vscode.Tab;
-	readonly uri: vscode.Uri | undefined;
+	readonly tab: zyraxoncode.Tab;
+	readonly uri: zyraxoncode.Uri | undefined;
 }
 
 export interface TabChangeEvent {
@@ -21,11 +21,11 @@ export const ITabsAndEditorsService = createServiceIdentifier<ITabsAndEditorsSer
 
 export interface ITabsAndEditorsService {
 	readonly _serviceBrand: undefined;
-	readonly onDidChangeActiveTextEditor: vscode.Event<vscode.TextEditor | undefined>;
-	readonly activeTextEditor: vscode.TextEditor | undefined;
-	readonly visibleTextEditors: readonly vscode.TextEditor[];
-	readonly activeNotebookEditor: vscode.NotebookEditor | undefined;
-	readonly visibleNotebookEditors: readonly vscode.NotebookEditor[];
-	readonly onDidChangeTabs: vscode.Event<TabChangeEvent>;
+	readonly onDidChangeActiveTextEditor: zyraxoncode.Event<zyraxoncode.TextEditor | undefined>;
+	readonly activeTextEditor: zyraxoncode.TextEditor | undefined;
+	readonly visibleTextEditors: readonly zyraxoncode.TextEditor[];
+	readonly activeNotebookEditor: zyraxoncode.NotebookEditor | undefined;
+	readonly visibleNotebookEditors: readonly zyraxoncode.NotebookEditor[];
+	readonly onDidChangeTabs: zyraxoncode.Event<TabChangeEvent>;
 	readonly tabs: TabInfo[];
 }

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Uri } from 'vscode';
+import type { Uri } from 'zyraxoncode';
 import { URI } from '../../../../util/vs/base/common/uri';
 import type { internal } from '@github/copilot/sdk';
 

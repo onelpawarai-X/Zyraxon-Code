@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import type { IChatDebugFileLoggerService, IDebugLogEntry } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import type { ISessionStore, SessionRow, TurnRow, FileRow, RefRow } from '../../../platform/chronicle/common/sessionStore';
 import type { CancellationToken } from '../../../util/vs/base/common/cancellation';
@@ -153,7 +153,7 @@ async function reindexOneSession(
 
 	// Ensure we always have a session row (even if no session_start event was found)
 	if (!buffer.session) {
-		buffer.session = { id: sessionId, host_type: 'vscode' };
+		buffer.session = { id: sessionId, host_type: 'zyraxoncode' };
 	}
 
 	// Flush all buffered data in a single transaction
@@ -219,7 +219,7 @@ function processSessionStart(
 	const attrs = entry.attrs;
 	buffer.session = {
 		id: sessionId,
-		host_type: 'vscode',
+		host_type: 'zyraxoncode',
 		cwd: typeof attrs.cwd === 'string' ? attrs.cwd : undefined,
 		repository: typeof attrs.repository === 'string' ? attrs.repository : undefined,
 		branch: typeof attrs.branch === 'string' ? attrs.branch : undefined,
@@ -269,7 +269,7 @@ function processAssistantResponse(
 	if (!buffer.session?.summary && state.pendingUserMessage) {
 		const summary = truncateForStore(extractPlainTextFromContent(state.pendingUserMessage), MAX_SUMMARY_LENGTH);
 		if (!buffer.session) {
-			buffer.session = { id: sessionId, host_type: 'vscode' };
+			buffer.session = { id: sessionId, host_type: 'zyraxoncode' };
 		}
 		buffer.session.summary = summary;
 	}
@@ -310,7 +310,7 @@ function processToolCall(
 		const repo = extractRepoFromMcpTool(toolArgs);
 		if (repo) {
 			if (!buffer.session) {
-				buffer.session = { id: sessionId, host_type: 'vscode' };
+				buffer.session = { id: sessionId, host_type: 'zyraxoncode' };
 			}
 			buffer.session.repository = repo;
 		}
@@ -513,7 +513,7 @@ async function reindexOneCloudSession(
 
 /**
  * Extract `owner/repo` from a repository string that may be a full URL
- * (e.g. `https://github.com/owner/repo.git`) or already `owner/repo`.
+ * (e.g. `__ZYRAXKEEP__0_`) or already `owner/repo`.
  */
 function extractNwoFromRepoString(repo: string): string | undefined {
 	// Already in owner/repo format

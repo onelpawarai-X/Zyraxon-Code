@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { IPromptEndpoint } from './promptRenderer';
 import { modelPrefersInstructionsInUserMessage } from '../../../../platform/endpoint/common/chatModelCapabilities';
 

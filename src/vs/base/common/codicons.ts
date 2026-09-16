@@ -16,7 +16,7 @@ export function getAllCodicons(): ThemeIcon[] {
 
 /**
  * Derived icons, that could become separate icons.
- * These mappings should be moved into the mapping file in the vscode-codicons repo at some point.
+ * These mappings should be moved into the mapping file in the zyraxoncode-codicons repo at some point.
  */
 export const codiconsDerived = {
 	dialogError: register('dialog-error', 'error'),

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { shouldInclude } from '../../../util/common/glob';
 import { Result } from '../../../util/common/result';
 import { TelemetryCorrelationId } from '../../../util/common/telemetryCorrelationId';
@@ -30,7 +30,7 @@ import {
  * The Blackbird local server endpoint for embeddings code search.
  * In scenario automation (msbench), Blackbird always runs at this address.
  */
-const BLACKBIRD_EMBEDDINGS_URL = 'http://localhost:4443/api/embeddings/code/search';
+const BLACKBIRD_EMBEDDINGS_URL = '__ZYRAXKEEP__0_';
 
 interface BlackbirdSearchResponse {
 	readonly embedding_model?: string;
@@ -84,7 +84,7 @@ export class ScenarioAutomationWorkspaceChunkSearchService implements IWorkspace
 		query: WorkspaceChunkQuery,
 		options: WorkspaceChunkSearchOptions,
 		_telemetryInfo: TelemetryCorrelationId,
-		_progress: vscode.Progress<vscode.ChatResponsePart> | undefined,
+		_progress: zyraxoncode.Progress<zyraxoncode.ChatResponsePart> | undefined,
 		token: CancellationToken,
 	): Promise<WorkspaceChunkSearchResult> {
 		if (token.isCancellationRequested) {

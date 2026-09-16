@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Event, McpGateway, McpServerDefinition } from 'vscode';
+import type { Event, McpGateway, McpServerDefinition } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { DisposableStore, IDisposable } from '../../../util/vs/base/common/lifecycle';

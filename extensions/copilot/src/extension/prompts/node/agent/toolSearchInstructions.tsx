@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@vscode/prompt-tsx';
-import type { LanguageModelToolInformation } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { CUSTOM_TOOL_SEARCH_NAME } from '../../../../platform/networking/common/anthropic';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { IToolDeferralService } from '../../../../platform/networking/common/toolDeferralService';

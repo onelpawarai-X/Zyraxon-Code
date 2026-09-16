@@ -71,8 +71,8 @@ export function getRemoteCLIInstallRoot(serverDataFolderName: string): string {
  * CLI machinery it inherits). Passed as `--cli-data-dir` so the CLI's
  * downloads cache, unpacked server installs, supervisor logs, and other
  * launcher state land under the same root Remote-SSH's `command-shell`
- * uses (e.g. `~/.vscode-server/cli`). Without this flag the CLI would
- * default to `~/.vscode-cli{,-<quality>}/` and split state across two
+ * uses (e.g. `~/.zyraxoncode-server/cli`). Without this flag the CLI would
+ * default to `~/.zyraxoncode-cli{,-<quality>}/` and split state across two
  * roots.
  *
  * The lockfile is unaffected: the Rust CLI anchors it on
@@ -87,7 +87,7 @@ export function getRemoteCLIDataDir(serverDataFolderName: string): string {
  * Full path to the installed CLI binary on the remote.
  *
  * When `commit` is provided, the path is keyed on commit (e.g.
- * `~/.vscode-server/code-insiders-<40hex>`) so we can install the CLI
+ * `~/.zyraxoncode-server/code-insiders-<40hex>`) so we can install the CLI
  * matching the current desktop without disturbing other installs. This
  * mirrors Remote-SSH's exec-server layout.
  *
@@ -166,7 +166,7 @@ export function resolveRemotePlatform(unameS: string, unameM: string): { os: str
  * When `commit` is undefined (dev/OSS builds), falls back to `latest`.
  */
 export function buildCLIDownloadUrl(os: string, arch: string, quality: string, commit?: string): string {
-	const base = 'https://update.code.visualstudio.com';
+	const base = '__ZYRAXKEEP__0_';
 	const artifact = `cli-${os}-${arch}`;
 	if (commit) {
 		// Defense-in-depth: same validation as getRemoteCLIBin so the URL
@@ -208,7 +208,7 @@ export function buildCleanupOldCLIsCommand(serverDataFolderName: string, quality
  * used as a fallback when the commit-pinned download fails. Order: any
  * commit-keyed binaries in the shared install root (newest mtime first),
  * then the legacy single-binary paths from the previous installer
- * (`~/.vscode-cli{,-<quality>}/<archive>`).
+ * (`~/.zyraxoncode-cli{,-<quality>}/<archive>`).
  *
  * Each line is a single path. The glob for commit-keyed candidates is
  * restricted to exactly 40 hex chars so the output can only contain
@@ -222,7 +222,7 @@ export function buildFindFallbackCLICommand(serverDataFolderName: string, qualit
 	const archive = getRemoteCLIArchiveName(quality);
 	const commitGlob = '[0-9a-f]'.repeat(40);
 	const q = validateShellToken(quality, 'quality');
-	const legacyDir = q === 'stable' ? '~/.vscode-cli' : `~/.vscode-cli-${q}`;
+	const legacyDir = q === 'stable' ? '~/.zyraxoncode-cli' : `~/.zyraxoncode-cli-${q}`;
 	const legacyBin = `${legacyDir}/${archive}`;
 	return [
 		`ls -1t -- ${root}/${archive}-${commitGlob} 2>/dev/null`,
@@ -248,7 +248,7 @@ export function isValidFallbackCLIPath(candidate: string, serverDataFolderName: 
 	const root = getRemoteCLIInstallRoot(serverDataFolderName);
 	const archive = getRemoteCLIArchiveName(quality);
 	const q = validateShellToken(quality, 'quality');
-	const legacyDir = q === 'stable' ? '~/.vscode-cli' : `~/.vscode-cli-${q}`;
+	const legacyDir = q === 'stable' ? '~/.zyraxoncode-cli' : `~/.zyraxoncode-cli-${q}`;
 	const legacyBin = `${legacyDir}/${archive}`;
 	if (candidate === legacyBin) {
 		return true;
@@ -267,7 +267,7 @@ export function redactToken(text: string): string {
 }
 
 /**
- * Match the `ws://127.0.0.1:PORT[?tkn=TOKEN]` URL emitted by `code agent host`
+ * Match the `__ZYRAXKEEP__1_[?tkn=TOKEN]` URL emitted by `code agent host`
  * on stdout/stderr. Shared by SSH and WSL agent-host transports — both spawn
  * the CLI inside a posix shell and scrape its first line of output to discover
  * the WebSocket endpoint.

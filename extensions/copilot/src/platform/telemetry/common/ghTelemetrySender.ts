@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { TelemetryLogger } from 'vscode';
+import type { TelemetryLogger } from 'zyraxoncode';
 import { redactPaths } from '../../../util/common/pathRedaction';
 import { DisposableStore } from '../../../util/vs/base/common/lifecycle';
 import { Mutable } from '../../../util/vs/base/common/types';

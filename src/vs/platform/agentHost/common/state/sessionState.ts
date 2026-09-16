@@ -901,7 +901,7 @@ export type ComponentToState = {
 
 // ---- Default chat URI helpers ----------------------------------------------
 
-/** Scheme used by chat channel URIs (`ahp-chat://...`). */
+/** Scheme used by chat channel URIs (`__ZYRAXKEEP__0_`). */
 export const AHP_CHAT_SCHEME = 'ahp-chat';
 
 /** Chat id of the default chat that every session owns. */
@@ -1115,14 +1115,14 @@ export function getDefaultChat(session: SessionState): ChatSummary | undefined {
 
 /**
  * ZYRAXON Code-side alias for the protocol's open `_meta` property bag on
- * {@link SessionState}. Keys SHOULD be namespaced (e.g. `git`, `vscode.foo`)
+ * {@link SessionState}. Keys SHOULD be namespaced (e.g. `git`, `zyraxoncode.foo`)
  * to avoid collisions; values MUST be JSON-serializable.
  */
 export type SessionMeta = Record<string, unknown>;
 
 /**
  * ZYRAXON Code-side alias for the protocol's open `_meta` property bag on
- * {@link SessionSummary}. Keys SHOULD be namespaced (e.g. `git`, `vscode.foo`)
+ * {@link SessionSummary}. Keys SHOULD be namespaced (e.g. `git`, `zyraxoncode.foo`)
  * to avoid collisions; values MUST be JSON-serializable.
  */
 export type SessionSummaryMeta = Record<string, unknown>;
@@ -1145,7 +1145,7 @@ export const SESSION_META_GIT_KEY = 'git';
  */
 export const SESSION_META_GITHUB_KEY = 'github';
 
-export const SESSION_META_PROMPT_CACHE_KEY = 'vscode.promptCache';
+export const SESSION_META_PROMPT_CACHE_KEY = 'zyraxoncode.promptCache';
 
 export const SESSION_META_MULTI_ROOT_KEY = 'multiRoot';
 

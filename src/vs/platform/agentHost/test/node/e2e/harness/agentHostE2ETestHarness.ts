@@ -819,7 +819,7 @@ export class AgentHostE2EServerLease {
 		private readonly _config: IAgentHostE2EProviderConfig,
 		startOptions: { readonly claudeSdkRoot?: string; readonly codexSdkRoot?: string; readonly target?: IAgentHostTarget } = {},
 	) {
-		const dataDir = mkdtempSync(join(tmpdir(), 'vscode-agent-host-e2e-'));
+		const dataDir = mkdtempSync(join(tmpdir(), 'zyraxoncode-agent-host-e2e-'));
 		this._dataDir = dataDir;
 		this._target = startOptions.target ?? defaultAgentHostTarget;
 		this._startOptions = {

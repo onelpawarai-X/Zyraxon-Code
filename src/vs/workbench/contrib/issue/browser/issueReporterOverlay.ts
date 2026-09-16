@@ -295,7 +295,7 @@ export class IssueReporterOverlay {
 	private createFloatingCaptureBar(): void {
 		const targetWindow = getWindow(this.container);
 		// Mount inside .monaco-workbench so ZYRAXON Code's color theme CSS vars
-		// (--vscode-debugToolBar-background, etc.) cascade and the bar matches the
+		// (--zyraxoncode-debugToolBar-background, etc.) cascade and the bar matches the
 		// active theme. body is outside that scope and the vars wouldn't resolve.
 		// eslint-disable-next-line no-restricted-syntax
 		const workbench = targetWindow.document.querySelector('.monaco-workbench') as HTMLElement | null;
@@ -533,9 +533,9 @@ export class IssueReporterOverlay {
 			const guidanceMd = new MarkdownString(localize(
 				{
 					key: 'reviewGuidanceLabelWizard',
-					comment: ['{Locked="https://github.com/microsoft/vscode/wiki/Submitting-Bugs-and-Suggestions"}']
+					comment: ['{Locked="__ZYRAXKEEP__0_"}']
 				},
-				'Before you report an issue here please [review the guidance we provide](https://github.com/microsoft/vscode/wiki/Submitting-Bugs-and-Suggestions). Please complete the form in English.'
+				'Before you report an issue here please [review the guidance we provide](__ZYRAXKEEP__1_). Please complete the form in English.'
 			), { isTrusted: true });
 			const rendered = this.markdownRendererService.render(guidanceMd, {
 				actionHandler: async (link: string) => {
@@ -606,7 +606,7 @@ export class IssueReporterOverlay {
 			} else if (this.data.isSessionsWindow) {
 				this.selectedIssueSource = IssueSource.AgentsWindow;
 			} else {
-				this.selectedIssueSource = IssueSource.VSCode;
+				this.selectedIssueSource = IssueSource.ZyraxonCode;
 			}
 			this.updateIssueSourceFlags();
 		}
@@ -754,7 +754,7 @@ export class IssueReporterOverlay {
 
 	private getAllSourceOptions(): { label: string; value: IssueSource }[] {
 		return [
-			{ label: product.nameLong || localize('vscode', "ZYRAXON Code"), value: IssueSource.VSCode },
+			{ label: product.nameLong || localize('zyraxoncode', "ZYRAXON Code"), value: IssueSource.ZyraxonCode },
 			{ label: localize('agentsWindow', "Agents Window"), value: IssueSource.AgentsWindow },
 			{ label: localize('extensionSource', "A ZYRAXON Code extension"), value: IssueSource.Extension },
 			{ label: localize('marketplace', "Extensions Marketplace"), value: IssueSource.Marketplace },
@@ -839,7 +839,7 @@ export class IssueReporterOverlay {
 	private updateIssueSourceFlags(): void {
 		const fileOnExtension = this.selectedIssueSource === IssueSource.Extension;
 		const fileOnMarketplace = this.selectedIssueSource === IssueSource.Marketplace;
-		const fileOnProduct = this.selectedIssueSource === IssueSource.VSCode || this.selectedIssueSource === IssueSource.AgentsWindow || this.selectedIssueSource === IssueSource.Unknown;
+		const fileOnProduct = this.selectedIssueSource === IssueSource.ZyraxonCode || this.selectedIssueSource === IssueSource.AgentsWindow || this.selectedIssueSource === IssueSource.Unknown;
 		const fileOnAgentsWindow = this.selectedIssueSource === IssueSource.AgentsWindow;
 		this.model.update({
 			issueSource: this.selectedIssueSource,
@@ -870,8 +870,8 @@ export class IssueReporterOverlay {
 			case IssueSource.AgentsWindow:
 				this.titleInput.setPlaceHolder(localize('agentsWindowPlaceholder', "E.g. Sessions list does not refresh after creating a new session"));
 				break;
-			case IssueSource.VSCode:
-				this.titleInput.setPlaceHolder(localize('vscodePlaceholder', "E.g. Workbench is missing problems panel"));
+			case IssueSource.ZyraxonCode:
+				this.titleInput.setPlaceHolder(localize('zyraxoncodePlaceholder', "E.g. Workbench is missing problems panel"));
 				break;
 			default:
 				this.titleInput.setPlaceHolder(localize('issueTitlePlaceholder', "Brief summary of the issue"));
@@ -948,7 +948,7 @@ export class IssueReporterOverlay {
 		// extension and the model so it shows up in the issue body. Doing this
 		// before the built-in early-return is important: extensions bundled with
 		// the dev build (Copilot, etc.) are flagged `isBuiltin`, which triggers
-		// the source switch to VSCode and returns — otherwise the preset data
+		// the source switch to ZyraxonCode and returns — otherwise the preset data
 		// would be silently lost for every built-in caller. We guard on
 		// `!this.includeExtensionData` (rather than `!extension.data`) because
 		// `issueService` pre-populates `extension.data` on every enabled
@@ -961,7 +961,7 @@ export class IssueReporterOverlay {
 		}
 
 		if (extension.isBuiltin && this.selectedIssueSource === IssueSource.Extension && !this.data.issueSource) {
-			this.setIssueSource(IssueSource.VSCode);
+			this.setIssueSource(IssueSource.ZyraxonCode);
 			return;
 		}
 
@@ -1061,8 +1061,8 @@ export class IssueReporterOverlay {
 
 	private getIssueSourceLabel(): string {
 		switch (this.selectedIssueSource) {
-			case IssueSource.VSCode:
-				return product.nameLong || localize('vscode', "ZYRAXON Code");
+			case IssueSource.ZyraxonCode:
+				return product.nameLong || localize('zyraxoncode', "ZYRAXON Code");
 			case IssueSource.AgentsWindow:
 				return localize('agentsWindow', "Agents Window");
 			case IssueSource.Extension:
@@ -1093,7 +1093,7 @@ export class IssueReporterOverlay {
 	}
 
 	private isGitHubUrl(url: string): boolean {
-		return /^https?:\/\/github\.com\//i.test(url);
+		return /^https?:\/\/github\.com\__ZYRAXKEEP__2_(url);
 	}
 
 	private parseGitHubUrl(url: string): { owner: string; repositoryName: string } | undefined {
@@ -1135,7 +1135,7 @@ export class IssueReporterOverlay {
 				const repo = marketplaceIssueUrl && this.parseGitHubUrl(marketplaceIssueUrl);
 				results = repo ? await this.searchGitHubIssues(`${repo.owner}/${repo.repositoryName}`, title) : [];
 			} else {
-				results = await this.searchVSCodeSimilarIssues(title, this.descriptionTextarea.value.trim());
+				results = await this.searchZyraxonCodeSimilarIssues(title, this.descriptionTextarea.value.trim());
 			}
 			if (request === this.similarIssuesRequest) {
 				this.renderSimilarIssues(results);
@@ -1149,13 +1149,13 @@ export class IssueReporterOverlay {
 
 	private async searchGitHubIssues(repo: string, title: string): Promise<ISimilarIssue[]> {
 		const query = `is:issue repo:${repo} ${title}`;
-		const response = await fetch(`https://api.github.com/search/issues?q=${encodeURIComponent(query)}`);
+		const response = await fetch(`__ZYRAXKEEP__3_{encodeURIComponent(query)}`);
 		const result = await response.json();
 		return Array.isArray(result?.items) ? result.items : [];
 	}
 
-	private async searchVSCodeDuplicates(title: string, body: string): Promise<ISimilarIssue[]> {
-		const response = await fetch('https://vscode-probot.westus.cloudapp.azure.com:7890/duplicate_candidates', {
+	private async searchZyraxonCodeDuplicates(title: string, body: string): Promise<ISimilarIssue[]> {
+		const response = await fetch('__ZYRAXKEEP__4_', {
 			method: 'POST',
 			body: JSON.stringify({ title, body }),
 			headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -1164,9 +1164,9 @@ export class IssueReporterOverlay {
 		return Array.isArray(result?.candidates) ? result.candidates : [];
 	}
 
-	private async searchVSCodeSimilarIssues(title: string, body: string): Promise<ISimilarIssue[]> {
+	private async searchZyraxonCodeSimilarIssues(title: string, body: string): Promise<ISimilarIssue[]> {
 		try {
-			const duplicates = await this.searchVSCodeDuplicates(title, body);
+			const duplicates = await this.searchZyraxonCodeDuplicates(title, body);
 			if (duplicates.length) {
 				return duplicates;
 			}
@@ -1220,7 +1220,7 @@ export class IssueReporterOverlay {
 	/** Update the guidance text above the description based on selected category */
 	private updateDescriptionGuidance(): void {
 		const markdownHint = localize('markdownSupported', "Markdown formatting is supported.");
-		const perfWikiUrl = 'https://github.com/microsoft/vscode/wiki/Performance-Issues';
+		const perfWikiUrl = '__ZYRAXKEEP__5_';
 
 		// Reset before updating
 		this.descriptionGuidanceDisposables.clear();
@@ -1566,7 +1566,7 @@ export class IssueReporterOverlay {
 				renderContent: (container) => {
 					const sysTable = append(container, $('table.review-diag-table'));
 					if (modelData.versionInfo) {
-						this.addDiagRow(sysTable, 'ZYRAXON Code', modelData.versionInfo.vscodeVersion);
+						this.addDiagRow(sysTable, 'ZYRAXON Code', modelData.versionInfo.zyraxoncodeVersion);
 						this.addDiagRow(sysTable, 'OS', modelData.versionInfo.os);
 					}
 					if (modelData.systemInfo) {
@@ -1950,10 +1950,10 @@ export class IssueReporterOverlay {
 		const cssVar = (name: string, fallback: string): string => containerStyles.getPropertyValue(name).trim() || fallback;
 		return {
 			...defaultButtonStyles,
-			buttonForeground: cssVar('--vscode-button-foreground', '#fff'),
-			buttonBackground: cssVar('--vscode-button-background', '#0e639c'),
-			buttonHoverBackground: cssVar('--vscode-button-hoverBackground', '#1177bb'),
-			buttonBorder: cssVar('--vscode-button-border', 'transparent'),
+			buttonForeground: cssVar('--zyraxoncode-button-foreground', '#fff'),
+			buttonBackground: cssVar('--zyraxoncode-button-background', '#0e639c'),
+			buttonHoverBackground: cssVar('--zyraxoncode-button-hoverBackground', '#1177bb'),
+			buttonBorder: cssVar('--zyraxoncode-button-border', 'transparent'),
 		};
 	}
 
@@ -2223,7 +2223,7 @@ export class IssueReporterOverlay {
 		const rows: [string, string | undefined][] = [
 			['Issue Category', this.getIssueTypeTitle(this.selectedIssueType ?? IssueType.Bug)],
 			['Target', this.getIssueSourceLabel()],
-			['ZYRAXON Code Version', modelData.versionInfo?.vscodeVersion ?? product.version],
+			['ZYRAXON Code Version', modelData.versionInfo?.zyraxoncodeVersion ?? product.version],
 			['OS Version', modelData.versionInfo?.os ?? modelData.systemInfo?.os],
 		];
 
@@ -2244,7 +2244,7 @@ export class IssueReporterOverlay {
 
 		if (modelData.versionInfo) {
 			rows.push(
-				['ZYRAXON Code Version', modelData.versionInfo.vscodeVersion],
+				['ZYRAXON Code Version', modelData.versionInfo.zyraxoncodeVersion],
 				['OS Version', modelData.versionInfo.os],
 			);
 		}

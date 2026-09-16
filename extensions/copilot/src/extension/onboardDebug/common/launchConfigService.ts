@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { URI } from '../../../util/vs/base/common/uri';
 
@@ -26,19 +26,19 @@ export interface ILaunchConfigService {
 	/**
 	 * Launches the debug configuration.
 	 */
-	launch(config: ILaunchJSON | vscode.DebugConfiguration): Promise<void>;
+	launch(config: ILaunchJSON | zyraxoncode.DebugConfiguration): Promise<void>;
 
 	/**
 	 * Resolves the configuration inputs in the given launch.json.
 	 */
-	resolveConfigurationInputs(launchJson: ILaunchJSON, defaults?: Map<string, string>, interactor?: ICommandInteractor): Promise<{ config: vscode.DebugConfiguration; inputs: Map<string, string> } | undefined>;
+	resolveConfigurationInputs(launchJson: ILaunchJSON, defaults?: Map<string, string>, interactor?: ICommandInteractor): Promise<{ config: zyraxoncode.DebugConfiguration; inputs: Map<string, string> } | undefined>;
 }
 
 export const ILaunchConfigService = createServiceIdentifier<ILaunchConfigService>('ILaunchConfigService');
 
 /** Describes the contents of launch.json */
 export interface ILaunchJSON {
-	configurations: vscode.DebugConfiguration[];
+	configurations: zyraxoncode.DebugConfiguration[];
 	inputs?: {
 		type: string;
 		id: string;
@@ -48,11 +48,11 @@ export interface ILaunchJSON {
 }
 
 export interface ITasksJSON {
-	tasks: vscode.TaskDefinition[];
+	tasks: zyraxoncode.TaskDefinition[];
 }
 
 export interface ICommandInteractor {
 	isGenerating(): void;
 	prompt(text: string, defaultValue?: string): Promise<string | undefined>;
-	ensureTask(workspaceFolder: URI | undefined, definition: vscode.TaskDefinition): Promise<boolean>;
+	ensureTask(workspaceFolder: URI | undefined, definition: zyraxoncode.TaskDefinition): Promise<boolean>;
 }

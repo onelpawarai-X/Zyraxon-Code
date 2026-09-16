@@ -5,7 +5,7 @@
 
 import assert from 'assert';
 import * as fs from 'fs';
-import type { ChatErrorDetails, LanguageModelToolInformation, MappedEditsResponseStream, TextDocument } from 'vscode';
+import type { ChatErrorDetails, LanguageModelToolInformation, MappedEditsResponseStream, TextDocument } from 'zyraxoncode';
 import { CodeBlocksMetadata } from '../../src/extension/codeBlocks/node/codeBlockProcessor';
 import { agentsToCommands, Intent } from '../../src/extension/common/constants';
 import '../../src/extension/intents/node/allIntents';
@@ -24,7 +24,7 @@ import { ChatRequestTurn, ChatResponseTurn } from '../../src/util/common/test/sh
 import { CancellationToken } from '../../src/util/vs/base/common/cancellation';
 import { DisposableStore } from '../../src/util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../src/util/vs/platform/instantiation/common/instantiation';
-import { ChatLocation, ChatRequest, ChatResponseAnchorPart, ChatResponseMarkdownPart, Uri } from '../../src/vscodeTypes';
+import { ChatLocation, ChatRequest, ChatResponseAnchorPart, ChatResponseMarkdownPart, Uri } from '../../src/zyraxoncodeTypes';
 import { SimulationWorkspaceExtHost } from '../base/extHostContext/simulationWorkspaceExtHost';
 import { ISimulationTestRuntime, SimulationTestFunction } from '../base/stest';
 import { INLINE_CHANGED_DOC_TAG, INLINE_INITIAL_DOC_TAG, IWorkspaceStateFile } from '../simulation/shared/sharedTypes';

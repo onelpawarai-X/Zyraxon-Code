@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { DocumentSelector } from '../configuration/documentSelector';
 import * as languageIds from '../configuration/languageIds';
 import { API } from '../tsServer/api';
@@ -24,7 +24,7 @@ type RenameResponse = {
 	readonly spans: readonly Proto.TextSpan[];
 };
 
-class TypeScriptRenameProvider implements vscode.RenameProvider {
+class TypeScriptRenameProvider implements zyraxoncode.RenameProvider {
 
 	public constructor(
 		private readonly language: LanguageDescription,
@@ -33,10 +33,10 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 	) { }
 
 	public async prepareRename(
-		document: vscode.TextDocument,
-		position: vscode.Position,
-		token: vscode.CancellationToken
-	): Promise<vscode.Range | undefined> {
+		document: zyraxoncode.TextDocument,
+		position: zyraxoncode.Position,
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.Range | undefined> {
 		const response = await this.execRename(document, position, token);
 		if (!response) {
 			return undefined;
@@ -46,7 +46,7 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 			case 'rename': {
 				const renameInfo = response.body.info;
 				if (!renameInfo.canRename) {
-					return Promise.reject<vscode.Range>(renameInfo.localizedErrorMessage);
+					return Promise.reject<zyraxoncode.Range>(renameInfo.localizedErrorMessage);
 				}
 				return typeConverters.Range.fromTextSpan(renameInfo.triggerSpan);
 			}
@@ -59,11 +59,11 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 	}
 
 	public async provideRenameEdits(
-		document: vscode.TextDocument,
-		position: vscode.Position,
+		document: zyraxoncode.TextDocument,
+		position: zyraxoncode.Position,
 		newName: string,
-		token: vscode.CancellationToken
-	): Promise<vscode.WorkspaceEdit | undefined> {
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.WorkspaceEdit | undefined> {
 		const file = this.client.toOpenTsFilePath(document);
 		if (!file) {
 			return undefined;
@@ -78,7 +78,7 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 			case 'rename': {
 				const renameInfo = response.body.info;
 				if (!renameInfo.canRename) {
-					return Promise.reject<vscode.WorkspaceEdit>(renameInfo.localizedErrorMessage);
+					return Promise.reject<zyraxoncode.WorkspaceEdit>(renameInfo.localizedErrorMessage);
 				}
 
 				if (renameInfo.fileToRename) {
@@ -86,7 +86,7 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 					if (edits) {
 						return edits;
 					} else {
-						return Promise.reject<vscode.WorkspaceEdit>(vscode.l10n.t("An error occurred while renaming file"));
+						return Promise.reject<zyraxoncode.WorkspaceEdit>(zyraxoncode.l10n.t("An error occurred while renaming file"));
 					}
 				}
 
@@ -102,9 +102,9 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 	}
 
 	public async execRename(
-		document: vscode.TextDocument,
-		position: vscode.Position,
-		token: vscode.CancellationToken
+		document: zyraxoncode.TextDocument,
+		position: zyraxoncode.Position,
+		token: zyraxoncode.CancellationToken
 	): Promise<RenameResponse | undefined> {
 		const file = this.client.toOpenTsFilePath(document);
 		if (!file) {
@@ -141,12 +141,12 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 		});
 	}
 
-	private looksLikePotentialJsxTagContext(document: vscode.TextDocument, position: vscode.Position): boolean {
+	private looksLikePotentialJsxTagContext(document: zyraxoncode.TextDocument, position: zyraxoncode.Position): boolean {
 		if (![languageIds.typescriptreact, languageIds.javascript, languageIds.javascriptreact].includes(document.languageId)) {
 			return false;
 		}
 
-		const prefix = document.getText(new vscode.Range(position.line, 0, position.line, position.character));
+		const prefix = document.getText(new zyraxoncode.Range(position.line, 0, position.line, position.character));
 		return /\<\/?\s*[\w\d_$.]*$/.test(prefix);
 	}
 
@@ -154,7 +154,7 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 		locations: ReadonlyArray<Proto.SpanGroup>,
 		newName: string
 	) {
-		const edit = new vscode.WorkspaceEdit();
+		const edit = new zyraxoncode.WorkspaceEdit();
 		for (const spanGroup of locations) {
 			const resource = this.client.toResource(spanGroup.file);
 			for (const textSpan of spanGroup.locs) {
@@ -169,8 +169,8 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 		fileToRename: string,
 		fullDisplayName: string,
 		newName: string,
-		token: vscode.CancellationToken,
-	): Promise<vscode.WorkspaceEdit | undefined> {
+		token: zyraxoncode.CancellationToken,
+	): Promise<zyraxoncode.WorkspaceEdit | undefined> {
 		// Make sure we preserve file extension if extension is unchanged or none provided
 		if (!path.extname(newName)) {
 			newName += path.extname(fileToRename);
@@ -193,7 +193,7 @@ class TypeScriptRenameProvider implements vscode.RenameProvider {
 		}
 
 		const edits = typeConverters.WorkspaceEdit.fromFileCodeEdits(this.client, response.body);
-		edits.renameFile(vscode.Uri.file(fileToRename), vscode.Uri.file(newFilePath));
+		edits.renameFile(zyraxoncode.Uri.file(fileToRename), zyraxoncode.Uri.file(newFilePath));
 		return edits;
 	}
 }
@@ -207,7 +207,7 @@ export function register(
 	return conditionalRegistration([
 		requireSomeCapability(client, ClientCapability.Semantic),
 	], () => {
-		return vscode.languages.registerRenameProvider(selector.semantic,
+		return zyraxoncode.languages.registerRenameProvider(selector.semantic,
 			new TypeScriptRenameProvider(language, client, fileConfigurationManager));
 	});
 }

@@ -5,10 +5,10 @@
 
 .accessible-view {
 	position: absolute;
-	background-color: var(--vscode-editorWidget-background);
-	color: var(--vscode-editorWidget-foreground);
-	box-shadow: var(--vscode-shadow-lg);
-	border: 2px solid var(--vscode-focusBorder);
+	background-color: var(--zyraxoncode-editorWidget-background);
+	color: var(--zyraxoncode-editorWidget-foreground);
+	box-shadow: var(--zyraxoncode-shadow-lg);
+	border: 2px solid var(--zyraxoncode-focusBorder);
 	border-radius: 6px;
 	margin-top: -1px;
 	z-index: 2550;

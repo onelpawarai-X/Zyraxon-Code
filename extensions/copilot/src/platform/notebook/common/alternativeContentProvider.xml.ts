@@ -2,18 +2,18 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { CancellationToken, NotebookCell, NotebookDocument, Uri } from 'vscode';
+import type { CancellationToken, NotebookCell, NotebookDocument, Uri } from 'zyraxoncode';
 import { getLanguage } from '../../../util/common/languages';
 import { isUri } from '../../../util/common/types';
 import { findLast } from '../../../util/vs/base/common/arraysFind';
-import { EndOfLine, NotebookCellKind, Position } from '../../../vscodeTypes';
+import { EndOfLine, NotebookCellKind, Position } from '../../../zyraxoncodeTypes';
 import { BaseAlternativeNotebookContentProvider } from './alternativeContentProvider';
 import { AlternativeNotebookDocument } from './alternativeNotebookDocument';
 import { EOL, getCellIdMap, getDefaultLanguage, LineOfCellText, LineOfText, summarize, SummaryCell } from './helpers';
 
-const StartDelimter = `<VSCode.Cell `;
-const StartEmptyCellDelimter = `<VSCode.Cell>`;
-const EndDelimter = `</VSCode.Cell>`;
+const StartDelimter = `<ZyraxonCode.Cell `;
+const StartEmptyCellDelimter = `<ZyraxonCode.Cell>`;
+const EndDelimter = `</ZyraxonCode.Cell>`;
 
 function generatePartialStartDelimiterWithId(id: string) {
 	return `${StartDelimter}id="${id}" `;

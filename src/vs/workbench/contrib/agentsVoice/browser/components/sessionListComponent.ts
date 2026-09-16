@@ -42,34 +42,34 @@ function hoverIcon(className: string, ariaLabel: string): HTMLElement {
 	el.role = 'button';
 	el.tabIndex = 0;
 	el.ariaLabel = ariaLabel;
-	el.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--vscode-descriptionForeground);cursor:pointer;-webkit-app-region:no-drag;padding:1px;`;
-	el.addEventListener('mouseenter', () => { el.style.color = 'var(--vscode-foreground)'; });
-	el.addEventListener('mouseleave', () => { el.style.color = 'var(--vscode-descriptionForeground)'; });
+	el.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--zyraxoncode-descriptionForeground);cursor:pointer;-webkit-app-region:no-drag;padding:1px;`;
+	el.addEventListener('mouseenter', () => { el.style.color = 'var(--zyraxoncode-foreground)'; });
+	el.addEventListener('mouseleave', () => { el.style.color = 'var(--zyraxoncode-descriptionForeground)'; });
 	addKeyboardActivation(el);
 	return el;
 }
 
 function createSessionRow(session: SessionRowData, props: SessionListProps): HTMLElement {
 	const isSelected = props.selectedTarget?.toString() === session.resource.toString();
-	const dotColor = session.needsInput ? 'var(--vscode-editorWarning-foreground)'
-		: session.isActive ? 'var(--vscode-charts-green)'
-			: 'var(--vscode-editorWhitespace-foreground)';
-	const effectiveDotColor = session.isSpeaking ? 'var(--vscode-agentsVoice-speakingForeground)' : dotColor;
+	const dotColor = session.needsInput ? 'var(--zyraxoncode-editorWarning-foreground)'
+		: session.isActive ? 'var(--zyraxoncode-charts-green)'
+			: 'var(--zyraxoncode-editorWhitespace-foreground)';
+	const effectiveDotColor = session.isSpeaking ? 'var(--zyraxoncode-agentsVoice-speakingForeground)' : dotColor;
 	const shouldPulse = session.isActive || session.isSpeaking;
 
-	const labelColor = session.isSpeaking ? 'var(--vscode-agentsVoice-speakingForeground)'
-		: session.isIdle ? 'var(--vscode-descriptionForeground)'
-			: 'var(--vscode-foreground)';
+	const labelColor = session.isSpeaking ? 'var(--zyraxoncode-agentsVoice-speakingForeground)'
+		: session.isIdle ? 'var(--zyraxoncode-descriptionForeground)'
+			: 'var(--zyraxoncode-foreground)';
 	const labelWeight = session.isSpeaking ? '500' : 'normal';
-	const rowBg = isSelected ? 'background:var(--vscode-list-activeSelectionBackground);border-radius:4px;' : '';
-	const rowLabelColor = isSelected ? 'var(--vscode-list-activeSelectionForeground)' : labelColor;
+	const rowBg = isSelected ? 'background:var(--zyraxoncode-list-activeSelectionBackground);border-radius:4px;' : '';
+	const rowLabelColor = isSelected ? 'var(--zyraxoncode-list-activeSelectionForeground)' : labelColor;
 
 	const row = dom.$('div');
 	row.role = 'option';
 	row.tabIndex = 0;
 	row.ariaLabel = session.label || 'Untitled session';
 	row.setAttribute('aria-selected', String(isSelected));
-	row.style.cssText = `display:flex;align-items:center;gap:6px;height:28px;padding:0 4px;border-bottom:1px solid var(--vscode-editorGroup-border);flex-shrink:0;cursor:pointer;${rowBg}`;
+	row.style.cssText = `display:flex;align-items:center;gap:6px;height:28px;padding:0 4px;border-bottom:1px solid var(--zyraxoncode-editorGroup-border);flex-shrink:0;cursor:pointer;${rowBg}`;
 
 	row.addEventListener('click', (e) => {
 		e.preventDefault();
@@ -130,13 +130,13 @@ function createSessionRow(session: SessionRowData, props: SessionListProps): HTM
 	stats.style.cssText = `display:flex;gap:4px;font-size:${FONT_SIZE.body};`;
 	if (session.insertions > 0) {
 		const ins = dom.$('span');
-		ins.style.color = 'var(--vscode-charts-green)';
+		ins.style.color = 'var(--zyraxoncode-charts-green)';
 		ins.textContent = `+${session.insertions}`;
 		stats.append(ins);
 	}
 	if (session.deletions > 0) {
 		const del = dom.$('span');
-		del.style.color = 'var(--vscode-editorError-foreground)';
+		del.style.color = 'var(--zyraxoncode-editorError-foreground)';
 		del.textContent = `-${session.deletions}`;
 		stats.append(del);
 	}
@@ -147,8 +147,8 @@ function createSessionRow(session: SessionRowData, props: SessionListProps): HTM
 
 	if (!session.isIdle) {
 		const stopBtn = hoverIcon('codicon-debug-stop', localize('agentsVoice.stopSessionAction', "Stop session"));
-		stopBtn.addEventListener('mouseenter', () => { stopBtn.style.color = 'var(--vscode-editorError-foreground)'; });
-		stopBtn.addEventListener('mouseleave', () => { stopBtn.style.color = 'var(--vscode-descriptionForeground)'; });
+		stopBtn.addEventListener('mouseenter', () => { stopBtn.style.color = 'var(--zyraxoncode-editorError-foreground)'; });
+		stopBtn.addEventListener('mouseleave', () => { stopBtn.style.color = 'var(--zyraxoncode-descriptionForeground)'; });
 		stopBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); props.onStopSession(session.resource); });
 		actions.append(stopBtn);
 	}
@@ -163,40 +163,40 @@ function createSessionRow(session: SessionRowData, props: SessionListProps): HTM
 	if (session.toolConfirmation) {
 		const tc = session.toolConfirmation;
 		const confRow = dom.$('div');
-		confRow.style.cssText = 'display:flex;flex-direction:column;gap:3px;padding:2px 2px 6px 15px;border-bottom:1px solid var(--vscode-panel-border);';
+		confRow.style.cssText = 'display:flex;flex-direction:column;gap:3px;padding:2px 2px 6px 15px;border-bottom:1px solid var(--zyraxoncode-panel-border);';
 
 		const confDesc = dom.$('span');
-		confDesc.style.cssText = `font-size:${FONT_SIZE.body};color:var(--vscode-editorWarning-foreground);`;
+		confDesc.style.cssText = `font-size:${FONT_SIZE.body};color:var(--zyraxoncode-editorWarning-foreground);`;
 		confDesc.textContent = tc.description;
 
 		const confBtns = dom.$('div');
 		confBtns.style.cssText = 'display:flex;gap:6px;';
 
-		const btnStyle = `-webkit-app-region:no-drag;border:none;color:var(--vscode-button-foreground);font-size:${FONT_SIZE.body};padding:2px 8px;border-radius:3px;cursor:pointer;`;
+		const btnStyle = `-webkit-app-region:no-drag;border:none;color:var(--zyraxoncode-button-foreground);font-size:${FONT_SIZE.body};padding:2px 8px;border-radius:3px;cursor:pointer;`;
 
 		if (tc.type === 'approval') {
 			const approveBtn = dom.$('button');
-			approveBtn.style.cssText = `${btnStyle}background:var(--vscode-charts-green);`;
+			approveBtn.style.cssText = `${btnStyle}background:var(--zyraxoncode-charts-green);`;
 			approveBtn.textContent = localize('agentsVoice.approve', "Approve");
 			approveBtn.addEventListener('click', () => tc.approve());
 
 			const denyBtn = dom.$('button');
-			denyBtn.style.cssText = `${btnStyle}background:var(--vscode-button-secondaryBackground);color:var(--vscode-foreground);`;
+			denyBtn.style.cssText = `${btnStyle}background:var(--zyraxoncode-button-secondaryBackground);color:var(--zyraxoncode-foreground);`;
 			denyBtn.textContent = localize('agentsVoice.deny', "Deny");
 			denyBtn.addEventListener('click', () => tc.deny());
 
 			const stopBtn = dom.$('button');
-			stopBtn.style.cssText = `${btnStyle}background:var(--vscode-button-secondaryBackground);color:var(--vscode-foreground);`;
+			stopBtn.style.cssText = `${btnStyle}background:var(--zyraxoncode-button-secondaryBackground);color:var(--zyraxoncode-foreground);`;
 			stopBtn.textContent = localize('agentsVoice.stop', "Stop");
 			stopBtn.addEventListener('click', () => props.onCancelSession(session.resource));
 
 			confBtns.append(approveBtn, denyBtn, stopBtn);
 		} else {
-			const openInVSCode = dom.$('button');
-			openInVSCode.style.cssText = `${btnStyle}background:var(--vscode-button-background);`;
-			openInVSCode.textContent = localize('agentsVoice.openInVSCode', "Open in ZYRAXON Code");
-			openInVSCode.addEventListener('click', () => props.onOpenSession(session.resource));
-			confBtns.append(openInVSCode);
+			const openInZyraxonCode = dom.$('button');
+			openInZyraxonCode.style.cssText = `${btnStyle}background:var(--zyraxoncode-button-background);`;
+			openInZyraxonCode.textContent = localize('agentsVoice.openInZyraxonCode', "Open in ZYRAXON Code");
+			openInZyraxonCode.addEventListener('click', () => props.onOpenSession(session.resource));
+			confBtns.append(openInZyraxonCode);
 		}
 
 		confRow.append(confDesc, confBtns);
@@ -219,8 +219,8 @@ export function createSessionList(): SessionListComponent {
 	style.textContent = `
 		@keyframes agents-voice-pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 		.voice-session-list::-webkit-scrollbar{width:6px;background:transparent;}
-		.voice-session-list::-webkit-scrollbar-thumb{background:var(--vscode-scrollbarSlider-activeBackground);border-radius:3px;}
-		.voice-session-list::-webkit-scrollbar-thumb:hover{background:var(--vscode-scrollbarSlider-activeBackground);}
+		.voice-session-list::-webkit-scrollbar-thumb{background:var(--zyraxoncode-scrollbarSlider-activeBackground);border-radius:3px;}
+		.voice-session-list::-webkit-scrollbar-thumb:hover{background:var(--zyraxoncode-scrollbarSlider-activeBackground);}
 		.voice-session-list > div:last-of-type{border-bottom:none !important;}
 	`;
 
@@ -234,10 +234,10 @@ export function createSessionList(): SessionListComponent {
 
 			// Header row
 			const headerRow = dom.$('div');
-			headerRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:2px 2px 4px;border-bottom:1px solid var(--vscode-editorGroup-border);';
+			headerRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:2px 2px 4px;border-bottom:1px solid var(--zyraxoncode-editorGroup-border);';
 
 			const headerLabel = dom.$('span');
-			headerLabel.style.cssText = `font-size:${FONT_SIZE.micro};color:var(--vscode-disabledForeground);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;`;
+			headerLabel.style.cssText = `font-size:${FONT_SIZE.micro};color:var(--zyraxoncode-disabledForeground);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;`;
 			headerLabel.textContent = props.selectedTarget ? localize('agentsVoice.sendTo', "Send to") : localize('agentsVoice.sendToActive', "Send to (active)");
 
 			const addBtn = hoverIcon('codicon-add', localize('agentsVoice.newSession', "New session"));
@@ -252,7 +252,7 @@ export function createSessionList(): SessionListComponent {
 				const empty = dom.$('div');
 				empty.style.cssText = 'display:flex;align-items:center;justify-content:center;height:60px;';
 				const emptyText = dom.$('span');
-				emptyText.style.cssText = `font-size:${FONT_SIZE.body};color:var(--vscode-foreground);`;
+				emptyText.style.cssText = `font-size:${FONT_SIZE.body};color:var(--zyraxoncode-foreground);`;
 				emptyText.textContent = localize('agentsVoice.noActiveSessions', "No active sessions");
 				empty.append(emptyText);
 				container.append(empty);
@@ -261,7 +261,7 @@ export function createSessionList(): SessionListComponent {
 					const groupHeader = dom.$('div');
 					groupHeader.style.cssText = 'padding:4px 2px 2px;';
 					const groupLabel = dom.$('span');
-					groupLabel.style.cssText = `font-size:${FONT_SIZE.micro};color:var(--vscode-disabledForeground);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;`;
+					groupLabel.style.cssText = `font-size:${FONT_SIZE.micro};color:var(--zyraxoncode-disabledForeground);text-transform:uppercase;letter-spacing:0.5px;font-weight:500;`;
 					groupLabel.textContent = group.label;
 					groupHeader.append(groupLabel);
 					container.append(groupHeader);

@@ -204,7 +204,7 @@ export class DefaultAccountService extends Disposable implements IDefaultAccount
 			return this.defaultAccountProvider.resolveGitHubUrl(path);
 		}
 
-		return `https://github.com/${path}`;
+		return `__ZYRAXKEEP__0_{path}`;
 	}
 
 	private setDefaultAccount(account: IDefaultAccount | null): void {
@@ -355,8 +355,8 @@ class DefaultAccountProvider extends Disposable implements IDefaultAccountProvid
 	}
 
 	private async init(): Promise<void> {
-		// Skip initialization for classic web-no-remote (vscode.dev editor), but
-		// still initialize for the agents web workbench (vscode.dev/agents) where
+		// Skip initialization for classic web-no-remote (zyraxoncode.dev editor), but
+		// still initialize for the agents web workbench (zyraxoncode.dev/agents) where
 		// account state drives the title bar and the welcome walkthrough.
 		if (isWeb && !this.environmentService.remoteAuthority && !this.environmentService.isSessionsWindow) {
 			this.logService.debug('[DefaultAccount] Running in web without remote, skipping initialization');
@@ -1129,7 +1129,7 @@ class DefaultAccountProvider extends Disposable implements IDefaultAccountProvid
 			}
 		}
 
-		return `https://github.com/${path}`;
+		return `__ZYRAXKEEP__1_{path}`;
 	}
 
 	private getEnterpriseUrl(): URL | undefined {

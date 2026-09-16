@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { AsyncIterableProducer, AsyncIterableSource, RunOnceScheduler } from '../../../base/common/async.js';
 import { VSBuffer } from '../../../base/common/buffer.js';
 import { CancellationToken, CancellationTokenSource } from '../../../base/common/cancellation.js';
@@ -35,15 +35,15 @@ export const IExtHostLanguageModels = createDecorator<IExtHostLanguageModels>('I
 
 type LanguageModelProviderData = {
 	readonly extension: IExtensionDescription;
-	readonly provider: vscode.LanguageModelChatProvider;
+	readonly provider: zyraxoncode.LanguageModelChatProvider;
 };
 
-type LMResponsePart = vscode.LanguageModelTextPart | vscode.LanguageModelToolCallPart | vscode.LanguageModelDataPart | vscode.LanguageModelThinkingPart;
+type LMResponsePart = zyraxoncode.LanguageModelTextPart | zyraxoncode.LanguageModelToolCallPart | zyraxoncode.LanguageModelDataPart | zyraxoncode.LanguageModelThinkingPart;
 
 
 class LanguageModelResponse {
 
-	readonly apiObject: vscode.LanguageModelChatResponse;
+	readonly apiObject: zyraxoncode.LanguageModelChatResponse;
 
 	private readonly _defaultStream = new AsyncIterableSource<LMResponsePart>();
 	private _isDone: boolean = false;
@@ -123,12 +123,12 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 
 	private readonly _languageModelProviders = new Map<string, LanguageModelProviderData>();
 	// TODO @lramos15 - Remove the need for both info and metadata as it's a lot of redundancy. Should just need one
-	private readonly _localModels = new Map<string, { group: string | undefined; metadata: ILanguageModelChatMetadata; info: vscode.LanguageModelChatInformation }>();
+	private readonly _localModels = new Map<string, { group: string | undefined; metadata: ILanguageModelChatMetadata; info: zyraxoncode.LanguageModelChatInformation }>();
 	private readonly _modelAccessList = new ExtensionIdentifierMap<ExtensionIdentifierSet>();
 	private readonly _pendingRequest = new Map<number, { languageModelId: string; res: LanguageModelResponse }>();
 	private readonly _pendingCancelCTS = new DisposableMap<number, CancellationTokenSource>();
-	private readonly _ignoredFileProviders = new Map<number, vscode.LanguageModelIgnoredFileProvider>();
-	private _languageModelProxyProvider: vscode.LanguageModelProxyProvider | undefined;
+	private readonly _ignoredFileProviders = new Map<number, zyraxoncode.LanguageModelIgnoredFileProvider>();
+	private _languageModelProxyProvider: zyraxoncode.LanguageModelProxyProvider | undefined;
 
 	constructor(
 		@IExtHostRpcService extHostRpc: IExtHostRpcService,
@@ -146,7 +146,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		this._pendingCancelCTS.dispose();
 	}
 
-	registerLanguageModelChatProvider(extension: IExtensionDescription, vendor: string, provider: vscode.LanguageModelChatProvider): IDisposable {
+	registerLanguageModelChatProvider(extension: IExtensionDescription, vendor: string, provider: zyraxoncode.LanguageModelChatProvider): IDisposable {
 
 		this._languageModelProviders.set(vendor, { extension: extension, provider });
 		this._proxy.$registerLanguageModelProvider(vendor);
@@ -184,7 +184,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		if (!data) {
 			return [];
 		}
-		const modelInformation: vscode.LanguageModelChatInformation[] = await data.provider.provideLanguageModelChatInformation({ silent: options.silent, configuration: options.configuration }, token) ?? [];
+		const modelInformation: zyraxoncode.LanguageModelChatInformation[] = await data.provider.provideLanguageModelChatInformation({ silent: options.silent, configuration: options.configuration }, token) ?? [];
 		const modelMetadataAndIdentifier: ILanguageModelChatMetadataAndIdentifier[] = modelInformation.map((m): ILanguageModelChatMetadataAndIdentifier => {
 			let auth;
 			if (m.requiresAuthorization && isProposedApiEnabled(data.extension, 'chatProvider')) {
@@ -312,7 +312,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 			}
 		};
 
-		const progress = new Progress<vscode.LanguageModelTextPart | vscode.LanguageModelToolCallPart | vscode.LanguageModelDataPart | vscode.LanguageModelThinkingPart>(async fragment => {
+		const progress = new Progress<zyraxoncode.LanguageModelTextPart | zyraxoncode.LanguageModelToolCallPart | zyraxoncode.LanguageModelDataPart | zyraxoncode.LanguageModelThinkingPart>(async fragment => {
 			if (providerToken.isCancellationRequested) {
 				this._logService.warn(`[CHAT](${data.extension.identifier.value}) CANNOT send progress because the REQUEST IS CANCELLED`);
 				return;
@@ -387,7 +387,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 
 	//#region --- making request
 
-	async getDefaultLanguageModel(extension: IExtensionDescription, forceResolveModels?: boolean): Promise<vscode.LanguageModelChat | undefined> {
+	async getDefaultLanguageModel(extension: IExtensionDescription, forceResolveModels?: boolean): Promise<zyraxoncode.LanguageModelChat | undefined> {
 		let defaultModelId: string | undefined;
 
 		if (forceResolveModels) {
@@ -407,7 +407,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		return this.getLanguageModelByIdentifier(extension, defaultModelId);
 	}
 
-	async getLanguageModelByIdentifier(extension: IExtensionDescription, modelId: string | undefined): Promise<vscode.LanguageModelChat | undefined> {
+	async getLanguageModelByIdentifier(extension: IExtensionDescription, modelId: string | undefined): Promise<zyraxoncode.LanguageModelChat | undefined> {
 		if (!modelId) {
 			return undefined;
 		}
@@ -431,7 +431,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		return this._createLanguageModelChatApi(extension, modelId);
 	}
 
-	private async _createLanguageModelChatApi(extension: IExtensionDescription, modelId: string): Promise<vscode.LanguageModelChat | undefined> {
+	private async _createLanguageModelChatApi(extension: IExtensionDescription, modelId: string): Promise<zyraxoncode.LanguageModelChat | undefined> {
 		const model = this._localModels.get(modelId);
 		if (!model) {
 			return undefined;
@@ -443,7 +443,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		}
 
 		const that = this;
-		const apiObject: vscode.LanguageModelChat = {
+		const apiObject: zyraxoncode.LanguageModelChat = {
 			id: model.info.id,
 			vendor: model.metadata.vendor,
 			family: model.info.family,
@@ -484,17 +484,17 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		return apiObject;
 	}
 
-	async selectLanguageModels(extension: IExtensionDescription, selector: vscode.LanguageModelChatSelector) {
+	async selectLanguageModels(extension: IExtensionDescription, selector: zyraxoncode.LanguageModelChatSelector) {
 
 		// this triggers extension activation
 		const models = await this._proxy.$selectChatModels({ ...selector, extension: extension.identifier });
 
 		// Skip the warn/retry path in `getLanguageModelByIdentifier`: identifiers are fresh, so a missing local entry means the provider lives in another ext host and re-resolving will not help.
 		const modelResults = await Promise.all(models.map(identifier => this._createLanguageModelChatApi(extension, identifier)));
-		return modelResults.filter((m): m is vscode.LanguageModelChat => !!m);
+		return modelResults.filter((m): m is zyraxoncode.LanguageModelChat => !!m);
 	}
 
-	private async _sendChatRequest(extension: IExtensionDescription, languageModelId: string, messages: vscode.LanguageModelChatMessage2[], options: vscode.LanguageModelChatRequestOptions, token: CancellationToken) {
+	private async _sendChatRequest(extension: IExtensionDescription, languageModelId: string, messages: zyraxoncode.LanguageModelChatMessage2[], options: zyraxoncode.LanguageModelChatRequestOptions, token: CancellationToken) {
 
 		const internalMessages: IChatMessage[] = this._convertMessages(extension, messages);
 
@@ -537,7 +537,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		return res.apiObject;
 	}
 
-	private _convertMessages(extension: IExtensionDescription, messages: vscode.LanguageModelChatMessage2[]) {
+	private _convertMessages(extension: IExtensionDescription, messages: zyraxoncode.LanguageModelChatMessage2[]) {
 		const internalMessages: IChatMessage[] = [];
 		for (const message of messages) {
 			if (message.role as number === extHostTypes.LanguageModelChatMessageRole.System) {
@@ -627,7 +627,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		}
 	}
 
-	private async _computeTokenLength(modelId: string, value: string | vscode.LanguageModelChatMessage2, token: vscode.CancellationToken): Promise<number> {
+	private async _computeTokenLength(modelId: string, value: string | zyraxoncode.LanguageModelChatMessage2, token: zyraxoncode.CancellationToken): Promise<number> {
 
 		const data = this._localModels.get(modelId);
 		if (!data) {
@@ -658,7 +658,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 
 	private readonly _languageAccessInformationExtensions = new Set<Readonly<IExtensionDescription>>();
 
-	createLanguageModelAccessInformation(from: Readonly<IExtensionDescription>): vscode.LanguageModelAccessInformation {
+	createLanguageModelAccessInformation(from: Readonly<IExtensionDescription>): zyraxoncode.LanguageModelAccessInformation {
 
 		this._languageAccessInformationExtensions.add(from);
 
@@ -670,7 +670,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 			get onDidChange() {
 				return Event.any(_onDidChangeAccess, _onDidAddRemove);
 			},
-			canSendRequest(chat: vscode.LanguageModelChat): boolean | undefined {
+			canSendRequest(chat: zyraxoncode.LanguageModelChat): boolean | undefined {
 				return true;
 				// TODO @lramos15 - Fix
 
@@ -700,7 +700,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		};
 	}
 
-	fileIsIgnored(extension: IExtensionDescription, uri: vscode.Uri, token: vscode.CancellationToken = CancellationToken.None): Promise<boolean> {
+	fileIsIgnored(extension: IExtensionDescription, uri: zyraxoncode.Uri, token: zyraxoncode.CancellationToken = CancellationToken.None): Promise<boolean> {
 		checkProposedApiEnabled(extension, 'chatParticipantAdditions');
 
 		return this._proxy.$fileIsIgnored(uri, token);
@@ -710,7 +710,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		return !!this._languageModelProxyProvider;
 	}
 
-	async getModelProxy(extension: IExtensionDescription): Promise<vscode.LanguageModelProxy> {
+	async getModelProxy(extension: IExtensionDescription): Promise<zyraxoncode.LanguageModelProxy> {
 		checkProposedApiEnabled(extension, 'languageModelProxy');
 
 		if (!this._languageModelProxyProvider) {
@@ -741,7 +741,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		return (await provider.provideFileIgnored(URI.revive(uri), token)) ?? false;
 	}
 
-	registerIgnoredFileProvider(extension: IExtensionDescription, provider: vscode.LanguageModelIgnoredFileProvider): vscode.Disposable {
+	registerIgnoredFileProvider(extension: IExtensionDescription, provider: zyraxoncode.LanguageModelIgnoredFileProvider): zyraxoncode.Disposable {
 		checkProposedApiEnabled(extension, 'chatParticipantPrivate');
 
 		const handle = ExtHostLanguageModels._idPool++;
@@ -753,7 +753,7 @@ export class ExtHostLanguageModels implements ExtHostLanguageModelsShape {
 		});
 	}
 
-	registerLanguageModelProxyProvider(extension: IExtensionDescription, provider: vscode.LanguageModelProxyProvider): vscode.Disposable {
+	registerLanguageModelProxyProvider(extension: IExtensionDescription, provider: zyraxoncode.LanguageModelProxyProvider): zyraxoncode.Disposable {
 		checkProposedApiEnabled(extension, 'chatParticipantPrivate');
 
 		this._languageModelProxyProvider = provider;

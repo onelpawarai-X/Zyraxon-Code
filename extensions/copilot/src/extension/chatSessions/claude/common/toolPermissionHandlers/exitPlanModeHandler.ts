@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { ILogService } from '../../../../../platform/log/common/logService';
 import { CancellationToken } from '../../../../../util/vs/base/common/cancellation';
-import { LanguageModelTextPart } from '../../../../../vscodeTypes';
+import { LanguageModelTextPart } from '../../../../../zyraxoncodeTypes';
 import { ToolName } from '../../../../tools/common/toolNames';
 import { IToolsService } from '../../../../tools/common/toolsService';
 import { IClaudePlanFileTracker } from '../claudePlanFileTracker';
@@ -23,7 +23,7 @@ interface IReviewPlanAction {
 	description?: string;
 }
 
-/** Input passed to the `vscode_reviewPlan` core tool. Mirrors the
+/** Input passed to the `zyraxoncode_reviewPlan` core tool. Mirrors the
  * subset of `IChatPlanReview` the tool accepts. */
 interface IReviewPlanInput {
 	title: string;
@@ -34,7 +34,7 @@ interface IReviewPlanInput {
 }
 
 /**
- * Shape returned by the `vscode_reviewPlan` core tool. Mirrors
+ * Shape returned by the `zyraxoncode_reviewPlan` core tool. Mirrors
  * `IChatPlanReviewResult` from the workbench side.
  */
 interface IReviewPlanResult {

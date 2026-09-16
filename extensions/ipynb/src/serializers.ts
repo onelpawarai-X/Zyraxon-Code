@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type * as nbformat from '@jupyterlab/nbformat';
-import type { NotebookCell, NotebookCellData, NotebookCellOutput, NotebookData, NotebookDocument } from 'vscode';
+import type { NotebookCell, NotebookCellData, NotebookCellOutput, NotebookData, NotebookDocument } from 'zyraxoncode';
 import { CellOutputMetadata, hasKey, type CellMetadata } from './common';
 import { textMimeTypes, NotebookCellKindMarkup, CellOutputMimeTypes, defaultNotebookFormat } from './constants';
 
@@ -29,7 +29,7 @@ export function createJupyterCellFromNotebookCell(
 /**
  * Sort the JSON to minimize unnecessary SCM changes.
  * Jupyter notbeooks/labs sorts the JSON keys in alphabetical order.
- * https://github.com/microsoft/vscode-python/issues/13155
+ * __ZYRAXKEEP__0_
  */
 export function sortObjectPropertiesRecursively(obj: any): any {
 	if (Array.isArray(obj)) {
@@ -71,16 +71,16 @@ export function getCellMetadata(options: { cell: NotebookCell | NotebookCellData
 	}
 }
 
-export function getVSCodeCellLanguageId(metadata: CellMetadata): string | undefined {
-	return metadata.metadata?.vscode?.languageId;
+export function getZyraxonCodeCellLanguageId(metadata: CellMetadata): string | undefined {
+	return metadata.metadata?.zyraxoncode?.languageId;
 }
-export function setVSCodeCellLanguageId(metadata: CellMetadata, languageId: string) {
+export function setZyraxonCodeCellLanguageId(metadata: CellMetadata, languageId: string) {
 	metadata.metadata = metadata.metadata || {};
-	metadata.metadata.vscode = { languageId };
+	metadata.metadata.zyraxoncode = { languageId };
 }
-export function removeVSCodeCellLanguageId(metadata: CellMetadata) {
-	if (metadata.metadata?.vscode) {
-		delete metadata.metadata.vscode;
+export function removeZyraxonCodeCellLanguageId(metadata: CellMetadata) {
+	if (metadata.metadata?.zyraxoncode) {
+		delete metadata.metadata.zyraxoncode;
 	}
 }
 
@@ -88,10 +88,10 @@ function createCodeCellFromNotebookCell(cell: NotebookCellData, preferredLanguag
 	const cellMetadata: CellMetadata = JSON.parse(JSON.stringify(getCellMetadata({ cell })));
 	cellMetadata.metadata = cellMetadata.metadata || {}; // This cannot be empty.
 	if (cell.languageId !== preferredLanguage) {
-		setVSCodeCellLanguageId(cellMetadata, cell.languageId);
+		setZyraxonCodeCellLanguageId(cellMetadata, cell.languageId);
 	} else {
-		// cell current language is the same as the preferred cell language in the document, flush the vscode custom language id metadata
-		removeVSCodeCellLanguageId(cellMetadata);
+		// cell current language is the same as the preferred cell language in the document, flush the zyraxoncode custom language id metadata
+		removeZyraxonCodeCellLanguageId(cellMetadata);
 	}
 
 	const codeCell: nbformat.ICodeCell = {

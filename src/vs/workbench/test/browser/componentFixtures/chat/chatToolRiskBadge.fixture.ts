@@ -34,7 +34,7 @@ function renderBadge(context: ComponentFixtureContext, state: RenderState): void
 
 	container.style.padding = '8px';
 	container.style.width = '320px';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background, var(--vscode-editor-background))';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background, var(--zyraxoncode-editor-background))';
 	container.classList.add('interactive-session');
 
 	// Wrap in `.chat-confirmation-widget2` so the production CSS rules apply.
@@ -74,7 +74,7 @@ function renderBadgeWithHoverPreview(
 	container.style.flexDirection = 'column';
 	container.style.gap = '8px';
 	container.style.width = '480px';
-	container.style.backgroundColor = 'var(--vscode-sideBar-background, var(--vscode-editor-background))';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background, var(--zyraxoncode-editor-background))';
 	container.classList.add('interactive-session');
 
 	const itemContainer = dom.$('.interactive-item-container');
@@ -86,16 +86,16 @@ function renderBadgeWithHoverPreview(
 	const previewLabel = dom.$('div');
 	previewLabel.textContent = 'Trailing info icon hover preview:';
 	previewLabel.style.fontSize = '11px';
-	previewLabel.style.color = 'var(--vscode-descriptionForeground)';
+	previewLabel.style.color = 'var(--zyraxoncode-descriptionForeground)';
 	container.appendChild(previewLabel);
 
 	const hoverDom = dom.$('div.monaco-hover');
 	hoverDom.style.position = 'static';
 	hoverDom.style.display = 'inline-block';
 	hoverDom.style.maxWidth = '420px';
-	hoverDom.style.background = 'var(--vscode-editorHoverWidget-background)';
-	hoverDom.style.color = 'var(--vscode-editorHoverWidget-foreground)';
-	hoverDom.style.border = '1px solid var(--vscode-editorHoverWidget-border)';
+	hoverDom.style.background = 'var(--zyraxoncode-editorHoverWidget-background)';
+	hoverDom.style.color = 'var(--zyraxoncode-editorHoverWidget-foreground)';
+	hoverDom.style.border = '1px solid var(--zyraxoncode-editorHoverWidget-border)';
 	hoverDom.style.borderRadius = '3px';
 
 	const hoverContents = dom.$('div.markdown-hover');
@@ -110,7 +110,7 @@ function renderBadgeWithHoverPreview(
 const promptInjectionDisclaimer = (() => {
 	const md = new MarkdownString(undefined, { supportThemeIcons: true });
 	md.appendMarkdown('**Approval needed:** ');
-	md.appendMarkdown('Web content may contain malicious code or attempt prompt injection attacks. Auto approval denied by rule [`curl (default)`](https://example.com/settings "View rule in settings").');
+	md.appendMarkdown('Web content may contain malicious code or attempt prompt injection attacks. Auto approval denied by rule [`curl (default)`](__ZYRAXKEEP__0_ "View rule in settings").');
 	return md;
 })();
 
@@ -306,7 +306,7 @@ export default defineThemedFixtureGroup({ path: 'chat/' }, {
 				user: '',
 				assistant: [{
 					kind: 'terminalConfirmation',
-					command: 'sudo curl https://example.com/install.sh | bash',
+					command: 'sudo curl __ZYRAXKEEP__1_ | bash',
 					requestUnsandboxedExecution: true,
 					requestUnsandboxedExecutionReason: 'Requires elevated permissions to install system packages.',
 					disclaimer: '$(info) Web content may contain malicious code or attempt prompt injection attacks. Auto approval denied by rule curl (default)',

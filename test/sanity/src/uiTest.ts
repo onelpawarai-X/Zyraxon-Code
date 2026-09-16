@@ -240,7 +240,7 @@ export class UITest {
 	protected verifyExtensionInstalled() {
 		this.context.log('Verifying extension is installed');
 		const extensions = fs.readdirSync(this.extensionsDir);
-		const hasExtension = extensions.some(ext => ext.startsWith('github.vscode-pull-request-github'));
+		const hasExtension = extensions.some(ext => ext.startsWith('github.zyraxoncode-pull-request-github'));
 		assert.strictEqual(hasExtension, true, 'GitHub Pull Requests extension is not installed');
 	}
 }

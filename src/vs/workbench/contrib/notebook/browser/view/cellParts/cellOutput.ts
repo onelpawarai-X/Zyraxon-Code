@@ -204,7 +204,7 @@ class CellOutputElement extends Disposable {
 		const selectedPresentation = mimeTypes[pick];
 		let renderer = this.notebookService.getRendererInfo(selectedPresentation.rendererId);
 		if (!renderer && selectedPresentation.mimeType.indexOf('text/') > -1) {
-			renderer = this.notebookService.getRendererInfo('vscode.builtin-renderer');
+			renderer = this.notebookService.getRendererInfo('zyraxoncode.builtin-renderer');
 		}
 
 		const innerContainer = this._generateInnerOutputContainer(previousSibling, selectedPresentation);

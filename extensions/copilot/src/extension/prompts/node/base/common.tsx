@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement } from '@vscode/prompt-tsx';
+import { PromptElement } from '@zyraxoncode/prompt-tsx';
 
 /**
  * @deprecated Workaround for a prompt-tsx issue which has since been fixed
- * See https://github.com/microsoft/vscode-prompt-tsx/issues/90 and https://github.com/microsoft/vscode-prompt-tsx/pull/94
+ * See __ZYRAXKEEP__0_ and __ZYRAXKEEP__1_
  */
 export class CompositeElement extends PromptElement {
 	render() {

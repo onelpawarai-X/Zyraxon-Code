@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { PromptElement, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { ILanguageDiagnosticsService } from '../../../../platform/languages/common/languageDiagnosticsService';
 import { findDiagnosticForSelectionAndPrompt } from '../../../context/node/resolvers/fixSelection';

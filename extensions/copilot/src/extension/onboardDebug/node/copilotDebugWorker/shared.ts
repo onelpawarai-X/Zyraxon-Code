@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { DebugConfiguration } from 'vscode';
+import type { DebugConfiguration } from 'zyraxoncode';
 import { URI } from '../../../../util/vs/base/common/uri';
 
 export const enum StartResultKind {

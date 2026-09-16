@@ -5,7 +5,7 @@
 
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { FileType } from '../../../platform/filesystem/common/fileTypes';
-import { Uri } from '../../../vscodeTypes';
+import { Uri } from '../../../zyraxoncodeTypes';
 
 export interface IStatCache {
 	stat(uri: Uri): Promise<{ type: FileType } | undefined>;

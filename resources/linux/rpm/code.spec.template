@@ -4,21 +4,21 @@ Release:  @@RELEASE@@.el8
 Summary:  Code editing. Redefined.
 Group:    Development/Tools
 Vendor:   Zyraxon Corporation
-Packager: ZYRAXON Code Team <vscode-linux@microsoft.com>
+Packager: ZYRAXON Code Team <zyraxoncode-linux@zyraxon.com>
 License:  @@LICENSE@@
-URL:      https://code.visualstudio.com/
+URL:      __ZYRAXKEEP__0_
 Icon:     @@NAME@@.xpm
 Requires: @@DEPENDENCIES@@
 Recommends: @@RECOMMENDS@@
 AutoReq:  0
 
 %global __provides_exclude_from ^%{_datadir}/%{name}/.*\\.so.*$
-# Disable elf stripping, refer https://github.com/microsoft/vscode/issues/223455#issuecomment-2610001754
+# Disable elf stripping, refer __ZYRAXKEEP__1_
 %global __brp_strip %{nil}
 %global __brp_strip_comment_note %{nil}
 
 %description
-ZYRAXON Code is a new choice of tool that combines the simplicity of a code editor with what developers need for the core edit-build-debug cycle. See https://code.visualstudio.com/docs/setup/linux for installation instructions and FAQ.
+ZYRAXON Code is a new choice of tool that combines the simplicity of a code editor with what developers need for the core edit-build-debug cycle. See __ZYRAXKEEP__2_ for installation instructions and FAQ.
 
 # Don't generate build_id links to prevent conflicts when installing multiple
 # versions of ZYRAXON Code alongside each other (e.g. `code` and `code-insiders`)

@@ -30,7 +30,7 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	background: var(--vscode-editor-background);
+	background: var(--zyraxoncode-editor-background);
 }
 
 .ai-customization-management-editor .sidebar-header-row {
@@ -49,7 +49,7 @@
 	border: none;
 	border-radius: 4px;
 	background: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 	font-size: 12px;
 	font-weight: 400;
@@ -59,11 +59,11 @@
 }
 
 .ai-customization-management-editor .sidebar-home-button:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .ai-customization-management-editor .sidebar-home-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -86,14 +86,14 @@
 
 .ai-customization-management-editor .sidebar-migration-shortcut {
 	flex-shrink: 0;
-	margin-top: var(--vscode-spacing-size80);
-	padding-top: var(--vscode-spacing-size40);
+	margin-top: var(--zyraxoncode-spacing-size80);
+	padding-top: var(--zyraxoncode-spacing-size40);
 }
 
 .ai-customization-management-editor .sidebar-migration-separator {
-	height: var(--vscode-strokeThickness);
+	height: var(--zyraxoncode-strokeThickness);
 	margin: 0 8px 6px;
-	background-color: var(--vscode-widget-border, var(--vscode-editorWidget-border, transparent));
+	background-color: var(--zyraxoncode-widget-border, var(--zyraxoncode-editorWidget-border, transparent));
 }
 
 .ai-customization-management-editor .sidebar-migration-shortcut > button.sidebar-migration-button {
@@ -105,9 +105,9 @@
 	width: 100%;
 	padding: 4px 8px;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 	font-size: 12px;
 	font-weight: 400;
@@ -117,11 +117,11 @@
 }
 
 .ai-customization-management-editor .sidebar-migration-shortcut > button.sidebar-migration-button:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .ai-customization-management-editor .sidebar-migration-shortcut > button.sidebar-migration-button:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -132,7 +132,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--vscode-list-warningForeground, var(--vscode-editorWarning-foreground, var(--vscode-descriptionForeground)));
+	color: var(--zyraxoncode-list-warningForeground, var(--zyraxoncode-editorWarning-foreground, var(--zyraxoncode-descriptionForeground)));
 	opacity: 1;
 }
 
@@ -149,9 +149,9 @@
 	margin-left: auto;
 	flex-shrink: 0;
 	min-width: 14px;
-	color: var(--vscode-descriptionForeground);
-	font-size: var(--vscode-agents-fontSize-label2);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	line-height: 16px;
 	text-align: right;
 }
@@ -168,7 +168,7 @@
 }
 
 .ai-customization-management-editor .section-list-item:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 /* Selected section - using list selection */
@@ -202,9 +202,9 @@
 
 .ai-customization-management-editor .section-list-item .section-count {
 	flex-shrink: 0;
-	font-size: var(--vscode-agents-fontSize-label2);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-descriptionForeground);
 	border-radius: 8px;
 	min-width: 14px;
 	text-align: right;
@@ -213,7 +213,7 @@
 
 /* Content area */
 .ai-customization-management-editor .management-content {
-	background-color: var(--vscode-editor-background);
+	background-color: var(--zyraxoncode-editor-background);
 	height: 100%;
 	overflow: hidden;
 }
@@ -231,8 +231,8 @@
 	flex: 1 1 auto;
 	min-height: 0;
 	padding: 40px 40px 16px;
-	background: var(--vscode-agentsPanel-background);
-	border: 1px solid var(--vscode-agentsPanel-border);
+	background: var(--zyraxoncode-agentsPanel-background);
+	border: 1px solid var(--zyraxoncode-agentsPanel-border);
 	border-radius: 6px;
 	box-sizing: border-box;
 }
@@ -254,7 +254,7 @@
 	border: none;
 	border-radius: 4px;
 	background: transparent;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	cursor: pointer;
 	font-family: inherit;
 	opacity: 0.8;
@@ -262,12 +262,12 @@
 }
 
 .ai-customization-management-editor .section-back-arrow-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground, var(--vscode-list-hoverBackground));
+	background-color: var(--zyraxoncode-toolbar-hoverBackground, var(--zyraxoncode-list-hoverBackground));
 	opacity: 1;
 }
 
 .ai-customization-management-editor .section-back-arrow-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -304,11 +304,11 @@
 	width: 100%;
 	padding: 2px 6px;
 	min-height: 26px;
-	border: 1px solid var(--vscode-dropdown-border, var(--vscode-dropdown-background));
+	border: 1px solid var(--zyraxoncode-dropdown-border, var(--zyraxoncode-dropdown-background));
 	font-size: 12px;
-	border-radius: var(--vscode-cornerRadius-small);
-	color: var(--vscode-dropdown-foreground);
-	background: var(--vscode-dropdown-background);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	color: var(--zyraxoncode-dropdown-foreground);
+	background: var(--zyraxoncode-dropdown-background);
 	cursor: pointer;
 	font-family: inherit;
 	text-align: left;
@@ -317,7 +317,7 @@
 }
 
 .ai-customization-management-editor .harness-dropdown-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -383,7 +383,7 @@
 .ai-customization-list-widget .list-empty-message {
 	padding: 12px;
 	text-align: center;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-style: italic;
 }
 
@@ -403,14 +403,14 @@
 .ai-customization-list-widget .list-empty-state .empty-state-text,
 .ai-customization-management-editor .tools-list-widget .list-empty-state .empty-state-text {
 	font-size: 16px;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-foreground);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
 }
 
 .ai-customization-list-widget .list-empty-state .empty-state-subtext,
 .ai-customization-management-editor .tools-list-widget .list-empty-state .empty-state-subtext {
-	font-size: var(--vscode-agents-fontSize-body1);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	color: var(--zyraxoncode-descriptionForeground);
 	max-width: 250px;
 	line-height: 1.4;
 }
@@ -451,7 +451,7 @@
 } */
 
 .ai-customization-group-header:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .ai-customization-group-header .group-chevron {
@@ -480,9 +480,9 @@
 }
 
 .ai-customization-group-header .group-label {
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	text-transform: capitalize;
-	color: var(--vscode-sideBarSectionHeader-foreground, var(--vscode-foreground));
+	color: var(--zyraxoncode-sideBarSectionHeader-foreground, var(--zyraxoncode-foreground));
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -490,9 +490,9 @@
 
 .ai-customization-group-header .group-count {
 	flex-shrink: 0;
-	font-size: var(--vscode-agents-fontSize-label2);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-descriptionForeground);
 	text-align: right;
 	margin-top: 2px;
 }
@@ -506,7 +506,7 @@
 	justify-content: center;
 	font-size: 14px;
 	opacity: 0;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	transition: opacity 0.1s ease;
 }
 
@@ -529,7 +529,7 @@
 }
 
 .ai-customization-list-item:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .ai-customization-list-item.disabled {
@@ -574,18 +574,18 @@
 }
 
 .ai-customization-list-item .git-status-badge.committed {
-	color: var(--vscode-charts-green, #89d185);
+	color: var(--zyraxoncode-charts-green, #89d185);
 	opacity: 0.6;
 }
 
 /* Shared inline badge style — used by MCP "Bridged" badge and item badges */
 .inline-badge {
 	flex-shrink: 0;
-	font-size: var(--vscode-agents-fontSize-label3);
+	font-size: var(--zyraxoncode-agents-fontSize-label3);
 	padding: 0 4px;
 	border-radius: 3px;
-	color: var(--vscode-descriptionForeground);
-	background: var(--vscode-toolbar-hoverBackground, rgba(90, 93, 94, 0.31));
+	color: var(--zyraxoncode-descriptionForeground);
+	background: var(--zyraxoncode-toolbar-hoverBackground, rgba(90, 93, 94, 0.31));
 	white-space: nowrap;
 	line-height: 16px;
 }
@@ -636,7 +636,7 @@
 }
 
 .ai-customization-list-item .item-name {
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -644,8 +644,8 @@
 }
 
 .ai-customization-list-item .item-description {
-	font-size: var(--vscode-agents-fontSize-body2);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -654,7 +654,7 @@
 
 .ai-customization-list-item .item-description.is-filename {
 	font-family: monospace;
-	font-size: var(--vscode-agents-fontSize-label3);
+	font-size: var(--zyraxoncode-agents-fontSize-label3);
 	opacity: 0.7;
 }
 
@@ -677,7 +677,7 @@
 /* Highlighted matches */
 .ai-customization-list-item .highlight {
 	font-weight: bold;
-	color: var(--vscode-list-highlightForeground);
+	color: var(--zyraxoncode-list-highlightForeground);
 }
 
 /* Section title header at top of list widget (shared by all list widgets) */
@@ -711,18 +711,18 @@
 .ai-customization-list-widget .section-title-header .section-title,
 .mcp-list-widget .section-title-header .section-title,
 .ai-customization-management-editor .tools-list-widget .section-title-header .section-title {
-	font-size: var(--vscode-agents-fontSize-heading2);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-agents-fontSize-heading2);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	margin: 0;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .ai-customization-list-widget .section-title-header .section-title-description,
 .mcp-list-widget .section-title-header .section-title-description,
 .ai-customization-management-editor .tools-list-widget .section-title-header .section-title-description {
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 1.45;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin: 0 0 8px 0;
 	/* Reserve space for ~2 lines so the header height is stable across sections. */
 	/* Rounded up to a whole pixel so naturally-wrapped 2-line descriptions and */
@@ -734,11 +734,11 @@
 .ai-customization-list-widget .section-title-header .section-title-link,
 .mcp-list-widget .section-title-header .section-title-link,
 .ai-customization-management-editor .tools-list-widget .section-title-header .section-title-link {
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	/* Match the description's line-height so the link's inline-flex line-box */
 	/* does not change the total header height between sections. */
 	line-height: 1.45;
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	text-decoration: none;
 	cursor: pointer;
 	display: inline-flex;
@@ -763,18 +763,18 @@
 .ai-customization-list-widget .section-footer {
 	flex-shrink: 0;
 	padding: 12px 4px 6px 4px;
-	border-top: 1px solid var(--vscode-widget-border);
+	border-top: 1px solid var(--zyraxoncode-widget-border);
 }
 
 .ai-customization-list-widget .section-footer .section-footer-description {
-	font-size: var(--vscode-agents-fontSize-body1);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin: 0 0 8px 0;
 }
 
 .ai-customization-list-widget .section-footer .section-footer-link {
-	font-size: var(--vscode-agents-fontSize-body1);
-	color: var(--vscode-textLink-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	color: var(--zyraxoncode-textLink-foreground);
 	text-decoration: none;
 	cursor: pointer;
 	display: inline-flex;
@@ -784,7 +784,7 @@
 
 .ai-customization-list-widget .section-footer .section-footer-link:hover {
 	text-decoration: underline;
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 /* Overview View (compact snapshot) */
@@ -807,8 +807,8 @@
 	align-items: center;
 	gap: 8px;
 	padding: 10px 12px;
-	background-color: var(--vscode-sideBar-background);
-	border: 1px solid var(--vscode-widget-border);
+	background-color: var(--zyraxoncode-sideBar-background);
+	border: 1px solid var(--zyraxoncode-widget-border);
 	border-radius: 6px;
 	cursor: pointer;
 	transition: background-color 0.1s ease;
@@ -817,12 +817,12 @@
 }
 
 .ai-customization-overview .overview-section:hover {
-	background-color: var(--vscode-list-hoverBackground);
-	border-color: var(--vscode-focusBorder);
+	background-color: var(--zyraxoncode-list-hoverBackground);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .ai-customization-overview .overview-section:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -839,9 +839,9 @@
 }
 
 .ai-customization-overview .overview-section .section-label {
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -854,8 +854,8 @@
 	font-size: 9px;
 	font-weight: 500;
 	padding: 1px 5px;
-	background-color: var(--vscode-list-inactiveSelectionBackground);
-	color: var(--vscode-list-inactiveSelectionForeground, var(--vscode-foreground));
+	background-color: var(--zyraxoncode-list-inactiveSelectionBackground);
+	color: var(--zyraxoncode-list-inactiveSelectionForeground, var(--zyraxoncode-foreground));
 	border-radius: 8px;
 	min-width: 14px;
 	text-align: center;
@@ -872,8 +872,8 @@
 	display: flex;
 	flex-direction: column;
 	padding: 40px 40px 16px;
-	background: var(--vscode-agentsPanel-background);
-	border: 1px solid var(--vscode-agentsPanel-border);
+	background: var(--zyraxoncode-agentsPanel-background);
+	border: 1px solid var(--zyraxoncode-agentsPanel-border);
 	border-radius: 6px;
 	overflow: hidden;
 	box-sizing: border-box;
@@ -909,9 +909,9 @@
 }
 
 .ai-customization-management-editor .prompt-migration-group-header:focus-within {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-list-focusOutline);
-	outline-offset: calc(-1 * var(--vscode-strokeThickness));
-	background: var(--vscode-list-activeSelectionBackground, var(--vscode-list-hoverBackground));
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-list-focusOutline);
+	outline-offset: calc(-1 * var(--zyraxoncode-strokeThickness));
+	background: var(--zyraxoncode-list-activeSelectionBackground, var(--zyraxoncode-list-hoverBackground));
 }
 
 .ai-customization-management-editor .prompt-migration-group-checkbox {
@@ -967,27 +967,27 @@
 	height: 24px;
 	padding: 0;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background: transparent;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 	cursor: pointer;
 	font-size: 16px;
 }
 
 .ai-customization-management-editor .prompt-migration-item .icon-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .ai-customization-management-editor .prompt-migration-item .icon-button:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
 .ai-customization-management-editor .prompt-migration-empty {
 	margin: 0;
 	padding: 8px 12px;
-	color: var(--vscode-descriptionForeground);
-	font-size: var(--vscode-agents-fontSize-body2);
+	color: var(--zyraxoncode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
 }
 
 .ai-customization-management-editor .prompt-migration-button {
@@ -1051,7 +1051,7 @@
 }
 
 .ai-customization-management-editor .gallery-item:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .ai-customization-management-editor .gallery-item-details {
@@ -1063,8 +1063,8 @@
 }
 
 .ai-customization-management-editor .gallery-item-name {
-	font-size: var(--vscode-agents-fontSize-body1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	line-height: 18px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1073,8 +1073,8 @@
 
 .ai-customization-management-editor .gallery-item-description,
 .ai-customization-management-editor .gallery-item-publisher {
-	font-size: var(--vscode-agents-fontSize-body2);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 16px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1087,7 +1087,7 @@
 
 .ai-customization-management-editor .gallery-item-action .monaco-button {
 	white-space: nowrap;
-	font-size: var(--vscode-agents-fontSize-body2);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
 	padding: 2px 10px;
 }
 
@@ -1124,7 +1124,7 @@
 
 .ai-customization-management-editor .tools-list-setrow:hover,
 .ai-customization-management-editor .tools-list-toolrow:hover {
-	background: var(--vscode-list-hoverBackground);
+	background: var(--zyraxoncode-list-hoverBackground);
 }
 
 /* Match the other customization lists' focus ring: :focus-within for inner checkbox/chevron, :focus for a row click. */
@@ -1132,8 +1132,8 @@
 .ai-customization-management-editor .tools-list-setrow:focus-within,
 .ai-customization-management-editor .tools-list-toolrow:focus,
 .ai-customization-management-editor .tools-list-toolrow:focus-within {
-	outline: 1px solid var(--vscode-list-focusOutline);
-	background: var(--vscode-list-focusBackground, var(--vscode-list-hoverBackground));
+	outline: 1px solid var(--zyraxoncode-list-focusOutline);
+	background: var(--zyraxoncode-list-focusBackground, var(--zyraxoncode-list-hoverBackground));
 }
 
 .ai-customization-management-editor .tools-list-chevron {
@@ -1144,7 +1144,7 @@
 	align-items: center;
 	justify-content: center;
 	font-size: 12px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	opacity: 0.7;
 	cursor: pointer;
 	margin-left: auto;
@@ -1188,7 +1188,7 @@
 }
 
 .ai-customization-management-editor .tools-list-row-label {
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 18px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1196,19 +1196,19 @@
 }
 
 .ai-customization-management-editor .tools-list-setrow .tools-list-row-label {
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 }
 
 /* Search match highlighting in tool set / tool names */
 .ai-customization-management-editor .tools-list-row-label .highlight {
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-list-highlightForeground);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-list-highlightForeground);
 }
 
 .ai-customization-management-editor .tools-list-row-subtext {
-	font-size: var(--vscode-agents-fontSize-body2);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
 	line-height: 14px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -1217,8 +1217,8 @@
 /* Enabled/total tool count shown at the right of a tool-set row */
 .ai-customization-management-editor .tools-list-row-count {
 	flex: none;
-	font-size: var(--vscode-agents-fontSize-body2);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-variant-numeric: tabular-nums;
 	white-space: nowrap;
 	cursor: pointer;
@@ -1232,8 +1232,8 @@
 	flex-direction: column;
 	min-height: 0;
 	padding: 16px;
-	background: var(--vscode-agentsPanel-background);
-	border: 1px solid var(--vscode-agentsPanel-border);
+	background: var(--zyraxoncode-agentsPanel-background);
+	border: 1px solid var(--zyraxoncode-agentsPanel-border);
 	border-radius: 6px;
 	overflow: hidden;
 	box-sizing: border-box;
@@ -1254,8 +1254,8 @@
 	flex-direction: column;
 	min-height: 0;
 	padding: 16px;
-	background: var(--vscode-agentsPanel-background);
-	border: 1px solid var(--vscode-agentsPanel-border);
+	background: var(--zyraxoncode-agentsPanel-background);
+	border: 1px solid var(--zyraxoncode-agentsPanel-border);
 	border-radius: 6px;
 	overflow: hidden;
 	box-sizing: border-box;
@@ -1324,7 +1324,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-icon.codicon::before {
@@ -1341,9 +1341,9 @@
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-name {
 	margin: 0;
-	font-size: var(--vscode-agents-fontSize-heading2);
+	font-size: var(--zyraxoncode-agents-fontSize-heading2);
 	line-height: 22px;
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	word-break: break-word;
 }
 
@@ -1351,7 +1351,7 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 }
 
@@ -1360,8 +1360,8 @@
 }
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-description {
-	color: var(--vscode-foreground);
-	font-size: var(--vscode-agents-fontSize-body1);
+	color: var(--zyraxoncode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 1.4;
 	white-space: pre-wrap;
 	word-break: break-word;
@@ -1369,8 +1369,8 @@
 }
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-empty {
-	color: var(--vscode-descriptionForeground);
-	font-size: var(--vscode-agents-fontSize-body1);
+	color: var(--zyraxoncode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	padding: 8px 0;
 }
 
@@ -1384,15 +1384,15 @@
 }
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-tools-heading {
-	font-size: var(--vscode-agents-fontSize-body1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
 	margin: 0;
 }
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-tools-message {
-	color: var(--vscode-descriptionForeground);
-	font-size: var(--vscode-agents-fontSize-body1);
+	color: var(--zyraxoncode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 }
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-tools-list {
@@ -1410,15 +1410,15 @@
 }
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-tool-name {
-	font-size: var(--vscode-agents-fontSize-body1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
 	word-break: break-word;
 }
 
 .ai-customization-management-editor .ai-customization-embedded-detail .embedded-detail-tool-description {
-	font-size: var(--vscode-agents-fontSize-body2);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 1.4;
 	word-break: break-word;
 	/* Keep descriptions short and scannable; the full text is available once installed. */
@@ -1433,19 +1433,19 @@
 .ai-customization-management-editor .models-content-container .section-footer {
 	flex-shrink: 0;
 	padding: 12px 4px 6px 4px;
-	border-top: 1px solid var(--vscode-widget-border);
+	border-top: 1px solid var(--zyraxoncode-widget-border);
 }
 
 .ai-customization-management-editor .models-content-container .section-footer-description {
-	font-size: var(--vscode-agents-fontSize-body1);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: 1.5;
 	margin: 0 0 8px 0;
 }
 
 .ai-customization-management-editor .models-content-container .section-footer-link {
-	font-size: var(--vscode-agents-fontSize-body1);
-	color: var(--vscode-textLink-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	color: var(--zyraxoncode-textLink-foreground);
 	text-decoration: none;
 	cursor: pointer;
 	display: inline-flex;
@@ -1455,7 +1455,7 @@
 
 .ai-customization-management-editor .models-content-container .section-footer-link:hover {
 	text-decoration: underline;
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 /* Override models widget padding when embedded in management editor */
@@ -1495,12 +1495,12 @@
 .mcp-list-widget .mcp-empty-state .empty-text {
 	font-size: 16px;
 	font-weight: 500;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .mcp-list-widget .mcp-empty-state .empty-subtext {
-	font-size: var(--vscode-agents-fontSize-body1);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	color: var(--zyraxoncode-descriptionForeground);
 	max-width: 250px;
 	line-height: 1.4;
 }
@@ -1559,25 +1559,25 @@
 .mcp-list-widget .mcp-disabled-state .empty-text {
 	font-size: 16px;
 	font-weight: 500;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .mcp-list-widget .mcp-disabled-state .empty-subtext {
-	font-size: var(--vscode-agents-fontSize-body1);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
+	color: var(--zyraxoncode-descriptionForeground);
 	max-width: 420px;
 	line-height: 1.5;
 }
 
 .mcp-list-widget .mcp-disabled-state .mcp-disabled-settings-link {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	cursor: pointer;
 	text-decoration: none;
 }
 
 .mcp-list-widget .mcp-disabled-state .mcp-disabled-settings-link:hover,
 .mcp-list-widget .mcp-disabled-state .mcp-disabled-settings-link:focus {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 	text-decoration: underline;
 	outline: none;
 }
@@ -1596,7 +1596,7 @@
 	align-items: center;
 	padding: 6px 8px 6px 30px;
 	cursor: pointer;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	min-height: 32px;
 	gap: 10px;
 	box-sizing: border-box;
@@ -1607,7 +1607,7 @@
 }
 
 .mcp-server-item:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .mcp-server-item.builtin {
@@ -1628,7 +1628,7 @@
 }
 
 .mcp-server-item .mcp-server-name {
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -1636,8 +1636,8 @@
 }
 
 .mcp-server-item .mcp-server-description {
-	font-size: var(--vscode-agents-fontSize-body2);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -1648,54 +1648,54 @@
 	flex-shrink: 0;
 	display: flex;
 	align-items: center;
-	gap: var(--vscode-spacing-size40);
+	gap: var(--zyraxoncode-spacing-size40);
 }
 
 .mcp-server-item .mcp-server-sign-in.monaco-button {
 	min-width: 0;
-	min-height: var(--vscode-spacing-size240);
-	padding: 0 var(--vscode-spacing-size80);
-	font-size: var(--vscode-agents-fontSize-label1);
-	border-radius: var(--vscode-cornerRadius-small);
+	min-height: var(--zyraxoncode-spacing-size240);
+	padding: 0 var(--zyraxoncode-spacing-size80);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .mcp-server-item .mcp-server-status {
 	flex-shrink: 0;
-	width: var(--vscode-spacing-size240);
-	height: var(--vscode-spacing-size240);
+	width: var(--zyraxoncode-spacing-size240);
+	height: var(--zyraxoncode-spacing-size240);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: var(--vscode-codiconFontSize);
+	font-size: var(--zyraxoncode-codiconFontSize);
 }
 
 .mcp-server-item .mcp-server-status-action.monaco-button {
-	min-width: var(--vscode-spacing-size240);
-	min-height: var(--vscode-spacing-size240);
-	padding: var(--vscode-spacing-size40);
+	min-width: var(--zyraxoncode-spacing-size240);
+	min-height: var(--zyraxoncode-spacing-size240);
+	padding: var(--zyraxoncode-spacing-size40);
 	border: 0;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background-color: transparent;
 }
 
 .mcp-server-item .mcp-server-status-action.monaco-button:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .mcp-server-item .mcp-server-status.running {
-	color: var(--vscode-charts-green);
+	color: var(--zyraxoncode-charts-green);
 }
 
 .mcp-server-item .mcp-server-status.starting {
-	color: var(--vscode-progressBar-background, var(--vscode-icon-foreground));
+	color: var(--zyraxoncode-progressBar-background, var(--zyraxoncode-icon-foreground));
 }
 
 .mcp-server-item .mcp-server-status.auth-required {
-	color: var(--vscode-list-warningForeground, var(--vscode-editorWarning-foreground));
+	color: var(--zyraxoncode-list-warningForeground, var(--zyraxoncode-editorWarning-foreground));
 }
 
 .mcp-server-item .mcp-server-status.error {
-	color: var(--vscode-testing-iconFailed, var(--vscode-errorForeground));
+	color: var(--zyraxoncode-testing-iconFailed, var(--zyraxoncode-errorForeground));
 }
 
 .mcp-server-item.disabled {
@@ -1703,7 +1703,7 @@
 }
 
 .mcp-server-item .mcp-server-status.disabled {
-	color: var(--vscode-disabledForeground);
+	color: var(--zyraxoncode-disabledForeground);
 }
 
 /* Button group for Add Server + Browse Marketplace */
@@ -1719,8 +1719,8 @@
 	display: flex;
 	flex-direction: column;
 	padding: 0;
-	background: var(--vscode-agentsPanel-background);
-	border: 1px solid var(--vscode-agentsPanel-border);
+	background: var(--zyraxoncode-agentsPanel-background);
+	border: 1px solid var(--zyraxoncode-agentsPanel-border);
 	border-radius: 6px;
 	overflow: hidden;
 	box-sizing: border-box;
@@ -1746,18 +1746,18 @@
 	cursor: pointer;
 	background: transparent;
 	border: none;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	opacity: 0.8;
 	transition: background-color 0.1s ease, opacity 0.1s ease;
 }
 
 .ai-customization-management-editor .editor-back-button:hover:not(:disabled) {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 	opacity: 1;
 }
 
 .ai-customization-management-editor .editor-back-button:active:not(:disabled) {
-	background-color: var(--vscode-toolbar-activeBackground);
+	background-color: var(--zyraxoncode-toolbar-activeBackground);
 }
 
 .ai-customization-management-editor .editor-back-button:disabled {
@@ -1781,15 +1781,15 @@
 .ai-customization-management-editor .editor-item-name {
 	font-size: 14px;
 	font-weight: 500;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
 .ai-customization-management-editor .editor-item-path {
-	font-size: var(--vscode-agents-fontSize-body2);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
+	color: var(--zyraxoncode-descriptionForeground);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -1803,7 +1803,7 @@
 	font-size: 16px;
 	line-height: 16px;
 	text-align: center;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	opacity: 0;
 	transition: opacity 0.2s ease;
 	margin-right: 4px;
@@ -1814,7 +1814,7 @@
 }
 
 .ai-customization-management-editor .editor-save-indicator.saved {
-	color: var(--vscode-testing-iconPassed, #73c991);
+	color: var(--zyraxoncode-testing-iconPassed, #73c991);
 	opacity: 1;
 }
 
@@ -1823,9 +1823,9 @@
 	height: 26px;
 	padding: 0 10px;
 	border-radius: 4px;
-	border: 1px solid var(--vscode-widget-border);
-	background: var(--vscode-button-secondaryBackground);
-	color: var(--vscode-button-secondaryForeground);
+	border: 1px solid var(--zyraxoncode-widget-border);
+	background: var(--zyraxoncode-button-secondaryBackground);
+	color: var(--zyraxoncode-button-secondaryForeground);
 	cursor: pointer;
 	font-size: 12px;
 	line-height: 24px;
@@ -1833,11 +1833,11 @@
 }
 
 .ai-customization-management-editor .editor-mode-button:hover {
-	background: var(--vscode-button-secondaryHoverBackground);
+	background: var(--zyraxoncode-button-secondaryHoverBackground);
 }
 
 .ai-customization-management-editor .editor-mode-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
 }
 
@@ -1850,7 +1850,7 @@
 }
 
 .ai-customization-management-editor .editor-preview-container {
-	background: var(--vscode-editor-background);
+	background: var(--zyraxoncode-editor-background);
 	overflow: hidden;
 }
 
@@ -1882,8 +1882,8 @@
 	flex-direction: column;
 	gap: 6px;
 	padding: 10px 12px;
-	background: var(--vscode-editorWidget-background);
-	border: 1px solid var(--vscode-widget-border);
+	background: var(--zyraxoncode-editorWidget-background);
+	border: 1px solid var(--zyraxoncode-widget-border);
 	border-radius: 6px;
 }
 
@@ -1896,7 +1896,7 @@
 .ai-customization-management-editor .editor-preview-row-key {
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	font-family: var(--monaco-monospace-font);
 }
 
@@ -1910,17 +1910,17 @@
 	border: none;
 	border-radius: 999px;
 	background: transparent;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	cursor: pointer;
 }
 
 .ai-customization-management-editor .editor-preview-row-help:hover {
-	background: var(--vscode-toolbar-hoverBackground);
-	color: var(--vscode-foreground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .ai-customization-management-editor .editor-preview-row-help:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
 }
 
@@ -1930,9 +1930,9 @@
 }
 
 .ai-customization-management-editor .editor-preview-row-value {
-	font-size: var(--vscode-agents-fontSize-body1);
+	font-size: var(--zyraxoncode-agents-fontSize-body1);
 	line-height: 1.5;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	white-space: pre-wrap;
 	word-break: break-word;
 }
@@ -1944,8 +1944,8 @@
 
 .ai-customization-management-editor .editor-preview-body-content {
 	padding: 12px 14px;
-	background: var(--vscode-editorWidget-background);
-	border: 1px solid var(--vscode-widget-border);
+	background: var(--zyraxoncode-editorWidget-background);
+	border: 1px solid var(--zyraxoncode-widget-border);
 	border-radius: 6px;
 }
 
@@ -1959,19 +1959,19 @@
 
 .ai-customization-management-editor .editor-preview-empty-state {
 	padding: 12px 14px;
-	background: var(--vscode-editorWidget-background);
-	border: 1px dashed var(--vscode-widget-border);
+	background: var(--zyraxoncode-editorWidget-background);
+	border: 1px dashed var(--zyraxoncode-widget-border);
 	border-radius: 6px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 }
 
 .ai-customization-management-editor .editor-preview-issues-box {
 	padding: 12px 14px;
-	background: var(--vscode-inputValidation-warningBackground);
-	border: 1px solid var(--vscode-inputValidation-warningBorder);
+	background: var(--zyraxoncode-inputValidation-warningBackground);
+	border: 1px solid var(--zyraxoncode-inputValidation-warningBorder);
 	border-radius: 6px;
-	color: var(--vscode-inputValidation-warningForeground);
+	color: var(--zyraxoncode-inputValidation-warningForeground);
 	display: flex;
 	flex-direction: column;
 	gap: 8px;

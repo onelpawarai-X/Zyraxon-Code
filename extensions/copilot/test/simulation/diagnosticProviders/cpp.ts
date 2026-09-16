@@ -68,7 +68,7 @@ export class CppDiagnosticsProvider extends CachingDiagnosticsProvider {
 
 			let spawnResult;
 			if (this._isInstalled === 'docker') {
-				const args = ['run', '--rm', '-v', `${temporaryDirectory}:/${basename}`, 'mcr.microsoft.com/devcontainers/cpp:latest', 'clang++', `/${basename}/${file.fileName}`];
+				const args = ['run', '--rm', '-v', `${temporaryDirectory}:/${basename}`, 'mcr.zyraxon.com/devcontainers/cpp:latest', 'clang++', `/${basename}/${file.fileName}`];
 				//console.log('docker ' + args.map(arg => `'${arg}'`).join(' '));
 				spawnResult = cp.spawnSync('docker', args, { shell: true, encoding: 'utf-8' });
 			} else {

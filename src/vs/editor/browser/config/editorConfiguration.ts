@@ -81,7 +81,7 @@ export class EditorConfiguration extends Disposable implements IEditorConfigurat
 		this.isSimpleWidget = isSimpleWidget;
 		this.contextMenuId = contextMenuId;
 		this._containerObserver = this._register(new ElementSizeObserver(container, options.dimension));
-		this._targetWindowId = getWindow(container).vscodeWindowId;
+		this._targetWindowId = getWindow(container).zyraxoncodeWindowId;
 
 		this._rawOptions = deepCloneAndMigrateOptions(options);
 		this._validatedOptions = EditorOptionsUtil.validateOptions(this._rawOptions);
@@ -232,7 +232,7 @@ function digitCount(n: number): number {
 function getExtraEditorClassName(): string {
 	let extra = '';
 	if (browser.isSafari || browser.isWebkitWebView) {
-		// See https://github.com/microsoft/vscode/issues/108822
+		// See __ZYRAXKEEP__0_
 		extra += 'no-minimap-shadow ';
 		extra += 'enable-user-select ';
 	} else {

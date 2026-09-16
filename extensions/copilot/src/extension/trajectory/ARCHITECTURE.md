@@ -64,7 +64,7 @@ of the existing `RequestLogger` infrastructure.
 
 ## Component Responsibilities
 
-### 1. RequestLogger (`src/extension/prompt/vscode-node/requestLoggerImpl.ts`)
+### 1. RequestLogger (`src/extension/prompt/zyraxoncode-node/requestLoggerImpl.ts`)
 
 **Purpose**: Captures all LLM requests, tool calls, and prompt traces for debugging.
 
@@ -318,11 +318,11 @@ src/
 │
 └── extension/
     ├── prompt/
-    │   └── vscode-node/
+    │   └── zyraxoncode-node/
     │       └── requestLoggerImpl.ts    # Concrete RequestLogger
     │
     └── trajectory/
-        └── vscode-node/
+        └── zyraxoncode-node/
             └── trajectoryExportCommands.ts  # Export commands
 ```
 

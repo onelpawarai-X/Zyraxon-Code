@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptRenderer, RenderPromptResult, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptRenderer, RenderPromptResult, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import * as JSONC from 'jsonc-parser';
-import type { LanguageModelToolInformation } from 'vscode';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { ObjectJsonSchema } from '../../../../platform/configuration/common/jsonSchema';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';

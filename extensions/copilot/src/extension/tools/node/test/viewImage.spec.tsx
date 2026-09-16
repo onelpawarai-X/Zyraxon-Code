@@ -13,7 +13,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { URI } from '../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelDataPart, MarkdownString } from '../../../../vscodeTypes';
+import { LanguageModelDataPart, MarkdownString } from '../../../../zyraxoncodeTypes';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { IViewImageParams, ViewImageTool } from '../viewImageTool';
 import { toolResultToString } from './toolTestUtils';

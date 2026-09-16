@@ -19,7 +19,7 @@ function _validateUri(ret: URI, _strict?: boolean): void {
 		throw new Error(`[UriError]: Scheme is missing: {scheme: "", authority: "${ret.authority}", path: "${ret.path}", query: "${ret.query}", fragment: "${ret.fragment}"}`);
 	}
 
-	// scheme, https://tools.ietf.org/html/rfc3986#section-3.1
+	// scheme, __ZYRAXKEEP__0_
 	// ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
 	if (ret.scheme && !_schemePattern.test(ret.scheme)) {
 		const matches = [...ret.scheme.matchAll(/[^\w\d+.-]/gu)];
@@ -29,7 +29,7 @@ function _validateUri(ret: URI, _strict?: boolean): void {
 		throw new Error(`[UriError]: Scheme contains illegal characters.${detail} (len:${ret.scheme.length})`);
 	}
 
-	// path, http://tools.ietf.org/html/rfc3986#section-3.3
+	// path, __ZYRAXKEEP__1_
 	// If a URI contains an authority component, then the path component
 	// must either be empty or begin with a slash ("/") character.  If a URI
 	// does not contain an authority component, then the path cannot begin
@@ -58,13 +58,13 @@ function _schemeFix(scheme: string, _strict: boolean): string {
 	return scheme;
 }
 
-// implements a bit of https://tools.ietf.org/html/rfc3986#section-5
+// implements a bit of __ZYRAXKEEP__2_
 function _referenceResolution(scheme: string, path: string): string {
 
 	// the slash-character is our 'default base' as we don't
 	// support constructing URIs relative to other URIs. This
 	// also means that we alter and potentially break paths.
-	// see https://tools.ietf.org/html/rfc3986#section-5.1.4
+	// see __ZYRAXKEEP__3_
 	switch (scheme) {
 		case 'https':
 		case 'http':
@@ -84,13 +84,13 @@ const _slash = '/';
 const _regexp = /^(([^:/?#]+?):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
 
 /**
- * Uniform Resource Identifier (URI) http://tools.ietf.org/html/rfc3986.
+ * Uniform Resource Identifier (URI) __ZYRAXKEEP__4_
  * This class is a simple parser which creates the basic component parts
- * (http://tools.ietf.org/html/rfc3986#section-3) with minimal validation
+ * (__ZYRAXKEEP__5_) with minimal validation
  * and encoding.
  *
  * ```txt
- *       foo://example.com:8042/over/there?name=ferret#nose
+ *       __ZYRAXKEEP__6_
  *       \_/   \______________/\_________/ \_________/ \__/
  *        |           |            |            |        |
  *     scheme     authority       path        query   fragment
@@ -119,29 +119,29 @@ export class URI implements UriComponents {
 	}
 
 	/**
-	 * scheme is the 'http' part of 'http://www.example.com/some/path?query#fragment'.
+	 * scheme is the 'http' part of '__ZYRAXKEEP__7_'.
 	 * The part before the first colon.
 	 */
 	readonly scheme: string;
 
 	/**
-	 * authority is the 'www.example.com' part of 'http://www.example.com/some/path?query#fragment'.
+	 * authority is the '__ZYRAXKEEP__8_' part of '__ZYRAXKEEP__9_'.
 	 * The part between the first double slashes and the next slash.
 	 */
 	readonly authority: string;
 
 	/**
-	 * path is the '/some/path' part of 'http://www.example.com/some/path?query#fragment'.
+	 * path is the '/some/path' part of '__ZYRAXKEEP__10_'.
 	 */
 	readonly path: string;
 
 	/**
-	 * query is the 'query' part of 'http://www.example.com/some/path?query#fragment'.
+	 * query is the 'query' part of '__ZYRAXKEEP__11_'.
 	 */
 	readonly query: string;
 
 	/**
-	 * fragment is the 'fragment' part of 'http://www.example.com/some/path?query#fragment'.
+	 * fragment is the 'fragment' part of '__ZYRAXKEEP__12_'.
 	 */
 	readonly fragment: string;
 
@@ -196,7 +196,7 @@ export class URI implements UriComponents {
 	 * of UNC paths. See the below sample of a file-uri with an authority (UNC path).
 	 *
 	 * ```ts
-		const u = URI.parse('file://server/c$/folder/file.txt')
+		const u = URI.parse('__ZYRAXKEEP__13_')
 		u.authority === 'server'
 		u.path === '/shares/c$/file.txt'
 		u.fsPath === '\\server\c$\folder\file.txt'
@@ -263,8 +263,8 @@ export class URI implements UriComponents {
 	// ---- parse & validate ------------------------
 
 	/**
-	 * Creates a new URI from a string, e.g. `http://www.example.com/some/path`,
-	 * `file:///usr/home`, or `scheme:with/path`.
+	 * Creates a new URI from a string, e.g. `__ZYRAXKEEP__14_`,
+	 * `__ZYRAXKEEP__15_`, or `scheme:with/path`.
 	 *
 	 * @param value A string which represents an URI (see `URI#toString`).
 	 */
@@ -451,7 +451,7 @@ interface UriState extends UriComponents {
 
 const _pathSepMarker = isWindows ? 1 : undefined;
 
-// This class exists so that URI is compatible with vscode.Uri (API).
+// This class exists so that URI is compatible with zyraxoncode.Uri (API).
 class Uri extends URI {
 
 	_formatted: string | null = null;
@@ -495,7 +495,7 @@ class Uri extends URI {
 		}
 		// TODO
 		// this isn't correct and can violate the UriComponents contract but
-		// this is part of the vscode.Uri API and we shouldn't change how that
+		// this is part of the zyraxoncode.Uri API and we shouldn't change how that
 		// works anymore
 		if (this.scheme) {
 			res.scheme = this.scheme;
@@ -513,7 +513,7 @@ class Uri extends URI {
 	}
 }
 
-// reserved characters: https://tools.ietf.org/html/rfc3986#section-2.2
+// reserved characters: __ZYRAXKEEP__16_
 const encodeTable: { [ch: number]: string } = {
 	[CharCode.Colon]: '%3A', // gen-delims
 	[CharCode.Slash]: '%2F',
@@ -545,7 +545,7 @@ function encodeURIComponentFast(uriComponent: string, isPath: boolean, isAuthori
 	for (let pos = 0; pos < uriComponent.length; pos++) {
 		const code = uriComponent.charCodeAt(pos);
 
-		// unreserved characters: https://tools.ietf.org/html/rfc3986#section-2.3
+		// unreserved characters: __ZYRAXKEEP__17_
 		if (
 			(code >= CharCode.a && code <= CharCode.z)
 			|| (code >= CharCode.A && code <= CharCode.Z)
@@ -627,7 +627,7 @@ export function uriToFsPath(uri: URI, keepDriveLetterCasing: boolean): string {
 
 	let value: string;
 	if (uri.authority && uri.path.length > 1 && uri.scheme === 'file') {
-		// unc path: file://shares/c$/far/boo
+		// unc path: __ZYRAXKEEP__18_
 		value = `//${uri.authority}${uri.path}`;
 	} else if (
 		uri.path.charCodeAt(0) === CharCode.Slash
@@ -635,7 +635,7 @@ export function uriToFsPath(uri: URI, keepDriveLetterCasing: boolean): string {
 		&& uri.path.charCodeAt(2) === CharCode.Colon
 	) {
 		if (!keepDriveLetterCasing) {
-			// windows drive letter: file:///c:/far/boo
+			// windows drive letter: __ZYRAXKEEP__19_
 			value = uri.path[1].toLowerCase() + uri.path.substr(2);
 		} else {
 			value = uri.path.substr(1);

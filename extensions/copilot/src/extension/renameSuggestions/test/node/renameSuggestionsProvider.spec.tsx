@@ -6,7 +6,7 @@
 import { outdent } from 'outdent';
 import { expect, suite, test } from 'vitest';
 import { ChatFetchResponseType } from '../../../../platform/chat/common/commonTypes';
-import { NewSymbolNameTriggerKind } from '../../../../vscodeTypes';
+import { NewSymbolNameTriggerKind } from '../../../../zyraxoncodeTypes';
 import { RenameSuggestionsProvider } from '../../node/renameSuggestionsProvider';
 
 suite('processReply', () => {
@@ -279,7 +279,7 @@ suite('shouldShowQuotaExceededDialog', () => {
 		expect(RenameSuggestionsProvider.shouldShowQuotaExceededDialog(NewSymbolNameTriggerKind.Invoke, ChatFetchResponseType.Success, false)).toBe(false);
 	});
 
-	// Regression test for https://github.com/microsoft/vscode/issues/319414
+	// Regression test for __ZYRAXKEEP__0_
 	test('does not show for automatic trigger + quota exceeded', () => {
 		expect(RenameSuggestionsProvider.shouldShowQuotaExceededDialog(NewSymbolNameTriggerKind.Automatic, ChatFetchResponseType.QuotaExceeded, false)).toBe(false);
 	});

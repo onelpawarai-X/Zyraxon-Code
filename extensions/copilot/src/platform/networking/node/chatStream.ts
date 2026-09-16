@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import { hash } from '../../../util/vs/base/common/hash';
 import { LRUCache } from '../../../util/vs/base/common/map';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
@@ -459,7 +459,7 @@ export function sendEngineMessagesTelemetry(telemetryService: ITelemetryService,
 	void multiplexProperties(telemetryDataWithPrompt.properties).then(properties => telemetryService.sendEnhancedGHTelemetryEvent('engine.messages', properties, telemetryDataWithPrompt.measurements)).catch(() => { /* best-effort telemetry */ });
 	// Commenting this out to test a new deduplicated way to collect the same information using sendModelTelemetryEvents()
 	// TO DO remove this line completely if the new way allows for complete reconstruction of entire message arrays with much lower drop rate
-	//telemetryService.sendInternalMSFTTelemetryEvent('engine.messages', multiplexProperties(telemetryDataWithPrompt.properties), telemetryDataWithPrompt.measurements);
+	__ZYRAXKEEP__0_('engine.messages', multiplexProperties(telemetryDataWithPrompt.properties), telemetryDataWithPrompt.measurements);
 
 	// Send all model telemetry events (model.request.added, model.message.added, model.modelCall.input/output, model.request.options.added)
 	// Comment out the line below to disable the new deduplicated model telemetry events

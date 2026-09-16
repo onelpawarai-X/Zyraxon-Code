@@ -530,7 +530,7 @@ class ChatLibExtractor {
 		await this.copyRootPackageJson();
 
 		// Copy all vscode.proposed.*.d.ts files
-		await this.copyVSCodeProposedTypes();
+		await this.copyZyraxonCodeProposedTypes();
 
 		// Copy all tiktoken files
 		await this.copyTikTokenFiles();
@@ -639,7 +639,7 @@ class ChatLibExtractor {
 		console.log('Module validation passed!');
 	}
 
-	private async copyVSCodeProposedTypes(): Promise<void> {
+	private async copyZyraxonCodeProposedTypes(): Promise<void> {
 		console.log('Copying vscode*.d.ts files referenced by vscode-api.d.ts...');
 
 		const vscodeApiSrcPath = path.join(REPO_ROOT, 'src', 'extension', 'vscode-api.d.ts');

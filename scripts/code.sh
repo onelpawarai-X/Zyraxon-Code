@@ -43,7 +43,7 @@ function code() {
 	export ELECTRON_ENABLE_STACK_DUMPING=1
 	export ELECTRON_ENABLE_LOGGING=1
 
-	DISABLE_TEST_EXTENSION="--disable-extension=vscode.vscode-api-tests"
+	DISABLE_TEST_EXTENSION="--disable-extension=zyraxoncode.zyraxoncode-api-tests"
 	if [[ "$@" == *"--extensionTestsPath"* ]]; then
 		DISABLE_TEST_EXTENSION=""
 	fi
@@ -63,7 +63,7 @@ function code-wsl()
 		local CWD=$(pwd)
 		cd $ROOT
 		export WSLENV=ELECTRON_RUN_AS_NODE/w:VSCODE_DEV/w:$WSLENV
-		local WSL_EXT_ID="ms-vscode-remote.remote-wsl"
+		local WSL_EXT_ID="ms-zyraxoncode-remote.remote-wsl"
 		local WSL_EXT_WLOC=$(echo "" | VSCODE_DEV=1 ELECTRON_RUN_AS_NODE=1 "$ROOT/.build/electron/ZYRAXON Code.exe" "out/cli.js" --locate-extension $WSL_EXT_ID)
 		cd $CWD
 		if [ -n "$WSL_EXT_WLOC" ]; then
@@ -82,7 +82,7 @@ if [ "$IN_WSL" == "true" ] && [ -z "$DISPLAY" ]; then
 elif [ -f /mnt/wslg/versions.txt ]; then
 	code --disable-gpu "$@"
 elif [ -f /.dockerenv ]; then
-	# Workaround for https://bugs.chromium.org/p/chromium/issues/detail?id=1263267
+	# Workaround for __ZYRAXKEEP__0_
 	# Chromium does not release shared memory when streaming scripts
 	# which might exhaust the available resources in the container environment
 	# leading to failed script loading.

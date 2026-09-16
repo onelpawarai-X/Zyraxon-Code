@@ -29,7 +29,7 @@ jobs:
       NPM_ARCH: x64
       VSCODE_ARCH: x64
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
         with:
           lfs: true
@@ -353,12 +353,12 @@ jobs:
             compile-extension:json-language-features-server \
             compile-extension:markdown-language-features \
             compile-extension-media \
-            compile-extension:microsoft-authentication \
+            compile-extension:zyraxon-authentication \
             compile-extension:typescript-language-features \
-            compile-extension:vscode-api-tests \
-            compile-extension:vscode-colorize-tests \
-            compile-extension:vscode-colorize-perf-tests \
-            compile-extension:vscode-test-resolver
+            compile-extension:zyraxoncode-api-tests \
+            compile-extension:zyraxoncode-colorize-tests \
+            compile-extension:zyraxoncode-colorize-perf-tests \
+            compile-extension:zyraxoncode-test-resolver
 
       - name: 🧪 Run integration tests (Electron)
         if: ${{ inputs.electron_tests && inputs.unit_and_integration_tests }}
@@ -401,7 +401,7 @@ jobs:
       # first; spawning a musl-linked ELF on the glibc-based GitHub Actions
       # runner returns ENOENT (missing ELF interpreter), which causes Claude
       # session smoke tests to time out. See
-      # https://github.com/anthropics/claude-agent-sdk-typescript for the SDK
+      # __ZYRAXKEEP__0_ for the SDK
       # resolution order.
       - name: Remove musl Claude binary on glibc Linux
         if: ${{ inputs.smoke_tests }}

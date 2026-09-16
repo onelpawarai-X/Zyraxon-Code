@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import 'mocha';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import type { ICompletionResource } from '../types';
-import type { Uri } from 'vscode';
+import type { Uri } from 'zyraxoncode';
 
 export interface ISuiteSpec {
 	name: string;
@@ -26,16 +26,16 @@ export interface ITestSpec {
 	expectedCompletions?: (string | ICompletionResource)[];
 }
 
-const fixtureDir = vscode.Uri.joinPath(vscode.Uri.file(__dirname), '../../testWorkspace');
+const fixtureDir = zyraxoncode.Uri.joinPath(zyraxoncode.Uri.file(__dirname), '../../testWorkspace');
 
 /**
  * A default set of paths shared across tests.
  */
 export const testPaths = {
 	fixtureDir,
-	cwdParent: vscode.Uri.joinPath(fixtureDir, 'parent'),
-	cwd: vscode.Uri.joinPath(fixtureDir, 'parent/home'),
-	cwdChild: vscode.Uri.joinPath(fixtureDir, 'parent/home/child'),
+	cwdParent: zyraxoncode.Uri.joinPath(fixtureDir, 'parent'),
+	cwd: zyraxoncode.Uri.joinPath(fixtureDir, 'parent/home'),
+	cwdChild: zyraxoncode.Uri.joinPath(fixtureDir, 'parent/home/child'),
 };
 
 export function removeArrayEntries<T>(array: T[], ...elements: T[]): T[] {

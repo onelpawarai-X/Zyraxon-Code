@@ -25,7 +25,7 @@ export namespace SessionType {
  * Decode a ZYRAXON Code chat session resource URI to extract the raw session ID.
  *
  * Handles multiple URI schemes:
- * - `vscode-chat-session://local/<base64EncodedSessionId>` — foreground chat sessions
+ * - `__ZYRAXKEEP__0_<base64EncodedSessionId>` — foreground chat sessions
  * - `copilotcli://<sessionId>` — CLI in-process sessions
  * - `claude-code://<sessionId>` — Claude Code sessions
  *
@@ -49,15 +49,15 @@ export function decodeSessionId(sessionResource: URI): string {
  *
  * @param sessionResource - The chat session resource URI
  * @returns The session type string. Returns `SessionType.Local` for local sessions
- *          (vscodeChatEditor and vscodeLocalChatSession schemes), or the scheme/authority
+ *          (zyraxoncodeChatEditor and zyraxoncodeLocalChatSession schemes), or the scheme/authority
  *          for contributed sessions.
  */
 export function getChatSessionType(sessionResource: URI): string {
-	if (sessionResource.scheme === Schemas.vscodeChatEditor) {
+	if (sessionResource.scheme === Schemas.zyraxoncodeChatEditor) {
 		return SessionType.Local;
 	}
 
-	if (sessionResource.scheme === Schemas.vscodeLocalChatSession) {
+	if (sessionResource.scheme === Schemas.zyraxoncodeLocalChatSession) {
 		return sessionResource.authority || SessionType.Local;
 	}
 

@@ -33,7 +33,7 @@ export interface DefaultModelContributionOptions {
 	 *   {@link ILanguageModelChatMetadata.asQualifiedName}. Kept for backward
 	 *   compatibility with existing settings (plan/explore agent).
 	 * - `'vendorAndId'`: `${vendor}/${id}` — stable composite of API-stable
-	 *   fields, directly usable with `vscode.lm.selectChatModels`.
+	 *   fields, directly usable with `zyraxoncode.lm.selectChatModels`.
 	 */
 	readonly storageFormat?: 'qualifiedName' | 'vendorAndId';
 	/**

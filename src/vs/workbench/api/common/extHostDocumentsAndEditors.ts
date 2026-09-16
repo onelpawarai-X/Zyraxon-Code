@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as assert from '../../../base/common/assert.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Emitter, Event } from '../../../base/common/event.js';
 import { dispose } from '../../../base/common/lifecycle.js';
 import { URI } from '../../../base/common/uri.js';
@@ -42,13 +42,13 @@ export class ExtHostDocumentsAndEditors implements ExtHostDocumentsAndEditorsSha
 
 	private readonly _onDidAddDocuments = new Emitter<readonly ExtHostDocumentData[]>();
 	private readonly _onDidRemoveDocuments = new Emitter<readonly ExtHostDocumentData[]>();
-	private readonly _onDidChangeVisibleTextEditors = new Emitter<readonly vscode.TextEditor[]>();
-	private readonly _onDidChangeActiveTextEditor = new Emitter<vscode.TextEditor | undefined>();
+	private readonly _onDidChangeVisibleTextEditors = new Emitter<readonly zyraxoncode.TextEditor[]>();
+	private readonly _onDidChangeActiveTextEditor = new Emitter<zyraxoncode.TextEditor | undefined>();
 
 	readonly onDidAddDocuments: Event<readonly ExtHostDocumentData[]> = this._onDidAddDocuments.event;
 	readonly onDidRemoveDocuments: Event<readonly ExtHostDocumentData[]> = this._onDidRemoveDocuments.event;
-	readonly onDidChangeVisibleTextEditors: Event<readonly vscode.TextEditor[]> = this._onDidChangeVisibleTextEditors.event;
-	readonly onDidChangeActiveTextEditor: Event<vscode.TextEditor | undefined> = this._onDidChangeActiveTextEditor.event;
+	readonly onDidChangeVisibleTextEditors: Event<readonly zyraxoncode.TextEditor[]> = this._onDidChangeVisibleTextEditors.event;
+	readonly onDidChangeActiveTextEditor: Event<zyraxoncode.TextEditor | undefined> = this._onDidChangeActiveTextEditor.event;
 
 	constructor(
 		@IExtHostRpcService private readonly _extHostRpc: IExtHostRpcService,
@@ -84,7 +84,7 @@ export class ExtHostDocumentsAndEditors implements ExtHostDocumentsAndEditorsSha
 				// double check -> only notebook cell documents should be
 				// referenced/opened more than once...
 				if (ref) {
-					if (resource.scheme !== Schemas.vscodeNotebookCell && resource.scheme !== Schemas.vscodeInteractiveInput) {
+					if (resource.scheme !== Schemas.zyraxoncodeNotebookCell && resource.scheme !== Schemas.zyraxoncodeInteractiveInput) {
 						throw new Error(`document '${resource} already exists!'`);
 					}
 				}
@@ -174,9 +174,9 @@ export class ExtHostDocumentsAndEditors implements ExtHostDocumentsAndEditorsSha
 		return this._editors.get(id);
 	}
 
-	activeEditor(): vscode.TextEditor | undefined;
+	activeEditor(): zyraxoncode.TextEditor | undefined;
 	activeEditor(internal: true): ExtHostTextEditor | undefined;
-	activeEditor(internal?: true): vscode.TextEditor | ExtHostTextEditor | undefined {
+	activeEditor(internal?: true): zyraxoncode.TextEditor | ExtHostTextEditor | undefined {
 		if (!this._activeEditorId) {
 			return undefined;
 		}

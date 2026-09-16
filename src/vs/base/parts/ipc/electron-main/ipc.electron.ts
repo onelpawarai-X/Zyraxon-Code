@@ -31,7 +31,7 @@ export class Server extends IPCServer {
 	private static readonly Clients = new Map<number, IDisposable>();
 
 	private static getOnDidClientConnect(): Event<ClientConnectionEvent> {
-		const onHello = Event.fromNodeEventEmitter<WebContents>(validatedIpcMain, 'vscode:hello', ({ sender }) => sender);
+		const onHello = Event.fromNodeEventEmitter<WebContents>(validatedIpcMain, 'zyraxoncode:hello', ({ sender }) => sender);
 
 		return Event.map(onHello, webContents => {
 			const id = webContents.id;
@@ -45,8 +45,8 @@ export class Server extends IPCServer {
 			});
 			Server.Clients.set(id, reconnectDisposable);
 
-			const onMessage = createScopedOnMessageEvent(id, 'vscode:message') as Event<VSBuffer>;
-			const onDidClientDisconnect = Event.any(Event.signal(createScopedOnMessageEvent(id, 'vscode:disconnect')), onDidClientReconnect.event);
+			const onMessage = createScopedOnMessageEvent(id, 'zyraxoncode:message') as Event<VSBuffer>;
+			const onDidClientDisconnect = Event.any(Event.signal(createScopedOnMessageEvent(id, 'zyraxoncode:disconnect')), onDidClientReconnect.event);
 			Event.once(onDidClientDisconnect)(() => {
 				if (Server.Clients.get(id) === reconnectDisposable) {
 					Server.Clients.delete(id);

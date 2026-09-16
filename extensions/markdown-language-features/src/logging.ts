@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Disposable } from './util/dispose';
 
 
@@ -12,10 +12,10 @@ export interface ILogger {
 }
 
 export class VsCodeOutputLogger extends Disposable implements ILogger {
-	#outputChannelValue?: vscode.LogOutputChannel;
+	#outputChannelValue?: zyraxoncode.LogOutputChannel;
 
 	get #outputChannel() {
-		this.#outputChannelValue ??= this._register(vscode.window.createOutputChannel('Markdown', { log: true }));
+		this.#outputChannelValue ??= this._register(zyraxoncode.window.createOutputChannel('Markdown', { log: true }));
 		return this.#outputChannelValue;
 	}
 

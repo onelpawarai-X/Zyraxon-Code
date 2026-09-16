@@ -9,7 +9,7 @@ import { Disposable } from '../../../util/vs/base/common/lifecycle';
 export const ILogService = createServiceIdentifier<ILogService>('ILogService');
 
 /**
- * Log levels (taken from vscode.d.ts)
+ * Log levels (taken from zyraxoncode.d.ts)
  */
 export enum LogLevel {
 
@@ -92,7 +92,7 @@ export interface ILogService extends ILogger {
 }
 
 /**
- * Mirrors vscode's {@link LogOutputChannel} in terms of available logging functions
+ * Mirrors zyraxoncode's {@link LogOutputChannel} in terms of available logging functions
  * Args has been ommitted for now in favor of simplifying the interface
  */
 export interface ILogger {

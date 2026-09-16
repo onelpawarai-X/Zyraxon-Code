@@ -688,7 +688,7 @@ class ExtensionsScanner extends Disposable {
 					name,
 					publisher,
 					version: scannedProfileExtension.version,
-					engines: { vscode: '' }
+					engines: { zyraxoncode: '' }
 				};
 			} else {
 				if (input.type !== ExtensionType.System) {
@@ -1088,7 +1088,7 @@ export class NativeExtensionsScannerService extends AbstractExtensionsScannerSer
 		super(
 			systemExtensionsLocation,
 			userExtensionsLocation,
-			joinPath(userHome, '.vscode-oss-dev', 'extensions', 'control.json'),
+			joinPath(userHome, '.zyraxoncode-oss-dev', 'extensions', 'control.json'),
 			currentProfile,
 			userDataProfilesService, extensionsProfileScannerService, fileService, logService, environmentService, productService, uriIdentityService, instantiationService);
 		this.translationsPromise = (async () => {

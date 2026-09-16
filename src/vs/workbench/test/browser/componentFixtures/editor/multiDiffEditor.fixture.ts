@@ -115,7 +115,7 @@ export function createServer(config: Config) {
 function renderMultiDiffEditor({ container, disposableStore, disposableStackStore, theme }: ComponentFixtureContext): void {
 	container.style.width = '800px';
 	container.style.height = '600px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const instantiationService = createCommonServices(disposableStore, theme, new TestDiffProviderFactoryService());
 
@@ -149,13 +149,13 @@ const MODIFIED_HIDDEN = `${UNCHANGED_BLOCK}\nconst changed = 'after';\nconst add
 function renderMultiDiffEditorHideOriginalLineNumbers({ container, disposableStore, disposableStackStore, theme }: ComponentFixtureContext): void {
 	container.style.width = '800px';
 	container.style.height = '600px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const instantiationService = createCommonServices(disposableStore, theme, new TestDiffProviderFactoryService());
 
 	const textModels = disposableStackStore.add(new DisposableStore());
-	const original = textModels.add(createTextModel(instantiationService, ORIGINAL_HIDDEN, URI.parse('inmemory://original/settings.ts'), 'typescript'));
-	const modified = textModels.add(createTextModel(instantiationService, MODIFIED_HIDDEN, URI.parse('inmemory://modified/settings.ts'), 'typescript'));
+	const original = textModels.add(createTextModel(instantiationService, ORIGINAL_HIDDEN, URI.parse('__ZYRAXKEEP__0_'), 'typescript'));
+	const modified = textModels.add(createTextModel(instantiationService, MODIFIED_HIDDEN, URI.parse('__ZYRAXKEEP__1_'), 'typescript'));
 	const doc = RefCounted.createOfNonDisposable<IDocumentDiffItem>({ original, modified }, { dispose() { } });
 
 	const widget = disposableStackStore.add(createWidget(instantiationService, container, {
@@ -237,12 +237,12 @@ function createWidget(instantiationService: IInstantiationService, container: HT
 }
 
 function createDocuments(instantiationService: TestInstantiationService, textModels: DisposableStore) {
-	const original1 = textModels.add(createTextModel(instantiationService, ORIGINAL_CODE_1, URI.parse('inmemory://original/greet.ts'), 'typescript'));
-	const modified1 = textModels.add(createTextModel(instantiationService, MODIFIED_CODE_1, URI.parse('inmemory://modified/greet.ts'), 'typescript'));
-	const original2 = textModels.add(createTextModel(instantiationService, ORIGINAL_CODE_2, URI.parse('inmemory://original/config.ts'), 'typescript'));
-	const modified2 = textModels.add(createTextModel(instantiationService, MODIFIED_CODE_2, URI.parse('inmemory://modified/config.ts'), 'typescript'));
-	const original3 = textModels.add(createTextModel(instantiationService, ORIGINAL_CODE_3, URI.parse('inmemory://original/server.ts'), 'typescript'));
-	const modified3 = textModels.add(createTextModel(instantiationService, MODIFIED_CODE_3, URI.parse('inmemory://modified/server.ts'), 'typescript'));
+	const original1 = textModels.add(createTextModel(instantiationService, ORIGINAL_CODE_1, URI.parse('__ZYRAXKEEP__2_'), 'typescript'));
+	const modified1 = textModels.add(createTextModel(instantiationService, MODIFIED_CODE_1, URI.parse('__ZYRAXKEEP__3_'), 'typescript'));
+	const original2 = textModels.add(createTextModel(instantiationService, ORIGINAL_CODE_2, URI.parse('__ZYRAXKEEP__4_'), 'typescript'));
+	const modified2 = textModels.add(createTextModel(instantiationService, MODIFIED_CODE_2, URI.parse('__ZYRAXKEEP__5_'), 'typescript'));
+	const original3 = textModels.add(createTextModel(instantiationService, ORIGINAL_CODE_3, URI.parse('__ZYRAXKEEP__6_'), 'typescript'));
+	const modified3 = textModels.add(createTextModel(instantiationService, MODIFIED_CODE_3, URI.parse('__ZYRAXKEEP__7_'), 'typescript'));
 	return {
 		doc1: RefCounted.createOfNonDisposable<IDocumentDiffItem>({ original: original1, modified: modified1 }, { dispose() { } }),
 		doc2: RefCounted.createOfNonDisposable<IDocumentDiffItem>({ original: original2, modified: modified2 }, { dispose() { } }),
@@ -254,7 +254,7 @@ function renderMultiDiffEditorIncrementalUpdate() {
 	return ({ container, disposableStore, disposableStackStore, theme }: ComponentFixtureContext) => {
 		container.style.width = '800px';
 		container.style.height = '600px';
-		container.style.border = '1px solid var(--vscode-editorWidget-border)';
+		container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 		// First file: sync diffs (already resolved). Files 2+3: 800ms delay.
 		const delayedFactory = new DelayedDiffProviderFactoryService(800);
@@ -285,7 +285,7 @@ function renderMultiDiffEditorDocumentSwap() {
 	return ({ container, disposableStore, disposableStackStore, theme }: ComponentFixtureContext) => {
 		container.style.width = '800px';
 		container.style.height = '600px';
-		container.style.border = '1px solid var(--vscode-editorWidget-border)';
+		container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 		const delayedFactory = new DelayedDiffProviderFactoryService(800);
 		const instantiationService = createCommonServices(disposableStore, theme, delayedFactory);
@@ -294,8 +294,8 @@ function renderMultiDiffEditorDocumentSwap() {
 		const widget = disposableStackStore.add(createWidget(instantiationService, container));
 
 		const makeDoc = (origText: string, modText: string, name: string) => {
-			const original = textModels.add(createTextModel(instantiationService, origText, URI.parse(`inmemory://original/${name}`), 'typescript'));
-			const modified = textModels.add(createTextModel(instantiationService, modText, URI.parse(`inmemory://modified/${name}`), 'typescript'));
+			const original = textModels.add(createTextModel(instantiationService, origText, URI.parse(`__ZYRAXKEEP__8_{name}`), 'typescript'));
+			const modified = textModels.add(createTextModel(instantiationService, modText, URI.parse(`__ZYRAXKEEP__9_{name}`), 'typescript'));
 			return RefCounted.createOfNonDisposable<IDocumentDiffItem>({ original, modified }, { dispose() { } });
 		};
 

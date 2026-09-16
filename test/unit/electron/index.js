@@ -127,7 +127,7 @@ if (crashReporterDirectory) {
 }
 
 if (!args.dev) {
-	app.setPath('userData', path.join(tmpdir(), `vscode-tests-${Date.now()}`));
+	app.setPath('userData', path.join(tmpdir(), `zyraxoncode-tests-${Date.now()}`));
 }
 
 function deserializeSuite(suite) {
@@ -233,7 +233,7 @@ class IPCRunner extends events.EventEmitter {
 app.on('ready', () => {
 
 	// needed when loading resources from the renderer, e.g xterm.js or the encoding lib
-	session.defaultSession.protocol.registerFileProtocol('vscode-file', (request, callback) => {
+	session.defaultSession.protocol.registerFileProtocol('zyraxoncode-file', (request, callback) => {
 		const path = new URL(request.url).pathname;
 		callback({ path });
 	});
@@ -248,7 +248,7 @@ app.on('ready', () => {
 	// We need to provide a basic `ISandboxConfiguration`
 	// for our preload script to function properly because
 	// some of our types depend on it (e.g. product.ts).
-	ipcMain.handle('vscode:test-vscode-window-config', async () => {
+	ipcMain.handle('zyraxoncode:test-zyraxoncode-window-config', async () => {
 		return {
 			product: {
 				version: '1.x.y',
@@ -262,7 +262,7 @@ app.on('ready', () => {
 	});
 
 	// No-op since invoke the IPC as part of IIFE in the preload.
-	ipcMain.handle('vscode:fetchShellEnv', event => { });
+	ipcMain.handle('zyraxoncode:fetchShellEnv', event => { });
 
 	/**
 	 * Validates that a file path is within the project root for security purposes.
@@ -288,7 +288,7 @@ app.on('ready', () => {
 	}
 
 	// Handle file reading for tests
-	ipcMain.handle('vscode:readFile', async (event, filePath) => {
+	ipcMain.handle('zyraxoncode:readFile', async (event, filePath) => {
 		validatePathWithinProject(filePath);
 
 		try {
@@ -300,7 +300,7 @@ app.on('ready', () => {
 	});
 
 	// Handle file stat for tests
-	ipcMain.handle('vscode:statFile', async (event, filePath) => {
+	ipcMain.handle('zyraxoncode:statFile', async (event, filePath) => {
 		validatePathWithinProject(filePath);
 
 		try {
@@ -325,8 +325,8 @@ app.on('ready', () => {
 		width: 800,
 		show: false,
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js'), // ensure similar environment as VSCode as tests may depend on this
-			additionalArguments: [`--vscode-window-config=vscode:test-vscode-window-config`],
+			preload: path.join(__dirname, 'preload.js'), // ensure similar environment as ZyraxonCode as tests may depend on this
+			additionalArguments: [`--zyraxoncode-window-config=zyraxoncode:test-zyraxoncode-window-config`],
 			nodeIntegration: true,
 			contextIsolation: false,
 			enableWebSQL: false,

@@ -20,14 +20,14 @@ export interface ICodexLaunchConfig {
 }
 
 export function isCodexThreadProviderCompatible(usageSource: CodexUsageSource, modelProvider: string): boolean {
-	return usageSource === 'copilot' ? modelProvider === 'vscode-proxy' : modelProvider !== 'vscode-proxy';
+	return usageSource === 'copilot' ? modelProvider === 'zyraxoncode-proxy' : modelProvider !== 'zyraxoncode-proxy';
 }
 
 /** Explicitly bind a compatible resumed thread to the current global usage source. */
 export function buildCodexResumeParams(usageSource: CodexUsageSource, threadId: string, mcpServers: Readonly<Record<string, unknown>>, workingDirectories?: readonly string[]): ThreadResumeParams {
 	return {
 		threadId,
-		modelProvider: usageSource === 'copilot' ? 'vscode-proxy' : 'openai',
+		modelProvider: usageSource === 'copilot' ? 'zyraxoncode-proxy' : 'openai',
 		...(workingDirectories?.length ? {
 			cwd: workingDirectories[0],
 			runtimeWorkspaceRoots: [...workingDirectories],
@@ -56,13 +56,13 @@ export function buildCodexLaunchConfig(
 	}
 	const overrides = [
 		...(proxy ? [
-			`model_provider="vscode-proxy"`,
-			`model_providers.vscode-proxy.name="ZYRAXON Code Proxy"`,
-			`model_providers.vscode-proxy.base_url="${proxy.baseUrl}/v1"`,
-			`model_providers.vscode-proxy.wire_api="responses"`,
-			`model_providers.vscode-proxy.env_key="OPENAI_API_KEY"`,
-			`model_providers.vscode-proxy.requires_openai_auth=false`,
-			`model_providers.vscode-proxy.supports_websockets=false`,
+			`model_provider="zyraxoncode-proxy"`,
+			`model_providers.zyraxoncode-proxy.name="ZYRAXON Code Proxy"`,
+			`model_providers.zyraxoncode-proxy.base_url="${proxy.baseUrl}/v1"`,
+			`model_providers.zyraxoncode-proxy.wire_api="responses"`,
+			`model_providers.zyraxoncode-proxy.env_key="OPENAI_API_KEY"`,
+			`model_providers.zyraxoncode-proxy.requires_openai_auth=false`,
+			`model_providers.zyraxoncode-proxy.supports_websockets=false`,
 		] : []),
 		// Codex filters its shell tool's env through `shell_environment_policy`,
 		// so pin the marker there too — a user policy (e.g. `inherit = "core"`)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <policyDefinitions revision="1.1" schemaVersion="1.0">
 	<policyNamespaces>
-		<target prefix="CodeOSS" namespace="Microsoft.Policies.CodeOSS" />
+		<target prefix="CodeOSS" namespace="Zyraxon.Policies.CodeOSS" />
 	</policyNamespaces>
 	<resources minRequiredRevision="1.0" />
 	<supportedOn>

@@ -57,7 +57,7 @@ export function resolveMobileDiffLanguageId(languageService: ILanguageService, d
 		return 'plaintext';
 	}
 	// `guessLanguageIdByFilepathOrFirstLine` already handles unknown
-	// URI schemes (like `vscode-agent-host://`) through resource paths
+	// URI schemes (like `zyraxoncode-agent-host://`) through resource paths
 	// and basenames for extension matching.
 	const guessed = languageService.guessLanguageIdByFilepathOrFirstLine(uri);
 	if (guessed && guessed !== 'unknown') {

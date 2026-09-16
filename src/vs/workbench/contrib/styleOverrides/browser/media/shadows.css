@@ -13,7 +13,7 @@
  * regardless of the `workbench.shadows` setting.
  *
  * Only the part-level shadows are suppressed. The floating-modal shadows
- * (`--vscode-shadow-lg` / `--vscode-shadow-xl` used by hovers, dropdowns,
+ * (`--zyraxoncode-shadow-lg` / `--zyraxoncode-shadow-xl` used by hovers, dropdowns,
  * dialogs and notifications) are intentionally left alone — these are preserved
  * even when `workbench.shadows` is disabled.
  *
@@ -27,10 +27,10 @@
 	 * Use zero-offset transparent shadows instead of `none` because these
 	 * variables are interpolated into multi-value box-shadow declarations.
 	 */
-	--vscode-shadow-active-tab: 0 0 0 0 transparent;
-	--vscode-shadow-depth-x: 0 0 0 0 transparent;
-	--vscode-shadow-depth-y: 0 0 0 0 transparent;
-	--vscode-shadow-sm: 0 0 0 0 transparent;
+	--zyraxoncode-shadow-active-tab: 0 0 0 0 transparent;
+	--zyraxoncode-shadow-depth-x: 0 0 0 0 transparent;
+	--zyraxoncode-shadow-depth-y: 0 0 0 0 transparent;
+	--zyraxoncode-shadow-sm: 0 0 0 0 transparent;
 }
 
 .style-override.monaco-workbench .part.titlebar,
@@ -44,5 +44,5 @@
 }
 
 .style-override.monaco-workbench:not(.hc-black):not(.hc-light) .terminal-resize-overlay {
-	box-shadow: var(--vscode-shadow-lg);
+	box-shadow: var(--zyraxoncode-shadow-lg);
 }

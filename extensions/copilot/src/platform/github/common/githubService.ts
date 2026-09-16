@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { Endpoints } from '@octokit/types';
-import { CCAModel, RemoteAgentJobPayload } from '@vscode/copilot-api';
+import { CCAModel, RemoteAgentJobPayload } from '@zyraxoncode/copilot-api';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { decodeBase64 } from '../../../util/vs/base/common/buffer';
 import { ICAPIClientService } from '../../endpoint/common/capiClient';
@@ -30,7 +30,7 @@ export type IGetRepositoryInfoResponseData = Endpoints['GET /repos/{owner}/{repo
 export const IGithubRepositoryService = createServiceIdentifier<IGithubRepositoryService>('IGithubRepositoryService');
 export const IOctoKitService = createServiceIdentifier<IOctoKitService>('IOctoKitService');
 
-export const VSCodeTeamId = 1682102;
+export const ZyraxonCodeTeamId = 1682102;
 
 export type GithubRepositoryItem = {
 	name: string;
@@ -165,14 +165,14 @@ export interface CustomAgentListItem {
 }
 
 export interface CustomAgentListOptions {
-	target?: 'github-copilot' | 'vscode';
+	target?: 'github-copilot' | 'zyraxoncode';
 	excludeInvalidConfig?: boolean;
 	dedupe?: boolean;
 	includeSources?: ('repo' | 'org' | 'enterprise')[];
 }
 
 export interface CustomAgentListOptions {
-	target?: 'github-copilot' | 'vscode';
+	target?: 'github-copilot' | 'zyraxoncode';
 	excludeInvalidConfig?: boolean;
 	dedupe?: boolean;
 	includeSources?: ('repo' | 'org' | 'enterprise')[];
@@ -522,8 +522,8 @@ export class BaseOctoKitService {
 			return this._cachedOutageStatus.value;
 		}
 		try {
-			// See docs at https://www.githubstatus.com/api/
-			const response = await this._fetcherService.fetch('https://www.githubstatus.com/api/v2/status.json', { method: 'GET', callSite: 'github-status' });
+			// See docs at __ZYRAXKEEP__0_
+			const response = await this._fetcherService.fetch('__ZYRAXKEEP__1_', { method: 'GET', callSite: 'github-status' });
 			const data = await response.json();
 			const status = data?.status?.indicator;
 			let result: GitHubOutageStatus;

@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 
-import { BasePromptElementProps } from '@vscode/prompt-tsx';
-import type { CancellationToken, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, ChatResult, Progress } from 'vscode';
+import { BasePromptElementProps } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, ChatResult, Progress } from 'zyraxoncode';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';

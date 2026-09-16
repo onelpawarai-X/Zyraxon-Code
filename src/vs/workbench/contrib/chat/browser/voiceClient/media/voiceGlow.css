@@ -236,21 +236,21 @@
 .hc-black .voice-glow-rim-warm,
 .hc-light .voice-glow-rim-cool,
 .hc-light .voice-glow-rim-warm {
-	border: var(--vscode-strokeThickness) solid;
+	border: var(--zyraxoncode-strokeThickness) solid;
 }
 
 .hc-black .voice-glow-rim-cool {
-	border-color: var(--vscode-charts-blue, #3794ff);
+	border-color: var(--zyraxoncode-charts-blue, #3794ff);
 }
 
 .hc-black .voice-glow-rim-warm {
-	border-color: var(--vscode-charts-purple, #b180d7);
+	border-color: var(--zyraxoncode-charts-purple, #b180d7);
 }
 
 .hc-light .voice-glow-rim-cool {
-	border-color: var(--vscode-charts-blue, #0f4a85);
+	border-color: var(--zyraxoncode-charts-blue, #0f4a85);
 }
 
 .hc-light .voice-glow-rim-warm {
-	border-color: var(--vscode-charts-purple, #5c2d91);
+	border-color: var(--zyraxoncode-charts-purple, #5c2d91);
 }

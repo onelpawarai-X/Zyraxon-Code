@@ -20,7 +20,7 @@ steps:
   - ${{ if eq(parameters.OS, 'linux') }}:
     - script: |
         set -e
-        APP_ROOT=$(agent.builddirectory)/VSCode-linux-$(VSCODE_ARCH)
+        APP_ROOT=$(agent.builddirectory)/ZyraxonCode-linux-$(VSCODE_ARCH)
         APP_NAME=$(node -p "require(\"$APP_ROOT/resources/app/product.json\").applicationName")
         echo "##vso[task.setvariable variable=VSCODE_UNDER_TEST]$APP_ROOT/$APP_NAME"
       displayName: Compute ZYRAXON Code build path
@@ -28,7 +28,7 @@ steps:
   - ${{ if eq(parameters.OS, 'darwin') }}:
     - script: |
         set -e
-        APP_ROOT=$(agent.builddirectory)/VSCode-darwin-$(VSCODE_ARCH)
+        APP_ROOT=$(agent.builddirectory)/ZyraxonCode-darwin-$(VSCODE_ARCH)
         APP_NAME="$(ls $APP_ROOT | head -n 1)"
         ProductJsonPath=$(find "$APP_ROOT" -name "product.json" -type f | head -n 1)
         BINARY_NAME=$(jq -r '.nameShort' "$ProductJsonPath")
@@ -37,7 +37,7 @@ steps:
 
   - ${{ if eq(parameters.OS, 'win32') }}:
     - powershell: |
-        $AppRoot = "$(agent.builddirectory)\test\VSCode-win32-$(VSCODE_ARCH)"
+        $AppRoot = "$(agent.builddirectory)\test\ZyraxonCode-win32-$(VSCODE_ARCH)"
         $ProductJsonPath = (Get-ChildItem -Path "$AppRoot" -Name "product.json" -Recurse | Select-Object -First 1)
         $AppProductJson = Get-Content -Raw -Path "$AppRoot\$ProductJsonPath" | ConvertFrom-Json
         $AppNameShort = $AppProductJson.nameShort

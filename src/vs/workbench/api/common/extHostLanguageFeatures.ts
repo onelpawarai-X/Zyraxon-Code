@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { asArray, coalesce, isFalsyOrEmpty, isNonEmptyArray } from '../../../base/common/arrays.js';
 import { raceCancellationError } from '../../../base/common/async.js';
 import { VSBuffer } from '../../../base/common/buffer.js';
@@ -46,7 +46,7 @@ class DocumentSymbolAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentSymbolProvider
+		private readonly _provider: zyraxoncode.DocumentSymbolProvider
 	) { }
 
 	async provideDocumentSymbols(resource: URI, token: CancellationToken): Promise<languages.DocumentSymbol[] | undefined> {
@@ -106,13 +106,13 @@ class DocumentSymbolAdapter {
 
 class CodeLensAdapter {
 
-	private readonly _cache = new Cache<vscode.CodeLens>('CodeLens');
+	private readonly _cache = new Cache<zyraxoncode.CodeLens>('CodeLens');
 	private readonly _disposables = new Map<number, DisposableStore>();
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
 		private readonly _commands: CommandsConverter,
-		private readonly _provider: vscode.CodeLensProvider,
+		private readonly _provider: zyraxoncode.CodeLensProvider,
 		private readonly _extension: IExtensionDescription,
 		private readonly _extTelemetry: ExtHostTelemetry,
 		private readonly _logService: ILogService,
@@ -155,7 +155,7 @@ class CodeLensAdapter {
 			return undefined;
 		}
 
-		let resolvedLens: vscode.CodeLens | undefined | null;
+		let resolvedLens: zyraxoncode.CodeLens | undefined | null;
 		if (typeof this._provider.resolveCodeLens !== 'function' || lens.isResolved) {
 			resolvedLens = lens;
 		} else {
@@ -192,7 +192,7 @@ class CodeLensAdapter {
 	}
 }
 
-function convertToLocationLinks(value: vscode.Location | vscode.Location[] | vscode.LocationLink[] | undefined | null): languages.LocationLink[] {
+function convertToLocationLinks(value: zyraxoncode.Location | zyraxoncode.Location[] | zyraxoncode.LocationLink[] | undefined | null): languages.LocationLink[] {
 	if (Array.isArray(value)) {
 		// eslint-disable-next-line local/code-no-any-casts
 		return (<any>value).map(typeConvert.DefinitionLink.from);
@@ -206,7 +206,7 @@ class DefinitionAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DefinitionProvider
+		private readonly _provider: zyraxoncode.DefinitionProvider
 	) { }
 
 	async provideDefinition(resource: URI, position: IPosition, token: CancellationToken): Promise<languages.LocationLink[]> {
@@ -221,7 +221,7 @@ class DeclarationAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DeclarationProvider
+		private readonly _provider: zyraxoncode.DeclarationProvider
 	) { }
 
 	async provideDeclaration(resource: URI, position: IPosition, token: CancellationToken): Promise<languages.LocationLink[]> {
@@ -236,7 +236,7 @@ class ImplementationAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.ImplementationProvider
+		private readonly _provider: zyraxoncode.ImplementationProvider
 	) { }
 
 	async provideImplementation(resource: URI, position: IPosition, token: CancellationToken): Promise<languages.LocationLink[]> {
@@ -251,7 +251,7 @@ class TypeDefinitionAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.TypeDefinitionProvider
+		private readonly _provider: zyraxoncode.TypeDefinitionProvider
 	) { }
 
 	async provideTypeDefinition(resource: URI, position: IPosition, token: CancellationToken): Promise<languages.LocationLink[]> {
@@ -265,13 +265,13 @@ class TypeDefinitionAdapter {
 class HoverAdapter {
 
 	private _hoverCounter: number = 0;
-	private _hoverMap: Map<number, vscode.Hover> = new Map<number, vscode.Hover>();
+	private _hoverMap: Map<number, zyraxoncode.Hover> = new Map<number, zyraxoncode.Hover>();
 
 	private static HOVER_MAP_MAX_SIZE = 10;
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.HoverProvider,
+		private readonly _provider: zyraxoncode.HoverProvider,
 	) { }
 
 	async provideHover(resource: URI, position: IPosition, context: languages.HoverContext<{ id: number }> | undefined, token: CancellationToken): Promise<extHostProtocol.HoverWithId | undefined> {
@@ -279,14 +279,14 @@ class HoverAdapter {
 		const doc = this._documents.getDocument(resource);
 		const pos = typeConvert.Position.to(position);
 
-		let value: vscode.Hover | null | undefined;
+		let value: zyraxoncode.Hover | null | undefined;
 		if (context && context.verbosityRequest) {
 			const previousHoverId = context.verbosityRequest.previousHover.id;
 			const previousHover = this._hoverMap.get(previousHoverId);
 			if (!previousHover) {
 				throw new Error(`Hover with id ${previousHoverId} not found`);
 			}
-			const hoverContext: vscode.HoverContext = { verbosityDelta: context.verbosityRequest.verbosityDelta, previousHover };
+			const hoverContext: zyraxoncode.HoverContext = { verbosityDelta: context.verbosityRequest.verbosityDelta, previousHover };
 			value = await this._provider.provideHover(doc, pos, token, hoverContext);
 		} else {
 			value = await this._provider.provideHover(doc, pos, token);
@@ -325,7 +325,7 @@ class EvaluatableExpressionAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.EvaluatableExpressionProvider,
+		private readonly _provider: zyraxoncode.EvaluatableExpressionProvider,
 	) { }
 
 	async provideEvaluatableExpression(resource: URI, position: IPosition, token: CancellationToken): Promise<languages.EvaluatableExpression | undefined> {
@@ -345,7 +345,7 @@ class InlineValuesAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.InlineValuesProvider,
+		private readonly _provider: zyraxoncode.InlineValuesProvider,
 	) { }
 
 	async provideInlineValues(resource: URI, viewPort: IRange, context: extHostProtocol.IInlineValueContextDto, token: CancellationToken): Promise<languages.InlineValue[] | undefined> {
@@ -362,7 +362,7 @@ class DocumentHighlightAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentHighlightProvider
+		private readonly _provider: zyraxoncode.DocumentHighlightProvider
 	) { }
 
 	async provideDocumentHighlights(resource: URI, position: IPosition, token: CancellationToken): Promise<languages.DocumentHighlight[] | undefined> {
@@ -382,7 +382,7 @@ class MultiDocumentHighlightAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.MultiDocumentHighlightProvider,
+		private readonly _provider: zyraxoncode.MultiDocumentHighlightProvider,
 		private readonly _logService: ILogService,
 	) { }
 
@@ -410,7 +410,7 @@ class MultiDocumentHighlightAdapter {
 class LinkedEditingRangeAdapter {
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.LinkedEditingRangeProvider
+		private readonly _provider: zyraxoncode.LinkedEditingRangeProvider
 	) { }
 
 	async provideLinkedEditingRanges(resource: URI, position: IPosition, token: CancellationToken): Promise<languages.LinkedEditingRanges | undefined> {
@@ -433,7 +433,7 @@ class ReferenceAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.ReferenceProvider
+		private readonly _provider: zyraxoncode.ReferenceProvider
 	) { }
 
 	async provideReferences(resource: URI, position: IPosition, context: languages.ReferenceContext, token: CancellationToken): Promise<languages.Location[] | undefined> {
@@ -455,14 +455,14 @@ export interface CustomCodeAction extends extHostProtocol.ICodeActionDto {
 class CodeActionAdapter {
 	private static readonly _maxCodeActionsPerFile: number = 1000;
 
-	private readonly _cache = new Cache<vscode.CodeAction | vscode.Command>('CodeAction');
+	private readonly _cache = new Cache<zyraxoncode.CodeAction | zyraxoncode.Command>('CodeAction');
 	private readonly _disposables = new Map<number, DisposableStore>();
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
 		private readonly _commands: CommandsConverter,
 		private readonly _diagnostics: ExtHostDiagnostics,
-		private readonly _provider: vscode.CodeActionProvider,
+		private readonly _provider: zyraxoncode.CodeActionProvider,
 		private readonly _logService: ILogService,
 		private readonly _extension: IExtensionDescription,
 		private readonly _apiDeprecation: IExtHostApiDeprecationService,
@@ -472,9 +472,9 @@ class CodeActionAdapter {
 
 		const doc = this._documents.getDocument(resource);
 		const ran = Selection.isISelection(rangeOrSelection)
-			? <vscode.Selection>typeConvert.Selection.to(rangeOrSelection)
-			: <vscode.Range>typeConvert.Range.to(rangeOrSelection);
-		const allDiagnostics: vscode.Diagnostic[] = [];
+			? <zyraxoncode.Selection>typeConvert.Selection.to(rangeOrSelection)
+			: <zyraxoncode.Range>typeConvert.Range.to(rangeOrSelection);
+		const allDiagnostics: zyraxoncode.Diagnostic[] = [];
 
 		for (const diagnostic of this._diagnostics.getDiagnostics(resource)) {
 			if (ran.intersection(diagnostic.range)) {
@@ -485,7 +485,7 @@ class CodeActionAdapter {
 			}
 		}
 
-		const codeActionContext: vscode.CodeActionContext = {
+		const codeActionContext: zyraxoncode.CodeActionContext = {
 			diagnostics: allDiagnostics,
 			only: context.only ? new CodeActionKind(context.only) : undefined,
 			triggerKind: typeConvert.CodeActionTriggerKind.to(context.trigger),
@@ -517,7 +517,7 @@ class CodeActionAdapter {
 					command: this._commands.toInternal(candidate, disposables),
 				});
 			} else {
-				const toConvert = candidate as vscode.CodeAction;
+				const toConvert = candidate as zyraxoncode.CodeAction;
 
 				// new school: convert code action
 				if (codeActionContext.only) {
@@ -583,21 +583,21 @@ class CodeActionAdapter {
 		this._cache.delete(cachedId);
 	}
 
-	private static _isCommand(thing: any): thing is vscode.Command {
-		return typeof (<vscode.Command>thing).command === 'string' && typeof (<vscode.Command>thing).title === 'string';
+	private static _isCommand(thing: any): thing is zyraxoncode.Command {
+		return typeof (<zyraxoncode.Command>thing).command === 'string' && typeof (<zyraxoncode.Command>thing).title === 'string';
 	}
 }
 
 class DocumentPasteEditProvider {
 
-	private _cachedPrepare?: Map<string, vscode.DataTransferItem>;
+	private _cachedPrepare?: Map<string, zyraxoncode.DataTransferItem>;
 
-	private readonly _editsCache = new Cache<vscode.DocumentPasteEdit>('DocumentPasteEdit.edits');
+	private readonly _editsCache = new Cache<zyraxoncode.DocumentPasteEdit>('DocumentPasteEdit.edits');
 
 	constructor(
 		private readonly _proxy: extHostProtocol.MainThreadLanguageFeaturesShape,
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentPasteEditProvider,
+		private readonly _provider: zyraxoncode.DocumentPasteEditProvider,
 		private readonly _handle: number,
 		private readonly _extension: IExtensionDescription,
 	) { }
@@ -610,12 +610,12 @@ class DocumentPasteEditProvider {
 		this._cachedPrepare = undefined;
 
 		const doc = this._documents.getDocument(resource);
-		const vscodeRanges = ranges.map(range => typeConvert.Range.to(range));
+		const zyraxoncodeRanges = ranges.map(range => typeConvert.Range.to(range));
 
 		const dataTransfer = typeConvert.DataTransfer.toDataTransfer(dataTransferDto, () => {
 			throw new NotImplementedError();
 		});
-		await this._provider.prepareDocumentPaste(doc, vscodeRanges, dataTransfer, token);
+		await this._provider.prepareDocumentPaste(doc, zyraxoncodeRanges, dataTransfer, token);
 		if (token.isCancellationRequested) {
 			return;
 		}
@@ -624,7 +624,7 @@ class DocumentPasteEditProvider {
 		const newEntries = Array.from(dataTransfer).filter(([, value]) => !(value instanceof InternalDataTransferItem));
 
 		// Store off original data transfer items so we can retrieve them on paste
-		const newCache = new Map<string, vscode.DataTransferItem>();
+		const newCache = new Map<string, zyraxoncode.DataTransferItem>();
 
 		const items = await Promise.all(Array.from(newEntries, async ([mime, value]) => {
 			const id = generateUuid();
@@ -643,9 +643,9 @@ class DocumentPasteEditProvider {
 		}
 
 		const doc = this._documents.getDocument(resource);
-		const vscodeRanges = ranges.map(range => typeConvert.Range.to(range));
+		const zyraxoncodeRanges = ranges.map(range => typeConvert.Range.to(range));
 
-		const items = dataTransferDto.items.map(([mime, value]): [string, vscode.DataTransferItem] => {
+		const items = dataTransferDto.items.map(([mime, value]): [string, zyraxoncode.DataTransferItem] => {
 			const cached = this._cachedPrepare?.get(value.id);
 			if (cached) {
 				return [mime, cached];
@@ -661,7 +661,7 @@ class DocumentPasteEditProvider {
 
 		const dataTransfer = new DataTransfer(items);
 
-		const edits = await this._provider.provideDocumentPasteEdits(doc, vscodeRanges, dataTransfer, {
+		const edits = await this._provider.provideDocumentPasteEdits(doc, zyraxoncodeRanges, dataTransfer, {
 			only: context.only ? new DocumentDropOrPasteEditKind(context.only) : undefined,
 			triggerKind: context.triggerKind,
 		}, token);
@@ -681,7 +681,7 @@ class DocumentPasteEditProvider {
 		}));
 	}
 
-	async resolvePasteEdit(id: extHostProtocol.ChainedCacheId, token: CancellationToken): Promise<{ insertText?: string | vscode.SnippetString; additionalEdit?: extHostProtocol.IWorkspaceEditDto }> {
+	async resolvePasteEdit(id: extHostProtocol.ChainedCacheId, token: CancellationToken): Promise<{ insertText?: string | zyraxoncode.SnippetString; additionalEdit?: extHostProtocol.IWorkspaceEditDto }> {
 		const [sessionId, itemId] = id;
 		const item = this._editsCache.get(sessionId, itemId);
 		if (!item || !this._provider.resolveDocumentPasteEdit) {
@@ -704,7 +704,7 @@ class DocumentFormattingAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentFormattingEditProvider
+		private readonly _provider: zyraxoncode.DocumentFormattingEditProvider
 	) { }
 
 	async provideDocumentFormattingEdits(resource: URI, options: languages.FormattingOptions, token: CancellationToken): Promise<languages.TextEdit[] | undefined> {
@@ -724,7 +724,7 @@ class RangeFormattingAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentRangeFormattingEditProvider
+		private readonly _provider: zyraxoncode.DocumentRangeFormattingEditProvider
 	) { }
 
 	async provideDocumentRangeFormattingEdits(resource: URI, range: IRange, options: languages.FormattingOptions, token: CancellationToken): Promise<languages.TextEdit[] | undefined> {
@@ -758,7 +758,7 @@ class OnTypeFormattingAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.OnTypeFormattingEditProvider
+		private readonly _provider: zyraxoncode.OnTypeFormattingEditProvider
 	) { }
 
 	autoFormatTriggerCharacters: string[] = []; // not here
@@ -779,10 +779,10 @@ class OnTypeFormattingAdapter {
 
 class NavigateTypeAdapter {
 
-	private readonly _cache = new Cache<vscode.SymbolInformation>('WorkspaceSymbols');
+	private readonly _cache = new Cache<zyraxoncode.SymbolInformation>('WorkspaceSymbols');
 
 	constructor(
-		private readonly _provider: vscode.WorkspaceSymbolProvider,
+		private readonly _provider: zyraxoncode.WorkspaceSymbolProvider,
 		private readonly _logService: ILogService
 	) { }
 
@@ -836,13 +836,13 @@ class NavigateTypeAdapter {
 
 class RenameAdapter {
 
-	static supportsResolving(provider: vscode.RenameProvider): boolean {
+	static supportsResolving(provider: zyraxoncode.RenameProvider): boolean {
 		return typeof provider.prepareRename === 'function';
 	}
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.RenameProvider,
+		private readonly _provider: zyraxoncode.RenameProvider,
 		private readonly _logService: ILogService
 	) { }
 
@@ -880,7 +880,7 @@ class RenameAdapter {
 		try {
 			const rangeOrLocation = await this._provider.prepareRename(doc, pos, token);
 
-			let range: vscode.Range | undefined;
+			let range: zyraxoncode.Range | undefined;
 			let text: string | undefined;
 			if (Range.isRange(rangeOrLocation)) {
 				range = rangeOrLocation;
@@ -923,14 +923,14 @@ class RenameAdapter {
 
 class NewSymbolNamesAdapter {
 
-	private static languageTriggerKindToVSCodeTriggerKind: Record<languages.NewSymbolNameTriggerKind, vscode.NewSymbolNameTriggerKind> = {
+	private static languageTriggerKindToZyraxonCodeTriggerKind: Record<languages.NewSymbolNameTriggerKind, zyraxoncode.NewSymbolNameTriggerKind> = {
 		[languages.NewSymbolNameTriggerKind.Invoke]: NewSymbolNameTriggerKind.Invoke,
 		[languages.NewSymbolNameTriggerKind.Automatic]: NewSymbolNameTriggerKind.Automatic,
 	};
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.NewSymbolNamesProvider,
+		private readonly _provider: zyraxoncode.NewSymbolNamesProvider,
 		private readonly _logService: ILogService
 	) { }
 
@@ -944,7 +944,7 @@ class NewSymbolNamesAdapter {
 		const pos = typeConvert.Range.to(range);
 
 		try {
-			const kind = NewSymbolNamesAdapter.languageTriggerKindToVSCodeTriggerKind[triggerKind];
+			const kind = NewSymbolNamesAdapter.languageTriggerKindToZyraxonCodeTriggerKind[triggerKind];
 			const value = await this._provider.provideNewSymbolNames(doc, pos, kind, token);
 			if (!value) {
 				return undefined;
@@ -983,8 +983,8 @@ type RelaxedSemanticTokens = { readonly resultId?: string; readonly data: number
 type RelaxedSemanticTokensEdit = { readonly start: number; readonly deleteCount: number; readonly data?: number[] };
 type RelaxedSemanticTokensEdits = { readonly resultId?: string; readonly edits: RelaxedSemanticTokensEdit[] };
 
-type ProvidedSemanticTokens = vscode.SemanticTokens | RelaxedSemanticTokens;
-type ProvidedSemanticTokensEdits = vscode.SemanticTokensEdits | RelaxedSemanticTokensEdits;
+type ProvidedSemanticTokens = zyraxoncode.SemanticTokens | RelaxedSemanticTokens;
+type ProvidedSemanticTokensEdits = zyraxoncode.SemanticTokensEdits | RelaxedSemanticTokensEdits;
 
 class DocumentSemanticTokensAdapter {
 
@@ -993,7 +993,7 @@ class DocumentSemanticTokensAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentSemanticTokensProvider,
+		private readonly _provider: zyraxoncode.DocumentSemanticTokensProvider,
 	) {
 		this._previousResults = new Map<number, SemanticTokensPreviousResult>();
 	}
@@ -1019,7 +1019,7 @@ class DocumentSemanticTokensAdapter {
 		this._previousResults.delete(semanticColoringResultId);
 	}
 
-	private static _fixProvidedSemanticTokens(v: ProvidedSemanticTokens | ProvidedSemanticTokensEdits): vscode.SemanticTokens | vscode.SemanticTokensEdits {
+	private static _fixProvidedSemanticTokens(v: ProvidedSemanticTokens | ProvidedSemanticTokensEdits): zyraxoncode.SemanticTokens | zyraxoncode.SemanticTokensEdits {
 		if (DocumentSemanticTokensAdapter._isSemanticTokens(v)) {
 			if (DocumentSemanticTokensAdapter._isCorrectSemanticTokens(v)) {
 				return v;
@@ -1038,7 +1038,7 @@ class DocumentSemanticTokensAdapter {
 		return v && !!((v as ProvidedSemanticTokens).data);
 	}
 
-	private static _isCorrectSemanticTokens(v: ProvidedSemanticTokens): v is vscode.SemanticTokens {
+	private static _isCorrectSemanticTokens(v: ProvidedSemanticTokens): v is zyraxoncode.SemanticTokens {
 		return (v.data instanceof Uint32Array);
 	}
 
@@ -1046,7 +1046,7 @@ class DocumentSemanticTokensAdapter {
 		return v && Array.isArray((v as ProvidedSemanticTokensEdits).edits);
 	}
 
-	private static _isCorrectSemanticTokensEdits(v: ProvidedSemanticTokensEdits): v is vscode.SemanticTokensEdits {
+	private static _isCorrectSemanticTokensEdits(v: ProvidedSemanticTokensEdits): v is zyraxoncode.SemanticTokensEdits {
 		for (const edit of v.edits) {
 			if (!(edit.data instanceof Uint32Array)) {
 				return false;
@@ -1055,7 +1055,7 @@ class DocumentSemanticTokensAdapter {
 		return true;
 	}
 
-	private static _convertToEdits(previousResult: SemanticTokensPreviousResult | null | undefined, newResult: vscode.SemanticTokens | vscode.SemanticTokensEdits): vscode.SemanticTokens | vscode.SemanticTokensEdits {
+	private static _convertToEdits(previousResult: SemanticTokensPreviousResult | null | undefined, newResult: zyraxoncode.SemanticTokens | zyraxoncode.SemanticTokensEdits): zyraxoncode.SemanticTokens | zyraxoncode.SemanticTokensEdits {
 		if (!DocumentSemanticTokensAdapter._isSemanticTokens(newResult)) {
 			return newResult;
 		}
@@ -1091,7 +1091,7 @@ class DocumentSemanticTokensAdapter {
 		}], newResult.resultId);
 	}
 
-	private _send(value: vscode.SemanticTokens | vscode.SemanticTokensEdits, original: vscode.SemanticTokens | vscode.SemanticTokensEdits): VSBuffer | null {
+	private _send(value: zyraxoncode.SemanticTokens | zyraxoncode.SemanticTokensEdits, original: zyraxoncode.SemanticTokens | zyraxoncode.SemanticTokensEdits): VSBuffer | null {
 		if (DocumentSemanticTokensAdapter._isSemanticTokens(value)) {
 			const myId = this._nextResultId++;
 			this._previousResults.set(myId, new SemanticTokensPreviousResult(value.resultId, value.data));
@@ -1125,7 +1125,7 @@ class DocumentRangeSemanticTokensAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentRangeSemanticTokensProvider,
+		private readonly _provider: zyraxoncode.DocumentRangeSemanticTokensProvider,
 	) { }
 
 	async provideDocumentRangeSemanticTokens(resource: URI, range: IRange, token: CancellationToken): Promise<VSBuffer | null> {
@@ -1137,7 +1137,7 @@ class DocumentRangeSemanticTokensAdapter {
 		return this._send(value);
 	}
 
-	private _send(value: vscode.SemanticTokens): VSBuffer {
+	private _send(value: zyraxoncode.SemanticTokens): VSBuffer {
 		return encodeSemanticTokensDto({
 			id: 0,
 			type: 'full',
@@ -1148,17 +1148,17 @@ class DocumentRangeSemanticTokensAdapter {
 
 class CompletionsAdapter {
 
-	static supportsResolving(provider: vscode.CompletionItemProvider): boolean {
+	static supportsResolving(provider: zyraxoncode.CompletionItemProvider): boolean {
 		return typeof provider.resolveCompletionItem === 'function';
 	}
 
-	private _cache = new Cache<vscode.CompletionItem>('CompletionItem');
+	private _cache = new Cache<zyraxoncode.CompletionItem>('CompletionItem');
 	private _disposables = new Map<number, DisposableStore>();
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
 		private readonly _commands: CommandsConverter,
-		private readonly _provider: vscode.CompletionItemProvider,
+		private readonly _provider: zyraxoncode.CompletionItemProvider,
 		private readonly _apiDeprecation: IExtHostApiDeprecationService,
 		private readonly _extension: IExtensionDescription,
 	) { }
@@ -1170,7 +1170,7 @@ class CompletionsAdapter {
 
 		// The default insert/replace ranges. It's important to compute them
 		// before asynchronously asking the provider for its results. See
-		// https://github.com/microsoft/vscode/issues/83400#issuecomment-546851421
+		// __ZYRAXKEEP__0_
 		const replaceRange = doc.getWordRangeAtPosition(pos) || new Range(pos, pos);
 		const insertRange = replaceRange.with({ end: pos });
 
@@ -1271,7 +1271,7 @@ class CompletionsAdapter {
 		this._cache.delete(id);
 	}
 
-	private _convertCompletionItem(item: vscode.CompletionItem, id: extHostProtocol.ChainedCacheId, defaultInsertRange?: vscode.Range, defaultReplaceRange?: vscode.Range): extHostProtocol.ISuggestDataDto {
+	private _convertCompletionItem(item: zyraxoncode.CompletionItem, id: extHostProtocol.ChainedCacheId, defaultInsertRange?: zyraxoncode.Range, defaultReplaceRange?: zyraxoncode.Range): extHostProtocol.ISuggestDataDto {
 
 		const disposables = this._disposables.get(id[0]);
 		if (!disposables) {
@@ -1313,7 +1313,7 @@ class CompletionsAdapter {
 		}
 
 		// 'overwrite[Before|After]'-logic
-		let range: vscode.Range | { inserting: vscode.Range; replacing: vscode.Range } | undefined;
+		let range: zyraxoncode.Range | { inserting: zyraxoncode.Range; replacing: zyraxoncode.Range } | undefined;
 		if (item.textEdit) {
 			range = item.textEdit.range;
 		} else if (item.range) {
@@ -1339,8 +1339,8 @@ class CompletionsAdapter {
 class InlineCompletionAdapter {
 	private readonly _references = new ReferenceMap<{
 		dispose(): void;
-		items: readonly vscode.InlineCompletionItem[];
-		list: vscode.InlineCompletionList | undefined;
+		items: readonly zyraxoncode.InlineCompletionItem[];
+		list: zyraxoncode.InlineCompletionList | undefined;
 	}>();
 
 	private readonly _isAdditionsProposedApiEnabled: boolean;
@@ -1348,7 +1348,7 @@ class InlineCompletionAdapter {
 	constructor(
 		private readonly _extension: IExtensionDescription,
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.InlineCompletionItemProvider,
+		private readonly _provider: zyraxoncode.InlineCompletionItemProvider,
 		private readonly _commands: CommandsConverter,
 	) {
 		this._isAdditionsProposedApiEnabled = isProposedApiEnabled(this._extension, 'inlineCompletionsAdditions');
@@ -1373,7 +1373,7 @@ class InlineCompletionAdapter {
 			&& typeof this._provider.setProviderOptionValue === 'function';
 	}
 
-	private readonly languageTriggerKindToVSCodeTriggerKind: Record<languages.InlineCompletionTriggerKind, InlineCompletionTriggerKind> = {
+	private readonly languageTriggerKindToZyraxonCodeTriggerKind: Record<languages.InlineCompletionTriggerKind, InlineCompletionTriggerKind> = {
 		[languages.InlineCompletionTriggerKind.Automatic]: InlineCompletionTriggerKind.Automatic,
 		[languages.InlineCompletionTriggerKind.Explicit]: InlineCompletionTriggerKind.Invoke,
 	};
@@ -1426,7 +1426,7 @@ class InlineCompletionAdapter {
 						text: context.selectedSuggestionInfo.text
 					}
 					: undefined,
-			triggerKind: this.languageTriggerKindToVSCodeTriggerKind[context.triggerKind],
+			triggerKind: this.languageTriggerKindToZyraxonCodeTriggerKind[context.triggerKind],
 			requestUuid: context.requestUuid,
 			requestIssuedDateTime: context.requestIssuedDateTime,
 			earliestShownDateTime: context.earliestShownDateTime,
@@ -1514,7 +1514,7 @@ class InlineCompletionAdapter {
 	disposeCompletions(pid: number, reason: languages.InlineCompletionsDisposeReason) {
 		const completionList = this._references.get(pid);
 		if (this._provider.handleListEndOfLifetime && this._isAdditionsProposedApiEnabled && completionList?.list) {
-			function translateReason(reason: languages.InlineCompletionsDisposeReason): vscode.InlineCompletionsDisposeReason {
+			function translateReason(reason: languages.InlineCompletionsDisposeReason): zyraxoncode.InlineCompletionsDisposeReason {
 				switch (reason.kind) {
 					case 'lostRace':
 						return { kind: InlineCompletionsDisposeReasonKind.LostRace };
@@ -1600,19 +1600,19 @@ class ReferenceMap<T> {
 
 class SignatureHelpAdapter {
 
-	private readonly _cache = new Cache<vscode.SignatureHelp>('SignatureHelp');
+	private readonly _cache = new Cache<zyraxoncode.SignatureHelp>('SignatureHelp');
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.SignatureHelpProvider,
+		private readonly _provider: zyraxoncode.SignatureHelpProvider,
 	) { }
 
 	async provideSignatureHelp(resource: URI, position: IPosition, context: extHostProtocol.ISignatureHelpContextDto, token: CancellationToken): Promise<extHostProtocol.ISignatureHelpDto | undefined> {
 		const doc = this._documents.getDocument(resource);
 		const pos = typeConvert.Position.to(position);
-		const vscodeContext = this.reviveContext(context);
+		const zyraxoncodeContext = this.reviveContext(context);
 
-		const value = await this._provider.provideSignatureHelp(doc, pos, token, vscodeContext);
+		const value = await this._provider.provideSignatureHelp(doc, pos, token, zyraxoncodeContext);
 		if (value) {
 			const id = this._cache.add([value]);
 			return { ...typeConvert.SignatureHelp.from(value), id };
@@ -1620,8 +1620,8 @@ class SignatureHelpAdapter {
 		return undefined;
 	}
 
-	private reviveContext(context: extHostProtocol.ISignatureHelpContextDto): vscode.SignatureHelpContext {
-		let activeSignatureHelp: vscode.SignatureHelp | undefined = undefined;
+	private reviveContext(context: extHostProtocol.ISignatureHelpContextDto): zyraxoncode.SignatureHelpContext {
+		let activeSignatureHelp: zyraxoncode.SignatureHelp | undefined = undefined;
 		if (context.activeSignatureHelp) {
 			const revivedSignatureHelp = typeConvert.SignatureHelp.to(context.activeSignatureHelp);
 			const saved = this._cache.get(context.activeSignatureHelp.id, 0);
@@ -1643,13 +1643,13 @@ class SignatureHelpAdapter {
 
 class InlayHintsAdapter {
 
-	private _cache = new Cache<vscode.InlayHint>('InlayHints');
+	private _cache = new Cache<zyraxoncode.InlayHint>('InlayHints');
 	private readonly _disposables = new Map<number, DisposableStore>();
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
 		private readonly _commands: CommandsConverter,
-		private readonly _provider: vscode.InlayHintsProvider,
+		private readonly _provider: zyraxoncode.InlayHintsProvider,
 		private readonly _logService: ILogService,
 		private readonly _extension: IExtensionDescription
 	) { }
@@ -1705,7 +1705,7 @@ class InlayHintsAdapter {
 		this._cache.delete(id);
 	}
 
-	private _isValidInlayHint(hint: vscode.InlayHint, range?: vscode.Range): boolean {
+	private _isValidInlayHint(hint: zyraxoncode.InlayHint, range?: zyraxoncode.Range): boolean {
 		if (hint.label.length === 0 || Array.isArray(hint.label) && hint.label.every(part => part.value.length === 0)) {
 			console.log('INVALID inlay hint, empty label', hint);
 			return false;
@@ -1717,7 +1717,7 @@ class InlayHintsAdapter {
 		return true;
 	}
 
-	private _convertInlayHint(hint: vscode.InlayHint, id: extHostProtocol.ChainedCacheId): extHostProtocol.IInlayHintDto {
+	private _convertInlayHint(hint: zyraxoncode.InlayHint, id: extHostProtocol.ChainedCacheId): extHostProtocol.IInlayHintDto {
 
 		const disposables = this._disposables.get(id[0]);
 		if (!disposables) {
@@ -1765,11 +1765,11 @@ class InlayHintsAdapter {
 
 class LinkProviderAdapter {
 
-	private _cache = new Cache<vscode.DocumentLink>('DocumentLink');
+	private _cache = new Cache<zyraxoncode.DocumentLink>('DocumentLink');
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentLinkProvider
+		private readonly _provider: zyraxoncode.DocumentLinkProvider
 	) { }
 
 	async provideLinks(resource: URI, token: CancellationToken): Promise<extHostProtocol.ILinksListDto | undefined> {
@@ -1807,7 +1807,7 @@ class LinkProviderAdapter {
 		}
 	}
 
-	private static _validateLink(link: vscode.DocumentLink): boolean {
+	private static _validateLink(link: zyraxoncode.DocumentLink): boolean {
 		if (link.target && link.target.path.length > 50_000) {
 			console.warn('DROPPING link because it is too long');
 			return false;
@@ -1839,7 +1839,7 @@ class ColorProviderAdapter {
 
 	constructor(
 		private _documents: ExtHostDocuments,
-		private _provider: vscode.DocumentColorProvider
+		private _provider: zyraxoncode.DocumentColorProvider
 	) { }
 
 	async provideColors(resource: URI, token: CancellationToken): Promise<extHostProtocol.IRawColorInfo[]> {
@@ -1873,7 +1873,7 @@ class FoldingProviderAdapter {
 
 	constructor(
 		private _documents: ExtHostDocuments,
-		private _provider: vscode.FoldingRangeProvider
+		private _provider: zyraxoncode.FoldingRangeProvider
 	) { }
 
 	async provideFoldingRanges(resource: URI, context: languages.FoldingContext, token: CancellationToken): Promise<languages.FoldingRange[] | undefined> {
@@ -1890,7 +1890,7 @@ class SelectionRangeAdapter {
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.SelectionRangeProvider,
+		private readonly _provider: zyraxoncode.SelectionRangeProvider,
 		private readonly _logService: ILogService
 	) { }
 
@@ -1911,7 +1911,7 @@ class SelectionRangeAdapter {
 			const oneResult: languages.SelectionRange[] = [];
 			allResults.push(oneResult);
 
-			let last: vscode.Position | vscode.Range = positions[i];
+			let last: zyraxoncode.Position | zyraxoncode.Range = positions[i];
 			let selectionRange = allProviderRanges[i];
 
 			while (true) {
@@ -1933,11 +1933,11 @@ class SelectionRangeAdapter {
 class CallHierarchyAdapter {
 
 	private readonly _idPool = new IdGenerator('');
-	private readonly _cache = new Map<string, Map<string, vscode.CallHierarchyItem>>();
+	private readonly _cache = new Map<string, Map<string, zyraxoncode.CallHierarchyItem>>();
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.CallHierarchyProvider
+		private readonly _provider: zyraxoncode.CallHierarchyProvider
 	) { }
 
 	async prepareSession(uri: URI, position: IPosition, token: CancellationToken): Promise<extHostProtocol.ICallHierarchyItemDto[] | undefined> {
@@ -1997,14 +1997,14 @@ class CallHierarchyAdapter {
 		this._cache.delete(sessionId);
 	}
 
-	private _cacheAndConvertItem(sessionId: string, item: vscode.CallHierarchyItem): extHostProtocol.ICallHierarchyItemDto {
+	private _cacheAndConvertItem(sessionId: string, item: zyraxoncode.CallHierarchyItem): extHostProtocol.ICallHierarchyItemDto {
 		const map = this._cache.get(sessionId)!;
 		const dto = typeConvert.CallHierarchyItem.from(item, sessionId, map.size.toString(36));
 		map.set(dto._itemId, item);
 		return dto;
 	}
 
-	private _itemFromCache(sessionId: string, itemId: string): vscode.CallHierarchyItem | undefined {
+	private _itemFromCache(sessionId: string, itemId: string): zyraxoncode.CallHierarchyItem | undefined {
 		const map = this._cache.get(sessionId);
 		return map?.get(itemId);
 	}
@@ -2013,11 +2013,11 @@ class CallHierarchyAdapter {
 class TypeHierarchyAdapter {
 
 	private readonly _idPool = new IdGenerator('');
-	private readonly _cache = new Map<string, Map<string, vscode.TypeHierarchyItem>>();
+	private readonly _cache = new Map<string, Map<string, zyraxoncode.TypeHierarchyItem>>();
 
 	constructor(
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.TypeHierarchyProvider
+		private readonly _provider: zyraxoncode.TypeHierarchyProvider
 	) { }
 
 	async prepareSession(uri: URI, position: IPosition, token: CancellationToken): Promise<extHostProtocol.ITypeHierarchyItemDto[] | undefined> {
@@ -2071,14 +2071,14 @@ class TypeHierarchyAdapter {
 		this._cache.delete(sessionId);
 	}
 
-	private _cacheAndConvertItem(sessionId: string, item: vscode.TypeHierarchyItem): extHostProtocol.ITypeHierarchyItemDto {
+	private _cacheAndConvertItem(sessionId: string, item: zyraxoncode.TypeHierarchyItem): extHostProtocol.ITypeHierarchyItemDto {
 		const map = this._cache.get(sessionId)!;
 		const dto = typeConvert.TypeHierarchyItem.from(item, sessionId, map.size.toString(36));
 		map.set(dto._itemId, item);
 		return dto;
 	}
 
-	private _itemFromCache(sessionId: string, itemId: string): vscode.TypeHierarchyItem | undefined {
+	private _itemFromCache(sessionId: string, itemId: string): zyraxoncode.TypeHierarchyItem | undefined {
 		const map = this._cache.get(sessionId);
 		return map?.get(itemId);
 	}
@@ -2086,12 +2086,12 @@ class TypeHierarchyAdapter {
 
 class DocumentDropEditAdapter {
 
-	private readonly _cache = new Cache<vscode.DocumentDropEdit>('DocumentDropEdit');
+	private readonly _cache = new Cache<zyraxoncode.DocumentDropEdit>('DocumentDropEdit');
 
 	constructor(
 		private readonly _proxy: extHostProtocol.MainThreadLanguageFeaturesShape,
 		private readonly _documents: ExtHostDocuments,
-		private readonly _provider: vscode.DocumentDropEditProvider,
+		private readonly _provider: zyraxoncode.DocumentDropEditProvider,
 		private readonly _handle: number,
 		private readonly _extension: IExtensionDescription,
 	) { }
@@ -2164,8 +2164,8 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 	private readonly _proxy: extHostProtocol.MainThreadLanguageFeaturesShape;
 	private readonly _adapter = new Map<number, AdapterData>();
 
-	private _inlineCompletionsUnificationState: vscode.InlineCompletionsUnificationState;
-	public get inlineCompletionsUnificationState(): vscode.InlineCompletionsUnificationState {
+	private _inlineCompletionsUnificationState: zyraxoncode.InlineCompletionsUnificationState;
+	public get inlineCompletionsUnificationState(): zyraxoncode.InlineCompletionsUnificationState {
 		return this._inlineCompletionsUnificationState;
 	}
 
@@ -2192,7 +2192,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		};
 	}
 
-	private _transformDocumentSelector(selector: vscode.DocumentSelector, extension: IExtensionDescription): Array<extHostProtocol.IDocumentFilterDto> {
+	private _transformDocumentSelector(selector: zyraxoncode.DocumentSelector, extension: IExtensionDescription): Array<extHostProtocol.IDocumentFilterDto> {
 		return typeConvert.DocumentSelector.from(selector, this._uriTransformer, extension);
 	}
 
@@ -2263,7 +2263,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- outline
 
-	registerDocumentSymbolProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentSymbolProvider, metadata?: vscode.DocumentSymbolProviderMetadata): vscode.Disposable {
+	registerDocumentSymbolProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentSymbolProvider, metadata?: zyraxoncode.DocumentSymbolProviderMetadata): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new DocumentSymbolAdapter(this._documents, provider), extension);
 		const displayName = (metadata && metadata.label) || ExtHostLanguageFeatures._extLabel(extension);
 		this._proxy.$registerDocumentSymbolProvider(handle, this._transformDocumentSelector(selector, extension), displayName);
@@ -2276,7 +2276,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- code lens
 
-	registerCodeLensProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.CodeLensProvider): vscode.Disposable {
+	registerCodeLensProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.CodeLensProvider): zyraxoncode.Disposable {
 		const handle = this._nextHandle();
 		const eventHandle = typeof provider.onDidChangeCodeLenses === 'function' ? this._nextHandle() : undefined;
 
@@ -2306,7 +2306,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- declaration
 
-	registerDefinitionProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DefinitionProvider): vscode.Disposable {
+	registerDefinitionProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DefinitionProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new DefinitionAdapter(this._documents, provider), extension);
 		this._proxy.$registerDefinitionSupport(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2316,7 +2316,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		return this._withAdapter(handle, DefinitionAdapter, adapter => adapter.provideDefinition(URI.revive(resource), position, token), [], token);
 	}
 
-	registerDeclarationProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DeclarationProvider): vscode.Disposable {
+	registerDeclarationProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DeclarationProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new DeclarationAdapter(this._documents, provider), extension);
 		this._proxy.$registerDeclarationSupport(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2326,7 +2326,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		return this._withAdapter(handle, DeclarationAdapter, adapter => adapter.provideDeclaration(URI.revive(resource), position, token), [], token);
 	}
 
-	registerImplementationProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.ImplementationProvider): vscode.Disposable {
+	registerImplementationProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.ImplementationProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new ImplementationAdapter(this._documents, provider), extension);
 		this._proxy.$registerImplementationSupport(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2336,7 +2336,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		return this._withAdapter(handle, ImplementationAdapter, adapter => adapter.provideImplementation(URI.revive(resource), position, token), [], token);
 	}
 
-	registerTypeDefinitionProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.TypeDefinitionProvider): vscode.Disposable {
+	registerTypeDefinitionProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.TypeDefinitionProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new TypeDefinitionAdapter(this._documents, provider), extension);
 		this._proxy.$registerTypeDefinitionSupport(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2348,7 +2348,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- extra info
 
-	registerHoverProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.HoverProvider, extensionId?: ExtensionIdentifier): vscode.Disposable {
+	registerHoverProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.HoverProvider, extensionId?: ExtensionIdentifier): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new HoverAdapter(this._documents, provider), extension);
 		this._proxy.$registerHoverProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2364,7 +2364,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- debug hover
 
-	registerEvaluatableExpressionProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.EvaluatableExpressionProvider, extensionId?: ExtensionIdentifier): vscode.Disposable {
+	registerEvaluatableExpressionProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.EvaluatableExpressionProvider, extensionId?: ExtensionIdentifier): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new EvaluatableExpressionAdapter(this._documents, provider), extension);
 		this._proxy.$registerEvaluatableExpressionProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2376,7 +2376,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- debug inline values
 
-	registerInlineValuesProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.InlineValuesProvider, extensionId?: ExtensionIdentifier): vscode.Disposable {
+	registerInlineValuesProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.InlineValuesProvider, extensionId?: ExtensionIdentifier): zyraxoncode.Disposable {
 
 		const eventHandle = typeof provider.onDidChangeInlineValues === 'function' ? this._nextHandle() : undefined;
 		const handle = this._addNewAdapter(new InlineValuesAdapter(this._documents, provider), extension);
@@ -2397,13 +2397,13 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- occurrences
 
-	registerDocumentHighlightProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentHighlightProvider): vscode.Disposable {
+	registerDocumentHighlightProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentHighlightProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new DocumentHighlightAdapter(this._documents, provider), extension);
 		this._proxy.$registerDocumentHighlightProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
 	}
 
-	registerMultiDocumentHighlightProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.MultiDocumentHighlightProvider): vscode.Disposable {
+	registerMultiDocumentHighlightProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.MultiDocumentHighlightProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new MultiDocumentHighlightAdapter(this._documents, provider, this._logService), extension);
 		this._proxy.$registerMultiDocumentHighlightProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2419,7 +2419,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- linked editing
 
-	registerLinkedEditingRangeProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.LinkedEditingRangeProvider): vscode.Disposable {
+	registerLinkedEditingRangeProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.LinkedEditingRangeProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new LinkedEditingRangeAdapter(this._documents, provider), extension);
 		this._proxy.$registerLinkedEditingRangeProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2440,7 +2440,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- references
 
-	registerReferenceProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.ReferenceProvider): vscode.Disposable {
+	registerReferenceProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.ReferenceProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new ReferenceAdapter(this._documents, provider), extension);
 		this._proxy.$registerReferenceSupport(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2452,7 +2452,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- code actions
 
-	registerCodeActionProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.CodeActionProvider, metadata?: vscode.CodeActionProviderMetadata): vscode.Disposable {
+	registerCodeActionProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.CodeActionProvider, metadata?: zyraxoncode.CodeActionProviderMetadata): zyraxoncode.Disposable {
 		const store = new DisposableStore();
 		const handle = this._addNewAdapter(new CodeActionAdapter(this._documents, this._commands.converter, this._diagnostics, provider, this._logService, extension, this._apiDeprecation), extension);
 		this._proxy.$registerCodeActionSupport(handle, this._transformDocumentSelector(selector, extension), {
@@ -2481,7 +2481,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- formatting
 
-	registerDocumentFormattingEditProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentFormattingEditProvider): vscode.Disposable {
+	registerDocumentFormattingEditProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentFormattingEditProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new DocumentFormattingAdapter(this._documents, provider), extension);
 		this._proxy.$registerDocumentFormattingSupport(handle, this._transformDocumentSelector(selector, extension), extension.identifier, extension.displayName || extension.name);
 		return this._createDisposable(handle);
@@ -2491,7 +2491,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		return this._withAdapter(handle, DocumentFormattingAdapter, adapter => adapter.provideDocumentFormattingEdits(URI.revive(resource), options, token), undefined, token);
 	}
 
-	registerDocumentRangeFormattingEditProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentRangeFormattingEditProvider): vscode.Disposable {
+	registerDocumentRangeFormattingEditProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentRangeFormattingEditProvider): zyraxoncode.Disposable {
 		const canFormatMultipleRanges = typeof provider.provideDocumentRangesFormattingEdits === 'function';
 		const handle = this._addNewAdapter(new RangeFormattingAdapter(this._documents, provider), extension);
 		this._proxy.$registerRangeFormattingSupport(handle, this._transformDocumentSelector(selector, extension), extension.identifier, extension.displayName || extension.name, canFormatMultipleRanges);
@@ -2506,7 +2506,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		return this._withAdapter(handle, RangeFormattingAdapter, adapter => adapter.provideDocumentRangesFormattingEdits(URI.revive(resource), ranges, options, token), undefined, token);
 	}
 
-	registerOnTypeFormattingEditProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.OnTypeFormattingEditProvider, triggerCharacters: string[]): vscode.Disposable {
+	registerOnTypeFormattingEditProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.OnTypeFormattingEditProvider, triggerCharacters: string[]): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new OnTypeFormattingAdapter(this._documents, provider), extension);
 		this._proxy.$registerOnTypeFormattingSupport(handle, this._transformDocumentSelector(selector, extension), triggerCharacters, extension.identifier);
 		return this._createDisposable(handle);
@@ -2518,7 +2518,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- navigate types
 
-	registerWorkspaceSymbolProvider(extension: IExtensionDescription, provider: vscode.WorkspaceSymbolProvider): vscode.Disposable {
+	registerWorkspaceSymbolProvider(extension: IExtensionDescription, provider: zyraxoncode.WorkspaceSymbolProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new NavigateTypeAdapter(provider, this._logService), extension);
 		this._proxy.$registerNavigateTypeSupport(handle, typeof provider.resolveWorkspaceSymbol === 'function');
 		return this._createDisposable(handle);
@@ -2538,7 +2538,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- rename
 
-	registerRenameProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.RenameProvider): vscode.Disposable {
+	registerRenameProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.RenameProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new RenameAdapter(this._documents, provider, this._logService), extension);
 		this._proxy.$registerRenameSupport(handle, this._transformDocumentSelector(selector, extension), RenameAdapter.supportsResolving(provider));
 		return this._createDisposable(handle);
@@ -2552,7 +2552,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		return this._withAdapter(handle, RenameAdapter, adapter => adapter.resolveRenameLocation(URI.revive(resource), position, token), undefined, token);
 	}
 
-	registerNewSymbolNamesProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.NewSymbolNamesProvider): vscode.Disposable {
+	registerNewSymbolNamesProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.NewSymbolNamesProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new NewSymbolNamesAdapter(this._documents, provider, this._logService), extension);
 		this._proxy.$registerNewSymbolNamesProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2574,7 +2574,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	//#region semantic coloring
 
-	registerDocumentSemanticTokensProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentSemanticTokensProvider, legend: vscode.SemanticTokensLegend): vscode.Disposable {
+	registerDocumentSemanticTokensProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentSemanticTokensProvider, legend: zyraxoncode.SemanticTokensLegend): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new DocumentSemanticTokensAdapter(this._documents, provider), extension);
 		const eventHandle = (typeof provider.onDidChangeSemanticTokens === 'function' ? this._nextHandle() : undefined);
 		this._proxy.$registerDocumentSemanticTokensProvider(handle, this._transformDocumentSelector(selector, extension), legend, eventHandle);
@@ -2596,7 +2596,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		this._withAdapter(handle, DocumentSemanticTokensAdapter, adapter => adapter.releaseDocumentSemanticColoring(semanticColoringResultId), undefined, undefined);
 	}
 
-	registerDocumentRangeSemanticTokensProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentRangeSemanticTokensProvider, legend: vscode.SemanticTokensLegend): vscode.Disposable {
+	registerDocumentRangeSemanticTokensProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentRangeSemanticTokensProvider, legend: zyraxoncode.SemanticTokensLegend): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new DocumentRangeSemanticTokensAdapter(this._documents, provider), extension);
 		const eventHandle = (typeof provider.onDidChangeSemanticTokens === 'function' ? this._nextHandle() : undefined);
 		this._proxy.$registerDocumentRangeSemanticTokensProvider(handle, this._transformDocumentSelector(selector, extension), legend, eventHandle);
@@ -2618,7 +2618,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- suggestion
 
-	registerCompletionItemProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.CompletionItemProvider, triggerCharacters: string[]): vscode.Disposable {
+	registerCompletionItemProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.CompletionItemProvider, triggerCharacters: string[]): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new CompletionsAdapter(this._documents, this._commands.converter, provider, this._apiDeprecation, extension), extension);
 		this._proxy.$registerCompletionsProvider(handle, this._transformDocumentSelector(selector, extension), triggerCharacters, CompletionsAdapter.supportsResolving(provider), extension.identifier);
 		return this._createDisposable(handle);
@@ -2638,7 +2638,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- ghost text
 
-	registerInlineCompletionsProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.InlineCompletionItemProvider, metadata: vscode.InlineCompletionItemProviderMetadata | undefined): vscode.Disposable {
+	registerInlineCompletionsProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.InlineCompletionItemProvider, metadata: zyraxoncode.InlineCompletionItemProviderMetadata | undefined): zyraxoncode.Disposable {
 		const adapter = new InlineCompletionAdapter(extension, this._documents, provider, this._commands.converter);
 		const handle = this._addNewAdapter(adapter, extension);
 		let result = this._createDisposable(handle);
@@ -2733,7 +2733,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- parameter hints
 
-	registerSignatureHelpProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.SignatureHelpProvider, metadataOrTriggerChars: string[] | vscode.SignatureHelpProviderMetadata): vscode.Disposable {
+	registerSignatureHelpProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.SignatureHelpProvider, metadataOrTriggerChars: string[] | zyraxoncode.SignatureHelpProviderMetadata): zyraxoncode.Disposable {
 		const metadata: extHostProtocol.ISignatureHelpProviderMetadataDto | undefined = Array.isArray(metadataOrTriggerChars)
 			? { triggerCharacters: metadataOrTriggerChars, retriggerCharacters: [] }
 			: metadataOrTriggerChars;
@@ -2753,7 +2753,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- inline hints
 
-	registerInlayHintsProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.InlayHintsProvider): vscode.Disposable {
+	registerInlayHintsProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.InlayHintsProvider): zyraxoncode.Disposable {
 
 		const eventHandle = typeof provider.onDidChangeInlayHints === 'function' ? this._nextHandle() : undefined;
 		const handle = this._addNewAdapter(new InlayHintsAdapter(this._documents, this._commands.converter, provider, this._logService, extension), extension);
@@ -2782,7 +2782,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- links
 
-	registerDocumentLinkProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentLinkProvider): vscode.Disposable {
+	registerDocumentLinkProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentLinkProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new LinkProviderAdapter(this._documents, provider), extension);
 		this._proxy.$registerDocumentLinkProvider(handle, this._transformDocumentSelector(selector, extension), typeof provider.resolveDocumentLink === 'function');
 		return this._createDisposable(handle);
@@ -2800,7 +2800,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		this._withAdapter(handle, LinkProviderAdapter, adapter => adapter.releaseLinks(id), undefined, undefined, true);
 	}
 
-	registerColorProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentColorProvider): vscode.Disposable {
+	registerColorProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentColorProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new ColorProviderAdapter(this._documents, provider), extension);
 		this._proxy.$registerDocumentColorProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2814,7 +2814,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		return this._withAdapter(handle, ColorProviderAdapter, adapter => adapter.provideColorPresentations(URI.revive(resource), colorInfo, token), undefined, token);
 	}
 
-	registerFoldingRangeProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.FoldingRangeProvider): vscode.Disposable {
+	registerFoldingRangeProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.FoldingRangeProvider): zyraxoncode.Disposable {
 		const handle = this._nextHandle();
 		const eventHandle = typeof provider.onDidChangeFoldingRanges === 'function' ? this._nextHandle() : undefined;
 
@@ -2830,7 +2830,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		return result;
 	}
 
-	$provideFoldingRanges(handle: number, resource: UriComponents, context: vscode.FoldingContext, token: CancellationToken): Promise<languages.FoldingRange[] | undefined> {
+	$provideFoldingRanges(handle: number, resource: UriComponents, context: zyraxoncode.FoldingContext, token: CancellationToken): Promise<languages.FoldingRange[] | undefined> {
 		return this._withAdapter(
 			handle,
 			FoldingProviderAdapter,
@@ -2843,7 +2843,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- smart select
 
-	registerSelectionRangeProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.SelectionRangeProvider): vscode.Disposable {
+	registerSelectionRangeProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.SelectionRangeProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new SelectionRangeAdapter(this._documents, provider, this._logService), extension);
 		this._proxy.$registerSelectionRangeProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2855,7 +2855,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- call hierarchy
 
-	registerCallHierarchyProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.CallHierarchyProvider): vscode.Disposable {
+	registerCallHierarchyProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.CallHierarchyProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new CallHierarchyAdapter(this._documents, provider), extension);
 		this._proxy.$registerCallHierarchyProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2878,7 +2878,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 	}
 
 	// --- type hierarchy
-	registerTypeHierarchyProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.TypeHierarchyProvider): vscode.Disposable {
+	registerTypeHierarchyProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.TypeHierarchyProvider): zyraxoncode.Disposable {
 		const handle = this._addNewAdapter(new TypeHierarchyAdapter(this._documents, provider), extension);
 		this._proxy.$registerTypeHierarchyProvider(handle, this._transformDocumentSelector(selector, extension));
 		return this._createDisposable(handle);
@@ -2902,7 +2902,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- Document on drop
 
-	registerDocumentOnDropEditProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentDropEditProvider, metadata?: vscode.DocumentDropEditProviderMetadata) {
+	registerDocumentOnDropEditProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentDropEditProvider, metadata?: zyraxoncode.DocumentDropEditProviderMetadata) {
 		const handle = this._nextHandle();
 		this._adapter.set(handle, new AdapterData(new DocumentDropEditAdapter(this._proxy, this._documents, provider, handle, extension), extension));
 
@@ -2930,7 +2930,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 
 	// --- copy/paste actions
 
-	registerDocumentPasteEditProvider(extension: IExtensionDescription, selector: vscode.DocumentSelector, provider: vscode.DocumentPasteEditProvider, metadata: vscode.DocumentPasteProviderMetadata): vscode.Disposable {
+	registerDocumentPasteEditProvider(extension: IExtensionDescription, selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentPasteEditProvider, metadata: zyraxoncode.DocumentPasteProviderMetadata): zyraxoncode.Disposable {
 		const handle = this._nextHandle();
 		this._adapter.set(handle, new AdapterData(new DocumentPasteEditProvider(this._proxy, this._documents, provider, handle, extension), extension));
 		this._proxy.$registerPasteEditProvider(handle, this._transformDocumentSelector(selector, extension), {
@@ -2969,7 +2969,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		};
 	}
 
-	private static _serializeIndentationRule(indentationRule: vscode.IndentationRule): extHostProtocol.IIndentationRuleDto {
+	private static _serializeIndentationRule(indentationRule: zyraxoncode.IndentationRule): extHostProtocol.IIndentationRuleDto {
 		return {
 			decreaseIndentPattern: ExtHostLanguageFeatures._serializeRegExp(indentationRule.decreaseIndentPattern),
 			increaseIndentPattern: ExtHostLanguageFeatures._serializeRegExp(indentationRule.increaseIndentPattern),
@@ -2978,7 +2978,7 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		};
 	}
 
-	private static _serializeOnEnterRule(onEnterRule: vscode.OnEnterRule): extHostProtocol.IOnEnterRuleDto {
+	private static _serializeOnEnterRule(onEnterRule: zyraxoncode.OnEnterRule): extHostProtocol.IOnEnterRuleDto {
 		return {
 			beforeText: ExtHostLanguageFeatures._serializeRegExp(onEnterRule.beforeText),
 			afterText: onEnterRule.afterText ? ExtHostLanguageFeatures._serializeRegExp(onEnterRule.afterText) : undefined,
@@ -2987,11 +2987,11 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		};
 	}
 
-	private static _serializeOnEnterRules(onEnterRules: vscode.OnEnterRule[]): extHostProtocol.IOnEnterRuleDto[] {
+	private static _serializeOnEnterRules(onEnterRules: zyraxoncode.OnEnterRule[]): extHostProtocol.IOnEnterRuleDto[] {
 		return onEnterRules.map(ExtHostLanguageFeatures._serializeOnEnterRule);
 	}
 
-	private static _serializeAutoClosingPair(autoClosingPair: vscode.AutoClosingPair): IAutoClosingPairConditional {
+	private static _serializeAutoClosingPair(autoClosingPair: zyraxoncode.AutoClosingPair): IAutoClosingPairConditional {
 		return {
 			open: autoClosingPair.open,
 			close: autoClosingPair.close,
@@ -2999,11 +2999,11 @@ export class ExtHostLanguageFeatures extends CoreDisposable implements extHostPr
 		};
 	}
 
-	private static _serializeAutoClosingPairs(autoClosingPairs: vscode.AutoClosingPair[]): IAutoClosingPairConditional[] {
+	private static _serializeAutoClosingPairs(autoClosingPairs: zyraxoncode.AutoClosingPair[]): IAutoClosingPairConditional[] {
 		return autoClosingPairs.map(ExtHostLanguageFeatures._serializeAutoClosingPair);
 	}
 
-	setLanguageConfiguration(extension: IExtensionDescription, languageId: string, configuration: vscode.LanguageConfiguration): vscode.Disposable {
+	setLanguageConfiguration(extension: IExtensionDescription, languageId: string, configuration: zyraxoncode.LanguageConfiguration): zyraxoncode.Disposable {
 		const { wordPattern } = configuration;
 
 		// check for a valid word pattern

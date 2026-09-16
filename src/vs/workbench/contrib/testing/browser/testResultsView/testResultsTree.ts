@@ -949,7 +949,7 @@ class TreeActionsProvider {
 					localize('testing.goToTest', "Go to Test"),
 					ThemeIcon.asClassName(Codicon.goToFile),
 					undefined,
-					() => this.commandService.executeCommand('vscode.revealTest', extId),
+					() => this.commandService.executeCommand('zyraxoncode.revealTest', extId),
 				));
 			}
 
@@ -977,7 +977,7 @@ class TreeActionsProvider {
 					localize('run test', 'Run Test'),
 					ThemeIcon.asClassName(icons.testingRunIcon),
 					undefined,
-					() => this.commandService.executeCommand('vscode.runTestsById', TestRunProfileBitset.Run, extId),
+					() => this.commandService.executeCommand('zyraxoncode.runTestsById', TestRunProfileBitset.Run, extId),
 				));
 			}
 
@@ -987,7 +987,7 @@ class TreeActionsProvider {
 					localize('debug test', 'Debug Test'),
 					ThemeIcon.asClassName(icons.testingDebugIcon),
 					undefined,
-					() => this.commandService.executeCommand('vscode.runTestsById', TestRunProfileBitset.Debug, extId),
+					() => this.commandService.executeCommand('zyraxoncode.runTestsById', TestRunProfileBitset.Debug, extId),
 				));
 			}
 

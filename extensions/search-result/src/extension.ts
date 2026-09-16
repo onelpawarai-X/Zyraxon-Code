@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import * as pathUtils from 'path';
 
 const FILE_LINE_REGEX = /^(\S.*):$/;
@@ -13,16 +13,16 @@ const SEARCH_RESULT_SELECTOR = { language: 'search-result', exclusive: true };
 const DIRECTIVES = ['# Query:', '# Flags:', '# Including:', '# Excluding:', '# ContextLines:'];
 const FLAGS = ['RegExp', 'CaseSensitive', 'IgnoreExcludeSettings', 'WordMatch'];
 
-let cachedLastParse: { version: number; parse: ParsedSearchResults; uri: vscode.Uri } | undefined;
-let documentChangeListener: vscode.Disposable | undefined;
+let cachedLastParse: { version: number; parse: ParsedSearchResults; uri: zyraxoncode.Uri } | undefined;
+let documentChangeListener: zyraxoncode.Disposable | undefined;
 
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: zyraxoncode.ExtensionContext) {
 
-	const contextLineDecorations = vscode.window.createTextEditorDecorationType({ opacity: '0.7' });
-	const matchLineDecorations = vscode.window.createTextEditorDecorationType({ fontWeight: 'bold' });
+	const contextLineDecorations = zyraxoncode.window.createTextEditorDecorationType({ opacity: '0.7' });
+	const matchLineDecorations = zyraxoncode.window.createTextEditorDecorationType({ fontWeight: 'bold' });
 
-	const decorate = (editor: vscode.TextEditor) => {
+	const decorate = (editor: zyraxoncode.TextEditor) => {
 		const parsed = parseSearchResults(editor.document).filter(isResultLine);
 		const contextRanges = parsed.filter(line => line.isContext).map(line => line.prefixRange);
 		const matchRanges = parsed.filter(line => !line.isContext).map(line => line.prefixRange);
@@ -30,20 +30,20 @@ export function activate(context: vscode.ExtensionContext) {
 		editor.setDecorations(matchLineDecorations, matchRanges);
 	};
 
-	if (vscode.window.activeTextEditor && vscode.window.activeTextEditor.document.languageId === 'search-result') {
-		decorate(vscode.window.activeTextEditor);
+	if (zyraxoncode.window.activeTextEditor && zyraxoncode.window.activeTextEditor.document.languageId === 'search-result') {
+		decorate(zyraxoncode.window.activeTextEditor);
 	}
 
 	context.subscriptions.push(
 
-		vscode.languages.registerDocumentSymbolProvider(SEARCH_RESULT_SELECTOR, {
-			provideDocumentSymbols(document: vscode.TextDocument, token: vscode.CancellationToken): vscode.DocumentSymbol[] {
+		zyraxoncode.languages.registerDocumentSymbolProvider(SEARCH_RESULT_SELECTOR, {
+			provideDocumentSymbols(document: zyraxoncode.TextDocument, token: zyraxoncode.CancellationToken): zyraxoncode.DocumentSymbol[] {
 				const results = parseSearchResults(document, token)
 					.filter(isFileLine)
-					.map(line => new vscode.DocumentSymbol(
+					.map(line => new zyraxoncode.DocumentSymbol(
 						line.path,
 						'',
-						vscode.SymbolKind.File,
+						zyraxoncode.SymbolKind.File,
 						line.allLocations.map(({ originSelectionRange }) => originSelectionRange!).reduce((p, c) => p.union(c), line.location.originSelectionRange!),
 						line.location.originSelectionRange!,
 					));
@@ -52,8 +52,8 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		}),
 
-		vscode.languages.registerCompletionItemProvider(SEARCH_RESULT_SELECTOR, {
-			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): vscode.CompletionItem[] {
+		zyraxoncode.languages.registerCompletionItemProvider(SEARCH_RESULT_SELECTOR, {
+			provideCompletionItems(document: zyraxoncode.TextDocument, position: zyraxoncode.Position): zyraxoncode.CompletionItem[] {
 
 				const line = document.lineAt(position.line);
 				if (position.line > 3) { return []; }
@@ -73,8 +73,8 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		}, '#'),
 
-		vscode.languages.registerDefinitionProvider(SEARCH_RESULT_SELECTOR, {
-			provideDefinition(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): vscode.DefinitionLink[] {
+		zyraxoncode.languages.registerDefinitionProvider(SEARCH_RESULT_SELECTOR, {
+			provideDefinition(document: zyraxoncode.TextDocument, position: zyraxoncode.Position, token: zyraxoncode.CancellationToken): zyraxoncode.DefinitionLink[] {
 				const lineResult = parseSearchResults(document, token)[position.line];
 				if (!lineResult) { return []; }
 				if (lineResult.type === 'file') {
@@ -86,33 +86,33 @@ export function activate(context: vscode.ExtensionContext) {
 					return [];
 				}
 
-				const targetPos = new vscode.Position(
+				const targetPos = new zyraxoncode.Position(
 					location.targetSelectionRange.start.line,
 					location.targetSelectionRange.start.character + (position.character - location.originSelectionRange.start.character)
 				);
 				return [{
 					...location,
-					targetSelectionRange: new vscode.Range(targetPos, targetPos),
+					targetSelectionRange: new zyraxoncode.Range(targetPos, targetPos),
 				}];
 			}
 		}),
 
-		vscode.languages.registerDocumentLinkProvider(SEARCH_RESULT_SELECTOR, {
-			async provideDocumentLinks(document: vscode.TextDocument, token: vscode.CancellationToken): Promise<vscode.DocumentLink[]> {
+		zyraxoncode.languages.registerDocumentLinkProvider(SEARCH_RESULT_SELECTOR, {
+			async provideDocumentLinks(document: zyraxoncode.TextDocument, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.DocumentLink[]> {
 				return parseSearchResults(document, token)
 					.filter(isFileLine)
 					.map(({ location }) => ({ range: location.originSelectionRange!, target: location.targetUri }));
 			}
 		}),
 
-		vscode.window.onDidChangeActiveTextEditor(editor => {
+		zyraxoncode.window.onDidChangeActiveTextEditor(editor => {
 			if (editor?.document.languageId === 'search-result') {
 				// Clear the parse whenever we open a new editor.
 				// Conservative because things like the URI might remain constant even if the contents change, and re-parsing even large files is relatively fast.
 				cachedLastParse = undefined;
 
 				documentChangeListener?.dispose();
-				documentChangeListener = vscode.workspace.onDidChangeTextDocument(doc => {
+				documentChangeListener = zyraxoncode.workspace.onDidChangeTextDocument(doc => {
 					if (doc.document.uri === editor.document.uri) {
 						decorate(editor);
 					}
@@ -127,43 +127,43 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 
-function relativePathToUri(path: string, resultsUri: vscode.Uri): vscode.Uri | undefined {
+function relativePathToUri(path: string, resultsUri: zyraxoncode.Uri): zyraxoncode.Uri | undefined {
 
 	const userDataPrefix = '(Settings) ';
 	if (path.startsWith(userDataPrefix)) {
-		return vscode.Uri.file(path.slice(userDataPrefix.length)).with({ scheme: 'vscode-userdata' });
+		return zyraxoncode.Uri.file(path.slice(userDataPrefix.length)).with({ scheme: 'zyraxoncode-userdata' });
 	}
 
 	if (pathUtils.isAbsolute(path)) {
 		if (/^[\\\/]Untitled-\d*$/.test(path)) {
-			return vscode.Uri.file(path.slice(1)).with({ scheme: 'untitled', path: path.slice(1) });
+			return zyraxoncode.Uri.file(path.slice(1)).with({ scheme: 'untitled', path: path.slice(1) });
 		}
-		return vscode.Uri.file(path);
+		return zyraxoncode.Uri.file(path);
 	}
 
 	if (path.indexOf('~/') === 0) {
 		const homePath = process.env.HOME || process.env.HOMEPATH || '';
-		return vscode.Uri.file(pathUtils.join(homePath, path.slice(2)));
+		return zyraxoncode.Uri.file(pathUtils.join(homePath, path.slice(2)));
 	}
 
-	const uriFromFolderWithPath = (folder: vscode.WorkspaceFolder, path: string): vscode.Uri =>
-		vscode.Uri.joinPath(folder.uri, path);
+	const uriFromFolderWithPath = (folder: zyraxoncode.WorkspaceFolder, path: string): zyraxoncode.Uri =>
+		zyraxoncode.Uri.joinPath(folder.uri, path);
 
-	if (vscode.workspace.workspaceFolders) {
+	if (zyraxoncode.workspace.workspaceFolders) {
 		const multiRootFormattedPath = /^(.*) • (.*)$/.exec(path);
 		if (multiRootFormattedPath) {
 			const [, workspaceName, workspacePath] = multiRootFormattedPath;
-			const folder = vscode.workspace.workspaceFolders.filter(wf => wf.name === workspaceName)[0];
+			const folder = zyraxoncode.workspace.workspaceFolders.filter(wf => wf.name === workspaceName)[0];
 			if (folder) {
 				return uriFromFolderWithPath(folder, workspacePath);
 			}
 		}
-		else if (vscode.workspace.workspaceFolders.length === 1) {
-			return uriFromFolderWithPath(vscode.workspace.workspaceFolders[0], path);
+		else if (zyraxoncode.workspace.workspaceFolders.length === 1) {
+			return uriFromFolderWithPath(zyraxoncode.workspace.workspaceFolders[0], path);
 		} else if (resultsUri.scheme !== 'untitled') {
 			// We're in a multi-root workspace, but the path is not multi-root formatted
 			// Possibly a saved search from a single root session. Try checking if the search result document's URI is in a current workspace folder.
-			const prefixMatch = vscode.workspace.workspaceFolders.filter(wf => resultsUri.toString().startsWith(wf.uri.toString()))[0];
+			const prefixMatch = zyraxoncode.workspace.workspaceFolders.filter(wf => resultsUri.toString().startsWith(wf.uri.toString()))[0];
 			if (prefixMatch) {
 				return uriFromFolderWithPath(prefixMatch, path);
 			}
@@ -174,14 +174,14 @@ function relativePathToUri(path: string, resultsUri: vscode.Uri): vscode.Uri | u
 	return undefined;
 }
 
-type ParsedSearchFileLine = { type: 'file'; location: vscode.LocationLink; allLocations: vscode.LocationLink[]; path: string };
-type ParsedSearchResultLine = { type: 'result'; locations: Required<vscode.LocationLink>[]; isContext: boolean; prefixRange: vscode.Range };
+type ParsedSearchFileLine = { type: 'file'; location: zyraxoncode.LocationLink; allLocations: zyraxoncode.LocationLink[]; path: string };
+type ParsedSearchResultLine = { type: 'result'; locations: Required<zyraxoncode.LocationLink>[]; isContext: boolean; prefixRange: zyraxoncode.Range };
 type ParsedSearchResults = Array<ParsedSearchFileLine | ParsedSearchResultLine>;
 const isFileLine = (line: ParsedSearchResultLine | ParsedSearchFileLine): line is ParsedSearchFileLine => line.type === 'file';
 const isResultLine = (line: ParsedSearchResultLine | ParsedSearchFileLine): line is ParsedSearchResultLine => line.type === 'result';
 
 
-function parseSearchResults(document: vscode.TextDocument, token?: vscode.CancellationToken): ParsedSearchResults {
+function parseSearchResults(document: zyraxoncode.TextDocument, token?: zyraxoncode.CancellationToken): ParsedSearchResults {
 
 	if (cachedLastParse && cachedLastParse.uri === document.uri && cachedLastParse.version === document.version) {
 		return cachedLastParse.parse;
@@ -190,8 +190,8 @@ function parseSearchResults(document: vscode.TextDocument, token?: vscode.Cancel
 	const lines = document.getText().split(/\r?\n/);
 	const links: ParsedSearchResults = [];
 
-	let currentTarget: vscode.Uri | undefined = undefined;
-	let currentTargetLocations: vscode.LocationLink[] | undefined = undefined;
+	let currentTarget: zyraxoncode.Uri | undefined = undefined;
+	let currentTargetLocations: zyraxoncode.LocationLink[] | undefined = undefined;
 
 	for (let i = 0; i < lines.length; i++) {
 		// TODO: This is probably always false, given we're pegging the thread...
@@ -206,10 +206,10 @@ function parseSearchResults(document: vscode.TextDocument, token?: vscode.Cancel
 			if (!currentTarget) { continue; }
 			currentTargetLocations = [];
 
-			const location: vscode.LocationLink = {
-				targetRange: new vscode.Range(0, 0, 0, 1),
+			const location: zyraxoncode.LocationLink = {
+				targetRange: new zyraxoncode.Range(0, 0, 0, 1),
 				targetUri: currentTarget,
-				originSelectionRange: new vscode.Range(i, 0, i, line.length),
+				originSelectionRange: new zyraxoncode.Range(i, 0, i, line.length),
 			};
 
 
@@ -223,9 +223,9 @@ function parseSearchResults(document: vscode.TextDocument, token?: vscode.Cancel
 			const [, indentation, _lineNumber, separator] = resultLine;
 			const lineNumber = +_lineNumber - 1;
 			const metadataOffset = (indentation + _lineNumber + separator).length;
-			const targetRange = new vscode.Range(Math.max(lineNumber - 3, 0), 0, lineNumber + 3, line.length);
+			const targetRange = new zyraxoncode.Range(Math.max(lineNumber - 3, 0), 0, lineNumber + 3, line.length);
 
-			const locations: Required<vscode.LocationLink>[] = [];
+			const locations: Required<zyraxoncode.LocationLink>[] = [];
 
 			let lastEnd = metadataOffset;
 			let offset = 0;
@@ -233,9 +233,9 @@ function parseSearchResults(document: vscode.TextDocument, token?: vscode.Cancel
 			for (let match: RegExpExecArray | null; (match = ELISION_REGEX.exec(line));) {
 				locations.push({
 					targetRange,
-					targetSelectionRange: new vscode.Range(lineNumber, offset, lineNumber, offset),
+					targetSelectionRange: new zyraxoncode.Range(lineNumber, offset, lineNumber, offset),
 					targetUri: currentTarget,
-					originSelectionRange: new vscode.Range(i, lastEnd, i, ELISION_REGEX.lastIndex - match[0].length),
+					originSelectionRange: new zyraxoncode.Range(i, lastEnd, i, ELISION_REGEX.lastIndex - match[0].length),
 				});
 
 				offset += (ELISION_REGEX.lastIndex - lastEnd - match[0].length) + Number(match[1]);
@@ -245,9 +245,9 @@ function parseSearchResults(document: vscode.TextDocument, token?: vscode.Cancel
 			if (lastEnd < line.length) {
 				locations.push({
 					targetRange,
-					targetSelectionRange: new vscode.Range(lineNumber, offset, lineNumber, offset),
+					targetSelectionRange: new zyraxoncode.Range(lineNumber, offset, lineNumber, offset),
 					targetUri: currentTarget,
-					originSelectionRange: new vscode.Range(i, lastEnd, i, line.length),
+					originSelectionRange: new zyraxoncode.Range(i, lastEnd, i, line.length),
 				});
 			}
 			// only show result lines in file-level peek
@@ -256,14 +256,14 @@ function parseSearchResults(document: vscode.TextDocument, token?: vscode.Cancel
 			}
 
 			// Allow line number, indentation, etc to take you to definition as well.
-			const convenienceLocation: Required<vscode.LocationLink> = {
+			const convenienceLocation: Required<zyraxoncode.LocationLink> = {
 				targetRange,
-				targetSelectionRange: new vscode.Range(lineNumber, 0, lineNumber, 1),
+				targetSelectionRange: new zyraxoncode.Range(lineNumber, 0, lineNumber, 1),
 				targetUri: currentTarget,
-				originSelectionRange: new vscode.Range(i, 0, i, metadataOffset - 1),
+				originSelectionRange: new zyraxoncode.Range(i, 0, i, metadataOffset - 1),
 			};
 			locations.push(convenienceLocation);
-			links[i] = { type: 'result', locations, isContext: separator === ' ', prefixRange: new vscode.Range(i, 0, i, metadataOffset) };
+			links[i] = { type: 'result', locations, isContext: separator === ' ', prefixRange: new zyraxoncode.Range(i, 0, i, metadataOffset) };
 		}
 	}
 

@@ -393,8 +393,8 @@ Launches an interactive wizard to configure hooks — custom scripts that run in
 | **Notification** | Status notification sent | `{ message, notification_type, title }` |
 
 **Save locations for hooks:**
-- **Workspace local** — `.vscode/settings.json` (not version controlled)
-- **Workspace** — `.vscode/settings.json` (version controlled)
+- **Workspace local** — `.zyraxoncode/settings.json` (not version controlled)
+- **Workspace** — `.zyraxoncode/settings.json` (version controlled)
 - **User settings** — ZYRAXON Code user settings
 
 **Example:** Block all Bash commands that use `rm -rf`:

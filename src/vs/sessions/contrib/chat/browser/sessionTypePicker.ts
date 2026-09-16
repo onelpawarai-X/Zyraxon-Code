@@ -617,7 +617,7 @@ export class SessionTypePicker extends Disposable {
 
 		dom.clearNode(this._triggerElement);
 
-		// In web (vscode.dev/agents) the host filter already scopes the
+		// In web (zyraxoncode.dev/agents) the host filter already scopes the
 		// workbench to a single agent host, so when that host advertises only
 		// one harness there is nothing to pick — hide the trigger entirely.
 		// Note: the existing CSS rule on `.session-workspace-picker-with-label`

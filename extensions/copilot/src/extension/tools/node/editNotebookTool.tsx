@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@vscode/prompt-tsx';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { EOL } from 'os';
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { IFileSystemService } from '../../../platform/filesystem/common/fileSystemService';
 import { ILogService } from '../../../platform/log/common/logService';
@@ -29,7 +29,7 @@ import { createSingleCallFunction } from '../../../util/vs/base/common/functiona
 import { DisposableStore, toDisposable } from '../../../util/vs/base/common/lifecycle';
 import { isEqual } from '../../../util/vs/base/common/resources';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { EndOfLine, EventEmitter, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString, NotebookCellData, NotebookCellKind, NotebookEdit, NotebookRange, Position, Range, TextEdit } from '../../../vscodeTypes';
+import { EndOfLine, EventEmitter, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult, MarkdownString, NotebookCellData, NotebookCellKind, NotebookEdit, NotebookRange, Position, Range, TextEdit } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { Tag } from '../../prompts/node/base/tag';
@@ -49,9 +49,9 @@ export interface IEditNotebookToolParams {
 	editType: 'insert' | 'delete' | 'edit';
 }
 
-type ExistingCell = { cell: vscode.NotebookCell; index: number; type: 'existing' };
+type ExistingCell = { cell: zyraxoncode.NotebookCell; index: number; type: 'existing' };
 type InsertCell = { cell: NotebookCellData; index: number; type: 'insert'; originalIndex: number };
-type DeleteCell = { cell: vscode.NotebookCell; index: number; type: 'delete' };
+type DeleteCell = { cell: zyraxoncode.NotebookCell; index: number; type: 'delete' };
 type ChangedCell = ExistingCell | InsertCell | DeleteCell;
 
 class ErrorWithTelemetrySafeReason extends Error {
@@ -74,7 +74,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 		@IFileSystemService protected readonly fileSystemService: IFileSystemService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IEditNotebookToolParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IEditNotebookToolParams>, token: zyraxoncode.CancellationToken) {
 		let uri = this.promptPathRepresentationService.resolveFilePath(options.input.filePath);
 		if (!uri) {
 			sendEditNotebookToolOutcomeTelemetry(this.telemetryService, this.endpointProvider, options, 'invalid_file_path');
@@ -91,7 +91,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 			throw new ErrorWithTelemetrySafeReason(`Invalid input, no stream`, 'invalid_input_no_stream');
 		}
 
-		let notebook: vscode.NotebookDocument;
+		let notebook: zyraxoncode.NotebookDocument;
 		try {
 			notebook = await this.workspaceService.openNotebookDocument(uri);
 		} catch (error) {
@@ -117,7 +117,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 
 		const cells: ChangedCell[] = notebook.getCells().map((cell, index) => ({ cell, index, type: 'existing' }));
 		const expectedCellEdits: ChangedCell[] = [];
-		const expectedCellTextEdits: [vscode.Uri, TextEdit][] = [];
+		const expectedCellTextEdits: [zyraxoncode.Uri, TextEdit][] = [];
 
 		// We must wait for all of the cell edits to get applied.
 		// This way we can return the final state of the notebook.
@@ -204,7 +204,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 
 					// Shift other indexes by 1.
 					const cell = cells.find(({ index, type }) => index === cellIndex && type === 'existing')!;
-					expectedCellEdits.push({ type: 'delete', cell: cell.cell as vscode.NotebookCell, index: cellIndex });
+					expectedCellEdits.push({ type: 'delete', cell: cell.cell as zyraxoncode.NotebookCell, index: cellIndex });
 					cell.type = 'delete';
 					cells.filter(({ type }) => type !== 'delete').filter(({ index }) => index > cellIndex).forEach(item => item.index = item.index - 1);
 					stream.notebookEdit(notebookUri, NotebookEdit.deleteCells(cellRange));
@@ -303,7 +303,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 		return input;
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IEditNotebookToolParams>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IEditNotebookToolParams>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation> {
 		const uri = resolveToolInputPath(options.input.filePath, this.promptPathRepresentationService);
 
 		const confirmation = await this.instantiationService.invokeFunction(
@@ -334,7 +334,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 		};
 	}
 
-	private validateInput({ editType, cellId, newCode }: { editType: 'edit' | 'insert' | 'delete'; cellId: string; newCode: string | undefined }, notebook: vscode.NotebookDocument) {
+	private validateInput({ editType, cellId, newCode }: { editType: 'edit' | 'insert' | 'delete'; cellId: string; newCode: string | undefined }, notebook: zyraxoncode.NotebookDocument) {
 		// Possible we'll get cellId as a number such as -1 when inserting a cell at the top.
 		const id = cellId;
 		const cellMap = getCellIdMap(notebook);
@@ -374,7 +374,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 		}
 	}
 
-	private fixInput(input: IEditNotebookToolParams, notebook: vscode.NotebookDocument, provider: BaseAlternativeNotebookContentProvider) {
+	private fixInput(input: IEditNotebookToolParams, notebook: zyraxoncode.NotebookDocument, provider: BaseAlternativeNotebookContentProvider) {
 		const language = input.language || getDefaultLanguage(notebook) || 'python'; // Default to Python if no language
 		let cellId = (input.cellId || '').toString().trim();
 		if (cellId.toLowerCase() === 'top') {
@@ -408,7 +408,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 		};
 	}
 
-	async waitForCellOperationComplete(notebook: vscode.NotebookDocument, done: vscode.Event<void>, expectedOutputs: ChangedCell[], disposables: DisposableStore, token: vscode.CancellationToken): Promise<void> {
+	async waitForCellOperationComplete(notebook: zyraxoncode.NotebookDocument, done: zyraxoncode.Event<void>, expectedOutputs: ChangedCell[], disposables: DisposableStore, token: zyraxoncode.CancellationToken): Promise<void> {
 		const store = disposables.add(new DisposableStore());
 		return new Promise<void>((resolve) => {
 			let completed = false;
@@ -456,7 +456,7 @@ export class EditNotebookTool implements ICopilotTool<IEditNotebookToolParams> {
 		}).finally(() => store.dispose());
 	}
 
-	async waitForCellTextEditsToComplete(done: vscode.Event<void>, expectedTextEdits: [vscode.Uri, TextEdit][], disposables: DisposableStore, token: vscode.CancellationToken): Promise<any> {
+	async waitForCellTextEditsToComplete(done: zyraxoncode.Event<void>, expectedTextEdits: [zyraxoncode.Uri, TextEdit][], disposables: DisposableStore, token: zyraxoncode.CancellationToken): Promise<any> {
 		const store = disposables.add(new DisposableStore());
 		return new Promise<void>((resolve) => {
 			let completed = false;
@@ -502,7 +502,7 @@ function getInvalidCellErrorMessage(cellId: string) {
 	return `None of the edits were applied as the cell id was not provided or was empty`;
 }
 
-function getCellEOL(cellId: string | undefined, language: string, notebook: vscode.NotebookDocument) {
+function getCellEOL(cellId: string | undefined, language: string, notebook: zyraxoncode.NotebookDocument) {
 	const cellMap = getCellIdMap(notebook);
 	if (cellId && cellId !== 'top' && cellId !== 'bottom') {
 		const cell = cellMap.get(cellId);
@@ -518,7 +518,7 @@ function getCellEOL(cellId: string | undefined, language: string, notebook: vsco
 	return EOL;
 }
 
-function summarizeOriginalEdits(notebook: vscode.NotebookDocument, editType: 'insert' | 'edit' | 'delete', cellId: string, edits: ChangedCell[]): string {
+function summarizeOriginalEdits(notebook: zyraxoncode.NotebookDocument, editType: 'insert' | 'edit' | 'delete', cellId: string, edits: ChangedCell[]): string {
 	const summary: string[] = [];
 	summary.push(`Notebook ${notebook.uri.toString()}. `);
 	summary.push(`Original number of cells: ${notebook.cellCount}. `);
@@ -558,7 +558,7 @@ function summarizeEdits(edits: ChangedCell[]): string {
 	return summary.join('\n');
 }
 
-function summarizeTextEdits(notebook: vscode.NotebookDocument, edits: [vscode.Uri, TextEdit][]): string {
+function summarizeTextEdits(notebook: zyraxoncode.NotebookDocument, edits: [zyraxoncode.Uri, TextEdit][]): string {
 	const summary: string[] = [];
 	for (const [index, edit] of edits.entries()) {
 		const cell = findCell(edit[0], notebook);
@@ -574,9 +574,9 @@ function summarizeTextEdits(notebook: vscode.NotebookDocument, edits: [vscode.Ur
 }
 
 export interface IEditFileResultProps extends BasePromptElementProps {
-	document: vscode.NotebookDocument;
+	document: zyraxoncode.NotebookDocument;
 	changes: ChangedCell[];
-	languageModel: vscode.LanguageModelChat | undefined;
+	languageModel: zyraxoncode.LanguageModelChat | undefined;
 }
 
 export class EditFileResult extends PromptElement<IEditFileResultProps> {
@@ -596,13 +596,13 @@ export class EditFileResult extends PromptElement<IEditFileResultProps> {
 	 */
 	override async render(state: void, sizing: PromptSizing) {
 		const document = this.props.document;
-		const cellsToInlucdeInSummary: vscode.NotebookCell[] = [];
+		const cellsToInlucdeInSummary: zyraxoncode.NotebookCell[] = [];
 
 		if (this.props.changes.every(i => i.type !== 'insert')) {
 			return <>The notebook file was successfully edited.</>;
 		}
 
-		let previousCell: vscode.NotebookCell | undefined;
+		let previousCell: zyraxoncode.NotebookCell | undefined;
 		const existingCells = new Set(this.props.changes.filter(i => i.type === 'existing').map(i => i.cell));
 		document.getCells().forEach((cell) => {
 			if (existingCells.has(cell)) {
@@ -627,7 +627,7 @@ export class EditFileResult extends PromptElement<IEditFileResultProps> {
 
 ToolRegistry.registerTool(EditNotebookTool);
 
-export async function sendEditNotebookTelemetry(telemetryService: ITelemetryService, endpointProvider: IEndpointProvider | undefined, toolUsedToEditNotebook: 'notebookEdit' | 'applyPatch' | 'stringReplace' | 'newNotebookIntent' | 'editCodeIntent' | 'insertEdit' | 'createFile', resource: vscode.Uri, requestId?: string, chatModel?: vscode.LanguageModelChat | string, endpoint?: IChatEndpoint) {
+export async function sendEditNotebookTelemetry(telemetryService: ITelemetryService, endpointProvider: IEndpointProvider | undefined, toolUsedToEditNotebook: 'notebookEdit' | 'applyPatch' | 'stringReplace' | 'newNotebookIntent' | 'editCodeIntent' | 'insertEdit' | 'createFile', resource: zyraxoncode.Uri, requestId?: string, chatModel?: zyraxoncode.LanguageModelChat | string, endpoint?: IChatEndpoint) {
 	const resourceHash = await createSha256Hash(resource.fsPath);
 	const model = typeof chatModel === 'string' ? chatModel : (endpoint?.model ?? (chatModel && endpointProvider && (await endpointProvider.getChatEndpoint(chatModel)).model));
 
@@ -647,7 +647,7 @@ export async function sendEditNotebookTelemetry(telemetryService: ITelemetryServ
 	);
 }
 
-async function sendEditNotebookToolOutcomeTelemetry(telemetryService: ITelemetryService, endpointProvider: IEndpointProvider | undefined, options: vscode.LanguageModelToolInvocationOptions<IEditNotebookToolParams>, outcome: string, failureData?: string) {
+async function sendEditNotebookToolOutcomeTelemetry(telemetryService: ITelemetryService, endpointProvider: IEndpointProvider | undefined, options: zyraxoncode.LanguageModelToolInvocationOptions<IEditNotebookToolParams>, outcome: string, failureData?: string) {
 	const model = (options.model && endpointProvider && (await endpointProvider.getChatEndpoint(options.model)).model);
 
 	/* __GDPR__
@@ -666,7 +666,7 @@ async function sendEditNotebookToolOutcomeTelemetry(telemetryService: ITelemetry
 	);
 }
 
-async function sendEditNotebookCellOperationsTelemetry(telemetryService: ITelemetryService, endpointProvider: IEndpointProvider | undefined, options: vscode.LanguageModelToolInvocationOptions<IEditNotebookToolParams>, editOperation: 'insert' | 'edit' | 'delete' | undefined) {
+async function sendEditNotebookCellOperationsTelemetry(telemetryService: ITelemetryService, endpointProvider: IEndpointProvider | undefined, options: zyraxoncode.LanguageModelToolInvocationOptions<IEditNotebookToolParams>, editOperation: 'insert' | 'edit' | 'delete' | undefined) {
 	const model = (options.model && endpointProvider && (await endpointProvider.getChatEndpoint(options.model)).model);
 	/* __GDPR__
 		"editNotebook.cellEditOps" : {
@@ -691,7 +691,7 @@ async function sendEditNotebookCellOperationsTelemetry(telemetryService: ITeleme
 	);
 }
 
-async function sendEditNotebookCellTelemetry(telemetryService: ITelemetryService, hasCodeMarker: boolean, resource: vscode.Uri, options: vscode.LanguageModelToolInvocationOptions<IEditNotebookToolParams>, endpointProvider: IEndpointProvider) {
+async function sendEditNotebookCellTelemetry(telemetryService: ITelemetryService, hasCodeMarker: boolean, resource: zyraxoncode.Uri, options: zyraxoncode.LanguageModelToolInvocationOptions<IEditNotebookToolParams>, endpointProvider: IEndpointProvider) {
 	const resourceHash = await createSha256Hash(resource.fsPath);
 	const model = options.model && (await endpointProvider.getChatEndpoint(options.model)).model;
 

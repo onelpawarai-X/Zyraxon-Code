@@ -5,7 +5,7 @@
 
 import * as jsonc from 'jsonc-parser';
 import * as path from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { wait } from '../test/testUtils';
 import { ITypeScriptServiceClient, ServerResponse } from '../typescriptService';
 import { coalesce } from '../utils/arrays';
@@ -26,7 +26,7 @@ enum AutoDetect {
 }
 
 
-interface TypeScriptTaskDefinition extends vscode.TaskDefinition {
+interface TypeScriptTaskDefinition extends zyraxoncode.TaskDefinition {
 	tsconfig: string;
 	option?: string;
 }
@@ -34,7 +34,7 @@ interface TypeScriptTaskDefinition extends vscode.TaskDefinition {
 /**
  * Provides tasks for building `tsconfig.json` files in a project.
  */
-class TscTaskProvider extends Disposable implements vscode.TaskProvider {
+class TscTaskProvider extends Disposable implements zyraxoncode.TaskProvider {
 
 	private readonly projectInfoRequestTimeout = 2000;
 	private readonly findConfigFilesTimeout = 5000;
@@ -48,18 +48,18 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 		super();
 		this.tsconfigProvider = new TsConfigProvider();
 
-		this._register(vscode.workspace.onDidChangeConfiguration(this.onConfigurationChanged, this));
+		this._register(zyraxoncode.workspace.onDidChangeConfiguration(this.onConfigurationChanged, this));
 		this.onConfigurationChanged();
 	}
 
-	public async provideTasks(token: vscode.CancellationToken): Promise<vscode.Task[]> {
-		const folders = vscode.workspace.workspaceFolders;
+	public async provideTasks(token: zyraxoncode.CancellationToken): Promise<zyraxoncode.Task[]> {
+		const folders = zyraxoncode.workspace.workspaceFolders;
 		if ((this.autoDetect === AutoDetect.off) || !folders?.length) {
 			return [];
 		}
 
 		const configPaths = new Set<string>();
-		const tasks: vscode.Task[] = [];
+		const tasks: zyraxoncode.Task[] = [];
 		for (const project of await this.getAllTsConfigs(token)) {
 			if (!configPaths.has(project.fsPath)) {
 				configPaths.add(project.fsPath);
@@ -69,11 +69,11 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 		return tasks;
 	}
 
-	public async resolveTask(task: vscode.Task): Promise<vscode.Task | undefined> {
+	public async resolveTask(task: zyraxoncode.Task): Promise<zyraxoncode.Task | undefined> {
 		const definition = <TypeScriptTaskDefinition>task.definition;
 		if (/\\tsconfig.*\.json/.test(definition.tsconfig)) {
 			// Warn that the task has the wrong slash type
-			vscode.window.showWarningMessage(vscode.l10n.t("TypeScript Task in tasks.json contains \"\\\\\". TypeScript tasks tsconfig must use \"/\""));
+			zyraxoncode.window.showWarningMessage(zyraxoncode.l10n.t("TypeScript Task in tasks.json contains \"\\\\\". TypeScript tasks tsconfig must use \"/\""));
 			return undefined;
 		}
 
@@ -82,7 +82,7 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 			return undefined;
 		}
 
-		if (task.scope === undefined || task.scope === vscode.TaskScope.Global || task.scope === vscode.TaskScope.Workspace) {
+		if (task.scope === undefined || task.scope === zyraxoncode.TaskScope.Global || task.scope === zyraxoncode.TaskScope.Workspace) {
 			// scope is required to be a WorkspaceFolder for resolveTask
 			return undefined;
 		}
@@ -96,7 +96,7 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 		return this.getTasksForProjectAndDefinition(tsconfig, definition);
 	}
 
-	private async getAllTsConfigs(token: vscode.CancellationToken): Promise<TSConfig[]> {
+	private async getAllTsConfigs(token: zyraxoncode.CancellationToken): Promise<TSConfig[]> {
 		const configs = (await Promise.all([
 			this.getTsConfigForActiveFile(token),
 			this.getTsConfigsInWorkspace(token),
@@ -107,8 +107,8 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 		).then(coalesce);
 	}
 
-	private async getTsConfigForActiveFile(token: vscode.CancellationToken): Promise<TSConfig[]> {
-		const editor = vscode.window.activeTextEditor;
+	private async getTsConfigForActiveFile(token: zyraxoncode.CancellationToken): Promise<TSConfig[]> {
+		const editor = zyraxoncode.window.activeTextEditor;
 		if (editor) {
 			if (isTsConfigFileName(editor.document.fileName)) {
 				const uri = editor.document.uri;
@@ -116,7 +116,7 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 					uri,
 					fsPath: uri.fsPath,
 					posixPath: uri.path,
-					workspaceFolder: vscode.workspace.getWorkspaceFolder(uri)
+					workspaceFolder: zyraxoncode.workspace.getWorkspaceFolder(uri)
 				}];
 			}
 		}
@@ -140,8 +140,8 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 		const { configFileName } = response.body;
 		if (configFileName && !isImplicitProjectConfigFile(configFileName)) {
 			const normalizedConfigPath = path.normalize(configFileName);
-			const uri = vscode.Uri.file(normalizedConfigPath);
-			const folder = vscode.workspace.getWorkspaceFolder(uri);
+			const uri = zyraxoncode.Uri.file(normalizedConfigPath);
+			const folder = zyraxoncode.workspace.getWorkspaceFolder(uri);
 			return [{
 				uri,
 				fsPath: normalizedConfigPath,
@@ -153,8 +153,8 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 		return [];
 	}
 
-	private async getTsConfigsInWorkspace(token: vscode.CancellationToken): Promise<TSConfig[]> {
-		const getConfigsTimeout = new vscode.CancellationTokenSource();
+	private async getTsConfigsInWorkspace(token: zyraxoncode.CancellationToken): Promise<TSConfig[]> {
+		const getConfigsTimeout = new zyraxoncode.CancellationTokenSource();
 		token.onCancellationRequested(() => getConfigsTimeout.cancel());
 
 		return Promise.race([
@@ -186,16 +186,16 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 	private static async getLocalTscAtPath(folderPath: string): Promise<string | undefined> {
 		const platform = process.platform;
 		const bin = path.join(folderPath, 'node_modules', '.bin');
-		if (platform === 'win32' && await exists(vscode.Uri.file(path.join(bin, 'tsc.cmd')))) {
+		if (platform === 'win32' && await exists(zyraxoncode.Uri.file(path.join(bin, 'tsc.cmd')))) {
 			return path.join(bin, 'tsc.cmd');
-		} else if ((platform === 'linux' || platform === 'darwin') && await exists(vscode.Uri.file(path.join(bin, 'tsc')))) {
+		} else if ((platform === 'linux' || platform === 'darwin') && await exists(zyraxoncode.Uri.file(path.join(bin, 'tsc')))) {
 			return path.join(bin, 'tsc');
 		}
 		return undefined;
 	}
 
 	private getActiveTypeScriptFile(): string | undefined {
-		const editor = vscode.window.activeTextEditor;
+		const editor = zyraxoncode.window.activeTextEditor;
 		if (editor) {
 			const document = editor.document;
 			if (document && (document.languageId === 'typescript' || document.languageId === 'typescriptreact')) {
@@ -205,38 +205,38 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 		return undefined;
 	}
 
-	private getBuildTask(workspaceFolder: vscode.WorkspaceFolder | undefined, label: string, command: string, args: string[], buildTaskidentifier: TypeScriptTaskDefinition): vscode.Task {
-		const buildTask = new vscode.Task(
+	private getBuildTask(workspaceFolder: zyraxoncode.WorkspaceFolder | undefined, label: string, command: string, args: string[], buildTaskidentifier: TypeScriptTaskDefinition): zyraxoncode.Task {
+		const buildTask = new zyraxoncode.Task(
 			buildTaskidentifier,
-			workspaceFolder || vscode.TaskScope.Workspace,
-			vscode.l10n.t("build - {0}", label),
+			workspaceFolder || zyraxoncode.TaskScope.Workspace,
+			zyraxoncode.l10n.t("build - {0}", label),
 			'tsc',
-			new vscode.ShellExecution(command, args),
+			new zyraxoncode.ShellExecution(command, args),
 			'$tsc');
-		buildTask.group = vscode.TaskGroup.Build;
+		buildTask.group = zyraxoncode.TaskGroup.Build;
 		buildTask.isBackground = false;
 		return buildTask;
 	}
 
-	private getWatchTask(workspaceFolder: vscode.WorkspaceFolder | undefined, label: string, command: string, args: string[], watchTaskidentifier: TypeScriptTaskDefinition) {
-		const watchTask = new vscode.Task(
+	private getWatchTask(workspaceFolder: zyraxoncode.WorkspaceFolder | undefined, label: string, command: string, args: string[], watchTaskidentifier: TypeScriptTaskDefinition) {
+		const watchTask = new zyraxoncode.Task(
 			watchTaskidentifier,
-			workspaceFolder || vscode.TaskScope.Workspace,
-			vscode.l10n.t("watch - {0}", label),
+			workspaceFolder || zyraxoncode.TaskScope.Workspace,
+			zyraxoncode.l10n.t("watch - {0}", label),
 			'tsc',
-			new vscode.ShellExecution(command, [...args, '--watch']),
+			new zyraxoncode.ShellExecution(command, [...args, '--watch']),
 			'$tsc-watch');
-		watchTask.group = vscode.TaskGroup.Build;
+		watchTask.group = zyraxoncode.TaskGroup.Build;
 		watchTask.isBackground = true;
 		return watchTask;
 	}
 
-	private async getTasksForProject(project: TSConfig): Promise<vscode.Task[]> {
+	private async getTasksForProject(project: TSConfig): Promise<zyraxoncode.Task[]> {
 		const command = await TscTaskProvider.getCommand(project);
 		const args = await this.getBuildShellArgs(project);
 		const label = this.getLabelForTasks(project);
 
-		const tasks: vscode.Task[] = [];
+		const tasks: zyraxoncode.Task[] = [];
 
 		if (this.autoDetect === AutoDetect.build || this.autoDetect === AutoDetect.on) {
 			tasks.push(this.getBuildTask(project.workspaceFolder, label, command, args, { type: 'typescript', tsconfig: label }));
@@ -249,12 +249,12 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 		return tasks;
 	}
 
-	private async getTasksForProjectAndDefinition(project: TSConfig, definition: TypeScriptTaskDefinition): Promise<vscode.Task | undefined> {
+	private async getTasksForProjectAndDefinition(project: TSConfig, definition: TypeScriptTaskDefinition): Promise<zyraxoncode.Task | undefined> {
 		const command = await TscTaskProvider.getCommand(project);
 		const args = await this.getBuildShellArgs(project);
 		const label = this.getLabelForTasks(project);
 
-		let task: vscode.Task | undefined;
+		let task: zyraxoncode.Task | undefined;
 
 		if (definition.option === undefined) {
 			task = this.getBuildTask(project.workspaceFolder, label, command, args, definition);
@@ -268,7 +268,7 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 	private async getBuildShellArgs(project: TSConfig): Promise<Array<string>> {
 		const defaultArgs = ['-p', project.fsPath];
 		try {
-			const bytes = await vscode.workspace.fs.readFile(project.uri);
+			const bytes = await zyraxoncode.workspace.fs.readFile(project.uri);
 			const text = Buffer.from(bytes).toString('utf-8');
 			const tsconfig = jsonc.parse(text);
 			if (tsconfig?.references) {
@@ -282,7 +282,7 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 
 	private getLabelForTasks(project: TSConfig): string {
 		if (project.workspaceFolder) {
-			const workspaceNormalizedUri = vscode.Uri.file(path.normalize(project.workspaceFolder.uri.fsPath)); // Make sure the drive letter is lowercase
+			const workspaceNormalizedUri = zyraxoncode.Uri.file(path.normalize(project.workspaceFolder.uri.fsPath)); // Make sure the drive letter is lowercase
 			return path.posix.relative(workspaceNormalizedUri.path, project.posixPath);
 		}
 
@@ -298,5 +298,5 @@ class TscTaskProvider extends Disposable implements vscode.TaskProvider {
 export function register(
 	lazyClient: Lazy<ITypeScriptServiceClient>,
 ) {
-	return vscode.tasks.registerTaskProvider('typescript', new TscTaskProvider(lazyClient));
+	return zyraxoncode.tasks.registerTaskProvider('typescript', new TscTaskProvider(lazyClient));
 }

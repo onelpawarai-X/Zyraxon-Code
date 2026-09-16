@@ -87,7 +87,7 @@ export class ReleaseNotesManager extends Disposable {
 				return dirname(currentFileUri);
 			}
 		}
-		return URI.parse('https://code.visualstudio.com/raw');
+		return URI.parse('__ZYRAXKEEP__0_');
 	}
 
 	public async show(version: string, useCurrentFile: boolean): Promise<boolean> {
@@ -119,7 +119,7 @@ export class ReleaseNotesManager extends Disposable {
 				},
 				'releaseNotes',
 				title,
-				Codicon.vscode,
+				Codicon.zyraxoncode,
 				{ group: ACTIVE_GROUP, preserveFocus: false });
 
 			const disposables = new DisposableStore();
@@ -154,7 +154,7 @@ export class ReleaseNotesManager extends Disposable {
 		}
 
 		const versionLabel = match[1].replace(/\./g, '_');
-		const baseUrl = 'https://code.visualstudio.com/raw';
+		const baseUrl = '__ZYRAXKEEP__1_';
 		const url = `${baseUrl}/v${versionLabel}.md`;
 		const unassigned = nls.localize('unassigned', "unassigned");
 
@@ -277,7 +277,7 @@ export class ReleaseNotesManager extends Disposable {
 			<head>
 				<base href="${asWebviewUri(fileContent.base).toString(true)}/" >
 				<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https: data:; media-src https:; style-src 'nonce-${nonce}' https://code.visualstudio.com; script-src 'nonce-${nonce}';">
+				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src https: data:; media-src https:; style-src 'nonce-${nonce}' __ZYRAXKEEP__2_ script-src 'nonce-${nonce}';">
 				<style nonce="${nonce}">
 					${DEFAULT_MARKDOWN_STYLES}
 					${css}
@@ -285,19 +285,19 @@ export class ReleaseNotesManager extends Disposable {
 					/* codesetting */
 
 					code:has(.codesetting) {
-						background-color: var(--vscode-textPreformat-background);
-						color: var(--vscode-textPreformat-foreground);
+						background-color: var(--zyraxoncode-textPreformat-background);
+						color: var(--zyraxoncode-textPreformat-foreground);
 						padding-left: 1px;
 						margin-right: 3px;
 						padding-right: 0px;
 					}
 
 					code:has(.codesetting):focus {
-						border: 1px solid var(--vscode-button-border, transparent);
+						border: 1px solid var(--zyraxoncode-button-border, transparent);
 					}
 
 					.codesetting {
-						color: var(--vscode-textPreformat-foreground);
+						color: var(--zyraxoncode-textPreformat-foreground);
 						padding: 0px 1px 1px 0px;
 						font-size: 0px;
 						overflow: hidden;
@@ -313,7 +313,7 @@ export class ReleaseNotesManager extends Disposable {
 						font-size: 12px;
 						text-align: center;
 						cursor: pointer;
-						border: 1px solid var(--vscode-button-secondaryBorder, transparent);
+						border: 1px solid var(--zyraxoncode-button-secondaryBorder, transparent);
 						outline: 1px solid transparent;
 						line-height: 9px;
 						margin-bottom: -5px;
@@ -339,7 +339,7 @@ export class ReleaseNotesManager extends Disposable {
 						margin-top: -3px;
 					}
 					.codesetting:hover {
-						color: var(--vscode-textPreformat-foreground) !important;
+						color: var(--zyraxoncode-textPreformat-foreground) !important;
 						text-decoration: none !important;
 					}
 					code:has(.codesetting):hover {
@@ -349,21 +349,21 @@ export class ReleaseNotesManager extends Disposable {
 					.codesetting:focus {
 						outline: 0 !important;
 						text-decoration: none !important;
-						color: var(--vscode-button-hoverForeground) !important;
+						color: var(--zyraxoncode-button-hoverForeground) !important;
 					}
 					.codesetting .separator {
 						width: 1px;
 						height: 14px;
 						margin-bottom: -3px;
 						display: inline-block;
-						background-color: var(--vscode-editor-background);
+						background-color: var(--zyraxoncode-editor-background);
 						font-size: 12px;
 						margin-right: 4px;
 					}
 
 					header { display: flex; align-items: center; padding-top: 1em; }
 
-					/* Release notes enhancements from vscode-docs */
+					/* Release notes enhancements from zyraxoncode-docs */
 					html {
 						font-size: 10px;
 						height: 100%;
@@ -385,8 +385,8 @@ export class ReleaseNotesManager extends Disposable {
 						height: 40px;
 						right: 25px;
 						bottom: 25px;
-						background-color: var(--vscode-button-background, #444);
-						border-color: var(--vscode-button-border);
+						background-color: var(--zyraxoncode-button-background, #444);
+						border-color: var(--zyraxoncode-button-border);
 						border-radius: 50%;
 						cursor: pointer;
 						box-shadow: 1px 1px 1px rgba(0,0,0,.25);
@@ -397,11 +397,11 @@ export class ReleaseNotesManager extends Disposable {
 					}
 
 					#scroll-to-top:hover {
-						background-color: var(--vscode-button-hoverBackground);
+						background-color: var(--zyraxoncode-button-hoverBackground);
 						box-shadow: 2px 2px 2px rgba(0,0,0,.25);
 					}
 
-					body.vscode-high-contrast #scroll-to-top {
+					body.zyraxoncode-high-contrast #scroll-to-top {
 						border-width: 2px;
 						border-style: solid;
 						box-shadow: none;
@@ -410,7 +410,7 @@ export class ReleaseNotesManager extends Disposable {
 					#scroll-to-top span.icon::before {
 						content: "";
 						display: block;
-						background: var(--vscode-button-foreground);
+						background: var(--zyraxoncode-button-foreground);
 						/* Chevron up icon */
 						-webkit-mask-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxNiAxNiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTYgMTY7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojRkZGRkZGO30KCS5zdDF7ZmlsbDpub25lO30KPC9zdHlsZT4KPHRpdGxlPnVwY2hldnJvbjwvdGl0bGU+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik04LDUuMWwtNy4zLDcuM0wwLDExLjZsOC04bDgsOGwtMC43LDAuN0w4LDUuMXoiLz4KPHJlY3QgY2xhc3M9InN0MSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ii8+Cjwvc3ZnPgo=');
 						mask-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxNiAxNiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTYgMTY7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojRkZGRkZGO30KCS5zdDF7ZmlsbDpub25lO30KPC9zdHlsZT4KPHRpdGxlPnVwY2hldnJvbjwvdGl0bGU+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik04LDUuMWwtNy4zLDcuM0wwLDExLjZsOC04bDgsOGwtMC43LDAuN0w4LDUuMXoiLz4KPHJlY3QgY2xhc3M9InN0MSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ii8+Cjwvc3ZnPgo=');
@@ -494,7 +494,7 @@ export class ReleaseNotesManager extends Disposable {
 					}
 
 					#toc-nav a {
-						color: var(--vscode-editor-foreground, #ccc);
+						color: var(--zyraxoncode-editor-foreground, #ccc);
 						text-decoration: none !important;
 						transition: background-color 0.2s, color 0.2s;
 						padding: 4px 6px;
@@ -505,8 +505,8 @@ export class ReleaseNotesManager extends Disposable {
 					}
 
 					#toc-nav a:hover {
-						background-color: var(--vscode-button-secondaryHoverBackground, #1177bb);
-						color: var(--vscode-button-secondaryForeground, #ffffff);
+						background-color: var(--zyraxoncode-button-secondaryHoverBackground, #1177bb);
+						color: var(--zyraxoncode-button-secondaryForeground, #ffffff);
 						cursor: pointer;
 						text-decoration: none !important;
 					}
@@ -537,7 +537,7 @@ export class ReleaseNotesManager extends Disposable {
 			<body>
 				${processedContent}
 				<script nonce="${nonce}">
-					const vscode = acquireVsCodeApi();
+					const zyraxoncode = acquireVsCodeApi();
 					const container = document.createElement('p');
 					container.style.display = 'flex';
 					container.style.alignItems = 'center';
@@ -569,7 +569,7 @@ export class ReleaseNotesManager extends Disposable {
 					window.addEventListener('click', event => {
 						const href = event.target.href ?? event.target.parentElement?.href ?? event.target.parentElement?.parentElement?.href;
 						if (href && (href.startsWith('${Schemas.codeSetting}'))) {
-							vscode.postMessage({ type: 'clickSetting', value: { uri: href, x: event.clientX, y: event.clientY }});
+							zyraxoncode.postMessage({ type: 'clickSetting', value: { uri: href, x: event.clientX, y: event.clientY }});
 						}
 					});
 
@@ -577,13 +577,13 @@ export class ReleaseNotesManager extends Disposable {
 						if (event.keyCode === 13) {
 							if (event.target.children.length > 0 && event.target.children[0].href) {
 								const clientRect = event.target.getBoundingClientRect();
-								vscode.postMessage({ type: 'clickSetting', value: { uri: event.target.children[0].href, x: clientRect.right , y: clientRect.bottom }});
+								zyraxoncode.postMessage({ type: 'clickSetting', value: { uri: event.target.children[0].href, x: clientRect.right , y: clientRect.bottom }});
 							}
 						}
 					});
 
 					input.addEventListener('change', event => {
-						vscode.postMessage({ type: 'showReleaseNotes', value: input.checked }, '*');
+						zyraxoncode.postMessage({ type: 'showReleaseNotes', value: input.checked }, '*');
 					});
 				</script>
 			</body>

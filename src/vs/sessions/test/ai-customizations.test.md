@@ -52,7 +52,7 @@ This tests the transition from the empty state to having an active workspace sel
 
 - On 'New Session' screen (Scenario 1 completed)
 - A git repository, cloned on the machine, is available to select
-  - For this test use `microsoft/zyraxon` cloned to a test folder
+  - For this test use `zyraxon/zyraxon` cloned to a test folder
 
 #### Actions
 
@@ -97,7 +97,7 @@ This tests the transition from the empty state to having an active workspace sel
 #### Preconditions
 
 - Active session with a worktree checked out (task started and running)
-- Use the same repository as Scenario 2 (`microsoft/zyraxon`)
+- Use the same repository as Scenario 2 (`zyraxon/zyraxon`)
 
 #### Actions
 
@@ -143,7 +143,7 @@ This tests the transition from the empty state to having an active workspace sel
 3. Select a name `<name>` when the quickpick appears and confirm
 4. Verify the file opens in the embedded editor
 5. Verify the file path shown in the editor header is `~/.copilot/instructions/<name>.instructions.md`
-6. Confirm the path is NOT the ZYRAXON Code profile folder (e.g., NOT `~/.vscode-oss-sessions-dev/User/...`)
+6. Confirm the path is NOT the ZYRAXON Code profile folder (e.g., NOT `~/.zyraxoncode-oss-sessions-dev/User/...`)
 7. Press the back button to return to the list
 8. Observe the new instruction appears in the "User" group
 9. Observe the sidebar badge count reflects the new user instruction

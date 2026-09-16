@@ -7,7 +7,7 @@ import { onUnexpectedError } from '../../../base/common/errors.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
 import { IDisposable } from '../../../base/common/lifecycle.js';
 import { Disposable } from './extHostTypes.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { MainContext, ExtHostDocumentContentProvidersShape, MainThreadDocumentContentProvidersShape, IMainContext } from './extHost.protocol.js';
 import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import { Schemas } from '../../../base/common/network.js';
@@ -19,7 +19,7 @@ export class ExtHostDocumentContentProvider implements ExtHostDocumentContentPro
 
 	private static _handlePool = 0;
 
-	private readonly _documentContentProviders = new Map<number, vscode.TextDocumentContentProvider>();
+	private readonly _documentContentProviders = new Map<number, zyraxoncode.TextDocumentContentProvider>();
 	private readonly _proxy: MainThreadDocumentContentProvidersShape;
 
 	constructor(
@@ -30,7 +30,7 @@ export class ExtHostDocumentContentProvider implements ExtHostDocumentContentPro
 		this._proxy = mainContext.getProxy(MainContext.MainThreadDocumentContentProviders);
 	}
 
-	registerTextDocumentContentProvider(scheme: string, provider: vscode.TextDocumentContentProvider): vscode.Disposable {
+	registerTextDocumentContentProvider(scheme: string, provider: zyraxoncode.TextDocumentContentProvider): zyraxoncode.Disposable {
 		// todo@remote
 		// check with scheme from fs-providers!
 		if (Object.keys(Schemas).indexOf(scheme) >= 0) {

@@ -15,7 +15,7 @@ const enum ShellIntegrationOscPs {
 	 * Sequences pioneered by ZYRAXON Code. The number is derived from the least significant digit of
 	 * "VSC" when encoded in hex ("VSC" = 0x56, 0x53, 0x43).
 	 */
-	VSCode = 633,
+	ZyraxonCode = 633,
 	/**
 	 * Sequences pioneered by iTerm.
 	 */
@@ -27,7 +27,7 @@ const enum ShellIntegrationOscPs {
  * those pioneered in FinalTerm. The decision to move to entirely custom sequences was to try to
  * improve reliability and prevent the possibility of applications confusing the terminal.
  */
-export const enum VSCodeOscPt {
+export const enum ZyraxonCodeOscPt {
 	/**
 	 * The start of the prompt, this is expected to always appear at the start of a line.
 	 * Based on FinalTerm's `OSC 133 ; A ST`.
@@ -88,7 +88,7 @@ export const enum VSCodeOscPt {
 	Property = 'P'
 }
 
-export const enum VSCodeOscProperty {
+export const enum ZyraxonCodeOscProperty {
 	Task = 'Task',
 	Cwd = 'Cwd',
 	HasRichCommandDetection = 'HasRichCommandDetection',
@@ -104,8 +104,8 @@ export const enum ITermOscPt {
 	SetMark = 'SetMark'
 }
 
-export function VSCodeSequence(osc: VSCodeOscPt, data?: string | VSCodeOscProperty): string {
-	return oscSequence(ShellIntegrationOscPs.VSCode, osc, data);
+export function ZyraxonCodeSequence(osc: ZyraxonCodeOscPt, data?: string | ZyraxonCodeOscProperty): string {
+	return oscSequence(ShellIntegrationOscPs.ZyraxonCode, osc, data);
 }
 
 export function ITermSequence(osc: ITermOscPt, data?: string): string {

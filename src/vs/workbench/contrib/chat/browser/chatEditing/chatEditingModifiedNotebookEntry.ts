@@ -56,7 +56,7 @@ import { adjustCellDiffAndOriginalModelBasedOnCellAddDelete, adjustCellDiffAndOr
 import { countChanges, ICellDiffInfo, sortCellChanges } from './notebook/notebookCellChanges.js';
 
 
-const SnapshotLanguageId = 'VSCodeChatNotebookSnapshotLanguage';
+const SnapshotLanguageId = 'ZyraxonCodeChatNotebookSnapshotLanguage';
 
 export class ChatEditingModifiedNotebookEntry extends AbstractChatEditingModifiedFileEntry {
 	static NewModelCounter: number = 0;
@@ -537,7 +537,7 @@ export class ChatEditingModifiedNotebookEntry extends AbstractChatEditingModifie
 
 	private newNotebookEditGenerator?: ChatEditingNewNotebookContentEdits;
 	override async acceptAgentEdits(resource: URI, edits: (TextEdit | ICellEditOperation)[], isLastEdits: boolean, responseModel: IChatResponseModel | undefined): Promise<void> {
-		const isCellUri = resource.scheme === Schemas.vscodeNotebookCell;
+		const isCellUri = resource.scheme === Schemas.zyraxoncodeNotebookCell;
 		const cell = isCellUri && this.modifiedModel.cells.find(cell => isEqual(cell.uri, resource));
 		let cellEntry: ChatEditingNotebookCellEntry | undefined;
 		if (cell) {

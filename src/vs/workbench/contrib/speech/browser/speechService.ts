@@ -25,7 +25,7 @@ export interface ISpeechProviderDescriptor {
 const speechProvidersExtensionPoint = ExtensionsRegistry.registerExtensionPoint<ISpeechProviderDescriptor[]>({
 	extensionPoint: 'speechProviders',
 	jsonSchema: {
-		description: localize('vscode.extension.contributes.speechProvider', 'Contributes a Speech Provider'),
+		description: localize('zyraxoncode.extension.contributes.speechProvider', 'Contributes a Speech Provider'),
 		type: 'array',
 		items: {
 			additionalProperties: false,

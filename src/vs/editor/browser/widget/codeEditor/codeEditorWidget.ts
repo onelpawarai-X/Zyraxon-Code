@@ -1813,7 +1813,7 @@ export class CodeEditorWidget extends Disposable implements editorBrowser.ICodeE
 					if (e.reachedMaxCursorCount) {
 
 						const multiCursorLimit = this.getOption(EditorOption.multiCursorLimit);
-						const message = nls.localize('cursors.maximum', "The number of cursors has been limited to {0}. Consider using [find and replace](https://code.visualstudio.com/docs/editor/codebasics#_find-and-replace) for larger changes or increase the editor multi cursor limit setting.", multiCursorLimit);
+						const message = nls.localize('cursors.maximum', "The number of cursors has been limited to {0}. Consider using [find and replace](__ZYRAXKEEP__0_) for larger changes or increase the editor multi cursor limit setting.", multiCursorLimit);
 						this._notificationService.prompt(Severity.Warning, message, [
 							{
 								label: 'Find and Replace',
@@ -2419,7 +2419,7 @@ export class EditorModeContext extends Disposable {
 			this._hasDocumentSelectionFormattingProvider.set(this._languageFeaturesService.documentRangeFormattingEditProvider.has(model));
 			this._hasMultipleDocumentFormattingProvider.set(this._languageFeaturesService.documentFormattingEditProvider.all(model).length + this._languageFeaturesService.documentRangeFormattingEditProvider.all(model).length > 1);
 			this._hasMultipleDocumentSelectionFormattingProvider.set(this._languageFeaturesService.documentRangeFormattingEditProvider.all(model).length > 1);
-			this._isInEmbeddedEditor.set(model.uri.scheme === Schemas.walkThroughSnippet || model.uri.scheme === Schemas.vscodeChatCodeBlock);
+			this._isInEmbeddedEditor.set(model.uri.scheme === Schemas.walkThroughSnippet || model.uri.scheme === Schemas.zyraxoncodeChatCodeBlock);
 		});
 	}
 }
@@ -2516,14 +2516,14 @@ class EditorDecorationsCollection implements editorCommon.IEditorDecorationsColl
 	}
 }
 
-const squigglyStart = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 3' enable-background='new 0 0 6 3' height='3' width='6'><g fill='`);
+const squigglyStart = encodeURIComponent(`<svg xmlns='__ZYRAXKEEP__1_' viewBox='0 0 6 3' enable-background='new 0 0 6 3' height='3' width='6'><g fill='`);
 const squigglyEnd = encodeURIComponent(`'><polygon points='5.5,0 2.5,3 1.1,3 4.1,0'/><polygon points='4,0 6,2 6,0.6 5.4,0'/><polygon points='0,2 1,3 2.4,3 0,0.6'/></g></svg>`);
 
 function getSquigglySVGData(color: Color) {
 	return squigglyStart + encodeURIComponent(color.toString()) + squigglyEnd;
 }
 
-const dotdotdotStart = encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" height="3" width="12"><g fill="`);
+const dotdotdotStart = encodeURIComponent(`<svg xmlns="__ZYRAXKEEP__2_" height="3" width="12"><g fill="`);
 const dotdotdotEnd = encodeURIComponent(`"><circle cx="1" cy="1" r="1"/><circle cx="5" cy="1" r="1"/><circle cx="9" cy="1" r="1"/></g></svg>`);
 
 function getDotDotDotSVGData(color: Color) {

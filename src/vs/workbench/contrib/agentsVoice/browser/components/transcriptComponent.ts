@@ -38,7 +38,7 @@ export interface TranscriptProps {
 function createUserTurn(turn: ITranscriptTurn, chatStyle?: boolean): HTMLElement {
 	const wrapper = dom.$('div.voice-user-transcript');
 	wrapper.style.cssText = USER_CONTAINER_STYLE;
-	const userColor = chatStyle ? 'var(--vscode-foreground)' : COLOR.userTranscript;
+	const userColor = chatStyle ? 'var(--zyraxoncode-foreground)' : COLOR.userTranscript;
 
 	const inner = dom.$('div');
 	if (!turn.isPartial) {
@@ -71,7 +71,7 @@ function createUserTurn(turn: ITranscriptTurn, chatStyle?: boolean): HTMLElement
 function createAssistantTurn(turn: ITranscriptTurn, chatStyle?: boolean): HTMLElement {
 	const el = dom.$('div');
 	if (chatStyle) {
-		el.style.cssText = ASSISTANT_STYLE.replace(`color:${COLOR.assistantTranscript}`, 'color:var(--vscode-descriptionForeground)');
+		el.style.cssText = ASSISTANT_STYLE.replace(`color:${COLOR.assistantTranscript}`, 'color:var(--zyraxoncode-descriptionForeground)');
 	} else {
 		el.style.cssText = ASSISTANT_STYLE;
 	}

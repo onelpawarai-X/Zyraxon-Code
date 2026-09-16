@@ -14,7 +14,7 @@ import { URI } from '../../../util/vs/base/common/uri';
  * Shared between the skill tool and the readFile tool to ensure consistent
  * telemetry when skills are loaded through either path.
  *
- * TODO: Add pluginNameHash and pluginVersion properties once vscode core's
+ * TODO: Add pluginNameHash and pluginVersion properties once zyraxoncode core's
  * extensionPromptFileProvider command exposes IAgentPluginService metadata.
  */
 export function sendSkillContentReadTelemetry(

@@ -13,9 +13,9 @@ const TARGET = join(__dirname, '../../src/util/vs');
 /**
  * Returns the absolute file path where the given file should be placed.
  */
-function determineTargetPath(absoluteVSCodeFilePath: string): string {
+function determineTargetPath(absoluteZyraxonCodeFilePath: string): string {
 
-	const vsRelative = path.relative(VS_ROOT, absoluteVSCodeFilePath);
+	const vsRelative = path.relative(VS_ROOT, absoluteZyraxonCodeFilePath);
 
 	const segements = vsRelative.split(path.sep);
 
@@ -110,7 +110,7 @@ async function doIt(filepaths: string[]) {
 			newSource = newSource.slice(0, edit.pos + 1) + edit.newText + newSource.slice(edit.end + 1);
 		}
 
-		newSource = '//!!! DO NOT modify, this file was COPIED from \'microsoft/vscode\'\n\n' + newSource;
+		newSource = '//!!! DO NOT modify, this file was COPIED from \'zyraxon/zyraxoncode\'\n\n' + newSource;
 
 		seen.set(filepath, {
 			sourceFilePath: filepath,
@@ -194,8 +194,8 @@ async function doIt(filepaths: string[]) {
 			'vs/base/common/sseParser.ts',
 
 			// SPECIAL IMPLICIT DEPENDENCIES
-			'typings/vscode-globals-nls.d.ts',
-			'typings/vscode-globals-product.d.ts',
+			'typings/zyraxoncode-globals-nls.d.ts',
+			'typings/zyraxoncode-globals-product.d.ts',
 			'typings/base-common.d.ts',
 			'typings/crypto.d.ts',
 		]);

@@ -88,7 +88,7 @@ export class ProxyAuthService extends Disposable implements IProxyAuthService {
 		// Compute a hash over the authentication info to be used
 		// with the credentials store to return the right credentials
 		// given the properties of the auth request
-		// (see https://github.com/microsoft/vscode/issues/109497)
+		// (see __ZYRAXKEEP__0_)
 		const authInfoHash = String(hash({ scheme: authInfo.scheme, host: authInfo.host, port: authInfo.port }));
 
 		let credentials: Credentials | undefined = undefined;
@@ -257,9 +257,9 @@ export class ProxyAuthService extends Disposable implements IProxyAuthService {
 			authInfo,
 			username: sessionCredentials?.username ?? storedUsername, // prefer to show already used username (if any) over stored
 			password: sessionCredentials?.password ?? storedPassword, // prefer to show already used password (if any) over stored
-			replyChannel: `vscode:proxyAuthResponse:${generateUuid()}`
+			replyChannel: `zyraxoncode:proxyAuthResponse:${generateUuid()}`
 		};
-		window.sendWhenReady('vscode:openProxyAuthenticationDialog', CancellationToken.None, payload);
+		window.sendWhenReady('zyraxoncode:openProxyAuthenticationDialog', CancellationToken.None, payload);
 
 		// Handle reply
 		const loginDialogCredentials = await new Promise<Credentials | undefined>(resolve => {

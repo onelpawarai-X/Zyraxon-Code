@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { MdLanguageClient } from '../client/client';
 import { Mime } from '../util/mimes';
 
-class UpdatePastedLinksEditProvider implements vscode.DocumentPasteEditProvider {
+class UpdatePastedLinksEditProvider implements zyraxoncode.DocumentPasteEditProvider {
 
-	public static readonly kind = vscode.DocumentDropOrPasteEditKind.Text.append('updateLinks', 'markdown');
+	public static readonly kind = zyraxoncode.DocumentDropOrPasteEditKind.Text.append('updateLinks', 'markdown');
 
-	public static readonly metadataMime = 'application/vnd.vscode.markdown.updatelinks.metadata';
+	public static readonly metadataMime = 'application/vnd.zyraxoncode.markdown.updatelinks.metadata';
 
 	readonly #client: MdLanguageClient;
 
@@ -21,7 +21,7 @@ class UpdatePastedLinksEditProvider implements vscode.DocumentPasteEditProvider 
 		this.#client = client;
 	}
 
-	async prepareDocumentPaste(document: vscode.TextDocument, ranges: readonly vscode.Range[], dataTransfer: vscode.DataTransfer, token: vscode.CancellationToken): Promise<void> {
+	async prepareDocumentPaste(document: zyraxoncode.TextDocument, ranges: readonly zyraxoncode.Range[], dataTransfer: zyraxoncode.DataTransfer, token: zyraxoncode.CancellationToken): Promise<void> {
 		if (!this.#isEnabled(document)) {
 			return;
 		}
@@ -31,16 +31,16 @@ class UpdatePastedLinksEditProvider implements vscode.DocumentPasteEditProvider 
 			return;
 		}
 
-		dataTransfer.set(UpdatePastedLinksEditProvider.metadataMime, new vscode.DataTransferItem(metadata));
+		dataTransfer.set(UpdatePastedLinksEditProvider.metadataMime, new zyraxoncode.DataTransferItem(metadata));
 	}
 
 	async provideDocumentPasteEdits(
-		document: vscode.TextDocument,
-		ranges: readonly vscode.Range[],
-		dataTransfer: vscode.DataTransfer,
-		context: vscode.DocumentPasteEditContext,
-		token: vscode.CancellationToken,
-	): Promise<vscode.DocumentPasteEdit[] | undefined> {
+		document: zyraxoncode.TextDocument,
+		ranges: readonly zyraxoncode.Range[],
+		dataTransfer: zyraxoncode.DataTransfer,
+		context: zyraxoncode.DocumentPasteEditContext,
+		token: zyraxoncode.CancellationToken,
+	): Promise<zyraxoncode.DocumentPasteEdit[] | undefined> {
 		if (!this.#isEnabled(document)) {
 			return;
 		}
@@ -60,30 +60,30 @@ class UpdatePastedLinksEditProvider implements vscode.DocumentPasteEditProvider 
 		// - copy empty line
 		// - Copy with multiple cursors and paste into multiple locations
 		// - ...
-		const edits = await this.#client.getUpdatePastedLinksEdit(document.uri, ranges.map(x => new vscode.TextEdit(x, text)), metadata, token);
+		const edits = await this.#client.getUpdatePastedLinksEdit(document.uri, ranges.map(x => new zyraxoncode.TextEdit(x, text)), metadata, token);
 		if (!edits?.length || token.isCancellationRequested) {
 			return;
 		}
 
-		const pasteEdit = new vscode.DocumentPasteEdit('', vscode.l10n.t("Paste and update pasted links"), UpdatePastedLinksEditProvider.kind);
-		const workspaceEdit = new vscode.WorkspaceEdit();
-		workspaceEdit.set(document.uri, edits.map(x => new vscode.TextEdit(new vscode.Range(x.range.start.line, x.range.start.character, x.range.end.line, x.range.end.character,), x.newText)));
+		const pasteEdit = new zyraxoncode.DocumentPasteEdit('', zyraxoncode.l10n.t("Paste and update pasted links"), UpdatePastedLinksEditProvider.kind);
+		const workspaceEdit = new zyraxoncode.WorkspaceEdit();
+		workspaceEdit.set(document.uri, edits.map(x => new zyraxoncode.TextEdit(new zyraxoncode.Range(x.range.start.line, x.range.start.character, x.range.end.line, x.range.end.character,), x.newText)));
 		pasteEdit.additionalEdit = workspaceEdit;
 
 		if (!context.only || !UpdatePastedLinksEditProvider.kind.contains(context.only)) {
-			pasteEdit.yieldTo = [vscode.DocumentDropOrPasteEditKind.Text];
+			pasteEdit.yieldTo = [zyraxoncode.DocumentDropOrPasteEditKind.Text];
 		}
 
 		return [pasteEdit];
 	}
 
-	#isEnabled(document: vscode.TextDocument): boolean {
-		return vscode.workspace.getConfiguration('markdown', document.uri).get<boolean>('editor.updateLinksOnPaste.enabled', true);
+	#isEnabled(document: zyraxoncode.TextDocument): boolean {
+		return zyraxoncode.workspace.getConfiguration('markdown', document.uri).get<boolean>('editor.updateLinksOnPaste.enabled', true);
 	}
 }
 
-export function registerUpdatePastedLinks(selector: vscode.DocumentSelector, client: MdLanguageClient) {
-	return vscode.languages.registerDocumentPasteEditProvider(selector, new UpdatePastedLinksEditProvider(client), {
+export function registerUpdatePastedLinks(selector: zyraxoncode.DocumentSelector, client: MdLanguageClient) {
+	return zyraxoncode.languages.registerDocumentPasteEditProvider(selector, new UpdatePastedLinksEditProvider(client), {
 		copyMimeTypes: [UpdatePastedLinksEditProvider.metadataMime],
 		providedPasteEditKinds: [UpdatePastedLinksEditProvider.kind],
 		pasteMimeTypes: [UpdatePastedLinksEditProvider.metadataMime],

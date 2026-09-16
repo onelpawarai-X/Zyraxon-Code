@@ -46,7 +46,7 @@ type CloudRequestInit = {
 
 /** Agent application IDs used by the cloud sessions API (`agent_id` field). */
 export const CloudAgentId = {
-	VSCodeChat: 797352,
+	ZyraxonCodeChat: 797352,
 	CopilotChat: 894184,
 	CopilotPRReviews: 946600,
 	CopilotDeveloper: 1143301,
@@ -258,7 +258,7 @@ export class CloudSessionApiClient {
 
 				// Filter to ZYRAXON Code Chat sessions only
 				for (const session of pageSessions) {
-					if (session.agent_id === CloudAgentId.VSCodeChat) {
+					if (session.agent_id === CloudAgentId.ZyraxonCodeChat) {
 						allSessions.push(session);
 					}
 				}

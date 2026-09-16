@@ -96,10 +96,10 @@ export interface IGenericChatRequestVariableEntry extends IBaseChatRequestVariab
 }
 
 export const ChatPasteAttachmentMetadata = {
-	Kind: 'vscode.chat.attachment.kind',
-	Language: 'vscode.chat.attachment.language',
-	FileName: 'vscode.chat.attachment.fileName',
-	PastedLines: 'vscode.chat.attachment.pastedLines',
+	Kind: 'zyraxoncode.chat.attachment.kind',
+	Language: 'zyraxoncode.chat.attachment.language',
+	FileName: 'zyraxoncode.chat.attachment.fileName',
+	PastedLines: 'zyraxoncode.chat.attachment.pastedLines',
 } as const;
 
 export interface IRestorablePasteAttachment {
@@ -897,18 +897,18 @@ export function isStringImplicitContextValue(value: unknown): value is StringCha
 }
 
 export enum PromptFileVariableKind {
-	Instruction = 'vscode.instructions.file.root',
-	InstructionReference = `vscode.instructions.file.reference`,
-	PromptFile = 'vscode.prompt.file',
+	Instruction = 'zyraxoncode.instructions.file.root',
+	InstructionReference = `zyraxoncode.instructions.file.reference`,
+	PromptFile = 'zyraxoncode.prompt.file',
 }
 
 /**
  * Utility to convert a {@link uri} to a chat variable entry.
  * The `id` of the chat variable can be one of the following:
  *
- * - `vscode.instructions.file.reference__<URI>`: for all non-root prompt instructions references
- * - `vscode.instructions.file.root__<URI>`: for *root* prompt instructions references
- * - `vscode.prompt.file__<URI>`: for prompt file references
+ * - `zyraxoncode.instructions.file.reference__<URI>`: for all non-root prompt instructions references
+ * - `zyraxoncode.instructions.file.root__<URI>`: for *root* prompt instructions references
+ * - `zyraxoncode.prompt.file__<URI>`: for prompt file references
  *
  * @param uri A resource URI that points to a prompt instructions file.
  * @param kind The kind of the prompt file variable entry.
@@ -929,7 +929,7 @@ export function toPromptFileVariableEntry(uri: URI, kind: PromptFileVariableKind
 }
 
 enum PromptTextVariableKind {
-	CustomizationsIndex = 'vscode.customizations.index',
+	CustomizationsIndex = 'zyraxoncode.customizations.index',
 }
 
 export function toPromptTextVariableEntry(content: string, automaticallyAdded = false, toolReferences?: ChatRequestToolReferenceEntry[]): IPromptTextVariableEntry {

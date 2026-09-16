@@ -24,7 +24,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	const tools: RegisteredTool[] = [];
 
 	tools.push(server.tool(
-		'vscode_automation_list_windows',
+		'zyraxoncode_automation_list_windows',
 		'List all open ZYRAXON Code windows with their index and URL',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -34,7 +34,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_switch_window',
+		'zyraxoncode_automation_switch_window',
 		'Switch to a different ZYRAXON Code window by index or URL pattern (e.g., "agent.html")',
 		{
 			indexOrUrl: z.union([z.number(), z.string()]).describe('Window index (0-based) or URL pattern to match (e.g., "agent.html", "workbench")')
@@ -54,7 +54,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_get_current_window',
+		'zyraxoncode_automation_get_current_window',
 		'Get information about the currently active window',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -66,8 +66,8 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_screenshot',
-		'Take a screenshot of the current window (respects the window set by vscode_automation_switch_window)',
+		'zyraxoncode_automation_window_screenshot',
+		'Take a screenshot of the current window (respects the window set by zyraxoncode_automation_switch_window)',
 		{
 			fullPage: z.boolean().optional().describe('When true, takes a screenshot of the full scrollable page')
 		},
@@ -87,7 +87,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_snapshot',
+		'zyraxoncode_automation_window_snapshot',
 		'Capture accessibility snapshot of the current window. Returns the page structure with element references that can be used for interactions.',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -100,7 +100,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_click',
+		'zyraxoncode_automation_window_click',
 		'Click on an element in the current window using a CSS selector',
 		{
 			selector: z.string().describe('CSS selector for the element to click'),
@@ -116,7 +116,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_type',
+		'zyraxoncode_automation_window_type',
 		'Type text into an element in the current window',
 		{
 			selector: z.string().describe('CSS selector for the element to type into'),
@@ -132,7 +132,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_evaluate',
+		'zyraxoncode_automation_window_evaluate',
 		'Evaluate JavaScript in the current window',
 		{
 			expression: z.string().describe('JavaScript expression to evaluate')
@@ -146,7 +146,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_locator',
+		'zyraxoncode_automation_window_locator',
 		'Get information about elements matching a selector in the current window',
 		{
 			selector: z.string().describe('CSS selector to find elements'),
@@ -161,7 +161,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_wait_for_selector',
+		'zyraxoncode_automation_window_wait_for_selector',
 		'Wait for an element to appear in the current window',
 		{
 			selector: z.string().describe('CSS selector to wait for'),
@@ -177,7 +177,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_hover',
+		'zyraxoncode_automation_window_hover',
 		'Hover over an element in the current window',
 		{
 			selector: z.string().describe('CSS selector for the element to hover over')
@@ -191,7 +191,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_drag',
+		'zyraxoncode_automation_window_drag',
 		'Drag from one element to another in the current window',
 		{
 			sourceSelector: z.string().describe('CSS selector for the source element'),
@@ -206,7 +206,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_press_key',
+		'zyraxoncode_automation_window_press_key',
 		'Press a key or key combination in the current window',
 		{
 			key: z.string().describe('Key to press (e.g., "Enter", "Tab", "Control+c", "Meta+v")')
@@ -220,7 +220,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_mouse_move',
+		'zyraxoncode_automation_window_mouse_move',
 		'Move mouse to a specific position in the current window',
 		{
 			x: z.number().describe('X coordinate'),
@@ -235,7 +235,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_mouse_click',
+		'zyraxoncode_automation_window_mouse_click',
 		'Click at a specific position in the current window',
 		{
 			x: z.number().describe('X coordinate'),
@@ -252,7 +252,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_mouse_drag',
+		'zyraxoncode_automation_window_mouse_drag',
 		'Drag from one position to another in the current window',
 		{
 			startX: z.number().describe('Starting X coordinate'),
@@ -269,7 +269,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_select_option',
+		'zyraxoncode_automation_window_select_option',
 		'Select an option in a dropdown in the current window',
 		{
 			selector: z.string().describe('CSS selector for the select element'),
@@ -284,7 +284,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_fill_form',
+		'zyraxoncode_automation_window_fill_form',
 		'Fill multiple form fields at once in the current window',
 		{
 			fields: z.array(z.object({
@@ -301,7 +301,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_console_messages',
+		'zyraxoncode_automation_window_console_messages',
 		'Get console messages from the current window',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -312,7 +312,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_wait_for_text',
+		'zyraxoncode_automation_window_wait_for_text',
 		'Wait for text to appear or disappear in the current window',
 		{
 			text: z.string().optional().describe('Text to wait for to appear'),
@@ -328,7 +328,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_wait_for_time',
+		'zyraxoncode_automation_window_wait_for_time',
 		'Wait for a specified time in the current window',
 		{
 			seconds: z.number().describe('Time to wait in seconds')
@@ -342,7 +342,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_verify_element_visible',
+		'zyraxoncode_automation_window_verify_element_visible',
 		'Verify an element is visible in the current window',
 		{
 			selector: z.string().describe('CSS selector for the element to verify')
@@ -356,7 +356,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_verify_text_visible',
+		'zyraxoncode_automation_window_verify_text_visible',
 		'Verify text is visible in the current window',
 		{
 			text: z.string().describe('Text to verify is visible')
@@ -370,7 +370,7 @@ export function applyWindowTools(server: McpServer, appService: ApplicationServi
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_window_get_input_value',
+		'zyraxoncode_automation_window_get_input_value',
 		'Get the value of an input element in the current window',
 		{
 			selector: z.string().describe('CSS selector for the input element')

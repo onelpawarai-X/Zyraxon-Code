@@ -316,9 +316,9 @@ export interface IFileAtomicOptions {
 	 * file will be in the same folder as the resource and
 	 * have `postfix` appended to the resource name.
 	 *
-	 * Example: given a file resource `file:///some/path/foo.txt`
+	 * Example: given a file resource `__ZYRAXKEEP__0_`
 	 * and a postfix `.vsctmp`, the temporary file will be
-	 * created as `file:///some/path/foo.txt.vsctmp`.
+	 * created as `__ZYRAXKEEP__1_`.
 	 */
 	readonly postfix: string;
 }
@@ -848,7 +848,7 @@ export function createFileSystemProviderError(error: Error | string, code: FileS
 
 export function ensureFileSystemProviderError(error?: Error): Error {
 	if (!error) {
-		return createFileSystemProviderError(localize('unknownError', "Unknown Error"), FileSystemProviderErrorCode.Unknown); // https://github.com/microsoft/vscode/issues/72798
+		return createFileSystemProviderError(localize('unknownError', "Unknown Error"), FileSystemProviderErrorCode.Unknown); // __ZYRAXKEEP__2_
 	}
 
 	return error;
@@ -1630,7 +1630,7 @@ export class ByteSize {
 export function getLargeFileConfirmationLimit(remoteAuthority?: string): number;
 export function getLargeFileConfirmationLimit(uri?: URI): number;
 export function getLargeFileConfirmationLimit(arg?: string | URI): number {
-	const isRemote = typeof arg === 'string' || arg?.scheme === Schemas.vscodeRemote;
+	const isRemote = typeof arg === 'string' || arg?.scheme === Schemas.zyraxoncodeRemote;
 	const isLocal = typeof arg !== 'string' && arg?.scheme === Schemas.file;
 
 	if (isLocal) {

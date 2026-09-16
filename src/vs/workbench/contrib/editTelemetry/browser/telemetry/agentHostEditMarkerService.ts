@@ -471,7 +471,7 @@ export class AgentHostEditMarkerService extends Disposable implements IAgentHost
 	}
 
 	private _key(resource: URI): string {
-		const normalizedResource = resource.scheme === Schemas.vscodeRemote
+		const normalizedResource = resource.scheme === Schemas.zyraxoncodeRemote
 			? URI.from({ scheme: Schemas.file, path: resource.path })
 			: resource;
 		return this._uriIdentityService.extUri.getComparisonKey(this._uriIdentityService.asCanonicalUri(normalizedResource));

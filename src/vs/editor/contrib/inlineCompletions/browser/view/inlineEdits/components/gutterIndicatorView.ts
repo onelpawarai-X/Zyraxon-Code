@@ -557,7 +557,7 @@ export class InlineEditsGutterIndicator extends Disposable {
 				position: 'absolute',
 				backgroundColor: this._gutterIndicatorStyles.map(v => v.background),
 				// eslint-disable-next-line local/code-no-any-casts
-				['--vscodeIconForeground' as any]: this._gutterIndicatorStyles.map(v => v.foreground),
+				['--zyraxoncodeIconForeground' as any]: this._gutterIndicatorStyles.map(v => v.foreground),
 				border: this._gutterIndicatorStyles.map(v => `1px solid ${v.border}`),
 				boxSizing: 'border-box',
 				borderRadius: `${INLINE_EDITS_BORDER_RADIUS}px`,

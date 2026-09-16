@@ -3,11 +3,11 @@
   "displayName": "%displayName%",
   "description": "%description%",
   "version": "10.0.0",
-  "publisher": "vscode",
+  "publisher": "zyraxoncode",
   "license": "MIT",
   "icon": "images/icon.png",
   "engines": {
-    "vscode": "^1.39.0"
+    "zyraxoncode": "^1.39.0"
   },
   "main": "./out/extension.js",
   "browser": "./dist/browser/extension",
@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "generate-grammar": "node ./syntaxes/generateTMLanguage.js",
-    "vscode:prepublish": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../../build/gulpfile.extensions.mjs compile-extension:search-result ./tsconfig.json",
+    "zyraxoncode:prepublish": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../../build/gulpfile.extensions.mjs compile-extension:search-result ./tsconfig.json",
     "compile-web": "npm-run-all2 -lp bundle-web typecheck-web",
     "bundle-web": "node ./esbuild.browser.mts",
     "typecheck-web": "node ../../node_modules/@typescript/native/lib/tsc.js --project ./tsconfig.json --noEmit",
@@ -60,7 +60,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/vscode.git"
+    "url": "__ZYRAXKEEP__0_"
   },
   "devDependencies": {
     "@types/node": "24.x"

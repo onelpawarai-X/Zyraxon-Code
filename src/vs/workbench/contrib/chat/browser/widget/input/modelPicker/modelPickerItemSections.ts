@@ -230,7 +230,7 @@ function appendPromotedModels(context: IGroupedContext, autoModel: ILanguageMode
 		if (model && !context.placed.has(model.identifier)) {
 			context.markPlaced(model.identifier);
 			const entry = options.controlModels[model.metadata.id];
-			if (entry?.minVSCodeVersion && !isVersionAtLeast(options.currentVSCodeVersion, entry.minVSCodeVersion)) {
+			if (entry?.minZyraxonCodeVersion && !isVersionAtLeast(options.currentZyraxonCodeVersion, entry.minZyraxonCodeVersion)) {
 				promoted.push({ kind: 'unavailable', id: model.metadata.id, entry, reason: 'update' });
 			} else {
 				promoted.push({ kind: 'available', model });
@@ -240,7 +240,7 @@ function appendPromotedModels(context: IGroupedContext, autoModel: ILanguageMode
 		const entry = options.controlModels[id];
 		if (!model && entry && !entry.exists) {
 			context.markPlaced(id);
-			promoted.push({ kind: 'unavailable', id, entry, reason: getUnavailableReason(entry, options.chatEntitlementService, options.currentVSCodeVersion) });
+			promoted.push({ kind: 'unavailable', id, entry, reason: getUnavailableReason(entry, options.chatEntitlementService, options.currentZyraxonCodeVersion) });
 			return true;
 		}
 		return false;
@@ -263,7 +263,7 @@ function appendPromotedModels(context: IGroupedContext, autoModel: ILanguageMode
 			}
 			const model = context.resolveModel(entryId);
 			if (model && !context.placed.has(model.identifier)) {
-				if (entry.minVSCodeVersion && !isVersionAtLeast(options.currentVSCodeVersion, entry.minVSCodeVersion)) {
+				if (entry.minZyraxonCodeVersion && !isVersionAtLeast(options.currentZyraxonCodeVersion, entry.minZyraxonCodeVersion)) {
 					if (options.presentation.showUnavailableFeatured) {
 						context.markPlaced(model.identifier);
 						promoted.push({ kind: 'unavailable', id: entryId, entry, reason: 'update' });
@@ -274,7 +274,7 @@ function appendPromotedModels(context: IGroupedContext, autoModel: ILanguageMode
 				}
 			} else if (!model && !entry.exists && options.presentation.showUnavailableFeatured) {
 				context.markPlaced(entryId);
-				promoted.push({ kind: 'unavailable', id: entryId, entry, reason: getUnavailableReason(entry, options.chatEntitlementService, options.currentVSCodeVersion) });
+				promoted.push({ kind: 'unavailable', id: entryId, entry, reason: getUnavailableReason(entry, options.chatEntitlementService, options.currentZyraxonCodeVersion) });
 			}
 		}
 	}
@@ -346,13 +346,13 @@ function appendOtherModels(context: IGroupedContext): boolean {
 		group.models.sort((left, right) => {
 			const leftEntry = options.controlModels[left.metadata.id] ?? options.controlModels[left.identifier];
 			const rightEntry = options.controlModels[right.metadata.id] ?? options.controlModels[right.identifier];
-			const leftUnavailable = leftEntry?.minVSCodeVersion && !isVersionAtLeast(options.currentVSCodeVersion, leftEntry.minVSCodeVersion) ? 1 : 0;
-			const rightUnavailable = rightEntry?.minVSCodeVersion && !isVersionAtLeast(options.currentVSCodeVersion, rightEntry.minVSCodeVersion) ? 1 : 0;
+			const leftUnavailable = leftEntry?.minZyraxonCodeVersion && !isVersionAtLeast(options.currentZyraxonCodeVersion, leftEntry.minZyraxonCodeVersion) ? 1 : 0;
+			const rightUnavailable = rightEntry?.minZyraxonCodeVersion && !isVersionAtLeast(options.currentZyraxonCodeVersion, rightEntry.minZyraxonCodeVersion) ? 1 : 0;
 			return leftUnavailable - rightUnavailable || left.metadata.name.localeCompare(right.metadata.name);
 		});
 		for (const model of group.models) {
 			const entry = options.controlModels[model.metadata.id] ?? options.controlModels[model.identifier];
-			if (entry?.minVSCodeVersion && !isVersionAtLeast(options.currentVSCodeVersion, entry.minVSCodeVersion)) {
+			if (entry?.minZyraxonCodeVersion && !isVersionAtLeast(options.currentZyraxonCodeVersion, entry.minZyraxonCodeVersion)) {
 				items.push(createUnavailableModelItem(model.metadata.id, entry, 'update', options.manageSettingsUrl, options.updateStateType, options.chatEntitlementService, ModelPickerSection.Other));
 			} else {
 				const { action, ariaDescription } = createModelAction(model, options.selectedModelId, options.actions.onSelect, ModelPickerSection.Other, showHeaders);

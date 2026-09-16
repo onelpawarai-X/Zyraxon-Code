@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IDisposable } from '../../../../base/common/lifecycle.js';
-import { CustomizationHarnessServiceBase, createVSCodeHarnessDescriptor, IHarnessDescriptor } from '../../../../workbench/contrib/chat/common/customizationHarnessService.js';
+import { CustomizationHarnessServiceBase, createZyraxonCodeHarnessDescriptor, IHarnessDescriptor } from '../../../../workbench/contrib/chat/common/customizationHarnessService.js';
 import { IPromptsService } from '../../../../workbench/contrib/chat/common/promptSyntax/service/promptsService.js';
 import { SessionType } from '../../../../workbench/contrib/chat/common/chatSessionsService.js';
 import { ISessionsManagementService } from '../../../services/sessions/common/sessionsManagement.js';
@@ -36,7 +36,7 @@ export class SessionsCustomizationHarnessService extends CustomizationHarnessSer
 		@IPromptsService promptsService: IPromptsService,
 		@ISessionsManagementService private readonly sessionsManagementService: ISessionsManagementService,
 	) {
-		const localHarness = createVSCodeHarnessDescriptor();
+		const localHarness = createZyraxonCodeHarnessDescriptor();
 
 		super(
 			[],

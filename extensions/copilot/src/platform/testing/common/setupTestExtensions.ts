@@ -30,11 +30,11 @@ interface ILanguageExtensionData {
 
 const jsTsExtensionData: ILanguageExtensionData = {
 	perFramework: new Map([
-		['mocha', { name: 'Mocha Test Explorer', id: 'hbenl.vscode-mocha-test-adapter' }],
-		['jest', { name: 'Jest', id: 'Orta.vscode-jest' }],
+		['mocha', { name: 'Mocha Test Explorer', id: 'hbenl.zyraxoncode-mocha-test-adapter' }],
+		['jest', { name: 'Jest', id: 'Orta.zyraxoncode-jest' }],
 		['vitest', { name: 'Vitest', id: 'vitest.explorer' }],
-		['playwright', { name: 'Playwright Test for VSCode', id: 'ms-playwright.playwright' }],
-		['jasmine', { name: 'Jasmine Test Explorer', id: 'hbenl.vscode-jasmine-test-adapter' }],
+		['playwright', { name: 'Playwright Test for ZyraxonCode', id: 'ms-playwright.playwright' }],
+		['jasmine', { name: 'Jasmine Test Explorer', id: 'hbenl.zyraxoncode-jasmine-test-adapter' }],
 	]),
 };
 
@@ -51,7 +51,7 @@ export const testExtensionsForLanguage: Readonly<Map<string, ILanguageExtensionD
 	}],
 	['java', {
 		forLanguage: {
-			extension: { id: 'vscjava.vscode-java-test', name: 'Test Runner for Java' }, associatedFrameworks: ['junit', 'testng']
+			extension: { id: 'vscjava.zyraxoncode-java-test', name: 'Test Runner for Java' }, associatedFrameworks: ['junit', 'testng']
 		}
 	}],
 	['csharp', {

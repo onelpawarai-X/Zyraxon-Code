@@ -34,7 +34,7 @@ function updateCheckRun(token: string, checkRunId: string, conclusion: string, d
 		headers: {
 			'Authorization': `token ${token}`,
 			'Accept': 'application/vnd.github+json',
-			'User-Agent': 'VSCode-ADO-Pipeline',
+			'User-Agent': 'ZyraxonCode-ADO-Pipeline',
 			'X-GitHub-Api-Version': '2022-11-28'
 		}
 	}, {

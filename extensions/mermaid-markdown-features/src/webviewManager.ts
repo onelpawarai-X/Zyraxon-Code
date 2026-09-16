@@ -2,11 +2,11 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 export interface MermaidWebviewInfo {
 	readonly id: string;
-	readonly webview: vscode.Webview;
+	readonly webview: zyraxoncode.Webview;
 	readonly mermaidSource: string;
 	readonly title: string | undefined;
 	readonly type: 'chat' | 'editor';
@@ -34,7 +34,7 @@ export class MermaidWebviewManager {
 		return this._activeWebviewId ? this._webviews.get(this._activeWebviewId) : undefined;
 	}
 
-	public registerWebview(id: string, webview: vscode.Webview, mermaidSource: string, title: string | undefined, type: 'chat' | 'editor'): vscode.Disposable {
+	public registerWebview(id: string, webview: zyraxoncode.Webview, mermaidSource: string, title: string | undefined, type: 'chat' | 'editor'): zyraxoncode.Disposable {
 		if (this._webviews.has(id)) {
 			throw new Error(`Webview with id ${id} is already registered.`);
 		}

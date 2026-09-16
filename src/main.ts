@@ -66,7 +66,7 @@ app.setPath('userData', userDataPath);
 // Resolve code cache path
 const codeCachePath = getCodeCachePath();
 
-// Disable default menu (https://github.com/electron/electron/issues/35512)
+// Disable default menu (__ZYRAXKEEP__0_)
 Menu.setApplicationMenu(null);
 
 // Configure crash reporter
@@ -87,7 +87,7 @@ perf.mark('code/didStartCrashReporter');
 // Set logs path before app 'ready' event if running portable
 // to ensure that no 'logs' folder is created on disk at a
 // location outside of the portable directory
-// (https://github.com/microsoft/vscode/issues/56651)
+// (__ZYRAXKEEP__1_)
 if (portable.isPortable) {
 	app.setAppLogsPath(path.join(userDataPath, 'logs'));
 }
@@ -95,19 +95,19 @@ if (portable.isPortable) {
 // Register custom schemes with privileges
 protocol.registerSchemesAsPrivileged([
 	{
-		scheme: 'vscode-webview',
+		scheme: 'zyraxoncode-webview',
 		privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, allowServiceWorkers: true, codeCache: true }
 	},
 	{
-		scheme: 'vscode-file',
+		scheme: 'zyraxoncode-file',
 		privileges: { secure: true, standard: true, supportFetchAPI: true, corsEnabled: true, codeCache: true }
 	},
 	{
-		scheme: 'vscode-remote-resource',
+		scheme: 'zyraxoncode-remote-resource',
 		privileges: { secure: true, supportFetchAPI: true, corsEnabled: true }
 	},
 	{
-		scheme: 'vscode-managed-remote-resource',
+		scheme: 'zyraxoncode-managed-remote-resource',
 		privileges: { secure: true, supportFetchAPI: true, corsEnabled: true }
 	}
 ]);
@@ -141,7 +141,7 @@ if (userLocale) {
 // Pass in the locale to Electron so that the
 // Windows Control Overlay is rendered correctly on Windows.
 // For now, don't pass in the locale on macOS due to
-// https://github.com/microsoft/vscode/issues/167543.
+// __ZYRAXKEEP__2_
 // If the locale is `qps-ploc`, the Zyraxon
 // Pseudo Language Language Pack is being used.
 // In that case, use `en` as the Electron locale.
@@ -258,7 +258,7 @@ function configureCommandlineSwitchesSync(cliArgs: NativeParsedArgs) {
 
 	const SUPPORTED_MAIN_PROCESS_SWITCHES = [
 
-		// Persistently enable proposed api via argv.json: https://github.com/microsoft/vscode/issues/99775
+		// Persistently enable proposed api via argv.json: __ZYRAXKEEP__3_
 		'enable-proposed-api',
 
 		// Log level to use. Default is 'info'. Allowed values are 'error', 'warn', 'info', 'debug', 'trace', 'off'.
@@ -267,7 +267,7 @@ function configureCommandlineSwitchesSync(cliArgs: NativeParsedArgs) {
 		// Use an in-memory storage for secrets
 		'use-inmemory-secretstorage',
 
-		// Enables display tracking to restore maximized windows under RDP: https://github.com/electron/electron/issues/47016
+		// Enables display tracking to restore maximized windows under RDP: __ZYRAXKEEP__4_
 		'enable-rdp-display-tracking',
 	];
 
@@ -337,24 +337,24 @@ function configureCommandlineSwitchesSync(cliArgs: NativeParsedArgs) {
 	});
 
 	// Following features are enabled from the runtime:
-	// `NetAdapterMaxBufSizeFeature` - Specify the max buffer size for NetToMojoPendingBuffer, refs https://github.com/microsoft/vscode/issues/268800
-	// `DocumentPolicyIncludeJSCallStacksInCrashReports` - https://www.electronjs.org/docs/latest/api/web-frame-main#framecollectjavascriptcallstack-experimental
-	// `EarlyEstablishGpuChannel` - Refs https://issues.chromium.org/issues/40208065
-	// `EstablishGpuChannelAsync` - Refs https://issues.chromium.org/issues/40208065
+	// `NetAdapterMaxBufSizeFeature` - Specify the max buffer size for NetToMojoPendingBuffer, refs __ZYRAXKEEP__5_
+	// `DocumentPolicyIncludeJSCallStacksInCrashReports` - __ZYRAXKEEP__6_
+	// `EarlyEstablishGpuChannel` - Refs __ZYRAXKEEP__7_
+	// `EstablishGpuChannelAsync` - Refs __ZYRAXKEEP__8_
 	// `GlobalShortcutsPortal` - Enables Electron's `globalShortcut` (system-wide keybindings) on Linux Wayland via the XDG global shortcuts portal (no-op elsewhere)
 	const featuresToEnable =
 		`NetAdapterMaxBufSizeFeature:NetAdapterMaxBufSize/8192,DocumentPolicyIncludeJSCallStacksInCrashReports,EarlyEstablishGpuChannel,EstablishGpuChannelAsync${process.platform === 'linux' ? ',GlobalShortcutsPortal' : ''},${app.commandLine.getSwitchValue('enable-features')}`;
 	app.commandLine.appendSwitch('enable-features', featuresToEnable);
 
 	// Following features are disabled from the runtime:
-	// `CalculateNativeWinOcclusion` - Disable native window occlusion tracker (https://groups.google.com/a/chromium.org/g/embedder-dev/c/ZF3uHHyWLKw/m/VDN2hDXMAAAJ)
+	// `CalculateNativeWinOcclusion` - Disable native window occlusion tracker (__ZYRAXKEEP__9_)
 	const featuresToDisable =
 		`CalculateNativeWinOcclusion,${app.commandLine.getSwitchValue('disable-features')}`;
 	app.commandLine.appendSwitch('disable-features', featuresToDisable);
 
 	// Blink features to configure.
-	// `FontMatchingCTMigration` - Siwtch font matching on macOS to Appkit (Refs https://github.com/microsoft/vscode/issues/224496#issuecomment-2270418470).
-	// `StandardizedBrowserZoom` - Disable zoom adjustment for bounding box (https://github.com/microsoft/vscode/issues/232750#issuecomment-2459495394)
+	// `FontMatchingCTMigration` - Siwtch font matching on macOS to Appkit (Refs __ZYRAXKEEP__10_).
+	// `StandardizedBrowserZoom` - Disable zoom adjustment for bounding box (__ZYRAXKEEP__11_)
 	const blinkFeaturesToDisable =
 		`FontMatchingCTMigration,StandardizedBrowserZoom,${app.commandLine.getSwitchValue('disable-blink-features')}`;
 	app.commandLine.appendSwitch('disable-blink-features', blinkFeaturesToDisable);
@@ -366,8 +366,8 @@ function configureCommandlineSwitchesSync(cliArgs: NativeParsedArgs) {
 	}
 
 	// Use portal version 4 that supports current_folder option
-	// to address https://github.com/microsoft/vscode/issues/213780
-	// Runtime sets the default version to 3, refs https://github.com/electron/electron/pull/44426
+	// to address __ZYRAXKEEP__12_
+	// Runtime sets the default version to 3, refs __ZYRAXKEEP__13_
 	app.commandLine.appendSwitch('xdg-portal-required-version', '4');
 
 	// Increase the maximum number of active WebGL contexts as each terminal may
@@ -451,9 +451,9 @@ function createDefaultArgvConfigSync(argvConfigPath: string): void {
 }
 
 function getArgvConfigPath(): string {
-	const vscodePortable = process.env['VSCODE_PORTABLE'];
-	if (vscodePortable) {
-		return path.join(vscodePortable, 'argv.json');
+	const zyraxoncodePortable = process.env['VSCODE_PORTABLE'];
+	if (zyraxoncodePortable) {
+		return path.join(zyraxoncodePortable, 'argv.json');
 	}
 
 	let dataFolderName = product.dataFolderName;
@@ -527,7 +527,7 @@ function configureCrashReporter(): void {
 				}
 				submitURL = submitURL.concat('&uid=', crashReporterId, '&iid=', crashReporterId, '&sid=', crashReporterId);
 				// Send the id for child node process that are explicitly starting crash reporter.
-				// For vscode this is ExtensionHost process currently.
+				// For zyraxoncode this is ExtensionHost process currently.
 				const argv = process.argv;
 				const endOfArgsMarkerIndex = argv.indexOf('--');
 				if (endOfArgsMarkerIndex === -1) {
@@ -595,7 +595,7 @@ function parseCLIArgs(): NativeParsedArgs {
 function registerListeners(): void {
 
 	/**
-	 * macOS: when someone drops a file to the not-yet running VSCode, the open-file event fires even before
+	 * macOS: when someone drops a file to the not-yet running ZyraxonCode, the open-file event fires even before
 	 * the app-ready event. We listen very early for open-file and remember this upon startup as path to open.
 	 */
 	const macOpenFiles: string[] = [];
@@ -711,7 +711,7 @@ async function resolveNlsConfiguration(): Promise<INLSConfiguration> {
 			resolvedLanguage: 'en',
 			defaultMessagesFile: path.join(import.meta.dirname, 'nls.messages.json'),
 
-			// NLS: below 2 are a relic from old times only used by vscode-nls and deprecated
+			// NLS: below 2 are a relic from old times only used by zyraxoncode-nls and deprecated
 			locale: 'en',
 			availableLanguages: {}
 		};

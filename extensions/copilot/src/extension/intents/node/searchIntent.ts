@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { parse } from 'jsonc-parser';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -32,11 +32,11 @@ export interface FindInFilesArgs {
 	isCaseSensitive: boolean;
 }
 
-function createSearchFollowUps(args: any): vscode.Command[] {
+function createSearchFollowUps(args: any): zyraxoncode.Command[] {
 	if (!args) {
 		return [];
 	}
-	const searchResponses: vscode.Command[] = [];
+	const searchResponses: zyraxoncode.Command[] = [];
 
 	const searchArg: FindInFilesArgs = {
 		query: args.query ?? '',
@@ -105,13 +105,13 @@ class SearchIntentInvocation extends RendererIntentInvocation implements IIntent
 		super(intent, location, endpoint);
 	}
 
-	createRenderer(promptContext: IBuildPromptContext, endpoint: IChatEndpoint, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken) {
+	createRenderer(promptContext: IBuildPromptContext, endpoint: IChatEndpoint, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken) {
 		return PromptRenderer.create(this.instantiationService, endpoint, SearchPrompt, {
 			promptContext
 		});
 	}
 
-	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		const responseProcessor = this.instantiationService.createInstance(SearchResponseProcessor);
 		return responseProcessor.processResponse(context, inputStream, outputStream, token);
 	}
@@ -128,7 +128,7 @@ class SearchResponseProcessor extends PseudoStopStartResponseProcessor {
 		);
 	}
 
-	override async doProcessResponse(responseStream: AsyncIterable<IResponsePart>, progress: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	override async doProcessResponse(responseStream: AsyncIterable<IResponsePart>, progress: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		await super.doProcessResponse(responseStream, progress, token);
 		const args = parseSearchParams(this._response ?? '');
 		for (const command of createSearchFollowUps(args)) {
@@ -136,7 +136,7 @@ class SearchResponseProcessor extends PseudoStopStartResponseProcessor {
 		}
 	}
 
-	protected override applyDelta(delta: IResponseDelta, progress: vscode.ChatResponseStream): void {
+	protected override applyDelta(delta: IResponseDelta, progress: zyraxoncode.ChatResponseStream): void {
 		this._response += delta.text;
 		super.applyDelta(delta, progress);
 	}

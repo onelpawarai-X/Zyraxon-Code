@@ -32,8 +32,8 @@ export const MINIMUM_LETTER_SPACING = -5;
 // HACK: On Linux it's common for fonts to include an underline that is rendered lower than the
 // bottom of the cell which causes it to be cut off due to `overflow:hidden` in the DOM renderer.
 // See:
-// - https://github.com/microsoft/vscode/issues/211933
-// - https://github.com/xtermjs/xterm.js/issues/4067
+// - __ZYRAXKEEP__0_
+// - __ZYRAXKEEP__1_
 export const DEFAULT_LINE_HEIGHT = isLinux ? 1.1 : 1;
 
 export const MINIMUM_FONT_WEIGHT = 1;
@@ -673,12 +673,12 @@ export const terminalContributionsDescriptor: IExtensionPointDescriptor<ITermina
 		}
 	},
 	jsonSchema: {
-		description: nls.localize('vscode.extension.contributes.terminal', 'Contributes terminal functionality.'),
+		description: nls.localize('zyraxoncode.extension.contributes.terminal', 'Contributes terminal functionality.'),
 		type: 'object',
 		properties: {
 			profiles: {
 				type: 'array',
-				description: nls.localize('vscode.extension.contributes.terminal.profiles', "Defines additional terminal profiles that the user can create."),
+				description: nls.localize('zyraxoncode.extension.contributes.terminal.profiles', "Defines additional terminal profiles that the user can create."),
 				items: {
 					type: 'object',
 					required: ['id', 'title'],
@@ -690,15 +690,15 @@ export const terminalContributionsDescriptor: IExtensionPointDescriptor<ITermina
 					}],
 					properties: {
 						id: {
-							description: nls.localize('vscode.extension.contributes.terminal.profiles.id', "The ID of the terminal profile provider."),
+							description: nls.localize('zyraxoncode.extension.contributes.terminal.profiles.id', "The ID of the terminal profile provider."),
 							type: 'string',
 						},
 						title: {
-							description: nls.localize('vscode.extension.contributes.terminal.profiles.title', "Title for this terminal profile."),
+							description: nls.localize('zyraxoncode.extension.contributes.terminal.profiles.title', "Title for this terminal profile."),
 							type: 'string',
 						},
 						icon: {
-							description: nls.localize('vscode.extension.contributes.terminal.types.icon', "A codicon, URI, or light and dark URIs to associate with this terminal type."),
+							description: nls.localize('zyraxoncode.extension.contributes.terminal.types.icon', "A codicon, URI, or light and dark URIs to associate with this terminal type."),
 							anyOf: [{
 								type: 'string',
 							},
@@ -706,18 +706,18 @@ export const terminalContributionsDescriptor: IExtensionPointDescriptor<ITermina
 								type: 'object',
 								properties: {
 									light: {
-										description: nls.localize('vscode.extension.contributes.terminal.types.icon.light', 'Icon path when a light theme is used'),
+										description: nls.localize('zyraxoncode.extension.contributes.terminal.types.icon.light', 'Icon path when a light theme is used'),
 										type: 'string'
 									},
 									dark: {
-										description: nls.localize('vscode.extension.contributes.terminal.types.icon.dark', 'Icon path when a dark theme is used'),
+										description: nls.localize('zyraxoncode.extension.contributes.terminal.types.icon.dark', 'Icon path when a dark theme is used'),
 										type: 'string'
 									}
 								}
 							}]
 						},
 						titleTemplate: {
-							description: nls.localize('vscode.extension.contributes.terminal.profiles.titleTemplate', "A title template string for the terminal tab. Supports variables like $\{sequence}, $\{process}, $\{cwd}, etc. Overrides the default terminal.integrated.tabs.title setting for terminals created with this profile."),
+							description: nls.localize('zyraxoncode.extension.contributes.terminal.profiles.titleTemplate', "A title template string for the terminal tab. Supports variables like $\{sequence}, $\{process}, $\{cwd}, etc. Overrides the default terminal.integrated.tabs.title setting for terminals created with this profile."),
 							type: 'string',
 						},
 					},
@@ -725,7 +725,7 @@ export const terminalContributionsDescriptor: IExtensionPointDescriptor<ITermina
 			},
 			completionProviders: {
 				type: 'array',
-				description: nls.localize('vscode.extension.contributes.terminal.completionProviders', "Defines terminal completion providers that will be registered when the extension activates."),
+				description: nls.localize('zyraxoncode.extension.contributes.terminal.completionProviders', "Defines terminal completion providers that will be registered when the extension activates."),
 				items: {
 					type: 'object',
 					required: ['id'],
@@ -737,7 +737,7 @@ export const terminalContributionsDescriptor: IExtensionPointDescriptor<ITermina
 					}],
 					properties: {
 						description: {
-							description: nls.localize('vscode.extension.contributes.terminal.completionProviders.description', "A description of what the completion provider does. This will be shown in the settings UI."),
+							description: nls.localize('zyraxoncode.extension.contributes.terminal.completionProviders.description', "A description of what the completion provider does. This will be shown in the settings UI."),
 							type: 'string',
 						},
 					},

@@ -9,8 +9,8 @@ export const IToolResultContentRenderer = createServiceIdentifier<IToolResultCon
 
 /**
  * Renders tool result content parts into human-readable strings.
- * Injected from the vscode-node layer to avoid layering violations
- * (the rendering depends on @vscode/prompt-tsx which lives in vscode-node).
+ * Injected from the zyraxoncode-node layer to avoid layering violations
+ * (the rendering depends on @zyraxoncode/prompt-tsx which lives in zyraxoncode-node).
  */
 export interface IToolResultContentRenderer {
 	readonly _serviceBrand: undefined;

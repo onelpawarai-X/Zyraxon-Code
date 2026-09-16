@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { splitLines } from '../../../util/vs/base/common/strings';
 import { StringEdit, StringReplacement } from '../../../util/vs/editor/common/core/edits/stringEdit';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
 import { PrefixSumComputer } from '../../../util/vs/editor/common/model/prefixSumComputer';
-import { Position, Range, TextEdit } from '../../../vscodeTypes';
+import { Position, Range, TextEdit } from '../../../zyraxoncodeTypes';
 
 export class PositionOffsetTransformer {
 	private readonly _eol: string;
@@ -40,7 +40,7 @@ export class PositionOffsetTransformer {
 		}
 	}
 
-	private _acceptDeleteRange(range: vscode.Range): void {
+	private _acceptDeleteRange(range: zyraxoncode.Range): void {
 
 		if (range.start.line === range.end.line) {
 			if (range.start.character === range.end.character) {
@@ -66,7 +66,7 @@ export class PositionOffsetTransformer {
 		this._lineStarts.removeValues(range.start.line + 1, range.end.line - range.start.line);
 	}
 
-	private _acceptInsertText(position: vscode.Position, insertText: string): void {
+	private _acceptInsertText(position: zyraxoncode.Position, insertText: string): void {
 		if (insertText.length === 0) {
 			// Nothing to insert
 			return;
@@ -154,7 +154,7 @@ export class PositionOffsetTransformer {
 		});
 	}
 
-	public validatePosition(position: vscode.Position): vscode.Position {
+	public validatePosition(position: zyraxoncode.Position): zyraxoncode.Position {
 		if (!(position instanceof Position)) {
 			throw new Error('Invalid argument');
 		}

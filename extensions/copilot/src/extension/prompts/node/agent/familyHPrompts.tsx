@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { isHiddenFamilyH } from '../../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { ToolName } from '../../../tools/common/toolNames';
@@ -312,7 +312,7 @@ class DefaultFamilyHAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				<br />
 				Rules:<br />
 				- Do not wrap link text in backticks — link text should be the path, filename, or a descriptive phrase<br />
-				- Use `/` separators only; do not use `file://` or `vscode://` schemes<br />
+				- Use `/` separators only; do not use `file://` or `zyraxoncode://` schemes<br />
 				- Percent-encode spaces in paths (`My%20File.ts`)<br />
 				- Non-contiguous lines require separate links — no comma-separated ranges<br />
 				<br />

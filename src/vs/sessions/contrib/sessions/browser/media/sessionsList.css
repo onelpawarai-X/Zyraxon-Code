@@ -9,7 +9,7 @@
 	min-height: 0;
 
 	.monaco-list-row:has(.session-item) {
-		border-radius: var(--vscode-cornerRadius-medium);
+		border-radius: var(--zyraxoncode-cornerRadius-medium);
 		margin: 0 10px;
 		width: calc(100% - 20px);
 	}
@@ -22,7 +22,7 @@
 	@media (prefers-reduced-motion: reduce) {
 		.monaco-list-row:not(.selected):not(.focused):not(:hover):has(.session-item.needs-input) {
 			animation: none;
-			background-color: color-mix(in srgb, var(--vscode-list-warningForeground) 8%, transparent);
+			background-color: color-mix(in srgb, var(--zyraxoncode-list-warningForeground) 8%, transparent);
 		}
 	}
 
@@ -50,11 +50,11 @@
 
 	.monaco-list:focus .monaco-list-row.selected .session-icon > .codicon,
 	.monaco-list:focus .monaco-list-row.selected .session-icon > .monaco-pixel-spinner {
-		color: var(--vscode-list-activeSelectionForeground) !important;
+		color: var(--zyraxoncode-list-activeSelectionForeground) !important;
 	}
 
 	.monaco-list:not(:focus) .monaco-list-row.selected .session-details-row {
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 	}
 
 	.monaco-list-row .session-title-toolbar {
@@ -74,7 +74,7 @@
 		height: 16px;
 		align-items: center;
 		margin-left: 4px;
-		color: var(--vscode-charts-blue);
+		color: var(--zyraxoncode-charts-blue);
 		font-size: 12px;
 		pointer-events: none;
 
@@ -120,11 +120,11 @@
 	padding: 8px 6px 8px 12px;
 
 	&.archived {
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 	}
 
 	&.sticky {
-		border-left: 2px solid var(--vscode-focusBorder);
+		border-left: 2px solid var(--zyraxoncode-focusBorder);
 		padding-left: 4px;
 	}
 
@@ -140,7 +140,7 @@
 			line-height: 16px;
 
 			> .codicon {
-				font-size: var(--vscode-codiconFontSize-compact, 12px);
+				font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 			}
 
 			> .monaco-pixel-spinner {
@@ -178,7 +178,7 @@
 
 		> .codicon {
 			flex-shrink: 0;
-			font-size: var(--vscode-codiconFontSize, 16px);
+			font-size: var(--zyraxoncode-codiconFontSize, 16px);
 			height: 16px;
 			display: flex;
 			align-items: center;
@@ -219,18 +219,18 @@
 
 	.session-details-row {
 		gap: 4px;
-		font-size: var(--vscode-agents-fontSize-label2, 11px);
+		font-size: var(--zyraxoncode-agents-fontSize-label2, 11px);
 		line-height: 15px;
 		max-height: 15px;
 		overflow: hidden;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 
 		.session-details-icon {
 			display: flex;
 			align-items: center;
 
 			> .codicon {
-				font-size: var(--vscode-codiconFontSize-compact, 12px);
+				font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 			}
 		}
 
@@ -241,11 +241,11 @@
 			gap: 2px;
 
 			.session-diff-added {
-				color: var(--vscode-chat-linesAddedForeground);
+				color: var(--zyraxoncode-chat-linesAddedForeground);
 			}
 
 			.session-diff-removed {
-				color: var(--vscode-chat-linesRemovedForeground);
+				color: var(--zyraxoncode-chat-linesRemovedForeground);
 			}
 		}
 
@@ -289,18 +289,18 @@
 	}
 
 	.session-title {
-		font-size: var(--vscode-agents-fontSize-body1, 13px);
+		font-size: var(--zyraxoncode-agents-fontSize-body1, 13px);
 	}
 
 	.session-title {
-		color: var(--vscode-foreground);
+		color: var(--zyraxoncode-foreground);
 	}
 
 	/* Strong foreground is reserved for sessions that need attention: */
 	/* unread, input required, or selected. All others use foreground. */
 	&.unread .session-title,
 	&.needs-input .session-title {
-		color: var(--vscode-strongForeground);
+		color: var(--zyraxoncode-strongForeground);
 	}
 
 	.session-time {
@@ -317,10 +317,10 @@
 		margin-left: -6px;
 		padding: 4px 4px 4px 6px;
 		box-sizing: border-box;
-		border: 1px solid var(--vscode-contrastBorder, var(--vscode-widget-border, transparent));
-		border-radius: var(--vscode-cornerRadius-large);
-		background-color: var(--vscode-editor-background);
-		color: var(--vscode-editor-foreground);
+		border: 1px solid var(--zyraxoncode-contrastBorder, var(--zyraxoncode-widget-border, transparent));
+		border-radius: var(--zyraxoncode-cornerRadius-large);
+		background-color: var(--zyraxoncode-editor-background);
+		color: var(--zyraxoncode-editor-foreground);
 		align-items: center;
 
 		&.visible {
@@ -344,7 +344,7 @@
 				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
-				font-size: var(--vscode-agents-fontSize-label1, 12px);
+				font-size: var(--zyraxoncode-agents-fontSize-label1, 12px);
 			}
 		}
 
@@ -353,7 +353,7 @@
 
 			.monaco-button {
 				padding: 2px 10px;
-				font-size: var(--vscode-agents-fontSize-label1, 12px);
+				font-size: var(--zyraxoncode-agents-fontSize-label1, 12px);
 				white-space: nowrap;
 			}
 		}
@@ -373,10 +373,10 @@
 			otherwise the single-line label's line box grows to the whole row and
 			pushes the content out of the clipped row. */
 		line-height: 18px;
-		border: var(--vscode-strokeThickness) solid var(--vscode-charts-orange);
-		border-radius: var(--vscode-cornerRadius-large);
-		background-color: color-mix(in srgb, var(--vscode-charts-orange) 6%, var(--vscode-editor-background));
-		color: var(--vscode-editor-foreground);
+		border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-charts-orange);
+		border-radius: var(--zyraxoncode-cornerRadius-large);
+		background-color: color-mix(in srgb, var(--zyraxoncode-charts-orange) 6%, var(--zyraxoncode-editor-background));
+		color: var(--zyraxoncode-editor-foreground);
 		align-items: center;
 
 		&.visible {
@@ -389,7 +389,7 @@
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
-			font-size: var(--vscode-agents-fontSize-label1, 12px);
+			font-size: var(--zyraxoncode-agents-fontSize-label1, 12px);
 		}
 
 		.session-ci-button {
@@ -397,7 +397,7 @@
 
 			.monaco-button {
 				padding: 2px 10px;
-				font-size: var(--vscode-agents-fontSize-label1, 12px);
+				font-size: var(--zyraxoncode-agents-fontSize-label1, 12px);
 				white-space: nowrap;
 			}
 		}
@@ -411,8 +411,8 @@
 	justify-content: center;
 	align-items: center;
 	padding: 0 10px;
-	font-size: var(--vscode-agents-fontSize-label2, 11px);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label2, 11px);
+	color: var(--zyraxoncode-descriptionForeground);
 	min-height: 26px;
 	cursor: pointer;
 
@@ -428,12 +428,12 @@
 		content: '';
 		flex: 1;
 		height: 1px;
-		background: var(--vscode-widget-border, var(--vscode-contrastBorder));
+		background: var(--zyraxoncode-widget-border, var(--zyraxoncode-contrastBorder));
 	}
 }
 
 .monaco-list-row:hover .session-show-more:hover {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 /* Muted placeholder row for the empty "Chats" section, aligned with chat titles. */
@@ -442,8 +442,8 @@
 	align-items: center;
 	/* Match .session-item: left padding (12px) + status icon (16px) + .session-main padding (6px). */
 	padding: 0 12px;
-	font-size: var(--vscode-agents-fontSize-label2, 11px);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label2, 11px);
+	color: var(--zyraxoncode-descriptionForeground);
 	min-height: 26px;
 	cursor: default;
 
@@ -461,7 +461,7 @@
 /* Folders show-more/show-less: align with workspace section headers. */
 .session-show-more.session-show-more-folders {
 	justify-content: flex-start;
-	font-weight: var(--vscode-agents-fontWeight-semiBold, 600);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold, 600);
 
 	.session-show-more-label {
 		padding: 0;
@@ -479,9 +479,9 @@
 .session-section {
 	display: flex;
 	align-items: center;
-	font-size: var(--vscode-agents-fontSize-label2, 11px);
-	font-weight: var(--vscode-agents-fontWeight-semiBold, 600);
-	color: var(--vscode-descriptionForeground);
+	font-size: var(--zyraxoncode-agents-fontSize-label2, 11px);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold, 600);
+	color: var(--zyraxoncode-descriptionForeground);
 	padding: 0 10px;
 
 	.session-section-label {
@@ -495,7 +495,7 @@
 	.session-section-icon {
 		flex-shrink: 0;
 		margin-right: 6px;
-		font-size: var(--vscode-codiconFontSize, 16px);
+		font-size: var(--zyraxoncode-codiconFontSize, 16px);
 	}
 
 	.session-section-status-indicator {
@@ -523,17 +523,17 @@
 	}
 
 	.session-section-toolbar .monaco-action-bar .action-label {
-		border-radius: var(--vscode-cornerRadius-small);
+		border-radius: var(--zyraxoncode-cornerRadius-small);
 	}
 
 	.session-section-chevron {
 		flex-shrink: 0;
 		display: none;
-		color: var(--vscode-descriptionForeground);
-		font-size: var(--vscode-codiconFontSize-compact, 12px);
+		color: var(--zyraxoncode-descriptionForeground);
+		font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 		width: 22px;
 		height: 22px;
-		border-radius: var(--vscode-cornerRadius-small);
+		border-radius: var(--zyraxoncode-cornerRadius-small);
 		justify-content: center;
 	}
 }
@@ -557,8 +557,8 @@
 
 /* Active background for shortcut sections when their editor is open */
 .session-section.session-section-shortcut.active {
-	background-color: var(--vscode-list-inactiveSelectionBackground);
-	border-radius: var(--vscode-cornerRadius-small);
+	background-color: var(--zyraxoncode-list-inactiveSelectionBackground);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .monaco-list-row:hover .session-section .session-section-chevron.collapsible,
@@ -568,7 +568,7 @@
 }
 
 .monaco-list-row .session-section .session-section-chevron.collapsible:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .sessions-list-control {
@@ -587,13 +587,13 @@
 	.monaco-list-row.focused .session-section .session-section-label,
 	.monaco-list-row:hover .session-show-more-folders .session-show-more-label,
 	.monaco-list-row.focused .session-show-more-folders .session-show-more-label {
-		color: var(--vscode-strongForeground);
+		color: var(--zyraxoncode-strongForeground);
 	}
 
 	/* Shortcut sections only change label and icon color on hover, unless active. */
 	.monaco-list-row.focused:not(:hover) .session-section.session-section-shortcut:not(.active) .session-section-label,
 	.monaco-list-row.focused:not(:hover) .session-section.session-section-shortcut:not(.active) .session-section-icon {
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 	}
 
 	&.session-section-focus-from-pointer {
@@ -619,7 +619,7 @@
 
 		.monaco-inputbox .input {
 			padding: 0 4px;
-			font-size: var(--vscode-agents-fontSize-label2, 11px);
+			font-size: var(--zyraxoncode-agents-fontSize-label2, 11px);
 		}
 	}
 }
@@ -631,7 +631,7 @@
 /* Header-only feedback while dragging sessions into a group or Pinned. */
 .sessions-list-control .monaco-list-row.drop-target:has(.session-section),
 .sessions-list-control .monaco-list-row:has(.session-header-drop-target) {
-	background-color: var(--vscode-list-dropBackground) !important;
+	background-color: var(--zyraxoncode-list-dropBackground) !important;
 }
 
 @keyframes session-needs-input-pulse {
@@ -652,7 +652,7 @@
 		background-color: transparent;
 	}
 	50% {
-		background-color: color-mix(in srgb, var(--vscode-list-warningForeground) 12%, transparent);
+		background-color: color-mix(in srgb, var(--zyraxoncode-list-warningForeground) 12%, transparent);
 	}
 }
 
@@ -667,11 +667,11 @@
 		.monaco-list-row:not(.selected) .session-item.in-progress .session-title {
 			background: linear-gradient(
 				90deg,
-				var(--vscode-strongForeground) 0%,
-				var(--vscode-strongForeground) 30%,
-				var(--vscode-chat-thinkingShimmer) 50%,
-				var(--vscode-strongForeground) 70%,
-				var(--vscode-strongForeground) 100%
+				var(--zyraxoncode-strongForeground) 0%,
+				var(--zyraxoncode-strongForeground) 30%,
+				var(--zyraxoncode-chat-thinkingShimmer) 50%,
+				var(--zyraxoncode-strongForeground) 70%,
+				var(--zyraxoncode-strongForeground) 100%
 			);
 			background-size: 400% 100%;
 			background-clip: text;
@@ -688,11 +688,11 @@
 		.hc-black .monaco-list-row:not(.selected) .session-item.in-progress .session-title {
 			background-image: linear-gradient(
 				90deg,
-				var(--vscode-strongForeground) 0%,
-				var(--vscode-strongForeground) 30%,
-				var(--vscode-descriptionForeground) 50%,
-				var(--vscode-strongForeground) 70%,
-				var(--vscode-strongForeground) 100%
+				var(--zyraxoncode-strongForeground) 0%,
+				var(--zyraxoncode-strongForeground) 30%,
+				var(--zyraxoncode-descriptionForeground) 50%,
+				var(--zyraxoncode-strongForeground) 70%,
+				var(--zyraxoncode-strongForeground) 100%
 			);
 		}
 	}
@@ -719,7 +719,7 @@
 
 /* Touch feedback on session list items */
 .agent-sessions-workbench.phone-layout .sessions-list .monaco-list-row:active {
-	background-color: var(--vscode-list-hoverBackground) !important;
+	background-color: var(--zyraxoncode-list-hoverBackground) !important;
 }
 
 /* Disable webkit touch callout on list items */
@@ -742,7 +742,7 @@
 		 * lives inside the row via padding. */
 		margin: 0 8px;
 		width: calc(100% - 16px);
-		border-radius: var(--vscode-cornerRadius-xLarge);
+		border-radius: var(--zyraxoncode-cornerRadius-xLarge);
 	}
 
 	.session-item {

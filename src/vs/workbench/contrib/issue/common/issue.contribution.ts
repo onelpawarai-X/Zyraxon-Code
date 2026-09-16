@@ -16,7 +16,7 @@ import { IWorkbenchContribution } from '../../../common/contributions.js';
 import { IssueReporterData, IWorkbenchIssueService } from './issue.js';
 
 const OpenIssueReporterActionId = 'workbench.action.openIssueReporter';
-const OpenIssueReporterApiId = 'vscode.openIssueReporter';
+const OpenIssueReporterApiId = 'zyraxoncode.openIssueReporter';
 
 const OpenIssueReporterCommandMetadata: ICommandMetadata = {
 	description: 'Open the issue reporter and optionally prefill part of the form.',

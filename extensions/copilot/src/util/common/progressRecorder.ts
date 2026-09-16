@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
-export class RecordedProgress<T> implements vscode.Progress<T> {
+export class RecordedProgress<T> implements zyraxoncode.Progress<T> {
 	private readonly _items: T[] = [];
 
 	public get items(): readonly T[] {
@@ -13,7 +13,7 @@ export class RecordedProgress<T> implements vscode.Progress<T> {
 	}
 
 	constructor(
-		private readonly _progress: vscode.Progress<T>,
+		private readonly _progress: zyraxoncode.Progress<T>,
 	) { }
 
 	report(value: T): void {

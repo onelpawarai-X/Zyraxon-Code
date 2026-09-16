@@ -1376,7 +1376,7 @@ export abstract class AbstractTaskService extends Disposable implements ITaskSer
 	}
 
 	private _openDocumentation(): void {
-		this._openerService.open(URI.parse('https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher'));
+		this._openerService.open(URI.parse('__ZYRAXKEEP__0_'));
 	}
 
 	private async _findSingleWorkspaceTaskOfGroup(group: TaskGroup): Promise<ITaskSummary | undefined> {
@@ -1782,13 +1782,13 @@ export abstract class AbstractTaskService extends Disposable implements ITaskSer
 			};
 			let content = [
 				'{',
-				nls.localize('tasksJsonComment', '\t// See https://go.microsoft.com/fwlink/?LinkId=733558 \n\t// for the documentation about the tasks.json format'),
+				nls.localize('tasksJsonComment', '\t// See __ZYRAXKEEP__1_ \n\t// for the documentation about the tasks.json format'),
 			].join('\n') + JSON.stringify(value, null, '\t').substr(1);
 			const editorConfig = this._configurationService.getValue<{ editor: { insertSpaces: boolean; tabSize: number } }>();
 			if (editorConfig.editor.insertSpaces) {
 				content = content.replace(/(\n)(\t+)/g, (_, s1, s2) => s1 + ' '.repeat(s2.length * editorConfig.editor.tabSize));
 			}
-			await this._textFileService.create([{ resource: workspaceFolder.toResource('.vscode/tasks.json'), value: content }]);
+			await this._textFileService.create([{ resource: workspaceFolder.toResource('.zyraxoncode/tasks.json'), value: content }]);
 		} else {
 			// We have a global task configuration
 			if ((index === -1) && properties) {
@@ -1865,7 +1865,7 @@ export abstract class AbstractTaskService extends Disposable implements ITaskSer
 			}
 			return uri;
 		} else {
-			return task.getWorkspaceFolder()!.toResource('.vscode/tasks.json');
+			return task.getWorkspaceFolder()!.toResource('.zyraxoncode/tasks.json');
 		}
 	}
 
@@ -1874,7 +1874,7 @@ export abstract class AbstractTaskService extends Disposable implements ITaskSer
 		if (task) {
 			resource = this._getResourceForTask(task);
 		} else {
-			resource = (this._workspaceFolders && (this._workspaceFolders.length > 0)) ? this._workspaceFolders[0].toResource('.vscode/tasks.json') : undefined;
+			resource = (this._workspaceFolders && (this._workspaceFolders.length > 0)) ? this._workspaceFolders[0].toResource('.zyraxoncode/tasks.json') : undefined;
 		}
 		return this._openEditorAtTask(resource, task ? task._label : undefined, task ? task._source.config.index : -1);
 	}
@@ -3641,7 +3641,7 @@ export abstract class AbstractTaskService extends Disposable implements ITaskSer
 			const taskQuickPick = this._instantiationService.createInstance(TaskQuickPick);
 			taskQuickPick.handleSettingOption(selection.settingType);
 		} else if (selection.folder && (this._contextService.getWorkbenchState() !== WorkbenchState.EMPTY)) {
-			this._openTaskFile(selection.folder.toResource('.vscode/tasks.json'), TaskSourceKind.Workspace);
+			this._openTaskFile(selection.folder.toResource('.zyraxoncode/tasks.json'), TaskSourceKind.Workspace);
 		} else {
 			const resource = this._getResourceForKind(TaskSourceKind.User);
 			if (resource) {
@@ -3678,7 +3678,7 @@ export abstract class AbstractTaskService extends Disposable implements ITaskSer
 		}
 
 		const stats = this._contextService.getWorkspace().folders.map<Promise<IFileStatWithPartialMetadata | undefined>>((folder) => {
-			return this._fileService.stat(folder.toResource('.vscode/tasks.json')).then(stat => stat, () => undefined);
+			return this._fileService.stat(folder.toResource('.zyraxoncode/tasks.json')).then(stat => stat, () => undefined);
 		});
 
 		const createLabel = nls.localize('TaskService.createJsonFile', 'Create tasks.json file from template');
@@ -3934,7 +3934,7 @@ export abstract class AbstractTaskService extends Disposable implements ITaskSer
 	}
 
 	private async _createTasksDotOld(folder: IWorkspaceFolder): Promise<[URI, URI] | undefined> {
-		const tasksFile = folder.toResource('.vscode/tasks.json');
+		const tasksFile = folder.toResource('.zyraxoncode/tasks.json');
 		if (await this._fileService.exists(tasksFile)) {
 			const oldFile = tasksFile.with({ path: `${tasksFile.path}.old` });
 			await this._fileService.copy(tasksFile, oldFile, true);

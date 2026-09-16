@@ -133,13 +133,13 @@ function getMetadataPath(userDataPath: string): string {
 function getSocketDirectory(userDataPath: string): string {
 	const owner = process.getuid?.().toString() ?? '';
 	const hash = createHash('sha256').update(`${owner}:${userDataPath}`).digest('hex').slice(0, 12);
-	return join(os.tmpdir(), `vscode-ah-${hash}`);
+	return join(os.tmpdir(), `zyraxoncode-ah-${hash}`);
 }
 
 function getEndpointPath(userDataPath: string, instanceId: string): string {
 	if (process.platform === 'win32') {
 		const userDataHash = createHash('sha256').update(userDataPath).digest('hex');
-		return `\\\\.\\pipe\\vscode-agent-host-${userDataHash}-${instanceId}`;
+		return `\\\\.\\pipe\\zyraxoncode-agent-host-${userDataHash}-${instanceId}`;
 	}
 	return join(getSocketDirectory(userDataPath), `${instanceId}.sock`);
 }

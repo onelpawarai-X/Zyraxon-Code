@@ -248,14 +248,14 @@ export class XtermTerminal extends Disposable implements IXtermTerminal, IDetach
 			fontSize: font.fontSize,
 			letterSpacing: font.letterSpacing,
 			lineHeight: font.lineHeight,
-			logLevel: vscodeToXtermLogLevel(this._logService.getLevel()),
+			logLevel: zyraxoncodeToXtermLogLevel(this._logService.getLevel()),
 			logger: this._logService,
 			minimumContrastRatio: config.minimumContrastRatio,
 			tabStopWidth: config.tabStopWidth,
 			cursorBlink: config.cursorBlinking,
 			blinkIntervalDuration: config.textBlinking ? TextBlinkConstants.IntervalDuration : 0,
-			cursorStyle: vscodeToXtermCursorStyle<'cursorStyle'>(config.cursorStyle),
-			cursorInactiveStyle: vscodeToXtermCursorStyle(config.cursorStyleInactive),
+			cursorStyle: zyraxoncodeToXtermCursorStyle<'cursorStyle'>(config.cursorStyle),
+			cursorInactiveStyle: zyraxoncodeToXtermCursorStyle(config.cursorStyleInactive),
 			cursorWidth: config.cursorWidth,
 			macOptionIsMeta: config.macOptionIsMeta,
 			macOptionClickForcesSelection: config.macOptionClickForcesSelection,
@@ -303,7 +303,7 @@ export class XtermTerminal extends Disposable implements IXtermTerminal, IDetach
 			}));
 
 			this._register(this._themeService.onDidColorThemeChange(theme => this._updateTheme(theme)));
-			this._register(this._logService.onDidChangeLogLevel(e => this.raw.options.logLevel = vscodeToXtermLogLevel(e)));
+			this._register(this._logService.onDidChangeLogLevel(e => this.raw.options.logLevel = zyraxoncodeToXtermLogLevel(e)));
 		}
 
 		// Refire events
@@ -550,7 +550,7 @@ export class XtermTerminal extends Disposable implements IXtermTerminal, IDetach
 	}
 
 	updateLogLevel(): void {
-		this.raw.options.logLevel = vscodeToXtermLogLevel(this._logService.getLevel());
+		this.raw.options.logLevel = zyraxoncodeToXtermLogLevel(this._logService.getLevel());
 	}
 
 	/**
@@ -653,7 +653,7 @@ export class XtermTerminal extends Disposable implements IXtermTerminal, IDetach
 
 	private _updateFindColors(searchOptions: ISearchOptions): void {
 		const theme = this._themeService.getColorTheme();
-		// Theme color names align with monaco/vscode whereas xterm.js has some different naming.
+		// Theme color names align with monaco/zyraxoncode whereas xterm.js has some different naming.
 		// The mapping is as follows:
 		// - findMatch -> activeMatch
 		// - findMatchHighlight -> match
@@ -861,14 +861,14 @@ export class XtermTerminal extends Disposable implements IXtermTerminal, IDetach
 	}
 
 	private _setCursorStyle(style: ITerminalConfiguration['cursorStyle']): void {
-		const mapped = vscodeToXtermCursorStyle<'cursorStyle'>(style);
+		const mapped = zyraxoncodeToXtermCursorStyle<'cursorStyle'>(style);
 		if (this.raw.options.cursorStyle !== mapped) {
 			this.raw.options.cursorStyle = mapped;
 		}
 	}
 
 	private _setCursorStyleInactive(style: ITerminalConfiguration['cursorStyleInactive']): void {
-		const mapped = vscodeToXtermCursorStyle(style);
+		const mapped = zyraxoncodeToXtermCursorStyle(style);
 		if (this.raw.options.cursorInactiveStyle !== mapped) {
 			this.raw.options.cursorInactiveStyle = mapped;
 		}
@@ -1149,7 +1149,7 @@ export function getXtermScaledDimensions(w: Window, font: ITerminalFont, width: 
 	return { rows, cols };
 }
 
-function vscodeToXtermLogLevel(logLevel: LogLevel): XtermLogLevel {
+function zyraxoncodeToXtermLogLevel(logLevel: LogLevel): XtermLogLevel {
 	switch (logLevel) {
 		case LogLevel.Trace: return 'trace';
 		case LogLevel.Debug: return 'debug';
@@ -1164,7 +1164,7 @@ interface ICursorStyleVscodeToXtermMap {
 	'cursorStyle': NonNullable<ITerminalOptions['cursorStyle']>;
 	'cursorStyleInactive': NonNullable<ITerminalOptions['cursorInactiveStyle']>;
 }
-function vscodeToXtermCursorStyle<T extends 'cursorStyle' | 'cursorStyleInactive'>(style: ITerminalConfiguration[T]): ICursorStyleVscodeToXtermMap[T] {
+function zyraxoncodeToXtermCursorStyle<T extends 'cursorStyle' | 'cursorStyleInactive'>(style: ITerminalConfiguration[T]): ICursorStyleVscodeToXtermMap[T] {
 	// 'line' is used instead of bar in ZYRAXON Code to be consistent with editor.cursorStyle
 	if (style === 'line') {
 		return 'bar';

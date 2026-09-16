@@ -82,7 +82,7 @@
 }
 
 .agent-sessions-workbench.phone-layout .notifications-toasts .notification-toast .notification-toast-container {
-	border-radius: var(--vscode-cornerRadius-xLarge);
+	border-radius: var(--zyraxoncode-cornerRadius-xLarge);
 }
 
 .agent-sessions-workbench.phone-layout .monaco-hover {
@@ -115,7 +115,7 @@
 }
 
 .agent-sessions-workbench .part.sidebar.mobile-overlay-sidebar {
-	background: var(--vscode-agents-background) !important;
+	background: var(--zyraxoncode-agents-background) !important;
 }
 
 .agent-sessions-workbench.phone-layout .monaco-modal-editor-part {
@@ -155,9 +155,9 @@
 	display: block;
 	width: 36px;
 	height: 5px;
-	background: var(--vscode-foreground);
+	background: var(--zyraxoncode-foreground);
 	opacity: 0.3;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	margin: 8px auto 4px;
 }
 

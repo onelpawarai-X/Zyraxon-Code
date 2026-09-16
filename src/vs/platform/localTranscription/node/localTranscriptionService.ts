@@ -25,7 +25,7 @@ const CHANNELS = 1;
 const BITS_PER_SAMPLE = 16;
 
 /** Application name reported to Foundry Local for logs/telemetry and its data dir. */
-const FOUNDRY_APP_NAME = 'vscode-dictation';
+const FOUNDRY_APP_NAME = 'zyraxoncode-dictation';
 
 /**
  * Directory holding the on-demand Foundry Local native runtime (addon + core

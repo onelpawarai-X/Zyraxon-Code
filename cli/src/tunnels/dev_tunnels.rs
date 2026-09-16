@@ -265,8 +265,8 @@ impl ActiveTunnel {
 	}
 }
 
-const VSCODE_CLI_TUNNEL_TAG: &str = "vscode-server-launcher";
-const VSCODE_CLI_FORWARDING_TAG: &str = "vscode-port-forward";
+const VSCODE_CLI_TUNNEL_TAG: &str = "zyraxoncode-server-launcher";
+const VSCODE_CLI_FORWARDING_TAG: &str = "zyraxoncode-port-forward";
 const OWNED_TUNNEL_TAGS: &[&str] = &[VSCODE_CLI_TUNNEL_TAG, VSCODE_CLI_FORWARDING_TAG];
 const MAX_TUNNEL_NAME_LENGTH: usize = 20;
 
@@ -1083,7 +1083,7 @@ impl ActiveTunnelManager {
 	}
 
 	/// Kills the process, and waits for it to exit.
-	/// See https://tokio.rs/tokio/topics/shutdown#waiting-for-things-to-finish-shutting-down for how this works
+	/// See __ZYRAXKEEP__0_ for how this works
 	pub async fn kill(&mut self) -> Result<(), AnyError> {
 		if let Some(tx) = self.close_tx.take() {
 			drop(tx);

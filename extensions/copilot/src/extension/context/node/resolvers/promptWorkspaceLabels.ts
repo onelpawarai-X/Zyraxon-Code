@@ -12,7 +12,7 @@ import { ITelemetryService } from '../../../../platform/telemetry/common/telemet
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { createServiceIdentifier } from '../../../../util/common/services';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Uri } from '../../../../vscodeTypes';
+import { Uri } from '../../../../zyraxoncodeTypes';
 
 export const IPromptWorkspaceLabels = createServiceIdentifier<IPromptWorkspaceLabels>('IPromptWorkspaceLabels');
 export interface IPromptWorkspaceLabels {
@@ -238,8 +238,8 @@ class BasicPromptWorkspaceLabels implements IPromptWorkspaceLabelsStrategy {
 			if (engines['node']) {
 				tags.push('node');
 			}
-			if (engines['vscode']) {
-				tags.push('vscode extension');
+			if (engines['zyraxoncode']) {
+				tags.push('zyraxoncode extension');
 			}
 		}
 		return tags;
@@ -429,7 +429,7 @@ class ExpandedPromptWorkspaceLabels extends BasicPromptWorkspaceLabels {
 		const enginesList = [
 			// Engines
 			{ dependency: 'node' },
-			{ dependency: 'vscode', prefix: 'vscode extension' }
+			{ dependency: 'zyraxoncode', prefix: 'zyraxoncode extension' }
 		];
 
 		allDependenciesFields.forEach((deps) => checkDependencies(deps, dependenciesList));

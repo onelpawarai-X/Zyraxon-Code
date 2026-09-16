@@ -38,7 +38,7 @@
 	height: 16px;
 	padding: 3px 8px;
 	border-radius: 4px;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .agent-host-chat-input-picker-slot .action-label .codicon-chevron-down {
@@ -79,7 +79,7 @@
 			font-size: 11px;
 
 			&:hover {
-				background-color: var(--vscode-toolbar-hoverBackground);
+				background-color: var(--zyraxoncode-toolbar-hoverBackground);
 			}
 		}
 
@@ -108,27 +108,27 @@
  * Toggled in `AgentHostChatInputPicker._renderTrigger`.
  */
 .agent-host-chat-input-picker-slot .action-label.warning {
-	color: var(--vscode-problemsWarningIcon-foreground);
+	color: var(--zyraxoncode-problemsWarningIcon-foreground);
 }
 
 .agent-host-chat-input-picker-slot .action-label.warning .codicon {
-	color: var(--vscode-problemsWarningIcon-foreground) !important;
+	color: var(--zyraxoncode-problemsWarningIcon-foreground) !important;
 }
 
 .agent-host-chat-input-picker-slot .action-label.warning:hover {
-	color: var(--vscode-problemsWarningIcon-foreground);
+	color: var(--zyraxoncode-problemsWarningIcon-foreground);
 }
 
 .agent-host-chat-input-picker-slot .action-label.info {
-	color: var(--vscode-problemsInfoIcon-foreground);
+	color: var(--zyraxoncode-problemsInfoIcon-foreground);
 }
 
 .agent-host-chat-input-picker-slot .action-label.info .codicon {
-	color: var(--vscode-problemsInfoIcon-foreground) !important;
+	color: var(--zyraxoncode-problemsInfoIcon-foreground) !important;
 }
 
 .agent-host-chat-input-picker-slot .action-label.info:hover {
-	color: var(--vscode-problemsInfoIcon-foreground);
+	color: var(--zyraxoncode-problemsInfoIcon-foreground);
 }
 
 .agent-host-chat-input-picker-label {

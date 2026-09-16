@@ -4,14 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AuthenticationResult } from '@azure/msal-node';
-import { Uri, LogOutputChannel, env } from 'vscode';
+import { Uri, LogOutputChannel, env } from 'zyraxoncode';
 import { ICachedPublicClientApplication } from '../common/publicClientCache';
 import { UriHandlerLoopbackClient } from '../common/loopbackClientAndOpener';
 import { UriEventHandler } from '../UriEventHandler';
 import { loopbackTemplate } from './loopbackTemplate';
 import { Config } from '../common/config';
 
-const DEFAULT_REDIRECT_URI = 'https://vscode.dev/redirect';
+const DEFAULT_REDIRECT_URI = '__ZYRAXKEEP__0_';
 
 export const enum ExtensionHost {
 	Remote,

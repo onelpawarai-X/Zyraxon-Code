@@ -5,14 +5,14 @@
 
 import { ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
 import { getModelId, modelSupportsContextEditing } from '../../endpoint/common/chatModelCapabilities';
-import type { LanguageModelChat } from 'vscode';
+import type { LanguageModelChat } from 'zyraxoncode';
 import { IExperimentationService } from '../../telemetry/common/nullExperimentationService';
 import { ChatLocation } from '../../chat/common/commonTypes';
 import { IChatEndpoint } from './networking';
 
 /**
  * Types for Anthropic Messages API
- * Based on https://platform.claude.com/docs/en/api/messages
+ * Based on __ZYRAXKEEP__0_
  *
  * This interface supports both regular tools and server tools (web search, tool search):
  * - Regular tools: require name, description, and input_schema
@@ -31,12 +31,12 @@ export interface AnthropicMessagesTool {
 	cache_control?: { type: 'ephemeral'; ttl?: '5m' | '1h' };
 }
 
-/** Name for the custom client-side embeddings-based tool search tool. Must not use copilot_/vscode_ prefix — those are reserved for static package.json declarations and will be rejected by vscode.lm.registerToolDefinition. */
+/** Name for the custom client-side embeddings-based tool search tool. Must not use copilot_/zyraxoncode_ prefix — those are reserved for static package.json declarations and will be rejected by zyraxoncode.lm.registerToolDefinition. */
 export const CUSTOM_TOOL_SEARCH_NAME = 'tool_search';
 
 /**
  * Context management types for Anthropic Messages API
- * Based on https://platform.claude.com/docs/en/build-with-claude/context-editing
+ * Based on __ZYRAXKEEP__1_
  */
 export type ContextManagementTrigger =
 	| { type: 'input_tokens'; value: number }

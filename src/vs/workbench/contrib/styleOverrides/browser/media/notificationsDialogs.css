@@ -13,7 +13,7 @@
 }
 
 .style-override.monaco-workbench .notifications-list-container .notification-list-item .notification-list-item-icon {
-	font-size: var(--vscode-codiconFontSize);
+	font-size: var(--zyraxoncode-codiconFontSize);
 	margin: 0 8px 0 6px;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .style-override.monaco-workbench .notifications-list-container .notification-list-item .notification-list-item-source {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-left: 24px;
 }
 
@@ -91,12 +91,12 @@
 
 .style-override .monaco-dialog-box .dialog-message-row .dialog-message-container .dialog-message {
 	margin: 2px 0 12px 0;
-	font-size: var(--vscode-fontSize-heading3);
-	font-weight: var(--vscode-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-fontSize-heading3);
+	font-weight: var(--zyraxoncode-fontWeight-semiBold);
 }
 
 .style-override .monaco-dialog-box .dialog-message-row .dialog-message-container .dialog-message-detail {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .style-override .monaco-dialog-box .dialog-toolbar-row {

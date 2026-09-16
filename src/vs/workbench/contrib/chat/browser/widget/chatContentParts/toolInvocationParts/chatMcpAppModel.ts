@@ -278,11 +278,11 @@ export class ChatMcpAppModel extends Disposable {
 
 		const cspTag = `<meta http-equiv="Content-Security-Policy" content="${cspContent}">`;
 
-		// window.top and window.parent get reset to `window` after the vscode API is made.
+		// window.top and window.parent get reset to `window` after the zyraxoncode API is made.
 		// However, the MCP App SDK by default tries to use these for postMessage. So, wrap them.
 		// We also need to wrap the event listeners otherwise the event.source won't match
 		// the wrapped window.parent/window.top.
-		// https://github.com/microsoft/vscode/blob/2a4c8f5b8a715d45dd2a36778906b5810e4a1905/src/vs/workbench/contrib/webview/browser/pre/index.html#L242-L244
+		// __ZYRAXKEEP__0_
 		const postMessageRehoist = `
 			<script>(() => {
 				const api = acquireVsCodeApi();
@@ -528,7 +528,7 @@ export class ChatMcpAppModel extends Disposable {
 		this._announcedCapabilities = true;
 
 		// "Host MUST send this notification with the complete tool arguments after the Guest UI's initialize request completes"
-		// Cast to `any` due to https://github.com/modelcontextprotocol/ext-apps/issues/197
+		// Cast to `any` due to __ZYRAXKEEP__1_
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		let args: any;
 		try {

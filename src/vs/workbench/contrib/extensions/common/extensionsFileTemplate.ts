@@ -7,7 +7,7 @@ import { localize } from '../../../../nls.js';
 import { IJSONSchema } from '../../../../base/common/jsonSchema.js';
 import { EXTENSION_IDENTIFIER_PATTERN } from '../../../../platform/extensionManagement/common/extensionManagement.js';
 
-export const ExtensionsConfigurationSchemaId = 'vscode://schemas/extensions';
+export const ExtensionsConfigurationSchemaId = '__ZYRAXKEEP__0_';
 export const ExtensionsConfigurationSchema: IJSONSchema = {
 	id: ExtensionsConfigurationSchemaId,
 	allowComments: true,
@@ -18,20 +18,20 @@ export const ExtensionsConfigurationSchema: IJSONSchema = {
 	properties: {
 		recommendations: {
 			type: 'array',
-			description: localize('app.extensions.json.recommendations', "List of extensions which should be recommended for users of this workspace. The identifier of an extension is always '${publisher}.${name}'. For example: 'vscode.csharp'."),
+			description: localize('app.extensions.json.recommendations', "List of extensions which should be recommended for users of this workspace. The identifier of an extension is always '${publisher}.${name}'. For example: 'zyraxoncode.csharp'."),
 			items: {
 				type: 'string',
 				pattern: EXTENSION_IDENTIFIER_PATTERN,
-				errorMessage: localize('app.extension.identifier.errorMessage', "Expected format '${publisher}.${name}'. Example: 'vscode.csharp'.")
+				errorMessage: localize('app.extension.identifier.errorMessage', "Expected format '${publisher}.${name}'. Example: 'zyraxoncode.csharp'.")
 			},
 		},
 		unwantedRecommendations: {
 			type: 'array',
-			description: localize('app.extensions.json.unwantedRecommendations', "List of extensions recommended by ZYRAXON Code that should not be recommended for users of this workspace. The identifier of an extension is always '${publisher}.${name}'. For example: 'vscode.csharp'."),
+			description: localize('app.extensions.json.unwantedRecommendations', "List of extensions recommended by ZYRAXON Code that should not be recommended for users of this workspace. The identifier of an extension is always '${publisher}.${name}'. For example: 'zyraxoncode.csharp'."),
 			items: {
 				type: 'string',
 				pattern: EXTENSION_IDENTIFIER_PATTERN,
-				errorMessage: localize('app.extension.identifier.errorMessage', "Expected format '${publisher}.${name}'. Example: 'vscode.csharp'.")
+				errorMessage: localize('app.extension.identifier.errorMessage', "Expected format '${publisher}.${name}'. Example: 'zyraxoncode.csharp'.")
 			},
 		},
 	}
@@ -39,8 +39,8 @@ export const ExtensionsConfigurationSchema: IJSONSchema = {
 
 export const ExtensionsConfigurationInitialContent: string = [
 	'{',
-	'\t// See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.',
-	'\t// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp',
+	'\t// See __ZYRAXKEEP__1_ to learn about workspace recommendations.',
+	'\t// Extension identifier format: ${publisher}.${name}. Example: zyraxoncode.csharp',
 	'',
 	'\t// List of extensions which should be recommended for users of this workspace.',
 	'\t"recommendations": [',

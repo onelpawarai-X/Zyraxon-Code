@@ -519,10 +519,10 @@ export class AgentFeedbackEditorWidget extends Disposable implements IOverlayWid
 
 		const acceptButton = buttonStore.add(new Button(buttonBar, {
 			title: acceptTooltip,
-			buttonBackground: 'var(--vscode-charts-purple)',
-			buttonHoverBackground: 'color-mix(in srgb, var(--vscode-charts-purple) 85%, var(--vscode-foreground))',
-			buttonForeground: 'var(--vscode-button-foreground)',
-			buttonBorder: 'var(--vscode-charts-purple)',
+			buttonBackground: 'var(--zyraxoncode-charts-purple)',
+			buttonHoverBackground: 'color-mix(in srgb, var(--zyraxoncode-charts-purple) 85%, var(--zyraxoncode-foreground))',
+			buttonForeground: 'var(--zyraxoncode-button-foreground)',
+			buttonBorder: 'var(--zyraxoncode-charts-purple)',
 		}));
 		acceptButton.label = nls.localize('acceptFeedbackButton', "Accept");
 		buttonStore.add(acceptButton.onDidClick(() => {
@@ -537,10 +537,10 @@ export class AgentFeedbackEditorWidget extends Disposable implements IOverlayWid
 		const deleteButton = buttonStore.add(new Button(buttonBar, {
 			title: deleteTooltip,
 			secondary: true,
-			buttonSecondaryBackground: 'var(--vscode-button-secondaryBackground)',
-			buttonSecondaryHoverBackground: 'var(--vscode-button-secondaryHoverBackground)',
-			buttonSecondaryForeground: 'var(--vscode-button-secondaryForeground)',
-			buttonSecondaryBorder: 'var(--vscode-button-secondaryBorder)',
+			buttonSecondaryBackground: 'var(--zyraxoncode-button-secondaryBackground)',
+			buttonSecondaryHoverBackground: 'var(--zyraxoncode-button-secondaryHoverBackground)',
+			buttonSecondaryForeground: 'var(--zyraxoncode-button-secondaryForeground)',
+			buttonSecondaryBorder: 'var(--zyraxoncode-button-secondaryBorder)',
 		}));
 		deleteButton.label = nls.localize('deleteFeedbackButton', "Delete");
 		buttonStore.add(deleteButton.onDidClick(() => {

@@ -22,7 +22,7 @@ flakySuite('IndexedDBFileSystemProvider', function () {
 	let userdataFileProvider: IndexedDBFileSystemProvider;
 	const testDir = '/';
 
-	const userdataURIFromPaths = (paths: readonly string[]) => joinPath(URI.from({ scheme: Schemas.vscodeUserData, path: testDir }), ...paths);
+	const userdataURIFromPaths = (paths: readonly string[]) => joinPath(URI.from({ scheme: Schemas.zyraxoncodeUserData, path: testDir }), ...paths);
 
 	const disposables = new DisposableStore();
 
@@ -63,10 +63,10 @@ flakySuite('IndexedDBFileSystemProvider', function () {
 		service = new FileService(logService);
 		disposables.add(service);
 
-		const indexedDB = await IndexedDB.create('vscode-web-db-test', 1, ['vscode-userdata-store', 'vscode-logs-store']);
+		const indexedDB = await IndexedDB.create('zyraxoncode-web-db-test', 1, ['zyraxoncode-userdata-store', 'zyraxoncode-logs-store']);
 
-		userdataFileProvider = new IndexedDBFileSystemProvider(Schemas.vscodeUserData, indexedDB, 'vscode-userdata-store', true);
-		disposables.add(service.registerProvider(Schemas.vscodeUserData, userdataFileProvider));
+		userdataFileProvider = new IndexedDBFileSystemProvider(Schemas.zyraxoncodeUserData, indexedDB, 'zyraxoncode-userdata-store', true);
+		disposables.add(service.registerProvider(Schemas.zyraxoncodeUserData, userdataFileProvider));
 		disposables.add(userdataFileProvider);
 	};
 

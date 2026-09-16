@@ -41,7 +41,7 @@ import { IOutputService } from '../../../../services/output/common/output.js';
 import { IWorkingCopyService } from '../../../../services/workingCopy/common/workingCopyService.js';
 import { IWebviewService } from '../../../../contrib/webview/browser/webview.js';
 import { IAICustomizationWorkspaceService, AICustomizationManagementSection, AICustomizationSource } from '../../../../contrib/chat/common/aiCustomizationWorkspaceService.js';
-import { ICustomizationHarnessService, ICustomizationItem, ICustomizationItemProvider, IHarnessDescriptor, createVSCodeHarnessDescriptor } from '../../../../contrib/chat/common/customizationHarnessService.js';
+import { ICustomizationHarnessService, ICustomizationItem, ICustomizationItemProvider, IHarnessDescriptor, createZyraxonCodeHarnessDescriptor } from '../../../../contrib/chat/common/customizationHarnessService.js';
 import { IChatSessionsService } from '../../../../contrib/chat/common/chatSessionsService.js';
 import { getChatSessionType, LocalChatSessionUri } from '../../../../contrib/chat/common/model/chatUri.js';
 import { IPromptsService, AgentInstructionFileType, PromptsStorage, IAgentSkill, IChatPromptSlashCommand, IAgentInstructionFile } from '../../../../contrib/chat/common/promptSyntax/service/promptsService.js';
@@ -111,7 +111,7 @@ interface IFixtureFile {
 
 function createMockEditorGroup(): IEditorGroup {
 	return new class extends mock<IEditorGroup>() {
-		override windowId = mainWindow.vscodeWindowId;
+		override windowId = mainWindow.zyraxoncodeWindowId;
 	}();
 }
 
@@ -563,7 +563,7 @@ const mcpRuntimeServers = [
 
 const activeSessionMcpServers: FixtureAgentHostMcpServer[] = [
 	{ id: 'mcp-top-level:fixture:session:component-explorer', name: 'component-explorer', enabled: true, status: McpServerStatus.Ready, state: { kind: McpServerStatus.Ready }, logOutputChannelId: 'fixture-agent-host', start: mcpLifecycleNoop, stop: mcpLifecycleNoop, setEnabled() { } },
-	{ id: 'mcp-top-level:fixture:session:Remote Browser', name: 'Remote Browser', enabled: true, status: McpServerStatus.AuthRequired, state: { kind: McpServerStatus.AuthRequired, reason: McpAuthRequiredReason.Required, resource: { resource: 'https://mcp.example.com' } }, logOutputChannelId: 'fixture-agent-host', start: mcpLifecycleNoop, stop: mcpLifecycleNoop, setEnabled() { } },
+	{ id: 'mcp-top-level:fixture:session:Remote Browser', name: 'Remote Browser', enabled: true, status: McpServerStatus.AuthRequired, state: { kind: McpServerStatus.AuthRequired, reason: McpAuthRequiredReason.Required, resource: { resource: '__ZYRAXKEEP__0_' } }, logOutputChannelId: 'fixture-agent-host', start: mcpLifecycleNoop, stop: mcpLifecycleNoop, setEnabled() { } },
 	{ id: 'mcp-top-level:fixture:session:Remote Search', name: 'Remote Search', enabled: true, status: McpServerStatus.Error, state: { kind: McpServerStatus.Error, error: { errorType: 'fixture', message: 'Fixture error' } }, logOutputChannelId: 'fixture-agent-host', start: mcpLifecycleNoop, stop: mcpLifecycleNoop, setEnabled() { } },
 ];
 
@@ -656,7 +656,7 @@ async function renderEditor(ctx: ComponentFixtureContext, options: IRenderEditor
 		AICustomizationManagementSection.Plugins,
 	];
 	const availableHarnesses = options.availableHarnesses ?? [
-		createVSCodeHarnessDescriptor(),
+		createZyraxonCodeHarnessDescriptor(),
 		{
 			id: 'agent-host-copilotcli',
 			label: 'Copilot [Agent Host]',
@@ -1044,7 +1044,7 @@ async function renderMcpBrowseMode(ctx: ComponentFixtureContext): Promise<void> 
 			reg.defineInstance(ICustomizationHarnessService, new class extends mock<ICustomizationHarnessService>() {
 				override readonly activeSessionResource = observableValue<URI>('activeSessionResource', LocalChatSessionUri.getNewSessionUri());
 				override readonly activeHarness = derived(reader => getChatSessionType(this.activeSessionResource.read(reader)));
-				override getActiveDescriptor() { return createVSCodeHarnessDescriptor(); }
+				override getActiveDescriptor() { return createZyraxonCodeHarnessDescriptor(); }
 				override registerExternalHarness() { return { dispose() { } }; }
 			}());
 			reg.defineInstance(IAgentHostCustomizationService, createMockAgentHostCustomizationService());
@@ -1109,7 +1109,7 @@ function makeMarketplacePlugin(name: string, description: string, repo: string):
 		source: repo,
 		sourceDescriptor: { kind: PluginSourceKind.GitHub, repo: `example/${repo}` },
 		marketplace: 'copilot',
-		marketplaceReference: { rawValue: `example/${repo}`, displayLabel: repo, cloneUrl: `https://github.com/example/${repo}.git`, canonicalId: `github:example/${repo}`, cacheSegments: ['example', repo], kind: MarketplaceReferenceKind.GitHubShorthand },
+		marketplaceReference: { rawValue: `example/${repo}`, displayLabel: repo, cloneUrl: `__ZYRAXKEEP__1_{repo}.git`, canonicalId: `github:example/${repo}`, cacheSegments: ['example', repo], kind: MarketplaceReferenceKind.GitHubShorthand },
 		marketplaceType: MarketplaceType.Copilot,
 	};
 }
@@ -1138,16 +1138,16 @@ async function renderPluginBrowseMode(ctx: ComponentFixtureContext): Promise<voi
 	// Some marketplace plugins match installed plugins by URI so the renderer
 	// shows them as "Installed" (exercises the installed-state check from #7379).
 	const browseInstalledPlugins = [
-		makeInstalledPlugin('Linear', URI.file('/home/dev/.vscode/agent-plugins/example/linear-plugin'), true),
-		makeInstalledPlugin('Sentry', URI.file('/home/dev/.vscode/agent-plugins/example/sentry-plugin'), true),
-		makeInstalledPlugin('Datadog', URI.file('/home/dev/.vscode/agent-plugins/example/datadog-plugin'), false),
+		makeInstalledPlugin('Linear', URI.file('/home/dev/.zyraxoncode/agent-plugins/example/linear-plugin'), true),
+		makeInstalledPlugin('Sentry', URI.file('/home/dev/.zyraxoncode/agent-plugins/example/sentry-plugin'), true),
+		makeInstalledPlugin('Datadog', URI.file('/home/dev/.zyraxoncode/agent-plugins/example/datadog-plugin'), false),
 	];
 
 	// Map plugin source descriptors to install URIs, matching installed URIs above
 	const pluginInstallUris = new Map<string, URI>([
-		['example/linear-plugin', URI.file('/home/dev/.vscode/agent-plugins/example/linear-plugin')],
-		['example/sentry-plugin', URI.file('/home/dev/.vscode/agent-plugins/example/sentry-plugin')],
-		['example/datadog-plugin', URI.file('/home/dev/.vscode/agent-plugins/example/datadog-plugin')],
+		['example/linear-plugin', URI.file('/home/dev/.zyraxoncode/agent-plugins/example/linear-plugin')],
+		['example/sentry-plugin', URI.file('/home/dev/.zyraxoncode/agent-plugins/example/sentry-plugin')],
+		['example/datadog-plugin', URI.file('/home/dev/.zyraxoncode/agent-plugins/example/datadog-plugin')],
 	]);
 
 	const instantiationService = createEditorServices(ctx.disposableStore, {
@@ -1158,7 +1158,7 @@ async function renderPluginBrowseMode(ctx: ComponentFixtureContext): Promise<voi
 			reg.defineInstance(ICustomizationHarnessService, new class extends mock<ICustomizationHarnessService>() {
 				override readonly activeSessionResource = observableValue<URI>('activeSessionResource', LocalChatSessionUri.getNewSessionUri());
 				override readonly activeHarness = derived(reader => getChatSessionType(this.activeSessionResource.read(reader)));
-				override getActiveDescriptor() { return createVSCodeHarnessDescriptor(); }
+				override getActiveDescriptor() { return createZyraxonCodeHarnessDescriptor(); }
 				override registerExternalHarness() { return { dispose() { } }; }
 			}());
 			reg.defineInstance(IAgentPluginService, new class extends mock<IAgentPluginService>() {
@@ -1265,7 +1265,7 @@ function renderMcpDisabled(ctx: ComponentFixtureContext, byPolicy: boolean): voi
 			reg.defineInstance(ICustomizationHarnessService, new class extends mock<ICustomizationHarnessService>() {
 				override readonly activeSessionResource = observableValue<URI>('activeSessionResource', LocalChatSessionUri.getNewSessionUri());
 				override readonly activeHarness = derived(reader => getChatSessionType(this.activeSessionResource.read(reader)));
-				override getActiveDescriptor() { return createVSCodeHarnessDescriptor(); }
+				override getActiveDescriptor() { return createZyraxonCodeHarnessDescriptor(); }
 				override registerExternalHarness() { return { dispose() { } }; }
 			}());
 			reg.defineInstance(IAgentHostCustomizationService, createMockAgentHostCustomizationService());
@@ -1295,7 +1295,7 @@ function renderPluginDisabled(ctx: ComponentFixtureContext, byPolicy: boolean): 
 			reg.defineInstance(ICustomizationHarnessService, new class extends mock<ICustomizationHarnessService>() {
 				override readonly activeSessionResource = observableValue<URI>('activeSessionResource', LocalChatSessionUri.getNewSessionUri());
 				override readonly activeHarness = derived(reader => getChatSessionType(this.activeSessionResource.read(reader)));
-				override getActiveDescriptor() { return createVSCodeHarnessDescriptor(); }
+				override getActiveDescriptor() { return createZyraxonCodeHarnessDescriptor(); }
 				override registerExternalHarness() { return { dispose() { } }; }
 			}());
 			reg.defineInstance(IAgentPluginService, new class extends mock<IAgentPluginService>() {
@@ -1398,7 +1398,7 @@ function makeMarketplacePluginItem(name: string, description: string): IAgentPlu
 		marketplaceReference: {
 			rawValue: `acme/${name.toLowerCase()}`,
 			displayLabel: `acme/${name.toLowerCase()}`,
-			cloneUrl: `https://github.com/acme/${name.toLowerCase()}`,
+			cloneUrl: `__ZYRAXKEEP__2_{name.toLowerCase()}`,
 			canonicalId: `github:acme/${name.toLowerCase()}`,
 			cacheSegments: ['github', 'acme', name.toLowerCase()],
 			kind: MarketplaceReferenceKind.GitHubShorthand,
@@ -1449,7 +1449,7 @@ export default defineThemedFixtureGroup({ path: 'chat/aiCustomizations/' }, {
 			isSessionsWindow: true,
 			selectedSection: AICustomizationManagementSection.Agents,
 			availableHarnesses: [
-				createVSCodeHarnessDescriptor(),
+				createZyraxonCodeHarnessDescriptor(),
 			],
 			managementSections: [
 				AICustomizationManagementSection.Agents,
@@ -1471,7 +1471,7 @@ export default defineThemedFixtureGroup({ path: 'chat/aiCustomizations/' }, {
 			isSessionsWindow: true,
 			selectedSection: AICustomizationManagementSection.Skills,
 			availableHarnesses: [
-				createVSCodeHarnessDescriptor(),
+				createZyraxonCodeHarnessDescriptor(),
 			],
 			managementSections: [
 				AICustomizationManagementSection.Agents,
@@ -1571,7 +1571,7 @@ export default defineThemedFixtureGroup({ path: 'chat/aiCustomizations/' }, {
 	}),
 
 	// MCP browse/marketplace mode — standalone widget with gallery results, scrollable
-	// Verifies fix for https://github.com/microsoft/vscode/issues/304139
+	// Verifies fix for __ZYRAXKEEP__3_
 	McpBrowseMode: defineComponentFixture({
 		labels: { kind: 'screenshot' },
 		render: renderMcpBrowseMode,

@@ -211,7 +211,7 @@ export class ActionWithDropdownActionViewItem extends ActionViewItem {
 			const menuActionsProvider = {
 				getActions: () => {
 					const actionsProvider = (<IActionWithDropdownActionViewItemOptions>this.options).menuActionsOrProvider;
-					return Array.isArray(actionsProvider) ? actionsProvider : (actionsProvider as IActionProvider).getActions(); // TODO: microsoft/TypeScript#42768
+					return Array.isArray(actionsProvider) ? actionsProvider : (actionsProvider as IActionProvider).getActions(); // TODO: zyraxon/TypeScript#42768
 				}
 			};
 

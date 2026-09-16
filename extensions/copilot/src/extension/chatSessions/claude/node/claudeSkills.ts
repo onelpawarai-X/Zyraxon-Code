@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Uri } from 'vscode';
+import type { Uri } from 'zyraxoncode';
 import { IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { INativeEnvService } from '../../../../platform/env/common/envService';
 import { IPromptsService } from '../../../../platform/promptFiles/common/promptsService';

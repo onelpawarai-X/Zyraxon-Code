@@ -37,7 +37,7 @@ export class WebviewPortMappingManager implements IDisposable {
 		for (const mapping of this._getMappings()) {
 			if (mapping.webviewPort === requestLocalHostInfo.port) {
 				const extensionLocation = this._getExtensionLocation();
-				if (extensionLocation && extensionLocation.scheme === Schemas.vscodeRemote) {
+				if (extensionLocation && extensionLocation.scheme === Schemas.zyraxoncodeRemote) {
 					const tunnel = resolveAuthority && await this.getOrCreateTunnel(resolveAuthority, mapping.extensionHostPort);
 					if (tunnel) {
 						if (tunnel.tunnelLocalPort === mapping.webviewPort) {

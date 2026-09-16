@@ -79,7 +79,7 @@ export interface IUserDataSyncConfiguration {
 export const CONFIG_SYNC_KEYBINDINGS_PER_PLATFORM = 'settingsSync.keybindingsPerPlatform';
 
 export function registerConfiguration(): IDisposable {
-	const ignoredSettingsSchemaId = 'vscode://schemas/ignoredSettings';
+	const ignoredSettingsSchemaId = '__ZYRAXKEEP__0_';
 	const configurationRegistry = Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Configuration);
 	configurationRegistry.registerConfiguration({
 		id: 'settingsSync',
@@ -96,11 +96,11 @@ export function registerConfiguration(): IDisposable {
 			},
 			'settingsSync.ignoredExtensions': {
 				'type': 'array',
-				markdownDescription: localize('settingsSync.ignoredExtensions', "List of extensions to be ignored while synchronizing. The identifier of an extension is always `${publisher}.${name}`. For example: `vscode.csharp`."),
+				markdownDescription: localize('settingsSync.ignoredExtensions', "List of extensions to be ignored while synchronizing. The identifier of an extension is always `${publisher}.${name}`. For example: `zyraxoncode.csharp`."),
 				items: [{
 					type: 'string',
 					pattern: EXTENSION_IDENTIFIER_PATTERN,
-					errorMessage: localize('app.extension.identifier.errorMessage', "Expected format '${publisher}.${name}'. Example: 'vscode.csharp'.")
+					errorMessage: localize('app.extension.identifier.errorMessage', "Expected format '${publisher}.${name}'. Example: 'zyraxoncode.csharp'.")
 				}],
 				'default': [],
 				'scope': ConfigurationScope.APPLICATION,
@@ -662,5 +662,5 @@ export interface IConflictSetting {
 //#endregion
 
 export const USER_DATA_SYNC_LOG_ID = 'userDataSync';
-export const USER_DATA_SYNC_SCHEME = 'vscode-userdata-sync';
+export const USER_DATA_SYNC_SCHEME = 'zyraxoncode-userdata-sync';
 export const PREVIEW_DIR_NAME = 'preview';

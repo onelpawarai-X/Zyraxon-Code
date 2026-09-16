@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { mapFindFirst } from '../../../util/vs/base/common/arraysFind';
 import { assertNever } from '../../../util/vs/base/common/assert';
 import { timeout } from '../../../util/vs/base/common/async';
-import { ChatResponseConfirmationPart, ChatResponseExtensionsPart, ChatResponseMarkdownPart, ExtensionMode, MarkdownString } from '../../../vscodeTypes';
+import { ChatResponseConfirmationPart, ChatResponseExtensionsPart, ChatResponseMarkdownPart, ExtensionMode, MarkdownString } from '../../../zyraxoncodeTypes';
 import { IRunCommandExecutionService } from '../../commands/common/runCommandExecutionService';
 import { ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
 import { TextDocumentSnapshot } from '../../editing/common/textDocumentSnapshot';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { IExtensionsService } from '../../extensions/common/extensionsService';
 import { IPackageJson } from '../../extensions/common/packageJson';
 import { ISetupTestExtension, testExtensionsForLanguage } from '../common/setupTestExtensions';
@@ -22,8 +22,8 @@ import { ITestDepsResolver } from './testDepsResolver';
 
 interface IDocumentContext {
 	readonly document: TextDocumentSnapshot;
-	readonly wholeRange: vscode.Range;
-	readonly selection: vscode.Selection;
+	readonly wholeRange: zyraxoncode.Range;
+	readonly selection: zyraxoncode.Selection;
 }
 
 export interface ISetupTestsDetector {
@@ -33,15 +33,15 @@ export interface ISetupTestsDetector {
 	 * Gets whether copilot should first offer to set up tests.
 	 * @returns The setup test action to take, if any
 	 */
-	shouldSuggestSetup(context: IDocumentContext, request: vscode.ChatRequest, output: vscode.ChatResponseStream): Promise<SetupTestAction | undefined>;
+	shouldSuggestSetup(context: IDocumentContext, request: zyraxoncode.ChatRequest, output: zyraxoncode.ChatResponseStream): Promise<SetupTestAction | undefined>;
 
 	/**
 	 * Returns th chat response parts suggested by the setup test action.
 	 */
-	showSuggestion(action: SetupTestAction): vscode.ExtendedChatResponsePart[];
+	showSuggestion(action: SetupTestAction): zyraxoncode.ExtendedChatResponsePart[];
 }
 
-export type SetupConfirmationResult = { message: string; command?: vscode.Command };
+export type SetupConfirmationResult = { message: string; command?: zyraxoncode.Command };
 
 export const ISetupTestsDetector = createServiceIdentifier<ISetupTestsDetector>('ISetupTestsDetector');
 
@@ -65,7 +65,7 @@ export type SetupTestAction =
 	| { type: SetupTestActionType.SearchGeneric; context: TextDocumentSnapshot }
 	| { type: SetupTestActionType.Remind; action: SetupTestAction }
 	| { type: SetupTestActionType.WasHandled }
-	| { type: SetupTestActionType.CustomExtensionCommand; message: string; command?: vscode.Command };
+	| { type: SetupTestActionType.CustomExtensionCommand; message: string; command?: zyraxoncode.Command };
 
 const DID_ALREADY_PROMPT = 'testing.setup.skipForWorkspace';
 
@@ -101,16 +101,16 @@ export class SetupTestsDetector implements ISetupTestsDetector {
 		@IConfigurationService private readonly _configurationService: IConfigurationService,
 		@ITestDepsResolver private readonly _testDepsResolver: ITestDepsResolver,
 		@ITestProvider private readonly _testService: ITestProvider,
-		@IVSCodeExtensionContext private readonly _extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _extensionContext: IZyraxonCodeExtensionContext,
 		@IExtensionsService private readonly _extensionsService: IExtensionsService,
 		@IRunCommandExecutionService private readonly _commandService: IRunCommandExecutionService,
 	) { }
 
 	/** @inheritdoc */
-	public showSuggestion(action: SetupTestAction): vscode.ExtendedChatResponsePart[] {
+	public showSuggestion(action: SetupTestAction): zyraxoncode.ExtendedChatResponsePart[] {
 		this.setDidAlreadyPrompt();
 
-		const output: vscode.ExtendedChatResponsePart[] = [];
+		const output: zyraxoncode.ExtendedChatResponsePart[] = [];
 		const frameworkQuery = (framework: string) => `@category:testing ${framework}`;
 
 		switch (action.type) {
@@ -207,7 +207,7 @@ export class SetupTestsDetector implements ISetupTestsDetector {
 	 *
 	 * See `src/platform/testing/node/setupTestDetector.png` for the flow followed here.
 	 */
-	public async shouldSuggestSetup({ document }: IDocumentContext, request: vscode.ChatRequest, output: vscode.ChatResponseStream): Promise<SetupTestAction | undefined> {
+	public async shouldSuggestSetup({ document }: IDocumentContext, request: zyraxoncode.ChatRequest, output: zyraxoncode.ChatResponseStream): Promise<SetupTestAction | undefined> {
 		if (request.rejectedConfirmationData?.some(r => r.$isSetupSuggestion)) {
 			return undefined; // said "not now" to setup
 		}
@@ -242,7 +242,7 @@ export class SetupTestsDetector implements ISetupTestsDetector {
 	private async waitForExtensionInstall(prom: Promise<void>, document: TextDocumentSnapshot, extensionId: string) {
 		await prom;
 
-		let extension: vscode.Extension<any> | undefined;
+		let extension: zyraxoncode.Extension<any> | undefined;
 		do {
 			extension = this._extensionsService.getExtension(extensionId);
 			await timeout(100);

@@ -2,8 +2,8 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type * as vscode from 'vscode';
-import type { Range } from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
+import type { Range } from 'zyraxoncode';
 import { VsCodeTextDocument } from '../../../../../platform/editing/common/abstractText';
 import { NotebookDocumentSnapshot } from '../../../../../platform/editing/common/notebookDocumentSnapshot';
 import { TextDocumentSnapshot } from '../../../../../platform/editing/common/textDocumentSnapshot';
@@ -25,7 +25,7 @@ export function getCharLimit(tokensBudget: number): number {
 export async function adjustSelectionAndSummarizeDocument(
 	parserService: IParserService,
 	document: TextDocumentSnapshot,
-	formattingOptions: vscode.FormattingOptions | undefined,
+	formattingOptions: zyraxoncode.FormattingOptions | undefined,
 	selection: Range,
 	tokensBudget: number,
 	settings?: ISummarizedDocumentSettings
@@ -46,7 +46,7 @@ export class NotebookDocumentSummarizer {
 
 	async summarizeDocument(
 		document: NotebookDocumentSnapshot,
-		_formattingOptions: vscode.FormattingOptions | undefined,
+		_formattingOptions: zyraxoncode.FormattingOptions | undefined,
 		_selection: Range | undefined,
 		_tokensBudget: number,
 		_settings?: ISummarizedDocumentSettings
@@ -62,7 +62,7 @@ export class DocumentSummarizer {
 
 	summarizeDocument(
 		document: TextDocumentSnapshot,
-		formattingOptions: vscode.FormattingOptions | undefined,
+		formattingOptions: zyraxoncode.FormattingOptions | undefined,
 		selection: Range | undefined,
 		tokensBudget: number,
 		settings?: ISummarizedDocumentSettings
@@ -74,7 +74,7 @@ export class DocumentSummarizer {
 export async function summarizeDocument(
 	parserService: IParserService,
 	document: TextDocumentSnapshot,
-	formattingOptions: vscode.FormattingOptions | undefined,
+	formattingOptions: zyraxoncode.FormattingOptions | undefined,
 	selection: Range | undefined,
 	tokensBudget: number,
 	settings?: ISummarizedDocumentSettings
@@ -96,7 +96,7 @@ export function summarizeDocumentSync(
 
 export interface SummarizeDocumentsItem {
 	document: TextDocumentSnapshot;
-	formattingOptions: vscode.FormattingOptions | undefined;
+	formattingOptions: zyraxoncode.FormattingOptions | undefined;
 	selection: Range | undefined;
 }
 

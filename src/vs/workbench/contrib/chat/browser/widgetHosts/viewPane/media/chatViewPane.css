@@ -8,7 +8,7 @@
 	display: flex;
 	flex-direction: column;
 	flex-shrink: 0;
-	border-bottom: 1px solid var(--vscode-panel-border);
+	border-bottom: 1px solid var(--zyraxoncode-panel-border);
 	position: relative;
 	overflow: hidden;
 }
@@ -22,7 +22,7 @@
 	z-index: 10;
 	/* Let clicks pass through to the input editor unless there is scrollable transcript content */
 	pointer-events: none;
-	background: var(--vscode-input-background, transparent);
+	background: var(--zyraxoncode-input-background, transparent);
 	border-radius: inherit;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
@@ -35,8 +35,8 @@
 .voice-transcript-overlay {
 	height: 100%;
 	box-sizing: border-box;
-	padding: var(--vscode-spacing-size80) var(--vscode-spacing-size120);
-	font-size: var(--vscode-bodyFontSize);
+	padding: var(--zyraxoncode-spacing-size80) var(--zyraxoncode-spacing-size120);
+	font-size: var(--zyraxoncode-bodyFontSize);
 	line-height: 1.4;
 	word-break: break-word;
 	overflow: hidden;
@@ -44,23 +44,23 @@
 }
 
 .voice-transcript-overlay .committed {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .voice-transcript-overlay .partial {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	opacity: 0.6;
 	font-style: italic;
 }
 
 /* Placeholder text while listening: static, no shimmer animation. */
 .voice-transcript-overlay .listening {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-style: italic;
 }
 
 .voice-transcript-overlay .assistant-text {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: pre-wrap;
 }
 
@@ -127,9 +127,9 @@
 
 		&.filtered .action-label.codicon.codicon-filter {
 			/* indicate when sessions filter is enabled */
-			border-color: var(--vscode-inputOption-activeBorder);
-			color: var(--vscode-inputOption-activeForeground);
-			background-color: var(--vscode-inputOption-activeBackground);
+			border-color: var(--zyraxoncode-inputOption-activeBorder);
+			color: var(--zyraxoncode-inputOption-activeForeground);
+			background-color: var(--zyraxoncode-inputOption-activeBackground);
 		}
 	}
 }
@@ -157,7 +157,7 @@
 		flex-direction: row;
 
 		.agent-sessions-container {
-			border-right: 1px solid var(--vscode-panel-border);
+			border-right: 1px solid var(--zyraxoncode-panel-border);
 		}
 	}
 
@@ -165,7 +165,7 @@
 		flex-direction: row-reverse;
 
 		.agent-sessions-container {
-			border-left: 1px solid var(--vscode-panel-border);
+			border-left: 1px solid var(--zyraxoncode-panel-border);
 		}
 	}
 

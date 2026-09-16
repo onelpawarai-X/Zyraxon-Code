@@ -69,7 +69,7 @@ class StackOperation implements IWorkspaceUndoRedoElement {
 	}
 
 	pushEndState(alternativeVersionId: string, selectionState: ISelectionState | undefined) {
-		// https://github.com/microsoft/vscode/issues/207523
+		// __ZYRAXKEEP__0_
 		this._resultAlternativeVersionId = alternativeVersionId;
 		this._resultSelectionState = selectionState || this._resultSelectionState;
 	}
@@ -261,7 +261,7 @@ export class NotebookTextModel extends Disposable implements INotebookTextModel 
 		this._initialize(cells);
 
 		const maybeUpdateCellTextModel = (textModel: ITextModel) => {
-			if (textModel.uri.scheme === Schemas.vscodeNotebookCell && textModel instanceof TextModel) {
+			if (textModel.uri.scheme === Schemas.zyraxoncodeNotebookCell && textModel instanceof TextModel) {
 				const cellUri = CellUri.parse(textModel.uri);
 				if (cellUri && isEqual(cellUri.notebook, this.uri)) {
 					const cellIdx = this._getCellIndexByHandle(cellUri.handle);
@@ -428,7 +428,7 @@ export class NotebookTextModel extends Disposable implements INotebookTextModel 
 	}
 
 	pushStackElement() {
-		// https://github.com/microsoft/vscode/issues/207523
+		// __ZYRAXKEEP__1_
 	}
 
 	private _getCellIndexByHandle(handle: number) {

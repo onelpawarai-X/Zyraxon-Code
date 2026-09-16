@@ -42,7 +42,7 @@ export interface IAgentHostTerminalProfileInfo {
 	readonly address: string;
 }
 
-const AGENT_HOST_PROFILE_EXT_ID = 'vscode.agent-host-terminal';
+const AGENT_HOST_PROFILE_EXT_ID = 'zyraxoncode.agent-host-terminal';
 
 export const IAgentHostTerminalService = createDecorator<IAgentHostTerminalService>('agentHostTerminalService');
 

@@ -12,7 +12,7 @@ const VERSION = 6;
 
 const maxActiveHostResourceResponseBodies = 32;
 
-const resourceCacheName = `vscode-resource-cache-${VERSION}`;
+const resourceCacheName = `zyraxoncode-resource-cache-${VERSION}`;
 
 const rootPath = sw.location.pathname.replace(/\/service-worker.js$/, '');
 
@@ -24,7 +24,7 @@ const shouldLimitHostResourceResponseBodies = searchParams.get('platform') === '
 /**
  * Origin used for resources
  */
-const resourceBaseAuthority = searchParams.get('vscode-resource-base-authority');
+const resourceBaseAuthority = searchParams.get('zyraxoncode-resource-base-authority');
 
 /**
  * @param {string} name
@@ -432,7 +432,7 @@ async function processResourceRequest(
 
 	const webviewId = getWebviewIdForClient(client);
 
-	// Refs https://github.com/microsoft/vscode/issues/244143
+	// Refs __ZYRAXKEEP__0_
 	// With PlzDedicatedWorker, worker subresources and blob workers
 	// will use clients different from the window client.
 	if (!webviewId && client.type !== 'worker' && client.type !== 'sharedworker') {
@@ -498,7 +498,7 @@ async function processResourceRequest(
 		}
 
 		// support COI requests, see network.ts#COI.getHeadersFromQuery(...)
-		const coiRequest = new URL(event.request.url).searchParams.get('vscode-coi');
+		const coiRequest = new URL(event.request.url).searchParams.get('zyraxoncode-coi');
 		if (coiRequest === '3') {
 			headers['Cross-Origin-Opener-Policy'] = 'same-origin';
 			headers['Cross-Origin-Embedder-Policy'] = 'require-corp';
@@ -622,7 +622,7 @@ async function processLocalhostRequest(
 		return fetch(event.request);
 	}
 	const webviewId = getWebviewIdForClient(client);
-	// Refs https://github.com/microsoft/vscode/issues/244143
+	// Refs __ZYRAXKEEP__1_
 	// With PlzDedicatedWorker, worker subresources and blob workers
 	// will use clients different from the window client.
 	if (!webviewId && client.type !== 'worker' && client.type !== 'sharedworker') {

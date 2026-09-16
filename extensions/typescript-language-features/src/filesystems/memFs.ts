@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { basename, dirname } from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Logger } from '../logging/logger';
 
-export class MemFs implements vscode.FileSystemProvider {
+export class MemFs implements zyraxoncode.FileSystemProvider {
 
 	private readonly root = new FsDirectoryEntry(
 		new Map(),
@@ -20,46 +20,46 @@ export class MemFs implements vscode.FileSystemProvider {
 		private readonly logger: Logger,
 	) { }
 
-	stat(uri: vscode.Uri): vscode.FileStat {
+	stat(uri: zyraxoncode.Uri): zyraxoncode.FileStat {
 		this.logger.trace(`MemFs.stat ${this.id}. uri: ${uri}`);
 		const entry = this.getEntry(uri);
 		if (!entry) {
-			throw vscode.FileSystemError.FileNotFound();
+			throw zyraxoncode.FileSystemError.FileNotFound();
 		}
 
 		return entry;
 	}
 
-	readDirectory(uri: vscode.Uri): [string, vscode.FileType][] {
+	readDirectory(uri: zyraxoncode.Uri): [string, zyraxoncode.FileType][] {
 		this.logger.trace(`MemFs.readDirectory ${this.id}. uri: ${uri}`);
 
 		const entry = this.getEntry(uri);
 		if (!entry) {
-			throw vscode.FileSystemError.FileNotFound();
+			throw zyraxoncode.FileSystemError.FileNotFound();
 		}
 		if (!(entry instanceof FsDirectoryEntry)) {
-			throw vscode.FileSystemError.FileNotADirectory();
+			throw zyraxoncode.FileSystemError.FileNotADirectory();
 		}
 
 		return Array.from(entry.contents.entries(), ([name, entry]) => [name, entry.type]);
 	}
 
-	readFile(uri: vscode.Uri): Uint8Array {
+	readFile(uri: zyraxoncode.Uri): Uint8Array {
 		this.logger.trace(`MemFs.readFile ${this.id}. uri: ${uri}`);
 
 		const entry = this.getEntry(uri);
 		if (!entry) {
-			throw vscode.FileSystemError.FileNotFound();
+			throw zyraxoncode.FileSystemError.FileNotFound();
 		}
 
 		if (!(entry instanceof FsFileEntry)) {
-			throw vscode.FileSystemError.FileIsADirectory(uri);
+			throw zyraxoncode.FileSystemError.FileIsADirectory(uri);
 		}
 
 		return entry.data;
 	}
 
-	writeFile(uri: vscode.Uri, content: Uint8Array, { create, overwrite }: { create: boolean; overwrite: boolean }): void {
+	writeFile(uri: zyraxoncode.Uri, content: Uint8Array, { create, overwrite }: { create: boolean; overwrite: boolean }): void {
 		this.logger.trace(`MemFs.writeFile ${this.id}. uri: ${uri}`);
 
 		const dir = this.getParent(uri);
@@ -72,38 +72,38 @@ export class MemFs implements vscode.FileSystemProvider {
 		if (!entry) {
 			if (create) {
 				dirContents.set(fileName, new FsFileEntry(content, time, time));
-				this._emitter.fire([{ type: vscode.FileChangeType.Created, uri }]);
+				this._emitter.fire([{ type: zyraxoncode.FileChangeType.Created, uri }]);
 			} else {
-				throw vscode.FileSystemError.FileNotFound();
+				throw zyraxoncode.FileSystemError.FileNotFound();
 			}
 		} else {
 			if (entry instanceof FsDirectoryEntry) {
-				throw vscode.FileSystemError.FileIsADirectory(uri);
+				throw zyraxoncode.FileSystemError.FileIsADirectory(uri);
 			}
 
 			if (overwrite) {
 				entry.mtime = time;
 				entry.data = content;
-				this._emitter.fire([{ type: vscode.FileChangeType.Changed, uri }]);
+				this._emitter.fire([{ type: zyraxoncode.FileChangeType.Changed, uri }]);
 			} else {
-				throw vscode.FileSystemError.NoPermissions('overwrite option was not passed in');
+				throw zyraxoncode.FileSystemError.NoPermissions('overwrite option was not passed in');
 			}
 		}
 	}
 
-	rename(_oldUri: vscode.Uri, _newUri: vscode.Uri, _options: { overwrite: boolean }): void {
+	rename(_oldUri: zyraxoncode.Uri, _newUri: zyraxoncode.Uri, _options: { overwrite: boolean }): void {
 		throw new Error('not implemented');
 	}
 
-	delete(uri: vscode.Uri): void {
+	delete(uri: zyraxoncode.Uri): void {
 		try {
 			const dir = this.getParent(uri);
 			dir.contents.delete(basename(uri.path));
-			this._emitter.fire([{ type: vscode.FileChangeType.Deleted, uri }]);
+			this._emitter.fire([{ type: zyraxoncode.FileChangeType.Deleted, uri }]);
 		} catch (e) { }
 	}
 
-	createDirectory(uri: vscode.Uri): void {
+	createDirectory(uri: zyraxoncode.Uri): void {
 		this.logger.trace(`MemFs.createDirectory ${this.id}. uri: ${uri}`);
 
 		const dir = this.getParent(uri);
@@ -111,7 +111,7 @@ export class MemFs implements vscode.FileSystemProvider {
 		dir.contents.set(basename(uri.path), new FsDirectoryEntry(new Map(), now, now));
 	}
 
-	private getEntry(uri: vscode.Uri): FsEntry | undefined {
+	private getEntry(uri: zyraxoncode.Uri): FsEntry | undefined {
 		// TODO: have this throw FileNotFound itself?
 		// TODO: support configuring case sensitivity
 		let node: FsEntry = this.root;
@@ -138,30 +138,30 @@ export class MemFs implements vscode.FileSystemProvider {
 		return node;
 	}
 
-	private getParent(uri: vscode.Uri): FsDirectoryEntry {
+	private getParent(uri: zyraxoncode.Uri): FsDirectoryEntry {
 		const dir = this.getEntry(uri.with({ path: dirname(uri.path) }));
 		if (!dir) {
-			throw vscode.FileSystemError.FileNotFound();
+			throw zyraxoncode.FileSystemError.FileNotFound();
 		}
 		if (!(dir instanceof FsDirectoryEntry)) {
-			throw vscode.FileSystemError.FileNotADirectory();
+			throw zyraxoncode.FileSystemError.FileNotADirectory();
 		}
 		return dir;
 	}
 
 	// --- manage file events
 
-	private readonly _emitter = new vscode.EventEmitter<vscode.FileChangeEvent[]>();
+	private readonly _emitter = new zyraxoncode.EventEmitter<zyraxoncode.FileChangeEvent[]>();
 
-	readonly onDidChangeFile: vscode.Event<vscode.FileChangeEvent[]> = this._emitter.event;
+	readonly onDidChangeFile: zyraxoncode.Event<zyraxoncode.FileChangeEvent[]> = this._emitter.event;
 	private readonly watchers = new Map<string, Set<Symbol>>;
 
-	watch(resource: vscode.Uri): vscode.Disposable {
+	watch(resource: zyraxoncode.Uri): zyraxoncode.Disposable {
 		if (!this.watchers.has(resource.path)) {
 			this.watchers.set(resource.path, new Set());
 		}
 		const sy = Symbol(resource.path);
-		return new vscode.Disposable(() => {
+		return new zyraxoncode.Disposable(() => {
 			const watcher = this.watchers.get(resource.path);
 			if (watcher) {
 				watcher.delete(sy);
@@ -174,7 +174,7 @@ export class MemFs implements vscode.FileSystemProvider {
 }
 
 class FsFileEntry {
-	readonly type = vscode.FileType.File;
+	readonly type = zyraxoncode.FileType.File;
 
 	get size(): number {
 		return this.data.length;
@@ -188,7 +188,7 @@ class FsFileEntry {
 }
 
 class FsDirectoryEntry {
-	readonly type = vscode.FileType.Directory;
+	readonly type = zyraxoncode.FileType.Directory;
 
 	get size(): number {
 		return [...this.contents.values()].reduce((acc: number, entry: FsEntry) => acc + entry.size, 0);

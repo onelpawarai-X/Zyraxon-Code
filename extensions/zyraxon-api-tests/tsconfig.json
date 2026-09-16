@@ -1,0 +1,17 @@
+{
+	"extends": "../tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "./src",
+		"outDir": "./out",
+		"types": [
+			"node",
+			"mocha"
+		],
+		"skipLibCheck": true
+	},
+	"include": [
+		"src/**/*",
+		"../../src/zyraxoncode-dts/zyraxoncode.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.*.d.ts"
+	]
+}

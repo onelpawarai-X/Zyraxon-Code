@@ -54,19 +54,19 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: var(--vscode-codiconFontSize-compact, 12px);
-	height: var(--vscode-codiconFontSize-compact, 12px);
+	width: var(--zyraxoncode-codiconFontSize-compact, 12px);
+	height: var(--zyraxoncode-codiconFontSize-compact, 12px);
 	margin: 0;
-	font-size: var(--vscode-codiconFontSize-compact, 12px);
+	font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 	flex-shrink: 0;
 }
 
 .chat-turn-pill-meta-added {
-	color: var(--vscode-chat-linesAddedForeground);
+	color: var(--zyraxoncode-chat-linesAddedForeground);
 }
 
 .chat-turn-pill-meta-removed {
-	color: var(--vscode-chat-linesRemovedForeground);
+	color: var(--zyraxoncode-chat-linesRemovedForeground);
 }
 
 /* Preview pill: a single unified control - a resource label (file icon + name),
@@ -82,9 +82,9 @@
 	height: 22px;
 	max-width: 280px;
 	border-radius: 4px;
-	color: var(--vscode-button-secondaryForeground);
-	background-color: var(--vscode-button-secondaryBackground);
-	border: 1px solid var(--vscode-button-secondaryBorder, transparent);
+	color: var(--zyraxoncode-button-secondaryForeground);
+	background-color: var(--zyraxoncode-button-secondaryBackground);
+	border: 1px solid var(--zyraxoncode-button-secondaryBorder, transparent);
 	box-sizing: border-box;
 	overflow: hidden;
 }
@@ -121,7 +121,7 @@
 }
 
 .chat-turn-pill-preview .monaco-button.chat-turn-pill-preview-primary:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 /* In-pill separator between the label and the chevron. A 2px vertical margin
@@ -131,7 +131,7 @@
 	width: 1px;
 	flex-shrink: 0;
 	margin: 2px 0;
-	background-color: var(--vscode-button-secondaryBorder, var(--vscode-menu-separatorBackground));
+	background-color: var(--zyraxoncode-button-secondaryBorder, var(--zyraxoncode-menu-separatorBackground));
 	opacity: 0.6;
 }
 
@@ -151,7 +151,7 @@
 }
 
 .chat-turn-pill-preview .monaco-button.chat-turn-pill-preview-chevron:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .chat-turn-pill-preview .monaco-button.chat-turn-pill-preview-chevron.hidden {
@@ -163,5 +163,5 @@
 .chat-turn-pill-preview .monaco-button:focus,
 .chat-turn-pill-preview .monaco-button:focus-visible {
 	outline: none;
-	box-shadow: inset 0 0 0 1px var(--vscode-focusBorder);
+	box-shadow: inset 0 0 0 1px var(--zyraxoncode-focusBorder);
 }

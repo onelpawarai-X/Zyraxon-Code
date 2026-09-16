@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { SymbolItemDragAndDrop, SymbolItemEditorHighlights, SymbolItemNavigation, SymbolTreeInput } from '../references-view';
 import { asResourceUrl, del, getThemeIcon, tail } from '../utils';
 
@@ -13,17 +13,17 @@ export class CallsTreeInput implements SymbolTreeInput<CallItem> {
 	readonly contextValue: string = 'callHierarchy';
 
 	constructor(
-		readonly location: vscode.Location,
+		readonly location: zyraxoncode.Location,
 		readonly direction: CallsDirection,
 	) {
 		this.title = direction === CallsDirection.Incoming
-			? vscode.l10n.t('Callers Of')
-			: vscode.l10n.t('Calls From');
+			? zyraxoncode.l10n.t('Callers Of')
+			: zyraxoncode.l10n.t('Calls From');
 	}
 
 	async resolve() {
 
-		const items = await Promise.resolve(vscode.commands.executeCommand<vscode.CallHierarchyItem[]>('vscode.prepareCallHierarchy', this.location.uri, this.location.range.start));
+		const items = await Promise.resolve(zyraxoncode.commands.executeCommand<zyraxoncode.CallHierarchyItem[]>('zyraxoncode.prepareCallHierarchy', this.location.uri, this.location.range.start));
 		const model = new CallsModel(this.direction, items ?? []);
 		const provider = new CallItemDataProvider(model);
 
@@ -33,7 +33,7 @@ export class CallsTreeInput implements SymbolTreeInput<CallItem> {
 
 		return {
 			provider,
-			get message() { return model.roots.length === 0 ? vscode.l10n.t('No results.') : undefined; },
+			get message() { return model.roots.length === 0 ? zyraxoncode.l10n.t('No results.') : undefined; },
 			navigation: model,
 			highlights: model,
 			dnd: model,
@@ -43,7 +43,7 @@ export class CallsTreeInput implements SymbolTreeInput<CallItem> {
 		};
 	}
 
-	with(location: vscode.Location): CallsTreeInput {
+	with(location: zyraxoncode.Location): CallsTreeInput {
 		return new CallsTreeInput(location, this.direction);
 	}
 }
@@ -62,9 +62,9 @@ export class CallItem {
 
 	constructor(
 		readonly model: CallsModel,
-		readonly item: vscode.CallHierarchyItem,
+		readonly item: zyraxoncode.CallHierarchyItem,
 		readonly parent: CallItem | undefined,
-		readonly locations: vscode.Location[] | undefined
+		readonly locations: zyraxoncode.Location[] | undefined
 	) { }
 
 	remove(): void {
@@ -76,20 +76,20 @@ class CallsModel implements SymbolItemNavigation<CallItem>, SymbolItemEditorHigh
 
 	readonly roots: CallItem[] = [];
 
-	private readonly _onDidChange = new vscode.EventEmitter<CallsModel>();
+	private readonly _onDidChange = new zyraxoncode.EventEmitter<CallsModel>();
 	readonly onDidChange = this._onDidChange.event;
 
-	constructor(readonly direction: CallsDirection, items: vscode.CallHierarchyItem[]) {
+	constructor(readonly direction: CallsDirection, items: zyraxoncode.CallHierarchyItem[]) {
 		this.roots = items.map(item => new CallItem(this, item, undefined, undefined));
 	}
 
 	private async _resolveCalls(call: CallItem): Promise<CallItem[]> {
 		if (this.direction === CallsDirection.Incoming) {
-			const calls = await vscode.commands.executeCommand<vscode.CallHierarchyIncomingCall[]>('vscode.provideIncomingCalls', call.item);
-			return calls ? calls.map(item => new CallItem(this, item.from, call, item.fromRanges.map(range => new vscode.Location(item.from.uri, range)))) : [];
+			const calls = await zyraxoncode.commands.executeCommand<zyraxoncode.CallHierarchyIncomingCall[]>('zyraxoncode.provideIncomingCalls', call.item);
+			return calls ? calls.map(item => new CallItem(this, item.from, call, item.fromRanges.map(range => new zyraxoncode.Location(item.from.uri, range)))) : [];
 		} else {
-			const calls = await vscode.commands.executeCommand<vscode.CallHierarchyOutgoingCall[]>('vscode.provideOutgoingCalls', call.item);
-			return calls ? calls.map(item => new CallItem(this, item.to, call, item.fromRanges.map(range => new vscode.Location(call.item.uri, range)))) : [];
+			const calls = await zyraxoncode.commands.executeCommand<zyraxoncode.CallHierarchyOutgoingCall[]>('zyraxoncode.provideOutgoingCalls', call.item);
+			return calls ? calls.map(item => new CallItem(this, item.to, call, item.fromRanges.map(range => new zyraxoncode.Location(call.item.uri, range)))) : [];
 		}
 	}
 
@@ -103,10 +103,10 @@ class CallsModel implements SymbolItemNavigation<CallItem>, SymbolItemEditorHigh
 	// -- navigation
 
 	location(item: CallItem) {
-		return new vscode.Location(item.item.uri, item.item.range);
+		return new zyraxoncode.Location(item.item.uri, item.item.range);
 	}
 
-	nearest(uri: vscode.Uri, _position: vscode.Position): CallItem | undefined {
+	nearest(uri: zyraxoncode.Uri, _position: zyraxoncode.Position): CallItem | undefined {
 		return this.roots.find(item => item.item.uri.toString() === uri.toString()) ?? this.roots[0];
 	}
 
@@ -132,13 +132,13 @@ class CallsModel implements SymbolItemNavigation<CallItem>, SymbolItemEditorHigh
 
 	// --- dnd
 
-	getDragUri(item: CallItem): vscode.Uri | undefined {
+	getDragUri(item: CallItem): zyraxoncode.Uri | undefined {
 		return asResourceUrl(item.item.uri, item.item.range);
 	}
 
 	// --- highlights
 
-	getEditorHighlights(item: CallItem, uri: vscode.Uri): vscode.Range[] | undefined {
+	getEditorHighlights(item: CallItem, uri: zyraxoncode.Uri): zyraxoncode.Range[] | undefined {
 		if (!item.locations) {
 			return item.item.uri.toString() === uri.toString() ? [item.item.selectionRange] : undefined;
 		}
@@ -157,12 +157,12 @@ class CallsModel implements SymbolItemNavigation<CallItem>, SymbolItemEditorHigh
 	}
 }
 
-class CallItemDataProvider implements vscode.TreeDataProvider<CallItem> {
+class CallItemDataProvider implements zyraxoncode.TreeDataProvider<CallItem> {
 
-	private readonly _emitter = new vscode.EventEmitter<CallItem | undefined>();
+	private readonly _emitter = new zyraxoncode.EventEmitter<CallItem | undefined>();
 	readonly onDidChangeTreeData = this._emitter.event;
 
-	private readonly _modelListener: vscode.Disposable;
+	private readonly _modelListener: zyraxoncode.Disposable;
 
 	constructor(private _model: CallsModel) {
 		this._modelListener = _model.onDidChange(e => this._emitter.fire(e instanceof CallItem ? e : undefined));
@@ -173,15 +173,15 @@ class CallItemDataProvider implements vscode.TreeDataProvider<CallItem> {
 		this._modelListener.dispose();
 	}
 
-	getTreeItem(element: CallItem): vscode.TreeItem {
+	getTreeItem(element: CallItem): zyraxoncode.TreeItem {
 
-		const item = new vscode.TreeItem(element.item.name);
+		const item = new zyraxoncode.TreeItem(element.item.name);
 		item.description = element.item.detail;
 		item.tooltip = item.label && element.item.detail ? `${item.label} - ${element.item.detail}` : item.label ? `${item.label}` : element.item.detail;
 		item.contextValue = 'call-item';
 		item.iconPath = getThemeIcon(element.item.kind);
 
-		type OpenArgs = [vscode.Uri, vscode.TextDocumentShowOptions];
+		type OpenArgs = [zyraxoncode.Uri, zyraxoncode.TextDocumentShowOptions];
 		let openArgs: OpenArgs;
 
 		if (element.model.direction === CallsDirection.Outgoing) {
@@ -190,7 +190,7 @@ class CallItemDataProvider implements vscode.TreeDataProvider<CallItem> {
 
 		} else {
 			// incoming call -> reveal first call instead of caller
-			let firstLoctionStart: vscode.Position | undefined;
+			let firstLoctionStart: zyraxoncode.Position | undefined;
 			if (element.locations) {
 				for (const loc of element.locations) {
 					if (loc.uri.toString() === element.item.uri.toString()) {
@@ -201,15 +201,15 @@ class CallItemDataProvider implements vscode.TreeDataProvider<CallItem> {
 			if (!firstLoctionStart) {
 				firstLoctionStart = element.item.selectionRange.start;
 			}
-			openArgs = [element.item.uri, { selection: new vscode.Range(firstLoctionStart, firstLoctionStart) }];
+			openArgs = [element.item.uri, { selection: new zyraxoncode.Range(firstLoctionStart, firstLoctionStart) }];
 		}
 
 		item.command = {
-			command: 'vscode.open',
-			title: vscode.l10n.t('Open Call'),
+			command: 'zyraxoncode.open',
+			title: zyraxoncode.l10n.t('Open Call'),
 			arguments: openArgs
 		};
-		item.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+		item.collapsibleState = zyraxoncode.TreeItemCollapsibleState.Collapsed;
 		return item;
 	}
 

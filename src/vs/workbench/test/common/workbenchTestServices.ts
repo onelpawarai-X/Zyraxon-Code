@@ -46,7 +46,7 @@ import { ICopyOperation, ICreateFileOperation, ICreateOperation, IDeleteOperatio
 
 export class TestLoggerService extends AbstractLoggerService {
 	constructor(logsHome?: URI) {
-		super(LogLevel.Info, logsHome ?? URI.file('tests').with({ scheme: 'vscode-tests' }));
+		super(LogLevel.Info, logsHome ?? URI.file('tests').with({ scheme: 'zyraxoncode-tests' }));
 	}
 	protected doCreateLogger(): ILogger { return new NullLogger(); }
 }
@@ -73,7 +73,7 @@ export class TestUserDataProfileService implements IUserDataProfileService {
 
 	readonly _serviceBrand: undefined;
 	readonly onDidChangeCurrentProfile = Event.None;
-	readonly currentProfile = toUserDataProfile('test', 'test', URI.file('tests').with({ scheme: 'vscode-tests' }), URI.file('tests').with({ scheme: 'vscode-tests' }));
+	readonly currentProfile = toUserDataProfile('test', 'test', URI.file('tests').with({ scheme: 'zyraxoncode-tests' }), URI.file('tests').with({ scheme: 'zyraxoncode-tests' }));
 	async updateCurrentProfile(): Promise<void> { }
 }
 

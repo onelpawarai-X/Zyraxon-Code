@@ -16,7 +16,7 @@ export function applyProfilerTools(server: McpServer, appService: ApplicationSer
 
 	// Seems too niche
 	// 	server.tool(
-	// 		'vscode_automation_profiler_info',
+	// 		'zyraxoncode_automation_profiler_info',
 	// 		'Get information about available profiler methods',
 	// 		{},
 	// 		async () => {

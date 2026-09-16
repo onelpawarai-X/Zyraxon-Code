@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ConfigurationChangeEvent } from 'vscode';
+import type { ConfigurationChangeEvent } from 'zyraxoncode';
 import { Emitter, Event } from '../../../util/vs/base/common/event';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { CopilotToken } from '../../authentication/common/copilotToken';

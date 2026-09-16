@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, NotebookCell, NotebookDocument } from 'vscode';
-import { Uri } from '../../../vscodeTypes';
+import type { CancellationToken, NotebookCell, NotebookDocument } from 'zyraxoncode';
+import { Uri } from '../../../zyraxoncodeTypes';
 import { AlternativeNotebookDocument } from './alternativeNotebookDocument';
 import { LineOfCellText, LineOfText } from './helpers';
 

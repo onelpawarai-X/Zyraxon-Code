@@ -31,9 +31,9 @@ const enum ShutdownConstants {
 	 * on Windows under conpty, killing a process while data is being output will cause the [conhost
 	 * flush to hang the pty host][2] because [conhost should be hosted on another thread][3].
 	 *
-	 * [1]: https://github.com/microsoft/node-pty/issues/72
-	 * [2]: https://github.com/microsoft/vscode/issues/71966
-	 * [3]: https://github.com/microsoft/node-pty/pull/415
+	 * [1]: __ZYRAXKEEP__0_
+	 * [2]: __ZYRAXKEEP__1_
+	 * [3]: __ZYRAXKEEP__2_
 	 */
 	DataFlushTimeout = 250,
 	/**
@@ -46,9 +46,9 @@ const enum Constants {
 	/**
 	 * The minimum duration between kill and spawn calls on Windows/conpty as a mitigation for a
 	 * hang issue. See:
-	 * - https://github.com/microsoft/vscode/issues/71966
-	 * - https://github.com/microsoft/vscode/issues/117956
-	 * - https://github.com/microsoft/vscode/issues/121336
+	 * - __ZYRAXKEEP__3_
+	 * - __ZYRAXKEEP__4_
+	 * - __ZYRAXKEEP__5_
 	 */
 	KillSpawnThrottleInterval = 250,
 	/**
@@ -252,7 +252,7 @@ export class TerminalProcess extends Disposable implements ITerminalChildProcess
 			this._logService.trace('node-pty.node-pty.IPty#spawn native exception', err);
 			const errorMessage = err.message;
 			if (errorMessage?.includes('Cannot launch conpty')) {
-				return { message: localize('conptyLaunchFailed', "A native exception occurred during launch (Cannot launch conpty). Winpty has been removed, see {0} for more details. You can also try enabling the `{1}` setting.", 'https://code.visualstudio.com/updates/v1_109#_removal-of-winpty-support', 'terminal.integrated.windowsUseConptyDll') };
+				return { message: localize('conptyLaunchFailed', "A native exception occurred during launch (Cannot launch conpty). Winpty has been removed, see {0} for more details. You can also try enabling the `{1}` setting.", '__ZYRAXKEEP__6_', 'terminal.integrated.windowsUseConptyDll') };
 			}
 			return { message: `A native exception occurred during launch (${errorMessage})` };
 		}
@@ -345,7 +345,7 @@ export class TerminalProcess extends Disposable implements ITerminalChildProcess
 		// node-pty >= 1.2.0-beta.11 defers conptyNative.connect() on Windows, so
 		// ptyProcess.pid may be 0 immediately after spawn. In that case we wait
 		// for the first data event which only fires after the connection completes
-		// and the real pid is available. See microsoft/node-pty#885.
+		// and the real pid is available. See zyraxon/node-pty#885.
 		if (ptyProcess.pid > 0) {
 			this._sendProcessId(ptyProcess.pid);
 		} else {
@@ -373,7 +373,7 @@ export class TerminalProcess extends Disposable implements ITerminalChildProcess
 	}
 
 	// Allow any trailing data events to be sent before the exit event is sent.
-	// See https://github.com/microsoft/node-pty/issues/72
+	// See __ZYRAXKEEP__7_
 	private _queueProcessExit() {
 		if (this._logService.getLevel() === LogLevel.Trace) {
 			this._logService.trace('TerminalProcess#_queueProcessExit', new Error().stack?.replace(/^Error/, ''));
@@ -438,7 +438,7 @@ export class TerminalProcess extends Disposable implements ITerminalChildProcess
 		if (this._store.isDisposed) {
 			return;
 		}
-		// HACK: The node-pty API can return undefined somehow https://github.com/microsoft/vscode/issues/222323
+		// HACK: The node-pty API can return undefined somehow __ZYRAXKEEP__8_
 		this._currentTitle = (ptyProcess.process ?? '');
 		this._onDidChangeProperty.fire({ type: ProcessPropertyType.Title, value: this._currentTitle });
 		// If fig is installed it may change the title of the process
@@ -464,7 +464,7 @@ export class TerminalProcess extends Disposable implements ITerminalChildProcess
 			this._logService.trace('TerminalProcess#shutdown', new Error().stack?.replace(/^Error/, ''));
 		}
 		// don't force immediate disposal of the terminal processes on Windows as an additional
-		// mitigation for https://github.com/microsoft/vscode/issues/71966 which causes the pty host
+		// mitigation for __ZYRAXKEEP__9_ which causes the pty host
 		// to become unresponsive, disconnecting all terminals across all windows.
 		if (immediate && !isWindows) {
 			this._kill();
@@ -542,7 +542,7 @@ export class TerminalProcess extends Disposable implements ITerminalChildProcess
 			return;
 		}
 		// Ensure that cols and rows are always >= 1, this prevents a native exception in winpty.
-		// TODO: Handle this directly on node-pty instead: https://github.com/microsoft/node-pty/issues/877
+		// TODO: Handle this directly on node-pty instead: __ZYRAXKEEP__10_
 		if (this._ptyProcess) {
 			cols = Math.max(cols, 1);
 			rows = Math.max(rows, 1);
@@ -608,7 +608,7 @@ export class TerminalProcess extends Disposable implements ITerminalChildProcess
 		if (isMacintosh) {
 			// From Big Sur (darwin v20) there is a spawn blocking thread issue on Electron,
 			// this is fixed in ZYRAXON Code's internal Electron.
-			// https://github.com/Microsoft/vscode/issues/105446
+			// __ZYRAXKEEP__11_
 			return new Promise<string>(resolve => {
 				if (!this._ptyProcess) {
 					resolve(this._initialCwd);

@@ -155,7 +155,7 @@ suite('Protocol WebSocket - Session Config persistence across restarts', functio
 	let userDataDir: string;
 
 	setup(function () {
-		userDataDir = mkdtempSync(`${tmpdir()}/vscode-agent-host-config-`);
+		userDataDir = mkdtempSync(`${tmpdir()}/zyraxoncode-agent-host-config-`);
 	});
 
 	teardown(function () {

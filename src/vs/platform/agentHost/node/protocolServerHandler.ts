@@ -550,7 +550,7 @@ export class ProtocolServerHandler extends Disposable {
 				// there is no supervisor to actually act on it, so don't
 				// lie to the client.
 				_meta: getAgentHostManagementSocketPath()
-					? { vscodeUpgradeMethod: VSCODE_UPGRADE_METHOD }
+					? { zyraxoncodeUpgradeMethod: VSCODE_UPGRADE_METHOD }
 					: undefined,
 			};
 			throw new ProtocolError(
@@ -609,7 +609,7 @@ export class ProtocolServerHandler extends Disposable {
 	 * - OTLP channels: install the canonical entry on the client's
 	 *   {@link IConnectedClient.subscriptions} map.
 	 *
-	 * Channels with unsupported shapes (e.g. `ahp-otlp://logs/verbose`
+	 * Channels with unsupported shapes (e.g. `__ZYRAXKEEP__0_`
 	 * with no recognised level, or a state channel the state manager
 	 * does not know about) are silently dropped.
 	 */
@@ -659,7 +659,7 @@ export class ProtocolServerHandler extends Disposable {
 		requestAgentHostUpgrade(socketPath).then(
 			(result) => transport.send(jsonRpcSuccess(id, result)),
 			(err: unknown) => {
-				this._logService.warn(`[ProtocolServer] vscodeUpgrade signal failed: ${err instanceof Error ? err.message : String(err)}`);
+				this._logService.warn(`[ProtocolServer] zyraxoncodeUpgrade signal failed: ${err instanceof Error ? err.message : String(err)}`);
 				transport.send(jsonRpcErrorFrom(id, err));
 			},
 		);

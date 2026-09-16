@@ -100,7 +100,7 @@ const quickFixExtensionPoint = ExtensionsRegistry.registerExtensionPoint<ITermin
 		}
 	},
 	jsonSchema: {
-		description: localize('vscode.extension.contributes.terminalQuickFixes', 'Contributes terminal quick fixes.'),
+		description: localize('zyraxoncode.extension.contributes.terminalQuickFixes', 'Contributes terminal quick fixes.'),
 		type: 'array',
 		items: {
 			type: 'object',
@@ -116,15 +116,15 @@ const quickFixExtensionPoint = ExtensionsRegistry.registerExtensionPoint<ITermin
 			}],
 			properties: {
 				id: {
-					description: localize('vscode.extension.contributes.terminalQuickFixes.id', "The ID of the quick fix provider"),
+					description: localize('zyraxoncode.extension.contributes.terminalQuickFixes.id', "The ID of the quick fix provider"),
 					type: 'string',
 				},
 				commandLineMatcher: {
-					description: localize('vscode.extension.contributes.terminalQuickFixes.commandLineMatcher', "A regular expression or string to test the command line against"),
+					description: localize('zyraxoncode.extension.contributes.terminalQuickFixes.commandLineMatcher', "A regular expression or string to test the command line against"),
 					type: 'string',
 				},
 				outputMatcher: {
-					markdownDescription: localize('vscode.extension.contributes.terminalQuickFixes.outputMatcher', "A regular expression or string to match a single line of the output against, which provides groups to be referenced in terminalCommand and uri.\n\nFor example:\n\n `lineMatcher: /git push --set-upstream origin (?<branchName>[^\s]+)/;`\n\n`terminalCommand: 'git push --set-upstream origin ${group:branchName}';`\n"),
+					markdownDescription: localize('zyraxoncode.extension.contributes.terminalQuickFixes.outputMatcher', "A regular expression or string to match a single line of the output against, which provides groups to be referenced in terminalCommand and uri.\n\nFor example:\n\n `lineMatcher: /git push --set-upstream origin (?<branchName>[^\s]+)/;`\n\n`terminalCommand: 'git push --set-upstream origin ${group:branchName}';`\n"),
 					type: 'object',
 					required: ['lineMatcher', 'anchor', 'offset', 'length'],
 					properties: {
@@ -147,7 +147,7 @@ const quickFixExtensionPoint = ExtensionsRegistry.registerExtensionPoint<ITermin
 					}
 				},
 				commandExitResult: {
-					description: localize('vscode.extension.contributes.terminalQuickFixes.commandExitResult', "The command exit result to match on"),
+					description: localize('zyraxoncode.extension.contributes.terminalQuickFixes.commandExitResult', "The command exit result to match on"),
 					enum: ['success', 'error'],
 					enumDescriptions: [
 						'The command exited with an exit code of zero.',
@@ -155,7 +155,7 @@ const quickFixExtensionPoint = ExtensionsRegistry.registerExtensionPoint<ITermin
 					]
 				},
 				kind: {
-					description: localize('vscode.extension.contributes.terminalQuickFixes.kind', "The kind of the resulting quick fix. This changes how the quick fix is presented. Defaults to {0}.", '`"fix"`'),
+					description: localize('zyraxoncode.extension.contributes.terminalQuickFixes.kind', "The kind of the resulting quick fix. This changes how the quick fix is presented. Defaults to {0}.", '`"fix"`'),
 					enum: ['default', 'explain'],
 					enumDescriptions: [
 						'A high confidence quick fix.',

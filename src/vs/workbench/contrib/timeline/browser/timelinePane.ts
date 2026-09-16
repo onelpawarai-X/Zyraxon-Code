@@ -67,7 +67,7 @@ function isLoadMoreCommand(item: TreeElement | undefined): item is LoadMoreComma
 }
 
 function isTimelineItem(item: TreeElement | undefined): item is TimelineItem {
-	return !!item && !item.handle.startsWith('vscode-command:');
+	return !!item && !item.handle.startsWith('zyraxoncode-command:');
 }
 
 function updateRelativeTime(item: TimelineItem, lastRelativeTime: string | undefined): string | undefined {
@@ -192,7 +192,7 @@ class TimelineAggregate {
 }
 
 class LoadMoreCommand {
-	readonly handle = 'vscode-command:loadMore';
+	readonly handle = 'zyraxoncode-command:loadMore';
 	readonly timestamp = 0;
 	readonly description = undefined;
 	readonly tooltip = undefined;
@@ -519,7 +519,7 @@ export class TimelinePane extends ViewPane {
 			}
 
 			// TODO@eamodio: Are these the right the list of schemes to exclude? Is there a better way?
-			if (this.uri?.scheme === Schemas.vscodeSettings || this.uri?.scheme === Schemas.webviewPanel || this.uri?.scheme === Schemas.walkThrough) {
+			if (this.uri?.scheme === Schemas.zyraxoncodeSettings || this.uri?.scheme === Schemas.webviewPanel || this.uri?.scheme === Schemas.walkThrough) {
 				this.uri = undefined;
 
 				this.clear(false);

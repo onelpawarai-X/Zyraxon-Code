@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptReference, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, PromptReference, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { isNotebookCellOrNotebookChatInput } from '../../../../util/common/notebooks';
 import { illegalArgument } from '../../../../util/vs/base/common/errors';
@@ -113,7 +113,7 @@ export class InlineChatGenerateMarkdownPrompt extends PromptElement<InlineChatGe
 }
 
 export type MarkdownBlockProps = PromptElementProps<{
-	uri: vscode.Uri | null;
+	uri: zyraxoncode.Uri | null;
 	code: string;
 	references?: PromptReference[];
 }>;

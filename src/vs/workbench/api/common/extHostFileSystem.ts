@@ -5,7 +5,7 @@
 
 import { URI, UriComponents } from '../../../base/common/uri.js';
 import { MainContext, IMainContext, ExtHostFileSystemShape, MainThreadFileSystemShape, IFileChangeDto } from './extHost.protocol.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import * as files from '../../../platform/files/common/files.js';
 import { IDisposable, toDisposable } from '../../../base/common/lifecycle.js';
 import { FileChangeType } from './extHostTypes.js';
@@ -87,10 +87,10 @@ class FsLinkProvider {
 		}
 	}
 
-	provideDocumentLinks(document: vscode.TextDocument): vscode.ProviderResult<vscode.DocumentLink[]> {
+	provideDocumentLinks(document: zyraxoncode.TextDocument): zyraxoncode.ProviderResult<zyraxoncode.DocumentLink[]> {
 		this._initStateMachine();
 
-		const result: vscode.DocumentLink[] = [];
+		const result: zyraxoncode.DocumentLink[] = [];
 		const links = LinkComputer.computeLinks({
 			getLineContent(lineNumber: number): string {
 				return document.lineAt(lineNumber - 1).text;
@@ -114,7 +114,7 @@ export class ExtHostFileSystem implements ExtHostFileSystemShape {
 
 	private readonly _proxy: MainThreadFileSystemShape;
 	private readonly _linkProvider = new FsLinkProvider();
-	private readonly _fsProvider = new Map<number, vscode.FileSystemProvider>();
+	private readonly _fsProvider = new Map<number, zyraxoncode.FileSystemProvider>();
 	private readonly _registeredSchemes = new Set<string>();
 	private readonly _watches = new Map<number, IDisposable>();
 
@@ -129,7 +129,7 @@ export class ExtHostFileSystem implements ExtHostFileSystemShape {
 		this._linkProviderRegistration?.dispose();
 	}
 
-	registerFileSystemProvider(extension: IExtensionDescription, scheme: string, provider: vscode.FileSystemProvider, options: { isCaseSensitive?: boolean; isReadonly?: boolean | vscode.MarkdownString } = {}) {
+	registerFileSystemProvider(extension: IExtensionDescription, scheme: string, provider: zyraxoncode.FileSystemProvider, options: { isCaseSensitive?: boolean; isReadonly?: boolean | zyraxoncode.MarkdownString } = {}) {
 
 		// validate the given provider is complete
 		ExtHostFileSystem._validateFileSystemProvider(provider);
@@ -218,7 +218,7 @@ export class ExtHostFileSystem implements ExtHostFileSystemShape {
 		});
 	}
 
-	private static _validateFileSystemProvider(provider: vscode.FileSystemProvider) {
+	private static _validateFileSystemProvider(provider: zyraxoncode.FileSystemProvider) {
 		if (!provider) {
 			throw new Error('MISSING provider');
 		}
@@ -248,7 +248,7 @@ export class ExtHostFileSystem implements ExtHostFileSystemShape {
 		}
 	}
 
-	private static _asIStat(stat: vscode.FileStat): files.IStat {
+	private static _asIStat(stat: zyraxoncode.FileStat): files.IStat {
 		const { type, ctime, mtime, size, permissions } = stat;
 		return { type, ctime, mtime, size, permissions };
 	}
@@ -337,7 +337,7 @@ export class ExtHostFileSystem implements ExtHostFileSystemShape {
 		return Promise.resolve(provider.write(fd, pos, data.buffer, 0, data.byteLength));
 	}
 
-	private _getFsProvider(handle: number): vscode.FileSystemProvider {
+	private _getFsProvider(handle: number): zyraxoncode.FileSystemProvider {
 		const provider = this._fsProvider.get(handle);
 		if (!provider) {
 			const err = new Error();

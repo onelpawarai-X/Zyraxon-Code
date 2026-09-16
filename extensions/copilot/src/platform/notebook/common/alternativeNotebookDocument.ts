@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { NotebookCell, NotebookDocument, TextLine } from 'vscode';
+import type { NotebookCell, NotebookDocument, TextLine } from 'zyraxoncode';
 import { DEFAULT_WORD_REGEXP, getWordAtText } from '../../../util/vs/editor/common/core/wordHelper';
-import { Position, Range } from '../../../vscodeTypes';
+import { Position, Range } from '../../../zyraxoncodeTypes';
 import { PositionOffsetTransformer } from '../../editing/common/positionOffsetTransformer';
 import { SnapshotDocumentLine } from '../../editing/common/textDocumentSnapshot';
 

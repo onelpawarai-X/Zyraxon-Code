@@ -38,8 +38,8 @@ export class ClientToolSetsContribution extends Disposable implements IWorkbench
 
 		if (!workspaceService.isSessionsWindow) {
 			this._register(this._registerDynamicToolSet(toolsService, {
-				id: 'vscode-tasks',
-				referenceName: 'vscodeTasks',
+				id: 'zyraxoncode-tasks',
+				referenceName: 'zyraxoncodeTasks',
 				icon: Codicon.tasklist,
 				description: localize('clientToolSet.tasks.description', "Tasks and Problems"),
 				detail: localize('clientToolSet.tasks.detail', "Create and run tasks and inspect workspace problems."),
@@ -54,8 +54,8 @@ export class ClientToolSetsContribution extends Disposable implements IWorkbench
 
 		if (workspaceService.isSessionsWindow) {
 			this._register(this._registerDynamicToolSet(toolsService, {
-				id: 'vscode-automations',
-				referenceName: 'vscodeAutomations',
+				id: 'zyraxoncode-automations',
+				referenceName: 'zyraxoncodeAutomations',
 				icon: Codicon.watch,
 				description: localize('clientToolSet.automations.description', "Automations"),
 				detail: localize('clientToolSet.automations.detail', "List, configure, run, and delete scheduled agent automations."),
@@ -69,8 +69,8 @@ export class ClientToolSetsContribution extends Disposable implements IWorkbench
 		}
 
 		this._register(this._registerDynamicToolSet(toolsService, {
-			id: 'vscode-browser',
-			referenceName: 'vscodeBrowser',
+			id: 'zyraxoncode-browser',
+			referenceName: 'zyraxoncodeBrowser',
 			icon: Codicon.browser,
 			description: localize('clientToolSet.browser.description', "Integrated Browser"),
 			detail: localize('clientToolSet.browser.detail', "Open, navigate, and inspect pages in the built-in browser."),
@@ -78,11 +78,11 @@ export class ClientToolSetsContribution extends Disposable implements IWorkbench
 		}));
 
 		this._register(this._registerDynamicToolSet(toolsService, {
-			id: 'vscode-general',
-			referenceName: 'vscodeGeneral',
-			icon: Codicon.vscode,
-			description: localize('clientToolSet.vscode.description', "ZYRAXON Code"),
-			detail: localize('clientToolSet.vscode.detail', "Navigate code, manage extensions, and run built-in ZYRAXON Code commands."),
+			id: 'zyraxoncode-general',
+			referenceName: 'zyraxoncodeGeneral',
+			icon: Codicon.zyraxoncode,
+			description: localize('clientToolSet.zyraxoncode.description', "ZYRAXON Code"),
+			detail: localize('clientToolSet.zyraxoncode.detail', "Navigate code, manage extensions, and run built-in ZYRAXON Code commands."),
 			members: [
 				'runTests',
 				'testFailure',
@@ -94,8 +94,8 @@ export class ClientToolSetsContribution extends Disposable implements IWorkbench
 
 		if (!workspaceService.isSessionsWindow) {
 			this._register(this._registerDynamicToolSet(toolsService, {
-				id: 'vscode-notebooks',
-				referenceName: 'vscodeNotebooks',
+				id: 'zyraxoncode-notebooks',
+				referenceName: 'zyraxoncodeNotebooks',
 				icon: Codicon.notebook,
 				description: localize('clientToolSet.notebooks.description', "Jupyter Notebooks"),
 				detail: localize('clientToolSet.notebooks.detail', "Create and edit Jupyter notebooks and run their cells."),

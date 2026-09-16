@@ -69,7 +69,7 @@ export class InlineChatZoneWidget extends ZoneWidget {
 	static readonly #options: IOptions = {
 		showFrame: true,
 		frameWidth: 1,
-		// frameColor: 'var(--vscode-inlineChat-border)',
+		// frameColor: 'var(--zyraxoncode-inlineChat-border)',
 		isResizeable: true,
 		showArrow: false,
 		isAccessible: true,
@@ -284,7 +284,7 @@ export class InlineChatZoneWidget extends ZoneWidget {
 
 	protected override _fillContainer(container: HTMLElement): void {
 
-		container.style.setProperty('--vscode-inlineChat-background', 'var(--vscode-editor-background)');
+		container.style.setProperty('--zyraxoncode-inlineChat-background', 'var(--zyraxoncode-editor-background)');
 
 		container.appendChild(this.widget.domNode);
 		container.appendChild(this.#terminationCard);

@@ -1081,7 +1081,7 @@ export const enum WebviewMessageArrayBufferViewType {
 }
 
 export interface WebviewMessageArrayBufferReference {
-	readonly $$vscode_array_buffer_reference$$: true;
+	readonly $$zyraxoncode_array_buffer_reference$$: true;
 
 	readonly index: number;
 

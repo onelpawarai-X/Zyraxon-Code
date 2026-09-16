@@ -573,7 +573,7 @@ registerAction2(class extends Action2 {
 		const pathService = accessor.get(IPathService);
 
 		const resource = EditorResourceAccessor.getOriginalUri(editorService.activeEditor, { supportSideBySide: SideBySideEditor.PRIMARY });
-		if (resource?.scheme !== pathService.defaultUriScheme && resource?.scheme !== Schemas.vscodeUserData) {
+		if (resource?.scheme !== pathService.defaultUriScheme && resource?.scheme !== Schemas.zyraxoncodeUserData) {
 			return; // only enable for selected schemes
 		}
 
@@ -656,7 +656,7 @@ export function toDiffEditorArguments(arg1: IWorkingCopyHistoryEntry, arg2: IWor
 
 export async function findLocalHistoryEntry(workingCopyHistoryService: IWorkingCopyHistoryService, descriptor: ITimelineCommandArgument): Promise<{ entry: IWorkingCopyHistoryEntry | undefined; previous: IWorkingCopyHistoryEntry | undefined }> {
 
-	// When the resource URI uses the `vscode-local-history` scheme (e.g.
+	// When the resource URI uses the `zyraxoncode-local-history` scheme (e.g.
 	// when triggered from the diff editor), map it back to the original
 	// file URI so that the history service can find matching entries.
 	let uri = descriptor.uri;

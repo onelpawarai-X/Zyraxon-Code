@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 export interface ILogDirectoryProvider {
-	getNewLogDirectory(): vscode.Uri | undefined;
+	getNewLogDirectory(): zyraxoncode.Uri | undefined;
 }
 
 export const noopLogDirectoryProvider = new class implements ILogDirectoryProvider {

@@ -4,14 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 .interactive-session .interactive-response .chat-used-context-list.chat-thinking-items {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	padding-top: 0;
 }
 
 .interactive-session .interactive-response .value .chat-thinking-box {
 	outline: none;
 	position: relative;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 
 	contain: layout style;
 
@@ -31,7 +31,7 @@
 		font-size: 13px;
 
 		.monaco-button-mdlabel {
-			font-size: var(--vscode-chat-font-size-body-s);
+			font-size: var(--zyraxoncode-chat-font-size-body-s);
 		}
 
 		.codicon {
@@ -61,12 +61,12 @@
 			padding-left: 6px;
 
 			> .label-added {
-				color: var(--vscode-chat-linesAddedForeground);
+				color: var(--zyraxoncode-chat-linesAddedForeground);
 			}
 
 			> .label-removed {
 				padding-left: 4px;
-				color: var(--vscode-chat-linesRemovedForeground);
+				color: var(--zyraxoncode-chat-linesRemovedForeground);
 			}
 		}
 	}
@@ -82,11 +82,11 @@
 
 		.chat-thinking-title-shimmer {
 			background: linear-gradient(90deg,
-					var(--vscode-descriptionForeground) 0%,
-					var(--vscode-descriptionForeground) 30%,
-					var(--vscode-chat-thinkingShimmer) 50%,
-					var(--vscode-descriptionForeground) 70%,
-					var(--vscode-descriptionForeground) 100%);
+					var(--zyraxoncode-descriptionForeground) 0%,
+					var(--zyraxoncode-descriptionForeground) 30%,
+					var(--zyraxoncode-chat-thinkingShimmer) 50%,
+					var(--zyraxoncode-descriptionForeground) 70%,
+					var(--zyraxoncode-descriptionForeground) 100%);
 			background-size: 400% 100%;
 			background-clip: text;
 			-webkit-background-clip: text;
@@ -99,11 +99,11 @@
 	/* shimmer animation stuffs */
 	.chat-thinking-spinner-item .chat-thinking-spinner-label {
 		background: linear-gradient(90deg,
-				var(--vscode-descriptionForeground) 0%,
-				var(--vscode-descriptionForeground) 30%,
-				var(--vscode-chat-thinkingShimmer) 50%,
-				var(--vscode-descriptionForeground) 70%,
-				var(--vscode-descriptionForeground) 100%);
+				var(--zyraxoncode-descriptionForeground) 0%,
+				var(--zyraxoncode-descriptionForeground) 30%,
+				var(--zyraxoncode-chat-thinkingShimmer) 50%,
+				var(--zyraxoncode-descriptionForeground) 70%,
+				var(--zyraxoncode-descriptionForeground) 100%);
 		background-size: 400% 100%;
 		background-clip: text;
 		-webkit-background-clip: text;
@@ -125,8 +125,8 @@
 		top: 22px;
 		height: 16px;
 		width: 5px;
-		border-left: 1px solid var(--vscode-chat-requestBorder);
-		border-bottom: 1px solid var(--vscode-chat-requestBorder);
+		border-left: 1px solid var(--zyraxoncode-chat-requestBorder);
+		border-bottom: 1px solid var(--zyraxoncode-chat-requestBorder);
 		border-bottom-left-radius: 5px;
 	}
 
@@ -156,12 +156,12 @@
 				padding-left: 2px;
 
 				.monaco-button.monaco-text-button {
-					color: var(--vscode-descriptionForeground);
+					color: var(--zyraxoncode-descriptionForeground);
 					display: flex;
 					align-items: center;
 
 					:hover {
-						color: var(--vscode-foreground);
+						color: var(--zyraxoncode-foreground);
 					}
 
 					.monaco-button:hover .chat-collapsible-hover-chevron {
@@ -172,7 +172,7 @@
 
 			.chat-used-context:not(.chat-used-context-collapsed) {
 				.monaco-button.monaco-text-button {
-					color: var(--vscode-foreground);
+					color: var(--zyraxoncode-foreground);
 				}
 			}
 
@@ -211,7 +211,7 @@
 		.chat-thinking-item.markdown-content {
 			padding: 6px 12px 6px 24px;
 			position: relative;
-			font-size: var(--vscode-chat-font-size-body-s);
+			font-size: var(--zyraxoncode-chat-font-size-body-s);
 
 			.progress-container {
 				margin-bottom: 0px;
@@ -219,10 +219,10 @@
 			}
 
 			[data-code] {
-				background-color: var(--vscode-textPreformat-background);
+				background-color: var(--zyraxoncode-textPreformat-background);
 				padding: 1px 3px;
 				border-radius: 4px;
-				border: 1px solid var(--vscode-textPreformat-border);
+				border: 1px solid var(--zyraxoncode-textPreformat-border);
 				white-space: pre-wrap;
 			}
 		}
@@ -287,7 +287,7 @@
 				bottom: 0px;
 				width: 1px;
 				border-radius: 0;
-				background-color: var(--vscode-chat-requestBorder);
+				background-color: var(--zyraxoncode-chat-requestBorder);
 				mask-image: linear-gradient(to bottom, #000 0 5px, transparent 5px 25px, #000 24px 100%);
 			}
 
@@ -313,7 +313,7 @@
 				font-size: 12px;
 				line-height: 12px;
 				text-align: center;
-				color: var(--vscode-descriptionForeground);
+				color: var(--zyraxoncode-descriptionForeground);
 			}
 
 			/* the default book icon has a pixel of space at the bottom */
@@ -324,10 +324,10 @@
 
 		.chat-thinking-spinner-item {
 			padding: 6px 12px 6px 24px;
-			font-size: var(--vscode-chat-font-size-body-s);
+			font-size: var(--zyraxoncode-chat-font-size-body-s);
 
 			.chat-thinking-spinner-label {
-				color: var(--vscode-descriptionForeground);
+				color: var(--zyraxoncode-descriptionForeground);
 			}
 		}
 	}
@@ -343,7 +343,7 @@
 	}
 
 	.chat-thinking-text {
-		font-size: var(--vscode-chat-font-size-body-s);
+		font-size: var(--zyraxoncode-chat-font-size-body-s);
 		padding: 0 10px;
 		display: block;
 	}
@@ -508,7 +508,7 @@
 }
 
 .editor-instance .interactive-session .interactive-response .value .chat-thinking-box .chat-thinking-item ::before {
-	background: var(--vscode-editor-background);
+	background: var(--zyraxoncode-editor-background);
 }
 
 .monaco-reduce-motion .chat-thinking-fixed-mode > .monaco-scrollable-element,

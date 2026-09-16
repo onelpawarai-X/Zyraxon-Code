@@ -1,8 +1,8 @@
-<VSCode.Cell id="<CELL_ID_0>" language="python">
+<ZyraxonCode.Cell id="<CELL_ID_0>" language="python">
 import numpy as np
 import pandas as pd
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_1>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_1>" language="python">
 # Create and populate a 5x2 NumPy array.
 my_data = np.array([[0, 3], [10, 7], [20, 9], [30, 14], [40, 15]])
 
@@ -17,7 +17,7 @@ my_dataframe['adjusted'] = my_dataframe['activity'] - 2
 
 # Print the entire DataFrame
 print(my_dataframe)
-</VSCode.Cell>
-<VSCode.Cell id="<CELL_ID_2>" language="python">
+</ZyraxonCode.Cell>
+<ZyraxonCode.Cell id="<CELL_ID_2>" language="python">
 
-</VSCode.Cell>
+</ZyraxonCode.Cell>

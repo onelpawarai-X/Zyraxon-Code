@@ -374,7 +374,7 @@ export class AquariumService extends Disposable implements IAquariumService {
 			owner: 'justschen';
 			comment: 'Tracks how often users click the Agents window aquarium easter-egg toggle.';
 		};
-		this.telemetryService.publicLog2<AquariumToggleEvent, AquariumToggleClassification>('vscodeAgents.aquarium/toggle', {
+		this.telemetryService.publicLog2<AquariumToggleEvent, AquariumToggleClassification>('zyraxoncodeAgents.aquarium/toggle', {
 			activated: willActivate,
 		});
 		if (this.activeRef.value) {

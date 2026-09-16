@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { isGpt5PlusFamily } from '../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { ToolName } from '../common/toolNames';
@@ -16,7 +16,7 @@ class ManageTodoListTool implements ICopilotTool<unknown> {
 	public static readonly toolName = ToolName.CoreManageTodoList;
 	public static readonly nonDeferred = true;
 
-	alternativeDefinition(tool: vscode.LanguageModelToolInformation, endpoint?: IChatEndpoint): vscode.LanguageModelToolInformation {
+	alternativeDefinition(tool: zyraxoncode.LanguageModelToolInformation, endpoint?: IChatEndpoint): zyraxoncode.LanguageModelToolInformation {
 		if (!isGpt5PlusFamily(endpoint)) {
 			return tool;
 		}

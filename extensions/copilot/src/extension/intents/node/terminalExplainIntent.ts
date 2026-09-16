@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { IEnvService } from '../../../platform/env/common/envService';
@@ -53,7 +53,7 @@ class TerminalExplainIntentInvocation implements IIntentInvocation {
 		@ITerminalService private readonly terminalService: ITerminalService,
 	) { }
 
-	async buildPrompt(promptContext: IBuildPromptContext, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken) {
+	async buildPrompt(promptContext: IBuildPromptContext, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken) {
 		const osName = this.envService.OS;
 		const shellType = this.terminalService.terminalShellType;
 

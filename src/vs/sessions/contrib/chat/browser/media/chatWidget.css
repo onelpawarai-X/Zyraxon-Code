@@ -45,7 +45,7 @@
 	max-width: 800px;
 	padding: 0;
 	box-sizing: border-box;
-	margin-bottom: var(--vscode-spacing-size20);
+	margin-bottom: var(--zyraxoncode-spacing-size20);
 }
 
 .new-chat-widget-container.revealed .new-session-workspace-picker-container {
@@ -204,12 +204,12 @@
 .new-chat-widget-container .new-chat-bottom-container .action-label {
 	height: 16px;
 	padding: 3px 8px;
-	font-size: var(--vscode-agents-fontSize-label2, 11px);
-	color: var(--vscode-icon-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-label2, 11px);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .new-chat-widget-container .new-chat-bottom-container .action-label > .codicon {
-	font-size: var(--vscode-codiconFontSize-compact, 12px);
+	font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 	width: auto;
 	height: auto;
 }
@@ -267,9 +267,9 @@
 }
 
 .session-workspace-picker-label {
-	font-size: var(--vscode-agents-fontSize-heading2, 18px);
+	font-size: var(--zyraxoncode-agents-fontSize-heading2, 18px);
 	line-height: 1.25;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: nowrap;
 }
 
@@ -282,29 +282,29 @@
 .sessions-chat-picker-slot.sessions-chat-session-type-picker .action-label {
 	height: auto;
 	padding: 4px;
-	font-size: var(--vscode-agents-fontSize-heading2, 18px);
+	font-size: var(--zyraxoncode-agents-fontSize-heading2, 18px);
 	line-height: 1.25;
 	border: none;
 	background-color: transparent;
-	color: var(--vscode-foreground);
-	border-radius: var(--vscode-cornerRadius-small);
+	color: var(--zyraxoncode-foreground);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	touch-action: manipulation;
 }
 
 .sessions-chat-picker-slot.sessions-chat-workspace-picker .action-label:hover,
 .sessions-chat-picker-slot.sessions-chat-session-type-picker .action-label:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
-	color: var(--vscode-foreground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .sessions-chat-picker-slot.sessions-chat-workspace-picker .action-label .sessions-chat-dropdown-label,
 .sessions-chat-picker-slot.sessions-chat-session-type-picker .action-label .sessions-chat-dropdown-label {
-	font-size: var(--vscode-agents-fontSize-heading2, 18px);
+	font-size: var(--zyraxoncode-agents-fontSize-heading2, 18px);
 }
 
 .sessions-chat-picker-slot.sessions-chat-workspace-picker .action-label > .codicon:not(.sessions-chat-dropdown-chevron),
 .sessions-chat-picker-slot.sessions-chat-session-type-picker .action-label > .codicon:not(.sessions-chat-dropdown-chevron) {
-	font-size: var(--vscode-codiconFontSize, 16px);
+	font-size: var(--zyraxoncode-codiconFontSize, 16px);
 	margin: 0;
 }
 
@@ -313,7 +313,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	font-size: var(--vscode-codiconFontSize-compact, 12px);
+	font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 	margin-left: 6px;
 	line-height: 1;
 	transform: translateY(1px);
@@ -341,11 +341,11 @@
 	padding: 3px 7px 3px 7px;
 	background-color: transparent;
 	border: none;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 	cursor: pointer;
 	touch-action: manipulation;
 	white-space: nowrap;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	min-width: 0;
 	overflow: hidden;
 }
@@ -355,8 +355,8 @@
 }
 
 .sessions-chat-picker-slot .action-label:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
-	color: var(--vscode-foreground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .sessions-chat-picker-slot.disabled .action-label {
@@ -367,7 +367,7 @@
 
 .sessions-chat-picker-slot.disabled .action-label:hover {
 	background-color: transparent;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .sessions-chat-picker-slot.resolving .action-label,
@@ -378,7 +378,7 @@
 
 .sessions-chat-picker-slot.resolving .action-label:hover {
 	background-color: transparent;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .sessions-chat-picker-slot.loading .action-label {
@@ -397,7 +397,7 @@
 	width: 12px;
 	height: 12px;
 	margin-left: 4px;
-	border: 1.5px solid var(--vscode-descriptionForeground);
+	border: 1.5px solid var(--zyraxoncode-descriptionForeground);
 	border-top-color: transparent;
 	border-radius: 50%;
 	animation: sessions-chat-picker-spin 0.8s linear infinite;
@@ -411,7 +411,7 @@
 }
 
 .interactive-input-part .sessions-chat-picker-slot .action-label .codicon {
-	font-size: var(--vscode-codiconFontSize-compact, 12px);
+	font-size: var(--zyraxoncode-codiconFontSize-compact, 12px);
 	flex-shrink: 0;
 	/* Override the base .monaco-action-bar .action-item .codicon { width:16px; height:16px }
 	 * so codicons here size naturally to their font-size, matching pickers (like Copilot CLI)
@@ -441,19 +441,19 @@
 }
 
 .sessions-chat-picker-slot .action-label.warning {
-	color: var(--vscode-problemsWarningIcon-foreground);
+	color: var(--zyraxoncode-problemsWarningIcon-foreground);
 }
 
 .sessions-chat-picker-slot .action-label.warning .codicon {
-	color: var(--vscode-problemsWarningIcon-foreground) !important;
+	color: var(--zyraxoncode-problemsWarningIcon-foreground) !important;
 }
 
 .sessions-chat-picker-slot .action-label.info {
-	color: var(--vscode-problemsInfoIcon-foreground);
+	color: var(--zyraxoncode-problemsInfoIcon-foreground);
 }
 
 .sessions-chat-picker-slot .action-label.info .codicon {
-	color: var(--vscode-problemsInfoIcon-foreground) !important;
+	color: var(--zyraxoncode-problemsInfoIcon-foreground) !important;
 }
 
 /* Tab bar styles live with the platform widget

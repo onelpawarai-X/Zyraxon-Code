@@ -11,7 +11,7 @@ import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import * as extHostTypeConverters from './extHostTypeConverters.js';
 import { NotebookRange } from './extHostTypes.js';
 import * as notebookCommon from '../../contrib/notebook/common/notebookCommon.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { isTextStreamMime } from '../../../base/common/mime.js';
 
 class RawContentChangeEvent {
@@ -19,11 +19,11 @@ class RawContentChangeEvent {
 	constructor(
 		readonly start: number,
 		readonly deletedCount: number,
-		readonly deletedItems: vscode.NotebookCell[],
+		readonly deletedItems: zyraxoncode.NotebookCell[],
 		readonly items: ExtHostCell[]
 	) { }
 
-	asApiEvent(): vscode.NotebookDocumentContentChange {
+	asApiEvent(): zyraxoncode.NotebookDocumentContentChange {
 		return {
 			range: new NotebookRange(this.start, this.start + this.deletedCount),
 			addedCells: this.items.map(cell => cell.apiCell),
@@ -46,16 +46,16 @@ export class ExtHostCell {
 		};
 	}
 
-	private _outputs: vscode.NotebookCellOutput[];
+	private _outputs: zyraxoncode.NotebookCellOutput[];
 	private _metadata: Readonly<notebookCommon.NotebookCellMetadata>;
-	private _previousResult: Readonly<vscode.NotebookCellExecutionSummary | undefined>;
+	private _previousResult: Readonly<zyraxoncode.NotebookCellExecutionSummary | undefined>;
 
 	private _internalMetadata: notebookCommon.NotebookCellInternalMetadata;
 	readonly handle: number;
 	readonly uri: URI;
 	readonly cellKind: notebookCommon.CellKind;
 
-	private _apiCell: vscode.NotebookCell | undefined;
+	private _apiCell: zyraxoncode.NotebookCell | undefined;
 	private _mime: string | undefined;
 
 	constructor(
@@ -76,14 +76,14 @@ export class ExtHostCell {
 		return this._internalMetadata;
 	}
 
-	get apiCell(): vscode.NotebookCell {
+	get apiCell(): zyraxoncode.NotebookCell {
 		if (!this._apiCell) {
 			const that = this;
 			const data = this._extHostDocument.getDocument(this.uri);
 			if (!data) {
 				throw new Error(`MISSING extHostDocument for notebook cell: ${this.uri}`);
 			}
-			const apiCell: vscode.NotebookCell = {
+			const apiCell: zyraxoncode.NotebookCell = {
 				get index() { return that.notebook.getCellIndex(that); },
 				notebook: that.notebook.apiNotebook,
 				kind: extHostTypeConverters.NotebookCellKind.to(this._cellData.cellKind),
@@ -164,7 +164,7 @@ export class ExtHostNotebookDocument {
 
 	private readonly _notebookType: string;
 
-	private _notebook: vscode.NotebookDocument | undefined;
+	private _notebook: zyraxoncode.NotebookDocument | undefined;
 	private _metadata: Record<string, any>;
 	private _versionId: number = 0;
 	private _isDirty: boolean = false;
@@ -191,10 +191,10 @@ export class ExtHostNotebookDocument {
 		return this._versionId;
 	}
 
-	get apiNotebook(): vscode.NotebookDocument {
+	get apiNotebook(): zyraxoncode.NotebookDocument {
 		if (!this._notebook) {
 			const that = this;
-			const apiObject: vscode.NotebookDocument = {
+			const apiObject: zyraxoncode.NotebookDocument = {
 				get uri() { return that.uri; },
 				get version() { return that._versionId; },
 				get notebookType() { return that._notebookType; },
@@ -233,7 +233,7 @@ export class ExtHostNotebookDocument {
 		this._isDirty = isDirty;
 	}
 
-	acceptModelChanged(event: extHostProtocol.NotebookCellsChangedEventDto, isDirty: boolean, newMetadata: notebookCommon.NotebookDocumentMetadata | undefined): vscode.NotebookDocumentChangeEvent {
+	acceptModelChanged(event: extHostProtocol.NotebookCellsChangedEventDto, isDirty: boolean, newMetadata: notebookCommon.NotebookDocumentMetadata | undefined): zyraxoncode.NotebookDocumentChangeEvent {
 		this._versionId = event.versionId;
 		this._isDirty = isDirty;
 		this.acceptDocumentPropertiesChanged({ metadata: newMetadata });
@@ -241,11 +241,11 @@ export class ExtHostNotebookDocument {
 		const result = {
 			notebook: this.apiNotebook,
 			metadata: newMetadata,
-			cellChanges: <vscode.NotebookDocumentCellChange[]>[],
-			contentChanges: <vscode.NotebookDocumentContentChange[]>[],
+			cellChanges: <zyraxoncode.NotebookDocumentCellChange[]>[],
+			contentChanges: <zyraxoncode.NotebookDocumentContentChange[]>[],
 		};
 
-		type RelaxedCellChange = Partial<vscode.NotebookDocumentCellChange> & { cell: vscode.NotebookCell };
+		type RelaxedCellChange = Partial<zyraxoncode.NotebookDocumentCellChange> & { cell: zyraxoncode.NotebookCell };
 		const relaxedCellChanges: RelaxedCellChange[] = [];
 
 		// -- apply change and populate content changes
@@ -286,7 +286,7 @@ export class ExtHostNotebookDocument {
 
 		// -- compact cellChanges
 
-		const map = new Map<vscode.NotebookCell, number>();
+		const map = new Map<zyraxoncode.NotebookCell, number>();
 		for (let i = 0; i < relaxedCellChanges.length; i++) {
 			const relaxedCellChange = relaxedCellChanges[i];
 			const existing = map.get(relaxedCellChange.cell);
@@ -326,7 +326,7 @@ export class ExtHostNotebookDocument {
 		}
 	}
 
-	private _validateRange(range: vscode.NotebookRange): vscode.NotebookRange {
+	private _validateRange(range: zyraxoncode.NotebookRange): zyraxoncode.NotebookRange {
 		let start = range.start | 0;
 		let end = range.end | 0;
 		if (start < 0) {
@@ -338,7 +338,7 @@ export class ExtHostNotebookDocument {
 		return range.with({ start, end });
 	}
 
-	private _getCells(range: vscode.NotebookRange): ExtHostCell[] {
+	private _getCells(range: zyraxoncode.NotebookRange): ExtHostCell[] {
 		range = this._validateRange(range);
 		const result: ExtHostCell[] = [];
 		for (let i = range.start; i < range.end; i++) {
@@ -354,7 +354,7 @@ export class ExtHostNotebookDocument {
 		return this._proxy.$trySaveNotebook(this.uri);
 	}
 
-	private _spliceNotebookCells(splices: notebookCommon.NotebookCellTextModelSplice<extHostProtocol.NotebookCellDto>[], initialization: boolean, bucket: vscode.NotebookDocumentContentChange[] | undefined): void {
+	private _spliceNotebookCells(splices: notebookCommon.NotebookCellTextModelSplice<extHostProtocol.NotebookCellDto>[], initialization: boolean, bucket: zyraxoncode.NotebookDocumentContentChange[] | undefined): void {
 		if (this._disposed) {
 			return;
 		}
@@ -395,7 +395,7 @@ export class ExtHostNotebookDocument {
 		}
 	}
 
-	private _moveCells(index: number, length: number, newIdx: number, bucket: vscode.NotebookDocumentContentChange[]): void {
+	private _moveCells(index: number, length: number, newIdx: number, bucket: zyraxoncode.NotebookDocumentContentChange[]): void {
 		const cells = this._cells.splice(index, length);
 		this._cells.splice(newIdx, 0, ...cells);
 		const changes = [
@@ -439,7 +439,7 @@ export class ExtHostNotebookDocument {
 		cell.setInternalMetadata(newInternalMetadata);
 	}
 
-	getCellFromApiCell(apiCell: vscode.NotebookCell): ExtHostCell | undefined {
+	getCellFromApiCell(apiCell: zyraxoncode.NotebookCell): ExtHostCell | undefined {
 		return this._cells.find(cell => cell.apiCell === apiCell);
 	}
 

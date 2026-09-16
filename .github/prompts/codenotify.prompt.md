@@ -12,7 +12,7 @@ This prompt helps you add your code contributions to the `.github/CODENOTIFY` fi
 **Before running this prompt, provide the following information:**
 
 1. **Your GitHub handle:** (e.g., `@YOURHANDLE`)
-2. **Alternative usernames in git blame:** (e.g., `Erich Gamma`, `ALIAS@microsoft.com`, or any other names/emails that might appear in git commits)
+2. **Alternative usernames in git blame:** (e.g., `Erich Gamma`, `ALIAS@zyraxon.com`, or any other names/emails that might appear in git commits)
 
 ## What This Prompt Does
 

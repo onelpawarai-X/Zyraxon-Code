@@ -1,6 +1,6 @@
 .DS_Store
-.vscode-test/
-.vscode-test-web/
+.zyraxoncode-test/
+.zyraxoncode-test-web/
 node_modules/
 dist/
 dist-sourcemaps/
@@ -42,7 +42,7 @@ test/aml/out
 .claude/settings.local.json
 
 # ZYRAXON Code extension debug profile (@playwright/cli automation)
-.vscode-ext-debug/
+.zyraxoncode-ext-debug/
 
 # playwright
 .playwright-mcp/

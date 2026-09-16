@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { URI } from '../../../base/common/uri.js';
 import * as editorRange from '../../../editor/common/core/range.js';
 import { TestId, TestIdPathParts } from '../../contrib/testing/common/testId.js';
@@ -13,11 +13,11 @@ import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import { createPrivateApiFor, getPrivateApiFor, IExtHostTestItemApi } from './extHostTestingPrivateApi.js';
 import * as Convert from './extHostTypeConverters.js';
 
-const testItemPropAccessor = <K extends keyof vscode.TestItem>(
+const testItemPropAccessor = <K extends keyof zyraxoncode.TestItem>(
 	api: IExtHostTestItemApi,
-	defaultValue: vscode.TestItem[K],
-	equals: (a: vscode.TestItem[K], b: vscode.TestItem[K]) => boolean,
-	toUpdate: (newValue: vscode.TestItem[K], oldValue: vscode.TestItem[K]) => ExtHostTestItemEvent,
+	defaultValue: zyraxoncode.TestItem[K],
+	equals: (a: zyraxoncode.TestItem[K], b: zyraxoncode.TestItem[K]) => boolean,
+	toUpdate: (newValue: zyraxoncode.TestItem[K], oldValue: zyraxoncode.TestItem[K]) => ExtHostTestItemEvent,
 ) => {
 	let value = defaultValue;
 	return {
@@ -26,7 +26,7 @@ const testItemPropAccessor = <K extends keyof vscode.TestItem>(
 		get() {
 			return value;
 		},
-		set(newValue: vscode.TestItem[K]) {
+		set(newValue: zyraxoncode.TestItem[K]) {
 			if (!equals(value, newValue)) {
 				const oldValue = value;
 				value = newValue;
@@ -36,11 +36,11 @@ const testItemPropAccessor = <K extends keyof vscode.TestItem>(
 	};
 };
 
-type WritableProps = Pick<vscode.TestItem, 'range' | 'label' | 'description' | 'sortText' | 'canResolveChildren' | 'busy' | 'error' | 'tags'>;
+type WritableProps = Pick<zyraxoncode.TestItem, 'range' | 'label' | 'description' | 'sortText' | 'canResolveChildren' | 'busy' | 'error' | 'tags'>;
 
 const strictEqualComparator = <T>(a: T, b: T) => a === b;
 
-const propComparators: { [K in keyof Required<WritableProps>]: (a: vscode.TestItem[K], b: vscode.TestItem[K]) => boolean } = {
+const propComparators: { [K in keyof Required<WritableProps>]: (a: zyraxoncode.TestItem[K], b: zyraxoncode.TestItem[K]) => boolean } = {
 	range: (a, b) => {
 		if (a === b) { return true; }
 		if (!a || !b) { return false; }
@@ -70,15 +70,15 @@ const evSetProps = <T>(fn: (newValue: T) => Partial<ITestItem>): (newValue: T) =
 
 const makePropDescriptors = (api: IExtHostTestItemApi, label: string): { [K in keyof Required<WritableProps>]: PropertyDescriptor } => ({
 	range: (() => {
-		let value: vscode.Range | undefined;
-		const updateProps = evSetProps<vscode.Range | undefined>(r => ({ range: editorRange.Range.lift(Convert.Range.from(r)) }));
+		let value: zyraxoncode.Range | undefined;
+		const updateProps = evSetProps<zyraxoncode.Range | undefined>(r => ({ range: editorRange.Range.lift(Convert.Range.from(r)) }));
 		return {
 			enumerable: true,
 			configurable: false,
 			get() {
 				return value;
 			},
-			set(newValue: vscode.Range | undefined) {
+			set(newValue: zyraxoncode.Range | undefined) {
 				api.listener?.({ op: TestItemEventOp.DocumentSynced });
 				if (!propComparators.range(value, newValue)) {
 					value = newValue;
@@ -124,25 +124,25 @@ export const toItemFromContext = (context: ITestItemContext): TestItemImpl => {
 	return node!;
 };
 
-export class TestItemImpl implements vscode.TestItem {
+export class TestItemImpl implements zyraxoncode.TestItem {
 	public readonly id!: string;
-	public readonly uri!: vscode.Uri | undefined;
-	public readonly children!: ITestItemChildren<vscode.TestItem>;
+	public readonly uri!: zyraxoncode.Uri | undefined;
+	public readonly children!: ITestItemChildren<zyraxoncode.TestItem>;
 	public readonly parent!: TestItemImpl | undefined;
 
-	public range!: vscode.Range | undefined;
+	public range!: zyraxoncode.Range | undefined;
 	public description!: string | undefined;
 	public sortText!: string | undefined;
 	public label!: string;
-	public error!: string | vscode.MarkdownString;
+	public error!: string | zyraxoncode.MarkdownString;
 	public busy!: boolean;
 	public canResolveChildren!: boolean;
-	public tags!: readonly vscode.TestTag[];
+	public tags!: readonly zyraxoncode.TestTag[];
 
 	/**
 	 * Note that data is deprecated and here for back-compat only
 	 */
-	constructor(controllerId: string, id: string, label: string, uri: vscode.Uri | undefined) {
+	constructor(controllerId: string, id: string, label: string, uri: zyraxoncode.Uri | undefined) {
 		if (id.includes(TestIdPathParts.Delimiter)) {
 			throw new Error(`Test IDs may not include the ${JSON.stringify(id)} symbol`);
 		}

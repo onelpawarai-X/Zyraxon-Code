@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { AuthenticationGetSessionOptions, AuthenticationSession } from 'vscode';
+import type { AuthenticationGetSessionOptions, AuthenticationSession } from 'zyraxoncode';
 import { Event } from '../../../../util/vs/base/common/event';
 import { IAuthenticationService } from '../../../authentication/common/authentication';
 import { CopilotToken } from '../../../authentication/common/copilotToken';

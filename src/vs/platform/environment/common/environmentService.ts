@@ -22,7 +22,7 @@ export interface INativeEnvironmentPaths {
 	 * The user data directory to use for anything that should be
 	 * persisted except for the content that is meant for the `homeDir`.
 	 *
-	 * Only one instance of VSCode can use the same `userDataDir`.
+	 * Only one instance of ZyraxonCode can use the same `userDataDir`.
 	 */
 	userDataDir: string;
 
@@ -65,7 +65,7 @@ export abstract class AbstractNativeEnvironmentService implements INativeEnviron
 	get stateResource(): URI { return joinPath(this.appSettingsHome, 'globalStorage', 'storage.json'); }
 
 	@memoize
-	get userRoamingDataHome(): URI { return this.appSettingsHome.with({ scheme: Schemas.vscodeUserData }); }
+	get userRoamingDataHome(): URI { return this.appSettingsHome.with({ scheme: Schemas.zyraxoncodeUserData }); }
 
 	@memoize
 	get userDataSyncHome(): URI { return joinPath(this.appSettingsHome, 'sync'); }
@@ -93,9 +93,9 @@ export abstract class AbstractNativeEnvironmentService implements INativeEnviron
 
 	@memoize
 	get argvResource(): URI {
-		const vscodePortable = env['VSCODE_PORTABLE'];
-		if (vscodePortable) {
-			return URI.file(join(vscodePortable, 'argv.json'));
+		const zyraxoncodePortable = env['VSCODE_PORTABLE'];
+		if (zyraxoncodePortable) {
+			return URI.file(join(zyraxoncodePortable, 'argv.json'));
 		}
 
 		return joinPath(this.userHome, this.productService.dataFolderName, 'argv.json');
@@ -134,14 +134,14 @@ export abstract class AbstractNativeEnvironmentService implements INativeEnviron
 			return resolve(cliExtensionsDir);
 		}
 
-		const vscodeExtensions = env['VSCODE_EXTENSIONS'];
-		if (vscodeExtensions) {
-			return vscodeExtensions;
+		const zyraxoncodeExtensions = env['VSCODE_EXTENSIONS'];
+		if (zyraxoncodeExtensions) {
+			return zyraxoncodeExtensions;
 		}
 
-		const vscodePortable = env['VSCODE_PORTABLE'];
-		if (vscodePortable) {
-			return join(vscodePortable, 'extensions');
+		const zyraxoncodePortable = env['VSCODE_PORTABLE'];
+		if (zyraxoncodePortable) {
+			return join(zyraxoncodePortable, 'extensions');
 		}
 
 		return joinPath(this.userHome, this.productService.dataFolderName, 'extensions').fsPath;
@@ -154,9 +154,9 @@ export abstract class AbstractNativeEnvironmentService implements INativeEnviron
 			return URI.file(resolve(cliSharedDataDir));
 		}
 
-		const vscodePortable = env['VSCODE_PORTABLE'];
-		if (vscodePortable) {
-			return URI.file(join(vscodePortable, 'shared-data'));
+		const zyraxoncodePortable = env['VSCODE_PORTABLE'];
+		if (zyraxoncodePortable) {
+			return URI.file(join(zyraxoncodePortable, 'shared-data'));
 		}
 
 		return joinPath(this.userHome, this.productService.sharedDataFolderName);
@@ -266,9 +266,9 @@ export abstract class AbstractNativeEnvironmentService implements INativeEnviron
 	@memoize
 	get policyFile(): URI | undefined {
 		if (this.args['__enable-file-policy']) {
-			const vscodePortable = env['VSCODE_PORTABLE'];
-			if (vscodePortable) {
-				return URI.file(join(vscodePortable, 'policy.json'));
+			const zyraxoncodePortable = env['VSCODE_PORTABLE'];
+			if (zyraxoncodePortable) {
+				return URI.file(join(zyraxoncodePortable, 'policy.json'));
 			}
 
 			return joinPath(this.userHome, this.productService.dataFolderName, 'policy.json');

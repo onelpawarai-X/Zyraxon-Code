@@ -38,7 +38,7 @@ import { countRunningMcpServersInOtherSessions, getActiveAgentHostMcpSessionReso
 import { IMcpRegistry } from '../common/mcpRegistryTypes.js';
 import { IMcpConfigPath, IMcpServerStartOpts, IMcpService, IMcpWorkbenchService, McpConnectionState, mcpOAuthClientSecretStorageKey } from '../common/mcpTypes.js';
 
-const diagnosticOwner = 'vscode.mcp';
+const diagnosticOwner = 'zyraxoncode.mcp';
 
 type ConfigDescriptor = Pick<IMcpConfigPath, 'section' | 'scope' | 'target'> & {
 	serversKey?: string;

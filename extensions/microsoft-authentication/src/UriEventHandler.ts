@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
-export class UriEventHandler extends vscode.EventEmitter<vscode.Uri> implements vscode.UriHandler {
-	private _disposable = vscode.window.registerUriHandler(this);
+export class UriEventHandler extends zyraxoncode.EventEmitter<zyraxoncode.Uri> implements zyraxoncode.UriHandler {
+	private _disposable = zyraxoncode.window.registerUriHandler(this);
 
-	handleUri(uri: vscode.Uri) {
+	handleUri(uri: zyraxoncode.Uri) {
 		this.fire(uri);
 	}
 

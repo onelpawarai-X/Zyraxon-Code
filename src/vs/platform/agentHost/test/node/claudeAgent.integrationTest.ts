@@ -35,7 +35,7 @@
 
 import type Anthropic from '@anthropic-ai/sdk';
 import type { GetSessionMessagesOptions, Options, PermissionResult, Query, SDKControlInterruptResponse, SDKMessage, SDKResultSuccess, SDKSessionInfo, SDKSystemMessage, SDKUserMessage, SessionMessage, WarmQuery } from '@anthropic-ai/claude-agent-sdk';
-import type { CCAModel } from '@vscode/copilot-api';
+import type { CCAModel } from '@zyraxoncode/copilot-api';
 import assert from 'assert';
 import type * as http from 'http';
 import { DeferredPromise } from '../../../../base/common/async.js';
@@ -712,7 +712,7 @@ suite('ClaudeAgent integration (proxy-backed)', function () {
 			subprocessNodeOptions: startup.env?.['NODE_OPTIONS'],
 			subprocessAnthropicApiKey: startup.env?.['ANTHROPIC_API_KEY'],
 			settingsBaseUrlIsLoopback: typeof settingsEnv['ANTHROPIC_BASE_URL'] === 'string'
-				&& settingsEnv['ANTHROPIC_BASE_URL'].startsWith('http://127.0.0.1:'),
+				&& settingsEnv['ANTHROPIC_BASE_URL'].startsWith('__ZYRAXKEEP__0_'),
 			settingsBearerHasNonceAndSession: typeof settingsEnv['ANTHROPIC_AUTH_TOKEN'] === 'string'
 				&& settingsEnv['ANTHROPIC_AUTH_TOKEN'].split('.').length === 2
 				&& settingsEnv['ANTHROPIC_AUTH_TOKEN'].endsWith(`.${sessionId}`),

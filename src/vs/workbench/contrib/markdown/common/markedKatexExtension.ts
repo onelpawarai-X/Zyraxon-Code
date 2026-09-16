@@ -6,7 +6,7 @@ import type * as marked from '../../../../base/common/marked/marked.js';
 import { htmlAttributeEncodeValue } from '../../../../base/common/strings.js';
 
 export const mathInlineRegExp = /(?<![a-zA-Z0-9])(?<dollars>\${1,2})(?!\.|\(["'])((?:\\.|[^\\\n])*?(?:\\.|[^\\\n\$]))\k<dollars>(?![a-zA-Z0-9])/; // Non-standard, but ensure opening $ is not preceded and closing $ is not followed by word/number characters, opening $ not followed by ., (", ('
-export const katexContainerClassName = 'vscode-katex-container';
+export const katexContainerClassName = 'zyraxoncode-katex-container';
 export const katexContainerLatexAttributeName = 'data-latex';
 
 const inlineRule = new RegExp('^' + mathInlineRegExp.source);
@@ -14,8 +14,8 @@ const inlineRule = new RegExp('^' + mathInlineRegExp.source);
 export namespace MarkedKatexExtension {
 	type KatexOptions = import('katex').KatexOptions;
 
-	// From https://github.com/UziTech/marked-katex-extension/blob/main/src/index.js
-	// From https://github.com/UziTech/marked-katex-extension/blob/main/src/index.js
+	// From __ZYRAXKEEP__0_
+	// From __ZYRAXKEEP__1_
 	export interface MarkedKatexOptions extends KatexOptions { }
 
 	const blockRule = /^(\${1,2})\n((?:\\[^]|[^\\])+?)\n\1(?:\n|$)/;

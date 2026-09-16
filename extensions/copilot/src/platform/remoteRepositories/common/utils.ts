@@ -6,5 +6,5 @@
 import { URI } from '../../../util/vs/base/common/uri';
 
 export function isGitHubRemoteRepository(uri: URI): boolean {
-	return uri.scheme === 'vscode-vfs' && uri.authority.startsWith('github');
+	return uri.scheme === 'zyraxoncode-vfs' && uri.authority.startsWith('github');
 }

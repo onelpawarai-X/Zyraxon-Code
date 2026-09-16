@@ -30,19 +30,19 @@
 }
 
 .monaco-editor .dirty-diff-added.primary {
-	border-left-color: var(--vscode-editorGutter-addedBackground);
+	border-left-color: var(--zyraxoncode-editorGutter-addedBackground);
 }
 
 .monaco-editor .dirty-diff-added.primary:before {
-	background: var(--vscode-editorGutter-addedBackground);
+	background: var(--zyraxoncode-editorGutter-addedBackground);
 }
 
 .monaco-editor .dirty-diff-added.secondary {
-	border-left-color: var(--vscode-editorGutter-addedSecondaryBackground);
+	border-left-color: var(--zyraxoncode-editorGutter-addedSecondaryBackground);
 }
 
 .monaco-editor .dirty-diff-added.secondary:before {
-	background: var(--vscode-editorGutter-addedSecondaryBackground);
+	background: var(--zyraxoncode-editorGutter-addedSecondaryBackground);
 }
 
 .monaco-editor .dirty-diff-added.pattern {
@@ -55,12 +55,12 @@
 
 .monaco-editor .dirty-diff-added.pattern.primary,
 .monaco-editor .dirty-diff-added.pattern.primary:before {
-	background-image: linear-gradient(-45deg, var(--vscode-editorGutter-addedBackground) 25%, var(--vscode-editorGutter-background) 25%, var(--vscode-editorGutter-background) 50%, var(--vscode-editorGutter-addedBackground) 50%, var(--vscode-editorGutter-addedBackground) 75%, var(--vscode-editorGutter-background) 75%, var(--vscode-editorGutter-background));
+	background-image: linear-gradient(-45deg, var(--zyraxoncode-editorGutter-addedBackground) 25%, var(--zyraxoncode-editorGutter-background) 25%, var(--zyraxoncode-editorGutter-background) 50%, var(--zyraxoncode-editorGutter-addedBackground) 50%, var(--zyraxoncode-editorGutter-addedBackground) 75%, var(--zyraxoncode-editorGutter-background) 75%, var(--zyraxoncode-editorGutter-background));
 }
 
 .monaco-editor .dirty-diff-added.pattern.secondary,
 .monaco-editor .dirty-diff-added.pattern.secondary:before {
-	background-image: linear-gradient(45deg, var(--vscode-editorGutter-addedSecondaryBackground) 25%, var(--vscode-editorGutter-background) 25%, var(--vscode-editorGutter-background) 50%, var(--vscode-editorGutter-addedSecondaryBackground) 50%, var(--vscode-editorGutter-addedSecondaryBackground) 75%, var(--vscode-editorGutter-background) 75%, var(--vscode-editorGutter-background));
+	background-image: linear-gradient(45deg, var(--zyraxoncode-editorGutter-addedSecondaryBackground) 25%, var(--zyraxoncode-editorGutter-background) 25%, var(--zyraxoncode-editorGutter-background) 50%, var(--zyraxoncode-editorGutter-addedSecondaryBackground) 50%, var(--zyraxoncode-editorGutter-addedSecondaryBackground) 75%, var(--zyraxoncode-editorGutter-background) 75%, var(--zyraxoncode-editorGutter-background));
 }
 
 .monaco-editor .dirty-diff-modified:not(.pattern) {
@@ -68,19 +68,19 @@
 }
 
 .monaco-editor .dirty-diff-modified.primary {
-	border-left-color: var(--vscode-editorGutter-modifiedBackground);
+	border-left-color: var(--zyraxoncode-editorGutter-modifiedBackground);
 }
 
 .monaco-editor .dirty-diff-modified.primary:before {
-	background: var(--vscode-editorGutter-modifiedBackground);
+	background: var(--zyraxoncode-editorGutter-modifiedBackground);
 }
 
 .monaco-editor .dirty-diff-modified.secondary {
-	border-left-color: var(--vscode-editorGutter-modifiedSecondaryBackground);
+	border-left-color: var(--zyraxoncode-editorGutter-modifiedSecondaryBackground);
 }
 
 .monaco-editor .dirty-diff-modified.secondary:before {
-	background: var(--vscode-editorGutter-modifiedSecondaryBackground);
+	background: var(--zyraxoncode-editorGutter-modifiedSecondaryBackground);
 }
 
 .monaco-editor .dirty-diff-modified.pattern {
@@ -93,12 +93,12 @@
 
 .monaco-editor .dirty-diff-modified.pattern.primary,
 .monaco-editor .dirty-diff-modified.pattern.primary:before {
-	background-image: linear-gradient(-45deg, var(--vscode-editorGutter-modifiedBackground) 25%, var(--vscode-editorGutter-background) 25%, var(--vscode-editorGutter-background) 50%, var(--vscode-editorGutter-modifiedBackground) 50%, var(--vscode-editorGutter-modifiedBackground) 75%, var(--vscode-editorGutter-background) 75%, var(--vscode-editorGutter-background));
+	background-image: linear-gradient(-45deg, var(--zyraxoncode-editorGutter-modifiedBackground) 25%, var(--zyraxoncode-editorGutter-background) 25%, var(--zyraxoncode-editorGutter-background) 50%, var(--zyraxoncode-editorGutter-modifiedBackground) 50%, var(--zyraxoncode-editorGutter-modifiedBackground) 75%, var(--zyraxoncode-editorGutter-background) 75%, var(--zyraxoncode-editorGutter-background));
 }
 
 .monaco-editor .dirty-diff-modified.pattern.secondary,
 .monaco-editor .dirty-diff-modified.pattern.secondary:before {
-	background-image: linear-gradient(45deg, var(--vscode-editorGutter-modifiedSecondaryBackground) 25%, var(--vscode-editorGutter-background) 25%, var(--vscode-editorGutter-background) 50%, var(--vscode-editorGutter-modifiedSecondaryBackground) 50%, var(--vscode-editorGutter-modifiedSecondaryBackground) 75%, var(--vscode-editorGutter-background) 75%, var(--vscode-editorGutter-background));
+	background-image: linear-gradient(45deg, var(--zyraxoncode-editorGutter-modifiedSecondaryBackground) 25%, var(--zyraxoncode-editorGutter-background) 25%, var(--zyraxoncode-editorGutter-background) 50%, var(--zyraxoncode-editorGutter-modifiedSecondaryBackground) 50%, var(--zyraxoncode-editorGutter-modifiedSecondaryBackground) 75%, var(--zyraxoncode-editorGutter-background) 75%, var(--zyraxoncode-editorGutter-background));
 }
 
 .monaco-workbench.monaco-enable-motion .monaco-editor .dirty-diff-added,
@@ -127,11 +127,11 @@
 }
 
 .monaco-editor .dirty-diff-deleted.primary:after {
-	border-left: 4px solid var(--vscode-editorGutter-deletedBackground);
+	border-left: 4px solid var(--zyraxoncode-editorGutter-deletedBackground);
 }
 
 .monaco-editor .dirty-diff-deleted.secondary:after {
-	border-left: 4px solid var(--vscode-editorGutter-deletedSecondaryBackground);
+	border-left: 4px solid var(--zyraxoncode-editorGutter-deletedSecondaryBackground);
 }
 
 .monaco-workbench.monaco-enable-motion .monaco-editor .dirty-diff-deleted:after {
@@ -139,18 +139,18 @@
 }
 
 .monaco-editor .dirty-diff-deleted:before {
-	background: var(--vscode-editorGutter-deletedBackground);
+	background: var(--zyraxoncode-editorGutter-deletedBackground);
 	margin-left: 3px;
 	height: 0;
 	bottom: 0;
 }
 
 .monaco-editor .dirty-diff-deleted.primary:before {
-	background: var(--vscode-editorGutter-deletedBackground);
+	background: var(--zyraxoncode-editorGutter-deletedBackground);
 }
 
 .monaco-editor .dirty-diff-deleted.secondary:before {
-	background: var(--vscode-editorGutter-deletedSecondaryBackground);
+	background: var(--zyraxoncode-editorGutter-deletedSecondaryBackground);
 }
 
 .monaco-workbench.monaco-enable-motion .monaco-editor .dirty-diff-deleted:before {

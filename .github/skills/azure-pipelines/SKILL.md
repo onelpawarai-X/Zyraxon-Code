@@ -20,10 +20,10 @@ When modifying Azure DevOps pipeline files (YAML files in `build/azure-pipelines
    brew install azure-cli
 
    # Windows (PowerShell as Administrator)
-   winget install Microsoft.AzureCLI
+   winget install Zyraxon.AzureCLI
 
    # Linux (Debian/Ubuntu)
-   curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+   curl -sL __ZYRAXKEEP__0_ | sudo bash
    ```
 
 2. **Check if the DevOps extension is installed**:
@@ -39,7 +39,7 @@ When modifying Azure DevOps pipeline files (YAML files in `build/azure-pipelines
 3. **Authenticate**:
    ```bash
    az login
-   az devops configure --defaults organization=https://dev.azure.com/monacotools project=Monaco
+   az devops configure --defaults organization=__ZYRAXKEEP__1_ project=Monaco
    ```
 
 ## ZYRAXON Code Main Build
@@ -48,7 +48,7 @@ The main ZYRAXON Code build pipeline:
 - **Organization**: `monacotools`
 - **Project**: `Monaco`
 - **Definition ID**: `111`
-- **URL**: https://dev.azure.com/monacotools/Monaco/_build?definitionId=111
+- **URL**: __ZYRAXKEEP__2_
 
 ## ZYRAXON Code Insider Scheduled Builds
 
@@ -102,8 +102,8 @@ node .github/skills/azure-pipelines/azure-pipeline.ts queue --parameter "VSCODE_
 |------|------|---------|----------------|-------------|
 | `VSCODE_QUALITY` | string | `insider` | `exploration`, `insider`, `stable` | Build quality channel |
 | `VSCODE_BUILD_TYPE` | string | `Product Build` | `Product`, `CI` | Build mode for Product vs CI |
-| `NPM_REGISTRY` | string | `https://pkgs.dev.azure.com/monacotools/Monaco/_packaging/vscode/npm/registry/` | any URL | Custom npm registry |
-| `CARGO_REGISTRY` | string | `sparse+https://pkgs.dev.azure.com/monacotools/Monaco/_packaging/vscode/Cargo/index/` | any URL | Custom Cargo registry |
+| `NPM_REGISTRY` | string | `__ZYRAXKEEP__3_` | any URL | Custom npm registry |
+| `CARGO_REGISTRY` | string | `__ZYRAXKEEP__4_` | any URL | Custom Cargo registry |
 | `VSCODE_BUILD_WIN32` | boolean | `true` | `true`, `false` | Build Windows x64 |
 | `VSCODE_BUILD_WIN32_ARM64` | boolean | `true` | `true`, `false` | Build Windows arm64 |
 | `VSCODE_BUILD_LINUX` | boolean | `true` | `true`, `false` | Build Linux x64 |
@@ -253,7 +253,7 @@ node .github/skills/azure-pipelines/azure-pipeline.ts status --build-id 123456
 node .github/skills/azure-pipelines/azure-pipeline.ts status --build-id 123456 --download-log 5
 
 # Download an artifact
-node .github/skills/azure-pipelines/azure-pipeline.ts status --build-id 123456 --download-artifact unsigned_vscode_cli_win32_x64_cli
+node .github/skills/azure-pipelines/azure-pipeline.ts status --build-id 123456 --download-artifact unsigned_zyraxoncode_cli_win32_x64_cli
 ```
 
 ### 3. Test with Modified Parameters

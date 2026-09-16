@@ -15,11 +15,11 @@ vsc_env_values=()
 use_associative_array=0
 bash_major_version=${BASH_VERSINFO[0]}
 
-__vscode_shell_env_reporting="${VSCODE_SHELL_ENV_REPORTING:-}"
+__zyraxoncode_shell_env_reporting="${VSCODE_SHELL_ENV_REPORTING:-}"
 unset VSCODE_SHELL_ENV_REPORTING
 
 envVarsToReport=()
-IFS=',' read -ra envVarsToReport <<< "$__vscode_shell_env_reporting"
+IFS=',' read -ra envVarsToReport <<< "$__zyraxoncode_shell_env_reporting"
 
 if (( BASH_VERSINFO[0] >= 4 )); then
 	use_associative_array=1
@@ -101,7 +101,7 @@ fi
 # Prevent multiple activation with guard
 if [ -z "${VSCODE_PYTHON_AUTOACTIVATE_GUARD:-}" ]; then
 	export VSCODE_PYTHON_AUTOACTIVATE_GUARD=1
-	if [ -n "${VSCODE_PYTHON_BASH_ACTIVATE:-}" ] && [ "$TERM_PROGRAM" = "vscode" ]; then
+	if [ -n "${VSCODE_PYTHON_BASH_ACTIVATE:-}" ] && [ "$TERM_PROGRAM" = "zyraxoncode" ]; then
 		# Prevent crashing by negating exit code
 		if ! builtin eval "$VSCODE_PYTHON_BASH_ACTIVATE"; then
 			__vsc_activation_status=$?
@@ -239,7 +239,7 @@ builtin printf '\e]633;P;HasRichCommandDetection=True\a'
 
 __vsc_report_prompt() {
 	# Expand the original PS1 similarly to how bash would normally
-	# See https://stackoverflow.com/a/37137981 for technique
+	# See __ZYRAXKEEP__0_ for technique
 	if ((BASH_VERSINFO[0] >= 5 || (BASH_VERSINFO[0] == 4 && BASH_VERSINFO[1] >= 4))); then
 		__vsc_prompt=${__vsc_original_PS1@P}
 	else
@@ -467,7 +467,7 @@ __vsc_prompt_cmd_original() {
 	builtin local cmd
 	__vsc_restore_exit_code "${__vsc_status}"
 	# Evaluate the original PROMPT_COMMAND similarly to how bash would normally
-	# See https://unix.stackexchange.com/a/672843 for technique
+	# See __ZYRAXKEEP__1_ for technique
 	for cmd in "${__vsc_original_prompt_command[@]}"; do
 		eval "${cmd:-}"
 	done

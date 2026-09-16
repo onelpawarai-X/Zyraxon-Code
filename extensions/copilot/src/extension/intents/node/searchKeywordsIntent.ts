@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
@@ -26,7 +26,7 @@ class SearchKeywordsIntentInvocation extends RendererIntentInvocation implements
 		super(intent, location, endpoint);
 	}
 
-	createRenderer(promptContext: ISearchPanelKeywordsPromptContext, endpoint: IChatEndpoint, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken) {
+	createRenderer(promptContext: ISearchPanelKeywordsPromptContext, endpoint: IChatEndpoint, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken) {
 		return PromptRenderer.create(this.instantiationService, endpoint, SearchPanelKeywordsPrompt, {
 			promptContext,
 			endpoint

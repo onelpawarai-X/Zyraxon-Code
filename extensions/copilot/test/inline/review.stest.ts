@@ -11,7 +11,7 @@ import { TextDocumentSnapshot } from '../../src/platform/editing/common/textDocu
 import { ReviewComment } from '../../src/platform/review/common/reviewService';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';
 import { IInstantiationService } from '../../src/util/vs/platform/instantiation/common/instantiation';
-import { CancellationTokenSource, Range } from '../../src/vscodeTypes';
+import { CancellationTokenSource, Range } from '../../src/zyraxoncodeTypes';
 import { ssuite, stest } from '../base/stest';
 import { setupSimulationWorkspace, teardownSimulationWorkspace } from '../simulation/inlineChatSimulator';
 import { forEachModel, fromFixture } from '../simulation/stestUtil';

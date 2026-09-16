@@ -353,7 +353,7 @@ export class ExtensionManagementService extends CommontExtensionManagementServic
 			}
 			throw new Error('Local extension management server is not found');
 		}
-		if (location.scheme === Schemas.vscodeRemote) {
+		if (location.scheme === Schemas.zyraxoncodeRemote) {
 			if (this.extensionManagementServerService.remoteExtensionManagementServer) {
 				return this.extensionManagementServerService.remoteExtensionManagementServer.extensionManagementService.installFromLocation(location, this.userDataProfileService.currentProfile.extensionsResource);
 			}
@@ -376,7 +376,7 @@ export class ExtensionManagementService extends CommontExtensionManagementServic
 		if (vsix.scheme === Schemas.file && this.extensionManagementServerService.remoteExtensionManagementServer) {
 			return this.extensionManagementServerService.remoteExtensionManagementServer.extensionManagementService.getManifest(vsix);
 		}
-		if (vsix.scheme === Schemas.vscodeRemote && this.extensionManagementServerService.remoteExtensionManagementServer) {
+		if (vsix.scheme === Schemas.zyraxoncodeRemote && this.extensionManagementServerService.remoteExtensionManagementServer) {
 			return this.extensionManagementServerService.remoteExtensionManagementServer.extensionManagementService.getManifest(vsix);
 		}
 		return Promise.reject('No Servers');
@@ -863,7 +863,7 @@ export class ExtensionManagementService extends CommontExtensionManagementServic
 			label: localize({ key: 'learnMore', comment: ['&& denotes a mnemonic'] }, "&&Learn More"),
 			run: () => {
 				this.telemetryService.publicLog2<TrustPublisherEvent, TrustPublisherClassification>('extensions:trustPublisher', { action: 'learn', extensionId: untrustedExtensions.map(e => e.identifier.id).join(',') });
-				this.instantiationService.invokeFunction(accessor => accessor.get(ICommandService).executeCommand('vscode.open', URI.parse('https://aka.ms/vscode-extension-security')));
+				this.instantiationService.invokeFunction(accessor => accessor.get(ICommandService).executeCommand('zyraxoncode.open', URI.parse('__ZYRAXKEEP__0_')));
 				throw new CancellationError();
 			}
 		};
@@ -872,7 +872,7 @@ export class ExtensionManagementService extends CommontExtensionManagementServic
 			return publisherLink ? `[${publisherDisplayName}](${publisherLink})` : publisherDisplayName;
 		};
 
-		const unverifiedLink = 'https://aka.ms/vscode-verify-publisher';
+		const unverifiedLink = '__ZYRAXKEEP__1_';
 
 		const title = allPublishers.length === 1
 			? localize('checkTrustedPublisherTitle', "Do you trust the publisher \"{0}\"?", allPublishers[0].publisherDisplayName)

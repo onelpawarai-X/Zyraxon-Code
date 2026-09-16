@@ -140,7 +140,7 @@ function defaultEditorSpecs(): IEditorSpec[] {
 		{ resource: file('/project/README.md'), icon: ThemeIcon.fromId(Codicon.markdown.id), pinned: true },
 		{ resource: file('/project/package.json'), icon: ThemeIcon.fromId(Codicon.json.id), pinned: true, dirty: true, active: true },
 		{ resource: URI.from({ scheme: Schemas.untitled, path: 'Untitled-1' }), typeId: 'workbench.editors.untitledFixture', icon: ThemeIcon.fromId(Codicon.file.id), pinned: false /* preview */ },
-		{ resource: file('/project/.vscode/settings.json'), icon: ThemeIcon.fromId(Codicon.settingsGear.id), pinned: true },
+		{ resource: file('/project/.zyraxoncode/settings.json'), icon: ThemeIcon.fromId(Codicon.settingsGear.id), pinned: true },
 		{ resource: file('/project/src/app/components/button.tsx'), pinned: true },
 		{ resource: file('/project/tests/app/main.test.ts'), pinned: true },
 	];

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as fs from 'fs';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostNotebookDocumentData } from '../../../util/common/test/shims/notebookDocument';
 import { ExtHostNotebookEditor } from '../../../util/common/test/shims/notebookEditor';
 import { createTextDocumentData } from '../../../util/common/test/shims/textDocument';
@@ -14,7 +14,7 @@ import * as path from '../../../util/vs/base/common/path';
 import { isEqual } from '../../../util/vs/base/common/resources';
 import { URI } from '../../../util/vs/base/common/uri';
 import { NotebookRange } from '../../../util/vs/workbench/api/common/extHostTypes/notebooks';
-import { Diagnostic, DiagnosticRelatedInformation, Location, Range, Selection, SymbolInformation, Uri } from '../../../vscodeTypes';
+import { Diagnostic, DiagnosticRelatedInformation, Location, Range, Selection, SymbolInformation, Uri } from '../../../zyraxoncodeTypes';
 import { RepoContext } from '../../git/common/gitService';
 import type { ISerializedWorkspaceState, IWorkspaceStateChangeFile, IWorkspaceStateTestFailure } from '../../workspaceState/common/promptContextModel';
 import { extensionHostWorkspaceUri, isInExtensionHost } from './isInExtensionHost';
@@ -29,15 +29,15 @@ export interface IDeserializedWorkspaceState {
 	readonly repositories: Array<RepoContext | undefined> | undefined;
 	readonly workspaceFolders: URI[] | undefined;
 	readonly workspaceFolderPath: string | undefined;
-	readonly activeTextEditor: vscode.TextEditor | undefined;
+	readonly activeTextEditor: zyraxoncode.TextEditor | undefined;
 	readonly __notebookExtHostDocuments: ExtHostNotebookDocumentData[];
-	readonly activeNotebookEditor: vscode.NotebookEditor | undefined;
-	readonly workspaceSymbols: readonly vscode.SymbolInformation[];
-	readonly notebookDocuments: readonly vscode.NotebookDocument[];
-	readonly activeFileDiagnostics: vscode.Diagnostic[];
+	readonly activeNotebookEditor: zyraxoncode.NotebookEditor | undefined;
+	readonly workspaceSymbols: readonly zyraxoncode.SymbolInformation[];
+	readonly notebookDocuments: readonly zyraxoncode.NotebookDocument[];
+	readonly activeFileDiagnostics: zyraxoncode.Diagnostic[];
 	readonly debugConsoleOutput: string;
 	readonly terminalBuffer: string;
-	readonly terminalLastCommand: vscode.TerminalExecutedCommand | undefined;
+	readonly terminalLastCommand: zyraxoncode.TerminalExecutedCommand | undefined;
 	readonly terminalSelection: string;
 	readonly terminalShellType: string;
 	readonly changeFiles: IWorkspaceStateChangeFile[];
@@ -206,7 +206,7 @@ export function deserializeWorkbenchState(scenarioFolderPath: string, stateFileP
 	};
 }
 
-export const noopFileSystemWatcher = new class implements vscode.FileSystemWatcher {
+export const noopFileSystemWatcher = new class implements zyraxoncode.FileSystemWatcher {
 	ignoreCreateEvents = false;
 	ignoreChangeEvents = false;
 	ignoreDeleteEvents = false;

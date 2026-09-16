@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 
 export interface DiagnosticsTelemetryData {
@@ -13,7 +13,7 @@ export interface DiagnosticsTelemetryData {
 	diagnosticsCount: number;
 }
 
-export function findDiagnosticsTelemetry(selection: vscode.Selection, fileDiagnostics: vscode.Diagnostic[]): { fileDiagnosticsTelemetry: DiagnosticsTelemetryData; selectionDiagnosticsTelemetry: DiagnosticsTelemetryData; diagnosticsProvider: string } {
+export function findDiagnosticsTelemetry(selection: zyraxoncode.Selection, fileDiagnostics: zyraxoncode.Diagnostic[]): { fileDiagnosticsTelemetry: DiagnosticsTelemetryData; selectionDiagnosticsTelemetry: DiagnosticsTelemetryData; diagnosticsProvider: string } {
 	const selectionDiagnostics = fileDiagnostics.filter(d => selection.intersection(d.range));
 	const fileDiagnosticsTelemetry: DiagnosticsTelemetryData = {
 		problems: fileDiagnostics.map(d => d.message).join(', '),

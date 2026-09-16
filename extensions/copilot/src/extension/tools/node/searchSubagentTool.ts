@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BudgetExceededError } from '@vscode/prompt-tsx/dist/base/materialized';
+import * as l10n from '@zyraxoncode/l10n';
+import { BudgetExceededError } from '@zyraxoncode/prompt-tsx/dist/base/materialized';
 import * as path from 'path';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
@@ -20,7 +20,7 @@ import { ChatResponseStreamImpl } from '../../../util/common/chatResponseStreamI
 import { URI } from '../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseNotebookEditPart, ChatResponseTextEditPart, ChatToolInvocationPart, ExtendedLanguageModelToolResult, LanguageModelTextPart, MarkdownString, Range } from '../../../vscodeTypes';
+import { ChatResponseNotebookEditPart, ChatResponseTextEditPart, ChatToolInvocationPart, ExtendedLanguageModelToolResult, LanguageModelTextPart, MarkdownString, Range } from '../../../zyraxoncodeTypes';
 import { Conversation, Turn } from '../../prompt/common/conversation';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import type { IToolCallLoopResult } from '../../intents/node/toolCallingLoop';
@@ -82,7 +82,7 @@ class SearchSubagentTool implements ICopilotTool<ISearchSubagentParams> {
 		@IExperimentationService private readonly experimentationService: IExperimentationService
 	) { }
 
-	alternativeDefinition(tool: vscode.LanguageModelToolInformation): vscode.LanguageModelToolInformation {
+	alternativeDefinition(tool: zyraxoncode.LanguageModelToolInformation): zyraxoncode.LanguageModelToolInformation {
 		const thoroughnessEnabled = this.configurationService.getExperimentBasedConfig(ConfigKey.Advanced.SearchSubagentThoroughnessEnabled, this.experimentationService);
 		if (!thoroughnessEnabled) {
 			return tool;
@@ -105,7 +105,7 @@ class SearchSubagentTool implements ICopilotTool<ISearchSubagentParams> {
 			},
 		};
 	}
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<ISearchSubagentParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<ISearchSubagentParams>, token: zyraxoncode.CancellationToken) {
 		// Get the current working directory — prefer the session's working directory
 		// (agents window) over the first workspace folder.
 		const workingDir = new WorkingDirectory(options.workingDirectory, this.workspaceService);
@@ -226,7 +226,7 @@ class SearchSubagentTool implements ICopilotTool<ISearchSubagentParams> {
 	 * @param token Cancellation token
 	 * @returns The response with actual code snippets appended to file paths
 	 */
-	private async parseFinalAnswerAndHydrate(response: string, cwd: string | undefined, workingDirectory: URI | undefined, token: vscode.CancellationToken): Promise<string> {
+	private async parseFinalAnswerAndHydrate(response: string, cwd: string | undefined, workingDirectory: URI | undefined, token: zyraxoncode.CancellationToken): Promise<string> {
 		const lines = response.split('\n');
 
 		// Parse file:line-line format
@@ -301,7 +301,7 @@ class SearchSubagentTool implements ICopilotTool<ISearchSubagentParams> {
 		return processedLines.join('\n');
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<ISearchSubagentParams>, _token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<ISearchSubagentParams>, _token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		return {
 			invocationMessage: options.input.description,
 		};

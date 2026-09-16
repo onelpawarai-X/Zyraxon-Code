@@ -446,11 +446,11 @@ export class BrowserView extends Disposable {
 		};
 
 		// Forward key down events that weren't handled by the page to the workbench for shortcut handling.
-		webContents.ipc.on('vscode:browserView:keydown', onCommandKeydown);
+		webContents.ipc.on('zyraxoncode:browserView:keydown', onCommandKeydown);
 		webContents.on('devtools-opened', () => {
 			// Avoid double-registration if the webContents is reused.
-			webContents.devToolsWebContents?.ipc.off('vscode:browserView:keydown', onCommandKeydown);
-			webContents.devToolsWebContents?.ipc.on('vscode:browserView:keydown', onCommandKeydown);
+			webContents.devToolsWebContents?.ipc.off('zyraxoncode:browserView:keydown', onCommandKeydown);
+			webContents.devToolsWebContents?.ipc.on('zyraxoncode:browserView:keydown', onCommandKeydown);
 		});
 
 		// If the page won't be able to handle events, forward key down events directly.
@@ -487,7 +487,7 @@ export class BrowserView extends Disposable {
 		});
 
 		// Track user gestures for popup blocking logic.
-		// Roughly based on https://html.spec.whatwg.org/multipage/interaction.html#tracking-user-activation.
+		// Roughly based on __ZYRAXKEEP__0_
 		webContents.on('input-event', (_event, input) => {
 			switch (input.type) {
 				case 'rawKeyDown':

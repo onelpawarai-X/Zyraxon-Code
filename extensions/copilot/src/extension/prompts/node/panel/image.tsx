@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType } from '@vscode/copilot-api';
-import * as l10n from '@vscode/l10n';
-import { Image as BaseImage, BasePromptElementProps, ChatResponseReferencePartStatusKind, PromptElement, PromptReference, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
+import { RequestType } from '@zyraxoncode/copilot-api';
+import * as l10n from '@zyraxoncode/l10n';
+import { Image as BaseImage, BasePromptElementProps, ChatResponseReferencePartStatusKind, PromptElement, PromptReference, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { modelCanUseImageURL } from '../../../../platform/endpoint/common/chatModelCapabilities';
 import { IImageService } from '../../../../platform/image/common/imageService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { getMimeType } from '../../../../util/common/imageUtils';
-import { Uri } from '../../../../vscodeTypes';
+import { Uri } from '../../../../zyraxoncodeTypes';
 import { IPromptEndpoint } from '../base/promptRenderer';
 
 export interface ImageProps extends BasePromptElementProps {

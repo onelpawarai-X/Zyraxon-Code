@@ -2,33 +2,33 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 declare function require(path: string): any;
 
 const markdownMathSetting = 'markdown.math';
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: zyraxoncode.ExtensionContext) {
 	function isEnabled(): boolean {
-		const config = vscode.workspace.getConfiguration('markdown');
+		const config = zyraxoncode.workspace.getConfiguration('markdown');
 		return config.get<boolean>('math.enabled', true);
 	}
 
 	function getMacros(): { [key: string]: string } {
-		const config = vscode.workspace.getConfiguration('markdown');
+		const config = zyraxoncode.workspace.getConfiguration('markdown');
 		return config.get<{ [key: string]: string }>('math.macros', {});
 	}
 
-	vscode.workspace.onDidChangeConfiguration(e => {
+	zyraxoncode.workspace.onDidChangeConfiguration(e => {
 		if (e.affectsConfiguration(markdownMathSetting)) {
-			vscode.commands.executeCommand('markdown.api.reloadPlugins');
+			zyraxoncode.commands.executeCommand('markdown.api.reloadPlugins');
 		}
 	}, undefined, context.subscriptions);
 
 	return {
 		extendMarkdownIt(md: any) {
 			if (isEnabled()) {
-				const katex = require('@vscode/markdown-it-katex').default;
+				const katex = require('@zyraxoncode/markdown-it-katex').default;
 				const settingsMacros = getMacros();
 				const options = {
 					enableFencedBlocks: true,

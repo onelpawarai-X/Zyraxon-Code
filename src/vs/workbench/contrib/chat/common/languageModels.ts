@@ -56,7 +56,7 @@ export function isLanguageModelVendorAbsenceConclusive(vendor: string, hasLiveMo
 /**
  * Vendor ids of the BYOK language-model providers that ship in-built with the GitHub Copilot Chat
  * extension. Each provider's vendor id is `providerName.toLowerCase()` (see
- * `extensions/copilot/src/extension/byok/vscode-node/*Provider.ts`). This list is intentionally
+ * `extensions/copilot/src/extension/byok/zyraxoncode-node/*Provider.ts`). This list is intentionally
  * hardcoded: the in-built provider set is stable and known ahead of time, which lets us report these
  * providers by name while bucketing every other (third-party) provider as `3p-extension`.
  */
@@ -354,7 +354,7 @@ export namespace ILanguageModelChatMetadata {
 	 * Documentation link explaining how Auto model selection works.
 	 * NOTE: Also defined in extensions/copilot/src/extension/conversation/common/languageModelAccess.ts — keep in sync.
 	 */
-	export const autoModelSelectionDocsUrl = 'https://docs.github.com/en/copilot/concepts/models/auto-model-selection';
+	export const autoModelSelectionDocsUrl = '__ZYRAXKEEP__0_';
 
 	/**
 	 * Builds the shared description shown for the Auto model, rendered as Markdown
@@ -707,7 +707,7 @@ export function getLanguageModelDisplayNameWithProvider(model: ILanguageModelCha
 export interface IModelControlEntry {
 	readonly label: string;
 	readonly featured?: boolean;
-	readonly minVSCodeVersion?: string;
+	readonly minZyraxonCodeVersion?: string;
 	readonly exists: boolean;
 }
 
@@ -722,39 +722,39 @@ const languageModelChatProviderType = {
 	properties: {
 		vendor: {
 			type: 'string',
-			description: localize('vscode.extension.contributes.languageModels.vendor', "A globally unique vendor of language model chat provider.")
+			description: localize('zyraxoncode.extension.contributes.languageModels.vendor', "A globally unique vendor of language model chat provider.")
 		},
 		displayName: {
 			type: 'string',
-			description: localize('vscode.extension.contributes.languageModels.displayName', "The display name of the language model chat provider.")
+			description: localize('zyraxoncode.extension.contributes.languageModels.displayName', "The display name of the language model chat provider.")
 		},
 		configuration: {
 			type: 'object',
-			description: localize('vscode.extension.contributes.languageModels.configuration', "Configuration options for the language model chat provider."),
+			description: localize('zyraxoncode.extension.contributes.languageModels.configuration', "Configuration options for the language model chat provider."),
 			anyOf: [
 				{
-					$ref: 'http://json-schema.org/draft-07/schema#'
+					$ref: '__ZYRAXKEEP__1_'
 				},
 				{
 					properties: {
 						properties: {
 							type: 'object',
 							additionalProperties: {
-								$ref: 'http://json-schema.org/draft-07/schema#',
+								$ref: '__ZYRAXKEEP__2_',
 								properties: {
 									secret: {
 										type: 'boolean',
-										description: localize('vscode.extension.contributes.languageModels.configuration.secret', "Whether the property is a secret.")
+										description: localize('zyraxoncode.extension.contributes.languageModels.configuration.secret', "Whether the property is a secret.")
 									}
 								}
 							}
 						},
 						additionalProperties: {
-							$ref: 'http://json-schema.org/draft-07/schema#',
+							$ref: '__ZYRAXKEEP__3_',
 							properties: {
 								secret: {
 									type: 'boolean',
-									description: localize('vscode.extension.contributes.languageModels.configuration.secret', "Whether the property is a secret.")
+									description: localize('zyraxoncode.extension.contributes.languageModels.configuration.secret', "Whether the property is a secret.")
 								}
 							}
 						}
@@ -765,23 +765,23 @@ const languageModelChatProviderType = {
 		},
 		managementCommand: {
 			type: 'string',
-			description: localize('vscode.extension.contributes.languageModels.managementCommand', "A command to manage the language model chat provider, e.g. 'Manage Copilot models'. This is used in the chat model picker. If not provided, a gear icon is not rendered during vendor selection."),
+			description: localize('zyraxoncode.extension.contributes.languageModels.managementCommand', "A command to manage the language model chat provider, e.g. 'Manage Copilot models'. This is used in the chat model picker. If not provided, a gear icon is not rendered during vendor selection."),
 			deprecated: true,
-			deprecationMessage: localize('vscode.extension.contributes.languageModels.managementCommand.deprecated', "The managementCommand property is deprecated and will be removed in a future release. Use the new configuration property instead.")
+			deprecationMessage: localize('zyraxoncode.extension.contributes.languageModels.managementCommand.deprecated', "The managementCommand property is deprecated and will be removed in a future release. Use the new configuration property instead.")
 		},
 		deprecation: {
 			type: 'object',
-			description: localize('vscode.extension.contributes.languageModels.deprecation', "Marks this language model chat provider as deprecated. When set, the Manage Models view renders the provider with a link pointing to a replacement."),
+			description: localize('zyraxoncode.extension.contributes.languageModels.deprecation', "Marks this language model chat provider as deprecated. When set, the Manage Models view renders the provider with a link pointing to a replacement."),
 			properties: {
 				link: {
 					type: 'string',
-					description: localize('vscode.extension.contributes.languageModels.deprecation.link', "A URL opened when the user clicks the deprecation link shown next to the provider name. Use a 'vscode:extension/<publisher>.<name>' URI to open a replacement extension in the Extensions view.")
+					description: localize('zyraxoncode.extension.contributes.languageModels.deprecation.link', "A URL opened when the user clicks the deprecation link shown next to the provider name. Use a 'zyraxoncode:extension/<publisher>.<name>' URI to open a replacement extension in the Extensions view.")
 				}
 			}
 		},
 		when: {
 			type: 'string',
-			description: localize('vscode.extension.contributes.languageModels.when', "Condition which must be true to show this language model chat provider in the Manage Models list.")
+			description: localize('zyraxoncode.extension.contributes.languageModels.when', "Condition which must be true to show this language model chat provider in the Manage Models list.")
 		}
 	}
 } as const satisfies IJSONSchema;
@@ -789,7 +789,7 @@ const languageModelChatProviderType = {
 export type IUserFriendlyLanguageModel = Omit<TypeFromJsonSchema<typeof languageModelChatProviderType>, 'deprecation'> & {
 	/**
 	 * Marks a provider as deprecated. The Manage Models view renders a link
-	 * (pointing to a replacement, e.g. a `vscode:extension/<publisher>.<name>` URI)
+	 * (pointing to a replacement, e.g. a `zyraxoncode:extension/<publisher>.<name>` URI)
 	 * next to the provider name. Optional so existing provider descriptors are unaffected.
 	 */
 	readonly deprecation?: { readonly link?: string };
@@ -801,21 +801,21 @@ export interface ILanguageModelProviderDescriptor extends IUserFriendlyLanguageM
 
 /**
  * Resolves a provider `deprecation.link` for opening inside the current build. Contributions point
- * at the replacement extension with a stable `vscode:extension/<id>` URI, but the URL service only
- * routes URIs whose scheme matches this build's `urlProtocol` (e.g. `code-oss`, `vscode-insiders`).
- * The `vscode:` scheme is therefore rewritten to the current protocol so the extensions URL handler
+ * at the replacement extension with a stable `zyraxoncode:extension/<id>` URI, but the URL service only
+ * routes URIs whose scheme matches this build's `urlProtocol` (e.g. `code-oss`, `zyraxoncode-insiders`).
+ * The `zyraxoncode:` scheme is therefore rewritten to the current protocol so the extensions URL handler
  * opens the extension; without this the opener falls back to treating the URI as a (non-existent)
  * file resource and fails. Other schemes (http(s), command) are returned unchanged.
  */
 export function resolveProviderDeprecationLink(link: string, urlProtocol: string | undefined): URI {
 	const uri = URI.parse(link);
-	return uri.scheme === Schemas.vscode && urlProtocol ? uri.with({ scheme: urlProtocol }) : uri;
+	return uri.scheme === Schemas.zyraxoncode && urlProtocol ? uri.with({ scheme: urlProtocol }) : uri;
 }
 
 export const languageModelChatProviderExtensionPoint = ExtensionsRegistry.registerExtensionPoint<IUserFriendlyLanguageModel | IUserFriendlyLanguageModel[]>({
 	extensionPoint: 'languageModelChatProviders',
 	jsonSchema: {
-		description: localize('vscode.extension.contributes.languageModelChatProviders', "Contribute language model chat providers of a specific vendor."),
+		description: localize('zyraxoncode.extension.contributes.languageModelChatProviders', "Contribute language model chat providers of a specific vendor."),
 		oneOf: [
 			languageModelChatProviderType,
 			{
@@ -853,7 +853,7 @@ interface IChatControlResponse {
 	readonly restrictedChatParticipants: { [name: string]: string[] };
 	readonly models?: {
 		readonly free?: Record<string, { readonly label: string; readonly featured?: boolean }>;
-		readonly paid?: Record<string, { readonly label: string; readonly featured?: boolean; readonly minVSCodeVersion?: string }>;
+		readonly paid?: Record<string, { readonly label: string; readonly featured?: boolean; readonly minZyraxonCodeVersion?: string }>;
 	};
 }
 
@@ -1003,15 +1003,15 @@ export class LanguageModelsService implements ILanguageModelsService {
 			for (const extension of added) {
 				for (const item of Iterable.wrap(extension.value)) {
 					if (this._vendors.has(item.vendor)) {
-						extension.collector.error(localize('vscode.extension.contributes.languageModels.vendorAlreadyRegistered', "The vendor '{0}' is already registered and cannot be registered twice", item.vendor));
+						extension.collector.error(localize('zyraxoncode.extension.contributes.languageModels.vendorAlreadyRegistered', "The vendor '{0}' is already registered and cannot be registered twice", item.vendor));
 						continue;
 					}
 					if (isFalsyOrWhitespace(item.vendor)) {
-						extension.collector.error(localize('vscode.extension.contributes.languageModels.emptyVendor', "The vendor field cannot be empty."));
+						extension.collector.error(localize('zyraxoncode.extension.contributes.languageModels.emptyVendor', "The vendor field cannot be empty."));
 						continue;
 					}
 					if (item.vendor.trim() !== item.vendor) {
-						extension.collector.error(localize('vscode.extension.contributes.languageModels.whitespaceVendor', "The vendor field cannot start or end with whitespace."));
+						extension.collector.error(localize('zyraxoncode.extension.contributes.languageModels.whitespaceVendor', "The vendor field cannot start or end with whitespace."));
 						continue;
 					}
 					addedVendors.push(item);
@@ -2439,7 +2439,7 @@ export class LanguageModelsService implements ILanguageModelsService {
 				if (!entry || !isObject(entry)) {
 					continue;
 				}
-				paid[entry.id] = { label: entry.label, featured: entry.featured, minVSCodeVersion: entry.minVSCodeVersion, exists: this._modelCache.has(`copilot/${entry.id}`) };
+				paid[entry.id] = { label: entry.label, featured: entry.featured, minZyraxonCodeVersion: entry.minZyraxonCodeVersion, exists: this._modelCache.has(`copilot/${entry.id}`) };
 			}
 		}
 

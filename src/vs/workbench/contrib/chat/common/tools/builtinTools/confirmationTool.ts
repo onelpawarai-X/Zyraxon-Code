@@ -10,9 +10,9 @@ import { ConfirmationOptionKind } from '../../../../../../platform/agentHost/com
 import { IChatModifiedFilesConfirmationData, IChatTerminalToolInvocationData } from '../../chatService/chatService.js';
 import { CountTokensCallback, IPreparedToolInvocation, IToolData, IToolImpl, IToolInvocation, IToolInvocationPreparationContext, IToolResult, ToolDataSource, ToolInvocationPresentation, ToolProgress } from '../languageModelToolsService.js';
 
-export const ConfirmationToolId = 'vscode_get_confirmation';
-export const ConfirmationToolWithOptionsId = 'vscode_get_confirmation_with_options';
-export const ModifiedFilesConfirmationToolId = 'vscode_get_modified_files_confirmation';
+export const ConfirmationToolId = 'zyraxoncode_get_confirmation';
+export const ConfirmationToolWithOptionsId = 'zyraxoncode_get_confirmation_with_options';
+export const ModifiedFilesConfirmationToolId = 'zyraxoncode_get_modified_files_confirmation';
 
 export const ConfirmationToolData: IToolData = {
 	id: ConfirmationToolId,

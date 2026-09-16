@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { URI } from '../../../util/vs/base/common/uri';
-import { ChatResponseFileTreePart } from '../../../vscodeTypes';
+import { ChatResponseFileTreePart } from '../../../zyraxoncodeTypes';
 
 /**
  * Converts a markdown-style file tree into a ChatResponseFileTreePart.
@@ -17,10 +17,10 @@ export function convertFileTreeToChatResponseFileTree(
 	generatePreviewURI: (filename: string) => URI,
 ): { chatResponseTree: ChatResponseFileTreePart; projectName: string } {
 	const lines = fileStructure.trim().split('\n');
-	const fileTree: vscode.ChatResponseFileTree[] = [];
+	const fileTree: zyraxoncode.ChatResponseFileTree[] = [];
 
 	let baseUri: URI | undefined;
-	const root: vscode.ChatResponseFileTree = { name: '', children: [] };
+	const root: zyraxoncode.ChatResponseFileTree = { name: '', children: [] };
 	fileTree[0] = root;
 
 	for (const line of lines) {
@@ -28,7 +28,7 @@ export function convertFileTreeToChatResponseFileTree(
 		const index = line.lastIndexOf('── ');
 		const name = index >= 0 ? line.substring(index + 3) : line;
 
-		const fileNode: vscode.ChatResponseFileTree = { name };
+		const fileNode: zyraxoncode.ChatResponseFileTree = { name };
 
 		if (depth === 0) {
 			if (isUnsafeNodeName(name)) {
@@ -64,7 +64,7 @@ export function convertFileTreeToChatResponseFileTree(
 /**
  * List filenames in the tree, separated by forward-slashes.
  */
-export function listFilesInResponseFileTree(tree: vscode.ChatResponseFileTree[]): string[] {
+export function listFilesInResponseFileTree(tree: zyraxoncode.ChatResponseFileTree[]): string[] {
 	const queue = tree.map(node => ({ node, path: node.name }));
 	const result: string[] = [];
 
@@ -98,8 +98,8 @@ const filterList = [
 	/* other files we should not be included in a new project */'.gitignore', 'LICENSE.txt', 'yarn.lock', 'package-lock.json'
 ];
 
-function filterChatResponseFileTree(fileTree: vscode.ChatResponseFileTree[]): vscode.ChatResponseFileTree[] {
-	const filteredTree: vscode.ChatResponseFileTree[] = [];
+function filterChatResponseFileTree(fileTree: zyraxoncode.ChatResponseFileTree[]): zyraxoncode.ChatResponseFileTree[] {
+	const filteredTree: zyraxoncode.ChatResponseFileTree[] = [];
 
 	for (const node of fileTree) {
 
@@ -114,7 +114,7 @@ function filterChatResponseFileTree(fileTree: vscode.ChatResponseFileTree[]): vs
 	return filteredTree;
 }
 
-function isNodeInFilterList(node: vscode.ChatResponseFileTree): boolean {
+function isNodeInFilterList(node: zyraxoncode.ChatResponseFileTree): boolean {
 	if (filterList.includes(node.name)) {
 		return true;
 	}

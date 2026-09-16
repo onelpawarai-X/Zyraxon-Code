@@ -25,10 +25,10 @@ import { CountTokensCallback, ILanguageModelToolsService, IPreparedToolInvocatio
 import { ISession } from '../../../services/sessions/common/session.js';
 import { IProviderSessionType, ISessionsManagementService } from '../../../services/sessions/common/sessionsManagement.js';
 
-export const ListAutomationsToolId = 'vscode_listAutomations';
-export const ConfigureAutomationToolId = 'vscode_configureAutomation';
-export const RunAutomationToolId = 'vscode_runAutomation';
-export const DeleteAutomationToolId = 'vscode_deleteAutomation';
+export const ListAutomationsToolId = 'zyraxoncode_listAutomations';
+export const ConfigureAutomationToolId = 'zyraxoncode_configureAutomation';
+export const RunAutomationToolId = 'zyraxoncode_runAutomation';
+export const DeleteAutomationToolId = 'zyraxoncode_deleteAutomation';
 
 const automationToolWhen = ContextKeyExpr.and(ChatContextKeys.enabled, ChatAutomationsEnabledContext);
 const deleteAutomationConfirmationId = 'delete';

@@ -74,11 +74,11 @@ External-only mode sends traces directly from each SDK to the user's collector a
 
 ## Resource Identity
 
-Agent Host is one logical system with several native OTel producers. Agent Host-owned launch and ingest boundaries assign the standard resource attribute `service.namespace=vscode.agent-host` while keeping component service names distinct:
+Agent Host is one logical system with several native OTel producers. Agent Host-owned launch and ingest boundaries assign the standard resource attribute `service.namespace=zyraxoncode.agent-host` while keeping component service names distinct:
 
 | Producer | `service.name` |
 |---|---|
-| Host session/title metadata | `vscode-agent-host` (unless the host has an explicit service-name override) |
+| Host session/title metadata | `zyraxoncode-agent-host` (unless the host has an explicit service-name override) |
 | Copilot runtime | `github-copilot` |
 | Claude runtime | `claude-code` |
 | Codex app-server | `codex-app-server` |
@@ -89,17 +89,17 @@ Claude honors these standard resource variables for traces, logs, and metrics wh
 
 ## Distributed Trace Context
 
-The host emits a zero-duration `vscode.agent_host.session` anchor and passes its W3C `traceparent`/`tracestate` to native runtimes. Copilot reads the context through `CopilotClientOptions.onGetTraceContext`, Claude receives it in its session subprocess environment, and Codex receives it on session-scoped JSON-RPC request envelopes. Provider-native traces can therefore share one trace id while retaining their provider conversation attributes.
+The host emits a zero-duration `zyraxoncode.agent_host.session` anchor and passes its W3C `traceparent`/`tracestate` to native runtimes. Copilot reads the context through `CopilotClientOptions.onGetTraceContext`, Claude receives it in its session subprocess environment, and Codex receives it on session-scoped JSON-RPC request envelopes. Provider-native traces can therefore share one trace id while retaining their provider conversation attributes.
 
 ## Session Title Metadata
 
-When content capture is enabled, the agent host emits a zero-duration `vscode.agent_host.session.title_changed` span whenever an authoritative Copilot or Claude session title changes. This includes fallback, generated, refined, and manually renamed titles; assigning the same title again does not emit another span. Downstream consumers can use the latest span for a conversation to display its current title.
+When content capture is enabled, the agent host emits a zero-duration `zyraxoncode.agent_host.session.title_changed` span whenever an authoritative Copilot or Claude session title changes. This includes fallback, generated, refined, and manually renamed titles; assigning the same title again does not emit another span. Downstream consumers can use the latest span for a conversation to display its current title.
 
 | Attribute | Description |
 |---|---|
 | `gen_ai.conversation.id` | Provider conversation identifier (Copilot conversation ID or Claude SDK session ID). |
-| `vscode.agent_host.session.title` | Latest session title, bounded to 200 characters. |
-| `vscode.agent_host.session.uri` | Agent Host protocol URI for the session. |
+| `zyraxoncode.agent_host.session.title` | Latest session title, bounded to 200 characters. |
+| `zyraxoncode.agent_host.session.uri` | Agent Host protocol URI for the session. |
 
 Title text is user-derived content, so these spans are emitted only when `chat.agentHost.otel.captureContent` is enabled. Host-produced title spans copy `OTEL_SERVICE_NAME` and `OTEL_RESOURCE_ATTRIBUTES` so collectors group them with the SDK telemetry. They are persisted in DB mode and use the configured OTLP, file, or console forwarder. Synthetic OTLP forwarding currently uses OTLP/HTTP JSON; when `http/protobuf` or gRPC is configured, title spans remain available in DB mode but are not sent to that external endpoint.
 
@@ -112,7 +112,7 @@ Open **Settings** (`Ctrl+,`) and search for `agentHost otel`:
 |---|---|---|---|
 | `chat.agentHost.otel.enabled` | boolean | `false` | Enable OTel emission from the agent host. |
 | `chat.agentHost.otel.exporterType` | string | `"otlp-http"` | `otlp-http`, `otlp-grpc`, `console`, or `file`. The CLI runtime downgrades `otlp-grpc` to `otlp-http` transparently. |
-| `chat.agentHost.otel.otlpEndpoint` | string | `""` | OTLP endpoint URL. Accepts a bare base URL (`http://localhost:4318`) — `/v1/traces` is appended automatically when needed, matching the standard `OTEL_EXPORTER_OTLP_ENDPOINT` convention. A full signal-specific URL (`http://host:4318/v1/traces`) is used verbatim. |
+| `chat.agentHost.otel.otlpEndpoint` | string | `""` | OTLP endpoint URL. Accepts a bare base URL (`__ZYRAXKEEP__0_`) — `/v1/traces` is appended automatically when needed, matching the standard `OTEL_EXPORTER_OTLP_ENDPOINT` convention. A full signal-specific URL (`__ZYRAXKEEP__1_`) is used verbatim. |
 | `chat.agentHost.otel.captureContent` | boolean | `false` | Capture prompt/response content in span attributes. Privacy-sensitive — do not enable in environments that ship spans to shared sinks. |
 | `chat.agentHost.otel.outfile` | string | `""` | Output path for JSON-lines spans when `exporterType` is `file`. |
 | `chat.agentHost.otel.dbSpanExporter.enabled` | boolean | `false` | Persist every emitted span to a local SQLite database at `<userData>/agent-host/otel/agent-host-traces.db`. Implicitly enables OTel. OTLP/HTTP JSON traces can also be forwarded; protobuf and gRPC traces remain local. |
@@ -148,7 +148,7 @@ Use the **Chat: Export Agent Host Traces Database…** command (`workbench.actio
 
 ## Quick Start with Aspire Dashboard
 
-To collect agent host traces with the [Aspire Dashboard](https://learn.microsoft.com/dotnet/aspire/fundamentals/dashboard/standalone) (or any OTLP-compatible collector):
+To collect agent host traces with the [Aspire Dashboard](__ZYRAXKEEP__2_) (or any OTLP-compatible collector):
 
 ```json
 {
@@ -156,7 +156,7 @@ To collect agent host traces with the [Aspire Dashboard](https://learn.microsoft
   "chat.agentHost.otel.enabled": true,
   "chat.agentHost.otel.captureContent": true,
   "chat.agentHost.otel.dbSpanExporter.enabled": true,
-  "chat.agentHost.otel.otlpEndpoint": "http://localhost:4318"
+  "chat.agentHost.otel.otlpEndpoint": "__ZYRAXKEEP__3_"
 }
 ```
 
@@ -207,8 +207,8 @@ src/vs/platform/otel/
 
 `OtlpHttpForwarder` accepts an endpoint in either of the two shapes that SDKs expect for the standard `OTEL_EXPORTER_OTLP_ENDPOINT` env var:
 
-- **Bare base URL** (`http://host:4318` or `http://host:4318/`) — `/v1/traces` is auto-appended via `resolveOtlpTracesEndpoint()` in [../otel/node/otlp/outboundForwarder.ts](../otel/node/otlp/outboundForwarder.ts).
-- **Full signal-specific URL** (`http://host:4318/v1/traces`, `http://host:4318/custom/path`) — used verbatim.
+- **Bare base URL** (`__ZYRAXKEEP__4_` or `__ZYRAXKEEP__5_`) — `/v1/traces` is auto-appended via `resolveOtlpTracesEndpoint()` in [../otel/node/otlp/outboundForwarder.ts](../otel/node/otlp/outboundForwarder.ts).
+- **Full signal-specific URL** (`__ZYRAXKEEP__6_`, `__ZYRAXKEEP__7_`) — used verbatim.
 
 This matches the path-handling rules of the official OpenTelemetry SDKs and ensures the pass-through SDK path and the DB-mode outbound forwarder path behave identically given the same `otlpEndpoint` setting.
 

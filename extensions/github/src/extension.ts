@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { commands, Disposable, ExtensionContext, extensions, l10n, LogLevel, LogOutputChannel, window } from 'vscode';
-import { TelemetryReporter } from '@vscode/extension-telemetry';
+import { commands, Disposable, ExtensionContext, extensions, l10n, LogLevel, LogOutputChannel, window } from 'zyraxoncode';
+import { TelemetryReporter } from '@zyraxoncode/extension-telemetry';
 import { GithubRemoteSourceProvider } from './remoteSourceProvider.js';
 import type { API, GitExtension } from './typings/git.d.ts';
 import { registerCommands } from './commands.js';
@@ -66,7 +66,7 @@ function initializeGitBaseExtension(): Disposable {
 		}
 	};
 
-	const gitBaseExtension = extensions.getExtension<GitBaseExtension>('vscode.git-base')!.exports;
+	const gitBaseExtension = extensions.getExtension<GitBaseExtension>('zyraxoncode.git-base')!.exports;
 	disposables.add(gitBaseExtension.onDidChangeEnablement(onDidChangeGitBaseExtensionEnablement));
 	onDidChangeGitBaseExtensionEnablement(gitBaseExtension.enabled);
 
@@ -91,7 +91,7 @@ function setGitHubContext(gitAPI: API, disposables: DisposableStore) {
 function initializeGitExtension(context: ExtensionContext, octokitService: OctokitService, telemetryReporter: TelemetryReporter, logger: LogOutputChannel): Disposable {
 	const disposables = new DisposableStore();
 
-	let gitExtension = extensions.getExtension<GitExtension>('vscode.git');
+	let gitExtension = extensions.getExtension<GitExtension>('zyraxoncode.git');
 
 	const initialize = () => {
 		gitExtension!.activate()
@@ -125,8 +125,8 @@ function initializeGitExtension(context: ExtensionContext, octokitService: Octok
 		initialize();
 	} else {
 		const listener = extensions.onDidChange(() => {
-			if (!gitExtension && extensions.getExtension<GitExtension>('vscode.git')) {
-				gitExtension = extensions.getExtension<GitExtension>('vscode.git');
+			if (!gitExtension && extensions.getExtension<GitExtension>('zyraxoncode.git')) {
+				gitExtension = extensions.getExtension<GitExtension>('zyraxoncode.git');
 				initialize();
 				listener.dispose();
 			}

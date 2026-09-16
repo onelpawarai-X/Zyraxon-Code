@@ -20,7 +20,7 @@
 	display: flex;
 	align-items: center;
 	height: 16px;
-	padding: var(--vscode-spacing-size40) var(--vscode-spacing-size60);
+	padding: var(--zyraxoncode-spacing-size40) var(--zyraxoncode-spacing-size60);
 	border-radius: 4px;
 	cursor: pointer;
 	text-decoration: none;
@@ -34,13 +34,13 @@
 }
 
 .chat-input-picker-item .action-label.model-picker-split:not(.disabled):has(.model-picker-section:hover) .model-picker-section {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .chat-input-picker-item .action-label.model-picker-split .model-picker-section:hover,
 .chat-input-picker-item .action-label.model-picker-split .model-picker-section[aria-expanded="true"] {
-	background-color: var(--vscode-toolbar-hoverBackground);
-	color: var(--vscode-foreground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .chat-input-picker-item .action-label.model-picker-split .model-picker-name {
@@ -75,17 +75,17 @@
 }
 
 .chat-input-picker-item .action-label.model-picker-split.disabled .codicon {
-	color: var(--vscode-disabledForeground);
+	color: var(--zyraxoncode-disabledForeground);
 }
 
 .action-widget .monaco-list-row.chat-model-picker-unavailable .description a,
 .action-widget .monaco-list-row.chat-model-picker-unavailable .description a:visited {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 }
 
 .action-widget .monaco-list-row.chat-model-picker-unavailable .description a:hover,
 .action-widget .monaco-list-row.chat-model-picker-unavailable .description a:active {
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .action-widget:has(.chat-model-picker-dropdown) .action-list-filter-input,
@@ -97,7 +97,7 @@
 }
 
 .action-widget:has(.chat-model-picker-dropdown) .action-list-filter-input:focus {
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .action-widget:has(.chat-model-picker-dropdown) .action-list-filter {
@@ -116,7 +116,7 @@
 	padding: 0;
 	border-radius: 0;
 	background-color: transparent;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 	line-height: normal;
 }
@@ -143,20 +143,20 @@
 	display: flex;
 	gap: 6px;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
-	border: var(--vscode-strokeThickness) solid var(--vscode-editorWidget-border, var(--vscode-contrastBorder, transparent));
+	color: var(--zyraxoncode-descriptionForeground);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-editorWidget-border, var(--zyraxoncode-contrastBorder, transparent));
 	border-radius: 4px;
 	padding: 6px 8px;
 }
 
 .chat-model-hover-warning-text > .codicon {
 	flex-shrink: 0;
-	color: var(--vscode-notificationsWarningIcon-foreground);
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground);
 }
 
 .chat-model-hover-promo-text > .codicon {
 	flex-shrink: 0;
-	color: var(--vscode-notificationsInfoIcon-foreground);
+	color: var(--zyraxoncode-notificationsInfoIcon-foreground);
 }
 
 .chat-model-hover-warning-text p,
@@ -171,13 +171,13 @@
 }
 
 .chat-model-hover-name {
-	font-weight: var(--vscode-fontWeight-semiBold);
-	font-size: var(--vscode-fontSize-heading3);
+	font-weight: var(--zyraxoncode-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-fontSize-heading3);
 }
 
 .chat-model-hover-description {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .chat-model-hover-title-row {
@@ -190,16 +190,16 @@
 .chat-model-hover-price-badge {
 	flex: 0 0 auto;
 	padding: 2px 8px;
-	border-radius: var(--vscode-cornerRadius-circle);
-	border: var(--vscode-strokeThickness) solid var(--vscode-contrastBorder, var(--vscode-editorWidget-border));
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-contrastBorder, var(--zyraxoncode-editorWidget-border));
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: nowrap;
 }
 
 .chat-model-hover-price-badge.high-cost {
-	color: var(--vscode-notificationsWarningIcon-foreground, var(--vscode-editorWarning-foreground));
-	border-color: var(--vscode-notificationsWarningIcon-foreground, var(--vscode-editorWarning-foreground));
+	color: var(--zyraxoncode-notificationsWarningIcon-foreground, var(--zyraxoncode-editorWarning-foreground));
+	border-color: var(--zyraxoncode-notificationsWarningIcon-foreground, var(--zyraxoncode-editorWarning-foreground));
 }
 
 .chat-model-hover-title-tags {
@@ -241,18 +241,18 @@
 	left: 0;
 	right: 0;
 	top: 50%;
-	border-top: var(--vscode-strokeThickness) dotted var(--vscode-descriptionForeground);
+	border-top: var(--zyraxoncode-strokeThickness) dotted var(--zyraxoncode-descriptionForeground);
 	opacity: 0.5;
 }
 
 .chat-model-hover-cost-heading {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	white-space: nowrap;
 	padding-right: 12px;
 }
 
 .chat-model-hover-cost-label {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: nowrap;
 	position: relative;
 	z-index: 1;
@@ -260,7 +260,7 @@
 
 .chat-model-hover-cost-label-text {
 	padding-right: 6px;
-	background-color: var(--model-hover-surface-background, var(--vscode-menu-background));
+	background-color: var(--model-hover-surface-background, var(--zyraxoncode-menu-background));
 }
 
 .chat-model-hover-cost-value {
@@ -285,19 +285,19 @@
 	top: 0;
 	bottom: 0;
 	width: 12px;
-	background-color: var(--model-hover-surface-background, var(--vscode-menu-background));
+	background-color: var(--model-hover-surface-background, var(--zyraxoncode-menu-background));
 }
 
 .chat-model-hover-cost-number {
 	padding-left: 6px;
-	font-weight: var(--vscode-fontWeight-semiBold);
-	color: var(--vscode-foreground);
-	background-color: var(--model-hover-surface-background, var(--vscode-menu-background));
+	font-weight: var(--zyraxoncode-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
+	background-color: var(--model-hover-surface-background, var(--zyraxoncode-menu-background));
 }
 
 .chat-model-hover-cost-value.subheader {
 	font-weight: normal;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	padding-left: 6px;
 }
 
@@ -307,7 +307,7 @@
 	flex-direction: column;
 	gap: 2px;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .chat-model-hover-context-label {
@@ -323,7 +323,7 @@
 
 .chat-model-hover-configurable-label {
 	flex: 0 0 auto;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	white-space: nowrap;
 }
 
@@ -341,5 +341,5 @@
 }
 
 .monaco-workbench .chat-model-hover-configurable-buttons > .monaco-button .codicon[class*='codicon-'] {
-	font-size: var(--vscode-codiconFontSize-compact);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 }

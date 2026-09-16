@@ -89,7 +89,7 @@ function renderProgressPart(
 		)
 	);
 
-	// .interactive-session provides CSS custom properties (--vscode-chat-font-size-body-s, etc.)
+	// .interactive-session provides CSS custom properties (--zyraxoncode-chat-font-size-body-s, etc.)
 	// .interactive-item-container .progress-container is the selector for layout styles
 	container.style.width = '400px';
 	container.style.padding = '8px';

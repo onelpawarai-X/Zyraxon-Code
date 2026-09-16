@@ -61,7 +61,7 @@ export class SessionsBrowserMain extends BrowserMain {
 
 		// Configuration — the sessions ConfigurationService works against the
 		// in-memory workspace model rather than a real .code-workspace file on disk.
-		const configurationCache = new ConfigurationCache([Schemas.file, Schemas.vscodeUserData], environmentService, fileService);
+		const configurationCache = new ConfigurationCache([Schemas.file, Schemas.zyraxoncodeUserData], environmentService, fileService);
 		const configurationService = new ConfigurationService(
 			userDataProfileService,
 			workspaceContextService,

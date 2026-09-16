@@ -16,8 +16,8 @@ import { NotificationPriority } from '../../../platform/notification/common/noti
 export class MainThreadProgress implements MainThreadProgressShape {
 
 	private static readonly URGENT_PROGRESS_SOURCES = [
-		'vscode.github-authentication',
-		'vscode.microsoft-authentication'
+		'zyraxoncode.github-authentication',
+		'zyraxoncode.zyraxon-authentication'
 	];
 
 	private readonly _progressService: IProgressService;

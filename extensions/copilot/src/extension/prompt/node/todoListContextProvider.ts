@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatParticipantToolToken } from 'vscode';
+import type { ChatParticipantToolToken } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
-import { LanguageModelTextPart } from '../../../vscodeTypes';
+import { LanguageModelTextPart } from '../../../zyraxoncodeTypes';
 import { ToolName } from '../../tools/common/toolNames';
 import { IToolsService } from '../../tools/common/toolsService';
 

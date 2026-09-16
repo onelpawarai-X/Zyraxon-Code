@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Node } from 'EmmetFlatNode';
 import { getFlatNode, offsetRangeToVsRange, validate } from './util';
 import { getRootNode } from './parseDocument';
 
 export function mergeLines() {
-	if (!validate(false) || !vscode.window.activeTextEditor) {
+	if (!validate(false) || !zyraxoncode.window.activeTextEditor) {
 		return;
 	}
 
-	const editor = vscode.window.activeTextEditor;
+	const editor = zyraxoncode.window.activeTextEditor;
 
 	const rootNode = getRootNode(editor.document, true);
 	if (!rootNode) {
@@ -30,7 +30,7 @@ export function mergeLines() {
 	});
 }
 
-function getRangesToReplace(document: vscode.TextDocument, selection: vscode.Selection, rootNode: Node): vscode.TextEdit | undefined {
+function getRangesToReplace(document: zyraxoncode.TextDocument, selection: zyraxoncode.Selection, rootNode: Node): zyraxoncode.TextEdit | undefined {
 	let startNodeToUpdate: Node | undefined;
 	let endNodeToUpdate: Node | undefined;
 
@@ -62,5 +62,5 @@ function getRangesToReplace(document: vscode.TextDocument, selection: vscode.Sel
 		textToReplaceWith += document.lineAt(i).text.trim();
 	}
 
-	return new vscode.TextEdit(rangeToReplace, textToReplaceWith);
+	return new zyraxoncode.TextEdit(rangeToReplace, textToReplaceWith);
 }

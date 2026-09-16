@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { API } from '../../tsServer/api';
 import { ClientCapability, ITypeScriptServiceClient } from '../../typescriptService';
 import { hasModifiedUnifiedConfig, readUnifiedConfig, ReadUnifiedConfigOptions } from '../../utils/configuration';
@@ -30,20 +30,20 @@ export class Condition extends Disposable {
 
 	public get value(): boolean { return this._value; }
 
-	private readonly _onDidChange = this._register(new vscode.EventEmitter<void>());
+	private readonly _onDidChange = this._register(new zyraxoncode.EventEmitter<void>());
 	public readonly onDidChange = this._onDidChange.event;
 }
 
 class ConditionalRegistration {
 	private state?: {
 		readonly enabled: boolean;
-		readonly registration: vscode.Disposable | undefined;
+		readonly registration: zyraxoncode.Disposable | undefined;
 	};
 
 	public constructor(
 		private readonly conditions: readonly Condition[],
-		private readonly doRegister: () => vscode.Disposable,
-		private readonly elseDoRegister?: () => vscode.Disposable
+		private readonly doRegister: () => zyraxoncode.Disposable,
+		private readonly elseDoRegister?: () => zyraxoncode.Disposable
 	) {
 		for (const condition of conditions) {
 			condition.onDidChange(() => this.update());
@@ -74,9 +74,9 @@ class ConditionalRegistration {
 
 export function conditionalRegistration(
 	conditions: readonly Condition[],
-	doRegister: () => vscode.Disposable,
-	elseDoRegister?: () => vscode.Disposable
-): vscode.Disposable {
+	doRegister: () => zyraxoncode.Disposable,
+	elseDoRegister?: () => zyraxoncode.Disposable
+): zyraxoncode.Disposable {
 	return new ConditionalRegistration(conditions, doRegister, elseDoRegister);
 }
 
@@ -101,7 +101,7 @@ export function requireHasModifiedUnifiedConfig(
 ) {
 	return new Condition(
 		() => hasModifiedUnifiedConfig(configValue, { fallbackSection }),
-		vscode.workspace.onDidChangeConfiguration
+		zyraxoncode.workspace.onDidChangeConfiguration
 	);
 }
 
@@ -113,7 +113,7 @@ export function requireGlobalUnifiedConfig(
 		() => {
 			return !!readUnifiedConfig(configValue, undefined, options);
 		},
-		vscode.workspace.onDidChangeConfiguration
+		zyraxoncode.workspace.onDidChangeConfiguration
 	);
 }
 
@@ -132,9 +132,9 @@ export function requireHasVsCodeExtension(
 ) {
 	return new Condition(
 		() => {
-			return extensionIds.some(extensionId => vscode.extensions.getExtension(extensionId));
+			return extensionIds.some(extensionId => zyraxoncode.extensions.getExtension(extensionId));
 		},
-		vscode.extensions.onDidChange
+		zyraxoncode.extensions.onDidChange
 	);
 }
 

@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Disposable } from '../util/dispose';
 import { isMarkdownFile } from '../util/file';
 import { ResourceMap } from '../util/resourceMap';
 
 export interface LastScrollLocation {
 	readonly line: number;
-	readonly uri: vscode.Uri;
+	readonly uri: zyraxoncode.Uri;
 }
 
 export class TopmostLineMonitor extends Disposable {
@@ -23,12 +23,12 @@ export class TopmostLineMonitor extends Disposable {
 	constructor() {
 		super();
 
-		if (vscode.window.activeTextEditor) {
-			const line = getVisibleLine(vscode.window.activeTextEditor);
-			this.setPreviousTextEditorLine({ uri: vscode.window.activeTextEditor.document.uri, line: line ?? 0 });
+		if (zyraxoncode.window.activeTextEditor) {
+			const line = getVisibleLine(zyraxoncode.window.activeTextEditor);
+			this.setPreviousTextEditorLine({ uri: zyraxoncode.window.activeTextEditor.document.uri, line: line ?? 0 });
 		}
 
-		this._register(vscode.window.onDidChangeTextEditorVisibleRanges(event => {
+		this._register(zyraxoncode.window.onDidChangeTextEditorVisibleRanges(event => {
 			if (isMarkdownFile(event.textEditor.document)) {
 				const line = getVisibleLine(event.textEditor);
 				if (typeof line === 'number') {
@@ -39,14 +39,14 @@ export class TopmostLineMonitor extends Disposable {
 		}));
 	}
 
-	readonly #onChanged = this._register(new vscode.EventEmitter<{ readonly resource: vscode.Uri; readonly line: number }>());
+	readonly #onChanged = this._register(new zyraxoncode.EventEmitter<{ readonly resource: zyraxoncode.Uri; readonly line: number }>());
 	public readonly onDidChanged = this.#onChanged.event;
 
 	public setPreviousStaticEditorLine(scrollLocation: LastScrollLocation): void {
 		this.#previousStaticEditorInfo.set(scrollLocation.uri, scrollLocation);
 	}
 
-	public getPreviousStaticEditorLineByUri(resource: vscode.Uri): number | undefined {
+	public getPreviousStaticEditorLineByUri(resource: zyraxoncode.Uri): number | undefined {
 		return this.#previousStaticEditorInfo.get(resource)?.line;
 	}
 
@@ -55,13 +55,13 @@ export class TopmostLineMonitor extends Disposable {
 		this.#previousTextEditorInfo.set(scrollLocation.uri, scrollLocation);
 	}
 
-	public getPreviousTextEditorLineByUri(resource: vscode.Uri): number | undefined {
+	public getPreviousTextEditorLineByUri(resource: zyraxoncode.Uri): number | undefined {
 		const scrollLoc = this.#previousTextEditorInfo.get(resource);
 		this.#previousTextEditorInfo.delete(resource);
 		return scrollLoc?.line;
 	}
 	public updateLine(
-		resource: vscode.Uri,
+		resource: zyraxoncode.Uri,
 		line: number
 	) {
 		if (!this.#pendingUpdates.has(resource)) {
@@ -88,7 +88,7 @@ export class TopmostLineMonitor extends Disposable {
  * Floor to get real line number
  */
 export function getVisibleLine(
-	editor: vscode.TextEditor
+	editor: zyraxoncode.TextEditor
 ): number | undefined {
 	if (!editor.visibleRanges.length) {
 		return undefined;

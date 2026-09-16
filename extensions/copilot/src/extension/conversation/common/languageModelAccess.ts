@@ -5,8 +5,8 @@
 
 
 import { IChatEndpoint, IChatEndpointTokenPricing } from '../../../platform/networking/common/networking';
-import * as l10n from '@vscode/l10n';
-import type { LanguageModelChatInformation, LanguageModelConfigurationSchema } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { LanguageModelChatInformation, LanguageModelConfigurationSchema } from 'zyraxoncode';
 
 /**
  * Picks a sensible default reasoning-effort level given the levels advertised
@@ -148,7 +148,7 @@ export function getModelCapabilitiesDescription(endpoint: IChatEndpoint | Langua
  * Documentation link surfaced in the Auto model description.
  * NOTE: Also defined in src/vs/workbench/contrib/chat/common/languageModels.ts (ILanguageModelChatMetadata.autoModelSelectionDocsUrl) — keep in sync.
  */
-const AUTO_MODEL_DOCS_URL = 'https://docs.github.com/en/copilot/concepts/models/auto-model-selection';
+const AUTO_MODEL_DOCS_URL = '__ZYRAXKEEP__0_';
 
 /**
  * Classifies an Auto discount range (given as fractions, e.g. `0.1` for 10%)

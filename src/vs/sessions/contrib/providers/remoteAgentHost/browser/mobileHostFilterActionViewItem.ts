@@ -70,7 +70,7 @@ export class MobileHostFilterActionViewItem extends HostFilterActionViewItem {
 		const targetDocument = targetWindow.document;
 
 		// Append inside the workbench container so CSS theme variables are
-		// inherited. The workbench element sets all --vscode-* custom
+		// inherited. The workbench element sets all --zyraxoncode-* custom
 		// properties; rendering outside it leaves them undefined.
 		const workbenchContainer = dom.findParentWithClass(this.element!, 'monaco-workbench')
 			?? targetDocument.body;

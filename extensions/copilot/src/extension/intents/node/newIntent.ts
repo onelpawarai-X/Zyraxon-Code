@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { Raw } from '@vscode/prompt-tsx';
+import * as l10n from '@zyraxoncode/l10n';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import { parse } from 'jsonc-parser';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -20,7 +20,7 @@ import { createServiceIdentifier } from '../../../util/common/services';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import * as path from '../../../util/vs/base/common/path';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseFileTreePart, MarkdownString, Uri } from '../../../vscodeTypes';
+import { ChatResponseFileTreePart, MarkdownString, Uri } from '../../../zyraxoncodeTypes';
 import { Intent } from '../../common/constants';
 import { commandUri } from '../../linkify/common/commands';
 import { convertFileTreeToChatResponseFileTree } from '../../prompt/common/fileTreeParser';
@@ -32,7 +32,7 @@ import { NewWorkspaceContentsPromptProps } from '../../prompts/node/panel/newWor
 import { FileContentsGenerator, ProjectSpecificationGenerator } from './generateNewWorkspaceContent';
 
 
-interface FileTreeDataWithContent extends vscode.ChatResponseFileTree {
+interface FileTreeDataWithContent extends zyraxoncode.ChatResponseFileTree {
 	content?: Promise<Uint8Array | undefined>;
 	ctime?: number;
 	type?: FileType;
@@ -166,7 +166,7 @@ export class NewWorkspaceCopilotContentManager {
 		return currentNode;
 	}
 
-	private _prefetch(userPrompt: string, projectStructure: string, projectSpecification: Promise<string>, fileTree: vscode.ChatResponseFileTree, chatMessages: Raw.ChatMessage[]): FileTreeDataWithContent {
+	private _prefetch(userPrompt: string, projectStructure: string, projectSpecification: Promise<string>, fileTree: zyraxoncode.ChatResponseFileTree, chatMessages: Raw.ChatMessage[]): FileTreeDataWithContent {
 		const ctime = Date.now();
 		if (fileTree.children) {
 			return { ...fileTree, type: FileType.Directory, children: fileTree.children.map((child) => this._prefetch(userPrompt, projectStructure, projectSpecification, child, chatMessages)), ctime };
@@ -198,7 +198,7 @@ export class NewWorkspaceCopilotContentManager {
 	}
 
 	private _getProjectMetadata(fullPath: string) {
-		// Format: vscode-copilot-workspace://<sessionId>/<projectName>/<filePath>
+		// Format: zyraxoncode-copilot-workspace://<sessionId>/<projectName>/<filePath>
 		const [, projectName, ...path] = fullPath.split('/');
 		return { projectName, path };
 	}
@@ -243,7 +243,7 @@ class NewWorkspaceGitHubContentManager {
 	}
 
 	private _getProjectMetadata(fullPath: string) {
-		// Format: vscode-copilot-github-workspace://<sessionId>/<projectName>/<filePath>
+		// Format: zyraxoncode-copilot-github-workspace://<sessionId>/<projectName>/<filePath>
 		const [, projectName, ...path] = fullPath.split('/');
 		return { projectName, path };
 	}
@@ -293,7 +293,7 @@ class NewWorkspaceFileContentManager {
 	}
 
 	private _getFileMetadata(fullPath: string) {
-		// Format: vscode-copilot-file://<sessionId>/<projectName>/<filePath>
+		// Format: zyraxoncode-copilot-file://<sessionId>/<projectName>/<filePath>
 		const [, projectName, ...path] = fullPath.split('/');
 		return { projectName, path };
 	}
@@ -308,7 +308,7 @@ class NewWorkspaceFileContentManager {
 	}
 }
 
-function findMatchingNodeFromPath(fileTree: vscode.ChatResponseFileTree[], pathElements: string[]): FileTreeDataWithContent | undefined {
+function findMatchingNodeFromPath(fileTree: zyraxoncode.ChatResponseFileTree[], pathElements: string[]): FileTreeDataWithContent | undefined {
 	let currentNode: FileTreeDataWithContent | undefined = undefined;
 	for (const element of pathElements) {
 		if (currentNode) {
@@ -348,7 +348,7 @@ export class NewWorkspaceIntent implements IIntent {
 		return this.instantiationService.createInstance(NewWorkspaceIntentInvocation, this, endpoint, location);
 	}
 }
-function createProjectCommand(fileTree: ChatResponseFileTreePart, workspaceRoot: Uri | undefined): vscode.Command {
+function createProjectCommand(fileTree: ChatResponseFileTreePart, workspaceRoot: Uri | undefined): zyraxoncode.Command {
 	return {
 		command: CreateProjectCommand,
 		arguments: [fileTree, workspaceRoot],
@@ -356,7 +356,7 @@ function createProjectCommand(fileTree: ChatResponseFileTreePart, workspaceRoot:
 	};
 }
 
-function createFileCommand(fileTree: ChatResponseFileTreePart): vscode.Command {
+function createFileCommand(fileTree: ChatResponseFileTreePart): zyraxoncode.Command {
 	return {
 		command: CreateFileCommand,
 		arguments: [fileTree],
@@ -388,7 +388,7 @@ export class NewWorkspaceIntentInvocation implements IIntentInvocation {
 		return false;
 	}
 
-	async buildPrompt(promptContext: IBuildPromptContext, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken) {
+	async buildPrompt(promptContext: IBuildPromptContext, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken) {
 		// TODO: @bhavyaus enable using project templates with variables
 		const { query, history, chatVariables } = promptContext;
 		const useTemplates = !chatVariables.hasVariables() && history[history.length - 1]?.request?.message !== query && await this.getShouldUseProjectTemplate();
@@ -407,7 +407,7 @@ export class NewWorkspaceIntentInvocation implements IIntentInvocation {
 		return result;
 	}
 
-	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		const responseProcessor = new NewWorkspaceResponseProcessor(this.newWorkspacePreviewContentManager, this.workspaceService, this.githubContentMetadata);
 		return responseProcessor.processResponse(context, inputStream, outputStream, token);
 	}
@@ -422,8 +422,8 @@ function convertGitHubItemsToChatResponseFileTree(items: GithubRepositoryItem[],
 		paths = items.map(item => item.path);
 	}
 	const rootName = paths[0].split('/')[0];
-	const root: vscode.ChatResponseFileTree = { name: rootName, children: [] };
-	const result: { [key: string]: vscode.ChatResponseFileTree } = { rootName: root };
+	const root: zyraxoncode.ChatResponseFileTree = { name: rootName, children: [] };
+	const result: { [key: string]: zyraxoncode.ChatResponseFileTree } = { rootName: root };
 	for (const path of paths) {
 		const pathParts = path.split('/');
 		let currentPath = rootName;
@@ -432,7 +432,7 @@ function convertGitHubItemsToChatResponseFileTree(items: GithubRepositoryItem[],
 			const pathPart = pathParts[i];
 			currentPath += `/${pathPart}`;
 			if (!result[currentPath]) {
-				const newNode: vscode.ChatResponseFileTree = { name: pathPart };
+				const newNode: zyraxoncode.ChatResponseFileTree = { name: pathPart };
 				if (currentNode.children === undefined) {
 					currentNode.children = [];
 				}
@@ -442,7 +442,7 @@ function convertGitHubItemsToChatResponseFileTree(items: GithubRepositoryItem[],
 			currentNode = result[currentPath];
 		}
 	}
-	let baseTree: vscode.ChatResponseFileTree[];
+	let baseTree: zyraxoncode.ChatResponseFileTree[];
 	if (isRepoRoot) {
 		baseTree = root.children?.[0].children ?? [];
 	} else {
@@ -452,9 +452,9 @@ function convertGitHubItemsToChatResponseFileTree(items: GithubRepositoryItem[],
 	return new ChatResponseFileTreePart([{ name: rootName, children: sortedTree }], baseUri);
 }
 
-export const CopilotWorkspaceScheme = 'vscode-copilot-workspace';
-export const GithubWorkspaceScheme = 'vscode-copilot-github-workspace';
-export const CopilotFileScheme = 'vscode-copilot-file';
+export const CopilotWorkspaceScheme = 'zyraxoncode-copilot-workspace';
+export const GithubWorkspaceScheme = 'zyraxoncode-copilot-github-workspace';
+export const CopilotFileScheme = 'zyraxoncode-copilot-file';
 
 function getNewPreviewUri(requestId: string | undefined, filePath?: string, isGithubRepo: boolean = false,) {
 	return Uri.from({
@@ -475,7 +475,7 @@ class NewWorkspaceResponseProcessor {
 		private readonly githubContentMetadata?: NewWorkspaceGithubContentMetadata
 	) { }
 
-	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: vscode.CancellationToken): Promise<void> {
+	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: zyraxoncode.CancellationToken): Promise<void> {
 		const { turn, messages } = context;
 
 		let isBufferingFileTree = false;
@@ -594,7 +594,7 @@ class NewWorkspaceResponseProcessor {
 		this.pushCommands(turn.id, outputStream);
 	}
 
-	pushCommands(turnRequestId: string, outputStream: vscode.ChatResponseStream): void {
+	pushCommands(turnRequestId: string, outputStream: zyraxoncode.ChatResponseStream): void {
 		// Extract the Repo structure here
 		const fileTree = this.newWorkspacePreviewContentManager.getFileTree(turnRequestId);
 		if (!fileTree) {

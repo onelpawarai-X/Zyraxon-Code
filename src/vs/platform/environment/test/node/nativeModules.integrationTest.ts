@@ -50,19 +50,19 @@ flakySuite('Native Modules (all platforms)', () => {
 		assert.ok(result, testErrorMessage('native-keymap'));
 	});
 
-	test('@vscode/native-watchdog', async () => {
-		const watchDog = await import('@vscode/native-watchdog');
-		assert.ok(typeof watchDog.start === 'function', testErrorMessage('@vscode/native-watchdog'));
+	test('@zyraxoncode/native-watchdog', async () => {
+		const watchDog = await import('@zyraxoncode/native-watchdog');
+		assert.ok(typeof watchDog.start === 'function', testErrorMessage('@zyraxoncode/native-watchdog'));
 	});
 
-	test('@vscode/sudo-prompt', async () => {
-		const prompt = await import('@vscode/sudo-prompt');
-		assert.ok(typeof prompt.exec === 'function', testErrorMessage('@vscode/sudo-prompt'));
+	test('@zyraxoncode/sudo-prompt', async () => {
+		const prompt = await import('@zyraxoncode/sudo-prompt');
+		assert.ok(typeof prompt.exec === 'function', testErrorMessage('@zyraxoncode/sudo-prompt'));
 	});
 
-	test('@vscode/policy-watcher', async () => {
-		const watcher = await import('@vscode/policy-watcher');
-		assert.ok(typeof watcher.createWatcher === 'function', testErrorMessage('@vscode/policy-watcher'));
+	test('@zyraxoncode/policy-watcher', async () => {
+		const watcher = await import('@zyraxoncode/policy-watcher');
+		assert.ok(typeof watcher.createWatcher === 'function', testErrorMessage('@zyraxoncode/policy-watcher'));
 	});
 
 	test('node-pty', async () => {
@@ -70,10 +70,10 @@ flakySuite('Native Modules (all platforms)', () => {
 		assert.ok(typeof nodePty.spawn === 'function', testErrorMessage('node-pty'));
 	});
 
-	test('@vscode/spdlog', async () => {
-		const spdlog = await import('@vscode/spdlog');
-		assert.ok(typeof spdlog.createRotatingLogger === 'function', testErrorMessage('@vscode/spdlog'));
-		assert.ok(typeof spdlog.version === 'number', testErrorMessage('@vscode/spdlog'));
+	test('@zyraxoncode/spdlog', async () => {
+		const spdlog = await import('@zyraxoncode/spdlog');
+		assert.ok(typeof spdlog.createRotatingLogger === 'function', testErrorMessage('@zyraxoncode/spdlog'));
+		assert.ok(typeof spdlog.version === 'number', testErrorMessage('@zyraxoncode/spdlog'));
 	});
 
 	test('@parcel/watcher', async () => {
@@ -81,19 +81,19 @@ flakySuite('Native Modules (all platforms)', () => {
 		assert.ok(typeof parcelWatcher.subscribe === 'function', testErrorMessage('@parcel/watcher'));
 	});
 
-	test('@vscode/ripgrep-universal', async () => {
-		const ripgrep = await import('@vscode/ripgrep-universal');
-		assert.ok(typeof ripgrep.rgPath === 'string', testErrorMessage('@vscode/ripgrep-universal'));
+	test('@zyraxoncode/ripgrep-universal', async () => {
+		const ripgrep = await import('@zyraxoncode/ripgrep-universal');
+		assert.ok(typeof ripgrep.rgPath === 'string', testErrorMessage('@zyraxoncode/ripgrep-universal'));
 	});
 
-	test('vscode-regexpp', async () => {
-		const regexpp = await import('vscode-regexpp');
-		assert.ok(typeof regexpp.RegExpParser === 'function', testErrorMessage('vscode-regexpp'));
+	test('zyraxoncode-regexpp', async () => {
+		const regexpp = await import('zyraxoncode-regexpp');
+		assert.ok(typeof regexpp.RegExpParser === 'function', testErrorMessage('zyraxoncode-regexpp'));
 	});
 
-	test('@vscode/sqlite3', async () => {
-		const { default: sqlite3 } = await import('@vscode/sqlite3');
-		assert.ok(typeof sqlite3.Database === 'function', testErrorMessage('@vscode/sqlite3'));
+	test('@zyraxoncode/sqlite3', async () => {
+		const { default: sqlite3 } = await import('@zyraxoncode/sqlite3');
+		assert.ok(typeof sqlite3.Database === 'function', testErrorMessage('@zyraxoncode/sqlite3'));
 	});
 
 	test('http-proxy-agent', async () => {
@@ -106,9 +106,9 @@ flakySuite('Native Modules (all platforms)', () => {
 		assert.ok(typeof mod.HttpsProxyAgent === 'function', testErrorMessage('https-proxy-agent'));
 	});
 
-	test('@vscode/proxy-agent', async () => {
-		const proxyAgent = await import('@vscode/proxy-agent');
-		// This call will load `@vscode/proxy-agent` which is a native module that we want to test on Windows
+	test('@zyraxoncode/proxy-agent', async () => {
+		const proxyAgent = await import('@zyraxoncode/proxy-agent');
+		// This call will load `@zyraxoncode/proxy-agent` which is a native module that we want to test on Windows
 		const windowsCerts = await proxyAgent.loadSystemCertificates({
 			loadSystemCertificatesFromNode: () => undefined,
 			log: {
@@ -119,12 +119,12 @@ flakySuite('Native Modules (all platforms)', () => {
 				error: () => { }
 			}
 		});
-		assert.ok(windowsCerts.length > 0, testErrorMessage('@vscode/proxy-agent'));
+		assert.ok(windowsCerts.length > 0, testErrorMessage('@zyraxoncode/proxy-agent'));
 	});
 
-	test('@vscode/os-proxy-resolver', async () => {
-		const proxyResolver = await import('@vscode/os-proxy-resolver');
-		const proxies = await proxyResolver.resolveProxy('https://example.com/');
+	test('@zyraxoncode/os-proxy-resolver', async () => {
+		const proxyResolver = await import('@zyraxoncode/os-proxy-resolver');
+		const proxies = await proxyResolver.resolveProxy('__ZYRAXKEEP__0_');
 		const config = await proxyResolver.readProxyConfig();
 		assert.deepStrictEqual({
 			resolveProxy: proxies.length > 0,
@@ -132,17 +132,17 @@ flakySuite('Native Modules (all platforms)', () => {
 		}, {
 			resolveProxy: true,
 			readProxyConfig: true,
-		}, testErrorMessage('@vscode/os-proxy-resolver'));
+		}, testErrorMessage('@zyraxoncode/os-proxy-resolver'));
 	});
 });
 
 (!isWindows ? suite.skip : suite)('Native Modules (Windows)', () => {
 
-	test('@vscode/windows-mutex', async () => {
-		const mutex = await import('@vscode/windows-mutex');
-		assert.ok(mutex && typeof mutex.isActive === 'function', testErrorMessage('@vscode/windows-mutex'));
-		assert.ok(typeof mutex.isActive === 'function', testErrorMessage('@vscode/windows-mutex'));
-		assert.ok(typeof mutex.Mutex === 'function', testErrorMessage('@vscode/windows-mutex'));
+	test('@zyraxoncode/windows-mutex', async () => {
+		const mutex = await import('@zyraxoncode/windows-mutex');
+		assert.ok(mutex && typeof mutex.isActive === 'function', testErrorMessage('@zyraxoncode/windows-mutex'));
+		assert.ok(typeof mutex.isActive === 'function', testErrorMessage('@zyraxoncode/windows-mutex'));
+		assert.ok(typeof mutex.Mutex === 'function', testErrorMessage('@zyraxoncode/windows-mutex'));
 	});
 
 	test('windows-foreground-love', async () => {
@@ -153,26 +153,26 @@ flakySuite('Native Modules (all platforms)', () => {
 		assert.ok(typeof result === 'boolean', testErrorMessage('windows-foreground-love'));
 	});
 
-	test('@vscode/windows-process-tree', async () => {
-		const processTree = await import('@vscode/windows-process-tree');
-		assert.ok(typeof processTree.getProcessTree === 'function', testErrorMessage('@vscode/windows-process-tree'));
+	test('@zyraxoncode/windows-process-tree', async () => {
+		const processTree = await import('@zyraxoncode/windows-process-tree');
+		assert.ok(typeof processTree.getProcessTree === 'function', testErrorMessage('@zyraxoncode/windows-process-tree'));
 
 		return new Promise((resolve, reject) => {
 			processTree.getProcessTree(process.pid, tree => {
 				if (tree) {
 					resolve();
 				} else {
-					reject(new Error(testErrorMessage('@vscode/windows-process-tree')));
+					reject(new Error(testErrorMessage('@zyraxoncode/windows-process-tree')));
 				}
 			});
 		});
 	});
 
-	test('@vscode/windows-registry', async () => {
-		const windowsRegistry = await import('@vscode/windows-registry');
-		assert.ok(typeof windowsRegistry.GetStringRegKey === 'function', testErrorMessage('@vscode/windows-registry'));
+	test('@zyraxoncode/windows-registry', async () => {
+		const windowsRegistry = await import('@zyraxoncode/windows-registry');
+		assert.ok(typeof windowsRegistry.GetStringRegKey === 'function', testErrorMessage('@zyraxoncode/windows-registry'));
 
 		const result = windowsRegistry.GetStringRegKey('HKEY_LOCAL_MACHINE', 'SOFTWARE\\Zyraxon\\Windows NT\\CurrentVersion', 'EditionID');
-		assert.ok(typeof result === 'string' || typeof result === 'undefined', testErrorMessage('@vscode/windows-registry'));
+		assert.ok(typeof result === 'string' || typeof result === 'undefined', testErrorMessage('@zyraxoncode/windows-registry'));
 	});
 });

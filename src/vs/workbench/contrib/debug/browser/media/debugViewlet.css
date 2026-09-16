@@ -63,7 +63,7 @@
 	padding-left: 2px;
 	padding-right: 1px;
 	margin-left: 1px;
-	border-radius: var(--vscode-cornerRadius-small) 0 0 var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small) 0 0 var(--zyraxoncode-cornerRadius-small);
 }
 
 .monaco-workbench .monaco-action-bar .start-debug-action-item .configuration {
@@ -88,13 +88,13 @@
 	gap: 4px;
 	min-width: 0;
 	flex: 1;
-	border-radius: 0 var(--vscode-cornerRadius-small) var(--vscode-cornerRadius-small) 0;
-	color: var(--vscode-dropdown-foreground);
+	border-radius: 0 var(--zyraxoncode-cornerRadius-small) var(--zyraxoncode-cornerRadius-small) 0;
+	color: var(--zyraxoncode-dropdown-foreground);
 	outline-offset: -1px;
 }
 
 .monaco-workbench .monaco-action-bar .start-debug-action-item .configuration .monaco-dropdown > .dropdown-label:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 }
 
 .monaco-workbench .monaco-action-bar .start-debug-action-item .configuration .monaco-dropdown > .dropdown-label .start-debug-action-item-label {
@@ -326,8 +326,8 @@
 }
 .debug-view-content .monaco-tl-contents .highlight {
 	color: unset !important;
-	background-color: var(--vscode-list-filterMatchBackground);
-	outline: 1px dotted var(--vscode-list-filterMatchBorder);
+	background-color: var(--zyraxoncode-list-filterMatchBackground);
+	outline: 1px dotted var(--zyraxoncode-list-filterMatchBorder);
 	outline-offset: -1px;
 }
 

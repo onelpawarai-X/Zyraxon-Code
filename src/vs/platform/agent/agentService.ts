@@ -272,7 +272,7 @@ function createAgentService(): IAgentService {
 					glob: 'allow',
 					grep: 'allow',
 					bash: 'allow',
-					screen_vision: 'deny'
+					screen_vision: 'allow'
 				}, userPermission),
 				mode: 'primary',
 				native: true

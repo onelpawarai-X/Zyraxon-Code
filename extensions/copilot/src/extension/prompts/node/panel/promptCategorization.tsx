@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { generateTaxonomyPrompt } from '../../../prompt/common/promptCategorizationTaxonomy';
 import { SafetyRules } from '../base/safetyRules';
 import { CurrentEditor } from './currentEditor';

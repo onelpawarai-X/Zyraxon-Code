@@ -48,7 +48,7 @@ function renderCollapsible(context: ComponentFixtureContext, commandText: string
 	const contentElement = dom.$('.chat-terminal-output-placeholder');
 	contentElement.textContent = '(terminal output would appear here)';
 	contentElement.style.padding = '8px';
-	contentElement.style.color = 'var(--vscode-descriptionForeground)';
+	contentElement.style.color = 'var(--zyraxoncode-descriptionForeground)';
 
 	const wrapper = disposableStore.add(instantiationService.createInstance(
 		ChatTerminalThinkingCollapsibleWrapper,

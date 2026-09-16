@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { randomUUID } from 'crypto';
-import type { CancellationToken, ChatRequest, LanguageModelToolInformation, Progress } from 'vscode';
+import type { CancellationToken, ChatRequest, LanguageModelToolInformation, Progress } from 'zyraxoncode';
 import { IAuthenticationChatUpgradeService } from '../../../platform/authentication/common/authenticationUpgrade';
 import { IChatHookService } from '../../../platform/chat/common/chatHookService';
 import { ChatLocation, ChatResponse } from '../../../platform/chat/common/commonTypes';
@@ -19,7 +19,7 @@ import { IRequestLogger } from '../../../platform/requestLogger/common/requestLo
 import { IExperimentationService } from '../../../platform/telemetry/common/nullExperimentationService';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseProgressPart, ChatResponseReferencePart } from '../../../vscodeTypes';
+import { ChatResponseProgressPart, ChatResponseReferencePart } from '../../../zyraxoncodeTypes';
 import { IToolCallingLoopOptions, ToolCallingLoop, ToolCallingLoopFetchOptions } from '../../intents/node/toolCallingLoop';
 import { PromptRenderer } from '../../prompts/node/base/promptRenderer';
 import { CodebaseAgentPrompt } from '../../prompts/node/panel/codebaseAgentPrompt';
@@ -79,7 +79,7 @@ export class CodebaseToolCallingLoop extends ToolCallingLoop<ICodebaseToolCallin
 
 	protected async getAvailableTools(): Promise<LanguageModelToolInformation[]> {
 		const endpoint = await this.getEndpoint(this.options.request);
-		return this.toolsService.getEnabledTools(this.options.request, endpoint, tool => tool.tags.includes('vscode_codesearch'));
+		return this.toolsService.getEnabledTools(this.options.request, endpoint, tool => tool.tags.includes('zyraxoncode_codesearch'));
 	}
 
 	protected async fetch({ messages, finishedCb, requestOptions }: ToolCallingLoopFetchOptions, token: CancellationToken): Promise<ChatResponse> {

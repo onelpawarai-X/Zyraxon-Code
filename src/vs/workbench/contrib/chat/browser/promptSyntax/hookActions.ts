@@ -401,22 +401,22 @@ export async function showConfigureHooksQuickPick(
 							.map(makeItem);
 					} else {
 						// No target: group into Default (shared), ZYRAXON Code Only, Copilot CLI Only
-						const vscodeTypes = new Set(Object.values(HOOKS_BY_TARGET[Target.VSCode]));
+						const zyraxoncodeTypes = new Set(Object.values(HOOKS_BY_TARGET[Target.ZyraxonCode]));
 						const copilotTypes = new Set(Object.values(HOOKS_BY_TARGET[Target.GitHubCopilot]));
 						const allEntries = Object.entries(HOOK_METADATA) as [HookType, IHookTypeMeta][];
 
-						const shared = allEntries.filter(([h]) => vscodeTypes.has(h) && copilotTypes.has(h));
-						const vscodeOnly = allEntries.filter(([h]) => vscodeTypes.has(h) && !copilotTypes.has(h));
-						const copilotOnly = allEntries.filter(([h]) => !vscodeTypes.has(h) && copilotTypes.has(h));
+						const shared = allEntries.filter(([h]) => zyraxoncodeTypes.has(h) && copilotTypes.has(h));
+						const zyraxoncodeOnly = allEntries.filter(([h]) => zyraxoncodeTypes.has(h) && !copilotTypes.has(h));
+						const copilotOnly = allEntries.filter(([h]) => !zyraxoncodeTypes.has(h) && copilotTypes.has(h));
 
 						pickerItems = [];
 						if (shared.length > 0) {
 							pickerItems.push({ type: 'separator', label: localize('hookSection.default', "Local/Copilot CLI Agents") });
 							pickerItems.push(...shared.map(makeItem));
 						}
-						if (vscodeOnly.length > 0) {
-							pickerItems.push({ type: 'separator', label: localize('hookSection.vscodeOnly', "Local Agents") });
-							pickerItems.push(...vscodeOnly.map(makeItem));
+						if (zyraxoncodeOnly.length > 0) {
+							pickerItems.push({ type: 'separator', label: localize('hookSection.zyraxoncodeOnly', "Local Agents") });
+							pickerItems.push(...zyraxoncodeOnly.map(makeItem));
 						}
 						if (copilotOnly.length > 0) {
 							pickerItems.push({ type: 'separator', label: localize('hookSection.copilotCliOnly', "Copilot CLI Agents") });
@@ -776,7 +776,7 @@ export async function showConfigureHooksQuickPick(
 					const newFileFormat = getHookSourceFormat(hookFileUri);
 					const isClaudeNewFile = newFileFormat === HookSourceFormat.Claude;
 					const isCopilotCliOnly = !isClaudeNewFile
-						&& !new Set(Object.values(HOOKS_BY_TARGET[Target.VSCode])).has(selectedHookType!.hookType)
+						&& !new Set(Object.values(HOOKS_BY_TARGET[Target.ZyraxonCode])).has(selectedHookType!.hookType)
 						&& new Set(Object.values(HOOKS_BY_TARGET[Target.GitHubCopilot])).has(selectedHookType!.hookType);
 					const hookTypeKey = isClaudeNewFile
 						? (getClaudeHookTypeName(selectedHookType!.hookType) ?? selectedHookType!.hookType)

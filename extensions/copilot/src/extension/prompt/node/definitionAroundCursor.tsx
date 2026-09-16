@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptPiece, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, PromptPiece, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IIgnoreService } from '../../../platform/ignore/common/ignoreService';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { TreeSitterOffsetRange } from '../../../platform/parser/node/nodes';
 import { NodeToDocumentContext } from '../../../platform/parser/node/parserImpl';
-import { IParserService, treeSitterOffsetRangeToVSCodeRange as toRange, vscodeToTreeSitterOffsetRange as toTSOffsetRange } from '../../../platform/parser/node/parserService';
+import { IParserService, treeSitterOffsetRangeToZyraxonCodeRange as toRange, zyraxoncodeToTreeSitterOffsetRange as toTSOffsetRange } from '../../../platform/parser/node/parserService';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
 import { CodeContextRegion, CodeContextTracker } from '../../inlineChat/node/codeContextRegion';
 import { IDocumentContext } from './documentContext';
@@ -43,7 +43,7 @@ export class DefinitionAroundCursor extends PromptElement<Props, State> {
 		super(props);
 	}
 
-	override async prepare(sizing: PromptSizing, progress?: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart> | undefined, token?: vscode.CancellationToken | undefined): Promise<State> {
+	override async prepare(sizing: PromptSizing, progress?: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart> | undefined, token?: zyraxoncode.CancellationToken | undefined): Promise<State> {
 		if (await this._ignoreService.isCopilotIgnored(this.props.documentContext.document.uri)) {
 			return { k: 'ignored' };
 		}
@@ -71,10 +71,10 @@ export class DefinitionAroundCursor extends PromptElement<Props, State> {
 }
 
 export type NodeToDocument = {
-	readonly range: vscode.Range;
+	readonly range: zyraxoncode.Range;
 	readonly identifier?: string;
 };
-export async function determineNodeToDocument(parserService: IParserService, telemetryService: ITelemetryService, ctx: IDocumentContext): Promise<{ range: vscode.Range; identifier?: string }> {
+export async function determineNodeToDocument(parserService: IParserService, telemetryService: ITelemetryService, ctx: IDocumentContext): Promise<{ range: zyraxoncode.Range; identifier?: string }> {
 
 	const selectionRange = toTSOffsetRange(ctx.selection, ctx.document);
 
@@ -99,7 +99,7 @@ export async function determineNodeToDocument(parserService: IParserService, tel
 		range: rangeOfNodeToDocument,
 	};
 }
-function generateDocContext(endpoint: IChatEndpoint, ctx: IDocumentContext, range: vscode.Range) {
+function generateDocContext(endpoint: IChatEndpoint, ctx: IDocumentContext, range: zyraxoncode.Range) {
 
 	const tracker = new CodeContextTracker((endpoint.modelMaxPromptTokens * 4) / 3);
 	const rangeInfo = new CodeContextRegion(tracker, ctx.document, ctx.language);

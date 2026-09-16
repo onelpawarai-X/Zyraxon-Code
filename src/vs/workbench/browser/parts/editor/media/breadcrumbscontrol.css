@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 .monaco-workbench.vs .breadcrumbs-control {
-	border-bottom: 1px solid var(--vscode-editorWidget-border);
+	border-bottom: 1px solid var(--zyraxoncode-editorWidget-border);
 }
 
 .monaco-workbench .part.editor > .content .editor-group-container .breadcrumbs-control.hidden {
@@ -30,8 +30,8 @@
 	padding: 0 4px 0 8px;
 	cursor: pointer;
 	font-size: 11px;
-	background: var(--vscode-breadcrumb-background);
-	color: var(--vscode-breadcrumb-foreground);
+	background: var(--zyraxoncode-breadcrumb-background);
+	color: var(--zyraxoncode-breadcrumb-foreground);
 }
 
 .monaco-workbench .breadcrumbs-control.with-editor-type > .breadcrumbs-editor-type.hidden {
@@ -39,7 +39,7 @@
 }
 
 .monaco-workbench .breadcrumbs-control.with-editor-type > .breadcrumbs-editor-type:hover {
-	color: var(--vscode-breadcrumb-focusForeground);
+	color: var(--zyraxoncode-breadcrumb-focusForeground);
 }
 
 .monaco-workbench .breadcrumbs-control.with-editor-type > .breadcrumbs-editor-type > .label {

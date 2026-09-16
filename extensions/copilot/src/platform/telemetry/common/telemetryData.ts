@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { TelemetryTrustedValue } from 'vscode';
+import type { TelemetryTrustedValue } from 'zyraxoncode';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { IConfigurationService } from '../../configuration/common/configurationService';
 import { IEnvService } from '../../env/common/envService';
@@ -17,7 +17,7 @@ export class TelemetryData {
 	displayedTime?: number;
 
 	private static keysExemptedFromSanitization: string[] = [
-		'VSCode.ABExp.Features',
+		'ZyraxonCode.ABExp.Features',
 		'abexp.assignmentcontext',
 	];
 
@@ -71,7 +71,7 @@ export class TelemetryData {
 
 		this.properties['common_extname'] = envService.getEditorPluginInfo().name;
 		this.properties['common_extversion'] = envService.getEditorPluginInfo().version;
-		this.properties['common_vscodeversion'] = envService.getEditorInfo().format();
+		this.properties['common_zyraxoncodeversion'] = envService.getEditorInfo().format();
 	}
 
 	/**
@@ -206,5 +206,5 @@ function addRequiredProperties(envService: IEnvService, properties: { [key: stri
 	properties['unique_id'] = generateUuid(); // add a unique id to the telemetry event so copilot-foundations can correlate with duplicate events
 	properties['common_extname'] = envService.getEditorPluginInfo().name;
 	properties['common_extversion'] = envService.getEditorPluginInfo().version;
-	properties['common_vscodeversion'] = envService.getEditorInfo().format();
+	properties['common_zyraxoncodeversion'] = envService.getEditorInfo().format();
 }

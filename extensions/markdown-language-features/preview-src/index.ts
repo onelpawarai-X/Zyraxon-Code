@@ -24,7 +24,7 @@ let documentVersion = 0;
 let documentResource = settings.settings.source;
 let lineChanges = settings.settings.lineChanges;
 
-const vscode = acquireVsCodeApi();
+const zyraxoncode = acquireVsCodeApi();
 
 const onDiffScroll = (mappedLine: number) => {
 	scrollDisabledCount = 1;
@@ -45,7 +45,7 @@ interface State {
 	fragment?: string;
 }
 
-const originalState: State = vscode.getState() ?? {};
+const originalState: State = zyraxoncode.getState() ?? {};
 const state: State = {
 	...originalState,
 	...getData<Partial<State>>('data-state')
@@ -58,9 +58,9 @@ if (typeof originalState.scrollProgress !== 'undefined'
 }
 
 // Make sure to sync ZYRAXON Code state here
-vscode.setState(state);
+zyraxoncode.setState(state);
 
-const messaging = createPosterForVsCode(vscode, settings);
+const messaging = createPosterForVsCode(zyraxoncode, settings);
 
 window.cspAlerter.setPoster(messaging);
 window.styleLoadingMonitor.setPoster(messaging);
@@ -129,7 +129,7 @@ onceDocumentLoaded(() => {
 					fragment = settings.settings.fragment;
 				}
 				state.fragment = undefined;
-				vscode.setState(state);
+				zyraxoncode.setState(state);
 
 				const element = getLineElementForFragment(fragment, documentVersion);
 				if (element) {
@@ -191,22 +191,22 @@ function addImageContexts() {
 		const imageSource = img.getAttribute('data-src');
 		const isLocalFile = imageSource && !(isOfScheme(Schemes.http, imageSource) || isOfScheme(Schemes.https, imageSource));
 		const webviewSection = isLocalFile ? 'localImage' : 'image';
-		img.setAttribute('data-vscode-context', JSON.stringify({ webviewSection, id: img.id, 'preventDefaultContextMenuItems': true, resource: documentResource, imageSource }));
+		img.setAttribute('data-zyraxoncode-context', JSON.stringify({ webviewSection, id: img.id, 'preventDefaultContextMenuItems': true, resource: documentResource, imageSource }));
 	}
 }
 
 function createCopyIcon(): SVGElement {
-	const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+	const svg = document.createElementNS('__ZYRAXKEEP__0_', 'svg');
 	svg.setAttribute('aria-hidden', 'true');
 	svg.setAttribute('focusable', 'false');
 	svg.setAttribute('width', '16');
 	svg.setAttribute('height', '16');
 	svg.setAttribute('viewBox', '0 0 16 16');
 	svg.setAttribute('fill', 'none');
-	const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const path1 = document.createElementNS('__ZYRAXKEEP__1_', 'path');
 	path1.setAttribute('d', 'M4 4H2V14H11V12H4V4Z');
 	path1.setAttribute('fill', 'currentColor');
-	const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const path2 = document.createElementNS('__ZYRAXKEEP__2_', 'path');
 	path2.setAttribute('fill-rule', 'evenodd');
 	path2.setAttribute('clip-rule', 'evenodd');
 	path2.setAttribute('d', 'M5 2H14V11H5V2ZM6 3H13V10H6V3Z');
@@ -217,14 +217,14 @@ function createCopyIcon(): SVGElement {
 }
 
 function createCheckIcon(): SVGElement {
-	const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+	const svg = document.createElementNS('__ZYRAXKEEP__3_', 'svg');
 	svg.setAttribute('aria-hidden', 'true');
 	svg.setAttribute('focusable', 'false');
 	svg.setAttribute('width', '16');
 	svg.setAttribute('height', '16');
 	svg.setAttribute('viewBox', '0 0 16 16');
 	svg.setAttribute('fill', 'none');
-	const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	const path = document.createElementNS('__ZYRAXKEEP__4_', 'path');
 	path.setAttribute('d', 'M6.27 10.87L3.63 8.23L2.56 9.3L6.27 13.01L14.07 5.21L13 4.14L6.27 10.87Z');
 	path.setAttribute('fill', 'currentColor');
 	svg.appendChild(path);
@@ -410,7 +410,7 @@ window.addEventListener('message', async event => {
 
 			++documentVersion;
 
-			window.dispatchEvent(new CustomEvent('vscode.markdown.updateContent'));
+			window.dispatchEvent(new CustomEvent('zyraxoncode.markdown.updateContent'));
 			addImageContexts();
 			addCodeBlockCopyButtons();
 			applyLineChanges(lineChanges);
@@ -730,7 +730,7 @@ document.addEventListener('dblclick', event => {
 	}
 });
 
-const passThroughLinkSchemes = ['http:', 'https:', 'mailto:', 'vscode:', 'vscode-insiders:'];
+const passThroughLinkSchemes = ['http:', 'https:', 'mailto:', 'zyraxoncode:', 'zyraxoncode-insiders:'];
 
 document.addEventListener('click', event => {
 	if (!event) {
@@ -777,7 +777,7 @@ window.addEventListener('scroll', throttle(() => {
 	const line = getEditorLineNumberForPageOffset(window.scrollY, documentVersion);
 	if (typeof line === 'number' && !isNaN(line)) {
 		state.line = line;
-		vscode.setState(state);
+		zyraxoncode.setState(state);
 		messaging.postMessage('revealLine', { line });
 		diffScrollSyncManager?.broadcastScroll(line);
 	}
@@ -785,7 +785,7 @@ window.addEventListener('scroll', throttle(() => {
 
 function updateScrollProgress() {
 	state.scrollProgress = window.scrollY / document.body.clientHeight;
-	vscode.setState(state);
+	zyraxoncode.setState(state);
 }
 
 

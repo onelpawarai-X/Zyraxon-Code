@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Command } from 'vscode';
+import type { Command } from 'zyraxoncode';
 import { DocumentId } from '../../../platform/inlineEdits/common/dataTypes/documentId';
 import { StringReplacement } from '../../../util/vs/editor/common/core/edits/stringEdit';
 import { Position } from '../../../util/vs/editor/common/core/position';

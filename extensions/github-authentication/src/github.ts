@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import TelemetryReporter from '@vscode/extension-telemetry';
+import * as zyraxoncode from 'zyraxoncode';
+import TelemetryReporter from '@zyraxoncode/extension-telemetry';
 import { Keychain } from './common/keychain';
 import { GitHubServer, IGitHubServer } from './githubServer';
 import { PromiseAdapter, arrayEquals, promiseFromEvent } from './common/utils';
@@ -32,7 +32,7 @@ export enum AuthProviderType {
 	githubEnterprise = 'github-enterprise'
 }
 
-interface GitHubAuthenticationProviderOptions extends vscode.AuthenticationProviderSessionOptions {
+interface GitHubAuthenticationProviderOptions extends zyraxoncode.AuthenticationProviderSessionOptions {
 	/**
 	 * This is specific to GitHub and is used to determine which social sign-in provider to use.
 	 * If not provided, the default (GitHub) is used which shows all options.
@@ -67,15 +67,15 @@ function isGitHubAuthenticationProviderOptions(object: any): object is GitHubAut
 	return true;
 }
 
-export class UriEventHandler extends vscode.EventEmitter<vscode.Uri> implements vscode.UriHandler {
+export class UriEventHandler extends zyraxoncode.EventEmitter<zyraxoncode.Uri> implements zyraxoncode.UriHandler {
 	private readonly _pendingNonces = new Map<string, string[]>();
-	private readonly _codeExchangePromises = new Map<string, { promise: Promise<string>; cancel: vscode.EventEmitter<void> }>();
+	private readonly _codeExchangePromises = new Map<string, { promise: Promise<string>; cancel: zyraxoncode.EventEmitter<void> }>();
 
-	public handleUri(uri: vscode.Uri) {
+	public handleUri(uri: zyraxoncode.Uri) {
 		this.fire(uri);
 	}
 
-	public async waitForCode(logger: Log, scopes: string, nonce: string, token: vscode.CancellationToken) {
+	public async waitForCode(logger: Log, scopes: string, nonce: string, token: zyraxoncode.CancellationToken) {
 		const existingNonces = this._pendingNonces.get(scopes) || [];
 		this._pendingNonces.set(scopes, [...existingNonces, nonce]);
 
@@ -98,7 +98,7 @@ export class UriEventHandler extends vscode.EventEmitter<vscode.Uri> implements 
 		}
 	}
 
-	private handleEvent: (logger: Log, scopes: string) => PromiseAdapter<vscode.Uri, string> =
+	private handleEvent: (logger: Log, scopes: string) => PromiseAdapter<zyraxoncode.Uri, string> =
 		(logger: Log, scopes) => (uri, resolve, reject) => {
 			const query = new URLSearchParams(uri.query);
 			const code = query.get('code');
@@ -127,21 +127,21 @@ export class UriEventHandler extends vscode.EventEmitter<vscode.Uri> implements 
 		};
 }
 
-export class GitHubAuthenticationProvider implements vscode.AuthenticationProvider, vscode.Disposable {
-	private readonly _sessionChangeEmitter = new vscode.EventEmitter<vscode.AuthenticationProviderAuthenticationSessionsChangeEvent>();
+export class GitHubAuthenticationProvider implements zyraxoncode.AuthenticationProvider, zyraxoncode.Disposable {
+	private readonly _sessionChangeEmitter = new zyraxoncode.EventEmitter<zyraxoncode.AuthenticationProviderAuthenticationSessionsChangeEvent>();
 	private readonly _logger: Log;
 	private readonly _githubServer: IGitHubServer;
 	private readonly _telemetryReporter: ExperimentationTelemetry;
 	private readonly _keychain: Keychain;
 	private readonly _accountsSeen = new Set<string>();
-	private readonly _disposable: vscode.Disposable | undefined;
+	private readonly _disposable: zyraxoncode.Disposable | undefined;
 
-	private _sessionsPromise: Promise<vscode.AuthenticationSession[]>;
+	private _sessionsPromise: Promise<zyraxoncode.AuthenticationSession[]>;
 
 	constructor(
-		private readonly context: vscode.ExtensionContext,
+		private readonly context: zyraxoncode.ExtensionContext,
 		uriHandler: UriEventHandler,
-		ghesUri?: vscode.Uri
+		ghesUri?: zyraxoncode.Uri
 	) {
 		const { aiKey } = context.extension.packageJSON as { name: string; version: string; aiKey: string };
 		this._telemetryReporter = new ExperimentationTelemetry(context, new TelemetryReporter(aiKey));
@@ -172,11 +172,11 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 		});
 
 		const supportedAuthorizationServers = ghesUri
-			? [vscode.Uri.joinPath(ghesUri, '/login/oauth')]
-			: [vscode.Uri.parse('https://github.com/login/oauth')];
-		this._disposable = vscode.Disposable.from(
+			? [zyraxoncode.Uri.joinPath(ghesUri, '/login/oauth')]
+			: [zyraxoncode.Uri.parse('__ZYRAXKEEP__0_')];
+		this._disposable = zyraxoncode.Disposable.from(
 			this._telemetryReporter,
-			vscode.authentication.registerAuthenticationProvider(
+			zyraxoncode.authentication.registerAuthenticationProvider(
 				type,
 				this._githubServer.friendlyName,
 				this,
@@ -197,7 +197,7 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 		return this._sessionChangeEmitter.event;
 	}
 
-	async getSessions(scopes: string[] | undefined, options?: vscode.AuthenticationProviderSessionOptions): Promise<vscode.AuthenticationSession[]> {
+	async getSessions(scopes: string[] | undefined, options?: zyraxoncode.AuthenticationProviderSessionOptions): Promise<zyraxoncode.AuthenticationSession[]> {
 		// For GitHub scope list, order doesn't matter so we immediately sort the scopes
 		const sortedScopes = scopes?.sort() || [];
 		this._logger.info(`Getting sessions for ${sortedScopes.length ? sortedScopes.join(',') : 'all scopes'}...`);
@@ -213,7 +213,7 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 		return finalSessions;
 	}
 
-	private async afterSessionLoad(session: vscode.AuthenticationSession): Promise<void> {
+	private async afterSessionLoad(session: zyraxoncode.AuthenticationSession): Promise<void> {
 		// We only want to fire a telemetry if we haven't seen this account yet in this session.
 		if (!this._accountsSeen.has(session.account.id)) {
 			this._accountsSeen.add(session.account.id);
@@ -226,8 +226,8 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 		this._sessionsPromise = this.readSessions();
 		const storedSessions = await this._sessionsPromise;
 
-		const added: vscode.AuthenticationSession[] = [];
-		const removed: vscode.AuthenticationSession[] = [];
+		const added: zyraxoncode.AuthenticationSession[] = [];
+		const removed: zyraxoncode.AuthenticationSession[] = [];
 
 		storedSessions.forEach(session => {
 			const matchesExisting = previousSessions.some(s => s.id === session.id);
@@ -252,7 +252,7 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 		}
 	}
 
-	private async readSessions(): Promise<vscode.AuthenticationSession[]> {
+	private async readSessions(): Promise<zyraxoncode.AuthenticationSession[]> {
 		let sessionData: SessionData[];
 		try {
 			this._logger.info('Reading sessions from keychain...');
@@ -280,7 +280,7 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 		let seenNumberAccountId: boolean = false;
 		// TODO: eventually remove this Set because we should only have one session per set of scopes.
 		const scopesSeen = new Set<string>();
-		const sessionPromises = sessionData.map(async (session: SessionData): Promise<vscode.AuthenticationSession | undefined> => {
+		const sessionPromises = sessionData.map(async (session: SessionData): Promise<zyraxoncode.AuthenticationSession | undefined> => {
 			// For GitHub scope list, order doesn't matter so we immediately sort the scopes
 			const scopesStr = [...session.scopes].sort().join(' ');
 			let userInfo: { id: string; accountName: string } | undefined;
@@ -325,7 +325,7 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 
 		const verifiedSessions = (await Promise.allSettled(sessionPromises))
 			.filter(p => p.status === 'fulfilled')
-			.map(p => (p as PromiseFulfilledResult<vscode.AuthenticationSession | undefined>).value)
+			.map(p => (p as PromiseFulfilledResult<zyraxoncode.AuthenticationSession | undefined>).value)
 			.filter(<T>(p?: T): p is T => Boolean(p));
 
 		this._logger.info(`Got ${verifiedSessions.length} verified sessions.`);
@@ -336,14 +336,14 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 		return verifiedSessions;
 	}
 
-	private async storeSessions(sessions: vscode.AuthenticationSession[]): Promise<void> {
+	private async storeSessions(sessions: zyraxoncode.AuthenticationSession[]): Promise<void> {
 		this._logger.info(`Storing ${sessions.length} sessions...`);
 		this._sessionsPromise = Promise.resolve(sessions);
 		await this._keychain.setToken(JSON.stringify(sessions));
 		this._logger.info(`Stored ${sessions.length} sessions!`);
 	}
 
-	public async createSession(scopes: string[], options?: GitHubAuthenticationProviderOptions): Promise<vscode.AuthenticationSession> {
+	public async createSession(scopes: string[], options?: GitHubAuthenticationProviderOptions): Promise<zyraxoncode.AuthenticationSession> {
 		try {
 			// For GitHub scope list, order doesn't matter so we use a sorted scope to determine
 			// if we've got a session already.
@@ -373,7 +373,7 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 			this.afterSessionLoad(session);
 
 			const sessionIndex = sessions.findIndex(s => s.account.id === session.account.id && arrayEquals([...s.scopes].sort(), sortedScopes));
-			const removed = new Array<vscode.AuthenticationSession>();
+			const removed = new Array<zyraxoncode.AuthenticationSession>();
 			if (sessionIndex > -1) {
 				removed.push(...sessions.splice(sessionIndex, 1, session));
 			} else {
@@ -401,13 +401,13 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 			*/
 			this._telemetryReporter?.sendTelemetryEvent('loginFailed');
 
-			vscode.window.showErrorMessage(vscode.l10n.t('Sign in failed: {0}', `${e}`));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t('Sign in failed: {0}', `${e}`));
 			this._logger.error(e);
 			throw e;
 		}
 	}
 
-	private async tokenToSession(token: string, scopes: string[]): Promise<vscode.AuthenticationSession> {
+	private async tokenToSession(token: string, scopes: string[]): Promise<zyraxoncode.AuthenticationSession> {
 		const userInfo = await this._githubServer.getUserInfo(token);
 		return {
 			id: crypto.getRandomValues(new Uint32Array(2)).reduce((prev, curr) => prev += curr.toString(16), ''),
@@ -445,7 +445,7 @@ export class GitHubAuthenticationProvider implements vscode.AuthenticationProvid
 			*/
 			this._telemetryReporter?.sendTelemetryEvent('logoutFailed');
 
-			vscode.window.showErrorMessage(vscode.l10n.t('Sign out failed: {0}', `${e}`));
+			zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t('Sign out failed: {0}', `${e}`));
 			this._logger.error(e);
 			throw e;
 		}

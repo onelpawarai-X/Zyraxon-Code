@@ -97,7 +97,7 @@ export class SnippyService implements ISnippyService {
 				documentUri,
 				`Similar code with ${pluralize(allLicenses.length, 'license type')}`,
 				`[${allLicenses.join(', ')}]`,
-				`${citation.match.github_url.replace(/,\s*$/, '')}&editor=vscode`,
+				`${citation.match.github_url.replace(/,\s*$/, '')}&editor=zyraxoncode`,
 				matchLocation,
 				shortenedMatchText
 			].join(' '));

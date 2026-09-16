@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import { mapFindFirst } from '../../../util/vs/base/common/arraysFind';
 import { roleToString } from '../../chat/common/globalStringUtils';
 import { rawPartAsStatefulMarker } from '../../endpoint/common/statefulMarkerContainer';

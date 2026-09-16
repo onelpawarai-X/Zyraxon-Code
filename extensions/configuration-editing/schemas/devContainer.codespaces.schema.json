@@ -1,5 +1,5 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$schema": "__ZYRAXKEEP__0_",
 	"type": "object",
 	"properties": {
 		"customizations": {
@@ -11,7 +11,7 @@
 					"properties": {
 						"repositories": {
 							"type": "object",
-							"description": "Configuration relative to the given repositories, following the format 'owner/repo'.\n  A wildcard (*) is permitted for the repo name (eg: 'microsoft/*')",
+							"description": "Configuration relative to the given repositories, following the format 'owner/repo'.\n  A wildcard (*) is permitted for the repo name (eg: 'zyraxon/*')",
 							"patternProperties": {
 								"^[a-zA-Z0-9-_.]+[.]*\/[a-zA-Z0-9-_*]+[.]*$": {
 									"type": "object",
@@ -21,7 +21,7 @@
 											"properties": {
 												"permissions": {
 													"type": "object",
-													"description": "Additional repository permissions.\n See https://aka.ms/ghcs/multi-repo-auth for more info.",
+													"description": "Additional repository permissions.\n See __ZYRAXKEEP__1_ for more info.",
 													"additionalProperties": true,
 													"anyOf": [
 														{
@@ -162,7 +162,7 @@
 											"properties": {
 												"permissions": {
 													"type": "string",
-													"description": "Additional repository permissions.\n See https://aka.ms/ghcs/multi-repo-auth for more info.",
+													"description": "Additional repository permissions.\n See __ZYRAXKEEP__2_ for more info.",
 													"enum": [
 														"read-all",
 														"write-all"

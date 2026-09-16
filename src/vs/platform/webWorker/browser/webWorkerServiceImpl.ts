@@ -59,7 +59,7 @@ const ttPolicy = ((): ReturnType<typeof createTrustedTypesPolicy> => {
 
 	// Reuse the trusted types policy defined from worker bootstrap
 	// when available.
-	// Refs https://github.com/microsoft/vscode/issues/222193
+	// Refs __ZYRAXKEEP__0_
 	const workerGlobalThis = globalThis as WorkerGlobalWithPolicy;
 	if (typeof self === 'object' && self.constructor && self.constructor.name === 'DedicatedWorkerGlobalScope' && workerGlobalThis.workerttPolicy !== undefined) {
 		return workerGlobalThis.workerttPolicy;
@@ -111,7 +111,7 @@ function getWorkerBootstrapUrl(label: string, workerScriptUrl: string, workerLoa
 		`await import(ttPolicy?.createScriptURL(${JSON.stringify(workerScriptUrl)}) ?? ${JSON.stringify(workerScriptUrl)});`,
 		workerLoadingFailedErrorMessage ? `} catch (err) { console.error(${JSON.stringify(workerLoadingFailedErrorMessage)}, err); throw err; }` : '',
 
-		`globalThis.postMessage({ type: 'vscode-worker-ready' });`,
+		`globalThis.postMessage({ type: 'zyraxoncode-worker-ready' });`,
 		`/*${label}*/`
 	]).join('')], { type: 'application/javascript' });
 	return URL.createObjectURL(blob);
@@ -120,7 +120,7 @@ function getWorkerBootstrapUrl(label: string, workerScriptUrl: string, workerLoa
 function whenESMWorkerReady(worker: Worker): Promise<Worker> {
 	return new Promise<Worker>((resolve, reject) => {
 		worker.onmessage = function (e) {
-			if (e.data.type === 'vscode-worker-ready') {
+			if (e.data.type === 'zyraxoncode-worker-ready') {
 				worker.onmessage = null;
 				resolve(worker);
 			}

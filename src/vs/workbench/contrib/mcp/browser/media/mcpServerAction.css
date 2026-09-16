@@ -27,6 +27,6 @@
 
 .mcp-hover-contents .mcp-hover-setting .mcp-hover-setting-label {
 	cursor: pointer;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	font-size: 12px;
 }

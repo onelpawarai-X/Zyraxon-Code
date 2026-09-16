@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ConfigurationScope } from 'vscode';
+import type { ConfigurationScope } from 'zyraxoncode';
 import { IExperimentationService } from '../../telemetry/common/nullExperimentationService';
 import { AbstractConfigurationService, BaseConfig, Config, ConfigTarget, ExperimentBasedConfig, ExperimentBasedConfigType, globalConfigRegistry, InspectConfigResult } from './configurationService';
 
@@ -43,7 +43,7 @@ export class DefaultsOnlyConfigurationService extends AbstractConfigurationServi
 			return expValue;
 		}
 
-		// This is the pattern vscode uses for settings using the `onExp` tag. But vscode only supports it for
+		// This is the pattern zyraxoncode uses for settings using the `onExp` tag. But zyraxoncode only supports it for
 		// settings defined in package.json, so this is why we're also reading the value from exp here.
 		const expValue2 = experimentationService.getTreatmentVariable<Exclude<T, undefined>>(`config.${key.fullyQualifiedId}`);
 		if (expValue2 !== undefined) {

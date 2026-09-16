@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptRenderer as BasePromptRenderer, HTMLTracer, ITokenizer, JSONTree, MetadataMap, OutputMode, QueueItem, Raw, RenderPromptResult } from '@vscode/prompt-tsx';
-import type { ChatResponsePart, ChatResponseProgressPart, LanguageModelToolTokenizationOptions, Progress } from 'vscode';
+import { BasePromptElementProps, PromptRenderer as BasePromptRenderer, HTMLTracer, ITokenizer, JSONTree, MetadataMap, OutputMode, QueueItem, Raw, RenderPromptResult } from '@zyraxoncode/prompt-tsx';
+import type { ChatResponsePart, ChatResponseProgressPart, LanguageModelToolTokenizationOptions, Progress } from 'zyraxoncode';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { toTextPart } from '../../../../platform/chat/common/globalStringUtils';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
@@ -19,7 +19,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
 import { ServiceCollection } from '../../../../util/vs/platform/instantiation/common/serviceCollection';
-import { ChatResponseReferencePart, Location, Uri } from '../../../../vscodeTypes';
+import { ChatResponseReferencePart, Location, Uri } from '../../../../zyraxoncodeTypes';
 import { RendererVisualizations } from '../../../inlineChat/node/rendererVisualization';
 import { getUniqueReferences, PromptReference } from '../../../prompt/common/conversation';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
@@ -179,7 +179,7 @@ class PromptRendererForJSON<P extends BasePromptElementProps> extends BasePrompt
 		chatEndpoint: IChatEndpoint,
 		private readonly instantiationService: IInstantiationService,
 	) {
-		// Copied from prompt-tsx to map the vscode tool tokenOptions to ITokenizer
+		// Copied from prompt-tsx to map the zyraxoncode tool tokenOptions to ITokenizer
 		const tokenizer: ITokenizer<OutputMode.Raw> = {
 			mode: OutputMode.Raw,
 			countMessageTokens(message) {

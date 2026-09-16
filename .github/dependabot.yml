@@ -4,7 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "devcontainers" # https://containers.dev/guide/dependabot
+  - package-ecosystem: "devcontainers" # __ZYRAXKEEP__0_
     directory: "/"
     schedule:
       interval: "weekly"
@@ -13,4 +13,4 @@ updates:
     schedule:
       interval: "daily"
     allow:
-      - dependency-name: "@vscode/markdown-editor"
+      - dependency-name: "@zyraxoncode/markdown-editor"

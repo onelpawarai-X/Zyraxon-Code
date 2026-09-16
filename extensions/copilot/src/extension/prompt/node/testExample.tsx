@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptReference, PromptSizing } from '@vscode/prompt-tsx';
-import type { Progress } from 'vscode';
+import { PromptElement, PromptElementProps, PromptReference, PromptSizing } from '@zyraxoncode/prompt-tsx';
+import type { Progress } from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { IParserService } from '../../../platform/parser/node/parserService';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import * as path from '../../../util/vs/base/common/path';
 import { URI } from '../../../util/vs/base/common/uri';
-import { ChatResponseProgressPart, Range } from '../../../vscodeTypes';
+import { ChatResponseProgressPart, Range } from '../../../zyraxoncodeTypes';
 import { Tag } from '../../prompts/node/base/tag';
 import { summarizeDocument } from '../../prompts/node/inline/summarizedDocument/summarizeDocumentHelpers';
 import { CodeBlock } from '../../prompts/node/panel/safeElements';

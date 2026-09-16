@@ -6,7 +6,7 @@ import assert from 'assert';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import * as path from 'path';
-import type { Command } from 'vscode';
+import type { Command } from 'zyraxoncode';
 import { Turn } from '../../src/extension/prompt/common/conversation';
 import { ITestingServicesAccessor } from '../../src/platform/test/node/services';
 import { ssuite, stest } from '../base/stest';
@@ -47,13 +47,13 @@ interface ISearchTestConfig {
 	 * Might not include all files that gets searched.
 	 * The actual results will be tested such that they CONTAIN the expected result. Therefore, the expected result should be the minimum-length possible result from the query.
 	 * ie:
-	 * queryShouldFind: "foo.md" -> ["http://google.ca", "http://github.com"]
-	 * where the file "foo.md" matches the text "http://google.ca" and "http://github.com"
+	 * queryShouldFind: "foo.md" -> ["__ZYRAXKEEP__0_", "__ZYRAXKEEP__1_"]
+	 * where the file "foo.md" matches the text "__ZYRAXKEEP__2_" and "__ZYRAXKEEP__3_"
 	 *
 	 * or
 	 *
-	 * queryShouldFind: "foo.md" -> [["http://google.ca", "http://github.com"],["http://google.ca"]]
-	 * where the file "foo.md" matches the text "http://google.ca" and "http://github.com" OR only "http://google.ca"
+	 * queryShouldFind: "foo.md" -> [["__ZYRAXKEEP__4_", "__ZYRAXKEEP__5_"],["__ZYRAXKEEP__6_"]]
+	 * where the file "foo.md" matches the text "__ZYRAXKEEP__7_" and "__ZYRAXKEEP__8_" OR only "__ZYRAXKEEP__9_"
 	 */
 	queryShouldFind: Map<string, string[] | string[][]>;
 	/**
@@ -104,7 +104,7 @@ const replaceSamples = path.join(scenarioFolder, 'replace-samples');
 			const testCase = getTestInfoFromFile(`search${i}.testArgs.json`);
 			const testName = testCase.question;
 			stest({ description: testName }, generateScenarioTestRunner(
-				[{ question: '@vscode /search ' + testCase.question, name: testName, scenarioFolderPath: scenarioFolder }],
+				[{ question: '@zyraxoncode /search ' + testCase.question, name: testName, scenarioFolderPath: scenarioFolder }],
 				generateEvaluate(testCase)
 			));
 		}

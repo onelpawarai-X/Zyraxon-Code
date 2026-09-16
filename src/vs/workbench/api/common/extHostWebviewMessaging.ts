@@ -31,7 +31,7 @@ export function serializeWebviewMessage(
 			if (value instanceof ArrayBuffer) {
 				const index = arrayBuffers.add(value);
 				return {
-					$$vscode_array_buffer_reference$$: true,
+					$$zyraxoncode_array_buffer_reference$$: true,
 					index,
 				} satisfies extHostProtocol.WebviewMessageArrayBufferReference;
 			} else if (ArrayBuffer.isView(value)) {
@@ -39,7 +39,7 @@ export function serializeWebviewMessage(
 				if (type) {
 					const index = arrayBuffers.add(value.buffer);
 					return {
-						$$vscode_array_buffer_reference$$: true,
+						$$zyraxoncode_array_buffer_reference$$: true,
 						index,
 						view: {
 							type: type,
@@ -92,7 +92,7 @@ export function deserializeWebviewMessage(jsonMessage: string, buffers: VSBuffer
 	});
 
 	const reviver = !buffers.length ? undefined : (_key: string, value: any) => {
-		if (value && typeof value === 'object' && (value as extHostProtocol.WebviewMessageArrayBufferReference).$$vscode_array_buffer_reference$$) {
+		if (value && typeof value === 'object' && (value as extHostProtocol.WebviewMessageArrayBufferReference).$$zyraxoncode_array_buffer_reference$$) {
 			const ref = value as extHostProtocol.WebviewMessageArrayBufferReference;
 			const { index } = ref;
 			const arrayBuffer = arrayBuffers[index];

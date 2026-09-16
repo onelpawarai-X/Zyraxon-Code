@@ -2,11 +2,11 @@
   "name": "github-authentication",
   "displayName": "%displayName%",
   "description": "%description%",
-  "publisher": "vscode",
+  "publisher": "zyraxoncode",
   "license": "MIT",
   "version": "0.0.2",
   "engines": {
-    "vscode": "^1.41.0"
+    "zyraxoncode": "^1.41.0"
   },
   "icon": "images/icon.png",
   "categories": [
@@ -37,7 +37,7 @@
         "label": "GitHub",
         "id": "github",
         "authorizationServerGlobs": [
-          "https://github.com/login/oauth"
+          "__ZYRAXKEEP__0_"
         ]
       },
       {
@@ -81,12 +81,12 @@
     "compile-web": "node esbuild.browser.mts",
     "watch": "gulp watch-extension:github-authentication",
     "watch-web": "node esbuild.browser.mts --watch",
-    "vscode:prepublish": "npm run compile"
+    "zyraxoncode:prepublish": "npm run compile"
   },
   "dependencies": {
     "node-fetch": "2.6.7",
-    "@vscode/extension-telemetry": "^0.9.8",
-    "vscode-tas-client": "^0.1.84"
+    "@zyraxoncode/extension-telemetry": "^0.9.8",
+    "zyraxoncode-tas-client": "^0.1.84"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -95,6 +95,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/vscode.git"
+    "url": "__ZYRAXKEEP__1_"
   }
 }

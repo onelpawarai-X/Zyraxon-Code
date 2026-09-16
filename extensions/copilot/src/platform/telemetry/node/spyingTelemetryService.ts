@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { TelemetryEventMeasurements, TelemetryEventProperties } from '@vscode/extension-telemetry';
+import type { TelemetryEventMeasurements, TelemetryEventProperties } from '@zyraxoncode/extension-telemetry';
 import { IGHTelemetryService, ITelemetryEvent, ITelemetryService, TelemetryDestination } from '../common/telemetry';
 
 interface InterceptedTelemetryServiceEvent {

@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { RequestType } from '@vscode/copilot-api';
+import { RequestType } from '@zyraxoncode/copilot-api';
 import { shouldInclude } from '../../../util/common/glob';
 import { Result } from '../../../util/common/result';
 import { TelemetryCorrelationId } from '../../../util/common/telemetryCorrelationId';
@@ -142,7 +142,7 @@ export class GithubCodeSearchService implements IGithubCodeSearchService {
 	async getRemoteIndexState(auth: { readonly silent: boolean }, githubRepoId: GithubRepoId, telemetryInfo: TelemetryCorrelationId, token: CancellationToken): Promise<Result<RemoteCodeSearchIndexState, RemoteCodeSearchError>> {
 		const repoNwo = toGithubNwo(githubRepoId);
 
-		if (repoNwo.startsWith('microsoft/simuluation-test-')) {
+		if (repoNwo.startsWith('zyraxon/simuluation-test-')) {
 			return Result.ok({ status: RemoteCodeSearchIndexStatus.NotYetIndexed });
 		}
 
@@ -527,16 +527,16 @@ export async function parseGithubCodeSearchResponse(body: ResponseShape, repo: G
 	let remoteUrl: string | undefined;
 	let refName: string | undefined;
 	if (firstResult) {
-		// Derive the web URL from the API URL (e.g. https://api.github.com/repos/o/r -> https://github.com/o/r)
+		// Derive the web URL from the API URL (e.g. __ZYRAXKEEP__0_ -> __ZYRAXKEEP__1_)
 		const apiUrl = firstResult.location.repo.url;
 		const nwo = firstResult.location.repo.nwo;
 		try {
 			const parsed = URI.parse(apiUrl);
 			const host = parsed.authority === 'api.github.com' ? 'github.com' : parsed.authority.replace(/^api\./, '');
-			remoteUrl = `https://${host}/${nwo}`;
+			remoteUrl = `__ZYRAXKEEP__2_{host}/${nwo}`;
 		} catch {
 			// Fall back to constructing from nwo
-			remoteUrl = `https://github.com/${nwo}`;
+			remoteUrl = `__ZYRAXKEEP__3_{nwo}`;
 		}
 
 		// Extract branch name from ref_name (e.g. "refs/heads/main" -> "main")

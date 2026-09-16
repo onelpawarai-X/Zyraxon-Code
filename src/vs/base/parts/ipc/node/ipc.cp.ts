@@ -198,7 +198,7 @@ export class Client implements IChannelClient, IDisposable {
 			if (forkOpts.execArgv === undefined) {
 				forkOpts.execArgv = process.execArgv			// if not set, the forked process inherits the execArgv of the parent process
 					.filter(a => !/^--inspect(-brk)?=/.test(a)) // --inspect and --inspect-brk can not be inherited as the port would conflict
-					.filter(a => !a.startsWith('--vscode-')); 	// --vscode-* arguments are unsupported by node.js and thus need to remove
+					.filter(a => !a.startsWith('--zyraxoncode-')); 	// --zyraxoncode-* arguments are unsupported by node.js and thus need to remove
 			}
 
 			removeDangerousEnvVariables(forkOpts.env);
@@ -233,7 +233,7 @@ export class Client implements IChannelClient, IDisposable {
 			this.child.on('error', err => console.warn('IPC "' + this.options.serverName + '" errored with ' + err));
 
 			this.child.on('exit', (code: any, signal: any) => {
-				process.removeListener('exit' as 'loaded', onExit); // https://github.com/electron/electron/issues/21475
+				process.removeListener('exit' as 'loaded', onExit); // __ZYRAXKEEP__0_
 				rawMessageDisposable.dispose();
 
 				this.activeRequests.forEach(r => dispose(r));

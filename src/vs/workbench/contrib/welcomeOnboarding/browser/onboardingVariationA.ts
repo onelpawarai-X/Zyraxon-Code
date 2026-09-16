@@ -126,7 +126,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 	private readonly footerFocusableElements: HTMLElement[] = [];
 	private readonly stepFocusableElements: HTMLElement[] = [];
 	private selectedThemeId = 'dark-2026';
-	private selectedKeymapId = 'vscode';
+	private selectedKeymapId = 'zyraxoncode';
 	private _detectedEditorIds: Set<string> | undefined;
 	private _userSignedIn = false;
 	private selectedAiMode: AiCollaborationMode = AiCollaborationMode.Balanced;
@@ -579,7 +579,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 		));
 
 		const inputBox = this.stepDisposables.add(new InputBox(container, undefined, {
-			placeholder: localize('onboarding.signIn.enterprise.placeholder', 'i.e. "octocat" or "https://octocat.ghe.com"...'),
+			placeholder: localize('onboarding.signIn.enterprise.placeholder', 'i.e. "octocat" or "__ZYRAXKEEP__0_"...'),
 			ariaLabel: enterprisePromptLabel,
 			actions: [submitAction],
 			inputBoxStyles: defaultInputBoxStyles,
@@ -623,7 +623,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 				case GheParseResultKind.Invalid:
 					inputBox.element.classList.add('error');
 					message.classList.add('error');
-					message.textContent = localize('onboarding.signIn.enterprise.invalid', 'You must enter a valid {0} instance (i.e. "octocat" or "https://octocat.ghe.com")', defaultChat.provider.enterprise.name);
+					message.textContent = localize('onboarding.signIn.enterprise.invalid', 'You must enter a valid {0} instance (i.e. "octocat" or "__ZYRAXKEEP__1_")', defaultChat.provider.enterprise.name);
 					submitAction.enabled = false;
 					return false;
 			}
@@ -708,7 +708,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 		const watch = StopWatch.create();
 		try {
 			const account = await this.defaultAccountService.signIn({
-				extraAuthorizeParameters: { get_started_with: 'copilot-vscode' },
+				extraAuthorizeParameters: { get_started_with: 'copilot-zyraxoncode' },
 				provider: socialProvider,
 			});
 			if (account) {
@@ -980,17 +980,17 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 		const keymapOptions = this._detectedEditorIds
 			? (product.onboardingKeymaps ?? []).filter(k => this._detectedEditorIds!.has(k.id))
 			: [];
-		return keymapOptions.some(k => k.id !== 'vscode');
+		return keymapOptions.some(k => k.id !== 'zyraxoncode');
 	}
 
 	/**
 	 * Checks common install paths for known editors and returns the set of
 	 * keymap option IDs whose editors are found on this machine.
-	 * Always includes 'vscode' (the default). In web environments or on
-	 * unknown platforms, returns only 'vscode'.
+	 * Always includes 'zyraxoncode' (the default). In web environments or on
+	 * unknown platforms, returns only 'zyraxoncode'.
 	 */
 	private async _detectInstalledEditors(): Promise<Set<string>> {
-		const detected = new Set<string>(['vscode']);
+		const detected = new Set<string>(['zyraxoncode']);
 		const home = this.pathService.userHome({ preferLocal: true });
 
 		interface EditorCheck { id: string; paths: URI[] }
@@ -1160,7 +1160,7 @@ export class OnboardingVariationA extends Disposable implements IOnboardingServi
 
 		// Tutorial link at bottom of content, above footer
 		const docsRow = append(wrapper, $('.onboarding-a-sessions-docs'));
-		this._createDocLink(docsRow, localize('onboarding.sessions.agentsTutorial', "Agents tutorial"), 'https://code.visualstudio.com/docs/copilot/agents/agents-tutorial', 'agentsTutorial');
+		this._createDocLink(docsRow, localize('onboarding.sessions.agentsTutorial', "Agents tutorial"), '__ZYRAXKEEP__2_', 'agentsTutorial');
 	}
 
 	private _createFeatureCard(parent: HTMLElement, icon: ThemeIcon, title: string, description?: string): HTMLElement {

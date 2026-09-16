@@ -281,7 +281,7 @@ function launchCode(dirs: { userDataDir: string; extensionDir: string }): Launch
 }
 
 async function connectToCode(port: number, launchFailure?: Promise<Error>): Promise<Browser> {
-	const endpoint = `http://127.0.0.1:${port}`;
+	const endpoint = `__ZYRAXKEEP__0_{port}`;
 	for (let i = 0; i < 120; i++) {
 		try {
 			await raceLaunchFailure(waitForCDPEndpoint(port), launchFailure);
@@ -336,7 +336,7 @@ async function isCDPAvailable(port: number): Promise<boolean> {
 }
 
 async function waitForCDPEndpoint(port: number): Promise<void> {
-	await getJson(`http://127.0.0.1:${port}/json/version`);
+	await getJson(`__ZYRAXKEEP__1_{port}/json/version`);
 }
 
 async function findWorkbenchPage(browser: Browser): Promise<Page> {
@@ -825,7 +825,7 @@ function parseIntegerArg(flag: string, value: string, min: number): number {
 }
 
 function printHelp(): void {
-	const tmp = path.join(os.tmpdir(), 'vscode-chat-memory-smoke');
+	const tmp = path.join(os.tmpdir(), 'zyraxoncode-chat-memory-smoke');
 	console.log([
 		'Usage: node .github/skills/auto-perf-optimize/scripts/chat-memory-smoke.mts [options]',
 		'',

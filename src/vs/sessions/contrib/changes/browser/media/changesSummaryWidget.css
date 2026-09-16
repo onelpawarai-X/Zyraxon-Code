@@ -8,10 +8,10 @@
 	gap: 4px;
 
 	.changes-summary-lines-added {
-		color: var(--vscode-chat-linesAddedForeground);
+		color: var(--zyraxoncode-chat-linesAddedForeground);
 	}
 
 	.changes-summary-lines-removed {
-		color: var(--vscode-chat-linesRemovedForeground);
+		color: var(--zyraxoncode-chat-linesRemovedForeground);
 	}
 }

@@ -129,7 +129,7 @@ export class BrowserViewWorkbenchService extends Disposable implements IBrowserV
 		super();
 		const channel = mainProcessService.getChannel(ipcBrowserViewChannelName);
 		this._browserViewService = ProxyChannel.toService<IBrowserViewService>(channel);
-		this._mainWindowId = mainWindow.vscodeWindowId;
+		this._mainWindowId = mainWindow.zyraxoncodeWindowId;
 
 		// Send the full per-window configuration as a single unit, and resend it
 		// whenever any of its inputs change.

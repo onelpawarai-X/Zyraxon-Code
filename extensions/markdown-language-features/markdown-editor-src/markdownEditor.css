@@ -8,7 +8,7 @@ html, body {
 	padding: 0;
 	height: 100%;
 	width: 100%;
-	background: var(--vscode-editor-background);
+	background: var(--zyraxoncode-editor-background);
 }
 
 body {

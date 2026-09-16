@@ -15,15 +15,15 @@
 		],
 		// Needed for tsx to run test files
 		"paths": {
-			"vscode": [
-				"./src/util/common/test/shims/vscodeTypesShim.ts"
+			"zyraxoncode": [
+				"./src/util/common/test/shims/zyraxoncodeTypesShim.ts"
 			]
 		}
 	},
 	"include": [
 		"./src",
 		"./test",
-		".vscode/extensions/test-extension"
+		".zyraxoncode/extensions/test-extension"
 	],
 	"exclude": [
 		"test/scenarios/**/*",
@@ -33,7 +33,7 @@
 		"src/extension/test/node/fixtures/**/*",
 		"src/extension/prompts/node/test/fixtures/**/*",
 		"src/extension/typescriptContext/serverPlugin/fixtures/**",
-		"src/extension/completions-core/vscode-node/extension/src/copilotPanel/webView/suggestionsPanelWebview.ts",
+		"src/extension/completions-core/zyraxoncode-node/extension/src/copilotPanel/webView/suggestionsPanelWebview.ts",
 		"test/aml/out"
 	]
 }

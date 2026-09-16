@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ICSSDataProvider, newCSSDataProvider } from 'vscode-css-languageservice';
+import { ICSSDataProvider, newCSSDataProvider } from 'zyraxoncode-css-languageservice';
 import { RequestService } from './requests.js';
 
 export function fetchDataProviders(dataPaths: string[], requestService: RequestService): Promise<ICSSDataProvider[]> {

@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import * as arrays from './util/arrays';
 import { Disposable } from './util/dispose';
 
-function resolveExtensionResource(extension: vscode.Extension<any>, resourcePath: string): vscode.Uri {
-	return vscode.Uri.joinPath(extension.extensionUri, resourcePath);
+function resolveExtensionResource(extension: zyraxoncode.Extension<any>, resourcePath: string): zyraxoncode.Uri {
+	return zyraxoncode.Uri.joinPath(extension.extensionUri, resourcePath);
 }
 
-function* resolveExtensionResources(extension: vscode.Extension<any>, resourcePaths: unknown): Iterable<vscode.Uri> {
+function* resolveExtensionResources(extension: zyraxoncode.Extension<any>, resourcePaths: unknown): Iterable<zyraxoncode.Uri> {
 	if (Array.isArray(resourcePaths)) {
 		for (const resource of resourcePaths) {
 			try {
@@ -24,14 +24,14 @@ function* resolveExtensionResources(extension: vscode.Extension<any>, resourcePa
 }
 
 export interface MarkdownPreviewScript {
-	readonly resource: vscode.Uri;
+	readonly resource: zyraxoncode.Uri;
 	readonly type?: 'module';
 }
 
 export interface MarkdownContributions {
 	readonly previewScripts: readonly MarkdownPreviewScript[];
-	readonly previewStyles: readonly vscode.Uri[];
-	readonly previewResourceRoots: readonly vscode.Uri[];
+	readonly previewStyles: readonly zyraxoncode.Uri[];
+	readonly previewResourceRoots: readonly zyraxoncode.Uri[];
 	readonly markdownItPlugins: ReadonlyMap<string, Thenable<(md: any) => any>>;
 }
 
@@ -52,7 +52,7 @@ export namespace MarkdownContributions {
 		};
 	}
 
-	function uriEqual(a: vscode.Uri, b: vscode.Uri): boolean {
+	function uriEqual(a: zyraxoncode.Uri, b: zyraxoncode.Uri): boolean {
 		return a.toString() === b.toString();
 	}
 
@@ -67,7 +67,7 @@ export namespace MarkdownContributions {
 			&& arrays.equals(Array.from(a.markdownItPlugins.keys()), Array.from(b.markdownItPlugins.keys()));
 	}
 
-	export function fromExtension(extension: vscode.Extension<any>): MarkdownContributions {
+	export function fromExtension(extension: zyraxoncode.Extension<any>): MarkdownContributions {
 		const contributions = extension.packageJSON?.contributes;
 		if (!contributions) {
 			return MarkdownContributions.Empty;
@@ -88,7 +88,7 @@ export namespace MarkdownContributions {
 
 	function getContributedMarkdownItPlugins(
 		contributes: any,
-		extension: vscode.Extension<any>
+		extension: zyraxoncode.Extension<any>
 	): Map<string, Thenable<(md: any) => any>> {
 		const map = new Map<string, Thenable<(md: any) => any>>();
 		if (contributes['markdown.markdownItPlugins']) {
@@ -104,19 +104,19 @@ export namespace MarkdownContributions {
 
 	function getContributedScripts(
 		contributes: any,
-		extension: vscode.Extension<any>
+		extension: zyraxoncode.Extension<any>
 	): Iterable<MarkdownPreviewScript> {
 		return resolvePreviewScripts(extension, contributes['markdown.previewScripts']);
 	}
 
 	function getContributedStyles(
 		contributes: any,
-		extension: vscode.Extension<any>
+		extension: zyraxoncode.Extension<any>
 	) {
 		return resolveExtensionResources(extension, contributes['markdown.previewStyles']);
 	}
 
-	function* resolvePreviewScripts(extension: vscode.Extension<any>, scripts: unknown): Iterable<MarkdownPreviewScript> {
+	function* resolvePreviewScripts(extension: zyraxoncode.Extension<any>, scripts: unknown): Iterable<MarkdownPreviewScript> {
 		if (!Array.isArray(scripts)) {
 			return;
 		}
@@ -160,26 +160,26 @@ export namespace MarkdownContributions {
 }
 
 export interface MarkdownContributionProvider {
-	readonly extensionUri: vscode.Uri;
+	readonly extensionUri: zyraxoncode.Uri;
 
 	readonly contributions: MarkdownContributions;
-	readonly onContributionsChanged: vscode.Event<this>;
+	readonly onContributionsChanged: zyraxoncode.Event<this>;
 
 	dispose(): void;
 }
 
-class VSCodeExtensionMarkdownContributionProvider extends Disposable implements MarkdownContributionProvider {
+class ZyraxonCodeExtensionMarkdownContributionProvider extends Disposable implements MarkdownContributionProvider {
 
 	#contributions?: MarkdownContributions;
-	readonly #extensionContext: vscode.ExtensionContext;
+	readonly #extensionContext: zyraxoncode.ExtensionContext;
 
 	public constructor(
-		extensionContext: vscode.ExtensionContext,
+		extensionContext: zyraxoncode.ExtensionContext,
 	) {
 		super();
 		this.#extensionContext = extensionContext;
 
-		this._register(vscode.extensions.onDidChange(() => {
+		this._register(zyraxoncode.extensions.onDidChange(() => {
 			const currentContributions = this.#getCurrentContributions();
 			const existingContributions = this.#contributions || MarkdownContributions.Empty;
 			if (!MarkdownContributions.equal(existingContributions, currentContributions)) {
@@ -193,7 +193,7 @@ class VSCodeExtensionMarkdownContributionProvider extends Disposable implements 
 		return this.#extensionContext.extensionUri;
 	}
 
-	readonly #onContributionsChanged = this._register(new vscode.EventEmitter<this>());
+	readonly #onContributionsChanged = this._register(new zyraxoncode.EventEmitter<this>());
 	public readonly onContributionsChanged = this.#onContributionsChanged.event;
 
 	public get contributions(): MarkdownContributions {
@@ -202,12 +202,12 @@ class VSCodeExtensionMarkdownContributionProvider extends Disposable implements 
 	}
 
 	#getCurrentContributions(): MarkdownContributions {
-		return vscode.extensions.all
+		return zyraxoncode.extensions.all
 			.map(MarkdownContributions.fromExtension)
 			.reduce(MarkdownContributions.merge, MarkdownContributions.Empty);
 	}
 }
 
-export function getMarkdownExtensionContributions(context: vscode.ExtensionContext): MarkdownContributionProvider {
-	return new VSCodeExtensionMarkdownContributionProvider(context);
+export function getMarkdownExtensionContributions(context: zyraxoncode.ExtensionContext): MarkdownContributionProvider {
+	return new ZyraxonCodeExtensionMarkdownContributionProvider(context);
 }

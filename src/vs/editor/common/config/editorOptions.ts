@@ -147,7 +147,7 @@ export interface IEditorOptions {
 	lineNumbersMinChars?: number;
 	/**
 	 * Enable the rendering of the glyph margin.
-	 * Defaults to true in vscode and to false in monaco-editor.
+	 * Defaults to true in zyraxoncode and to false in monaco-editor.
 	 */
 	glyphMargin?: boolean;
 	/**
@@ -360,7 +360,7 @@ export interface IEditorOptions {
 	wordWrapColumn?: number;
 	/**
 	 * Control indentation of wrapped lines. Can be: 'none', 'same', 'indent' or 'deepIndent'.
-	 * Defaults to 'same' in vscode and to 'none' in monaco-editor.
+	 * Defaults to 'same' in zyraxoncode and to 'none' in monaco-editor.
 	 */
 	wrappingIndent?: 'none' | 'same' | 'indent' | 'deepIndent';
 	/**
@@ -4308,7 +4308,7 @@ export interface IUnicodeHighlightOptions {
 	/**
 	 * Unicode characters that are common in allowed locales are not being highlighted.
 	 */
-	allowedLocales?: Record<string | '_os' | '_vscode', true>;
+	allowedLocales?: Record<string | '_os' | '_zyraxoncode', true>;
 }
 
 /**
@@ -4338,7 +4338,7 @@ class UnicodeHighlight extends BaseEditorOption<EditorOption.unicodeHighlighting
 			includeComments: inUntrustedWorkspace,
 			includeStrings: true,
 			allowedCharacters: {},
-			allowedLocales: { _os: true, _vscode: true },
+			allowedLocales: { _os: true, _zyraxoncode: true },
 		};
 
 		super(
@@ -6463,7 +6463,7 @@ export const EditorOptions = {
 					'- `ctrlCmd` refers to a value the setting can take and should not be localized.',
 					'- `Control` and `Command` refer to the modifier keys Ctrl or Cmd on the keyboard and can be localized.'
 				]
-			}, "The modifier to be used to add multiple cursors with the mouse. The Go to Definition and Open Link mouse gestures will adapt such that they do not conflict with the [multicursor modifier](https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier).")
+			}, "The modifier to be used to add multiple cursors with the mouse. The Go to Definition and Open Link mouse gestures will adapt such that they do not conflict with the [multicursor modifier](__ZYRAXKEEP__0_).")
 		}
 	)),
 	mouseMiddleClickAction: register(new EditorStringEnumOption(

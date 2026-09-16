@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { workspace, extensions, Uri, EventEmitter, Disposable } from 'vscode';
-import { Utils } from 'vscode-uri';
+import { workspace, extensions, Uri, EventEmitter, Disposable } from 'zyraxoncode';
+import { Utils } from 'zyraxoncode-uri';
 
 export function getCustomDataSource(toDispose: Disposable[]) {
 	let pathsInWorkspace = getCustomDataPathsInAllWorkspaces();

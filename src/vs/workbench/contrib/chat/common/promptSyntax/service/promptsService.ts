@@ -306,7 +306,7 @@ export interface ICustomAgent {
 	readonly argumentHint?: string;
 
 	/**
-	 * Target of the agent: Copilot, VSCode, Claude, or undefined if not specified.
+	 * Target of the agent: Copilot, ZyraxonCode, Claude, or undefined if not specified.
 	 */
 	readonly target: Target;
 

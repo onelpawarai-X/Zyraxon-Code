@@ -8,13 +8,13 @@ import { ILogService } from '../../../platform/log/common/log.js';
 import { ExtHostNotebookEditorsShape, INotebookEditorPropertiesChangeData, INotebookEditorViewColumnInfo } from './extHost.protocol.js';
 import { ExtHostNotebookController } from './extHostNotebook.js';
 import * as typeConverters from './extHostTypeConverters.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 
 export class ExtHostNotebookEditors implements ExtHostNotebookEditorsShape {
 
-	private readonly _onDidChangeNotebookEditorSelection = new Emitter<vscode.NotebookEditorSelectionChangeEvent>();
-	private readonly _onDidChangeNotebookEditorVisibleRanges = new Emitter<vscode.NotebookEditorVisibleRangesChangeEvent>();
+	private readonly _onDidChangeNotebookEditorSelection = new Emitter<zyraxoncode.NotebookEditorSelectionChangeEvent>();
+	private readonly _onDidChangeNotebookEditorVisibleRanges = new Emitter<zyraxoncode.NotebookEditorVisibleRangesChangeEvent>();
 
 	readonly onDidChangeNotebookEditorSelection = this._onDidChangeNotebookEditorSelection.event;
 	readonly onDidChangeNotebookEditorVisibleRanges = this._onDidChangeNotebookEditorVisibleRanges.event;

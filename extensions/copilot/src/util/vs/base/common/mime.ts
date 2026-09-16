@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -125,7 +125,7 @@ export function normalizeMimeType(mimeType: string, strict?: true): string | und
 			? undefined
 			: mimeType;
 	}
-	// https://datatracker.ietf.org/doc/html/rfc2045#section-5.1
+	// __ZYRAXKEEP__0_
 	// media and subtype must ALWAYS be lowercase, parameter not
 	return `${match[1].toLowerCase()}/${match[2].toLowerCase()}${match[3] ?? ''}`;
 }

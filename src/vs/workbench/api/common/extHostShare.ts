@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostShareShape, IMainContext, IShareableItemDto, MainContext, MainThreadShareShape } from './extHost.protocol.js';
 import { DocumentSelector, Range } from './extHostTypeConverters.js';
 import { IURITransformer } from '../../../base/common/uriIpc.js';
@@ -14,7 +14,7 @@ export class ExtHostShare implements ExtHostShareShape {
 	private static handlePool: number = 0;
 
 	private proxy: MainThreadShareShape;
-	private providers: Map<number, vscode.ShareProvider> = new Map();
+	private providers: Map<number, zyraxoncode.ShareProvider> = new Map();
 
 	constructor(
 		mainContext: IMainContext,
@@ -29,7 +29,7 @@ export class ExtHostShare implements ExtHostShareShape {
 		return result ?? undefined;
 	}
 
-	registerShareProvider(selector: vscode.DocumentSelector, provider: vscode.ShareProvider): vscode.Disposable {
+	registerShareProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.ShareProvider): zyraxoncode.Disposable {
 		const handle = ExtHostShare.handlePool++;
 		this.providers.set(handle, provider);
 		this.proxy.$registerShareProvider(handle, DocumentSelector.from(selector, this.uriTransformer), provider.id, provider.label, provider.priority);

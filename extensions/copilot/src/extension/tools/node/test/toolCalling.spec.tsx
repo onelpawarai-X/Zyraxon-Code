@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptPiece, PromptSizing, Raw, RenderPromptResult, UserMessage } from '@vscode/prompt-tsx';
+import { PromptElement, PromptPiece, PromptSizing, Raw, RenderPromptResult, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { beforeEach, expect, suite, test } from 'vitest';
 import { getTextPart, roleToString } from '../../../../platform/chat/common/globalStringUtils';
 import { rawPartAsThinkingData } from '../../../../platform/endpoint/common/thinkingDataContainer';
 import { MockEndpoint } from '../../../../platform/endpoint/test/node/mockEndpoint';
 import { ITestingServicesAccessor } from '../../../../platform/test/node/services';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelTextPart, LanguageModelToolResult } from '../../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult } from '../../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
 import { ToolCallRound } from '../../../prompt/common/toolCallRound';
 import { PromptRenderer } from '../../../prompts/node/base/promptRenderer';

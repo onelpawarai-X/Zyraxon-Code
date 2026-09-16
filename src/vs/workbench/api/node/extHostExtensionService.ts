@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as performance from '../../../base/common/performance.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createApiFactoryAndRegisterActors } from '../common/extHost.api.impl.js';
 import { INodeModuleFactory, RequireInterceptor } from '../common/extHostRequireInterceptor.js';
 import { ExtensionActivationTimesBuilder } from '../common/extHostExtensionActivator.js';
@@ -32,7 +32,7 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 		return `data:text/javascript;base64,${Buffer.from(scriptContent).toString('base64')}`;
 	}
 
-	private static _vscodeImportFnName = `_VSCODE_IMPORT_VSCODE_API`;
+	private static _zyraxoncodeImportFnName = `_VSCODE_IMPORT_VSCODE_API`;
 
 	private readonly _store = new DisposableStore();
 
@@ -84,11 +84,11 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 			return request;
 		};
 
-		const apiInstances = new BidirectionalMap<typeof vscode, string>();
+		const apiInstances = new BidirectionalMap<typeof zyraxoncode, string>();
 		const apiImportDataUrl = new Map<string, string>();
 
 		// define a global function that can be used to get API instances given a random key
-		Object.defineProperty(globalThis, NodeModuleRequireInterceptor._vscodeImportFnName, {
+		Object.defineProperty(globalThis, NodeModuleRequireInterceptor._zyraxoncodeImportFnName, {
 			enumerable: false,
 			configurable: false,
 			writable: false,
@@ -100,10 +100,10 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 		let apiModuleFactory: INodeModuleFactory | undefined;
 
 		const lookup = (url: string): string => {
-			// Get the vscode-module factory - which is the same logic that's also used by
+			// Get the zyraxoncode-module factory - which is the same logic that's also used by
 			// the CommonJS require interceptor
 			if (!apiModuleFactory) {
-				apiModuleFactory = this._factories.get('vscode');
+				apiModuleFactory = this._factories.get('zyraxoncode');
 				assertType(apiModuleFactory);
 			}
 
@@ -121,7 +121,7 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 			// Create and cache a data-url which is the import script for the API instance
 			let scriptDataUrlSrc = apiImportDataUrl.get(key);
 			if (!scriptDataUrlSrc) {
-				const jsCode = `const _vscodeInstance = globalThis.${NodeModuleRequireInterceptor._vscodeImportFnName}('${key}');\n\n${Object.keys(apiInstance).map((name => `export const ${name} = _vscodeInstance['${name}'];`)).join('\n')}`;
+				const jsCode = `const _zyraxoncodeInstance = globalThis.${NodeModuleRequireInterceptor._zyraxoncodeImportFnName}('${key}');\n\n${Object.keys(apiInstance).map((name => `export const ${name} = _zyraxoncodeInstance['${name}'];`)).join('\n')}`;
 				scriptDataUrlSrc = NodeModuleRequireInterceptor._createDataUri(jsCode);
 				apiImportDataUrl.set(key, scriptDataUrlSrc);
 			}
@@ -129,7 +129,7 @@ class NodeModuleRequireInterceptor extends RequireInterceptor {
 		};
 		const hooks = nodeModule.registerHooks({
 			resolve: (specifier, context, nextResolve) => {
-				if (specifier !== 'vscode' || !context.parentURL) {
+				if (specifier !== 'zyraxoncode' || !context.parentURL) {
 					return nextResolve(specifier, context);
 				}
 				const otherUrl = lookup(context.parentURL);

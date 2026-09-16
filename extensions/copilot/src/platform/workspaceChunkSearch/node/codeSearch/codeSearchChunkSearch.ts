@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { shouldInclude } from '../../../../util/common/glob';
 import { Result } from '../../../../util/common/result';
 import { TelemetryCorrelationId } from '../../../../util/common/telemetryCorrelationId';
@@ -20,7 +20,7 @@ import { isEqual, isEqualOrParent } from '../../../../util/vs/base/common/resour
 import { StopWatch } from '../../../../util/vs/base/common/stopwatch';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseWarningPart } from '../../../../vscodeTypes';
+import { ChatResponseWarningPart } from '../../../../zyraxoncodeTypes';
 import { IAuthenticationService } from '../../../authentication/common/authentication';
 import { IAuthenticationChatUpgradeService } from '../../../authentication/common/authenticationUpgrade';
 import { FileChunkAndScore } from '../../../chunking/common/chunk';
@@ -28,7 +28,7 @@ import { ConfigKey, ConfigTarget, IConfigurationService } from '../../../configu
 import { EmbeddingType } from '../../../embeddings/common/embeddingsComputer';
 import { RelativePattern } from '../../../filesystem/common/fileTypes';
 import { IGitService, ResolvedRepoRemoteInfo } from '../../../git/common/gitService';
-import { Change } from '../../../git/vscode/git';
+import { Change } from '../../../git/zyraxoncode/git';
 import { logExecTime, LogExecTime } from '../../../log/common/logExecTime';
 import { ILogService } from '../../../log/common/logService';
 import { IAdoCodeSearchService } from '../../../remoteCodeSearch/common/adoCodeSearchService';

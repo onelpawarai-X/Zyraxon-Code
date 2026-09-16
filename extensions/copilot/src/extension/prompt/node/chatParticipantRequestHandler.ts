@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type { ChatRequest, ChatRequestTurn2, ChatResponseStream, ChatResult, Location } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { ChatRequest, ChatRequestTurn2, ChatResponseStream, ChatResult, Location } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { IAuthenticationChatUpgradeService } from '../../../platform/authentication/common/authenticationUpgrade';
 import { getChatParticipantNameFromId } from '../../../platform/chat/common/chatAgents';
@@ -27,7 +27,7 @@ import { isEqual } from '../../../util/vs/base/common/resources';
 import { URI } from '../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { IInstantiationService, ServicesAccessor } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestEditorData, ChatRequestNotebookData, ChatRequestTurn, ChatResponseAnchorPart, ChatResponseFileTreePart, ChatResponseMarkdownPart, ChatResponseProgressPart2, ChatResponseReferencePart, ChatResponseTurn, ChatLocation as VSChatLocation } from '../../../vscodeTypes';
+import { ChatRequestEditorData, ChatRequestNotebookData, ChatRequestTurn, ChatResponseAnchorPart, ChatResponseFileTreePart, ChatResponseMarkdownPart, ChatResponseProgressPart2, ChatResponseReferencePart, ChatResponseTurn, ChatLocation as VSChatLocation } from '../../../zyraxoncodeTypes';
 import { ICommandService } from '../../commands/node/commandService';
 import { getAgentForIntent, Intent } from '../../common/constants';
 import { IConversationStore } from '../../conversationStore/node/conversationStore';
@@ -353,12 +353,12 @@ export function addHistoryToConversation(accessor: ServicesAccessor, history: Re
 		if (entry instanceof ChatRequestTurn) {
 			previousChatRequestTurn = entry;
 		} else {
-			const existingTurn = instaService.invokeFunction(findExistingTurnFromVSCodeChatHistoryTurn, entry);
+			const existingTurn = instaService.invokeFunction(findExistingTurnFromZyraxonCodeChatHistoryTurn, entry);
 			if (existingTurn) {
 				turns.push(existingTurn);
 			} else {
 				if (previousChatRequestTurn) {
-					const deserializedTurn = instaService.invokeFunction(createTurnFromVSCodeChatHistoryTurns, previousChatRequestTurn, entry);
+					const deserializedTurn = instaService.invokeFunction(createTurnFromZyraxonCodeChatHistoryTurns, previousChatRequestTurn, entry);
 					previousChatRequestTurn = undefined;
 					turns.push(deserializedTurn);
 				}
@@ -375,16 +375,16 @@ export function addHistoryToConversation(accessor: ServicesAccessor, history: Re
 }
 
 /**
- * Try to find an existing `Turn` instance that we created previously based on the responseId of a vscode turn.
+ * Try to find an existing `Turn` instance that we created previously based on the responseId of a zyraxoncode turn.
  */
-function findExistingTurnFromVSCodeChatHistoryTurn(accessor: ServicesAccessor, turn: ChatRequestTurn | ChatResponseTurn): Turn | undefined {
+function findExistingTurnFromZyraxonCodeChatHistoryTurn(accessor: ServicesAccessor, turn: ChatRequestTurn | ChatResponseTurn): Turn | undefined {
 	const conversationStore = accessor.get(IConversationStore);
-	const responseId = getResponseIdFromVSCodeChatHistoryTurn(turn);
+	const responseId = getResponseIdFromZyraxonCodeChatHistoryTurn(turn);
 	const conversation = responseId ? conversationStore.getConversation(responseId) : undefined;
 	return conversation?.turns.find(turn => turn.id === responseId);
 }
 
-function getResponseIdFromVSCodeChatHistoryTurn(turn: ChatRequestTurn | ChatResponseTurn): string | undefined {
+function getResponseIdFromZyraxonCodeChatHistoryTurn(turn: ChatRequestTurn | ChatResponseTurn): string | undefined {
 	if (turn instanceof ChatResponseTurn) {
 		const lastEntryResult = turn.result as ICopilotChatResultIn | undefined;
 		return lastEntryResult?.metadata?.responseId;
@@ -393,9 +393,9 @@ function getResponseIdFromVSCodeChatHistoryTurn(turn: ChatRequestTurn | ChatResp
 }
 
 /**
- * Try as best as possible to create a `Turn` object from data that comes from vscode.
+ * Try as best as possible to create a `Turn` object from data that comes from zyraxoncode.
  */
-function createTurnFromVSCodeChatHistoryTurns(
+function createTurnFromZyraxonCodeChatHistoryTurns(
 	accessor: ServicesAccessor,
 	chatRequestTurn: ChatRequestTurn,
 	chatResponseTurn: ChatResponseTurn

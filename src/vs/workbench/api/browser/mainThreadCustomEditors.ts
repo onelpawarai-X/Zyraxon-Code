@@ -608,7 +608,7 @@ class MainThreadCustomEditorModel extends ResourceWorkingCopy implements ICustom
 		const authority = viewType.replace(/[^a-z0-9\-_]/gi, '-');
 		const path = `/${multibyteAwareBtoa(resource.with({ query: null, fragment: null }).toString(true))}`;
 		return URI.from({
-			scheme: Schemas.vscodeCustomEditor,
+			scheme: Schemas.zyraxoncodeCustomEditor,
 			authority: authority,
 			path: path,
 			query: JSON.stringify(resource.toJSON()),

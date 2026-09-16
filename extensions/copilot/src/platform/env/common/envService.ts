@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Event, WindowState } from 'vscode';
+import type { Event, WindowState } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { env } from '../../../util/vs/base/common/process';
 import { URI } from '../../../util/vs/base/common/uri';
@@ -36,14 +36,14 @@ export interface IEnvService {
 	readonly sessionId: string;
 	readonly machineId: string;
 	readonly devDeviceId: string;
-	readonly vscodeVersion: string;
+	readonly zyraxoncodeVersion: string;
 	/**
 	 * Whether the current session is considered active
-	 * @see vscode.window.state.active
+	 * @see zyraxoncode.window.state.active
 	 */
 	readonly isActive: boolean;
 	/**
-	 * @see vscode.env.remoteName
+	 * @see zyraxoncode.env.remoteName
 	 */
 	readonly remoteName: string | undefined;
 	readonly uiKind: 'desktop' | 'web';
@@ -53,7 +53,7 @@ export interface IEnvService {
 	readonly appRoot: string;
 	readonly shell: string;
 	/**
-	 * @see vscode.window.onDidChangeWindowState
+	 * @see zyraxoncode.window.onDidChangeWindowState
 	 */
 	readonly onDidChangeWindowState: Event<WindowState>;
 	isProduction(): boolean;
@@ -79,7 +79,7 @@ export abstract class AbstractEnvService implements IEnvService {
 	declare _serviceBrand: undefined;
 
 	abstract get sessionId(): string;
-	abstract get vscodeVersion(): string;
+	abstract get zyraxoncodeVersion(): string;
 	abstract get extensionId(): string;
 	abstract get machineId(): string;
 	abstract get devDeviceId(): string;
@@ -125,7 +125,7 @@ export abstract class AbstractEnvService implements IEnvService {
 
 	/**
 	 * The name and version of the editor itself.
-	 * `{ name : 'vscode', version: '1.63.2' }`.
+	 * `{ name : 'zyraxoncode', version: '1.63.2' }`.
 	 */
 	abstract getEditorInfo(): NameAndVersion;
 

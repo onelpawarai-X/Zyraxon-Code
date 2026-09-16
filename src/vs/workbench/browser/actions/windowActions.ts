@@ -121,7 +121,7 @@ abstract class BaseOpenRecentAction extends Action2 {
 		}
 
 		// Identify all folders and workspaces opened in main windows
-		const activeWindowId = getActiveWindow().vscodeWindowId;
+		const activeWindowId = getActiveWindow().zyraxoncodeWindowId;
 		const openedInWindows = new ResourceMap<{ isActive: boolean }>();
 		for (const window of mainWindows) {
 			const isActive = window.id === activeWindowId;

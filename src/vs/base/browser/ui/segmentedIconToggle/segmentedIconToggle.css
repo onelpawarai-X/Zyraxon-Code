@@ -28,7 +28,7 @@
 	box-sizing: border-box;
 	width: var(--segmented-icon-toggle-width, 56px);
 	height: var(--segmented-icon-toggle-height, 24px);
-	border: 1px solid var(--vscode-input-border, var(--vscode-editorWidget-border));
+	border: 1px solid var(--zyraxoncode-input-border, var(--zyraxoncode-editorWidget-border));
 	border-radius: var(--segmented-icon-toggle-radius, 8px);
 }
 
@@ -49,7 +49,7 @@
 	padding: 0;
 	border: none;
 	background: transparent;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 	cursor: pointer;
 	overflow: hidden;
 	transition: width 0.3s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.22s ease, color 0.2s ease;
@@ -73,7 +73,7 @@
 }
 
 .monaco-segmented-icon-toggle-cell:hover::before {
-	background: var(--vscode-toolbar-hoverBackground, transparent);
+	background: var(--zyraxoncode-toolbar-hoverBackground, transparent);
 }
 
 /* Single-icon view: the lone button fills the whole pill, so its click target and hover background take up the entire pill. */
@@ -102,6 +102,6 @@
 }
 
 .monaco-segmented-icon-toggle-cell:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }

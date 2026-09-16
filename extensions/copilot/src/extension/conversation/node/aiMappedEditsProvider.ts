@@ -2,10 +2,10 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ICodeMapperService } from '../../prompts/node/codeMapper/codeMapperService';
 
-export class AIMappedEditsProvider2 implements vscode.MappedEditsProvider2 {
+export class AIMappedEditsProvider2 implements zyraxoncode.MappedEditsProvider2 {
 
 	constructor(
 		@ICodeMapperService private readonly _codeMapperService: ICodeMapperService,
@@ -13,10 +13,10 @@ export class AIMappedEditsProvider2 implements vscode.MappedEditsProvider2 {
 	}
 
 	async provideMappedEdits(
-		request: vscode.MappedEditsRequest,
-		response: vscode.MappedEditsResponseStream,
-		token: vscode.CancellationToken
-	): Promise<vscode.MappedEditsResult | null | undefined> {
+		request: zyraxoncode.MappedEditsRequest,
+		response: zyraxoncode.MappedEditsResponseStream,
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.MappedEditsResult | null | undefined> {
 
 		const errorMessages: string[] = [];
 		for (const codeBlock of request.codeBlocks) {

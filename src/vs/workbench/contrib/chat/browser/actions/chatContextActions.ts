@@ -107,7 +107,7 @@ abstract class AttachResourceAction extends Action2 {
 				uri = EditorResourceAccessor.getCanonicalUri(editorService.activeEditor, { supportSideBySide: SideBySideEditor.PRIMARY });
 			}
 
-			if (uri && [Schemas.file, Schemas.vscodeRemote, Schemas.untitled].includes(uri.scheme)) {
+			if (uri && [Schemas.file, Schemas.zyraxoncodeRemote, Schemas.untitled].includes(uri.scheme)) {
 				files.push(uri);
 			}
 		}
@@ -151,7 +151,7 @@ class AttachFileToChatAction extends AttachResourceAction {
 					ExplorerFolderContext.negate(),
 					ContextKeyExpr.or(
 						ResourceContextKey.Scheme.isEqualTo(Schemas.file),
-						ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeRemote)
+						ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeRemote)
 					)
 				),
 			}, {
@@ -162,7 +162,7 @@ class AttachFileToChatAction extends AttachResourceAction {
 					ChatContextKeys.enabled,
 					ContextKeyExpr.or(
 						ResourceContextKey.Scheme.isEqualTo(Schemas.file),
-						ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeRemote)
+						ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeRemote)
 					)
 				),
 			}, {
@@ -174,9 +174,9 @@ class AttachFileToChatAction extends AttachResourceAction {
 					EditorContextKeys.hasNonEmptySelection.negate(),
 					ContextKeyExpr.or(
 						ResourceContextKey.Scheme.isEqualTo(Schemas.file),
-						ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeRemote),
+						ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeRemote),
 						ResourceContextKey.Scheme.isEqualTo(Schemas.untitled),
-						ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeUserData)
+						ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeUserData)
 					)
 				)
 			}, {
@@ -226,7 +226,7 @@ class AttachFolderToChatAction extends AttachResourceAction {
 					ExplorerFolderContext,
 					ContextKeyExpr.or(
 						ResourceContextKey.Scheme.isEqualTo(Schemas.file),
-						ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeRemote)
+						ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeRemote)
 					)
 				)
 			}
@@ -275,7 +275,7 @@ class AttachPinnedEditorsToChatAction extends Action2 {
 			for (const editor of group.editors) {
 				if (group.isPinned(editor)) {
 					const uri = EditorResourceAccessor.getCanonicalUri(editor, { supportSideBySide: SideBySideEditor.PRIMARY });
-					if (uri && [Schemas.file, Schemas.vscodeRemote, Schemas.untitled].includes(uri.scheme)) {
+					if (uri && [Schemas.file, Schemas.zyraxoncodeRemote, Schemas.untitled].includes(uri.scheme)) {
 						files.push(uri);
 					}
 				}
@@ -314,9 +314,9 @@ class AttachSelectionToChatAction extends Action2 {
 					EditorContextKeys.hasNonEmptySelection,
 					ContextKeyExpr.or(
 						ResourceContextKey.Scheme.isEqualTo(Schemas.file),
-						ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeRemote),
+						ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeRemote),
 						ResourceContextKey.Scheme.isEqualTo(Schemas.untitled),
-						ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeUserData)
+						ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeUserData)
 					)
 				)
 			}, {
@@ -369,7 +369,7 @@ class AttachSelectionToChatAction extends Action2 {
 		} else {
 			const activeEditor = editorService.activeTextEditorControl;
 			const activeUri = EditorResourceAccessor.getCanonicalUri(editorService.activeEditor, { supportSideBySide: SideBySideEditor.PRIMARY });
-			if (activeEditor && activeUri && [Schemas.file, Schemas.vscodeRemote, Schemas.untitled].includes(activeUri.scheme)) {
+			if (activeEditor && activeUri && [Schemas.file, Schemas.zyraxoncodeRemote, Schemas.untitled].includes(activeUri.scheme)) {
 				const selection = activeEditor.getSelection();
 				if (selection) {
 					widget.focusInput();
@@ -628,7 +628,7 @@ export class AttachContextAction extends Action2 {
 						references: [{ reference: pick.resource, kind: 'reference' }]
 					});
 				}
-			} else if (pick.resource.scheme === Schemas.vscodeBrowser) {
+			} else if (pick.resource.scheme === Schemas.zyraxoncodeBrowser) {
 				const entry = await chatAttachmentResolveService.resolveEditorAttachContext({ resource: pick.resource });
 				if (entry) {
 					toAttach.push(entry);

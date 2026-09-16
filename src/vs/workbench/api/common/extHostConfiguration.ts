@@ -5,7 +5,7 @@
 
 import { mixin, deepClone } from '../../../base/common/objects.js';
 import { Event, Emitter } from '../../../base/common/event.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostWorkspace, IExtHostWorkspace } from './extHostWorkspace.js';
 import { ExtHostConfigurationShape, MainThreadConfigurationShape, IConfigurationInitData, MainContext } from './extHost.protocol.js';
 import { ConfigurationTarget as ExtHostConfigurationTarget } from './extHostTypes.js';
@@ -53,7 +53,7 @@ export type ConfigurationInspect<T> = {
 	languageIds?: string[];
 };
 
-function isUri(thing: unknown): thing is vscode.Uri {
+function isUri(thing: unknown): thing is zyraxoncode.Uri {
 	return thing instanceof URI;
 }
 
@@ -71,14 +71,14 @@ function isLanguage(thing: unknown): thing is { languageId: string } {
 		&& typeof (thing as Record<string, unknown>).languageId === 'string';
 }
 
-function isWorkspaceFolder(thing: unknown): thing is vscode.WorkspaceFolder {
+function isWorkspaceFolder(thing: unknown): thing is zyraxoncode.WorkspaceFolder {
 	return isObject(thing)
 		&& (thing as Record<string, unknown>).uri instanceof URI
 		&& (!(thing as Record<string, unknown>).name || typeof (thing as Record<string, unknown>).name === 'string')
 		&& (!(thing as Record<string, unknown>).index || typeof (thing as Record<string, unknown>).index === 'number');
 }
 
-function scopeToOverrides(scope: vscode.ConfigurationScope | undefined | null): IConfigurationOverrides | undefined {
+function scopeToOverrides(scope: zyraxoncode.ConfigurationScope | undefined | null): IConfigurationOverrides | undefined {
 	if (isUri(scope)) {
 		return { resource: scope };
 	}
@@ -138,7 +138,7 @@ export class ExtHostConfiguration implements ExtHostConfigurationShape {
 
 export class ExtHostConfigProvider {
 
-	private readonly _onDidChangeConfiguration = new Emitter<vscode.ConfigurationChangeEvent>();
+	private readonly _onDidChangeConfiguration = new Emitter<zyraxoncode.ConfigurationChangeEvent>();
 	private readonly _proxy: MainThreadConfigurationShape;
 	private readonly _extHostWorkspace: ExtHostWorkspace;
 	private _configurationScopes: Map<string, ConfigurationScope | undefined>;
@@ -153,7 +153,7 @@ export class ExtHostConfigProvider {
 		this._configurationScopes = this._toMap(data.configurationScopes);
 	}
 
-	get onDidChangeConfiguration(): Event<vscode.ConfigurationChangeEvent> {
+	get onDidChangeConfiguration(): Event<zyraxoncode.ConfigurationChangeEvent> {
 		return this._onDidChangeConfiguration && this._onDidChangeConfiguration.event;
 	}
 
@@ -164,7 +164,7 @@ export class ExtHostConfigProvider {
 		this._onDidChangeConfiguration.fire(this._toConfigurationChangeEvent(change, previous));
 	}
 
-	getConfiguration(section?: string, scope?: vscode.ConfigurationScope | null, extensionDescription?: IExtensionDescription): vscode.WorkspaceConfiguration {
+	getConfiguration(section?: string, scope?: zyraxoncode.ConfigurationScope | null, extensionDescription?: IExtensionDescription): zyraxoncode.WorkspaceConfiguration {
 		const overrides = scopeToOverrides(scope) || {};
 		const config = this._toReadonlyValue(this._configuration.getValue(section, overrides, this._extHostWorkspace.workspace));
 
@@ -187,7 +187,7 @@ export class ExtHostConfigProvider {
 			}
 		}
 
-		const result: vscode.WorkspaceConfiguration = {
+		const result: zyraxoncode.WorkspaceConfiguration = {
 			has(key: string): boolean {
 				return typeof lookUp(config, key) !== 'undefined';
 			},
@@ -330,10 +330,10 @@ export class ExtHostConfigProvider {
 		}
 	}
 
-	private _toConfigurationChangeEvent(change: IConfigurationChange, previous: { data: IConfigurationData; workspace: Workspace | undefined }): vscode.ConfigurationChangeEvent {
+	private _toConfigurationChangeEvent(change: IConfigurationChange, previous: { data: IConfigurationData; workspace: Workspace | undefined }): zyraxoncode.ConfigurationChangeEvent {
 		const event = new ConfigurationChangeEvent(change, previous, this._configuration, this._extHostWorkspace.workspace, this._logService);
 		return Object.freeze({
-			affectsConfiguration: (section: string, scope?: vscode.ConfigurationScope) => event.affectsConfiguration(section, scopeToOverrides(scope))
+			affectsConfiguration: (section: string, scope?: zyraxoncode.ConfigurationScope) => event.affectsConfiguration(section, scopeToOverrides(scope))
 		});
 	}
 

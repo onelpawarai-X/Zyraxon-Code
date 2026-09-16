@@ -8,30 +8,30 @@
  * the hover sits on the panel surface, so scope the surface color to the panel background here.
  * The hover is portaled but mounts inside this workbench root, so it inherits this value. */
 .monaco-workbench.agent-sessions-workbench {
-	background-color: var(--vscode-agents-background);
-	--model-hover-surface-background: var(--vscode-agentsPanel-background);
+	background-color: var(--zyraxoncode-agents-background);
+	--model-hover-surface-background: var(--zyraxoncode-agentsPanel-background);
 }
 
 /* ---- Workbench Shell ---- */
 
 .monaco-workbench.agent-sessions-workbench .part.sidebar {
-	background: var(--vscode-agents-background);
+	background: var(--zyraxoncode-agents-background);
 }
 
 .monaco-workbench.agent-sessions-workbench > .monaco-grid-view {
-	margin: 0 var(--vscode-spacing-size100) var(--vscode-spacing-size100) 4px;
+	margin: 0 var(--zyraxoncode-spacing-size100) var(--zyraxoncode-spacing-size100) 4px;
 	width: auto;
-	height: calc(100% - var(--vscode-spacing-size100));
+	height: calc(100% - var(--zyraxoncode-spacing-size100));
 }
 
 .monaco-workbench.agent-sessions-workbench.nosidebar > .monaco-grid-view {
-	margin-left: var(--vscode-spacing-size100);
+	margin-left: var(--zyraxoncode-spacing-size100);
 }
 
 .monaco-workbench.agent-sessions-workbench.shell-gradient-background {
 	position: relative;
 	isolation: isolate;
-	background: var(--vscode-agents-background);
+	background: var(--zyraxoncode-agents-background);
 }
 
 .monaco-workbench.agent-sessions-workbench.shell-gradient-background::before {
@@ -40,7 +40,7 @@
 	inset: 0;
 	z-index: 0;
 	pointer-events: none;
-	background: var(--vscode-agents-background);
+	background: var(--zyraxoncode-agents-background);
 }
 
 .monaco-workbench.agent-sessions-workbench.shell-gradient-background > .monaco-grid-view {
@@ -53,29 +53,29 @@
 	.agent-sessions-workbench.shell-gradient-background::before {
 		background:
 			radial-gradient(ellipse 128% 102% at 100% 100%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 9%, transparent) 0%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 7%, transparent) 16%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 5%, transparent) 30%,
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 9%, transparent) 0%,
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 7%, transparent) 16%,
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 5%, transparent) 30%,
 				transparent 60%),
-			var(--vscode-agents-background);
+			var(--zyraxoncode-agents-background);
 	}
 
 	.monaco-workbench.vs.agent-sessions-workbench.shell-gradient-background::before {
 		background:
 			radial-gradient(ellipse 128% 102% at 100% 100%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 12%, transparent) 0%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 6%, transparent) 18%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 1%, transparent) 32%,
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 12%, transparent) 0%,
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 6%, transparent) 18%,
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 1%, transparent) 32%,
 				transparent 58%),
-			var(--vscode-agents-background);
+			var(--zyraxoncode-agents-background);
 	}
 
 	.monaco-workbench.vs-dark.agent-sessions-workbench.shell-gradient-background::before {
 		background: radial-gradient(ellipse 128% 102% at 100% 100%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 13%, var(--vscode-agents-background)) 0%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 10%, var(--vscode-agents-background)) 17%,
-				color-mix(in srgb, var(--vscode-agentsGradient-tintColor) 7%, var(--vscode-agents-background)) 31%,
-				var(--vscode-agents-background) 60%);
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 13%, var(--zyraxoncode-agents-background)) 0%,
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 10%, var(--zyraxoncode-agents-background)) 17%,
+				color-mix(in srgb, var(--zyraxoncode-agentsGradient-tintColor) 7%, var(--zyraxoncode-agents-background)) 31%,
+				var(--zyraxoncode-agents-background) 60%);
 	}
 }
 
@@ -120,8 +120,8 @@
 /* ---- Workbench Parts ---- */
 
 .agent-sessions-workbench .monaco-grid-view .part.editor:not(.modal-editor-part) {
-	background: var(--vscode-agentsPanel-background);
-	border: 1px solid var(--vscode-agentsPanel-border, transparent);
+	background: var(--zyraxoncode-agentsPanel-background);
+	border: 1px solid var(--zyraxoncode-agentsPanel-border, transparent);
 	border-right-width: 0;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
@@ -136,7 +136,7 @@
 }
 
 .agent-sessions-workbench.noauxiliarybar .monaco-grid-view .part.editor:not(.modal-editor-part) {
-	border-right-width: var(--vscode-strokeThickness);
+	border-right-width: var(--zyraxoncode-strokeThickness);
 	border-top-right-radius: 8px;
 	border-bottom-right-radius: 8px;
 }
@@ -144,10 +144,10 @@
 /* Floating content card. Shared by every full-surface content part (the
 	sessions grid and the custom view grid) so they are visually identical. */
 .agent-sessions-workbench .agents-part-card {
-	margin: 0 var(--vscode-agents-layout-floatingPanelGap) 0 0;
+	margin: 0 var(--zyraxoncode-agents-layout-floatingPanelGap) 0 0;
 	background: var(--part-background);
 	border: 1px solid var(--part-border-color, transparent);
-	border-radius: var(--vscode-cornerRadius-large);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 	box-sizing: border-box;
 }
 
@@ -174,29 +174,29 @@
 }
 
 .agent-sessions-workbench .part.auxiliarybar > .content .pane-body {
-	background-color: var(--vscode-agentsPanel-background);
+	background-color: var(--zyraxoncode-agentsPanel-background);
 }
 
 .agent-sessions-workbench .part.panel {
-	margin: var(--vscode-agents-layout-floatingPanelGap) 0 0 0;
+	margin: var(--zyraxoncode-agents-layout-floatingPanelGap) 0 0 0;
 	background: var(--part-background);
 	border: 1px solid var(--part-border-color, transparent);
-	border-radius: var(--vscode-cornerRadius-large);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 	box-sizing: border-box;
 }
 
 .monaco-workbench.vs.agent-sessions-workbench .agents-part-card,
 .monaco-workbench.vs.agent-sessions-workbench .part.auxiliarybar,
 .monaco-workbench.vs.agent-sessions-workbench .part.panel {
-	border-color: var(--vscode-editorWidget-border, var(--vscode-widget-border, transparent));
+	border-color: var(--zyraxoncode-editorWidget-border, var(--zyraxoncode-widget-border, transparent));
 }
 
 .agent-sessions-workbench .monaco-sash:before {
-	border-radius: calc(var(--vscode-sash-hover-size) / 2);
+	border-radius: calc(var(--zyraxoncode-sash-hover-size) / 2);
 }
 
 .agent-sessions-workbench .monaco-sash:not(.disabled) > .orthogonal-drag-handle {
-	border-radius: var(--vscode-sash-size);
+	border-radius: var(--zyraxoncode-sash-size);
 }
 
 /*
@@ -206,13 +206,13 @@
  * without moving the split itself. `max()` preserves larger configured sashes.
  */
 .agent-sessions-workbench:not(.noeditorpane) .monaco-split-view2.horizontal:has(> .monaco-scrollable-element > .split-view-container > .split-view-view > .part.sessionspart) > .sash-container > .monaco-sash.vertical:first-child {
-	width: max(var(--vscode-sash-size), var(--vscode-agents-layout-floatingPanelGap));
-	transform: translateX(calc((var(--vscode-sash-size) - max(var(--vscode-sash-size), var(--vscode-agents-layout-floatingPanelGap)) - var(--vscode-agents-layout-floatingPanelGap)) / 2));
+	width: max(var(--zyraxoncode-sash-size), var(--zyraxoncode-agents-layout-floatingPanelGap));
+	transform: translateX(calc((var(--zyraxoncode-sash-size) - max(var(--zyraxoncode-sash-size), var(--zyraxoncode-agents-layout-floatingPanelGap)) - var(--zyraxoncode-agents-layout-floatingPanelGap)) / 2));
 }
 
 .agent-sessions-workbench:not(.nopanel) .monaco-split-view2.vertical:has(> .monaco-scrollable-element > .split-view-container > .split-view-view > .part.panel) > .sash-container > .monaco-sash.horizontal {
-	height: max(var(--vscode-sash-size), var(--vscode-agents-layout-floatingPanelGap));
-	transform: translateY(calc((var(--vscode-sash-size) - max(var(--vscode-sash-size), var(--vscode-agents-layout-floatingPanelGap)) + var(--vscode-agents-layout-floatingPanelGap)) / 2));
+	height: max(var(--zyraxoncode-sash-size), var(--zyraxoncode-agents-layout-floatingPanelGap));
+	transform: translateY(calc((var(--zyraxoncode-sash-size) - max(var(--zyraxoncode-sash-size), var(--zyraxoncode-agents-layout-floatingPanelGap)) + var(--zyraxoncode-agents-layout-floatingPanelGap)) / 2));
 }
 
 /*
@@ -226,22 +226,22 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width: var(--vscode-spacing-size20);
-	height: var(--vscode-spacing-size20);
-	border-radius: var(--vscode-cornerRadius-circle);
-	background: color-mix(in srgb, var(--vscode-foreground) 30%, transparent);
-	color: color-mix(in srgb, var(--vscode-foreground) 30%, transparent);
+	width: var(--zyraxoncode-spacing-size20);
+	height: var(--zyraxoncode-spacing-size20);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
+	background: color-mix(in srgb, var(--zyraxoncode-foreground) 30%, transparent);
+	color: color-mix(in srgb, var(--zyraxoncode-foreground) 30%, transparent);
 	opacity: 0.5;
 	pointer-events: none;
 	transform: translate(-50%, -50%);
 }
 
 .agent-sessions-workbench:not(.noeditorpane) .monaco-split-view2.horizontal:has(> .monaco-scrollable-element > .split-view-container > .split-view-view > .part.sessionspart) > .sash-container > .monaco-sash.vertical:first-child:not(.disabled)::after {
-	box-shadow: 0 calc(-1 * var(--vscode-agents-layout-floatingPanelGap)) currentColor, 0 var(--vscode-agents-layout-floatingPanelGap) currentColor;
+	box-shadow: 0 calc(-1 * var(--zyraxoncode-agents-layout-floatingPanelGap)) currentColor, 0 var(--zyraxoncode-agents-layout-floatingPanelGap) currentColor;
 }
 
 .agent-sessions-workbench:not(.nopanel) .monaco-split-view2.vertical:has(> .monaco-scrollable-element > .split-view-container > .split-view-view > .part.panel) > .sash-container > .monaco-sash.horizontal:not(.disabled)::after {
-	box-shadow: calc(-1 * var(--vscode-agents-layout-floatingPanelGap)) 0 currentColor, var(--vscode-agents-layout-floatingPanelGap) 0 currentColor;
+	box-shadow: calc(-1 * var(--zyraxoncode-agents-layout-floatingPanelGap)) 0 currentColor, var(--zyraxoncode-agents-layout-floatingPanelGap) 0 currentColor;
 }
 
 .agent-sessions-workbench:not(.noeditorpane) .monaco-split-view2.horizontal:has(> .monaco-scrollable-element > .split-view-container > .split-view-view > .part.sessionspart) > .sash-container > .monaco-sash.vertical:first-child:is(.hover, .active)::after,
@@ -269,17 +269,17 @@
 .agent-sessions-workbench.dock-detail-panel .monaco-grid-view .part.editor:not(.modal-editor-part) {
 	position: relative;
 	overflow: hidden;
-	background: var(--vscode-editor-background);
-	border-right-width: var(--vscode-strokeThickness);
+	background: var(--zyraxoncode-editor-background);
+	border-right-width: var(--zyraxoncode-strokeThickness);
 	border-top-right-radius: 8px;
 	border-bottom-right-radius: 8px;
 }
 
 .agent-sessions-workbench.dock-detail-panel .part.auxiliarybar {
-	--part-background: var(--vscode-editor-background);
-	--vscode-sideBar-background: var(--vscode-editor-background);
-	background: var(--vscode-editor-background);
-	border-left: var(--vscode-strokeThickness) solid var(--vscode-agentsPanel-border);
+	--part-background: var(--zyraxoncode-editor-background);
+	--zyraxoncode-sideBar-background: var(--zyraxoncode-editor-background);
+	background: var(--zyraxoncode-editor-background);
+	border-left: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-agentsPanel-border);
 	box-sizing: border-box;
 	z-index: 2;
 }
@@ -287,27 +287,27 @@
 .agent-sessions-workbench.dock-detail-panel .part.auxiliarybar::before {
 	content: '';
 	position: absolute;
-	top: calc(-1 * var(--vscode-strokeThickness));
-	left: calc(-1 * var(--vscode-strokeThickness));
-	width: var(--vscode-strokeThickness);
-	height: var(--vscode-strokeThickness);
-	background: var(--vscode-agentsPanel-border);
+	top: calc(-1 * var(--zyraxoncode-strokeThickness));
+	left: calc(-1 * var(--zyraxoncode-strokeThickness));
+	width: var(--zyraxoncode-strokeThickness);
+	height: var(--zyraxoncode-strokeThickness);
+	background: var(--zyraxoncode-agentsPanel-border);
 }
 
 .agent-sessions-workbench.dock-detail-panel .part.editor .editor-group-header-toolbars {
-	border-bottom: var(--vscode-strokeThickness) solid var(--vscode-agentsPanel-border);
-	padding-bottom: var(--vscode-spacing-size80, 8px) !important;
+	border-bottom: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-agentsPanel-border);
+	padding-bottom: var(--zyraxoncode-spacing-size80, 8px) !important;
 }
 
 .agent-sessions-workbench.dock-detail-panel .part.editor .editor-group-container:not(:has(.editor-group-header-toolbars)) > .title {
-	border-bottom: var(--vscode-strokeThickness) solid var(--vscode-agentsPanel-border);
+	border-bottom: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-agentsPanel-border);
 	box-sizing: border-box;
 }
 
 .agent-sessions-workbench.dock-detail-panel .part.auxiliarybar > .content .pane-body,
 .agent-sessions-workbench.dock-detail-panel .part.auxiliarybar .monaco-list,
 .agent-sessions-workbench.dock-detail-panel .part.auxiliarybar .monaco-list-rows {
-	background-color: var(--vscode-editor-background);
+	background-color: var(--zyraxoncode-editor-background);
 }
 
 .agent-sessions-workbench.dock-detail-panel .part.auxiliarybar.docked-auxiliarybar {
@@ -351,7 +351,7 @@
 	.agent-sessions-workbench .agents-part-card {
 		opacity: 0;
 		border-color: transparent;
-		background: color-mix(in srgb, var(--part-background) 60%, var(--vscode-sideBar-background));
+		background: color-mix(in srgb, var(--part-background) 60%, var(--zyraxoncode-sideBar-background));
 	}
 
 	.agent-sessions-workbench .part.sidebar > .content {

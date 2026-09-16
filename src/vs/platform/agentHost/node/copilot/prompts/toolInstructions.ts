@@ -57,7 +57,7 @@ const browserToolInstructions: ToolInstructionLine = hasTool => {
 	if (!companion) {
 		return undefined;
 	}
-	return `Use the browser tools (${BrowserChatToolReferenceName.OpenBrowserPage}, ${companion}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Microsoft Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).`;
+	return `Use the browser tools (${BrowserChatToolReferenceName.OpenBrowserPage}, ${companion}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Zyraxon Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).`;
 };
 
 /**

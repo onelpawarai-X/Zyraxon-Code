@@ -580,8 +580,8 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
 	private onBeforeUnloadWindowInRenderer(window: ICodeWindow, reason: UnloadReason): Promise<boolean /* veto */> {
 		return new Promise<boolean>(resolve => {
 			const oneTimeEventToken = this.oneTimeListenerTokenGenerator++;
-			const okChannel = `vscode:ok${oneTimeEventToken}`;
-			const cancelChannel = `vscode:cancel${oneTimeEventToken}`;
+			const okChannel = `zyraxoncode:ok${oneTimeEventToken}`;
+			const cancelChannel = `zyraxoncode:cancel${oneTimeEventToken}`;
 
 			const cleanup = (value: boolean) => {
 				validatedIpcMain.removeListener(okChannel, okListener);
@@ -600,18 +600,18 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
 			validatedIpcMain.on(okChannel, okListener);
 			validatedIpcMain.on(cancelChannel, cancelListener);
 
-			window.send('vscode:onBeforeUnload', { okChannel, cancelChannel, reason });
+			window.send('zyraxoncode:onBeforeUnload', { okChannel, cancelChannel, reason });
 		});
 	}
 
 	private onWillUnloadWindowInRenderer(window: ICodeWindow, reason: UnloadReason): Promise<void> {
 		return new Promise<void>(resolve => {
 			const oneTimeEventToken = this.oneTimeListenerTokenGenerator++;
-			const replyChannel = `vscode:reply${oneTimeEventToken}`;
+			const replyChannel = `zyraxoncode:reply${oneTimeEventToken}`;
 
 			validatedIpcMain.once(replyChannel, () => resolve());
 
-			window.send('vscode:onWillUnload', { replyChannel, reason });
+			window.send('zyraxoncode:onWillUnload', { replyChannel, reason });
 		});
 	}
 
@@ -723,7 +723,7 @@ export class LifecycleMainService extends Disposable implements ILifecycleMainSe
 		// `app.exit()`.
 		//
 		// Note: Electron implements a similar logic here:
-		// https://github.com/electron/electron/blob/fe5318d753637c3903e23fc1ed1b263025887b6a/spec-main/window-helpers.ts#L5
+		// __ZYRAXKEEP__0_
 
 		await Promise.race([
 

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type { CancellationToken, ChatPromptReference, ChatRequest, ChatResponseStream, ChatResult } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { CancellationToken, ChatPromptReference, ChatRequest, ChatResponseStream, ChatResult } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { IChatHookService } from '../../../../platform/chat/common/chatHookService';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
@@ -26,7 +26,7 @@ import { getLanguage } from '../../../../util/common/languages';
 import { isUri } from '../../../../util/common/types';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Position, Range, Selection } from '../../../../vscodeTypes';
+import { Position, Range, Selection } from '../../../../zyraxoncodeTypes';
 import { Intent } from '../../../common/constants';
 import { Conversation } from '../../../prompt/common/conversation';
 import { ChatTelemetryBuilder } from '../../../prompt/node/chatParticipantTelemetry';
@@ -116,7 +116,7 @@ export class TestsIntent implements IIntent {
 		const fileRefs: [ChatPromptReference, URI][] = [];
 
 		for (const ref of refs) {
-			if (ref.id === 'copilot.file' || ref.id === 'vscode.file') {
+			if (ref.id === 'copilot.file' || ref.id === 'zyraxoncode.file') {
 				if (isUri(ref.value)) {
 					hashFileCount += 1;
 					fileRefs.push([ref, ref.value]);
@@ -169,7 +169,7 @@ export class TestsIntent implements IIntent {
 
 			// FIXME@ulugbekna: I don't like how I fish for #file references
 
-			if (ref.id !== 'vscode.file' && ref.id !== 'copilot.file') {
+			if (ref.id !== 'zyraxoncode.file' && ref.id !== 'copilot.file') {
 				continue;
 			}
 

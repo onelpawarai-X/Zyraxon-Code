@@ -207,7 +207,7 @@ if should_run_suite api-folder; then
 echo
 echo "### API tests (folder)"
 echo
-"$INTEGRATION_TEST_ELECTRON_PATH" $ROOT/extensions/vscode-api-tests/testWorkspace --enable-proposed-api=vscode.vscode-api-tests --extensionDevelopmentPath=$ROOT/extensions/vscode-api-tests --extensionTestsPath=$ROOT/extensions/vscode-api-tests/out/singlefolder-tests $API_TESTS_EXTRA_ARGS
+"$INTEGRATION_TEST_ELECTRON_PATH" $ROOT/extensions/zyraxoncode-api-tests/testWorkspace --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests --extensionDevelopmentPath=$ROOT/extensions/zyraxoncode-api-tests --extensionTestsPath=$ROOT/extensions/zyraxoncode-api-tests/out/singlefolder-tests $API_TESTS_EXTRA_ARGS
 kill_app
 fi
 
@@ -215,7 +215,7 @@ if should_run_suite api-workspace; then
 echo
 echo "### API tests (workspace)"
 echo
-"$INTEGRATION_TEST_ELECTRON_PATH" $ROOT/extensions/vscode-api-tests/testworkspace.code-workspace --enable-proposed-api=vscode.vscode-api-tests --extensionDevelopmentPath=$ROOT/extensions/vscode-api-tests --extensionTestsPath=$ROOT/extensions/vscode-api-tests/out/workspace-tests $API_TESTS_EXTRA_ARGS
+"$INTEGRATION_TEST_ELECTRON_PATH" $ROOT/extensions/zyraxoncode-api-tests/testworkspace.code-workspace --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests --extensionDevelopmentPath=$ROOT/extensions/zyraxoncode-api-tests --extensionTestsPath=$ROOT/extensions/zyraxoncode-api-tests/out/workspace-tests $API_TESTS_EXTRA_ARGS
 kill_app
 fi
 
@@ -223,7 +223,7 @@ if should_run_suite colorize; then
 echo
 echo "### Colorize tests"
 echo
-npm run test-extension -- -l vscode-colorize-tests "${GREP_ARGS[@]}"
+npm run test-extension -- -l zyraxoncode-colorize-tests "${GREP_ARGS[@]}"
 kill_app
 fi
 
@@ -231,7 +231,7 @@ if should_run_suite terminal-suggest; then
 echo
 echo "### Terminal Suggest tests"
 echo
-npm run test-extension -- -l terminal-suggest --enable-proposed-api=vscode.vscode-api-tests "${GREP_ARGS[@]}"
+npm run test-extension -- -l terminal-suggest --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests "${GREP_ARGS[@]}"
 kill_app
 fi
 

@@ -31,7 +31,7 @@ export class ImageCarouselEditorInput extends EditorInput {
 	) {
 		super();
 		this._resource = URI.from({
-			scheme: Schemas.vscodeImageCarousel,
+			scheme: Schemas.zyraxoncodeImageCarousel,
 			path: `/${encodeURIComponent(collection.id)}`,
 		});
 		this._name = collection.title;

@@ -72,7 +72,7 @@ export interface IShellConfiguration {
 export interface ICommandOptionsConfig {
 	/**
 	 * The current working directory of the executed program or shell.
-	 * If omitted VSCode's current workspace root is used.
+	 * If omitted ZyraxonCode's current workspace root is used.
 	 */
 	cwd?: string;
 
@@ -1450,8 +1450,8 @@ namespace ConfiguringTask {
 	const grunt = 'grunt.';
 	const jake = 'jake.';
 	const gulp = 'gulp.';
-	const npm = 'vscode.npm.';
-	const typescript = 'vscode.typescript.';
+	const npm = 'zyraxoncode.npm.';
+	const typescript = 'zyraxoncode.typescript.';
 
 	interface ICustomizeShape {
 		customize: string;
@@ -1508,7 +1508,7 @@ namespace ConfiguringTask {
 		}
 		const configElement: Tasks.ITaskSourceConfigElement = {
 			workspaceFolder: context.workspaceFolder,
-			file: '.vscode/tasks.json',
+			file: '.zyraxoncode/tasks.json',
 			index,
 			element: external
 		};
@@ -1588,15 +1588,15 @@ namespace CustomTask {
 		let taskSource: Tasks.FileBasedTaskSource;
 		switch (source) {
 			case TaskConfigSource.User: {
-				taskSource = { kind: Tasks.TaskSourceKind.User, config: { index, element: external, file: '.vscode/tasks.json', workspaceFolder: context.workspaceFolder }, label };
+				taskSource = { kind: Tasks.TaskSourceKind.User, config: { index, element: external, file: '.zyraxoncode/tasks.json', workspaceFolder: context.workspaceFolder }, label };
 				break;
 			}
 			case TaskConfigSource.WorkspaceFile: {
-				taskSource = { kind: Tasks.TaskSourceKind.WorkspaceFile, config: { index, element: external, file: '.vscode/tasks.json', workspaceFolder: context.workspaceFolder, workspace: context.workspace }, label };
+				taskSource = { kind: Tasks.TaskSourceKind.WorkspaceFile, config: { index, element: external, file: '.zyraxoncode/tasks.json', workspaceFolder: context.workspaceFolder, workspace: context.workspace }, label };
 				break;
 			}
 			default: {
-				taskSource = { kind: Tasks.TaskSourceKind.Workspace, config: { index, element: external, file: '.vscode/tasks.json', workspaceFolder: context.workspaceFolder }, label };
+				taskSource = { kind: Tasks.TaskSourceKind.Workspace, config: { index, element: external, file: '.zyraxoncode/tasks.json', workspaceFolder: context.workspaceFolder }, label };
 				break;
 			}
 		}
@@ -1619,7 +1619,7 @@ namespace CustomTask {
 		if (configuration.value) {
 			result.configurationProperties = Object.assign(result.configurationProperties, configuration.value);
 		}
-		const supportLegacy: boolean = true; //context.schemaVersion === Tasks.JsonSchemaVersion.V2_0_0;
+		const supportLegacy: boolean = true; __ZYRAXKEEP__0_ === Tasks.JsonSchemaVersion.V2_0_0;
 		if (supportLegacy) {
 			const legacy: ILegacyTaskProperties = external as ILegacyTaskProperties;
 			if (result.configurationProperties.isBackground === undefined && legacy.isWatching !== undefined) {

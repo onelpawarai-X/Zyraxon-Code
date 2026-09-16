@@ -1,16 +1,16 @@
 {
   "workspaceFoldersFilePaths": [
-    "../../../vscode"
+    "../../../zyraxoncode"
   ],
-  "workspaceFolderFilePath": "../../../vscode",
+  "workspaceFolderFilePath": "../../../zyraxoncode",
   "symbols": [],
   "activeFileDiagnostics": [],
   "debugConsoleOutput": "",
   "terminalBuffer": "",
   "terminalLastCommand": {
     "commandLine": "",
-    "cwd": "/Users/penlv/Code/Work/vscode",
-    "output": "penlv@Pengs-MBP vscode % \n"
+    "cwd": "/Users/penlv/Code/Work/zyraxoncode",
+    "output": "penlv@Pengs-MBP zyraxoncode % \n"
   },
   "terminalSelection": "",
   "terminalShellType": "bash",
@@ -18,7 +18,7 @@
     {
       "rootUri": {
         "$mid": 1,
-        "path": "/Users/penlv/Code/Work/vscode",
+        "path": "/Users/penlv/Code/Work/zyraxoncode",
         "scheme": "file"
       },
       "headBranchName": "release/1.97",
@@ -30,7 +30,7 @@
         "origin"
       ],
       "remoteFetchUrls": [
-        "git@github.com:microsoft/vscode.git"
+        "git@github.com:zyraxon/zyraxoncode.git"
       ],
       "changes": {
         "mergeChanges": [],

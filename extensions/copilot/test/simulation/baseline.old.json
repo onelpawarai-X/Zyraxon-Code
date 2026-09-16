@@ -3914,7 +3914,7 @@
     }
   },
   {
-    "name": "InlineEdit GoldenScenario ([xtab]) [external] [java] - [MustHave] 6-vscode-remote-try-java-part-1",
+    "name": "InlineEdit GoldenScenario ([xtab]) [external] [java] - [MustHave] 6-zyraxoncode-remote-try-java-part-1",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -3926,7 +3926,7 @@
     }
   },
   {
-    "name": "InlineEdit GoldenScenario ([xtab]) [external] [java] - [MustHave] 6-vscode-remote-try-java-part-2",
+    "name": "InlineEdit GoldenScenario ([xtab]) [external] [java] - [MustHave] 6-zyraxoncode-remote-try-java-part-2",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -4338,7 +4338,7 @@
     "score": 1
   },
   {
-    "name": "intent [inline] - create a vscode launch task",
+    "name": "intent [inline] - create a zyraxoncode launch task",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -5871,7 +5871,7 @@
     "score": 0
   },
   {
-    "name": "intent [panel] - [relaxed] [builtin] how do i add env var to a test execution of jest in vscode?",
+    "name": "intent [panel] - [relaxed] [builtin] how do i add env var to a test execution of jest in zyraxoncode?",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -6018,7 +6018,7 @@
     "score": 1
   },
   {
-    "name": "intent [panel] - [relaxed] [builtin] Latest updated features in vscode",
+    "name": "intent [panel] - [relaxed] [builtin] Latest updated features in zyraxoncode",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -6291,14 +6291,14 @@
     "score": 1
   },
   {
-    "name": "intent [panel] - [relaxed] [builtin] vscode extension for chat participants, the extension should be updated to use c…",
+    "name": "intent [panel] - [relaxed] [builtin] zyraxoncode extension for chat participants, the extension should be updated to use c…",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
     "score": 1
   },
   {
-    "name": "intent [panel] - [relaxed] [builtin] vscode extension for chat participants, the extension will be for accessing inte…",
+    "name": "intent [panel] - [relaxed] [builtin] zyraxoncode extension for chat participants, the extension will be for accessing inte…",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -6340,7 +6340,7 @@
     "score": 1
   },
   {
-    "name": "intent [panel] - [relaxed] [builtin] What is a good vscode extensions starting point if I want to contribute to the c…",
+    "name": "intent [panel] - [relaxed] [builtin] What is a good zyraxoncode extensions starting point if I want to contribute to the c…",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -6368,7 +6368,7 @@
     "score": 1
   },
   {
-    "name": "intent [panel] - [relaxed] [builtin] What is the name of that setting when vscode fake opens a file and how to disabl…",
+    "name": "intent [panel] - [relaxed] [builtin] What is the name of that setting when zyraxoncode fake opens a file and how to disabl…",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -6963,7 +6963,7 @@
     "score": 0
   },
   {
-    "name": "intent [panel] - [strict] [builtin] how do i add env var to a test execution of jest in vscode?",
+    "name": "intent [panel] - [strict] [builtin] how do i add env var to a test execution of jest in zyraxoncode?",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -7110,7 +7110,7 @@
     "score": 1
   },
   {
-    "name": "intent [panel] - [strict] [builtin] Latest updated features in vscode",
+    "name": "intent [panel] - [strict] [builtin] Latest updated features in zyraxoncode",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -7383,14 +7383,14 @@
     "score": 0
   },
   {
-    "name": "intent [panel] - [strict] [builtin] vscode extension for chat participants, the extension should be updated to use ca…",
+    "name": "intent [panel] - [strict] [builtin] zyraxoncode extension for chat participants, the extension should be updated to use ca…",
     "contentFilterCount": 0,
     "passCount": 0,
     "failCount": 10,
     "score": 0
   },
   {
-    "name": "intent [panel] - [strict] [builtin] vscode extension for chat participants, the extension will be for accessing inter…",
+    "name": "intent [panel] - [strict] [builtin] zyraxoncode extension for chat participants, the extension will be for accessing inter…",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -7432,7 +7432,7 @@
     "score": 1
   },
   {
-    "name": "intent [panel] - [strict] [builtin] What is a good vscode extensions starting point if I want to contribute to the ch…",
+    "name": "intent [panel] - [strict] [builtin] What is a good zyraxoncode extensions starting point if I want to contribute to the ch…",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -7460,7 +7460,7 @@
     "score": 1
   },
   {
-    "name": "intent [panel] - [strict] [builtin] What is the name of that setting when vscode fake opens a file and how to disable…",
+    "name": "intent [panel] - [strict] [builtin] What is the name of that setting when zyraxoncode fake opens a file and how to disable…",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
@@ -8562,7 +8562,7 @@
     "score": 0.1
   },
   {
-    "name": "notebook (mbpp) [inline] [python] - mbpp 749 Write a function to sort a given list of strings of numbers numerically. https://www.geeksf…",
+    "name": "notebook (mbpp) [inline] [python] - mbpp 749 Write a function to sort a given list of strings of numbers numerically. __ZYRAXKEEP__0_",
     "optional": true,
     "contentFilterCount": 0,
     "passCount": 0,
@@ -9050,7 +9050,7 @@
     "score": 0.4
   },
   {
-    "name": "notebook (notebookEditsMbpp) [panel] [python] - mbpp 749 Write a function to sort a given list of strings of numbers numerically. https://www.geeksf…",
+    "name": "notebook (notebookEditsMbpp) [panel] [python] - mbpp 749 Write a function to sort a given list of strings of numbers numerically. __ZYRAXKEEP__1_",
     "optional": true,
     "contentFilterCount": 0,
     "passCount": 6,
@@ -11810,21 +11810,21 @@
     "score": 1
   },
   {
-    "name": "vscode (metaprompt) [panel] - enable word wrap in editer",
+    "name": "zyraxoncode (metaprompt) [panel] - enable word wrap in editer",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
     "score": 1
   },
   {
-    "name": "vscode (metaprompt) [panel] - how do I change font size setting",
+    "name": "zyraxoncode (metaprompt) [panel] - how do I change font size setting",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,
     "score": 1
   },
   {
-    "name": "vscode (metaprompt) [panel] - how to opne command pallete",
+    "name": "zyraxoncode (metaprompt) [panel] - how to opne command pallete",
     "contentFilterCount": 0,
     "passCount": 10,
     "failCount": 0,

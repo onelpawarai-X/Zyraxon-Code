@@ -85,7 +85,7 @@ Registry.as<IViewsRegistry>(ViewExtensions.ViewsRegistry).registerViews([chatVie
 const chatParticipantExtensionPoint = extensionsRegistry.ExtensionsRegistry.registerExtensionPoint<IRawChatParticipantContribution[]>({
 	extensionPoint: 'chatParticipants',
 	jsonSchema: {
-		description: localize('vscode.extension.contributes.chatParticipant', 'Contributes a chat participant'),
+		description: localize('zyraxoncode.extension.contributes.chatParticipant', 'Contributes a chat participant'),
 		type: 'array',
 		items: {
 			additionalProperties: false,

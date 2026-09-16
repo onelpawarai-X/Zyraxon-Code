@@ -17,8 +17,8 @@
 	"include": [
 		"src/**/*",
 		"src/completions/index.d.ts",
-		"../../src/vscode-dts/vscode.d.ts",
-		"../../src/vscode-dts/vscode.proposed.terminalCompletionProvider.d.ts",
-		"../../src/vscode-dts/vscode.proposed.terminalShellEnv.d.ts"
+		"../../src/zyraxoncode-dts/zyraxoncode.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.terminalCompletionProvider.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.terminalShellEnv.d.ts"
 	]
 }

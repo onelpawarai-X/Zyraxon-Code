@@ -224,7 +224,7 @@ export class AgentsVoiceWidget extends Disposable {
 			: `position:absolute;top:0;left:0;width:${opts.width}px;${opts.inputBoxLayout ? '' : `min-height:${AGENTS_VOICE_WINDOW_DEFAULT_HEIGHT}px;`}`;
 
 		this._rootDiv = dom.$('div');
-		this._rootDiv.style.cssText = `${widthStyle}display:flex;flex-direction:column;user-select:none;font-family:inherit;font-size:${FONT_SIZE.base};color:var(--vscode-foreground);box-sizing:border-box;margin:0;${opts.inputBoxLayout && opts.draggable ? '-webkit-app-region:drag;' : ''}`;
+		this._rootDiv.style.cssText = `${widthStyle}display:flex;flex-direction:column;user-select:none;font-family:inherit;font-size:${FONT_SIZE.base};color:var(--zyraxoncode-foreground);box-sizing:border-box;margin:0;${opts.inputBoxLayout && opts.draggable ? '-webkit-app-region:drag;' : ''}`;
 
 		this._glowDiv = dom.$('div');
 		this._glowDiv.style.cssText = 'position:absolute;top:0;left:0;right:0;height:50px;pointer-events:none;z-index:0;';
@@ -233,12 +233,12 @@ export class AgentsVoiceWidget extends Disposable {
 		this._titleRow.style.cssText = 'display:flex;align-items:baseline;gap:6px;padding:8px 14px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:1;';
 		if (opts.title) {
 			const titleSpan = dom.$('span');
-			titleSpan.style.cssText = `font-size:${FONT_SIZE.micro};font-weight:700;color:var(--vscode-sideBarSectionHeader-foreground, var(--vscode-foreground));text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0;user-select:none;`;
+			titleSpan.style.cssText = `font-size:${FONT_SIZE.micro};font-weight:700;color:var(--zyraxoncode-sideBarSectionHeader-foreground, var(--zyraxoncode-foreground));text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0;user-select:none;`;
 			titleSpan.textContent = opts.title;
 			this._titleRow.append(titleSpan);
 			if (opts.subtitle) {
 				const subtitleSpan = dom.$('span');
-				subtitleSpan.style.cssText = `font-size:${FONT_SIZE.micro};font-weight:400;color:var(--vscode-descriptionForeground);overflow:hidden;text-overflow:ellipsis;`;
+				subtitleSpan.style.cssText = `font-size:${FONT_SIZE.micro};font-weight:400;color:var(--zyraxoncode-descriptionForeground);overflow:hidden;text-overflow:ellipsis;`;
 				subtitleSpan.textContent = opts.subtitle;
 				this._titleRow.append(subtitleSpan);
 			}
@@ -248,7 +248,7 @@ export class AgentsVoiceWidget extends Disposable {
 		this._contentDiv.style.cssText = 'display:flex;flex-direction:column;flex:1;padding:8px 14px 2px;position:relative;z-index:1;';
 
 		this._statusTextDiv = dom.$('div');
-		this._statusTextDiv.style.cssText = `text-align:center;font-size:${FONT_SIZE.body};font-weight:500;color:var(--vscode-foreground);padding:2px 0;`;
+		this._statusTextDiv.style.cssText = `text-align:center;font-size:${FONT_SIZE.body};font-weight:500;color:var(--zyraxoncode-foreground);padding:2px 0;`;
 
 		this._sessionListWrapper = dom.$('div');
 		this._sessionListWrapper.style.cssText = 'display:flex;flex-direction:column;-webkit-app-region:no-drag;overflow:hidden;';
@@ -262,9 +262,9 @@ export class AgentsVoiceWidget extends Disposable {
 		this._chevronWrapper.tabIndex = 0;
 		this._chevronWrapper.style.cssText = 'display:flex;justify-content:center;cursor:pointer;-webkit-app-region:no-drag;';
 		this._chevronIcon = dom.$('span.codicon');
-		this._chevronIcon.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--vscode-descriptionForeground);`;
-		this._register(dom.addDisposableListener(this._chevronIcon, 'mouseenter', () => { this._chevronIcon.style.color = 'var(--vscode-foreground)'; }));
-		this._register(dom.addDisposableListener(this._chevronIcon, 'mouseleave', () => { this._chevronIcon.style.color = 'var(--vscode-descriptionForeground)'; }));
+		this._chevronIcon.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--zyraxoncode-descriptionForeground);`;
+		this._register(dom.addDisposableListener(this._chevronIcon, 'mouseenter', () => { this._chevronIcon.style.color = 'var(--zyraxoncode-foreground)'; }));
+		this._register(dom.addDisposableListener(this._chevronIcon, 'mouseleave', () => { this._chevronIcon.style.color = 'var(--zyraxoncode-descriptionForeground)'; }));
 		this._chevronWrapper.append(this._chevronIcon);
 		this._register(dom.addDisposableListener(this._chevronWrapper, 'click', (e) => {
 			e.preventDefault(); e.stopPropagation();
@@ -320,10 +320,10 @@ export class AgentsVoiceWidget extends Disposable {
 
 			// Rounded bordered container for transcript/placeholder (matches chat-input-container)
 			this._inputBoxContainer = dom.$('div');
-			this._inputBoxContainer.style.cssText = 'box-sizing:border-box;background-color:var(--vscode-input-background);border:1px solid var(--vscode-input-border, transparent);border-radius:var(--vscode-cornerRadius-large, 8px);padding:10px 12px;width:100%;position:relative;min-height:32px;display:flex;align-items:center;-webkit-app-region:no-drag;';
+			this._inputBoxContainer.style.cssText = 'box-sizing:border-box;background-color:var(--zyraxoncode-input-background);border:1px solid var(--zyraxoncode-input-border, transparent);border-radius:var(--zyraxoncode-cornerRadius-large, 8px);padding:10px 12px;width:100%;position:relative;min-height:32px;display:flex;align-items:center;-webkit-app-region:no-drag;';
 
 			this._inputBoxPlaceholder = dom.$('span');
-			this._inputBoxPlaceholder.style.cssText = `font-size:${FONT_SIZE.body};color:var(--vscode-input-placeholderForeground, var(--vscode-descriptionForeground));user-select:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;`;
+			this._inputBoxPlaceholder.style.cssText = `font-size:${FONT_SIZE.body};color:var(--zyraxoncode-input-placeholderForeground, var(--zyraxoncode-descriptionForeground));user-select:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;`;
 			this._inputBoxTranscriptComponent.element.style.width = '100%';
 			this._inputBoxTranscriptComponent.element.style.display = 'none';
 			this._inputBoxContainer.append(this._inputBoxPlaceholder, this._inputBoxTranscriptComponent.element);
@@ -345,9 +345,9 @@ export class AgentsVoiceWidget extends Disposable {
 				el.tabIndex = 0;
 				el.ariaLabel = ariaLabel;
 				el.title = title;
-				el.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--vscode-descriptionForeground);cursor:pointer;-webkit-app-region:no-drag;padding:2px;`;
-				this._register(dom.addDisposableListener(el, 'mouseenter', () => { el.style.color = 'var(--vscode-foreground)'; }));
-				this._register(dom.addDisposableListener(el, 'mouseleave', () => { el.style.color = 'var(--vscode-descriptionForeground)'; }));
+				el.style.cssText = `font-size:${FONT_SIZE.iconSm};color:var(--zyraxoncode-descriptionForeground);cursor:pointer;-webkit-app-region:no-drag;padding:2px;`;
+				this._register(dom.addDisposableListener(el, 'mouseenter', () => { el.style.color = 'var(--zyraxoncode-foreground)'; }));
+				this._register(dom.addDisposableListener(el, 'mouseleave', () => { el.style.color = 'var(--zyraxoncode-descriptionForeground)'; }));
 				addKeyboardActivation(el);
 				return el;
 			};
@@ -514,7 +514,7 @@ export class AgentsVoiceWidget extends Disposable {
 		}
 
 		// Set up PTT via BroadcastChannel
-		const pttChannel = new BroadcastChannel('vscode-ptt');
+		const pttChannel = new BroadcastChannel('zyraxoncode-ptt');
 		pttChannel.onmessage = (e) => {
 			if (e.data === 'down') { this.callbacks.pttDown(); }
 			if (e.data === 'up') { this.callbacks.pttUp(); }
@@ -690,7 +690,7 @@ export class AgentsVoiceWidget extends Disposable {
 				// When expanded, show full transcript component with chat-like styling
 				this._transcriptComponent.element.style.display = '';
 				this._transcriptComponent.element.style.padding = '8px 12px';
-				this._transcriptComponent.element.style.borderBottom = '1px solid var(--vscode-widget-border, var(--vscode-input-border, transparent))';
+				this._transcriptComponent.element.style.borderBottom = '1px solid var(--zyraxoncode-widget-border, var(--zyraxoncode-input-border, transparent))';
 				this._transcriptComponent.update({ turns: transcriptTurns, chatStyle: true });
 				this._inputBoxPlaceholder!.style.display = 'none';
 				this._inputBoxTranscriptComponent.element.style.display = 'none';
@@ -763,10 +763,10 @@ export class AgentsVoiceWidget extends Disposable {
 			: localize('agentsVoice.pushToTalk', "Push to talk");
 		this._inputBoxMicBtn!.title = micTooltip;
 		this._inputBoxMicBtn!.ariaLabel = micTooltip;
-		const micColor = voiceState === 'error' ? 'var(--vscode-editorError-foreground)'
-			: voiceState === 'listening' ? 'var(--vscode-editorInfo-foreground)'
-				: voiceState === 'speaking' ? 'var(--vscode-agentsVoice-speakingForeground)'
-					: 'var(--vscode-descriptionForeground)';
+		const micColor = voiceState === 'error' ? 'var(--zyraxoncode-editorError-foreground)'
+			: voiceState === 'listening' ? 'var(--zyraxoncode-editorInfo-foreground)'
+				: voiceState === 'speaking' ? 'var(--zyraxoncode-agentsVoice-speakingForeground)'
+					: 'var(--zyraxoncode-descriptionForeground)';
 		this._inputBoxMicBtn!.style.color = micColor;
 		const micIsActive = voiceState === 'listening' || voiceState === 'speaking';
 		this._inputBoxMicBtn!.classList.toggle('agents-voice-mode-active', micIsActive);
@@ -897,7 +897,7 @@ export class AgentsVoiceWidget extends Disposable {
 				if ((opts.showStatusText || isError) && statusText) {
 					this._statusTextDiv.style.display = '';
 					this._statusTextDiv.textContent = statusText;
-					this._statusTextDiv.style.color = isError ? 'var(--vscode-editorError-foreground)' : 'var(--vscode-foreground)';
+					this._statusTextDiv.style.color = isError ? 'var(--zyraxoncode-editorError-foreground)' : 'var(--zyraxoncode-foreground)';
 				} else {
 					this._statusTextDiv.style.display = 'none';
 				}

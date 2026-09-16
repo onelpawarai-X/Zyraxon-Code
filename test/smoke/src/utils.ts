@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as sqlite3 from '@vscode/sqlite3';
+import * as sqlite3 from '@zyraxoncode/sqlite3';
 import * as fs from 'fs';
 import { Suite, Context } from 'mocha';
 import { dirname, join } from 'path';
@@ -260,7 +260,7 @@ export function getRandomUserDataDir(baseUserDataDir: string): string {
 
 	// Pick a random user data dir suffix that is not
 	// too long to not run into max path length issues
-	// https://github.com/microsoft/vscode/issues/34988
+	// __ZYRAXKEEP__0_
 	const userDataPathSuffix = [...Array(8)].map(() => Math.random().toString(36)[3]).join('');
 
 	return baseUserDataDir.concat(`-${userDataPathSuffix}`);

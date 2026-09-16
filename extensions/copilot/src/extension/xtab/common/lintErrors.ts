@@ -14,7 +14,7 @@ import { URI } from '../../../util/vs/base/common/uri';
 import { Position } from '../../../util/vs/editor/common/core/position';
 import { Range } from '../../../util/vs/editor/common/core/range';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
-import { Diagnostic, DiagnosticSeverity } from '../../../vscodeTypes';
+import { Diagnostic, DiagnosticSeverity } from '../../../zyraxoncodeTypes';
 import { PromptTags } from './tags';
 import { CurrentDocument } from './xtabCurrentDocument';
 

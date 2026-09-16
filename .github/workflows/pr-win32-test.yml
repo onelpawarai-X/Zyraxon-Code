@@ -23,13 +23,13 @@ on:
 jobs:
   windows-test:
     name: ${{ inputs.job_name }}
-    runs-on: [ self-hosted, 1ES.Pool=1es-vscode-oss-windows-2022-x64, "JobId=windows-test-${{ inputs.job_name }}-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
+    runs-on: [ self-hosted, 1ES.Pool=1es-zyraxoncode-oss-windows-2022-x64, "JobId=windows-test-${{ inputs.job_name }}-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
     env:
       ARTIFACT_NAME: ${{ (inputs.electron_tests && 'electron') || (inputs.browser_tests && 'browser') || (inputs.remote_tests && 'remote') || 'unknown' }}${{ (!inputs.unit_and_integration_tests && inputs.smoke_tests) && '-smoke' || '' }}
       NPM_ARCH: x64
       VSCODE_ARCH: x64
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
         with:
           lfs: true
@@ -164,12 +164,12 @@ jobs:
             compile-extension:json-language-features-server `
             compile-extension:markdown-language-features `
             compile-extension-media `
-            compile-extension:microsoft-authentication `
+            compile-extension:zyraxon-authentication `
             compile-extension:typescript-language-features `
-            compile-extension:vscode-api-tests `
-            compile-extension:vscode-colorize-tests `
-            compile-extension:vscode-colorize-perf-tests `
-            compile-extension:vscode-test-resolver `
+            compile-extension:zyraxoncode-api-tests `
+            compile-extension:zyraxoncode-colorize-tests `
+            compile-extension:zyraxoncode-colorize-perf-tests `
+            compile-extension:zyraxoncode-test-resolver `
           }
 
       - name: Diagnostics before integration test runs

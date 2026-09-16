@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { ChatRequest } from '../../../vscodeTypes';
+import * as l10n from '@zyraxoncode/l10n';
+import { ChatRequest } from '../../../zyraxoncodeTypes';
 
 export interface IToolCallIterationIncrease {
 	copilotRequestedRoundLimit: number;

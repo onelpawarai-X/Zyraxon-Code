@@ -211,7 +211,7 @@ The entire system is built on `IObservable`:
 - **Chat prompts** — plugin hooks are contributed to the prompt system via the hook infrastructure.
 - **MCP servers** — plugins can define stdio and remote MCP servers. Agent Plugins v1 validates Streamable HTTP and legacy SSE declarations before passing remote servers to the existing MCP transport auto-detection.
 - **AI Customization UI** — the AI customization views aggregate plugin stats alongside MCP servers, prompts, and other customization surfaces.
-- **Extension API** — the plugin system is internal; there is no public `vscode` API surface for third-party access.
+- **Extension API** — the plugin system is internal; there is no public `zyraxoncode` API surface for third-party access.
 
 ## Key Design Patterns
 

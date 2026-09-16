@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IRunCommandExecutionService } from '../../../platform/commands/common/runCommandExecutionService';
 import { IEnvService } from '../../../platform/env/common/envService';
 import { IExtensionsService } from '../../../platform/extensions/common/extensionsService';
 import { timeout } from '../../../util/vs/base/common/async';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { StopWatch } from '../../../util/vs/base/common/stopwatch';
-import { LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult, MarkdownString } from '../../../zyraxoncodeTypes';
 import { ToolName } from '../common/toolNames';
 import { ToolRegistry } from '../common/toolsRegistry';
 import { IToolsService } from '../common/toolsService';
@@ -21,7 +21,7 @@ export interface IInstallExtensionToolInput {
 	name: string;
 }
 
-class InstallExtensionTool implements vscode.LanguageModelTool<IInstallExtensionToolInput> {
+class InstallExtensionTool implements zyraxoncode.LanguageModelTool<IInstallExtensionToolInput> {
 
 	public static readonly toolName = ToolName.InstallExtension;
 
@@ -32,7 +32,7 @@ class InstallExtensionTool implements vscode.LanguageModelTool<IInstallExtension
 		@IToolsService private readonly toolsService: IToolsService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IInstallExtensionToolInput>, token: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IInstallExtensionToolInput>, token: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		const extensionId = options.input.id;
 		const existingExtension = this._extensionsService.getExtension(extensionId);
 		if (existingExtension) {
@@ -52,7 +52,7 @@ class InstallExtensionTool implements vscode.LanguageModelTool<IInstallExtension
 
 	private async waitForExtensionInstall(prom: Promise<void>, extensionId: string) {
 		await prom;
-		let extension: vscode.Extension<any> | undefined;
+		let extension: zyraxoncode.Extension<any> | undefined;
 		const maxTime = 2_000;
 		const stopWatch = new StopWatch();
 
@@ -77,7 +77,7 @@ class InstallExtensionTool implements vscode.LanguageModelTool<IInstallExtension
 		}
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IInstallExtensionToolInput>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IInstallExtensionToolInput>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation> {
 		const extensionId = options.input.id;
 		if (!extensionId) {
 			throw new Error('No extension ID provided');

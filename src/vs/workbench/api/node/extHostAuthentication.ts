@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as nls from '../../../nls.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { URL } from 'url';
 import { ExtHostAuthentication, DynamicAuthProvider, IExtHostAuthentication } from '../common/extHostAuthentication.js';
 import { XaaifyAuthProvider } from '../common/extHostXaaAuthProvider.js';
@@ -74,7 +74,7 @@ export class NodeDynamicAuthProvider extends DynamicAuthProvider {
 		}
 	}
 
-	private async _createWithLoopbackServer(scopes: string[], progress: vscode.Progress<IProgressStep>, token: vscode.CancellationToken): Promise<IAuthorizationTokenResponse> {
+	private async _createWithLoopbackServer(scopes: string[], progress: zyraxoncode.Progress<IProgressStep>, token: zyraxoncode.CancellationToken): Promise<IAuthorizationTokenResponse> {
 		if (!this._serverMetadata.authorization_endpoint) {
 			throw new Error('Authorization Endpoint required');
 		}
@@ -169,7 +169,7 @@ export class NodeDynamicAuthProvider extends DynamicAuthProvider {
 		}
 	}
 
-	private async _createWithDeviceCode(scopes: string[], progress: vscode.Progress<IProgressStep>, token: vscode.CancellationToken): Promise<IAuthorizationTokenResponse> {
+	private async _createWithDeviceCode(scopes: string[], progress: zyraxoncode.Progress<IProgressStep>, token: zyraxoncode.CancellationToken): Promise<IAuthorizationTokenResponse> {
 		if (!this._serverMetadata.token_endpoint) {
 			throw new Error('Token endpoint not available in server metadata');
 		}

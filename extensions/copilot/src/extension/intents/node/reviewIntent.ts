@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { RenderPromptResult } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { RenderPromptResult } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
@@ -20,7 +20,7 @@ import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import * as path from '../../../util/vs/base/common/path';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { MarkdownString } from '../../../vscodeTypes';
+import { MarkdownString } from '../../../zyraxoncodeTypes';
 import { Intent } from '../../common/constants';
 import { LinkifiedPart, LinkifiedText, LinkifyLocationAnchor } from '../../linkify/common/linkifiedText';
 import { IContributedLinkifier, LinkifierContext } from '../../linkify/common/linkifyService';
@@ -57,7 +57,7 @@ class ReviewIntentInvocation extends RendererIntentInvocation implements IIntent
 		super(intent, location, endpoint);
 	}
 
-	async createRenderer({ history, query, chatVariables }: IBuildPromptContext, endpoint: IChatEndpoint, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken) {
+	async createRenderer({ history, query, chatVariables }: IBuildPromptContext, endpoint: IChatEndpoint, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken) {
 
 		const input: CurrentChangeInput[] = [];
 		if (query === reviewLocalChangesMessage) {
@@ -91,7 +91,7 @@ class ReviewIntentInvocation extends RendererIntentInvocation implements IIntent
 		});
 	}
 
-	override async buildPrompt(context: IBuildPromptContext, progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>, token: vscode.CancellationToken): Promise<RenderPromptResult> {
+	override async buildPrompt(context: IBuildPromptContext, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>, token: zyraxoncode.CancellationToken): Promise<RenderPromptResult> {
 		if (context.query === '') {
 			context = { ...context, query: reviewIntentPromptSnippet };
 		}
@@ -101,7 +101,7 @@ class ReviewIntentInvocation extends RendererIntentInvocation implements IIntent
 
 class InlineReviewIntentInvocation extends ReviewIntentInvocation implements IIntentInvocation {
 
-	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		const replyInterpreter = this.instantiationService.createInstance(ReviewReplyInterpreter, this.documentContext);
 		return replyInterpreter.processResponse(context, inputStream, outputStream, token);
 	}
@@ -135,9 +135,9 @@ export class ReviewIntent implements IIntent {
 
 class LineLinkifier implements IContributedLinkifier {
 
-	constructor(private readonly file: vscode.Uri) { }
+	constructor(private readonly file: zyraxoncode.Uri) { }
 
-	async linkify(newText: string, context: LinkifierContext, token?: vscode.CancellationToken): Promise<LinkifiedText | undefined> {
+	async linkify(newText: string, context: LinkifierContext, token?: zyraxoncode.CancellationToken): Promise<LinkifiedText | undefined> {
 		const parsedResponse = parseFeedbackResponse(newText);
 		if (!parsedResponse.length) {
 			return;
@@ -167,9 +167,9 @@ class ReviewReplyInterpreter implements ReplyInterpreter {
 	) {
 	}
 
-	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		const request: ReviewRequest = {
-			source: 'vscodeCopilotChat',
+			source: 'zyraxoncodeCopilotChat',
 			promptCount: 1,
 			messageId: generateUuid(), // TODO: Use from request?
 			inputType: 'selection',

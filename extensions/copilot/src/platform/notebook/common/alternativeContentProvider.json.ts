@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { visit } from 'jsonc-parser';
-import type { CancellationToken, NotebookCell, NotebookDocument, TextDocument } from 'vscode';
+import type { CancellationToken, NotebookCell, NotebookDocument, TextDocument } from 'zyraxoncode';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
 import { URI } from '../../../util/vs/base/common/uri';
-import { NotebookCellKind, Position, Range, Uri } from '../../../vscodeTypes';
+import { NotebookCellKind, Position, Range, Uri } from '../../../zyraxoncodeTypes';
 import { BaseAlternativeNotebookContentProvider } from './alternativeContentProvider';
 import { AlternativeNotebookDocument } from './alternativeNotebookDocument';
 import { EOL, getCellId, getCellIdMap, getDefaultLanguage, LineOfCellText, LineOfText, summarize } from './helpers';

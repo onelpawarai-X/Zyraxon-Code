@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptPiece, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, PromptPiece, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { isScenarioAutomation } from '../../../../platform/env/common/envService';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILanguageFeaturesService } from '../../../../platform/languages/common/languageFeaturesService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { TreeSitterExpressionInfo, TreeSitterExpressionLocationInfo } from '../../../../platform/parser/node/nodes';
-import { IParserService, treeSitterOffsetRangeToVSCodeRange } from '../../../../platform/parser/node/parserService';
+import { IParserService, treeSitterOffsetRangeToZyraxonCodeRange } from '../../../../platform/parser/node/parserService';
 import { ITabsAndEditorsService } from '../../../../platform/tabs/common/tabsAndEditorsService';
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
-import { ExtensionMode, Location, Uri } from '../../../../vscodeTypes';
+import { ExtensionMode, Location, Uri } from '../../../../zyraxoncodeTypes';
 import { findAllReferencedClassDeclarationsInSelection, findAllReferencedFunctionImplementationsInSelection, findAllReferencedTypeDeclarationsInSelection } from '../../../context/node/resolvers/selectionContextHelpers';
 import { PromptReference } from '../../../prompt/common/conversation';
 import { EmbeddedInsideUserMessage, embeddedInsideUserMessageDefault } from '../base/promptElement';
@@ -30,7 +30,7 @@ type Props = PromptElementProps<EmbeddedInsideUserMessage & {
 	 * Range of interest for which definitions are to be found.
 	 * @remark if not provided, will use active selection in currently active editor
 	 */
-	range?: vscode.Range;
+	range?: zyraxoncode.Range;
 	/**
 	 * Timeout for finding implementations in milliseconds. Defaults to 200ms.
 	 */
@@ -50,7 +50,7 @@ export class SymbolDefinitions extends PromptElement<Props, State> {
 	constructor(
 		props: Props,
 		@IIgnoreService private readonly ignoreService: IIgnoreService,
-		@IVSCodeExtensionContext private readonly extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly extensionContext: IZyraxonCodeExtensionContext,
 		@ITabsAndEditorsService private readonly tabsAndEditorsService: ITabsAndEditorsService,
 		@IParserService private readonly parserService: IParserService,
 		@ILogService private readonly logService: ILogService,
@@ -155,7 +155,7 @@ export function treeSitterInfoToContext(activeDocument: TextDocumentSnapshot, in
 	const uris: Uri[] = [];
 	for (const impl of info) {
 		const uri = impl.uri ?? activeDocument.uri;
-		const range = impl.range ?? treeSitterOffsetRangeToVSCodeRange(activeDocument, impl);
+		const range = impl.range ?? treeSitterOffsetRangeToZyraxonCodeRange(activeDocument, impl);
 		const key = `${uri.toString()}-${range.start.line}-${range.start.character}-${range.end.line}-${range.end.character}`;
 		if (seenReferences.has(key)) {
 			continue;

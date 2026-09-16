@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import { Utils } from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import { Utils } from 'zyraxoncode-uri';
 import { Command } from '../commandManager';
 import { createUriListSnippet, linkEditKind } from '../languageFeatures/copyFiles/shared';
 import { mediaFileExtensions } from '../util/mimes';
@@ -16,18 +16,18 @@ import { Schemes } from '../util/schemes';
 export class InsertLinkFromWorkspace implements Command {
 	public readonly id = 'markdown.editor.insertLinkFromWorkspace';
 
-	public async execute(resources?: vscode.Uri[]) {
-		const activeEditor = vscode.window.activeTextEditor;
+	public async execute(resources?: zyraxoncode.Uri[]) {
+		const activeEditor = zyraxoncode.window.activeTextEditor;
 		if (!activeEditor) {
 			return;
 		}
 
-		resources ??= await vscode.window.showOpenDialog({
+		resources ??= await zyraxoncode.window.showOpenDialog({
 			canSelectFiles: true,
 			canSelectFolders: false,
 			canSelectMany: true,
-			openLabel: vscode.l10n.t("Insert link"),
-			title: vscode.l10n.t("Insert link"),
+			openLabel: zyraxoncode.l10n.t("Insert link"),
+			title: zyraxoncode.l10n.t("Insert link"),
 			defaultUri: getDefaultUri(activeEditor.document),
 		});
 		if (!resources) {
@@ -41,21 +41,21 @@ export class InsertLinkFromWorkspace implements Command {
 export class InsertImageFromWorkspace implements Command {
 	public readonly id = 'markdown.editor.insertImageFromWorkspace';
 
-	public async execute(resources?: vscode.Uri[]) {
-		const activeEditor = vscode.window.activeTextEditor;
+	public async execute(resources?: zyraxoncode.Uri[]) {
+		const activeEditor = zyraxoncode.window.activeTextEditor;
 		if (!activeEditor) {
 			return;
 		}
 
-		resources ??= await vscode.window.showOpenDialog({
+		resources ??= await zyraxoncode.window.showOpenDialog({
 			canSelectFiles: true,
 			canSelectFolders: false,
 			canSelectMany: true,
 			filters: {
-				[vscode.l10n.t("Media")]: Array.from(mediaFileExtensions.keys())
+				[zyraxoncode.l10n.t("Media")]: Array.from(mediaFileExtensions.keys())
 			},
-			openLabel: vscode.l10n.t("Insert image"),
-			title: vscode.l10n.t("Insert image"),
+			openLabel: zyraxoncode.l10n.t("Insert image"),
+			title: zyraxoncode.l10n.t("Insert image"),
 			defaultUri: getDefaultUri(activeEditor.document),
 		});
 		if (!resources) {
@@ -66,23 +66,23 @@ export class InsertImageFromWorkspace implements Command {
 	}
 }
 
-function getDefaultUri(document: vscode.TextDocument) {
+function getDefaultUri(document: zyraxoncode.TextDocument) {
 	const docUri = getParentDocumentUri(document.uri);
 	if (docUri.scheme === Schemes.untitled) {
-		return vscode.workspace.workspaceFolders?.[0]?.uri;
+		return zyraxoncode.workspace.workspaceFolders?.[0]?.uri;
 	}
 	return Utils.dirname(docUri);
 }
 
-async function insertLink(activeEditor: vscode.TextEditor, selectedFiles: readonly vscode.Uri[], insertAsMedia: boolean): Promise<void> {
+async function insertLink(activeEditor: zyraxoncode.TextEditor, selectedFiles: readonly zyraxoncode.Uri[], insertAsMedia: boolean): Promise<void> {
 	const edit = createInsertLinkEdit(activeEditor, selectedFiles, insertAsMedia);
 	if (edit) {
-		await vscode.workspace.applyEdit(edit);
+		await zyraxoncode.workspace.applyEdit(edit);
 	}
 }
 
-function createInsertLinkEdit(activeEditor: vscode.TextEditor, selectedFiles: readonly vscode.Uri[], insertAsMedia: boolean) {
-	const snippetEdits = coalesce(activeEditor.selections.map((selection, i): vscode.SnippetTextEdit | undefined => {
+function createInsertLinkEdit(activeEditor: zyraxoncode.TextEditor, selectedFiles: readonly zyraxoncode.Uri[], insertAsMedia: boolean) {
+	const snippetEdits = coalesce(activeEditor.selections.map((selection, i): zyraxoncode.SnippetTextEdit | undefined => {
 		const selectionText = activeEditor.document.getText(selection);
 		const snippet = createUriListSnippet(activeEditor.document.uri, selectedFiles.map(uri => ({ uri })), {
 			linkKindHint: insertAsMedia ? 'media' : linkEditKind,
@@ -91,13 +91,13 @@ function createInsertLinkEdit(activeEditor: vscode.TextEditor, selectedFiles: re
 			separator: insertAsMedia ? '\n' : ' ',
 		});
 
-		return snippet ? new vscode.SnippetTextEdit(selection, snippet.snippet) : undefined;
+		return snippet ? new zyraxoncode.SnippetTextEdit(selection, snippet.snippet) : undefined;
 	}));
 	if (!snippetEdits.length) {
 		return;
 	}
 
-	const edit = new vscode.WorkspaceEdit();
+	const edit = new zyraxoncode.WorkspaceEdit();
 	edit.set(activeEditor.document.uri, snippetEdits);
 	return edit;
 }

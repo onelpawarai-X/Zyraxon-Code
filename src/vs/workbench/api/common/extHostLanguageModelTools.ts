@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { raceCancellation } from '../../../base/common/async.js';
 import { CancellationToken } from '../../../base/common/cancellation.js';
 import { CancellationError } from '../../../base/common/errors.js';
@@ -26,8 +26,8 @@ import { URI } from '../../../base/common/uri.js';
 class Tool {
 
 	private _data: IToolDataDto;
-	private _apiObject: vscode.LanguageModelToolInformation | undefined;
-	private _apiObjectWithChatParticipantAdditions: vscode.LanguageModelToolInformation | undefined;
+	private _apiObject: zyraxoncode.LanguageModelToolInformation | undefined;
+	private _apiObjectWithChatParticipantAdditions: zyraxoncode.LanguageModelToolInformation | undefined;
 
 	constructor(data: IToolDataDto) {
 		this._data = data;
@@ -43,7 +43,7 @@ class Tool {
 		return this._data;
 	}
 
-	get apiObject(): vscode.LanguageModelToolInformation {
+	get apiObject(): zyraxoncode.LanguageModelToolInformation {
 		if (!this._apiObject) {
 			this._apiObject = Object.freeze({
 				name: this._data.id,
@@ -74,11 +74,11 @@ class Tool {
 
 export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape {
 	/** A map of tools that were registered in this EH */
-	private readonly _registeredTools = new Map<string, { extension: IExtensionDescription; tool: vscode.LanguageModelTool<Object> }>();
+	private readonly _registeredTools = new Map<string, { extension: IExtensionDescription; tool: zyraxoncode.LanguageModelTool<Object> }>();
 	private readonly _proxy: MainThreadLanguageModelToolsShape;
-	private readonly _tokenCountFuncs = new Map</* call ID */string, (text: string, token?: vscode.CancellationToken) => Thenable<number>>();
+	private readonly _tokenCountFuncs = new Map</* call ID */string, (text: string, token?: zyraxoncode.CancellationToken) => Thenable<number>>();
 
-	/** A map of all known tools, from other EHs or registered in vscode core */
+	/** A map of all known tools, from other EHs or registered in zyraxoncode core */
 	private readonly _allTools = new Map<string, Tool>();
 
 	constructor(
@@ -103,7 +103,7 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 		return await fn(input, token);
 	}
 
-	async invokeTool(extension: IExtensionDescription, toolIdOrInfo: string | vscode.LanguageModelToolInformation, options: vscode.LanguageModelToolInvocationOptions<any>, token?: CancellationToken): Promise<vscode.LanguageModelToolResult> {
+	async invokeTool(extension: IExtensionDescription, toolIdOrInfo: string | zyraxoncode.LanguageModelToolInformation, options: zyraxoncode.LanguageModelToolInvocationOptions<any>, token?: CancellationToken): Promise<zyraxoncode.LanguageModelToolResult> {
 		const toolId = typeof toolIdOrInfo === 'string' ? toolIdOrInfo : toolIdOrInfo.name;
 		const callId = generateUuid();
 		if (options.tokenizationOptions) {
@@ -161,7 +161,7 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 		}
 	}
 
-	getTools(extension: IExtensionDescription): vscode.LanguageModelToolInformation[] {
+	getTools(extension: IExtensionDescription): zyraxoncode.LanguageModelToolInformation[] {
 		const hasParticipantAdditions = isProposedApiEnabled(extension, 'chatParticipantPrivate');
 
 		return Array.from(this._allTools.values())
@@ -185,9 +185,9 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 			throw new Error(`Unknown tool ${dto.toolId}`);
 		}
 
-		const options: vscode.LanguageModelToolInvocationOptions<Object> = {
+		const options: zyraxoncode.LanguageModelToolInvocationOptions<Object> = {
 			input: dto.parameters,
-			toolInvocationToken: revive(dto.context) as unknown as vscode.ChatParticipantToolToken | undefined,
+			toolInvocationToken: revive(dto.context) as unknown as zyraxoncode.ChatParticipantToolToken | undefined,
 		};
 		if (isProposedApiEnabled(item.extension, 'chatParticipantPrivate')) {
 			options.chatRequestId = dto.chatRequestId;
@@ -214,7 +214,7 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 			};
 		}
 
-		let progress: vscode.Progress<{ message?: string | vscode.MarkdownString; increment?: number }> | undefined;
+		let progress: zyraxoncode.Progress<{ message?: string | zyraxoncode.MarkdownString; increment?: number }> | undefined;
 		if (isProposedApiEnabled(item.extension, 'toolProgress')) {
 			let lastProgress: number | undefined;
 			progress = {
@@ -241,8 +241,8 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 		return typeConvert.LanguageModelToolResult.from(extensionResult, item.extension);
 	}
 
-	private async getModel(modelId: string, extension: IExtensionDescription): Promise<vscode.LanguageModelChat> {
-		let model: vscode.LanguageModelChat | undefined;
+	private async getModel(modelId: string, extension: IExtensionDescription): Promise<zyraxoncode.LanguageModelChat> {
+		let model: zyraxoncode.LanguageModelChat | undefined;
 		if (modelId) {
 			model = await this._languageModels.getLanguageModelByIdentifier(extension, modelId);
 		}
@@ -270,7 +270,7 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 		// Ensure the chatParticipantAdditions API is enabled
 		checkProposedApiEnabled(item.extension, 'chatParticipantAdditions');
 
-		const options: vscode.LanguageModelToolInvocationStreamOptions<any> = {
+		const options: zyraxoncode.LanguageModelToolInvocationStreamOptions<any> = {
 			rawInput: context.rawInput,
 			chatRequestId: context.chatRequestId,
 			chatSessionResource: context.chatSessionResource,
@@ -293,7 +293,7 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 			throw new Error(`Unknown tool ${toolId}`);
 		}
 
-		const options: vscode.LanguageModelToolInvocationPrepareOptions<any> = {
+		const options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<any> = {
 			input: context.parameters,
 			chatRequestId: context.chatRequestId,
 			chatSessionResource: context.chatSessionResource,
@@ -341,7 +341,7 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 		return undefined;
 	}
 
-	registerTool(extension: IExtensionDescription, id: string, tool: vscode.LanguageModelTool<any>): IDisposable {
+	registerTool(extension: IExtensionDescription, id: string, tool: zyraxoncode.LanguageModelTool<any>): IDisposable {
 		this._registeredTools.set(id, { extension, tool });
 		this._proxy.$registerTool(id, typeof tool.handleToolStream === 'function');
 
@@ -351,7 +351,7 @@ export class ExtHostLanguageModelTools implements ExtHostLanguageModelToolsShape
 		});
 	}
 
-	registerToolDefinition(extension: IExtensionDescription, definition: vscode.LanguageModelToolDefinition, tool: vscode.LanguageModelTool<any>): IDisposable {
+	registerToolDefinition(extension: IExtensionDescription, definition: zyraxoncode.LanguageModelToolDefinition, tool: zyraxoncode.LanguageModelTool<any>): IDisposable {
 		checkProposedApiEnabled(extension, 'languageModelToolSupportsModel');
 
 		const id = definition.name;

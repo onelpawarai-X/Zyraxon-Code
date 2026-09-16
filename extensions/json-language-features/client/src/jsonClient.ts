@@ -10,13 +10,13 @@ import {
 	Diagnostic, StatusBarAlignment, TextDocument, FormattingOptions, CancellationToken, FoldingRange,
 	ProviderResult, TextEdit, Range, Position, Disposable, CompletionItem, CompletionList, CompletionContext, Hover, MarkdownString, FoldingContext, DocumentSymbol, SymbolInformation, l10n,
 	RelativePattern, CodeAction, CodeActionKind, CodeActionContext
-} from 'vscode';
+} from 'zyraxoncode';
 import {
 	LanguageClientOptions, RequestType, NotificationType, FormattingOptions as LSPFormattingOptions, DocumentDiagnosticReportKind,
 	Diagnostic as LSPDiagnostic,
 	DidChangeConfigurationNotification, HandleDiagnosticsSignature, ResponseError, DocumentRangeFormattingParams,
 	DocumentRangeFormattingRequest, ProvideCompletionItemsSignature, ProvideHoverSignature, BaseLanguageClient, ProvideFoldingRangeSignature, ProvideDocumentSymbolsSignature, ProvideDocumentColorsSignature
-} from 'vscode-languageclient';
+} from 'zyraxoncode-languageclient';
 
 
 import { hash } from './utils/hash';
@@ -24,8 +24,8 @@ import { createDocumentSymbolsLimitItem, createLanguageStatusItem, createLimitSt
 import { getLanguageParticipants, LanguageParticipants } from './languageParticipants';
 import { matchesUrlPattern } from './utils/urlMatch';
 
-namespace VSCodeContentRequest {
-	export const type: RequestType<string, string, any> = new RequestType('vscode/content');
+namespace ZyraxonCodeContentRequest {
+	export const type: RequestType<string, string, any> = new RequestType('zyraxoncode/content');
 }
 
 namespace SchemaContentChangeNotification {
@@ -163,7 +163,7 @@ export enum SchemaRequestServiceErrors {
 	OpenTextDocumentAccessError = 3,
 	HTTPDisabledError = 4,
 	HTTPError = 5,
-	VSCodeAccessError = 6,
+	ZyraxonCodeAccessError = 6,
 	UntitledAccessError = 7,
 }
 
@@ -392,20 +392,20 @@ async function startClientWithParticipants(_context: ExtensionContext, languageP
 	const schemaDocuments: { [uri: string]: boolean } = {};
 
 	// handle content request
-	client.onRequest(VSCodeContentRequest.type, async (uriPath: string) => {
+	client.onRequest(ZyraxonCodeContentRequest.type, async (uriPath: string) => {
 		const uri = Uri.parse(uriPath);
 		const uriString = uri.toString(true);
 		if (uri.scheme === 'untitled') {
 			throw new ResponseError(SchemaRequestServiceErrors.UntitledAccessError, l10n.t('Unable to load {0}', uriString));
 		}
-		if (uri.scheme === 'vscode') {
+		if (uri.scheme === 'zyraxoncode') {
 			try {
-				runtime.logOutputChannel.info('read schema from vscode: ' + uriString);
+				runtime.logOutputChannel.info('read schema from zyraxoncode: ' + uriString);
 				ensureFilesystemWatcherInstalled(uri);
 				const content = await workspace.fs.readFile(uri);
 				return new TextDecoder().decode(content);
 			} catch (e) {
-				throw new ResponseError(SchemaRequestServiceErrors.VSCodeAccessError, e.toString(), e);
+				throw new ResponseError(SchemaRequestServiceErrors.ZyraxonCodeAccessError, e.toString(), e);
 			}
 		} else if (uri.scheme !== 'http' && uri.scheme !== 'https') {
 			try {
@@ -969,7 +969,7 @@ function getSchemaId(schema: JSONSchemaSettings, settingsLocation?: Uri): string
 	let url = schema.url;
 	if (!url) {
 		if (schema.schema) {
-			url = schema.schema.id || `vscode://schemas/custom/${encodeURIComponent(hash(schema.schema).toString(16))}`;
+			url = schema.schema.id || `__ZYRAXKEEP__0_{encodeURIComponent(hash(schema.schema).toString(16))}`;
 		}
 	} else if (settingsLocation && (url[0] === '.' || url[0] === '/')) {
 		url = Uri.joinPath(settingsLocation, url).toString(false);

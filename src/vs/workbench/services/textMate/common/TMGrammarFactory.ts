@@ -6,7 +6,7 @@
 import { Disposable } from '../../../../base/common/lifecycle.js';
 import { URI } from '../../../../base/common/uri.js';
 import { IValidEmbeddedLanguagesMap, IValidGrammarDefinition, TMScopeRegistry } from './TMScopeRegistry.js';
-import type { IGrammar, IOnigLib, IRawTheme, Registry, StateStack } from 'vscode-textmate';
+import type { IGrammar, IOnigLib, IRawTheme, Registry, StateStack } from 'zyraxoncode-textmate';
 
 interface ITMGrammarFactoryHost {
 	logTrace(msg: string): void;
@@ -34,15 +34,15 @@ export class TMGrammarFactory extends Disposable {
 	private readonly _languageToScope: Map<string, string>;
 	private readonly _grammarRegistry: Registry;
 
-	constructor(host: ITMGrammarFactoryHost, grammarDefinitions: IValidGrammarDefinition[], vscodeTextmate: typeof import('vscode-textmate'), onigLib: Promise<IOnigLib>) {
+	constructor(host: ITMGrammarFactoryHost, grammarDefinitions: IValidGrammarDefinition[], zyraxoncodeTextmate: typeof import('zyraxoncode-textmate'), onigLib: Promise<IOnigLib>) {
 		super();
 		this._host = host;
-		this._initialState = vscodeTextmate.INITIAL;
+		this._initialState = zyraxoncodeTextmate.INITIAL;
 		this._scopeRegistry = new TMScopeRegistry();
 		this._injections = {};
 		this._injectedEmbeddedLanguages = {};
 		this._languageToScope = new Map<string, string>();
-		this._grammarRegistry = this._register(new vscodeTextmate.Registry({
+		this._grammarRegistry = this._register(new zyraxoncodeTextmate.Registry({
 			onigLib: onigLib,
 			loadGrammar: async (scopeName: string) => {
 				const grammarDefinition = this._scopeRegistry.getGrammarDefinition(scopeName);
@@ -53,7 +53,7 @@ export class TMGrammarFactory extends Disposable {
 				const location = grammarDefinition.location;
 				try {
 					const content = await this._host.readFile(location);
-					return vscodeTextmate.parseRawGrammar(content, location.path);
+					return zyraxoncodeTextmate.parseRawGrammar(content, location.path);
 				} catch (e) {
 					this._host.logError(`Unable to load and parse grammar for scope ${scopeName} from ${location}`, e);
 					return null;

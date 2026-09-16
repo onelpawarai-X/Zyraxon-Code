@@ -11,7 +11,7 @@ export interface IGitHubIssueReference {
 }
 
 /**
- * Matches `https://github.com/{owner}/{repo}/issues/{number}`, optionally with a
+ * Matches `__ZYRAXKEEP__0_{owner}/{repo}/issues/{number}`, optionally with a
  * `www.` host, a trailing slash, a query string or a fragment (e.g. the
  * `#issuecomment-123` anchor GitHub appends when copying a comment link).
  */
@@ -20,7 +20,7 @@ const ISSUE_URL_PATTERN = /\bhttps?:\/\/(?:www\.)?github\.com\/([\w.-]+)\/([\w.-
 /**
  * Matches the cross-repository shorthand `{owner}/{repo}#{number}`. The leading
  * boundary check rejects references that are part of a longer path (e.g. the
- * `microsoft/vscode#1` inside a URL, which the URL pattern already covers).
+ * `zyraxon/zyraxoncode#1` inside a URL, which the URL pattern already covers).
  */
 const ISSUE_SHORTHAND_PATTERN = /(?<![\w./-])([\w.-]+)\/([\w.-]+)#(\d+)\b/g;
 
@@ -65,7 +65,7 @@ export function parseGitHubIssueReferences(text: string): IGitHubIssueReference[
 
 /** Builds the canonical `github.com` URL for an issue reference. */
 export function toGitHubIssueUrl(reference: IGitHubIssueReference): string {
-	return `https://github.com/${reference.owner}/${reference.repo}/issues/${reference.number}`;
+	return `__ZYRAXKEEP__1_{reference.owner}/${reference.repo}/issues/${reference.number}`;
 }
 
 /** Parses a canonical GitHub issue URL back into its parts, or `undefined`. */

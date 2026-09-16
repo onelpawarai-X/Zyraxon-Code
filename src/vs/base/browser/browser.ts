@@ -62,7 +62,7 @@ class WindowManager {
 	}
 
 	private getWindowId(targetWindow: Window): number {
-		return (targetWindow as CodeWindow).vscodeWindowId;
+		return (targetWindow as CodeWindow).zyraxoncodeWindowId;
 	}
 }
 
@@ -129,13 +129,13 @@ export function isStandalone(): boolean {
 
 // Visible means that the feature is enabled, not necessarily being rendered
 // e.g. visible is true even in fullscreen mode where the controls are hidden
-// See docs at https://developer.mozilla.org/en-US/docs/Web/API/WindowControlsOverlay/visible
+// See docs at __ZYRAXKEEP__0_
 export function isWCOEnabled(): boolean {
 	return !!(navigator as Navigator & { windowControlsOverlay?: { visible: boolean } })?.windowControlsOverlay?.visible;
 }
 
 // Returns the bounding rect of the titlebar area if it is supported and defined
-// See docs at https://developer.mozilla.org/en-US/docs/Web/API/WindowControlsOverlay/getTitlebarAreaRect
+// See docs at __ZYRAXKEEP__1_
 export function getWCOTitlebarAreaRect(targetWindow: Window): DOMRect | undefined {
 	return (targetWindow.navigator as Navigator & { windowControlsOverlay?: { getTitlebarAreaRect: () => DOMRect } })?.windowControlsOverlay?.getTitlebarAreaRect();
 }

@@ -112,7 +112,7 @@ function createMockSession(options: IMockSessionOptions): IActiveSession {
 
 	return new class extends mock<IActiveSession>() {
 		override readonly sessionId = `local:${options.title}`;
-		override readonly resource = URI.parse(`vscode-session://session/${Math.random().toString(36).slice(2)}`);
+		override readonly resource = URI.parse(`__ZYRAXKEEP__0_{Math.random().toString(36).slice(2)}`);
 		override readonly capabilities = constObservable(capabilities);
 		override readonly title: IObservable<string> = constObservable(options.title);
 		override readonly status: IObservable<SessionStatus> = constObservable(options.status ?? SessionStatus.Completed);
@@ -199,7 +199,7 @@ function renderHeader(ctx: ComponentFixtureContext, session: IActiveSession): vo
 			reg.define(IMenuService, FixtureMenuService);
 			reg.defineInstance(IActionViewItemService, actionViewItemService);
 			reg.defineInstance(ISessionContext, new SessionContext(constObservable<IActiveSession | undefined>(session)));
-			reg.defineInstance(IGitHubService, createFixtureGitHubService([{ owner: 'Zyraxon', repo: 'vscode', pullRequest: openPullRequestDetails }]));
+			reg.defineInstance(IGitHubService, createFixtureGitHubService([{ owner: 'Zyraxon', repo: 'zyraxoncode', pullRequest: openPullRequestDetails }]));
 			reg.defineInstance(ISessionsListModelService, createMockListModelService());
 			reg.defineInstance(ISessionsManagementService, new class extends mock<ISessionsManagementService>() {
 				override readonly onDidChangeSessions = Event.None;
@@ -239,8 +239,8 @@ function renderHeader(ctx: ComponentFixtureContext, session: IActiveSession): vo
 	// hosting SessionView in production) for its surface colors, so mirror those
 	// here against the agents-window panel background.
 	container.style.width = '420px';
-	container.style.setProperty('--session-view-background', 'var(--vscode-agentsPanel-background, var(--vscode-sideBar-background))');
-	container.style.setProperty('--session-view-foreground', 'var(--vscode-agentsPanel-foreground, var(--vscode-sideBar-foreground))');
+	container.style.setProperty('--session-view-background', 'var(--zyraxoncode-agentsPanel-background, var(--zyraxoncode-sideBar-background))');
+	container.style.setProperty('--session-view-foreground', 'var(--zyraxoncode-agentsPanel-foreground, var(--zyraxoncode-sideBar-foreground))');
 	container.style.backgroundColor = 'var(--session-view-background)';
 
 	const header = disposableStore.add(instantiationService.createInstance(SessionHeader));
@@ -250,7 +250,7 @@ function renderHeader(ctx: ComponentFixtureContext, session: IActiveSession): vo
 
 const openPr: IGitHubInfo['pullRequest'] = {
 	number: 12345,
-	uri: URI.parse('https://github.com/microsoft/vscode/pull/12345'),
+	uri: URI.parse('__ZYRAXKEEP__1_'),
 	icon: { ...Codicon.gitPullRequest, color: themeColorFromId('charts.green') },
 };
 
@@ -301,14 +301,14 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 	SessionHeader_Default: defineComponentFixture({
 		render: (ctx) => renderHeader(ctx, createMockSession({
 			title: 'Fix login bug',
-			workspace: createMockWorkspace({ label: 'vscode' }),
+			workspace: createMockWorkspace({ label: 'zyraxoncode' }),
 		})),
 	}),
 
 	SessionHeader_WithPullRequest: defineComponentFixture({
 		render: (ctx) => renderHeader(ctx, createMockSession({
 			title: 'Add session header PR link',
-			workspace: createMockWorkspace({ label: 'vscode', isWorktree: true, pullRequest: openPr }),
+			workspace: createMockWorkspace({ label: 'zyraxoncode', isWorktree: true, pullRequest: openPr }),
 			changes: [createMockChange(42, 7), createMockChange(5, 0)],
 		})),
 	}),
@@ -317,7 +317,7 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 		render: (ctx) => renderHeader(ctx, createMockSession({
 			title: 'Investigate flaky test',
 			status: SessionStatus.InProgress,
-			workspace: createMockWorkspace({ label: 'vscode', isWorktree: true, pullRequest: openPr }),
+			workspace: createMockWorkspace({ label: 'zyraxoncode', isWorktree: true, pullRequest: openPr }),
 			changes: [createMockChange(118, 64)],
 		})),
 	}),
@@ -326,14 +326,14 @@ export default defineThemedFixtureGroup({ path: 'sessions/' }, {
 		render: (ctx) => renderHeader(ctx, createMockSession({
 			title: 'Update documentation',
 			status: SessionStatus.NeedsInput,
-			workspace: createMockWorkspace({ label: 'vscode' }),
+			workspace: createMockWorkspace({ label: 'zyraxoncode' }),
 		})),
 	}),
 
 	SessionHeader_LongTitle: defineComponentFixture({
 		render: (ctx) => renderHeader(ctx, createMockSession({
 			title: 'Investigate and fix the flaky integration test in the notebook editor viewport rendering pipeline',
-			workspace: createMockWorkspace({ label: 'microsoft/vscode', isWorktree: true, pullRequest: openPr }),
+			workspace: createMockWorkspace({ label: 'zyraxon/zyraxoncode', isWorktree: true, pullRequest: openPr }),
 			changes: [createMockChange(12, 3)],
 		})),
 	}),

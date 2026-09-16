@@ -29,7 +29,7 @@ export enum ExtensionsFilter {
 	/**
 	 * Version of the completions version.
 	 */
-	CompletionsVersionInCopilotChat = 'X-VSCode-CompletionsInChatExtensionVersion',
+	CompletionsVersionInCopilotChat = 'X-ZyraxonCode-CompletionsInChatExtensionVersion',
 
 	/**
 	 * SKU of the copilot entitlement.

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AssistantMessage, BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, Raw, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { AssistantMessage, BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, Raw, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { getTextPart } from '../../../../../platform/chat/common/globalStringUtils';
 import { CopilotIdentityRules } from '../../base/copilotIdentity';
 import { ResponseTranslationRules } from '../../base/responseTranslationRules';
@@ -33,7 +33,7 @@ export class FileContentsPrompt extends PromptElement<NewWorkspaceContentsPrompt
 					If the file is supposed to be empty, please respond with a code comment saying that this file is intentionally left blank.<br />
 					Do not include comments in json files.<br />
 					Do not use code blocks or backticks.<br />
-					Do not include product names such as Visual Studio in the comments.<br />
+					Do not include product names such as ZYRAXON in the comments.<br />
 				</SystemMessage>
 				{this.props.relavantFiles && this.props.relavantFiles.size > 0 && <><UserMessage priority={500}>
 					Below, you will find a list of file paths and their contents previously used<br />
@@ -76,7 +76,7 @@ export class ProjectSpecificationPrompt extends PromptElement<NewWorkspaceConten
 					Do not use code blocks or backticks. Do not include any text before or after the file contents.<br />
 					Do not include comments in json files.<br />
 					Do not use code blocks or backticks.<br />
-					Do not include product names such as Visual Studio in the comments.<br />
+					Do not include product names such as ZYRAXON in the comments.<br />
 					Below you will find a set of examples of what you should respond with. Please follow these examples as closely as possible.<br />
 					<br />
 					## Valid question<br />

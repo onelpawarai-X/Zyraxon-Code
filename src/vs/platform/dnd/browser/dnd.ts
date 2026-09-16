@@ -123,7 +123,7 @@ export function extractEditorsDropData(e: DragEvent): Array<IDraggedResourceEdit
 
 	// Prevent duplicates: it is possible that we end up with the same
 	// dragged editor multiple times because multiple data transfers
-	// are being used (https://github.com/microsoft/vscode/issues/128925)
+	// are being used (__ZYRAXKEEP__0_)
 
 	const coalescedEditors: IDraggedResourceEditorInput[] = [];
 	const seen = new ResourceMap<boolean>();
@@ -163,7 +163,7 @@ export function createDraggedEditorInputFromRawResourcesData(rawResourcesData: s
 	if (rawResourcesData) {
 		const resourcesRaw: string[] = JSON.parse(rawResourcesData);
 		for (const resourceRaw of resourcesRaw) {
-			if (resourceRaw.indexOf(':') > 0) { // mitigate https://github.com/microsoft/vscode/issues/124946
+			if (resourceRaw.indexOf(':') > 0) { // mitigate __ZYRAXKEEP__1_
 				const { selection, uri } = extractSelection(URI.parse(resourceRaw));
 				editors.push({ resource: uri, options: { selection } });
 			}
@@ -564,7 +564,7 @@ export function fillInChatReferenceDragData(data: ChatReferenceTransferData, e: 
 }
 
 interface IElectronWebUtils {
-	vscode?: {
+	zyraxoncode?: {
 		webUtils?: {
 			getPathForFile(file: File): string;
 		};
@@ -576,8 +576,8 @@ interface IElectronWebUtils {
  * in a safe way without crashing the application when running in the web.
  */
 export function getPathForFile(file: File): string | undefined {
-	if (isNative && typeof (globalThis as IElectronWebUtils).vscode?.webUtils?.getPathForFile === 'function') {
-		return (globalThis as IElectronWebUtils).vscode?.webUtils?.getPathForFile(file);
+	if (isNative && typeof (globalThis as IElectronWebUtils).zyraxoncode?.webUtils?.getPathForFile === 'function') {
+		return (globalThis as IElectronWebUtils).zyraxoncode?.webUtils?.getPathForFile(file);
 	}
 
 	return undefined;

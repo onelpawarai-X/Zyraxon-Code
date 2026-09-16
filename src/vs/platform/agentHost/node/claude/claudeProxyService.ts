@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type Anthropic from '@anthropic-ai/sdk';
-import type { CCAModel } from '@vscode/copilot-api';
+import type { CCAModel } from '@zyraxoncode/copilot-api';
 import type * as http from 'http';
 import { once } from 'events';
 import { Emitter, Event } from '../../../../base/common/event.js';
@@ -49,7 +49,7 @@ import { parseProxyBearer } from './claudeProxyAuth.js';
  * subprocess would silently lose its endpoint.
  */
 export interface IClaudeProxyHandle extends ILoopbackProxyHandle {
-	/** e.g. `http://127.0.0.1:54321` — no trailing slash. */
+	/** e.g. `__ZYRAXKEEP__0_` — no trailing slash. */
 	readonly baseUrl: string;
 	/** 256-bit hex string. Combine with a session id as `Bearer <nonce>.<sessionId>`. */
 	readonly nonce: string;
@@ -134,7 +134,7 @@ type IClaudeProxyRuntime = ILoopbackProxyRuntime<IClaudeProxyState>;
 const KNOWN_CLAUDE_VENDORS = new Set(['anthropic']);
 const ANTHROPIC_MESSAGES_ENDPOINT = '/v1/messages';
 const PROXY_USER_FACING_NAME = 'ClaudeProxyService';
-const USER_AGENT_PREFIX = 'vscode_claude_code';
+const USER_AGENT_PREFIX = 'zyraxoncode_claude_code';
 
 /**
  * CAPI augments the Anthropic `/v1/messages` response with the request's
@@ -227,7 +227,7 @@ export class ClaudeProxyService extends LoopbackProxyServer<IClaudeProxyState, s
 		runtime: IClaudeProxyRuntime,
 	): Promise<void> {
 		const method = req.method ?? 'GET';
-		const pathname = new URL(req.url ?? '/', 'http://127.0.0.1').pathname;
+		const pathname = new URL(req.url ?? '/', '__ZYRAXKEEP__1_').pathname;
 		this._logService.trace(`[${PROXY_USER_FACING_NAME}] ${method} ${pathname}`);
 
 		// Health check is the only unauthenticated route.
@@ -679,9 +679,9 @@ function buildOutboundHeaders(inbound: http.IncomingHttpHeaders): Record<string,
  * prefix for server-side identification.
  *
  * Examples:
- * - `claude-code/1.2.3` → `vscode_claude_code/1.2.3`
- * - `Anthropic/Python/1.0` → `vscode_claude_code/Python/1.0`
- * - `unknown` → `vscode_claude_code/unknown`
+ * - `claude-code/1.2.3` → `zyraxoncode_claude_code/1.2.3`
+ * - `Anthropic/Python/1.0` → `zyraxoncode_claude_code/Python/1.0`
+ * - `unknown` → `zyraxoncode_claude_code/unknown`
  */
 function transformUserAgent(userAgent: string): string {
 	const slashIndex = userAgent.indexOf('/');

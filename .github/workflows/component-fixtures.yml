@@ -69,7 +69,7 @@ jobs:
         uses: ./.github/actions/save-node-modules
 
       - name: Copy codicons
-        run: cp node_modules/@vscode/codicons/dist/codicon.ttf src/vs/base/browser/ui/codicons/codicon/codicon.ttf
+        run: cp node_modules/@zyraxoncode/codicons/dist/codicon.ttf src/vs/base/browser/ui/codicons/codicon/codicon.ttf
 
       - name: Build component explorer
         run: npx rspack build --config rspack.serve-out.config.mts
@@ -158,7 +158,7 @@ jobs:
           node build/lib/screenshotBlocksCi.ts \
             test/componentFixtures/.screenshots/current/manifest.json \
             test/componentFixtures/blocks-ci-screenshots.md \
-            https://hediet-screenshots.azurewebsites.net \
+            __ZYRAXKEEP__0_ \
             > /tmp/blocks-ci-updated.md 2>/tmp/blocks-ci-stderr.txt \
             && echo "match=true" >> "$GITHUB_OUTPUT" \
             || {
@@ -204,7 +204,7 @@ jobs:
         if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
         run: |
           TOKEN=$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://hediet-screenshots.azurewebsites.net" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=__ZYRAXKEEP__1_" \
             | jq -r .value)
           echo "::add-mask::$TOKEN"
           echo "token=$TOKEN" >> "$GITHUB_OUTPUT"
@@ -216,7 +216,7 @@ jobs:
           zip -qr "$GITHUB_WORKSPACE/screenshots.zip" .
           set +e
           STATUS=$(curl -sS -o /tmp/screenshot-upload.out -w '%{http_code}' \
-            -X POST "https://hediet-screenshots.azurewebsites.net/upload" \
+            -X POST "__ZYRAXKEEP__2_" \
             -H "Content-Type: application/zip" \
             -H "Authorization: Bearer $SCREENSHOT_SERVICE_TOKEN" \
             --data-binary @"$GITHUB_WORKSPACE/screenshots.zip")
@@ -239,7 +239,7 @@ jobs:
           BASE_SHA: ${{ steps.base.outputs.base_sha }}
         run: |
           BASE_MANIFEST=/tmp/base-manifest.json
-          URL="https://hediet-screenshots.azurewebsites.net/commits/${{ github.repository_owner }}/${{ github.event.repository.name }}/$BASE_SHA"
+          URL="__ZYRAXKEEP__3_{{ github.repository_owner }}/${{ github.event.repository.name }}/$BASE_SHA"
           set +e
           STATUS=$(curl -sS -o "$BASE_MANIFEST" -w '%{http_code}' "$URL")
           CURL_EXIT=$?
@@ -259,7 +259,7 @@ jobs:
         if: always()
         run: |
           BODY=$(node build/lib/screenshotDiffReport.ts \
-            https://hediet-screenshots.azurewebsites.net \
+            __ZYRAXKEEP__4_ \
             "${{ steps.base.outputs.base_sha }}" \
             ${{ github.sha }} \
             "${{ steps.base_manifest.outputs.path }}" \
@@ -417,7 +417,7 @@ jobs:
       #     fi
 
       #     SHA="${{ github.event.pull_request.head.sha || github.sha }}"
-      #     DETAILS_URL="https://hediet-ghartifactpreview.azurewebsites.net/${{ github.repository }}/run/${{ github.run_id }}/component-explorer/___explorer.html?report=./screenshot-report/report.json&search=changed"
+      #     DETAILS_URL="__ZYRAXKEEP__5_{{ github.repository }}/run/${{ github.run_id }}/component-explorer/___explorer.html?report=./screenshot-report/report.json&search=changed"
 
       #     gh api "repos/${{ github.repository }}/statuses/$SHA" \
       #       --input - <<EOF || echo "::warning::Could not create commit status (expected for fork PRs)"

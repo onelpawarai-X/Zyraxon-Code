@@ -578,7 +578,7 @@ export class ExplorerFindProvider implements IAsyncFindProvider<ExplorerItem> {
 
 	private searchSupportsScheme(scheme: string): boolean {
 		// Limited by the search API
-		if (scheme !== Schemas.file && scheme !== Schemas.vscodeRemote) {
+		if (scheme !== Schemas.file && scheme !== Schemas.zyraxoncodeRemote) {
 			return false;
 		}
 		return this.searchService.schemeHasFileSearchProvider(scheme);
@@ -851,7 +851,7 @@ export class FilesRenderer implements ICompressibleTreeRenderer<ExplorerItem, Fu
 		const updateOffsetStyles = () => {
 			const indent = this.configurationService.getValue<number>('workbench.tree.indent');
 			const offset = Math.max(22 - indent, 0); // derived via inspection
-			container.style.setProperty(`--vscode-explorer-align-offset-margin-left`, `${offset}px`);
+			container.style.setProperty(`--zyraxoncode-explorer-align-offset-margin-left`, `${offset}px`);
 		};
 
 		this.configListener = this.configurationService.onDidChangeConfiguration(e => {

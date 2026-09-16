@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
 import { CopilotIdentityRules } from '../base/copilotIdentity';
@@ -18,7 +18,7 @@ import { ProjectLabels } from './projectLabels';
 export interface SearchPromptProps extends BasePromptElementProps {
 	promptContext: IBuildPromptContext;
 	document?: TextDocumentSnapshot;
-	selection?: vscode.Selection;
+	selection?: zyraxoncode.Selection;
 }
 
 export class SearchPrompt extends PromptElement<SearchPromptProps> {

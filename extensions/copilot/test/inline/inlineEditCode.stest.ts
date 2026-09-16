@@ -5,7 +5,7 @@
 import assert from 'assert';
 import { EditCodeIntent } from '../../src/extension/intents/node/editCodeIntent';
 import { TestingServiceCollection } from '../../src/platform/test/node/services';
-import { Selection } from '../../src/vscodeTypes';
+import { Selection } from '../../src/zyraxoncodeTypes';
 import { NonExtensionConfiguration, ssuite, stest } from '../base/stest';
 import { KnownDiagnosticProviders } from '../simulation/diagnosticProviders';
 import { simulateInlineChat, simulateInlineChatIntent } from '../simulation/inlineChatSimulator';
@@ -37,7 +37,7 @@ forInlineChatIntent((strategy, location, variant, nonExtensionConfigurations) =>
 	ssuite({ title: `edit${variant}`, location }, () => {
 		stest({ description: 'Context Outline: TypeScript between methods', language: 'typescript', nonExtensionConfigurations }, (testingServiceCollection) => {
 			return executeEditTest(strategy, testingServiceCollection, {
-				files: [fromFixture('vscode/codeEditorWidget.ts')],
+				files: [fromFixture('zyraxoncode/codeEditorWidget.ts')],
 				queries: [
 					{
 						file: 'codeEditorWidget.ts',
@@ -63,7 +63,7 @@ forInlineChatIntent((strategy, location, variant, nonExtensionConfigurations) =>
 
 		stest({ description: 'Context Outline: TypeScript in method', language: 'typescript', nonExtensionConfigurations }, (testingServiceCollection) => {
 			return executeEditTest(strategy, testingServiceCollection, {
-				files: [fromFixture('vscode/codeEditorWidget.ts')],
+				files: [fromFixture('zyraxoncode/codeEditorWidget.ts')],
 				queries: [
 					{
 						file: 'codeEditorWidget.ts',
@@ -146,7 +146,7 @@ forInlineChatIntent((strategy, location, variant, nonExtensionConfigurations) =>
 			}
 
 			return executeEditTest(strategy, testingServiceCollection, {
-				files: [fromFixture('vscode/extHost.api.impl.ts')],
+				files: [fromFixture('zyraxoncode/extHost.api.impl.ts')],
 				queries: [
 					{
 						file: 'extHost.api.impl.ts',
@@ -171,10 +171,10 @@ forInlineChatIntent((strategy, location, variant, nonExtensionConfigurations) =>
 
 		stest({ description: 'issue #246: Add comment sends request to sidebar', language: 'typescript', nonExtensionConfigurations }, (testingServiceCollection) => {
 			return executeEditTest(strategy, testingServiceCollection, {
-				files: [fromFixture('vscode/vscode.proposed.notebookDocumentWillSave.d.ts')],
+				files: [fromFixture('zyraxoncode/zyraxoncode.proposed.notebookDocumentWillSave.d.ts')],
 				queries: [
 					{
-						file: 'vscode.proposed.notebookDocumentWillSave.d.ts',
+						file: 'zyraxoncode.proposed.notebookDocumentWillSave.d.ts',
 						selection: [52, 5, 52, 5],
 						visibleRanges: [[0, 65]],
 						query: 'add comment',
@@ -557,7 +557,7 @@ forInlineChatIntent((strategy, location, variant, nonExtensionConfigurations) =>
 		stest({ description: 'issue #2431: Inline Chat follow-up tweak ends up in noop text-only answer', language: 'typescript', nonExtensionConfigurations }, (testingServiceCollection) => {
 			return executeEditTest(strategy, testingServiceCollection, {
 				files: [
-					fromFixture('vscode/editorGroupWatermark.ts'),
+					fromFixture('zyraxoncode/editorGroupWatermark.ts'),
 				],
 				queries: [
 					{
@@ -766,11 +766,11 @@ forInlineChatIntent((strategy, location, variant, nonExtensionConfigurations) =>
 		stest({ description: 'issue #5755: Inline edits go outside the selection', language: 'typescript', nonExtensionConfigurations }, (testingServiceCollection) => {
 			return executeEditTest(strategy, testingServiceCollection, {
 				files: [
-					fromFixture('edit/issue-5755/vscode.proposed.chatParticipantAdditions.d.ts')
+					fromFixture('edit/issue-5755/zyraxoncode.proposed.chatParticipantAdditions.d.ts')
 				],
 				queries: [
 					{
-						file: 'vscode.proposed.chatParticipantAdditions.d.ts',
+						file: 'zyraxoncode.proposed.chatParticipantAdditions.d.ts',
 						selection: [158, 0, 166, 0],
 						query: 'make the comment more readable',
 						expectedIntent: EditCodeIntent.ID,

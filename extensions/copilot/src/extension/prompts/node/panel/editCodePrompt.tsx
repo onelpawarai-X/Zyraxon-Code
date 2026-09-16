@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { AssistantMessage, BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptReference, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@vscode/prompt-tsx';
+import * as l10n from '@zyraxoncode/l10n';
+import { AssistantMessage, BasePromptElementProps, Chunk, PrioritizedList, PromptElement, PromptReference, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { NotebookDocumentSnapshot } from '../../../../platform/editing/common/notebookDocumentSnapshot';
@@ -20,7 +20,7 @@ import { isLocation, isUri } from '../../../../util/common/types';
 import { ResourceMap } from '../../../../util/vs/base/common/map';
 import { Schemas } from '../../../../util/vs/base/common/network';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Range, Uri } from '../../../../vscodeTypes';
+import { Range, Uri } from '../../../../zyraxoncodeTypes';
 import { GenericBasePromptElementProps } from '../../../context/node/resolvers/genericPanelIntentInvocation';
 import { IEditStepBuildPromptContext, PreviousEditCodeStep } from '../../../intents/node/editCodeStep';
 import { ChatVariablesCollection } from '../../../prompt/common/chatVariablesCollection';

@@ -393,7 +393,7 @@ const EMPTY_DESCRIPTOR: IHarnessDescriptor = {
  * Creates a "ZYRAXON Code" harness descriptor that shows all storage sources
  * with no user-root restrictions.
  */
-export function createVSCodeHarnessDescriptor(): IHarnessDescriptor {
+export function createZyraxonCodeHarnessDescriptor(): IHarnessDescriptor {
 	return {
 		id: SessionType.Local,
 		label: localize('harness.local', "Local"),

@@ -5,7 +5,7 @@
 
 import type { Point, SyntaxNode } from 'web-tree-sitter';
 import { BugIndicatingError } from '../../../util/vs/base/common/errors';
-import { Range, Uri } from '../../../vscodeTypes';
+import { Range, Uri } from '../../../zyraxoncodeTypes';
 
 export interface TreeSitterOffsetRange {
 	startIndex: number;

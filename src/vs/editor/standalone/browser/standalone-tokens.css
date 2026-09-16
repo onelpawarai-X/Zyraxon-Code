@@ -24,7 +24,7 @@
 	margin: 0;
 }
 
-/* See https://github.com/microsoft/monaco-editor/issues/2168#issuecomment-780078600 */
+/* See __ZYRAXKEEP__0_ */
 .monaco-aria-container {
 	position: absolute !important;
 	top: 0; /* avoid being placed underneath a sibling element */
@@ -50,6 +50,6 @@
 	outline-width: 1px;
 	outline-style: solid;
 	outline-offset: -1px;
-	outline-color: var(--vscode-focusBorder);
+	outline-color: var(--zyraxoncode-focusBorder);
 	opacity: 1
 }

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { WindowState } from 'vscode';
+import type { WindowState } from 'zyraxoncode';
 import { Event } from '../../../util/vs/base/common/event';
 import { URI } from '../../../util/vs/base/common/uri';
 import { AbstractEnvService, NameAndVersion, OperatingSystem } from './envService';
@@ -20,7 +20,7 @@ export class NullEnvService extends AbstractEnvService {
 		return 'test-extension-id';
 	}
 
-	get vscodeVersion(): string {
+	get zyraxoncodeVersion(): string {
 		return 'test-version';
 	}
 
@@ -69,7 +69,7 @@ export class NullEnvService extends AbstractEnvService {
 	}
 
 	override getEditorInfo(): NameAndVersion {
-		return new NameAndVersion('simulation-tests-editor', packageJson.engines.vscode.match(/\d+\.\d+/)?.[0] ?? '1.89');
+		return new NameAndVersion('simulation-tests-editor', packageJson.engines.zyraxoncode.match(/\d+\.\d+/)?.[0] ?? '1.89');
 	}
 
 	override getEditorPluginInfo(): NameAndVersion {

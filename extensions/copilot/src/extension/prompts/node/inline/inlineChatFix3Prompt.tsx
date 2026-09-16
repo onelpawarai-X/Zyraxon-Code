@@ -2,9 +2,9 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as l10n from '@vscode/l10n';
-import { PromptElement, PromptReference, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@vscode/prompt-tsx';
-import type { CancellationToken, ChatResponseStream, ChatVulnerability, MarkdownString } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { PromptElement, PromptReference, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, ChatResponseStream, ChatVulnerability, MarkdownString } from 'zyraxoncode';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
@@ -20,7 +20,7 @@ import { isEqual } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { StringEdit } from '../../../../util/vs/editor/common/core/edits/stringEdit';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { Range, TextEdit, Uri } from '../../../../vscodeTypes';
+import { Range, TextEdit, Uri } from '../../../../zyraxoncodeTypes';
 import { CodeBlockInfo, CodeBlockProcessor, isCodeBlockWithResource } from '../../../codeBlocks/node/codeBlockProcessor';
 import { findDiagnosticForSelectionAndPrompt } from '../../../context/node/resolvers/fixSelection';
 import { InlineFixProps } from '../../../context/node/resolvers/inlineFixIntentInvocation';

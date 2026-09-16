@@ -31,20 +31,20 @@
 
 /*
  * Foundation: align the shared body font-size tokens to the ramp. Most widgets
- * (lists, trees, inputs, menus, ...) consume these `--vscode-bodyFontSize*`
+ * (lists, trees, inputs, menus, ...) consume these `--zyraxoncode-bodyFontSize*`
  * variables, so redefining them here distributes the ramp's body sizes across
  * the workbench from a single place. The tiers map as: bodyFontSize = Body 1
  * (13px), small = Label 1 (12px), xSmall = Body 2 / Label 2 (11px).
  */
 .style-override {
-	--vscode-bodyFontSize: 13px;
-	--vscode-bodyFontSize-small: 12px;
-	--vscode-bodyFontSize-xSmall: 11px;
+	--zyraxoncode-bodyFontSize: 13px;
+	--zyraxoncode-bodyFontSize-small: 12px;
+	--zyraxoncode-bodyFontSize-xSmall: 11px;
 }
 
 /* Anchor the workbench base font on Body 1 so inheriting surfaces follow the ramp. */
 .style-override.monaco-workbench {
-	font-size: var(--vscode-bodyFontSize);
+	font-size: var(--zyraxoncode-bodyFontSize);
 }
 
 /* =============================================================================
@@ -70,13 +70,13 @@
 
 /* View pane (sidebar / panel section) header titles — section title, Strong. */
 .style-override .monaco-pane-view .pane > .pane-header .title {
-	font-size: var(--vscode-bodyFontSize-small);
+	font-size: var(--zyraxoncode-bodyFontSize-small);
 	font-weight: 600;
 }
 
 /* Part (sidebar / auxiliary bar / panel) title labels — section title, Strong. */
 .style-override.monaco-workbench .part > .title > .title-label h2 {
-	font-size: var(--vscode-bodyFontSize-small);
+	font-size: var(--zyraxoncode-bodyFontSize-small);
 	font-weight: 600;
 }
 
@@ -91,7 +91,7 @@
 
 /* Editor tab labels use Body 1 for comfortable readability at a normal viewing distance. */
 .style-override.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label {
-	font-size: var(--vscode-fontSize-body1);
+	font-size: var(--zyraxoncode-fontSize-body1);
 }
 
 /* =============================================================================
@@ -100,11 +100,11 @@
 
 .style-override .monaco-count-badge,
 .style-override .monaco-action-bar .badge .badge-content {
-	font-size: var(--vscode-fontSize-label3);
+	font-size: var(--zyraxoncode-fontSize-label3);
 }
 
 .style-override.monaco-workbench .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .badge .badge-content {
-	font-weight: var(--vscode-fontWeight-regular);
+	font-weight: var(--zyraxoncode-fontWeight-regular);
 }
 
 /* =============================================================================
@@ -136,7 +136,7 @@
 /* Agent sessions list header ("SESSIONS"). */
 .style-override .chat-viewpane.has-sessions-control .agent-sessions-container .agent-sessions-title-container {
 	text-transform: capitalize;
-	font-size: var(--vscode-bodyFontSize-small);
+	font-size: var(--zyraxoncode-bodyFontSize-small);
 }
 
 /*
@@ -145,7 +145,7 @@
  * stays in one module.
  */
 .style-override.monaco-workbench > .notifications-center > .notifications-center-header > .notifications-center-header-title {
-	font-weight: var(--vscode-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-fontWeight-semiBold);
 }
 
 /*
@@ -153,7 +153,7 @@
  * (user input). `text-transform: none` overrides both the base `uppercase` rule
  * and the `capitalize` override above. System labels such as "Untitled
  * (Workspace)" are already title-cased in source, so they still render
- * correctly; only user-provided folder names (e.g. "vscode-dev") are left
+ * correctly; only user-provided folder names (e.g. "zyraxoncode-dev") are left
  * untouched.
  */
 .style-override.monaco-workbench .part:not(.editor)[data-active-composite="workbench.view.explorer"] > .title > .title-label h2,
@@ -169,7 +169,7 @@
  */
 .style-override .chat-viewpane .chat-view-title-container .chat-view-title-label {
 	text-transform: none;
-	font-size: var(--vscode-bodyFontSize-small);
+	font-size: var(--zyraxoncode-bodyFontSize-small);
 }
 
 /*
@@ -190,7 +190,7 @@
 }
 
 .style-override .debug-pane .debug-call-stack .session > .state.label {
-	font-size: var(--vscode-fontSize-label2);
+	font-size: var(--zyraxoncode-fontSize-label2);
 }
 
 .style-override.monaco-workbench .agent-sessions-viewer {
@@ -199,7 +199,7 @@
 	}
 
 	.agent-session-item .agent-session-details-row {
-		font-size: var(--vscode-fontSize-label2);
+		font-size: var(--zyraxoncode-fontSize-label2);
 	}
 }
 
@@ -212,5 +212,5 @@
 .style-override.monaco-workbench .monaco-icon-label::after,
 .style-override.monaco-workbench .explorer-folders-view .explorer-item::after {
 	margin-right: 8px;
-	font-size: var(--vscode-fontSize-label2);
+	font-size: var(--zyraxoncode-fontSize-label2);
 }

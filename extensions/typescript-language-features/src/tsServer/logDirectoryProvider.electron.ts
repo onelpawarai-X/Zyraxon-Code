@@ -5,20 +5,20 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { ILogDirectoryProvider } from './logDirectoryProvider';
 import { Lazy } from '../utils/lazy';
 
 export class NodeLogDirectoryProvider implements ILogDirectoryProvider {
 	public constructor(
-		private readonly context: vscode.ExtensionContext
+		private readonly context: zyraxoncode.ExtensionContext
 	) { }
 
-	public getNewLogDirectory(): vscode.Uri | undefined {
+	public getNewLogDirectory(): zyraxoncode.Uri | undefined {
 		const root = this.logDirectory.value;
 		if (root) {
 			try {
-				return vscode.Uri.file(fs.mkdtempSync(path.join(root, `tsserver-log-`)));
+				return zyraxoncode.Uri.file(fs.mkdtempSync(path.join(root, `tsserver-log-`)));
 			} catch (e) {
 				return undefined;
 			}

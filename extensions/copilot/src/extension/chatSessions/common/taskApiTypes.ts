@@ -6,7 +6,7 @@
 /**
  * Local helpers for the Mission Control Task API: the option bags used at call sites and
  * the {@link ITaskApiClient} abstraction. The wire-format types themselves live in
- * `@vscode/copilot-api` (`AgentTask*`).
+ * `@zyraxoncode/copilot-api` (`AgentTask*`).
  */
 
 import type {
@@ -17,7 +17,7 @@ import type {
 	AgentTaskListEventsResponse,
 	AgentTaskListResponse,
 	AgentTaskSteerRequest,
-} from '@vscode/copilot-api';
+} from '@zyraxoncode/copilot-api';
 
 export interface ListTasksOptions {
 	readonly page?: number;

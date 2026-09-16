@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { ILanguageFeaturesService } from '../../../../platform/languages/common/languageFeaturesService';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
-import { DiagnosticSeverity } from '../../../../vscodeTypes';
+import { DiagnosticSeverity } from '../../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
 import { CopilotIdentityRules } from '../base/copilotIdentity';
 import { InstructionMessage } from '../base/instructionMessage';
@@ -30,7 +30,7 @@ export interface ExplainPromptProps extends BasePromptElementProps {
 
 	// We want these upfront if possible because these could change during async prompt rendering
 	document?: TextDocumentSnapshot;
-	selection?: vscode.Selection;
+	selection?: zyraxoncode.Selection;
 	isInlineChat?: boolean;
 }
 
@@ -61,7 +61,7 @@ export class ExplainPrompt extends PromptElement<ExplainPromptProps, ExplainProm
 
 	override render(state: ExplainPromptState, sizing: PromptSizing): PromptPiece<any, any> | undefined {
 		let { query, history, chatVariables, } = this.props.promptContext;
-		chatVariables = chatVariables.filter(v => !v.reference.id.startsWith('vscode.implicit'));
+		chatVariables = chatVariables.filter(v => !v.reference.id.startsWith('zyraxoncode.implicit'));
 		return (
 			<>
 				<SystemMessage priority={1000}>

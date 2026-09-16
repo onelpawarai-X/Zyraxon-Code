@@ -118,7 +118,7 @@ export class ExternalTerminalContribution extends Disposable implements IWorkben
 				id: OPEN_IN_INTEGRATED_TERMINAL_COMMAND_ID,
 				title: nls.localize('scopedConsoleAction.Integrated', "Open in Integrated Terminal")
 			},
-			when: ContextKeyExpr.or(shouldShowIntegratedOnLocal, ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeRemote))
+			when: ContextKeyExpr.or(shouldShowIntegratedOnLocal, ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeRemote))
 		};
 
 

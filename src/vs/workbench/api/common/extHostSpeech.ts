@@ -6,7 +6,7 @@
 import { CancellationTokenSource } from '../../../base/common/cancellation.js';
 import { DisposableStore, IDisposable, toDisposable } from '../../../base/common/lifecycle.js';
 import { ExtHostSpeechShape, IMainContext, MainContext, MainThreadSpeechShape } from './extHost.protocol.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtensionIdentifier } from '../../../platform/extensions/common/extensions.js';
 
 export class ExtHostSpeech implements ExtHostSpeechShape {
@@ -15,9 +15,9 @@ export class ExtHostSpeech implements ExtHostSpeechShape {
 
 	private readonly proxy: MainThreadSpeechShape;
 
-	private readonly providers = new Map<number, vscode.SpeechProvider>();
+	private readonly providers = new Map<number, zyraxoncode.SpeechProvider>();
 	private readonly sessions = new Map<number, CancellationTokenSource>();
-	private readonly synthesizers = new Map<number, vscode.TextToSpeechSession>();
+	private readonly synthesizers = new Map<number, zyraxoncode.TextToSpeechSession>();
 
 	constructor(
 		mainContext: IMainContext
@@ -128,7 +128,7 @@ export class ExtHostSpeech implements ExtHostSpeechShape {
 		this.sessions.delete(session);
 	}
 
-	registerProvider(extension: ExtensionIdentifier, identifier: string, provider: vscode.SpeechProvider): IDisposable {
+	registerProvider(extension: ExtensionIdentifier, identifier: string, provider: zyraxoncode.SpeechProvider): IDisposable {
 		const handle = ExtHostSpeech.ID_POOL++;
 
 		this.providers.set(handle, provider);

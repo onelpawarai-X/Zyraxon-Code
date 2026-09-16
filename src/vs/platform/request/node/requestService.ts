@@ -138,7 +138,7 @@ export class RequestService extends AbstractRequestService implements IRequestSe
 	}
 
 	async loadCertificates(): Promise<string[]> {
-		const proxyAgent = await import('@vscode/proxy-agent');
+		const proxyAgent = await import('@zyraxoncode/proxy-agent');
 		return proxyAgent.loadSystemCertificates({
 			loadSystemCertificatesFromNode: () => this.getConfigValue<boolean>('http.systemCertificatesNode', systemCertificatesNodeDefault),
 			log: this.logService,
@@ -238,7 +238,7 @@ async function nodeRequestAttempt(options: NodeRequestOptions, token: Cancellati
 				// from browser, which will apply gzip filter and decompress the response
 				// using zlib before passing the result to us. Following step can be bypassed
 				// in this case and proceed further.
-				// Refs https://source.chromium.org/chromium/chromium/src/+/main:net/url_request/url_request_http_job.cc;l=1266-1318
+				// Refs __ZYRAXKEEP__0_
 				if (!options.isChromiumNetwork && res.headers['content-encoding'] === 'gzip') {
 					stream = res.pipe(createGunzip());
 				}
@@ -269,7 +269,7 @@ async function nodeRequestAttempt(options: NodeRequestOptions, token: Cancellati
 		}
 
 		// Chromium will abort the request if forbidden headers are set.
-		// Ref https://source.chromium.org/chromium/chromium/src/+/main:services/network/public/cpp/header_util.cc;l=14-48;
+		// Ref __ZYRAXKEEP__1_
 		// for additional context.
 		if (options.isChromiumNetwork) {
 			req.removeHeader('Content-Length');

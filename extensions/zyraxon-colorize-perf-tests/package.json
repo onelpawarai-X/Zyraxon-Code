@@ -1,0 +1,31 @@
+{
+  "name": "zyraxoncode-colorize-perf-tests",
+  "description": "Colorize performance tests for ZYRAXON Code",
+  "version": "0.0.1",
+  "publisher": "zyraxoncode",
+  "license": "MIT",
+  "private": true,
+  "activationEvents": [
+    "onLanguage:json"
+  ],
+  "main": "./out/colorizerTestMain",
+  "engines": {
+    "zyraxoncode": "*"
+  },
+  "icon": "media/icon.png",
+  "scripts": {
+    "zyraxoncode:prepublish": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../../build/gulpfile.extensions.mjs compile-extension:zyraxoncode-colorize-perf-tests ./tsconfig.json",
+    "watch": "gulp watch-extension:zyraxoncode-colorize-perf-tests",
+    "compile": "gulp compile-extension:zyraxoncode-colorize-perf-tests"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "__ZYRAXKEEP__0_"
+  }
+}

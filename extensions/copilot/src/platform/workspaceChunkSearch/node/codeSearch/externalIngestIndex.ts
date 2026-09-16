@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import ingestUtils = require('@github/blackbird-external-ingest-utils');
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import * as fs from 'node:fs';
 import sql from 'node:sqlite';
 import { toErrorMessage } from '../../../../util/common/errorMessage';
@@ -28,7 +28,7 @@ import { FileChunkAndScore } from '../../../chunking/common/chunk';
 import { stripChunkTextMetadata } from '../../../chunking/common/chunkingStringUtils';
 import { EmbeddingType } from '../../../embeddings/common/embeddingsComputer';
 import { IEnvService } from '../../../env/common/envService';
-import { IVSCodeExtensionContext } from '../../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../extContext/common/extensionContext';
 import { IFileSystemService } from '../../../filesystem/common/fileSystemService';
 import { RelativePattern } from '../../../filesystem/common/fileTypes';
 import { IIgnoreService } from '../../../ignore/common/ignoreService';
@@ -155,7 +155,7 @@ export class ExternalIngestIndex extends Disposable {
 		@ILogService private readonly _logService: ILogService,
 		@ISearchService private readonly _searchService: ISearchService,
 		@ITelemetryService private readonly _telemetryService: ITelemetryService,
-		@IVSCodeExtensionContext private readonly _vsExtensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _vsExtensionContext: IZyraxonCodeExtensionContext,
 		@IWorkspaceService private readonly _workspaceService: IWorkspaceService,
 	) {
 		super();
@@ -1078,7 +1078,7 @@ export class ExternalIngestIndex extends Disposable {
 			return undefined;
 		}
 
-		const name = `vscode.${this._envService.getName()}.${generateUuid()}`;
+		const name = `zyraxoncode.${this._envService.getName()}.${generateUuid()}`;
 		this._vsExtensionContext.workspaceState.update(ExternalIngestIndex.storageKeys.FileSetName, name);
 		return name;
 	}

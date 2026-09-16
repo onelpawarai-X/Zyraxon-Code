@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createDecorator } from '../../../platform/instantiation/common/instantiation.js';
 import { Event, Emitter } from '../../../base/common/event.js';
 import { ExtHostTelemetryShape } from './extHost.protocol.js';
@@ -29,8 +29,8 @@ export class ExtHostTelemetry extends Disposable implements ExtHostTelemetryShap
 	private readonly _onDidChangeTelemetryEnabled = this._register(new Emitter<boolean>());
 	readonly onDidChangeTelemetryEnabled: Event<boolean> = this._onDidChangeTelemetryEnabled.event;
 
-	private readonly _onDidChangeTelemetryConfiguration = this._register(new Emitter<vscode.TelemetryConfiguration>());
-	readonly onDidChangeTelemetryConfiguration: Event<vscode.TelemetryConfiguration> = this._onDidChangeTelemetryConfiguration.event;
+	private readonly _onDidChangeTelemetryConfiguration = this._register(new Emitter<zyraxoncode.TelemetryConfiguration>());
+	readonly onDidChangeTelemetryConfiguration: Event<zyraxoncode.TelemetryConfiguration> = this._onDidChangeTelemetryConfiguration.event;
 
 	private _productConfig: { usage: boolean; error: boolean } = { usage: true, error: true };
 	private _level: TelemetryLevel = TelemetryLevel.NONE;
@@ -59,7 +59,7 @@ export class ExtHostTelemetry extends Disposable implements ExtHostTelemetryShap
 		return this._level === TelemetryLevel.USAGE;
 	}
 
-	getTelemetryDetails(): vscode.TelemetryConfiguration {
+	getTelemetryDetails(): zyraxoncode.TelemetryConfiguration {
 		return {
 			isCrashEnabled: this._level >= TelemetryLevel.CRASH,
 			isErrorsEnabled: this._productConfig.error ? this._level >= TelemetryLevel.ERROR : false,
@@ -67,7 +67,7 @@ export class ExtHostTelemetry extends Disposable implements ExtHostTelemetryShap
 		};
 	}
 
-	instantiateLogger(extension: IExtensionDescription, sender: vscode.TelemetrySender, options?: vscode.TelemetryLoggerOptions) {
+	instantiateLogger(extension: IExtensionDescription, sender: zyraxoncode.TelemetrySender, options?: zyraxoncode.TelemetryLoggerOptions) {
 		const telemetryDetails = this.getTelemetryDetails();
 		const logger = new ExtHostTelemetryLogger(
 			sender,
@@ -94,13 +94,13 @@ export class ExtHostTelemetry extends Disposable implements ExtHostTelemetryShap
 		// Or will first party extensions just mix this in
 		commonProperties['common.extname'] = `${extension.publisher}.${extension.name}`;
 		commonProperties['common.extversion'] = extension.version;
-		commonProperties['common.vscodemachineid'] = this.initData.telemetryInfo.machineId;
-		commonProperties['common.vscodesessionid'] = this.initData.telemetryInfo.sessionId;
-		commonProperties['common.vscodecommithash'] = this.initData.commit;
+		commonProperties['common.zyraxoncodemachineid'] = this.initData.telemetryInfo.machineId;
+		commonProperties['common.zyraxoncodesessionid'] = this.initData.telemetryInfo.sessionId;
+		commonProperties['common.zyraxoncodecommithash'] = this.initData.commit;
 		commonProperties['common.sqmid'] = this.initData.telemetryInfo.sqmId;
 		commonProperties['common.devDeviceId'] = this.initData.telemetryInfo.devDeviceId ?? this.initData.telemetryInfo.machineId;
-		commonProperties['common.vscodeversion'] = this.initData.version;
-		commonProperties['common.vscodereleasedate'] = this.initData.date;
+		commonProperties['common.zyraxoncodeversion'] = this.initData.version;
+		commonProperties['common.zyraxoncodereleasedate'] = this.initData.date;
 		commonProperties['common.isnewappinstall'] = isNewAppInstall(this.initData.telemetryInfo.firstSessionDate);
 		commonProperties['common.product'] = this.initData.environment.appHost;
 
@@ -172,7 +172,7 @@ export class ExtHostTelemetry extends Disposable implements ExtHostTelemetryShap
 
 export class ExtHostTelemetryLogger {
 
-	static validateSender(sender: vscode.TelemetrySender): void {
+	static validateSender(sender: zyraxoncode.TelemetrySender): void {
 		if (typeof sender !== 'object') {
 			throw new TypeError('TelemetrySender argument is invalid');
 		}
@@ -187,18 +187,18 @@ export class ExtHostTelemetryLogger {
 		}
 	}
 
-	private readonly _onDidChangeEnableStates = new Emitter<vscode.TelemetryLogger>();
+	private readonly _onDidChangeEnableStates = new Emitter<zyraxoncode.TelemetryLogger>();
 	private readonly _ignoreBuiltinCommonProperties: boolean;
 	private readonly _additionalCommonProperties: Record<string, any> | undefined;
 	public readonly ignoreUnhandledExtHostErrors: boolean;
 
 	private _telemetryEnablements: { isUsageEnabled: boolean; isErrorsEnabled: boolean };
-	private _apiObject: vscode.TelemetryLogger | undefined;
-	private _sender: vscode.TelemetrySender | undefined;
+	private _apiObject: zyraxoncode.TelemetryLogger | undefined;
+	private _sender: zyraxoncode.TelemetrySender | undefined;
 
 	constructor(
-		sender: vscode.TelemetrySender,
-		options: vscode.TelemetryLoggerOptions | undefined,
+		sender: zyraxoncode.TelemetrySender,
+		options: zyraxoncode.TelemetryLoggerOptions | undefined,
 		private readonly _extension: IExtensionDescription,
 		private readonly _logger: ILogger,
 		private readonly _inLoggingOnlyMode: boolean,
@@ -249,8 +249,8 @@ export class ExtHostTelemetryLogger {
 		if (!this._sender) {
 			return;
 		}
-		// If it's a built-in extension (vscode publisher) we don't prefix the publisher and only the ext name
-		if (this._extension.publisher === 'vscode') {
+		// If it's a built-in extension (zyraxoncode publisher) we don't prefix the publisher and only the ext name
+		if (this._extension.publisher === 'zyraxoncode') {
 			eventName = this._extension.name + '/' + eventName;
 		} else {
 			eventName = this._extension.identifier.value + '/' + eventName;
@@ -297,10 +297,10 @@ export class ExtHostTelemetryLogger {
 		}
 	}
 
-	get apiTelemetryLogger(): vscode.TelemetryLogger {
+	get apiTelemetryLogger(): zyraxoncode.TelemetryLogger {
 		if (!this._apiObject) {
 			const that = this;
-			const obj: vscode.TelemetryLogger = {
+			const obj: zyraxoncode.TelemetryLogger = {
 				logUsage: that.logUsage.bind(that),
 				get isUsageEnabled() {
 					return that._telemetryEnablements.isUsageEnabled;
@@ -323,7 +323,7 @@ export class ExtHostTelemetryLogger {
 
 	dispose(): void {
 		if (this._sender?.flush) {
-			let tempSender: vscode.TelemetrySender | undefined = this._sender;
+			let tempSender: zyraxoncode.TelemetrySender | undefined = this._sender;
 			this._sender = undefined;
 			Promise.resolve(tempSender.flush!()).then(tempSender = undefined);
 			this._apiObject = undefined;

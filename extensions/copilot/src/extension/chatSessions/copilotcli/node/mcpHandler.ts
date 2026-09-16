@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -13,7 +13,7 @@ import { createServiceIdentifier } from '../../../../util/common/services';
 import { Disposable, DisposableStore, IDisposable } from '../../../../util/vs/base/common/lifecycle';
 import { hasKey } from '../../../../util/vs/base/common/types';
 import { URI } from '../../../../util/vs/base/common/uri';
-import type { LanguageModelToolInformation } from '../../../../vscodeTypes';
+import type { LanguageModelToolInformation } from '../../../../zyraxoncodeTypes';
 import { GitHubMcpDefinitionProvider } from '../../../githubMcp/common/githubMcpDefinitionProvider';
 import { Session } from '../common/utils';
 
@@ -85,7 +85,7 @@ export class CopilotCLIMCPHandler implements ICopilotCLIMCPHandler {
 			if (gateway) {
 				disposable.add(gateway);
 				for (const server of gateway.servers) {
-					const serverId = this.normalizeServerName(server.label) ?? `vscode-mcp-server-${Object.keys(mcpConfig).length}`;
+					const serverId = this.normalizeServerName(server.label) ?? `zyraxoncode-mcp-server-${Object.keys(mcpConfig).length}`;
 					mcpConfig[serverId] = {
 						type: 'http',
 						url: server.address.toString(),

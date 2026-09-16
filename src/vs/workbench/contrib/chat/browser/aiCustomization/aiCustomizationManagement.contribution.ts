@@ -423,7 +423,7 @@ registerAction2(class extends Action2 {
 });
 
 const INSTALL_CHAT_CUSTOMIZATION_EXTENSION_ID = 'aiCustomizationManagement.installChatCustomizationExtension';
-const CHAT_CUSTOMIZATION_EXTENSION_ID = 'ms-vscode.vscode-chat-customizations-evaluations';
+const CHAT_CUSTOMIZATION_EXTENSION_ID = 'ms-zyraxoncode.zyraxoncode-chat-customizations-evaluations';
 const CHAT_CUSTOMIZATION_EXTENSION_NOT_INSTALLED_CONTEXT = new RawContextKey<boolean>('chat.customizationExtensionNotInstalled', true);
 const CHAT_CUSTOMIZATION_EXTENSION_NOT_INSTALLED = CHAT_CUSTOMIZATION_EXTENSION_NOT_INSTALLED_CONTEXT.isEqualTo(true);
 registerAction2(class extends Action2 {
@@ -452,7 +452,7 @@ const WHEN_ITEM_IS_DELETABLE = ContextKeyExpr.and(
  * When clause that shows an action only for plugin items.
  *
  * Synced customizations are bundled into a synthetic plugin (under the
- * `vscode-synced-customization:` scheme) as an implementation detail of the
+ * `zyraxoncode-synced-customization:` scheme) as an implementation detail of the
  * sync mechanism. Their plugin identity is not user-facing, so we hide
  * plugin-related actions ("Show Plugin", "Uninstall Plugin") for them.
  */
@@ -510,7 +510,7 @@ MenuRegistry.appendMenuItem(AICustomizationManagementItemMenuId, {
 	order: 1,
 	when: ContextKeyExpr.or(
 		ContextKeyExpr.regex(AI_CUSTOMIZATION_ITEM_URI_KEY, new RegExp(`^${Schemas.file}:`)),
-		ContextKeyExpr.regex(AI_CUSTOMIZATION_ITEM_URI_KEY, new RegExp(`^${Schemas.vscodeUserData}:`))
+		ContextKeyExpr.regex(AI_CUSTOMIZATION_ITEM_URI_KEY, new RegExp(`^${Schemas.zyraxoncodeUserData}:`))
 	),
 });
 

@@ -98,7 +98,7 @@ const SUPPORTED_ARCHES = new Set<string>(['x64', 'arm64']);
  *
  * Mirror of the build pipeline's `getSdkTargetForBuild` (in
  * `build/agent-sdk/common.ts`) translated from build-time
- * `vscodePlatform` to runtime `process.platform` + libc detection.
+ * `zyraxoncodePlatform` to runtime `process.platform` + libc detection.
  * Keep the two in sync when adding new target SKUs.
  */
 export function resolveSdkTarget(
@@ -339,7 +339,7 @@ export class AgentSdkDownloader extends Disposable implements IAgentSdkDownloade
 		}
 		const url = format2(config.urlTemplate, { sdkTarget });
 		// `format2` leaves unknown `{placeholder}` segments untouched; catch
-		// vscode-distro typos like `{sdkTaret}` here instead of letting the
+		// zyraxoncode-distro typos like `{sdkTaret}` here instead of letting the
 		// CDN return a 404 against a clearly-broken URL.
 		const stray = /{[^}]+}/.exec(url);
 		if (stray) {

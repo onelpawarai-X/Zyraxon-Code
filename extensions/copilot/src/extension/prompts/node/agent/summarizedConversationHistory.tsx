@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PrioritizedList, PromptElement, PromptMetadata, PromptSizing, Raw, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import { BudgetExceededError } from '@vscode/prompt-tsx/dist/base/materialized';
-import { ChatMessage } from '@vscode/prompt-tsx/dist/base/output/rawTypes';
-import type { ChatLanguageModelToolReference, ChatResponsePart, ChatResultPromptTokenDetail, LanguageModelToolInformation, NotebookDocument, Progress } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PrioritizedList, PromptElement, PromptMetadata, PromptSizing, Raw, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import { BudgetExceededError } from '@zyraxoncode/prompt-tsx/dist/base/materialized';
+import { ChatMessage } from '@zyraxoncode/prompt-tsx/dist/base/output/rawTypes';
+import type { ChatLanguageModelToolReference, ChatResponsePart, ChatResultPromptTokenDetail, LanguageModelToolInformation, NotebookDocument, Progress } from 'zyraxoncode';
 import { IChatHookService, PreCompactHookInput } from '../../../../platform/chat/common/chatHookService';
 import { ChatFetchResponseType, ChatLocation, ChatResponse, FetchSuccess } from '../../../../platform/chat/common/commonTypes';
 import { getTextPart } from '../../../../platform/chat/common/globalStringUtils';
@@ -29,7 +29,7 @@ import { Iterable } from '../../../../util/vs/base/common/iterator';
 import { StopWatch } from '../../../../util/vs/base/common/stopwatch';
 import { generateUuid } from '../../../../util/vs/base/common/uuid';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseProgressPart2 } from '../../../../vscodeTypes';
+import { ChatResponseProgressPart2 } from '../../../../zyraxoncodeTypes';
 import { ToolCallingLoop } from '../../../intents/node/toolCallingLoop';
 import { IResultMetadata } from '../../../prompt/common/conversation';
 import { IBuildPromptContext, IToolCallRound } from '../../../prompt/common/intents';

@@ -16,7 +16,7 @@ function renderVoiceModeOnboarding(width: string) {
 		container.classList.add('monaco-workbench');
 		container.style.width = width;
 		container.style.padding = '24px';
-		container.style.background = 'var(--vscode-editor-background)';
+		container.style.background = 'var(--zyraxoncode-editor-background)';
 
 		const instantiationService = createEditorServices(disposableStore, {
 			colorTheme: theme,

@@ -45,7 +45,7 @@ Consumer script: `build/azure-pipelines/common/downloadNotice.ts` (read its head
 How it works, per desktop platform compile template (`build/azure-pipelines/{win32,linux,darwin}/steps/product-build-*-compile.yml`):
 
 1. **Pull CG NOTICE (background)** — at compile start, `deemon --detach` launches `downloadNotice.ts` as a detached poller. It polls the parallel Quality stage's `notice_output` artifact while compilation runs, so the wait overlaps work already happening.
-2. **Apply CG NOTICE** — right before gulp packages the app, `deemon --attach` blocks on that poller. It downloads, extracts, validates the merged notice, and **overwrites the repo-root `ThirdPartyNotices.txt`**. `build/gulpfile.vscode.ts` then packages whatever file is at that path → the CG notice ships.
+2. **Apply CG NOTICE** — right before gulp packages the app, `deemon --attach` blocks on that poller. It downloads, extracts, validates the merged notice, and **overwrites the repo-root `ThirdPartyNotices.txt`**. `build/gulpfile.zyraxoncode.ts` then packages whatever file is at that path → the CG notice ships.
 
 Only the 7 desktop targets that bundle a notice run these steps (win32 x64/arm64, darwin universal, linux x64/arm64/armhf). REH/server/web/alpine are unaffected.
 
@@ -224,7 +224,7 @@ Section 4 closes two Rust gaps:
 Important functions and constants:
 
 - `parseCargoLock()` extracts `name`, `version`, and `source` from `[[package]]` blocks.
-- `fetchCratesIoJson()` calls `https://crates.io/api/v1/crates/<name>` with `CRATES_IO_USER_AGENT`.
+- `fetchCratesIoJson()` calls `__ZYRAXKEEP__0_<name>` with `CRATES_IO_USER_AGENT`.
 - `getCrateRepository()` applies legacy repository URL overrides for crates such as `isatty`, `redox_syscall`, `redox_termios`, and `termion`.
 - `crateLicenseRefs()` tries `v<version>`, `<version>`, `<name>-v<version>`, `<name>-<version>`, then `main` and `master`.
 - `isSpdxStub()` detects CG bodies that are only SPDX expressions.
@@ -283,7 +283,7 @@ Useful options:
 ```powershell
 .\run-local.ps1 -CgNotice C:\path\to\ThirdPartyNotices.generated.txt
 .\run-local.ps1 -SkipScan
-.\run-local.ps1 -RepoRoot C:\src\vscode.worktrees\oss-cg-validation -OutDir C:\path\to\oss-local
+.\run-local.ps1 -RepoRoot C:\src\zyraxoncode.worktrees\oss-cg-validation -OutDir C:\path\to\oss-local
 ```
 
 What it does:

@@ -4,7 +4,7 @@ This directory contains a Model Context Protocol (MCP) server that provides ZYRA
 
 ## What is MCP?
 
-The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) is an open standard that enables AI assistants to securely connect to external data sources and tools. This MCP server specifically provides ZYRAXON Code automation capabilities, making it possible for AI assistants to:
+The [Model Context Protocol (MCP)](__ZYRAXKEEP__0_) is an open standard that enables AI assistants to securely connect to external data sources and tools. This MCP server specifically provides ZYRAXON Code automation capabilities, making it possible for AI assistants to:
 
 - Start and stop ZYRAXON Code instances
 - Interact with editors, terminals, and UI elements
@@ -19,15 +19,15 @@ Firstly, make sure you install all dependencies (`npm i`) at the root of the rep
 
 Then, open the Command Palette and run:
 ```
-MCP: List Servers → vscode-automation-mcp → Start Server
+MCP: List Servers → zyraxoncode-automation-mcp → Start Server
 ```
-or open [mcp.json](../../.vscode/mcp.json) and start it from there.
+or open [mcp.json](../../.zyraxoncode/mcp.json) and start it from there.
 
 That's it! It should automatically compile everything needed.
 
 ## Arguments
 
-Open the [mcp.json](../../.vscode/mcp.json) and modify the `args`:
+Open the [mcp.json](../../.zyraxoncode/mcp.json) and modify the `args`:
 
 * `["run", "start-stdio"]`: opens Electron window
 * `["run", "start-stdio", "--", "--web"]`: opens a Chromium window
@@ -39,7 +39,7 @@ Open the [mcp.json](../../.vscode/mcp.json) and modify the `args`:
 
 You can modify the mcp.json to debug the server:
 ```JSON
-"vscode-automation-mcp": {
+"zyraxoncode-automation-mcp": {
 	"type": "stdio",
 	"command": "node",
 	"args": ["./out/stdio.js"],

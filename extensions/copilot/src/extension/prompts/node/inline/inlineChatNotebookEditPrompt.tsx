@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@vscode/prompt-tsx';
-import type { NotebookDocument } from 'vscode';
+import { PromptElement, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { NotebookDocument } from 'zyraxoncode';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { IParserService } from '../../../../platform/parser/node/parserService';
 import { ITabsAndEditorsService } from '../../../../platform/tabs/common/tabsAndEditorsService';
@@ -53,7 +53,7 @@ class InlineChatNotebookEditSelection extends PromptElement<InlineChatNotebookEd
 	}
 
 	render(state: InlineChatNotebookSelectionState, sizing: PromptSizing) {
-		if (this.props.documentContext.document.uri.scheme !== Schemas.vscodeNotebookCell) {
+		if (this.props.documentContext.document.uri.scheme !== Schemas.zyraxoncodeNotebookCell) {
 			throw illegalArgument('InlineChatNotebookSelection should be used only with a notebook!');
 		}
 		const { wholeRange } = state;
@@ -196,7 +196,7 @@ export class InlineChatNotebookEditPrompt extends PromptElement<InlineChatEditCo
 
 		const context = state.activeDocumentContext;
 		const promptContext = this.props.promptContext;
-		if (context.document.uri.scheme !== Schemas.vscodeNotebookCell) {
+		if (context.document.uri.scheme !== Schemas.zyraxoncodeNotebookCell) {
 			throw illegalArgument('InlineChatNotebookEditPrompt should be used only with a notebook!');
 		}
 		if (state.isIgnored) {

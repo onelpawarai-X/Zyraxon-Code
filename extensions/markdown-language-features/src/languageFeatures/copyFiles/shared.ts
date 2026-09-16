@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as vscode from 'vscode';
-import * as URI from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import * as URI from 'zyraxoncode-uri';
 import { ITextDocument } from '../../types/textDocument';
 import { getDocumentDir } from '../../util/document';
 import { Schemes } from '../../util/schemes';
@@ -14,7 +14,7 @@ import { resolveSnippet } from './snippets';
 import { mediaFileExtensions, MediaKind } from '../../util/mimes';
 
 /** Base kind for any sort of markdown link, including both path and media links */
-export const baseLinkEditKind = vscode.DocumentDropOrPasteEditKind.Empty.append('markdown', 'link');
+export const baseLinkEditKind = zyraxoncode.DocumentDropOrPasteEditKind.Empty.append('markdown', 'link');
 
 /** Kind for normal markdown links, i.e. `[text](path/to/file.md)` */
 export const linkEditKind = baseLinkEditKind.append('uri');
@@ -25,13 +25,13 @@ export const videoEditKind = baseLinkEditKind.append('video');
 
 export function getSnippetLabelAndKind(counter: { readonly insertedAudioCount: number; readonly insertedVideoCount: number; readonly insertedImageCount: number; readonly insertedLinkCount: number }): {
 	label: string;
-	kind: vscode.DocumentDropOrPasteEditKind;
+	kind: zyraxoncode.DocumentDropOrPasteEditKind;
 } {
 	if (counter.insertedVideoCount > 0 || counter.insertedAudioCount > 0) {
 		// Any media plus links
 		if (counter.insertedLinkCount > 0) {
 			return {
-				label: vscode.l10n.t('Insert Markdown Media and Links'),
+				label: zyraxoncode.l10n.t('Insert Markdown Media and Links'),
 				kind: baseLinkEditKind,
 			};
 		}
@@ -39,7 +39,7 @@ export function getSnippetLabelAndKind(counter: { readonly insertedAudioCount: n
 		// Any media plus images
 		if (counter.insertedImageCount > 0) {
 			return {
-				label: vscode.l10n.t('Insert Markdown Media and Images'),
+				label: zyraxoncode.l10n.t('Insert Markdown Media and Images'),
 				kind: baseLinkEditKind,
 			};
 		}
@@ -47,7 +47,7 @@ export function getSnippetLabelAndKind(counter: { readonly insertedAudioCount: n
 		// Audio only
 		if (counter.insertedAudioCount > 0 && !counter.insertedVideoCount) {
 			return {
-				label: vscode.l10n.t('Insert Markdown Audio'),
+				label: zyraxoncode.l10n.t('Insert Markdown Audio'),
 				kind: audioEditKind,
 			};
 		}
@@ -55,21 +55,21 @@ export function getSnippetLabelAndKind(counter: { readonly insertedAudioCount: n
 		// Video only
 		if (counter.insertedVideoCount > 0 && !counter.insertedAudioCount) {
 			return {
-				label: vscode.l10n.t('Insert Markdown Video'),
+				label: zyraxoncode.l10n.t('Insert Markdown Video'),
 				kind: videoEditKind,
 			};
 		}
 
 		// Mix of audio and video
 		return {
-			label: vscode.l10n.t('Insert Markdown Media'),
+			label: zyraxoncode.l10n.t('Insert Markdown Media'),
 			kind: baseLinkEditKind,
 		};
 	} else if (counter.insertedImageCount > 0) {
 		// Mix of images and links
 		if (counter.insertedLinkCount > 0) {
 			return {
-				label: vscode.l10n.t('Insert Markdown Images and Links'),
+				label: zyraxoncode.l10n.t('Insert Markdown Images and Links'),
 				kind: baseLinkEditKind,
 			};
 		}
@@ -77,15 +77,15 @@ export function getSnippetLabelAndKind(counter: { readonly insertedAudioCount: n
 		// Just images
 		return {
 			label: counter.insertedImageCount > 1
-				? vscode.l10n.t('Insert Markdown Images')
-				: vscode.l10n.t('Insert Markdown Image'),
+				? zyraxoncode.l10n.t('Insert Markdown Images')
+				: zyraxoncode.l10n.t('Insert Markdown Image'),
 			kind: imageEditKind,
 		};
 	} else {
 		return {
 			label: counter.insertedLinkCount > 1
-				? vscode.l10n.t('Insert Markdown Links')
-				: vscode.l10n.t('Insert Markdown Link'),
+				? zyraxoncode.l10n.t('Insert Markdown Links')
+				: zyraxoncode.l10n.t('Insert Markdown Link'),
 			kind: linkEditKind,
 		};
 	}
@@ -93,15 +93,15 @@ export function getSnippetLabelAndKind(counter: { readonly insertedAudioCount: n
 
 export function createInsertUriListEdit(
 	document: ITextDocument,
-	ranges: readonly vscode.Range[],
+	ranges: readonly zyraxoncode.Range[],
 	urlList: UriList,
 	options?: UriListSnippetOptions,
-): { edits: vscode.SnippetTextEdit[]; label: string; kind: vscode.DocumentDropOrPasteEditKind } | undefined {
+): { edits: zyraxoncode.SnippetTextEdit[]; label: string; kind: zyraxoncode.DocumentDropOrPasteEditKind } | undefined {
 	if (!ranges.length || !urlList.entries.length) {
 		return;
 	}
 
-	const edits: vscode.SnippetTextEdit[] = [];
+	const edits: zyraxoncode.SnippetTextEdit[] = [];
 
 	let insertedLinkCount = 0;
 	let insertedImageCount = 0;
@@ -132,7 +132,7 @@ export function createInsertUriListEdit(
 
 		placeHolderStartIndex += urlList.entries.length;
 
-		edits.push(new vscode.SnippetTextEdit(range, snippet.snippet));
+		edits.push(new zyraxoncode.SnippetTextEdit(range, snippet.snippet));
 	}
 
 	const { label, kind } = getSnippetLabelAndKind({ insertedAudioCount, insertedVideoCount, insertedImageCount, insertedLinkCount });
@@ -149,7 +149,7 @@ interface UriListSnippetOptions {
 	 *
 	 * By default this is inferred from the uri. If you use `media`, we will insert the resource as an image, video, or audio.
 	 */
-	readonly linkKindHint?: vscode.DocumentDropOrPasteEditKind | 'media';
+	readonly linkKindHint?: zyraxoncode.DocumentDropOrPasteEditKind | 'media';
 
 	readonly separator?: string;
 
@@ -163,7 +163,7 @@ interface UriListSnippetOptions {
 
 
 export interface UriSnippet {
-	readonly snippet: vscode.SnippetString;
+	readonly snippet: zyraxoncode.SnippetString;
 	readonly insertedLinkCount: number;
 	readonly insertedImageCount: number;
 	readonly insertedVideoCount: number;
@@ -171,9 +171,9 @@ export interface UriSnippet {
 }
 
 export function createUriListSnippet(
-	document: vscode.Uri,
+	document: zyraxoncode.Uri,
 	uris: ReadonlyArray<{
-		readonly uri: vscode.Uri;
+		readonly uri: zyraxoncode.Uri;
 		readonly str?: string;
 		readonly kind?: MediaKind;
 	}>,
@@ -184,7 +184,7 @@ export function createUriListSnippet(
 	}
 
 	const documentDir = getDocumentDir(document);
-	const config = vscode.workspace.getConfiguration('markdown', document);
+	const config = zyraxoncode.workspace.getConfiguration('markdown', document);
 	const title = options?.placeholderText || 'Title';
 
 	let insertedLinkCount = 0;
@@ -192,7 +192,7 @@ export function createUriListSnippet(
 	let insertedAudioCount = 0;
 	let insertedVideoCount = 0;
 
-	const snippet = new vscode.SnippetString();
+	const snippet = new zyraxoncode.SnippetString();
 	let placeholderIndex = options?.placeholderStartIndex ?? 1;
 
 	uris.forEach((uri, i) => {
@@ -245,8 +245,8 @@ enum DesiredLinkKind {
 	Audio,
 }
 
-function getDesiredLinkKind(uri: vscode.Uri, uriFileKind: MediaKind | undefined, options: UriListSnippetOptions | undefined): DesiredLinkKind {
-	if (options?.linkKindHint instanceof vscode.DocumentDropOrPasteEditKind) {
+function getDesiredLinkKind(uri: zyraxoncode.Uri, uriFileKind: MediaKind | undefined, options: UriListSnippetOptions | undefined): DesiredLinkKind {
+	if (options?.linkKindHint instanceof zyraxoncode.DocumentDropOrPasteEditKind) {
 		if (linkEditKind.contains(options.linkKindHint)) {
 			return DesiredLinkKind.Link;
 		} else if (imageEditKind.contains(options.linkKindHint)) {
@@ -278,7 +278,7 @@ function getDesiredLinkKind(uri: vscode.Uri, uriFileKind: MediaKind | undefined,
 	return DesiredLinkKind.Link;
 }
 
-function getRelativeMdPath(dir: vscode.Uri | undefined, file: vscode.Uri): string | undefined {
+function getRelativeMdPath(dir: zyraxoncode.Uri | undefined, file: zyraxoncode.Uri): string | undefined {
 	if (dir && dir.scheme === file.scheme && dir.authority === file.authority) {
 		if (file.scheme === Schemes.file) {
 			// On windows, we must use the native `path.relative` to generate the relative path
@@ -336,9 +336,9 @@ function needsBracketLink(mdPath: string): boolean {
 }
 
 export interface DropOrPasteEdit {
-	readonly snippet: vscode.SnippetString;
-	readonly kind: vscode.DocumentDropOrPasteEditKind;
+	readonly snippet: zyraxoncode.SnippetString;
+	readonly kind: zyraxoncode.DocumentDropOrPasteEditKind;
 	readonly label: string;
-	readonly additionalEdits: vscode.WorkspaceEdit;
-	readonly yieldTo: vscode.DocumentDropOrPasteEditKind[];
+	readonly additionalEdits: zyraxoncode.WorkspaceEdit;
+	readonly yieldTo: zyraxoncode.DocumentDropOrPasteEditKind[];
 }

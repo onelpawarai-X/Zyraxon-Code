@@ -1,4 +1,4 @@
-Template: @@NAME@@/add-microsoft-repo
+Template: @@NAME@@/add-zyraxon-repo
 Type: boolean
 Default: true
 Description: Add Zyraxon apt repository for ZYRAXON Code?

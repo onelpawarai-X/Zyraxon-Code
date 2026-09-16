@@ -6,14 +6,14 @@
 import { CharCode } from '../../../util/vs/base/common/charCode';
 import { StringEdit, StringReplacement } from '../../../util/vs/editor/common/core/edits/stringEdit';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
-import * as vscodeTypes from '../../../vscodeTypes';
+import * as zyraxoncodeTypes from '../../../zyraxoncodeTypes';
 import { IDiffService } from '../../diff/common/diffService';
 import { stringEditFromDiff } from '../../editing/common/edit';
 import { OffsetLineColumnConverter } from '../../editing/common/offsetLineColumnConverter';
 
 export interface IEditCollector {
 	initialText: string;
-	addEdits(edits: vscodeTypes.TextEdit[]): void;
+	addEdits(edits: zyraxoncodeTypes.TextEdit[]): void;
 	getText(): string;
 	getEdits(): Promise<StringEdit>;
 }
@@ -28,7 +28,7 @@ export class EditCollector implements IEditCollector {
 		this._document = new OffsetBasedTextDocument(initialText);
 	}
 
-	public addEdits(edits: vscodeTypes.TextEdit[]): void {
+	public addEdits(edits: zyraxoncodeTypes.TextEdit[]): void {
 		this._document.applyTextEdits(edits);
 	}
 
@@ -54,7 +54,7 @@ export class OffsetBasedTextDocument {
 		return this._value;
 	}
 
-	applyTextEdits(edits: vscodeTypes.TextEdit[]) {
+	applyTextEdits(edits: zyraxoncodeTypes.TextEdit[]) {
 		const offsetEdit = new StringEdit(edits.map(e => {
 			const start = this.positionToOffset(e.range.start);
 			const end = this.positionToOffset(e.range.end);
@@ -68,7 +68,7 @@ export class OffsetBasedTextDocument {
 		this._converter = undefined;
 	}
 
-	positionToOffset(position: vscodeTypes.Position): number {
+	positionToOffset(position: zyraxoncodeTypes.Position): number {
 		if (!this._converter) {
 			this._converter = new OffsetLineColumnConverter(this._value);
 		}

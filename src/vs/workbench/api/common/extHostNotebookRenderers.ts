@@ -8,11 +8,11 @@ import { IExtensionDescription } from '../../../platform/extensions/common/exten
 import { ExtHostNotebookRenderersShape, IMainContext, MainContext, MainThreadNotebookRenderersShape } from './extHost.protocol.js';
 import { ExtHostNotebookController } from './extHostNotebook.js';
 import { ExtHostNotebookEditor } from './extHostNotebookEditor.js';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 
 export class ExtHostNotebookRenderers implements ExtHostNotebookRenderersShape {
-	private readonly _rendererMessageEmitters = new Map<string /* rendererId */, Emitter<{ editor: vscode.NotebookEditor; message: unknown }>>();
+	private readonly _rendererMessageEmitters = new Map<string /* rendererId */, Emitter<{ editor: zyraxoncode.NotebookEditor; message: unknown }>>();
 	private readonly proxy: MainThreadNotebookRenderersShape;
 
 	constructor(mainContext: IMainContext, private readonly _extHostNotebook: ExtHostNotebookController) {
@@ -24,12 +24,12 @@ export class ExtHostNotebookRenderers implements ExtHostNotebookRenderersShape {
 		this._rendererMessageEmitters.get(rendererId)?.fire({ editor: editor.apiEditor, message });
 	}
 
-	public createRendererMessaging(manifest: IExtensionDescription, rendererId: string): vscode.NotebookRendererMessaging {
+	public createRendererMessaging(manifest: IExtensionDescription, rendererId: string): zyraxoncode.NotebookRendererMessaging {
 		if (!manifest.contributes?.notebookRenderer?.some(r => r.id === rendererId)) {
 			throw new Error(`Extensions may only call createRendererMessaging() for renderers they contribute (got ${rendererId})`);
 		}
 
-		const messaging: vscode.NotebookRendererMessaging = {
+		const messaging: zyraxoncode.NotebookRendererMessaging = {
 			onDidReceiveMessage: (listener, thisArg, disposables) => {
 				return this.getOrCreateEmitterFor(rendererId).event(listener, thisArg, disposables);
 			},

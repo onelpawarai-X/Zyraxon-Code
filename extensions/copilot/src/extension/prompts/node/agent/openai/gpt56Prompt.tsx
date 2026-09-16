@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { isGpt56 } from '../../../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../../../platform/networking/common/networking';
 import { ToolName } from '../../../../tools/common/toolNames';
@@ -177,7 +177,7 @@ class Gpt56Prompt extends PromptElement<DefaultAgentPromptProps> {
 				- Code samples or multi-line snippets should be wrapped in fenced code blocks. Include an info string as often as possible.<br />
 				- When referencing a real local file, prefer a clickable markdown link.<br />
 				* Do not wrap markdown links in backticks, or put backticks inside the label or target. This confuses the markdown renderer.<br />
-				* Do not use URIs like file://, vscode://, or https:// for file links.<br />
+				* Do not use URIs like __ZYRAXKEEP__0_ __ZYRAXKEEP__1_ or https:// for file links.<br />
 				* Do not provide ranges of lines.<br />
 				* Avoid repeating the same filename multiple times when one grouping is clearer.<br />
 				- Don’t use emojis or em dashes unless explicitly instructed.<br />

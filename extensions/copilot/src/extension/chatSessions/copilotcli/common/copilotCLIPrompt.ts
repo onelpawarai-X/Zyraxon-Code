@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatPromptReference } from 'vscode';
+import type { ChatPromptReference } from 'zyraxoncode';
 import { createFilepathRegexp } from '../../../../util/common/markdown';
 import { Schemas } from '../../../../util/vs/base/common/network';
 import * as path from '../../../../util/vs/base/common/path';
 import { isEqual } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { Range as EditorRange } from '../../../../util/vs/editor/common/core/range';
-import { ChatReferenceDiagnostic, Diagnostic, DiagnosticSeverity, Location, Range } from '../../../../vscodeTypes';
+import { ChatReferenceDiagnostic, Diagnostic, DiagnosticSeverity, Location, Range } from '../../../../zyraxoncodeTypes';
 import { PromptFileIdPrefix } from '../../../prompt/common/chatVariablesCollection';
 
 /**
@@ -22,7 +22,7 @@ import { PromptFileIdPrefix } from '../../../prompt/common/chatVariablesCollecti
  *    -> Aggregated into ChatReferenceDiagnostic (maps uri -> Diagnostic[])
  *  - <attachment>Excerpt from /abs/path.py, lines X to Y: ...</attachment>
  *    or attachment blocks containing a `# filepath: /abs/path.py` comment
- *    -> Converted into vscode.Location objects.
+ *    -> Converted into zyraxoncode.Location objects.
  */
 export function extractChatPromptReferences(prompt: string): ChatPromptReference[] {
 	// Preserve order of items as they appear inside <attachments>...
@@ -156,7 +156,7 @@ function extractResourcesFromTag(prompt: string, tagText: string): ChatPromptRef
 			range = [startIdx, startIdx + providedId.length];
 		}
 		if (providedId && providedId.startsWith('sym:')) {
-			id = `vscode.symbol/${uri.toJSON()}`;
+			id = `zyraxoncode.symbol/${uri.toJSON()}`;
 		}
 		return { id, name: locName, range, value: uri };
 	}
@@ -243,7 +243,7 @@ function extractResourcesFromTag(prompt: string, tagText: string): ChatPromptRef
 		const idx = prompt.indexOf(`#${locName}`);
 		range = [idx, idx + locName.length];
 	}
-	if (locName.startsWith('sym:')) { id = `vscode.symbol/${(location ? JSON.stringify(location) : uri.toString())}`; }
+	if (locName.startsWith('sym:')) { id = `zyraxoncode.symbol/${(location ? JSON.stringify(location) : uri.toString())}`; }
 	return { id, name: locName, range, value: location ?? uri };
 }
 

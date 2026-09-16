@@ -10,7 +10,7 @@
  * against the filesystem it runs on.
  *
  * **Server to client** — the same surface travelling the other way. The host
- * addresses client-side files through the `vscode-agent-client` scheme and
+ * addresses client-side files through the `zyraxoncode-agent-client` scheme and
  * serves them by sending reverse requests back down the connection, so a file
  * that exists only on the client is still reachable. Nothing else in the E2E
  * suite puts the host in that configuration.
@@ -636,7 +636,7 @@ export function defineClientFilesystemTests(context: IAgentHostE2ETestContext): 
 
 	conformanceTest(context, 'host reads a client-hosted plugin through reverse resource requests', async function () {
 		// The plugin is published as belonging to this client, so the host
-		// addresses it through the `vscode-agent-client` scheme and fetches it
+		// addresses it through the `zyraxoncode-agent-client` scheme and fetches it
 		// over the connection. Both processes share a filesystem here, so it is
 		// the assertion on `servedReverseRequests` — not where the directory
 		// sits — that proves the reverse path was actually used.
@@ -681,7 +681,7 @@ export function defineClientFilesystemTests(context: IAgentHostE2ETestContext): 
 		const loadKind = (getActionEnvelope(updated).action as { customization?: { load?: { kind?: string } } }).customization?.load?.kind;
 		// Compare both sides through `URI`, never a raw filesystem path: `fsPath`
 		// lower-cases the Windows drive letter, so a served
-		// `file:///c%3A/...` and a `pluginRoot` of `C:\...` describe the same
+		// `__ZYRAXKEEP__0_` and a `pluginRoot` of `C:\...` describe the same
 		// directory but do not match as strings. `tmpdir()` and its canonical
 		// form also differ on macOS (`/var` vs `/private/var`), so both
 		// spellings of the root are accepted.

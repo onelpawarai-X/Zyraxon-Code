@@ -4,17 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { internal, LocalSessionMetadata, SessionContext, SessionEvent, SessionOptions, SweCustomAgent } from '@github/copilot/sdk';
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { createReadStream } from 'node:fs';
 import { devNull } from 'node:os';
 import { createInterface } from 'node:readline';
-import type { ChatCustomAgent, ChatRequest, ChatSessionItem } from 'vscode';
+import type { ChatCustomAgent, ChatRequest, ChatSessionItem } from 'zyraxoncode';
 import { IChatDebugFileLoggerService } from '../../../../platform/chat/common/chatDebugFileLoggerService';
 import { ModelDetailsInfo } from '../../../../platform/chat/common/chatModelDetails';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { INTEGRATION_ID } from '../../../../platform/endpoint/common/licenseAgreement';
 import { INativeEnvService } from '../../../../platform/env/common/envService';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { FileType, RelativePattern } from '../../../../platform/filesystem/common/fileTypes';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -34,7 +34,7 @@ import { basename, dirname, joinPath } from '../../../../util/vs/base/common/res
 import { URI } from '../../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../../util/vs/base/common/uuid';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestTurn2, ChatResponseTurn2, ChatSessionStatus, Uri } from '../../../../vscodeTypes';
+import { ChatRequestTurn2, ChatResponseTurn2, ChatSessionStatus, Uri } from '../../../../zyraxoncodeTypes';
 import { IPromptVariablesService } from '../../../prompt/node/promptVariablesService';
 import { IAgentSessionsWorkspace } from '../../common/agentSessionsWorkspace';
 import { IChatSessionMetadataStore, RequestDetails, StoredModeInstructions } from '../../common/chatSessionMetadataStore';
@@ -58,7 +58,7 @@ const COPILOT_CLI_WORKSPACE_JSON_FILE_KEY = 'github.copilot.cli.workspaceSession
 const AGENT_HOST_ENABLED_SETTING_ID = 'chat.agentHost.enabled';
 const AGENT_HOST_DEFAULT_SESSIONS_PROVIDER_SETTING_ID = 'chat.agentHost.defaultSessionsProvider';
 const COPILOT_CLI_HIDE_EXTENSION_HOST_EDITOR_SETTING_ID = 'chat.editor.copilotCli.hideExtensionHost';
-const AGENT_HOST_COPILOT_CLIENT_NAME = 'vscode-agent-host';
+const AGENT_HOST_COPILOT_CLIENT_NAME = 'zyraxoncode-agent-host';
 export const COPILOT_CLI_CHAT_PANEL_SYSTEM_MESSAGE = 'You are an AI assistant using Copilot CLI runtime in ZYRAXON Code. You help users with software engineering tasks. When asked about your identity, you must state that you are an AI assistant using Copilot CLI runtime in ZYRAXON Code.';
 
 type SDKPackage = Awaited<ReturnType<ICopilotCLISDK['getPackage']>>;
@@ -183,7 +183,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 		@IPromptsService private readonly _promptsService: IPromptsService,
 		@ICopilotCLIModels private readonly _copilotCLIModels: ICopilotCLIModels,
 		@IExperimentationService private readonly _experimentationService: IExperimentationService,
-		@IVSCodeExtensionContext private readonly _vscodeExtensionContext?: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _zyraxoncodeExtensionContext?: IZyraxonCodeExtensionContext,
 	) {
 		super();
 		this.showExternalSessions = this.configurationService.getConfig(ConfigKey.Advanced.CLIShowExternalSessions);
@@ -513,7 +513,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 	 * `undefined` when no extension context (e.g. tests).
 	 */
 	private _getAgentHostSessionDataDir(): URI | undefined {
-		const globalStorageUri = this._vscodeExtensionContext?.globalStorageUri;
+		const globalStorageUri = this._zyraxoncodeExtensionContext?.globalStorageUri;
 		if (!globalStorageUri) {
 			return undefined;
 		}
@@ -692,7 +692,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 				const authTypeInspect = this.configurationService.inspectConfig(ConfigKey.Shared.DebugOverrideAuthType);
 				const authType = authTypeInspect?.globalValue ?? 'hmac';
 				const copilotUser = { endpoints: { api: sessionOptions.copilotUrl } };
-				const host = 'https://github.com' as const;
+				const host = '__ZYRAXKEEP__0_' as const;
 				const authInfo = authType === 'token'
 					? { type: 'token' as const, token: 'mock-token', host, copilotUser }
 					: { type: 'hmac' as const, hmac: 'empty', host, copilotUser };
@@ -773,7 +773,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 
 		if (!this.showExternalSessions) {
 			const sessionOrigin = await this._chatSessionMetadataStore.getSessionOrigin(sessionId);
-			if (sessionOrigin !== 'vscode') {
+			if (sessionOrigin !== 'zyraxoncode') {
 				return false;
 			}
 		}
@@ -834,7 +834,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 		}
 
 		const allOptions: SessionOptions = {
-			clientName: 'vscode',
+			clientName: 'zyraxoncode',
 			integrationId: INTEGRATION_ID
 		};
 
@@ -897,7 +897,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 	}
 
 	public async getSession(options: IGetSessionOptions, token: CancellationToken): Promise<RefCountedSession | undefined> {
-		// https://github.com/microsoft/vscode/issues/276573
+		// __ZYRAXKEEP__1_
 		const lock = this.sessionMutexForGetSession.get(options.sessionId) ?? new Mutex();
 		this.sessionMutexForGetSession.set(options.sessionId, lock);
 		const lockDisposable = await lock.acquire(token);
@@ -998,10 +998,10 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 				// Agents from older requests isn't useful, hence to save time.
 				// Re-use the same custom agent from last request for all previous requests.
 				const modeInstructions = defaultModeInstructions;
-				detailsByCopilotId.set(d.copilotRequestId, { requestId: d.vscodeRequestId, toolIdEditMap: d.toolIdEditMap, modeInstructions, responseModelId: d.responseModelId, creditsUsed: d.creditsUsed, isUsingAutoModel: d.isUsingAutoModel });
+				detailsByCopilotId.set(d.copilotRequestId, { requestId: d.zyraxoncodeRequestId, toolIdEditMap: d.toolIdEditMap, modeInstructions, responseModelId: d.responseModelId, creditsUsed: d.creditsUsed, isUsingAutoModel: d.isUsingAutoModel });
 			}
 		}
-		const getVSCodeRequestId = (sdkRequestId: string) => {
+		const getZyraxonCodeRequestId = (sdkRequestId: string) => {
 			const stored = detailsByCopilotId.get(sdkRequestId);
 			if (stored) {
 				return stored;
@@ -1011,7 +1011,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 				detailsByCopilotId.set(sdkRequestId, mapping);
 				legacyMappings.push({
 					copilotRequestId: sdkRequestId,
-					vscodeRequestId: mapping.requestId,
+					zyraxoncodeRequestId: mapping.requestId,
 					toolIdEditMap: mapping.toolIdEditMap,
 				});
 			}
@@ -1021,7 +1021,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 		const modelDetailsById = this.configurationService.getConfig(ConfigKey.Advanced.CLIModelDetailsEnabled)
 			? await this.getModelDetailsById()
 			: undefined;
-		const history = buildChatHistoryFromEvents(sessionId, modelId, events, getVSCodeRequestId, this._delegationSummaryService, this.logService, getWorkingDirectory(workspace), defaultModeInstructions, modelDetailsById);
+		const history = buildChatHistoryFromEvents(sessionId, modelId, events, getZyraxonCodeRequestId, this._delegationSummaryService, this.logService, getWorkingDirectory(workspace), defaultModeInstructions, modelDetailsById);
 
 		if (legacyMappings.length > 0) {
 			void this._chatSessionMetadataStore.updateRequestDetails(sessionId, legacyMappings).catch(error => {
@@ -1122,7 +1122,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 			const requestToTruncateTo = history.find(event => event instanceof ChatRequestTurn2 && event.id === requestId);
 			if (requestToTruncateTo) {
 				const storedDetails = await this._chatSessionMetadataStore.getRequestDetails(sessionId);
-				const translatedSDKEvent = storedDetails.find(d => d.vscodeRequestId === requestToTruncateTo.id || d.copilotRequestId === requestToTruncateTo.id)?.copilotRequestId;
+				const translatedSDKEvent = storedDetails.find(d => d.zyraxoncodeRequestId === requestToTruncateTo.id || d.copilotRequestId === requestToTruncateTo.id)?.copilotRequestId;
 				const sdkEvent = originalSessionEvents.find(e => e.type === 'user.message' && e.id === requestToTruncateTo.id)?.id;
 				toEventId = translatedSDKEvent ?? sdkEvent;
 				if (!toEventId) {
@@ -1275,7 +1275,7 @@ export class CopilotCLISessionService extends Disposable implements ICopilotCLIS
 			this.logService.error(`Failed to delete session ${sessionId}: ${error}`);
 		} finally {
 			this._sessionWrappers.deleteAndLeak(sessionId);
-			// Possible the session was deleted in another vscode session or the like.
+			// Possible the session was deleted in another zyraxoncode session or the like.
 			this._onDidChangeSessions.fire();
 			this._onDidDeleteSession.fire(sessionId);
 		}
@@ -1361,7 +1361,7 @@ export class CopilotCLISessionWorkspaceTracker {
 	private readonly _workspaceSessions = new Set<string>();
 	constructor(
 		@IFileSystemService private readonly fileSystem: IFileSystemService,
-		@IVSCodeExtensionContext private readonly context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly context: IZyraxonCodeExtensionContext,
 		@IWorkspaceService private readonly workspaceService: IWorkspaceService,
 	) {
 		this._initializeSessionStorageFiles = new Lazy<Promise<{ global: Uri; workspace: Uri }>>(async () => {

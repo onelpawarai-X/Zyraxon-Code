@@ -163,13 +163,13 @@ export function createModelAction(
 export function getUnavailableReason(
 	entry: IModelControlEntry,
 	chatEntitlementService: IChatEntitlementService,
-	currentVSCodeVersion: string,
+	currentZyraxonCodeVersion: string,
 ): 'upgrade' | 'update' | 'admin' {
 	const businessOrEnterprise = chatEntitlementService.entitlement === ChatEntitlement.Business || chatEntitlementService.entitlement === ChatEntitlement.Enterprise;
 	if (!businessOrEnterprise) {
 		return 'upgrade';
 	}
-	return entry.minVSCodeVersion && !isVersionAtLeast(currentVSCodeVersion, entry.minVSCodeVersion) ? 'update' : 'admin';
+	return entry.minZyraxonCodeVersion && !isVersionAtLeast(currentZyraxonCodeVersion, entry.minZyraxonCodeVersion) ? 'update' : 'admin';
 }
 
 export function createUnavailableModelItem(

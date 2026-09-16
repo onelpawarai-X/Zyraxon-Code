@@ -593,7 +593,7 @@ private _readSessionPermissionMode(sessionUri: URI): PermissionMode {
 
 The `AskUserQuestion` built-in tool ([extensions/copilot/src/extension/chatSessions/claude/common/claudeTools.ts:60](../../../../../../extensions/copilot/src/extension/chatSessions/claude/common/claudeTools.ts#L60)) is the SDK's question-carousel mechanism. The production extension handles it in [`askUserQuestionHandler.ts:33-92`](../../../../../../extensions/copilot/src/extension/chatSessions/claude/common/toolPermissionHandlers/askUserQuestionHandler.ts#L33) by:
 
-1. Calling the workbench `vscode_askQuestions` core tool to render the question carousel.
+1. Calling the workbench `zyraxoncode_askQuestions` core tool to render the question carousel.
 2. Translating the answers back into the SDK's expected shape: `Record<question.question, "selected, freeText">` keyed by **question text**, not header.
 3. Returning `{ behavior: 'allow', updatedInput: { ...input, answers } }` so the SDK "executes" the tool with the assembled answers as its result.
 

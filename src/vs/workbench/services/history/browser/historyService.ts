@@ -102,7 +102,7 @@ export class HistoryService extends Disposable implements IHistoryService {
 
 		// if the service is created late enough that an editor is already opened
 		// make sure to trigger the onActiveEditorChanged() to track the editor
-		// properly (fixes https://github.com/microsoft/vscode/issues/59908)
+		// properly (fixes __ZYRAXKEEP__0_)
 		if (this.editorService.activeEditorPane) {
 			this.onDidActiveEditorChange();
 		}
@@ -211,7 +211,7 @@ export class HistoryService extends Disposable implements IHistoryService {
 
 		// Handle editor change unless the editor is transient. In that case
 		// setup a listener to see if the transient editor becomes non-transient
-		// (https://github.com/microsoft/vscode/issues/211769)
+		// (__ZYRAXKEEP__1_)
 		if (!activeEditorPane?.group.isTransient(activeEditorPane.input)) {
 			this.handleActiveEditorChange(activeEditorGroup, activeEditorPane);
 		} else {
@@ -777,7 +777,7 @@ export class HistoryService extends Disposable implements IHistoryService {
 			}
 		}
 
-		// Fix for https://github.com/microsoft/vscode/issues/67882
+		// Fix for __ZYRAXKEEP__2_
 		// If none of the editors in the batch could be reopened, make sure to
 		// try the previous batch. The failing editors have already been removed
 		// from the list of recently closed editors to prevent endless loops.
@@ -803,7 +803,7 @@ export class HistoryService extends Disposable implements IHistoryService {
 		let editorPane: IEditorPane | undefined = undefined;
 		if (!this.editorGroupService.activeGroup.contains(lastClosedEditor.editor)) {
 
-			// Fix for https://github.com/microsoft/vscode/issues/107850
+			// Fix for __ZYRAXKEEP__3_
 			// If opening an editor fails, it is possible that we get
 			// another editor-close event as a result. But we really do
 			// want to ignore that in our list of recently closed editors
@@ -1149,7 +1149,7 @@ export class HistoryService extends Disposable implements IHistoryService {
 					}
 				}
 			} catch (error) {
-				onUnexpectedError(error); // https://github.com/microsoft/vscode/issues/99075
+				onUnexpectedError(error); // __ZYRAXKEEP__4_
 			}
 		}
 
@@ -2084,14 +2084,14 @@ class EditorHelper {
 		const resource = EditorResourceAccessor.getOriginalUri(editor);
 
 		// For now, only prefer well known schemes that we control to prevent
-		// issues such as https://github.com/microsoft/vscode/issues/85204
+		// issues such as __ZYRAXKEEP__5_
 		// from being used as resource inputs
 		// resource inputs survive editor disposal and as such are a lot more
 		// durable across editor changes and restarts
 		const hasValidResourceEditorInputScheme =
 			resource?.scheme === Schemas.file ||
-			resource?.scheme === Schemas.vscodeRemote ||
-			resource?.scheme === Schemas.vscodeUserData ||
+			resource?.scheme === Schemas.zyraxoncodeRemote ||
+			resource?.scheme === Schemas.zyraxoncodeUserData ||
 			resource?.scheme === this.pathService.defaultUriScheme;
 
 		// Scheme is valid: prefer the untyped input
@@ -2159,7 +2159,7 @@ class EditorHelper {
 			}
 
 			if (this.lifecycleService.phase >= LifecyclePhase.Restored && !this.fileService.hasProvider(inputResource)) {
-				return false; // make sure to only check this when workbench has restored (for https://github.com/microsoft/vscode/issues/48275)
+				return false; // make sure to only check this when workbench has restored (for __ZYRAXKEEP__6_)
 			}
 
 			return this.uriIdentityService.extUri.isEqual(inputResource, resource);

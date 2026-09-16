@@ -12,7 +12,7 @@ export default new class NoTestOnly implements eslint.Rule.RuleModule {
 	create(context: eslint.Rule.RuleContext): eslint.Rule.RuleListener {
 
 		// compute/use real file path because LSP eslint might see cached
-		// filenames from VSCode that aren't using the latest casing
+		// filenames from ZyraxonCode that aren't using the latest casing
 		let realFilename: string | undefined;
 		const filename = path.basename(context.filename);
 		const filenames = readdirSync(path.dirname(context.filename));

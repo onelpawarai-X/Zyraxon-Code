@@ -227,7 +227,7 @@ export function buildPlanReviewProgressContent(review: IChatPlanReview, message:
 				const label = planFileName
 					? localize('chat.planReview.openFullPlanFile', "Open full plan file ({0})", planFileName)
 					: localize('chat.planReview.openFullPlan', "Open full plan file");
-				const planWidgetUri = planUri.with({ query: planUri.query ? `${planUri.query}&vscodeLinkType=file` : 'vscodeLinkType=file' });
+				const planWidgetUri = planUri.with({ query: planUri.query ? `${planUri.query}&zyraxoncodeLinkType=file` : 'zyraxoncodeLinkType=file' });
 				content.appendMarkdown(`[${escapeMarkdownLinkLabel(label)}](${planWidgetUri.toString(true)})`);
 			}
 		}
@@ -361,7 +361,7 @@ export interface IChatItemHeightUpdate {
  * `isBeingRendered` is `true` when the measurement arrives *synchronously* during the tree's
  * `renderElement` call; in that case the tree must not be notified re-entrantly.
  *
- * See https://github.com/microsoft/vscode/issues/326952: when notification is suppressed,
+ * See __ZYRAXKEEP__0_ when notification is suppressed,
  * `currentRenderedHeight` must remain unchanged so an identical deferred measurement is not
  * deduplicated before it reaches the tree.
  */
@@ -2708,7 +2708,7 @@ export class ChatListItemRenderer extends Disposable implements ITreeRenderer<Ch
 		// only pin terminal tools based on settings
 		const isTerminalTool = (part.kind === 'toolInvocation' || part.kind === 'toolInvocationSerialized') && part.toolSpecificData?.kind === 'terminal';
 		const isContributedTerminalToolInvocation = element
-			&& (element.sessionResource.scheme !== Schemas.vscodeChatInput && getChatSessionType(element.sessionResource) !== localChatSessionType) // contributed sessions
+			&& (element.sessionResource.scheme !== Schemas.zyraxoncodeChatInput && getChatSessionType(element.sessionResource) !== localChatSessionType) // contributed sessions
 			&& part.kind === 'toolInvocationSerialized' && part.toolSpecificData?.kind === 'terminal'; // contributed serialized terminal tool invocations data
 		if (isTerminalTool && !isContributedTerminalToolInvocation) {
 			// don't pin terminals with confirmation
@@ -3983,7 +3983,7 @@ export class ChatListItemRenderer extends Disposable implements ITreeRenderer<Ch
 		const element = context.element;
 		const isBlankMarkdown = !markdown.content.value.trim();
 		// Don't finalize thinking if the markdown has an incomplete codeblock with a
-		// vscode_codeblock_uri tag — the isEdit annotation may not have arrived yet.
+		// zyraxoncode_codeblock_uri tag — the isEdit annotation may not have arrived yet.
 		// Only check codeblocks that contain a URI tag to avoid catching regular non-edit codeblocks.
 		const hasPendingEditCodeblock = isResponseVM(element) && !element.isComplete
 			&& hasCodeblockUriTag(markdown.content.value)

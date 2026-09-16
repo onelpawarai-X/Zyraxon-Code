@@ -15,9 +15,9 @@ import { ISandboxConfiguration } from '../../../base/parts/sandbox/common/sandbo
 let product: IProductConfiguration;
 
 // Native sandbox environment
-const vscodeGlobal = (globalThis as { vscode?: { context?: { configuration(): ISandboxConfiguration | undefined } } }).vscode;
-if (typeof vscodeGlobal !== 'undefined' && typeof vscodeGlobal.context !== 'undefined') {
-	const configuration: ISandboxConfiguration | undefined = vscodeGlobal.context.configuration();
+const zyraxoncodeGlobal = (globalThis as { zyraxoncode?: { context?: { configuration(): ISandboxConfiguration | undefined } } }).zyraxoncode;
+if (typeof zyraxoncodeGlobal !== 'undefined' && typeof zyraxoncodeGlobal.context !== 'undefined') {
+	const configuration: ISandboxConfiguration | undefined = zyraxoncodeGlobal.context.configuration();
 	if (configuration) {
 		product = configuration.product;
 	} else {
@@ -67,10 +67,10 @@ else {
 			applicationName: 'zyraxon-code',
 			dataFolderName: '.zyraxon-code',
 			urlProtocol: 'zyraxon-code',
-			reportIssueUrl: 'https://github.com/onelpawarai/ZYRAXON-AI/issues/new',
-			licenseName: 'MIT',
-			licenseUrl: 'https://github.com/microsoft/vscode/blob/main/LICENSE.txt',
-			serverLicenseUrl: 'https://github.com/microsoft/vscode/blob/main/LICENSE.txt',
+			reportIssueUrl: '__ZYRAXKEEP__0_',
+			licenseName: 'ZSL-X 1.0.0',
+			licenseUrl: '__ZYRAXKEEP__1_',
+			serverLicenseUrl: '__ZYRAXKEEP__2_',
 			defaultChatAgent: {
 				extensionId: 'GitHub.copilot',
 				chatExtensionId: 'GitHub.copilot-chat',

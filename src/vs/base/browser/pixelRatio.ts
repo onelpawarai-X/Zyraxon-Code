@@ -16,7 +16,7 @@ type BackingStoreContext = CanvasRenderingContext2D & {
 };
 
 /**
- * See https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio#monitoring_screen_resolution_or_zoom_level_changes
+ * See __ZYRAXKEEP__0_
  */
 class DevicePixelRatioMonitor extends Disposable {
 
@@ -99,8 +99,8 @@ class PixelRatioMonitorFacade {
 			pixelRatioMonitor = markAsSingleton(new PixelRatioMonitorImpl(targetWindow));
 			this.mapWindowIdToPixelRatioMonitor.set(targetWindowId, pixelRatioMonitor);
 
-			markAsSingleton(Event.once(onDidUnregisterWindow)(({ vscodeWindowId }) => {
-				if (vscodeWindowId === targetWindowId) {
+			markAsSingleton(Event.once(onDidUnregisterWindow)(({ zyraxoncodeWindowId }) => {
+				if (zyraxoncodeWindowId === targetWindowId) {
 					pixelRatioMonitor?.dispose();
 					this.mapWindowIdToPixelRatioMonitor.delete(targetWindowId);
 				}

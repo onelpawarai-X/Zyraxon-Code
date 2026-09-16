@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
+import { PromptElement, PromptElementProps, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
 import assert from 'assert';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
-import { IParserService, treeSitterOffsetRangeToVSCodeRange as toRange, vscodeToTreeSitterOffsetRange as toTSOffsetRange } from '../../../../platform/parser/node/parserService';
+import { IParserService, treeSitterOffsetRangeToZyraxonCodeRange as toRange, zyraxoncodeToTreeSitterOffsetRange as toTSOffsetRange } from '../../../../platform/parser/node/parserService';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { CancellationToken } from '../../../../util/vs/base/common/cancellation';
 import * as path from '../../../../util/vs/base/common/path';
@@ -18,7 +18,7 @@ import { assertType } from '../../../../util/vs/base/common/types';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { StringEdit } from '../../../../util/vs/editor/common/core/edits/stringEdit';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseMovePart, Range, Uri } from '../../../../vscodeTypes';
+import { ChatResponseMovePart, Range, Uri } from '../../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
 import { IDocumentContext } from '../../../prompt/node/documentContext';
 import { EarlyStopping, IIntentInvocation, IResponseProcessorContext, LeadingMarkdownStreaming } from '../../../prompt/node/intents';
@@ -55,7 +55,7 @@ type TestFileToWriteTo = {
 export class TestFromSourceInvocation implements IIntentInvocation {
 
 	private _testFileToWriteTo: TestFileToWriteTo | undefined;
-	private _additionalResponseParts: vscode.ExtendedChatResponsePart[] | undefined;
+	private _additionalResponseParts: zyraxoncode.ExtendedChatResponsePart[] | undefined;
 	private _testFileFinder: TestFileFinder;
 
 	constructor(
@@ -63,7 +63,7 @@ export class TestFromSourceInvocation implements IIntentInvocation {
 		readonly endpoint: IChatEndpoint,
 		readonly location: ChatLocation,
 		private readonly documentContext: IDocumentContext,
-		private readonly alreadyConsumedChatVariable: vscode.ChatPromptReference | undefined,
+		private readonly alreadyConsumedChatVariable: zyraxoncode.ChatPromptReference | undefined,
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 		@IWorkspaceService private readonly workspaceService: IWorkspaceService,
 		@IIgnoreService private readonly ignoreService: IIgnoreService,
@@ -74,8 +74,8 @@ export class TestFromSourceInvocation implements IIntentInvocation {
 
 	async buildPrompt(
 		promptContext: IBuildPromptContext,
-		progress: vscode.Progress<vscode.ChatResponseProgressPart | vscode.ChatResponseReferencePart>,
-		token: vscode.CancellationToken
+		progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart | zyraxoncode.ChatResponseReferencePart>,
+		token: zyraxoncode.CancellationToken
 	) {
 		assert(!isTestFile(this.documentContext.document), 'TestFromSourceInvocation should not be invoked from a test file');
 
@@ -139,7 +139,7 @@ export class TestFromSourceInvocation implements IIntentInvocation {
 		return result;
 	}
 
-	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 
 		if (this.location === ChatLocation.Panel) {
 			const responseProcessor = this.instantiationService.createInstance(PseudoStopStartResponseProcessor, [], undefined);
@@ -280,7 +280,7 @@ type Props = PromptElementProps<{
 	testExampleFile: TestExampleFile | null;
 	testFileToWriteTo: TestFileToWriteTo;
 	promptContext: IBuildPromptContext;
-	alreadyConsumedChatVariable: vscode.ChatPromptReference | undefined;
+	alreadyConsumedChatVariable: zyraxoncode.ChatPromptReference | undefined;
 }>;
 
 class Prompt extends PromptElement<Props> {
@@ -302,7 +302,7 @@ class Prompt extends PromptElement<Props> {
 
 		const treeSitterAST = this.parserService.getTreeSitterAST(context.document);
 
-		let userSelection: vscode.Range = context.selection;
+		let userSelection: zyraxoncode.Range = context.selection;
 		let testedSymbolIdentifier: string | undefined;
 		let nodeKind: string | undefined;
 		if (treeSitterAST !== undefined) {

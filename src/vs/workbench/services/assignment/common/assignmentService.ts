@@ -226,12 +226,12 @@ export class WorkbenchAssignmentService extends Disposable implements IAssignmen
 		// If not, use the async call with `checkCache: true`. This will allow the module to return a cached value if it is present.
 		// Otherwise it will await the initial fetch to return the most up to date value.
 		if (this.networkInitialized) {
-			result = client.getTreatmentVariable<T>('vscode', name);
+			result = client.getTreatmentVariable<T>('zyraxoncode', name);
 		} else {
-			result = await client.getTreatmentVariableAsync<T>('vscode', name, true);
+			result = await client.getTreatmentVariableAsync<T>('zyraxoncode', name, true);
 		}
 
-		result = client.getTreatmentVariable<T>('vscode', name);
+		result = client.getTreatmentVariable<T>('zyraxoncode', name);
 		return result;
 	}
 
@@ -315,7 +315,7 @@ export class WorkbenchAssignmentService extends Disposable implements IAssignmen
 
 		// Refresh the assignments and measure the network latency of the refetch.
 		const refetchStopWatch = StopWatch.create();
-		await tasClient.getTreatmentVariableAsync('vscode', 'refresh', false);
+		await tasClient.getTreatmentVariableAsync('zyraxoncode', 'refresh', false);
 		this.logFetchLatency('refetch', refetchStopWatch.elapsed());
 	}
 

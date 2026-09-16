@@ -37,7 +37,7 @@ import { TMGrammarFactory, missingTMGrammarErrorMessage } from '../common/TMGram
 import { ITMSyntaxExtensionPoint, grammarsExtPoint } from '../common/TMGrammars.js';
 import { IValidEmbeddedLanguagesMap, IValidGrammarDefinition, IValidTokenTypeMap } from '../common/TMScopeRegistry.js';
 import { ITextMateThemingRule, IWorkbenchColorTheme, IWorkbenchThemeService } from '../../themes/common/workbenchThemeService.js';
-import type { IGrammar, IOnigLib, IRawTheme } from 'vscode-textmate';
+import type { IGrammar, IOnigLib, IRawTheme } from 'zyraxoncode-textmate';
 import { IFontTokenOptions } from '../../../../platform/theme/common/themeService.js';
 
 export class TextMateTokenizationFeature extends Disposable implements ITextMateTokenizationService {
@@ -87,10 +87,10 @@ export class TextMateTokenizationFeature extends Disposable implements ITextMate
 			(timeMs, languageId, sourceExtensionId, lineLength, isRandomSample) => this._reportTokenizationTime(timeMs, languageId, sourceExtensionId, lineLength, true, isRandomSample),
 			() => this.getAsyncTokenizationEnabled(),
 		);
-		this._vscodeOniguruma = null;
+		this._zyraxoncodeOniguruma = null;
 
 		this._styleElement = domStylesheets.createStyleSheet();
-		this._styleElement.className = 'vscode-tokens-styles';
+		this._styleElement.className = 'zyraxoncode-tokens-styles';
 
 		grammarsExtPoint.setHandler((extensions) => this._handleGrammarsExtPoint(extensions));
 
@@ -233,8 +233,8 @@ export class TextMateTokenizationFeature extends Disposable implements ITextMate
 						message: nls.localize('progress1', "Preparing to log TM Grammar parsing. Press Stop when finished.")
 					});
 
-					return this._getVSCodeOniguruma().then((vscodeOniguruma) => {
-						vscodeOniguruma.setDefaultDebugCall(true);
+					return this._getZyraxonCodeOniguruma().then((zyraxoncodeOniguruma) => {
+						zyraxoncodeOniguruma.setDefaultDebugCall(true);
 						progress.report({
 							message: nls.localize('progress2', "Now logging TM Grammar parsing. Press Stop when finished.")
 						});
@@ -242,10 +242,10 @@ export class TextMateTokenizationFeature extends Disposable implements ITextMate
 					});
 				},
 				(choice) => {
-					this._getVSCodeOniguruma().then((vscodeOniguruma) => {
+					this._getZyraxonCodeOniguruma().then((zyraxoncodeOniguruma) => {
 						this._debugModePrintFunc = () => { };
 						this._debugMode = false;
-						vscodeOniguruma.setDefaultDebugCall(false);
+						zyraxoncodeOniguruma.setDefaultDebugCall(false);
 						onStop();
 					});
 				}
@@ -262,10 +262,10 @@ export class TextMateTokenizationFeature extends Disposable implements ITextMate
 			return this._grammarFactory;
 		}
 
-		const [vscodeTextmate, vscodeOniguruma] = await Promise.all([importAMDNodeModule<typeof import('vscode-textmate')>('vscode-textmate', 'release/main.js'), this._getVSCodeOniguruma()]);
+		const [zyraxoncodeTextmate, zyraxoncodeOniguruma] = await Promise.all([importAMDNodeModule<typeof import('zyraxoncode-textmate')>('zyraxoncode-textmate', 'release/main.js'), this._getZyraxonCodeOniguruma()]);
 		const onigLib: Promise<IOnigLib> = Promise.resolve({
-			createOnigScanner: (sources: string[]) => vscodeOniguruma.createOnigScanner(sources),
-			createOnigString: (str: string) => vscodeOniguruma.createOnigString(str)
+			createOnigScanner: (sources: string[]) => zyraxoncodeOniguruma.createOnigScanner(sources),
+			createOnigString: (str: string) => zyraxoncodeOniguruma.createOnigString(str)
 		});
 
 		// Avoid duplicate instantiations
@@ -277,7 +277,7 @@ export class TextMateTokenizationFeature extends Disposable implements ITextMate
 			logTrace: (msg: string) => this._logService.trace(msg),
 			logError: (msg: string, err: unknown) => this._logService.error(msg, err),
 			readFile: (resource: URI) => this._extensionResourceLoaderService.readExtensionResource(resource)
-		}, this._grammarDefinitions || [], vscodeTextmate, onigLib);
+		}, this._grammarDefinitions || [], zyraxoncodeTextmate, onigLib);
 
 		this._updateTheme(this._themeService.getColorTheme(), true);
 
@@ -374,34 +374,34 @@ export class TextMateTokenizationFeature extends Disposable implements ITextMate
 		return grammar;
 	}
 
-	private _vscodeOniguruma: Promise<typeof import('vscode-oniguruma')> | null;
-	private _getVSCodeOniguruma(): Promise<typeof import('vscode-oniguruma')> {
-		if (!this._vscodeOniguruma) {
-			this._vscodeOniguruma = (async () => {
-				const [vscodeOniguruma, wasm] = await Promise.all([importAMDNodeModule<typeof import('vscode-oniguruma')>('vscode-oniguruma', 'release/main.js'), this._loadVSCodeOnigurumaWASM()]);
-				await vscodeOniguruma.loadWASM({
+	private _zyraxoncodeOniguruma: Promise<typeof import('zyraxoncode-oniguruma')> | null;
+	private _getZyraxonCodeOniguruma(): Promise<typeof import('zyraxoncode-oniguruma')> {
+		if (!this._zyraxoncodeOniguruma) {
+			this._zyraxoncodeOniguruma = (async () => {
+				const [zyraxoncodeOniguruma, wasm] = await Promise.all([importAMDNodeModule<typeof import('zyraxoncode-oniguruma')>('zyraxoncode-oniguruma', 'release/main.js'), this._loadZyraxonCodeOnigurumaWASM()]);
+				await zyraxoncodeOniguruma.loadWASM({
 					data: wasm,
 					print: (str: string) => {
 						this._debugModePrintFunc(str);
 					}
 				});
-				return vscodeOniguruma;
+				return zyraxoncodeOniguruma;
 			})();
 		}
-		return this._vscodeOniguruma;
+		return this._zyraxoncodeOniguruma;
 	}
 
-	private async _loadVSCodeOnigurumaWASM(): Promise<Response | ArrayBuffer> {
+	private async _loadZyraxonCodeOnigurumaWASM(): Promise<Response | ArrayBuffer> {
 		if (isWeb) {
-			const response = await fetch(resolveAmdNodeModulePath('vscode-oniguruma', 'release/onig.wasm'));
+			const response = await fetch(resolveAmdNodeModulePath('zyraxoncode-oniguruma', 'release/onig.wasm'));
 			// Using the response directly only works if the server sets the MIME type 'application/wasm'.
 			// Otherwise, a TypeError is thrown when using the streaming compiler.
 			// We therefore use the non-streaming compiler :(.
 			return await response.arrayBuffer();
 		} else {
 			const response = await fetch(this._environmentService.isBuilt
-				? FileAccess.asBrowserUri(`${nodeModulesAsarUnpackedPath}/vscode-oniguruma/release/onig.wasm`).toString(true)
-				: FileAccess.asBrowserUri(`${nodeModulesPath}/vscode-oniguruma/release/onig.wasm`).toString(true));
+				? FileAccess.asBrowserUri(`${nodeModulesAsarUnpackedPath}/zyraxoncode-oniguruma/release/onig.wasm`).toString(true)
+				: FileAccess.asBrowserUri(`${nodeModulesPath}/zyraxoncode-oniguruma/release/onig.wasm`).toString(true));
 			return response;
 		}
 	}

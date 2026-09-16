@@ -190,14 +190,14 @@ export class GlobalKeybindingsMainService extends Disposable implements IGlobalK
 		// foreground even when the command opens or reveals a *different* window (e.g.
 		// `workbench.action.openAgentsWindow` reveals the agents window). Pulling the routing window
 		// forward first produces a visible flicker. Instead we let the command decide what to surface
-		// and focus — matching every other `vscode:runAction` sender (menubar, touchbar, mouse), none
+		// and focus — matching every other `zyraxoncode:runAction` sender (menubar, touchbar, mouse), none
 		// of which force-focus. `sendWhenReady` only needs the web contents to be ready, not focused.
 		const payload: INativeRunActionInWindowRequest = {
 			id: binding.commandId,
 			from: 'systemWideKeybinding',
 			args: binding.args === undefined ? undefined : [binding.args]
 		};
-		target.sendWhenReady('vscode:runAction', CancellationToken.None, payload);
+		target.sendWhenReady('zyraxoncode:runAction', CancellationToken.None, payload);
 	}
 
 	private onDidDestroyWindow(window: ICodeWindow): void {

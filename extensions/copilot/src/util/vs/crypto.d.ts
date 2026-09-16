@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -15,61 +15,61 @@ declare global {
 	 * This Web Crypto API interface provides a number of low-level cryptographic functions. It is accessed via the Crypto.subtle properties available in a window context (via Window.crypto).
 	 * Available only in secure contexts.
 	 *
-	 * [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto)
+	 * [MDN Reference](__ZYRAXKEEP__0_)
 	 */
 	interface SubtleCrypto {
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/decrypt) */
+		// /** [MDN Reference](__ZYRAXKEEP__1_) */
 		// decrypt(algorithm: AlgorithmIdentifier | RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams, key: CryptoKey, data: BufferSource): Promise<ArrayBuffer>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/deriveBits) */
+		// /** [MDN Reference](__ZYRAXKEEP__2_) */
 		// deriveBits(algorithm: AlgorithmIdentifier | EcdhKeyDeriveParams | HkdfParams | Pbkdf2Params, baseKey: CryptoKey, length?: number | null): Promise<ArrayBuffer>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/deriveKey) */
+		// /** [MDN Reference](__ZYRAXKEEP__3_) */
 		// deriveKey(algorithm: AlgorithmIdentifier | EcdhKeyDeriveParams | HkdfParams | Pbkdf2Params, baseKey: CryptoKey, derivedKeyType: AlgorithmIdentifier | AesDerivedKeyParams | HmacImportParams | HkdfParams | Pbkdf2Params, extractable: boolean, keyUsages: KeyUsage[]): Promise<CryptoKey>;
-		/** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/digest) */
+		/** [MDN Reference](__ZYRAXKEEP__4_) */
 		digest(algorithm: { name: string } | string, data: ArrayBufferView | ArrayBuffer): Promise<ArrayBuffer>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/encrypt) */
+		// /** [MDN Reference](__ZYRAXKEEP__5_) */
 		// encrypt(algorithm: AlgorithmIdentifier | RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams, key: CryptoKey, data: BufferSource): Promise<ArrayBuffer>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/exportKey) */
+		// /** [MDN Reference](__ZYRAXKEEP__6_) */
 		// exportKey(format: "jwk", key: CryptoKey): Promise<JsonWebKey>;
 		// exportKey(format: Exclude<KeyFormat, "jwk">, key: CryptoKey): Promise<ArrayBuffer>;
 		// exportKey(format: KeyFormat, key: CryptoKey): Promise<ArrayBuffer | JsonWebKey>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/generateKey) */
+		// /** [MDN Reference](__ZYRAXKEEP__7_) */
 		// generateKey(algorithm: "Ed25519", extractable: boolean, keyUsages: ReadonlyArray<"sign" | "verify">): Promise<CryptoKeyPair>;
 		// generateKey(algorithm: RsaHashedKeyGenParams | EcKeyGenParams, extractable: boolean, keyUsages: ReadonlyArray<KeyUsage>): Promise<CryptoKeyPair>;
 		// generateKey(algorithm: AesKeyGenParams | HmacKeyGenParams | Pbkdf2Params, extractable: boolean, keyUsages: ReadonlyArray<KeyUsage>): Promise<CryptoKey>;
 		// generateKey(algorithm: AlgorithmIdentifier, extractable: boolean, keyUsages: KeyUsage[]): Promise<CryptoKeyPair | CryptoKey>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/importKey) */
+		// /** [MDN Reference](__ZYRAXKEEP__8_) */
 		// importKey(format: "jwk", keyData: JsonWebKey, algorithm: AlgorithmIdentifier | RsaHashedImportParams | EcKeyImportParams | HmacImportParams | AesKeyAlgorithm, extractable: boolean, keyUsages: ReadonlyArray<KeyUsage>): Promise<CryptoKey>;
 		// importKey(format: Exclude<KeyFormat, "jwk">, keyData: BufferSource, algorithm: AlgorithmIdentifier | RsaHashedImportParams | EcKeyImportParams | HmacImportParams | AesKeyAlgorithm, extractable: boolean, keyUsages: KeyUsage[]): Promise<CryptoKey>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/sign) */
+		// /** [MDN Reference](__ZYRAXKEEP__9_) */
 		// sign(algorithm: AlgorithmIdentifier | RsaPssParams | EcdsaParams, key: CryptoKey, data: BufferSource): Promise<ArrayBuffer>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/unwrapKey) */
+		// /** [MDN Reference](__ZYRAXKEEP__10_) */
 		// unwrapKey(format: KeyFormat, wrappedKey: BufferSource, unwrappingKey: CryptoKey, unwrapAlgorithm: AlgorithmIdentifier | RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams, unwrappedKeyAlgorithm: AlgorithmIdentifier | RsaHashedImportParams | EcKeyImportParams | HmacImportParams | AesKeyAlgorithm, extractable: boolean, keyUsages: KeyUsage[]): Promise<CryptoKey>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/verify) */
+		// /** [MDN Reference](__ZYRAXKEEP__11_) */
 		// verify(algorithm: AlgorithmIdentifier | RsaPssParams | EcdsaParams, key: CryptoKey, signature: BufferSource, data: BufferSource): Promise<boolean>;
-		// /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/SubtleCrypto/wrapKey) */
+		// /** [MDN Reference](__ZYRAXKEEP__12_) */
 		// wrapKey(format: KeyFormat, key: CryptoKey, wrappingKey: CryptoKey, wrapAlgorithm: AlgorithmIdentifier | RsaOaepParams | AesCtrParams | AesCbcParams | AesGcmParams): Promise<ArrayBuffer>;
 	}
 
 	/**
 	 * Basic cryptography features available in the current context. It allows access to a cryptographically strong random number generator and to cryptographic primitives.
 	 *
-	 * [MDN Reference](https://developer.mozilla.org/docs/Web/API/Crypto)
+	 * [MDN Reference](__ZYRAXKEEP__13_)
 	 */
 	interface Crypto {
 		/**
 		 * Available only in secure contexts.
 		 *
-		 * [MDN Reference](https://developer.mozilla.org/docs/Web/API/Crypto/subtle)
+		 * [MDN Reference](__ZYRAXKEEP__14_)
 		 */
 		readonly subtle: SubtleCrypto;
 		/**
-		 * [MDN Reference](https://developer.mozilla.org/docs/Web/API/Crypto/getRandomValues)
+		 * [MDN Reference](__ZYRAXKEEP__15_)
 		 */
 		getRandomValues<T extends ArrayBufferView | null>(array: T): T;
 		/**
 		 * Available only in secure contexts.
 		 *
-		 * [MDN Reference](https://developer.mozilla.org/docs/Web/API/Crypto/randomUUID)
+		 * [MDN Reference](__ZYRAXKEEP__16_)
 		 */
 		randomUUID(): `${string}-${string}-${string}-${string}-${string}`;
 	}

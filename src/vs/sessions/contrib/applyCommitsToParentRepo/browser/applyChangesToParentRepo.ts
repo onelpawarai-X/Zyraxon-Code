@@ -97,13 +97,13 @@ class ApplyChangesToParentRepoAction extends Action2 {
 
 		const openFolderAction = toAction({
 			id: 'applyChangesToParentRepo.openFolder',
-			label: localize('openInVSCode', "Open in ZYRAXON Code"),
+			label: localize('openInZyraxonCode', "Open in ZYRAXON Code"),
 			run: () => {
 				const scheme = productService.quality === 'stable'
-					? 'vscode'
+					? 'zyraxoncode'
 					: productService.quality === 'exploration'
-						? 'vscode-exploration'
-						: 'vscode-insiders';
+						? 'zyraxoncode-exploration'
+						: 'zyraxoncode-insiders';
 
 				const params = new URLSearchParams();
 				params.set('windowId', '_blank');

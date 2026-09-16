@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, ChatParticipantToolToken, Uri } from 'vscode';
+import type { CancellationToken, ChatParticipantToolToken, Uri } from 'zyraxoncode';
 import { IEndpointProvider } from '../../../../../lib/node/chatLibMain';
 import { ILogger, ILogService } from '../../../../../platform/log/common/logService';
 import { IChatEndpoint } from '../../../../../platform/networking/common/networking';

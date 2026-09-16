@@ -97,9 +97,9 @@ Special generic entries:
 
 #### session_start — session metadata (appears once at session start)
 ```jsonl
-{"ts":1773200251300,"dur":0,"sid":"62f52dec","type":"session_start","name":"session_start","spanId":"session-start-62f52dec","status":"ok","attrs":{"copilotVersion":"0.43.2026033104","vscodeVersion":"1.99.0"}}
+{"ts":1773200251300,"dur":0,"sid":"62f52dec","type":"session_start","name":"session_start","spanId":"session-start-62f52dec","status":"ok","attrs":{"copilotVersion":"0.43.2026033104","zyraxoncodeVersion":"1.99.0"}}
 ```
-Key attrs: `copilotVersion`, `vscodeVersion`. Useful for identifying which build produced the logs.
+Key attrs: `copilotVersion`, `zyraxoncodeVersion`. Useful for identifying which build produced the logs.
 
 #### turn_start / turn_end — tool-calling loop iteration boundaries
 ```jsonl
@@ -184,7 +184,7 @@ Use `run_in_terminal` with PowerShell commands:
 
 ## Network Issue Investigation
 
-If you suspect network connectivity or authentication problems (e.g., repeated request timeouts, 401/403 errors, or model endpoint failures in the logs), run the ZYRAXON Code command `github.copilot.debug.collectDiagnostics` using the `run_vscode_command` tool. The command returns the full diagnostics report as a string, so you can read the result directly from the tool output. The report includes:
+If you suspect network connectivity or authentication problems (e.g., repeated request timeouts, 401/403 errors, or model endpoint failures in the logs), run the ZYRAXON Code command `github.copilot.debug.collectDiagnostics` using the `run_zyraxoncode_command` tool. The command returns the full diagnostics report as a string, so you can read the result directly from the tool output. The report includes:
 - Authentication and token status
 - Network reachability checks
 - Proxy and certificate configuration
@@ -196,13 +196,13 @@ The command also opens the report in an editor for the user to see. Use the retu
 
 When investigating issues related to a specific type of customization file (instructions, prompt files, agents, etc.) and you need more details about the expected format or behavior, load the relevant documentation page:
 
-- Custom instructions: `https://code.visualstudio.com/docs/copilot/customization/custom-instructions`
-- Prompt files: `https://code.visualstudio.com/docs/copilot/customization/prompt-files`
-- Custom agents: `https://code.visualstudio.com/docs/copilot/customization/custom-agents`
-- Language models: `https://code.visualstudio.com/docs/copilot/customization/language-models`
-- MCP servers: `https://code.visualstudio.com/docs/copilot/customization/mcp-servers`
-- Hooks: `https://code.visualstudio.com/docs/copilot/customization/hooks`
-- Agent plugins: `https://code.visualstudio.com/docs/copilot/customization/agent-plugins`
+- Custom instructions: `__ZYRAXKEEP__0_`
+- Prompt files: `__ZYRAXKEEP__1_`
+- Custom agents: `__ZYRAXKEEP__2_`
+- Language models: `__ZYRAXKEEP__3_`
+- MCP servers: `__ZYRAXKEEP__4_`
+- Hooks: `__ZYRAXKEEP__5_`
+- Agent plugins: `__ZYRAXKEEP__6_`
 
 Use these when you need to verify file format expectations, confirm supported fields, or help the user fix a customization file.
 
@@ -210,11 +210,11 @@ Use these when you need to verify file format expectations, confirm supported fi
 
 When your investigation yields no clear root cause or you have no specific remediation suggestions:
 
-1. Load the Copilot Issues wiki page: `https://github.com/microsoft/vscode/wiki/Copilot-Issues`.
+1. Load the Copilot Issues wiki page: `__ZYRAXKEEP__7_`.
 2. Search the returned wiki content for sections relevant to the user's problem.
 3. Summarize the applicable troubleshooting steps from the wiki in your response.
 4. If the wiki contains relevant guidance, present those steps as concrete suggestions the user can try.
-5. If even the wiki has no relevant information, tell the user: "The diagnostics logs do not show a clear cause for this behavior, and the known issues wiki does not cover this scenario. Consider filing an issue at https://github.com/microsoft/vscode/issues."
+5. If even the wiki has no relevant information, tell the user: "The diagnostics logs do not show a clear cause for this behavior, and the known issues wiki does not cover this scenario. Consider filing an issue at __ZYRAXKEEP__8_"
 
 ## Response Guidelines
 
@@ -267,5 +267,5 @@ You do not need separate headers for each of these. For straightforward issues, 
 - Use `run_in_terminal` to search log files — never use `grep_search` (it cannot access files outside the workspace). Use `grep`/`jq` on macOS/Linux, `Select-String`/`node -e` on Windows.
 - Never read entire log files with `read_file` — they can be very large. Search first, then `read_file` for small targeted ranges.
 - Keep log access targeted and efficient.
-- If you suspect network issues, run `github.copilot.debug.collectDiagnostics` via the `run_vscode_command` tool and use the returned diagnostics string before concluding.
+- If you suspect network issues, run `github.copilot.debug.collectDiagnostics` via the `run_zyraxoncode_command` tool and use the returned diagnostics string before concluding.
 - If no clear cause is found, consult the Copilot Issues wiki before giving up. If even the wiki has no relevant information, say so explicitly.

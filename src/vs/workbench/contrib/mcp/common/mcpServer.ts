@@ -918,16 +918,16 @@ export class McpServer extends Disposable implements IMcpServer {
 			let docsLink: string | undefined;
 			switch (cnx.launchDefinition.command) {
 				case 'uvx':
-					docsLink = `https://aka.ms/vscode-mcp-install/uvx`;
+					docsLink = `__ZYRAXKEEP__0_`;
 					break;
 				case 'npx':
-					docsLink = `https://aka.ms/vscode-mcp-install/npx`;
+					docsLink = `__ZYRAXKEEP__1_`;
 					break;
 				case 'dnx':
-					docsLink = `https://aka.ms/vscode-mcp-install/dnx`;
+					docsLink = `__ZYRAXKEEP__2_`;
 					break;
 				case 'dotnet':
-					docsLink = `https://aka.ms/vscode-mcp-install/dotnet`;
+					docsLink = `__ZYRAXKEEP__3_`;
 					break;
 			}
 
@@ -939,7 +939,7 @@ export class McpServer extends Disposable implements IMcpServer {
 			if (cnx.definition.devMode?.debug?.type === 'debugpy' && debug) {
 				this._notificationService.prompt(Severity.Error, localize('mcpDebugPyHelp', 'The command "{0}" was not found. You can specify the path to debugpy in the `dev.debug.debugpyPath` option.', cnx.launchDefinition.command, cnx.definition.label), [...options, {
 					label: localize('mcpViewDocs', 'View Docs'),
-					run: () => this._openerService.open(URI.parse('https://aka.ms/vscode-mcp-install/debugpy')),
+					run: () => this._openerService.open(URI.parse('__ZYRAXKEEP__4_')),
 				}]);
 				return;
 			}
@@ -1094,7 +1094,7 @@ export class McpServer extends Disposable implements IMcpServer {
 
 		// Per MCP spec, properties is optional. But JSON Schema Draft 7 requires
 		// it for object types. Normalize the schema to include an empty properties
-		// object if not present. https://github.com/microsoft/vscode/issues/251723
+		// object if not present. __ZYRAXKEEP__5_
 		if (tool.inputSchema && !tool.inputSchema.properties) {
 			tool.inputSchema = { ...tool.inputSchema, properties: {} };
 		}
@@ -1104,7 +1104,7 @@ export class McpServer extends Disposable implements IMcpServer {
 		let diagnostics: JsonDiagnostic[] = [];
 		const toolJson = JSON.stringify(tool.inputSchema);
 		try {
-			const schemaUri = URI.parse('https://json-schema.org/draft-07/schema');
+			const schemaUri = URI.parse('__ZYRAXKEEP__6_');
 			diagnostics = await this._commandService.executeCommand<JsonDiagnostic[]>('json.validate', schemaUri, toolJson) || [];
 		} catch (e) {
 			// ignored (error in json extension?);
@@ -1377,10 +1377,10 @@ export class McpTool implements IMcpTool {
 
 			const meta: Record<string, unknown> = { progressToken };
 			if (context?.chatSessionResource) {
-				meta['vscode.conversationId'] = chatSessionResourceToId(context.chatSessionResource);
+				meta['zyraxoncode.conversationId'] = chatSessionResourceToId(context.chatSessionResource);
 			}
 			if (context?.chatRequestId) {
-				meta['vscode.requestId'] = context.chatRequestId;
+				meta['zyraxoncode.requestId'] = context.chatRequestId;
 			}
 			// Propagate W3C trace context to the MCP server (MCP SEP-414) so server-side
 			// spans can be correlated with the client trace.

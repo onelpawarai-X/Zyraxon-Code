@@ -1,6 +1,6 @@
 {
 	// This TS configuration is used to ensure that all source code in the
-	// layers common, vscode, worker, vscode-worker compile without errors
+	// layers common, zyraxoncode, worker, zyraxoncode-worker compile without errors
 	// when using ES2022 and WebWorker types.
 	//
 	// The intent is to compile against an environment that matches the
@@ -20,9 +20,9 @@
 	},
 	"include": [
 		"src/**/common/**/*.ts",
-		"src/**/vscode/**/*.ts",
+		"src/**/zyraxoncode/**/*.ts",
 		"src/**/worker/**/*.ts",
-		"src/**/vscode-worker/**/*.ts",
+		"src/**/zyraxoncode-worker/**/*.ts",
 		"src/**/*.d.ts"
 	],
 	"exclude": [

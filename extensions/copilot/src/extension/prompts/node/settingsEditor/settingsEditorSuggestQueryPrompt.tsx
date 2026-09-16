@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, SystemMessage, TextChunk, UserMessage } from '@vscode/prompt-tsx';
-import { settingItemToContext, SettingListItem } from '../../../../platform/embeddings/common/vscodeIndex';
+import { BasePromptElementProps, PromptElement, SystemMessage, TextChunk, UserMessage } from '@zyraxoncode/prompt-tsx';
+import { settingItemToContext, SettingListItem } from '../../../../platform/embeddings/common/zyraxoncodeIndex';
 import { InstructionMessage } from '../base/instructionMessage';
 import { Tag } from '../base/tag';
 

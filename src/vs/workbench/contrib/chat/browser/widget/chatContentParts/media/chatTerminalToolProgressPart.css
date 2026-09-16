@@ -65,8 +65,8 @@
 }
 
 .chat-terminal-content-part .chat-terminal-content-title {
-	border: 1px solid var(--vscode-chat-requestBorder);
-	border-radius: var(--vscode-cornerRadius-medium);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 	padding: 0px 9px 0px 5px;
 	max-width: 100%;
 	box-sizing: border-box;
@@ -118,7 +118,7 @@
 }
 
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block > .rendered-markdown code {
-	font-size: var(--vscode-chat-font-size-body-xs);
+	font-size: var(--zyraxoncode-chat-font-size-body-xs);
 }
 
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .chat-terminal-command-decoration,
@@ -135,17 +135,17 @@
 
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .chat-terminal-command-decoration.success,
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .terminal-command-decoration.success {
-	color: var(--vscode-terminalCommandDecoration-successBackground) !important;
+	color: var(--zyraxoncode-terminalCommandDecoration-successBackground) !important;
 }
 
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .chat-terminal-command-decoration.default-color,
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .terminal-command-decoration.default-color {
-	color: var(--vscode-terminalCommandDecoration-defaultBackground) !important;
+	color: var(--zyraxoncode-terminalCommandDecoration-defaultBackground) !important;
 }
 
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .chat-terminal-command-decoration.error,
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .terminal-command-decoration.error {
-	color: var(--vscode-terminalCommandDecoration-errorBackground) !important;
+	color: var(--zyraxoncode-terminalCommandDecoration-errorBackground) !important;
 }
 
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .chat-terminal-command-decoration.default,
@@ -158,7 +158,7 @@
 }
 
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .chat-terminal-command-decoration.chat-terminal-running-spinner {
-	color: var(--vscode-terminalCommandDecoration-defaultBackground);
+	color: var(--zyraxoncode-terminalCommandDecoration-defaultBackground);
 	pointer-events: none;
 	margin-right: 3px;
 	margin-left: 2px;
@@ -170,7 +170,7 @@
 
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .chat-terminal-command-decoration:focus-visible,
 .chat-terminal-content-part .chat-terminal-content-title .chat-terminal-command-block .terminal-command-decoration:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
 }
 
@@ -192,21 +192,21 @@
 		line-height: normal;
 
 		& > p {
-			color: var(--vscode-descriptionForeground);
-			font-size: var(--vscode-chat-font-size-body-s);
+			color: var(--zyraxoncode-descriptionForeground);
+			font-size: var(--zyraxoncode-chat-font-size-body-s);
 			margin: 0 !important;
 
 			code {
-				font-size: var(--vscode-chat-font-size-body-xs);
+				font-size: var(--zyraxoncode-chat-font-size-body-xs);
 			}
 		}
 	}
 }
 
 .chat-terminal-output-container {
-	border: 1px solid var(--vscode-chat-requestBorder);
-	border-bottom-left-radius: var(--vscode-cornerRadius-medium);
-	border-bottom-right-radius: var(--vscode-cornerRadius-medium);
+	border: 1px solid var(--zyraxoncode-chat-requestBorder);
+	border-bottom-left-radius: var(--zyraxoncode-cornerRadius-medium);
+	border-bottom-right-radius: var(--zyraxoncode-cornerRadius-medium);
 	max-height: 300px;
 	box-sizing: border-box;
 	overflow: hidden;
@@ -238,7 +238,7 @@
 	padding-bottom: 5px;
 }
 .chat-terminal-output-container:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
 }
 div.chat-terminal-content-part.progress-step > div.chat-terminal-output-container.expanded > div > div.chat-terminal-output-body > div > div.chat-terminal-output-terminal > div > div.xterm-scrollable-element {
@@ -278,7 +278,7 @@ div.chat-terminal-content-part.progress-step > div.chat-terminal-output-containe
 .chat-terminal-output-empty {
 	display: none;
 	font-style: italic;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	line-height: normal;
 	padding-left: 12px;
 }
@@ -309,19 +309,19 @@ div.chat-terminal-content-part.progress-step > div.chat-terminal-output-containe
 	margin: 0;
 }
 .chat-terminal-output-info {
-	color: var(--vscode-descriptionForeground);
-	font-size: var(--vscode-chat-font-size-body-xs);
+	color: var(--zyraxoncode-descriptionForeground);
+	font-size: var(--zyraxoncode-chat-font-size-body-xs);
 }
 
 .chat-used-context-label .chat-terminal-show-link {
-	color: var(--vscode-textLink-foreground);
+	color: var(--zyraxoncode-textLink-foreground);
 	cursor: pointer;
 	text-decoration: none;
 }
 
 .chat-used-context-label .chat-terminal-show-link:hover {
 	text-decoration: underline;
-	color: var(--vscode-textLink-activeForeground);
+	color: var(--zyraxoncode-textLink-activeForeground);
 }
 
 .chat-terminal-show-link-container {

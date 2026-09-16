@@ -9,7 +9,7 @@
 }
 .workbench-hover-container:focus-within.locked:has(.chat-context-usage-details) .monaco-hover.workbench-hover {
 	outline: none;
-	border-color: var(--vscode-focusBorder);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .chat-context-usage-details {
@@ -28,7 +28,7 @@
 .chat-context-usage-details div.header {
 	display: flex;
 	align-items: center;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 4px;
 	font-weight: 600;
 }
@@ -46,7 +46,7 @@
 }
 
 .chat-context-usage-details .session-cost-label {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .chat-context-usage-details .session-cost-value {
@@ -62,22 +62,22 @@
 }
 
 .chat-context-usage-details .quota-indicator .quota-label .quota-value {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .chat-context-usage-details .quota-indicator .quota-bar {
 	width: 100%;
 	height: 4px;
-	background-color: var(--vscode-editorWidget-border);
+	background-color: var(--zyraxoncode-editorWidget-border);
 	border-radius: 4px;
-	border: 1px solid var(--vscode-editorWidget-border);
+	border: 1px solid var(--zyraxoncode-editorWidget-border);
 	margin: 4px 0;
 	display: flex;
 }
 
 .chat-context-usage-details .quota-indicator .quota-bar .quota-bit {
 	height: 100%;
-	background-color: var(--vscode-focusBorder);
+	background-color: var(--zyraxoncode-focusBorder);
 	border-radius: 4px;
 	transition: width 0.3s ease;
 }
@@ -85,8 +85,8 @@
 .chat-context-usage-details .quota-indicator .quota-bar .quota-bit.output-buffer {
 	background: repeating-linear-gradient(
 		-45deg,
-		var(--vscode-focusBorder),
-		var(--vscode-focusBorder) 2px,
+		var(--zyraxoncode-focusBorder),
+		var(--zyraxoncode-focusBorder) 2px,
 		transparent 2px,
 		transparent 4px
 	);
@@ -104,7 +104,7 @@
 	gap: 6px;
 	margin-top: 4px;
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .chat-context-usage-details .quota-indicator .output-buffer-legend .output-buffer-swatch {
@@ -113,8 +113,8 @@
 	border-radius: 2px;
 	background: repeating-linear-gradient(
 		-45deg,
-		var(--vscode-focusBorder),
-		var(--vscode-focusBorder) 2px,
+		var(--zyraxoncode-focusBorder),
+		var(--zyraxoncode-focusBorder) 2px,
 		transparent 2px,
 		transparent 4px
 	);
@@ -124,26 +124,26 @@
 .chat-context-usage-details .quota-indicator.warning .output-buffer-swatch {
 	background: repeating-linear-gradient(
 		-45deg,
-		var(--vscode-editorWarning-foreground),
-		var(--vscode-editorWarning-foreground) 2px,
+		var(--zyraxoncode-editorWarning-foreground),
+		var(--zyraxoncode-editorWarning-foreground) 2px,
 		transparent 2px,
 		transparent 4px
 	);
 }
 
 .chat-context-usage-details .quota-indicator.warning .quota-bar {
-	background-color: var(--vscode-editorWidget-border);
+	background-color: var(--zyraxoncode-editorWidget-border);
 }
 
 .chat-context-usage-details .quota-indicator.warning .quota-bar .quota-bit {
-	background-color: var(--vscode-editorWarning-foreground);
+	background-color: var(--zyraxoncode-editorWarning-foreground);
 }
 
 .chat-context-usage-details .quota-indicator.warning .quota-bar .quota-bit.output-buffer {
 	background: repeating-linear-gradient(
 		-45deg,
-		var(--vscode-editorWarning-foreground),
-		var(--vscode-editorWarning-foreground) 2px,
+		var(--zyraxoncode-editorWarning-foreground),
+		var(--zyraxoncode-editorWarning-foreground) 2px,
 		transparent 2px,
 		transparent 4px
 	);
@@ -152,26 +152,26 @@
 .chat-context-usage-details .quota-indicator.error .output-buffer-swatch {
 	background: repeating-linear-gradient(
 		-45deg,
-		var(--vscode-editorError-foreground),
-		var(--vscode-editorError-foreground) 2px,
+		var(--zyraxoncode-editorError-foreground),
+		var(--zyraxoncode-editorError-foreground) 2px,
 		transparent 2px,
 		transparent 4px
 	);
 }
 
 .chat-context-usage-details .quota-indicator.error .quota-bar {
-	background-color: var(--vscode-editorWidget-border);
+	background-color: var(--zyraxoncode-editorWidget-border);
 }
 
 .chat-context-usage-details .quota-indicator.error .quota-bar .quota-bit {
-	background-color: var(--vscode-editorError-foreground);
+	background-color: var(--zyraxoncode-editorError-foreground);
 }
 
 .chat-context-usage-details .quota-indicator.error .quota-bar .quota-bit.output-buffer {
 	background: repeating-linear-gradient(
 		-45deg,
-		var(--vscode-editorError-foreground),
-		var(--vscode-editorError-foreground) 2px,
+		var(--zyraxoncode-editorError-foreground),
+		var(--zyraxoncode-editorError-foreground) 2px,
 		transparent 2px,
 		transparent 4px
 	);
@@ -180,7 +180,7 @@
 /* Description / warning text — matching ChatStatusDashboard */
 .chat-context-usage-details div.description {
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	display: flex;
 	align-items: center;
 	gap: 3px;
@@ -194,7 +194,7 @@
 .chat-context-usage-details .token-category-header {
 	display: flex;
 	align-items: center;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-top: 16px;
 	margin-bottom: 4px;
 	font-weight: 600;
@@ -213,11 +213,11 @@
 }
 
 .chat-context-usage-details .token-detail-label {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .chat-context-usage-details .token-detail-value {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 /* Actions section */

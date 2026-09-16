@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import * as extHostProtocol from './extHost.protocol.js';
 import { ExtensionIdentifier, IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 
@@ -11,7 +11,7 @@ export class ExtHostChatStatus {
 
 	private readonly _proxy: extHostProtocol.MainThreadChatStatusShape;
 
-	private readonly _items = new Map<string, vscode.ChatStatusItem>();
+	private readonly _items = new Map<string, zyraxoncode.ChatStatusItem>();
 
 	constructor(
 		mainContext: extHostProtocol.IMainContext
@@ -19,7 +19,7 @@ export class ExtHostChatStatus {
 		this._proxy = mainContext.getProxy(extHostProtocol.MainContext.MainThreadChatStatus);
 	}
 
-	createChatStatusItem(extension: IExtensionDescription, id: string): vscode.ChatStatusItem {
+	createChatStatusItem(extension: IExtensionDescription, id: string): zyraxoncode.ChatStatusItem {
 		const internalId = asChatItemIdentifier(extension.identifier, id);
 		if (this._items.has(internalId)) {
 			throw new Error(`Chat status item '${id}' already exists`);
@@ -47,7 +47,7 @@ export class ExtHostChatStatus {
 			this._proxy.$setEntry(id, state);
 		};
 
-		const item = Object.freeze<vscode.ChatStatusItem>({
+		const item = Object.freeze<zyraxoncode.ChatStatusItem>({
 			id: id,
 
 			get title(): string | { label: string; link: string; helpText?: string } {

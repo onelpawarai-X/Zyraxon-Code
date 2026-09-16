@@ -635,7 +635,7 @@ export class ChatWidget extends Disposable implements IChatWidget {
 
 		this._register(this.codeEditorService.registerCodeEditorOpenHandler(async (input: ITextResourceEditorInput, _source: ICodeEditor | null, _sideBySide?: boolean): Promise<ICodeEditor | null> => {
 			const resource = input.resource;
-			if (resource.scheme !== Schemas.vscodeChatCodeBlock) {
+			if (resource.scheme !== Schemas.zyraxoncodeChatCodeBlock) {
 				return null;
 			}
 
@@ -897,7 +897,7 @@ export class ChatWidget extends Disposable implements IChatWidget {
 			const fontFamily = this.chatLayoutService.fontFamily.read(reader);
 			const fontSize = this.chatLayoutService.fontSize.read(reader);
 
-			this.container.style.setProperty('--vscode-chat-font-family', fontFamily);
+			this.container.style.setProperty('--zyraxoncode-chat-font-family', fontFamily);
 			this.container.style.fontSize = `${fontSize}px`;
 
 			if (this.visible) {
@@ -1380,7 +1380,7 @@ export class ChatWidget extends Disposable implements IChatWidget {
 			const message = providerMessage
 				? new MarkdownString(providerMessage)
 				: (this._lockedAgent?.prefix === '@copilot '
-					? new MarkdownString(localize('copilotCodingAgentMessage', "This chat session will be forwarded to the {0} [coding agent]({1}) where work is completed in the background. ", this._lockedAgent.prefix, 'https://aka.ms/coding-agent-docs') + DISCLAIMER, { isTrusted: true })
+					? new MarkdownString(localize('copilotCodingAgentMessage', "This chat session will be forwarded to the {0} [coding agent]({1}) where work is completed in the background. ", this._lockedAgent.prefix, '__ZYRAXKEEP__0_') + DISCLAIMER, { isTrusted: true })
 					: new MarkdownString(localize('genericCodingAgentMessage', "This chat session will be forwarded to the {0} coding agent where work is completed in the background. ", this._lockedAgent?.prefix) + DISCLAIMER));
 
 			return {
@@ -2272,9 +2272,9 @@ export class ChatWidget extends Disposable implements IChatWidget {
 	}
 
 	private onDidStyleChange(): void {
-		this.container.style.setProperty('--vscode-interactive-result-editor-background-color', this.editorOptions.configuration.resultEditor.backgroundColor?.toString() ?? '');
-		this.container.style.setProperty('--vscode-interactive-session-foreground', this.editorOptions.configuration.foreground?.toString() ?? '');
-		this.container.style.setProperty('--vscode-chat-list-background', this.themeService.getColorTheme().getColor(this.styles.listBackground)?.toString() ?? '');
+		this.container.style.setProperty('--zyraxoncode-interactive-result-editor-background-color', this.editorOptions.configuration.resultEditor.backgroundColor?.toString() ?? '');
+		this.container.style.setProperty('--zyraxoncode-interactive-session-foreground', this.editorOptions.configuration.foreground?.toString() ?? '');
+		this.container.style.setProperty('--zyraxoncode-chat-list-background', this.themeService.getColorTheme().getColor(this.styles.listBackground)?.toString() ?? '');
 	}
 
 	/**
@@ -2385,7 +2385,7 @@ export class ChatWidget extends Disposable implements IChatWidget {
 
 		this.viewModelDisposables.add(Event.runAndSubscribe(Event.accumulate(this.viewModel.onDidChange), (events => {
 			if (!this.viewModel || this._store.isDisposed) {
-				// See https://github.com/microsoft/vscode/issues/278969
+				// See __ZYRAXKEEP__1_
 				return;
 			}
 

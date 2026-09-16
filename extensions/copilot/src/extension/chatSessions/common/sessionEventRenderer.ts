@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionEvent, ToolExecutionCompleteEvent, ToolExecutionStartEvent } from '@github/copilot/sdk';
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import { ILogger } from '../../../platform/log/common/logService';
 import { URI } from '../../../util/vs/base/common/uri';
-import { ChatResponseCodeblockUriPart, ChatResponseMarkdownPart, ChatResponsePullRequestPart, ChatResponseTextEditPart, ChatResponseThinkingProgressPart, ChatToolInvocationPart, MarkdownString } from '../../../vscodeTypes';
-import type { ExtendedChatResponsePart } from 'vscode';
+import { ChatResponseCodeblockUriPart, ChatResponseMarkdownPart, ChatResponsePullRequestPart, ChatResponseTextEditPart, ChatResponseThinkingProgressPart, ChatToolInvocationPart, MarkdownString } from '../../../zyraxoncodeTypes';
+import type { ExtendedChatResponsePart } from 'zyraxoncode';
 
 /**
  * A tool invocation entry tracked between `tool.execution_start` and

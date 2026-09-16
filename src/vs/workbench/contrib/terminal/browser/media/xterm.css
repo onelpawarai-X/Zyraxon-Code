@@ -5,7 +5,7 @@
 /**
  * Copyright (c) 2014 The xterm.js authors. All rights reserved.
  * Copyright (c) 2012-2013, Christopher Jeffrey (MIT License)
- * https://github.com/chjj/term.js
+ * __ZYRAXKEEP__0_
  * @license MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,7 +28,7 @@
  *
  * Originally forked from (with the author's permission):
  *   Fabrice Bellard's javascript vt100 for jslinux:
- *   http://bellard.org/jslinux/
+ *   __ZYRAXKEEP__1_
  *   Copyright (c) 2011 Fabrice Bellard
  *   The original design remains. The terminal itself
  *   has been extended to include xterm CSI codes, among
@@ -294,7 +294,7 @@
 	left: 3px;
 	height: 3px;
 	width: 100%;
-	box-shadow: var(--vscode-scrollbar-shadow, #000) 0 6px 6px -6px inset;
+	box-shadow: var(--zyraxoncode-scrollbar-shadow, #000) 0 6px 6px -6px inset;
 }
 
 .xterm .xterm-scrollable-element > .xterm-shadow.xterm-shadow-left {
@@ -303,7 +303,7 @@
 	left: 0;
 	height: 100%;
 	width: 3px;
-	box-shadow: var(--vscode-scrollbar-shadow, #000) 6px 0 6px -6px inset;
+	box-shadow: var(--zyraxoncode-scrollbar-shadow, #000) 6px 0 6px -6px inset;
 }
 
 .xterm .xterm-scrollable-element > .xterm-shadow.xterm-shadow-top-left-corner {
@@ -315,5 +315,5 @@
 }
 
 .xterm .xterm-scrollable-element > .xterm-shadow.xterm-shadow-top.xterm-shadow-left {
-	box-shadow: var(--vscode-scrollbar-shadow, #000) 6px 0 6px -6px inset;
+	box-shadow: var(--zyraxoncode-scrollbar-shadow, #000) 6px 0 6px -6px inset;
 }

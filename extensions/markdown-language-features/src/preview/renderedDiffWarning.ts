@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Disposable } from '../util/dispose';
 
 const suppressedStorageKey = 'markdown.preview.renderedDiffWarning.suppressed';
@@ -11,19 +11,19 @@ const notificationShownStorageKey = 'markdown.preview.renderedDiffWarning.notifi
 
 export class RenderedDiffWarningManager extends Disposable {
 
-	readonly #workspaceState: vscode.Memento;
+	readonly #workspaceState: zyraxoncode.Memento;
 
-	#statusBarItem: vscode.StatusBarItem | undefined;
+	#statusBarItem: zyraxoncode.StatusBarItem | undefined;
 	#hasActiveDiffPreview = false;
 
 	readonly #showWarningCommandId = '_markdown.preview.showRenderedDiffWarning';
 
-	constructor(workspaceState: vscode.Memento) {
+	constructor(workspaceState: zyraxoncode.Memento) {
 		super();
 
 		this.#workspaceState = workspaceState;
 
-		this._register(vscode.commands.registerCommand(this.#showWarningCommandId, () => {
+		this._register(zyraxoncode.commands.registerCommand(this.#showWarningCommandId, () => {
 			void this.#showWarningNotification();
 		}));
 	}
@@ -62,20 +62,20 @@ export class RenderedDiffWarningManager extends Disposable {
 		}
 
 		if (!this.#statusBarItem) {
-			this.#statusBarItem = vscode.window.createStatusBarItem('markdown.renderedDiffWarning', vscode.StatusBarAlignment.Right, 100);
-			this.#statusBarItem.name = vscode.l10n.t('Rendered Markdown Diff Warning');
-			this.#statusBarItem.text = vscode.l10n.t('{0} Rendered Diff', '$(warning)');
-			this.#statusBarItem.tooltip = vscode.l10n.t('Rendered Markdown diffs may hide important changes. Click for details.');
-			this.#statusBarItem.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
+			this.#statusBarItem = zyraxoncode.window.createStatusBarItem('markdown.renderedDiffWarning', zyraxoncode.StatusBarAlignment.Right, 100);
+			this.#statusBarItem.name = zyraxoncode.l10n.t('Rendered Markdown Diff Warning');
+			this.#statusBarItem.text = zyraxoncode.l10n.t('{0} Rendered Diff', '$(warning)');
+			this.#statusBarItem.tooltip = zyraxoncode.l10n.t('Rendered Markdown diffs may hide important changes. Click for details.');
+			this.#statusBarItem.backgroundColor = new zyraxoncode.ThemeColor('statusBarItem.warningBackground');
 			this.#statusBarItem.command = this.#showWarningCommandId;
 		}
 		this.#statusBarItem.show();
 	}
 
 	async #showWarningNotification(): Promise<void> {
-		const dontShowAgain = vscode.l10n.t("Don't Show Again");
-		const selected = await vscode.window.showWarningMessage(
-			vscode.l10n.t('Rendered Markdown diffs may hide important changes such as formatting, whitespace, links, or HTML. Switch to the text diff if you need to review them.'),
+		const dontShowAgain = zyraxoncode.l10n.t("Don't Show Again");
+		const selected = await zyraxoncode.window.showWarningMessage(
+			zyraxoncode.l10n.t('Rendered Markdown diffs may hide important changes such as formatting, whitespace, links, or HTML. Switch to the text diff if you need to review them.'),
 			dontShowAgain,
 		);
 		if (selected === dontShowAgain) {

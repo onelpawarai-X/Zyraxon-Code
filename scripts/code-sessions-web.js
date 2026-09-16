@@ -34,7 +34,7 @@ async function main() {
 	const HOST = args['host'] ?? 'localhost';
 	const PORT = parseInt(args['port'] ?? '8081', 10);
 
-	// Collect CSS module paths from the compiled output (same as @vscode/test-web does).
+	// Collect CSS module paths from the compiled output (same as @zyraxoncode/test-web does).
 	// These are turned into an import map so the browser can load `import './foo.css'`
 	// statements as JavaScript shims that inject the CSS via `_VSCODE_CSS_LOAD`.
 	let cssModules = [];
@@ -47,7 +47,7 @@ async function main() {
 	}
 
 	const server = http.createServer((req, res) => {
-		const url = new URL(req.url, `http://${HOST}:${PORT}`);
+		const url = new URL(req.url, `__ZYRAXKEEP__0_{HOST}:${PORT}`);
 
 		// Serve the sessions workbench HTML at the root
 		if (url.pathname === '/' || url.pathname === '/index.html') {
@@ -86,10 +86,10 @@ async function main() {
 	});
 
 	server.listen(PORT, HOST, () => {
-		console.log(`\n  Sessions Web running at: http://${HOST}:${PORT}/\n`);
+		console.log(`\n  Sessions Web running at: __ZYRAXKEEP__1_{HOST}:${PORT}/\n`);
 		if (!args['no-open'] && args.open !== false) {
 			const query = args['skip-welcome'] ? '?skip-sessions-welcome' : '';
-			open.default(`http://${HOST}:${PORT}/${query}`);
+			open.default(`__ZYRAXKEEP__2_{HOST}:${PORT}/${query}`);
 		}
 	});
 
@@ -98,7 +98,7 @@ async function main() {
 }
 
 function getSessionsHTML(host, port, cssModules, useMock) {
-	const baseUrl = `http://${host}:${port}`;
+	const baseUrl = `__ZYRAXKEEP__3_{host}:${port}`;
 	const fileRoot = `${baseUrl}/out`;
 
 	// Build the import map server-side. Each CSS file gets mapped to a
@@ -125,10 +125,10 @@ function getSessionsHTML(host, port, cssModules, useMock) {
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Sessions</title>
-	<style id="vscode-css-modules"></style>
+	<style id="zyraxoncode-css-modules"></style>
 	<script>
 		globalThis._VSCODE_FILE_ROOT = '${fileRoot}';
-		const sheet = document.getElementById('vscode-css-modules').sheet;
+		const sheet = document.getElementById('zyraxoncode-css-modules').sheet;
 		globalThis._VSCODE_CSS_LOAD = function (url) { sheet.insertRule(\`@import url(\${url});\`); };
 	</script>
 	<script type="importmap">
@@ -147,7 +147,7 @@ ${importMapJson}
 			${additionalBuiltinExtensions}
 			workspaceProvider: {
 				workspace: ${useMock
-			? `{ folderUri: URI.parse('mock-fs://mock-repo/mock-repo') }`
+			? `{ folderUri: URI.parse('__ZYRAXKEEP__4_') }`
 			: 'undefined'},
 				open: async () => false,
 				payload: [['isSessionsWindow', 'true']],

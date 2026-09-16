@@ -5,7 +5,7 @@
 
 import { readFileSync } from 'fs';
 import { afterAll, beforeAll, expect, suite, test } from 'vitest';
-import type { ChatResponseStream, TextEdit } from 'vscode';
+import type { ChatResponseStream, TextEdit } from 'zyraxoncode';
 import { ITestingServicesAccessor } from '../../../../platform/test/node/services';
 import { applyEdits } from '../../../../platform/test/node/simulationWorkspace';
 import { TestWorkspaceService } from '../../../../platform/test/node/testWorkspaceService';
@@ -15,7 +15,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { ResourceMap } from '../../../../util/vs/base/common/map';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../util/vs/platform/instantiation/common/descriptors';
-import { ChatResponseTextEditPart, Range } from '../../../../vscodeTypes';
+import { ChatResponseTextEditPart, Range } from '../../../../zyraxoncodeTypes';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { ToolName } from '../../common/toolNames';
 import { CopilotToolMode } from '../../common/toolsRegistry';
@@ -110,7 +110,7 @@ suite('MultiReplaceString', () => {
 		const r = await invoke(input);
 		expect(await applyEditsInMap(r.edits)).toMatchInlineSnapshot(`
 			{
-			  "file:///workspace/file.ts": "line 1
+			  "__ZYRAXKEEP__0_": "line 1
 			new line 2
 
 			line 4

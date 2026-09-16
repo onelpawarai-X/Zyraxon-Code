@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { Event, Emitter } from '../../../base/common/event.js';
 import { ExtHostTerminalServiceShape, MainContext, MainThreadTerminalServiceShape, ITerminalDimensionsDto, ITerminalLinkDto, ExtHostTerminalIdentifier, ICommandDto, ITerminalQuickFixOpenerDto, ITerminalQuickFixTerminalCommandDto, TerminalCommandMatchResultDto, ITerminalCommandDto, ITerminalCompletionContextDto, TerminalCompletionListDto } from './extHost.protocol.js';
 import { createDecorator } from '../../../platform/instantiation/common/instantiation.js';
 import { URI } from '../../../base/common/uri.js';
 import { IExtHostRpcService } from './extHostRpcService.js';
 import { IDisposable, DisposableStore, Disposable, MutableDisposable } from '../../../base/common/lifecycle.js';
-import { Disposable as VSCodeDisposable, EnvironmentVariableMutatorType, TerminalExitReason, TerminalCompletionItem } from './extHostTypes.js';
+import { Disposable as ZyraxonCodeDisposable, EnvironmentVariableMutatorType, TerminalExitReason, TerminalCompletionItem } from './extHostTypes.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { localize } from '../../../nls.js';
 import { NotSupportedError } from '../../../base/common/errors.js';
@@ -36,35 +36,35 @@ export interface IExtHostTerminalService extends ExtHostTerminalServiceShape, ID
 
 	readonly _serviceBrand: undefined;
 
-	activeTerminal: vscode.Terminal | undefined;
-	terminals: vscode.Terminal[];
+	activeTerminal: zyraxoncode.Terminal | undefined;
+	terminals: zyraxoncode.Terminal[];
 
-	readonly onDidCloseTerminal: Event<vscode.Terminal>;
-	readonly onDidOpenTerminal: Event<vscode.Terminal>;
-	readonly onDidChangeActiveTerminal: Event<vscode.Terminal | undefined>;
-	readonly onDidChangeTerminalDimensions: Event<vscode.TerminalDimensionsChangeEvent>;
-	readonly onDidChangeTerminalState: Event<vscode.Terminal>;
-	readonly onDidWriteTerminalData: Event<vscode.TerminalDataWriteEvent>;
-	readonly onDidExecuteTerminalCommand: Event<vscode.TerminalExecutedCommand>;
+	readonly onDidCloseTerminal: Event<zyraxoncode.Terminal>;
+	readonly onDidOpenTerminal: Event<zyraxoncode.Terminal>;
+	readonly onDidChangeActiveTerminal: Event<zyraxoncode.Terminal | undefined>;
+	readonly onDidChangeTerminalDimensions: Event<zyraxoncode.TerminalDimensionsChangeEvent>;
+	readonly onDidChangeTerminalState: Event<zyraxoncode.Terminal>;
+	readonly onDidWriteTerminalData: Event<zyraxoncode.TerminalDataWriteEvent>;
+	readonly onDidExecuteTerminalCommand: Event<zyraxoncode.TerminalExecutedCommand>;
 	readonly onDidChangeShell: Event<string>;
 
-	createTerminal(name?: string, shellPath?: string, shellArgs?: readonly string[] | string): vscode.Terminal;
-	createTerminalFromOptions(options: vscode.TerminalOptions, internalOptions?: ITerminalInternalOptions): vscode.Terminal;
-	createExtensionTerminal(options: vscode.ExtensionTerminalOptions): vscode.Terminal;
-	attachPtyToTerminal(id: number, pty: vscode.Pseudoterminal): void;
+	createTerminal(name?: string, shellPath?: string, shellArgs?: readonly string[] | string): zyraxoncode.Terminal;
+	createTerminalFromOptions(options: zyraxoncode.TerminalOptions, internalOptions?: ITerminalInternalOptions): zyraxoncode.Terminal;
+	createExtensionTerminal(options: zyraxoncode.ExtensionTerminalOptions): zyraxoncode.Terminal;
+	attachPtyToTerminal(id: number, pty: zyraxoncode.Pseudoterminal): void;
 	getDefaultShell(useAutomationShell: boolean): string;
 	getDefaultShellArgs(useAutomationShell: boolean): string[] | string;
-	registerLinkProvider(provider: vscode.TerminalLinkProvider): vscode.Disposable;
-	registerProfileProvider(extension: IExtensionDescription, id: string, provider: vscode.TerminalProfileProvider): vscode.Disposable;
-	registerTerminalQuickFixProvider(id: string, extensionId: string, provider: vscode.TerminalQuickFixProvider): vscode.Disposable;
+	registerLinkProvider(provider: zyraxoncode.TerminalLinkProvider): zyraxoncode.Disposable;
+	registerProfileProvider(extension: IExtensionDescription, id: string, provider: zyraxoncode.TerminalProfileProvider): zyraxoncode.Disposable;
+	registerTerminalQuickFixProvider(id: string, extensionId: string, provider: zyraxoncode.TerminalQuickFixProvider): zyraxoncode.Disposable;
 	getEnvironmentVariableCollection(extension: IExtensionDescription): IEnvironmentVariableCollection;
 	getTerminalById(id: number): ExtHostTerminal | null;
-	getTerminalIdByApiObject(apiTerminal: vscode.Terminal): number | null;
-	registerTerminalCompletionProvider(extension: IExtensionDescription, provider: vscode.TerminalCompletionProvider<vscode.TerminalCompletionItem>, ...triggerCharacters: string[]): vscode.Disposable;
+	getTerminalIdByApiObject(apiTerminal: zyraxoncode.Terminal): number | null;
+	registerTerminalCompletionProvider(extension: IExtensionDescription, provider: zyraxoncode.TerminalCompletionProvider<zyraxoncode.TerminalCompletionItem>, ...triggerCharacters: string[]): zyraxoncode.Disposable;
 }
 
-interface IEnvironmentVariableCollection extends vscode.EnvironmentVariableCollection {
-	getScoped(scope: vscode.EnvironmentVariableScope): vscode.EnvironmentVariableCollection;
+interface IEnvironmentVariableCollection extends zyraxoncode.EnvironmentVariableCollection {
+	getScoped(scope: zyraxoncode.EnvironmentVariableScope): zyraxoncode.EnvironmentVariableCollection;
 }
 
 export interface ITerminalInternalOptions {
@@ -88,15 +88,15 @@ export class ExtHostTerminal extends Disposable {
 	private _cols: number | undefined;
 	private _pidPromiseComplete: ((value: number | undefined) => unknown) | undefined;
 	private _rows: number | undefined;
-	private _exitStatus: vscode.TerminalExitStatus | undefined;
-	private _state: vscode.TerminalState = { isInteractedWith: false, shell: undefined };
+	private _exitStatus: zyraxoncode.TerminalExitStatus | undefined;
+	private _state: zyraxoncode.TerminalState = { isInteractedWith: false, shell: undefined };
 	private _selection: string | undefined;
 
-	shellIntegration: vscode.TerminalShellIntegration | undefined;
+	shellIntegration: zyraxoncode.TerminalShellIntegration | undefined;
 
 	public isOpen: boolean = false;
 
-	readonly value: vscode.Terminal;
+	readonly value: zyraxoncode.Terminal;
 
 	protected readonly _onWillDispose = this._register(new Emitter<void>());
 	readonly onWillDispose = this._onWillDispose.event;
@@ -104,7 +104,7 @@ export class ExtHostTerminal extends Disposable {
 	constructor(
 		private _proxy: MainThreadTerminalServiceShape,
 		public _id: ExtHostTerminalIdentifier,
-		private readonly _creationOptions: vscode.TerminalOptions | vscode.ExtensionTerminalOptions,
+		private readonly _creationOptions: zyraxoncode.TerminalOptions | zyraxoncode.ExtensionTerminalOptions,
 		private _name?: string,
 	) {
 		super();
@@ -120,19 +120,19 @@ export class ExtHostTerminal extends Disposable {
 			get processId(): Promise<number | undefined> {
 				return that._pidPromise;
 			},
-			get creationOptions(): Readonly<vscode.TerminalOptions | vscode.ExtensionTerminalOptions> {
+			get creationOptions(): Readonly<zyraxoncode.TerminalOptions | zyraxoncode.ExtensionTerminalOptions> {
 				return that._creationOptions;
 			},
-			get exitStatus(): vscode.TerminalExitStatus | undefined {
+			get exitStatus(): zyraxoncode.TerminalExitStatus | undefined {
 				return that._exitStatus;
 			},
-			get state(): vscode.TerminalState {
+			get state(): zyraxoncode.TerminalState {
 				return that._state;
 			},
 			get selection(): string | undefined {
 				return that._selection;
 			},
-			get shellIntegration(): vscode.TerminalShellIntegration | undefined {
+			get shellIntegration(): zyraxoncode.TerminalShellIntegration | undefined {
 				return that.shellIntegration;
 			},
 			sendText(text: string, shouldExecute: boolean = true): void {
@@ -153,7 +153,7 @@ export class ExtHostTerminal extends Disposable {
 					that._proxy.$dispose(that._id);
 				}
 			},
-			get dimensions(): vscode.TerminalDimensions | undefined {
+			get dimensions(): zyraxoncode.TerminalDimensions | undefined {
 				if (that._cols === undefined || that._rows === undefined) {
 					return undefined;
 				}
@@ -171,7 +171,7 @@ export class ExtHostTerminal extends Disposable {
 	}
 
 	public async create(
-		options: vscode.TerminalOptions,
+		options: zyraxoncode.TerminalOptions,
 		internalOptions?: ITerminalInternalOptions,
 	): Promise<void> {
 		if (typeof this._id !== 'string') {
@@ -200,7 +200,7 @@ export class ExtHostTerminal extends Disposable {
 	}
 
 
-	public async createExtensionTerminal(location?: TerminalLocation | vscode.TerminalEditorLocationOptions | vscode.TerminalSplitLocationOptions, internalOptions?: ITerminalInternalOptions, parentTerminal?: ExtHostTerminalIdentifier, iconPath?: TerminalIcon, color?: ThemeColor, shellIntegrationNonce?: string, titleTemplate?: string): Promise<number> {
+	public async createExtensionTerminal(location?: TerminalLocation | zyraxoncode.TerminalEditorLocationOptions | zyraxoncode.TerminalSplitLocationOptions, internalOptions?: ITerminalInternalOptions, parentTerminal?: ExtHostTerminalIdentifier, iconPath?: TerminalIcon, color?: ThemeColor, shellIntegrationNonce?: string, titleTemplate?: string): Promise<number> {
 		if (typeof this._id !== 'string') {
 			throw new Error('Terminal has already been created');
 		}
@@ -221,7 +221,7 @@ export class ExtHostTerminal extends Disposable {
 		return this._id;
 	}
 
-	private _serializeParentTerminal(location?: TerminalLocation | vscode.TerminalEditorLocationOptions | vscode.TerminalSplitLocationOptions, parentTerminal?: ExtHostTerminalIdentifier): TerminalLocation | { viewColumn: EditorGroupColumn; preserveFocus?: boolean } | { parentTerminal: ExtHostTerminalIdentifier } | undefined {
+	private _serializeParentTerminal(location?: TerminalLocation | zyraxoncode.TerminalEditorLocationOptions | zyraxoncode.TerminalSplitLocationOptions, parentTerminal?: ExtHostTerminalIdentifier): TerminalLocation | { viewColumn: EditorGroupColumn; preserveFocus?: boolean } | { parentTerminal: ExtHostTerminalIdentifier } | undefined {
 		if (typeof location === 'object') {
 			if (hasKey(location, { parentTerminal: true }) && location.parentTerminal && parentTerminal) {
 				return { parentTerminal };
@@ -320,7 +320,7 @@ class ExtHostPseudoterminal implements ITerminalChildProcess {
 	private readonly _onProcessExit = new Emitter<number | undefined>();
 	public readonly onProcessExit: Event<number | undefined> = this._onProcessExit.event;
 
-	constructor(private readonly _pty: vscode.Pseudoterminal) { }
+	constructor(private readonly _pty: zyraxoncode.Pseudoterminal) { }
 
 	refreshProperty<T extends ProcessPropertyType>(property: ProcessPropertyType): Promise<IProcessPropertyMap[T]> {
 		throw new Error(`refreshProperty is not suppported in extension owned terminals. property: ${property}`);
@@ -404,8 +404,8 @@ class ExtHostPseudoterminal implements ITerminalChildProcess {
 let nextLinkId = 1;
 
 interface ICachedLinkEntry {
-	provider: vscode.TerminalLinkProvider;
-	link: vscode.TerminalLink;
+	provider: zyraxoncode.TerminalLinkProvider;
+	link: zyraxoncode.TerminalLink;
 }
 
 export abstract class BaseExtHostTerminalService extends Disposable implements IExtHostTerminalService, ExtHostTerminalServiceShape {
@@ -425,35 +425,35 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 	private readonly _lastQuickFixCommands: MutableDisposable<IDisposable> = this._register(new MutableDisposable());
 
 	private readonly _bufferer: TerminalDataBufferer;
-	private readonly _linkProviders: Set<vscode.TerminalLinkProvider> = new Set();
-	private readonly _completionProviders: Map<string, vscode.TerminalCompletionProvider<vscode.TerminalCompletionItem>> = new Map();
-	private readonly _profileProviders: Map<string, { provider: vscode.TerminalProfileProvider; extension: IExtensionDescription }> = new Map();
-	private readonly _quickFixProviders: Map<string, vscode.TerminalQuickFixProvider> = new Map();
+	private readonly _linkProviders: Set<zyraxoncode.TerminalLinkProvider> = new Set();
+	private readonly _completionProviders: Map<string, zyraxoncode.TerminalCompletionProvider<zyraxoncode.TerminalCompletionItem>> = new Map();
+	private readonly _profileProviders: Map<string, { provider: zyraxoncode.TerminalProfileProvider; extension: IExtensionDescription }> = new Map();
+	private readonly _quickFixProviders: Map<string, zyraxoncode.TerminalQuickFixProvider> = new Map();
 	private readonly _terminalLinkCache: Map<number, Map<number, ICachedLinkEntry>> = new Map();
 	private readonly _terminalLinkCancellationSource: Map<number, CancellationTokenSource> = new Map();
 
-	public get activeTerminal(): vscode.Terminal | undefined { return this._activeTerminal?.value; }
-	public get terminals(): vscode.Terminal[] { return this._terminals.map(term => term.value); }
+	public get activeTerminal(): zyraxoncode.Terminal | undefined { return this._activeTerminal?.value; }
+	public get terminals(): zyraxoncode.Terminal[] { return this._terminals.map(term => term.value); }
 
-	protected readonly _onDidCloseTerminal = new Emitter<vscode.Terminal>();
+	protected readonly _onDidCloseTerminal = new Emitter<zyraxoncode.Terminal>();
 	readonly onDidCloseTerminal = this._onDidCloseTerminal.event;
-	protected readonly _onDidOpenTerminal = new Emitter<vscode.Terminal>();
+	protected readonly _onDidOpenTerminal = new Emitter<zyraxoncode.Terminal>();
 	readonly onDidOpenTerminal = this._onDidOpenTerminal.event;
-	protected readonly _onDidChangeActiveTerminal = new Emitter<vscode.Terminal | undefined>();
+	protected readonly _onDidChangeActiveTerminal = new Emitter<zyraxoncode.Terminal | undefined>();
 	readonly onDidChangeActiveTerminal = this._onDidChangeActiveTerminal.event;
-	protected readonly _onDidChangeTerminalDimensions = new Emitter<vscode.TerminalDimensionsChangeEvent>();
+	protected readonly _onDidChangeTerminalDimensions = new Emitter<zyraxoncode.TerminalDimensionsChangeEvent>();
 	readonly onDidChangeTerminalDimensions = this._onDidChangeTerminalDimensions.event;
-	protected readonly _onDidChangeTerminalState = new Emitter<vscode.Terminal>();
+	protected readonly _onDidChangeTerminalState = new Emitter<zyraxoncode.Terminal>();
 	readonly onDidChangeTerminalState = this._onDidChangeTerminalState.event;
 	protected readonly _onDidChangeShell = new Emitter<string>();
 	readonly onDidChangeShell = this._onDidChangeShell.event;
 
-	protected readonly _onDidWriteTerminalData = new Emitter<vscode.TerminalDataWriteEvent>({
+	protected readonly _onDidWriteTerminalData = new Emitter<zyraxoncode.TerminalDataWriteEvent>({
 		onWillAddFirstListener: () => this._proxy.$startSendingDataEvents(),
 		onDidRemoveLastListener: () => this._proxy.$stopSendingDataEvents()
 	});
 	readonly onDidWriteTerminalData = this._onDidWriteTerminalData.event;
-	protected readonly _onDidExecuteCommand = new Emitter<vscode.TerminalExecutedCommand>({
+	protected readonly _onDidExecuteCommand = new Emitter<zyraxoncode.TerminalExecutedCommand>({
 		onWillAddFirstListener: () => this._proxy.$startSendingCommandEvents(),
 		onDidRemoveLastListener: () => this._proxy.$stopSendingCommandEvents()
 	});
@@ -501,8 +501,8 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 		});
 	}
 
-	public abstract createTerminal(name?: string, shellPath?: string, shellArgs?: string[] | string): vscode.Terminal;
-	public abstract createTerminalFromOptions(options: vscode.TerminalOptions, internalOptions?: ITerminalInternalOptions): vscode.Terminal;
+	public abstract createTerminal(name?: string, shellPath?: string, shellArgs?: string[] | string): zyraxoncode.Terminal;
+	public abstract createTerminalFromOptions(options: zyraxoncode.TerminalOptions, internalOptions?: ITerminalInternalOptions): zyraxoncode.Terminal;
 
 	public getDefaultShell(useAutomationShell: boolean): string {
 		const profile = useAutomationShell ? this._defaultAutomationProfile : this._defaultProfile;
@@ -514,7 +514,7 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 		return profile?.args || [];
 	}
 
-	public createExtensionTerminal(options: vscode.ExtensionTerminalOptions, internalOptions?: ITerminalInternalOptions): vscode.Terminal {
+	public createExtensionTerminal(options: zyraxoncode.ExtensionTerminalOptions, internalOptions?: ITerminalInternalOptions): zyraxoncode.Terminal {
 		const terminal = new ExtHostTerminal(this._proxy, generateUuid(), options, options.name);
 		const p = new ExtHostPseudoterminal(options.pty);
 		terminal.createExtensionTerminal(options.location, internalOptions, this._serializeParentTerminal(options, internalOptions).resolvedExtHostIdentifier, asTerminalIcon(options.iconPath), asTerminalColor(options.color), options.shellIntegrationNonce, options.titleTemplate).then(id => {
@@ -525,7 +525,7 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 		return terminal.value;
 	}
 
-	protected _serializeParentTerminal(options: vscode.TerminalOptions, internalOptions?: ITerminalInternalOptions): ITerminalInternalOptions {
+	protected _serializeParentTerminal(options: zyraxoncode.TerminalOptions, internalOptions?: ITerminalInternalOptions): ITerminalInternalOptions {
 		internalOptions = internalOptions ? internalOptions : {};
 		if (options.location && typeof options.location === 'object' && hasKey(options.location, { parentTerminal: true })) {
 			const parentTerminal = options.location.parentTerminal;
@@ -543,7 +543,7 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 		return internalOptions;
 	}
 
-	public attachPtyToTerminal(id: number, pty: vscode.Pseudoterminal): void {
+	public attachPtyToTerminal(id: number, pty: zyraxoncode.Pseudoterminal): void {
 		const terminal = this.getTerminalById(id);
 		if (!terminal) {
 			throw new Error(`Cannot resolve terminal with id ${id} for virtual process`);
@@ -584,7 +584,7 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 			if (terminal.setDimensions(cols, rows)) {
 				this._onDidChangeTerminalDimensions.fire({
 					terminal: terminal.value,
-					dimensions: terminal.value.dimensions as vscode.TerminalDimensions
+					dimensions: terminal.value.dimensions as zyraxoncode.TerminalDimensions
 				});
 			}
 		}
@@ -640,7 +640,7 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 			}
 		}
 
-		const creationOptions: vscode.TerminalOptions = {
+		const creationOptions: zyraxoncode.TerminalOptions = {
 			name: shellLaunchConfigDto.name,
 			shellPath: shellLaunchConfigDto.executable,
 			shellArgs: shellLaunchConfigDto.args,
@@ -758,25 +758,25 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 	}
 
 
-	public registerProfileProvider(extension: IExtensionDescription, id: string, provider: vscode.TerminalProfileProvider): vscode.Disposable {
+	public registerProfileProvider(extension: IExtensionDescription, id: string, provider: zyraxoncode.TerminalProfileProvider): zyraxoncode.Disposable {
 		if (this._profileProviders.has(id)) {
 			throw new Error(`Terminal profile provider "${id}" already registered`);
 		}
 		this._profileProviders.set(id, { provider, extension });
 		this._proxy.$registerProfileProvider(id, extension.identifier.value);
-		return new VSCodeDisposable(() => {
+		return new ZyraxonCodeDisposable(() => {
 			this._profileProviders.delete(id);
 			this._proxy.$unregisterProfileProvider(id);
 		});
 	}
 
-	public registerTerminalCompletionProvider(extension: IExtensionDescription, provider: vscode.TerminalCompletionProvider<TerminalCompletionItem>, ...triggerCharacters: string[]): vscode.Disposable {
+	public registerTerminalCompletionProvider(extension: IExtensionDescription, provider: zyraxoncode.TerminalCompletionProvider<TerminalCompletionItem>, ...triggerCharacters: string[]): zyraxoncode.Disposable {
 		if (this._completionProviders.has(extension.identifier.value)) {
 			throw new Error(`Terminal completion provider "${extension.identifier.value}" already registered`);
 		}
 		this._completionProviders.set(extension.identifier.value, provider);
 		this._proxy.$registerCompletionProvider(extension.identifier.value, extension.identifier.value, ...triggerCharacters);
-		return new VSCodeDisposable(() => {
+		return new ZyraxonCodeDisposable(() => {
 			this._completionProviders.delete(extension.identifier.value);
 			this._proxy.$unregisterCompletionProvider(extension.identifier.value);
 		});
@@ -808,13 +808,13 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 		}
 	}
 
-	public registerTerminalQuickFixProvider(id: string, extensionId: string, provider: vscode.TerminalQuickFixProvider): vscode.Disposable {
+	public registerTerminalQuickFixProvider(id: string, extensionId: string, provider: zyraxoncode.TerminalQuickFixProvider): zyraxoncode.Disposable {
 		if (this._quickFixProviders.has(id)) {
 			throw new Error(`Terminal quick fix provider "${id}" is already registered`);
 		}
 		this._quickFixProviders.set(id, provider);
 		this._proxy.$registerQuickFixProvider(id, extensionId);
-		return new VSCodeDisposable(() => {
+		return new ZyraxonCodeDisposable(() => {
 			this._quickFixProviders.delete(id);
 			this._proxy.$unregisterQuickFixProvider(id);
 		});
@@ -893,12 +893,12 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 		this.createTerminalFromOptions(profileOptions, options);
 	}
 
-	public registerLinkProvider(provider: vscode.TerminalLinkProvider): vscode.Disposable {
+	public registerLinkProvider(provider: zyraxoncode.TerminalLinkProvider): zyraxoncode.Disposable {
 		this._linkProviders.add(provider);
 		if (this._linkProviders.size === 1) {
 			this._proxy.$startLinkProvider();
 		}
-		return new VSCodeDisposable(() => {
+		return new ZyraxonCodeDisposable(() => {
 			this._linkProviders.delete(provider);
 			if (this._linkProviders.size === 0) {
 				this._proxy.$stopLinkProvider();
@@ -922,8 +922,8 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 		this._terminalLinkCancellationSource.set(terminalId, cancellationSource);
 
 		const result: ITerminalLinkDto[] = [];
-		const context: vscode.TerminalLinkContext = { terminal: terminal.value, line };
-		const promises: vscode.ProviderResult<{ provider: vscode.TerminalLinkProvider; links: vscode.TerminalLink[] }>[] = [];
+		const context: zyraxoncode.TerminalLinkContext = { terminal: terminal.value, line };
+		const promises: zyraxoncode.ProviderResult<{ provider: zyraxoncode.TerminalLinkProvider; links: zyraxoncode.TerminalLink[] }>[] = [];
 
 		for (const provider of this._linkProviders) {
 			promises.push(Promises.withAsyncBody(async r => {
@@ -998,7 +998,7 @@ export abstract class BaseExtHostTerminalService extends Disposable implements I
 		return this._getTerminalObjectById(this._terminals, id);
 	}
 
-	public getTerminalIdByApiObject(terminal: vscode.Terminal): number | null {
+	public getTerminalIdByApiObject(terminal: zyraxoncode.Terminal): number | null {
 		const index = this._terminals.findIndex(item => {
 			return item.value === terminal;
 		});
@@ -1086,7 +1086,7 @@ class UnifiedEnvironmentVariableCollection extends Disposable {
 		this.map = new Map(serialized);
 	}
 
-	getScopedEnvironmentVariableCollection(scope: vscode.EnvironmentVariableScope | undefined): IEnvironmentVariableCollection {
+	getScopedEnvironmentVariableCollection(scope: zyraxoncode.EnvironmentVariableScope | undefined): IEnvironmentVariableCollection {
 		const scopedCollectionKey = this.getScopeKey(scope);
 		let scopedCollection = this.scopedCollections.get(scopedCollectionKey);
 		if (!scopedCollection) {
@@ -1097,19 +1097,19 @@ class UnifiedEnvironmentVariableCollection extends Disposable {
 		return scopedCollection;
 	}
 
-	replace(variable: string, value: string, options: vscode.EnvironmentVariableMutatorOptions | undefined, scope: vscode.EnvironmentVariableScope | undefined): void {
+	replace(variable: string, value: string, options: zyraxoncode.EnvironmentVariableMutatorOptions | undefined, scope: zyraxoncode.EnvironmentVariableScope | undefined): void {
 		this._setIfDiffers(variable, { value, type: EnvironmentVariableMutatorType.Replace, options: options ?? { applyAtProcessCreation: true }, scope });
 	}
 
-	append(variable: string, value: string, options: vscode.EnvironmentVariableMutatorOptions | undefined, scope: vscode.EnvironmentVariableScope | undefined): void {
+	append(variable: string, value: string, options: zyraxoncode.EnvironmentVariableMutatorOptions | undefined, scope: zyraxoncode.EnvironmentVariableScope | undefined): void {
 		this._setIfDiffers(variable, { value, type: EnvironmentVariableMutatorType.Append, options: options ?? { applyAtProcessCreation: true }, scope });
 	}
 
-	prepend(variable: string, value: string, options: vscode.EnvironmentVariableMutatorOptions | undefined, scope: vscode.EnvironmentVariableScope | undefined): void {
+	prepend(variable: string, value: string, options: zyraxoncode.EnvironmentVariableMutatorOptions | undefined, scope: zyraxoncode.EnvironmentVariableScope | undefined): void {
 		this._setIfDiffers(variable, { value, type: EnvironmentVariableMutatorType.Prepend, options: options ?? { applyAtProcessCreation: true }, scope });
 	}
 
-	private _setIfDiffers(variable: string, mutator: vscode.EnvironmentVariableMutator & { scope: vscode.EnvironmentVariableScope | undefined }): void {
+	private _setIfDiffers(variable: string, mutator: zyraxoncode.EnvironmentVariableMutator & { scope: zyraxoncode.EnvironmentVariableScope | undefined }): void {
 		if (mutator.options && mutator.options.applyAtProcessCreation === false && !mutator.options.applyAtShellIntegration) {
 			throw new Error('EnvironmentVariableMutatorOptions must apply at either process creation or shell integration');
 		}
@@ -1140,28 +1140,28 @@ class UnifiedEnvironmentVariableCollection extends Disposable {
 		}
 	}
 
-	get(variable: string, scope: vscode.EnvironmentVariableScope | undefined): vscode.EnvironmentVariableMutator | undefined {
+	get(variable: string, scope: zyraxoncode.EnvironmentVariableScope | undefined): zyraxoncode.EnvironmentVariableMutator | undefined {
 		const key = this.getKey(variable, scope);
 		const value = this.map.get(key);
 		// TODO: Set options to defaults if needed
 		return value ? convertMutator(value) : undefined;
 	}
 
-	private getKey(variable: string, scope: vscode.EnvironmentVariableScope | undefined) {
+	private getKey(variable: string, scope: zyraxoncode.EnvironmentVariableScope | undefined) {
 		const scopeKey = this.getScopeKey(scope);
 		return scopeKey.length ? `${variable}:::${scopeKey}` : variable;
 	}
 
-	private getScopeKey(scope: vscode.EnvironmentVariableScope | undefined): string {
+	private getScopeKey(scope: zyraxoncode.EnvironmentVariableScope | undefined): string {
 		return this.getWorkspaceKey(scope?.workspaceFolder) ?? '';
 	}
 
-	private getWorkspaceKey(workspaceFolder: vscode.WorkspaceFolder | undefined): string | undefined {
+	private getWorkspaceKey(workspaceFolder: zyraxoncode.WorkspaceFolder | undefined): string | undefined {
 		return workspaceFolder ? workspaceFolder.uri.toString() : undefined;
 	}
 
-	public getVariableMap(scope: vscode.EnvironmentVariableScope | undefined): Map<string, vscode.EnvironmentVariableMutator> {
-		const map = new Map<string, vscode.EnvironmentVariableMutator>();
+	public getVariableMap(scope: zyraxoncode.EnvironmentVariableScope | undefined): Map<string, zyraxoncode.EnvironmentVariableMutator> {
+		const map = new Map<string, zyraxoncode.EnvironmentVariableMutator>();
 		for (const [_, value] of this.map) {
 			if (this.getScopeKey(value.scope) === this.getScopeKey(scope)) {
 				map.set(value.variable, convertMutator(value));
@@ -1170,13 +1170,13 @@ class UnifiedEnvironmentVariableCollection extends Disposable {
 		return map;
 	}
 
-	delete(variable: string, scope: vscode.EnvironmentVariableScope | undefined): void {
+	delete(variable: string, scope: zyraxoncode.EnvironmentVariableScope | undefined): void {
 		const key = this.getKey(variable, scope);
 		this.map.delete(key);
 		this._onDidChangeCollection.fire();
 	}
 
-	clear(scope: vscode.EnvironmentVariableScope | undefined): void {
+	clear(scope: zyraxoncode.EnvironmentVariableScope | undefined): void {
 		if (scope?.workspaceFolder) {
 			for (const [key, mutator] of this.map) {
 				if (mutator.scope?.workspaceFolder?.index === scope.workspaceFolder.index) {
@@ -1191,7 +1191,7 @@ class UnifiedEnvironmentVariableCollection extends Disposable {
 		this._onDidChangeCollection.fire();
 	}
 
-	setDescription(description: string | vscode.MarkdownString | undefined, scope: vscode.EnvironmentVariableScope | undefined): void {
+	setDescription(description: string | zyraxoncode.MarkdownString | undefined, scope: zyraxoncode.EnvironmentVariableScope | undefined): void {
 		const key = this.getScopeKey(scope);
 		const current = this.descriptionMap.get(key);
 		if (!current || current.description !== description) {
@@ -1208,12 +1208,12 @@ class UnifiedEnvironmentVariableCollection extends Disposable {
 		}
 	}
 
-	public getDescription(scope: vscode.EnvironmentVariableScope | undefined): string | vscode.MarkdownString | undefined {
+	public getDescription(scope: zyraxoncode.EnvironmentVariableScope | undefined): string | zyraxoncode.MarkdownString | undefined {
 		const key = this.getScopeKey(scope);
 		return this.descriptionMap.get(key)?.description;
 	}
 
-	private clearDescription(scope: vscode.EnvironmentVariableScope | undefined): void {
+	private clearDescription(scope: zyraxoncode.EnvironmentVariableScope | undefined): void {
 		const key = this.getScopeKey(scope);
 		this.descriptionMap.delete(key);
 	}
@@ -1230,35 +1230,35 @@ class ScopedEnvironmentVariableCollection implements IEnvironmentVariableCollect
 
 	constructor(
 		private readonly collection: UnifiedEnvironmentVariableCollection,
-		private readonly scope: vscode.EnvironmentVariableScope | undefined
+		private readonly scope: zyraxoncode.EnvironmentVariableScope | undefined
 	) {
 	}
 
-	getScoped(scope: vscode.EnvironmentVariableScope | undefined) {
+	getScoped(scope: zyraxoncode.EnvironmentVariableScope | undefined) {
 		return this.collection.getScopedEnvironmentVariableCollection(scope);
 	}
 
-	replace(variable: string, value: string, options?: vscode.EnvironmentVariableMutatorOptions | undefined): void {
+	replace(variable: string, value: string, options?: zyraxoncode.EnvironmentVariableMutatorOptions | undefined): void {
 		this.collection.replace(variable, value, options, this.scope);
 	}
 
-	append(variable: string, value: string, options?: vscode.EnvironmentVariableMutatorOptions | undefined): void {
+	append(variable: string, value: string, options?: zyraxoncode.EnvironmentVariableMutatorOptions | undefined): void {
 		this.collection.append(variable, value, options, this.scope);
 	}
 
-	prepend(variable: string, value: string, options?: vscode.EnvironmentVariableMutatorOptions | undefined): void {
+	prepend(variable: string, value: string, options?: zyraxoncode.EnvironmentVariableMutatorOptions | undefined): void {
 		this.collection.prepend(variable, value, options, this.scope);
 	}
 
-	get(variable: string): vscode.EnvironmentVariableMutator | undefined {
+	get(variable: string): zyraxoncode.EnvironmentVariableMutator | undefined {
 		return this.collection.get(variable, this.scope);
 	}
 
-	forEach(callback: (variable: string, mutator: vscode.EnvironmentVariableMutator, collection: vscode.EnvironmentVariableCollection) => unknown, thisArg?: unknown): void {
+	forEach(callback: (variable: string, mutator: zyraxoncode.EnvironmentVariableMutator, collection: zyraxoncode.EnvironmentVariableCollection) => unknown, thisArg?: unknown): void {
 		this.collection.getVariableMap(this.scope).forEach((value, variable) => callback.call(thisArg, variable, value, this), this.scope);
 	}
 
-	[Symbol.iterator](): IterableIterator<[variable: string, mutator: vscode.EnvironmentVariableMutator]> {
+	[Symbol.iterator](): IterableIterator<[variable: string, mutator: zyraxoncode.EnvironmentVariableMutator]> {
 		return this.collection.getVariableMap(this.scope).entries();
 	}
 
@@ -1271,11 +1271,11 @@ class ScopedEnvironmentVariableCollection implements IEnvironmentVariableCollect
 		this.collection.clear(this.scope);
 	}
 
-	set description(description: string | vscode.MarkdownString | undefined) {
+	set description(description: string | zyraxoncode.MarkdownString | undefined) {
 		this.collection.setDescription(description, this.scope);
 	}
 
-	get description(): string | vscode.MarkdownString | undefined {
+	get description(): string | zyraxoncode.MarkdownString | undefined {
 		return this.collection.getDescription(this.scope);
 	}
 }
@@ -1293,14 +1293,14 @@ export class WorkerExtHostTerminalService extends BaseExtHostTerminalService {
 		this._hasRemoteAuthority = !!initData.remote.authority;
 	}
 
-	public createTerminal(name?: string, shellPath?: string, shellArgs?: string[] | string): vscode.Terminal {
+	public createTerminal(name?: string, shellPath?: string, shellArgs?: string[] | string): zyraxoncode.Terminal {
 		if (!this._hasRemoteAuthority) {
 			throw new NotSupportedError();
 		}
 		return this.createTerminalFromOptions({ name, shellPath, shellArgs });
 	}
 
-	public createTerminalFromOptions(options: vscode.TerminalOptions, internalOptions?: ITerminalInternalOptions): vscode.Terminal {
+	public createTerminalFromOptions(options: zyraxoncode.TerminalOptions, internalOptions?: ITerminalInternalOptions): zyraxoncode.Terminal {
 		if (!this._hasRemoteAuthority) {
 			throw new NotSupportedError();
 		}
@@ -1311,7 +1311,7 @@ export class WorkerExtHostTerminalService extends BaseExtHostTerminalService {
 	}
 }
 
-function asTerminalIcon(iconPath?: vscode.Uri | { light: vscode.Uri; dark: vscode.Uri } | vscode.ThemeIcon): TerminalIcon | undefined {
+function asTerminalIcon(iconPath?: zyraxoncode.Uri | { light: zyraxoncode.Uri; dark: zyraxoncode.Uri } | zyraxoncode.ThemeIcon): TerminalIcon | undefined {
 	if (!iconPath || typeof iconPath === 'string') {
 		return undefined;
 	}
@@ -1326,13 +1326,13 @@ function asTerminalIcon(iconPath?: vscode.Uri | { light: vscode.Uri; dark: vscod
 	};
 }
 
-function asTerminalColor(color?: vscode.ThemeColor): ThemeColor | undefined {
+function asTerminalColor(color?: zyraxoncode.ThemeColor): ThemeColor | undefined {
 	return ThemeColor.isThemeColor(color) ? color as ThemeColor : undefined;
 }
 
-function convertMutator(mutator: IEnvironmentVariableMutator): vscode.EnvironmentVariableMutator {
+function convertMutator(mutator: IEnvironmentVariableMutator): zyraxoncode.EnvironmentVariableMutator {
 	const newMutator = { ...mutator };
 	delete newMutator.scope;
 	newMutator.options = newMutator.options ?? undefined;
-	return newMutator as vscode.EnvironmentVariableMutator;
+	return newMutator as zyraxoncode.EnvironmentVariableMutator;
 }

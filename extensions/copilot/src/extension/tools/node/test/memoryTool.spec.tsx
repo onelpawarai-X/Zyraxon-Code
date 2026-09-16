@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { afterAll, beforeAll, beforeEach, describe, expect, suite, test } from 'vitest';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { MockFileSystemService } from '../../../../platform/filesystem/node/test/mockFileSystemService';
 import { NullTelemetryService } from '../../../../platform/telemetry/common/nullTelemetryService';
@@ -15,7 +15,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { URI } from '../../../../util/vs/base/common/uri';
 import { SyncDescriptor } from '../../../../util/vs/platform/instantiation/common/descriptors';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { MarkdownString } from '../../../../vscodeTypes';
+import { MarkdownString } from '../../../../zyraxoncodeTypes';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { MemoryTool } from '../memoryTool';
 
@@ -42,7 +42,7 @@ function getResultText(result: { content: { value: string }[] }): string {
 	return result.content.map((c: { value: string }) => c.value).join('');
 }
 
-const TEST_SESSION_RESOURCE = 'vscode-chat-session://local/session-abc123';
+const TEST_SESSION_RESOURCE = '__ZYRAXKEEP__0_';
 const TEST_SESSION_ID = 'session-abc123';
 
 function invokeMemoryTool(tool: MemoryTool, input: object, chatSessionResource: string = TEST_SESSION_RESOURCE) {
@@ -59,7 +59,7 @@ suite('MemoryTool', () => {
 		const services = createExtensionUnitTestingServices();
 		mockTelemetry = new MockCapturingTelemetryService();
 		services.define(ITelemetryService, mockTelemetry);
-		services.define(IVSCodeExtensionContext, new SyncDescriptor(MockExtensionContext, ['/tmp/test-memory-global', undefined, '/tmp/test-memory']));
+		services.define(IZyraxonCodeExtensionContext, new SyncDescriptor(MockExtensionContext, ['/tmp/test-memory-global', undefined, '/tmp/test-memory']));
 		accessor = services.createTestingAccessor();
 	});
 
@@ -96,7 +96,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('view returns file content with line numbers', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -112,7 +112,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('view lists session directory contents', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -128,7 +128,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('view /memories/ shows merged root with user files and session entry', async () => {
-		const globalStorageUri = accessor.get(IVSCodeExtensionContext).globalStorageUri;
+		const globalStorageUri = accessor.get(IZyraxonCodeExtensionContext).globalStorageUri;
 		if (!globalStorageUri) {
 			return;
 		}
@@ -144,7 +144,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('view with view_range returns specific lines', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -174,7 +174,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('create fails if file already exists', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -193,7 +193,7 @@ suite('MemoryTool', () => {
 	// --- Local str_replace ---
 
 	test('str_replace replaces unique text', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -211,7 +211,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('str_replace fails when text not found', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -229,7 +229,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('str_replace fails on multiple occurrences', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -249,7 +249,7 @@ suite('MemoryTool', () => {
 	// --- Local insert ---
 
 	test('insert adds text at specified line', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -267,7 +267,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('insert fails with invalid line number', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -287,7 +287,7 @@ suite('MemoryTool', () => {
 	// --- Local delete ---
 
 	test('delete removes a file', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -314,7 +314,7 @@ suite('MemoryTool', () => {
 	// --- Local rename ---
 
 	test('rename moves a file', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -341,7 +341,7 @@ suite('MemoryTool', () => {
 	});
 
 	test('rename fails when destination already exists', async () => {
-		const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+		const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 		if (!storageUri) {
 			return;
 		}
@@ -362,8 +362,8 @@ suite('MemoryTool', () => {
 	// --- Session isolation ---
 
 	test('different sessions have isolated storage', async () => {
-		const sessionA = 'vscode-chat-session://local/session-aaa';
-		const sessionB = 'vscode-chat-session://local/session-bbb';
+		const sessionA = '__ZYRAXKEEP__1_';
+		const sessionB = '__ZYRAXKEEP__2_';
 
 		// Create a file in session A
 		const resultA = await invokeMemoryTool(tool, {
@@ -455,7 +455,7 @@ suite('MemoryTool', () => {
 		});
 
 		test('emits memoryToolInvoked with error outcome on create conflict', async () => {
-			const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+			const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 			if (!storageUri) {
 				return;
 			}
@@ -491,7 +491,7 @@ suite('MemoryTool', () => {
 		});
 
 		test('emits memoryToolInvoked for delete success', async () => {
-			const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+			const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 			if (!storageUri) {
 				return;
 			}
@@ -512,7 +512,7 @@ suite('MemoryTool', () => {
 		});
 
 		test('emits memoryToolInvoked for str_replace error', async () => {
-			const storageUri = accessor.get(IVSCodeExtensionContext).storageUri;
+			const storageUri = accessor.get(IZyraxonCodeExtensionContext).storageUri;
 			if (!storageUri) {
 				return;
 			}
@@ -557,9 +557,9 @@ suite('MemoryTool', () => {
 			} as never, CancellationToken.None);
 			expect(result).toBeDefined();
 			const prepared = result as { invocationMessage: { value: string }; pastTenseMessage: { value: string } };
-			expect(prepared.invocationMessage.value).toContain('[](file:///');
+			expect(prepared.invocationMessage.value).toContain('[](__ZYRAXKEEP__3_');
 			expect(prepared.invocationMessage.value).toContain('memory-tool/memories/notes.md');
-			expect(prepared.pastTenseMessage.value).toContain('[](file:///');
+			expect(prepared.pastTenseMessage.value).toContain('[](__ZYRAXKEEP__4_');
 		});
 
 		test('generates file widget for user-scoped create', () => {
@@ -572,7 +572,7 @@ suite('MemoryTool', () => {
 		});
 
 		test('generates file widget for session-scoped view', () => {
-			const sessionResource = URI.from({ scheme: 'vscode-chat-session', authority: 'local', path: '/session-abc123' });
+			const sessionResource = URI.from({ scheme: 'zyraxoncode-chat-session', authority: 'local', path: '/session-abc123' });
 			const result = tool.prepareInvocation({
 				input: { command: 'view', path: '/memories/session/notes.md' },
 				chatSessionResource: sessionResource,

@@ -68,7 +68,7 @@
 	transform: translateY(-6px);
 	transition: opacity 140ms ease, transform 140ms ease;
 	pointer-events: none;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .prompt-timeline-sticky:not(.hidden) {
@@ -89,7 +89,7 @@
 .hc-black .prompt-timeline-sticky-band,
 .hc-light .prompt-timeline-sticky-band {
 	box-shadow: none;
-	border-bottom: var(--vscode-strokeThickness) solid var(--vscode-contrastBorder);
+	border-bottom: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-contrastBorder);
 }
 
 /* The band spans the transcript column, which the chat widget already centers and caps (chat.css:
@@ -115,10 +115,10 @@
 	box-sizing: border-box;
 	padding-left: 16px;
 	padding-right: 8px;
-	background-color: var(--vscode-chat-list-background, var(--vscode-editor-background));
-	background-image: linear-gradient(var(--vscode-chat-requestBubbleBackground), var(--vscode-chat-requestBubbleBackground));
-	box-shadow: 0 6px 6px -6px var(--vscode-widget-shadow, transparent);
-	color: var(--vscode-foreground);
+	background-color: var(--zyraxoncode-chat-list-background, var(--zyraxoncode-editor-background));
+	background-image: linear-gradient(var(--zyraxoncode-chat-requestBubbleBackground), var(--zyraxoncode-chat-requestBubbleBackground));
+	box-shadow: 0 6px 6px -6px var(--zyraxoncode-widget-shadow, transparent);
+	color: var(--zyraxoncode-foreground);
 }
 
 /* Agents window: the band mirrors the session header instead — the shared centered-content width
@@ -133,12 +133,12 @@
 }
 
 .agent-sessions-workbench .prompt-timeline-sticky-band {
-	padding-left: calc(var(--vscode-codiconFontSize, 16px) + 6px);
+	padding-left: calc(var(--zyraxoncode-codiconFontSize, 16px) + 6px);
 	/* The centered host already insets this side by 10px, so the band itself sits flush with it. */
 	padding-right: 0;
-	border: var(--vscode-strokeThickness) solid var(--vscode-agentsPanel-border, transparent);
+	border: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-agentsPanel-border, transparent);
 	border-top: none;
-	border-radius: 0 0 var(--vscode-cornerRadius-small) var(--vscode-cornerRadius-small);
+	border-radius: 0 0 var(--zyraxoncode-cornerRadius-small) var(--zyraxoncode-cornerRadius-small);
 }
 
 /* The label area names the pinned prompt and reveals it when activated. The horizontal padding gives
@@ -153,7 +153,7 @@
 	padding: 4px 8px;
 	margin-left: -8px;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background: none;
 	color: inherit;
 	font: inherit;
@@ -191,13 +191,13 @@
  * matches the standard bubble hover instead of stacking over the band's own tint. */
 .prompt-timeline-sticky-label-button:hover,
 .prompt-timeline-sticky-label-button:focus-visible {
-	background-color: var(--vscode-chat-list-background, var(--vscode-editor-background));
-	background-image: linear-gradient(var(--vscode-chat-requestBubbleHoverBackground, var(--vscode-toolbar-hoverBackground)), var(--vscode-chat-requestBubbleHoverBackground, var(--vscode-toolbar-hoverBackground)));
+	background-color: var(--zyraxoncode-chat-list-background, var(--zyraxoncode-editor-background));
+	background-image: linear-gradient(var(--zyraxoncode-chat-requestBubbleHoverBackground, var(--zyraxoncode-toolbar-hoverBackground)), var(--zyraxoncode-chat-requestBubbleHoverBackground, var(--zyraxoncode-toolbar-hoverBackground)));
 }
 
 .prompt-timeline-sticky-count {
 	flex: 0 0 auto;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-variant-numeric: tabular-nums;
 }
 
@@ -209,7 +209,7 @@
 }
 
 .prompt-timeline-sticky-label-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -218,11 +218,11 @@
 	position: absolute;
 	right: 44px;
 	width: 280px;
-	background-color: var(--vscode-editorHoverWidget-background);
-	color: var(--vscode-editorHoverWidget-foreground);
-	border: 1px solid var(--vscode-editorHoverWidget-border);
+	background-color: var(--zyraxoncode-editorHoverWidget-background);
+	color: var(--zyraxoncode-editorHoverWidget-foreground);
+	border: 1px solid var(--zyraxoncode-editorHoverWidget-border);
 	border-radius: 6px;
-	box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+	box-shadow: 0 2px 8px var(--zyraxoncode-widget-shadow);
 	pointer-events: auto;
 	overflow: hidden;
 	z-index: 20;
@@ -249,7 +249,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 11px;
 }
 
@@ -263,49 +263,49 @@
 	border: 1px solid transparent;
 	border-radius: 5px;
 	background: transparent;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 11px;
 	cursor: pointer;
 }
 
 .prompt-timeline-card-diff-action:hover {
-	background-color: var(--vscode-list-hoverBackground);
-	border-color: var(--vscode-focusBorder);
+	background-color: var(--zyraxoncode-list-hoverBackground);
+	border-color: var(--zyraxoncode-focusBorder);
 }
 
 .prompt-timeline-card-diff-action:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
 }
 
 .prompt-timeline-card-diff-action-chevron {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 11px;
 }
 
 .prompt-timeline-card-diff-action:hover .prompt-timeline-card-diff-action-chevron {
-	color: var(--vscode-focusBorder);
+	color: var(--zyraxoncode-focusBorder);
 }
 
 .prompt-timeline-card-no-edits {
 	margin-top: 6px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 11px;
 }
 
 .prompt-timeline-card-stat .added,
 .prompt-timeline-card-fstat .added {
-	color: var(--vscode-gitDecoration-addedResourceForeground, var(--vscode-charts-green));
+	color: var(--zyraxoncode-gitDecoration-addedResourceForeground, var(--zyraxoncode-charts-green));
 }
 
 .prompt-timeline-card-stat .removed,
 .prompt-timeline-card-fstat .removed {
-	color: var(--vscode-gitDecoration-deletedResourceForeground, var(--vscode-charts-red));
+	color: var(--zyraxoncode-gitDecoration-deletedResourceForeground, var(--zyraxoncode-charts-red));
 	margin-left: 4px;
 }
 
 .prompt-timeline-card-files {
-	border-top: 1px solid var(--vscode-editorHoverWidget-border);
+	border-top: 1px solid var(--zyraxoncode-editorHoverWidget-border);
 	margin-top: 8px;
 	max-height: 140px;
 	overflow-y: auto;
@@ -326,11 +326,11 @@
 }
 
 .prompt-timeline-card-file:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .prompt-timeline-card-file:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -413,7 +413,7 @@
 	width: 12px;
 	height: 3px;
 	border-radius: 2px;
-	background-color: var(--vscode-scrollbarSlider-background);
+	background-color: var(--zyraxoncode-scrollbarSlider-background);
 	/* `transform` is animated for the fisheye "fan" magnification; keep origin at the transcript
 	 * edge so the bar grows leftward, never across the scrollbar. */
 	transform-origin: right center;
@@ -442,11 +442,11 @@
 }
 
 .prompt-timeline-ruler-bar.edited .seg-add {
-	background-color: var(--vscode-editorOverviewRuler-addedForeground);
+	background-color: var(--zyraxoncode-editorOverviewRuler-addedForeground);
 }
 
 .prompt-timeline-ruler-bar.edited .seg-del {
-	background-color: var(--vscode-editorOverviewRuler-deletedForeground);
+	background-color: var(--zyraxoncode-editorOverviewRuler-deletedForeground);
 }
 
 /* Hover, active and keyboard-focus share one "emphasized pill" so the bar barely changes size
@@ -460,14 +460,14 @@
 
 /* Neutral (no-edit) marks brighten on hover; edited marks keep their green/red. */
 .prompt-timeline-ruler-mark:hover .prompt-timeline-ruler-bar:not(.edited) {
-	background-color: var(--vscode-scrollbarSlider-hoverBackground);
+	background-color: var(--zyraxoncode-scrollbarSlider-hoverBackground);
 }
 
 /* Active = the single selected prompt (the one in view / just revealed). A crisp border hugging
  * the pill (outline-offset 0 sits on the pill edge, so it reads as the pill's own border rather
  * than a glowy floating box). Colours kept. There is only ever one active mark. */
 .prompt-timeline-ruler-mark.active .prompt-timeline-ruler-bar {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 0;
 }
 
@@ -485,7 +485,7 @@
 }
 
 .prompt-timeline-rail .prompt-timeline-ruler-mark:focus-visible .prompt-timeline-ruler-bar {
-	outline: 1px dashed var(--vscode-focusBorder);
+	outline: 1px dashed var(--zyraxoncode-focusBorder);
 	outline-offset: 2px;
 }
 
@@ -535,7 +535,7 @@
 	gap: 4px;
 	padding: 8px 6px;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background: transparent;
 	color: inherit;
 	font: inherit;
@@ -548,11 +548,11 @@
  * arriving from the left, which re-triggers hover and flickers. */
 .prompt-timeline-dock-rest:hover,
 .prompt-timeline-rail-dock.revealed .prompt-timeline-dock-rest {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .prompt-timeline-dock-rest:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
 }
 
@@ -560,7 +560,7 @@
 	width: 4px;
 	height: 4px;
 	border-radius: 50%;
-	background-color: var(--vscode-descriptionForeground);
+	background-color: var(--zyraxoncode-descriptionForeground);
 	opacity: 0.55;
 	transition: opacity 140ms ease, transform 140ms ease, background-color 140ms ease;
 }
@@ -572,7 +572,7 @@
 /* "You are here": the dot for the prompt the transcript is scrolled to takes the accent, so the
  * resting handle doubles as a position indicator that tracks scrolling. */
 .prompt-timeline-dock-dot.active {
-	background-color: var(--vscode-focusBorder);
+	background-color: var(--zyraxoncode-focusBorder);
 	opacity: 1;
 	transform: scale(1.5);
 }
@@ -588,8 +588,8 @@
 .prompt-timeline-dock-dot-more {
 	width: 2px;
 	height: 8px;
-	border-radius: var(--vscode-cornerRadius-circle);
-	background-color: var(--vscode-descriptionForeground);
+	border-radius: var(--zyraxoncode-cornerRadius-circle);
+	background-color: var(--zyraxoncode-descriptionForeground);
 	opacity: 0.4;
 	transition: opacity 140ms ease;
 }
@@ -628,11 +628,11 @@
 	padding: 4px;
 	box-sizing: border-box;
 	overflow-y: auto;
-	background-color: var(--vscode-editorHoverWidget-background);
-	color: var(--vscode-editorHoverWidget-foreground);
-	border: 1px solid var(--vscode-editorHoverWidget-border);
-	border-radius: var(--vscode-cornerRadius-medium);
-	box-shadow: 0 2px 8px var(--vscode-widget-shadow);
+	background-color: var(--zyraxoncode-editorHoverWidget-background);
+	color: var(--zyraxoncode-editorHoverWidget-foreground);
+	border: 1px solid var(--zyraxoncode-editorHoverWidget-border);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
+	box-shadow: 0 2px 8px var(--zyraxoncode-widget-shadow);
 	opacity: 0;
 	pointer-events: none;
 	transition: opacity 140ms ease, transform 140ms ease;
@@ -668,7 +668,7 @@
 	width: 100%;
 	padding: 6px 8px;
 	border: none;
-	border-radius: var(--vscode-cornerRadius-small);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 	background: transparent;
 	color: inherit;
 	font: inherit;
@@ -680,18 +680,18 @@
  * highlight alone is enough to tie it back to the dot under the pointer. */
 .prompt-timeline-dock-row:hover,
 .prompt-timeline-dock-row.preview {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 /* Pair the selection background with its matching foreground so the label stays legible in themes
  * where the two are designed together. */
 .prompt-timeline-dock-row.active {
-	background-color: var(--vscode-list-activeSelectionBackground);
-	color: var(--vscode-list-activeSelectionForeground);
+	background-color: var(--zyraxoncode-list-activeSelectionBackground);
+	color: var(--zyraxoncode-list-activeSelectionForeground);
 }
 
 .prompt-timeline-dock-row:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -716,10 +716,10 @@
 }
 
 .prompt-timeline-dock-row-stat .added {
-	color: var(--vscode-gitDecoration-addedResourceForeground, var(--vscode-charts-green));
+	color: var(--zyraxoncode-gitDecoration-addedResourceForeground, var(--zyraxoncode-charts-green));
 }
 
 .prompt-timeline-dock-row-stat .removed {
-	color: var(--vscode-gitDecoration-deletedResourceForeground, var(--vscode-charts-red));
+	color: var(--zyraxoncode-gitDecoration-deletedResourceForeground, var(--zyraxoncode-charts-red));
 	margin-left: 4px;
 }

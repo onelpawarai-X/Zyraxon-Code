@@ -49,7 +49,7 @@ async function collectNetworkDiagnostics(connectionsService: IAgentHostConnectio
 }
 
 async function formatLocalProxyConfig(nativeHostService: INativeHostService): Promise<string> {
-	let output = '## Local OS Proxy Configuration (@vscode/os-proxy-resolver)\n\n';
+	let output = '## Local OS Proxy Configuration (@zyraxoncode/os-proxy-resolver)\n\n';
 	try {
 		const config = await nativeHostService.readProxyConfigWithPackage();
 		output += `- Proxy environment: ${formatEnvironmentProxyConfig(config.environment)}\n`;
@@ -157,9 +157,9 @@ async function formatEndpointSection(endpoint: IAgentHostNetworkEndpoint, result
 	output += `- Proxy: ${result.proxyUrl ?? 'None'}\n`;
 	try {
 		const proxies = await nativeHostService.resolveProxyWithPackage(result.url);
-		output += `- Local OS proxy (@vscode/os-proxy-resolver): ${formatProxies(proxies)}\n`;
+		output += `- Local OS proxy (@zyraxoncode/os-proxy-resolver): ${formatProxies(proxies)}\n`;
 	} catch (err) {
-		output += `- Local OS proxy (@vscode/os-proxy-resolver): error: ${err instanceof Error ? err.message : String(err)}\n`;
+		output += `- Local OS proxy (@zyraxoncode/os-proxy-resolver): error: ${err instanceof Error ? err.message : String(err)}\n`;
 	}
 	output += `- Reachability: ${formatReachability(endpoint, result)}\n\n`;
 	return output;

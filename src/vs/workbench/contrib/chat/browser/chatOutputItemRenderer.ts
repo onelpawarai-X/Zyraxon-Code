@@ -143,7 +143,7 @@ export class ChatOutputRendererService extends Disposable implements IChatOutput
 			throw new Error(`No renderer registered found for code block language identifier: ${languageIdentifier}`);
 		}
 
-		return this.doRenderOutputPart(rendererData, 'text/x-vscode-chat-code-block', data, { codeBlockContext: { languageIdentifier } }, parent, webviewOptions, token);
+		return this.doRenderOutputPart(rendererData, 'text/x-zyraxoncode-chat-code-block', data, { codeBlockContext: { languageIdentifier } }, parent, webviewOptions, token);
 	}
 
 	private async doRenderOutputPart(rendererData: RendererEntry, mime: string, data: Uint8Array, context: IChatOutputRenderContext, parent: HTMLElement, webviewOptions: RenderOutputPartWebviewOptions, token: CancellationToken): Promise<RenderedOutputPart> {
@@ -299,7 +299,7 @@ const chatOutputRenderContributionPoint = ExtensionsRegistry.registerExtensionPo
 		}
 	},
 	jsonSchema: {
-		description: nls.localize('vscode.extension.contributes.chatOutputRenderer', 'Contributes a renderer for specific MIME types and code block language identifiers in chat outputs'),
+		description: nls.localize('zyraxoncode.extension.contributes.chatOutputRenderer', 'Contributes a renderer for specific MIME types and code block language identifiers in chat outputs'),
 		type: 'array',
 		items: chatOutputRendererContributionSchema,
 	}

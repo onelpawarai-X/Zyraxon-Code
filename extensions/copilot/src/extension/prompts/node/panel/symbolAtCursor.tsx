@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PrioritizedList, PromptElement, PromptPiece, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
-import type { CancellationToken, ChatResponseReferencePart, Progress, Uri } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PrioritizedList, PromptElement, PromptPiece, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, ChatResponseReferencePart, Progress, Uri } from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILanguageFeaturesService, isLocationLink } from '../../../../platform/languages/common/languageFeaturesService';
 import { TreeSitterExpressionLocationInfo } from '../../../../platform/parser/node/nodes';
-import { IParserService, treeSitterOffsetRangeToVSCodeRange, vscodeToTreeSitterOffsetRange } from '../../../../platform/parser/node/parserService';
+import { IParserService, treeSitterOffsetRangeToZyraxonCodeRange, zyraxoncodeToTreeSitterOffsetRange } from '../../../../platform/parser/node/parserService';
 import { IScopeSelector } from '../../../../platform/scopeSelection/common/scopeSelection';
 import { ITabsAndEditorsService } from '../../../../platform/tabs/common/tabsAndEditorsService';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { basename } from '../../../../util/vs/base/common/path';
-import { ChatResponseProgressPart, Range, Selection } from '../../../../vscodeTypes';
+import { ChatResponseProgressPart, Range, Selection } from '../../../../zyraxoncodeTypes';
 import { CodeBlock } from './safeElements';
 import { treeSitterInfoToContext } from './symbolDefinitions';
 
@@ -105,14 +105,14 @@ export class SymbolAtCursor extends PromptElement<SymbolAtCursorProps, SymbolAtC
 			return undefined;
 		}
 
-		const treeSitterOffsetRange = vscodeToTreeSitterOffsetRange(range, document);
+		const treeSitterOffsetRange = zyraxoncodeToTreeSitterOffsetRange(range, document);
 		let nodeContext;
 		if (preferDefinitions) {
 			nodeContext = await treeSitterAST.getNodeToExplain(treeSitterOffsetRange);
 		}
 		nodeContext ??= await treeSitterAST.getNodeToDocument(treeSitterOffsetRange);
 		const { startIndex, endIndex } = 'nodeToDocument' in nodeContext ? nodeContext.nodeToDocument : nodeContext.nodeToExplain;
-		const expandedRange = treeSitterOffsetRangeToVSCodeRange(document, { startIndex, endIndex });
+		const expandedRange = treeSitterOffsetRangeToZyraxonCodeRange(document, { startIndex, endIndex });
 
 		return { identifier: nodeContext.nodeIdentifier, text: document.getText(expandedRange), range: expandedRange, uri: document.uri, startIndex, endIndex };
 	}
@@ -226,7 +226,7 @@ export class SymbolAtCursor extends PromptElement<SymbolAtCursorProps, SymbolAtC
 		// Include a reference for the code on the line that the cursor is on
 		const info = [...state.definitions, ...state.references];
 		if (state.codeAtCursor) {
-			const { startIndex, endIndex } = vscodeToTreeSitterOffsetRange(state.range, state.document);
+			const { startIndex, endIndex } = zyraxoncodeToTreeSitterOffsetRange(state.range, state.document);
 			info.push({ version: state.document.version, uri: state.document.uri, range: state.range, text: state.codeAtCursor, startIndex, endIndex });
 		}
 

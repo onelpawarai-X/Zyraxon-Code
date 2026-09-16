@@ -3,30 +3,30 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { SymbolsTree } from '../tree';
 import { ContextKey } from '../utils';
 import { TypeHierarchyDirection, TypeItem, TypesTreeInput } from './model';
 
-export function register(tree: SymbolsTree, context: vscode.ExtensionContext): void {
+export function register(tree: SymbolsTree, context: zyraxoncode.ExtensionContext): void {
 
 	const direction = new RichTypesDirection(context.workspaceState, TypeHierarchyDirection.Subtypes);
 
 	function showTypeHierarchy() {
-		if (vscode.window.activeTextEditor) {
-			const input = new TypesTreeInput(new vscode.Location(vscode.window.activeTextEditor.document.uri, vscode.window.activeTextEditor.selection.active), direction.value);
+		if (zyraxoncode.window.activeTextEditor) {
+			const input = new TypesTreeInput(new zyraxoncode.Location(zyraxoncode.window.activeTextEditor.document.uri, zyraxoncode.window.activeTextEditor.selection.active), direction.value);
 			tree.setInput(input);
 		}
 	}
 
-	function setTypeHierarchyDirection(value: TypeHierarchyDirection, anchor: TypeItem | vscode.Location | unknown) {
+	function setTypeHierarchyDirection(value: TypeHierarchyDirection, anchor: TypeItem | zyraxoncode.Location | unknown) {
 		direction.value = value;
 
 		let newInput: TypesTreeInput | undefined;
 		const oldInput = tree.getInput();
 		if (anchor instanceof TypeItem) {
-			newInput = new TypesTreeInput(new vscode.Location(anchor.item.uri, anchor.item.selectionRange.start), direction.value);
-		} else if (anchor instanceof vscode.Location) {
+			newInput = new TypesTreeInput(new zyraxoncode.Location(anchor.item.uri, anchor.item.selectionRange.start), direction.value);
+		} else if (anchor instanceof zyraxoncode.Location) {
 			newInput = new TypesTreeInput(anchor, direction.value);
 		} else if (oldInput instanceof TypesTreeInput) {
 			newInput = new TypesTreeInput(oldInput.location, direction.value);
@@ -37,10 +37,10 @@ export function register(tree: SymbolsTree, context: vscode.ExtensionContext): v
 	}
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('references-view.showTypeHierarchy', showTypeHierarchy),
-		vscode.commands.registerCommand('references-view.showSupertypes', (item: TypeItem | vscode.Location | unknown) => setTypeHierarchyDirection(TypeHierarchyDirection.Supertypes, item)),
-		vscode.commands.registerCommand('references-view.showSubtypes', (item: TypeItem | vscode.Location | unknown) => setTypeHierarchyDirection(TypeHierarchyDirection.Subtypes, item)),
-		vscode.commands.registerCommand('references-view.removeTypeItem', removeTypeItem)
+		zyraxoncode.commands.registerCommand('references-view.showTypeHierarchy', showTypeHierarchy),
+		zyraxoncode.commands.registerCommand('references-view.showSupertypes', (item: TypeItem | zyraxoncode.Location | unknown) => setTypeHierarchyDirection(TypeHierarchyDirection.Supertypes, item)),
+		zyraxoncode.commands.registerCommand('references-view.showSubtypes', (item: TypeItem | zyraxoncode.Location | unknown) => setTypeHierarchyDirection(TypeHierarchyDirection.Subtypes, item)),
+		zyraxoncode.commands.registerCommand('references-view.removeTypeItem', removeTypeItem)
 	);
 }
 
@@ -57,7 +57,7 @@ class RichTypesDirection {
 	private _ctxMode = new ContextKey<TypeHierarchyDirection>('references-view.typeHierarchyMode');
 
 	constructor(
-		private _mem: vscode.Memento,
+		private _mem: zyraxoncode.Memento,
 		private _value: TypeHierarchyDirection = TypeHierarchyDirection.Subtypes,
 	) {
 		const raw = _mem.get<TypeHierarchyDirection>(RichTypesDirection._key);

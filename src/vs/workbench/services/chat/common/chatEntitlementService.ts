@@ -1249,7 +1249,7 @@ export class ChatEntitlementRequests extends Disposable {
 	async signIn(options?: { useSocialProvider?: string; additionalScopes?: readonly string[] }): Promise<{ defaultAccount?: IDefaultAccount; entitlements?: IEntitlements }> {
 		const defaultAccount = await this.defaultAccountService.signIn({
 			additionalScopes: options?.additionalScopes,
-			extraAuthorizeParameters: { get_started_with: 'copilot-vscode' },
+			extraAuthorizeParameters: { get_started_with: 'copilot-zyraxoncode' },
 			provider: options?.useSocialProvider
 		});
 		if (!defaultAccount) {

@@ -15,7 +15,7 @@ export function applyTaskTools(server: McpServer, appService: ApplicationService
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_task_assert_tasks',
+	// 	'zyraxoncode_automation_task_assert_tasks',
 	// 	'Assert that specific tasks exist with given properties',
 	// 	{
 	// 		filter: z.string().describe('Filter string for tasks'),
@@ -48,7 +48,7 @@ export function applyTaskTools(server: McpServer, appService: ApplicationService
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_task_configure',
+		'zyraxoncode_automation_task_configure',
 		'Configure a task with specific properties',
 		{
 			properties: z.object({

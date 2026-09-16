@@ -3,53 +3,53 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { DocumentSelector, Position } from 'vscode-languageserver-protocol';
+import type * as zyraxoncode from 'zyraxoncode';
+import { DocumentSelector, Position } from 'zyraxoncode-languageserver-protocol';
 import { GhostTextLogContext } from '../../extension/completions-core/common/ghostTextContext';
-import { CompletionsTelemetryServiceBridge, ICompletionsTelemetryService } from '../../extension/completions-core/vscode-node/bridge/src/completionsTelemetryServiceBridge';
-import { CopilotExtensionStatus, ICompletionsExtensionStatus } from '../../extension/completions-core/vscode-node/extension/src/extensionStatus';
-import { CopilotTokenManagerImpl, ICompletionsCopilotTokenManager } from '../../extension/completions-core/vscode-node/lib/src/auth/copilotTokenManager';
-import { ICompletionsCitationManager, IPCitationDetail, IPDocumentCitation } from '../../extension/completions-core/vscode-node/lib/src/citationManager';
-import { CompletionNotifier, ICompletionsNotifierService } from '../../extension/completions-core/vscode-node/lib/src/completionNotifier';
-import { ICompletionsObservableWorkspace } from '../../extension/completions-core/vscode-node/lib/src/completionsObservableWorkspace';
-import { BuildInfo, BuildType, ConfigKeyType, DefaultsOnlyConfigProvider, EditorInfo, EditorPluginInfo, ICompletionsConfigProvider, ICompletionsEditorAndPluginInfo, InMemoryConfigProvider } from '../../extension/completions-core/vscode-node/lib/src/config';
-import { ICompletionsUserErrorNotifierService, UserErrorNotifier } from '../../extension/completions-core/vscode-node/lib/src/error/userErrorNotifier';
-import { Features } from '../../extension/completions-core/vscode-node/lib/src/experiments/features';
-import { ICompletionsFeaturesService } from '../../extension/completions-core/vscode-node/lib/src/experiments/featuresService';
-import { FileReader, ICompletionsFileReaderService } from '../../extension/completions-core/vscode-node/lib/src/fileReader';
-import { ICompletionsFileSystemService } from '../../extension/completions-core/vscode-node/lib/src/fileSystem';
-import { AsyncCompletionManager, ICompletionsAsyncManagerService } from '../../extension/completions-core/vscode-node/lib/src/ghostText/asyncCompletions';
-import { CompletionsCache, ICompletionsCacheService } from '../../extension/completions-core/vscode-node/lib/src/ghostText/completionsCache';
-import { ConfigBlockModeConfig, ICompletionsBlockModeConfig } from '../../extension/completions-core/vscode-node/lib/src/ghostText/configBlockMode';
-import { CopilotCompletion } from '../../extension/completions-core/vscode-node/lib/src/ghostText/copilotCompletion';
-import { CurrentGhostText, ICompletionsCurrentGhostText } from '../../extension/completions-core/vscode-node/lib/src/ghostText/current';
-import { GetGhostTextOptions } from '../../extension/completions-core/vscode-node/lib/src/ghostText/ghostText';
-import { ICompletionsLastGhostText, LastGhostText } from '../../extension/completions-core/vscode-node/lib/src/ghostText/last';
-import { ITextEditorOptions } from '../../extension/completions-core/vscode-node/lib/src/ghostText/normalizeIndent';
-import { ICompletionsSpeculativeRequestCache, SpeculativeRequestCache } from '../../extension/completions-core/vscode-node/lib/src/ghostText/speculativeRequestCache';
-import { GhostText } from '../../extension/completions-core/vscode-node/lib/src/inlineCompletion';
-import { LocalFileSystem } from '../../extension/completions-core/vscode-node/lib/src/localFileSystem';
-import { LogLevel as CompletionsLogLevel, ICompletionsLogTargetService } from '../../extension/completions-core/vscode-node/lib/src/logger';
-import { ICompletionsFetcherService } from '../../extension/completions-core/vscode-node/lib/src/networking';
-import { ActionItem, ICompletionsNotificationSender } from '../../extension/completions-core/vscode-node/lib/src/notificationSender';
-import { ICompletionsOpenAIFetcherService, LiveOpenAIFetcher } from '../../extension/completions-core/vscode-node/lib/src/openai/fetch';
-import { AvailableModelsManager, ICompletionsModelManagerService } from '../../extension/completions-core/vscode-node/lib/src/openai/model';
-import { ICompletionsStatusReporter, StatusChangedEvent, StatusReporter } from '../../extension/completions-core/vscode-node/lib/src/progress';
-import { CompletionsPromptFactory, ICompletionsPromptFactoryService } from '../../extension/completions-core/vscode-node/lib/src/prompt/completionsPromptFactory/completionsPromptFactory';
-import { ContextProviderBridge, ICompletionsContextProviderBridgeService } from '../../extension/completions-core/vscode-node/lib/src/prompt/components/contextProviderBridge';
-import { CachedContextProviderRegistry, CoreContextProviderRegistry, DefaultContextProvidersContainer, ICompletionsContextProviderRegistryService, ICompletionsDefaultContextProviders } from '../../extension/completions-core/vscode-node/lib/src/prompt/contextProviderRegistry';
-import { ContextProviderStatistics, ICompletionsContextProviderService } from '../../extension/completions-core/vscode-node/lib/src/prompt/contextProviderStatistics';
-import { FullRecentEditsProvider, ICompletionsRecentEditsProviderService } from '../../extension/completions-core/vscode-node/lib/src/prompt/recentEdits/recentEditsProvider';
-import { CompositeRelatedFilesProvider } from '../../extension/completions-core/vscode-node/lib/src/prompt/similarFiles/compositeRelatedFilesProvider';
-import { ICompletionsRelatedFilesProviderService } from '../../extension/completions-core/vscode-node/lib/src/prompt/similarFiles/relatedFiles';
-import { ICompletionsTelemetryUserConfigService, TelemetryUserConfig } from '../../extension/completions-core/vscode-node/lib/src/telemetry/userConfig';
-import { INotebookDocument, ITextDocument, TextDocumentIdentifier } from '../../extension/completions-core/vscode-node/lib/src/textDocument';
-import { ICompletionsTextDocumentManagerService, TextDocumentChangeEvent, TextDocumentCloseEvent, TextDocumentFocusedEvent, TextDocumentManager, TextDocumentOpenEvent, WorkspaceFoldersChangeEvent } from '../../extension/completions-core/vscode-node/lib/src/textDocumentManager';
-import { Event } from '../../extension/completions-core/vscode-node/lib/src/util/event';
-import { ICompletionsPromiseQueueService, PromiseQueue } from '../../extension/completions-core/vscode-node/lib/src/util/promiseQueue';
-import { ICompletionsRuntimeModeService, RuntimeMode } from '../../extension/completions-core/vscode-node/lib/src/util/runtimeMode';
-import { setExternalTokenizerProvider, TokenizerName, type ExternalTokenizerProvider, type Tokenizer } from '../../extension/completions-core/vscode-node/prompt/src/tokenization';
-import { DocumentContext, WorkspaceFolder } from '../../extension/completions-core/vscode-node/types/src';
+import { CompletionsTelemetryServiceBridge, ICompletionsTelemetryService } from '../../extension/completions-core/zyraxoncode-node/bridge/src/completionsTelemetryServiceBridge';
+import { CopilotExtensionStatus, ICompletionsExtensionStatus } from '../../extension/completions-core/zyraxoncode-node/extension/src/extensionStatus';
+import { CopilotTokenManagerImpl, ICompletionsCopilotTokenManager } from '../../extension/completions-core/zyraxoncode-node/lib/src/auth/copilotTokenManager';
+import { ICompletionsCitationManager, IPCitationDetail, IPDocumentCitation } from '../../extension/completions-core/zyraxoncode-node/lib/src/citationManager';
+import { CompletionNotifier, ICompletionsNotifierService } from '../../extension/completions-core/zyraxoncode-node/lib/src/completionNotifier';
+import { ICompletionsObservableWorkspace } from '../../extension/completions-core/zyraxoncode-node/lib/src/completionsObservableWorkspace';
+import { BuildInfo, BuildType, ConfigKeyType, DefaultsOnlyConfigProvider, EditorInfo, EditorPluginInfo, ICompletionsConfigProvider, ICompletionsEditorAndPluginInfo, InMemoryConfigProvider } from '../../extension/completions-core/zyraxoncode-node/lib/src/config';
+import { ICompletionsUserErrorNotifierService, UserErrorNotifier } from '../../extension/completions-core/zyraxoncode-node/lib/src/error/userErrorNotifier';
+import { Features } from '../../extension/completions-core/zyraxoncode-node/lib/src/experiments/features';
+import { ICompletionsFeaturesService } from '../../extension/completions-core/zyraxoncode-node/lib/src/experiments/featuresService';
+import { FileReader, ICompletionsFileReaderService } from '../../extension/completions-core/zyraxoncode-node/lib/src/fileReader';
+import { ICompletionsFileSystemService } from '../../extension/completions-core/zyraxoncode-node/lib/src/fileSystem';
+import { AsyncCompletionManager, ICompletionsAsyncManagerService } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/asyncCompletions';
+import { CompletionsCache, ICompletionsCacheService } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/completionsCache';
+import { ConfigBlockModeConfig, ICompletionsBlockModeConfig } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/configBlockMode';
+import { CopilotCompletion } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/copilotCompletion';
+import { CurrentGhostText, ICompletionsCurrentGhostText } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/current';
+import { GetGhostTextOptions } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/ghostText';
+import { ICompletionsLastGhostText, LastGhostText } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/last';
+import { ITextEditorOptions } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/normalizeIndent';
+import { ICompletionsSpeculativeRequestCache, SpeculativeRequestCache } from '../../extension/completions-core/zyraxoncode-node/lib/src/ghostText/speculativeRequestCache';
+import { GhostText } from '../../extension/completions-core/zyraxoncode-node/lib/src/inlineCompletion';
+import { LocalFileSystem } from '../../extension/completions-core/zyraxoncode-node/lib/src/localFileSystem';
+import { LogLevel as CompletionsLogLevel, ICompletionsLogTargetService } from '../../extension/completions-core/zyraxoncode-node/lib/src/logger';
+import { ICompletionsFetcherService } from '../../extension/completions-core/zyraxoncode-node/lib/src/networking';
+import { ActionItem, ICompletionsNotificationSender } from '../../extension/completions-core/zyraxoncode-node/lib/src/notificationSender';
+import { ICompletionsOpenAIFetcherService, LiveOpenAIFetcher } from '../../extension/completions-core/zyraxoncode-node/lib/src/openai/fetch';
+import { AvailableModelsManager, ICompletionsModelManagerService } from '../../extension/completions-core/zyraxoncode-node/lib/src/openai/model';
+import { ICompletionsStatusReporter, StatusChangedEvent, StatusReporter } from '../../extension/completions-core/zyraxoncode-node/lib/src/progress';
+import { CompletionsPromptFactory, ICompletionsPromptFactoryService } from '../../extension/completions-core/zyraxoncode-node/lib/src/prompt/completionsPromptFactory/completionsPromptFactory';
+import { ContextProviderBridge, ICompletionsContextProviderBridgeService } from '../../extension/completions-core/zyraxoncode-node/lib/src/prompt/components/contextProviderBridge';
+import { CachedContextProviderRegistry, CoreContextProviderRegistry, DefaultContextProvidersContainer, ICompletionsContextProviderRegistryService, ICompletionsDefaultContextProviders } from '../../extension/completions-core/zyraxoncode-node/lib/src/prompt/contextProviderRegistry';
+import { ContextProviderStatistics, ICompletionsContextProviderService } from '../../extension/completions-core/zyraxoncode-node/lib/src/prompt/contextProviderStatistics';
+import { FullRecentEditsProvider, ICompletionsRecentEditsProviderService } from '../../extension/completions-core/zyraxoncode-node/lib/src/prompt/recentEdits/recentEditsProvider';
+import { CompositeRelatedFilesProvider } from '../../extension/completions-core/zyraxoncode-node/lib/src/prompt/similarFiles/compositeRelatedFilesProvider';
+import { ICompletionsRelatedFilesProviderService } from '../../extension/completions-core/zyraxoncode-node/lib/src/prompt/similarFiles/relatedFiles';
+import { ICompletionsTelemetryUserConfigService, TelemetryUserConfig } from '../../extension/completions-core/zyraxoncode-node/lib/src/telemetry/userConfig';
+import { INotebookDocument, ITextDocument, TextDocumentIdentifier } from '../../extension/completions-core/zyraxoncode-node/lib/src/textDocument';
+import { ICompletionsTextDocumentManagerService, TextDocumentChangeEvent, TextDocumentCloseEvent, TextDocumentFocusedEvent, TextDocumentManager, TextDocumentOpenEvent, WorkspaceFoldersChangeEvent } from '../../extension/completions-core/zyraxoncode-node/lib/src/textDocumentManager';
+import { Event } from '../../extension/completions-core/zyraxoncode-node/lib/src/util/event';
+import { ICompletionsPromiseQueueService, PromiseQueue } from '../../extension/completions-core/zyraxoncode-node/lib/src/util/promiseQueue';
+import { ICompletionsRuntimeModeService, RuntimeMode } from '../../extension/completions-core/zyraxoncode-node/lib/src/util/runtimeMode';
+import { setExternalTokenizerProvider, TokenizerName, type ExternalTokenizerProvider, type Tokenizer } from '../../extension/completions-core/zyraxoncode-node/prompt/src/tokenization';
+import { DocumentContext, WorkspaceFolder } from '../../extension/completions-core/zyraxoncode-node/types/src';
 import { DebugRecorder } from '../../extension/inlineEdits/node/debugRecorder';
 import { INextEditProvider, NESInlineCompletionContext, NextEditProvider } from '../../extension/inlineEdits/node/nextEditProvider';
 import { LlmNESTelemetryBuilder, NextEditProviderTelemetryBuilder, TelemetrySender } from '../../extension/inlineEdits/node/nextEditProviderTelemetry';
@@ -132,7 +132,7 @@ export { TokenizerName };
 export type { ExternalTokenizerProvider, Tokenizer };
 
 /**
- * Log levels (taken from vscode.d.ts)
+ * Log levels (taken from zyraxoncode.d.ts)
  */
 export enum LogLevel {
 
@@ -186,7 +186,7 @@ export interface INESProviderOptions {
 	readonly telemetrySender: ITelemetrySender;
 	readonly logTarget?: ILogTarget;
 	/**
-	 * Identifies the host editor (e.g. `{ name: 'vscode', version: '1.99.0' }`).
+	 * Identifies the host editor (e.g. `{ name: 'zyraxoncode', version: '1.99.0' }`).
 	 * Together with {@link editorPluginInfo} this sets the `Editor-Version` and
 	 * `Editor-Plugin-Version` headers on outgoing requests (including the model
 	 * list fetch) so the backend can identify the caller.
@@ -239,7 +239,7 @@ export interface INESResult {
 
 export interface INESProvider<T extends INESResult = INESResult> {
 	getId(): string;
-	getNextEdit(documentUri: vscode.Uri, cancellationToken: CancellationToken): Promise<T>;
+	getNextEdit(documentUri: zyraxoncode.Uri, cancellationToken: CancellationToken): Promise<T>;
 	handleShown(suggestion: T): void;
 	handleAcceptance(suggestion: T): void;
 	handleRejection(suggestion: T): void;
@@ -324,7 +324,7 @@ class NESProvider extends Disposable implements INESProvider<NESResult> {
 		}
 	}
 
-	async getNextEdit(documentUri: vscode.Uri, cancellationToken: CancellationToken): Promise<NESResult> {
+	async getNextEdit(documentUri: zyraxoncode.Uri, cancellationToken: CancellationToken): Promise<NESResult> {
 		const docId = DocumentId.create(documentUri.toString());
 
 		// Create minimal required context objects
@@ -1036,9 +1036,9 @@ function setupCompletionServices(options: IInlineCompletionsProviderOptions): II
 		readonly sessionId = editorSession.sessionId;
 		readonly machineId = editorSession.machineId;
 		readonly devDeviceId = editorSession.machineId;
-		readonly vscodeVersion = options.editorInfo.version;
+		readonly zyraxoncodeVersion = options.editorInfo.version;
 		readonly isActive = true;
-		readonly onDidChangeWindowState: vscode.Event<vscode.WindowState> = VsEvent.None;
+		readonly onDidChangeWindowState: zyraxoncode.Event<zyraxoncode.WindowState> = VsEvent.None;
 		readonly remoteName = editorSession.remoteName;
 		readonly uiKind = editorSession.uiKind === 'web' ? 'web' : 'desktop';
 		readonly OS = process.platform === 'darwin' ? OperatingSystem.Macintosh : process.platform === 'win32' ? OperatingSystem.Windows : OperatingSystem.Linux;

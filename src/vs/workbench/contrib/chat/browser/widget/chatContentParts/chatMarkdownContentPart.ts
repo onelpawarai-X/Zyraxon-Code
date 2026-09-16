@@ -239,7 +239,7 @@ export class ChatMarkdownContentPart extends Disposable implements IChatContentP
 					const isCodeBlockComplete = !isResponseVM(context.element) || context.element.isComplete || !raw || codeblockHasClosingBackticks(raw);
 					const hasChatOutputRenderer = !!languageId
 						&& this.chatOutputRendererService.hasCodeBlockRenderer(languageId);
-					if ((!text || (text.startsWith('<vscode_codeblock_uri') && !text.includes('\n')))
+					if ((!text || (text.startsWith('<zyraxoncode_codeblock_uri') && !text.includes('\n')))
 						&& !isCodeBlockComplete
 						&& !hasChatOutputRenderer) {
 						const hideEmptyCodeblock = $('div');
@@ -273,7 +273,7 @@ export class ChatMarkdownContentPart extends Disposable implements IChatContentP
 							return diffPart.element;
 						}
 					}
-					if (languageId === 'vscode-extensions') {
+					if (languageId === 'zyraxoncode-extensions') {
 						const chatExtensions = store.add(instantiationService.createInstance(ChatExtensionsContentPart, { kind: 'extensions', extensions: text.split(',') }));
 						return chatExtensions.domNode;
 					}

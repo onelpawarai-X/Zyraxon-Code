@@ -1,4 +1,4 @@
-<VSCode.Cell id="<CELL_ID_0>" language="python">
+<ZyraxonCode.Cell id="<CELL_ID_0>" language="python">
 import math
 
 def circle_area(radius):
@@ -12,4 +12,4 @@ def circle_area(radius):
     float: The area of the circle.
     """
     return math.pi * radius**2
-</VSCode.Cell>
+</ZyraxonCode.Cell>

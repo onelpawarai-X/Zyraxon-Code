@@ -248,7 +248,7 @@ export class AgentHostRestrictedTelemetrySender implements IAgentHostRestrictedT
 			: this._commonProps;
 		const envelope = {
 			ver: 1,
-			name: `Microsoft.ApplicationInsights.${iKey.replace(/-/g, '')}.Event`,
+			name: `Zyraxon.ApplicationInsights.${iKey.replace(/-/g, '')}.Event`,
 			time: new Date().toISOString(),
 			sampleRate: 100,
 			seq: '',

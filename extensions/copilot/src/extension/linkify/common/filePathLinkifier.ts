@@ -12,7 +12,7 @@ import * as path from '../../../util/vs/base/common/path';
 import { isWindows } from '../../../util/vs/base/common/platform';
 import * as resources from '../../../util/vs/base/common/resources';
 import { isUriComponents } from '../../../util/vs/base/common/uri';
-import { Uri } from '../../../vscodeTypes';
+import { Uri } from '../../../zyraxoncodeTypes';
 import { coalesceParts, LinkifiedPart, LinkifiedText, LinkifyLocationAnchor } from './linkifiedText';
 import { IContributedLinkifier, LinkifierContext } from './linkifyService';
 import { IStatCache } from './statCache';

@@ -2,10 +2,10 @@
 
 This document is the canonical spec for the **system-wide keybindings** feature: user
 `keybindings.json` entries that fire even when ZYRAXON Code is not the focused application, backed by
-Electron's [`globalShortcut`](https://www.electronjs.org/docs/latest/api/accelerator) module.
+Electron's [`globalShortcut`](__ZYRAXKEEP__0_) module.
 
-History: introduced in PR microsoft/zyraxon#323871; the first-run notice dialog was later removed in
-PR microsoft/zyraxon#324045 (it could appear in multiple windows at once, and the single-window
+History: introduced in PR zyraxon/zyraxon#323871; the first-run notice dialog was later removed in
+PR zyraxon/zyraxon#324045 (it could appear in multiple windows at once, and the single-window
 election meant to prevent that was racy). The feature is **desktop only** and **always on**.
 
 ## User-facing contract

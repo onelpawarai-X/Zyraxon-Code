@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
-import type { ChatResultPromptTokenDetail, LanguageModelToolInformation } from 'vscode';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { ChatResultPromptTokenDetail, LanguageModelToolInformation } from 'zyraxoncode';
 import { ITokenizer } from '../../../util/common/tokenizer';
 
 /**
@@ -50,8 +50,8 @@ const tagToLabelMapping: Record<string, { category: string; label: string }> = {
 	codebaseToolInstructions: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
 	codeSearchInstructions: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
 	codeSearchToolUseInstructions: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
-	vscodeAPIToolUseInstructions: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
-	vscodeCmdToolUseInstructions: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
+	zyraxoncodeAPIToolUseInstructions: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
+	zyraxoncodeCmdToolUseInstructions: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
 	searchExtensionToolUseInstructions: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
 	extensionSearchResponseRules: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
 	grounding: { category: PromptTokenCategory.System, label: PromptTokenLabel.SystemInstructions },
@@ -187,7 +187,7 @@ const tagToLabelMapping: Record<string, { category: string; label: string }> = {
 	// ZYRAXON Code specific context
 	settings: { category: PromptTokenCategory.UserContext, label: PromptTokenLabel.Messages },
 	command: { category: PromptTokenCategory.UserContext, label: PromptTokenLabel.Messages },
-	currentVSCodeVersion: { category: PromptTokenCategory.UserContext, label: PromptTokenLabel.Messages },
+	currentZyraxonCodeVersion: { category: PromptTokenCategory.UserContext, label: PromptTokenLabel.Messages },
 	releaseNotes: { category: PromptTokenCategory.UserContext, label: PromptTokenLabel.Messages },
 	// Example tags for ZYRAXON Code participant
 	singleSettingExample: { category: PromptTokenCategory.UserContext, label: PromptTokenLabel.Messages },

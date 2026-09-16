@@ -105,7 +105,7 @@ export const HOOK_COMMAND_FIELD_DESCRIPTIONS: Record<string, string> = {
  * JSON Schema for GitHub Copilot hook configuration files.
  * Hooks enable executing custom shell commands at strategic points in an agent's workflow.
  */
-const vscodeHookCommandSchema: IJSONSchema = {
+const zyraxoncodeHookCommandSchema: IJSONSchema = {
 	type: 'object',
 	additionalProperties: true,
 	required: ['type'],
@@ -159,7 +159,7 @@ const vscodeHookCommandSchema: IJSONSchema = {
 
 const hookArraySchema: IJSONSchema = {
 	type: 'array',
-	items: vscodeHookCommandSchema
+	items: zyraxoncodeHookCommandSchema
 };
 
 /**
@@ -178,7 +178,7 @@ function buildHookProperties(target: Target, arraySchema: IJSONSchema): Record<s
 /**
  * Hook properties for the ZYRAXON Code format.
  */
-const vscodeHookProperties: Record<string, IJSONSchema> = buildHookProperties(Target.VSCode, hookArraySchema);
+const zyraxoncodeHookProperties: Record<string, IJSONSchema> = buildHookProperties(Target.ZyraxonCode, hookArraySchema);
 
 /**
  * Hook command schema for the Copilot CLI format.
@@ -235,7 +235,7 @@ const copilotCliHookArraySchema: IJSONSchema = {
 const copilotCliHookProperties: Record<string, IJSONSchema> = buildHookProperties(Target.GitHubCopilot, copilotCliHookArraySchema);
 
 export const hookFileSchema: IJSONSchema = {
-	$schema: 'http://json-schema.org/draft-07/schema#',
+	$schema: '__ZYRAXKEEP__0_',
 	type: 'object',
 	description: nls.localize('hookFile.description', 'GitHub Copilot hook configuration file. Hooks enable executing custom shell commands at strategic points in an agent\'s workflow.'),
 	additionalProperties: true,
@@ -271,7 +271,7 @@ export const hookFileSchema: IJSONSchema = {
 		// ZYRAXON Code / PascalCase format
 		properties: {
 			hooks: {
-				properties: vscodeHookProperties
+				properties: zyraxoncodeHookProperties
 			}
 		}
 	},
@@ -303,7 +303,7 @@ export const hookFileSchema: IJSONSchema = {
 /**
  * URI for the hook schema registration.
  */
-export const HOOK_SCHEMA_URI = 'vscode://schemas/hooks';
+export const HOOK_SCHEMA_URI = '__ZYRAXKEEP__1_';
 
 /**
  * Normalizes a raw hook type identifier to the canonical HookType enum value.

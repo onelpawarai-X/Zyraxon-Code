@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { TypeScriptServiceConfiguration } from '../configuration/configuration';
 import { DiagnosticLanguage } from '../configuration/languageDescription';
 import { TelemetryReporter } from '../logging/telemetry';
@@ -13,7 +13,7 @@ import { Disposable } from '../utils/dispose';
 import { equals } from '../utils/objects';
 import { ResourceMap } from '../utils/resourceMap';
 
-function diagnosticsEquals(a: vscode.Diagnostic, b: vscode.Diagnostic): boolean {
+function diagnosticsEquals(a: zyraxoncode.Diagnostic, b: zyraxoncode.Diagnostic): boolean {
 	if (a === b) {
 		return true;
 	}
@@ -40,18 +40,18 @@ export const enum DiagnosticKind {
 
 class FileDiagnostics {
 
-	private readonly _diagnostics = new Map<DiagnosticKind, ReadonlyArray<vscode.Diagnostic>>();
+	private readonly _diagnostics = new Map<DiagnosticKind, ReadonlyArray<zyraxoncode.Diagnostic>>();
 
 	constructor(
-		public readonly file: vscode.Uri,
+		public readonly file: zyraxoncode.Uri,
 		public language: DiagnosticLanguage
 	) { }
 
 	public updateDiagnostics(
 		language: DiagnosticLanguage,
 		kind: DiagnosticKind,
-		diagnostics: ReadonlyArray<vscode.Diagnostic>,
-		ranges: ReadonlyArray<vscode.Range> | undefined
+		diagnostics: ReadonlyArray<zyraxoncode.Diagnostic>,
+		ranges: ReadonlyArray<zyraxoncode.Range> | undefined
 	): boolean {
 		if (language !== this.language) {
 			this._diagnostics.clear();
@@ -71,7 +71,7 @@ class FileDiagnostics {
 		return true;
 	}
 
-	public getAllDiagnostics(settings: DiagnosticSettings): vscode.Diagnostic[] {
+	public getAllDiagnostics(settings: DiagnosticSettings): zyraxoncode.Diagnostic[] {
 		if (!settings.getValidate(this.language)) {
 			return [];
 		}
@@ -83,7 +83,7 @@ class FileDiagnostics {
 		];
 	}
 
-	public delete(toDelete: vscode.Diagnostic): void {
+	public delete(toDelete: zyraxoncode.Diagnostic): void {
 		for (const [type, diags] of this._diagnostics) {
 			this._diagnostics.set(type, diags.filter(diag => !diagnosticsEquals(diag, toDelete)));
 		}
@@ -93,8 +93,8 @@ class FileDiagnostics {
 	 * @param ranges The ranges whose diagnostics were updated.
 	 */
 	private updateRegionDiagnostics(
-		diagnostics: ReadonlyArray<vscode.Diagnostic>,
-		ranges: ReadonlyArray<vscode.Range>): boolean {
+		diagnostics: ReadonlyArray<zyraxoncode.Diagnostic>,
+		ranges: ReadonlyArray<zyraxoncode.Range>): boolean {
 		if (!this._diagnostics.get(DiagnosticKind.Semantic)) {
 			this._diagnostics.set(DiagnosticKind.Semantic, diagnostics);
 			return true;
@@ -111,13 +111,13 @@ class FileDiagnostics {
 		return this.get(DiagnosticKind.Suggestion).filter(x => {
 			if (!enableSuggestions) {
 				// Still show unused
-				return x.tags && (x.tags.includes(vscode.DiagnosticTag.Unnecessary) || x.tags.includes(vscode.DiagnosticTag.Deprecated));
+				return x.tags && (x.tags.includes(zyraxoncode.DiagnosticTag.Unnecessary) || x.tags.includes(zyraxoncode.DiagnosticTag.Deprecated));
 			}
 			return true;
 		});
 	}
 
-	private get(kind: DiagnosticKind): ReadonlyArray<vscode.Diagnostic> {
+	private get(kind: DiagnosticKind): ReadonlyArray<zyraxoncode.Diagnostic> {
 		return this._diagnostics.get(kind) || [];
 	}
 }
@@ -181,16 +181,16 @@ interface DiagnosticPerformanceData extends TsDiagnosticPerformanceData {
 class DiagnosticsTelemetryManager extends Disposable {
 
 	private readonly _diagnosticCodesMap = new Map<number, number>();
-	private readonly _diagnosticSnapshotsMap = new ResourceMap<readonly vscode.Diagnostic[]>(uri => uri.toString(), { onCaseInsensitiveFileSystem: false });
+	private readonly _diagnosticSnapshotsMap = new ResourceMap<readonly zyraxoncode.Diagnostic[]>(uri => uri.toString(), { onCaseInsensitiveFileSystem: false });
 	private _timeout: NodeJS.Timeout | undefined;
 	private _telemetryEmitter: NodeJS.Timeout | undefined;
 
 	constructor(
 		private readonly _telemetryReporter: TelemetryReporter,
-		private readonly _diagnosticsCollection: vscode.DiagnosticCollection,
+		private readonly _diagnosticsCollection: zyraxoncode.DiagnosticCollection,
 	) {
 		super();
-		this._register(vscode.workspace.onDidChangeTextDocument(e => {
+		this._register(zyraxoncode.workspace.onDidChangeTextDocument(e => {
 			if (e.document.languageId === 'typescript' || e.document.languageId === 'typescriptreact') {
 				this._updateAllDiagnosticCodesAfterTimeout();
 			}
@@ -284,7 +284,7 @@ class DiagnosticsTelemetryManager extends Disposable {
 export class DiagnosticsManager extends Disposable {
 	private readonly _diagnostics: ResourceMap<FileDiagnostics>;
 	private readonly _settings = new DiagnosticSettings();
-	private readonly _currentDiagnostics: vscode.DiagnosticCollection;
+	private readonly _currentDiagnostics: zyraxoncode.DiagnosticCollection;
 	private readonly _pendingUpdates: ResourceMap</* timeout */ any>;
 
 	private readonly _updateDelay = 50;
@@ -301,7 +301,7 @@ export class DiagnosticsManager extends Disposable {
 		this._diagnostics = new ResourceMap<FileDiagnostics>(undefined, { onCaseInsensitiveFileSystem });
 		this._pendingUpdates = new ResourceMap<any>(undefined, { onCaseInsensitiveFileSystem });
 
-		this._currentDiagnostics = this._register(vscode.languages.createDiagnosticCollection(owner));
+		this._currentDiagnostics = this._register(zyraxoncode.languages.createDiagnosticCollection(owner));
 		// Here we are selecting only 1 user out of 1000 to send telemetry diagnostics
 		if (Math.random() * 1000 <= 1 || configuration.enableDiagnosticsTelemetry) {
 			this._diagnosticsTelemetryManager = this._register(new DiagnosticsTelemetryManager(telemetryReporter, this._currentDiagnostics));
@@ -337,11 +337,11 @@ export class DiagnosticsManager extends Disposable {
 	}
 
 	public updateDiagnostics(
-		file: vscode.Uri,
+		file: zyraxoncode.Uri,
 		language: DiagnosticLanguage,
 		kind: DiagnosticKind,
-		diagnostics: ReadonlyArray<vscode.Diagnostic>,
-		ranges: ReadonlyArray<vscode.Range> | undefined,
+		diagnostics: ReadonlyArray<zyraxoncode.Diagnostic>,
+		ranges: ReadonlyArray<zyraxoncode.Range> | undefined,
 	): void {
 		let didUpdate = false;
 		const entry = this._diagnostics.get(file);
@@ -360,18 +360,18 @@ export class DiagnosticsManager extends Disposable {
 	}
 
 	public configFileDiagnosticsReceived(
-		file: vscode.Uri,
-		diagnostics: ReadonlyArray<vscode.Diagnostic>
+		file: zyraxoncode.Uri,
+		diagnostics: ReadonlyArray<zyraxoncode.Diagnostic>
 	): void {
 		this._currentDiagnostics.set(file, diagnostics);
 	}
 
-	public deleteAllDiagnosticsInFile(resource: vscode.Uri): void {
+	public deleteAllDiagnosticsInFile(resource: zyraxoncode.Uri): void {
 		this._currentDiagnostics.delete(resource);
 		this._diagnostics.delete(resource);
 	}
 
-	public deleteDiagnostic(resource: vscode.Uri, diagnostic: vscode.Diagnostic): void {
+	public deleteDiagnostic(resource: zyraxoncode.Uri, diagnostic: zyraxoncode.Diagnostic): void {
 		const fileDiagnostics = this._diagnostics.get(resource);
 		if (fileDiagnostics) {
 			fileDiagnostics.delete(diagnostic);
@@ -379,7 +379,7 @@ export class DiagnosticsManager extends Disposable {
 		}
 	}
 
-	public getDiagnostics(file: vscode.Uri): ReadonlyArray<vscode.Diagnostic> {
+	public getDiagnostics(file: zyraxoncode.Uri): ReadonlyArray<zyraxoncode.Diagnostic> {
 		return this._currentDiagnostics.get(file) || [];
 	}
 
@@ -387,13 +387,13 @@ export class DiagnosticsManager extends Disposable {
 		this._diagnosticsTelemetryManager?.logDiagnosticsPerformanceTelemetry(performanceData);
 	}
 
-	private scheduleDiagnosticsUpdate(file: vscode.Uri) {
+	private scheduleDiagnosticsUpdate(file: zyraxoncode.Uri) {
 		if (!this._pendingUpdates.has(file)) {
 			this._pendingUpdates.set(file, setTimeout(() => this.updateCurrentDiagnostics(file), this._updateDelay));
 		}
 	}
 
-	private updateCurrentDiagnostics(file: vscode.Uri): void {
+	private updateCurrentDiagnostics(file: zyraxoncode.Uri): void {
 		if (this._pendingUpdates.has(file)) {
 			clearTimeout(this._pendingUpdates.get(file));
 			this._pendingUpdates.delete(file);

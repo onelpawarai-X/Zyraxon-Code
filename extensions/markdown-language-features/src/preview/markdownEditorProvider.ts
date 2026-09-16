@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { Disposable } from '../util/dispose';
 import { MdLinkOpener } from '../util/openDocumentLink';
 import { getMarkdownLocalResourceRoots } from '../util/resources';
@@ -11,13 +11,13 @@ import { ChangedLineRange, MarkdownPreviewLineDiffProvider } from './lineDiff';
 
 /**
  * Experimental hybrid (WYSIWYG) Markdown editor backed by the
- * `@vscode/markdown-editor` component. The {@link vscode.TextDocument} remains
+ * `@zyraxoncode/markdown-editor` component. The {@link zyraxoncode.TextDocument} remains
  * the single source of truth, so native undo/redo, dirty state and hot-exit are
  * preserved.
  */
-export class MarkdownEditorProvider extends Disposable implements vscode.CustomTextEditorProvider {
+export class MarkdownEditorProvider extends Disposable implements zyraxoncode.CustomTextEditorProvider {
 
-	public static readonly viewType = 'vscode.markdown.editor';
+	public static readonly viewType = 'zyraxoncode.markdown.editor';
 
 	/**
 	 * Memento key under which the last chosen edit/read-only mode is remembered.
@@ -26,44 +26,44 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 	 */
 	static readonly #readonlyStateKey = 'markdown.editor.readonly';
 
-	readonly #mediaRoot: vscode.Uri;
-	readonly #extensionUri: vscode.Uri;
-	readonly #globalState: vscode.Memento;
+	readonly #mediaRoot: zyraxoncode.Uri;
+	readonly #extensionUri: zyraxoncode.Uri;
+	readonly #globalState: zyraxoncode.Memento;
 	readonly #linkOpener: MdLinkOpener;
 
-	constructor(extensionUri: vscode.Uri, globalState: vscode.Memento, linkOpener: MdLinkOpener) {
+	constructor(extensionUri: zyraxoncode.Uri, globalState: zyraxoncode.Memento, linkOpener: MdLinkOpener) {
 		super();
 		this.#extensionUri = extensionUri;
 		this.#globalState = globalState;
 		this.#linkOpener = linkOpener;
-		this.#mediaRoot = vscode.Uri.joinPath(this.#extensionUri, 'markdown-editor-out');
+		this.#mediaRoot = zyraxoncode.Uri.joinPath(this.#extensionUri, 'markdown-editor-out');
 	}
 
 	public async resolveCustomTextEditor(
-		document: vscode.TextDocument,
-		webviewPanel: vscode.WebviewPanel,
-		token: vscode.CancellationToken,
+		document: zyraxoncode.TextDocument,
+		webviewPanel: zyraxoncode.WebviewPanel,
+		token: zyraxoncode.CancellationToken,
 	): Promise<void> {
 		await this.#resolveEditor(document, webviewPanel, token);
 	}
 
 	public async resolveCustomTextEditorInlineDiff(
-		documents: vscode.CustomEditorDiffDocuments<vscode.TextDocument>,
-		webviewPanel: vscode.WebviewPanel,
-		token: vscode.CancellationToken,
+		documents: zyraxoncode.CustomEditorDiffDocuments<zyraxoncode.TextDocument>,
+		webviewPanel: zyraxoncode.WebviewPanel,
+		token: zyraxoncode.CancellationToken,
 	): Promise<void> {
 		await this.#resolveEditor(documents.modified, webviewPanel, token, documents.original);
 	}
 
-	async #resolveEditor(document: vscode.TextDocument, webviewPanel: vscode.WebviewPanel, token: vscode.CancellationToken, originalDocument?: vscode.TextDocument): Promise<void> {
-		if (!vscode.workspace.isTrusted) {
-			const cancel = { title: vscode.l10n.t("Cancel"), isCloseAffordance: true };
-			const openAnyway = { title: vscode.l10n.t("Open Anyway") };
-			const choice = await vscode.window.showWarningMessage(
-				vscode.l10n.t("This Markdown file is in an untrusted workspace. Do you want to open it anyway?"),
+	async #resolveEditor(document: zyraxoncode.TextDocument, webviewPanel: zyraxoncode.WebviewPanel, token: zyraxoncode.CancellationToken, originalDocument?: zyraxoncode.TextDocument): Promise<void> {
+		if (!zyraxoncode.workspace.isTrusted) {
+			const cancel = { title: zyraxoncode.l10n.t("Cancel"), isCloseAffordance: true };
+			const openAnyway = { title: zyraxoncode.l10n.t("Open Anyway") };
+			const choice = await zyraxoncode.window.showWarningMessage(
+				zyraxoncode.l10n.t("This Markdown file is in an untrusted workspace. Do you want to open it anyway?"),
 				{
 					modal: true,
-					detail: vscode.l10n.t("For your security, only continue if you trust the source of this Markdown file."),
+					detail: zyraxoncode.l10n.t("For your security, only continue if you trust the source of this Markdown file."),
 				},
 				cancel,
 				openAnyway,
@@ -82,17 +82,17 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 		this.#wireSingle(document, webviewPanel, originalDocument);
 	}
 
-	#configureWebview(documentUri: vscode.Uri, webview: vscode.Webview): void {
+	#configureWebview(documentUri: zyraxoncode.Uri, webview: zyraxoncode.Webview): void {
 		webview.options = {
 			enableScripts: true,
 			localResourceRoots: getMarkdownLocalResourceRoots(documentUri, [this.#mediaRoot], {
-				includeWorkspaceResources: vscode.workspace.isTrusted,
+				includeWorkspaceResources: zyraxoncode.workspace.isTrusted,
 			}),
 		};
 		webview.html = this.#getHtml(documentUri, webview);
 	}
 
-	#wireSingle(document: vscode.TextDocument, webviewPanel: vscode.WebviewPanel, originalDocument?: vscode.TextDocument): void {
+	#wireSingle(document: zyraxoncode.TextDocument, webviewPanel: zyraxoncode.WebviewPanel, originalDocument?: zyraxoncode.TextDocument): void {
 		const webview = webviewPanel.webview;
 		let isUpdatingFromWebview = false;
 		let editQueue = Promise.resolve();
@@ -118,7 +118,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 					if (message.command === 'undo' || message.command === 'redo') {
 						await editQueue;
 						if (webviewPanel.active) {
-							await vscode.commands.executeCommand(message.command);
+							await zyraxoncode.commands.executeCommand(message.command);
 						}
 					}
 					break;
@@ -129,10 +129,10 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 				}
 				case 'edit': {
 					editQueue = editQueue.then(async () => {
-						const edit = new vscode.WorkspaceEdit();
+						const edit = new zyraxoncode.WorkspaceEdit();
 						edit.replace(
 							document.uri,
-							new vscode.Range(
+							new zyraxoncode.Range(
 								document.positionAt(message.start),
 								document.positionAt(message.endExclusive),
 							),
@@ -140,7 +140,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 						);
 						isUpdatingFromWebview = true;
 						try {
-							await vscode.workspace.applyEdit(edit);
+							await zyraxoncode.workspace.applyEdit(edit);
 						} finally {
 							isUpdatingFromWebview = false;
 						}
@@ -151,7 +151,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 			}
 		});
 
-		const onDocumentChange = vscode.workspace.onDidChangeTextDocument((e) => {
+		const onDocumentChange = zyraxoncode.workspace.onDidChangeTextDocument((e) => {
 			if (e.document.uri.toString() !== document.uri.toString() || isUpdatingFromWebview) {
 				return;
 			}
@@ -163,7 +163,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 			? this.#wireDocumentDiff(originalDocument, document, webview)
 			: this.#wireQuickDiff(document, webview);
 		const comments = this.#wireComments(document, webview);
-		const onDidGrantWorkspaceTrust = vscode.workspace.onDidGrantWorkspaceTrust(() => {
+		const onDidGrantWorkspaceTrust = zyraxoncode.workspace.onDidGrantWorkspaceTrust(() => {
 			this.#configureWebview(document.uri, webview);
 		});
 
@@ -184,8 +184,8 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 	 * are converted to source character offsets here, since the webview works in
 	 * offsets.
 	 */
-	#wireQuickDiff(document: vscode.TextDocument, webview: vscode.Webview): vscode.Disposable {
-		const diffProvider = vscode.window.createSourceControlDiffInformation(document.uri);
+	#wireQuickDiff(document: zyraxoncode.TextDocument, webview: zyraxoncode.Webview): zyraxoncode.Disposable {
+		const diffProvider = zyraxoncode.window.createSourceControlDiffInformation(document.uri);
 
 		const postMarkers = () => {
 			const diffInformation = diffProvider.diffInformation;
@@ -207,16 +207,16 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 				postMarkers();
 			}
 		});
-		const onDocumentChange = vscode.workspace.onDidChangeTextDocument((e) => {
+		const onDocumentChange = zyraxoncode.workspace.onDidChangeTextDocument((e) => {
 			if (e.document.uri.toString() === document.uri.toString()) {
 				postMarkers();
 			}
 		});
 
-		return vscode.Disposable.from(diffProvider, onChange, onMessage, onDocumentChange);
+		return zyraxoncode.Disposable.from(diffProvider, onChange, onMessage, onDocumentChange);
 	}
 
-	#wireDocumentDiff(originalDocument: vscode.TextDocument, modifiedDocument: vscode.TextDocument, webview: vscode.Webview): vscode.Disposable {
+	#wireDocumentDiff(originalDocument: zyraxoncode.TextDocument, modifiedDocument: zyraxoncode.TextDocument, webview: zyraxoncode.Webview): zyraxoncode.Disposable {
 		const lineDiffProvider = new MarkdownPreviewLineDiffProvider(originalDocument, modifiedDocument);
 		const postMarkers = async () => {
 			const originalVersion = originalDocument.version;
@@ -233,13 +233,13 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 				void postMarkers();
 			}
 		});
-		const onDocumentChange = vscode.workspace.onDidChangeTextDocument(event => {
+		const onDocumentChange = zyraxoncode.workspace.onDidChangeTextDocument(event => {
 			if (event.document.uri.toString() === originalDocument.uri.toString() || event.document.uri.toString() === modifiedDocument.uri.toString()) {
 				void postMarkers();
 			}
 		});
 
-		return vscode.Disposable.from(onMessage, onDocumentChange);
+		return zyraxoncode.Disposable.from(onMessage, onDocumentChange);
 	}
 
 	/**
@@ -247,11 +247,11 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 	 * editor renders its comments from) to the webview: existing comments are
 	 * forwarded for rendering, and comments the user adds in the Markdown editor
 	 * are written back to the shared store so they appear in the code editor too.
-	 * Comment ranges are converted between {@link vscode.Range} and the source
+	 * Comment ranges are converted between {@link zyraxoncode.Range} and the source
 	 * character offsets the webview works in.
 	 */
-	#wireComments(document: vscode.TextDocument, webview: vscode.Webview): vscode.Disposable {
-		const commentsProvider = vscode.window.createAgentEditorComments(document.uri);
+	#wireComments(document: zyraxoncode.TextDocument, webview: zyraxoncode.Webview): zyraxoncode.Disposable {
+		const commentsProvider = zyraxoncode.window.createAgentEditorComments(document.uri);
 		let webviewReady = false;
 		let revealedCommentId: string | undefined;
 
@@ -282,7 +282,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 				postComments();
 				postReveal();
 			} else if (message.type === 'addComment') {
-				const range = new vscode.Range(
+				const range = new zyraxoncode.Range(
 					document.positionAt(message.start),
 					document.positionAt(message.endExclusive),
 				);
@@ -292,7 +292,7 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 			}
 		});
 
-		return vscode.Disposable.from(commentsProvider, onChange, onDidRevealComment, onMessage);
+		return zyraxoncode.Disposable.from(commentsProvider, onChange, onDidRevealComment, onMessage);
 	}
 
 
@@ -301,12 +301,12 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 	 * `documentSyntaxHighlighting` proposed API, since the webview cannot call
 	 * it directly. Also forwards theme changes so the webview can re-highlight.
 	 */
-	#wireHighlight(webview: vscode.Webview): vscode.Disposable {
+	#wireHighlight(webview: zyraxoncode.Webview): zyraxoncode.Disposable {
 		const onMessage = webview.onDidReceiveMessage(async (message) => {
 			if (message.type !== 'highlight') {
 				return;
 			}
-			const result = await vscode.languages.computeFullSyntaxHighlighting(message.source, message.languageId);
+			const result = await zyraxoncode.languages.computeFullSyntaxHighlighting(message.source, message.languageId);
 			webview.postMessage({
 				type: 'highlightResult',
 				requestId: message.requestId,
@@ -315,16 +315,16 @@ export class MarkdownEditorProvider extends Disposable implements vscode.CustomT
 			});
 		});
 
-		const onThemeChange = vscode.languages.onDidChangeSyntaxHighlighting(() => {
+		const onThemeChange = zyraxoncode.languages.onDidChangeSyntaxHighlighting(() => {
 			webview.postMessage({ type: 'highlightThemeChanged' });
 		});
 
-		return vscode.Disposable.from(onMessage, onThemeChange);
+		return zyraxoncode.Disposable.from(onMessage, onThemeChange);
 	}
 
-	#getHtml(documentUri: vscode.Uri, webview: vscode.Webview): string {
-		const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this.#mediaRoot, 'editor.js'));
-		const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this.#mediaRoot, 'editor.css'));
+	#getHtml(documentUri: zyraxoncode.Uri, webview: zyraxoncode.Webview): string {
+		const scriptUri = webview.asWebviewUri(zyraxoncode.Uri.joinPath(this.#mediaRoot, 'editor.js'));
+		const styleUri = webview.asWebviewUri(zyraxoncode.Uri.joinPath(this.#mediaRoot, 'editor.css'));
 		const baseUri = webview.asWebviewUri(documentUri);
 		const nonce = getNonce();
 
@@ -370,33 +370,33 @@ interface GutterMarkerMessage {
  * changes map to the offset span of their modified lines; deleted changes map to
  * an empty range at the boundary where the removed text used to be.
  *
- * Line ranges use {@link vscode.TextEditorLineRange} semantics: 1-based
+ * Line ranges use {@link zyraxoncode.TextEditorLineRange} semantics: 1-based
  * `startLineNumber` and exclusive `endLineNumberExclusive`.
  */
-function toGutterMarkers(document: vscode.TextDocument, changes: readonly vscode.TextEditorChange[]): GutterMarkerMessage[] {
+function toGutterMarkers(document: zyraxoncode.TextDocument, changes: readonly zyraxoncode.TextEditorChange[]): GutterMarkerMessage[] {
 	const markers: GutterMarkerMessage[] = [];
 	for (const change of changes) {
-		if (change.kind === vscode.TextEditorChangeKind.Deletion) {
+		if (change.kind === zyraxoncode.TextEditorChangeKind.Deletion) {
 			// The modified range is empty; place an empty marker at the start of the
 			// line where the removed content used to be.
 			const line = Math.max(0, change.modified.startLineNumber - 1);
-			const offset = document.offsetAt(new vscode.Position(line, 0));
+			const offset = document.offsetAt(new zyraxoncode.Position(line, 0));
 			markers.push({ start: offset, endExclusive: offset, type: 'deleted' });
 			continue;
 		}
 
-		const start = document.offsetAt(new vscode.Position(change.modified.startLineNumber - 1, 0));
+		const start = document.offsetAt(new zyraxoncode.Position(change.modified.startLineNumber - 1, 0));
 		const endExclusive = document.offsetAt(document.lineAt(change.modified.endLineNumberExclusive - 2).range.end);
 		markers.push({
 			start,
 			endExclusive,
-			type: change.kind === vscode.TextEditorChangeKind.Addition ? 'added' : 'modified',
+			type: change.kind === zyraxoncode.TextEditorChangeKind.Addition ? 'added' : 'modified',
 		});
 	}
 	return markers;
 }
 
-export function lineRangesToGutterMarkers(document: vscode.TextDocument, changes: readonly ChangedLineRange[]): GutterMarkerMessage[] {
+export function lineRangesToGutterMarkers(document: zyraxoncode.TextDocument, changes: readonly ChangedLineRange[]): GutterMarkerMessage[] {
 	return changes.map(change => {
 		if (change.modifiedRange.isEmpty) {
 			const offset = document.offsetAt(change.modifiedRange.start);

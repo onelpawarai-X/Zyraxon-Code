@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 /**
  * This interface describes the shape for the references viewlet API. It includes
@@ -13,7 +13,7 @@ import * as vscode from 'vscode';
  *
  * ```ts
  * // get references viewlet API
- * const api = await vscode.extensions.getExtension<SymbolTree>('vscode.references-view').activate();
+ * const api = await zyraxoncode.extensions.getExtension<SymbolTree>('zyraxoncode.references-view').activate();
  *
  * // instantiate and set input which updates the view
  * const myInput: SymbolTreeInput<MyItems> = ...
@@ -60,13 +60,13 @@ export interface SymbolTreeInput<T> {
 	 * The location at which this position is anchored. Locations are validated and inputs
 	 * with "funny" locations might be ignored
 	 */
-	readonly location: vscode.Location;
+	readonly location: zyraxoncode.Location;
 
 	/**
 	 * Resolve this input to a model that contains the actual data. When there are no result
 	 * than `undefined` or `null` should be returned.
 	 */
-	resolve(): vscode.ProviderResult<SymbolTreeModel<T>>;
+	resolve(): zyraxoncode.ProviderResult<SymbolTreeModel<T>>;
 
 	/**
 	 * This function is called when re-running from history. The symbols tree has tracked
@@ -77,7 +77,7 @@ export interface SymbolTreeInput<T> {
 	 * @param location The location at which the new input should be anchored.
 	 * @returns A new input which location is anchored at the position.
 	 */
-	with(location: vscode.Location): SymbolTreeInput<T>;
+	with(location: zyraxoncode.Location): SymbolTreeInput<T>;
 }
 
 /**
@@ -88,7 +88,7 @@ export interface SymbolTreeModel<T> {
 	/**
 	 * A tree data provider which is used to populate the symbols tree.
 	 */
-	provider: vscode.TreeDataProvider<T>;
+	provider: zyraxoncode.TreeDataProvider<T>;
 
 	/**
 	 * An optional message that is displayed above the tree. Whenever the provider
@@ -127,7 +127,7 @@ export interface SymbolItemNavigation<T> {
 	/**
 	 * Return the item that is the nearest to the given location or `undefined`
 	 */
-	nearest(uri: vscode.Uri, position: vscode.Position): T | undefined;
+	nearest(uri: zyraxoncode.Uri, position: zyraxoncode.Position): T | undefined;
 	/**
 	 * Return the next item from the given item or the item itself.
 	 */
@@ -139,7 +139,7 @@ export interface SymbolItemNavigation<T> {
 	/**
 	 * Return the location of the given item.
 	 */
-	location(item: T): vscode.Location | undefined;
+	location(item: T): zyraxoncode.Location | undefined;
 }
 
 /**
@@ -149,10 +149,10 @@ export interface SymbolItemEditorHighlights<T> {
 	/**
 	 * Given an item and an uri return an array of ranges to highlight.
 	 */
-	getEditorHighlights(item: T, uri: vscode.Uri): vscode.Range[] | undefined;
+	getEditorHighlights(item: T, uri: zyraxoncode.Uri): zyraxoncode.Range[] | undefined;
 }
 
 export interface SymbolItemDragAndDrop<T> {
 
-	getDragUri(item: T): vscode.Uri | undefined;
+	getDragUri(item: T): zyraxoncode.Uri | undefined;
 }

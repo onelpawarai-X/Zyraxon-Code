@@ -11,14 +11,14 @@ import { ExtHostExtensionService } from './extHostExtensionService.js';
 import { URI } from '../../../base/common/uri.js';
 import { ILogService, LogLevel as LogServiceLevel } from '../../../platform/log/common/log.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
-import { LogLevel, createHttpPatch, createProxyAuthorizationLookup, createProxyResolver, createTlsPatch, ProxySupportSetting, ProxyAgentParams, createNetPatch, loadSystemCertificates, ResolveProxyWithRequest } from '@vscode/proxy-agent';
+import { LogLevel, createHttpPatch, createProxyAuthorizationLookup, createProxyResolver, createTlsPatch, ProxySupportSetting, ProxyAgentParams, createNetPatch, loadSystemCertificates, ResolveProxyWithRequest } from '@zyraxoncode/proxy-agent';
 import { systemCertificatesNodeDefault } from '../../../platform/request/common/request.js';
 import { DisposableStore } from '../../../base/common/lifecycle.js';
 import { createRequire } from 'node:module';
 import type * as undiciType from 'undici-types';
 import type * as tlsType from 'tls';
 import { lookupKerberosAuthorization } from '../../../platform/request/node/requestService.js';
-import * as proxyAgent from '@vscode/proxy-agent';
+import * as proxyAgent from '@zyraxoncode/proxy-agent';
 
 const require = createRequire(import.meta.url);
 const http = require('http');
@@ -161,16 +161,16 @@ const unsafeHeaders = [
 
 function patchGlobalFetch(params: ProxyAgentParams, configProvider: ExtHostConfigProvider, mainThreadTelemetry: MainThreadTelemetryShape, initData: IExtensionHostInitData, resolveProxyURL: (url: string) => Promise<string | undefined>, disposables: DisposableStore) {
 	// eslint-disable-next-line local/code-no-any-casts
-	if (!(globalThis as any).__vscodeOriginalFetch) {
+	if (!(globalThis as any).__zyraxoncodeOriginalFetch) {
 		const originalFetch = globalThis.fetch;
 		// eslint-disable-next-line local/code-no-any-casts
-		(globalThis as any).__vscodeOriginalFetch = originalFetch;
+		(globalThis as any).__zyraxoncodeOriginalFetch = originalFetch;
 		const createPatchedFetch = (options?: proxyAgent.CreateFetchPatchOptions) => proxyAgent.createFetchPatch(params, originalFetch, resolveProxyURL, options);
 		const patchedFetch = createPatchedFetch();
 		// eslint-disable-next-line local/code-no-any-casts
-		(globalThis as any).__vscodePatchedFetch = patchedFetch;
+		(globalThis as any).__zyraxoncodePatchedFetch = patchedFetch;
 		// eslint-disable-next-line local/code-no-any-casts
-		(globalThis as any).__vscodeCreateFetchPatch = createPatchedFetch;
+		(globalThis as any).__zyraxoncodeCreateFetchPatch = createPatchedFetch;
 		let useElectronFetch = false;
 		if (!initData.remote.isRemote) {
 			useElectronFetch = configProvider.getConfiguration('http').get<boolean>('electronFetch', useElectronFetchDefault);
@@ -180,13 +180,13 @@ function patchGlobalFetch(params: ProxyAgentParams, configProvider: ExtHostConfi
 				}
 			}));
 		}
-		// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+		// __ZYRAXKEEP__0_
 		globalThis.fetch = async function fetch(input: string | URL | Request, init?: RequestInit) {
 			function getRequestProperty(name: keyof Request & keyof RequestInit) {
 				return init && name in init ? init[name] : typeof input === 'object' && 'cache' in input ? input[name] : undefined;
 			}
-			// Limitations: https://github.com/electron/electron/pull/36733#issuecomment-1405615494
-			// net.fetch fails on manual redirect: https://github.com/electron/electron/issues/43715
+			// Limitations: __ZYRAXKEEP__1_
+			// net.fetch fails on manual redirect: __ZYRAXKEEP__2_
 			const urlString = typeof input === 'string' ? input : 'cache' in input ? input.url : input.toString();
 			const isDataUrl = urlString.startsWith('data:');
 			if (isDataUrl) {
@@ -209,7 +209,7 @@ function patchGlobalFetch(params: ProxyAgentParams, configProvider: ExtHostConfi
 				monitorResponseProperties(mainThreadTelemetry, response, urlString);
 				return response;
 			}
-			// Unsupported headers: https://source.chromium.org/chromium/chromium/src/+/main:services/network/public/cpp/header_util.cc;l=32;drc=ee7299f8961a1b05a3554efcc496b6daa0d7f6e1
+			// Unsupported headers: __ZYRAXKEEP__3_
 			if (init?.headers) {
 				const headers = new Headers(init.headers);
 				for (const header of unsafeHeaders) {
@@ -217,7 +217,7 @@ function patchGlobalFetch(params: ProxyAgentParams, configProvider: ExtHostConfi
 				}
 				init = { ...init, headers };
 			}
-			// Support for URL: https://github.com/electron/electron/issues/43712
+			// Support for URL: __ZYRAXKEEP__4_
 			const electronInput = input instanceof URL ? input.toString() : input;
 			const electron = require('electron');
 			const response = await electron.net.fetch(electronInput, init);
@@ -229,10 +229,10 @@ function patchGlobalFetch(params: ProxyAgentParams, configProvider: ExtHostConfi
 
 function patchGlobalWebSocket(params: ProxyAgentParams, resolveProxyURL: (url: string) => Promise<string | undefined>) {
 	// eslint-disable-next-line local/code-no-any-casts
-	if (!(globalThis as any).__vscodeOriginalWebSocket) {
+	if (!(globalThis as any).__zyraxoncodeOriginalWebSocket) {
 		const originalWebSocket = globalThis.WebSocket;
 		// eslint-disable-next-line local/code-no-any-casts
-		(globalThis as any).__vscodeOriginalWebSocket = originalWebSocket;
+		(globalThis as any).__zyraxoncodeOriginalWebSocket = originalWebSocket;
 		globalThis.WebSocket = proxyAgent.createWebSocketPatch(params, originalWebSocket, resolveProxyURL);
 	}
 }
@@ -401,7 +401,7 @@ function createPatchedModules(params: ProxyAgentParams, resolveProxy: ResolvePro
 
 	function mergeModules(module: any, patch: any) {
 		const target = module.default || module;
-		target.__vscodeOriginal = Object.assign({}, target);
+		target.__zyraxoncodeOriginal = Object.assign({}, target);
 		return Object.assign(target, patch);
 	}
 

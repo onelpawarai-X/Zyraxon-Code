@@ -37,14 +37,14 @@ function renderInlineEdit(options: InlineEditOptions): void {
 	const { container, disposableStore, theme } = options;
 	container.style.width = options.width ?? '500px';
 	container.style.height = options.height ?? '170px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const instantiationService = createEditorServices(disposableStore, { colorTheme: theme });
 
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		options.code,
-		URI.parse('inmemory://inline-edit.ts'),
+		URI.parse('__ZYRAXKEEP__0_'),
 		'typescript'
 	));
 

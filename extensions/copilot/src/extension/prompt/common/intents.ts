@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { NotebookDocumentSnapshot } from '../../../platform/editing/common/notebookDocumentSnapshot';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { OpenAIContextManagementResponse } from '../../../platform/networking/common/openai';
@@ -11,7 +11,7 @@ import { ThinkingData } from '../../../platform/thinking/common/thinking';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { ResourceMap, ResourceSet } from '../../../util/vs/base/common/map';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
-import { ChatRequest } from '../../../vscodeTypes';
+import { ChatRequest } from '../../../zyraxoncodeTypes';
 import { getToolName } from '../../tools/common/toolNames';
 import { IToolGrouping } from '../../tools/common/virtualTools/virtualToolTypes';
 import { ChatVariablesCollection } from './chatVariablesCollection';
@@ -34,7 +34,7 @@ export interface IToolCallRound {
 	statefulMarker?: string;
 	/**
 	 * The local summary generation included when an extension-contributed/BYOK
-	 * response created this marker. Used only at the `vscode.lm` boundary to
+	 * response created this marker. Used only at the `zyraxoncode.lm` boundary to
 	 * reject BYOK markers that still reference pre-summary server history;
 	 * first-party WebSocket summary compatibility remains manager-owned.
 	 */
@@ -55,13 +55,13 @@ export interface IToolCallRound {
 	modelId?: string;
 }
 
-export interface InternalToolReference extends vscode.ChatLanguageModelToolReference {
+export interface InternalToolReference extends zyraxoncode.ChatLanguageModelToolReference {
 	readonly id: string;
 	readonly input?: Object; // Allows to pass input to tool invocations internally
 }
 
 export namespace InternalToolReference {
-	export function from(base: vscode.ChatLanguageModelToolReference): InternalToolReference {
+	export function from(base: zyraxoncode.ChatLanguageModelToolReference): InternalToolReference {
 		return {
 			...base,
 			id: generateUuid(),
@@ -78,18 +78,18 @@ export interface IBuildPromptContext {
 	readonly workingSet?: IWorkingSet;
 	readonly tools?: {
 		readonly toolReferences: readonly InternalToolReference[];
-		readonly toolInvocationToken: vscode.ChatParticipantToolToken;
-		readonly availableTools: readonly vscode.LanguageModelToolInformation[];
+		readonly toolInvocationToken: zyraxoncode.ChatParticipantToolToken;
+		readonly availableTools: readonly zyraxoncode.LanguageModelToolInformation[];
 		readonly subAgentInvocationId?: string;
 		readonly subAgentName?: string;
 	};
-	readonly modeInstructions?: vscode.ChatRequestModeInstructions;
+	readonly modeInstructions?: zyraxoncode.ChatRequestModeInstructions;
 
 	/**
 	 * The accumulated tool call rounds for the current ongoing response.
 	 */
 	readonly toolCallRounds?: readonly IToolCallRound[];
-	readonly toolCallResults?: Record<string, vscode.LanguageModelToolResult>;
+	readonly toolCallResults?: Record<string, zyraxoncode.LanguageModelToolResult>;
 	readonly toolGrouping?: IToolGrouping;
 
 	/**
@@ -111,10 +111,10 @@ export interface IBuildPromptContext {
 	 */
 	readonly allowedEditUris?: ResourceSet;
 
-	readonly editedFileEvents?: readonly vscode.ChatRequestEditedFileEvent[];
+	readonly editedFileEvents?: readonly zyraxoncode.ChatRequestEditedFileEvent[];
 	readonly conversation?: Conversation;
 	readonly request?: ChatRequest;
-	readonly stream?: vscode.ChatResponseStream;
+	readonly stream?: zyraxoncode.ChatResponseStream;
 	readonly isContinuation?: boolean;
 	/**
 	 * True when the query contains a stop hook message that should be rendered
@@ -155,14 +155,14 @@ export enum WorkingSetEntryState {
 
 export interface ITextDocumentWorkingSetEntry {
 	readonly document: TextDocumentSnapshot;
-	readonly range?: vscode.Range;
+	readonly range?: zyraxoncode.Range;
 	readonly state: WorkingSetEntryState;
 	readonly isMarkedReadonly: boolean | undefined;
 }
 
 export interface INotebookWorkingSetEntry {
 	readonly document: NotebookDocumentSnapshot;
-	readonly range?: vscode.Range;
+	readonly range?: zyraxoncode.Range;
 	readonly state: WorkingSetEntryState;
 	readonly isMarkedReadonly: boolean | undefined;
 }

@@ -16,7 +16,7 @@ type ChatSessionIdentifier = {
 
 export namespace LocalChatSessionUri {
 
-	export const scheme = Schemas.vscodeLocalChatSession;
+	export const scheme = Schemas.zyraxoncodeLocalChatSession;
 
 	export function forSession(sessionId: string): URI {
 		const encodedId = encodeBase64(VSBuffer.wrap(new TextEncoder().encode(sessionId)), false, true);
@@ -77,11 +77,11 @@ export function chatSessionResourceToId(resource: URI): string {
  *
  * @param resource - The chat session resource URI
  * @returns The session type string. Returns `localChatSessionType` for local sessions
- *          (vscodeChatEditor and vscodeLocalChatSession schemes), or the scheme/authority
+ *          (zyraxoncodeChatEditor and zyraxoncodeLocalChatSession schemes), or the scheme/authority
  *          for contributed sessions.
  */
 export function getChatSessionType(resource: URI): string {
-	if (resource.scheme === Schemas.vscodeChatEditor) {
+	if (resource.scheme === Schemas.zyraxoncodeChatEditor) {
 		return localChatSessionType;
 	}
 

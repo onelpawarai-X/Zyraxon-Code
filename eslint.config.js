@@ -387,7 +387,7 @@ export default defineConfig(
 			'extensions/git/src/**/*.ts',
 			'extensions/git-base/src/**/*.ts',
 			'extensions/github/src/**/*.ts',
-			// vscode
+			// zyraxoncode
 			'src/**/*.ts',
 		],
 		ignores: [
@@ -398,10 +398,10 @@ export default defineConfig(
 			'extensions/git/src/util.ts',
 			'extensions/git-base/src/decorators.ts',
 			'extensions/github/src/util.ts',
-			// vscode d.ts
+			// zyraxoncode d.ts
 			'src/vs/amdX.ts',
 			'src/vs/monaco.d.ts',
-			'src/vscode-dts/**',
+			'src/zyraxoncode-dts/**',
 			// Base
 			'src/vs/base/browser/dom.ts',
 			'src/vs/base/browser/mouseEvent.ts',
@@ -854,7 +854,7 @@ export default defineConfig(
 			]
 		}
 	},
-	// vscode tests specific rules
+	// zyraxoncode tests specific rules
 	{
 		files: [
 			'src/vs/**/*.test.ts'
@@ -907,11 +907,11 @@ export default defineConfig(
 			]
 		}
 	},
-	// vscode API
+	// zyraxoncode API
 	{
 		files: [
-			'**/vscode.d.ts',
-			'**/vscode.proposed.*.d.ts'
+			'**/zyraxoncode.d.ts',
+			'**/zyraxoncode.proposed.*.d.ts'
 		],
 		languageOptions: {
 			parser: tseslint.parser,
@@ -927,15 +927,15 @@ export default defineConfig(
 					'message': 'Use Array<...> for arrays of union types.'
 				},
 			],
-			'local/vscode-dts-create-func': 'warn',
-			'local/vscode-dts-literal-or-types': 'warn',
-			'local/vscode-dts-string-type-literals': 'warn',
-			'local/vscode-dts-interface-naming': 'warn',
-			'local/vscode-dts-cancellation': 'warn',
-			'local/vscode-dts-use-export': 'warn',
-			'local/vscode-dts-use-thenable': 'warn',
-			'local/vscode-dts-vscode-in-comments': 'warn',
-			'local/vscode-dts-provider-naming': [
+			'local/zyraxoncode-dts-create-func': 'warn',
+			'local/zyraxoncode-dts-literal-or-types': 'warn',
+			'local/zyraxoncode-dts-string-type-literals': 'warn',
+			'local/zyraxoncode-dts-interface-naming': 'warn',
+			'local/zyraxoncode-dts-cancellation': 'warn',
+			'local/zyraxoncode-dts-use-export': 'warn',
+			'local/zyraxoncode-dts-use-thenable': 'warn',
+			'local/zyraxoncode-dts-zyraxoncode-in-comments': 'warn',
+			'local/zyraxoncode-dts-provider-naming': [
 				'warn',
 				{
 					'allowed': [
@@ -950,7 +950,7 @@ export default defineConfig(
 					]
 				}
 			],
-			'local/vscode-dts-event-naming': [
+			'local/zyraxoncode-dts-event-naming': [
 				'warn',
 				{
 					'allowed': [
@@ -1001,10 +1001,10 @@ export default defineConfig(
 			]
 		}
 	},
-	// vscode.d.ts
+	// zyraxoncode.d.ts
 	{
 		files: [
-			'**/vscode.d.ts'
+			'**/zyraxoncode.d.ts'
 		],
 		languageOptions: {
 			parser: tseslint.parser,
@@ -1535,18 +1535,18 @@ export default defineConfig(
 					'allow': [
 						'@github/copilot-sdk',
 						'zod',
-						'@microsoft/dev-tunnels-contracts',
-						'@microsoft/dev-tunnels-management',
+						'@zyraxon/dev-tunnels-contracts',
+						'@zyraxon/dev-tunnels-management',
 						'@parcel/watcher',
-						'@vscode/sqlite3',
-						'@vscode/vscode-languagedetection',
-						'@vscode/ripgrep-universal',
-						'@vscode/iconv-lite-umd',
-						'@vscode/native-watchdog',
-						'@vscode/policy-watcher',
-						'@vscode/proxy-agent',
-						'@vscode/spdlog',
-						'@vscode/windows-process-tree',
+						'@zyraxoncode/sqlite3',
+						'@zyraxoncode/zyraxoncode-languagedetection',
+						'@zyraxoncode/ripgrep-universal',
+						'@zyraxoncode/iconv-lite-umd',
+						'@zyraxoncode/native-watchdog',
+						'@zyraxoncode/policy-watcher',
+						'@zyraxoncode/proxy-agent',
+						'@zyraxoncode/spdlog',
+						'@zyraxoncode/windows-process-tree',
 						'assert',
 						'child_process',
 						'console',
@@ -1580,8 +1580,8 @@ export default defineConfig(
 						'url',
 						'module',
 						'util',
-						'vscode-regexpp',
-						'vscode-textmate',
+						'zyraxoncode-regexpp',
+						'zyraxoncode-textmate',
 						'worker_threads',
 						'ws',
 						'@xterm/addon-clipboard',
@@ -1675,12 +1675,12 @@ export default defineConfig(
 						'vs/base/parts/*/~',
 						'vs/platform/*/~',
 						'tas-client', // node module allowed even in /common/
-						'@microsoft/1ds-core-js', // node module allowed even in /common/
-						'@microsoft/1ds-post-js', // node module allowed even in /common/
+						'@zyraxon/1ds-core-js', // node module allowed even in /common/
+						'@zyraxon/1ds-post-js', // node module allowed even in /common/
 						'@xterm/headless', // node module allowed even in /common/
-						'@vscode/fs-copyfile', // used by agentHost for file copying after worktree creation
-						'@vscode/tree-sitter-wasm', // used by agentHost for command auto-approval
-						'@vscode/copilot-api', // used by agentHost for Copilot API requests
+						'@zyraxoncode/fs-copyfile', // used by agentHost for file copying after worktree creation
+						'@zyraxoncode/tree-sitter-wasm', // used by agentHost for command auto-approval
+						'@zyraxoncode/copilot-api', // used by agentHost for Copilot API requests
 						'@anthropic-ai/sdk', // used by agentHost for Anthropic API requests
 						'@anthropic-ai/claude-agent-sdk', // used by agentHost for Claude Agent SDK session enumeration / queries
 						'@modelcontextprotocol/sdk/**/*', // used by agentHost for Claude client-tool MCP result types (Phase 10)
@@ -1695,10 +1695,10 @@ export default defineConfig(
 						'vs/base/parts/*/~',
 						'vs/platform/*/~',
 						'tas-client', // node module allowed even in /common/
-						'@microsoft/1ds-core-js', // node module allowed even in /common/
-						'@microsoft/1ds-post-js', // node module allowed even in /common/
+						'@zyraxon/1ds-core-js', // node module allowed even in /common/
+						'@zyraxon/1ds-post-js', // node module allowed even in /common/
 						'@xterm/headless', // node module allowed even in /common/
-						'@vscode/tree-sitter-wasm' // used by agentHost for command auto-approval
+						'@zyraxoncode/tree-sitter-wasm' // used by agentHost for command auto-approval
 					]
 				},
 				{
@@ -1708,8 +1708,8 @@ export default defineConfig(
 						'vs/base/parts/*/~',
 						'vs/platform/*/~',
 						'vs/editor/~',
-						'@vscode/tree-sitter-wasm', // node module allowed even in /common/
-						'@vscode/diff' // type import (loaded at runtime via resolveAmdNodeModulePath)
+						'@zyraxoncode/tree-sitter-wasm', // node module allowed even in /common/
+						'@zyraxoncode/diff' // type import (loaded at runtime via resolveAmdNodeModulePath)
 					]
 				},
 				{
@@ -1731,7 +1731,7 @@ export default defineConfig(
 						'vs/editor/~',
 						'vs/editor/contrib/*/~',
 						'vs/editor/standalone/~',
-						'@vscode/tree-sitter-wasm' // type import
+						'@zyraxoncode/tree-sitter-wasm' // type import
 					]
 				},
 				{
@@ -1787,7 +1787,7 @@ export default defineConfig(
 				{
 					'target': 'src/vs/workbench/api/~',
 					'restrictions': [
-						'vscode',
+						'zyraxoncode',
 						'vs/base/~',
 						'vs/base/parts/*/~',
 						'vs/platform/*/~',
@@ -1815,9 +1815,9 @@ export default defineConfig(
 							'pattern': 'vs/workbench/contrib/*/~'
 						}, // TODO@layers
 						'tas-client', // node module allowed even in /common/
-						'vscode-textmate', // node module allowed even in /common/
-						'@vscode/vscode-languagedetection', // node module allowed even in /common/
-						'@vscode/tree-sitter-wasm', // type import
+						'zyraxoncode-textmate', // node module allowed even in /common/
+						'@zyraxoncode/zyraxoncode-languagedetection', // node module allowed even in /common/
+						'@zyraxoncode/tree-sitter-wasm', // type import
 						{
 							'when': 'hasBrowser',
 							'pattern': '@xterm/xterm'
@@ -1838,8 +1838,8 @@ export default defineConfig(
 						'vs/sessions/~',
 						'vs/workbench/contrib/terminal/terminalContribChatExports*',
 						'vs/workbench/contrib/terminal/terminalContribExports*',
-						'vscode-notebook-renderer', // Type only import
-						'@vscode/tree-sitter-wasm', // type import
+						'zyraxoncode-notebook-renderer', // Type only import
+						'@zyraxoncode/tree-sitter-wasm', // type import
 						{
 							'when': 'hasBrowser',
 							'pattern': '@xterm/xterm'
@@ -1850,7 +1850,7 @@ export default defineConfig(
 						}, // node module allowed even in /browser/
 						{
 							'when': 'hasBrowser',
-							'pattern': 'vscode-textmate'
+							'pattern': 'zyraxoncode-textmate'
 						} // node module allowed even in /browser/
 					]
 				},
@@ -1868,8 +1868,8 @@ export default defineConfig(
 						// Only allow terminalContrib to import from itself, this works because
 						// terminalContrib is one extra folder deep
 						'vs/workbench/contrib/terminalContrib/*/~',
-						'vscode-notebook-renderer', // Type only import
-						'@vscode/tree-sitter-wasm', // type import
+						'zyraxoncode-notebook-renderer', // Type only import
+						'@zyraxoncode/tree-sitter-wasm', // type import
 						{
 							'when': 'hasBrowser',
 							'pattern': '@xterm/xterm'
@@ -1880,7 +1880,7 @@ export default defineConfig(
 						}, // node module allowed even in /browser/
 						{
 							'when': 'hasBrowser',
-							'pattern': 'vscode-textmate'
+							'pattern': 'zyraxoncode-textmate'
 						}, // node module allowed even in /browser/
 						'@xterm/headless' // node module allowed even in /common/ and /browser/
 					]
@@ -2039,7 +2039,7 @@ export default defineConfig(
 					'restrictions': []
 				},
 				{
-					'target': 'src/vscode-dts/**',
+					'target': 'src/zyraxoncode-dts/**',
 					'restrictions': []
 				},
 				{
@@ -2240,9 +2240,9 @@ export default defineConfig(
 							'pattern': 'vs/workbench/contrib/*/~'
 						}, // TODO@layers
 						'tas-client', // node module allowed even in /common/
-						'vscode-textmate', // node module allowed even in /common/
-						'@vscode/vscode-languagedetection', // node module allowed even in /common/
-						'@vscode/tree-sitter-wasm', // type import
+						'zyraxoncode-textmate', // node module allowed even in /common/
+						'@zyraxoncode/zyraxoncode-languagedetection', // node module allowed even in /common/
+						'@zyraxoncode/tree-sitter-wasm', // type import
 						{
 							'when': 'hasBrowser',
 							'pattern': '@xterm/xterm'
@@ -2270,7 +2270,7 @@ export default defineConfig(
 					'restrictions': [
 						'test/automation',
 						'test/smoke/**',
-						'@vscode/*',
+						'@zyraxoncode/*',
 						'@parcel/*',
 						'@playwright/*',
 						'*' // node modules
@@ -2287,7 +2287,7 @@ export default defineConfig(
 					'target': 'test/automation/**',
 					'restrictions': [
 						'test/automation/**',
-						'@vscode/*',
+						'@zyraxoncode/*',
 						'@parcel/*',
 						'playwright-core/**',
 						'@playwright/*',
@@ -2298,7 +2298,7 @@ export default defineConfig(
 					'target': 'test/integration/**',
 					'restrictions': [
 						'test/integration/**',
-						'@vscode/*',
+						'@zyraxoncode/*',
 						'@parcel/*',
 						'@playwright/*',
 						'*' // node modules
@@ -2308,7 +2308,7 @@ export default defineConfig(
 					'target': 'test/monaco/**',
 					'restrictions': [
 						'test/monaco/**',
-						'@vscode/*',
+						'@zyraxoncode/*',
 						'@parcel/*',
 						'@playwright/*',
 						'*' // node modules
@@ -2319,7 +2319,7 @@ export default defineConfig(
 					'restrictions': [
 						'test/automation',
 						'test/mcp/**',
-						'@vscode/*',
+						'@zyraxoncode/*',
 						'@parcel/*',
 						'@playwright/*',
 						'@modelcontextprotocol/sdk/**/*',
@@ -2526,7 +2526,7 @@ export default defineConfig(
 		],
 		ignores: [
 			'extensions/copilot/**/.esbuild.ts',
-			'extensions/copilot/src/extension/completions-core/vscode-node/bridge/src/completionsTelemetryServiceBridge.ts',
+			'extensions/copilot/src/extension/completions-core/zyraxoncode-node/bridge/src/completionsTelemetryServiceBridge.ts',
 		],
 		languageOptions: {
 			parser: tseslint.parser,
@@ -2545,13 +2545,13 @@ export default defineConfig(
 				...builtinModules,
 				// node: dependencies
 				'@humanwhocodes/gitignore-to-minimatch',
-				'@vscode/extension-telemetry',
+				'@zyraxoncode/extension-telemetry',
 				'applicationinsights',
 				'ignore',
 				'isbinaryfile',
 				'minimatch',
 				'source-map-support',
-				'vscode-tas-client',
+				'zyraxoncode-tas-client',
 				'web-tree-sitter'
 			],
 			'import/no-restricted-paths': [
@@ -2561,52 +2561,52 @@ export default defineConfig(
 						{
 							target: '**/common/**',
 							from: [
-								'**/vscode/**',
+								'**/zyraxoncode/**',
 								'**/node/**',
-								'**/vscode-node/**',
+								'**/zyraxoncode-node/**',
 								'**/worker/**',
-								'**/vscode-worker/**'
+								'**/zyraxoncode-worker/**'
 							]
 						},
 						{
-							target: '**/vscode/**',
+							target: '**/zyraxoncode/**',
 							from: [
 								'**/node/**',
-								'**/vscode-node/**',
+								'**/zyraxoncode-node/**',
 								'**/worker/**',
-								'**/vscode-worker/**'
+								'**/zyraxoncode-worker/**'
 							]
 						},
 						{
 							target: '**/node/**',
 							from: [
-								'**/vscode/**',
-								'**/vscode-node/**',
+								'**/zyraxoncode/**',
+								'**/zyraxoncode-node/**',
 								'**/worker/**',
-								'**/vscode-worker/**'
+								'**/zyraxoncode-worker/**'
 							]
 						},
 						{
-							target: '**/vscode-node/**',
+							target: '**/zyraxoncode-node/**',
 							from: [
 								'**/worker/**',
-								'**/vscode-worker/**'
+								'**/zyraxoncode-worker/**'
 							]
 						},
 						{
 							target: '**/worker/**',
 							from: [
-								'**/vscode/**',
+								'**/zyraxoncode/**',
 								'**/node/**',
-								'**/vscode-node/**',
-								'**/vscode-worker/**'
+								'**/zyraxoncode-node/**',
+								'**/zyraxoncode-worker/**'
 							]
 						},
 						{
-							target: '**/vscode-worker/**',
+							target: '**/zyraxoncode-worker/**',
 							from: [
 								'**/node/**',
-								'**/vscode-node/**'
+								'**/zyraxoncode-node/**'
 							]
 						},
 						{
@@ -2627,7 +2627,7 @@ export default defineConfig(
 						},
 						{
 							target: ['./extensions/copilot/test', '!./extensions/copilot/test/base/extHostContext/*.ts'],
-							from: ['**/vscode-node/**', '**/vscode-worker/**']
+							from: ['**/zyraxoncode-node/**', '**/zyraxoncode-worker/**']
 						},
 						{
 							target: 'extensions/copilot/src/!(lib)/**',
@@ -2641,9 +2641,9 @@ export default defineConfig(
 			'copilot-local/no-runtime-import': [
 				'warn',
 				{
-					test: ['vscode'],
-					'src/**/common/**/*': ['vscode'],
-					'src/**/node/**/*': ['vscode']
+					test: ['zyraxoncode'],
+					'src/**/common/**/*': ['zyraxoncode'],
+					'src/**/node/**/*': ['zyraxoncode']
 				}
 			],
 			'copilot-local/no-funny-filename': ['warn'],
@@ -2663,8 +2663,8 @@ export default defineConfig(
 	// copilot extension - allow node imports in node layer
 	{
 		files: [
-			'extensions/copilot/**/{vscode-node,node}/**/*.ts',
-			'extensions/copilot/**/{vscode-node,node}/**/*.tsx',
+			'extensions/copilot/**/{zyraxoncode-node,node}/**/*.ts',
+			'extensions/copilot/**/{zyraxoncode-node,node}/**/*.tsx',
 		],
 		rules: {
 			'no-restricted-imports': 'off'
@@ -2674,7 +2674,7 @@ export default defineConfig(
 	{
 		files: [
 			'extensions/copilot/test/**',
-			'extensions/copilot/src/vscodeTypes.ts',
+			'extensions/copilot/src/zyraxoncodeTypes.ts',
 			'extensions/copilot/script/**',
 			'extensions/copilot/src/extension/*.d.ts',
 			'extensions/copilot/build/**',
@@ -2721,62 +2721,62 @@ export default defineConfig(
 			'extensions/copilot/src/extension/byok/common/anthropicMessageConverter.ts',
 			'extensions/copilot/src/extension/byok/common/geminiFunctionDeclarationConverter.ts',
 			'extensions/copilot/src/extension/byok/common/geminiMessageConverter.ts',
-			'extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts',
-			'extensions/copilot/src/extension/byok/vscode-node/geminiNativeProvider.ts',
-			'extensions/copilot/src/extension/byok/vscode-node/ollamaProvider.ts',
-			'extensions/copilot/src/extension/chatSessions/vscode-node/copilotCloudSessionContentBuilder.ts',
-			'extensions/copilot/src/extension/chatSessions/vscode-node/copilotCloudSessionsProvider.ts',
+			'extensions/copilot/src/extension/byok/zyraxoncode-node/anthropicProvider.ts',
+			'extensions/copilot/src/extension/byok/zyraxoncode-node/geminiNativeProvider.ts',
+			'extensions/copilot/src/extension/byok/zyraxoncode-node/ollamaProvider.ts',
+			'extensions/copilot/src/extension/chatSessions/zyraxoncode-node/copilotCloudSessionContentBuilder.ts',
+			'extensions/copilot/src/extension/chatSessions/zyraxoncode-node/copilotCloudSessionsProvider.ts',
 			'extensions/copilot/src/extension/codeBlocks/node/codeBlockProcessor.ts',
-			'extensions/copilot/src/extension/codeBlocks/vscode-node/provider.ts',
-			'extensions/copilot/src/extension/configuration/vscode-node/configurationMigration.ts',
+			'extensions/copilot/src/extension/codeBlocks/zyraxoncode-node/provider.ts',
+			'extensions/copilot/src/extension/configuration/zyraxoncode-node/configurationMigration.ts',
 			'extensions/copilot/src/extension/context/node/resolvers/genericInlineIntentInvocation.ts',
 			'extensions/copilot/src/extension/context/node/resolvers/genericPanelIntentInvocation.ts',
 			'extensions/copilot/src/extension/context/node/resolvers/inlineFixIntentInvocation.ts',
 			'extensions/copilot/src/extension/context/node/resolvers/promptWorkspaceLabels.ts',
-			'extensions/copilot/src/extension/contextKeys/vscode-node/contextKeys.contribution.ts',
-			'extensions/copilot/src/extension/conversation/vscode-node/userActions.ts',
-			'extensions/copilot/src/extension/extension/vscode/services.ts',
+			'extensions/copilot/src/extension/contextKeys/zyraxoncode-node/contextKeys.contribution.ts',
+			'extensions/copilot/src/extension/conversation/zyraxoncode-node/userActions.ts',
+			'extensions/copilot/src/extension/extension/zyraxoncode/services.ts',
 			'extensions/copilot/src/extension/inlineChat/node/rendererVisualization.ts',
-			'extensions/copilot/src/extension/inlineChat/vscode-node/inlineChatCommands.ts',
+			'extensions/copilot/src/extension/inlineChat/zyraxoncode-node/inlineChatCommands.ts',
 			'extensions/copilot/src/extension/inlineEdits/common/observableWorkspaceRecordingReplayer.ts',
-			'extensions/copilot/src/extension/inlineEdits/vscode-node/parts/vscodeWorkspace.ts',
+			'extensions/copilot/src/extension/inlineEdits/zyraxoncode-node/parts/zyraxoncodeWorkspace.ts',
 			'extensions/copilot/src/extension/intents/node/editCodeIntent.ts',
 			'extensions/copilot/src/extension/intents/node/editCodeStep.ts',
 			'extensions/copilot/src/extension/intents/node/fixIntent.ts',
 			'extensions/copilot/src/extension/intents/node/newIntent.ts',
 			'extensions/copilot/src/extension/intents/node/searchIntent.ts',
-			'extensions/copilot/src/extension/languageContextProvider/vscode-node/languageContextProviderService.ts',
+			'extensions/copilot/src/extension/languageContextProvider/zyraxoncode-node/languageContextProviderService.ts',
 			'extensions/copilot/src/extension/linkify/common/commands.ts',
 			'extensions/copilot/src/extension/linkify/common/responseStreamWithLinkification.ts',
 			'extensions/copilot/src/extension/linkify/test/node/util.ts',
-			'extensions/copilot/src/extension/log/vscode-node/loggingActions.ts',
-			'extensions/copilot/src/extension/log/vscode-node/requestLogTree.ts',
-			'extensions/copilot/src/extension/mcp/test/vscode-node/util.ts',
-			'extensions/copilot/src/extension/mcp/vscode-node/commands.ts',
-			'extensions/copilot/src/extension/mcp/vscode-node/nuget.ts',
+			'extensions/copilot/src/extension/log/zyraxoncode-node/loggingActions.ts',
+			'extensions/copilot/src/extension/log/zyraxoncode-node/requestLogTree.ts',
+			'extensions/copilot/src/extension/mcp/test/zyraxoncode-node/util.ts',
+			'extensions/copilot/src/extension/mcp/zyraxoncode-node/commands.ts',
+			'extensions/copilot/src/extension/mcp/zyraxoncode-node/nuget.ts',
 			'extensions/copilot/src/extension/onboardDebug/node/copilotDebugWorker/rpc.ts',
 			'extensions/copilot/src/extension/onboardDebug/node/parseLaunchConfigFromResponse.ts',
-			'extensions/copilot/src/extension/onboardDebug/vscode-node/copilotDebugCommandHandle.ts',
+			'extensions/copilot/src/extension/onboardDebug/zyraxoncode-node/copilotDebugCommandHandle.ts',
 			'extensions/copilot/src/extension/prompt/common/toolCallRound.ts',
 			'extensions/copilot/src/extension/prompt/node/chatMLFetcher.ts',
 			'extensions/copilot/src/extension/prompt/node/chatParticipantTelemetry.ts',
 			'extensions/copilot/src/extension/prompt/node/editGeneration.ts',
 			'extensions/copilot/src/extension/prompt/node/intents.ts',
 			'extensions/copilot/src/extension/prompt/node/todoListContextProvider.ts',
-			'extensions/copilot/src/extension/prompt/vscode-node/endpointProviderImpl.ts',
-			'extensions/copilot/src/extension/prompt/vscode-node/requestLoggerImpl.ts',
+			'extensions/copilot/src/extension/prompt/zyraxoncode-node/endpointProviderImpl.ts',
+			'extensions/copilot/src/extension/prompt/zyraxoncode-node/requestLoggerImpl.ts',
 			'extensions/copilot/src/extension/prompts/node/agent/promptRegistry.ts',
 			'extensions/copilot/src/extension/prompts/node/base/promptElement.ts',
 			'extensions/copilot/src/extension/prompts/node/base/promptRenderer.ts',
 			'extensions/copilot/src/extension/prompts/node/test/utils.ts',
 			'extensions/copilot/src/extension/replay/common/chatReplayResponses.ts',
 			'extensions/copilot/src/extension/replay/node/replayParser.ts',
-			'extensions/copilot/src/extension/replay/vscode-node/replayDebugSession.ts',
+			'extensions/copilot/src/extension/replay/zyraxoncode-node/replayDebugSession.ts',
 			'extensions/copilot/src/extension/review/node/githubReviewAgent.ts',
 			'extensions/copilot/src/extension/test/node/services.ts',
-			'extensions/copilot/src/extension/test/vscode-node/extension.test.ts',
-			'extensions/copilot/src/extension/test/vscode-node/sanity.sanity-test.ts',
-			'extensions/copilot/src/extension/test/vscode-node/session.test.ts',
+			'extensions/copilot/src/extension/test/zyraxoncode-node/extension.test.ts',
+			'extensions/copilot/src/extension/test/zyraxoncode-node/sanity.sanity-test.ts',
+			'extensions/copilot/src/extension/test/zyraxoncode-node/session.test.ts',
 			'extensions/copilot/src/extension/tools/common/toolSchemaNormalizer.ts',
 			'extensions/copilot/src/extension/tools/common/toolsService.ts',
 			'extensions/copilot/src/extension/typescriptContext/common/serverProtocol.ts',
@@ -2785,9 +2785,9 @@ export default defineConfig(
 			'extensions/copilot/src/extension/typescriptContext/serverPlugin/src/common/protocol.ts',
 			'extensions/copilot/src/extension/typescriptContext/serverPlugin/src/common/typescripts.ts',
 			'extensions/copilot/src/extension/typescriptContext/serverPlugin/src/common/utils.ts',
-			'extensions/copilot/src/extension/typescriptContext/vscode-node/inspector.ts',
-			'extensions/copilot/src/extension/typescriptContext/vscode-node/languageContextService.ts',
-			'extensions/copilot/src/extension/workspaceRecorder/vscode-node/workspaceListenerService.ts',
+			'extensions/copilot/src/extension/typescriptContext/zyraxoncode-node/inspector.ts',
+			'extensions/copilot/src/extension/typescriptContext/zyraxoncode-node/languageContextService.ts',
+			'extensions/copilot/src/extension/workspaceRecorder/zyraxoncode-node/workspaceListenerService.ts',
 			'extensions/copilot/src/extension/workspaceSemanticSearch/node/semanticSearchTextSearchProvider.ts',
 			'extensions/copilot/src/lib/node/chatLibMain.ts',
 			'extensions/copilot/src/platform/authentication/test/node/simulationTestCopilotTokenManager.ts',
@@ -2795,13 +2795,13 @@ export default defineConfig(
 			'extensions/copilot/src/platform/chunking/common/chunkingEndpointClientImpl.ts',
 			'extensions/copilot/src/platform/commands/common/mockRunCommandExecutionService.ts',
 			'extensions/copilot/src/platform/commands/common/runCommandExecutionService.ts',
-			'extensions/copilot/src/platform/commands/vscode/runCommandExecutionServiceImpl.ts',
+			'extensions/copilot/src/platform/commands/zyraxoncode/runCommandExecutionServiceImpl.ts',
 			'extensions/copilot/src/platform/configuration/common/configurationService.ts',
 			'extensions/copilot/src/platform/configuration/common/validator.ts',
 			'extensions/copilot/src/platform/configuration/test/common/inMemoryConfigurationService.ts',
-			'extensions/copilot/src/platform/configuration/vscode/configurationServiceImpl.ts',
+			'extensions/copilot/src/platform/configuration/zyraxoncode/configurationServiceImpl.ts',
 			'extensions/copilot/src/platform/customInstructions/common/customInstructionsService.ts',
-			'extensions/copilot/src/platform/debug/vscode/debugOutputListener.ts',
+			'extensions/copilot/src/platform/debug/zyraxoncode/debugOutputListener.ts',
 			'extensions/copilot/src/platform/diff/node/diffWorkerMain.ts',
 			'extensions/copilot/src/platform/editing/common/notebookDocumentSnapshot.ts',
 			'extensions/copilot/src/platform/editing/common/textDocumentSnapshot.ts',
@@ -2823,7 +2823,7 @@ export default defineConfig(
 			'extensions/copilot/src/platform/languages/common/languageDiagnosticsService.ts',
 			'extensions/copilot/src/platform/log/common/logExecTime.ts',
 			'extensions/copilot/src/platform/log/common/logService.ts',
-			'extensions/copilot/src/platform/log/vscode/outputChannelLogTarget.ts',
+			'extensions/copilot/src/platform/log/zyraxoncode/outputChannelLogTarget.ts',
 			'extensions/copilot/src/platform/nesFetch/common/completionsFetchService.ts',
 			'extensions/copilot/src/platform/nesFetch/node/completionsFetchServiceImpl.ts',
 			'extensions/copilot/src/platform/networking/common/fetch.ts',
@@ -2837,10 +2837,10 @@ export default defineConfig(
 			'extensions/copilot/src/platform/networking/node/nodeFetcher.ts',
 			'extensions/copilot/src/platform/networking/node/stream.ts',
 			'extensions/copilot/src/platform/networking/node/test/nodeFetcherService.ts',
-			'extensions/copilot/src/platform/networking/vscode-node/electronFetcher.ts',
-			'extensions/copilot/src/platform/networking/vscode-node/fetcherServiceImpl.ts',
+			'extensions/copilot/src/platform/networking/zyraxoncode-node/electronFetcher.ts',
+			'extensions/copilot/src/platform/networking/zyraxoncode-node/fetcherServiceImpl.ts',
 			'extensions/copilot/src/platform/notification/common/notificationService.ts',
-			'extensions/copilot/src/platform/notification/vscode/notificationServiceImpl.ts',
+			'extensions/copilot/src/platform/notification/zyraxoncode/notificationServiceImpl.ts',
 			'extensions/copilot/src/platform/openai/node/fetch.ts',
 			'extensions/copilot/src/platform/parser/node/nodes.ts',
 			'extensions/copilot/src/platform/parser/node/parserServiceImpl.ts',
@@ -2848,17 +2848,17 @@ export default defineConfig(
 			'extensions/copilot/src/platform/parser/node/treeSitterQueries.ts',
 			'extensions/copilot/src/platform/remoteCodeSearch/common/githubCodeSearchService.ts',
 			'extensions/copilot/src/platform/remoteSearch/node/codeOrDocsSearchClientImpl.ts',
-			'extensions/copilot/src/platform/review/vscode/reviewServiceImpl.ts',
-			'extensions/copilot/src/platform/scopeSelection/vscode-node/scopeSelectionImpl.ts',
+			'extensions/copilot/src/platform/review/zyraxoncode/reviewServiceImpl.ts',
+			'extensions/copilot/src/platform/scopeSelection/zyraxoncode-node/scopeSelectionImpl.ts',
 			'extensions/copilot/src/platform/snippy/common/snippyTypes.ts',
-			'extensions/copilot/src/platform/survey/vscode/surveyServiceImpl.ts',
-			'extensions/copilot/src/platform/tasks/vscode/tasksService.ts',
+			'extensions/copilot/src/platform/survey/zyraxoncode/surveyServiceImpl.ts',
+			'extensions/copilot/src/platform/tasks/zyraxoncode/tasksService.ts',
 			'extensions/copilot/src/platform/telemetry/common/failingTelemetryReporter.ts',
 			'extensions/copilot/src/platform/telemetry/common/telemetryData.ts',
 			'extensions/copilot/src/platform/telemetry/node/azureInsightsReporter.ts',
 			'extensions/copilot/src/platform/telemetry/node/spyingTelemetryService.ts',
 			'extensions/copilot/src/platform/terminal/common/terminalService.ts',
-			'extensions/copilot/src/platform/terminal/vscode/terminalServiceImpl.ts',
+			'extensions/copilot/src/platform/terminal/zyraxoncode/terminalServiceImpl.ts',
 			'extensions/copilot/src/platform/test/common/endpointTestFixtures.ts',
 			'extensions/copilot/src/platform/test/common/testExtensionsService.ts',
 			'extensions/copilot/src/platform/test/node/extensionContext.ts',
@@ -2872,7 +2872,7 @@ export default defineConfig(
 			'extensions/copilot/src/platform/tokenizer/node/tikTokenizerWorker.ts',
 			'extensions/copilot/src/platform/tokenizer/node/tokenizer.ts',
 			'extensions/copilot/src/platform/workbench/common/workbenchService.ts',
-			'extensions/copilot/src/platform/workbench/vscode/workbenchServiceImpt.ts',
+			'extensions/copilot/src/platform/workbench/zyraxoncode/workbenchServiceImpt.ts',
 			'extensions/copilot/src/platform/workspaceChunkSearch/node/nullWorkspaceFileIndex.ts',
 			'extensions/copilot/src/platform/workspaceChunkSearch/node/tfidfChunkSearch.ts',
 			'extensions/copilot/src/platform/workspaceChunkSearch/node/workspaceFileIndex.ts',
@@ -2888,7 +2888,7 @@ export default defineConfig(
 			'extensions/copilot/src/util/common/test/shims/editing.ts',
 			'extensions/copilot/src/util/common/test/shims/l10n.ts',
 			'extensions/copilot/src/util/common/test/shims/notebookDocument.ts',
-			'extensions/copilot/src/util/common/test/shims/vscodeTypesShim.ts',
+			'extensions/copilot/src/util/common/test/shims/zyraxoncodeTypesShim.ts',
 			'extensions/copilot/src/util/common/test/simpleMock.ts',
 			'extensions/copilot/src/util/common/timeTravelScheduler.ts',
 			'extensions/copilot/src/util/common/types.ts',

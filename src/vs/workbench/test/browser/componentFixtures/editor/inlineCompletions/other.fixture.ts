@@ -103,7 +103,7 @@ async function renderHintsToolbar(options: HintsToolbarOptions): Promise<void> {
 	const { container, disposableStore, theme } = options;
 	container.style.width = '500px';
 	container.style.height = '180px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const instantiationService = createEditorServices(disposableStore, {
 		colorTheme: theme,
@@ -118,7 +118,7 @@ async function renderHintsToolbar(options: HintsToolbarOptions): Promise<void> {
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		HINTS_CODE,
-		URI.parse('inmemory://hints-toolbar.ts'),
+		URI.parse('__ZYRAXKEEP__0_'),
 		'typescript'
 	));
 
@@ -162,14 +162,14 @@ async function renderHintsToolbar(options: HintsToolbarOptions): Promise<void> {
 function renderJumpToHint({ container, disposableStore, theme }: ComponentFixtureContext): void {
 	container.style.width = '500px';
 	container.style.height = '200px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const instantiationService = createEditorServices(disposableStore, { colorTheme: theme });
 
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		SAMPLE_CODE,
-		URI.parse('inmemory://jump-to-hint.ts'),
+		URI.parse('__ZYRAXKEEP__1_'),
 		'typescript'
 	));
 
@@ -213,14 +213,14 @@ function createLongDistanceEditor(options: {
 	const { container, disposableStore, theme } = options;
 	container.style.width = '600px';
 	container.style.height = '500px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const instantiationService = createEditorServices(disposableStore, { colorTheme: theme });
 
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		options.code,
-		URI.parse('inmemory://long-distance.ts'),
+		URI.parse('__ZYRAXKEEP__2_'),
 		'typescript'
 	));
 
@@ -282,7 +282,7 @@ function createLongDistanceEditor(options: {
 function renderNextFileEdit({ container, disposableStore, theme }: ComponentFixtureContext): void {
 	container.style.width = '500px';
 	container.style.height = '200px';
-	container.style.border = '1px solid var(--vscode-editorWidget-border)';
+	container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
 
 	const instantiationService = createEditorServices(disposableStore, { colorTheme: theme });
 
@@ -295,7 +295,7 @@ export function createApp(config: Config) {
 	const app = express();
 	app.listen(config.port);
 }`,
-		URI.parse('inmemory://app.ts'),
+		URI.parse('__ZYRAXKEEP__3_'),
 		'typescript'
 	));
 
@@ -306,7 +306,7 @@ export function createApp(config: Config) {
 	port: number;
 	host: string;
 }`,
-		URI.parse('inmemory://config.ts'),
+		URI.parse('__ZYRAXKEEP__4_'),
 		'typescript'
 	));
 
@@ -366,7 +366,7 @@ function renderGutterMenu({ container, disposableStore, theme }: ComponentFixtur
 	const textModel = disposableStore.add(createTextModel(
 		instantiationService,
 		'const x = 1;',
-		URI.parse('inmemory://gutter-menu.ts'),
+		URI.parse('__ZYRAXKEEP__5_'),
 		'typescript'
 	));
 
@@ -397,10 +397,10 @@ function renderGutterMenu({ container, disposableStore, theme }: ComponentFixtur
 		).toDisposableLiveElement()
 	);
 
-	container.style.background = 'var(--vscode-editorHoverWidget-background)';
-	container.style.border = '2px solid var(--vscode-editorHoverWidget-border)';
+	container.style.background = 'var(--zyraxoncode-editorHoverWidget-background)';
+	container.style.border = '2px solid var(--zyraxoncode-editorHoverWidget-border)';
 	container.style.borderRadius = '3px';
-	container.style.color = 'var(--vscode-editorHoverWidget-foreground)';
+	container.style.color = 'var(--zyraxoncode-editorHoverWidget-foreground)';
 	container.appendChild(content.element);
 }
 

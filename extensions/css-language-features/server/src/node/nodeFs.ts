@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { RequestService } from '../requests.js';
-import { URI as Uri } from 'vscode-uri';
+import { URI as Uri } from 'zyraxoncode-uri';
 
 import * as fs from 'fs';
-import { FileType } from 'vscode-css-languageservice';
+import { FileType } from 'zyraxoncode-css-languageservice';
 
 export function getNodeFSRequestService(): RequestService {
 	function ensureFileUri(location: string) {

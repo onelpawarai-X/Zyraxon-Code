@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ExtensionContext, Uri, l10n } from 'vscode';
-import { BaseLanguageClient, LanguageClientOptions } from 'vscode-languageclient';
+import { ExtensionContext, Uri, l10n } from 'zyraxoncode';
+import { BaseLanguageClient, LanguageClientOptions } from 'zyraxoncode-languageclient';
 import { startClient, LanguageClientConstructor } from '../cssClient';
-import { LanguageClient } from 'vscode-languageclient/browser';
+import { LanguageClient } from 'zyraxoncode-languageclient/browser';
 import { registerDropOrPasteResourceSupport } from '../dropOrPaste/dropOrPasteResource';
 
 let client: BaseLanguageClient | undefined;

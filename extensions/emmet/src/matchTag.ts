@@ -3,24 +3,24 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { validate, getHtmlFlatNode, offsetRangeToSelection } from './util';
 import { getRootNode } from './parseDocument';
 import { HtmlNode as HtmlFlatNode } from 'EmmetFlatNode';
 
 export function matchTag() {
-	if (!validate(false) || !vscode.window.activeTextEditor) {
+	if (!validate(false) || !zyraxoncode.window.activeTextEditor) {
 		return;
 	}
 
-	const editor = vscode.window.activeTextEditor;
+	const editor = zyraxoncode.window.activeTextEditor;
 	const document = editor.document;
 	const rootNode = <HtmlFlatNode>getRootNode(document, true);
 	if (!rootNode) {
 		return;
 	}
 
-	const updatedSelections: vscode.Selection[] = [];
+	const updatedSelections: zyraxoncode.Selection[] = [];
 	editor.selections.forEach(selection => {
 		const updatedSelection = getUpdatedSelections(document, rootNode, selection.start);
 		if (updatedSelection) {
@@ -33,7 +33,7 @@ export function matchTag() {
 	}
 }
 
-function getUpdatedSelections(document: vscode.TextDocument, rootNode: HtmlFlatNode, position: vscode.Position): vscode.Selection | undefined {
+function getUpdatedSelections(document: zyraxoncode.TextDocument, rootNode: HtmlFlatNode, position: zyraxoncode.Position): zyraxoncode.Selection | undefined {
 	const offset = document.offsetAt(position);
 	const currentNode = getHtmlFlatNode(document.getText(), rootNode, offset, true);
 	if (!currentNode) {

@@ -101,12 +101,12 @@ class TodoListRenderer implements IListRenderer<IChatTodo, ITodoListTemplate> {
 	private getStatusIconColor(status: string): string {
 		switch (status) {
 			case 'completed':
-				return 'var(--vscode-charts-green)';
+				return 'var(--zyraxoncode-charts-green)';
 			case 'in-progress':
-				return 'var(--vscode-charts-blue)';
+				return 'var(--zyraxoncode-charts-blue)';
 			case 'not-started':
 			default:
-				return 'var(--vscode-foreground)';
+				return 'var(--zyraxoncode-foreground)';
 		}
 	}
 }
@@ -435,10 +435,10 @@ export class ChatTodoListWidget extends Disposable {
 				const icon = dom.$('.codicon');
 				if (todoToShow === firstInProgressTodo) {
 					icon.classList.add('codicon-record');
-					icon.style.color = 'var(--vscode-charts-blue)';
+					icon.style.color = 'var(--zyraxoncode-charts-blue)';
 				} else {
 					icon.classList.add('codicon-circle-outline');
-					icon.style.color = 'var(--vscode-foreground)';
+					icon.style.color = 'var(--zyraxoncode-foreground)';
 				}
 				icon.style.marginRight = '4px';
 				icon.style.verticalAlign = 'middle';

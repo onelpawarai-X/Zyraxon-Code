@@ -2,9 +2,9 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptReference } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptReference } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { ObjectJsonSchema } from '../../../platform/configuration/common/jsonSchema';
 import { ICustomInstructionsService } from '../../../platform/customInstructions/common/customInstructionsService';
@@ -25,7 +25,7 @@ import { dirname, extUriBiasedIgnorePathCase } from '../../../util/vs/base/commo
 import { sendSkillContentReadTelemetry } from '../common/skillTelemetry';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelPromptTsxPart, LanguageModelToolResult, Location, MarkdownString, Range } from '../../../vscodeTypes';
+import { LanguageModelPromptTsxPart, LanguageModelToolResult, Location, MarkdownString, Range } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { BinaryFileHexdump, hexdumpIfBinary } from '../../prompts/node/panel/binaryFileHexdump';
@@ -36,10 +36,10 @@ import { formatUriForFileWidget } from '../common/toolUtils';
 import { getImageMimeType } from './imageToolUtils';
 import { assertFileNotContentExcluded, assertFileOkForTool, isFileExternalAndNeedsConfirmation, resolveToolInputPath } from './toolUtils';
 
-export const getReadFileV2Description = (orig: vscode.LanguageModelToolInformation): vscode.LanguageModelToolInformation => ({
+export const getReadFileV2Description = (orig: zyraxoncode.LanguageModelToolInformation): zyraxoncode.LanguageModelToolInformation => ({
 	name: ToolName.ReadFile,
 	description: 'Read the contents of a file. Line numbers are 1-indexed. This tool will truncate its output at 2000 lines and may be called repeatedly with offset and limit parameters to read larger files in chunks. Binary files use offset/limit as byte offsets.',
-	tags: ['vscode_codesearch'],
+	tags: ['zyraxoncode_codesearch'],
 	source: undefined,
 	inputSchema: {
 		type: 'object',
@@ -134,7 +134,7 @@ export class ReadFileTool implements ICopilotTool<ReadFileParams> {
 		@IExtensionsService private readonly extensionsService: IExtensionsService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<ReadFileParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<ReadFileParams>, token: zyraxoncode.CancellationToken) {
 		let ranges: IParamRanges | undefined;
 		let uri: URI | undefined;
 		try {
@@ -204,7 +204,7 @@ export class ReadFileTool implements ICopilotTool<ReadFileParams> {
 		}
 	}
 
-	async prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<ReadFileParams>, token: vscode.CancellationToken): Promise<vscode.PreparedToolInvocation | undefined> {
+	async prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<ReadFileParams>, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.PreparedToolInvocation | undefined> {
 		const { input } = options;
 		if (!input.filePath.length) {
 			return;
@@ -278,8 +278,8 @@ export class ReadFileTool implements ICopilotTool<ReadFileParams> {
 				const { skillName } = skillInfo;
 				if (this.customInstructionsService.isSkillMdFile(uri)) {
 					return {
-						invocationMessage: new MarkdownString(l10n.t`Reading skill ${formatUriForFileWidget(uri, { vscodeLinkType: 'skill', linkText: skillName })}`),
-						pastTenseMessage: new MarkdownString(l10n.t`Read skill ${formatUriForFileWidget(uri, { vscodeLinkType: 'skill', linkText: skillName })}`),
+						invocationMessage: new MarkdownString(l10n.t`Reading skill ${formatUriForFileWidget(uri, { zyraxoncodeLinkType: 'skill', linkText: skillName })}`),
+						pastTenseMessage: new MarkdownString(l10n.t`Read skill ${formatUriForFileWidget(uri, { zyraxoncodeLinkType: 'skill', linkText: skillName })}`),
 					};
 				} else {
 					return {
@@ -301,8 +301,8 @@ export class ReadFileTool implements ICopilotTool<ReadFileParams> {
 				const { skillName } = skillInfo;
 				if (this.customInstructionsService.isSkillMdFile(uri)) {
 					return {
-						invocationMessage: new MarkdownString(l10n.t`Reading skill ${formatUriForFileWidget(readLocation, { vscodeLinkType: 'skill', linkText: skillName })}, lines ${start} to ${end}`),
-						pastTenseMessage: new MarkdownString(l10n.t`Read skill ${formatUriForFileWidget(readLocation, { vscodeLinkType: 'skill', linkText: skillName })}, lines ${start} to ${end}`),
+						invocationMessage: new MarkdownString(l10n.t`Reading skill ${formatUriForFileWidget(readLocation, { zyraxoncodeLinkType: 'skill', linkText: skillName })}, lines ${start} to ${end}`),
+						pastTenseMessage: new MarkdownString(l10n.t`Read skill ${formatUriForFileWidget(readLocation, { zyraxoncodeLinkType: 'skill', linkText: skillName })}, lines ${start} to ${end}`),
 					};
 				} else {
 					return {
@@ -318,7 +318,7 @@ export class ReadFileTool implements ICopilotTool<ReadFileParams> {
 		};
 	}
 
-	public alternativeDefinition(originTool: vscode.LanguageModelToolInformation): vscode.LanguageModelToolInformation {
+	public alternativeDefinition(originTool: zyraxoncode.LanguageModelToolInformation): zyraxoncode.LanguageModelToolInformation {
 		if (this.configurationService.getExperimentBasedConfig<boolean>(ConfigKey.TeamInternal.EnableReadFileV2, this.experimentationService)) {
 			return getReadFileV2Description(originTool);
 		}
@@ -334,7 +334,7 @@ export class ReadFileTool implements ICopilotTool<ReadFileParams> {
 		return TextDocumentSnapshot.create(await this.workspaceService.openTextDocument(uri));
 	}
 
-	private async sendReadFileTelemetry(outcome: string, options: Pick<vscode.LanguageModelToolInvocationOptions<ReadFileParams>, 'model' | 'chatRequestId' | 'input'>, { start, end, truncated }: IParamRanges, uri: URI | undefined, documentSnapshot?: TextDocumentSnapshot | NotebookDocumentSnapshot) {
+	private async sendReadFileTelemetry(outcome: string, options: Pick<zyraxoncode.LanguageModelToolInvocationOptions<ReadFileParams>, 'model' | 'chatRequestId' | 'input'>, { start, end, truncated }: IParamRanges, uri: URI | undefined, documentSnapshot?: TextDocumentSnapshot | NotebookDocumentSnapshot) {
 		const model = options.model && (await this.endpointProvider.getChatEndpoint(options.model)).model;
 		const extensionSkillInfo = uri && this.customInstructionsService.getExtensionSkillInfo(uri);
 		const skillInfo = extensionSkillInfo || (uri && this.customInstructionsService.getSkillInfo(uri));
@@ -397,7 +397,7 @@ interface ReadFileResultProps extends BasePromptElementProps {
 	endLine: number;
 	truncated: boolean;
 	snapshot: TextDocumentSnapshot | NotebookDocumentSnapshot;
-	languageModel: vscode.LanguageModelChat | undefined;
+	languageModel: zyraxoncode.LanguageModelChat | undefined;
 	useCodeFences: boolean;
 }
 

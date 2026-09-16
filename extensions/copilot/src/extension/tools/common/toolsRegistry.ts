@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { IDisposable } from '../../../util/vs/base/common/lifecycle';
 import { ObservableMap } from '../../../util/vs/base/common/observable';
@@ -55,7 +55,7 @@ export interface ICopilotToolExtension<T> {
 	 * can be driven by EXP for example, or customized based on the current model.
 	 * ⚠️ A tool using an alternative definition MUST still accept its default
 	 * parameters because the alternative definition will only be applied within
-	 * the Copilot extension, not other extensions' usages via `vscode.lm.tools`.
+	 * the Copilot extension, not other extensions' usages via `zyraxoncode.lm.tools`.
 	 *
 	 * @param tool The original tool definition.
 	 * @param endpoint Optional information about the currently selected language model endpoint.
@@ -64,12 +64,12 @@ export interface ICopilotToolExtension<T> {
 	 * @return An overridden tool definition.
 	 * @deprecated use `ToolRegistry.registerModelSpecificTool` instead
 	 */
-	alternativeDefinition?(tool: vscode.LanguageModelToolInformation, endpoint?: IChatEndpoint): vscode.LanguageModelToolInformation;
+	alternativeDefinition?(tool: zyraxoncode.LanguageModelToolInformation, endpoint?: IChatEndpoint): zyraxoncode.LanguageModelToolInformation;
 }
 
 export interface ICopilotTool<T> extends ICopilotToolExtension<T> {
-	invoke?: vscode.LanguageModelTool<T>['invoke'];
-	prepareInvocation?: vscode.LanguageModelTool<T>['prepareInvocation'];
+	invoke?: zyraxoncode.LanguageModelTool<T>['invoke'];
+	prepareInvocation?: zyraxoncode.LanguageModelTool<T>['prepareInvocation'];
 }
 
 export interface ICopilotModelSpecificTool<T> extends ICopilotTool<T> {
@@ -84,7 +84,7 @@ export interface ICopilotModelSpecificTool<T> extends ICopilotTool<T> {
 	overridesTool?: ToolName;
 }
 
-export function isVscodeLanguageModelTool(tool: ICopilotTool<unknown>): tool is vscode.LanguageModelTool<unknown> {
+export function isVscodeLanguageModelTool(tool: ICopilotTool<unknown>): tool is zyraxoncode.LanguageModelTool<unknown> {
 	return typeof tool.invoke === 'function';
 }
 
@@ -112,7 +112,7 @@ export interface ICopilotToolExtensionCtor extends IModelSpecificToolCtor {
 export const ToolRegistry = new class {
 	private _tools: Array<ICopilotToolCtor> = [];
 	private _toolExtensions: Array<ICopilotToolExtensionCtor> = [];
-	private _modelSpecificTools = new ObservableMap<string, { definition: vscode.LanguageModelToolDefinition; tool: IModelSpecificToolCtor }>();
+	private _modelSpecificTools = new ObservableMap<string, { definition: zyraxoncode.LanguageModelToolDefinition; tool: IModelSpecificToolCtor }>();
 	private _nonDeferredToolNames = new Set<string>();
 
 	public get modelSpecificTools() {
@@ -138,7 +138,7 @@ export const ToolRegistry = new class {
 		this._toolExtensions.push(tool);
 	}
 
-	public registerModelSpecificTool(definition: vscode.LanguageModelToolDefinition, tool: IModelSpecificToolCtor): IDisposable {
+	public registerModelSpecificTool(definition: zyraxoncode.LanguageModelToolDefinition, tool: IModelSpecificToolCtor): IDisposable {
 		if (this._modelSpecificTools.has(definition.name)) {
 			throw new Error(`Model specific tool for ${definition.name} is already registered`);
 		}
@@ -157,7 +157,7 @@ export const ToolRegistry = new class {
 	}
 }();
 
-export function modelSpecificToolApplies(tool: vscode.LanguageModelToolDefinition, endpoint: IChatEndpoint) {
+export function modelSpecificToolApplies(tool: zyraxoncode.LanguageModelToolDefinition, endpoint: IChatEndpoint) {
 	if (!tool.models) {
 		return true;
 	}

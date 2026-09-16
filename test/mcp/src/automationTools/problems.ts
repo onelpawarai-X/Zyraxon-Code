@@ -14,7 +14,7 @@ export function applyProblemsTools(server: McpServer, appService: ApplicationSer
 	const tools: RegisteredTool[] = [];
 
 	tools.push(server.tool(
-		'vscode_automation_problems_show',
+		'zyraxoncode_automation_problems_show',
 		'Show the problems view',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -29,7 +29,7 @@ export function applyProblemsTools(server: McpServer, appService: ApplicationSer
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_problems_hide',
+		'zyraxoncode_automation_problems_hide',
 		'Hide the problems view',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -45,7 +45,7 @@ export function applyProblemsTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_problems_wait_for_view',
+	// 	'zyraxoncode_automation_problems_wait_for_view',
 	// 	'Wait for the problems view to appear',
 	// 	async () => {
 	// 		await app.workbench.problems.waitForProblemsView();
@@ -59,7 +59,7 @@ export function applyProblemsTools(server: McpServer, appService: ApplicationSer
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_problems_get_selector_in_view',
+		'zyraxoncode_automation_problems_get_selector_in_view',
 		'Get CSS selector for problems of a specific severity in the problems view',
 		{
 			severity: z.enum(['WARNING', 'ERROR']).describe('Problem severity (WARNING or ERROR)')
@@ -86,7 +86,7 @@ export function applyProblemsTools(server: McpServer, appService: ApplicationSer
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_problems_get_selector_in_editor',
+	// 	'zyraxoncode_automation_problems_get_selector_in_editor',
 	// 	'Get CSS selector for problems of a specific severity in the editor',
 	// 	{
 	// 		severity: z.enum(['WARNING', 'ERROR']).describe('Problem severity (WARNING or ERROR)')

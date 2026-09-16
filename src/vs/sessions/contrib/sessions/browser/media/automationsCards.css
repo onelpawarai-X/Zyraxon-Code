@@ -45,20 +45,20 @@
 
 .automations-cards-header-icon {
 	font-size: 16px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .automations-cards-header-title {
 	font-size: 16px;
 	font-weight: 600;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	margin: 0;
 	flex: 1;
 }
 
 .automations-cards-header-description {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin: 4px 0 16px;
 	line-height: 1.4;
 }
@@ -97,7 +97,7 @@
 	align-items: flex-start;
 	gap: 12px;
 	padding: 12px 16px;
-	border: 1px solid var(--vscode-editorWidget-border);
+	border: 1px solid var(--zyraxoncode-editorWidget-border);
 	border-radius: 6px;
 	height: 100%;
 	cursor: pointer;
@@ -105,11 +105,11 @@
 }
 
 .automations-card:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .automations-card:has(> .automations-card-main:focus-visible) {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -147,7 +147,7 @@
 	min-width: 0;
 	font-size: 13px;
 	font-weight: 600;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -157,7 +157,7 @@
 	font-size: 12px;
 	font-weight: 400;
 	font-style: italic;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 /* Card Metadata */
@@ -167,7 +167,7 @@
 	align-items: center;
 	gap: 6px;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	min-width: 0;
 }
 
@@ -185,17 +185,17 @@
 }
 
 .automations-card-last-run.automations-card-run-failed {
-	color: var(--vscode-errorForeground);
+	color: var(--zyraxoncode-errorForeground);
 }
 
 .automations-card-last-run.automations-card-run-success {
-	color: var(--vscode-testing-iconPassed);
+	color: var(--zyraxoncode-testing-iconPassed);
 }
 
 /* Card Prompt */
 .automations-card-prompt {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-top: 2px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -230,18 +230,18 @@
 	border: none;
 	border-radius: 4px;
 	background: transparent;
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 	cursor: pointer;
 	font-size: 16px;
 	min-width: 24px;
 }
 
 .automations-card-actions .monaco-button.automations-card-action-button:hover:not(.disabled) {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .automations-card-actions .monaco-button.automations-card-action-button:focus-visible {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -264,21 +264,21 @@
 
 .automations-cards-empty-icon {
 	font-size: 28px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 4px;
 	opacity: 0.7;
 }
 
 .automations-cards-empty-title {
-	font-size: var(--vscode-agents-fontSize-heading3);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-heading3);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
 	margin: 0;
 }
 
 .automations-cards-empty-description {
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin: 0 0 12px;
 	max-width: 320px;
 	line-height: 1.4;
@@ -299,9 +299,9 @@
 }
 
 .automations-history-header {
-	font-size: var(--vscode-agents-fontSize-heading3);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
-	color: var(--vscode-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-heading3);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
+	color: var(--zyraxoncode-foreground);
 	margin-bottom: 12px;
 	display: flex;
 	align-items: center;
@@ -324,7 +324,7 @@
 .automations-history-group-header {
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	margin-bottom: 8px;
 }
 
@@ -339,8 +339,8 @@
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
-	padding: var(--vscode-spacing-size100) var(--vscode-spacing-size160);
-	border: 1px solid var(--vscode-widget-border);
+	padding: var(--zyraxoncode-spacing-size100) var(--zyraxoncode-spacing-size160);
+	border: 1px solid var(--zyraxoncode-widget-border);
 	border-radius: 6px;
 }
 
@@ -349,29 +349,29 @@
 }
 
 .automations-run-card.clickable:hover {
-	background-color: var(--vscode-list-hoverBackground);
+	background-color: var(--zyraxoncode-list-hoverBackground);
 }
 
 .automations-run-card.clickable:focus-within {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
 .automations-run-card-name {
 	font-size: 13px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
 .automations-run-card-name-title {
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 }
 
 .automations-run-card-name-workspace {
 	font-weight: 400;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .automations-run-card-unread-dot {
@@ -380,7 +380,7 @@
 	height: 7px;
 	min-width: 7px;
 	border-radius: 50%;
-	background-color: var(--vscode-textLink-foreground);
+	background-color: var(--zyraxoncode-textLink-foreground);
 	margin-right: 6px;
 	vertical-align: middle;
 }
@@ -391,7 +391,7 @@
 	align-items: center;
 	gap: 6px;
 	font-size: 12px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .automations-run-card-status-row .meta-sep {
@@ -399,24 +399,24 @@
 }
 
 .automations-run-card-icon {
-	font-size: var(--vscode-codiconFontSize);
+	font-size: var(--zyraxoncode-codiconFontSize);
 }
 
 .automations-run-card-icon.codicon-check {
-	color: var(--vscode-testing-iconPassed);
+	color: var(--zyraxoncode-testing-iconPassed);
 }
 
 .automations-run-card-icon.codicon-error {
-	color: var(--vscode-errorForeground);
+	color: var(--zyraxoncode-errorForeground);
 }
 
 .automations-run-card-icon.codicon-sync {
-	color: var(--vscode-progressBar-background);
+	color: var(--zyraxoncode-progressBar-background);
 }
 
 .automations-run-card-workspace {
 	font-size: 11px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	opacity: 0.8;
 }
 
@@ -430,5 +430,5 @@
 
 .hc-black .automations-card,
 .hc-light .automations-card {
-	border-color: var(--vscode-contrastBorder);
+	border-color: var(--zyraxoncode-contrastBorder);
 }

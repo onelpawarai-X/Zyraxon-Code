@@ -38,7 +38,7 @@ export type RemoteAgentHostConnectionStatus =
 		 * Set only when the server was spawned by a ZYRAXON Code CLI willing
 		 * to receive upgrade signals.
 		 */
-		readonly vscodeUpgradeMethod?: string;
+		readonly zyraxoncodeUpgradeMethod?: string;
 	};
 
 export namespace RemoteAgentHostConnectionStatus {
@@ -49,8 +49,8 @@ export namespace RemoteAgentHostConnectionStatus {
 	/** Singleton "disconnected" status. */
 	export const disconnected: RemoteAgentHostConnectionStatus = Object.freeze({ kind: 'disconnected' });
 	/** Build an "incompatible" status from a host-supplied message and the versions involved. */
-	export function incompatible(message: string, supportedByClient: readonly string[], offeredByServer?: readonly string[], vscodeUpgradeMethod?: string): RemoteAgentHostConnectionStatus {
-		return Object.freeze({ kind: 'incompatible', message, supportedByClient, offeredByServer, vscodeUpgradeMethod });
+	export function incompatible(message: string, supportedByClient: readonly string[], offeredByServer?: readonly string[], zyraxoncodeUpgradeMethod?: string): RemoteAgentHostConnectionStatus {
+		return Object.freeze({ kind: 'incompatible', message, supportedByClient, offeredByServer, zyraxoncodeUpgradeMethod });
 	}
 	/** Whether the connection is fully established and ready for traffic. */
 	export function isConnected(status: RemoteAgentHostConnectionStatus | undefined): boolean {
@@ -82,8 +82,8 @@ export namespace RemoteAgentHostConnectionStatus {
 		if (err instanceof ProtocolError && err.code === AHP_UNSUPPORTED_PROTOCOL_VERSION) {
 			const data = err.data as Partial<UnsupportedProtocolVersionErrorData> | undefined;
 			const offeredByServer = Array.isArray(data?.supportedVersions) ? data.supportedVersions : undefined;
-			const vscodeUpgradeMethod = readUnsupportedProtocolVersionErrorMeta(err.data)?.vscodeUpgradeMethod;
-			return incompatible(err.message, supportedByClient, offeredByServer, vscodeUpgradeMethod);
+			const zyraxoncodeUpgradeMethod = readUnsupportedProtocolVersionErrorMeta(err.data)?.zyraxoncodeUpgradeMethod;
+			return incompatible(err.message, supportedByClient, offeredByServer, zyraxoncodeUpgradeMethod);
 		}
 		return undefined;
 	}
@@ -335,7 +335,7 @@ export interface IRemoteAgentHostService {
 	 * Ask the remote agent host to upgrade itself via its hosting CLI.
 	 *
 	 * Sends the host-advertised JSON-RPC method (typically
-	 * `_vscodeUpgrade`) on the existing transport — even when the handshake
+	 * `_zyraxoncodeUpgrade`) on the existing transport — even when the handshake
 	 * has not completed (e.g. the host was just rejected for protocol
 	 * incompatibility). The hosting CLI receives the signal, checks for a
 	 * newer build, and kills+respawns the server on success. The caller
@@ -392,7 +392,7 @@ export function parseRemoteAgentHostInput(input: string): RemoteAgentHostInputPa
 
 	const hasExplicitScheme = /^[a-zA-Z][a-zA-Z\d+.-]*:\/\//.test(candidate);
 	try {
-		const url = new URL(hasExplicitScheme ? candidate : `ws://${candidate}`);
+		const url = new URL(hasExplicitScheme ? candidate : `__ZYRAXKEEP__0_{candidate}`);
 		const normalizedProtocol = normalizeRemoteAgentHostProtocol(url.protocol);
 		if (!normalizedProtocol || !url.host) {
 			return { error: RemoteAgentHostInputValidationError.Invalid };

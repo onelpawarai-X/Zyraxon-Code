@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ChatContext, ChatRequest, ChatResponseStream } from 'vscode';
+import type { ChatContext, ChatRequest, ChatResponseStream } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { Event } from '../../../util/vs/base/common/event';
 

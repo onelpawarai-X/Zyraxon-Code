@@ -26,7 +26,7 @@ import { AgentHostFilterConnectionStatus, IAgentHostFilterEntry, IAgentHostFilte
  * Visual appearance of {@link HostFilterActionViewItem}.
  *
  * - `titlebar` — the original compact pill designed for the desktop
- *   titlebar's left toolbar. Fixed-height pill with `--vscode-titleBar-…`
+ *   titlebar's left toolbar. Fixed-height pill with `--zyraxoncode-titleBar-…`
  *   text colors and a `max-width` so it never grows too wide.
  * - `sidebar` — full-width row aligned with the rest of the agents
  *   sidebar (matches `.sidebar-action-button`'s rhythm), used by the

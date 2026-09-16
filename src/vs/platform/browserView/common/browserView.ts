@@ -704,7 +704,7 @@ export interface IBrowserViewService {
 	/**
 	 * Replace the calling window's configuration for the browser views it owns.
 	 *
-	 * @param windowId The calling window's `vscodeWindowId`.
+	 * @param windowId The calling window's `zyraxoncodeWindowId`.
 	 * @param config The configuration to apply.
 	 */
 	updateWindowConfiguration(windowId: number, config: IBrowserViewWindowConfiguration): Promise<void>;

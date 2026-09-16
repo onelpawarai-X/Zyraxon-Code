@@ -369,7 +369,7 @@ Phase 2 is "done" when all of the following pass:
 
 **Lifecycle (Q2/Q3):**
 - [ ] `start(token)` returns a handle with `baseUrl` (e.g.
-  `http://127.0.0.1:54321`) and a 256-bit hex `nonce`
+  `__ZYRAXKEEP__0_`) and a 256-bit hex `nonce`
 - [ ] Two concurrent `start()` calls share one server, share the latest
   token, return handles with the same `baseUrl` and `nonce`
 - [ ] Disposing one handle while the other is alive: server stays up,
@@ -1999,7 +1999,7 @@ Description is a required, non-empty string — there is no fallback.
 | Field | `models: IObservable<readonly IAgentModelInfo[]>` |
 | `IAgentModelInfo` | `{ provider, id, name, supportsVision, maxContextWindow?, configSchema?: ConfigSchema, policyState?, _meta? }` ([agentService.ts:265-274](../../common/agentService.ts#L265-L274)) |
 | Claude provider source | **CAPI** via `ICopilotApiService.models(githubToken)` ([copilotApiService.ts:228-281](../shared/copilotApiService.ts#L228-L281)) — *not* `Query.supportedModels()` |
-| Result shape | `CCAModel[]` from `@vscode/copilot-api` — carries `vendor`, `supported_endpoints`, `model_picker_enabled`, `model_picker_category`, plus capability metadata |
+| Result shape | `CCAModel[]` from `@zyraxoncode/copilot-api` — carries `vendor`, `supported_endpoints`, `model_picker_enabled`, `model_picker_category`, plus capability metadata |
 
 **This provider runs against CAPI, not Anthropic.** Claude models
 reach the IAgent provider through the same Copilot Chat API the
@@ -2291,7 +2291,7 @@ round-trip as a no-op or fail. M11's restart-required bucket
 
 The reference Claude extension has no equivalent of
 `resolveSessionConfig` (the chat-session UI has no creation form;
-sessions inherit settings from `vscode.workspace.getConfiguration`
+sessions inherit settings from `zyraxoncode.workspace.getConfiguration`
 and `~/.claude/settings.json`). The IAgent Claude provider is the
 first place this schema gets explicitly assembled for Claude.
 

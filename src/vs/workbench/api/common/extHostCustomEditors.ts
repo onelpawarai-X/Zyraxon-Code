@@ -17,7 +17,7 @@ import * as typeConverters from './extHostTypeConverters.js';
 import { ExtHostWebviews, shouldSerializeBuffersForPostMessage, toExtensionData } from './extHostWebview.js';
 import { ExtHostWebviewPanels } from './extHostWebviewPanels.js';
 import { EditorGroupColumn } from '../../services/editor/common/editorGroupColumn.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { Cache } from './cache.js';
 import * as extHostProtocol from './extHost.protocol.js';
 import * as extHostTypes from './extHostTypes.js';
@@ -29,15 +29,15 @@ class CustomDocumentStoreEntry {
 	private _backupCounter = 1;
 
 	constructor(
-		public readonly document: vscode.CustomDocument,
+		public readonly document: zyraxoncode.CustomDocument,
 		private readonly _storagePath: URI | undefined,
 	) { }
 
-	private readonly _edits = new Cache<vscode.CustomDocumentEditEvent>('custom documents');
+	private readonly _edits = new Cache<zyraxoncode.CustomDocumentEditEvent>('custom documents');
 
-	private _backup?: vscode.CustomDocumentBackup;
+	private _backup?: zyraxoncode.CustomDocumentBackup;
 
-	addEdit(item: vscode.CustomDocumentEditEvent): number {
+	addEdit(item: zyraxoncode.CustomDocumentEditEvent): number {
 		return this._edits.add([item]);
 	}
 
@@ -69,7 +69,7 @@ class CustomDocumentStoreEntry {
 		return joinPath(this._storagePath, fileName);
 	}
 
-	updateBackup(backup: vscode.CustomDocumentBackup): void {
+	updateBackup(backup: zyraxoncode.CustomDocumentBackup): void {
 		this._backup?.delete();
 		this._backup = backup;
 	}
@@ -79,7 +79,7 @@ class CustomDocumentStoreEntry {
 		this._backup = undefined;
 	}
 
-	private getEdit(editId: number): vscode.CustomDocumentEditEvent {
+	private getEdit(editId: number): zyraxoncode.CustomDocumentEditEvent {
 		const edit = this._edits.get(editId, 0);
 		if (!edit) {
 			throw new Error('No edit found');
@@ -91,11 +91,11 @@ class CustomDocumentStoreEntry {
 class CustomDocumentStore {
 	private readonly _documents = new Map<string, CustomDocumentStoreEntry>();
 
-	public get(viewType: string, resource: vscode.Uri): CustomDocumentStoreEntry | undefined {
+	public get(viewType: string, resource: zyraxoncode.Uri): CustomDocumentStoreEntry | undefined {
 		return this._documents.get(this.key(viewType, resource));
 	}
 
-	public add(viewType: string, document: vscode.CustomDocument, storagePath: URI | undefined): CustomDocumentStoreEntry {
+	public add(viewType: string, document: zyraxoncode.CustomDocument, storagePath: URI | undefined): CustomDocumentStoreEntry {
 		const key = this.key(viewType, document.uri);
 		if (this._documents.has(key)) {
 			throw new Error(`Document already exists for viewType:${viewType} resource:${document.uri}`);
@@ -105,14 +105,14 @@ class CustomDocumentStore {
 		return entry;
 	}
 
-	public delete(viewType: string, resource: vscode.Uri) {
+	public delete(viewType: string, resource: zyraxoncode.Uri) {
 		// Use the resource parameter directly instead of document.uri, because the document's
 		// URI may have changed (e.g., after SaveAs from untitled to a file path).
 		const key = this.key(viewType, resource);
 		this._documents.delete(key);
 	}
 
-	private key(viewType: string, resource: vscode.Uri): string {
+	private key(viewType: string, resource: zyraxoncode.Uri): string {
 		return `${viewType}@@@${resource}`;
 	}
 }
@@ -125,21 +125,21 @@ const enum CustomEditorType {
 type ProviderEntry = {
 	readonly extension: IExtensionDescription;
 	readonly type: CustomEditorType.Text;
-	readonly provider: vscode.CustomTextEditorProvider;
+	readonly provider: zyraxoncode.CustomTextEditorProvider;
 } | {
 	readonly extension: IExtensionDescription;
 	readonly type: CustomEditorType.Custom;
-	readonly provider: vscode.CustomReadonlyEditorProvider;
+	readonly provider: zyraxoncode.CustomReadonlyEditorProvider;
 };
 
 class EditorProviderStore {
 	private readonly _providers = new Map<string, ProviderEntry>();
 
-	public addTextProvider(viewType: string, extension: IExtensionDescription, provider: vscode.CustomTextEditorProvider): vscode.Disposable {
+	public addTextProvider(viewType: string, extension: IExtensionDescription, provider: zyraxoncode.CustomTextEditorProvider): zyraxoncode.Disposable {
 		return this.add(viewType, { type: CustomEditorType.Text, extension, provider });
 	}
 
-	public addCustomProvider(viewType: string, extension: IExtensionDescription, provider: vscode.CustomReadonlyEditorProvider): vscode.Disposable {
+	public addCustomProvider(viewType: string, extension: IExtensionDescription, provider: zyraxoncode.CustomReadonlyEditorProvider): zyraxoncode.Disposable {
 		return this.add(viewType, { type: CustomEditorType.Custom, extension, provider });
 	}
 
@@ -147,7 +147,7 @@ class EditorProviderStore {
 		return this._providers.get(viewType);
 	}
 
-	private add(viewType: string, entry: ProviderEntry): vscode.Disposable {
+	private add(viewType: string, entry: ProviderEntry): zyraxoncode.Disposable {
 		if (this._providers.has(viewType)) {
 			throw new Error(`Provider for viewType:${viewType} already registered`);
 		}
@@ -177,9 +177,9 @@ export class ExtHostCustomEditors implements extHostProtocol.ExtHostCustomEditor
 	public registerCustomEditorProvider(
 		extension: IExtensionDescription,
 		viewType: string,
-		provider: vscode.CustomReadonlyEditorProvider | vscode.CustomTextEditorProvider,
-		options: { webviewOptions?: vscode.WebviewPanelOptions; supportsMultipleEditorsPerDocument?: boolean },
-	): vscode.Disposable {
+		provider: zyraxoncode.CustomReadonlyEditorProvider | zyraxoncode.CustomTextEditorProvider,
+		options: { webviewOptions?: zyraxoncode.WebviewPanelOptions; supportsMultipleEditorsPerDocument?: boolean },
+	): zyraxoncode.Disposable {
 		const disposables = new DisposableStore();
 		if (isCustomTextEditorProvider(provider)) {
 			disposables.add(this._editorProviders.addTextProvider(viewType, extension, provider));
@@ -372,7 +372,7 @@ export class ExtHostCustomEditors implements extHostProtocol.ExtHostCustomEditor
 		viewType: string,
 		initData: extHostProtocol.CustomEditorDiffInitData,
 		position: EditorGroupColumn,
-	): { entry: ProviderEntry; panel: vscode.WebviewPanel } {
+	): { entry: ProviderEntry; panel: zyraxoncode.WebviewPanel } {
 		const entry = this._editorProviders.get(viewType);
 		if (!entry) {
 			throw new Error(`No provider found for '${viewType}'`);
@@ -396,7 +396,7 @@ export class ExtHostCustomEditors implements extHostProtocol.ExtHostCustomEditor
 			throw new Error(`No provider found for '${viewType}'`);
 		}
 
-		if (!(entry.provider as vscode.CustomTextEditorProvider).moveCustomTextEditor) {
+		if (!(entry.provider as zyraxoncode.CustomTextEditorProvider).moveCustomTextEditor) {
 			throw new Error(`Provider does not implement move '${viewType}'`);
 		}
 
@@ -407,7 +407,7 @@ export class ExtHostCustomEditors implements extHostProtocol.ExtHostCustomEditor
 
 		const resource = URI.revive(newResourceComponents);
 		const document = this._extHostDocuments.getDocument(resource);
-		await (entry.provider as vscode.CustomTextEditorProvider).moveCustomTextEditor!(document, webview, CancellationToken.None);
+		await (entry.provider as zyraxoncode.CustomTextEditorProvider).moveCustomTextEditor!(document, webview, CancellationToken.None);
 	}
 
 	async $undo(resourceComponents: UriComponents, viewType: string, editId: number, isDirty: boolean): Promise<void> {
@@ -459,7 +459,7 @@ export class ExtHostCustomEditors implements extHostProtocol.ExtHostCustomEditor
 		return entry;
 	}
 
-	private getCustomEditorProvider(viewType: string): vscode.CustomEditorProvider {
+	private getCustomEditorProvider(viewType: string): zyraxoncode.CustomEditorProvider {
 		const entry = this._editorProviders.get(viewType);
 		const provider = entry?.provider;
 		if (!provider || !isCustomEditorProviderWithEditingCapability(provider)) {
@@ -469,33 +469,33 @@ export class ExtHostCustomEditors implements extHostProtocol.ExtHostCustomEditor
 	}
 }
 
-function isCustomEditorProviderWithEditingCapability(provider: vscode.CustomTextEditorProvider | vscode.CustomEditorProvider | vscode.CustomReadonlyEditorProvider): provider is vscode.CustomEditorProvider {
-	return !!(provider as vscode.CustomEditorProvider).onDidChangeCustomDocument;
+function isCustomEditorProviderWithEditingCapability(provider: zyraxoncode.CustomTextEditorProvider | zyraxoncode.CustomEditorProvider | zyraxoncode.CustomReadonlyEditorProvider): provider is zyraxoncode.CustomEditorProvider {
+	return !!(provider as zyraxoncode.CustomEditorProvider).onDidChangeCustomDocument;
 }
 
-function isCustomTextEditorProvider(provider: vscode.CustomReadonlyEditorProvider<vscode.CustomDocument> | vscode.CustomTextEditorProvider): provider is vscode.CustomTextEditorProvider {
-	return typeof (provider as vscode.CustomTextEditorProvider).resolveCustomTextEditor === 'function';
+function isCustomTextEditorProvider(provider: zyraxoncode.CustomReadonlyEditorProvider<zyraxoncode.CustomDocument> | zyraxoncode.CustomTextEditorProvider): provider is zyraxoncode.CustomTextEditorProvider {
+	return typeof (provider as zyraxoncode.CustomTextEditorProvider).resolveCustomTextEditor === 'function';
 }
 
-function isCustomTextEditorProviderWithInlineDiffCapability(provider: vscode.CustomTextEditorProvider): provider is vscode.CustomTextEditorProvider & Required<Pick<vscode.CustomTextEditorProvider, 'resolveCustomTextEditorInlineDiff'>> {
+function isCustomTextEditorProviderWithInlineDiffCapability(provider: zyraxoncode.CustomTextEditorProvider): provider is zyraxoncode.CustomTextEditorProvider & Required<Pick<zyraxoncode.CustomTextEditorProvider, 'resolveCustomTextEditorInlineDiff'>> {
 	return typeof provider.resolveCustomTextEditorInlineDiff === 'function';
 }
 
-function isCustomTextEditorProviderWithSideBySideDiffCapability(provider: vscode.CustomTextEditorProvider): provider is vscode.CustomTextEditorProvider & Required<Pick<vscode.CustomTextEditorProvider, 'resolveCustomTextEditorSideBySideDiff'>> {
+function isCustomTextEditorProviderWithSideBySideDiffCapability(provider: zyraxoncode.CustomTextEditorProvider): provider is zyraxoncode.CustomTextEditorProvider & Required<Pick<zyraxoncode.CustomTextEditorProvider, 'resolveCustomTextEditorSideBySideDiff'>> {
 	return typeof provider.resolveCustomTextEditorSideBySideDiff === 'function';
 }
 
-function isCustomEditorProviderWithInlineDiffCapability(provider: vscode.CustomReadonlyEditorProvider): provider is vscode.CustomReadonlyEditorProvider & Required<Pick<vscode.CustomReadonlyEditorProvider, 'resolveCustomEditorInlineDiff'>> {
+function isCustomEditorProviderWithInlineDiffCapability(provider: zyraxoncode.CustomReadonlyEditorProvider): provider is zyraxoncode.CustomReadonlyEditorProvider & Required<Pick<zyraxoncode.CustomReadonlyEditorProvider, 'resolveCustomEditorInlineDiff'>> {
 	return typeof provider.resolveCustomEditorInlineDiff === 'function';
 }
 
-function isCustomEditorProviderWithSideBySideDiffCapability(provider: vscode.CustomReadonlyEditorProvider): provider is vscode.CustomReadonlyEditorProvider & Required<Pick<vscode.CustomReadonlyEditorProvider, 'resolveCustomEditorSideBySideDiff'>> {
+function isCustomEditorProviderWithSideBySideDiffCapability(provider: zyraxoncode.CustomReadonlyEditorProvider): provider is zyraxoncode.CustomReadonlyEditorProvider & Required<Pick<zyraxoncode.CustomReadonlyEditorProvider, 'resolveCustomEditorSideBySideDiff'>> {
 	return typeof provider.resolveCustomEditorSideBySideDiff === 'function';
 }
 
-function isEditEvent(e: vscode.CustomDocumentContentChangeEvent | vscode.CustomDocumentEditEvent): e is vscode.CustomDocumentEditEvent {
-	return typeof (e as vscode.CustomDocumentEditEvent).undo === 'function'
-		&& typeof (e as vscode.CustomDocumentEditEvent).redo === 'function';
+function isEditEvent(e: zyraxoncode.CustomDocumentContentChangeEvent | zyraxoncode.CustomDocumentEditEvent): e is zyraxoncode.CustomDocumentEditEvent {
+	return typeof (e as zyraxoncode.CustomDocumentEditEvent).undo === 'function'
+		&& typeof (e as zyraxoncode.CustomDocumentEditEvent).redo === 'function';
 }
 
 function hashPath(resource: URI): string {

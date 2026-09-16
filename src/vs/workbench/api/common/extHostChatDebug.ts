@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { VSBuffer } from '../../../base/common/buffer.js';
 import { CancellationToken } from '../../../base/common/cancellation.js';
 import { Emitter } from '../../../base/common/event.js';
@@ -17,12 +17,12 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 	declare _serviceBrand: undefined;
 
 	private readonly _proxy: MainThreadChatDebugShape;
-	private _provider: vscode.ChatDebugLogProvider | undefined;
+	private _provider: zyraxoncode.ChatDebugLogProvider | undefined;
 	private _nextHandle: number = 0;
 	/** Progress pipelines keyed by `${handle}:${sessionResource}` so multiple sessions can stream concurrently. */
 	private readonly _activeProgress = new Map<string, DisposableStore>();
 
-	private readonly _onDidAddCoreEvent = this._register(new Emitter<vscode.ChatDebugEvent>({
+	private readonly _onDidAddCoreEvent = this._register(new Emitter<zyraxoncode.ChatDebugEvent>({
 		onWillAddFirstListener: () => this._proxy.$subscribeToCoreDebugEvents(),
 		onDidRemoveLastListener: () => this._proxy.$unsubscribeFromCoreDebugEvents(),
 	}));
@@ -47,7 +47,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 		}
 	}
 
-	registerChatDebugLogProvider(provider: vscode.ChatDebugLogProvider): vscode.Disposable {
+	registerChatDebugLogProvider(provider: zyraxoncode.ChatDebugLogProvider): zyraxoncode.Disposable {
 		if (this._provider) {
 			throw new Error('A ChatDebugLogProvider is already registered.');
 		}
@@ -80,7 +80,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 		const store = new DisposableStore();
 		this._activeProgress.set(key, store);
 
-		const emitter = store.add(new Emitter<vscode.ChatDebugEvent>());
+		const emitter = store.add(new Emitter<zyraxoncode.ChatDebugEvent>());
 
 		// Forward progress events to the main thread
 		store.add(emitter.event(event => {
@@ -97,7 +97,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 		}));
 
 		try {
-			const progress: vscode.Progress<vscode.ChatDebugEvent> = {
+			const progress: zyraxoncode.Progress<zyraxoncode.ChatDebugEvent> = {
 				report: (value) => emitter.fire(value)
 			};
 
@@ -118,10 +118,10 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 		// is cancelled, or the provider is unregistered.
 	}
 
-	private _serializeEvent(event: vscode.ChatDebugEvent): IChatDebugEventDto {
+	private _serializeEvent(event: zyraxoncode.ChatDebugEvent): IChatDebugEventDto {
 		const base = {
 			id: event.id,
-			sessionResource: (event as { sessionResource?: vscode.Uri }).sessionResource,
+			sessionResource: (event as { sessionResource?: zyraxoncode.Uri }).sessionResource,
 			created: event.created.getTime(),
 			parentEventId: event.parentEventId,
 		};
@@ -132,7 +132,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 		const kind = (event as { _kind?: string })._kind;
 		switch (kind) {
 			case 'toolCall': {
-				const e = event as vscode.ChatDebugToolCallEvent;
+				const e = event as zyraxoncode.ChatDebugToolCallEvent;
 				return {
 					...base,
 					kind: 'toolCall',
@@ -147,7 +147,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'modelTurn': {
-				const e = event as vscode.ChatDebugModelTurnEvent;
+				const e = event as zyraxoncode.ChatDebugModelTurnEvent;
 				return {
 					...base,
 					kind: 'modelTurn',
@@ -162,7 +162,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'generic': {
-				const e = event as vscode.ChatDebugGenericEvent;
+				const e = event as zyraxoncode.ChatDebugGenericEvent;
 				return {
 					...base,
 					kind: 'generic',
@@ -173,7 +173,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'subagentInvocation': {
-				const e = event as vscode.ChatDebugSubagentInvocationEvent;
+				const e = event as zyraxoncode.ChatDebugSubagentInvocationEvent;
 				return {
 					...base,
 					kind: 'subagentInvocation',
@@ -189,7 +189,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'userMessage': {
-				const e = event as vscode.ChatDebugUserMessageEvent;
+				const e = event as zyraxoncode.ChatDebugUserMessageEvent;
 				return {
 					...base,
 					kind: 'userMessage',
@@ -198,7 +198,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'agentResponse': {
-				const e = event as vscode.ChatDebugAgentResponseEvent;
+				const e = event as zyraxoncode.ChatDebugAgentResponseEvent;
 				return {
 					...base,
 					kind: 'agentResponse',
@@ -207,7 +207,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			default: {
-				const generic = event as vscode.ChatDebugGenericEvent;
+				const generic = event as zyraxoncode.ChatDebugGenericEvent;
 				const rawName = generic.name;
 				const rawDetails = generic.details;
 				return {
@@ -235,9 +235,9 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 		const kind = (result as { _kind?: string })._kind;
 		switch (kind) {
 			case 'text':
-				return { kind: 'text', value: (result as vscode.ChatDebugEventTextContent).value };
+				return { kind: 'text', value: (result as zyraxoncode.ChatDebugEventTextContent).value };
 			case 'messageContent': {
-				const msg = result as vscode.ChatDebugEventMessageContent;
+				const msg = result as zyraxoncode.ChatDebugEventMessageContent;
 				return {
 					kind: 'message',
 					type: msg.type === ChatDebugMessageContentType.User ? 'user' : 'agent',
@@ -246,7 +246,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'userMessage': {
-				const msg = result as vscode.ChatDebugUserMessageEvent;
+				const msg = result as zyraxoncode.ChatDebugUserMessageEvent;
 				return {
 					kind: 'message',
 					type: 'user',
@@ -255,7 +255,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'agentResponse': {
-				const msg = result as vscode.ChatDebugAgentResponseEvent;
+				const msg = result as zyraxoncode.ChatDebugAgentResponseEvent;
 				return {
 					kind: 'message',
 					type: 'agent',
@@ -264,7 +264,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'toolCallContent': {
-				const tc = result as vscode.ChatDebugEventToolCallContent;
+				const tc = result as zyraxoncode.ChatDebugEventToolCallContent;
 				return {
 					kind: 'toolCall',
 					toolName: tc.toolName,
@@ -277,7 +277,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 				};
 			}
 			case 'modelTurnContent': {
-				const mt = result as vscode.ChatDebugEventModelTurnContent;
+				const mt = result as zyraxoncode.ChatDebugEventModelTurnContent;
 				return {
 					kind: 'modelTurn',
 					requestName: mt.requestName,
@@ -319,7 +319,7 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 		}
 	}
 
-	private _deserializeEvent(dto: IChatDebugEventDto): vscode.ChatDebugEvent | undefined {
+	private _deserializeEvent(dto: IChatDebugEventDto): zyraxoncode.ChatDebugEvent | undefined {
 		const created = new Date(dto.created);
 		const sessionResource = dto.sessionResource ? URI.revive(dto.sessionResource) : undefined;
 		switch (dto.kind) {
@@ -409,8 +409,8 @@ export class ExtHostChatDebug extends Disposable implements ExtHostChatDebugShap
 			return undefined;
 		}
 		const sessionUri = URI.revive(sessionResource);
-		const coreEvents = coreEventDtos.map(dto => this._deserializeEvent(dto)).filter((e): e is vscode.ChatDebugEvent => e !== undefined);
-		const options: vscode.ChatDebugLogExportOptions = { coreEvents, sessionTitle };
+		const coreEvents = coreEventDtos.map(dto => this._deserializeEvent(dto)).filter((e): e is zyraxoncode.ChatDebugEvent => e !== undefined);
+		const options: zyraxoncode.ChatDebugLogExportOptions = { coreEvents, sessionTitle };
 		const result = await this._provider.provideChatDebugLogExport(sessionUri, options, token);
 		if (!result) {
 			return undefined;

@@ -101,7 +101,7 @@ export function isClaudeEffortLevel(value: string): value is ClaudeEffortLevel {
  * and the extension mirrors the same fallback rule at
  * `extensions/copilot/src/extension/chatSessions/claude/node/claudeCodeModels.ts:230`.
  * (Anthropic's `CCAModel` rows don't carry a server-supplied default
- * field; tracked at microsoft/vscode-capi#85.)
+ * field; tracked at zyraxon/zyraxoncode-capi#85.)
  *
  * Returns `undefined` for an empty list — the picker then renders no
  * thinkingLevel control for that model.

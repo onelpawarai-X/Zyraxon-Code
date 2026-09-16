@@ -68,9 +68,9 @@ export class ElectronAgentHostStarter extends Disposable implements IAgentHostSt
 
 		// Listen for new windows to establish a direct MessagePort connection to the agent host
 		const onWindowConnection = (e: IpcMainEvent, nonce: string) => this._onWindowConnection(e, nonce);
-		validatedIpcMain.on('vscode:createAgentHostMessageChannel', onWindowConnection);
+		validatedIpcMain.on('zyraxoncode:createAgentHostMessageChannel', onWindowConnection);
 		this._register(toDisposable(() => {
-			validatedIpcMain.removeListener('vscode:createAgentHostMessageChannel', onWindowConnection);
+			validatedIpcMain.removeListener('zyraxoncode:createAgentHostMessageChannel', onWindowConnection);
 		}));
 	}
 
@@ -219,13 +219,13 @@ export class ElectronAgentHostStarter extends Disposable implements IAgentHostSt
 			return;
 		}
 
-		e.sender.postMessage('vscode:createAgentHostMessageChannelResult', nonce, [port]);
+		e.sender.postMessage('zyraxoncode:createAgentHostMessageChannelResult', nonce, [port]);
 	}
 
 	private static readonly _expectedStderrPatterns = [
 		'Most NODE_OPTIONs are not supported in packaged apps',
 		'Debugger listening on ws://',
-		'For help, see: https://nodejs.org/en/docs/inspector',
+		'For help, see: __ZYRAXKEEP__0_',
 		'ExperimentalWarning: SQLite is an experimental feature',
 	];
 

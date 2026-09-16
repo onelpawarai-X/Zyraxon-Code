@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createDecorator as createServiceIdentifier, IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
 import { ILogService } from '../../log/common/logService';
 import { EditCollector } from './editCollector';
@@ -13,14 +13,14 @@ import { EditSurvivalReporter, EditSurvivalResult } from './editSurvivalReporter
 export const IEditSurvivalTrackerService = createServiceIdentifier<IEditSurvivalTrackerService>('IEditSurvivalTrackerService');
 
 export interface IEditSurvivalTrackingSession {
-	collectAIEdits(textEdit: vscode.TextEdit | vscode.TextEdit[]): void;
+	collectAIEdits(textEdit: zyraxoncode.TextEdit | zyraxoncode.TextEdit[]): void;
 	startReporter(sendTelemetryEvent: (res: EditSurvivalResult) => void): void;
 	cancel(): void;
 }
 
 export interface IEditSurvivalTrackerService {
 	readonly _serviceBrand: undefined;
-	initialize(document: vscode.TextDocument): IEditSurvivalTrackingSession;
+	initialize(document: zyraxoncode.TextDocument): IEditSurvivalTrackingSession;
 }
 
 export class NullEditSurvivalTrackingSession implements IEditSurvivalTrackingSession {
@@ -32,7 +32,7 @@ export class NullEditSurvivalTrackingSession implements IEditSurvivalTrackingSes
 export class NullEditSurvivalTrackerService implements IEditSurvivalTrackerService {
 	readonly _serviceBrand: undefined;
 
-	initialize(document: vscode.TextDocument): IEditSurvivalTrackingSession {
+	initialize(document: zyraxoncode.TextDocument): IEditSurvivalTrackingSession {
 		return new NullEditSurvivalTrackingSession();
 	}
 }
@@ -46,11 +46,11 @@ export class EditSurvivalTrackerService implements IEditSurvivalTrackerService {
 	) {
 	}
 
-	initialize(document: vscode.TextDocument): IEditSurvivalTrackingSession {
+	initialize(document: zyraxoncode.TextDocument): IEditSurvivalTrackingSession {
 		const editCollector = this._instantiationService.createInstance(EditCollector, document.getText());
 		let reporter: EditSurvivalReporter | undefined;
 		return {
-			collectAIEdits: (edits: vscode.TextEdit | vscode.TextEdit[]) => {
+			collectAIEdits: (edits: zyraxoncode.TextEdit | zyraxoncode.TextEdit[]) => {
 				try {
 					editCollector.addEdits(Array.isArray(edits) ? edits : [edits]);
 				} catch (error) {

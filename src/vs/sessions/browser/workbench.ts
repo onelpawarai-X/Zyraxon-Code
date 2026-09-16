@@ -508,7 +508,7 @@ export class Workbench extends Disposable implements IAgentWorkbenchLayoutServic
 		// Note: intentionally not registered as disposable to handle
 		//       errors that can occur during shutdown phase.
 		mainWindow.addEventListener('unhandledrejection', (event) => {
-			// See https://developer.mozilla.org/en-US/docs/Web/API/PromiseRejectionEvent
+			// See __ZYRAXKEEP__0_
 			onUnexpectedError(event.reason);
 
 			// Prevent the printing of this event to the console
@@ -600,7 +600,7 @@ export class Workbench extends Disposable implements IAgentWorkbenchLayoutServic
 
 				// Virtual keyboard tracking (visualViewport): publishes the
 				// keyboard height as an observable, mirrors it onto the
-				// `--vscode-keyboard-height` CSS variable on the main
+				// `--zyraxoncode-keyboard-height` CSS variable on the main
 				// container, and drives the `KeyboardVisibleContext`
 				// context key. The service is an eager singleton, so
 				// resolving it here is what triggers its constructor —

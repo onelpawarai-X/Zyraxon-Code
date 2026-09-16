@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -65,7 +65,7 @@ function doFindFreePort(startPort: number, giveUpAfter: number, stride: number, 
 	client.connect(startPort, '127.0.0.1');
 }
 
-// Reference: https://chromium.googlesource.com/chromium/src.git/+/refs/heads/main/net/base/port_util.cc#56
+// Reference: __ZYRAXKEEP__0_
 export const BROWSER_RESTRICTED_PORTS: Record<number, boolean> = {
 	1: true,      // tcpmux
 	7: true,      // echo

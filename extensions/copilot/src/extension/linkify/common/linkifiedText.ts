@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
-import { Location, SymbolInformation, Uri } from '../../../vscodeTypes';
+import { Location, SymbolInformation, Uri } from '../../../zyraxoncodeTypes';
 
 export class LinkifyLocationAnchor {
 	constructor(

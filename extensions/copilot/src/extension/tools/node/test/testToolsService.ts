@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { packageJson } from '../../../../platform/env/common/packagejson';
 import { ILanguageDiagnosticsService } from '../../../../platform/languages/common/languageDiagnosticsService';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -15,7 +15,7 @@ import { Lazy } from '../../../../util/vs/base/common/lazy';
 import { isDisposable } from '../../../../util/vs/base/common/lifecycle';
 import { autorunIterableDelta } from '../../../../util/vs/base/common/observable';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelToolInformation, LanguageModelToolResult2 } from '../../../../vscodeTypes';
+import { LanguageModelToolInformation, LanguageModelToolResult2 } from '../../../../zyraxoncodeTypes';
 import { getContributedToolName, getToolName, mapContributedToolNamesInSchema, mapContributedToolNamesInString, ToolName } from '../../common/toolNames';
 import { ICopilotTool, ICopilotToolCtor, ToolRegistry } from '../../common/toolsRegistry';
 import { BaseToolsService, IToolsService } from '../../common/toolsService';
@@ -103,7 +103,7 @@ export class TestToolsService extends BaseToolsService implements IToolsService 
 		return filteredTools;
 	}
 
-	async invokeTool(contributedName: string, options: vscode.LanguageModelToolInvocationOptions<unknown>, token: CancellationToken): Promise<LanguageModelToolResult2> {
+	async invokeTool(contributedName: string, options: zyraxoncode.LanguageModelToolInvocationOptions<unknown>, token: CancellationToken): Promise<LanguageModelToolResult2> {
 		const name = getToolName(contributedName);
 		const tool = this._copilotTools.get(name as ToolName)?.value || this.getModelSpecificTools().get(contributedName)?.tool;
 		const invoke = tool?.invoke;
@@ -178,7 +178,7 @@ export class TestToolsService extends BaseToolsService implements IToolsService 
 		return undefined;
 	}
 
-	getEnabledTools(request: vscode.ChatRequest, endpoint: IChatEndpoint, filter?: (tool: LanguageModelToolInformation) => boolean | undefined): LanguageModelToolInformation[] {
+	getEnabledTools(request: zyraxoncode.ChatRequest, endpoint: IChatEndpoint, filter?: (tool: LanguageModelToolInformation) => boolean | undefined): LanguageModelToolInformation[] {
 		const toolMap = new Map(this.tools.map(t => [t.name, t]));
 		const requestToolsByName = new Map(Iterable.map(request.tools, ([t, enabled]) => [t.name, enabled]));
 
@@ -221,7 +221,7 @@ export class TestToolsService extends BaseToolsService implements IToolsService 
 
 	}
 
-	addTestToolOverride(info: LanguageModelToolInformation, tool: vscode.LanguageModelTool<unknown>): void {
+	addTestToolOverride(info: LanguageModelToolInformation, tool: zyraxoncode.LanguageModelTool<unknown>): void {
 		this._tools.set(info.name, info);
 		this._copilotTools.set(info.name as ToolName, new Lazy(() => tool));
 	}
@@ -235,7 +235,7 @@ export class NoopTestToolsService extends TestToolsService {
 		super(new Set(), instantiationService, logService);
 	}
 
-	override invokeTool(name: string, options: vscode.LanguageModelToolInvocationOptions<unknown>, token: CancellationToken): Promise<LanguageModelToolResult2> {
+	override invokeTool(name: string, options: zyraxoncode.LanguageModelToolInvocationOptions<unknown>, token: CancellationToken): Promise<LanguageModelToolResult2> {
 		throw new Error('NoopTestToolsService does not support invoking tools');
 	}
 
@@ -245,7 +245,7 @@ export class NoopTestToolsService extends TestToolsService {
 }
 
 export function getPackagejsonToolsForTest() {
-	// Simulate what vscode would do- enable all tools that would be in the picker (tools in a toolset or with canBeReferencedInPrompt)
+	// Simulate what zyraxoncode would do- enable all tools that would be in the picker (tools in a toolset or with canBeReferencedInPrompt)
 	const toolsetReferenceNames = new Set(packageJson.contributes.languageModelToolSets
 		.flatMap(toolset => toolset.tools));
 	const tools = new Set(packageJson.contributes.languageModelTools
@@ -253,7 +253,7 @@ export function getPackagejsonToolsForTest() {
 		.map(tool => getToolName(tool.name)));
 
 	// Add core tools that should be enabled for the agent.
-	// Normally, vscode is in control of deciding which tools are enabled for a chat request, but in the simulator, the extension has to decide this.
+	// Normally, zyraxoncode is in control of deciding which tools are enabled for a chat request, but in the simulator, the extension has to decide this.
 	// Since it can't get info like `canBeReferencedInPrompt` from the extension API, we have to hardcode tool names here.
 	tools.add(ToolName.CoreRunInTerminal);
 	tools.add(ToolName.CoreGetTerminalOutput);

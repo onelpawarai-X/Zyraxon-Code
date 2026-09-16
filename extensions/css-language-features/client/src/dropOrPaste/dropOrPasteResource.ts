@@ -4,20 +4,20 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { getDocumentDir, Mimes, Schemes } from './shared';
 import { UriList } from './uriList';
 
-class DropOrPasteResourceProvider implements vscode.DocumentDropEditProvider, vscode.DocumentPasteEditProvider {
+class DropOrPasteResourceProvider implements zyraxoncode.DocumentDropEditProvider, zyraxoncode.DocumentPasteEditProvider {
 
-	readonly kind = vscode.DocumentDropOrPasteEditKind.Empty.append('css', 'link', 'url');
+	readonly kind = zyraxoncode.DocumentDropOrPasteEditKind.Empty.append('css', 'link', 'url');
 
 	async provideDocumentDropEdits(
-		document: vscode.TextDocument,
-		position: vscode.Position,
-		dataTransfer: vscode.DataTransfer,
-		token: vscode.CancellationToken,
-	): Promise<vscode.DocumentDropEdit | undefined> {
+		document: zyraxoncode.TextDocument,
+		position: zyraxoncode.Position,
+		dataTransfer: zyraxoncode.DataTransfer,
+		token: zyraxoncode.CancellationToken,
+	): Promise<zyraxoncode.DocumentDropEdit | undefined> {
 		const uriList = await this.getUriList(dataTransfer);
 		if (!uriList.entries.length || token.isCancellationRequested) {
 			return;
@@ -32,17 +32,17 @@ class DropOrPasteResourceProvider implements vscode.DocumentDropEditProvider, vs
 			kind: this.kind,
 			title: snippet.label,
 			insertText: snippet.snippet.value,
-			yieldTo: this.pasteAsCssUrlByDefault(document, position) ? [] : [vscode.DocumentDropOrPasteEditKind.Empty.append('uri')]
+			yieldTo: this.pasteAsCssUrlByDefault(document, position) ? [] : [zyraxoncode.DocumentDropOrPasteEditKind.Empty.append('uri')]
 		};
 	}
 
 	async provideDocumentPasteEdits(
-		document: vscode.TextDocument,
-		ranges: readonly vscode.Range[],
-		dataTransfer: vscode.DataTransfer,
-		_context: vscode.DocumentPasteEditContext,
-		token: vscode.CancellationToken
-	): Promise<vscode.DocumentPasteEdit[] | undefined> {
+		document: zyraxoncode.TextDocument,
+		ranges: readonly zyraxoncode.Range[],
+		dataTransfer: zyraxoncode.DataTransfer,
+		_context: zyraxoncode.DocumentPasteEditContext,
+		token: zyraxoncode.CancellationToken
+	): Promise<zyraxoncode.DocumentPasteEdit[] | undefined> {
 		const uriList = await this.getUriList(dataTransfer);
 		if (!uriList.entries.length || token.isCancellationRequested) {
 			return;
@@ -57,18 +57,18 @@ class DropOrPasteResourceProvider implements vscode.DocumentDropEditProvider, vs
 			kind: this.kind,
 			title: snippet.label,
 			insertText: snippet.snippet.value,
-			yieldTo: this.pasteAsCssUrlByDefault(document, ranges[0].start) ? [] : [vscode.DocumentDropOrPasteEditKind.Empty.append('uri')]
+			yieldTo: this.pasteAsCssUrlByDefault(document, ranges[0].start) ? [] : [zyraxoncode.DocumentDropOrPasteEditKind.Empty.append('uri')]
 		}];
 	}
 
-	private async getUriList(dataTransfer: vscode.DataTransfer): Promise<UriList> {
+	private async getUriList(dataTransfer: zyraxoncode.DataTransfer): Promise<UriList> {
 		const urlList = await dataTransfer.get(Mimes.uriList)?.asString();
 		if (urlList) {
 			return UriList.from(urlList);
 		}
 
 		// Find file entries
-		const uris: vscode.Uri[] = [];
+		const uris: zyraxoncode.Uri[] = [];
 		for (const [_, entry] of dataTransfer) {
 			const file = entry.asFile();
 			if (file?.uri) {
@@ -79,12 +79,12 @@ class DropOrPasteResourceProvider implements vscode.DocumentDropEditProvider, vs
 		return new UriList(uris.map(uri => ({ uri, str: uri.toString(true) })));
 	}
 
-	private async createUriListSnippet(docUri: vscode.Uri, uriList: UriList): Promise<{ readonly snippet: vscode.SnippetString; readonly label: string } | undefined> {
+	private async createUriListSnippet(docUri: zyraxoncode.Uri, uriList: UriList): Promise<{ readonly snippet: zyraxoncode.SnippetString; readonly label: string } | undefined> {
 		if (!uriList.entries.length) {
 			return;
 		}
 
-		const snippet = new vscode.SnippetString();
+		const snippet = new zyraxoncode.SnippetString();
 		for (let i = 0; i < uriList.entries.length; i++) {
 			const uri = uriList.entries[i];
 			const relativePath = getRelativePath(getDocumentDir(docUri), uri.uri);
@@ -99,12 +99,12 @@ class DropOrPasteResourceProvider implements vscode.DocumentDropEditProvider, vs
 		return {
 			snippet,
 			label: uriList.entries.length > 1
-				? vscode.l10n.t('Insert url() Functions')
-				: vscode.l10n.t('Insert url() Function')
+				? zyraxoncode.l10n.t('Insert url() Functions')
+				: zyraxoncode.l10n.t('Insert url() Function')
 		};
 	}
 
-	private pasteAsCssUrlByDefault(document: vscode.TextDocument, position: vscode.Position): boolean {
+	private pasteAsCssUrlByDefault(document: zyraxoncode.TextDocument, position: zyraxoncode.Position): boolean {
 		const regex = /url\(.+?\)/gi;
 		for (const match of Array.from(document.lineAt(position.line).text.matchAll(regex))) {
 			if (position.character > match.index && position.character < match.index + match[0].length) {
@@ -115,7 +115,7 @@ class DropOrPasteResourceProvider implements vscode.DocumentDropEditProvider, vs
 	}
 }
 
-function getRelativePath(fromFile: vscode.Uri | undefined, toFile: vscode.Uri): string | undefined {
+function getRelativePath(fromFile: zyraxoncode.Uri | undefined, toFile: zyraxoncode.Uri): string | undefined {
 	if (fromFile && fromFile.scheme === toFile.scheme && fromFile.authority === toFile.authority) {
 		if (toFile.scheme === Schemes.file) {
 			// On windows, we must use the native `path.relative` to generate the relative path
@@ -131,18 +131,18 @@ function getRelativePath(fromFile: vscode.Uri | undefined, toFile: vscode.Uri): 
 	return undefined;
 }
 
-export function registerDropOrPasteResourceSupport(selector: vscode.DocumentSelector): vscode.Disposable {
+export function registerDropOrPasteResourceSupport(selector: zyraxoncode.DocumentSelector): zyraxoncode.Disposable {
 	const provider = new DropOrPasteResourceProvider();
 
-	return vscode.Disposable.from(
-		vscode.languages.registerDocumentDropEditProvider(selector, provider, {
+	return zyraxoncode.Disposable.from(
+		zyraxoncode.languages.registerDocumentDropEditProvider(selector, provider, {
 			providedDropEditKinds: [provider.kind],
 			dropMimeTypes: [
 				Mimes.uriList,
 				'files'
 			]
 		}),
-		vscode.languages.registerDocumentPasteEditProvider(selector, provider, {
+		zyraxoncode.languages.registerDocumentPasteEditProvider(selector, provider, {
 			providedPasteEditKinds: [provider.kind],
 			pasteMimeTypes: [
 				Mimes.uriList,

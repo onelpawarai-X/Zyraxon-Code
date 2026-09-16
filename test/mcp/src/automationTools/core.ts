@@ -14,7 +14,7 @@ export function applyCoreTools(server: McpServer, appService: ApplicationService
 	const tools: RegisteredTool[] = [];
 
 	tools.push(server.tool(
-		'vscode_automation_restart',
+		'zyraxoncode_automation_restart',
 		'Restart ZYRAXON Code with optional workspace or folder and extra command-line arguments',
 		{
 			workspaceOrFolder: z.string().optional().describe('Path to a workspace or folder to open on restart'),
@@ -35,7 +35,7 @@ export function applyCoreTools(server: McpServer, appService: ApplicationService
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_stop',
+		'zyraxoncode_automation_stop',
 		'Stop the ZYRAXON Code application',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -52,7 +52,7 @@ export function applyCoreTools(server: McpServer, appService: ApplicationService
 
 	// This doesn't seem particularly useful
 	// server.tool(
-	// 	'vscode_automation_get_quality',
+	// 	'zyraxoncode_automation_get_quality',
 	// 	'Get the quality/build type of ZYRAXON Code (Dev, Insiders, Stable, etc.)',
 	// 	async () => {
 	// 		const info = {
@@ -74,7 +74,7 @@ export function applyCoreTools(server: McpServer, appService: ApplicationService
 
 	// This doesn't seem particularly useful
 	// server.tool(
-	// 	'vscode_automation_wait_for_element',
+	// 	'zyraxoncode_automation_wait_for_element',
 	// 	'Wait for a UI element to appear using CSS selector - prefer using specific workbench methods when available',
 	// 	{
 	// 		selector: z.string().describe('CSS selector for the element to wait for'),
@@ -95,7 +95,7 @@ export function applyCoreTools(server: McpServer, appService: ApplicationService
 
 	// Defer to Playwright's tool
 	// server.tool(
-	// 	'vscode_automation_click_element',
+	// 	'zyraxoncode_automation_click_element',
 	// 	'Click on a UI element - prefer using specific workbench methods when available',
 	// 	{
 	// 		selector: z.string().describe('CSS selector for the element to click'),
@@ -116,7 +116,7 @@ export function applyCoreTools(server: McpServer, appService: ApplicationService
 
 	// Defer to Playwright's tool
 	// server.tool(
-	// 	'vscode_automation_send_keybinding',
+	// 	'zyraxoncode_automation_send_keybinding',
 	// 	'Send a keybinding to ZYRAXON Code (e.g., ctrl+shift+p, cmd+s)',
 	// 	{
 	// 		keybinding: z.string().describe('The keybinding to send (e.g., ctrl+shift+p, cmd+s, escape)'),
@@ -140,7 +140,7 @@ export function applyCoreTools(server: McpServer, appService: ApplicationService
 
 	// Defer to Playwright's tool
 	// server.tool(
-	// 	'vscode_automation_get_text_content',
+	// 	'zyraxoncode_automation_get_text_content',
 	// 	'Get text content from a UI element using CSS selector',
 	// 	{
 	// 		selector: z.string().describe('CSS selector for the element'),

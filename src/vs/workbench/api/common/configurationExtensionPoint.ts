@@ -29,25 +29,25 @@ const configurationEntrySchema: IJSONSchema = {
 	defaultSnippets: [{ body: { title: '', properties: {} } }],
 	properties: {
 		title: {
-			description: nls.localize('vscode.extension.contributes.configuration.title', 'A title for the current category of settings. This label will be rendered in the Settings editor as a subheading. If the title is the same as the extension display name, then the category will be grouped under the main extension heading.'),
+			description: nls.localize('zyraxoncode.extension.contributes.configuration.title', 'A title for the current category of settings. This label will be rendered in the Settings editor as a subheading. If the title is the same as the extension display name, then the category will be grouped under the main extension heading.'),
 			type: 'string'
 		},
 		order: {
-			description: nls.localize('vscode.extension.contributes.configuration.order', 'When specified, gives the order of this category of settings relative to other categories.'),
+			description: nls.localize('zyraxoncode.extension.contributes.configuration.order', 'When specified, gives the order of this category of settings relative to other categories.'),
 			type: 'integer'
 		},
 		properties: {
-			description: nls.localize('vscode.extension.contributes.configuration.properties', 'Description of the configuration properties.'),
+			description: nls.localize('zyraxoncode.extension.contributes.configuration.properties', 'Description of the configuration properties.'),
 			type: 'object',
 			propertyNames: {
 				pattern: '\\S+',
-				patternErrorMessage: nls.localize('vscode.extension.contributes.configuration.property.empty', 'Property should not be empty.'),
+				patternErrorMessage: nls.localize('zyraxoncode.extension.contributes.configuration.property.empty', 'Property should not be empty.'),
 			},
 			additionalProperties: {
 				anyOf: [
 					{
-						title: nls.localize('vscode.extension.contributes.configuration.properties.schema', 'Schema of the configuration property.'),
-						$ref: 'http://json-schema.org/draft-07/schema#'
+						title: nls.localize('zyraxoncode.extension.contributes.configuration.properties.schema', 'Schema of the configuration property.'),
+						$ref: '__ZYRAXKEEP__0_'
 					},
 					{
 						type: 'object',
@@ -174,7 +174,7 @@ const configurationEntrySchema: IJSONSchema = {
 let _configDelta: IConfigurationDelta | undefined;
 
 
-// BEGIN VSCode extension point `configurationDefaults`
+// BEGIN ZyraxonCode extension point `configurationDefaults`
 const defaultConfigurationExtPoint = ExtensionsRegistry.registerExtensionPoint<IStringDictionary<IStringDictionary<unknown>>>({
 	extensionPoint: 'configurationDefaults',
 	jsonSchema: {
@@ -227,15 +227,15 @@ defaultConfigurationExtPoint.setHandler((extensions, { added, removed }) => {
 		_configDelta.addedDefaults = addedDefaultConfigurations;
 	}
 });
-// END VSCode extension point `configurationDefaults`
+// END ZyraxonCode extension point `configurationDefaults`
 
 
-// BEGIN VSCode extension point `configuration`
+// BEGIN ZyraxonCode extension point `configuration`
 const configurationExtPoint = ExtensionsRegistry.registerExtensionPoint<IConfigurationNode>({
 	extensionPoint: 'configuration',
 	deps: [defaultConfigurationExtPoint],
 	jsonSchema: {
-		description: nls.localize('vscode.extension.contributes.configuration', 'Contributes configuration settings.'),
+		description: nls.localize('zyraxoncode.extension.contributes.configuration', 'Contributes configuration settings.'),
 		oneOf: [
 			configurationEntrySchema,
 			{
@@ -360,9 +360,9 @@ configurationExtPoint.setHandler((extensions, { added, removed }) => {
 	configurationRegistry.deltaConfiguration(_configDelta);
 	_configDelta = undefined;
 });
-// END VSCode extension point `configuration`
+// END ZyraxonCode extension point `configuration`
 
-jsonRegistry.registerSchema('vscode://schemas/workspaceConfig', {
+jsonRegistry.registerSchema('__ZYRAXKEEP__1_', {
 	allowComments: true,
 	allowTrailingCommas: true,
 	default: {
@@ -446,7 +446,7 @@ jsonRegistry.registerSchema('vscode://schemas/workspaceConfig', {
 			type: 'object',
 			default: {},
 			description: nls.localize('workspaceConfig.extensions.description', "Workspace extensions"),
-			$ref: 'vscode://schemas/extensions'
+			$ref: '__ZYRAXKEEP__2_'
 		},
 		'remoteAuthority': {
 			type: 'string',

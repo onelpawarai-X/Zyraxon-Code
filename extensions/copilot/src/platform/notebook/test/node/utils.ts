@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 import * as fs from 'fs';
 import * as path from '../../../../util/vs/base/common/path';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { BaseAlternativeNotebookContentProvider } from '../../../../platform/notebook/common/alternativeContentProvider';
 import { SimulationWorkspace } from '../../../../platform/test/node/simulationWorkspace';
 import { ExtHostNotebookDocumentData } from '../../../../util/common/test/shims/notebookDocument';
-import { Uri } from '../../../../vscodeTypes';
+import { Uri } from '../../../../zyraxoncodeTypes';
 
 export function loadFile(data: FixtureData): Promise<ITestFile>;
 export function loadFile(data: Omit<FixtureData, 'filePath'> & { fileName: string; fileContents: string }): Promise<'not_supported'>;
@@ -54,12 +54,12 @@ export function docPathInFixture(pathWithinFixturesDir: string, type: 'summarize
 interface ITestFile {
 	contents: string;
 	filePath: string;
-	formattingOptions?: vscode.FormattingOptions;
+	formattingOptions?: zyraxoncode.FormattingOptions;
 }
 export async function generateAlternativeContent(
 	filePromise: ITestFile | Promise<ITestFile>,
 	contentProvider: BaseAlternativeNotebookContentProvider,
-): Promise<{ content: string; notebook: vscode.NotebookDocument }> {
+): Promise<{ content: string; notebook: zyraxoncode.NotebookDocument }> {
 	const notebook = await loadNotebook(filePromise);
 
 	const content = contentProvider.getAlternativeDocument(notebook).getText();

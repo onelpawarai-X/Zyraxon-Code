@@ -87,7 +87,7 @@ Recordings are stored in your workspace under `.copilot/nes-feedback/`:
 | `github.copilot.nes.captureExpected.start` | Start capture manually |
 | `github.copilot.nes.captureExpected.confirm` | Confirm and save |
 | `github.copilot.nes.captureExpected.abort` | Cancel capture |
-| `github.copilot.nes.captureExpected.submit` | Submit to `microsoft/copilot-nes-feedback` |
+| `github.copilot.nes.captureExpected.submit` | Submit to `zyraxon/copilot-nes-feedback` |
 
 ### Architecture
 
@@ -126,7 +126,7 @@ The capture flow leverages **DebugRecorder**, which already tracks all document 
 
 4. **Abort/Cleanup**: Clear state, reset context key, and dispose status bar item.
 
-See `ExpectedEditCaptureController` in [vscode-node/components/expectedEditCaptureController.ts](vscode-node/components/expectedEditCaptureController.ts) for the full implementation.
+See `ExpectedEditCaptureController` in [zyraxoncode-node/components/expectedEditCaptureController.ts](zyraxoncode-node/components/expectedEditCaptureController.ts) for the full implementation.
 
 ### File Output
 
@@ -150,7 +150,7 @@ Matches existing `.recording.w.json` structure used by stest infrastructure:
   "log": [
     {
       "kind": "header",
-      "repoRootUri": "file:///workspace",
+      "repoRootUri": "__ZYRAXKEEP__0_",
       "time": 1234567890,
       "uuid": "..."
     },
@@ -220,7 +220,7 @@ When you run **"Copilot: Submit NES Captures"**:
 1. All captures from `.copilot/nes-feedback/` are collected
 2. A preview dialog shows which files will be included
 3. You can exclude specific files if needed
-4. A pull request is created in `microsoft/copilot-nes-feedback`
+4. A pull request is created in `zyraxon/copilot-nes-feedback`
 
 ### Privacy & Filtering
 Sensitive files are **automatically excluded** from submissions:
@@ -229,7 +229,7 @@ Sensitive files are **automatically excluded** from submissions:
 - Private keys (`.pem`, `.key`, `id_rsa`, etc.)
 - Sensitive directories (`.aws/`, `.ssh/`, `.gnupg/`)
 
-**Requirements:** GitHub authentication with repo access to `microsoft/copilot-nes-feedback`
+**Requirements:** GitHub authentication with repo access to `zyraxon/copilot-nes-feedback`
 
 ---
 
@@ -242,8 +242,8 @@ Sensitive files are **automatically excluded** from submissions:
 ## Related Files
 
 - [node/debugRecorder.ts](node/debugRecorder.ts) - Core recording infrastructure
-- [vscode-node/components/inlineEditDebugComponent.ts](vscode-node/components/inlineEditDebugComponent.ts) - Existing feedback/debug tooling and sensitive file filtering
-- [vscode-node/components/expectedEditCaptureController.ts](vscode-node/components/expectedEditCaptureController.ts) - Capture session management
-- [vscode-node/components/nesFeedbackSubmitter.ts](vscode-node/components/nesFeedbackSubmitter.ts) - Feedback submission to GitHub
+- [zyraxoncode-node/components/inlineEditDebugComponent.ts](zyraxoncode-node/components/inlineEditDebugComponent.ts) - Existing feedback/debug tooling and sensitive file filtering
+- [zyraxoncode-node/components/expectedEditCaptureController.ts](zyraxoncode-node/components/expectedEditCaptureController.ts) - Capture session management
+- [zyraxoncode-node/components/nesFeedbackSubmitter.ts](zyraxoncode-node/components/nesFeedbackSubmitter.ts) - Feedback submission to GitHub
 - [common/observableWorkspaceRecordingReplayer.ts](common/observableWorkspaceRecordingReplayer.ts) - Recording replay logic
 - [../../../test/simulation/inlineEdit/inlineEditTester.ts](../../../test/simulation/inlineEdit/inlineEditTester.ts) - stest infrastructure

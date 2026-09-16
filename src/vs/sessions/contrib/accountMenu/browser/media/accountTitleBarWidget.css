@@ -13,7 +13,7 @@
 	width: 22px;
 	min-width: 22px;
 	background: transparent;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 	color: inherit;
 	cursor: pointer;
 	-webkit-app-region: no-drag;
@@ -22,23 +22,23 @@
 
 .agent-sessions-workbench .sessions-account-titlebar-widget:hover,
 .agent-sessions-workbench .action-item:focus-within .sessions-account-titlebar-widget {
-	background: var(--vscode-toolbar-hoverBackground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-widget:active,
 .agent-sessions-workbench .sessions-account-titlebar-widget.menu-visible,
 .agent-sessions-workbench .action-item:focus-within .sessions-account-titlebar-widget.menu-visible {
-	background: var(--vscode-toolbar-activeBackground);
+	background: var(--zyraxoncode-toolbar-activeBackground);
 }
 
 .agent-sessions-workbench .action-item:focus-within .sessions-account-titlebar-widget {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-widget-icon {
 	flex: 0 0 auto;
-	font-size: var(--vscode-codiconFontSize);
+	font-size: var(--zyraxoncode-codiconFontSize);
 	color: inherit;
 }
 
@@ -51,7 +51,7 @@
 	flex: 0 0 auto;
 	width: 18px;
 	height: 18px;
-	border: 1px solid var(--vscode-commandCenter-border, transparent);
+	border: 1px solid var(--zyraxoncode-commandCenter-border, transparent);
 	border-radius: 50%;
 	box-sizing: border-box;
 	object-fit: cover;
@@ -62,7 +62,7 @@
 }
 
 .monaco-workbench .part.titlebar.inactive .sessions-account-titlebar-widget-avatar {
-	border-color: var(--vscode-commandCenter-inactiveBorder, var(--vscode-commandCenter-border, transparent));
+	border-color: var(--zyraxoncode-commandCenter-inactiveBorder, var(--zyraxoncode-commandCenter-border, transparent));
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-widget-label {
@@ -85,11 +85,11 @@
 	min-width: 18px;
 	height: 16px;
 	padding: 0 4px;
-	border-radius: var(--vscode-cornerRadius-large);
-	background: var(--vscode-badge-background);
-	color: var(--vscode-badge-foreground);
-	font-size: var(--vscode-agents-fontSize-label3);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	background: var(--zyraxoncode-badge-background);
+	color: var(--zyraxoncode-badge-foreground);
+	font-size: var(--zyraxoncode-agents-fontSize-label3);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	font-variant-numeric: tabular-nums;
 	line-height: 1;
 }
@@ -103,36 +103,36 @@
 	height: 6px;
 	padding: 0;
 	border-radius: 50%;
-	border: 1px solid var(--vscode-titleBar-activeBackground);
-	background: var(--vscode-editorWarning-foreground);
+	border: 1px solid var(--zyraxoncode-titleBar-activeBackground);
+	background: var(--zyraxoncode-editorWarning-foreground);
 	color: transparent;
 	pointer-events: none;
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-widget-badge.dot-badge-warning {
-	background: var(--vscode-editorWarning-foreground) !important;
+	background: var(--zyraxoncode-editorWarning-foreground) !important;
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-widget-badge.dot-badge-error {
-	background: var(--vscode-editorError-foreground) !important;
+	background: var(--zyraxoncode-editorError-foreground) !important;
 }
 
 /* Kind-based styling */
 
 .agent-sessions-workbench .sessions-account-titlebar-widget.kind-warning .sessions-account-titlebar-widget-icon,
 .agent-sessions-workbench .sessions-account-titlebar-widget.kind-warning .sessions-account-titlebar-widget-label {
-	color: var(--vscode-statusBarItem-warningForeground);
+	color: var(--zyraxoncode-statusBarItem-warningForeground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-widget.kind-prominent .sessions-account-titlebar-widget-badge:not(.dot-badge),
 .agent-sessions-workbench .sessions-account-titlebar-widget.kind-warning .sessions-account-titlebar-widget-badge:not(.dot-badge) {
-	background: var(--vscode-activityBarBadge-background);
-	color: var(--vscode-activityBarBadge-foreground);
+	background: var(--zyraxoncode-activityBarBadge-background);
+	color: var(--zyraxoncode-activityBarBadge-foreground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-widget.kind-accent .sessions-account-titlebar-widget-badge:not(.dot-badge) {
-	background: var(--vscode-button-background);
-	color: var(--vscode-button-foreground);
+	background: var(--zyraxoncode-button-background);
+	color: var(--zyraxoncode-button-foreground);
 }
 
 /* Panel (hover popup) */
@@ -142,7 +142,7 @@
 	flex-direction: column;
 	width: 360px;
 	max-width: 360px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-header {
@@ -151,7 +151,7 @@
 	gap: 6px;
 	min-height: 28px;
 	padding: 4px 8px;
-	border-bottom: 1px solid var(--vscode-menu-separatorBackground, var(--vscode-disabledForeground));
+	border-bottom: 1px solid var(--zyraxoncode-menu-separatorBackground, var(--zyraxoncode-disabledForeground));
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-avatar {
@@ -160,7 +160,7 @@
 	height: 20px;
 	border-radius: 50%;
 	object-fit: cover;
-	border: 1px solid var(--vscode-commandCenter-border, var(--vscode-contrastBorder, transparent));
+	border: 1px solid var(--zyraxoncode-commandCenter-border, var(--zyraxoncode-contrastBorder, transparent));
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-title {
@@ -169,8 +169,8 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	line-height: 18px;
 }
 
@@ -188,18 +188,18 @@
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-header-actions > .monaco-action-bar .action-label {
 	padding: 4px;
-	color: var(--vscode-icon-foreground, var(--vscode-descriptionForeground));
+	color: var(--zyraxoncode-icon-foreground, var(--zyraxoncode-descriptionForeground));
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-header-actions > .monaco-action-bar .action-item:not(.disabled) .action-label:hover,
 .agent-sessions-workbench .sessions-account-titlebar-panel-header-actions > .monaco-action-bar .action-item:not(.disabled) .action-label:focus-visible {
-	background: var(--vscode-toolbar-hoverBackground);
-	color: var(--vscode-foreground);
+	background: var(--zyraxoncode-toolbar-hoverBackground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-header-actions > .monaco-action-bar .action-item:not(.disabled) .action-label:active {
-	background: var(--vscode-toolbar-activeBackground);
-	color: var(--vscode-foreground);
+	background: var(--zyraxoncode-toolbar-activeBackground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-cta-actions {
@@ -209,9 +209,9 @@
 .agent-sessions-workbench .sessions-account-titlebar-panel-cta-actions .monaco-button {
 	height: 22px;
 	padding: 0 8px;
-	font-size: var(--vscode-agents-fontSize-label2);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
 	line-height: 20px;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 }
 
 .monaco-hover.workbench-hover.sessions-account-titlebar-panel-hover,
@@ -228,9 +228,9 @@
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-summary {
 	padding: 12px 16px;
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	line-height: 1.4;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-actions {
@@ -254,15 +254,15 @@
 	padding: 3px 16px;
 	justify-content: flex-start;
 	border-radius: 0;
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	line-height: 18px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-actions > .monaco-action-bar .action-item:not(.disabled) .action-label:hover,
 .agent-sessions-workbench .sessions-account-titlebar-panel-actions > .monaco-action-bar .action-item:not(.disabled) .action-label:focus-visible {
-	background: var(--vscode-list-hoverBackground);
-	color: var(--vscode-list-activeSelectionForeground, var(--vscode-foreground));
+	background: var(--zyraxoncode-list-hoverBackground);
+	color: var(--zyraxoncode-list-activeSelectionForeground, var(--zyraxoncode-foreground));
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-section {
@@ -292,24 +292,24 @@
 	padding: 0 28px 0 0;
 	border-top: none;
 	background: none;
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	line-height: 18px;
-	font-weight: var(--vscode-agents-fontWeight-regular);
-	color: var(--vscode-descriptionForeground);
+	font-weight: var(--zyraxoncode-agents-fontWeight-regular);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-section .chat-status-bar-entry-tooltip .collapsible-header.non-collapsible .collapsible-label {
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-section .chat-status-bar-entry-tooltip .collapsible-header.non-collapsible .collapsible-status {
 	margin-left: auto;
-	font-size: var(--vscode-agents-fontSize-label2);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
 	line-height: 15px;
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-section .chat-status-bar-entry-tooltip .collapsible-header.non-collapsible .contributed-detail {
-	font-size: var(--vscode-agents-fontSize-label2);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
 	line-height: 15px;
 }
 
@@ -321,10 +321,10 @@
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-section-title {
 	padding: 4px 8px 2px;
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	line-height: 18px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 }
 
 /* Subscription section: place "Subscription" label and the dashboard's
@@ -349,16 +349,16 @@
 	display: flex;
 	align-items: center;
 	gap: 6px;
-	font-size: var(--vscode-agents-fontSize-label1);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
 	line-height: 18px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-section-header > div.header .header-label {
 	flex: 0 0 auto;
-	color: var(--vscode-descriptionForeground);
-	font-weight: var(--vscode-agents-fontWeight-regular);
-	font-size: var(--vscode-agents-fontSize-label2);
+	color: var(--zyraxoncode-descriptionForeground);
+	font-weight: var(--zyraxoncode-agents-fontWeight-regular);
+	font-size: var(--zyraxoncode-agents-fontSize-label2);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-section-header > div.header .monaco-action-bar {
@@ -378,9 +378,9 @@
 .agent-sessions-workbench .sessions-account-titlebar-panel-section.subscription .chat-status-bar-entry-tooltip > div.description {
 	margin: 0;
 	padding: 0 2px;
-	font-size: var(--vscode-agents-fontSize-body2);
+	font-size: var(--zyraxoncode-agents-fontSize-body2);
 	line-height: 16px;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 }
 
 .agent-sessions-workbench .sessions-account-titlebar-panel-section.subscription .chat-status-bar-entry-tooltip > .monaco-button {
@@ -388,9 +388,9 @@
 	height: 26px;
 	margin: 0;
 	padding: 0 12px;
-	border-radius: var(--vscode-cornerRadius-medium);
-	font-size: var(--vscode-agents-fontSize-label1);
-	font-weight: var(--vscode-agents-fontWeight-semiBold);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
+	font-size: var(--zyraxoncode-agents-fontSize-label1);
+	font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 	line-height: 1;
 }
 

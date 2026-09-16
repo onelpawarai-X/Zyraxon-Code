@@ -9,7 +9,7 @@ import { ExtHostDocumentsAndEditors } from './extHostDocumentsAndEditors.js';
 import { IExtHostRpcService } from './extHostRpcService.js';
 import { WorkspaceEdit } from './extHostTypeConverters.js';
 import { SerializableObjectWithBuffers } from '../../services/extensions/common/proxyIdentifier.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 export class ExtHostBulkEdits {
 
@@ -28,7 +28,7 @@ export class ExtHostBulkEdits {
 		};
 	}
 
-	applyWorkspaceEdit(edit: vscode.WorkspaceEdit, extension: IExtensionDescription, metadata: vscode.WorkspaceEditMetadata | undefined): Promise<boolean> {
+	applyWorkspaceEdit(edit: zyraxoncode.WorkspaceEdit, extension: IExtensionDescription, metadata: zyraxoncode.WorkspaceEditMetadata | undefined): Promise<boolean> {
 		const dto = new SerializableObjectWithBuffers(WorkspaceEdit.from(edit, this._versionInformationProvider));
 		return this._proxy.$tryApplyWorkspaceEdit(dto, undefined, metadata?.isRefactoring ?? false);
 	}

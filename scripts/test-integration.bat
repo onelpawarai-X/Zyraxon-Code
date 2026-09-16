@@ -73,7 +73,7 @@ if defined SHOW_HELP (
 	exit /b 0
 )
 
-set VSCODEUSERDATADIR=%TEMP%\vscodeuserfolder-%RANDOM%-%TIME:~6,2%
+set VSCODEUSERDATADIR=%TEMP%\zyraxoncodeuserfolder-%RANDOM%-%TIME:~6,2%
 set VSCODECRASHDIR=%SCRIPT_DIR%\..\.build\crashes
 set VSCODELOGSDIR=%SCRIPT_DIR%\..\.build\logs\integration-tests
 
@@ -152,14 +152,14 @@ set API_TESTS_EXTRA_ARGS=--disable-telemetry --disable-experiments --skip-welcom
 call :should_run_suite api-folder || goto skip_api_folder
 echo.
 echo ### API tests (folder)
-call "%INTEGRATION_TEST_ELECTRON_PATH%" %SCRIPT_DIR%\..\extensions\vscode-api-tests\testWorkspace --enable-proposed-api=vscode.vscode-api-tests --extensionDevelopmentPath=%SCRIPT_DIR%\..\extensions\vscode-api-tests --extensionTestsPath=%SCRIPT_DIR%\..\extensions\vscode-api-tests\out\singlefolder-tests %API_TESTS_EXTRA_ARGS%
+call "%INTEGRATION_TEST_ELECTRON_PATH%" %SCRIPT_DIR%\..\extensions\zyraxoncode-api-tests\testWorkspace --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests --extensionDevelopmentPath=%SCRIPT_DIR%\..\extensions\zyraxoncode-api-tests --extensionTestsPath=%SCRIPT_DIR%\..\extensions\zyraxoncode-api-tests\out\singlefolder-tests %API_TESTS_EXTRA_ARGS%
 if %errorlevel% neq 0 exit /b %errorlevel%
 :skip_api_folder
 
 call :should_run_suite api-workspace || goto skip_api_workspace
 echo.
 echo ### API tests (workspace)
-call "%INTEGRATION_TEST_ELECTRON_PATH%" %SCRIPT_DIR%\..\extensions\vscode-api-tests\testworkspace.code-workspace --enable-proposed-api=vscode.vscode-api-tests --extensionDevelopmentPath=%SCRIPT_DIR%\..\extensions\vscode-api-tests --extensionTestsPath=%SCRIPT_DIR%\..\extensions\vscode-api-tests\out\workspace-tests %API_TESTS_EXTRA_ARGS%
+call "%INTEGRATION_TEST_ELECTRON_PATH%" %SCRIPT_DIR%\..\extensions\zyraxoncode-api-tests\testworkspace.code-workspace --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests --extensionDevelopmentPath=%SCRIPT_DIR%\..\extensions\zyraxoncode-api-tests --extensionTestsPath=%SCRIPT_DIR%\..\extensions\zyraxoncode-api-tests\out\workspace-tests %API_TESTS_EXTRA_ARGS%
 if %errorlevel% neq 0 exit /b %errorlevel%
 :skip_api_workspace
 
@@ -167,9 +167,9 @@ call :should_run_suite colorize || goto skip_colorize
 echo.
 echo ### Colorize tests
 if defined GREP_PATTERN (
-	call npm run test-extension -- -l vscode-colorize-tests --grep "%GREP_PATTERN%"
+	call npm run test-extension -- -l zyraxoncode-colorize-tests --grep "%GREP_PATTERN%"
 ) else (
-	call npm run test-extension -- -l vscode-colorize-tests
+	call npm run test-extension -- -l zyraxoncode-colorize-tests
 )
 if %errorlevel% neq 0 exit /b %errorlevel%
 :skip_colorize
@@ -178,9 +178,9 @@ call :should_run_suite terminal-suggest || goto skip_terminal_suggest
 echo.
 echo ### Terminal Suggest tests
 if defined GREP_PATTERN (
-	call npm run test-extension -- -l terminal-suggest --enable-proposed-api=vscode.vscode-api-tests --grep "%GREP_PATTERN%"
+	call npm run test-extension -- -l terminal-suggest --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests --grep "%GREP_PATTERN%"
 ) else (
-	call npm run test-extension -- -l terminal-suggest --enable-proposed-api=vscode.vscode-api-tests
+	call npm run test-extension -- -l terminal-suggest --enable-proposed-api=zyraxoncode.zyraxoncode-api-tests
 )
 if %errorlevel% neq 0 exit /b %errorlevel%
 :skip_terminal_suggest

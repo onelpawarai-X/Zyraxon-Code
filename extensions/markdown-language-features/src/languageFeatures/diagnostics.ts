@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { CommandManager } from '../commandManager';
 import { isMarkdownFile } from '../util/file';
 
@@ -17,33 +17,33 @@ export enum DiagnosticCode {
 }
 
 
-class AddToIgnoreLinksQuickFixProvider implements vscode.CodeActionProvider {
+class AddToIgnoreLinksQuickFixProvider implements zyraxoncode.CodeActionProvider {
 
 	static readonly #addToIgnoreLinksCommandId = '_markdown.addToIgnoreLinks';
 
-	static readonly #metadata: vscode.CodeActionProviderMetadata = {
+	static readonly #metadata: zyraxoncode.CodeActionProviderMetadata = {
 		providedCodeActionKinds: [
-			vscode.CodeActionKind.QuickFix
+			zyraxoncode.CodeActionKind.QuickFix
 		],
 	};
 
-	public static register(selector: vscode.DocumentSelector, commandManager: CommandManager): vscode.Disposable {
-		const reg = vscode.languages.registerCodeActionsProvider(selector, new AddToIgnoreLinksQuickFixProvider(), AddToIgnoreLinksQuickFixProvider.#metadata);
+	public static register(selector: zyraxoncode.DocumentSelector, commandManager: CommandManager): zyraxoncode.Disposable {
+		const reg = zyraxoncode.languages.registerCodeActionsProvider(selector, new AddToIgnoreLinksQuickFixProvider(), AddToIgnoreLinksQuickFixProvider.#metadata);
 		const commandReg = commandManager.register({
 			id: AddToIgnoreLinksQuickFixProvider.#addToIgnoreLinksCommandId,
-			execute(resource: vscode.Uri, path: string) {
+			execute(resource: zyraxoncode.Uri, path: string) {
 				const settingId = 'validate.ignoredLinks';
-				const config = vscode.workspace.getConfiguration('markdown', resource);
+				const config = zyraxoncode.workspace.getConfiguration('markdown', resource);
 				const paths = new Set(config.get<string[]>(settingId, []));
 				paths.add(path);
-				config.update(settingId, [...paths], vscode.ConfigurationTarget.WorkspaceFolder);
+				config.update(settingId, [...paths], zyraxoncode.ConfigurationTarget.WorkspaceFolder);
 			}
 		});
-		return vscode.Disposable.from(reg, commandReg);
+		return zyraxoncode.Disposable.from(reg, commandReg);
 	}
 
-	provideCodeActions(document: vscode.TextDocument, _range: vscode.Range | vscode.Selection, context: vscode.CodeActionContext, _token: vscode.CancellationToken): vscode.ProviderResult<(vscode.CodeAction | vscode.Command)[]> {
-		const fixes: vscode.CodeAction[] = [];
+	provideCodeActions(document: zyraxoncode.TextDocument, _range: zyraxoncode.Range | zyraxoncode.Selection, context: zyraxoncode.CodeActionContext, _token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<(zyraxoncode.CodeAction | zyraxoncode.Command)[]> {
+		const fixes: zyraxoncode.CodeAction[] = [];
 
 		for (const diagnostic of context.diagnostics) {
 			switch (diagnostic.code) {
@@ -53,9 +53,9 @@ class AddToIgnoreLinksQuickFixProvider implements vscode.CodeActionProvider {
 				case DiagnosticCode.link_noSuchHeaderInFile: {
 					const hrefText = (diagnostic as unknown as Record<string, any>).data?.hrefText;
 					if (hrefText) {
-						const fix = new vscode.CodeAction(
-							vscode.l10n.t("Exclude '{0}' from link validation.", hrefText),
-							vscode.CodeActionKind.QuickFix);
+						const fix = new zyraxoncode.CodeAction(
+							zyraxoncode.l10n.t("Exclude '{0}' from link validation.", hrefText),
+							zyraxoncode.CodeActionKind.QuickFix);
 
 						fix.command = {
 							command: AddToIgnoreLinksQuickFixProvider.#addToIgnoreLinksCommandId,
@@ -73,8 +73,8 @@ class AddToIgnoreLinksQuickFixProvider implements vscode.CodeActionProvider {
 	}
 }
 
-function registerMarkdownStatusItem(selector: vscode.DocumentSelector, commandManager: CommandManager): vscode.Disposable {
-	const statusItem = vscode.languages.createLanguageStatusItem('markdownStatus', selector);
+function registerMarkdownStatusItem(selector: zyraxoncode.DocumentSelector, commandManager: CommandManager): zyraxoncode.Disposable {
+	const statusItem = zyraxoncode.languages.createLanguageStatusItem('markdownStatus', selector);
 
 	const enabledSettingId = 'validate.enabled';
 	const commandId = '_markdown.toggleValidation';
@@ -82,39 +82,39 @@ function registerMarkdownStatusItem(selector: vscode.DocumentSelector, commandMa
 	const commandSub = commandManager.register({
 		id: commandId,
 		execute: (enabled: boolean) => {
-			vscode.workspace.getConfiguration('markdown').update(enabledSettingId, enabled);
+			zyraxoncode.workspace.getConfiguration('markdown').update(enabledSettingId, enabled);
 		}
 	});
 
 	const update = () => {
-		const activeDoc = vscode.window.activeTextEditor?.document;
+		const activeDoc = zyraxoncode.window.activeTextEditor?.document;
 		const markdownDoc = activeDoc && isMarkdownFile(activeDoc) ? activeDoc : undefined;
 
-		const enabled = vscode.workspace.getConfiguration('markdown', markdownDoc).get(enabledSettingId);
+		const enabled = zyraxoncode.workspace.getConfiguration('markdown', markdownDoc).get(enabledSettingId);
 		if (enabled) {
-			statusItem.text = vscode.l10n.t('Markdown link validation enabled');
+			statusItem.text = zyraxoncode.l10n.t('Markdown link validation enabled');
 			statusItem.command = {
 				command: commandId,
 				arguments: [false],
-				title: vscode.l10n.t('Disable'),
-				tooltip: vscode.l10n.t('Disable validation of Markdown links'),
+				title: zyraxoncode.l10n.t('Disable'),
+				tooltip: zyraxoncode.l10n.t('Disable validation of Markdown links'),
 			};
 		} else {
-			statusItem.text = vscode.l10n.t('Markdown link validation disabled');
+			statusItem.text = zyraxoncode.l10n.t('Markdown link validation disabled');
 			statusItem.command = {
 				command: commandId,
 				arguments: [true],
-				title: vscode.l10n.t('Enable'),
-				tooltip: vscode.l10n.t('Enable validation of Markdown links'),
+				title: zyraxoncode.l10n.t('Enable'),
+				tooltip: zyraxoncode.l10n.t('Enable validation of Markdown links'),
 			};
 		}
 	};
 	update();
 
-	return vscode.Disposable.from(
+	return zyraxoncode.Disposable.from(
 		statusItem,
 		commandSub,
-		vscode.workspace.onDidChangeConfiguration(e => {
+		zyraxoncode.workspace.onDidChangeConfiguration(e => {
 			if (e.affectsConfiguration('markdown.' + enabledSettingId)) {
 				update();
 			}
@@ -123,10 +123,10 @@ function registerMarkdownStatusItem(selector: vscode.DocumentSelector, commandMa
 }
 
 export function registerDiagnosticSupport(
-	selector: vscode.DocumentSelector,
+	selector: zyraxoncode.DocumentSelector,
 	commandManager: CommandManager,
-): vscode.Disposable {
-	return vscode.Disposable.from(
+): zyraxoncode.Disposable {
+	return zyraxoncode.Disposable.from(
 		AddToIgnoreLinksQuickFixProvider.register(selector, commandManager),
 		registerMarkdownStatusItem(selector, commandManager),
 	);

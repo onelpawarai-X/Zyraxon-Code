@@ -38,7 +38,7 @@ The `extensions/` directory contains first-party extensions that ship with ZYRAX
 - **Language support** - `typescript-language-features/`, `html-language-features/`, `css-language-features/`, etc.
 - **Core features** - `git/`, `debug-auto-launch/`, `emmet/`, `markdown-language-features/`
 - **Themes** - `theme-*` folders for default color themes
-- **Development tools** - `extension-editing/`, `vscode-api-tests/`
+- **Development tools** - `extension-editing/`, `zyraxoncode-api-tests/`
 
 Each extension follows the standard ZYRAXON Code extension structure with `package.json`, TypeScript sources, and contribution points to extend the workbench through the Extension API.
 

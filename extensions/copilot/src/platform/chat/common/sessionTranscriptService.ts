@@ -31,7 +31,7 @@ export interface SessionStartData {
 	readonly version: number;
 	readonly producer: string;
 	readonly copilotVersion: string;
-	readonly vscodeVersion: string;
+	readonly zyraxoncodeVersion: string;
 	readonly startTime: string;
 	readonly context?: {
 		readonly cwd?: string;

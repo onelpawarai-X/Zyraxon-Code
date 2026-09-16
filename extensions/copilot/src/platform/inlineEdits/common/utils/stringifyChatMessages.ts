@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 
 export function stringifyChatMessages(messages: Raw.ChatMessage[]) {
 	return messages.map(stringifyMessage).join('\n');

@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { Attachment, SendOptions, SessionOptions, ToolExecutionCompleteEvent, ToolExecutionStartEvent } from '@github/copilot/sdk';
-import * as l10n from '@vscode/l10n';
+import * as l10n from '@zyraxoncode/l10n';
 import * as cp from 'child_process';
 import * as crypto from 'crypto';
-import type * as vscode from 'vscode';
-import type { ChatParticipantToolToken } from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
+import type { ChatParticipantToolToken } from 'zyraxoncode';
 import { IAuthenticationService } from '../../../../platform/authentication/common/authentication';
 import { IChatQuotaService, QuotaSnapshot, QuotaSnapshots } from '../../../../platform/chat/common/chatQuotaService';
 import { getQuotaMessageForPlan } from '../../../../platform/chat/common/commonTypes';
@@ -32,7 +32,7 @@ import { DisposableStore, IDisposable, toDisposable } from '../../../../util/vs/
 import { truncate } from '../../../../util/vs/base/common/strings';
 import { ThemeIcon } from '../../../../util/vs/base/common/themables';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseMarkdownPart, ChatResponseThinkingProgressPart, ChatSessionStatus, ChatToolInvocationPart, EventEmitter, MarkdownString, Uri } from '../../../../vscodeTypes';
+import { ChatResponseMarkdownPart, ChatResponseThinkingProgressPart, ChatSessionStatus, ChatToolInvocationPart, EventEmitter, MarkdownString, Uri } from '../../../../zyraxoncodeTypes';
 import { IToolsService } from '../../../tools/common/toolsService';
 import { IChatSessionMetadataStore } from '../../common/chatSessionMetadataStore';
 import { ExternalEditTracker } from '../../common/externalEditTracker';
@@ -91,39 +91,39 @@ interface McSharedState {
 	/** Dispose function for the persistent on('*') listener for MC events. */
 	mcEventListenerDispose: (() => void) | undefined;
 	/** ZYRAXON Code session resource URI for routing steering through the chat UI. */
-	mcSessionResource: import('vscode').Uri;
+	mcSessionResource: import('zyraxoncode').Uri;
 }
 const mcStateBySessionId = new Map<string, McSharedState>();
 
 class CopilotCLIResponseStreamRouter {
-	private _stream: vscode.ChatResponseStream | undefined;
-	private readonly _routedStream: vscode.ChatResponseStream = {
-		markdown: (value: string | vscode.MarkdownString): void => { this._call('markdown', [value]); },
-		anchor: (value: vscode.Uri | vscode.Location, title?: string): void => { this._call('anchor', [value, title]); },
-		button: (command: vscode.Command): void => { this._call('button', [command]); },
-		filetree: (value: vscode.ChatResponseFileTree[], baseUri: vscode.Uri): void => { this._call('filetree', [value, baseUri]); },
-		progress: (value: string, task?: (progress: vscode.Progress<vscode.ChatResponseWarningPart | vscode.ChatResponseReferencePart>) => Thenable<string | void>): void => { this._call('progress', [value, task]); },
-		reference: (value: vscode.Uri | vscode.Location | { variableName: string; value?: vscode.Uri | vscode.Location }, iconPath?: vscode.Uri | vscode.ThemeIcon | { light: vscode.Uri; dark: vscode.Uri }): void => { this._call('reference', [value, iconPath]); },
-		push: (part: vscode.ExtendedChatResponsePart): void => { this._call('push', [part]); },
-		thinkingProgress: (thinkingDelta: vscode.ThinkingDelta): void => { this._call('thinkingProgress', [thinkingDelta]); },
-		hookProgress: (hookType: vscode.ChatHookType, stopReason?: string, systemMessage?: string): void => { this._call('hookProgress', [hookType, stopReason, systemMessage]); },
+	private _stream: zyraxoncode.ChatResponseStream | undefined;
+	private readonly _routedStream: zyraxoncode.ChatResponseStream = {
+		markdown: (value: string | zyraxoncode.MarkdownString): void => { this._call('markdown', [value]); },
+		anchor: (value: zyraxoncode.Uri | zyraxoncode.Location, title?: string): void => { this._call('anchor', [value, title]); },
+		button: (command: zyraxoncode.Command): void => { this._call('button', [command]); },
+		filetree: (value: zyraxoncode.ChatResponseFileTree[], baseUri: zyraxoncode.Uri): void => { this._call('filetree', [value, baseUri]); },
+		progress: (value: string, task?: (progress: zyraxoncode.Progress<zyraxoncode.ChatResponseWarningPart | zyraxoncode.ChatResponseReferencePart>) => Thenable<string | void>): void => { this._call('progress', [value, task]); },
+		reference: (value: zyraxoncode.Uri | zyraxoncode.Location | { variableName: string; value?: zyraxoncode.Uri | zyraxoncode.Location }, iconPath?: zyraxoncode.Uri | zyraxoncode.ThemeIcon | { light: zyraxoncode.Uri; dark: zyraxoncode.Uri }): void => { this._call('reference', [value, iconPath]); },
+		push: (part: zyraxoncode.ExtendedChatResponsePart): void => { this._call('push', [part]); },
+		thinkingProgress: (thinkingDelta: zyraxoncode.ThinkingDelta): void => { this._call('thinkingProgress', [thinkingDelta]); },
+		hookProgress: (hookType: zyraxoncode.ChatHookType, stopReason?: string, systemMessage?: string): void => { this._call('hookProgress', [hookType, stopReason, systemMessage]); },
 		voiceProgress: (id: string, value: string): void => { this._call('voiceProgress', [id, value]); },
-		textEdit: (target: vscode.Uri, editsOrDone: vscode.TextEdit | vscode.TextEdit[] | true): void => { this._call('textEdit', [target, editsOrDone]); },
-		notebookEdit: (target: vscode.Uri, editsOrDone: vscode.NotebookEdit | vscode.NotebookEdit[] | true): void => { this._call('notebookEdit', [target, editsOrDone]); },
-		workspaceEdit: (edits: vscode.ChatWorkspaceFileEdit[]): void => { this._call('workspaceEdit', [edits]); },
-		externalEdit: (target: vscode.Uri | vscode.Uri[], callback: () => Thenable<unknown>): Thenable<string> => this._call('externalEdit', [target, createSingleCallFunction(callback)]) as Thenable<string>,
-		markdownWithVulnerabilities: (value: string | vscode.MarkdownString, vulnerabilities: vscode.ChatVulnerability[]): void => { this._call('markdownWithVulnerabilities', [value, vulnerabilities]); },
-		codeblockUri: (uri: vscode.Uri, isEdit?: boolean): void => { this._call('codeblockUri', [uri, isEdit]); },
-		confirmation: (title: string, message: string | vscode.MarkdownString, data: unknown, buttons?: string[]): void => { this._call('confirmation', [title, message, data, buttons]); },
-		questionCarousel: (questions: vscode.ChatQuestion[], allowSkip?: boolean): Thenable<Record<string, unknown> | undefined> => this._call('questionCarousel', [questions, allowSkip]) as Thenable<Record<string, unknown> | undefined>,
-		warning: (message: string | vscode.MarkdownString): void => { this._call('warning', [message]); },
-		info: (message: string | vscode.MarkdownString): void => { this._call('info', [message]); },
-		reference2: (value: vscode.Uri | vscode.Location | string | { variableName: string; value?: vscode.Uri | vscode.Location }, iconPath?: vscode.Uri | vscode.ThemeIcon | { light: vscode.Uri; dark: vscode.Uri }, options?: { status?: { description: string; kind: vscode.ChatResponseReferencePartStatusKind } }): void => { this._call('reference2', [value, iconPath, options]); },
-		codeCitation: (value: vscode.Uri, license: string, snippet: string): void => { this._call('codeCitation', [value, license, snippet]); },
-		beginToolInvocation: (toolCallId: string, toolName: string, streamData?: vscode.ChatToolInvocationStreamData & { subagentInvocationId?: string }): void => { this._call('beginToolInvocation', [toolCallId, toolName, streamData]); },
-		updateToolInvocation: (toolCallId: string, streamData: vscode.ChatToolInvocationStreamData): void => { this._call('updateToolInvocation', [toolCallId, streamData]); },
-		clearToPreviousToolInvocation: (reason: vscode.ChatResponseClearToPreviousToolInvocationReason): void => { this._call('clearToPreviousToolInvocation', [reason]); },
-		usage: (usage: vscode.ChatResultUsage): void => { this._call('usage', [usage]); },
+		textEdit: (target: zyraxoncode.Uri, editsOrDone: zyraxoncode.TextEdit | zyraxoncode.TextEdit[] | true): void => { this._call('textEdit', [target, editsOrDone]); },
+		notebookEdit: (target: zyraxoncode.Uri, editsOrDone: zyraxoncode.NotebookEdit | zyraxoncode.NotebookEdit[] | true): void => { this._call('notebookEdit', [target, editsOrDone]); },
+		workspaceEdit: (edits: zyraxoncode.ChatWorkspaceFileEdit[]): void => { this._call('workspaceEdit', [edits]); },
+		externalEdit: (target: zyraxoncode.Uri | zyraxoncode.Uri[], callback: () => Thenable<unknown>): Thenable<string> => this._call('externalEdit', [target, createSingleCallFunction(callback)]) as Thenable<string>,
+		markdownWithVulnerabilities: (value: string | zyraxoncode.MarkdownString, vulnerabilities: zyraxoncode.ChatVulnerability[]): void => { this._call('markdownWithVulnerabilities', [value, vulnerabilities]); },
+		codeblockUri: (uri: zyraxoncode.Uri, isEdit?: boolean): void => { this._call('codeblockUri', [uri, isEdit]); },
+		confirmation: (title: string, message: string | zyraxoncode.MarkdownString, data: unknown, buttons?: string[]): void => { this._call('confirmation', [title, message, data, buttons]); },
+		questionCarousel: (questions: zyraxoncode.ChatQuestion[], allowSkip?: boolean): Thenable<Record<string, unknown> | undefined> => this._call('questionCarousel', [questions, allowSkip]) as Thenable<Record<string, unknown> | undefined>,
+		warning: (message: string | zyraxoncode.MarkdownString): void => { this._call('warning', [message]); },
+		info: (message: string | zyraxoncode.MarkdownString): void => { this._call('info', [message]); },
+		reference2: (value: zyraxoncode.Uri | zyraxoncode.Location | string | { variableName: string; value?: zyraxoncode.Uri | zyraxoncode.Location }, iconPath?: zyraxoncode.Uri | zyraxoncode.ThemeIcon | { light: zyraxoncode.Uri; dark: zyraxoncode.Uri }, options?: { status?: { description: string; kind: zyraxoncode.ChatResponseReferencePartStatusKind } }): void => { this._call('reference2', [value, iconPath, options]); },
+		codeCitation: (value: zyraxoncode.Uri, license: string, snippet: string): void => { this._call('codeCitation', [value, license, snippet]); },
+		beginToolInvocation: (toolCallId: string, toolName: string, streamData?: zyraxoncode.ChatToolInvocationStreamData & { subagentInvocationId?: string }): void => { this._call('beginToolInvocation', [toolCallId, toolName, streamData]); },
+		updateToolInvocation: (toolCallId: string, streamData: zyraxoncode.ChatToolInvocationStreamData): void => { this._call('updateToolInvocation', [toolCallId, streamData]); },
+		clearToPreviousToolInvocation: (reason: zyraxoncode.ChatResponseClearToPreviousToolInvocationReason): void => { this._call('clearToPreviousToolInvocation', [reason]); },
+		usage: (usage: zyraxoncode.ChatResultUsage): void => { this._call('usage', [usage]); },
 	};
 	private static readonly _closedStreamErrorFragment = 'Response stream has been closed'.toLowerCase();
 
@@ -132,11 +132,11 @@ class CopilotCLIResponseStreamRouter {
 		private readonly _sessionId: string,
 	) { }
 
-	get stream(): vscode.ChatResponseStream {
+	get stream(): zyraxoncode.ChatResponseStream {
 		return this._routedStream;
 	}
 
-	attach(stream: vscode.ChatResponseStream): IDisposable {
+	attach(stream: zyraxoncode.ChatResponseStream): IDisposable {
 		this._stream = stream;
 		return toDisposable(() => {
 			if (this._stream === stream) {
@@ -175,7 +175,7 @@ class CopilotCLIResponseStreamRouter {
 		}
 	}
 
-	private _handleCallError(error: unknown, method: string, args: unknown[], stream: vscode.ChatResponseStream): unknown {
+	private _handleCallError(error: unknown, method: string, args: unknown[], stream: zyraxoncode.ChatResponseStream): unknown {
 		if (CopilotCLIResponseStreamRouter._isClosedStreamError(error)) {
 			if (this._stream === stream) {
 				this._stream = undefined;
@@ -818,7 +818,7 @@ async function renderRemoteControlQrCode(data: string): Promise<string> {
 		const moduleY = (y + qrQuietZoneModules) * qrSvgModuleSize;
 		return `M${moduleX} ${moduleY}h${qrSvgModuleSize}v${qrSvgModuleSize}h-${qrSvgModuleSize}z`;
 	})).join('');
-	const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${imageSize} ${imageSize}" width="${imageSize}" height="${imageSize}"><path fill="#fff" d="M0 0h${imageSize}v${imageSize}H0z"/><path fill="#000" d="${path}"/></svg>`;
+	const svg = `<svg xmlns="__ZYRAXKEEP__0_" viewBox="0 0 ${imageSize} ${imageSize}" width="${imageSize}" height="${imageSize}"><path fill="#fff" d="M0 0h${imageSize}v${imageSize}H0z"/><path fill="#000" d="${path}"/></svg>`;
 	return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 }
 
@@ -826,21 +826,21 @@ export interface ICopilotCLISession extends IDisposable {
 	readonly sessionId: string;
 	readonly title?: string;
 	readonly createdPullRequestUrl: string | undefined;
-	readonly onDidChangeTitle: vscode.Event<string>;
-	readonly status: vscode.ChatSessionStatus | undefined;
-	readonly onDidChangeStatus: vscode.Event<vscode.ChatSessionStatus | undefined>;
+	readonly onDidChangeTitle: zyraxoncode.Event<string>;
+	readonly status: zyraxoncode.ChatSessionStatus | undefined;
+	readonly onDidChangeStatus: zyraxoncode.Event<zyraxoncode.ChatSessionStatus | undefined>;
 	readonly workspace: IWorkspaceInfo;
 	readonly additionalWorkspaces: IWorkspaceInfo[];
 	readonly pendingPrompt: string | undefined;
-	attachStream(stream: vscode.ChatResponseStream): IDisposable;
+	attachStream(stream: zyraxoncode.ChatResponseStream): IDisposable;
 	setPermissionLevel(level: string | undefined): void;
 	handleRequest(
-		request: { id: string; toolInvocationToken: ChatParticipantToolToken; sessionResource?: vscode.Uri },
+		request: { id: string; toolInvocationToken: ChatParticipantToolToken; sessionResource?: zyraxoncode.Uri },
 		input: CopilotCLISessionInput,
 		attachments: Attachment[],
 		model: { model: string; reasoningEffort?: string; contextTier?: 'default' | 'long_context' } | undefined,
 		authInfo: NonNullable<SessionOptions['authInfo']>,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	): Promise<void>;
 	addUserMessage(content: string): void;
 	addUserAssistantMessage(content: string): void;
@@ -854,11 +854,11 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 	public get createdPullRequestUrl(): string | undefined {
 		return this._createdPullRequestUrl;
 	}
-	private _status?: vscode.ChatSessionStatus;
-	public get status(): vscode.ChatSessionStatus | undefined {
+	private _status?: zyraxoncode.ChatSessionStatus;
+	public get status(): zyraxoncode.ChatSessionStatus | undefined {
 		return this._status;
 	}
-	private readonly _statusChange = this.add(new EventEmitter<vscode.ChatSessionStatus | undefined>());
+	private readonly _statusChange = this.add(new EventEmitter<zyraxoncode.ChatSessionStatus | undefined>());
 
 	public readonly onDidChangeStatus = this._statusChange.event;
 
@@ -869,7 +869,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 	private _onDidChangeTitle = this.add(new Emitter<string>());
 	public onDidChangeTitle = this._onDidChangeTitle.event;
 	private readonly _streamRouter: CopilotCLIResponseStreamRouter;
-	private readonly _stream: vscode.ChatResponseStream;
+	private readonly _stream: zyraxoncode.ChatResponseStream;
 	private _toolInvocationToken?: ChatParticipantToolToken;
 	public get sdkSession() {
 		return this._sdkSession;
@@ -936,7 +936,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 		this.add(toDisposable(() => this._todoSqlQuery.dispose()));
 	}
 
-	attachStream(stream: vscode.ChatResponseStream): IDisposable {
+	attachStream(stream: zyraxoncode.ChatResponseStream): IDisposable {
 		return this._streamRouter.attach(stream);
 	}
 
@@ -1001,12 +1001,12 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 	 * When the session is idle, a normal full request is started instead.
 	 */
 	public async handleRequest(
-		request: { id: string; toolInvocationToken: ChatParticipantToolToken; sessionResource?: vscode.Uri },
+		request: { id: string; toolInvocationToken: ChatParticipantToolToken; sessionResource?: zyraxoncode.Uri },
 		input: CopilotCLISessionInput,
 		attachments: Attachment[],
 		model: { model: string; reasoningEffort?: string; contextTier?: 'default' | 'long_context' } | undefined,
 		authInfo: NonNullable<SessionOptions['authInfo']>,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	): Promise<void> {
 		if (this.isDisposed) {
 			throw new Error('Session disposed');
@@ -1054,7 +1054,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 		attachments: Attachment[],
 		model: { model: string; reasoningEffort?: string; contextTier?: 'default' | 'long_context' } | undefined,
 		previousRequestPromise: Promise<unknown>,
-		token: vscode.CancellationToken,
+		token: zyraxoncode.CancellationToken,
 	): Promise<void> {
 		this.attachments.push(...attachments);
 		const prompt = getPromptLabel(input);
@@ -1091,11 +1091,11 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 	}
 
 	private async _handleRequestImpl(
-		request: { id: string; toolInvocationToken: ChatParticipantToolToken; sessionResource?: vscode.Uri },
+		request: { id: string; toolInvocationToken: ChatParticipantToolToken; sessionResource?: zyraxoncode.Uri },
 		input: CopilotCLISessionInput,
 		attachments: Attachment[],
 		model: { model: string; reasoningEffort?: string; contextTier?: 'default' | 'long_context' } | undefined,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	): Promise<void> {
 		const modelId = model?.model;
 		const promptLabel = getPromptLabel(input);
@@ -1146,11 +1146,11 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 
 	private async _handleRequestImplInner(
 		invokeAgentSpan: ISpanHandle,
-		request: { id: string; toolInvocationToken: ChatParticipantToolToken; sessionResource?: vscode.Uri },
+		request: { id: string; toolInvocationToken: ChatParticipantToolToken; sessionResource?: zyraxoncode.Uri },
 		input: CopilotCLISessionInput,
 		attachments: Attachment[],
 		modelId: string | undefined,
-		token: vscode.CancellationToken
+		token: zyraxoncode.CancellationToken
 	): Promise<void> {
 		this.attachments.push(...attachments);
 		const prompt = getPromptLabel(input);
@@ -1548,7 +1548,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 						flushPendingInvocationMessages();
 						wroteResponseContent = true;
 						requestStream?.push(responsePart);
-						requestStream?.push(new ChatResponseThinkingProgressPart('', '', { vscodeReasoningDone: true }));
+						requestStream?.push(new ChatResponseThinkingProgressPart('', '', { zyraxoncodeReasoningDone: true }));
 					} else if (responsePart instanceof ChatResponseMarkdownPart) {
 						// Wait for completion to push into stream.
 					} else if (responsePart instanceof ChatToolInvocationPart) {
@@ -1711,7 +1711,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 			}));
 			if (sdkRequestId) {
 				await this._chatSessionMetadataStore.updateRequestDetails(this.sessionId, [{
-					vscodeRequestId: request.id,
+					zyraxoncodeRequestId: request.id,
 					copilotRequestId: sdkRequestId,
 					toolIdEditMap: resolvedToolIdEditMap,
 					agentId: this._agentName,
@@ -2006,7 +2006,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 			}
 
 			// Step 3: Resolve numeric owner/repo IDs via GitHub API
-			const repoResponse = await fetch(`https://api.github.com/repos/${nwo.owner}/${nwo.repo}`, {
+			const repoResponse = await fetch(`__ZYRAXKEEP__1_{nwo.owner}/${nwo.repo}`, {
 				headers: { 'Authorization': `token ${githubToken}`, 'Accept': 'application/json' },
 			});
 			if (!repoResponse.ok) {
@@ -2149,7 +2149,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 			});
 
 			// Step 8: Construct and display the frontend URL
-			const frontendUrl = `https://github.com/${nwo.owner}/${nwo.repo}/tasks/${taskId}`;
+			const frontendUrl = `__ZYRAXKEEP__2_{nwo.owner}/${nwo.repo}/tasks/${taskId}`;
 			sharedState.mcFrontendUrl = frontendUrl;
 			this.logService.trace(`[CopilotCLISession] MC session created, URL: ${frontendUrl}`);
 
@@ -2192,7 +2192,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 
 		this._stream?.markdown(banner);
 		this._stream?.button({
-			command: 'vscode.open',
+			command: 'zyraxoncode.open',
 			arguments: [Uri.parse(frontendUrl)],
 			title: l10n.t('Open on GitHub'),
 		});
@@ -2240,7 +2240,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 	/**
 	 * Parse owner/repo from the git remote URL of a working directory.
 	 */
-	private _resolveGitHubNwo(workingDirectory: vscode.Uri): Promise<{ owner: string; repo: string } | undefined> {
+	private _resolveGitHubNwo(workingDirectory: zyraxoncode.Uri): Promise<{ owner: string; repo: string } | undefined> {
 		return new Promise((resolve) => {
 			cp.execFile('git', ['remote', 'get-url', 'origin'], { cwd: workingDirectory.fsPath, timeout: 5000 }, (_error, stdout) => {
 				if (!stdout) {
@@ -2690,7 +2690,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 					default: {
 						// Route steering messages through the ZYRAXON Code chat UI so
 						// they appear in the chat panel with proper rendering.
-						const vsCodeApi = require('vscode') as typeof import('vscode');
+						const vsCodeApi = require('zyraxoncode') as typeof import('zyraxoncode');
 						getMissionControlPendingCommandCompletionIds(state).add(cmd.id);
 						setPendingCopilotCLIRequestContext(sessionId, {
 							prompt: cmd.content,
@@ -3137,7 +3137,7 @@ export class CopilotCLISession extends DisposableStore implements ICopilotCLISes
 		event: ToolExecutionCompleteEvent,
 		toolCall: ToolCall | undefined,
 		toolStartTimes: Map<string, number>,
-		sessionResource: vscode.Uri | undefined,
+		sessionResource: zyraxoncode.Uri | undefined,
 	): void {
 		const { toolCallId, success, error } = event.data;
 		const eventToolName = 'toolName' in event.data && typeof event.data.toolName === 'string' ? event.data.toolName : undefined;

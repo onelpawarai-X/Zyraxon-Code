@@ -1,11 +1,11 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { illegalArgument } from '../../../../base/common/errors';
 import { es5ClassCompat } from './es5ClassCompat';
 
@@ -54,7 +54,7 @@ export class Position {
 		return false;
 	}
 
-	static of(obj: vscode.Position): Position {
+	static of(obj: zyraxoncode.Position): Position {
 		if (obj instanceof Position) {
 			return obj;
 		} else if (this.isPosition(obj)) {

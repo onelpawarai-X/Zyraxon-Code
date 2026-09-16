@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type MarkdownIt from 'markdown-it';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { extendMarkdownIt as extendMarkdownItWithFrontMatter } from './extensions/yamlPreamble/yamlPreamble';
 import { ILogger } from './logging';
 import { MarkdownContributionProvider } from './markdownExtensions';
@@ -46,7 +46,7 @@ type MarkdownItConfig = Readonly<Required<Pick<MarkdownIt.Options, 'breaks' | 'l
 
 class TokenCache {
 	#cachedDocument?: {
-		readonly uri: vscode.Uri;
+		readonly uri: zyraxoncode.Uri;
 		readonly version: number;
 		readonly config: MarkdownItConfig;
 	};
@@ -86,7 +86,7 @@ export interface RenderOutput {
 
 interface RenderEnv {
 	readonly containingImages: Set<string>;
-	readonly currentDocument: vscode.Uri | undefined;
+	readonly currentDocument: zyraxoncode.Uri | undefined;
 	readonly resourceProvider: WebviewResourceProvider | undefined;
 	readonly slugifier: SlugBuilder;
 }
@@ -125,7 +125,7 @@ export class MarkdownItEngine implements IMdParser {
 	}
 
 
-	public async getEngine(resource: vscode.Uri | undefined): Promise<MarkdownIt> {
+	public async getEngine(resource: zyraxoncode.Uri | undefined): Promise<MarkdownIt> {
 		const config = this.#getConfig(resource);
 		return this.#getEngine(config);
 	}
@@ -229,7 +229,7 @@ export class MarkdownItEngine implements IMdParser {
 		this.#tokenCache.clean();
 	}
 
-	#getConfig(resource?: vscode.Uri): MarkdownItConfig {
+	#getConfig(resource?: zyraxoncode.Uri): MarkdownItConfig {
 		const config = MarkdownPreviewConfiguration.getForResource(resource ?? null);
 		return {
 			breaks: config.previewLineBreaks,
@@ -281,8 +281,8 @@ export class MarkdownItEngine implements IMdParser {
 		md.normalizeLink = (link: string) => {
 			try {
 				// Normalize ZYRAXON Code schemes to target the current version
-				if (isOfScheme(Schemes.vscode, link) || isOfScheme(Schemes['vscode-insiders'], link)) {
-					return normalizeLink(vscode.Uri.parse(link).with({ scheme: vscode.env.uriScheme }).toString());
+				if (isOfScheme(Schemes.zyraxoncode, link) || isOfScheme(Schemes['zyraxoncode-insiders'], link)) {
+					return normalizeLink(zyraxoncode.Uri.parse(link).with({ scheme: zyraxoncode.env.uriScheme }).toString());
 				}
 
 			} catch (e) {
@@ -296,8 +296,8 @@ export class MarkdownItEngine implements IMdParser {
 		const validateLink = md.validateLink;
 		md.validateLink = (link: string) => {
 			return validateLink(link)
-				|| isOfScheme(Schemes.vscode, link)
-				|| isOfScheme(Schemes['vscode-insiders'], link)
+				|| isOfScheme(Schemes.zyraxoncode, link)
+				|| isOfScheme(Schemes['zyraxoncode-insiders'], link)
 				|| /^data:image\/.*?;/.test(link);
 		};
 	}
@@ -350,11 +350,11 @@ export class MarkdownItEngine implements IMdParser {
 		};
 	}
 
-	#toResourceUri(href: string, currentDocument: vscode.Uri | undefined, resourceProvider: WebviewResourceProvider | undefined): string {
+	#toResourceUri(href: string, currentDocument: zyraxoncode.Uri | undefined, resourceProvider: WebviewResourceProvider | undefined): string {
 		try {
 			// Support file:// links
 			if (isOfScheme(Schemes.file, href)) {
-				const uri = vscode.Uri.parse(href);
+				const uri = zyraxoncode.Uri.parse(href);
 				if (resourceProvider) {
 					return resourceProvider.asWebviewUri(uri).toString(true);
 				}
@@ -365,14 +365,14 @@ export class MarkdownItEngine implements IMdParser {
 			// If original link doesn't look like a url with a scheme, assume it must be a link to a file in workspace
 			if (!/^[a-z\-]+:/i.test(href)) {
 				// Use a fake scheme for parsing
-				let uri = vscode.Uri.parse('markdown-link:' + href);
+				let uri = zyraxoncode.Uri.parse('markdown-link:' + href);
 
 				// Relative paths should be resolved correctly inside the preview but we need to
 				// handle absolute paths specially to resolve them relative to the workspace root
 				if (uri.path[0] === '/' && currentDocument) {
-					const root = vscode.workspace.getWorkspaceFolder(currentDocument);
+					const root = zyraxoncode.workspace.getWorkspaceFolder(currentDocument);
 					if (root) {
-						uri = vscode.Uri.joinPath(root.uri, uri.fsPath).with({
+						uri = zyraxoncode.Uri.joinPath(root.uri, uri.fsPath).with({
 							fragment: uri.fragment,
 							query: uri.query,
 						});
@@ -425,7 +425,7 @@ function normalizeHighlightLang(lang: string | undefined) {
 
 		case 'tsx':
 		case 'typescriptreact':
-			// Workaround for highlight not supporting tsx: https://github.com/isagalaev/highlight.js/issues/1155
+			// Workaround for highlight not supporting tsx: __ZYRAXKEEP__0_
 			return 'jsx';
 
 		case 'json5':

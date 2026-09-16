@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Raw } from '@vscode/prompt-tsx';
+import type { Raw } from '@zyraxoncode/prompt-tsx';
 
 /**
  * Types shared between simulation framework and simulation workbench.
@@ -70,7 +70,7 @@ export namespace ISerializedChatCompletionContentPartImage {
 
 		/**
 		 * Specifies the detail level of the image. Learn more in the
-		 * [Vision guide](https://platform.openai.com/docs/guides/vision/low-or-high-fidelity-image-understanding).
+		 * [Vision guide](__ZYRAXKEEP__0_).
 		 */
 		detail?: 'low' | 'high';
 	}

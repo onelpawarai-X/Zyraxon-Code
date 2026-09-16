@@ -47,7 +47,7 @@ const languageModelToolsExtensionPoint = extensionsRegistry.ExtensionsRegistry.r
 		}
 	},
 	jsonSchema: {
-		description: localize('vscode.extension.contributes.tools', 'Contributes a tool that can be invoked by a language model in a chat session, or from a standalone command. Registered tools can be used by all extensions.'),
+		description: localize('zyraxoncode.extension.contributes.tools', 'Contributes a tool that can be invoked by a language model in a chat session, or from a standalone command. Registered tools can be used by all extensions.'),
 		type: 'array',
 		items: {
 			additionalProperties: false,
@@ -73,7 +73,7 @@ const languageModelToolsExtensionPoint = extensionsRegistry.ExtensionsRegistry.r
 					description: localize('toolName', "A unique name for this tool. This name must be a globally unique identifier, and is also used as a name when presenting this tool to a language model."),
 					type: 'string',
 					// [\\w-]+ is OpenAI's requirement for tool names
-					pattern: '^(?!copilot_|vscode_)[\\w-]+$'
+					pattern: '^(?!copilot_|zyraxoncode_)[\\w-]+$'
 				},
 				toolReferenceName: {
 					markdownDescription: localize('toolName2', "If {0} is enabled for this tool, the user may use '#' with this name to invoke the tool in a query. Otherwise, the name is not required. Name must not contain whitespace.", '`canBeReferencedInPrompt`'),
@@ -129,7 +129,7 @@ const languageModelToolsExtensionPoint = extensionsRegistry.ExtensionsRegistry.r
 					type: 'array',
 					items: {
 						type: 'string',
-						pattern: '^(?!copilot_|vscode_)'
+						pattern: '^(?!copilot_|zyraxoncode_)'
 					}
 				}
 			}
@@ -153,7 +153,7 @@ const languageModelToolSetsExtensionPoint = extensionsRegistry.ExtensionsRegistr
 	extensionPoint: 'languageModelToolSets',
 	deps: [languageModelToolsExtensionPoint],
 	jsonSchema: {
-		description: localize('vscode.extension.contributes.toolSets', 'Contributes a set of language model tools that can be used together.'),
+		description: localize('zyraxoncode.extension.contributes.toolSets', 'Contributes a set of language model tools that can be used together.'),
 		type: 'array',
 		items: {
 			additionalProperties: false,
@@ -239,13 +239,13 @@ export class LanguageModelToolsExtensionPointHandler implements IWorkbenchContri
 						continue;
 					}
 
-					if ((rawTool.name.startsWith('copilot_') || rawTool.name.startsWith('vscode_')) && !isProposedApiEnabled(extension.description, 'chatParticipantPrivate')) {
-						extension.collector.error(`Extension '${extension.description.identifier.value}' CANNOT register tool with name starting with "vscode_" or "copilot_"`);
+					if ((rawTool.name.startsWith('copilot_') || rawTool.name.startsWith('zyraxoncode_')) && !isProposedApiEnabled(extension.description, 'chatParticipantPrivate')) {
+						extension.collector.error(`Extension '${extension.description.identifier.value}' CANNOT register tool with name starting with "zyraxoncode_" or "copilot_"`);
 						continue;
 					}
 
-					if (rawTool.tags?.some(tag => tag.startsWith('copilot_') || tag.startsWith('vscode_')) && !isProposedApiEnabled(extension.description, 'chatParticipantPrivate')) {
-						extension.collector.error(`Extension '${extension.description.identifier.value}' CANNOT register tool with tags starting with "vscode_" or "copilot_"`);
+					if (rawTool.tags?.some(tag => tag.startsWith('copilot_') || tag.startsWith('zyraxoncode_')) && !isProposedApiEnabled(extension.description, 'chatParticipantPrivate')) {
+						extension.collector.error(`Extension '${extension.description.identifier.value}' CANNOT register tool with tags starting with "zyraxoncode_" or "copilot_"`);
 					}
 
 					if (rawTool.legacyToolReferenceFullNames && !isProposedApiEnabled(extension.description, 'chatParticipantPrivate')) {

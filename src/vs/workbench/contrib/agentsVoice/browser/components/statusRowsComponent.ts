@@ -30,7 +30,7 @@ function createStatusRow(): { element: HTMLElement; update(dotColor: string, cou
 	dot.style.cssText = 'width:7px;height:7px;border-radius:50%;flex-shrink:0;';
 
 	const text = dom.$('span');
-	text.style.cssText = `font-size:${FONT_SIZE.body};color:var(--vscode-descriptionForeground);`;
+	text.style.cssText = `font-size:${FONT_SIZE.body};color:var(--zyraxoncode-descriptionForeground);`;
 
 	row.append(dot, text);
 
@@ -63,9 +63,9 @@ export function createStatusRows(): StatusRowsComponent {
 	const speakingRow = dom.$('div');
 	speakingRow.style.cssText = 'display:flex;align-items:center;gap:6px;height:20px;flex-shrink:0;padding-left:2px;';
 	const speakingDot = dom.$('span');
-	speakingDot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:var(--vscode-agentsVoice-speakingForeground);flex-shrink:0;animation:agents-voice-pulse 1.4s ease-in-out infinite;';
+	speakingDot.style.cssText = 'width:7px;height:7px;border-radius:50%;background:var(--zyraxoncode-agentsVoice-speakingForeground);flex-shrink:0;animation:agents-voice-pulse 1.4s ease-in-out infinite;';
 	const speakingLabel = dom.$('span');
-	speakingLabel.style.cssText = `font-size:${FONT_SIZE.body};color:var(--vscode-agentsVoice-speakingForeground);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;`;
+	speakingLabel.style.cssText = `font-size:${FONT_SIZE.body};color:var(--zyraxoncode-agentsVoice-speakingForeground);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;`;
 	speakingRow.append(speakingDot, speakingLabel);
 	let speakingClickHandler: (() => void) | undefined;
 	let speakingKeyHandler: ((e: KeyboardEvent) => void) | undefined;
@@ -77,7 +77,7 @@ export function createStatusRows(): StatusRowsComponent {
 	const noSessionsRow = dom.$('div');
 	noSessionsRow.style.cssText = 'display:flex;align-items:center;height:20px;flex-shrink:0;padding-left:2px;';
 	const noSessionsText = dom.$('span');
-	noSessionsText.style.cssText = `font-size:${FONT_SIZE.body};color:var(--vscode-descriptionForeground);font-style:italic;`;
+	noSessionsText.style.cssText = `font-size:${FONT_SIZE.body};color:var(--zyraxoncode-descriptionForeground);font-style:italic;`;
 	noSessionsText.textContent = localize('agentsVoice.noActiveSessions', "No active sessions");
 	noSessionsRow.append(noSessionsText);
 
@@ -149,9 +149,9 @@ export function createStatusRows(): StatusRowsComponent {
 			}
 
 			if (showCounters) {
-				workingRow.update('var(--vscode-charts-green)', props.workingCount, localize('agentsVoice.working', "working"));
-				needsInputRow.update('var(--vscode-editorWarning-foreground)', props.needsInputCount, localize('agentsVoice.needsInput', "needs input"));
-				doneRow.update('var(--vscode-disabledForeground)', props.doneCount, localize('agentsVoice.done', "done"));
+				workingRow.update('var(--zyraxoncode-charts-green)', props.workingCount, localize('agentsVoice.working', "working"));
+				needsInputRow.update('var(--zyraxoncode-editorWarning-foreground)', props.needsInputCount, localize('agentsVoice.needsInput', "needs input"));
+				doneRow.update('var(--zyraxoncode-disabledForeground)', props.doneCount, localize('agentsVoice.done', "done"));
 				noSessionsRow.style.display = !hasAny ? 'flex' : 'none';
 			} else {
 				workingRow.element.style.display = 'none';

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { isGpt52Family } from '../../../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../../../platform/networking/common/networking';
 import { agenticBrowserTools, ToolName } from '../../../../tools/common/toolNames';
@@ -165,7 +165,7 @@ class HiddenModelBPrompt extends PromptElement<DefaultAgentPromptProps> {
 				- You have access to many tools. If a tool exists to perform a specific task, you MUST use that tool instead of running a terminal command to perform that task.<br />
 				{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>- For efficient codebase exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} to search and gather data instead of directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}. Use this as a quick injection of context before beginning to solve the problem yourself.<br /></>}
 				{tools[ToolName.CoreRunTest] && <>- Use the {ToolName.CoreRunTest} tool to run tests instead of running terminal commands.<br /></>}
-				{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>- Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Microsoft Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).<br /></>}
+				{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>- Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Zyraxon Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).<br /></>}
 			</Tag>
 			{tools[ToolName.ExecutionSubagent] && <>
 				<Tag name='toolUseInstructions'>

@@ -9,7 +9,7 @@ import { regExpLeadsToEndlessLoop } from '../../../base/common/strings.js';
 import { URI, UriComponents } from '../../../base/common/uri.js';
 import { MirrorTextModel } from '../../../editor/common/model/mirrorTextModel.js';
 import { ensureValidWordDefinition, getWordAtText } from '../../../editor/common/core/wordHelper.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { equals } from '../../../base/common/arrays.js';
 import { EndOfLine } from './extHostTypes/textEdit.js';
 import { Position } from './extHostTypes/position.js';
@@ -34,7 +34,7 @@ export interface IExtHostDocumentSaveDelegate {
 
 export class ExtHostDocumentData extends MirrorTextModel {
 
-	private _document?: vscode.TextDocument;
+	private _document?: zyraxoncode.TextDocument;
 	private _isDisposed: boolean = false;
 
 	constructor(
@@ -62,7 +62,7 @@ export class ExtHostDocumentData extends MirrorTextModel {
 		return equals(this._lines, lines);
 	}
 
-	get document(): vscode.TextDocument {
+	get document(): zyraxoncode.TextDocument {
 		if (!this._document) {
 			const that = this;
 			this._document = {
@@ -78,7 +78,7 @@ export class ExtHostDocumentData extends MirrorTextModel {
 				getText(range?) { return range ? that._getTextInRange(range) : that.getText(); },
 				get eol() { return that._eol === '\n' ? EndOfLine.LF : EndOfLine.CRLF; },
 				get lineCount() { return that._lines.length; },
-				lineAt(lineOrPos: number | vscode.Position) { return that._lineAt(lineOrPos); },
+				lineAt(lineOrPos: number | zyraxoncode.Position) { return that._lineAt(lineOrPos); },
 				offsetAt(pos) { return that._offsetAt(pos); },
 				positionAt(offset) { return that._positionAt(offset); },
 				validateRange(ran) { return that._validateRange(ran); },
@@ -114,7 +114,7 @@ export class ExtHostDocumentData extends MirrorTextModel {
 		return this._proxy.$trySaveDocument(this._uri);
 	}
 
-	private _getTextInRange(_range: vscode.Range): string {
+	private _getTextInRange(_range: zyraxoncode.Range): string {
 		const range = this._validateRange(_range);
 
 		if (range.isEmpty) {
@@ -139,7 +139,7 @@ export class ExtHostDocumentData extends MirrorTextModel {
 		return resultLines.join(lineEnding);
 	}
 
-	private _lineAt(lineOrPosition: number | vscode.Position): vscode.TextLine {
+	private _lineAt(lineOrPosition: number | zyraxoncode.Position): zyraxoncode.TextLine {
 
 		let line: number | undefined;
 		if (lineOrPosition instanceof Position) {
@@ -157,13 +157,13 @@ export class ExtHostDocumentData extends MirrorTextModel {
 		return new ExtHostDocumentLine(line, this._lines[line], line === this._lines.length - 1);
 	}
 
-	private _offsetAt(position: vscode.Position): number {
+	private _offsetAt(position: zyraxoncode.Position): number {
 		position = this._validatePosition(position);
 		this._ensureLineStarts();
 		return this._lineStarts!.getPrefixSum(position.line - 1) + position.character;
 	}
 
-	private _positionAt(offset: number): vscode.Position {
+	private _positionAt(offset: number): zyraxoncode.Position {
 		offset = Math.floor(offset);
 		offset = Math.max(0, offset);
 
@@ -178,7 +178,7 @@ export class ExtHostDocumentData extends MirrorTextModel {
 
 	// ---- range math
 
-	private _validateRange(range: vscode.Range): vscode.Range {
+	private _validateRange(range: zyraxoncode.Range): zyraxoncode.Range {
 		if (this._strictInstanceofChecks) {
 			if (!(range instanceof Range)) {
 				throw new Error('Invalid argument');
@@ -198,7 +198,7 @@ export class ExtHostDocumentData extends MirrorTextModel {
 		return new Range(start.line, start.character, end.line, end.character);
 	}
 
-	private _validatePosition(position: vscode.Position): vscode.Position {
+	private _validatePosition(position: zyraxoncode.Position): zyraxoncode.Position {
 		if (this._strictInstanceofChecks) {
 			if (!(position instanceof Position)) {
 				throw new Error('Invalid argument');
@@ -244,7 +244,7 @@ export class ExtHostDocumentData extends MirrorTextModel {
 		return new Position(line, character);
 	}
 
-	private _getWordRangeAtPosition(_position: vscode.Position, regexp?: RegExp): vscode.Range | undefined {
+	private _getWordRangeAtPosition(_position: zyraxoncode.Position, regexp?: RegExp): zyraxoncode.Range | undefined {
 		const position = this._validatePosition(_position);
 
 		if (!regexp) {
@@ -270,7 +270,7 @@ export class ExtHostDocumentData extends MirrorTextModel {
 	}
 }
 
-export class ExtHostDocumentLine implements vscode.TextLine {
+export class ExtHostDocumentLine implements zyraxoncode.TextLine {
 
 	private readonly _line: number;
 	private readonly _text: string;

@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -504,7 +504,7 @@ export function remove<T>(array: T[], element: T): T | undefined {
 
 /**
  * Insert `insertArr` inside `target` at `insertIndex`.
- * Please don't touch unless you understand https://jsperf.com/inserting-an-array-within-an-array
+ * Please don't touch unless you understand __ZYRAXKEEP__0_
  */
 export function arrayInsert<T>(target: T[], insertIndex: number, insertArr: T[]): T[] {
 	const before = target.slice(0, insertIndex);
@@ -521,7 +521,7 @@ export function shuffle<T>(array: T[], _seed?: number): void {
 	if (typeof _seed === 'number') {
 		let seed = _seed;
 		// Seeded random number generator in JS. Modified from:
-		// https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+		// __ZYRAXKEEP__1_
 		rand = () => {
 			const x = Math.sin(seed++) * 179426549; // throw away most significant digits and reduce any potential bias
 			return x - Math.floor(x);
@@ -633,7 +633,7 @@ export function splice<T>(array: T[], start: number, deleteCount: number, newIte
 	const index = getActualStartIndex(array, start);
 	let result = array.splice(index, deleteCount);
 	if (result === undefined) {
-		// see https://bugs.webkit.org/show_bug.cgi?id=261140
+		// see __ZYRAXKEEP__2_
 		result = [];
 	}
 	insertInto(array, index, newItems);

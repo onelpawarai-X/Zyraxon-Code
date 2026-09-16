@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { URI } from '../../../util/vs/base/common/uri';
 
 /**
- * Taken from vscode.d.ts
+ * Taken from zyraxoncode.d.ts
  * Enumeration of file types. The types `File` and `Directory` can also be
  * a symbolic links, in that case use `FileType.File | FileType.SymbolicLink` and
  * `FileType.Directory | FileType.SymbolicLink`.
@@ -31,7 +31,7 @@ export enum FileType {
 	SymbolicLink = 64
 }
 
-export class RelativePattern implements vscode.RelativePattern {
+export class RelativePattern implements zyraxoncode.RelativePattern {
 	constructor(
 		public readonly baseUri: URI,
 		public readonly pattern: string,

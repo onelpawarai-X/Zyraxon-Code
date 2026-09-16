@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { Raw } from '@vscode/prompt-tsx';
-import type { CancellationToken, ChatRequest, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, ChatResult, LanguageModelToolInformation, Progress } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, ChatRequest, ChatResponseProgressPart, ChatResponseReferencePart, ChatResponseStream, ChatResult, LanguageModelToolInformation, Progress } from 'zyraxoncode';
 import { IAuthenticationChatUpgradeService } from '../../../platform/authentication/common/authenticationUpgrade';
 import { IChatDebugFileLoggerService } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { IChatHookService, SessionStartHookInput, SessionStartHookOutput, StopHookInput, StopHookOutput, SubagentStartHookInput, SubagentStartHookOutput, SubagentStopHookInput, SubagentStopHookOutput } from '../../../platform/chat/common/chatHookService';
@@ -41,7 +41,7 @@ import { Mutable } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
 import { generateUuid } from '../../../util/vs/base/common/uuid';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponsePullRequestPart, LanguageModelDataPart2, LanguageModelPartAudience, LanguageModelTextPart, LanguageModelToolResult2, MarkdownString } from '../../../vscodeTypes';
+import { ChatResponsePullRequestPart, LanguageModelDataPart2, LanguageModelPartAudience, LanguageModelTextPart, LanguageModelToolResult2, MarkdownString } from '../../../zyraxoncodeTypes';
 import { InteractionOutcomeComputer } from '../../inlineChat/node/promptCraftingTypes';
 import { ChatVariablesCollection } from '../../prompt/common/chatVariablesCollection';
 import { Conversation, IResultMetadata, ResponseStreamParticipant, TurnStatus, TurnTokenUsageMetadata } from '../../prompt/common/conversation';
@@ -184,7 +184,7 @@ const validationToolNames = new Set<string>([
 
 const investigatingToolNames = new Set<string>([
 	ToolName.Codebase,
-	ToolName.VSCodeAPI,
+	ToolName.ZyraxonCodeAPI,
 	ToolName.FindFiles,
 	ToolName.FindTextInFiles,
 	ToolName.ReadFile,
@@ -2077,7 +2077,7 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 	 */
 	private createInternalToolCallId(toolCallId: string): string {
 		// Note- if this code is ever removed, these IDs will still exist in persisted session metadata!
-		return toolCallId + `__vscode-${ToolCallingLoop.NextToolCallId++}`;
+		return toolCallId + `__zyraxoncode-${ToolCallingLoop.NextToolCallId++}`;
 	}
 
 	private applyMessagePostProcessing(messages: Raw.ChatMessage[], options?: { stripOrphanedToolCalls?: boolean }): Raw.ChatMessage[] {
@@ -2092,13 +2092,13 @@ export abstract class ToolCallingLoop<TOptions extends IToolCallingLoopOptions =
 					...m,
 					toolCalls: m.toolCalls?.map(tc => ({
 						...tc,
-						id: tc.id.split('__vscode-')[0]
+						id: tc.id.split('__zyraxoncode-')[0]
 					}))
 				};
 			} else if (m.role === Raw.ChatRole.Tool) {
 				return {
 					...m,
-					toolCallId: m.toolCallId?.split('__vscode-')[0]
+					toolCallId: m.toolCallId?.split('__zyraxoncode-')[0]
 				};
 			}
 

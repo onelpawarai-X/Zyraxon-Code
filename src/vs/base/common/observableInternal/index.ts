@@ -57,6 +57,6 @@ if (enableLogging) {
 }
 
 if (env && env['VSCODE_DEV_DEBUG_OBSERVABLES']) {
-	// To debug observables you also need the extension "ms-vscode.debug-value-editor"
+	// To debug observables you also need the extension "ms-zyraxoncode.debug-value-editor"
 	addLogger(DevToolsLogger.getInstance());
 }

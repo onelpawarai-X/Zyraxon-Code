@@ -13,7 +13,7 @@ import { z } from 'zod';
 export function applyDebugTools(server: McpServer, appService: ApplicationService): RegisteredTool[] {
 	const tools: RegisteredTool[] = [];
 	tools.push(server.tool(
-		'vscode_automation_debug_open',
+		'zyraxoncode_automation_debug_open',
 		'Open the debug viewlet',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -28,7 +28,7 @@ export function applyDebugTools(server: McpServer, appService: ApplicationServic
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_debug_set_breakpoint',
+		'zyraxoncode_automation_debug_set_breakpoint',
 		'Set a breakpoint on a specific line',
 		{
 			lineNumber: z.number().describe('Line number to set breakpoint on')
@@ -47,7 +47,7 @@ export function applyDebugTools(server: McpServer, appService: ApplicationServic
 	));
 
 	tools.push(server.tool(
-		'vscode_automation_debug_start',
+		'zyraxoncode_automation_debug_start',
 		'Start debugging',
 		async () => {
 			const app = await appService.getOrCreateApplication();
@@ -63,7 +63,7 @@ export function applyDebugTools(server: McpServer, appService: ApplicationServic
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_debug_stop',
+	// 	'zyraxoncode_automation_debug_stop',
 	// 	'Stop debugging',
 	// 	async () => {
 	// 		await app.workbench.debug.stopDebugging();
@@ -78,7 +78,7 @@ export function applyDebugTools(server: McpServer, appService: ApplicationServic
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_debug_step_over',
+	// 	'zyraxoncode_automation_debug_step_over',
 	// 	'Step over in debugger',
 	// 	async () => {
 	// 		await app.workbench.debug.stepOver();
@@ -93,7 +93,7 @@ export function applyDebugTools(server: McpServer, appService: ApplicationServic
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_debug_step_in',
+	// 	'zyraxoncode_automation_debug_step_in',
 	// 	'Step into in debugger',
 	// 	async () => {
 	// 		await app.workbench.debug.stepIn();
@@ -108,7 +108,7 @@ export function applyDebugTools(server: McpServer, appService: ApplicationServic
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_debug_step_out',
+	// 	'zyraxoncode_automation_debug_step_out',
 	// 	'Step out in debugger',
 	// 	async () => {
 	// 		await app.workbench.debug.stepOut();
@@ -123,7 +123,7 @@ export function applyDebugTools(server: McpServer, appService: ApplicationServic
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_debug_continue',
+	// 	'zyraxoncode_automation_debug_continue',
 	// 	'Continue execution in debugger',
 	// 	async () => {
 	// 		await app.workbench.debug.continue();

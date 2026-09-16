@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, TextChunk, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { IEnvService } from '../../../../platform/env/common/envService';
@@ -18,7 +18,7 @@ import { ResourceSet } from '../../../../util/vs/base/common/map';
 import { basename, dirname } from '../../../../util/vs/base/common/path';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseProgressPart } from '../../../../vscodeTypes';
+import { ChatResponseProgressPart } from '../../../../zyraxoncodeTypes';
 import { getSchemasForTypeAsList } from '../../../onboardDebug/node/parseLaunchConfigFromResponse';
 import { Turn } from '../../../prompt/common/conversation';
 import { CopilotIdentityRules } from '../base/copilotIdentity';
@@ -150,7 +150,7 @@ export class StartDebuggingPrompt extends PromptElement<StartDebuggingPromptProp
 		super(props);
 	}
 
-	override async prepare(sizing: PromptSizing, progress: vscode.Progress<vscode.ChatResponseProgressPart> | undefined, token: vscode.CancellationToken): Promise<StartDebuggingPromptState> {
+	override async prepare(sizing: PromptSizing, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart> | undefined, token: zyraxoncode.CancellationToken): Promise<StartDebuggingPromptState> {
 		if (token.isCancellationRequested) {
 			return {};
 		}
@@ -209,7 +209,7 @@ export class StartDebuggingPrompt extends PromptElement<StartDebuggingPromptProp
 		const fileNeedle = returnedUris.at(0) ?? (defaultWorkspaceFolder && { file: defaultWorkspaceFolder, workspaceFolder: defaultWorkspaceFolder });
 		if (fileNeedle) {
 			for (const file of ['launch.json', 'tasks.json']) {
-				todo.push(tryAdd(URI.joinPath(fileNeedle.workspaceFolder, '.vscode', file)));
+				todo.push(tryAdd(URI.joinPath(fileNeedle.workspaceFolder, '.zyraxoncode', file)));
 			}
 
 			for (const usefulFile of ['README.md', 'CONTRIBUTING.md']) {
@@ -225,7 +225,7 @@ export class StartDebuggingPrompt extends PromptElement<StartDebuggingPromptProp
 		return [...fileResults];
 	}
 
-	private async getResources(debuggerType: string | undefined, progress: vscode.Progress<vscode.ChatResponseProgressPart> | undefined, token: vscode.CancellationToken): Promise<URI[] | undefined> {
+	private async getResources(debuggerType: string | undefined, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart> | undefined, token: zyraxoncode.CancellationToken): Promise<URI[] | undefined> {
 		const r = await this.queryModelForRequestedFiles(debuggerType, progress, token);
 		if (!r?.requestedFiles.length || token.isCancellationRequested) {
 			return;
@@ -233,7 +233,7 @@ export class StartDebuggingPrompt extends PromptElement<StartDebuggingPromptProp
 		return this.getFiles(r.requestedFiles, r.structureMetadata);
 	}
 
-	private async queryModelForRequestedFiles(debuggerType: string | undefined, progress: vscode.Progress<vscode.ChatResponseProgressPart> | undefined, token: vscode.CancellationToken) {
+	private async queryModelForRequestedFiles(debuggerType: string | undefined, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart> | undefined, token: zyraxoncode.CancellationToken) {
 		const endpoint = await this.endpointProvider.getChatEndpoint('copilot-utility-small');
 		const promptRenderer = this.props.input.type === StartDebuggingType.CommandLine
 			? PromptRenderer.create(
@@ -282,7 +282,7 @@ export class StartDebuggingPrompt extends PromptElement<StartDebuggingPromptProp
 		return { requestedFiles, structureMetadata };
 	}
 
-	private async getSchema(debuggerType: string | undefined, progress: vscode.Progress<vscode.ChatResponseProgressPart> | undefined, token: vscode.CancellationToken): Promise<string[] | undefined> {
+	private async getSchema(debuggerType: string | undefined, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart> | undefined, token: zyraxoncode.CancellationToken): Promise<string[] | undefined> {
 		if (!debuggerType) {
 			return;
 		}
@@ -294,7 +294,7 @@ export class StartDebuggingPrompt extends PromptElement<StartDebuggingPromptProp
 		return schema;
 	}
 
-	private async getDebuggerType(progress: vscode.Progress<vscode.ChatResponseProgressPart> | undefined, token: vscode.CancellationToken): Promise<string | undefined> {
+	private async getDebuggerType(progress: zyraxoncode.Progress<zyraxoncode.ChatResponseProgressPart> | undefined, token: zyraxoncode.CancellationToken): Promise<string | undefined> {
 		const endpoint = await this.endpointProvider.getChatEndpoint('copilot-utility-small');
 
 		const promptRenderer = PromptRenderer.create(

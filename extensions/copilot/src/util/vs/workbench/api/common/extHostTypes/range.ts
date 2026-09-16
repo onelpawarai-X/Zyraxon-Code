@@ -1,11 +1,11 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { illegalArgument } from '../../../../base/common/errors';
 import { es5ClassCompat } from './es5ClassCompat';
 import { Position } from './position';
@@ -13,7 +13,7 @@ import { Position } from './position';
 @es5ClassCompat
 export class Range {
 
-	static isRange(thing: unknown): thing is vscode.Range {
+	static isRange(thing: unknown): thing is zyraxoncode.Range {
 		if (thing instanceof Range) {
 			return true;
 		}
@@ -24,7 +24,7 @@ export class Range {
 			&& Position.isPosition((<Range>thing).end);
 	}
 
-	static of(obj: vscode.Range): Range {
+	static of(obj: zyraxoncode.Range): Range {
 		if (obj instanceof Range) {
 			return obj;
 		}
@@ -45,10 +45,10 @@ export class Range {
 		return this._end;
 	}
 
-	constructor(start: vscode.Position, end: vscode.Position);
+	constructor(start: zyraxoncode.Position, end: zyraxoncode.Position);
 	constructor(start: Position, end: Position);
 	constructor(startLine: number, startColumn: number, endLine: number, endColumn: number);
-	constructor(startLineOrStart: number | Position | vscode.Position, startColumnOrEnd: number | Position | vscode.Position, endLine?: number, endColumn?: number) {
+	constructor(startLineOrStart: number | Position | zyraxoncode.Position, startColumnOrEnd: number | Position | zyraxoncode.Position, endLine?: number, endColumn?: number) {
 		let start: Position | undefined;
 		let end: Position | undefined;
 
@@ -160,7 +160,7 @@ export class Range {
 	}
 }
 
-export function getDebugDescriptionOfRange(range: vscode.Range): string {
+export function getDebugDescriptionOfRange(range: zyraxoncode.Range): string {
 	return range.isEmpty
 		? `[${range.start.line}:${range.start.character})`
 		: `[${range.start.line}:${range.start.character} -> ${range.end.line}:${range.end.character})`;

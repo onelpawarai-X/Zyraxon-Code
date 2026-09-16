@@ -1,0 +1,7 @@
+src/**
+out/**
+tsconfig*.json
+**/*.tsbuildinfo
+.zyraxoncode/**
+esbuild*
+package-lock.json

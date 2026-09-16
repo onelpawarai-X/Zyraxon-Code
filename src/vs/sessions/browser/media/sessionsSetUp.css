@@ -12,7 +12,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: var(--vscode-editor-background);
+	background: var(--zyraxoncode-editor-background);
 	transition: opacity 200ms ease-out;
 }
 
@@ -23,7 +23,7 @@
 
 .agent-sessions-workbench .sessions-loading-overlay .sessions-loading-icon.codicon {
 	font-size: 112px;
-	color: var(--vscode-foreground);
+	color: var(--zyraxoncode-foreground);
 	animation: sessions-loading-pulse 1.4s ease-in-out infinite;
 }
 

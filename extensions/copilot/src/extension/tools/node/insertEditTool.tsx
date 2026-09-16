@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { NotebookDocumentSnapshot } from '../../../platform/editing/common/notebookDocumentSnapshot';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { ILanguageDiagnosticsService } from '../../../platform/languages/common/languageDiagnosticsService';
@@ -14,7 +14,7 @@ import { IPromptPathRepresentationService } from '../../../platform/prompts/comm
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
 import { IWorkspaceService } from '../../../platform/workspace/common/workspaceService';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelPromptTsxPart, LanguageModelToolResult } from '../../../vscodeTypes';
+import { LanguageModelPromptTsxPart, LanguageModelToolResult } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { IEditToolLearningService } from '../common/editToolLearningService';
@@ -33,7 +33,7 @@ export interface IEditFileParams {
 	code: string;
 }
 
-export const InternalEditToolId = 'vscode_editFile_internal';
+export const InternalEditToolId = 'zyraxoncode_editFile_internal';
 
 export class EditFileTool implements ICopilotTool<IEditFileParams> {
 	public static toolName = ToolName.EditFile;
@@ -53,7 +53,7 @@ export class EditFileTool implements ICopilotTool<IEditFileParams> {
 		@ILogService private readonly logService: ILogService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IEditFileParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IEditFileParams>, token: zyraxoncode.CancellationToken) {
 		const uri = this.promptPathRepresentationService.resolveFilePath(options.input.filePath);
 		if (!uri) {
 			throw new Error(`Invalid file path`);
@@ -68,7 +68,7 @@ export class EditFileTool implements ICopilotTool<IEditFileParams> {
 
 		const existingDiagnostics = this.languageDiagnosticsService.getDiagnostics(uri);
 
-		// Wait for vscode to do the edit, call the codemapper service, wait for textedits to be applied
+		// Wait for zyraxoncode to do the edit, call the codemapper service, wait for textedits to be applied
 		const internalOptions = {
 			...options,
 			input: {
@@ -111,7 +111,7 @@ export class EditFileTool implements ICopilotTool<IEditFileParams> {
 		]);
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IEditFileParams>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IEditFileParams>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		const uri = this.promptPathRepresentationService.resolveFilePath(options.input.filePath);
 		return this.instantiationService.invokeFunction(
 			createEditConfirmation,
@@ -129,7 +129,7 @@ export class EditFileTool implements ICopilotTool<IEditFileParams> {
 		return input;
 	}
 
-	private recordEditSuccess(options: vscode.LanguageModelToolInvocationOptions<IEditFileParams>, success: boolean) {
+	private recordEditSuccess(options: zyraxoncode.LanguageModelToolInvocationOptions<IEditFileParams>, success: boolean) {
 		if (options.model) {
 			this.editToolLearningService.didMakeEdit(options.model, ToolName.EditFile, success);
 		}

@@ -94,7 +94,7 @@ export interface ISessionSchemeAlias {
  * - **sessionId** - `{providerId}:{resource}` - the provider-scoped ID used by
  *   {@link ISessionsProvider} methods.
  * - Protocol operations (e.g. `disposeSession`) use the canonical agent
- *   session URI (`copilot:///abc123`), reconstructed via `AgentSession.uri`.
+ *   session URI (`__ZYRAXKEEP__0_`), reconstructed via `AgentSession.uri`.
  */
 export class RemoteAgentHostSessionsProvider extends BaseAgentHostSessionsProvider {
 
@@ -441,7 +441,7 @@ export class RemoteAgentHostSessionsProvider extends BaseAgentHostSessionsProvid
 	// -- Session-type sync ---------------------------------------------------
 
 	protected _formatSessionTypeLabel(agentLabel: string): string {
-		// In web (vscode.dev/agents) the workbench is already scoped to a
+		// In web (zyraxoncode.dev/agents) the workbench is already scoped to a
 		// single host via the host picker, so there's no need to disambiguate
 		// the session-type label with the host name.
 		if (this.isWebPlatform) {

@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ResourceMap, ResourceSet } from '../../../util/vs/base/common/map';
 import { count } from '../../../util/vs/base/common/strings';
 import { URI } from '../../../util/vs/base/common/uri';
-import { MarkdownString } from '../../../vscodeTypes';
+import { MarkdownString } from '../../../zyraxoncodeTypes';
 import { CellOrNotebookEdit } from '../../prompts/node/codeMapper/codeMapper';
 import { ToolName } from '../common/toolNames';
 import { ToolRegistry } from '../common/toolsRegistry';
@@ -34,7 +34,7 @@ export class MultiReplaceStringTool extends AbstractReplaceStringTool<IMultiRepl
 		}));
 	}
 
-	async handleToolStream(options: vscode.LanguageModelToolInvocationStreamOptions<IMultiReplaceStringToolParams>, _token: vscode.CancellationToken): Promise<vscode.LanguageModelToolStreamResult> {
+	async handleToolStream(options: zyraxoncode.LanguageModelToolInvocationStreamOptions<IMultiReplaceStringToolParams>, _token: zyraxoncode.CancellationToken): Promise<zyraxoncode.LanguageModelToolStreamResult> {
 		const partialInput = options.rawInput as Partial<IMultiReplaceStringToolParams> | undefined;
 
 		let invocationMessage: MarkdownString;
@@ -83,7 +83,7 @@ export class MultiReplaceStringTool extends AbstractReplaceStringTool<IMultiRepl
 		return { invocationMessage };
 	}
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IMultiReplaceStringToolParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IMultiReplaceStringToolParams>, token: zyraxoncode.CancellationToken) {
 		if (!options.input.replacements || !Array.isArray(options.input.replacements)) {
 			throw new Error('Invalid input, no replacements array');
 		}
@@ -167,7 +167,7 @@ export class MultiReplaceStringTool extends AbstractReplaceStringTool<IMultiRepl
 
 ToolRegistry.registerTool(MultiReplaceStringTool);
 
-function textEditSorter(a: vscode.TextEdit, b: vscode.TextEdit) {
+function textEditSorter(a: zyraxoncode.TextEdit, b: zyraxoncode.TextEdit) {
 	return b.range.end.compareTo(a.range.end) || b.range.start.compareTo(a.range.start);
 }
 
@@ -176,10 +176,10 @@ function textEditSorter(a: vscode.TextEdit, b: vscode.TextEdit) {
  * Text edits for the same URI are concatenated and sorted in reverse file order (descending by start position).
  */
 function mergeNotebookAndTextEdits(left: CellOrNotebookEdit[], right: CellOrNotebookEdit[]): CellOrNotebookEdit[] {
-	const notebookEdits: vscode.NotebookEdit[] = [];
-	const textEditsByUri = new ResourceMap<vscode.TextEdit[]>();
+	const notebookEdits: zyraxoncode.NotebookEdit[] = [];
+	const textEditsByUri = new ResourceMap<zyraxoncode.TextEdit[]>();
 
-	const add = (item: vscode.NotebookEdit | [URI, vscode.TextEdit[]]) => {
+	const add = (item: zyraxoncode.NotebookEdit | [URI, zyraxoncode.TextEdit[]]) => {
 		if (Array.isArray(item)) {
 			const [uri, edits] = item;
 			let bucket = textEditsByUri.get(uri);
@@ -196,7 +196,7 @@ function mergeNotebookAndTextEdits(left: CellOrNotebookEdit[], right: CellOrNote
 	left.forEach(add);
 	right.forEach(add);
 
-	const mergedTextEditTuples: [URI, vscode.TextEdit[]][] = [];
+	const mergedTextEditTuples: [URI, zyraxoncode.TextEdit[]][] = [];
 	for (const [uri, edits] of textEditsByUri.entries()) {
 		edits.sort(textEditSorter);
 		mergedTextEditTuples.push([uri, edits]);

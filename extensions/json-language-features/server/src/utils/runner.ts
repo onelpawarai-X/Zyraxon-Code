@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CancellationToken, ResponseError, LSPErrorCodes } from 'vscode-languageserver';
+import { CancellationToken, ResponseError, LSPErrorCodes } from 'zyraxoncode-languageserver';
 import { RuntimeEnvironment } from '../jsonServer.js';
 
 export function formatError(message: string, err: any): string {

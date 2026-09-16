@@ -247,7 +247,7 @@ export class ComplexCustomWorkingCopyEditorHandler extends Disposable implements
 	}
 
 	handles(workingCopy: IWorkingCopyIdentifier): boolean {
-		return workingCopy.resource.scheme === Schemas.vscodeCustomEditor;
+		return workingCopy.resource.scheme === Schemas.zyraxoncodeCustomEditor;
 	}
 
 	isOpen(workingCopy: IWorkingCopyIdentifier, editor: EditorInput): boolean {

@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
 
 if [ $# -eq 0 ]; then
-	echo "Pass in a version like ./scripts/generate-vscode-dts.sh 1.30."
+	echo "Pass in a version like ./scripts/generate-zyraxoncode-dts.sh 1.30."
 	echo "Failed to generate index.d.ts."
 	exit 1
 fi
 
 header="// Type definitions for ZYRAXON Code ${1}
-// Project: https://github.com/microsoft/vscode
-// Definitions by: ZYRAXON Code Team, Zyraxon <https://github.com/microsoft>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+// Project: __ZYRAXKEEP__0_
+// Definitions by: ZYRAXON Code Team, Zyraxon <__ZYRAXKEEP__1_>
+// Definitions: __ZYRAXKEEP__2_
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License.
- *  See https://github.com/microsoft/vscode/blob/main/LICENSE.txt for license information.
+ *  See __ZYRAXKEEP__3_ for license information.
  *--------------------------------------------------------------------------------------------*/
 
 /**
  * Type Definition for ZYRAXON Code ${1} Extension API
- * See https://code.visualstudio.com/api for more information
+ * See __ZYRAXKEEP__4_ for more information
  */"
 
-if [ -f ./src/vscode-dts/vscode.d.ts ]; then
+if [ -f ./src/zyraxoncode-dts/zyraxoncode.d.ts ]; then
 	echo "$header" > index.d.ts
-	sed "1,4d" ./src/vscode-dts/vscode.d.ts >> index.d.ts
+	sed "1,4d" ./src/zyraxoncode-dts/zyraxoncode.d.ts >> index.d.ts
 	echo "Generated index.d.ts for version ${1}."
 else
-	echo "Can't find ./src/vscode-dts/vscode.d.ts. Run this script at zyraxon root."
+	echo "Can't find ./src/zyraxoncode-dts/zyraxoncode.d.ts. Run this script at zyraxon root."
 fi

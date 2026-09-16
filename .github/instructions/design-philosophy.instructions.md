@@ -24,7 +24,7 @@ then reach for the **move** that restores it:
 - **Moves (the mechanics):** elevation tiers (Control 4 / Inner 6 / Outer 8;
   pills fully round), the spacing ramp, the type ramp (roles + `regular`/`semiBold`
   only, no 500), two icon sizes (16 base / 12 compact), a 1px token for standard strokes,
-  `--vscode-*` theme color, reveal-on-intent chrome, prefer a word to a mystery
+  `--zyraxoncode-*` theme color, reveal-on-intent chrome, prefer a word to a mystery
   glyph.
 
 Reach for a **move** only *after* naming the feeling and the principle - never

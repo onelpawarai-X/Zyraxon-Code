@@ -14,7 +14,7 @@ import { Browser, chromium, ElectronApplication, Page, webkit } from 'playwright
 import { Capability, detectCapabilities } from './detectors.js';
 
 /**
- * Response from https://update.code.visualstudio.com/api/versions/commit:<commit>/<target>/<quality>
+ * Response from __ZYRAXKEEP__0_<commit>/<target>/<quality>
  */
 interface ITargetMetadata {
 	url: string;
@@ -175,7 +175,7 @@ export class TestContext {
 	 * Creates a new temporary directory and returns its path.
 	 */
 	public createTempDir(): string {
-		const tempDir = fs.mkdtempSync(path.join(this.osTempDir, 'vscode-sanity'));
+		const tempDir = fs.mkdtempSync(path.join(this.osTempDir, 'zyraxoncode-sanity'));
 		this.log(`Created temp directory: ${tempDir}`);
 		this.tempDirs.add(tempDir);
 		return tempDir;
@@ -185,7 +185,7 @@ export class TestContext {
 	 * Creates a new temporary directory in WSL and returns its path.
 	 */
 	public createWslTempDir(): string {
-		const tempDir = `/tmp/vscode-sanity-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+		const tempDir = `/tmp/zyraxoncode-sanity-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 		this.log(`Creating WSL temp directory: ${tempDir}`);
 		this.runNoErrors('wsl', 'mkdir', '-p', tempDir);
 		this.wslTempDirs.add(tempDir);
@@ -336,7 +336,7 @@ export class TestContext {
 	 * @returns The target metadata.
 	 */
 	public async fetchMetadata(target: string): Promise<ITargetMetadata> {
-		const url = `https://update.code.visualstudio.com/api/versions/commit:${this.options.commit}/${target}/${this.options.quality}`;
+		const url = `__ZYRAXKEEP__1_{this.options.commit}/${target}/${this.options.quality}`;
 
 		this.log(`Fetching metadata for ${target} from ${url}`);
 		const response = await this.fetchNoErrors(url);
@@ -1252,7 +1252,7 @@ export class TestContext {
 		}
 
 		try {
-			const screenshotDir = this.options.screenshotsDir ?? path.join(this.osTempDir, 'vscode-sanity-screenshots');
+			const screenshotDir = this.options.screenshotsDir ?? path.join(this.osTempDir, 'zyraxoncode-sanity-screenshots');
 			fs.mkdirSync(screenshotDir, { recursive: true });
 			const sanitizedName = this.currentTestName.replace(/[^a-zA-Z0-9_-]/g, '_');
 			const screenshotPath = path.join(screenshotDir, `${sanitizedName}-${++this.screenshotCounter}.png`);
@@ -1271,7 +1271,7 @@ export class TestContext {
 	 * @returns The constructed web server URL.
 	 */
 	public getWebServerUrl(port: string, token?: string, folder?: string): URL {
-		const url = new URL(`http://localhost:${port}`);
+		const url = new URL(`__ZYRAXKEEP__2_{port}`);
 		if (token) {
 			url.searchParams.set('tkn', token);
 		}
@@ -1287,13 +1287,13 @@ export class TestContext {
 
 	/**
 	 * Returns the tunnel URL for the ZYRAXON Code server.
-	 * @param baseUrl The base URL for *vscode.dev/tunnel connection.
+	 * @param baseUrl The base URL for *zyraxoncode.dev/tunnel connection.
 	 * @param workspaceDir Optional folder path to open
 	 * @returns The tunnel URL with folder in pathname.
 	 */
 	public getTunnelUrl(baseUrl: string, workspaceDir?: string): string {
 		const url = new URL(baseUrl);
-		url.searchParams.set('vscode-version', this.options.commit);
+		url.searchParams.set('zyraxoncode-version', this.options.commit);
 		if (workspaceDir) {
 			let folder = workspaceDir.replaceAll('\\', '/');
 			if (!folder.startsWith('/')) {
@@ -1320,19 +1320,19 @@ export class TestContext {
 
 	/**
 	 * Returns the default WSL server extensions directory path.
-	 * @returns The path to the extensions directory (e.g., '~/.vscode-server-insiders/extensions').
+	 * @returns The path to the extensions directory (e.g., '~/.zyraxoncode-server-insiders/extensions').
 	 */
 	public getWslServerExtensionsDir(): string {
 		let serverDir: string;
 		switch (this.options.quality) {
 			case 'stable':
-				serverDir = '.vscode-server';
+				serverDir = '.zyraxoncode-server';
 				break;
 			case 'insider':
-				serverDir = '.vscode-server-insiders';
+				serverDir = '.zyraxoncode-server-insiders';
 				break;
 			case 'exploration':
-				serverDir = '.vscode-server-exploration';
+				serverDir = '.zyraxoncode-server-exploration';
 				break;
 		}
 		return `~/${serverDir}/extensions`;

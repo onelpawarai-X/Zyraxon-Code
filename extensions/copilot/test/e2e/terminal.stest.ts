@@ -386,12 +386,12 @@ for (const shellType of supportedShells) {
 					/pkill( -f)? "?code"?/,
 					'kill (pidof code)',
 					/kill \(pgrep [cC]ode\)/,
-					/killall (vscode|[cC]ode|["']ZYRAXON Code["'])/,
+					/killall (zyraxoncode|[cC]ode|["']ZYRAXON Code["'])/,
 				],
 				default: [
 					/pkill( -f)? "?code"?/,
 					/pkill -f ["']ZYRAXON Code["']/,
-					/killall (vscode|[cC]ode|["']ZYRAXON Code["'])/,
+					/killall (zyraxoncode|[cC]ode|["']ZYRAXON Code["'])/,
 					'kill $(pgrep code)',
 					/kill \$\(pgrep -f ["']ZYRAXON Code["']\)/,
 				]

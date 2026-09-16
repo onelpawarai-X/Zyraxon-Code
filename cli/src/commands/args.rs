@@ -164,7 +164,7 @@ pub struct StandaloneUpdateArgs {
 #[derive(Subcommand, Debug, Clone)]
 
 pub enum Commands {
-	/// Create a tunnel that's accessible on vscode.dev from anywhere.
+	/// Create a tunnel that's accessible on zyraxoncode.dev from anywhere.
 	/// Run `code tunnel --help` for more usage info.
 	Tunnel(TunnelArgs),
 
@@ -312,7 +312,7 @@ pub enum AgentSubcommand {
 
 #[derive(Args, Debug, Clone)]
 pub struct AgentPsArgs {
-	/// WebSocket address of a running agent host (e.g. ws://127.0.0.1:1234?tkn=secret).
+	/// WebSocket address of a running agent host (e.g. __ZYRAXKEEP__0_).
 	/// If omitted, the CLI discovers a locally running agent host automatically.
 	#[clap(long)]
 	pub address: Option<String>,
@@ -464,7 +464,7 @@ pub struct InstallExtensionArgs {
 	/// Either an extension id or a path to a VSIX. The identifier of an
 	/// extension is '${publisher}.${name}'. Use '--force' argument to update
 	/// to latest version. To install a specific version provide '@${version}'.
-	/// For example: 'vscode.csharp@1.2.3'.
+	/// For example: 'zyraxoncode.csharp@1.2.3'.
 	#[clap(name = "ext-id | id")]
 	pub id_or_path: Vec<String>,
 

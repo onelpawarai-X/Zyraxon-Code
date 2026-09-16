@@ -2,22 +2,22 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { CancellationToken, NotebookCell, NotebookDocument, Position, Uri } from 'vscode';
+import type { CancellationToken, NotebookCell, NotebookDocument, Position, Uri } from 'zyraxoncode';
 import { getLanguage } from '../../../util/common/languages';
 import { isUri } from '../../../util/common/types';
 import { findLast } from '../../../util/vs/base/common/arraysFind';
-import { EndOfLine, NotebookCellKind } from '../../../vscodeTypes';
+import { EndOfLine, NotebookCellKind } from '../../../zyraxoncodeTypes';
 import { BaseAlternativeNotebookContentProvider } from './alternativeContentProvider';
 import { AlternativeNotebookDocument } from './alternativeNotebookDocument';
 import { EOL, getCellIdMap, getDefaultLanguage, LineOfCellText, LineOfText, summarize, SummaryCell } from './helpers';
 
 export function generateCellTextMarker(cell: SummaryCell, lineComment: string): string {
 	const cellIdStr = cell.id ? `[id=${cell.id}] ` : '';
-	return `${lineComment}%% vscode.cell ${cellIdStr}[language=${cell.language}]`;
+	return `${lineComment}%% zyraxoncode.cell ${cellIdStr}[language=${cell.language}]`;
 }
 
 export function lineMightHaveCellMarker(line: string) {
-	return line.toLowerCase().includes('vscode.cell');
+	return line.toLowerCase().includes('zyraxoncode.cell');
 }
 
 class AlternativeTextDocument extends AlternativeNotebookDocument {
@@ -111,9 +111,9 @@ export class AlternativeTextNotebookContentProvider extends BaseAlternativeNoteb
 			const line = lineOfText.value;
 
 			// Check for new cell delimiter
-			// Sometimes LLM returns cells without the `vscode.cell` marker such as .
+			// Sometimes LLM returns cells without the `zyraxoncode.cell` marker such as .
 			const isLineCommentForEmptyCellWithoutCellMarker = line.startsWith(`${lineCommentStart}%% [`) && line.trimEnd().endsWith(']');
-			const isLineCommentWithCellMarker = line.startsWith(`${lineCommentStart}%% vscode.cell`);
+			const isLineCommentWithCellMarker = line.startsWith(`${lineCommentStart}%% zyraxoncode.cell`);
 			// Attempt to extract only if we think we have a cell marker, else we end up doing this for every single line and thats expensive.
 			const cellParts = (isLineCommentWithCellMarker || isLineCommentForEmptyCellWithoutCellMarker) ? extractCellParts(line, defaultLanguage) : undefined;
 			if ((isLineCommentWithCellMarker || isLineCommentForEmptyCellWithoutCellMarker) && cellParts?.language) {
@@ -199,7 +199,7 @@ export class AlternativeTextNotebookContentProvider extends BaseAlternativeNoteb
 		for (let i = 0; i < lines.length; i++) {
 			const line = lines[i];
 			const isLineCommentForEmptyCellWithoutCellMarker = line.startsWith(`${lineCommentStart}%% [`) && line.trimEnd().endsWith(']');
-			const isLineCommentWithCellMarker = line.startsWith(`${lineCommentStart}%% vscode.cell`);
+			const isLineCommentWithCellMarker = line.startsWith(`${lineCommentStart}%% zyraxoncode.cell`);
 
 			if (isLineCommentWithCellMarker || isLineCommentForEmptyCellWithoutCellMarker) {
 				const cellParts = extractCellParts(line, undefined);

@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IMainContext, MainContext } from './extHost.protocol.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 export class ExtHostClipboard {
 
-	readonly value: vscode.Clipboard;
+	readonly value: zyraxoncode.Clipboard;
 
 	constructor(mainContext: IMainContext) {
 		const proxy = mainContext.getProxy(MainContext.MainThreadClipboard);

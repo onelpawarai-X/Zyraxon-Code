@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type { ChatContext, ChatRequest, ChatResponseStream } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { ChatContext, ChatRequest, ChatResponseStream } from 'zyraxoncode';
 import { coalesce } from '../../../util/vs/base/common/arrays';
 import { findLast } from '../../../util/vs/base/common/arraysFind';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { URI } from '../../../util/vs/base/common/uri';
-import { ChatRequestTurn } from '../../../vscodeTypes';
+import { ChatRequestTurn } from '../../../zyraxoncodeTypes';
 import { AuthPermissionMode, ConfigKey, IConfigurationService } from '../../configuration/common/configurationService';
 import { getGitHubRepoInfoFromContext, IGitService } from '../../git/common/gitService';
 import { IGithubRepositoryService } from '../../github/common/githubService';
@@ -94,7 +94,7 @@ export class AuthenticationChatUpgradeService extends Disposable implements IAut
 			await this._authenticationService.getGitHubSession('permissive', {
 				forceNewSession: {
 					detail: l10n.t('To get more relevant Chat results, we need permission to read the contents of your repository on GitHub.'),
-					learnMore: URI.parse('https://aka.ms/copilotRepoScope'),
+					learnMore: URI.parse('__ZYRAXKEEP__0_'),
 				},
 				clearSessionPreference: true
 			});

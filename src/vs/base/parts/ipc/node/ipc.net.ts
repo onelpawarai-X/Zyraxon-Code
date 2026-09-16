@@ -34,7 +34,7 @@ export function upgradeToISocket(req: http.IncomingMessage, socket: Socket, {
 		return;
 	}
 
-	// https://tools.ietf.org/html/rfc6455#section-4
+	// __ZYRAXKEEP__0_
 	const requestNonce = req.headers['sec-websocket-key'];
 	const hash = createHash('sha1');// CodeQL [SM04514] SHA1 must be used here to respect the WebSocket protocol specification
 	hash.update(requestNonce + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11');
@@ -47,7 +47,7 @@ export function upgradeToISocket(req: http.IncomingMessage, socket: Socket, {
 		`Sec-WebSocket-Accept: ${responseNonce}`
 	];
 
-	// See https://tools.ietf.org/html/rfc7692#page-12
+	// See __ZYRAXKEEP__1_
 	let permessageDeflate = false;
 	if (!skipWebSocketFrames && !disableWebSocketCompression && req.headers['sec-websocket-extensions']) {
 		const websocketExtensionOptions = Array.isArray(req.headers['sec-websocket-extensions']) ? req.headers['sec-websocket-extensions'] : [req.headers['sec-websocket-extensions']];
@@ -89,7 +89,7 @@ export function upgradeToISocket(req: http.IncomingMessage, socket: Socket, {
  * ends. For unix domain sockets, the close event may not fire consistently
  * due to what appears to be a Node.js bug.
  *
- * @see https://github.com/microsoft/vscode/issues/211462#issuecomment-2155471996
+ * @see __ZYRAXKEEP__2_
  */
 const socketEndTimeoutMs = 30_000;
 
@@ -117,7 +117,7 @@ export class NodeSocket implements ISocket {
 				if (err.code === 'EPIPE') {
 					// An EPIPE exception at the wrong time can lead to a renderer process crash
 					// so ignore the error since the socket will fire the close event soon anyways:
-					// > https://nodejs.org/api/errors.html#errors_common_system_errors
+					// > __ZYRAXKEEP__3_
 					// > EPIPE (Broken pipe): A write on a pipe, socket, or FIFO for which there is no
 					// > process to read the data. Commonly encountered at the net and http layers,
 					// > indicative that the remote side of the stream being written to has been closed.
@@ -201,7 +201,7 @@ export class NodeSocket implements ISocket {
 
 		// we ignore the returned value from `write` because we would have to cached the data
 		// anyways and nodejs is already doing that for us:
-		// > https://nodejs.org/api/stream.html#stream_writable_write_chunk_encoding_callback
+		// > __ZYRAXKEEP__4_
 		// > However, the false return value is only advisory and the writable stream will unconditionally
 		// > accept and buffer chunk even if it has not been allowed to drain.
 		try {
@@ -211,7 +211,7 @@ export class NodeSocket implements ISocket {
 					if (err.code === 'EPIPE') {
 						// An EPIPE exception at the wrong time can lead to a renderer process crash
 						// so ignore the error since the socket will fire the close event soon anyways:
-						// > https://nodejs.org/api/errors.html#errors_common_system_errors
+						// > __ZYRAXKEEP__5_
 						// > EPIPE (Broken pipe): A write on a pipe, socket, or FIFO for which there is no
 						// > process to read the data. Commonly encountered at the net and http layers,
 						// > indicative that the remote side of the stream being written to has been closed.
@@ -224,7 +224,7 @@ export class NodeSocket implements ISocket {
 			if (err.code === 'EPIPE') {
 				// An EPIPE exception at the wrong time can lead to a renderer process crash
 				// so ignore the error since the socket will fire the close event soon anyways:
-				// > https://nodejs.org/api/errors.html#errors_common_system_errors
+				// > __ZYRAXKEEP__6_
 				// > EPIPE (Broken pipe): A write on a pipe, socket, or FIFO for which there is no
 				// > process to read the data. Commonly encountered at the net and http layers,
 				// > indicative that the remote side of the stream being written to has been closed.
@@ -294,7 +294,7 @@ interface FrameOptions {
 }
 
 /**
- * See https://tools.ietf.org/html/rfc6455#section-5.2
+ * See __ZYRAXKEEP__7_
  */
 export class WebSocketNodeSocket extends Disposable implements ISocket, ISocketTracer {
 
@@ -622,7 +622,7 @@ class WebSocketFlowManager extends Disposable {
 	) {
 		super();
 		if (permessageDeflate) {
-			// See https://tools.ietf.org/html/rfc7692#page-16
+			// See __ZYRAXKEEP__8_
 			// To simplify our logic, we don't negotiate the window size
 			// and simply dedicate (2^15) / 32kb per web socket
 			this._zlibInflateStream = this._register(new ZlibInflateStream(this._tracer, recordInflateBytes, inflateBytes, { windowBits: 15 }));
@@ -687,7 +687,7 @@ class WebSocketFlowManager extends Disposable {
 		while (this._readQueue.length > 0) {
 			const frameInfo = this._readQueue.shift()!;
 			if (this._zlibInflateStream && frameInfo.isCompressed) {
-				// See https://datatracker.ietf.org/doc/html/rfc7692#section-9.2
+				// See __ZYRAXKEEP__9_
 				// Even if permessageDeflate is negotiated, it is possible
 				// that the other side might decide to send uncompressed messages
 				// So only decompress messages that have the RSV 1 bit set
@@ -710,7 +710,7 @@ class WebSocketFlowManager extends Disposable {
 	 */
 	private _inflateFrame(zlibInflateStream: ZlibInflateStream, buffer: VSBuffer, isLastFrameOfMessage: boolean): Promise<VSBuffer> {
 		return new Promise<VSBuffer>((resolve, reject) => {
-			// See https://tools.ietf.org/html/rfc7692#section-7.2.2
+			// See __ZYRAXKEEP__10_
 			zlibInflateStream.write(buffer);
 			if (isLastFrameOfMessage) {
 				zlibInflateStream.write(VSBuffer.fromByteArray([0x00, 0x00, 0xff, 0xff]));
@@ -833,14 +833,14 @@ class ZlibDeflateStream extends Disposable {
 	}
 
 	public flush(callback: (data: VSBuffer) => void): void {
-		// See https://zlib.net/manual.html#Constants
+		// See __ZYRAXKEEP__11_
 		this._zlibDeflate.flush(/*Z_SYNC_FLUSH*/2, () => {
 			this._tracer.traceSocketEvent(SocketDiagnosticsEventType.zlibDeflateFlushFired);
 
 			let data = VSBuffer.concat(this._pendingDeflateData);
 			this._pendingDeflateData.length = 0;
 
-			// See https://tools.ietf.org/html/rfc7692#section-7.2.1
+			// See __ZYRAXKEEP__12_
 			data = data.slice(0, data.byteLength - 4);
 
 			callback(data);
@@ -884,7 +884,7 @@ function unmask(buffer: VSBuffer, mask: number): void {
 }
 
 // Read this before there's any chance it is overwritten
-// Related to https://github.com/microsoft/vscode/issues/30624
+// Related to __ZYRAXKEEP__13_
 export const XDG_RUNTIME_DIR = process.env['XDG_RUNTIME_DIR'];
 
 const safeIpcPathLengths: { [platform: number]: number } = {
@@ -897,7 +897,7 @@ export function createRandomIPCHandle(): string {
 
 	// Windows: use named pipe
 	if (process.platform === 'win32') {
-		return `\\\\.\\pipe\\vscode-ipc-${randomSuffix}-sock`;
+		return `\\\\.\\pipe\\zyraxoncode-ipc-${randomSuffix}-sock`;
 	}
 
 	// Mac & Unix: Use socket file
@@ -908,17 +908,17 @@ export function createRandomIPCHandle(): string {
 	// platform limit cause an `EINVAL` error at bind time instead of being silently
 	// truncated. The suffix only needs to be unique, so trim it (while keeping enough
 	// entropy) to make the path fit within the limit.
-	// See https://github.com/nodejs/node/commit/75884678d7e7ef228c8f8f82b4c085258c70a823
+	// See __ZYRAXKEEP__14_
 	const limit = safeIpcPathLengths[platform];
 	let suffix = randomSuffix;
 	if (typeof limit === 'number') {
-		const available = Math.max(0, (limit - 1) - join(basePath, `vscode-ipc-.sock`).length);
+		const available = Math.max(0, (limit - 1) - join(basePath, `zyraxoncode-ipc-.sock`).length);
 		if (available < suffix.length) {
 			suffix = suffix.slice(0, available);
 		}
 	}
 
-	return join(basePath, `vscode-ipc-${suffix}.sock`);
+	return join(basePath, `zyraxoncode-ipc-${suffix}.sock`);
 }
 
 export function createStaticIPCHandle(directoryPath: string, type: string, version: string): string {
@@ -933,14 +933,14 @@ export function createStaticIPCHandle(directoryPath: string, type: string, versi
 	// Mac & Unix: Use socket file
 	// Unix: Prefer XDG_RUNTIME_DIR over user data path, unless portable
 	// Trim the version and type values for the socket to prevent too large
-	// file names causing issues: https://unix.stackexchange.com/q/367008
+	// file names causing issues: __ZYRAXKEEP__15_
 
 	const versionForSocket = version.substr(0, 4);
 	const typeForSocket = type.substr(0, 6);
 
 	let result: string;
 	if (process.platform !== 'darwin' && XDG_RUNTIME_DIR && !process.env['VSCODE_PORTABLE']) {
-		result = join(XDG_RUNTIME_DIR, `vscode-${scopeForSocket}-${versionForSocket}-${typeForSocket}.sock`);
+		result = join(XDG_RUNTIME_DIR, `zyraxoncode-${scopeForSocket}-${versionForSocket}-${typeForSocket}.sock`);
 	} else {
 		result = join(directoryPath, `${versionForSocket}-${typeForSocket}.sock`);
 	}
@@ -957,7 +957,7 @@ export function createStaticIPCHandle(directoryPath: string, type: string, versi
 function validateIPCHandleLength(handle: string): void {
 	const limit = safeIpcPathLengths[platform];
 	if (typeof limit === 'number' && handle.length >= limit) {
-		// https://nodejs.org/api/net.html#net_identifying_paths_for_ipc_connections
+		// __ZYRAXKEEP__16_
 		console.warn(`WARNING: IPC handle "${handle}" is longer than ${limit} chars, try a shorter --user-data-dir`);
 	}
 }

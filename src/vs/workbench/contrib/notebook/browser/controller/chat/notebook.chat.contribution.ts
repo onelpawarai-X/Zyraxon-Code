@@ -69,7 +69,7 @@ class NotebookChatContribution extends Disposable implements IWorkbenchContribut
 		updateNotebookAgentStatus();
 		this._register(chatAgentService.onDidChangeAgents(updateNotebookAgentStatus));
 
-		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.vscodeChatInput, hasAccessToAllModels: true }, {
+		this._register(this.languageFeaturesService.completionProvider.register({ scheme: Schemas.zyraxoncodeChatInput, hasAccessToAllModels: true }, {
 			_debugDisplayName: 'chatKernelDynamicCompletions',
 			triggerCharacters: [chatVariableLeader],
 			provideCompletionItems: async (model: ITextModel, position: Position, _context: CompletionContext, token: CancellationToken) => {
@@ -230,7 +230,7 @@ export class SelectAndInsertKernelVariableAction extends Action2 {
 			}
 
 			widget.getContrib<ChatDynamicVariableModel>(ChatDynamicVariableModel.ID)?.addReference({
-				id: 'vscode.notebook.variable',
+				id: 'zyraxoncode.notebook.variable',
 				range: { startLineNumber: range.startLineNumber, startColumn: range.startColumn, endLineNumber: range.endLineNumber, endColumn: range.startColumn + text.length },
 				data: variableName,
 				fullName: variableName,
@@ -238,7 +238,7 @@ export class SelectAndInsertKernelVariableAction extends Action2 {
 			});
 		} else {
 			widget.attachmentModel.addContext({
-				id: 'vscode.notebook.variable',
+				id: 'zyraxoncode.notebook.variable',
 				name: variableName,
 				value: variableName,
 				icon: codiconsLibrary.variable,
@@ -290,7 +290,7 @@ class KernelVariableContextPicker implements IChatContextPickerItem {
 					asAttachment: () => {
 						return {
 							kind: 'generic',
-							id: 'vscode.notebook.variable',
+							id: 'zyraxoncode.notebook.variable',
 							name: variable.name,
 							value: variable.value,
 							icon: codiconsLibrary.variable,

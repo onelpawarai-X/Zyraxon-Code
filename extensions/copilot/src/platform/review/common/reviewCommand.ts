@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ReviewComment, ReviewSuggestion } from './reviewService';
 
 /**
  * A single file to review, specified by URI pairs.
  */
 export interface CodeReviewFileInput {
-	readonly currentUri: vscode.Uri;
-	readonly baseUri?: vscode.Uri;
+	readonly currentUri: zyraxoncode.Uri;
+	readonly baseUri?: zyraxoncode.Uri;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface CodeReviewInput {
  * A simplified suggestion change for the public API.
  */
 export interface CodeReviewSuggestionChange {
-	readonly range: vscode.Range;
+	readonly range: zyraxoncode.Range;
 	readonly newText: string;
 	readonly oldText: string;
 }
@@ -41,8 +41,8 @@ export interface CodeReviewSuggestion {
  * A review comment returned by the public API — stripped of internal metadata.
  */
 export interface CodeReviewComment {
-	readonly uri: vscode.Uri;
-	readonly range: vscode.Range;
+	readonly uri: zyraxoncode.Uri;
+	readonly range: zyraxoncode.Range;
 	readonly body: string;
 	readonly kind: string;
 	readonly severity: string;

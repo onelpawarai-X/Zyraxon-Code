@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
@@ -13,7 +13,7 @@ import { extractNotebookOutline, INotebookOutline } from '../../../util/common/n
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { DisposableStore } from '../../../util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatLocation, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
+import { ChatLocation, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult } from '../../../zyraxoncodeTypes';
 import { ChatVariablesCollection } from '../../prompt/common/chatVariablesCollection';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElement, renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
@@ -37,7 +37,7 @@ export class NewNotebookTool implements ICopilotTool<IBuildPromptContext> {
 		@ITelemetryService private readonly telemetryService: ITelemetryService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IBuildPromptContext>, token: CancellationToken): Promise<LanguageModelToolResult> {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IBuildPromptContext>, token: CancellationToken): Promise<LanguageModelToolResult> {
 		if (!this._input?.stream) {
 			this.sendTelemetry('noStream', options);
 			throw new Error('No output stream found');
@@ -134,7 +134,7 @@ export class NewNotebookTool implements ICopilotTool<IBuildPromptContext> {
 
 		return input;
 	}
-	async sendTelemetry(outcome: 'noStream' | 'failedToCreatePlanningEndpoint' | 'failedToRenderPlanningPrompt' | 'failedToMakePlanningRequest' | 'failedToRenderNewNotebookPrompt' | 'planningFailed' | 'noOutline' | 'unknownError' | 'success', options: vscode.LanguageModelToolInvocationOptions<IBuildPromptContext>) {
+	async sendTelemetry(outcome: 'noStream' | 'failedToCreatePlanningEndpoint' | 'failedToRenderPlanningPrompt' | 'failedToMakePlanningRequest' | 'failedToRenderNewNotebookPrompt' | 'planningFailed' | 'noOutline' | 'unknownError' | 'success', options: zyraxoncode.LanguageModelToolInvocationOptions<IBuildPromptContext>) {
 		const model = options.model && (await this.endpointProvider.getChatEndpoint(options.model)).model;
 
 		/* __GDPR__
@@ -159,7 +159,7 @@ export interface NewNotebookToolPromptProps extends BasePromptElementProps {
 	outline: INotebookOutline;
 	promptContext: IBuildPromptContext;
 	originalCreateNotebookQuery: string;
-	availableTools?: readonly vscode.LanguageModelToolInformation[];
+	availableTools?: readonly zyraxoncode.LanguageModelToolInformation[];
 }
 
 export class NewNotebookToolPrompt extends PromptElement<NewNotebookToolPromptProps, NewNotebookCodeGenerationPromptState> {

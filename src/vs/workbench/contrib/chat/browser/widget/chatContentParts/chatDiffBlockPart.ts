@@ -112,11 +112,11 @@ export class MarkdownDiffBlockPart extends Disposable {
 
 		// Create in-memory models for the diff
 		const originalUri = URI.from({
-			scheme: Schemas.vscodeChatCodeBlock,
+			scheme: Schemas.zyraxoncodeChatCodeBlock,
 			path: `/chat-diff-original-${data.codeBlockIndex}-${generateUuid()}`,
 		});
 		const modifiedUri = URI.from({
-			scheme: Schemas.vscodeChatCodeBlock,
+			scheme: Schemas.zyraxoncodeChatCodeBlock,
 			path: `/chat-diff-modified-${data.codeBlockIndex}-${generateUuid()}`,
 		});
 

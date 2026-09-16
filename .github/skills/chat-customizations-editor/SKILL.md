@@ -35,11 +35,11 @@ Principle: the UI widgets read everything from the descriptor — no harness-spe
 
 ## Extension API (`chatSessionCustomizationProvider`)
 
-The proposed API in `src/vscode-dts/vscode.proposed.chatSessionCustomizationProvider.d.ts` lets extensions register customization providers. Changes to `IExternalCustomizationItem` or `IExternalCustomizationItemProvider` must be kept in sync across the full chain:
+The proposed API in `src/zyraxoncode-dts/zyraxoncode.proposed.chatSessionCustomizationProvider.d.ts` lets extensions register customization providers. Changes to `IExternalCustomizationItem` or `IExternalCustomizationItemProvider` must be kept in sync across the full chain:
 
 | Layer | File | Type |
 |-------|------|------|
-| Extension API | `vscode.proposed.chatSessionCustomizationProvider.d.ts` | `ChatSessionCustomizationItem` |
+| Extension API | `zyraxoncode.proposed.chatSessionCustomizationProvider.d.ts` | `ChatSessionCustomizationItem` |
 | IPC DTO | `extHost.protocol.ts` | `IChatSessionCustomizationItemDto` |
 | ExtHost mapping | `extHostChatAgents2.ts` | `$provideChatSessionCustomizations()` |
 | MainThread mapping | `mainThreadChatAgents2.ts` | `provideChatSessionCustomizations` callback |

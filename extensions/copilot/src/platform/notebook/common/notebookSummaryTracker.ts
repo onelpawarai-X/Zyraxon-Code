@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { NotebookDocument } from 'vscode';
+import type { NotebookDocument } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 export const INotebookSummaryTracker = createServiceIdentifier<INotebookSummaryTracker>('INotebookSummaryTracker');

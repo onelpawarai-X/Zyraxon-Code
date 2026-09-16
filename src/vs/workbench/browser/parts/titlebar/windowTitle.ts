@@ -102,7 +102,7 @@ export class WindowTitle extends Disposable {
 	) {
 		super();
 
-		this.windowId = targetWindow.vscodeWindowId;
+		this.windowId = targetWindow.zyraxoncodeWindowId;
 
 		this.checkTitleVariables();
 
@@ -204,7 +204,7 @@ export class WindowTitle extends Disposable {
 				// in the "Windows" menu. As such, we set the title
 				// briefly to something different to ensure macOS
 				// recognizes we have a window.
-				// See: https://github.com/microsoft/vscode/issues/191288
+				// See: __ZYRAXKEEP__0_
 				window.document.title = `${this.productService.nameLong} ${WindowTitle.TITLE_DIRTY}`;
 			}
 
@@ -333,11 +333,11 @@ export class WindowTitle extends Disposable {
 		}
 
 		// Compute remote
-		// vscode-remtoe: use as is
+		// zyraxoncode-remtoe: use as is
 		// otherwise figure out if we have a virtual folder opened
 		let remoteName: string | undefined = undefined;
 		if (this.environmentService.remoteAuthority && !isWeb) {
-			remoteName = this.labelService.getHostLabel(Schemas.vscodeRemote, this.environmentService.remoteAuthority);
+			remoteName = this.labelService.getHostLabel(Schemas.zyraxoncodeRemote, this.environmentService.remoteAuthority);
 		} else {
 			const virtualWorkspaceLocation = getVirtualWorkspaceLocation(workspace);
 			if (virtualWorkspaceLocation) {

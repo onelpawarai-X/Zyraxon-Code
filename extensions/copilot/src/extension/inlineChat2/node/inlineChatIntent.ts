@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { Raw } from '@vscode/prompt-tsx';
-import { BudgetExceededError } from '@vscode/prompt-tsx/dist/base/materialized';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { Raw } from '@zyraxoncode/prompt-tsx';
+import { BudgetExceededError } from '@zyraxoncode/prompt-tsx/dist/base/materialized';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { CanceledResult, ChatFetchResponseType, ChatLocation, ChatResponse, getErrorDetailsFromChatFetchError } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -27,7 +27,7 @@ import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { ResourceSet } from '../../../util/vs/base/common/map';
 import { assertType, isDefined } from '../../../util/vs/base/common/types';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestEditorData, ChatResponseTextEditPart, LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
+import { ChatRequestEditorData, ChatResponseTextEditPart, LanguageModelTextPart, LanguageModelToolResult } from '../../../zyraxoncodeTypes';
 import { Intent } from '../../common/constants';
 import { getAgentTools } from '../../intents/node/agentIntent';
 import { ChatVariablesCollection } from '../../prompt/common/chatVariablesCollection';
@@ -53,7 +53,7 @@ interface IInlineChatEditResult {
 	lastResponse: ChatResponse;
 	needsExitTool: boolean;
 	toolCallRounds: ToolCallRound[];
-	availableTools: vscode.LanguageModelToolInformation[];
+	availableTools: zyraxoncode.LanguageModelToolInformation[];
 	totalInputTokens: number;
 	totalOutputTokens: number;
 	totalCacheReadTokens: number;
@@ -90,7 +90,7 @@ export class InlineChatIntent implements IIntent {
 		this._progressMessages = this._instantiationService.createInstance(InlineChatProgressMessages);
 	}
 
-	async handleRequest(conversation: Conversation, request: vscode.ChatRequest, stream: vscode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext | undefined, _agentName: string, _location: ChatLocation, chatTelemetry: ChatTelemetryBuilder): Promise<vscode.ChatResult> {
+	async handleRequest(conversation: Conversation, request: zyraxoncode.ChatRequest, stream: zyraxoncode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext | undefined, _agentName: string, _location: ChatLocation, chatTelemetry: ChatTelemetryBuilder): Promise<zyraxoncode.ChatResult> {
 
 		assertType(request.location2 instanceof ChatRequestEditorData);
 		assertType(documentContext);
@@ -206,7 +206,7 @@ class InlineChatToolCalling {
 		@IOTelService private readonly _otelService: IOTelService,
 	) { }
 
-	async run(endpoint: IChatEndpoint, conversation: Conversation, request: vscode.ChatRequest, stream: vscode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext, chatTelemetry: ChatTelemetryBuilder): Promise<IInlineChatEditResult> {
+	async run(endpoint: IChatEndpoint, conversation: Conversation, request: zyraxoncode.ChatRequest, stream: zyraxoncode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext, chatTelemetry: ChatTelemetryBuilder): Promise<IInlineChatEditResult> {
 		assertType(request.location2 instanceof ChatRequestEditorData);
 		assertType(documentContext);
 
@@ -276,7 +276,7 @@ class InlineChatToolCalling {
 		);
 	}
 
-	private async _runInlineToolLoop(endpoint: IChatEndpoint, conversation: Conversation, request: vscode.ChatRequest, stream: vscode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext, chatTelemetry: ChatTelemetryBuilder): Promise<IInlineChatEditResult> {
+	private async _runInlineToolLoop(endpoint: IChatEndpoint, conversation: Conversation, request: zyraxoncode.ChatRequest, stream: zyraxoncode.ChatResponseStream, token: CancellationToken, documentContext: IDocumentContext, chatTelemetry: ChatTelemetryBuilder): Promise<IInlineChatEditResult> {
 
 		// Re-narrow `request.location2` for the type checker. `run()` has already asserted this,
 		// but the narrowing does not survive across the async boundary into this private method.
@@ -360,7 +360,7 @@ class InlineChatToolCalling {
 			}
 
 			// Build a completed round from all tool calls in their original order
-			const roundCalls: [IToolCall, vscode.ExtendedLanguageModelToolResult][] = [];
+			const roundCalls: [IToolCall, zyraxoncode.ExtendedLanguageModelToolResult][] = [];
 			for (const toolCall of result.toolCalls) {
 				const toolResult = result.allCallResults.get(toolCall.id);
 				if (toolResult) {
@@ -421,7 +421,7 @@ class InlineChatToolCalling {
 		return { lastResponse, telemetry, needsExitTool, toolCallRounds, availableTools, totalInputTokens, totalOutputTokens, totalCacheReadTokens, totalCacheCreationTokens, totalReasoningTokens, lastResolvedModel };
 	}
 
-	private async _makeRequestAndRunTools(endpoint: IChatEndpoint, request: vscode.ChatRequest, stream: vscode.ChatResponseStream, messages: Raw.ChatMessage[], inlineChatTools: vscode.LanguageModelToolInformation[], telemetry: InlineChatTelemetry, token: CancellationToken) {
+	private async _makeRequestAndRunTools(endpoint: IChatEndpoint, request: zyraxoncode.ChatRequest, stream: zyraxoncode.ChatResponseStream, messages: Raw.ChatMessage[], inlineChatTools: zyraxoncode.LanguageModelToolInformation[], telemetry: InlineChatTelemetry, token: CancellationToken) {
 
 		const requestOptions: IMakeChatRequestOptions['requestOptions'] = {
 			tool_choice: 'auto',
@@ -438,8 +438,8 @@ class InlineChatToolCalling {
 		};
 
 		const toolCalls: IToolCall[] = [];
-		const failedEdits: [IToolCall, vscode.ExtendedLanguageModelToolResult][] = [];
-		const allCallResults = new Map<string, vscode.ExtendedLanguageModelToolResult>();
+		const failedEdits: [IToolCall, zyraxoncode.ExtendedLanguageModelToolResult][] = [];
+		const allCallResults = new Map<string, zyraxoncode.ExtendedLanguageModelToolResult>();
 
 		const toolExecutions: Promise<unknown>[] = [];
 
@@ -506,10 +506,10 @@ class InlineChatToolCalling {
 							const result = await this._toolsService.invokeToolWithEndpoint(toolCall.name, {
 								input,
 								toolInvocationToken: request.toolInvocationToken,
-								// Split on `__vscode` so it's the chat stream id
+								// Split on `__zyraxoncode` so it's the chat stream id
 								// TODO @lramos15 - This is a gross hack
-								chatStreamToolCallId: toolCall.id.split('__vscode')[0],
-							}, endpoint, token) as vscode.ExtendedLanguageModelToolResult;
+								chatStreamToolCallId: toolCall.id.split('__zyraxoncode')[0],
+							}, endpoint, token) as zyraxoncode.ExtendedLanguageModelToolResult;
 
 							allCallResults.set(toolCall.id, result);
 
@@ -538,7 +538,7 @@ class InlineChatToolCalling {
 		return { fetchResult, toolCalls, failedEdits, allCallResults };
 	}
 
-	private async _getAvailableTools(request: vscode.ChatRequest, model: IChatEndpoint, isLargeFile: boolean): Promise<vscode.LanguageModelToolInformation[]> {
+	private async _getAvailableTools(request: zyraxoncode.ChatRequest, model: IChatEndpoint, isLargeFile: boolean): Promise<zyraxoncode.LanguageModelToolInformation[]> {
 		assertType(request.location2 instanceof ChatRequestEditorData);
 
 
@@ -549,7 +549,7 @@ class InlineChatToolCalling {
 		}
 
 		// ALWAYS enable editing tools (only) and ignore what the client did send
-		const fakeRequest: vscode.ChatRequest = {
+		const fakeRequest: zyraxoncode.ChatRequest = {
 			...request,
 			tools: new Map(
 				Array.from(enabledTools)

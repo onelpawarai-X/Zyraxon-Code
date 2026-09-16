@@ -4,12 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { afterAll, beforeEach, describe, expect, test } from 'vitest';
-import type { NotebookDocument, NotebookDocumentContentChange, TextDocumentChangeEvent } from 'vscode';
+import type { NotebookDocument, NotebookDocumentContentChange, TextDocumentChangeEvent } from 'zyraxoncode';
 import { ExtHostNotebookDocumentData } from '../../../../util/common/test/shims/notebookDocument';
 import { DisposableStore } from '../../../../util/vs/base/common/lifecycle';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { OffsetRange } from '../../../../util/vs/editor/common/core/ranges/offsetRange';
-import { NotebookCellData, NotebookCellKind, NotebookData, NotebookRange, Range } from '../../../../vscodeTypes';
+import { NotebookCellData, NotebookCellKind, NotebookData, NotebookRange, Range } from '../../../../zyraxoncodeTypes';
 import { createAlternativeNotebookDocument, createAlternativeNotebookDocumentSnapshot, IAlternativeNotebookDocument, IAlternativeNotebookDocumentSnapshot, toAltNotebookCellChangeEdit, toAltNotebookChangeEdit } from '../../common/alternativeNotebookTextDocument';
 
 describe('Alternative Notebook (text) Content', () => {
@@ -110,7 +110,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(0), [new Range(0, 0, 1, 9)])).toEqual([new OffsetRange(53, 73)]);
 
 			// Translating alt text range across cells will only return contents of one cell.
-			expect(altDocSnapshot.getText(new OffsetRange(53, 140))).toBe('import sys\nimport os\n#%% vscode.cell [id=#VSC-bdb3864a] [language=python]\nimport pandas');
+			expect(altDocSnapshot.getText(new OffsetRange(53, 140))).toBe('import sys\nimport os\n#%% zyraxoncode.cell [id=#VSC-bdb3864a] [language=python]\nimport pandas');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(53, 140))).toEqual([[notebook.cellAt(0), new Range(0, 0, 1, 9)], [notebook.cellAt(1), new Range(0, 0, 0, 13)]]);
 			expect(altDocSnapshot.fromAltRange(new Range(1, 0, 4, 13))).toEqual([[notebook.cellAt(0), new Range(0, 0, 1, 9)], [notebook.cellAt(1), new Range(0, 0, 0, 13)]]);
 
@@ -129,7 +129,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.fromAltRange(new Range(4, 0, 4, 6))).toEqual([[notebook.cellAt(1), new Range(0, 0, 0, 6)]]);
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(1), [new Range(0, 0, 0, 6)])).toEqual([new OffsetRange(127, 133)]);
 
-			expect(altDocSnapshot.getText(new OffsetRange(134, 258))).toBe('pandas\nimport requests\n#%% vscode.cell [id=#VSC-8862d4f3] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar');
+			expect(altDocSnapshot.getText(new OffsetRange(134, 258))).toBe('pandas\nimport requests\n#%% zyraxoncode.cell [id=#VSC-8862d4f3] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(134, 258))).toEqual([
 				[notebook.cellAt(1), new Range(0, 7, 1, 15)],
 				[notebook.cellAt(2), new Range(0, 0, 2, 10)],
@@ -156,7 +156,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.fromAltRange(new Range(11, 0, 12, 18))).toEqual([[notebook.cellAt(3), new Range(0, 0, 1, 18)]]);
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(3), [new Range(0, 0, 1, 18)])).toEqual([new OffsetRange(318, 358)]);
 
-			expect(altDocSnapshot.getText(new OffsetRange(60, 349))).toBe('sys\nimport os\n#%% vscode.cell [id=#VSC-bdb3864a] [language=python]\nimport pandas\nimport requests\n#%% vscode.cell [id=#VSC-8862d4f3] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar Baz")\n#%% vscode.cell [id=#VSC-e07487cb] [language=python]\nprint(sys.executable)\nprint(sys');
+			expect(altDocSnapshot.getText(new OffsetRange(60, 349))).toBe('sys\nimport os\n#%% zyraxoncode.cell [id=#VSC-bdb3864a] [language=python]\nimport pandas\nimport requests\n#%% zyraxoncode.cell [id=#VSC-8862d4f3] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar Baz")\n#%% zyraxoncode.cell [id=#VSC-e07487cb] [language=python]\nprint(sys.executable)\nprint(sys');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(60, 349))).toEqual([
 				[notebook.cellAt(0), new Range(0, 7, 1, 9)],
 				[notebook.cellAt(1), new Range(0, 0, 1, 15)],
@@ -208,7 +208,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(2), [new Range(0, 0, 1, 9)])).toEqual([new OffsetRange(53, 73)]);
 
 			// Translating alt text range across cells will only return contents of one cell.
-			expect(altDocSnapshot.getText(new OffsetRange(53, 140))).toBe('import sys\nimport os\n#%% vscode.cell [id=#VSC-53ab90bb] [language=python]\nimport pandas');
+			expect(altDocSnapshot.getText(new OffsetRange(53, 140))).toBe('import sys\nimport os\n#%% zyraxoncode.cell [id=#VSC-53ab90bb] [language=python]\nimport pandas');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(53, 140))).toEqual([[notebook.cellAt(2), new Range(0, 0, 1, 9)], [notebook.cellAt(4), new Range(0, 0, 0, 13)]]);
 			expect(altDocSnapshot.fromAltRange(new Range(1, 0, 4, 13))).toEqual([[notebook.cellAt(2), new Range(0, 0, 1, 9)], [notebook.cellAt(4), new Range(0, 0, 0, 13)]]);
 
@@ -227,7 +227,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.fromAltRange(new Range(4, 0, 4, 6))).toEqual([[notebook.cellAt(4), new Range(0, 0, 0, 6)]]);
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(4), [new Range(0, 0, 0, 6)])).toEqual([new OffsetRange(127, 133)]);
 
-			expect(altDocSnapshot.getText(new OffsetRange(134, 258))).toBe('pandas\nimport requests\n#%% vscode.cell [id=#VSC-749a8f95] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar');
+			expect(altDocSnapshot.getText(new OffsetRange(134, 258))).toBe('pandas\nimport requests\n#%% zyraxoncode.cell [id=#VSC-749a8f95] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(134, 258))).toEqual([
 				[notebook.cellAt(4), new Range(0, 7, 1, 15)],
 				[notebook.cellAt(5), new Range(0, 0, 2, 10)],
@@ -254,7 +254,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.fromAltRange(new Range(11, 0, 12, 18))).toEqual([[notebook.cellAt(6), new Range(0, 0, 1, 18)]]);
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(6), [new Range(0, 0, 1, 18)])).toEqual([new OffsetRange(318, 358)]);
 
-			expect(altDocSnapshot.getText(new OffsetRange(60, 349))).toBe('sys\nimport os\n#%% vscode.cell [id=#VSC-53ab90bb] [language=python]\nimport pandas\nimport requests\n#%% vscode.cell [id=#VSC-749a8f95] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar Baz")\n#%% vscode.cell [id=#VSC-d2139a72] [language=python]\nprint(sys.executable)\nprint(sys');
+			expect(altDocSnapshot.getText(new OffsetRange(60, 349))).toBe('sys\nimport os\n#%% zyraxoncode.cell [id=#VSC-53ab90bb] [language=python]\nimport pandas\nimport requests\n#%% zyraxoncode.cell [id=#VSC-749a8f95] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar Baz")\n#%% zyraxoncode.cell [id=#VSC-d2139a72] [language=python]\nprint(sys.executable)\nprint(sys');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(60, 349))).toEqual([
 				[notebook.cellAt(2), new Range(0, 7, 1, 9)],
 				[notebook.cellAt(4), new Range(0, 0, 1, 15)],
@@ -306,7 +306,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(2), [new Range(0, 0, 1, 9)])).toEqual([new OffsetRange(233, 253)]);
 
 			// Translating alt text range across cells will only return contents of one cell.
-			expect(altDocSnapshot.getText(new OffsetRange(53, 254))).toBe(']\n"""\n# This is a sample notebook\n"""\n#%% vscode.cell [id=#VSC-bdb3864a] [language=markdown]\n"""\n## Header\n### Sub Heading\n"""\n#%% vscode.cell [id=#VSC-8862d4f3] [language=python]\nimport sys\nimport os\n');
+			expect(altDocSnapshot.getText(new OffsetRange(53, 254))).toBe(']\n"""\n# This is a sample notebook\n"""\n#%% zyraxoncode.cell [id=#VSC-bdb3864a] [language=markdown]\n"""\n## Header\n### Sub Heading\n"""\n#%% zyraxoncode.cell [id=#VSC-8862d4f3] [language=python]\nimport sys\nimport os\n');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(53, 254))).toEqual([
 				[notebook.cellAt(0), new Range(0, 0, 0, 27)],
 				[notebook.cellAt(1), new Range(0, 0, 1, 15)],
@@ -333,7 +333,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.fromAltRange(new Range(17, 0, 17, 6))).toEqual([[notebook.cellAt(4), new Range(0, 0, 0, 6)]]);
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(4), [new Range(0, 0, 0, 6)])).toEqual([new OffsetRange(379, 385)]);
 
-			expect(altDocSnapshot.getText(new OffsetRange(386, 510))).toBe('pandas\nimport requests\n#%% vscode.cell [id=#VSC-749a8f95] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar');
+			expect(altDocSnapshot.getText(new OffsetRange(386, 510))).toBe('pandas\nimport requests\n#%% zyraxoncode.cell [id=#VSC-749a8f95] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(386, 510))).toEqual([
 				[notebook.cellAt(4), new Range(0, 7, 1, 15)],
 				[notebook.cellAt(5), new Range(0, 0, 2, 10)],
@@ -360,7 +360,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.fromAltRange(new Range(24, 0, 25, 18))).toEqual([[notebook.cellAt(6), new Range(0, 0, 1, 18)]]);
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(6), [new Range(0, 0, 1, 18)])).toEqual([new OffsetRange(570, 610)]);
 
-			expect(altDocSnapshot.getText(new OffsetRange(240, 601))).toBe('sys\nimport os\n#%% vscode.cell [id=#VSC-e07487cb] [language=markdown]\n"""\nComments\n"""\n#%% vscode.cell [id=#VSC-53ab90bb] [language=python]\nimport pandas\nimport requests\n#%% vscode.cell [id=#VSC-749a8f95] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar Baz")\n#%% vscode.cell [id=#VSC-d2139a72] [language=python]\nprint(sys.executable)\nprint(sys');
+			expect(altDocSnapshot.getText(new OffsetRange(240, 601))).toBe('sys\nimport os\n#%% zyraxoncode.cell [id=#VSC-e07487cb] [language=markdown]\n"""\nComments\n"""\n#%% zyraxoncode.cell [id=#VSC-53ab90bb] [language=python]\nimport pandas\nimport requests\n#%% zyraxoncode.cell [id=#VSC-749a8f95] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar Baz")\n#%% zyraxoncode.cell [id=#VSC-d2139a72] [language=python]\nprint(sys.executable)\nprint(sys');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(240, 601))).toEqual([
 				[notebook.cellAt(2), new Range(0, 7, 1, 9)],
 				[notebook.cellAt(3), new Range(0, 0, 0, 8)],
@@ -407,7 +407,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(0), [new Range(0, 0, 1, 9)])).toEqual([new OffsetRange(53, 73)]);
 
 			// Translating alt text range across cells will only return contents of one cell.
-			expect(altDocSnapshot.getText(new OffsetRange(53, 140))).toBe('import sys\nimport os\n#%% vscode.cell [id=#VSC-bdb3864a] [language=python]\nimport pandas');
+			expect(altDocSnapshot.getText(new OffsetRange(53, 140))).toBe('import sys\nimport os\n#%% zyraxoncode.cell [id=#VSC-bdb3864a] [language=python]\nimport pandas');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(53, 140))).toEqual([[notebook.cellAt(0), new Range(0, 0, 1, 9)], [notebook.cellAt(1), new Range(0, 0, 0, 13)]]);
 			expect(altDocSnapshot.fromAltRange(new Range(0, 0, 4, 13))).toEqual([[notebook.cellAt(0), new Range(0, 0, 1, 9)], [notebook.cellAt(1), new Range(0, 0, 0, 13)]]);
 
@@ -416,7 +416,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.fromAltRange(new Range(2, 7, 2, 9))).toEqual([[notebook.cellAt(0), new Range(1, 7, 1, 9)]]);
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(0), [new Range(1, 7, 1, 9)])).toEqual([new OffsetRange(71, 73)]);
 
-			expect(altDocSnapshot.getText(new OffsetRange(134, 258))).toBe('pandas\nimport requests\n#%% vscode.cell [id=#VSC-8862d4f3] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar');
+			expect(altDocSnapshot.getText(new OffsetRange(134, 258))).toBe('pandas\nimport requests\n#%% zyraxoncode.cell [id=#VSC-8862d4f3] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(134, 258))).toEqual([
 				[notebook.cellAt(1), new Range(0, 7, 1, 15)],
 				[notebook.cellAt(2), new Range(0, 0, 2, 10)],
@@ -443,7 +443,7 @@ describe('Alternative Notebook (text) Content', () => {
 			expect(altDocSnapshot.fromAltRange(new Range(11, 0, 12, 18))).toEqual([[notebook.cellAt(3), new Range(0, 0, 1, 18)]]);
 			expect(altDocSnapshot.toAltOffsetRange(notebook.cellAt(3), [new Range(0, 0, 1, 18)])).toEqual([new OffsetRange(318, 358)]);
 
-			expect(altDocSnapshot.getText(new OffsetRange(60, 349))).toBe('sys\nimport os\n#%% vscode.cell [id=#VSC-bdb3864a] [language=python]\nimport pandas\nimport requests\n#%% vscode.cell [id=#VSC-8862d4f3] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar Baz")\n#%% vscode.cell [id=#VSC-e07487cb] [language=python]\nprint(sys.executable)\nprint(sys');
+			expect(altDocSnapshot.getText(new OffsetRange(60, 349))).toBe('sys\nimport os\n#%% zyraxoncode.cell [id=#VSC-bdb3864a] [language=python]\nimport pandas\nimport requests\n#%% zyraxoncode.cell [id=#VSC-8862d4f3] [language=python]\nprint("Hello World")\nprint("Foo Bar")\nprint("Bar Baz")\n#%% zyraxoncode.cell [id=#VSC-e07487cb] [language=python]\nprint(sys.executable)\nprint(sys');
 			expect(altDocSnapshot.fromAltOffsetRange(new OffsetRange(60, 349))).toEqual([
 				[notebook.cellAt(0), new Range(0, 7, 1, 9)],
 				[notebook.cellAt(1), new Range(0, 0, 1, 15)],

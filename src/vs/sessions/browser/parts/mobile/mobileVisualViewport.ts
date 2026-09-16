@@ -23,11 +23,11 @@ export const KEYBOARD_VISIBLE_THRESHOLD_PX = 50;
 /**
  * CSS custom property exposed on the workbench main container that
  * reflects the current virtual keyboard height in pixels (e.g.
- * `--vscode-keyboard-height: 320px`). Consumers can read this from
- * CSS (`bottom: var(--vscode-keyboard-height, 0px)`) when they need
+ * `--zyraxoncode-keyboard-height: 320px`). Consumers can read this from
+ * CSS (`bottom: var(--zyraxoncode-keyboard-height, 0px)`) when they need
  * to keep UI above the keyboard without subscribing to the observable.
  */
-const KEYBOARD_HEIGHT_CSS_VAR = '--vscode-keyboard-height';
+const KEYBOARD_HEIGHT_CSS_VAR = '--zyraxoncode-keyboard-height';
 
 /**
  * Service decorator for {@link MobileVisualViewport}. Consumers inject
@@ -69,7 +69,7 @@ export interface IMobileVisualViewport {
  *
  *  1. As an {@link IObservable} (`keyboardHeight`) for code that wants
  *     to react to keyboard changes via `autorun` / `derived`.
- *  2. As a CSS custom property (`--vscode-keyboard-height`) set on the
+ *  2. As a CSS custom property (`--zyraxoncode-keyboard-height`) set on the
  *     workbench main container, so styles can position fixed UI above
  *     the keyboard without touching JavaScript at all.
  *  3. As a reactive {@link KeyboardVisibleContext} context key (`true`

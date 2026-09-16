@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -44,7 +44,7 @@ export class VSBuffer {
 	 */
 	static wrap(actual: Uint8Array): VSBuffer {
 		if (hasBuffer && !(Buffer.isBuffer(actual))) {
-			// https://nodejs.org/dist/latest-v10.x/docs/api/buffer.html#buffer_class_method_buffer_from_arraybuffer_byteoffset_length
+			// __ZYRAXKEEP__0_
 			// Create a zero-copy Buffer wrapper around the ArrayBuffer pointed to by the Uint8Array
 			actual = Buffer.from(actual.buffer, actual.byteOffset, actual.byteLength);
 		}
@@ -398,7 +398,7 @@ export function decodeBase64(encoded: string) {
 
 	for (let i = 0; i < encoded.length; i++) {
 		const code = encoded.charCodeAt(i);
-		// See https://datatracker.ietf.org/doc/html/rfc4648#section-4
+		// See __ZYRAXKEEP__1_
 		// This branchy code is about 3x faster than an indexOf on a base64 char string.
 		if (code >= 65 && code <= 90) {
 			append(code - 65); // A-Z starts ranges from char code 65 to 90

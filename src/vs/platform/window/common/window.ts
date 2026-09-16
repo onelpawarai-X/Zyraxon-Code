@@ -45,7 +45,7 @@ export interface IBaseOpenWindowsOptions {
 	/**
 	 * The remote authority to use when windows are opened with either
 	 * - no workspace (empty window)
-	 * - a workspace that is neither `file://` nor `vscode-remote://`
+	 * - a workspace that is neither `file://` nor `zyraxoncode-remote://`
 	 * Use 'null' for a local window.
 	 * If not set, defaults to the remote authority of the current window.
 	 */
@@ -301,7 +301,7 @@ export function getTitleBarStyle(configurationService: IConfigurationService): T
 
 		const useSimpleFullScreen = isMacintosh && configuration.nativeFullScreen === false;
 		if (useSimpleFullScreen) {
-			return TitlebarStyle.NATIVE; // simple fullscreen does not work well with custom title style (https://github.com/microsoft/vscode/issues/63291)
+			return TitlebarStyle.NATIVE; // simple fullscreen does not work well with custom title style (__ZYRAXKEEP__0_)
 		}
 
 		const style = configuration.titleBarStyle;
@@ -355,7 +355,7 @@ export function useNativeFullScreen(configurationService: IConfigurationService)
 	}
 
 	if (windowConfig.nativeTabs) {
-		return true; // https://github.com/electron/electron/issues/16142
+		return true; // __ZYRAXKEEP__1_
 	}
 
 	return windowConfig.nativeFullScreen !== false;
@@ -505,7 +505,7 @@ export interface INativeWindowConfiguration extends IWindowConfiguration, Native
 
 /**
  * According to Electron docs: `scale := 1.2 ^ level`.
- * https://github.com/electron/electron/blob/master/docs/api/web-contents.md#contentssetzoomlevellevel
+ * __ZYRAXKEEP__2_
  */
 export function zoomLevelToZoomFactor(zoomLevel = 0): number {
 	return 1.2 ** zoomLevel;

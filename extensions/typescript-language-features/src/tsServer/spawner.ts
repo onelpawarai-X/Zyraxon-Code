@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { SyntaxServerConfiguration, TsServerLogLevel, TypeScriptServiceConfiguration } from '../configuration/configuration';
 import { Logger } from '../logging/logger';
 import { TelemetryReporter } from '../logging/telemetry';
@@ -37,8 +37,8 @@ const enum CompositeServerType {
 
 export class TypeScriptServerSpawner {
 
-	public static readonly tsServerLogOutputChannel = new Lazy<vscode.OutputChannel>(() => {
-		return vscode.window.createOutputChannel(vscode.l10n.t("TypeScript Server Log"));
+	public static readonly tsServerLogOutputChannel = new Lazy<zyraxoncode.OutputChannel>(() => {
+		return zyraxoncode.window.createOutputChannel(zyraxoncode.l10n.t("TypeScript Server Log"));
 	});
 
 	public constructor(
@@ -192,10 +192,10 @@ export class TypeScriptServerSpawner {
 		apiVersion: API,
 		pluginManager: PluginManager,
 		cancellationPipeName: string | undefined,
-	): { args: string[]; tsServerLog: TsServerLog | undefined; tsServerTraceDirectory: vscode.Uri | undefined } {
+	): { args: string[]; tsServerLog: TsServerLog | undefined; tsServerTraceDirectory: zyraxoncode.Uri | undefined } {
 		const args: string[] = [];
 		let tsServerLog: TsServerLog | undefined;
-		let tsServerTraceDirectory: vscode.Uri | undefined;
+		let tsServerTraceDirectory: zyraxoncode.Uri | undefined;
 
 		if (kind === TsServerProcessKind.Syntax) {
 			if (apiVersion.gte(API.v401)) {
@@ -226,7 +226,7 @@ export class TypeScriptServerSpawner {
 			} else {
 				const logDir = this._logDirectoryProvider.getNewLogDirectory();
 				if (logDir) {
-					const logFilePath = vscode.Uri.joinPath(logDir, `tsserver.log`);
+					const logFilePath = zyraxoncode.Uri.joinPath(logDir, `tsserver.log`);
 					tsServerLog = { type: 'file', uri: logFilePath };
 
 					args.push('--logVerbosity', TsServerLogLevel.toString(configuration.tsServerLogLevel));
@@ -299,7 +299,7 @@ export class TypeScriptServerSpawner {
 	private static getTsLocale(configuration: TypeScriptServiceConfiguration): string {
 		return configuration.locale
 			? configuration.locale
-			: vscode.env.language;
+			: zyraxoncode.env.language;
 	}
 }
 

@@ -7,9 +7,9 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
 import { pickRemoteSource } from './remoteSource';
-import { l10n, workspace, window, Uri, ProgressLocation, commands } from 'vscode';
+import { l10n, workspace, window, Uri, ProgressLocation, commands } from 'zyraxoncode';
 import { RepositoryCache, RepositoryCacheInfo } from './repositoryCache';
-import TelemetryReporter from '@vscode/extension-telemetry';
+import TelemetryReporter from '@zyraxoncode/extension-telemetry';
 import { Model } from './model';
 
 type ApiPostCloneAction = 'none';
@@ -178,11 +178,11 @@ export class CloneManager {
 		const uri = Uri.file(target);
 
 		if (action === PostCloneAction.Open) {
-			commands.executeCommand('vscode.openFolder', uri, { forceReuseWindow: true });
+			commands.executeCommand('zyraxoncode.openFolder', uri, { forceReuseWindow: true });
 		} else if (action === PostCloneAction.AddToWorkspace) {
 			workspace.updateWorkspaceFolders(workspace.workspaceFolders!.length, 0, { uri });
 		} else if (action === PostCloneAction.OpenNewWindow) {
-			commands.executeCommand('vscode.openFolder', uri, { forceNewWindow: true });
+			commands.executeCommand('zyraxoncode.openFolder', uri, { forceNewWindow: true });
 		}
 	}
 

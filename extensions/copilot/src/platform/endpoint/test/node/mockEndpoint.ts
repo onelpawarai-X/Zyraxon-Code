@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import { modelSupportsToolSearch } from '../../common/chatModelCapabilities';
 import { ITokenizer, TokenizerType } from '../../../../util/common/tokenizer';
 import { AsyncIterableObject } from '../../../../util/vs/base/common/async';
@@ -48,7 +48,7 @@ export class MockEndpoint implements IChatEndpoint {
 	isDefault: boolean = false;
 	isFallback: boolean = false;
 	policy: 'enabled' | { terms: string } = 'enabled';
-	urlOrRequestMetadata: string = 'https://microsoft.com';
+	urlOrRequestMetadata: string = '__ZYRAXKEEP__0_';
 	modelMaxPromptTokens: number = 50000;
 	name: string = 'test';
 	family: string = 'test';

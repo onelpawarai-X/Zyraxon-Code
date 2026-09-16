@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { getRootNode } from './parseDocument';
 import { validate, getHtmlFlatNode, offsetRangeToVsRange } from './util';
 import { HtmlNode as HtmlFlatNode } from 'EmmetFlatNode';
 
 export function removeTag() {
-	if (!validate(false) || !vscode.window.activeTextEditor) {
+	if (!validate(false) || !zyraxoncode.window.activeTextEditor) {
 		return;
 	}
-	const editor = vscode.window.activeTextEditor;
+	const editor = zyraxoncode.window.activeTextEditor;
 	const document = editor.document;
 	const rootNode = <HtmlFlatNode>getRootNode(document, true);
 	if (!rootNode) {
@@ -20,7 +20,7 @@ export function removeTag() {
 	}
 
 	const finalRangesToRemove = Array.from(editor.selections).reverse()
-		.reduce<vscode.Range[]>((prev, selection) =>
+		.reduce<zyraxoncode.Range[]>((prev, selection) =>
 			prev.concat(getRangesToRemove(editor.document, rootNode, selection)), []);
 
 	return editor.edit(editBuilder => {
@@ -35,29 +35,29 @@ export function removeTag() {
  * It finds the node to remove based on the selection's start position
  * and then removes that node, reindenting the content in between.
  */
-function getRangesToRemove(document: vscode.TextDocument, rootNode: HtmlFlatNode, selection: vscode.Selection): vscode.Range[] {
+function getRangesToRemove(document: zyraxoncode.TextDocument, rootNode: HtmlFlatNode, selection: zyraxoncode.Selection): zyraxoncode.Range[] {
 	const offset = document.offsetAt(selection.start);
 	const nodeToUpdate = getHtmlFlatNode(document.getText(), rootNode, offset, true);
 	if (!nodeToUpdate) {
 		return [];
 	}
 
-	let openTagRange: vscode.Range | undefined;
+	let openTagRange: zyraxoncode.Range | undefined;
 	if (nodeToUpdate.open) {
 		openTagRange = offsetRangeToVsRange(document, nodeToUpdate.open.start, nodeToUpdate.open.end);
 	}
-	let closeTagRange: vscode.Range | undefined;
+	let closeTagRange: zyraxoncode.Range | undefined;
 	if (nodeToUpdate.close) {
 		closeTagRange = offsetRangeToVsRange(document, nodeToUpdate.close.start, nodeToUpdate.close.end);
 	}
 
 	if (openTagRange && closeTagRange) {
-		const innerCombinedRange = new vscode.Range(
+		const innerCombinedRange = new zyraxoncode.Range(
 			openTagRange.end.line,
 			openTagRange.end.character,
 			closeTagRange.start.line,
 			closeTagRange.start.character);
-		const outerCombinedRange = new vscode.Range(
+		const outerCombinedRange = new zyraxoncode.Range(
 			openTagRange.start.line,
 			openTagRange.start.character,
 			closeTagRange.end.line,
@@ -77,7 +77,7 @@ function getRangesToRemove(document: vscode.TextDocument, rootNode: HtmlFlatNode
 			let lastInnerNonEmptyLine: number | undefined;
 			for (let i = openTagRange.start.line + 1; i < closeTagRange.start.line; i++) {
 				if (!document.lineAt(i).isEmptyOrWhitespace) {
-					rangesToRemove.push(new vscode.Range(i, 0, i, indentAmountToRemove));
+					rangesToRemove.push(new zyraxoncode.Range(i, 0, i, indentAmountToRemove));
 					if (firstInnerNonEmptyLine === undefined) {
 						// We found the first non-empty inner line.
 						firstInnerNonEmptyLine = i;
@@ -89,7 +89,7 @@ function getRangesToRemove(document: vscode.TextDocument, rootNode: HtmlFlatNode
 			// Remove the entire last line + empty lines preceding it
 			// if it is just the tag, otherwise remove just the tag.
 			if (entireLineIsTag(document, closeTagRange) && lastInnerNonEmptyLine) {
-				rangesToRemove.push(new vscode.Range(
+				rangesToRemove.push(new zyraxoncode.Range(
 					lastInnerNonEmptyLine,
 					document.lineAt(lastInnerNonEmptyLine).range.end.character,
 					closeTagRange.end.line,
@@ -101,7 +101,7 @@ function getRangesToRemove(document: vscode.TextDocument, rootNode: HtmlFlatNode
 			// Remove the entire first line + empty lines proceding it
 			// if it is just the tag, otherwise keep on removing just the tag.
 			if (entireLineIsTag(document, openTagRange) && firstInnerNonEmptyLine) {
-				rangesToRemove[1] = new vscode.Range(
+				rangesToRemove[1] = new zyraxoncode.Range(
 					openTagRange.start.line,
 					openTagRange.start.character,
 					firstInnerNonEmptyLine,
@@ -113,7 +113,7 @@ function getRangesToRemove(document: vscode.TextDocument, rootNode: HtmlFlatNode
 	return rangesToRemove;
 }
 
-function entireLineIsTag(document: vscode.TextDocument, range: vscode.Range): boolean {
+function entireLineIsTag(document: zyraxoncode.TextDocument, range: zyraxoncode.Range): boolean {
 	if (range.start.line === range.end.line) {
 		const lineText = document.lineAt(range.start).text;
 		const tagText = document.getText(range);
@@ -127,7 +127,7 @@ function entireLineIsTag(document: vscode.TextDocument, range: vscode.Range): bo
 /**
  * Calculates the amount of indent to remove for getRangesToRemove.
  */
-function calculateIndentAmountToRemove(document: vscode.TextDocument, openRange: vscode.Range, closeRange: vscode.Range): number {
+function calculateIndentAmountToRemove(document: zyraxoncode.TextDocument, openRange: zyraxoncode.Range, closeRange: zyraxoncode.Range): number {
 	const startLine = openRange.start.line;
 	const endLine = closeRange.start.line;
 

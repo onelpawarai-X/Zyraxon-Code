@@ -5,7 +5,7 @@
 
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { ExtHostAiEmbeddingVectorShape, IMainContext, MainContext, MainThreadAiEmbeddingVectorShape } from './extHost.protocol.js';
-import type { CancellationToken, EmbeddingVectorProvider } from 'vscode';
+import type { CancellationToken, EmbeddingVectorProvider } from 'zyraxoncode';
 import { Disposable } from './extHostTypes.js';
 
 export class ExtHostAiEmbeddingVector implements ExtHostAiEmbeddingVectorShape {

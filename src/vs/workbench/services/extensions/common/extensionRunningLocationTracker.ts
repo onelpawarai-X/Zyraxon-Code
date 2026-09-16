@@ -326,7 +326,7 @@ export class ExtensionRunningLocationTracker {
 		const localWebWorkerExtensions: IExtensionDescription[] = [];
 		for (const extension of toAdd) {
 			const extensionKind = this.readExtensionKinds(extension);
-			const isRemote = extension.extensionLocation.scheme === Schemas.vscodeRemote;
+			const isRemote = extension.extensionLocation.scheme === Schemas.zyraxoncodeRemote;
 			const extensionHostKind = this._extensionHostKindPicker.pickExtensionHostKind(extension.identifier, extensionKind, !isRemote, isRemote, ExtensionRunningPreference.None);
 			let runningLocation: ExtensionRunningLocation | null = null;
 			if (extensionHostKind === ExtensionHostKind.LocalProcess) {

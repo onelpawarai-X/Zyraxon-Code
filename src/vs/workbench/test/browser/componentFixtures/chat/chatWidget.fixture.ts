@@ -295,12 +295,12 @@ export async function renderChatWidget(context: ComponentFixtureContext, options
 	const height = options.height ?? 600;
 	container.style.width = `${width}px`;
 	container.style.height = `${height}px`;
-	container.style.backgroundColor = 'var(--vscode-sideBar-background, var(--vscode-editor-background))';
+	container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background, var(--zyraxoncode-editor-background))';
 	container.classList.add('monaco-workbench');
 
 	// Mirror the product DOM ancestry: the chat widget lives inside
 	// `.part.auxiliarybar > .content`, where auxiliaryBarPart.css recolors
-	// inline editors with `--vscode-sideBar-background` (used by the carousel).
+	// inline editors with `--zyraxoncode-sideBar-background` (used by the carousel).
 	const auxBar = dom.$('.part.auxiliarybar');
 	auxBar.style.width = '100%';
 	auxBar.style.height = '100%';
@@ -339,9 +339,9 @@ export async function renderChatWidget(context: ComponentFixtureContext, options
 		inputEditorMinLines: 2,
 	};
 	const inputStyles: IChatInputStyles = {
-		overlayBackground: 'var(--vscode-editor-background)',
-		listForeground: 'var(--vscode-foreground)',
-		listBackground: 'var(--vscode-editor-background)',
+		overlayBackground: 'var(--zyraxoncode-editor-background)',
+		listForeground: 'var(--zyraxoncode-foreground)',
+		listBackground: 'var(--zyraxoncode-editor-background)',
 	};
 
 	const inputPart = disposableStore.add(instantiationService.createInstance(ChatInputPart, ChatAgentLocation.Chat, inputOptions, inputStyles, false));
@@ -376,8 +376,8 @@ export async function renderChatWidget(context: ComponentFixtureContext, options
 			currentChatMode: () => ChatModeKind.Agent,
 			defaultElementHeight: 120,
 			styles: {
-				listForeground: 'var(--vscode-foreground)',
-				listBackground: 'var(--vscode-editor-background)',
+				listForeground: 'var(--zyraxoncode-foreground)',
+				listBackground: 'var(--zyraxoncode-editor-background)',
 			},
 			location: ChatAgentLocation.Chat,
 			rendererOptions: {
@@ -536,7 +536,7 @@ const PENDING_TOOL_APPROVAL: IFixtureMessage[] = [
 	},
 ];
 
-// https://github.com/microsoft/vscode/issues/309796
+// __ZYRAXKEEP__0_
 const ISSUE_309796_MISSING_BACKSLASH: IFixtureMessage[] = [
 	{
 		user: 'install dependencies in the server directory',
@@ -663,8 +663,8 @@ async function renderResizeObserverLoopHarness(context: ComponentFixtureContext,
 	controls.style.gap = '8px';
 	controls.style.alignItems = 'center';
 	controls.style.padding = '6px 8px';
-	controls.style.background = 'var(--vscode-editorWidget-background)';
-	controls.style.border = '1px solid var(--vscode-widget-border)';
+	controls.style.background = 'var(--zyraxoncode-editorWidget-background)';
+	controls.style.border = '1px solid var(--zyraxoncode-widget-border)';
 	context.container.style.position = 'relative';
 	context.container.appendChild(controls);
 

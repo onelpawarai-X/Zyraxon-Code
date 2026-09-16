@@ -5,10 +5,10 @@
 
 .defineKeybindingWidget {
 	padding: 10px;
-	border-radius: var(--vscode-cornerRadius-large);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
 	position: absolute;
-	box-shadow: var(--vscode-shadow-lg);
-	border: 1px solid var(--vscode-editorWidget-border);
+	box-shadow: var(--zyraxoncode-shadow-lg);
+	border: 1px solid var(--zyraxoncode-editorWidget-border);
 }
 
 .defineKeybindingWidget .message {

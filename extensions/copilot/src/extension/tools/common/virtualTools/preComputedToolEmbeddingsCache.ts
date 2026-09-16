@@ -7,7 +7,7 @@ import { Embedding, EmbeddingType } from '../../../../platform/embeddings/common
 import { EmbeddingCacheType, IEmbeddingsCache, RemoteCacheType, RemoteEmbeddingsCache } from '../../../../platform/embeddings/common/embeddingsIndex';
 import { IEnvService } from '../../../../platform/env/common/envService';
 import { ILogService } from '../../../../platform/log/common/logService';
-import { sanitizeVSCodeVersion } from '../../../../util/common/vscodeVersion';
+import { sanitizeZyraxonCodeVersion } from '../../../../util/common/zyraxoncodeVersion';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
 import { IToolEmbeddingsCache } from './toolEmbeddingsComputer';
 
@@ -22,7 +22,7 @@ export class PreComputedToolEmbeddingsCache implements IToolEmbeddingsCache {
 		@IInstantiationService instantiationService: IInstantiationService,
 		@IEnvService envService: IEnvService
 	) {
-		const cacheVersion = sanitizeVSCodeVersion(envService.getEditorInfo().version);
+		const cacheVersion = sanitizeZyraxonCodeVersion(envService.getEditorInfo().version);
 		this.cache = instantiationService.createInstance(RemoteEmbeddingsCache, EmbeddingCacheType.GLOBAL, 'toolEmbeddings', cacheVersion, EMBEDDING_TYPE_FOR_TOOL_GROUPING, RemoteCacheType.Tools);
 	}
 

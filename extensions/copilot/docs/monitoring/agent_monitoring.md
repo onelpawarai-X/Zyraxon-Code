@@ -20,7 +20,7 @@ docker run --rm -d \
   -p 18888:18888 \
   -p 4318:18890 \
   --name aspire-dashboard \
-  mcr.microsoft.com/dotnet/aspire-dashboard:latest
+  mcr.zyraxon.com/dotnet/aspire-dashboard:latest
 ```
 
 This exposes the dashboard UI on port `18888` and an OTLP (HTTP) endpoint on port `4318`.

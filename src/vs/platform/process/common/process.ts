@@ -19,7 +19,7 @@ export interface WindowData {
 }
 
 export enum IssueSource {
-	VSCode = 'vscode',
+	ZyraxonCode = 'zyraxoncode',
 	Extension = 'extension',
 	Marketplace = 'marketplace'
 }

@@ -125,7 +125,7 @@ export class WebviewElement extends Disposable implements IWebviewElement, Webvi
 		}
 
 		if (this.window.document.activeElement && this.window.document.activeElement !== this.element) {
-			// looks like https://github.com/microsoft/vscode/issues/132641
+			// looks like __ZYRAXKEEP__0_
 			// where the focus is actually not in the `<iframe>`
 			return false;
 		}
@@ -441,12 +441,12 @@ export class WebviewElement extends Disposable implements IWebviewElement, Webvi
 		// The extensionId and purpose in the URL are used for filtering in js-debug:
 		const params: { [key: string]: string } = {
 			id: this.id,
-			parentId: targetWindow.vscodeWindowId.toString(),
+			parentId: targetWindow.zyraxoncodeWindowId.toString(),
 			origin: this.origin,
 			swVersion: String(this._expectedServiceWorkerVersion),
 			extensionId: extension?.id.value ?? '',
 			platform: this.platform,
-			'vscode-resource-base-authority': webviewRootResourceAuthority,
+			'zyraxoncode-resource-base-authority': webviewRootResourceAuthority,
 			parentOrigin: targetWindow.origin,
 		};
 
@@ -476,7 +476,7 @@ export class WebviewElement extends Disposable implements IWebviewElement, Webvi
 			return;
 		}
 
-		this._windowId = targetWindow.vscodeWindowId;
+		this._windowId = targetWindow.zyraxoncodeWindowId;
 		this._encodedWebviewOriginPromise = parentOriginHash(targetWindow.origin, this.origin).then(id => this._encodedWebviewOrigin = id);
 		this._encodedWebviewOriginPromise.then(encodedWebviewOrigin => {
 			if (!this._disposed) {
@@ -726,7 +726,7 @@ export class WebviewElement extends Disposable implements IWebviewElement, Webvi
 			return;
 		}
 
-		// Electron: workaround for https://github.com/electron/electron/issues/14258
+		// Electron: workaround for __ZYRAXKEEP__1_
 		// We have to detect keyboard events in the <webview> and dispatch them to our
 		// keybinding service because these events do not bubble to the parent window anymore.
 		// Create a fake KeyboardEvent from the data provided
@@ -753,7 +753,7 @@ export class WebviewElement extends Disposable implements IWebviewElement, Webvi
 	windowDidDragStart(): void {
 		// Webview break drag and dropping around the main window (no events are generated when you are over them)
 		// Work around this by disabling pointer events during the drag.
-		// https://github.com/electron/electron/issues/18226
+		// __ZYRAXKEEP__2_
 		this._startBlockingIframeDragEvents();
 	}
 
@@ -965,7 +965,7 @@ export class WebviewElement extends Disposable implements IWebviewElement, Webvi
 			// noop
 		}
 
-		// Workaround for https://github.com/microsoft/vscode/issues/75209
+		// Workaround for __ZYRAXKEEP__3_
 		// Focusing the inner webview is async so for a sequence of actions such as:
 		//
 		// 1. Open webview

@@ -122,12 +122,12 @@ export class FileBasedRecommendations extends ExtensionRecommendations {
 	}
 
 	private onModelAdded(model: ITextModel): void {
-		const uri = model.uri.scheme === Schemas.vscodeNotebookCell ? CellUri.parse(model.uri)?.notebook : model.uri;
+		const uri = model.uri.scheme === Schemas.zyraxoncodeNotebookCell ? CellUri.parse(model.uri)?.notebook : model.uri;
 		if (!uri) {
 			return;
 		}
 
-		const supportedSchemes = distinct([Schemas.untitled, Schemas.file, Schemas.vscodeRemote, ...this.workspaceContextService.getWorkspace().folders.map(folder => folder.uri.scheme)]);
+		const supportedSchemes = distinct([Schemas.untitled, Schemas.file, Schemas.zyraxoncodeRemote, ...this.workspaceContextService.getWorkspace().folders.map(folder => folder.uri.scheme)]);
 		if (!uri || !supportedSchemes.includes(uri.scheme)) {
 			return;
 		}

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { packageJson } from '../../../../platform/env/common/packagejson';
 import { ILanguageDiagnosticsService } from '../../../../platform/languages/common/languageDiagnosticsService';
@@ -14,7 +14,7 @@ import { IPromptPathRepresentationService } from '../../../../platform/prompts/c
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelPromptTsxPart, LanguageModelToolResult } from '../../../../vscodeTypes';
+import { LanguageModelPromptTsxPart, LanguageModelToolResult } from '../../../../zyraxoncodeTypes';
 import { renderPromptElementJSON } from '../../../prompts/node/base/promptRenderer';
 import { ICodeMapperService } from '../../../prompts/node/codeMapper/codeMapperService';
 import { IEditToolLearningService } from '../../common/editToolLearningService';
@@ -34,10 +34,10 @@ interface IEditToolParams {
  * An implementation of the EditFile tool for simulation tests
  */
 export class TestEditFileTool extends EditFileTool {
-	readonly info: vscode.LanguageModelToolInformation;
+	readonly info: zyraxoncode.LanguageModelToolInformation;
 
 	constructor(
-		private readonly stream: vscode.ChatResponseStream,
+		private readonly stream: zyraxoncode.ChatResponseStream,
 		@ICodeMapperService private readonly codeMapperService: ICodeMapperService,
 		@IInstantiationService instantiationService: IInstantiationService,
 		@IWorkspaceService workspaceService: IWorkspaceService,
@@ -65,7 +65,7 @@ export class TestEditFileTool extends EditFileTool {
 		};
 	}
 
-	override async invoke(options: vscode.LanguageModelToolInvocationOptions<IEditToolParams>, token: vscode.CancellationToken) {
+	override async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IEditToolParams>, token: zyraxoncode.CancellationToken) {
 		const parameters: IEditToolParams = options.input;
 		const uri = this.promptPathRepresentationService.resolveFilePath(options.input.filePath);
 		if (!uri) {

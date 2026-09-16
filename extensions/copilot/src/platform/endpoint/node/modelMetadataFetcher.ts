@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestMetadata, RequestType } from '@vscode/copilot-api';
-import type { LanguageModelChat } from 'vscode';
+import { RequestMetadata, RequestType } from '@zyraxoncode/copilot-api';
+import type { LanguageModelChat } from 'zyraxoncode';
 import { TaskSingler } from '../../../util/common/taskSingler';
 import { Emitter, Event } from '../../../util/vs/base/common/event';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
@@ -369,7 +369,7 @@ export class ModelMetadataFetcher extends Disposable implements IModelMetadataFe
 		try {
 			const status = await this._octoKitService.getGitHubOutageStatus();
 			if (status !== GitHubOutageStatus.None) {
-				return 'Error fetching models! It appears that GitHub is experiencing an outage. Please check the [GitHub Status Page](https://githubstatus.com) for more info';
+				return 'Error fetching models! It appears that GitHub is experiencing an outage. Please check the [GitHub Status Page](__ZYRAXKEEP__0_) for more info';
 			}
 		} catch {
 			// Don't let status check failures block the original error

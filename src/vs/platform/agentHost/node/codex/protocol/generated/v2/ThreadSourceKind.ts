@@ -6,4 +6,4 @@
 // Regenerate: npm run codex:gen-protocol
 // Source file: v2/ThreadSourceKind.ts
 
-export type ThreadSourceKind = "cli" | "vscode" | "exec" | "appServer" | "subAgent" | "subAgentReview" | "subAgentCompact" | "subAgentThreadSpawn" | "subAgentOther" | "unknown";
+export type ThreadSourceKind = "cli" | "zyraxoncode" | "exec" | "appServer" | "subAgent" | "subAgentReview" | "subAgentCompact" | "subAgentThreadSpawn" | "subAgentOther" | "unknown";

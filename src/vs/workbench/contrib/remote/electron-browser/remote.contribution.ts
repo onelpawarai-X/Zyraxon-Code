@@ -42,11 +42,11 @@ class RemoteAgentDiagnosticListener implements IWorkbenchContribution {
 		@IRemoteAgentService remoteAgentService: IRemoteAgentService,
 		@ILabelService labelService: ILabelService
 	) {
-		ipcRenderer.on('vscode:getDiagnosticInfo', (event: unknown, ...args: unknown[]): void => {
+		ipcRenderer.on('zyraxoncode:getDiagnosticInfo', (event: unknown, ...args: unknown[]): void => {
 			const request = args[0] as { replyChannel: string; args: IDiagnosticInfoOptions };
 			const connection = remoteAgentService.getConnection();
 			if (connection) {
-				const hostName = labelService.getHostLabel(Schemas.vscodeRemote, connection.remoteAuthority);
+				const hostName = labelService.getHostLabel(Schemas.zyraxoncodeRemote, connection.remoteAuthority);
 				remoteAgentService.getDiagnosticInfo(request.args)
 					.then(info => {
 						if (info) {

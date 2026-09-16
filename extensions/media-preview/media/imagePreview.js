@@ -62,9 +62,9 @@
 	const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
 	// @ts-ignore
-	const vscode = acquireVsCodeApi();
+	const zyraxoncode = acquireVsCodeApi();
 
-	const initialState = vscode.getState() || { scale: 'fit', offsetX: 0, offsetY: 0 };
+	const initialState = zyraxoncode.getState() || { scale: 'fit', offsetX: 0, offsetY: 0 };
 
 	// State
 	let scale = initialState.scale;
@@ -92,7 +92,7 @@
 			// Clear explicit dimensions so the image can scale-to-fit naturally
 			image.style.minWidth = '';
 			image.style.minHeight = '';
-			vscode.setState(undefined);
+			zyraxoncode.setState(undefined);
 		} else {
 			scale = clamp(newScale, MIN_SCALE, MAX_SCALE);
 			if (scale >= PIXELATION_THRESHOLD) {
@@ -124,10 +124,10 @@
 
 			window.scrollTo(newScrollX, newScrollY);
 
-			vscode.setState({ scale: scale, offsetX: newScrollX, offsetY: newScrollY });
+			zyraxoncode.setState({ scale: scale, offsetX: newScrollX, offsetY: newScrollY });
 		}
 
-		vscode.postMessage({
+		zyraxoncode.postMessage({
 			type: 'zoom',
 			value: scale
 		});
@@ -290,9 +290,9 @@
 			return;
 		}
 
-		const entry = vscode.getState();
+		const entry = zyraxoncode.getState();
 		if (entry) {
-			vscode.setState({ scale: entry.scale, offsetX: window.scrollX, offsetY: window.scrollY });
+			zyraxoncode.setState({ scale: entry.scale, offsetX: window.scrollX, offsetY: window.scrollY });
 		}
 	}, { passive: true });
 
@@ -306,7 +306,7 @@
 		}
 		hasLoadedImage = true;
 
-		vscode.postMessage({
+		zyraxoncode.postMessage({
 			type: 'size',
 			value: `${image.naturalWidth}x${image.naturalHeight}`,
 		});
@@ -348,7 +348,7 @@
 
 	document.querySelector('.open-file-link')?.addEventListener('click', (e) => {
 		e.preventDefault();
-		vscode.postMessage({
+		zyraxoncode.postMessage({
 			type: 'reopen-as-text',
 		});
 	});

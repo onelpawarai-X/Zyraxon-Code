@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { Uri } from '../../vscodeTypes';
+import type * as zyraxoncode from 'zyraxoncode';
+import { Uri } from '../../zyraxoncodeTypes';
 import * as glob from '../vs/base/common/glob';
 import { Schemas } from '../vs/base/common/network';
 import { basename } from '../vs/base/common/path';
@@ -23,8 +23,8 @@ export interface INotebookOutline {
 }
 
 export interface INotebookExclusiveDocumentFilter {
-	include?: string | vscode.RelativePattern;
-	exclude?: string | vscode.RelativePattern;
+	include?: string | zyraxoncode.RelativePattern;
+	exclude?: string | zyraxoncode.RelativePattern;
 }
 
 export interface INotebookFilenamePattern {
@@ -32,7 +32,7 @@ export interface INotebookFilenamePattern {
 	excludeFileNamePattern?: string;
 }
 
-export type NotebookSelector = vscode.GlobPattern | INotebookExclusiveDocumentFilter | INotebookFilenamePattern;
+export type NotebookSelector = zyraxoncode.GlobPattern | INotebookExclusiveDocumentFilter | INotebookFilenamePattern;
 
 export enum RegisteredEditorPriority {
 	builtin = 'builtin',
@@ -57,12 +57,12 @@ export interface EditorAssociation {
 /**
  * Find a notebook document by uri or cell uri.
  */
-export function findNotebook(uri: vscode.Uri, notebookDocuments: readonly vscode.NotebookDocument[]): vscode.NotebookDocument | undefined {
+export function findNotebook(uri: zyraxoncode.Uri, notebookDocuments: readonly zyraxoncode.NotebookDocument[]): zyraxoncode.NotebookDocument | undefined {
 	return notebookDocuments.find(doc => isEqual(doc.uri, uri) || doc.uri.path === uri.path || findCell(uri, doc));
 }
 
-export function findCell(cellUri: vscode.Uri, notebook: vscode.NotebookDocument): vscode.NotebookCell | undefined {
-	if (cellUri.scheme === Schemas.vscodeNotebookCell || cellUri.scheme === Schemas.vscodeNotebookCellOutput) {
+export function findCell(cellUri: zyraxoncode.Uri, notebook: zyraxoncode.NotebookDocument): zyraxoncode.NotebookCell | undefined {
+	if (cellUri.scheme === Schemas.zyraxoncodeNotebookCell || cellUri.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 		// Fragment is not unique to a notebook, hence ensure we compaure the path as well.
 		const index = notebook.getCells().findIndex(cell => isEqual(cell.document.uri, cellUri) || (cell.document.uri.fragment === cellUri.fragment && cell.document.uri.path === cellUri.path));
 		if (index !== -1) {
@@ -72,8 +72,8 @@ export function findCell(cellUri: vscode.Uri, notebook: vscode.NotebookDocument)
 }
 
 
-export function getNotebookCellOutput(outputUri: Uri, notebookDocuments: readonly vscode.NotebookDocument[]): [vscode.NotebookDocument, vscode.NotebookCell, vscode.NotebookCellOutput] | undefined {
-	if (outputUri.scheme !== Schemas.vscodeNotebookCellOutput) {
+export function getNotebookCellOutput(outputUri: Uri, notebookDocuments: readonly zyraxoncode.NotebookDocument[]): [zyraxoncode.NotebookDocument, zyraxoncode.NotebookCell, zyraxoncode.NotebookCellOutput] | undefined {
+	if (outputUri.scheme !== Schemas.zyraxoncodeNotebookCellOutput) {
 		return undefined;
 	}
 	const params = new URLSearchParams(outputUri.query);
@@ -88,7 +88,7 @@ export function getNotebookCellOutput(outputUri: Uri, notebookDocuments: readonl
 	return [notebook, cell, cell.outputs[outputIndex]] as const;
 }
 
-export function getNotebookAndCellFromUri(uri: Uri, notebookDocuments: readonly vscode.NotebookDocument[]): [undefined, undefined] | [vscode.NotebookDocument, vscode.NotebookCell | undefined] {
+export function getNotebookAndCellFromUri(uri: Uri, notebookDocuments: readonly zyraxoncode.NotebookDocument[]): [undefined, undefined] | [zyraxoncode.NotebookDocument, zyraxoncode.NotebookCell | undefined] {
 	const notebook = findNotebook(uri, notebookDocuments) || notebookDocuments.find(doc => doc.uri.path === uri.path);
 	if (!notebook) {
 		return [undefined, undefined];
@@ -101,26 +101,26 @@ export function getNotebookAndCellFromUri(uri: Uri, notebookDocuments: readonly 
 	return [notebook, cell];
 }
 
-export function isNotebookCellOrNotebookChatInput(uri: vscode.Uri): boolean {
-	return uri.scheme === Schemas.vscodeNotebookCell
+export function isNotebookCellOrNotebookChatInput(uri: zyraxoncode.Uri): boolean {
+	return uri.scheme === Schemas.zyraxoncodeNotebookCell
 		// Support the experimental cell chat widget
 		|| (uri.scheme === 'untitled' && uri.fragment.startsWith('notebook-chat-input'));
 }
 
-export function isNotebookCell(uri: vscode.Uri): boolean {
-	return uri.scheme === Schemas.vscodeNotebookCell;
+export function isNotebookCell(uri: zyraxoncode.Uri): boolean {
+	return uri.scheme === Schemas.zyraxoncodeNotebookCell;
 }
 
-export function isJupyterNotebookUri(uri: vscode.Uri): boolean {
+export function isJupyterNotebookUri(uri: zyraxoncode.Uri): boolean {
 	return uri.path.endsWith('.ipynb');
 }
 
-export function isJupyterNotebook(notebook: vscode.NotebookDocument): boolean {
+export function isJupyterNotebook(notebook: zyraxoncode.NotebookDocument): boolean {
 	return notebook.notebookType === 'jupyter-notebook';
 }
 
 
-export function serializeNotebookDocument(document: vscode.NotebookDocument, features: { cell_uri_fragment?: boolean } = {}): string {
+export function serializeNotebookDocument(document: zyraxoncode.NotebookDocument, features: { cell_uri_fragment?: boolean } = {}): string {
 	return JSON.stringify({
 		cells: document.getCells().map(cell => ({
 			uri_fragment: features.cell_uri_fragment ? cell.document.uri.fragment : undefined,
@@ -150,7 +150,7 @@ export function extractNotebookOutline(response: string): INotebookOutline | und
 /**
  * Checks if the provided pattern is a document exclude pattern
  */
-export function isDocumentExcludePattern(pattern: string | vscode.RelativePattern | INotebookExclusiveDocumentFilter | INotebookFilenamePattern): pattern is INotebookExclusiveDocumentFilter {
+export function isDocumentExcludePattern(pattern: string | zyraxoncode.RelativePattern | INotebookExclusiveDocumentFilter | INotebookFilenamePattern): pattern is INotebookExclusiveDocumentFilter {
 	const arg = pattern as INotebookExclusiveDocumentFilter;
 
 	// Check if it has include property (exclude is optional)
@@ -161,7 +161,7 @@ export function isDocumentExcludePattern(pattern: string | vscode.RelativePatter
 /**
  * Checks if the provided pattern is a filename pattern
  */
-export function isFilenamePattern(pattern: string | vscode.RelativePattern | INotebookExclusiveDocumentFilter | INotebookFilenamePattern): pattern is INotebookFilenamePattern {
+export function isFilenamePattern(pattern: string | zyraxoncode.RelativePattern | INotebookExclusiveDocumentFilter | INotebookFilenamePattern): pattern is INotebookFilenamePattern {
 	const arg = pattern as INotebookFilenamePattern;
 
 	// Check if it has filenamePattern property
@@ -171,8 +171,8 @@ export function isFilenamePattern(pattern: string | vscode.RelativePattern | INo
 /**a
  * Checks if the provided object is a RelativePattern
  */
-export function isRelativePattern(obj: unknown): obj is vscode.RelativePattern {
-	const rp = obj as vscode.RelativePattern | undefined | null;
+export function isRelativePattern(obj: unknown): obj is zyraxoncode.RelativePattern {
+	const rp = obj as zyraxoncode.RelativePattern | undefined | null;
 	if (!rp) {
 		return false;
 	}
@@ -262,7 +262,7 @@ export function getNotebookEditorAssociations(resource: Uri, editorAssociations:
 /**
  * Checks if the provided resource has a supported notebook provider
  */
-export function _hasSupportedNotebooks(uri: Uri, workspaceNotebookDocuments: readonly vscode.NotebookDocument[], notebookEditorContributions: INotebookEditorContribution[], editorAssociations: EditorAssociation[]): boolean {
+export function _hasSupportedNotebooks(uri: Uri, workspaceNotebookDocuments: readonly zyraxoncode.NotebookDocument[], notebookEditorContributions: INotebookEditorContribution[], editorAssociations: EditorAssociation[]): boolean {
 	if (findNotebook(uri, workspaceNotebookDocuments)) {
 		return true;
 	}
@@ -281,7 +281,7 @@ export function _hasSupportedNotebooks(uri: Uri, workspaceNotebookDocuments: rea
 
 	// often users won't have associations that take priority, so check the priority of our valid providers
 	// a provider with priority !default will only be chosen if there is an association that matches, so we need default at this point
-	// In ZYRAXON Code, if priority is empty, it defaults to `default`, vscode/main/src/vs/workbench/contrib/notebook/browser/notebookExtensionPoint.ts#L110
+	// In ZYRAXON Code, if priority is empty, it defaults to `default`, zyraxoncode/main/src/vs/workbench/contrib/notebook/browser/notebookExtensionPoint.ts#L110
 	if (validNotebookEditorContribs.some(notebookEditorContrib => (notebookEditorContrib.priority ?? RegisteredEditorPriority.default) === RegisteredEditorPriority.default)) {
 		return true;
 	} else {

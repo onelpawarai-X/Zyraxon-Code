@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
-const Logger = vscode.window.createOutputChannel(vscode.l10n.t('Zyraxon Authentication'), { log: true });
+const Logger = zyraxoncode.window.createOutputChannel(zyraxoncode.l10n.t('Zyraxon Authentication'), { log: true });
 export default Logger;

@@ -46,7 +46,7 @@ export interface ISessionsRecentWorkspacesService {
 
 	/**
 	 * The recently used folders, resolved and most recent first: own history
-	 * first, then (when `includeVSCodeRecents` is `true`, the default) VS
+	 * first, then (when `includeZyraxonCodeRecents` is `true`, the default) VS
 	 * Code's own recently opened folders (deduplicated against own history).
 	 *
 	 * Pass `false` to restrict to the sessions' own recently-picked history
@@ -55,7 +55,7 @@ export interface ISessionsRecentWorkspacesService {
 	 * a regular ZYRAXON Code window never silently becomes a new session's
 	 * default workspace.
 	 */
-	getRecentWorkspaces(includeVSCodeRecents?: boolean): IRecentWorkspace[];
+	getRecentWorkspaces(includeZyraxonCodeRecents?: boolean): IRecentWorkspace[];
 
 	/** Records `folderUri` as most-recently used; `checked` un-checks every other entry. */
 	addRecentWorkspace(folderUri: URI, providerId: string | undefined, checked: boolean): void;
@@ -85,13 +85,13 @@ export class SessionsRecentWorkspacesService extends Disposable implements ISess
 	) {
 		super();
 
-		this._refreshVSCodeRecentWorkspaces();
-		this._register(this.workspacesService.onDidChangeRecentlyOpened(() => this._refreshVSCodeRecentWorkspaces()));
+		this._refreshZyraxonCodeRecentWorkspaces();
+		this._register(this.workspacesService.onDidChangeRecentlyOpened(() => this._refreshZyraxonCodeRecentWorkspaces()));
 	}
 
-	getRecentWorkspaces(includeVSCodeRecents = true): IRecentWorkspace[] {
+	getRecentWorkspaces(includeZyraxonCodeRecents = true): IRecentWorkspace[] {
 		const own = this._getStoredRecentWorkspaces();
-		if (!includeVSCodeRecents) {
+		if (!includeZyraxonCodeRecents) {
 			return this._resolveStored(own);
 		}
 
@@ -166,7 +166,7 @@ export class SessionsRecentWorkspacesService extends Disposable implements ISess
 		return undefined;
 	}
 
-	private async _refreshVSCodeRecentWorkspaces(): Promise<void> {
+	private async _refreshZyraxonCodeRecentWorkspaces(): Promise<void> {
 		const recentlyOpened = await this.workspacesService.getRecentlyOpened();
 		this._vsCodeRecentFolderUris = recentlyOpened.workspaces
 			.filter(isRecentFolder)

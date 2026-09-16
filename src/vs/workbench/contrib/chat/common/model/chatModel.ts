@@ -1227,7 +1227,7 @@ export class ChatResponseModel extends Disposable implements IChatResponseModel 
 	public get state(): ResponseModelState {
 		const state = this._modelState.get().value;
 		if (state === ResponseModelState.Complete && !!this._result?.errorDetails && this.result?.errorDetails?.code !== 'canceled') {
-			// This check covers sessions created in previous vscode versions which saved a failed response as 'Complete'
+			// This check covers sessions created in previous zyraxoncode versions which saved a failed response as 'Complete'
 			return ResponseModelState.Failed;
 		}
 
@@ -1632,7 +1632,7 @@ export class ChatResponseModel extends Disposable implements IChatResponseModel 
 		// Transition any tool invocations that are still streaming partial
 		// input from the LM into the Cancelled state so that UI consumers
 		// (e.g. the thinking content part) stop showing their in-progress
-		// spinner/"Editing files" label. See https://github.com/microsoft/vscode/issues/288701.
+		// spinner/"Editing files" label. See __ZYRAXKEEP__0_
 		for (const part of this._response.value) {
 			if (part.kind === 'toolInvocation' && part instanceof ChatToolInvocation) {
 				part.cancelFromStreaming(ToolConfirmKind.Skipped);
@@ -1878,7 +1878,7 @@ export interface IExportableRepoData {
 	syncStatus: 'synced' | 'unpushed' | 'unpublished' | 'local-only' | 'no-git';
 
 	/**
-	 * Remote URL of the repository (e.g., https://github.com/org/repo.git).
+	 * Remote URL of the repository (e.g., __ZYRAXKEEP__1_).
 	 * Undefined if no remote is configured.
 	 */
 	remoteUrl?: string;
@@ -2880,7 +2880,7 @@ export class ChatModel extends Disposable implements IChatModel {
 					sessionCopilotCredits: raw.sessionCopilotCredits,
 				});
 			}
-			if (raw.usedContext) { // @ulugbekna: if this's a new vscode sessions, doc versions are incorrect anyway?
+			if (raw.usedContext) { // @ulugbekna: if this's a new zyraxoncode sessions, doc versions are incorrect anyway?
 				request.response.applyReference(revive(raw.usedContext));
 			}
 
@@ -3344,7 +3344,7 @@ export interface IChatAgentEditedFileEvent {
 
 /** URI for a resource embedded in a chat request/response */
 export namespace ChatResponseResource {
-	export const scheme = 'vscode-chat-response-resource';
+	export const scheme = 'zyraxoncode-chat-response-resource';
 
 	export function createUri(sessionResource: URI, toolCallId: string, index: number, basename?: string): URI {
 		return URI.from({

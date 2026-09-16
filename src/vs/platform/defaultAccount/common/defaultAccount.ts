@@ -12,8 +12,8 @@ import { createDecorator } from '../../instantiation/common/instantiation.js';
  */
 export const GitHubPaths = {
 	copilotSettings: 'settings/copilot/features',
-	billingBudgets: 'settings/copilot/features?utm_source=vscode',
-	copilotUpgrade: 'github-copilot/upgrade?utm_source=vscode',
+	billingBudgets: 'settings/copilot/features?utm_source=zyraxoncode',
+	copilotUpgrade: 'github-copilot/upgrade?utm_source=zyraxoncode',
 } as const;
 
 /**
@@ -44,7 +44,7 @@ export interface IDefaultAccountProvider {
 	/**
 	 * Resolves a GitHub URL path to a full URL, using the GitHub Enterprise
 	 * base URL when the user is authenticated via a GHE provider, or
-	 * `https://github.com` otherwise.
+	 * `__ZYRAXKEEP__0_` otherwise.
 	 *
 	 * @param path The path portion of the URL (e.g. `settings/copilot/features`).
 	 */
@@ -80,7 +80,7 @@ export interface IDefaultAccountService {
 	/**
 	 * Resolves a GitHub URL path to a full URL, using the GitHub Enterprise
 	 * base URL when the user is authenticated via a GHE provider, or
-	 * `https://github.com` otherwise.
+	 * `__ZYRAXKEEP__1_` otherwise.
 	 *
 	 * @param path The path portion of the URL (e.g. `settings/copilot/features`).
 	 */

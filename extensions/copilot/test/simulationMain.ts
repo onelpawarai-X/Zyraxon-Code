@@ -10,13 +10,13 @@ dotenv.config();
 import 'source-map-support/register';
 
 // Load other imports
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import * as fs from 'fs';
 import minimist from 'minimist';
 import { createConnection } from 'net';
 import * as path from 'path';
 import * as v8 from 'v8';
-import type * as vscodeType from 'vscode';
+import type * as zyraxoncodeType from 'zyraxoncode';
 import { SimpleRPC } from '../src/extension/onboardDebug/node/copilotDebugWorker/rpc';
 import { ChatMLFetcherImpl } from '../src/extension/prompt/node/chatMLFetcher';
 import { ISimulationModelConfig, createExtensionUnitTestingServices } from '../src/extension/test/node/services';
@@ -179,8 +179,8 @@ async function runInExtensionHost() {
 		socket.on('error', reject);
 	});
 
-	const vscode: typeof vscodeType = require('vscode');
-	const folder = vscode.workspace.workspaceFolders![0];
+	const zyraxoncode: typeof zyraxoncodeType = require('zyraxoncode');
+	const folder = zyraxoncode.workspace.workspaceFolders![0];
 
 	Cache.Instance.on('deviceCodeCallback', (url: string) => {
 		rpc.callMethod('deviceCodeCallback', { url });

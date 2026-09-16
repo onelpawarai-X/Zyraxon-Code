@@ -130,7 +130,7 @@ export class TerminalLaunchHelpAction extends Action {
 	}
 
 	override async run(): Promise<void> {
-		this._openerService.open('https://aka.ms/vscode-troubleshoot-terminal-launch');
+		this._openerService.open('__ZYRAXKEEP__0_');
 	}
 }
 
@@ -413,7 +413,7 @@ export function registerTerminalActions() {
 				secondary: [KeyMod.Alt | KeyMod.CtrlCmd | KeyCode.UpArrow]
 			},
 			when: ContextKeyExpr.and(TerminalContextKeys.focus, TerminalContextKeys.splitTerminalActive),
-			// Should win over send sequence commands https://github.com/microsoft/vscode/issues/259326
+			// Should win over send sequence commands __ZYRAXKEEP__1_
 			weight: KeybindingWeight.WorkbenchContrib + 1
 		},
 		precondition: sharedWhenClause.terminalAvailable,
@@ -434,7 +434,7 @@ export function registerTerminalActions() {
 				secondary: [KeyMod.Alt | KeyMod.CtrlCmd | KeyCode.DownArrow]
 			},
 			when: ContextKeyExpr.and(TerminalContextKeys.focus, TerminalContextKeys.splitTerminalActive),
-			// Should win over send sequence commands https://github.com/microsoft/vscode/issues/259326
+			// Should win over send sequence commands __ZYRAXKEEP__2_
 			weight: KeybindingWeight.WorkbenchContrib + 1
 		},
 		precondition: sharedWhenClause.terminalAvailable,
@@ -601,7 +601,7 @@ export function registerTerminalActions() {
 			const instance = await c.service.getActiveOrCreateInstance({ acceptsInput: true });
 			const isRemote = instance ? instance.hasRemoteAuthority : (workbenchEnvironmentService.remoteAuthority ? true : false);
 			const uri = editor.getModel().uri;
-			if ((!isRemote && uri.scheme !== Schemas.file && uri.scheme !== Schemas.vscodeUserData) || (isRemote && uri.scheme !== Schemas.vscodeRemote)) {
+			if ((!isRemote && uri.scheme !== Schemas.file && uri.scheme !== Schemas.zyraxoncodeUserData) || (isRemote && uri.scheme !== Schemas.zyraxoncodeRemote)) {
 				notificationService.warn(localize('workbench.action.terminal.runActiveFile.noFile', 'Only files on disk can be run in the terminal'));
 				return;
 			}
@@ -890,7 +890,7 @@ export function registerTerminalActions() {
 				id,
 				group: '1_shellIntegration',
 				order: 4,
-				when: ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeTerminal),
+				when: ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeTerminal),
 				isHiddenByDefault: true
 			})),
 		],
@@ -919,7 +919,7 @@ export function registerTerminalActions() {
 				id,
 				group: '1_shellIntegration',
 				order: 5,
-				when: ResourceContextKey.Scheme.isEqualTo(Schemas.vscodeTerminal),
+				when: ResourceContextKey.Scheme.isEqualTo(Schemas.zyraxoncodeTerminal),
 				isHiddenByDefault: true
 			})),
 		],

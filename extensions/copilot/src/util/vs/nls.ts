@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -212,8 +212,8 @@ export interface INLSConfiguration {
 
 	/**
 	 * Below properties are deprecated and only there to continue support
-	 * for `vscode-nls` module that depends on them.
-	 * Refs https://github.com/microsoft/vscode-nls/blob/main/src/node/main.ts#L36-L46
+	 * for `zyraxoncode-nls` module that depends on them.
+	 * Refs __ZYRAXKEEP__0_
 	 */
 	/** @deprecated */
 	readonly locale: string;

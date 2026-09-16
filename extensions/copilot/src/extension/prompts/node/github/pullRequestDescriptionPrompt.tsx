@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { BasePromptElementProps, PromptElement, SystemMessage, UserMessage, } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, SystemMessage, UserMessage, } from '@zyraxoncode/prompt-tsx';
 import { SafetyRules } from '../base/safetyRules';
 import { Tag } from '../base/tag';
 import { CustomInstructions } from '../panel/customInstructions';
@@ -50,7 +50,7 @@ class GitHubPullRequestSystemExamples extends PromptElement<GitHubPullRequestIde
 				Example two:<br />
 				+++Fallback to hybrid after 20 process ports<br />
 				+++Additionally the \`remote.autoForwardPortsSource\` setting has been updated to remove the \`markdownDescription\` reference to a reload being required for changes to take effect.<br />
-				Fixes microsoft/vscode#4533+++<br />
+				Fixes zyraxon/zyraxoncode#4533+++<br />
 			</>
 		) : (
 			<>

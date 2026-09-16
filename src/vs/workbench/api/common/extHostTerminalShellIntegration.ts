@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { TerminalShellExecutionCommandLineConfidence } from './extHostTypes.js';
 import { Disposable, DisposableStore, toDisposable } from '../../../base/common/lifecycle.js';
 import { createDecorator } from '../../../platform/instantiation/common/instantiation.js';
@@ -17,9 +17,9 @@ import { AsyncIterableObject, Barrier, type AsyncIterableEmitter } from '../../.
 export interface IExtHostTerminalShellIntegration extends ExtHostTerminalShellIntegrationShape {
 	readonly _serviceBrand: undefined;
 
-	readonly onDidChangeTerminalShellIntegration: Event<vscode.TerminalShellIntegrationChangeEvent>;
-	readonly onDidStartTerminalShellExecution: Event<vscode.TerminalShellExecutionStartEvent>;
-	readonly onDidEndTerminalShellExecution: Event<vscode.TerminalShellExecutionEndEvent>;
+	readonly onDidChangeTerminalShellIntegration: Event<zyraxoncode.TerminalShellIntegrationChangeEvent>;
+	readonly onDidStartTerminalShellExecution: Event<zyraxoncode.TerminalShellExecutionStartEvent>;
+	readonly onDidEndTerminalShellExecution: Event<zyraxoncode.TerminalShellExecutionEndEvent>;
 }
 export const IExtHostTerminalShellIntegration = createDecorator<IExtHostTerminalShellIntegration>('IExtHostTerminalShellIntegration');
 
@@ -31,11 +31,11 @@ export class ExtHostTerminalShellIntegration extends Disposable implements IExtH
 
 	private _activeShellIntegrations: Map</*instanceId*/number, InternalTerminalShellIntegration> = new Map();
 
-	protected readonly _onDidChangeTerminalShellIntegration = this._register(new Emitter<vscode.TerminalShellIntegrationChangeEvent>());
+	protected readonly _onDidChangeTerminalShellIntegration = this._register(new Emitter<zyraxoncode.TerminalShellIntegrationChangeEvent>());
 	readonly onDidChangeTerminalShellIntegration = this._onDidChangeTerminalShellIntegration.event;
-	protected readonly _onDidStartTerminalShellExecution = this._register(new Emitter<vscode.TerminalShellExecutionStartEvent>());
+	protected readonly _onDidStartTerminalShellExecution = this._register(new Emitter<zyraxoncode.TerminalShellExecutionStartEvent>());
 	readonly onDidStartTerminalShellExecution = this._onDidStartTerminalShellExecution.event;
-	protected readonly _onDidEndTerminalShellExecution = this._register(new Emitter<vscode.TerminalShellExecutionEndEvent>());
+	protected readonly _onDidEndTerminalShellExecution = this._register(new Emitter<zyraxoncode.TerminalShellExecutionEndEvent>());
 	readonly onDidEndTerminalShellExecution = this._onDidEndTerminalShellExecution.event;
 
 	constructor(
@@ -110,7 +110,7 @@ export class ExtHostTerminalShellIntegration extends Disposable implements IExtH
 		if (!this._activeShellIntegrations.has(instanceId)) {
 			this.$shellIntegrationChange(instanceId, supportsExecuteCommandApi);
 		}
-		const commandLine: vscode.TerminalShellExecutionCommandLine = {
+		const commandLine: zyraxoncode.TerminalShellExecutionCommandLine = {
 			value: commandLineValue,
 			confidence: commandLineConfidence,
 			isTrusted
@@ -119,7 +119,7 @@ export class ExtHostTerminalShellIntegration extends Disposable implements IExtH
 	}
 
 	public $shellExecutionEnd(instanceId: number, commandLineValue: string, commandLineConfidence: TerminalShellExecutionCommandLineConfidence, isTrusted: boolean, exitCode: number | undefined): void {
-		const commandLine: vscode.TerminalShellExecutionCommandLine = {
+		const commandLine: zyraxoncode.TerminalShellExecutionCommandLine = {
 			value: commandLineValue,
 			confidence: commandLineConfidence,
 			isTrusted
@@ -167,26 +167,26 @@ export class InternalTerminalShellIntegration extends Disposable {
 	get currentExecution(): InternalTerminalShellExecution | undefined { return this._currentExecution; }
 
 
-	private _env: vscode.TerminalShellIntegrationEnvironment | undefined;
+	private _env: zyraxoncode.TerminalShellIntegrationEnvironment | undefined;
 	private _cwd: URI | undefined;
 
 	readonly store: DisposableStore = this._register(new DisposableStore());
 
-	readonly value: vscode.TerminalShellIntegration;
+	readonly value: zyraxoncode.TerminalShellIntegration;
 
-	protected readonly _onDidRequestChangeShellIntegration = this._register(new Emitter<vscode.TerminalShellIntegrationChangeEvent>());
+	protected readonly _onDidRequestChangeShellIntegration = this._register(new Emitter<zyraxoncode.TerminalShellIntegrationChangeEvent>());
 	readonly onDidRequestChangeShellIntegration = this._onDidRequestChangeShellIntegration.event;
 	protected readonly _onDidRequestShellExecution = this._register(new Emitter<string>());
 	readonly onDidRequestShellExecution = this._onDidRequestShellExecution.event;
-	protected readonly _onDidRequestEndExecution = this._register(new Emitter<vscode.TerminalShellExecutionEndEvent>());
+	protected readonly _onDidRequestEndExecution = this._register(new Emitter<zyraxoncode.TerminalShellExecutionEndEvent>());
 	readonly onDidRequestEndExecution = this._onDidRequestEndExecution.event;
 	protected readonly _onDidRequestNewExecution = this._register(new Emitter<string>());
 	readonly onDidRequestNewExecution = this._onDidRequestNewExecution.event;
 
 	constructor(
-		private readonly _terminal: vscode.Terminal,
+		private readonly _terminal: zyraxoncode.Terminal,
 		supportsExecuteCommandApi: boolean,
-		private readonly _onDidStartTerminalShellExecution: Emitter<vscode.TerminalShellExecutionStartEvent>
+		private readonly _onDidStartTerminalShellExecution: Emitter<zyraxoncode.TerminalShellExecutionStartEvent>
 	) {
 		super();
 
@@ -195,7 +195,7 @@ export class InternalTerminalShellIntegration extends Disposable {
 			get cwd(): URI | undefined {
 				return that._cwd;
 			},
-			get env(): vscode.TerminalShellIntegrationEnvironment | undefined {
+			get env(): zyraxoncode.TerminalShellIntegrationEnvironment | undefined {
 				if (!that._env) {
 					return undefined;
 				}
@@ -204,9 +204,9 @@ export class InternalTerminalShellIntegration extends Disposable {
 					value: Object.freeze({ ...that._env.value })
 				});
 			},
-			// executeCommand(commandLine: string): vscode.TerminalShellExecution;
-			// executeCommand(executable: string, args: string[]): vscode.TerminalShellExecution;
-			executeCommand(commandLineOrExecutable: string, args?: string[]): vscode.TerminalShellExecution {
+			// executeCommand(commandLine: string): zyraxoncode.TerminalShellExecution;
+			// executeCommand(executable: string, args: string[]): zyraxoncode.TerminalShellExecution;
+			executeCommand(commandLineOrExecutable: string, args?: string[]): zyraxoncode.TerminalShellExecution {
 				if (!supportsExecuteCommandApi) {
 					throw new Error('This terminal does not support the executeCommand API.');
 				}
@@ -225,7 +225,7 @@ export class InternalTerminalShellIntegration extends Disposable {
 				that._onDidRequestShellExecution.fire(commandLineValue);
 				// Fire the event in a microtask to allow the extension to use the execution before
 				// the start event fires
-				const commandLine: vscode.TerminalShellExecutionCommandLine = {
+				const commandLine: zyraxoncode.TerminalShellExecutionCommandLine = {
 					value: commandLineValue,
 					confidence: TerminalShellExecutionCommandLineConfidence.High,
 					isTrusted: true
@@ -236,7 +236,7 @@ export class InternalTerminalShellIntegration extends Disposable {
 		};
 	}
 
-	requestNewShellExecution(commandLine: vscode.TerminalShellExecutionCommandLine, cwd: URI | undefined) {
+	requestNewShellExecution(commandLine: zyraxoncode.TerminalShellExecutionCommandLine, cwd: URI | undefined) {
 		const execution = new InternalTerminalShellExecution(commandLine, cwd ?? this._cwd);
 		const unresolvedCommandLines = splitAndSanitizeCommandLine(commandLine.value);
 		if (unresolvedCommandLines.length > 1) {
@@ -250,7 +250,7 @@ export class InternalTerminalShellIntegration extends Disposable {
 		return execution;
 	}
 
-	startShellExecution(commandLine: vscode.TerminalShellExecutionCommandLine, cwd: URI | undefined): undefined {
+	startShellExecution(commandLine: zyraxoncode.TerminalShellExecutionCommandLine, cwd: URI | undefined): undefined {
 		// Since an execution is starting, fire the end event for any execution that is awaiting to
 		// end. When this happens it means that the data stream may not be flushed and therefore may
 		// fire events after the end event.
@@ -318,7 +318,7 @@ export class InternalTerminalShellIntegration extends Disposable {
 		this.currentExecution?.emitData(data);
 	}
 
-	endShellExecution(commandLine: vscode.TerminalShellExecutionCommandLine | undefined, exitCode: number | undefined): void {
+	endShellExecution(commandLine: zyraxoncode.TerminalShellExecutionCommandLine | undefined, exitCode: number | undefined): void {
 		// If the current execution is multi-line, don't end it until the next command line is
 		// confirmed to not be a part of it.
 		if (this._currentExecutionProperties?.isMultiLine) {
@@ -374,18 +374,18 @@ export class InternalTerminalShellIntegration extends Disposable {
 }
 
 class InternalTerminalShellExecution {
-	readonly value: vscode.TerminalShellExecution;
+	readonly value: zyraxoncode.TerminalShellExecution;
 
 	private _dataStream: ShellExecutionDataStream | undefined;
 	private _isEnded: boolean = false;
 
 	constructor(
-		private _commandLine: vscode.TerminalShellExecutionCommandLine,
+		private _commandLine: zyraxoncode.TerminalShellExecutionCommandLine,
 		readonly cwd: URI | undefined,
 	) {
 		const that = this;
 		this.value = {
-			get commandLine(): vscode.TerminalShellExecutionCommandLine {
+			get commandLine(): zyraxoncode.TerminalShellExecutionCommandLine {
 				return that._commandLine;
 			},
 			get cwd(): URI | undefined {
@@ -413,7 +413,7 @@ class InternalTerminalShellExecution {
 		}
 	}
 
-	endExecution(commandLine: vscode.TerminalShellExecutionCommandLine | undefined): void {
+	endExecution(commandLine: zyraxoncode.TerminalShellExecutionCommandLine | undefined): void {
 		if (commandLine) {
 			this._commandLine = commandLine;
 		}
@@ -475,7 +475,7 @@ function splitAndSanitizeCommandLine(commandLine: string): string[] {
  * a comment followed by a command, this needs to all be tracked under a single
  * execution.
  */
-function isSubExecution(unresolvedCommandLines: string[], commandLine: vscode.TerminalShellExecutionCommandLine): { unresolvedCommandLines: string[] } | false {
+function isSubExecution(unresolvedCommandLines: string[], commandLine: zyraxoncode.TerminalShellExecutionCommandLine): { unresolvedCommandLines: string[] } | false {
 	if (unresolvedCommandLines.length === 0) {
 		return false;
 	}

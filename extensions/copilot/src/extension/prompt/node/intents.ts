@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { MetadataMap, Raw, RenderPromptResult } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { MetadataMap, Raw, RenderPromptResult } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatLocation, ChatResponse } from '../../../platform/chat/common/commonTypes';
 import { PositionOffsetTransformer } from '../../../platform/editing/common/positionOffsetTransformer';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { AsyncIterableObject, AsyncIterableSource } from '../../../util/vs/base/common/async';
 import { CancellationToken } from '../../../util/vs/base/common/cancellation';
-import { TextEdit } from '../../../vscodeTypes';
+import { TextEdit } from '../../../zyraxoncodeTypes';
 import { ISessionTurnStorage, OutcomeAnnotation } from '../../inlineChat/node/promptCraftingTypes';
 import { IContributedLinkifierFactory } from '../../linkify/common/linkifyService';
 import { StreamPipe, forEachStreamed } from '../../prompts/node/inline/utils/streaming';
@@ -45,9 +45,9 @@ export interface IIntentInvocationContext {
 	 */
 	readonly documentContext?: IDocumentContext;
 
-	readonly request: vscode.ChatRequest;
+	readonly request: zyraxoncode.ChatRequest;
 
-	readonly slashCommand?: vscode.ChatCommand;
+	readonly slashCommand?: zyraxoncode.ChatCommand;
 }
 
 export interface IIntent {
@@ -91,15 +91,15 @@ export interface IIntent {
 	 */
 	handleRequest?(
 		conversation: Conversation,
-		request: vscode.ChatRequest,
-		stream: vscode.ChatResponseStream,
+		request: zyraxoncode.ChatRequest,
+		stream: zyraxoncode.ChatResponseStream,
 		token: CancellationToken,
 		documentContext: IDocumentContext | undefined,
 		agentName: string,
 		location: ChatLocation,
 		chatTelemetry: ChatTelemetryBuilder,
 		yieldRequested: () => boolean,
-	): Promise<vscode.ChatResult>;
+	): Promise<zyraxoncode.ChatResult>;
 }
 
 
@@ -110,10 +110,10 @@ export interface IIntent {
  * note: this is only treated specially in stests at the moment
  */
 export class IntentError extends Error {
-	public readonly errorDetails: vscode.ChatErrorDetails;
+	public readonly errorDetails: zyraxoncode.ChatErrorDetails;
 
 	constructor(
-		error: string | vscode.ChatErrorDetails,
+		error: string | zyraxoncode.ChatErrorDetails,
 	) {
 		super(typeof error === 'string' ? error : error.message);
 		this.errorDetails = typeof error === 'string' ? { message: error } : error;
@@ -183,15 +183,15 @@ export interface IIntentInvocation extends Partial<IResponseProcessor> {
 	 * provided, the default {@link IToolsService.getEnabledTools} will be used
 	 * with no specific filter.
 	 */
-	getAvailableTools?(): vscode.LanguageModelToolInformation[] | Promise<vscode.LanguageModelToolInformation[]> | undefined;
+	getAvailableTools?(): zyraxoncode.LanguageModelToolInformation[] | Promise<zyraxoncode.LanguageModelToolInformation[]> | undefined;
 
 	/**
 	 * Build the prompt which is a system and different user messages.
 	 */
 	buildPrompt(
 		context: IBuildPromptContext,
-		progress: vscode.Progress<vscode.ChatResponseReferencePart | vscode.ChatResponseProgressPart>,
-		token: vscode.CancellationToken
+		progress: zyraxoncode.Progress<zyraxoncode.ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart>,
+		token: zyraxoncode.CancellationToken
 	): Promise<IBuildPromptResult>;
 
 	/**
@@ -199,13 +199,13 @@ export interface IIntentInvocation extends Partial<IResponseProcessor> {
 	 *
 	 * Called when a request with confirmation data is made, and handles the request. The PromptCrafter/ResponseProcessor will not be called in this scenario.
 	 */
-	confirmationHandler?(acceptedConfirmationData: any[] | undefined, rejectedConfirmationData: any[] | undefined, progress: vscode.ChatResponseStream): Promise<void>;
+	confirmationHandler?(acceptedConfirmationData: any[] | undefined, rejectedConfirmationData: any[] | undefined, progress: zyraxoncode.ChatResponseStream): Promise<void>;
 
 	readonly linkification?: IntentLinkificationOptions;
 
 	readonly codeblocksRepresentEdits?: boolean;
 
-	modifyErrorDetails?(errorDetails: vscode.ChatErrorDetails, response: ChatResponse): vscode.ChatErrorDetails;
+	modifyErrorDetails?(errorDetails: zyraxoncode.ChatErrorDetails, response: ChatResponse): zyraxoncode.ChatErrorDetails;
 
 	getAdditionalVariables?(context: IBuildPromptContext): ChatVariablesCollection | undefined;
 }
@@ -265,7 +265,7 @@ export interface IResponseProcessor {
 	 * @param outputStream The stream to report the processed response to the user
 	 * @param token A cancellation token
 	 */
-	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<vscode.ChatResult | void>;
+	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<zyraxoncode.ChatResult | void>;
 }
 
 export class ReplyInterpreterMetaData extends PromptMetadata {
@@ -275,11 +275,11 @@ export class ReplyInterpreterMetaData extends PromptMetadata {
 }
 
 export interface ReplyInterpreter {
-	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void>;
+	processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void>;
 }
 
 export class StreamingMarkdownReplyInterpreter implements ReplyInterpreter {
-	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		for await (const part of inputStream) {
 			outputStream.markdown(part.delta.text);
 		}
@@ -333,7 +333,7 @@ export class StreamingEditsController {
 	private _streamingPromise: Promise<StreamingEditsResult>;
 
 	constructor(
-		private readonly _outputStream: vscode.ChatResponseStream,
+		private readonly _outputStream: zyraxoncode.ChatResponseStream,
 		private readonly _leadingMarkdownStreamPipe: StreamPipe<string>,
 		private readonly _earlyStopping: EarlyStopping,
 		textPieceClassifier: IStreamingTextPieceClassifier,

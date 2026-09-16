@@ -32,10 +32,10 @@ Implement as a single atomic PR on top of the Phase 1 commit.
 
 ## Step 0 — `package.json`
 
-**File:** `/package.json` line ~92 (after `@vscode/sandbox-runtime`)
+**File:** `/package.json` line ~92 (after `@zyraxoncode/sandbox-runtime`)
 
 ```diff
-  "@vscode/sandbox-runtime": "0.0.1",
+  "@zyraxoncode/sandbox-runtime": "0.0.1",
 + "@anthropic-ai/sdk": "^0.82.0",
 ```
 
@@ -605,6 +605,6 @@ scripts/test.sh --grep copilotApiService
 
 - **`messagesText()` was YAGNI.** No downstream phase in the roadmap consumes a text-only streaming API. This is a greenfield service with no backcompat obligations. Cut it rather than carry dead surface area. If a future caller needs text-only streaming, filtering `messages()` output is trivial.
 
-- **`@vscode/copilot-api` ambient typings must avoid `any`.** The package uses extensionless relative imports incompatible with `moduleResolution: "nodenext"`, requiring ambient declarations in `src/typings/copilot-api.d.ts`. The original declarations used `json?: any` and `Promise<any>` — replaced with `unknown` per project coding guidelines.
+- **`@zyraxoncode/copilot-api` ambient typings must avoid `any`.** The package uses extensionless relative imports incompatible with `moduleResolution: "nodenext"`, requiring ambient declarations in `src/typings/copilot-api.d.ts`. The original declarations used `json?: any` and `Promise<any>` — replaced with `unknown` per project coding guidelines.
 
 - **Use `Iterable.asyncToArray` from `base/common/iterator` instead of a local `collect<T>` helper.** The codebase already has this utility; no need to duplicate it in tests.

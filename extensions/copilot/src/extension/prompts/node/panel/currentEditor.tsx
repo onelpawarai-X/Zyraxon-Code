@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing, UserMessage } from '@vscode/prompt-tsx';
-import type { NotebookEditor, TextEditor } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptSizing, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { NotebookEditor, TextEditor } from 'zyraxoncode';
 import { NotebookDocumentSnapshot } from '../../../../platform/editing/common/notebookDocumentSnapshot';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { IAlternativeNotebookContentService } from '../../../../platform/notebook/common/alternativeContent';
@@ -13,7 +13,7 @@ import { IWorkspaceService } from '../../../../platform/workspace/common/workspa
 import { findCell, findNotebook } from '../../../../util/common/notebooks';
 import { Schemas } from '../../../../util/vs/base/common/network';
 import * as path from '../../../../util/vs/base/common/path';
-import { Position, Range } from '../../../../vscodeTypes';
+import { Position, Range } from '../../../../zyraxoncodeTypes';
 import { PromptReference } from '../../../prompt/common/conversation';
 import { IPromptEndpoint } from '../base/promptRenderer';
 import { CodeBlock } from './safeElements';
@@ -38,7 +38,7 @@ export class CurrentEditor extends PromptElement<CurrentEditorPromptProps> {
 		if (editor) {
 			// TODO@DonJayamanne, need to figure out places relying on this and how its used.
 			// E.g. if problems were using this, then we need to translate positions in problems as well, & the like.
-			// return editor.document.uri.scheme === Schemas.vscodeNotebookCell ?
+			// return editor.document.uri.scheme === Schemas.zyraxoncodeNotebookCell ?
 			// 	this.renderActiveNotebookCellEditor(editor) :
 			// 	this.renderActiveTextEditor(editor);
 			return this.renderActiveTextEditor(editor);
@@ -89,7 +89,7 @@ export class CurrentEditor extends PromptElement<CurrentEditorPromptProps> {
 	}
 
 	async renderActiveNotebookCellEditor(editor: TextEditor) {
-		if (editor.document.uri.scheme !== Schemas.vscodeNotebookCell) {
+		if (editor.document.uri.scheme !== Schemas.zyraxoncodeNotebookCell) {
 			return;
 		}
 		const notebook = findNotebook(editor.document.uri, this._workspaceService.notebookDocuments);

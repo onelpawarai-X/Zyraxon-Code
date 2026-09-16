@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { validate, isStyleSheet } from './util';
 import { nextItemHTML, prevItemHTML } from './selectItemHTML';
 import { nextItemStylesheet, prevItemStylesheet } from './selectItemStylesheet';
@@ -11,17 +11,17 @@ import { HtmlNode, CssNode } from 'EmmetFlatNode';
 import { getRootNode } from './parseDocument';
 
 export function fetchSelectItem(direction: string): void {
-	if (!validate() || !vscode.window.activeTextEditor) {
+	if (!validate() || !zyraxoncode.window.activeTextEditor) {
 		return;
 	}
-	const editor = vscode.window.activeTextEditor;
+	const editor = zyraxoncode.window.activeTextEditor;
 	const document = editor.document;
 	const rootNode = getRootNode(document, true);
 	if (!rootNode) {
 		return;
 	}
 
-	const newSelections: vscode.Selection[] = [];
+	const newSelections: zyraxoncode.Selection[] = [];
 	editor.selections.forEach(selection => {
 		const selectionStart = selection.isReversed ? selection.active : selection.anchor;
 		const selectionEnd = selection.isReversed ? selection.anchor : selection.active;

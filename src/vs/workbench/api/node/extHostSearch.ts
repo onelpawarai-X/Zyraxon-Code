@@ -19,7 +19,7 @@ import { SearchService } from '../../services/search/node/rawSearchService.js';
 import { RipgrepSearchProvider } from '../../services/search/node/ripgrepSearchProvider.js';
 import { OutputChannel } from '../../services/search/node/ripgrepSearchUtils.js';
 import { NativeTextSearchManager } from '../../services/search/node/textSearchManager.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 
 export class NativeExtHostSearch extends ExtHostSearch implements IDisposable {
 
@@ -48,7 +48,7 @@ export class NativeExtHostSearch extends ExtHostSearch implements IDisposable {
 		this.getNumThreadsCached = this.getNumThreadsCached.bind(this);
 		this.handleConfigurationChanged = this.handleConfigurationChanged.bind(this);
 		const outputChannel = new OutputChannel('RipgrepSearchUD', this._logService);
-		this._disposables.add(this.registerTextSearchProvider(Schemas.vscodeUserData, new RipgrepSearchProvider(outputChannel, this.getNumThreadsCached)));
+		this._disposables.add(this.registerTextSearchProvider(Schemas.zyraxoncodeUserData, new RipgrepSearchProvider(outputChannel, this.getNumThreadsCached)));
 		if (initData.remote.isRemote && initData.remote.authority) {
 			this._registerEHSearchProviders();
 		}
@@ -61,7 +61,7 @@ export class NativeExtHostSearch extends ExtHostSearch implements IDisposable {
 		});
 	}
 
-	private handleConfigurationChanged(event: vscode.ConfigurationChangeEvent) {
+	private handleConfigurationChanged(event: zyraxoncode.ConfigurationChangeEvent) {
 		if (!event.affectsConfiguration('search')) {
 			return;
 		}
@@ -112,7 +112,7 @@ export class NativeExtHostSearch extends ExtHostSearch implements IDisposable {
 		});
 	}
 
-	override $provideFileSearchResults(handle: number, session: number, rawQuery: IRawFileQuery, token: vscode.CancellationToken): Promise<ISearchCompleteStats> {
+	override $provideFileSearchResults(handle: number, session: number, rawQuery: IRawFileQuery, token: zyraxoncode.CancellationToken): Promise<ISearchCompleteStats> {
 		const query = reviveQuery(rawQuery);
 		if (handle === this._internalFileSearchHandle) {
 			const start = Date.now();
@@ -126,7 +126,7 @@ export class NativeExtHostSearch extends ExtHostSearch implements IDisposable {
 		return super.$provideFileSearchResults(handle, session, rawQuery, token);
 	}
 
-	override async doInternalFileSearchWithCustomCallback(rawQuery: IFileQuery, token: vscode.CancellationToken, handleFileMatch: (data: URI[]) => void): Promise<ISearchCompleteStats> {
+	override async doInternalFileSearchWithCustomCallback(rawQuery: IFileQuery, token: zyraxoncode.CancellationToken, handleFileMatch: (data: URI[]) => void): Promise<ISearchCompleteStats> {
 		const onResult = (ev: ISerializedSearchProgressItem) => {
 			if (isSerializedFileMatch(ev)) {
 				ev = [ev];
@@ -149,7 +149,7 @@ export class NativeExtHostSearch extends ExtHostSearch implements IDisposable {
 		return <Promise<ISearchCompleteStats>>this._internalFileSearchProvider.doFileSearch(rawQuery, numThreads, onResult, token);
 	}
 
-	private async doInternalFileSearch(handle: number, session: number, rawQuery: IFileQuery, token: vscode.CancellationToken): Promise<ISearchCompleteStats> {
+	private async doInternalFileSearch(handle: number, session: number, rawQuery: IFileQuery, token: zyraxoncode.CancellationToken): Promise<ISearchCompleteStats> {
 		return this.doInternalFileSearchWithCustomCallback(rawQuery, token, (data) => {
 			this._proxy.$handleFileMatch(handle, session, data);
 		});
@@ -161,7 +161,7 @@ export class NativeExtHostSearch extends ExtHostSearch implements IDisposable {
 		return super.$clearCache(cacheKey);
 	}
 
-	protected override createTextSearchManager(query: ITextQuery, provider: vscode.TextSearchProvider2): TextSearchManager {
+	protected override createTextSearchManager(query: ITextQuery, provider: zyraxoncode.TextSearchProvider2): TextSearchManager {
 		return new NativeTextSearchManager(query, provider, undefined, 'textSearchProvider');
 	}
 }

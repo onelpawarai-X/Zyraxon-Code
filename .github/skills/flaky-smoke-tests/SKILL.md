@@ -7,7 +7,7 @@ description: Diagnose intermittent ZYRAXON Code Electron smoke-test failures fro
 
 Use this skill for failures from the Azure DevOps **Flaky Smoke Tests** pipeline:
 
-- Organization: `https://dev.azure.com/monacotools`
+- Organization: `__ZYRAXKEEP__0_`
 - Project: `Monaco`
 - Definition ID: `700`
 - Pipeline YAML: `build/azure-pipelines/product-smoke-flaky.yml`
@@ -62,7 +62,7 @@ Use Azure CLI rather than the browser:
 az --version
 az extension show --name azure-devops
 az devops configure --defaults \
-  organization=https://dev.azure.com/monacotools \
+  organization=__ZYRAXKEEP__1_ \
   project=Monaco
 ```
 
@@ -73,7 +73,7 @@ If authentication fails, run `az login`.
 ```bash
 az pipelines build show \
   --id <BUILD_ID> \
-  --org https://dev.azure.com/monacotools \
+  --org __ZYRAXKEEP__2_ \
   --project Monaco \
   --query "{id:id,status:status,result:result,sourceBranch:sourceBranch,sourceVersion:sourceVersion,templateParameters:templateParameters}" \
   --output json
@@ -88,7 +88,7 @@ Download the build timeline:
 
 ```bash
 az devops invoke \
-  --org https://dev.azure.com/monacotools \
+  --org __ZYRAXKEEP__3_ \
   --area build \
   --resource timeline \
   --route-parameters project=Monaco buildId=<BUILD_ID> \
@@ -111,7 +111,7 @@ If the user supplied an Azure log URL, its `j=` value is the job ID and its
 
 ```bash
 az devops invoke \
-  --org https://dev.azure.com/monacotools \
+  --org __ZYRAXKEEP__4_ \
   --area build \
   --resource timeline \
   --route-parameters project=Monaco buildId=<BUILD_ID> \
@@ -126,7 +126,7 @@ Use timeline record `log.id`. The correct REST resource is `logs`, not
 
 ```bash
 az devops invoke \
-  --org https://dev.azure.com/monacotools \
+  --org __ZYRAXKEEP__5_ \
   --area build \
   --resource logs \
   --route-parameters project=Monaco buildId=<BUILD_ID> logId=<LOG_ID> \
@@ -162,7 +162,7 @@ List artifacts first; names include the job attempt:
 ```bash
 az pipelines runs artifact list \
   --run-id <BUILD_ID> \
-  --org https://dev.azure.com/monacotools \
+  --org __ZYRAXKEEP__6_ \
   --project Monaco \
   --output table
 ```
@@ -174,7 +174,7 @@ az pipelines runs artifact download \
   --run-id <BUILD_ID> \
   --artifact-name <LOGS_ARTIFACT> \
   --path <DESTINATION> \
-  --org https://dev.azure.com/monacotools \
+  --org __ZYRAXKEEP__7_ \
   --project Monaco
 ```
 
@@ -255,7 +255,7 @@ Session-list text and active-view text answer different questions:
 - Standard smoke suites created through `installAllHandlers` use distinct
   randomized user-data directories. Do not attribute a setting from the
   preceding suite to the failing suite without comparing the actual
-  `vscode-userdata:` or `--user-data-dir` paths in their logs. Iterations share
+  `zyraxoncode-userdata:` or `--user-data-dir` paths in their logs. Iterations share
   broader job state, but sibling suites normally do not share the same profile.
 - A setup change can alter rather than fix the symptom. Re-check the exact
   stack and the gesture/dispatch/request/rendering chain on every validation
@@ -298,7 +298,7 @@ and the pipeline evidence matches it.
 
 ## 8. Queue a Focused Validation Run
 
-The branch and commit must already be pushed to `microsoft/zyraxon`. Check for
+The branch and commit must already be pushed to `zyraxon/zyraxon`. Check for
 and cancel obsolete definition-700 runs on the same branch before queueing.
 
 Use `az pipelines run` directly because `iterations` is an object parameter:
@@ -312,7 +312,7 @@ az pipelines run \
     VSCODE_BUILD_MACOS=true \
     VSCODE_BUILD_LINUX=false \
     VSCODE_BUILD_WIN32=true \
-  --org https://dev.azure.com/monacotools \
+  --org __ZYRAXKEEP__8_ \
   --project Monaco \
   --output json
 ```

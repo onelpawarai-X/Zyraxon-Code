@@ -12,7 +12,7 @@ export interface PackageJSONShape {
 	publisher: string;
 	name: string;
 	engines: {
-		vscode: string;
+		zyraxoncode: string;
 	};
 	contributes: {
 		configuration: {
@@ -46,4 +46,4 @@ declare const require: any; // TODO@bpasero we need package.json support in web 
 export const packageJson: PackageJSONShape = require('../../../../package.json');
 export const isProduction = (packageJson.buildType !== 'dev');
 export const isPreRelease = (packageJson.isPreRelease || !isProduction);
-export const vscodeEngineVersion = packageJson.engines.vscode;
+export const zyraxoncodeEngineVersion = packageJson.engines.zyraxoncode;

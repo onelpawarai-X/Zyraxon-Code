@@ -19,7 +19,7 @@ import { IsAgentHostSession } from './agentHostSkillButtons.js';
  * Copilot CLI session, then defers to the shared workbench helper for
  * the actual resolution and editor opening.
  *
- * The vscode workbench registers a separate action class
+ * The zyraxoncode workbench registers a separate action class
  * (`OpenCopilotCliStateFileAction` in
  * `workbench/contrib/chat/browser/actions/openCopilotCliStateFileAction.ts`)
  * that resolves the session resource via `IChatWidgetService` instead.

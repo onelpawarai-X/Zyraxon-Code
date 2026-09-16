@@ -237,7 +237,7 @@ export class VariableCompletionHandler extends Disposable {
 		}
 
 		// SEARCH — always run to populate initial results (empty pattern returns scored files)
-		if (workspaceUri.scheme === Schemas.file || workspaceUri.scheme === Schemas.vscodeRemote) {
+		if (workspaceUri.scheme === Schemas.file || workspaceUri.scheme === Schemas.zyraxoncodeRemote) {
 			await this._addEntriesViaSearch(workspaceUri, pattern, seen, makeItem, result, token);
 		} else {
 			await this._addEntriesViaFileService(workspaceUri, pattern, seen, makeItem, result, token);
@@ -245,7 +245,7 @@ export class VariableCompletionHandler extends Disposable {
 	}
 
 	/**
-	 * Uses the search service to find files/folders — works for `file://` and `vscodeRemote` schemes.
+	 * Uses the search service to find files/folders — works for `file://` and `zyraxoncodeRemote` schemes.
 	 */
 	private async _addEntriesViaSearch(
 		workspaceUri: URI,

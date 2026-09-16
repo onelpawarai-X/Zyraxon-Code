@@ -43,7 +43,7 @@ const AUTO_CONNECT_SUPPRESSED_TUNNELS_KEY = 'tunnelAgentHost.autoConnectSuppress
  * - **Discovery**: listing available agent host tunnels
  * - **Relay address**: obtaining the WebSocket proxy URL for connecting
  *
- * This decouples ZYRAXON Code core from any specific embedder (vscode.dev,
+ * This decouples ZYRAXON Code core from any specific embedder (zyraxoncode.dev,
  * github.dev, etc.). The embedder handles the actual Dev Tunnels API
  * calls and relay proxying.
  */
@@ -160,7 +160,7 @@ export class WebTunnelAgentHostService extends Disposable implements ITunnelAgen
 
 		// Keep an incompatible handshake from tearing down the relay: the
 		// protocol client must remain registered with IRemoteAgentHostService
-		// so `triggerServerUpgrade` can locate it and send `_vscodeUpgrade`
+		// so `triggerServerUpgrade` can locate it and send `_zyraxoncodeUpgrade`
 		// over the still-open transport.
 		let status: RemoteAgentHostConnectionStatus = RemoteAgentHostConnectionStatus.connected;
 		let connectError: unknown;

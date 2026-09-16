@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { VsCodeTextDocument } from '../../../../platform/editing/common/abstractText';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { ILanguageFeaturesService, isLocationLink } from '../../../../platform/languages/common/languageFeaturesService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { getStructureUsingIndentation } from '../../../../platform/parser/node/indentationStructure';
 import { TreeSitterExpressionInfo } from '../../../../platform/parser/node/nodes';
-import { IParserService, ParserWorkerTimeoutError, vscodeToTreeSitterOffsetRange } from '../../../../platform/parser/node/parserService';
+import { IParserService, ParserWorkerTimeoutError, zyraxoncodeToTreeSitterOffsetRange } from '../../../../platform/parser/node/parserService';
 import { TreeSitterUnknownLanguageError } from '../../../../platform/parser/node/treeSitterLanguages';
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
@@ -26,7 +26,7 @@ export async function findAllReferencedFunctionImplementationsInSelection(
 	languageFeaturesService: ILanguageFeaturesService,
 	workspaceService: IWorkspaceService,
 	document: TextDocumentSnapshot,
-	selection: vscode.Range,
+	selection: zyraxoncode.Range,
 	timeoutMs: number
 ) {
 	const currentDocAST = parserService.getTreeSitterAST(document);
@@ -35,7 +35,7 @@ export async function findAllReferencedFunctionImplementationsInSelection(
 	}
 
 	// Parse all function calls in given selection
-	const treeSitterOffsetRange = vscodeToTreeSitterOffsetRange(selection, document);
+	const treeSitterOffsetRange = zyraxoncodeToTreeSitterOffsetRange(selection, document);
 	const callExprs = await asyncComputeWithTimeBudget(logService, telemetryService, document, timeoutMs, () => currentDocAST.getCallExpressions(treeSitterOffsetRange), []);
 
 	// find implementation or, if not found, definition for a call expression
@@ -74,7 +74,7 @@ export async function findAllReferencedFunctionImplementationsInSelection(
 				const functionDefinitions = await treeSitterAST.getFunctionDefinitions(); // TODO: we should do this once per document, not once per call expression
 				const functionDefinition = functionDefinitions.find((fn) => fn.identifier === callExpr.identifier); // FIXME: this's incorrect because it doesn't count for import aliases (e.g., `import { foo as bar } from 'baz'`)
 				if (functionDefinition) {
-					const treeSitterRange = vscodeToTreeSitterOffsetRange(range, textDocument);
+					const treeSitterRange = zyraxoncodeToTreeSitterOffsetRange(range, textDocument);
 					functionImplementations.push({
 						uri,
 						range,
@@ -116,7 +116,7 @@ export async function findAllReferencedClassDeclarationsInSelection(
 	languageFeaturesService: ILanguageFeaturesService,
 	workspaceService: IWorkspaceService,
 	document: TextDocumentSnapshot,
-	selection: vscode.Range,
+	selection: zyraxoncode.Range,
 	timeoutMs: number
 ) {
 	const currentDocAST = parserService.getTreeSitterAST(document);
@@ -125,7 +125,7 @@ export async function findAllReferencedClassDeclarationsInSelection(
 	}
 
 	// Parse all new expressions in active selection
-	const treeSitterOffsetRange = vscodeToTreeSitterOffsetRange(selection, document);
+	const treeSitterOffsetRange = zyraxoncodeToTreeSitterOffsetRange(selection, document);
 	const matches = await asyncComputeWithTimeBudget(logService, telemetryService, document, timeoutMs, () => currentDocAST.getClassReferences(treeSitterOffsetRange), []);
 
 	const implementations = await asyncComputeWithTimeBudget(
@@ -158,7 +158,7 @@ export async function findAllReferencedClassDeclarationsInSelection(
 			if (treeSitterAST) {
 				const classDeclaration = (await treeSitterAST.getClassDeclarations()).find((fn) => fn.identifier === match.identifier);
 				if (classDeclaration) {
-					const treeSitterRange = vscodeToTreeSitterOffsetRange(range, textDocument);
+					const treeSitterRange = zyraxoncodeToTreeSitterOffsetRange(range, textDocument);
 					classDeclarations.push({
 						uri,
 						range,
@@ -200,7 +200,7 @@ export async function findAllReferencedTypeDeclarationsInSelection(
 	_languageFeaturesService: ILanguageFeaturesService,
 	_workspaceService: IWorkspaceService,
 	document: TextDocumentSnapshot,
-	selection: vscode.Range,
+	selection: zyraxoncode.Range,
 	timeoutMs: number
 ) {
 	const currentDocAST = parserService.getTreeSitterAST(document);
@@ -209,7 +209,7 @@ export async function findAllReferencedTypeDeclarationsInSelection(
 	}
 
 	// Parse all type references in active selection
-	const treeSitterOffsetRange = vscodeToTreeSitterOffsetRange(selection, document);
+	const treeSitterOffsetRange = zyraxoncodeToTreeSitterOffsetRange(selection, document);
 	const matches = await asyncComputeWithTimeBudget(logService, telemetryService, document, timeoutMs, () => currentDocAST.getTypeReferences(treeSitterOffsetRange), []);
 
 	// For now, just search the current file for all type declarations
@@ -320,7 +320,7 @@ export class FilePathCodeMarker {
 		return this.forUri(language, document.uri);
 	}
 
-	public static forUri(language: ILanguage, uri: vscode.Uri): string {
+	public static forUri(language: ILanguage, uri: zyraxoncode.Uri): string {
 		return `${this.forLanguage(language)}: ${uri.path}`;
 	}
 
@@ -338,7 +338,7 @@ export class FilePathCodeMarker {
 
 }
 
-export async function getStructure(parserService: IParserService, document: TextDocumentSnapshot, formattingOptions: vscode.FormattingOptions | undefined) {
+export async function getStructure(parserService: IParserService, document: TextDocumentSnapshot, formattingOptions: zyraxoncode.FormattingOptions | undefined) {
 	const currentDocAST = parserService.getTreeSitterAST(document);
 	if (currentDocAST) {
 		try {

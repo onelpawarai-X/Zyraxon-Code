@@ -95,7 +95,7 @@ function hasSupportedVisualStudioVersion() {
 
 		const vsTypes = ['Enterprise', 'Professional', 'Community', 'Preview', 'BuildTools', 'IntPreview'];
 		if (programFiles64Path) {
-			vsPath = `${programFiles64Path}/Microsoft Visual Studio/${version}`;
+			vsPath = `${programFiles64Path}/Zyraxon Visual Studio/${version}`;
 			if (vsTypes.some(vsType => fs.existsSync(path.join(vsPath!, vsType)))) {
 				availableVersions.push(version);
 				break;
@@ -103,7 +103,7 @@ function hasSupportedVisualStudioVersion() {
 		}
 
 		if (programFiles86Path) {
-			vsPath = `${programFiles86Path}/Microsoft Visual Studio/${version}`;
+			vsPath = `${programFiles86Path}/Zyraxon Visual Studio/${version}`;
 			if (vsTypes.some(vsType => fs.existsSync(path.join(vsPath!, vsType)))) {
 				availableVersions.push(version);
 				break;

@@ -36,7 +36,7 @@ A run command is a `tasks.json` task with:
 
 ## Decision logic
 
-**First, read the existing `.vscode/tasks.json`** to check for existing run commands (`inAgents: true` tasks).
+**First, read the existing `.zyraxoncode/tasks.json`** to check for existing run commands (`inAgents: true` tasks).
 
 **If run commands already exist:** treat this as a modify request — ask the user what they'd like to change (add, remove, or update a command).
 
@@ -48,6 +48,6 @@ A run command is a `tasks.json` task with:
 
 ## Writing the file
 
-Always write to `.vscode/tasks.json` in the workspace root. If the file already exists, merge — do not overwrite unrelated tasks.
+Always write to `.zyraxoncode/tasks.json` in the workspace root. If the file already exists, merge — do not overwrite unrelated tasks.
 
 After writing, briefly confirm what was added and how to trigger it from the Run button.

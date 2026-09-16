@@ -59,7 +59,7 @@ interface ICreatedWorktree {
 
 /**
  * The `<repo>.worktrees` sibling directory where per-session isolated
- * worktrees are created, e.g. `/src/vscode` → `/src/vscode.worktrees`.
+ * worktrees are created, e.g. `/src/zyraxoncode` → `/src/zyraxoncode.worktrees`.
  */
 export function getWorktreesRoot(repositoryRoot: URI): URI {
 	return URI.joinPath(repositoryRoot, '..', `${basename(repositoryRoot.fsPath)}.worktrees`);
@@ -867,7 +867,7 @@ export class WorktreeIsolation extends Disposable {
 	 * Resolves the repository "project" for a worktree-isolated session from its
 	 * persisted worktree metadata. Worktree sessions run out of a
 	 * `<repo>.worktrees/<name>` directory, but in the sessions UI they must group
-	 * under the *repository* (e.g. `vscode`) — not the worktree folder — exactly
+	 * under the *repository* (e.g. `zyraxoncode`) — not the worktree folder — exactly
 	 * like Copilot. Returns the repository root as the project so agents can merge
 	 * it into the `project` field of the `IAgentSessionMetadata` reported from
 	 * `listSessions` / `getSessionMetadata`; without it a list refresh clears the

@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { IChatMLFetcher } from '../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatResponse } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
@@ -56,7 +56,7 @@ export function isBYOKModel(endpoint: IChatEndpoint | undefined): number {
 
 export class OpenAIEndpoint extends ChatEndpoint {
 	// Reserved headers that cannot be overridden for security and functionality reasons
-	// Including forbidden request headers: https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_request_header
+	// Including forbidden request headers: __ZYRAXKEEP__0_
 	private static readonly _reservedHeaders: ReadonlySet<string> = new Set([
 		// Forbidden Request Headers
 		'accept-charset',
@@ -96,7 +96,7 @@ export class OpenAIEndpoint extends ChatEndpoint {
 		'x-interaction-type',
 		'x-onbehalf-extension-id',
 		'x-request-id',
-		'x-vscode-user-agent-library-version',
+		'x-zyraxoncode-user-agent-library-version',
 		// Pattern-based forbidden headers are checked separately:
 		// - 'proxy-*' headers (handled in sanitization logic)
 		// - 'sec-*' headers (handled in sanitization logic)

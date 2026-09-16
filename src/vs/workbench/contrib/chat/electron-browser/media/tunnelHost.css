@@ -12,8 +12,8 @@
 	height: 22px;
 	padding: 0;
 	cursor: pointer;
-	color: var(--vscode-icon-foreground);
-	border-radius: var(--vscode-cornerRadius-small);
+	color: var(--zyraxoncode-icon-foreground);
+	border-radius: var(--zyraxoncode-cornerRadius-small);
 }
 
 .tunnel-host-toggle:has(.tunnel-host-toast.visible) {
@@ -23,11 +23,11 @@
 }
 
 .tunnel-host-toggle:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .tunnel-host-toggle:focus-visible {
-	outline: var(--vscode-strokeThickness) solid var(--vscode-focusBorder);
+	outline: var(--zyraxoncode-strokeThickness) solid var(--zyraxoncode-focusBorder);
 	outline-offset: -1px;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .tunnel-host-toggle.sharing .tunnel-host-icon .codicon {
-	color: var(--vscode-focusBorder) !important;
+	color: var(--zyraxoncode-focusBorder) !important;
 }
 
 .tunnel-host-toggle.connecting .tunnel-host-icon .codicon {
@@ -64,7 +64,7 @@
 	overflow: hidden;
 	white-space: nowrap;
 	opacity: 0;
-	font-size: var(--vscode-agents-fontSize-label2, 11px);
+	font-size: var(--zyraxoncode-agents-fontSize-label2, 11px);
 	transition: max-width 0.3s ease-out, opacity 0.3s ease-out;
 }
 

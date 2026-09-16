@@ -116,7 +116,7 @@ interface IPathResolveOptions {
 
 	/**
 	 * The remoteAuthority to use if the URL to open is
-	 * neither `file` nor `vscode-remote`.
+	 * neither `file` nor `zyraxoncode-remote`.
 	 */
 	readonly remoteAuthority?: string;
 }
@@ -304,7 +304,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 		// folder-resolve.
 		if (windows.length > 0) {
 			const openSource = source ?? (openConfig.cli.agents ? AgentsWindowOpenSource.CommandLine : AgentsWindowOpenSource.Unknown);
-			windows[0].sendWhenReady('vscode:selectAgentsFolder', CancellationToken.None, folderUri?.toJSON(), sessionResource?.toJSON(), openSource);
+			windows[0].sendWhenReady('zyraxoncode:selectAgentsFolder', CancellationToken.None, folderUri?.toJSON(), sessionResource?.toJSON(), openSource);
 		}
 
 		return windows;
@@ -534,7 +534,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 		}
 
 		if (windowHandlingChatRequest) {
-			windowHandlingChatRequest.sendWhenReady('vscode:handleChatRequest', CancellationToken.None, openConfig.cli.chat);
+			windowHandlingChatRequest.sendWhenReady('zyraxoncode:handleChatRequest', CancellationToken.None, openConfig.cli.chat);
 			windowHandlingChatRequest.focus();
 		}
 	}
@@ -739,7 +739,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 			filesToWait: filesToOpen?.filesToWait,
 			termProgram: configuration?.userEnv?.['TERM_PROGRAM']
 		};
-		window.sendWhenReady('vscode:openFiles', CancellationToken.None, params);
+		window.sendWhenReady('zyraxoncode:openFiles', CancellationToken.None, params);
 
 		return window;
 	}
@@ -764,7 +764,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 		window.focus(); // make sure window has focus
 
 		const request: IAddRemoveFoldersRequest = { foldersToAdd, foldersToRemove };
-		window.sendWhenReady('vscode:addRemoveFolders', CancellationToken.None, request);
+		window.sendWhenReady('zyraxoncode:addRemoveFolders', CancellationToken.None, request);
 
 		return window;
 	}
@@ -941,7 +941,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 			forceOpenWorkspaceAsFile:
 				// special case diff / merge mode to force open
 				// workspace as file
-				// https://github.com/microsoft/vscode/issues/149731
+				// __ZYRAXKEEP__0_
 				cli.diff && cli._.length === 2 ||
 				cli.merge && cli._.length === 4
 		};
@@ -1036,7 +1036,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 
 					// Workspaces
 					if (lastSessionWindow.workspace) {
-						const pathToOpen = await this.resolveOpenable({ workspaceUri: lastSessionWindow.workspace.configPath }, { remoteAuthority: lastSessionWindow.remoteAuthority, rejectTransientWorkspaces: true /* https://github.com/microsoft/vscode/issues/119695 */ });
+						const pathToOpen = await this.resolveOpenable({ workspaceUri: lastSessionWindow.workspace.configPath }, { remoteAuthority: lastSessionWindow.remoteAuthority, rejectTransientWorkspaces: true /* __ZYRAXKEEP__1_ */ });
 						if (isWorkspacePathToOpen(pathToOpen)) {
 							return pathToOpen;
 						}
@@ -1122,7 +1122,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 	private doResolveRemoteOpenable(openable: IWindowOpenable, options: IPathResolveOptions): IPathToOpen<ITextEditorOptions> | undefined {
 		let uri = this.resourceFromOpenable(openable);
 
-		// use remote authority from vscode
+		// use remote authority from zyraxoncode
 		const remoteAuthority = getRemoteAuthority(uri) || options.remoteAuthority;
 
 		// normalize URI
@@ -1281,11 +1281,11 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 			addUNCHostToAllowlist(uri.authority);
 
 			if (checkboxChecked) {
-				// Due to https://github.com/microsoft/vscode/issues/195436, we can only
+				// Due to __ZYRAXKEEP__2_ we can only
 				// update settings from within a window. But we do not know if a window
 				// is about to open or can already handle the request, so we have to send
 				// to any current window and any newly opening window.
-				const request = { channel: 'vscode:configureAllowedUNCHost', args: uri.authority };
+				const request = { channel: 'zyraxoncode:configureAllowedUNCHost', args: uri.authority };
 				this.sendToFocused(request.channel, request.args);
 				this.sendToOpeningWindow(request.channel, request.args);
 			}
@@ -1294,9 +1294,9 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 		}
 
 		if (response === 2) {
-			shell.openExternal('https://aka.ms/vscode-windows-unc');
+			shell.openExternal('__ZYRAXKEEP__3_');
 
-			return this.onUNCHostNotAllowed(path, options); // keep showing the dialog until decision (https://github.com/microsoft/vscode/issues/181956)
+			return this.onUNCHostNotAllowed(path, options); // keep showing the dialog until decision (__ZYRAXKEEP__4_)
 		}
 
 		return undefined;
@@ -1323,7 +1323,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 			path = `/${path}`;
 		}
 
-		const uri = URI.from({ scheme: Schemas.vscodeRemote, authority: remoteAuthority, path: path });
+		const uri = URI.from({ scheme: Schemas.zyraxoncodeRemote, authority: remoteAuthority, path: path });
 
 		// guess the file type:
 		// - if it ends with a slash it's a folder
@@ -1389,7 +1389,7 @@ export class WindowsMainService extends Disposable implements IWindowsMainServic
 			// Linux/Windows: by default we open files in the new window unless triggered via DIALOG / MENU context
 			// or from the integrated terminal where we assume the user prefers to open in the current window
 			else {
-				if (openConfig.context !== OpenContext.DIALOG && openConfig.context !== OpenContext.MENU && !(openConfig.userEnv && openConfig.userEnv['TERM_PROGRAM'] === 'vscode')) {
+				if (openConfig.context !== OpenContext.DIALOG && openConfig.context !== OpenContext.MENU && !(openConfig.userEnv && openConfig.userEnv['TERM_PROGRAM'] === 'zyraxoncode')) {
 					openFilesInNewWindow = true;
 				}
 			}

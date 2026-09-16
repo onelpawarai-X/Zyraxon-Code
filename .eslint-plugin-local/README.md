@@ -1,20 +1,20 @@
 # Custom ESLint rules
 
-We use a set of custom [ESLint](http://eslint.org) to enforce repo specific coding rules and styles. These custom rules are run in addition to many standard ESLint rules we enable in the project. Some example custom rules includes:
+We use a set of custom [ESLint](__ZYRAXKEEP__0_) to enforce repo specific coding rules and styles. These custom rules are run in addition to many standard ESLint rules we enable in the project. Some example custom rules includes:
 
 - Enforcing proper code layering
 - Preventing checking in of `test.only(...)`
-- Enforcing conventions in `vscode.d.ts`
+- Enforcing conventions in `zyraxoncode.d.ts`
 
 Custom rules are mostly used for enforcing or banning certain coding patterns. We tend to leave stylistic choices up to area owners unless there's a good reason to enforce something project wide.
 
 This doc provides a brief overview of how these rules are setup and how you can add a new one.
 
 # Resources
-- [ESLint rules](https://eslint.org/docs/latest/extend/custom-rules) — General documentation about writing eslint rules
-- [TypeScript ASTs and eslint](https://typescript-eslint.io/blog/asts-and-typescript-eslint/) — Look at how ESLint works with TS programs
-- [ESTree selectors](https://eslint.org/docs/latest/extend/selectors)  — Info about the selector syntax rules use to target specific nodes in an AST. Works similarly to css selectors.
-- [TypeScript ESLint playground](https://typescript-eslint.io/play/#showAST=es) — Useful tool for figuring out the structure of TS programs and debugging custom rule selectors
+- [ESLint rules](__ZYRAXKEEP__1_) — General documentation about writing eslint rules
+- [TypeScript ASTs and eslint](__ZYRAXKEEP__2_) — Look at how ESLint works with TS programs
+- [ESTree selectors](__ZYRAXKEEP__3_)  — Info about the selector syntax rules use to target specific nodes in an AST. Works similarly to css selectors.
+- [TypeScript ESLint playground](__ZYRAXKEEP__4_) — Useful tool for figuring out the structure of TS programs and debugging custom rule selectors
 
 
 # Custom Rule Configuration
@@ -22,7 +22,7 @@ This doc provides a brief overview of how these rules are setup and how you can 
 Custom rules are defined in the `.eslint-plugin-local` folder. Each rule is defined in its own TypeScript file. These follow the naming convention:
 
 - `code-RULE-NAME.ts` — General rules that apply to the entire repo.
-- `vscode-dts-RULE-NAME.ts` — Rules that apply just to `vscode.d.ts`.
+- `zyraxoncode-dts-RULE-NAME.ts` — Rules that apply just to `zyraxoncode.d.ts`.
 
 These rules are then enabled in the `eslint.config.js` file. This is the main eslint configuration for our repo. It defines a set of file scopes which rules should apply to files in those scopes.
 
@@ -85,7 +85,7 @@ This walks through the steps to create a new eslint rule:
 
     - Update the name of the class to match the name of your rule
     - Add message entries for any errors you want to report
-    - Update `SELECTOR` with the [ESTree selector](https://eslint.org/docs/latest/extend/selectors) needed to target the nodes you are interested in. Use the [TypeScript ESLint playground](https://typescript-eslint.io/play/#showAST=es) to figure out which nodes you need and debug selectors
+    - Update `SELECTOR` with the [ESTree selector](__ZYRAXKEEP__5_) needed to target the nodes you are interested in. Use the [TypeScript ESLint playground](__ZYRAXKEEP__6_) to figure out which nodes you need and debug selectors
 
 3. Register the rule in `eslint.config.js`
 
@@ -120,6 +120,6 @@ To add a fix for a custom rule:
 
 2. When reporting an error in the rule, also include a `fix`. This is a function that takes a `fixer` argument and returns one or more fixes.
 
-See the [Double quoted to single quoted string covert fix](https://github.com/microsoft/vscode/blob/b074375e1884ae01033967bf0bbceeaa4795354a/.eslint-plugin-local/code-no-unexternalized-strings.ts#L128) for an example. The ESLint docs also have [details on adding fixes and the fixer api](https://eslint.org/docs/latest/extend/custom-rules#applying-fixes)
+See the [Double quoted to single quoted string covert fix](__ZYRAXKEEP__7_) for an example. The ESLint docs also have [details on adding fixes and the fixer api](__ZYRAXKEEP__8_)
 
 The fixes can be run using `npx eslint --fix` in the ZYRAXON Code repo

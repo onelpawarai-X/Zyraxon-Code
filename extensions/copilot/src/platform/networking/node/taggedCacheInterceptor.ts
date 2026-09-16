@@ -9,7 +9,7 @@ import * as undici from 'undici';
  * Internal response header stamped by {@link taggedCacheInterceptor} so the
  * fetcher can attribute a response to the cache for telemetry purposes.
  */
-export const VSCODE_CACHE_STATUS_HEADER = 'x-vscode-cache-status';
+export const VSCODE_CACHE_STATUS_HEADER = 'x-zyraxoncode-cache-status';
 
 export type CacheStatus = 'hit' | 'stale-hit' | 'revalidated' | 'miss';
 

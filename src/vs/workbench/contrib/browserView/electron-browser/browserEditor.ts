@@ -600,7 +600,7 @@ export class BrowserEditor extends EditorPane {
 
 		// Listen for workbench zoom level changes and update browser view placeholder screenshot's zoom factor
 		this._inputDisposables.add(onDidChangeZoomLevel(targetWindowId => {
-			if (targetWindowId === this.window.vscodeWindowId) {
+			if (targetWindowId === this.window.zyraxoncodeWindowId) {
 				// Update CSS variable for size calculations
 				this._browserContainerWrapper.style.setProperty('--zoom-factor', String(getZoomFactor(this.window)));
 				// Re-push container bounds and emulation: zoom-factor affects

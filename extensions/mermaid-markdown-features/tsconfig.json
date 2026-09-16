@@ -12,11 +12,11 @@
 	},
 	"include": [
 		"src/**/*",
-		"../../src/vscode-dts/vscode.d.ts",
-		"../../src/vscode-dts/vscode.proposed.chatOutputRenderer.d.ts",
-		"../../src/vscode-dts/vscode.proposed.chatParticipantAdditions.d.ts",
-		"../../src/vscode-dts/vscode.proposed.languageModelThinkingPart.d.ts",
-		"../../src/vscode-dts/vscode.proposed.chatParticipantPrivate.d.ts",
-		"../../src/vscode-dts/vscode.proposed.languageModelProxy.d.ts"
+		"../../src/zyraxoncode-dts/zyraxoncode.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.chatOutputRenderer.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.chatParticipantAdditions.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.languageModelThinkingPart.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.chatParticipantPrivate.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.languageModelProxy.d.ts"
 	]
 }

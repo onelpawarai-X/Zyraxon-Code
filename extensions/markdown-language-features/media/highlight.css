@@ -1,8 +1,8 @@
 /*
-https://raw.githubusercontent.com/isagalaev/highlight.js/master/src/styles/vs2015.css
+__ZYRAXKEEP__0_
 */
 /*
- * Visual Studio 2015 dark style
+ * ZYRAXON 2015 dark style
  * Author: Nicolas LLOBERA <nllobera@gmail.com>
  */
 
@@ -99,14 +99,14 @@ https://raw.githubusercontent.com/isagalaev/highlight.js/master/src/styles/vs201
 }
 
 .hljs-addition {
-	background-color: var(--vscode-diffEditor-insertedTextBackground, rgba(155, 185, 85, 0.2));
+	background-color: var(--zyraxoncode-diffEditor-insertedTextBackground, rgba(155, 185, 85, 0.2));
 	color: rgb(155, 185, 85);
 	display: inline-block;
 	width: 100%;
 }
 
 .hljs-deletion {
-	background: var(--vscode-diffEditor-removedTextBackground, rgba(255, 0, 0, 0.2));
+	background: var(--zyraxoncode-diffEditor-removedTextBackground, rgba(255, 0, 0, 0.2));
 	color: rgb(255, 0, 0);
 	display: inline-block;
 	width: 100%;
@@ -114,78 +114,78 @@ https://raw.githubusercontent.com/isagalaev/highlight.js/master/src/styles/vs201
 
 
 /*
-From https://raw.githubusercontent.com/isagalaev/highlight.js/master/src/styles/vs.css
+From __ZYRAXKEEP__1_
 */
 /*
 
-Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
+ZYRAXON-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
 
 */
 
-.vscode-light .hljs-function,
-.vscode-light .hljs-params,
-.vscode-light .hljs-number,
-.vscode-light .hljs-class  {
+.zyraxoncode-light .hljs-function,
+.zyraxoncode-light .hljs-params,
+.zyraxoncode-light .hljs-number,
+.zyraxoncode-light .hljs-class  {
 	color: inherit;
 }
 
-.vscode-light .hljs-comment,
-.vscode-light .hljs-quote,
-.vscode-light .hljs-number,
-.vscode-light .hljs-class,
-.vscode-light .hljs-variable {
+.zyraxoncode-light .hljs-comment,
+.zyraxoncode-light .hljs-quote,
+.zyraxoncode-light .hljs-number,
+.zyraxoncode-light .hljs-class,
+.zyraxoncode-light .hljs-variable {
 	color: #008000;
 }
 
-.vscode-light .hljs-keyword,
-.vscode-light .hljs-selector-tag,
-.vscode-light .hljs-name,
-.vscode-light .hljs-tag {
+.zyraxoncode-light .hljs-keyword,
+.zyraxoncode-light .hljs-selector-tag,
+.zyraxoncode-light .hljs-name,
+.zyraxoncode-light .hljs-tag {
 	color: #00f;
 }
 
-.vscode-light .hljs-built_in,
-.vscode-light .hljs-builtin-name {
+.zyraxoncode-light .hljs-built_in,
+.zyraxoncode-light .hljs-builtin-name {
 	color: #007acc;
 }
 
-.vscode-light .hljs-string,
-.vscode-light .hljs-section,
-.vscode-light .hljs-attribute,
-.vscode-light .hljs-literal,
-.vscode-light .hljs-template-tag,
-.vscode-light .hljs-template-variable,
-.vscode-light .hljs-type {
+.zyraxoncode-light .hljs-string,
+.zyraxoncode-light .hljs-section,
+.zyraxoncode-light .hljs-attribute,
+.zyraxoncode-light .hljs-literal,
+.zyraxoncode-light .hljs-template-tag,
+.zyraxoncode-light .hljs-template-variable,
+.zyraxoncode-light .hljs-type {
 	color: #a31515;
 }
 
-.vscode-light .hljs-subst,
-.vscode-light .hljs-selector-attr,
-.vscode-light .hljs-selector-pseudo,
-.vscode-light .hljs-meta,
-.vscode-light .hljs-meta-keyword {
+.zyraxoncode-light .hljs-subst,
+.zyraxoncode-light .hljs-selector-attr,
+.zyraxoncode-light .hljs-selector-pseudo,
+.zyraxoncode-light .hljs-meta,
+.zyraxoncode-light .hljs-meta-keyword {
 	color: #2b91af;
 }
-.vscode-light .hljs-title,
-.vscode-light .hljs-doctag {
+.zyraxoncode-light .hljs-title,
+.zyraxoncode-light .hljs-doctag {
 	color: #808080;
 }
 
-.vscode-light .hljs-attr {
+.zyraxoncode-light .hljs-attr {
 	color: #f00;
 }
 
-.vscode-light .hljs-symbol,
-.vscode-light .hljs-bullet,
-.vscode-light .hljs-link {
+.zyraxoncode-light .hljs-symbol,
+.zyraxoncode-light .hljs-bullet,
+.zyraxoncode-light .hljs-link {
 	color: #00b0e8;
 }
 
 
-.vscode-light .hljs-emphasis {
+.zyraxoncode-light .hljs-emphasis {
 	font-style: italic;
 }
 
-.vscode-light .hljs-strong {
+.zyraxoncode-light .hljs-strong {
 	font-weight: bold;
 }

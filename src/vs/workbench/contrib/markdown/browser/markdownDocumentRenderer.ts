@@ -102,11 +102,11 @@ pre {
 }
 
 pre code {
-	font-family: var(--vscode-editor-font-family);
-	font-weight: var(--vscode-editor-font-weight);
-	font-size: var(--vscode-editor-font-size);
+	font-family: var(--zyraxoncode-editor-font-family);
+	font-weight: var(--zyraxoncode-editor-font-weight);
+	font-size: var(--zyraxoncode-editor-font-size);
 	line-height: 1.5;
-	color: var(--vscode-editor-foreground);
+	color: var(--zyraxoncode-editor-foreground);
 	tab-size: 4;
 }
 
@@ -117,30 +117,30 @@ pre code {
 /** Theming */
 
 .pre {
-	background-color: var(--vscode-textCodeBlock-background);
+	background-color: var(--zyraxoncode-textCodeBlock-background);
 }
 
-.vscode-high-contrast h1 {
+.zyraxoncode-high-contrast h1 {
 	border-color: rgb(0, 0, 0);
 }
 
-.vscode-light th {
+.zyraxoncode-light th {
 	border-color: rgba(0, 0, 0, 0.69);
 }
 
-.vscode-dark th {
+.zyraxoncode-dark th {
 	border-color: rgba(255, 255, 255, 0.69);
 }
 
-.vscode-light h1,
-.vscode-light hr,
-.vscode-light td {
+.zyraxoncode-light h1,
+.zyraxoncode-light hr,
+.zyraxoncode-light td {
 	border-color: rgba(0, 0, 0, 0.18);
 }
 
-.vscode-dark h1,
-.vscode-dark hr,
-.vscode-dark td {
+.zyraxoncode-dark h1,
+.zyraxoncode-dark hr,
+.zyraxoncode-dark td {
 	border-color: rgba(255, 255, 255, 0.18);
 }
 
@@ -253,7 +253,7 @@ export async function renderMarkdownDocument(
 }
 
 namespace MarkedHighlight {
-	// Copied from https://github.com/markedjs/marked-highlight/blob/main/src/index.js
+	// Copied from __ZYRAXKEEP__0_
 
 	export function markedHighlight(options: marked.MarkedOptions & { highlight: (code: string, lang: string) => string | Promise<string> }): marked.MarkedExtension {
 		if (typeof options === 'function') {

@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { ChatResponsePart, Progress } from 'vscode';
+import type { ChatResponsePart, Progress } from 'zyraxoncode';
 import { EmbeddingType } from '../../src/platform/embeddings/common/embeddingsComputer';
 import { GithubRepoId } from '../../src/platform/git/common/gitService';
 import { IIgnoreService } from '../../src/platform/ignore/common/ignoreService';
@@ -19,7 +19,7 @@ import { Event } from '../../src/util/vs/base/common/event';
 import { Disposable } from '../../src/util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../src/util/vs/platform/instantiation/common/instantiation';
 
-const searchEndpoint = 'http://localhost:4443/api/embeddings/code/search';
+const searchEndpoint = '__ZYRAXKEEP__0_';
 
 
 class SimulationGithubCodeSearchService extends Disposable implements IGithubCodeSearchService {

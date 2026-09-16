@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import assert from 'assert';
-import type { FileStat } from 'vscode';
+import type { FileStat } from 'zyraxoncode';
 import { NullEnvService } from '../../../../platform/env/common/nullEnvService';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { FileType } from '../../../../platform/filesystem/common/fileTypes';

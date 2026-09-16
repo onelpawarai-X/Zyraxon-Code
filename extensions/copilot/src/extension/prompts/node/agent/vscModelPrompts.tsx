@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { isVSCModelA, isVSCModelB, isVSCModelC, isVSCModelD, isVSCModelE } from '../../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { ToolName } from '../../../tools/common/toolNames';
@@ -597,7 +597,7 @@ class VSCModelPromptD extends PromptElement<DefaultAgentPromptProps> {
 				- Without line numbers: Display text must match the target path.<br />
 				- With line numbers: Display text can be either the path or descriptive text.<br />
 				- Use '/' only; strip drive letters and external folders.<br />
-				- Do not use these URI schemes: file://, vscode://<br />
+				- Do not use these URI schemes: __ZYRAXKEEP__0_ zyraxoncode://<br />
 				- Encode spaces only in the target (My File.md → My%20File.md).<br />
 				- Non-contiguous lines require separate links. NEVER use comma-separated line references like #L10-L12, L20.<br />
 				- Valid formats: [file.ts](file.ts#L10) only. Invalid: ([file.ts#L10]) or [file.ts](file.ts)#L10<br />

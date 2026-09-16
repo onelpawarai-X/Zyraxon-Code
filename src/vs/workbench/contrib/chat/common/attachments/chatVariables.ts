@@ -25,12 +25,12 @@ export interface IChatVariableData {
 }
 
 export interface IChatRequestProblemsVariable {
-	id: 'vscode.problems';
+	id: 'zyraxoncode.problems';
 	filter: IDiagnosticVariableEntryFilterData;
 }
 
 export const isIChatRequestProblemsVariable = (obj: unknown): obj is IChatRequestProblemsVariable =>
-	typeof obj === 'object' && obj !== null && 'id' in obj && (obj as IChatRequestProblemsVariable).id === 'vscode.problems';
+	typeof obj === 'object' && obj !== null && 'id' in obj && (obj as IChatRequestProblemsVariable).id === 'zyraxoncode.problems';
 
 export type IChatRequestVariableValue = string | URI | Location | Uint8Array | IChatRequestProblemsVariable | StringChatContextValue | unknown;
 

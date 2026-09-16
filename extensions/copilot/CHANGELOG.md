@@ -1,8 +1,8 @@
 # GitHub Copilot Chat in ZYRAXON Code - Changelog
 
-You can find the latest AI-related updates for GitHub Copilot in ZYRAXON Code in the weekly [ZYRAXON Code release notes](https://code.visualstudio.com/updates).
+You can find the latest AI-related updates for GitHub Copilot in ZYRAXON Code in the weekly [ZYRAXON Code release notes](__ZYRAXKEEP__0_).
 
-For more frequent updates, check the [Commit log](https://github.com/Microsoft/vscode/commits/main) and [vscode-copilot-chat commit log](https://github.com/microsoft/vscode-copilot-chat/commits/main) on GitHub.
+For more frequent updates, check the [Commit log](__ZYRAXKEEP__1_) and [zyraxoncode-copilot-chat commit log](__ZYRAXKEEP__2_) on GitHub.
 
 ---
 
@@ -10,7 +10,7 @@ For more frequent updates, check the [Commit log](https://github.com/Microsoft/v
 
 ## 0.41 (2026-03-25)
 
-GitHub Copilot updates for [ZYRAXON Code 1.113](https://code.visualstudio.com/updates/v1_113):
+GitHub Copilot updates for [ZYRAXON Code 1.113](__ZYRAXKEEP__3_):
 
 - MCP support in Copilot CLI & Claude agents
 - Forking sessions in Copilot CLI & Claude agents
@@ -25,7 +25,7 @@ GitHub Copilot updates for [ZYRAXON Code 1.113](https://code.visualstudio.com/up
 
 ## 0.40 (2026-03-18)
 
-GitHub Copilot updates for [ZYRAXON Code 1.112](https://code.visualstudio.com/updates/v1_112):
+GitHub Copilot updates for [ZYRAXON Code 1.112](__ZYRAXKEEP__4_):
 
 - Message steering and queueing in Copilot CLI
 - Preview changes before delegating to Copilot CLI
@@ -44,7 +44,7 @@ GitHub Copilot updates for [ZYRAXON Code 1.112](https://code.visualstudio.com/up
 
 ## 0.39 (2026-03-09)
 
-GitHub Copilot updates for [ZYRAXON Code 1.111](https://code.visualstudio.com/updates/v1_111):
+GitHub Copilot updates for [ZYRAXON Code 1.111](__ZYRAXKEEP__5_):
 
 - Autopilot and agent permissions
 - Agent-scoped hooks (Preview)
@@ -54,7 +54,7 @@ GitHub Copilot updates for [ZYRAXON Code 1.111](https://code.visualstudio.com/up
 
 ## 0.38 (2026-03-05)
 
-GitHub Copilot updates from [February 2026](https://code.visualstudio.com/updates/v1_110):
+GitHub Copilot updates from [February 2026](__ZYRAXKEEP__6_):
 
 ### Agent controls
 
@@ -71,7 +71,7 @@ GitHub Copilot updates from [February 2026](https://code.visualstudio.com/update
 - **Agent plugins (Experimental)** — Prepackaged bundles of chat customizations (skills, commands, agents, MCP servers, hooks) installable from the Extensions view. Configurable plugin marketplaces and local plugin directories.
 - **Agentic browser tools (Experimental)** — Agents can read and interact with the integrated browser using tools like `openBrowserPage`, `readPage`, `screenshotPage`, `clickElement`, `typeInPage`, and `runPlaywrightCode`. Enable by setting `workbench.browser.enableChatTools` to `true`.
 - **Create agent customizations from chat** — New `/create-prompt`, `/create-instruction`, `/create-skill`, `/create-agent`, and `/create-hook` slash commands to generate customization files directly from a conversation.
-- **Tools for usages and rename** — New `vscode_renameSymbol` tool and updated `usages` tool let agents navigate and refactor code using extension/LSP capabilities with high precision.
+- **Tools for usages and rename** — New `zyraxoncode_renameSymbol` tool and updated `usages` tool let agents navigate and refactor code using extension/LSP capabilities with high precision.
 
 ### Smarter sessions
 
@@ -98,7 +98,7 @@ GitHub Copilot updates from [February 2026](https://code.visualstudio.com/update
 
 ## 0.37 (2026-02-04)
 
-GitHub Copilot updates from [January 2026](https://code.visualstudio.com/updates/v1_109):
+GitHub Copilot updates from [January 2026](__ZYRAXKEEP__7_):
 
 ### Chat UX
 
@@ -175,7 +175,7 @@ GitHub Copilot updates from [January 2026](https://code.visualstudio.com/updates
 
 ## 0.36 (2026-01-08)
 
-GitHub Copilot updates from [December 2025](https://code.visualstudio.com/updates/v1_108):
+GitHub Copilot updates from [December 2025](__ZYRAXKEEP__8_):
 
 ### Agents
 
@@ -197,7 +197,7 @@ GitHub Copilot updates from [December 2025](https://code.visualstudio.com/update
 
 ## 0.35 (2025-12-10)
 
-GitHub Copilot updates from [November 2025](https://code.visualstudio.com/updates/v1_107):
+GitHub Copilot updates from [November 2025](__ZYRAXKEEP__9_):
 
 ### Agents
 
@@ -251,7 +251,7 @@ GitHub Copilot updates from [November 2025](https://code.visualstudio.com/update
 
 ## 0.33 (2025-11-12)
 
-GitHub Copilot updates from [October 2025](https://code.visualstudio.com/updates/v1_106):
+GitHub Copilot updates from [October 2025](__ZYRAXKEEP__10_):
 
 ### Agents
 
@@ -276,13 +276,13 @@ GitHub Copilot updates from [October 2025](https://code.visualstudio.com/updates
 
 ### Code editing (AI-related)
 
-- **Inline suggestions open-sourced** — Merged into vscode-copilot-chat repo; Copilot and Copilot Chat extensions consolidating into one. GitHub Copilot extension to be deprecated by early 2026.
+- **Inline suggestions open-sourced** — Merged into zyraxoncode-copilot-chat repo; Copilot and Copilot Chat extensions consolidating into one. GitHub Copilot extension to be deprecated by early 2026.
 - **Snooze inline suggestions** — Pause suggestions directly from the gutter icon with a configurable duration.
 
 ### MCP
 
 - **Organization MCP registry** — Custom MCP registry via GitHub org policies to control which MCP servers can be installed/started.
-- **Install MCP servers to workspace** — Add MCP servers to `.vscode/mcp.json` for team sharing.
+- **Install MCP servers to workspace** — Add MCP servers to `.zyraxoncode/mcp.json` for team sharing.
 - **Client ID Metadata Document auth** — New OAuth flow for remote MCP servers (more secure than DCR).
 - **WWW-Authenticate scope step up** — Dynamic scope escalation for remote MCP servers (least-privilege principle).
 
@@ -299,7 +299,7 @@ GitHub Copilot updates from [October 2025](https://code.visualstudio.com/updates
 
 ## 0.32 (2025-10-09)
 
-GitHub Copilot updates from [September 2025](https://code.visualstudio.com/updates/v1_105):
+GitHub Copilot updates from [September 2025](__ZYRAXKEEP__11_):
 
 ### Chat
 
@@ -311,15 +311,15 @@ Tool names are now qualified by the MCP server, extension, or tool set they are 
 
 You can still use the previous notation, however a code actions helps migrating to the new names.
 
-![Screenshot of a prompt file showing a Code Action to update an unqualified tool name.](https://code.visualstudio.com/assets/updates/1_105/qualified_tool_names.png)
+![Screenshot of a prompt file showing a Code Action to update an unqualified tool name.](__ZYRAXKEEP__12_)
 
 #### Improved edit tools for bring-your-own-key models
 
 **Setting**: `github.copilot.chat.customOAIModels`
 
-To make working with custom models better integrated with ZYRAXON Code built-in tools, we improved the set of edit tools given to [Bring Your Own Key (BYOK)](https://code.visualstudio.com/docs/copilot/customization/language-models#_bring-your-own-language-model-key) custom models. In addition, we enhanced our default tools and added a 'learning' mechanism to select the optimal tool set for custom models.
+To make working with custom models better integrated with ZYRAXON Code built-in tools, we improved the set of edit tools given to [Bring Your Own Key (BYOK)](__ZYRAXKEEP__13_) custom models. In addition, we enhanced our default tools and added a 'learning' mechanism to select the optimal tool set for custom models.
 
-If you're [using OpenAI-compatible models](https://code.visualstudio.com/docs/copilot/customization/language-models#_use-an-openaicompatible-model), you can also explicitly configure the list of edit tools with the `github.copilot.chat.customOAIModels` setting.
+If you're [using OpenAI-compatible models](__ZYRAXKEEP__14_), you can also explicitly configure the list of edit tools with the `github.copilot.chat.customOAIModels` setting.
 
 #### Chat user experience improvements
 
@@ -329,7 +329,7 @@ If you're [using OpenAI-compatible models](https://code.visualstudio.com/docs/co
 
 In ZYRAXON Code 1.103, we introduced OS notifications for chat sessions that required a user confirmation when the ZYRAXON Code window was not focused. In this release, we are expanding this functionality to show an OS badge and notification toast when a chat response is received. The notification includes a preview of the response, and selecting it brings focus to the chat input.
 
-![Screenshot showing an OS notification while the ZYRAXON Code window is unfocused.](https://code.visualstudio.com/assets/updates/1_105/chat-notification.png)
+![Screenshot showing an OS notification while the ZYRAXON Code window is unfocused.](__ZYRAXKEEP__15_)
 
 You can control the notification behavior with the `chat.notifyWindowOnResponseReceived` setting.
 
@@ -339,7 +339,7 @@ You can control the notification behavior with the `chat.notifyWindowOnResponseR
 
 Chain of thought shows the model’s reasoning as it responds, which can be great for debugging or understanding suggestions the model provides. With the introduction of GPT-5-Codex, thinking tokens are now shown in chat as expandable sections in the response.
 
-![Screenshot of a chat response showing thinking tokens as expandable sections in the response.](https://code.visualstudio.com/assets/updates/1_105/chat-thinking-tokens.png)
+![Screenshot of a chat response showing thinking tokens as expandable sections in the response.](__ZYRAXKEEP__16_)
 
 You can configure how to display or hide chain of thought with the `chat.agent.thinkingStyle` setting. Thinking tokens will soon be available in more models as well!
 
@@ -347,9 +347,9 @@ You can configure how to display or hide chain of thought with the `chat.agent.t
 
 **Setting**: `chat.emptyState.history.enabled`
 
-Last milestone, we introduced [prompt file suggestions](https://code.visualstudio.com/updates/v1_104#_configure-prompt-file-suggestions-experimental) to help you get started when creating a new chat session (<kbd>Ctrl+L</kbd> or <kbd>Cmd+L</kbd> on macOS). In this release, we are building on that by showing your recent local chat conversations. This helps you quickly pick up where you left off or revisit past conversations.
+Last milestone, we introduced [prompt file suggestions](__ZYRAXKEEP__17_) to help you get started when creating a new chat session (<kbd>Ctrl+L</kbd> or <kbd>Cmd+L</kbd> on macOS). In this release, we are building on that by showing your recent local chat conversations. This helps you quickly pick up where you left off or revisit past conversations.
 
-![Screenshot of the Chat view showing recent local chat conversations when there are no active chat sessions.](https://code.visualstudio.com/assets/updates/1_105/chat-history-on-empty.png)
+![Screenshot of the Chat view showing recent local chat conversations when there are no active chat sessions.](__ZYRAXKEEP__18_)
 
 By default, this functionality is off, but you can enable it with the `chat.emptyState.history.enabled` setting.
 
@@ -372,7 +372,7 @@ This milestone, we made several improvements to the Chat Sessions view and the e
 
 **Setting**: `chat.agentSessionsViewLocation`
 
-The [Chat Sessions view](https://code.visualstudio.com/docs/copilot/copilot-coding-agent#_manage-sessions-with-dedicated-chat-editor-experimental) provides a centralized location for managing both local chat conversations and remote coding agent sessions. This view enables you to work with multiple AI sessions simultaneously, track their progress, and manage long-running tasks efficiently.
+The [Chat Sessions view](__ZYRAXKEEP__19_) provides a centralized location for managing both local chat conversations and remote coding agent sessions. This view enables you to work with multiple AI sessions simultaneously, track their progress, and manage long-running tasks efficiently.
 
 In this release, we made several UI refinements and performance improvements to enhance the Chat Sessions experience.
 
@@ -380,15 +380,15 @@ In this release, we made several UI refinements and performance improvements to 
 
 * Quickly initiate a new session by using the "+" button in the view header.
 
-    ![Screenshot of the Chat Sessions view with a new session open via the + button.](https://code.visualstudio.com/assets/updates/1_105/chat-sessions.png)
+    ![Screenshot of the Chat Sessions view with a new session open via the + button.](__ZYRAXKEEP__20_)
 
 #### Delegating to remote coding agents
 
 A typical scenario for working with remote coding agents is to first discuss and plan a task in a local chat session, where you have access to the full context of your codebase, and then delegate the implementation work to a remote coding agent. The remote agent can then work on the task in the background and create a pull request with the solution.
 
-If you're working in a repository that has [Copilot coding agent enabled](https://aka.ms/coding-agent-docs), the **Delegate to coding agent** button in the Chat view now appears by default.
+If you're working in a repository that has [Copilot coding agent enabled](__ZYRAXKEEP__21_), the **Delegate to coding agent** button in the Chat view now appears by default.
 
-![Screenshot of the Chat view with the Delegate to coding agent button highlighted.](https://code.visualstudio.com/assets/updates/1_105/delegate-button.png)
+![Screenshot of the Chat view with the Delegate to coding agent button highlighted.](__ZYRAXKEEP__22_)
 
 When you use the delegate action, all the context from your chat conversation, including file references, are forwarded to the coding agent. If your conversation exceeds the coding agent's context window, ZYRAXON Code automatically summarizes and condenses the information to fit the window.
 
@@ -412,7 +412,7 @@ This milestone, we added support for the following models in chat. The available
 
 * **Claude Sonnet 4.5**, Anthropic’s most advanced model for coding and real-world agents.
 
-You can choose between different models with the model picker in chat. Learn more about [language models in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/customization/language-models).
+You can choose between different models with the model picker in chat. Learn more about [language models in ZYRAXON Code](__ZYRAXKEEP__23_).
 
 ### MCP
 
@@ -420,13 +420,13 @@ You can choose between different models with the model picker in chat. Learn mor
 
 **Setting**: `chat.mcp.gallery.enabled`
 
-ZYRAXON Code now includes a built-in MCP marketplace that enables users to browse and install MCP servers directly from the Extensions view. This is powered by the [GitHub MCP registry](https://github.com/mcp) and provides a seamless experience for discovering and managing MCP servers directly within the editor.
+ZYRAXON Code now includes a built-in MCP marketplace that enables users to browse and install MCP servers directly from the Extensions view. This is powered by the [GitHub MCP registry](__ZYRAXKEEP__24_) and provides a seamless experience for discovering and managing MCP servers directly within the editor.
 
 > **Note**: This feature is currently in preview. Not all features are available yet and the experience might still have some rough edges.
 
 The MCP marketplace is disabled by default. When no MCP servers are installed, you see a welcome view in the Extensions view that provides easy access to enable the marketplace. You can also enable the MCP marketplace manually using the setting `chat.mcp.gallery.enabled`.
 
-![Screenshot showing the MCP Servers welcome view with text describing how to browse and install Model Context Protocol servers, and an "Enable MCP Servers Marketplace" button.](https://code.visualstudio.com/assets/updates/1_105/mcp-servers-welcome.png)
+![Screenshot showing the MCP Servers welcome view with text describing how to browse and install Model Context Protocol servers, and an "Enable MCP Servers Marketplace" button.](__ZYRAXKEEP__25_)
 
 To browse the MCP servers from the Extensions view:
 
@@ -434,7 +434,7 @@ To browse the MCP servers from the Extensions view:
 * Select **MCP Servers** from the filter dropdown in the Extensions view
 * Search for specific MCP servers by name
 
-![Screenshot showing the GitHub MCP server details from the MCP server marketplace inside ZYRAXON Code.](https://code.visualstudio.com/assets/updates/1_105/mcp-server-editor.png)
+![Screenshot showing the GitHub MCP server details from the MCP server marketplace inside ZYRAXON Code.](__ZYRAXKEEP__26_)
 
 #### Autostart MCP servers
 
@@ -442,7 +442,7 @@ To browse the MCP servers from the Extensions view:
 
 In this release, new or outdated MCP servers are now started automatically when you send a chat message. ZYRAXON Code also avoids triggering interactions such as dialogs when autostarting a server, and instead adds an indicator in chat to let you know that a server needs attention.
 
-![Screenshot of the Chat view, showing a notification message that the GitHub MCP requires restarting.](https://code.visualstudio.com/assets/updates/1_105/mcp_autostart_prompt.png)
+![Screenshot of the Chat view, showing a notification message that the GitHub MCP requires restarting.](__ZYRAXKEEP__27_)
 
 With MCP autostart on by default, we no longer eagerly activate extensions and instead only activate MCP-providing extensions when the first chat message is sent.
 
@@ -456,13 +456,13 @@ Previously, our implementation of tool results that contain resources left it up
 
 This milestone, we adopted the following updates to the MCP specification:
 
-* [SEP-973](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/955), which lets MCP servers specify `icons` to associate with their data. This can be used to give a custom icon to servers, resources, and tools.
+* [SEP-973](__ZYRAXKEEP__28_), which lets MCP servers specify `icons` to associate with their data. This can be used to give a custom icon to servers, resources, and tools.
 
-    ![Screenshot of the tools picker, showing one of the MCP servers in the list with a custom icon.](https://code.visualstudio.com/assets/updates/1_105/mcp_icons.png)
+    ![Screenshot of the tools picker, showing one of the MCP servers in the list with a custom icon.](__ZYRAXKEEP__29_)
 
-    HTTP MCP servers must provide icons from the same authority that the MCP server itself is listening on, while stdio servers are allowed to reference `file:///` URIs on disk.
+    HTTP MCP servers must provide icons from the same authority that the MCP server itself is listening on, while stdio servers are allowed to reference `__ZYRAXKEEP__30_` URIs on disk.
 
-* [SEP-1034](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/1035), which lets MCP servers provide `default` values when using elicitation.
+* [SEP-1034](__ZYRAXKEEP__31_), which lets MCP servers provide `default` values when using elicitation.
 
 ### Accessibility
 
@@ -480,7 +480,7 @@ From the chat input, users can focus the last focused chat response item with <k
 
 When opening a file with git merge conflict markers, you are now able to resolve merge conflicts with AI. We added a new action in the lower right hand corner of the editor. Selecting this new action opens the Chat view and starts an agentic flow with the merge base and changes from each branch as context.
 
-![Screenshot of the proposed merge conflict resolution in the editor.](https://code.visualstudio.com/assets/updates/1_105/merge-conflict-resolution.png)
+![Screenshot of the proposed merge conflict resolution in the editor.](__ZYRAXKEEP__32_)
 
 You can review the proposed merge conflict resolution in the editor and follow up with additional context if needed. You can customize the merge conflict resolution by using an `AGENTS.md` file.
 
@@ -494,7 +494,7 @@ To add a file from a history item to chat, select a history item to view the lis
 
 #### Run tests with code coverage
 
-If you have a testing extension installed for your code, the `runTests` tool in chat enables the agent to run tests in your codebase by using the [ZYRAXON Code testing integration](https://code.visualstudio.com/docs/debugtest/testing) rather than running them from the command line.
+If you have a testing extension installed for your code, the `runTests` tool in chat enables the agent to run tests in your codebase by using the [ZYRAXON Code testing integration](__ZYRAXKEEP__33_) rather than running them from the command line.
 
 In this release, the `runTests` tool now also reports test code coverage to the agent. This enables the agent to generate and verify tests that cover the entirety of your code.
 
@@ -502,7 +502,7 @@ In this release, the `runTests` tool now also reports test code coverage to the 
 
 ## 0.31 (2025-09-11)
 
-GitHub Copilot updates from [August 2025](https://code.visualstudio.com/updates/v1_104):
+GitHub Copilot updates from [August 2025](__ZYRAXKEEP__34_):
 
 ### Chat
 
@@ -512,27 +512,27 @@ This iteration, we're introducing auto model selection in chat. When you choose 
 
 Auto model selection is currently in preview and we are rolling it out to all GitHub Copilot users in ZYRAXON Code in the following weeks, starting with the individual Copilot plans.
 
-![Screenshot that shows the model picker in the Chat view, showing the Auto option.](https://code.visualstudio.com/assets/updates/1_104/model-dropdown-auto.png)
+![Screenshot that shows the model picker in the Chat view, showing the Auto option.](__ZYRAXKEEP__35_)
 
 Auto will choose between Claude Sonnet 4, GPT-5, GPT-5 mini, and GPT-4.1 and Gemini Pro 2.5, unless your organization has disabled access to these models. When using auto model selection, ZYRAXON Code uses a variable model multiplier, based on the selected model. If you are a paid user, auto will apply a 10% request discount.
 
 You can view the selected model and the model multiplier by hovering over the response in the Chat view.
 
-![Screenshot of a chat response, showing the selected model on hover.](https://code.visualstudio.com/assets/updates/1_104/auto-model-multiplier.png)
+![Screenshot of a chat response, showing the selected model on hover.](__ZYRAXKEEP__36_)
 
-Learn more about [auto model selection in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/customization/language-models).
+Learn more about [auto model selection in ZYRAXON Code](__ZYRAXKEEP__37_).
 
 #### Confirm edits to sensitive files
 
 **Setting**: `chat.tools.edits.autoApprove`
 
-In agent mode, the agent can autonomously make edits to files in your workspace. This might include accidentally or maliciously modifying or deleting important files such as configuration files, which could cause immediate negative side-effects on your machine. Learn more about [security considerations when using AI-powered development tools](https://code.visualstudio.com/docs/copilot/security).
+In agent mode, the agent can autonomously make edits to files in your workspace. This might include accidentally or maliciously modifying or deleting important files such as configuration files, which could cause immediate negative side-effects on your machine. Learn more about [security considerations when using AI-powered development tools](__ZYRAXKEEP__38_).
 
 In this release, the agent now explicitly asks for user confirmation before making edits to certain files. This provides an additional layer of safety when using agent mode. With the `chat.tools.edits.autoApprove` setting, you can configure file patterns to indicate which files require confirmation.
 
 Common system folders, dotfiles, and files outside your workspace will require confirmation by default.
 
-![Screenshot showing the confirmation dialog for sensitive file edits in the Chat view.](https://code.visualstudio.com/assets/updates/1_104/chat-edit-sensitive-file.png)
+![Screenshot showing the confirmation dialog for sensitive file edits in the Chat view.](__ZYRAXKEEP__39_)
 
 #### Support for AGENTS.md files (Experimental)
 
@@ -540,9 +540,9 @@ Common system folders, dotfiles, and files outside your workspace will require c
 
 An `AGENTS.md` file lets you provide context and instructions to the agent. Starting from this release, when you have an `AGENTS.md` file in your workspace root(s), it is automatically picked up as context for chat requests. This can be useful for teams that use multiple AI agents.
 
-Support for `AGENTS.md` files is enabled by default and can be controlled with the `chat.useAgentsMdFile` setting. See <https://agents.md/> for more information about `AGENTS.md` files.
+Support for `AGENTS.md` files is enabled by default and can be controlled with the `chat.useAgentsMdFile` setting. See <__ZYRAXKEEP__40_> for more information about `AGENTS.md` files.
 
-Learn more about [customizing chat in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/customization/overview) to your practices and team workflows.
+Learn more about [customizing chat in ZYRAXON Code](__ZYRAXKEEP__41_) to your practices and team workflows.
 
 #### Improved changed files experience
 
@@ -556,7 +556,7 @@ This iteration, the changed files list has been reworked with several quality-of
 
 * Changes _per file_ (lines added or removed) are now shown for each item in the list.
 
-<video src="https://code.visualstudio.com/assets/updates/1_104/changed-files-list.mp4" title="Video uncollapsing the changed files list and accepting file entries to remove them from the list." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__42_" title="Video uncollapsing the changed files list and accepting file entries to remove them from the list." autoplay loop controls muted></video>
 
 #### Use custom chat modes in prompt files
 
@@ -564,9 +564,9 @@ Prompt files are Markdown files in which you write reusable chat prompts. To run
 
 You can specify which chat mode should be used for running the prompt file. Previously, you could only use built-in chat modes like `agent`, `edit`, or `ask` in your prompt files. Now, you can also reference custom chat modes in your prompt files.
 
-![Screenshot showing IntelliSense for custom chat modes in prompt files.](https://code.visualstudio.com/assets/updates/1_104/custom_modes_in_prompt_files.png)
+![Screenshot showing IntelliSense for custom chat modes in prompt files.](__ZYRAXKEEP__43_)
 
-Learn more about [customizing chat in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/customization/overview) with prompt files, chat modes, and custom instructions.
+Learn more about [customizing chat in ZYRAXON Code](__ZYRAXKEEP__44_) with prompt files, chat modes, and custom instructions.
 
 #### Configure prompt file suggestions (Experimental)
 
@@ -591,11 +591,11 @@ This helps teams surface the right AI workflows at the right time, making custom
 
 #### Select tools in tool sets
 
-[Tool sets](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode#_define-tool-sets) are a convenient way to group related tools together and ZYRAXON Code has several built-in tool sets like `edit` or `search`.
+[Tool sets](__ZYRAXKEEP__45_) are a convenient way to group related tools together and ZYRAXON Code has several built-in tool sets like `edit` or `search`.
 
 The tools picker now shows which tools are part of each tool set and you can individually enable or disable each tool. You can access the tools picker via the `Configure Tools...` button in the Chat view.
 
-![Screenshot showing the tools picker with an expanded edit tool set, listing all available tools.](https://code.visualstudio.com/assets/updates/1_104/tools_in_toolsets.png)
+![Screenshot showing the tools picker with an expanded edit tool set, listing all available tools.](__ZYRAXKEEP__46_)
 
 #### Configure font used in chat
 
@@ -603,7 +603,7 @@ The tools picker now shows which tools are part of each tool set and you can ind
 
 ZYRAXON Code lets you choose which font to use across the editor, however the Chat view lacked that configurability. We have now added two new settings for configuring the font family (`chat.fontFamily`) and font size (`chat.fontSize`) of chat messages.
 
-![Screenshot showing the Chat view with a custom font and font size.](https://code.visualstudio.com/assets/updates/1_104/chat-configure-font.png)
+![Screenshot showing the Chat view with a custom font and font size.](__ZYRAXKEEP__47_)
 
 > **Note**: content for lists currently does not yet honor these settings, but this is something that we are working on fixing in the upcoming releases.
 
@@ -624,14 +624,14 @@ The Chat Sessions view provides a single, unified view for managing both local a
 
 ##### GitHub coding agent integration
 
-We've improved the integration of [GitHub coding agents](https://code.visualstudio.com/docs/copilot/copilot-coding-agent) with chat sessions to deliver a smoother, more intuitive experience.
+We've improved the integration of [GitHub coding agents](__ZYRAXKEEP__48_) with chat sessions to deliver a smoother, more intuitive experience.
 
 * **Chat editor actions**: Easily view or apply code changes, and check out pull requests directly from the chat editor.
 * **Seamless transitions**: Move from local chats to GitHub agent tasks with improved continuity.
 * **Better session rendering**: Various improvements on cards and tools rendering for better visual clarity.
 * **Performance boosts**: Faster session loading for a more responsive experience.
 
-<video src="https://code.visualstudio.com/assets/updates/1_104/chat-sessions-view.mp4" title="Video showing Chat Sessions view and integration with GitHub coding agents." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__49_" title="Video showing Chat Sessions view and integration with GitHub coding agents." autoplay loop controls muted></video>
 
 ##### Delegate to coding agent
 
@@ -641,48 +641,48 @@ We continued to expand on ways to delegate local tasks in ZYRAXON Code to a Copi
 
     Comments starting with `TODO` now show a Code Action to quickly initiate a coding agent session.
 
-    ![Screenshot of a code action above a TODO comment called Delegate to coding agent.](https://code.visualstudio.com/assets/updates/1_104/coding-agent-todo.png)
+    ![Screenshot of a code action above a TODO comment called Delegate to coding agent.](__ZYRAXKEEP__50_)
 
 * Delegate from chat (`githubPullRequests.codingAgent.uiIntegration`):
 
     Additional context, including file references, are now forwarded to GitHub coding agent when you perform the **Delegate to coding agent** action in chat. This enables you to precisely plan out a task before handing it off to coding agent to complete it. A new chat editor is opened with the coding agent's progress shown in real-time.
 
-    <video src="https://code.visualstudio.com/assets/updates/1_104/delegate-to-coding-agent.mp4" title="Delegating a task from sidebar chat to coding agent" autoplay loop controls muted></video>
+    <video src="__ZYRAXKEEP__51_" title="Delegating a task from sidebar chat to coding agent" autoplay loop controls muted></video>
 
-_Theme: [Sharp Solarized](https://marketplace.visualstudio.com/items?itemName=joshspicer.sharp-solarized) (preview on [vscode.dev](https://vscode.dev/editor/theme/joshspicer.sharp-solarized))_
+_Theme: [Sharp Solarized](__ZYRAXKEEP__52_) (preview on [zyraxoncode.dev](__ZYRAXKEEP__53_))_
 
 
 #### Social sign in with Google
 
 The option to sign in or sign up to GitHub Copilot with a Google account is now generally available and rolling out to all users in ZYRAXON Code.
 
-![Screenshot showing the sign in dialog showing the option to use a Google account.](https://code.visualstudio.com/assets/updates/1_104/google.png)
+![Screenshot showing the sign in dialog showing the option to use a Google account.](__ZYRAXKEEP__54_)
 
-You can find more information about this in the [announcement GitHub blog post](https://github.blog/changelog/2025-07-15-social-login-with-google-is-now-generally-available).
+You can find more information about this in the [announcement GitHub blog post](__ZYRAXKEEP__55_).
 
 #### Terminal auto approve
 
 **Setting**: `chat.tools.terminal.enableAutoApprove`
 
-Automatically approving terminal commands can greatly streamline agent interactions, but it also comes with [security risks](https://code.visualstudio.com/docs/copilot/security). This release introduces several improvements to terminal auto approve to enhance both usability and security.
+Automatically approving terminal commands can greatly streamline agent interactions, but it also comes with [security risks](__ZYRAXKEEP__56_). This release introduces several improvements to terminal auto approve to enhance both usability and security.
 
-* You can now enable or disable terminal auto approve with the `chat.tools.terminal.enableAutoApprove` setting. This setting can also be set by organizations via [device management](https://code.visualstudio.com/docs/setup/enterprise#_centrally-manage-vs-code-settings).
+* You can now enable or disable terminal auto approve with the `chat.tools.terminal.enableAutoApprove` setting. This setting can also be set by organizations via [device management](__ZYRAXKEEP__57_).
 
 * Before terminal auto approve is actually enabled, you need to explicitly opt in via a dropdown in the Chat view.
 
-    ![Screenshot of a terminal command in the Chat view, showing the Enable Auto Approve dropdown.](https://code.visualstudio.com/assets/updates/1_104/terminal-auto-approve-opt-in.png)
+    ![Screenshot of a terminal command in the Chat view, showing the Enable Auto Approve dropdown.](__ZYRAXKEEP__58_)
 
 * From the Chat view, you can conveniently add auto-approve rules for the command being run, or open the configuration setting:
 
-    ![Screenshot that shows the three standard options are presented for "foo --arg && bar".](https://code.visualstudio.com/assets/updates/1_104/terminal-auto-approve-ui.png)
+    ![Screenshot that shows the three standard options are presented for "foo --arg && bar".](__ZYRAXKEEP__59_)
 
-    _Theme: [Sapphire](https://marketplace.visualstudio.com/items?itemName=Tyriar.theme-sapphire) (preview on [vscode.dev](https://vscode.dev/editor/theme/Tyriar.theme-sapphire))_
+    _Theme: [Sapphire](__ZYRAXKEEP__60_) (preview on [zyraxoncode.dev](__ZYRAXKEEP__61_))_
 
     This has some basic support for commands to suggest sub-commands where they would be more appropriate, such as suggesting an `npm test` rule rather than `npm`.
 
 * To improve transparency around auto-approved commands, we show which rule was applied in the Chat view, also enabling you to configure that rule:
 
-    ![Screenshot showing the new links added under the tool call in the Chat view for adding new auto approve rules.](https://code.visualstudio.com/assets/updates/1_104/terminal-auto-approve-new-links.png)
+    ![Screenshot showing the new links added under the tool call in the Chat view for adding new auto approve rules.](__ZYRAXKEEP__62_)
 
 * We improved the defaults to provide safety and reduce noise. You can see the full list of rules by viewing the setting's default value by opening your `settings.json` file, then entering `chat.tools.terminal.autoApprove` and completing it via <kbd>Tab</kbd>.
 
@@ -690,15 +690,15 @@ Automatically approving terminal commands can greatly streamline agent interacti
 
 * When agent mode wants to pull content from the internet using `curl`, `wget`, `Invoke-RestMethod`, or `Invoke-WebRequest`, we now show a warning, as this is a common vector for prompt injection attacks.
 
-Learn more about [terminal auto approve](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode#_autoapprove-terminal-commands) in our documentation.
+Learn more about [terminal auto approve](__ZYRAXKEEP__63_) in our documentation.
 
 #### Global auto approve
 
-Global auto approve has been [an experimental setting since v1.99](https://code.visualstudio.com/updates/v1_99#_agent-mode-tool-approvals). What we have observed is that users have been enabling this setting without thinking deeply enough about the consequences. Additionally, some users thought that enabling the `chat.tools.autoApprove` setting was a prerequisite to enabling terminal auto approve, which was never the case.
+Global auto approve has been [an experimental setting since v1.99](__ZYRAXKEEP__64_). What we have observed is that users have been enabling this setting without thinking deeply enough about the consequences. Additionally, some users thought that enabling the `chat.tools.autoApprove` setting was a prerequisite to enabling terminal auto approve, which was never the case.
 
 To combat these misconceptions and to further protect our users, there is now a deservedly scary-looking warning the first time global auto approve attempts to be used, so the user can easily back out and disable the setting:
 
-![Screenshot of a warning dialog that appears when global auto approve is used for the first time.](https://code.visualstudio.com/assets/updates/1_104/global-auto-approve-warning.png)
+![Screenshot of a warning dialog that appears when global auto approve is used for the first time.](__ZYRAXKEEP__65_)
 
 The setting has also been changed to the clearer `chat.tools.global.autoApprove` without any automatic migration, so all users (accidental or intentional) need to go and explicitly set it again.
 
@@ -708,9 +708,9 @@ The setting has also been changed to the clearer `chat.tools.global.autoApprove`
 
 Rendering of mathematical equations in chat responses is now generally available and enabled by default. You can disable this functionality with the `chat.math.enabled` setting.
 
-![Screenshot of the Chat view, showing inline and block equations in a chat response.](https://code.visualstudio.com/assets/updates/1_104/chat-math.png)
+![Screenshot of the Chat view, showing inline and block equations in a chat response.](__ZYRAXKEEP__66_)
 
-This feature is powered by [KaTeX](https://katex.org) and supports both inline and block math equations. Inline math equations can be written by wrapping the markup in single dollar signs (`$...$`), while block math equations use two dollar signs (`$$...$$`).
+This feature is powered by [KaTeX](__ZYRAXKEEP__67_) and supports both inline and block math equations. Inline math equations can be written by wrapping the markup in single dollar signs (`$...$`), while block math equations use two dollar signs (`$$...$$`).
 
 #### Chat view default visibility
 
@@ -718,7 +718,7 @@ This feature is powered by [KaTeX](https://katex.org) and supports both inline a
 
 When you first open a workspace, the Secondary Side Bar with the Chat view is visible by default, inviting you to ask questions or start an agentic session right away. You can configure this behavior with the `workbench.secondarySideBar.defaultVisibility` setting or by using the dropdown of the Chat view itself:
 
-![Screenshot showing Chat view menu with the option to set the default Secondary Side Bar visibility.](https://code.visualstudio.com/assets/updates/1_104/auxview.png)
+![Screenshot showing Chat view menu with the option to set the default Secondary Side Bar visibility.](__ZYRAXKEEP__68_)
 
 #### Improved task support
 
@@ -726,7 +726,7 @@ When you first open a workspace, the Secondary Side Bar with the Chat view is vi
 
     When you run a task or terminal command in agent mode, the agent now detects when the process requests user input, and you're prompted to respond in chat. If you type in the terminal while a prompt is present, the prompt will hide automatically. When options and descriptions are provided (such as `[Y] Yes [N] No`), these are surfaced in the confirmation prompt.
 
-    <video src="https://code.visualstudio.com/assets/updates/1_104/prompt-input-demo.mp4" title="Example of input being detected and responded to" autoplay loop controls muted></video>
+    <video src="__ZYRAXKEEP__69_" title="Example of input being detected and responded to" autoplay loop controls muted></video>
 
 * Error detection for tasks with problem matchers
 
@@ -738,13 +738,13 @@ When you first open a workspace, the Secondary Side Bar with the Chat view is vi
 
     In the example below, the ZYRAXON Code - Build task is run. Output is assessed for each dependency task and a problem is surfaced to the user in the response and in the progress message dropdown.
 
-    <video src="https://code.visualstudio.com/assets/updates/1_104/build-task.mp4" title="Example of agent running the ZYRAXON Code - Build task" autoplay loop controls muted></video>
+    <video src="__ZYRAXKEEP__70_" title="Example of agent running the ZYRAXON Code - Build task" autoplay loop controls muted></video>
 
 #### Improved terminal support
 
 * Moved more terminal tools to core
 
-    Like [the `runInTerminal` tool last release](https://code.visualstudio.com/updates/v1_103#_improved-reliability-and-performance-of-the-run-in-terminal-and-task-tools), the `terminalSelection` and `terminalLastCommand` tools have been moved from the extension to core, which should provide general reliability improvements.
+    Like [the `runInTerminal` tool last release](__ZYRAXKEEP__71_), the `terminalSelection` and `terminalLastCommand` tools have been moved from the extension to core, which should provide general reliability improvements.
 
 * Configurable terminal tool shell integration timeout
 
@@ -754,7 +754,7 @@ When you first open a workspace, the Secondary Side Bar with the Chat view is vi
 
     Since shell integration isn't really possible in Command Prompt, at least with the capabilities that Copilot needs, Copilot now opts to use Windows PowerShell instead, which should have shell integration by default. This should improve the reliability of the `runInTerminal` tool when your default shell is Command Prompt.
 
-    If, for some reason, you want Copilot to use Command Prompt, this is currently not possible. We will likely be adding the ability to customize the terminal profile used by Copilot soon, which is tracked in [#253945](https://github.com/microsoft/vscode/issues/253945).
+    If, for some reason, you want Copilot to use Command Prompt, this is currently not possible. We will likely be adding the ability to customize the terminal profile used by Copilot soon, which is tracked in [#253945](__ZYRAXKEEP__72_).
 
 #### Todo List tool
 
@@ -768,7 +768,7 @@ When the agent requests confirmation for a tool call, you can now choose to skip
 
 #### Improvements to semantic workspace search
 
-We've upgraded the `#codebase` tool to use a new [embeddings](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) model for semantic searching for code in your workspace. This new model provides better results for code searches. The new embeddings also use less storage space, requiring only 6% of our previous model's on-disk storage size for each embedding.
+We've upgraded the `#codebase` tool to use a new [embeddings](__ZYRAXKEEP__73_(machine_learning)) model for semantic searching for code in your workspace. This new model provides better results for code searches. The new embeddings also use less storage space, requiring only 6% of our previous model's on-disk storage size for each embedding.
 
 We'll be gradually rolling out this new embeddings model over the next few weeks. Your workspace will be automatically updated to use this new embeddings model, so no action is required. ZYRAXON Code Insiders is already using the new model if you want to try it out before it rolls out to you.
 
@@ -798,7 +798,7 @@ ZYRAXON Code now reads MCP server instructions and will include them in its base
 
 **Setting**: `chat.mcp.discovery.enabled`
 
-ZYRAXON Code supports [automatic discovery of MCP servers](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server) installed in other apps like Claude Code. As MCP support has matured in ZYRAXON Code, auto-discovery is now disabled by default, but you can re-enable it using the `chat.mcp.discovery.enabled` setting.
+ZYRAXON Code supports [automatic discovery of MCP servers](__ZYRAXKEEP__74_) installed in other apps like Claude Code. As MCP support has matured in ZYRAXON Code, auto-discovery is now disabled by default, but you can re-enable it using the `chat.mcp.discovery.enabled` setting.
 
 #### Enable MCP
 
@@ -835,7 +835,7 @@ We are experimenting with improving the quality of next edit suggestions for not
 
 ## 0.30 (2025-08-07)
 
-GitHub Copilot updates from [July 2025](https://code.visualstudio.com/updates/v1_103):
+GitHub Copilot updates from [July 2025](__ZYRAXKEEP__75_):
 
 ### Chat
 
@@ -847,7 +847,7 @@ We've introduced checkpoints that enable you to restore different states of your
 
 When you select a checkpoint, ZYRAXON Code reverts workspace changes and the chat history to that point. After restoring a checkpoint, you can redo that action as well!
 
-<video src="https://code.visualstudio.com/assets/updates/1_103/chat-checkpoints.mp4" title="Video that shows creating and managing chat checkpoints." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__76_" title="Video that shows creating and managing chat checkpoints." autoplay loop controls muted></video>
 
 Checkpoints will be enabled by default and can be controlled with `chat.checkpoints.enabled`.
 
@@ -855,7 +855,7 @@ Checkpoints will be enabled by default and can be controlled with `chat.checkpoi
 
 We've totally revamped the tool picker this iteration and adopted a new component called Quick Tree to display all the tools.
 
-![Screenshot showing the new tool picker using a quick tree, enabling collapsing and expanding nodes.](https://code.visualstudio.com/assets/updates/1_103/tool-picker-quick-tree.png)
+![Screenshot showing the new tool picker using a quick tree, enabling collapsing and expanding nodes.](__ZYRAXKEEP__77_)
 
 Notable features:
 
@@ -880,7 +880,7 @@ This behavior, including the threshold, is configurable via the setting `github.
 
 **Setting**: `chat.tools.terminal.autoApprove`
 
-Early terminal auto-approve settings were introduced last month. This release, the feature got many improvements. Learn more about [terminal auto-approval](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode#_autoapprove-terminal-commands-experimental) in our documentation.
+Early terminal auto-approve settings were introduced last month. This release, the feature got many improvements. Learn more about [terminal auto-approval](__ZYRAXKEEP__78_) in our documentation.
 
 - We merged the `allowList` and `denyList` settings into the `chat.tools.terminal.autoApprove` setting. If you were using the old settings, you should see a warning asking you to migrate to the new setting.
 - Regular expression matchers now support flags. This allows case insensitivity, for example in PowerShell, where case often doesn't matter:
@@ -901,19 +901,19 @@ Early terminal auto-approve settings were introduced last month. This release, t
     }
     ```
 
-- The auto approve reasoning is now logged to the Terminal Output channel. We plan to [surface this in the UI soon](https://github.com/microsoft/vscode/issues/256780).
+- The auto approve reasoning is now logged to the Terminal Output channel. We plan to [surface this in the UI soon](__ZYRAXKEEP__79_).
 
 #### Improved model management experience
 
 This iteration, we've revamped the chat provider API, which is responsible for language model access. Users are now able to select which models appear in their model picker, creating a more personalized and focused experience.
 
-![Screenshot of the model picker showing various models from providers such as Copilot and OpenRouter](https://code.visualstudio.com/assets/updates/1_103/modelpicker.png)
+![Screenshot of the model picker showing various models from providers such as Copilot and OpenRouter](__ZYRAXKEEP__80_)
 
 We plan to finalize this new API in the coming months and would appreciate any feedback. Finalization of this API will open up the extension ecosystem to implement their own model providers and further expand the bring your own key offering.
 
 #### Azure DevOps repos remote index support
 
-The [`#codebase` tool](https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context#_perform-a-codebase-search) now supports remote indexes for workspaces that are linked to Azure DevOps repos. This enables `#codebase` to search for relevant snippets almost instantly without any initialization. This even works for larger repos with tens of thousands of indexable files. Previously, this feature only worked with GitHub linked repos.
+The [`#codebase` tool](__ZYRAXKEEP__81_) now supports remote indexes for workspaces that are linked to Azure DevOps repos. This enables `#codebase` to search for relevant snippets almost instantly without any initialization. This even works for larger repos with tens of thousands of indexable files. Previously, this feature only worked with GitHub linked repos.
 
 Remote indexes are used automatically when working in a workspace that is linked to Azure DevOps through git. Make sure you are also logged into ZYRAXON Code with the Zyraxon account you use to access the Azure DevOps repos.
 
@@ -921,15 +921,15 @@ We're gradually rolling out support for this feature on the services side, so no
 
 #### Improved reliability and performance of the run in terminal and task tools
 
-We have migrated the tools for running tasks and commands within the terminal from the Copilot extension into the core [microsoft/zyraxon repository](https://github.com/microsoft/vscode). This gives the tools access to lower-level and richer APIs, allowing us to fix many of the terminal hanging issues. This update also comes with the benefit of more easily implementing features going forward, as we're no longer restricted to the capabilities of the extension API, especially any changes that need custom UI within the Chat view.
+We have migrated the tools for running tasks and commands within the terminal from the Copilot extension into the core [zyraxon/zyraxon repository](__ZYRAXKEEP__82_). This gives the tools access to lower-level and richer APIs, allowing us to fix many of the terminal hanging issues. This update also comes with the benefit of more easily implementing features going forward, as we're no longer restricted to the capabilities of the extension API, especially any changes that need custom UI within the Chat view.
 
 #### Warning about no shell integration when using chat
 
 While we strive to allow agent mode to run commands in terminals without shell integration, the experience will always be inferior as the terminal is essentially a black box at that point. Examples of issues that can occur without shell integration are: no exit code reporting and the inability to differentiate between a command idling and a prompt idling, resulting in output possibly not being reported to the agent.
 
-When the `run in terminal` tool is used but [shell integration](https://code.visualstudio.com/docs/terminal/shell-integration) is not detected, a message is displayed calling this out and pointing at the documentation.
+When the `run in terminal` tool is used but [shell integration](__ZYRAXKEEP__83_) is not detected, a message is displayed calling this out and pointing at the documentation.
 
-![Screenshot of a message in the Chat view saying "Enable shell integration to improve command detection".](https://code.visualstudio.com/assets/updates/1_103/terminal-chat-si-none.png)
+![Screenshot of a message in the Chat view saying "Enable shell integration to improve command detection".](__ZYRAXKEEP__84_)
 
 #### Output polling for tasks and terminals
 
@@ -947,7 +947,7 @@ The agent now maintains awareness of all user-created terminals in the workspace
 
 Terminal inline chat now better detects your active shell, even when working within subshells (for example, launching Python or Node from PowerShell or zsh). This dynamic shell detection improves the accuracy of inline chat responses by providing more relevant command suggestions for your current shell type.
 
-![Screenshot of terminal inline chat showing node specific suggestions.](https://code.visualstudio.com/assets/updates/1_103/hello_node.png)
+![Screenshot of terminal inline chat showing node specific suggestions.](__ZYRAXKEEP__85_)
 
 #### Improved test runner tool
 
@@ -959,7 +959,7 @@ The test runner tool has been reworked. It now shows progress inline within chat
 
 Last iteration, we enabled users to edit previous requests and rolled out a few different access points. This iteration, we've made inline edits the default behavior. Click on the request bubble to begin editing that request. You can modify attachments, change the mode and model, and resend your request with modified text.
 
-<video src="https://code.visualstudio.com/assets/updates/1_103/chat-previous-edits.mp4" title="Video that shows editing a previous chat request inline in the Chat view." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__86_" title="Video that shows editing a previous chat request inline in the Chat view." autoplay loop controls muted></video>
 
 You can control the chat editing behavior with the `chat.editRequests` setting if you prefer editing via the toolbar hovers above each request.
 
@@ -972,13 +972,13 @@ We added two extra options for configuring the default visibility of the Seconda
 * `maximizedInWorkspace`: open the Chat view as maximized when opening a new workspace
 * `maximized`: open the Chat view always as maximized, including in empty windows
 
-![Screenshot that shows the Chat view maximized.](https://code.visualstudio.com/assets/updates/1_103/max-chat.png)
+![Screenshot that shows the Chat view maximized.](__ZYRAXKEEP__87_)
 
 #### Pending chat confirmation
 
 To help prevent accidentally closing a workspace where an agent session is actively changing files or responding to your request, we now show a dialog when you try to quit ZYRAXON Code or close its window when a chat response is in progress:
 
-![Screenshot of confirmation to exit with running chat.](https://code.visualstudio.com/assets/updates/1_103/confirm-chat-exit.png)
+![Screenshot of confirmation to exit with running chat.](__ZYRAXKEEP__88_)
 
 #### OS notification on user action
 
@@ -986,7 +986,7 @@ To help prevent accidentally closing a workspace where an agent session is activ
 
 We now leverage the OS native notification system to show a toast when user confirmation is needed within a chat session. Enable this behavior with the `chat.notifyWindowOnConfirmation`.
 
-![Screenshot of toast for confirmation of a chat agent.](https://code.visualstudio.com/assets/updates/1_103/chat-toast.png)
+![Screenshot of toast for confirmation of a chat agent.](__ZYRAXKEEP__89_)
 
 We plan to improve this experience in the future to allow for displaying more information and for allowing you to approve directly from the toast. For now, selecting the toast focuses the window where the confirmation originated from.
 
@@ -996,9 +996,9 @@ We plan to improve this experience in the future to allow for displaying more in
 
 Chats now have initial support for rendering mathematical equations in responses:
 
-![Screenshot of the Chat view, showing inline and block equations in a chat response.](https://code.visualstudio.com/assets/updates/1_103/chat-math.png)
+![Screenshot of the Chat view, showing inline and block equations in a chat response.](__ZYRAXKEEP__90_)
 
-This feature is powered by [KaTeX](https://katex.org) and supports both inline and block math equations. Inline math equations can be written by wrapping the markup in single dollar signs (`$...$`), while block math equations use two dollar signs (`$$...$$`).
+This feature is powered by [KaTeX](__ZYRAXKEEP__91_) and supports both inline and block math equations. Inline math equations can be written by wrapping the markup in single dollar signs (`$...$`), while block math equations use two dollar signs (`$$...$$`).
 
 Math rendering can be enabled using `chat.math.enabled`. Currently, it is off by default but we plan to enable it in a future release, after further testing.
 
@@ -1018,11 +1018,11 @@ Previously, when you added or updated an MCP server configuration, ZYRAXON Code 
 
 Use the `chat.mcp.autostart:newAndOutdated` setting to control this behavior. You can also change this setting within the icon's tooltip and see which servers will be started:
 
-![Screenshot showing the hover of the refresh MCP server icon, enabling you to configure the auto-start behavior.](https://code.visualstudio.com/assets/updates/1_103/mcp-refresh-tip.png)
+![Screenshot showing the hover of the refresh MCP server icon, enabling you to configure the auto-start behavior.](__ZYRAXKEEP__92_)
 
 The first time an MCP server is started after being updated or changed, we now show a dialog asking you to trust the server. Giving trust to these servers is particularly important with autostart turned on to prevent running undesirable commands unknowingly.
 
-Learn more about [using MCP servers in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) in our documentation.
+Learn more about [using MCP servers in ZYRAXON Code](__ZYRAXKEEP__93_) in our documentation.
 
 #### Client credentials flow for remote MCP servers
 
@@ -1032,17 +1032,17 @@ However, not every auth provider supports DCR, so we introduced a client-credent
 
 * Step 1: ZYRAXON Code detects that DCR can't be used, and asks if you want to do the client credentials flow:
 
-    ![Screenshot of a modal dialog saying that DCR is not supported but you can provide client credentials manually.](https://code.visualstudio.com/assets/updates/1_103/mcp-auth-no-dcr1.png)
+    ![Screenshot of a modal dialog saying that DCR is not supported but you can provide client credentials manually.](__ZYRAXKEEP__94_)
 
     > **IMPORTANT**: At this point, you would go to the auth provider's website and manually create an application registration. There you will put in the redirect URIs mentioned in the modal dialog.
 
 * Step 2: From the auth provider's portal, you will get a client ID and maybe a client secret. You'll put the client ID in the input box that appears and hit <kbd>Enter</kbd>:
 
-    ![Screenshot of an input box to provide the client ID for the MCP server.](https://code.visualstudio.com/assets/updates/1_103/mcp-auth-no-dcr2.png)
+    ![Screenshot of an input box to provide the client ID for the MCP server.](__ZYRAXKEEP__95_)
 
 * Step 3: Then you'll put in the client secret if you have one, and hit <kbd>Enter</kbd> (leave blank if you don't have one)
 
-    ![Screenshot of an input box to provide the optional client secret for the MCP server.](https://code.visualstudio.com/assets/updates/1_103/mcp-auth-no-dcr3.png)
+    ![Screenshot of an input box to provide the optional client secret for the MCP server.](__ZYRAXKEEP__96_)
 
     At that point, you'll be taken through the typical auth flow to authenticate the MCP server you're working with.
 
@@ -1052,11 +1052,11 @@ Since the addition of remote MCP authentication, there has been a command availa
 
 We've now exposed this command in the Account menu. You can find it inside of an MCP server account:
 
-![Screenshot of the Account menu showing the manage dynamic auth option in an account's submenu.](https://code.visualstudio.com/assets/updates/1_103/mcp-remove-dynamic-auth1.png)
+![Screenshot of the Account menu showing the manage dynamic auth option in an account's submenu.](__ZYRAXKEEP__97_)
 
 or at the root of the menu if you don't have any MCP server accounts yet:
 
-![Screenshot of the Account menu showing the manage dynamic auth option in the root of account menu.](https://code.visualstudio.com/assets/updates/1_103/mcp-remove-dynamic-auth2.png)
+![Screenshot of the Account menu showing the manage dynamic auth option in the root of account menu.](__ZYRAXKEEP__98_)
 
 #### Support for `resource_link` and structured output
 
@@ -1072,7 +1072,7 @@ We added an experimental feature for displaying basic AI statistics. Use the `ed
 
 This feature shows you, per project, the percentage of characters that was inserted by AI versus inserted by typing. It also keeps track of how many inline and next edit suggestions you accepted during the current day.
 
-![Screenshot showing the AI statistic hover information in the Status Bar.](https://code.visualstudio.com/assets/updates/1_103/ai-stats.png)
+![Screenshot showing the AI statistic hover information in the Status Bar.](__ZYRAXKEEP__99_)
 
 ### Notebooks
 
@@ -1082,7 +1082,7 @@ This feature shows you, per project, the percentage of characters that was inser
 
 The notebook inline chat control can now use the full suite of notebook agent tools to enable additional capabilities like running cells and installing packages into the kernel.
 
-<video src="https://code.visualstudio.com/assets/updates/1_103/notebook-inline-agent.mp4" title="Video showing a coding agent session opening in a chat session editor." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__100_" title="Video showing a coding agent session opening in a chat session editor." autoplay loop controls muted></video>
 
 To enable agent tools in notebooks, enable the new experimental setting `inlineChat.notebookAgent:true`. This also currently requires enabling the setting for inline chat v2 `inlineChat.enableV2:true`.
 
@@ -1090,13 +1090,13 @@ To enable agent tools in notebooks, enable the new experimental setting `inlineC
 
 ## 0.29 (2025-07-09)
 
-GitHub Copilot updates from [June 2025](https://code.visualstudio.com/updates/v1_102):
+GitHub Copilot updates from [June 2025](__ZYRAXKEEP__101_):
 
 ### Chat
 
 #### Copilot Chat is open source
 
-We're excited to announce that we've open sourced the GitHub Copilot Chat extension! The source code is now available at [`microsoft/vscode-copilot-chat`](https://github.com/microsoft/vscode-copilot-chat) under the MIT license.
+We're excited to announce that we've open sourced the GitHub Copilot Chat extension! The source code is now available at [`zyraxon/zyraxoncode-copilot-chat`](__ZYRAXKEEP__102_) under the MIT license.
 
 This marks a significant milestone in our commitment to transparency and community collaboration. By open sourcing the extension, we're enabling the community to:
 
@@ -1105,13 +1105,13 @@ This marks a significant milestone in our commitment to transparency and communi
 * **Build upon our work** to create even better AI developer tools
 * **Participate in shaping the future** of AI-assisted coding
 
-You can explore the repository to see how features like [agent mode](https://github.com/microsoft/vscode-copilot-chat/blob/e1222084830244174e6aa64683286561fa7e7607/src/extension/prompts/node/agent/agentPrompt.tsx), [inline chat](https://github.com/microsoft/vscode-copilot-chat/blob/e1222084830244174e6aa64683286561fa7e7607/src/extension/prompts/node/inline/inlineChatEditCodePrompt.tsx), and [MCP integration](https://github.com/microsoft/vscode-copilot-chat/blob/e1222084830244174e6aa64683286561fa7e7607/src/extension/mcp/vscode-node/mcpToolCallingLoop.tsx) are implemented. We welcome contributions, feedback, and collaboration from the community.
+You can explore the repository to see how features like [agent mode](__ZYRAXKEEP__103_), [inline chat](__ZYRAXKEEP__104_), and [MCP integration](__ZYRAXKEEP__105_) are implemented. We welcome contributions, feedback, and collaboration from the community.
 
-To learn more about this milestone and our broader vision for open source AI editor tooling, read our detailed blog post: [Open Source AI Editor - First Milestone](https://code.visualstudio.com/blogs/2025/06/30/openSourceAIEditorFirstMilestone).
+To learn more about this milestone and our broader vision for open source AI editor tooling, read our detailed blog post: [Open Source AI Editor - First Milestone](__ZYRAXKEEP__106_).
 
 #### Chat mode improvements
 
-Last milestone, we previewed [custom chat modes](https://code.visualstudio.com/docs/copilot/chat/chat-modes#_custom-chat-modes). In addition to the built-in chat modes 'Ask', 'Edit' and 'Agent', you can define your own chat modes with specific instructions and a set of allowed tools that you want the LLM to follow when replying to a request.
+Last milestone, we previewed [custom chat modes](__ZYRAXKEEP__107_). In addition to the built-in chat modes 'Ask', 'Edit' and 'Agent', you can define your own chat modes with specific instructions and a set of allowed tools that you want the LLM to follow when replying to a request.
 
 This milestone, we have made several improvements and bug fixes in this area.
 
@@ -1119,54 +1119,54 @@ This milestone, we have made several improvements and bug fixes in this area.
 
 Upon popular request, you can now also specify which language model should be used for a chat mode. Add the `model` metadata property to your `chatmode.md` file and provide the model identifier (we provide IntelliSense for the model info).
 
-![Screenshot that shows the IntelliSense for the model metadata property in chat mode file.](https://code.visualstudio.com/assets/updates/1_102/prompt-file-model-code-completion.png)
+![Screenshot that shows the IntelliSense for the model metadata property in chat mode file.](__ZYRAXKEEP__108_)
 
 ##### Improved editing support
 
-The editor for [chat modes](https://code.visualstudio.com/docs/copilot/chat/chat-modes), [prompts](https://code.visualstudio.com/docs/copilot/copilot-customization#_prompt-files-experimental), and [instruction files](https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions) now supports completions, validation, and hovers for all supported metadata properties.
+The editor for [chat modes](__ZYRAXKEEP__109_), [prompts](__ZYRAXKEEP__110_), and [instruction files](__ZYRAXKEEP__111_) now supports completions, validation, and hovers for all supported metadata properties.
 
-![Screenshot that shows the hover information for tools.](https://code.visualstudio.com/assets/updates/1_102/tools-hover.png)
+![Screenshot that shows the hover information for tools.](__ZYRAXKEEP__112_)
 
-![Screenshot that shows the model diagnostics when a model is not available for a specific chat mode.](https://code.visualstudio.com/assets/updates/1_102/prompt-file-diagnostics.png)
+![Screenshot that shows the model diagnostics when a model is not available for a specific chat mode.](__ZYRAXKEEP__113_)
 
 ##### Gear menu in the chat view
 
 The **Configure Chat** action in the Chat view toolbar lets you manage custom modes as well as reusable instructions, prompts, and tool sets:
 
-![Screenshot that shows the Configure Chat menu in the Chat view.](https://code.visualstudio.com/assets/updates/1_102/chat-gear.png)
+![Screenshot that shows the Configure Chat menu in the Chat view.](__ZYRAXKEEP__114_)
 
 Selecting **Modes** shows all currently installed custom modes and enables you to open, create new, or delete modes.
 
-##### Import modes via a `vscode` link
+##### Import modes via a `zyraxoncode` link
 
 You can now import a chat mode file from an external link, such as a gist. For example, the following link will import the chat mode file for Burke's GPT 4.1 Beast Mode:
 
-[Burke's GPT 4.1 Beast Mode (ZYRAXON Code)](zyraxon:chat-mode/install?url=https://gist.githubusercontent.com/burkeholland/a232b706994aa2f4b2ddd3d97b11f9a7/raw/6e497f4b4ef5e7ea36787ef38fdf4385433591c1/4.1.chatmode.md)
+[Burke's GPT 4.1 Beast Mode (ZYRAXON Code)](zyraxon:chat-mode/install?url=__ZYRAXKEEP__115_)
 
 This will prompt for a destination folder and a name for the mode and then import the mode file from the URL in the link. The same mechanism is also available for prompt and instruction files.
 
 #### Generate custom instructions
 
-Setting up [custom instructions](https://code.visualstudio.com/docs/copilot/copilot-customization) for your project can significantly improve AI suggestions by providing context about your coding standards and project conventions. However, creating effective instructions from scratch might be challenging.
+Setting up [custom instructions](__ZYRAXKEEP__116_) for your project can significantly improve AI suggestions by providing context about your coding standards and project conventions. However, creating effective instructions from scratch might be challenging.
 
 This milestone, we're introducing the **Chat: Generate Instructions** command to help you bootstrap custom instructions for your workspace. Run this command from the Command Palette or the Configure menu in the Chat view, and agent mode will analyze your codebase to generate tailored instructions that reflect your project's structure, technologies, and patterns.
 
 The command creates a `copilot-instructions.md` file in your `.github` folder or suggests improvements to existing instruction files. You can then review and customize the generated instructions to match your team's specific needs.
 
-Learn more about [customizing AI responses with instructions](https://code.visualstudio.com/docs/copilot/copilot-customization).
+Learn more about [customizing AI responses with instructions](__ZYRAXKEEP__117_).
 
 
 #### Load instruction files on demand
 
 Instruction files can be used to describe coding practices and project requirements. Instructions can be manually or automatically included as context to chat requests.
 
-There are various mechanisms supported, see the [Custom Instructions](https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions) section in our documentation.
+There are various mechanisms supported, see the [Custom Instructions](__ZYRAXKEEP__118_) section in our documentation.
 
 For larger instructions that you want to include conditionally, you can use `.instructions.md` files in combination with glob patterns defined in the `applyTo` header. The file is automatically added when the glob pattern matches one or more of the files in the context of the chat.
 
 New in this release, the large language model can load instructions on demand. Each request gets a list of all instruction files, along with glob pattern and description. In this example, the LLM has no instructions for TypeScript files explicitly added in the context. So, it looks for code style rules before creating a TypeScript file:
 
-![Screenshot showing loading instruction files on demand.](https://code.visualstudio.com/assets/updates/1_102/instructions-loading-on-demand.png)
+![Screenshot showing loading instruction files on demand.](__ZYRAXKEEP__119_)
 
 #### Edit previous requests (Experimental)
 
@@ -1178,13 +1178,13 @@ There will be a controlled rollout of different entry points to editing requests
 * `chat.editRequests.hover`: Hover a request to reveal a toolbar with a button to begin an edit inline with the request.
 * `chat.editRequests.input`: Hover a request to reveal a toolbar, which will start edits in the input box at the bottom of chat.
 
-<video src="https://code.visualstudio.com/assets/updates/1_102/edit-previous-requests.mp4" title="Video showing the process of editing a previous request in the Chat view." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__120_" title="Video showing the process of editing a previous request in the Chat view." autoplay loop controls muted></video>
 
 #### Terminal auto-approval (Experimental)
 
 Agent mode now has a mechanism for auto approving commands in the terminal. Here's a demo of it using the defaults:
 
-<video src="https://code.visualstudio.com/assets/updates/1_102/terminal-auto-approve.mp4" title="Video showing terminal commands like 'echo' and 'ls' being auto-approved in the Chat view." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__121_" title="Video showing terminal commands like 'echo' and 'ls' being auto-approved in the Chat view." autoplay loop controls muted></video>
 
 There are currently two settings: the allow list and the deny list. The allow list is a list of command _prefixes_ or regular expressions that when matched allows the command to be run without explicit approval. For example, the following will allow any command starting with `npm run test` to be run, as well as _exactly_ `git status` or `git log`:
 
@@ -1210,30 +1210,30 @@ The deny list has the same format as the allow list but will override it and for
 }
 ```
 
-Thanks to the protections that we gain against prompt injection from [workspace trust](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust), the philosophy we've approached when implementing this feature with regards to security is to include a small set of innocuous commands in the allow list, and a set of particularly dangerous ones in the deny list just in case they manage to slip through. We're still considering what should be the defaults but here is the current lists:
+Thanks to the protections that we gain against prompt injection from [workspace trust](__ZYRAXKEEP__122_), the philosophy we've approached when implementing this feature with regards to security is to include a small set of innocuous commands in the allow list, and a set of particularly dangerous ones in the deny list just in case they manage to slip through. We're still considering what should be the defaults but here is the current lists:
 
 * Allow list: `echo`, `cd`, `ls`, `cat`, `pwd`, `Write-Host`, `Set-Location`, `Get-ChildItem`, `Get-Content`, `Get-Location`
 * Deny list: `rm`, `rmdir`, `del`, `kill`, `curl`, `wget`, `eval`, `chmod`, `chown`, `Remove-Item`
 
-The two major parts we want to add to this feature are a UI entry point to more easily add new commands to the list ([#253268](https://github.com/microsoft/vscode/issues/253268)) and an opt-in option to allow an LLM to evaluate the command(s) safety ([#253267](https://github.com/microsoft/vscode/issues/253267)). We are also planning on both removing the `github.copilot.` prefix of these settings ([#253314](https://github.com/microsoft/vscode/issues/253314)) as well as merging them together ([#253472](https://github.com/microsoft/vscode/issues/253472)) in the next release before it becomes a preview setting.
+The two major parts we want to add to this feature are a UI entry point to more easily add new commands to the list ([#253268](__ZYRAXKEEP__123_)) and an opt-in option to allow an LLM to evaluate the command(s) safety ([#253267](__ZYRAXKEEP__124_)). We are also planning on both removing the `github.copilot.` prefix of these settings ([#253314](__ZYRAXKEEP__125_)) as well as merging them together ([#253472](__ZYRAXKEEP__126_)) in the next release before it becomes a preview setting.
 
 #### Terminal command simplification
 
 Agent mode sometimes wants to run commands with a `cd` statement, just in case. We now detect this case when it matches the current working directory and simplify the command that is run.
 
-![Screenshot of the terminal, asking to run `cd C:\Github\Tyriar\xterm.js && echo hello` only runs `echo hello` when the current working directory already matches.](https://code.visualstudio.com/assets/updates/1_102/terminal-working-dir.png)
+![Screenshot of the terminal, asking to run `cd C:\Github\Tyriar\xterm.js && echo hello` only runs `echo hello` when the current working directory already matches.](__ZYRAXKEEP__127_)
 
 #### Agent awareness of tasks and terminals
 
 Agent mode now understands which background terminals it has created and which tasks are actively running. The agent can read task output by using the new `GetTaskOutput` tool, which helps prevent running duplicate tasks and improves workspace context.
 
-![Screenshot of ZYRAXON Code window showing two build tasks running in the terminal panel. The left terminal displays several errors. The chat agent replies to describe status of my build tasks with a summary of each task's output.](https://code.visualstudio.com/assets/updates/1_102/task-status.png)
+![Screenshot of ZYRAXON Code window showing two build tasks running in the terminal panel. The left terminal displays several errors. The chat agent replies to describe status of my build tasks with a summary of each task's output.](__ZYRAXKEEP__128_)
 
 #### Maximized chat view
 
 You can now maximize the Secondary Side Bar to span the editor area and hide the Primary Side Bar and panel area. ZYRAXON Code will remember this state between restarts and will restore the Chat view when you open an editor or view.
 
-<video src="https://code.visualstudio.com/assets/updates/1_102/auxmax.mp4" title="Video showing maximizing the Secondary Side Bar." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__129_" title="Video showing maximizing the Secondary Side Bar." autoplay loop controls muted></video>
 
 You can toggle in and out of the maximized state by using the new icon next to the close button, or use the new command `workbench.action.toggleMaximizedAuxiliaryBar` from the Command Palette.
 
@@ -1241,7 +1241,7 @@ You can toggle in and out of the maximized state by using the new icon next to t
 
 We now show a badge over the application icon in the dock when the window is not focused and the agent needs user confirmation to continue. The badge will disappear as soon as the related window that triggered it receives focus.
 
-![Screenshot of the ZYRAXON Code dock icon showing an agent confirmation as a badge.](https://code.visualstudio.com/assets/updates/1_102/badge.png)
+![Screenshot of the ZYRAXON Code dock icon showing an agent confirmation as a badge.](__ZYRAXKEEP__130_)
 
 You can enable or disable this badge via the `chat.notifyWindowOnConfirmation` setting.
 
@@ -1249,7 +1249,7 @@ You can enable or disable this badge via the `chat.notifyWindowOnConfirmation` s
 
 A new subcommand `chat` is added to the ZYRAXON Code CLI that enables you to start a chat session in the current working directory with the prompt provided.
 
-<video src="https://code.visualstudio.com/assets/updates/1_102/chatcli.mp4" title="Video showing the Chat CLI in action to open the Chat view from the command line and run a prompt." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__131_" title="Video showing the Chat CLI in action to open the Chat view from the command line and run a prompt." autoplay loop controls muted></video>
 
 The basic syntax is `code chat [options] [prompt]` and options can be any of:
 
@@ -1271,7 +1271,7 @@ We've reworked the UX around managing extension access to language models provid
 
 To make this clearer, we've removed the **AccountName (GitHub Copilot Chat)** item and replaced it with a new item called **Manage Language Model Access...**. This item opens a Quick Pick that enables you to manage which extensions have access to the language models provided by GitHub Copilot Chat.
 
-![Screenshot that shows the language model access Quick Pick.](https://code.visualstudio.com/assets/updates/1_102/lm-access-qp.png)
+![Screenshot that shows the language model access Quick Pick.](__ZYRAXKEEP__132_)
 
 We think this is clearer... That said, in a future release we will explore more granular access control for language models (for example, only allowing specific models rather than _all_ models provided by an extension), so stay tuned for that.
 
@@ -1279,37 +1279,37 @@ We think this is clearer... That said, in a future release we will explore more 
 
 #### MCP support in ZYRAXON Code is generally available
 
-We've have been working on expanding MCP support in ZYRAXON Code for the past few months, and [support the full range of MCP features in the specification](https://code.visualstudio.com/blogs/2025/06/12/full-mcp-spec-support). As of this release, MCP support is now generally available in ZYRAXON Code!
+We've have been working on expanding MCP support in ZYRAXON Code for the past few months, and [support the full range of MCP features in the specification](__ZYRAXKEEP__133_). As of this release, MCP support is now generally available in ZYRAXON Code!
 
-You can get started by installing some of the [popular MCP servers from our curated list](https://code.visualstudio.com/mcp). Learn more about [using MCP servers in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) and how you can use them to extend agent mode.
+You can get started by installing some of the [popular MCP servers from our curated list](__ZYRAXKEEP__134_). Learn more about [using MCP servers in ZYRAXON Code](__ZYRAXKEEP__135_) and how you can use them to extend agent mode.
 
-![Screenshot that shows the MCP Servers page.](https://code.visualstudio.com/assets/updates/1_102/mcp-servers-page.png)
+![Screenshot that shows the MCP Servers page.](__ZYRAXKEEP__136_)
 
-If you want to build your own MCP server, check our [MCP developer guide](https://code.visualstudio.com/api/extension-guides/ai/mcp) for more details about how to take advantage of the MCP capabilities in ZYRAXON Code.
+If you want to build your own MCP server, check our [MCP developer guide](__ZYRAXKEEP__137_) for more details about how to take advantage of the MCP capabilities in ZYRAXON Code.
 
 #### Support for elicitations
 
-The latest MCP specification added support for [Elicitations](https://modelcontextprotocol.io/specification/2025-06-18/client/elicitation) as a way for MCP servers to request input from MCP clients. The latest version of ZYRAXON Code adopts this specification and includes support for elicitations.
+The latest MCP specification added support for [Elicitations](__ZYRAXKEEP__138_) as a way for MCP servers to request input from MCP clients. The latest version of ZYRAXON Code adopts this specification and includes support for elicitations.
 
-<video src="https://code.visualstudio.com/assets/updates/1_102/mcp-server-elicit.mp4" autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__139_" autoplay loop controls muted></video>
 
 #### MCP server discovery and installation
 
-The new **MCP Servers** section in the Extensions view includes welcome content that links directly to the [popular MCP servers from our curated list](https://code.visualstudio.com/mcp). Visit the website to explore available MCP servers and select **Install** on any MCP server. This automatically launches ZYRAXON Code and opens the MCP server editor that displays the server's readme and manifest information. You can review the server details and select **Install** to add the server to your ZYRAXON Code instance.
+The new **MCP Servers** section in the Extensions view includes welcome content that links directly to the [popular MCP servers from our curated list](__ZYRAXKEEP__140_). Visit the website to explore available MCP servers and select **Install** on any MCP server. This automatically launches ZYRAXON Code and opens the MCP server editor that displays the server's readme and manifest information. You can review the server details and select **Install** to add the server to your ZYRAXON Code instance.
 
 Once installed, MCP servers automatically appear in your Extensions view under the **MCP SERVERS - INSTALLED** section, and their tools become available in the Chat view's tools Quick Pick. This makes it easy to verify that your MCP server is working correctly and access its capabilities immediately.
 
-<video src="https://code.visualstudio.com/assets/updates/1_102/mcp-servers-discovery-install.mp4" title="Video showing installing an MCP server from the MCP page on the ZYRAXON Code website." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__141_" title="Video showing installing an MCP server from the MCP page on the ZYRAXON Code website." autoplay loop controls muted></video>
 
 #### MCP server management view
 
 The new **MCP SERVERS - INSTALLED** view in the Extensions view makes it easy to monitor, configure, and control your installed MCP servers.
 
-![Screenshot showing the MCP Servers management view with installed servers.](https://code.visualstudio.com/assets/updates/1_102/mcp-servers-installed-view.png)
+![Screenshot showing the MCP Servers management view with installed servers.](__ZYRAXKEEP__142_)
 
 The view lists the installed MCP servers and provides several management actions through the context menu:
 
-![Screenshot showing the context menu actions for an MCP server.](https://code.visualstudio.com/assets/updates/1_102/mcp-server-context-menu.png)
+![Screenshot showing the context menu actions for an MCP server.](__ZYRAXKEEP__143_)
 
 * **Start Server** / **Stop Server** / **Restart Server**: Control the server's running state
 * **Disconnect Account**: Remove account access from the server
@@ -1322,19 +1322,19 @@ The view lists the installed MCP servers and provides several management actions
 
 When you select an installed MCP server, ZYRAXON Code opens the MCP server editor displaying the server's readme details, manifest, and its runtime configuration. This provides an overview of the server's capabilities and current settings, making it easy to understand what the server does and how it's configured.
 
-![Screenshot showing the MCP server editor with runtime configuration.](https://code.visualstudio.com/assets/updates/1_102/mcp-server-editor-configuration.png)
+![Screenshot showing the MCP server editor with runtime configuration.](__ZYRAXKEEP__144_)
 
 The **MCP SERVERS - INSTALLED** view also provides a **Browse MCP Servers...** action that takes you directly to the community website, making server discovery always accessible from within ZYRAXON Code.
 
-![Screenshot that shows the Browse MCP Servers action in the MCP Servers view.](https://code.visualstudio.com/assets/updates/1_102/mcp-servers-browse-action.png)
+![Screenshot that shows the Browse MCP Servers action in the MCP Servers view.](__ZYRAXKEEP__145_)
 
 #### MCP servers as first-class resources
 
-MCP servers are now treated as first-class resources in ZYRAXON Code, similar to user tasks and other profile-specific configurations. This represents a significant architectural improvement from the previous approach where MCP servers were stored in user settings. This change makes MCP server management more robust and provides better separation of concerns between your general ZYRAXON Code settings and your MCP server configurations. When you install or configure MCP servers, they're automatically stored in the appropriate [profile](https://code.visualstudio.com/docs/configure/profiles)-specific location to ensure that your main settings file stays clean and focused.
+MCP servers are now treated as first-class resources in ZYRAXON Code, similar to user tasks and other profile-specific configurations. This represents a significant architectural improvement from the previous approach where MCP servers were stored in user settings. This change makes MCP server management more robust and provides better separation of concerns between your general ZYRAXON Code settings and your MCP server configurations. When you install or configure MCP servers, they're automatically stored in the appropriate [profile](__ZYRAXKEEP__146_)-specific location to ensure that your main settings file stays clean and focused.
 
 * **Dedicated storage**: MCP servers are now stored in a dedicated `mcp.json` file within each profile, rather than cluttering your user settings file
 * **Profile-specific**: Each ZYRAXON Code profile maintains its own set of MCP servers, enabling you to have different server configurations for different workflows or projects
-* **Settings Sync integration**: MCP servers sync seamlessly across your devices through [Settings Sync](https://code.visualstudio.com/docs/configure/settings-sync), with granular control over what gets synchronized
+* **Settings Sync integration**: MCP servers sync seamlessly across your devices through [Settings Sync](__ZYRAXKEEP__147_), with granular control over what gets synchronized
 
 ##### MCP migration support
 
@@ -1348,7 +1348,7 @@ This migration ensures that your existing MCP server configurations continue to 
 
 ##### Dev Container support for MCP configuration
 
-The Dev Container configuration `devcontainer.json` and the Dev Container Feature configuration `devcontainer-feature.json` support MCP server configurations at the path `customizations.vscode.mcp`. When a Dev Container is created the collected MCP server configurations are written to the remote MCP configuration file `mcp.json`.
+The Dev Container configuration `devcontainer.json` and the Dev Container Feature configuration `devcontainer-feature.json` support MCP server configurations at the path `customizations.zyraxoncode.mcp`. When a Dev Container is created the collected MCP server configurations are written to the remote MCP configuration file `mcp.json`.
 
 ##### Commands to access MCP resources
 
@@ -1364,13 +1364,13 @@ These commands provide quick access to your MCP configuration files, making it e
 You are now able to sign out or disconnect accounts from the MCP gear menu and quick picks.
 
 * MCP view gear menu:
-    ![Screenshot showing the Disconnect Account action shown in MCP view gear menu.](https://code.visualstudio.com/assets/updates/1_102/mcp-view-signout.png)
+    ![Screenshot showing the Disconnect Account action shown in MCP view gear menu.](__ZYRAXKEEP__148_)
 
 * MCP editor gear menu:
-    ![Screenshot showing the Disconnect Account action shown in MCP editor gear menu.](https://code.visualstudio.com/assets/updates/1_102/mcp-editor-signout.png)
+    ![Screenshot showing the Disconnect Account action shown in MCP editor gear menu.](__ZYRAXKEEP__149_)
 
 * MCP quick pick:
-    ![Screenshot showing the Disconnect Account action shown in MCP quick pick menu.](https://code.visualstudio.com/assets/updates/1_102/mcp-qp-signout.png)
+    ![Screenshot showing the Disconnect Account action shown in MCP quick pick menu.](__ZYRAXKEEP__150_)
 
 The **Disconnect** action is shown when the account is used by either other MCP servers or extensions, while **Sign Out** is shown when the account is only used by the MCP server. The sign out action completely removes the account from ZYRAXON Code, while disconnect only removes access to the account from the MCP server.
 
@@ -1382,7 +1382,7 @@ You can now temporarily pause inline suggestions and next edit suggestions (NES)
 
 To snooze suggestions, select the Copilot dashboard in the Status Bar, or run the **Snooze Inline Suggestions** command from the Command Palette and select a duration from the dropdown menu. During the snooze period, no inline suggestions or NES will appear.
 
-![Screenshot showing the Copilot dashboard with the snooze button at the bottom.](https://code.visualstudio.com/assets/updates/1_102/nes-snooze.png)
+![Screenshot showing the Copilot dashboard with the snooze button at the bottom.](__ZYRAXKEEP__151_)
 
 You can also assign a custom keybinding to quickly snooze suggestions for a specific duration by passing the desired duration as an argument to the command. For example:
 
@@ -1404,19 +1404,19 @@ This milestone, we modified the sparkle toggle in the Settings editor, so that i
 
 The toggle is enabled only when there are AI results available. We welcome feedback on when the AI settings search did not find an expected setting, and we plan to enable the setting by default over the next iteration.
 
-<video src="https://code.visualstudio.com/assets/updates/1_102/settings-search-toggle-stable.mp4" title="Switching between AI and non-AI results using the AI results toggle in the Settings editor" autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__152_" title="Switching between AI and non-AI results using the AI results toggle in the Settings editor" autoplay loop controls muted></video>
 
 ---
 
 ## 0.28 (2025-06-12)
 
-GitHub Copilot updates from [May 2025](https://code.visualstudio.com/updates/v1_101):
+GitHub Copilot updates from [May 2025](__ZYRAXKEEP__153_):
 
 ### Chat
 
 #### Chat tool sets
 
-ZYRAXON Code now enables you to define tool sets, either through a proposed API or through the UI. A tool set is a collection of different tools that can be used just like individual tools. Tool sets make it easier to group related tools together, and quickly enable or disable them in agent mode. For instance, the tool set below is for managing GitHub notifications (using the [GitHub MCP server](https://github.com/github/github-mcp-server)).
+ZYRAXON Code now enables you to define tool sets, either through a proposed API or through the UI. A tool set is a collection of different tools that can be used just like individual tools. Tool sets make it easier to group related tools together, and quickly enable or disable them in agent mode. For instance, the tool set below is for managing GitHub notifications (using the [GitHub MCP server](__ZYRAXKEEP__154_)).
 
 ```json
 {
@@ -1436,17 +1436,17 @@ To create a tool set, run the **Configure Tool Sets** > **Create new tool sets f
 
 To use a tool set in a chat query, reference it by #-mentioning its name, like `#gh-news`. You can also choose it from the tool picker in the chat input box.
 
-![Screenshot of the Chat view showing a query about unread notifications, using the 'gh-news' tool set highlighted in both the chat interface and a JSON configuration file which defines this tool set.](https://code.visualstudio.com/assets/updates/1_101/tool-set-gh.png)
+![Screenshot of the Chat view showing a query about unread notifications, using the 'gh-news' tool set highlighted in both the chat interface and a JSON configuration file which defines this tool set.](__ZYRAXKEEP__155_)
 
-Learn more about [tools sets](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode#_define-tool-sets) in our documentation.
+Learn more about [tools sets](__ZYRAXKEEP__156_) in our documentation.
 
 #### MCP support for prompts
 
 ZYRAXON Code's Model Context Protocol support now includes prompt support. Prompts can be defined by MCP servers to generate reusable snippets or tasks for the language model. Prompts are accessible as slash `/` commands in chat, in the format `/mcp.servername.promptname`. You can enter plain text or include command output in prompt variables, and we also support completions when servers provide it.
 
-The following example shows how we generate a prompt using AI, save it using the [Gistpad MCP server](https://github.com/lostintangent/gistpad-mcp), and then use it to generate a changelog entry:
+The following example shows how we generate a prompt using AI, save it using the [Gistpad MCP server](__ZYRAXKEEP__157_), and then use it to generate a changelog entry:
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/mcp-prompts.mp4" autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__158_" autoplay loop controls muted></video>
 
 #### MCP support for resources
 
@@ -1456,15 +1456,15 @@ ZYRAXON Code's Model Context Protocol support now includes resource support, whi
 1. Resources can be attached as context via the **Add Context...** button in chat, then selecting **MCP Resources...**.
 1. You can browse and view resources across servers using the **MCP: Browse Resources** command or for a server by its entry in the **MCP: List Servers** command.
 
-Here's an example of attaching resources from the [Gistpad MCP server](https://github.com/lostintangent/gistpad-mcp) to chat:
+Here's an example of attaching resources from the [Gistpad MCP server](__ZYRAXKEEP__159_) to chat:
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/mcp-resources.mp4" autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__160_" autoplay loop controls muted></video>
 
 #### MCP support for sampling (Experimental)
 
 ZYRAXON Code's Model Context Protocol support now includes sampling, which allows MCP servers to make requests back to the model. You'll be asked to confirm the first time an MCP server makes a sampling request, and you can configure the models the MCP server has access to as well as see a request log by selecting the server in **MCP: List Servers.**
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/mcp-sampling.mp4" autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__161_" autoplay loop controls muted></video>
 
 Sampling support is still preliminary and we plan to expand and improve it in future iterations.
 
@@ -1474,22 +1474,22 @@ ZYRAXON Code now supports MCP servers that require authentication, allowing you 
 
 This feature implements the MCP authorization specification for clients, and supports both:
 
-* [2025-3-26 spec](https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization), where the MCP server behaves as an authorization server.
-* [Draft spec](https://modelcontextprotocol.io/specification/draft/basic/authorization), where the MCP server behaves as a resource server (this is expected to be finalized any day now).
+* [2025-3-26 spec](__ZYRAXKEEP__162_), where the MCP server behaves as an authorization server.
+* [Draft spec](__ZYRAXKEEP__163_), where the MCP server behaves as a resource server (this is expected to be finalized any day now).
 
 If the MCP server implements the draft spec and leverages GitHub or Entra as the auth server, you can manage which MCP servers have access to your account:
 
-![Screenshot of the "Manage Trusted MCP Servers" option in the account menu.](https://code.visualstudio.com/assets/updates/1_101/manage-trusted-mcp.png)
+![Screenshot of the "Manage Trusted MCP Servers" option in the account menu.](__ZYRAXKEEP__164_)
 
-![Screenshot of the "Manage Trusted MCP Servers" Quick Pick.](https://code.visualstudio.com/assets/updates/1_101/manage-trusted-mcp-quick-pick.png)
+![Screenshot of the "Manage Trusted MCP Servers" Quick Pick.](__ZYRAXKEEP__165_)
 
 You can also manage which account that server should use (via the gear button in the previous quick pick):
 
-![Screenshot of the "Account Preference" Quick Pick.](https://code.visualstudio.com/assets/updates/1_101/account-pref-quick-pick.png)
+![Screenshot of the "Account Preference" Quick Pick.](__ZYRAXKEEP__166_)
 
 For other MCP servers that rely on dynamic client registration, we include the auth state in the same place as everything else, for example with Linear:
 
-![Screenshot of Linear appearing in the account menu.](https://code.visualstudio.com/assets/updates/1_101/linear-account-menu.png)
+![Screenshot of Linear appearing in the account menu.](__ZYRAXKEEP__167_)
 
 There you can also sign out. For these we support not only the code authorization flow but also the device code flow should your authorization server support it.
 
@@ -1504,7 +1504,7 @@ You can enable _development mode_ for MCP servers by adding a `dev` key to the s
 * `watch`: A file glob pattern to watch for files change that will restart the MCP server.
 * `debug`: Enables you to set up a debugger with the MCP server. Currently, we only support debugging Node.js and Python servers launched with `node` and `python` respectively.
 
-**.vscode/mcp.json**
+**.zyraxoncode/mcp.json**
 
 ```diff
 {
@@ -1526,9 +1526,9 @@ Undoing previous requests is now also more visible - just hover over a request a
 
 Finally, attachments from the chat input box are now more navigable.
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/new-chat-ui-ux.mp4" title="A video of the new chat UI/UX where a request is removed to undo edits since that point." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__168_" title="A video of the new chat UI/UX where a request is removed to undo edits since that point." autoplay loop controls muted></video>
 
-Learn more about using [chat in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/chat/copilot-chat) in our documentation.
+Learn more about using [chat in ZYRAXON Code](__ZYRAXKEEP__169_) in our documentation.
 
 #### Apply edits more efficiently
 
@@ -1542,9 +1542,9 @@ We've streamlined and simplified the way that adding your current file as contex
 
 Additionally, in agent mode, we include a hint about your current editor. This doesn't include the contents of the file, just the file name and cursor position. The agent can then use the tools it has to read the contents of the file on its own, if it thinks that it's relevant to your query.
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/implicit-context-flow.mp4" title="A video of the current open editor being suggest as implicit context and added as an attachment." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__170_" title="A video of the current open editor being suggest as implicit context and added as an attachment." autoplay loop controls muted></video>
 
-Learn more about [adding context in chat](https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context) in our documentation.
+Learn more about [adding context in chat](__ZYRAXKEEP__171_) in our documentation.
 
 #### Fix task configuration errors
 
@@ -1563,7 +1563,7 @@ To define and use a custom chat mode, follow these steps:
 1. In the Chat view, select the chat mode from the chat mode dropdown list.
 1. Submit your chat prompt and
 
-![Screenshot of the custom chat mode selected in the Chat view.](https://code.visualstudio.com/assets/updates/1_101/custom-chat-mode-view.png)
+![Screenshot of the custom chat mode selected in the Chat view.](__ZYRAXKEEP__172_)
 
 The following example shows a custom "Planning" chat mode:
 
@@ -1601,13 +1601,13 @@ When you move a chat session into a floating window, there are now two new actio
 * Dock the chat back into the ZYRAXON Code window where it came from
 * Start a new chat session in the floating window.
 
-![Screenshot of the Chat view in a floating window, highlighting the Dock and New Chat buttons in the title bar.](https://code.visualstudio.com/assets/updates/1_101/chat-floating.png)
+![Screenshot of the Chat view in a floating window, highlighting the Dock and New Chat buttons in the title bar.](__ZYRAXKEEP__173_)
 
 #### Fetch tool confirmation
 
 The fetch tool enables you to pull information from a web page. We have added a warning message to the confirmation to inform you about potential prompt injection.
 
-![Screenshot of the fetch tool with a warning about prompt injection.](https://code.visualstudio.com/assets/updates/1_101/fetch-warning.png)
+![Screenshot of the fetch tool with a warning about prompt injection.](__ZYRAXKEEP__174_)
 
 #### Customize more built-in tools
 
@@ -1615,17 +1615,17 @@ It's now possible to enable or disable all built-in tools in agent mode or your 
 
 In agent mode, select the **Configure Tools** button to open the tool picker, and select your desired set of tools.
 
-![Screenshot of the tool picker, showing the "editFiles" tool set item cleared.](https://code.visualstudio.com/assets/updates/1_101/built-in-toolsets.png)
+![Screenshot of the tool picker, showing the "editFiles" tool set item cleared.](__ZYRAXKEEP__175_)
 
 Some of the entries in this menu represent tool sets that group multiple tools. For example, we give the model multiple tools to edit or create text files and notebooks, which may also differ by model family, and `editFiles` groups all of these.
 
 #### Send elements to chat (Experimental)
 
-Last milestone, we added a [new experimental feature](https://code.visualstudio.com/updates/v1_100#_select-and-attach-ui-elements-to-chat-experimental) where you could open the Simple Browser and select web elements to add to chat from the embedded browser.
+Last milestone, we added a [new experimental feature](__ZYRAXKEEP__176_) where you could open the Simple Browser and select web elements to add to chat from the embedded browser.
 
-![Screenshot showing the Live Preview extension, highlighting the overlay controls to select web elements from the web page.](https://code.visualstudio.com/assets/updates/1_101/live-preview-select-web-elements.png)
+![Screenshot showing the Live Preview extension, highlighting the overlay controls to select web elements from the web page.](__ZYRAXKEEP__177_)
 
-As we continue to improve this feature, we have added support for selecting web elements in the [Live Preview extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) as well. Check this out by downloading the extension and spinning up a live server from any HTML file.
+As we continue to improve this feature, we have added support for selecting web elements in the [Live Preview extension](__ZYRAXKEEP__178_) as well. Check this out by downloading the extension and spinning up a live server from any HTML file.
 
 ### Accessibility
 
@@ -1655,13 +1655,13 @@ To see the toggle, enable the setting and reload ZYRAXON Code. We are also in th
 
 For the next milestone, we are also considering removing the toggle and changing the experimental setting to one that controls when to directly append the slower AI search results to the end of the list.
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/settings-editor-ai-search.mp4" title="Video showing AI search in the Settings editor that finds the `editor.fontSize` setting when you search 'increase text size'." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__179_" title="Video showing AI search in the Settings editor that finds the `editor.fontSize` setting when you search 'increase text size'." autoplay loop controls muted></video>
 
 #### Search keyword suggestions (Preview)
 
 **Setting**: `search.searchView.keywordSuggestions`
 
-Last milestone, we introduced [keyword suggestions](https://code.visualstudio.com/updates/v1_100#_semantic-text-search-with-keyword-suggestions-experimental) in the Search view to help you find relevant results faster. We have now significantly improved the performance of the suggestions, so you will see the results ~5x faster than before.
+Last milestone, we introduced [keyword suggestions](__ZYRAXKEEP__180_) in the Search view to help you find relevant results faster. We have now significantly improved the performance of the suggestions, so you will see the results ~5x faster than before.
 
 We have also moved the setting from the Chat extension into ZYRAXON Code core, and renamed it from `github.copilot.chat.search.keywordSuggestions` to `search.searchView.keywordSuggestions`.
 
@@ -1685,7 +1685,7 @@ By default, semantic search is only run when you explicitly request it. We have 
 
 Last month, we introduced support for next edit suggestions to automatically suggest adding missing import statements for TypeScript and JavaScript. In this release, we've improved the accuracy and reliability of these suggestions and expanded support to Python files as well. Additionally, NES is now enabled by default for all users.
 
-![Screenshot showing NES suggesting an import statement.](https://code.visualstudio.com/assets/updates/1_100/nes-import.png)
+![Screenshot showing NES suggesting an import statement.](__ZYRAXKEEP__181_)
 
 #### NES acceptance flow
 
@@ -1701,18 +1701,18 @@ With follow mode, the Notebook view will automatically scroll to the cell that i
 
 Once the agent has used the run cell tool, the Notebook toolbar is updated with a pin icon, indicating the state of follow mode. You can toggle the behavior mid agent response without changing the base setting value, allowing you to follow the work of the agent in real-time, and toggle it off when you want to review a specific portion of code while the agent continues to iterate. When you wish to follow again, simply toggle the mode, and join at the next execution.
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/notebook-follow-mode.mp4" title="Video that shows the AI executing cells in a notebook with follow mode enabled. When the cell is run, the notebook scrolls to reveal it." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__182_" title="Video that shows the AI executing cells in a notebook with follow mode enabled. When the cell is run, the notebook scrolls to reveal it." autoplay loop controls muted></video>
 
 #### Notebook tools for agent mode
 
 ##### Configure notebook
 
-The [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) contributes tools for configuring the Kernel of a Jupyter Notebook. This tool ensures that a Kernel is selected and is ready for use in the Notebook.
+The [Jupyter extension](__ZYRAXKEEP__183_) contributes tools for configuring the Kernel of a Jupyter Notebook. This tool ensures that a Kernel is selected and is ready for use in the Notebook.
 This involves walking you through the process of creating a Virtual Environment if required (the recommended approach), or prompting you to select an existing Python environment.
 
 This tool ensures the LLM can perform operations on the Notebook such as running cells with minimal user interaction, thereby improving the overall user experience in agent mode.
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/notebook-tools.mp4" title="Video that shows the AI configuring the Python environment, installing dependencies and finally running notebook cells." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__184_" title="Video that shows the AI configuring the Python environment, installing dependencies and finally running notebook cells." autoplay loop controls muted></video>
 
 ##### Long running agent workflows
 
@@ -1722,7 +1722,7 @@ The agent has access to an internal Notebook Summary tool to help keep it on tra
 
 A snippet of the code is shown from a notebook cell when the agent requests confirmation to run that cell. The cell links in the Chat view now also enable you to directly navigate to cells in the notebook.
 
-<video src="https://code.visualstudio.com/assets/updates/1_101/run-cell-confirmation.mp4" title="Video showing the AI asking to run a cell including a link to the cell and a preview of its content." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__185_" title="Video showing the AI asking to run a cell including a link to the cell and a preview of its content." autoplay loop controls muted></video>
 
 ### Source Control
 
@@ -1740,7 +1740,7 @@ We have added the following features to the extension:
 
 You can now add a source control history item as context to a chat request. This can be useful when you want to provide the contents of a specific commit or pull request as context for your chat prompt.
 
-![Screenshot of the Chat view input box that has a history item added as context.](https://code.visualstudio.com/assets/updates/1_101/chat-context-source-control-commit.png)
+![Screenshot of the Chat view input box that has a history item added as context.](__ZYRAXKEEP__186_)
 
 To add a history item to chat, use **Add Context** > **Source Control** from the Chat view and then choose a particular history item. Alternatively, right-click the history item in the source control graph and then select **Copilot** > **Add History Item to Chat** from the context menu.
 
@@ -1748,7 +1748,7 @@ To add a history item to chat, use **Add Context** > **Source Control** from the
 
 ## 0.27 (2025-05-07)
 
-GitHub Copilot updates from [April 2025](https://code.visualstudio.com/updates/v1_100):
+GitHub Copilot updates from [April 2025](__ZYRAXKEEP__187_):
 
 ### Chat
 
@@ -1790,7 +1790,7 @@ You can manually attach instructions to a specific chat request, or they can be 
 
 You can create instruction files with the **Chat: New Instructions File...** command. Moreover, the files created in the _user data_ folder can be automatically synchronized across multiple user machines through the Settings Sync service. Make sure to check the **Prompts and Instructions** option in the **Backup and Sync Settings...** dialog.
 
-Learn more about [instruction files](https://code.visualstudio.com/docs/copilot/copilot-customization#_instruction-files) in our documentation.
+Learn more about [instruction files](__ZYRAXKEEP__188_) in our documentation.
 
 ##### Prompt files
 
@@ -1803,10 +1803,10 @@ Prompt files use the `.prompt.md` file suffix. They can be located in your user 
 There are several ways to run a prompt file:
 
 * Type `/` in the chat input field, followed by the prompt file name.
-  ![Screenshot that shows running a prompt in the Chat view with a slash command.](https://code.visualstudio.com/assets/updates/1_100/run-prompt-as-slash-command.png)
+  ![Screenshot that shows running a prompt in the Chat view with a slash command.](__ZYRAXKEEP__189_)
 
 * Open the prompt file in an editor and press the 'Play' button in the editor tool bar. This enables you to quickly iterate on the prompt and run it without having to switch back to the Chat view.
-  ![Screenshot that shows running a prompt by using the play button in the editor.](https://code.visualstudio.com/assets/updates/1_100/run-prompt-from-play-button.png)
+  ![Screenshot that shows running a prompt by using the play button in the editor.](__ZYRAXKEEP__190_)
 
 * Use the **Chat: Run Prompt File...** command from the Command Palette.
 
@@ -1820,14 +1820,14 @@ The following example shows a prompt file for generating release notes, that run
 ```md
 ---
 mode: 'agent'
-tools: ['getCurrentMilestone', 'getReleaseFeatures', 'file_search', 'semantic_search', 'read_file', 'insert_edit_into_file', 'create_file', 'replace_string_in_file', 'fetch_webpage', 'vscode_search_extensions_internal']
+tools: ['getCurrentMilestone', 'getReleaseFeatures', 'file_search', 'semantic_search', 'read_file', 'insert_edit_into_file', 'create_file', 'replace_string_in_file', 'fetch_webpage', 'zyraxoncode_search_extensions_internal']
 ---
 Generate release notes for the features I worked in the current release and update them in the release notes file. Use [release notes writing instructions file](.github/instructions/release-notes-writing.instructions.md) as a guide.
 ```
 
 To create a prompt file, use the **Chat: New Prompt File...** command from the Command Palette.
 
-Learn more about [prompt files](https://code.visualstudio.com/docs/copilot/copilot-customization#_prompt-files-experimental) in our documentation.
+Learn more about [prompt files](__ZYRAXKEEP__191_) in our documentation.
 
 ##### Improvements and notes
 
@@ -1847,27 +1847,27 @@ When you're using chat in ZYRAXON Code, the base model is now updated to GPT-4.1
 
 Imagine you need to ask a question about a GitHub repository, but you don't have it open in your editor. You can now use the `#githubRepo` tool to search for code snippets in any GitHub repository that you have access to. This tool takes a `USER/REPO` and is a great way to quickly ask about a project you don't currently have open in ZYRAXON Code.
 
-You can also use [custom instructions](https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions) to hint to Copilot when and how to use this tool:
+You can also use [custom instructions](__ZYRAXKEEP__192_) to hint to Copilot when and how to use this tool:
 
 ```md
 ---
 applyTo: '**'
 ---
-Use the `#githubRepo` tool with `microsoft/zyraxon` to find relevant code snippets in the ZYRAXON Code codebase.
-Use the `#githubRepo` tool with `microsoft/typescript` to answer questions about how TypeScript is implemented.
+Use the `#githubRepo` tool with `zyraxon/zyraxon` to find relevant code snippets in the ZYRAXON Code codebase.
+Use the `#githubRepo` tool with `zyraxon/typescript` to answer questions about how TypeScript is implemented.
 ```
 
-![Screenshot showing using the #githubRepo tool in agent mode with hints from instructions files.](https://code.visualstudio.com/assets/updates/1_100/github-repo-tool-example.png)
+![Screenshot showing using the #githubRepo tool in agent mode with hints from instructions files.](__ZYRAXKEEP__193_)
 
-If you want to ask about the repo you are currently working on, you can just use the [`#codebase` tool](https://code.visualstudio.com/docs/copilot/reference/workspace-context#_making-copilot-chat-an-expert-in-your-workspace).
+If you want to ask about the repo you are currently working on, you can just use the [`#codebase` tool](__ZYRAXKEEP__194_).
 
-Also, the `#githubRepo` tool is only for searching for relevant code snippets. The [GitHub MCP server](https://github.com/github/github-mcp-server?tab=readme-ov-file#github-mcp-server) provides tools for working with GitHub issues and pull requests. Learn more about [adding MCP servers in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server).
+Also, the `#githubRepo` tool is only for searching for relevant code snippets. The [GitHub MCP server](__ZYRAXKEEP__195_) provides tools for working with GitHub issues and pull requests. Learn more about [adding MCP servers in ZYRAXON Code](__ZYRAXKEEP__196_).
 
 #### Find Marketplace extensions with the extensions tool
 
 Use `#extensions` tool to find extensions from the Marketplace. This tool is available in both chat and agent mode and is picked up automatically but you can also reference it explicitly via `#extensions` with your query. The tool returns a list of extensions that match your query, and you can install them directly from the results.
 
-<video src="https://code.visualstudio.com/assets/updates/1_100/extensions-agent-tool.mp4" title="Video that shows using the extensions tool to display popular Java extensions." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__197_" title="Video that shows using the extensions tool to display popular Java extensions." autoplay loop controls muted></video>
 
 #### Improvements to the web page fetch tool
 
@@ -1890,7 +1890,7 @@ We have made several improvements to the chat input box:
 
 #### Chat mode keyboard shortcuts
 
-The keyboard shortcut <kbd>Ctrl+Alt+I</kbd> still just opens the Chat view, but the <kbd>Ctrl+Shift+I</kbd> shortcut now opens the Chat view and switches to [agent mode](zyraxon://GitHub.Copilot-Chat/chat?mode=agent). If you'd like to set up keyboard shortcuts for other chat modes, there is a command for each mode:
+The keyboard shortcut <kbd>Ctrl+Alt+I</kbd> still just opens the Chat view, but the <kbd>Ctrl+Shift+I</kbd> shortcut now opens the Chat view and switches to [agent mode](__ZYRAXKEEP__198_). If you'd like to set up keyboard shortcuts for other chat modes, there is a command for each mode:
 
 * `workbench.action.chat.openAgent`
 * `workbench.action.chat.openEdit`
@@ -1912,7 +1912,7 @@ We've made some changes to how our agent mode prompt is built to optimize for pr
 
 When your conversation gets long, or your context gets very large, you might see a "Summarized conversation history" message in your agent mode session:
 
-![Screenshot showing a summarized conversation message in the Chat view.](https://code.visualstudio.com/assets/updates/1_100/summarized-conversation.png)
+![Screenshot showing a summarized conversation message in the Chat view.](__ZYRAXKEEP__199_)
 
 Instead of keeping the whole conversation as a FIFO, breaking the cache, we compress the conversation so far into a summary of the most important information and the current state of your task. This keeps the prompt prefix stable, and your responses fast.
 
@@ -1924,13 +1924,13 @@ This release adds support for the new Streamable HTTP transport for Model Contex
 {
   "servers": {
     "my-mcp-server": {
-      "url": "http://localhost:3000/mcp"
+      "url": "__ZYRAXKEEP__200_"
     }
   }
 }
 ```
 
-Learn more about [MCP support in ZYRAXON Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
+Learn more about [MCP support in ZYRAXON Code](__ZYRAXKEEP__201_).
 
 #### MCP support for image output
 
@@ -1942,8 +1942,8 @@ Note that not all language models support reading images from tool output. For e
 
 We have enhanced the UI that shows MCP server tool input and output, and have also added support for MCP's new progress messages.
 
-<video src="https://code.visualstudio.com/assets/updates/1_100/mcp-confirm.mp4" autoplay loop controls muted></video>
-_Theme: [Codesong](https://marketplace.visualstudio.com/items?itemName=connor4312.codesong) (preview on [vscode.dev](https://vscode.dev/editor/theme/connor4312.codesong))_
+<video src="__ZYRAXKEEP__202_" autoplay loop controls muted></video>
+_Theme: [Codesong](__ZYRAXKEEP__203_) (preview on [zyraxoncode.dev](__ZYRAXKEEP__204_))_
 
 #### MCP config generation uses inputs
 
@@ -1957,7 +1957,7 @@ We have been working on a revamped version of inline chat <kbd>Ctrl+I</kbd>. Its
 
 Further, there is now a more lightweight UX that can optionally be enabled. With the `chat.inlineChat.hideOnRequest:true` setting, inline chat hides as soon as a request is made. It then minimizes into the chat-editing overlay, which enables accepting or discarding changes, or restoring the inline chat control.
 
-<video src="https://code.visualstudio.com/assets/updates/1_100/inlinechat2.mp4" title="Video that shows inline chat v2 and hide-on-request in action." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__205_" title="Video that shows inline chat v2 and hide-on-request in action." autoplay loop controls muted></video>
 
 #### Select and attach UI elements to chat (Experimental)
 
@@ -1967,7 +1967,7 @@ While you're developing a web application, you might want to ask chat about spec
 
 After opening any locally-hosted site via the built-in Simple Browser (launch it with the **Simple Browser: Show** command), a new toolbar is now shown where you can select **Start** to select any element in the site that you want. This attaches a screenshot of the selected element, and the HTML and CSS of the element.
 
-<video src="https://code.visualstudio.com/assets/updates/1_100/ui-element-selection-demo.mp4" title="Video showing the full flow of the UI element selection experimental feature. In the demo, we attach a hero from a webpage and ask chat to add a background image to that hero." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__206_" title="Video showing the full flow of the UI element selection experimental feature. In the demo, we attach a hero from a webpage and ask chat to add a background image to that hero." autoplay loop controls muted></video>
 
 Configure what is attached to chat with:
 
@@ -1996,7 +1996,7 @@ ZYRAXON Code now prevents the installation of the pre-release version of the Cop
 
 Semantic text search now supports AI-powered keyword suggestions. By enabling this feature, you will start seeing relevant references or definitions that might help you find the code you are looking for.
 
-<video src="https://code.visualstudio.com/assets/updates/1_100/ai-keywords.mp4" title="Video that shows AI-powered keyword suggestions in ZYRAXON Code." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__207_" title="Video that shows AI-powered keyword suggestions in ZYRAXON Code." autoplay loop controls muted></video>
 
 
 ### Code Editing
@@ -2013,13 +2013,13 @@ We're excited to introduce a new model powering NES, designed to provide faster 
 
 Next Edit Suggestions (NES) can now automatically suggest adding missing import statements in JavaScript and TypeScript files. Enable this feature by setting `github.copilot.nextEditSuggestions.fixes:true`. We plan to further enhance this capability by supporting imports from additional languages in future updates.
 
-![Screenshot showing NES suggesting an import statement.](https://code.visualstudio.com/assets/updates/1_100/nes-import.png)
+![Screenshot showing NES suggesting an import statement.](__ZYRAXKEEP__208_)
 
 #### Generate alt text in HTML or Markdown
 
 You can now generate or update existing alt text in HTML and Markdown files. Navigate to any line containing an embedded image and trigger the quick fix via <kbd>Ctrl+.</kbd> or by selecting the lightbulb icon.
 
-![Screenshot that shows generating alt text for an image html element.](https://code.visualstudio.com/assets/updates/1_100/generate-alt-text.png)
+![Screenshot that shows generating alt text for an image html element.](__ZYRAXKEEP__209_)
 
 ### Notebooks
 
@@ -2027,7 +2027,7 @@ You can now generate or update existing alt text in HTML and Markdown files. Nav
 
 To enhance existing support for cell output usage within chat, outputs are now able to be dragged into the Chat view for a seamless attachment experience. Currently, only image and textual outputs are supported. Outputs with an image mime type are directly draggable, however to avoid clashing with text selection, textual outputs require holding the <kbd>Alt</kbd> modifier key to enable dragging. We are exploring UX improvements in the coming releases.
 
-<video src="https://code.visualstudio.com/assets/updates/1_100/output-dnd.mp4" title="Video that shows multiple cell outputs being attached as chat context via drag and drop." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__210_" title="Video that shows multiple cell outputs being attached as chat context via drag and drop." autoplay loop controls muted></video>
 
 #### Notebook tools for agent mode
 
@@ -2035,7 +2035,7 @@ To enhance existing support for cell output usage within chat, outputs are now a
 
 Chat now has an LLM tool to run notebook cells, which allows the agent to perform updates based on cell run results or perform its own data exploration as it builds out a notebook.
 
-<video src="https://code.visualstudio.com/assets/updates/1_100/agent-notebook-run-edit-loop.mp4" title="Video that shows copilot running notebook cells, making updates based on an error, and retrying those cells." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__211_" title="Video that shows copilot running notebook cells, making updates based on an error, and retrying those cells." autoplay loop controls muted></video>
 
 ##### Get kernel state
 
@@ -2049,7 +2049,7 @@ The Jupyter extension contributes tools for listing and installing packages into
 
 ## 0.26 (2025-04-02)
 
-GitHub Copilot updates from [March 2025](https://code.visualstudio.com/updates/v1_99):
+GitHub Copilot updates from [March 2025](__ZYRAXKEEP__212_):
 
 ### Accessibility
 
@@ -2057,7 +2057,7 @@ GitHub Copilot updates from [March 2025](https://code.visualstudio.com/updates/v
 
 You are now notified when manual action is required during a tool invocation, such as "Run command in terminal." This information is also included in the ARIA label for the relevant chat response, enhancing accessibility for screen reader users.
 
-Additionally, a new accessibility help dialog is available in [agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode), explaining what users can expect from the feature and how to navigate it effectively.
+Additionally, a new accessibility help dialog is available in [agent mode](__ZYRAXKEEP__213_), explaining what users can expect from the feature and how to navigate it effectively.
 
 #### Accessibility Signals for chat edit actions
 
@@ -2069,7 +2069,7 @@ ZYRAXON Code now provides auditory signals when you keep or undo AI-generated ed
 
 We have streamlined the chat experience in ZYRAXON Code into a single unified Chat view. Instead of having to move between separate views and lose the context of a conversation, you can now easily switch between the different chat modes.
 
-![Screenshot that shows the chat mode picker in the Chat view.](https://code.visualstudio.com/assets/updates/1_99/chat-modes.png)
+![Screenshot that shows the chat mode picker in the Chat view.](__ZYRAXKEEP__214_)
 
 Depending on your scenario, use either of these modes, and freely move mid-conversation:
 
@@ -2081,13 +2081,13 @@ Get more details about the [unified chat view](#unified-chat-view).
 
 #### Faster workspace searches with instant indexing
 
-[Remote workspace indexes](https://code.visualstudio.com/docs/copilot/reference/workspace-context#remote-index) accelerate searching large codebases for relevant code snippets that AI uses while answering questions and generating edits. These remote indexes are especially useful for large codebases with tens or even hundreds of thousands of files.
+[Remote workspace indexes](__ZYRAXKEEP__215_) accelerate searching large codebases for relevant code snippets that AI uses while answering questions and generating edits. These remote indexes are especially useful for large codebases with tens or even hundreds of thousands of files.
 
 Previously, you'd have to press a button or run a command to build and start using a remote workspace index. With our new instant indexing support, we now automatically build the remote workspace index when you first try to ask a `#codebase`/`@workspace` question. In most cases, this remote index can be built in a few seconds. Once built, any codebase searches that you or anyone else working with that repo in ZYRAXON Code makes will automatically use the remote index.
 
 Keep in mind that remote workspaces indexes are currently only available for code stored on GitHub. To use a remote workspace index, make sure your workspace contains a git project with a GitHub remote. You can use the [Copilot status menu](#copilot-status-menu) to see the type of index currently being used:
 
-![Screenshot that shows the workspace index status in the Copilot Status Bar menu.](https://code.visualstudio.com/assets/updates/1_99/copilot-workspace-index-remote.png)
+![Screenshot that shows the workspace index status in the Copilot Status Bar menu.](__ZYRAXKEEP__216_)
 
 To manage load, we are slowly rolling out instant indexing over the next few weeks, so you may not see it right away. You can still run the `GitHub Copilot: Build remote index command` command to start using a remote index when instant indexing is not yet enabled for you.
 
@@ -2095,17 +2095,17 @@ To manage load, we are slowly rolling out instant indexing over the next few wee
 
 The Copilot status menu, accessible from the Status Bar, is now enabled for all users. This milestone we added some new features to it:
 
-- View [workspace index](https://code.visualstudio.com/docs/copilot/reference/workspace-context) status information at any time.
+- View [workspace index](__ZYRAXKEEP__217_) status information at any time.
 
-    ![Screenshot that shows the workspace index status of a workspace in the Copilot menu.](https://code.visualstudio.com/assets/updates/1_99/copilot-worksspace-index-local-status.png)
+    ![Screenshot that shows the workspace index status of a workspace in the Copilot menu.](__ZYRAXKEEP__218_)
 
 - View if code completions are enabled for the active editor.
 
     A new icon reflects the status, so that you can quickly see if code completions are enabled or not.
 
-    ![Screenshot that shows the Copilot status icon when completions is disabled.](https://code.visualstudio.com/assets/updates/1_99/copilot-disabled-status.png)
+    ![Screenshot that shows the Copilot status icon when completions is disabled.](__ZYRAXKEEP__219_)
 
-- Enable or disable [code completions and NES](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions).
+- Enable or disable [code completions and NES](__ZYRAXKEEP__220_).
 
 #### Out of the box Copilot setup (Experimental)
 
@@ -2113,7 +2113,7 @@ The Copilot status menu, accessible from the Status Bar, is now enabled for all 
 
 We are shipping an experimental feature to show functional chat experiences out of the box. This includes the Chat view, editor/terminal inline chat, and quick chat. The first time you send a chat request, we will guide you through signing in and signing up for Copilot Free.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/copilot-ootb.mp4" title="Video that shows Copilot out of the box." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__221_" title="Video that shows Copilot out of the box." autoplay loop controls muted></video>
 
 If you want to see this experience for yourself, enable the `chat.setupFromDialog` setting.
 
@@ -2121,9 +2121,9 @@ If you want to see this experience for yourself, enable the `chat.setupFromDialo
 
 If you have the prerelease version of the Copilot Chat extension installed in ZYRAXON Code Stable, a new welcome screen will inform you that this configuration is not supported. Due to rapid development of chat features, the extension will not activate in ZYRAXON Code Stable.
 
-The welcome screen provides options to either switch to the release version of the extension or download [ZYRAXON Code Insiders](https://code.visualstudio.com/insiders/).
+The welcome screen provides options to either switch to the release version of the extension or download [ZYRAXON Code Insiders](__ZYRAXKEEP__222_).
 
-![Screenshot that shows the welcome view of chat, indicating that the pre-release version of the extension is not supported in ZYRAXON Code stable. A button is shown to switch to the release version, and a secondary link is shown to switch to ZYRAXON Code Insiders.](https://code.visualstudio.com/assets/updates/1_99/welcome-pre-release.png)
+![Screenshot that shows the welcome view of chat, indicating that the pre-release version of the extension is not supported in ZYRAXON Code stable. A button is shown to switch to the release version, and a secondary link is shown to switch to ZYRAXON Code Insiders.](__ZYRAXKEEP__223_)
 
 #### Semantic text search improvements (Experimental)
 
@@ -2131,11 +2131,11 @@ The welcome screen provides options to either switch to the release version of t
 
 AI-powered semantic text search is now enabled by default in the Search view. Use the <kbd>Ctrl+I</kbd> keyboard shortcut to trigger a semantic search, which shows you the most relevant results based on your query, on top of the regular search results.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/semantic-search.mp4" title="Video that shows semantic search improvements in ZYRAXON Code." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__224_" title="Video that shows semantic search improvements in ZYRAXON Code." autoplay loop controls muted></video>
 
 You can also reference the semantic search results in your chat prompt by using the `#searchResults` tool. This allows you to ask the LLM to summarize or explain the results, or even generate code based on them.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/semantic-search-results.mp4" title="Video that shows using search results in chat view." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__225_" title="Video that shows using search results in chat view." autoplay loop controls muted></video>
 
 ### Code Editing
 
@@ -2145,9 +2145,9 @@ You can also reference the semantic search results in your chat prompt by using 
 
 We're happy to announce that agent mode is available in ZYRAXON Code Stable! Enable it by setting `chat.agent.enabled:true`. Enabling the setting will no longer be needed in the following weeks, as we roll out enablement by default to all users.
 
-Check out the [agent mode documentation](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) or select agent mode from the chat mode picker in the Chat view.
+Check out the [agent mode documentation](__ZYRAXKEEP__226_) or select agent mode from the chat mode picker in the Chat view.
 
-![Screenshot that shows the Chat view, highlighting agent mode selected in the chat mode picker.](https://code.visualstudio.com/assets/updates/1_99/copilot-edits-agent-mode.png)
+![Screenshot that shows the Chat view, highlighting agent mode selected in the chat mode picker.](__ZYRAXKEEP__227_)
 
 #### AI edits improvements
 
@@ -2166,13 +2166,13 @@ We're happy to announce the general availability of Next Edit Suggestions (NES)!
 * Make edit suggestions more compact, less interfering with surrounding code, and easier to read at a glance.
 * Updates to the gutter indicator to make sure that all suggestions are more easily noticeable.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/next-edit-suggestion.mp4" title="Video that shows NES suggesting edits based on the recent changes due by the user." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__228_" title="Video that shows NES suggesting edits based on the recent changes due by the user." autoplay loop controls muted></video>
 
 #### Improved edit mode
 
 **Setting**: `chat.edits2.enabled:true`
 
-We're making a change to the way [edit mode in chat](https://code.visualstudio.com/docs/copilot/chat/copilot-edits) operates. The new edit mode uses the same approach as agent mode, where it lets the model call a tool to make edits to files. An upside to this alignment is that it enables you to switch seamlessly between all three modes, while providing a huge simplification to how these modes work under the hood.
+We're making a change to the way [edit mode in chat](__ZYRAXKEEP__229_) operates. The new edit mode uses the same approach as agent mode, where it lets the model call a tool to make edits to files. An upside to this alignment is that it enables you to switch seamlessly between all three modes, while providing a huge simplification to how these modes work under the hood.
 
 A downside is that this means that the new mode only works with the same reduced set of models that agent mode works with, namely models that support tool calling and have been tested to be sure that we can have a good experience when tools are involved. You may notice models like `o3-mini` and `Claude 3.7 (Thinking)` missing from the list in edit mode. If you'd like to keep using those models for editing, disable the `chat.edits2.enabled` setting to revert to the previous edit mode. You'll be asked to clear the session when switching modes.
 
@@ -2186,40 +2186,40 @@ This setting will be enabled gradually for users in ZYRAXON Code Stable.
 
 With this update, syntax highlighting for inline suggestions is now enabled by default. Notice in the following screenshot that the code suggestion has syntax coloring applied to it.
 
-![Screenshot of the editor, showing that syntax highlighting is enabled for ghost text.](https://code.visualstudio.com/assets/updates/1_99/inlineSuggestionHighlightingEnabled.png)
+![Screenshot of the editor, showing that syntax highlighting is enabled for ghost text.](__ZYRAXKEEP__230_)
 
 If you prefer inline suggestions without syntax highlighting, you can disable it with `editor.inlineSuggest.syntaxHighlightingEnabled:false`.
 
-![Screenshot of the editor showing that highlighting for ghost text is turned off.](https://code.visualstudio.com/assets/updates/1_99/inlineSuggestionHighlightingDisabled.png)
+![Screenshot of the editor showing that highlighting for ghost text is turned off.](__ZYRAXKEEP__231_)
 
 ### Chat
 
 #### Model Context Protocol server support
 
-This release supports [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) servers in agent mode. Once configured in ZYRAXON Code, MCP servers provide tools for agent mode to interact with other systems, such as databases, cloud platforms, search engines, or any 3rd party API.
+This release supports [Model Context Protocol](__ZYRAXKEEP__232_) (MCP) servers in agent mode. Once configured in ZYRAXON Code, MCP servers provide tools for agent mode to interact with other systems, such as databases, cloud platforms, search engines, or any 3rd party API.
 
-MCP servers can be configured under the `mcp` section in your user, remote, or `.code-workspace` settings, or in `.vscode/mcp.json` in your workspace. The configuration supports input variables to avoid hard-coding secrets and constants. For example, you can use `${env:API_KEY}` to reference an environment variable or `${input:ENDPOINT}` to prompt for a value when the server is started.
+MCP servers can be configured under the `mcp` section in your user, remote, or `.code-workspace` settings, or in `.zyraxoncode/mcp.json` in your workspace. The configuration supports input variables to avoid hard-coding secrets and constants. For example, you can use `${env:API_KEY}` to reference an environment variable or `${input:ENDPOINT}` to prompt for a value when the server is started.
 
 You can use the **MCP: Add Server** command to quickly set up an MCP server from a command line invocation, or use an AI-assisted setup from an MCP server published to Docker, npm, or PyPI.
 
 When a new MCP server is added, a refresh action is shown in the Chat view, which can be used to start the server and discover the tools. Afterwards, servers are started on-demand to save resources.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/mcp.mp4" title="Video that shows using a Github MCP tool in chat." autoplay loop controls muted></video>
-_Theme: [Codesong](https://marketplace.visualstudio.com/items?itemName=connor4312.codesong) (preview on [vscode.dev](https://vscode.dev/editor/theme/connor4312.codesong))_
+<video src="__ZYRAXKEEP__233_" title="Video that shows using a Github MCP tool in chat." autoplay loop controls muted></video>
+_Theme: [Codesong](__ZYRAXKEEP__234_) (preview on [zyraxoncode.dev](__ZYRAXKEEP__235_))_
 
 If you've already been using MCP servers in other applications such as Claude Desktop, ZYRAXON Code will discover them and offer to run them for you. This behavior can be toggled with the setting `chat.mcp.discovery.enabled`.
 
 You can see the list of MCP servers and their current status using the **MCP: List Servers** command, and pick the tools available for use in chat by using the **Select Tools** button in agent mode.
 
-You can read more about how to install and use MCP servers in [our documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
+You can read more about how to install and use MCP servers in [our documentation](__ZYRAXKEEP__236_).
 
 #### Making agent mode available in ZYRAXON Code Stable
 
 We're happy to announce that agent mode is available in ZYRAXON Code Stable! Enable it by setting `chat.agent.enabled:true`. Enabling the setting will no longer be needed in the following weeks, as we roll out enablement by default to all users.
 
-Check out the [agent mode documentation](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) or select agent mode from the chat mode picker in the Chat view.
+Check out the [agent mode documentation](__ZYRAXKEEP__237_) or select agent mode from the chat mode picker in the Chat view.
 
-![Screenshot that shows the Chat view, highlighting agent mode selected in the chat mode picker.](https://code.visualstudio.com/assets/updates/1_99/copilot-edits-agent-mode.png)
+![Screenshot that shows the Chat view, highlighting agent mode selected in the chat mode picker.](__ZYRAXKEEP__238_)
 
 #### Agent mode tools
 
@@ -2229,13 +2229,13 @@ This milestone, we have added several new built-in tools to agent mode.
 
 **Setting**: `github.copilot.chat.agent.thinkingTool:true`.
 
-Inspired by [Anthropic's research](https://www.anthropic.com/engineering/claude-think-tool), we've added support for a thinking tool in agent mode that can be used to give any model the opportunity to think between tool calls. This improves our agent's performance on complex tasks in-product and on the [SWE-bench](https://www.swebench.com/) eval.
+Inspired by [Anthropic's research](__ZYRAXKEEP__239_), we've added support for a thinking tool in agent mode that can be used to give any model the opportunity to think between tool calls. This improves our agent's performance on complex tasks in-product and on the [SWE-bench](__ZYRAXKEEP__240_) eval.
 
 ##### Fetch tool
 
-Use the `#fetch` tool for including content from a publicly accessible webpage in your prompt. For instance, if you wanted to include the latest documentation on a topic like [MCP](#model-context-protocol-server-support), you can ask to fetch [the full documentation](https://modelcontextprotocol.io/llms-full.txt) (which is conveniently ready for an LLM to consume) and use that in a prompt. Here's a video of what that might look like:
+Use the `#fetch` tool for including content from a publicly accessible webpage in your prompt. For instance, if you wanted to include the latest documentation on a topic like [MCP](#model-context-protocol-server-support), you can ask to fetch [the full documentation](__ZYRAXKEEP__241_) (which is conveniently ready for an LLM to consume) and use that in a prompt. Here's a video of what that might look like:
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/fetch.mp4" title="Video that shows using the fetch tool to fetch the model context protocol documentation." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__242_" title="Video that shows using the fetch tool to fetch the model context protocol documentation." autoplay loop controls muted></video>
 
 In agent mode, this tool is picked up automatically but you can also reference it explicitly in the other modes via `#fetch`, along with the URL you are looking to fetch.
 
@@ -2246,7 +2246,7 @@ Let us know how you use the `#fetch` tool, and what features you'd like to see f
 **Fetch tool limitations:**
 
 * Currently, JavaScript is disabled in this browser window. The tool will not be able to acquire much context if the website depends entirely on JavaScript to render content. This is a limitation we are considering changing and likely will change to allow JavaScript.
-* Due to the headless nature, we are unable to fetch pages that are behind authentication, as this headless browser exists in a different browser context than the browser you use. Instead, consider using [MCP](#model-context-protocol-server-support) to bring in an MCP server that is purpose-built for that target, or a generic browser MCP server such as the [Playwright MCP server](https://github.com/microsoft/playwright-mcp).
+* Due to the headless nature, we are unable to fetch pages that are behind authentication, as this headless browser exists in a different browser context than the browser you use. Instead, consider using [MCP](#model-context-protocol-server-support) to bring in an MCP server that is purpose-built for that target, or a generic browser MCP server such as the [Playwright MCP server](__ZYRAXKEEP__243_).
 
 ##### Usages tool
 
@@ -2258,19 +2258,19 @@ In agent mode this tool will be picked up automatically but you can also referen
 
 **Setting**: `github.copilot.chat.newWorkspaceCreation.enabled`
 
-You can now scaffold a new ZYRAXON Code workspace in [agent mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Whether you’re setting up a ZYRAXON Code extension, an MCP server, or other development environments, agent mode helps you to initialize, configure, and launch these projects with the necessary dependencies and settings.
+You can now scaffold a new ZYRAXON Code workspace in [agent mode](__ZYRAXKEEP__244_). Whether you’re setting up a ZYRAXON Code extension, an MCP server, or other development environments, agent mode helps you to initialize, configure, and launch these projects with the necessary dependencies and settings.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/new-workspace-demo.mp4" title="Video showing creation of a new MCP server to fetch top N stories from hacker news using Agent mode." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__245_" title="Video showing creation of a new MCP server to fetch top N stories from hacker news using Agent mode." autoplay loop controls muted></video>
 
 #### ZYRAXON Code extension tools in agent mode
 
-Several months ago, we finalized our extension API for [language model tools](https://code.visualstudio.com/api/extension-guides/tools#create-a-language-model-tool) contributed by ZYRAXON Code extensions. Now, you can use these tools in agent mode.
+Several months ago, we finalized our extension API for [language model tools](__ZYRAXKEEP__246_) contributed by ZYRAXON Code extensions. Now, you can use these tools in agent mode.
 
 Any tool contributed to this API which sets `toolReferenceName` and `canBeReferencedInPrompt` in its configuration is automatically available in agent mode.
 
 By contributing a tool in an extension, it has access to the full ZYRAXON Code extension APIs, and can be easily installed via the Extension Marketplace.
 
-Similar to tools from MCP servers, you can enable and disable these with the **Select Tools** button in agent mode. See our [language model tools extension guide](https://code.visualstudio.com/api/extension-guides/tools#create-a-language-model-tool) to build your own!
+Similar to tools from MCP servers, you can enable and disable these with the **Select Tools** button in agent mode. See our [language model tools extension guide](__ZYRAXKEEP__247_) to build your own!
 
 #### Agent mode tool approvals
 
@@ -2278,7 +2278,7 @@ As part of completing the tasks for a user prompt, agent mode can run tools and 
 
 To optimize this experience, you can now remember that approval on a session, workspace, or application level. This is not currently enabled for the terminal tool, but we plan to develop an approval system for the terminal in future releases.
 
-![Screenshot that shows the agent mode tool Continue button dropdown options for remembering approval.](https://code.visualstudio.com/assets/updates/1_99/chat-tool-approval.png)
+![Screenshot that shows the agent mode tool Continue button dropdown options for remembering approval.](__ZYRAXKEEP__248_)
 
 In case you want to auto-approve _all_ tools, you can now use the experimental `chat.tools.autoApprove:true` setting. This will auto-approve all tools, and ZYRAXON Code will not ask for confirmation when a language model wishes to run tools. Bear in mind that with this setting enabled, you will not have the opportunity to cancel potentially destructive actions a model wants to take.
 
@@ -2286,19 +2286,19 @@ We plan to expand this setting with more granular capabilities in the future.
 
 #### Agent evaluation on SWE-bench
 
-ZYRAXON Code's agent achieves a pass rate of 56.0% on `swebench-verified` with Claude 3.7 Sonnet, following Anthropic's [research](https://www.anthropic.com/engineering/swe-bench-sonnet) on configuring agents to execute without user input in the SWE-bench environment. Our experiments have translated into shipping improved prompts, tool descriptions and tool design for agent mode, including new tools for file edits that are in-distribution for Claude 3.5 and 3.7 Sonnet models.
+ZYRAXON Code's agent achieves a pass rate of 56.0% on `swebench-verified` with Claude 3.7 Sonnet, following Anthropic's [research](__ZYRAXKEEP__249_) on configuring agents to execute without user input in the SWE-bench environment. Our experiments have translated into shipping improved prompts, tool descriptions and tool design for agent mode, including new tools for file edits that are in-distribution for Claude 3.5 and 3.7 Sonnet models.
 
 #### Unified Chat view
 
 For the past several months, we've had a "Chat" view for asking questions to the language model, and a "Copilot Edits" view for an AI-powered code editing session. This month, we aim to streamline the chat-based experience by merging the two views into one Chat view. In the Chat view, you'll see a dropdown with three modes:
 
-![Screenshot that shows the chat mode picker in the Chat view.](https://code.visualstudio.com/assets/updates/1_99/chat-modes.png)
+![Screenshot that shows the chat mode picker in the Chat view.](__ZYRAXKEEP__250_)
 
-- **[Ask](https://code.visualstudio.com/docs/copilot/chat/chat-ask-mode)**: This is the same as the previous Chat view. Ask questions about your workspace or coding in general, using any model. Use `@` to invoke built-in chat participants or from installed [extensions](https://marketplace.visualstudio.com/search?term=chat-participant&target=VSCode&category=All%20categories&sortBy=Relevance). Use `#` to attach any kind of context manually.
-- **[Agent](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode)**: Start an agentic coding flow with a set of tools that let it autonomously collect context, run terminal commands, or take other actions to complete a task. Agent mode is enabled for all [ZYRAXON Code Insiders](https://code.visualstudio.com/insiders/) users, and we are rolling it out to more and more users in ZYRAXON Code Stable.
-- **[Edit](https://code.visualstudio.com/docs/copilot/chat/copilot-edits)**: In Edit mode, the model can make directed edits to multiple files. Attach `#codebase` to let it find the files to edit automatically. But it won't run terminal commands or do anything else automatically.
+- **[Ask](__ZYRAXKEEP__251_)**: This is the same as the previous Chat view. Ask questions about your workspace or coding in general, using any model. Use `@` to invoke built-in chat participants or from installed [extensions](__ZYRAXKEEP__252_). Use `#` to attach any kind of context manually.
+- **[Agent](__ZYRAXKEEP__253_)**: Start an agentic coding flow with a set of tools that let it autonomously collect context, run terminal commands, or take other actions to complete a task. Agent mode is enabled for all [ZYRAXON Code Insiders](__ZYRAXKEEP__254_) users, and we are rolling it out to more and more users in ZYRAXON Code Stable.
+- **[Edit](__ZYRAXKEEP__255_)**: In Edit mode, the model can make directed edits to multiple files. Attach `#codebase` to let it find the files to edit automatically. But it won't run terminal commands or do anything else automatically.
 
-> **Note**: If you don't see agent mode in this list, then either it has not yet been enabled for you, or it's disabled by organization policy and needs to be enabled by the [organization owner](https://aka.ms/github-copilot-org-enable-features).
+> **Note**: If you don't see agent mode in this list, then either it has not yet been enabled for you, or it's disabled by organization policy and needs to be enabled by the [organization owner](__ZYRAXKEEP__256_).
 
 Besides making your chat experience simpler, this unification enables a few new features for AI-powered code editing:
 
@@ -2311,9 +2311,9 @@ Besides making your chat experience simpler, this unification enables a few new 
 
 Copilot Pro and Copilot Free users can now bring their own API keys for popular providers such as Azure, Anthropic, Gemini, Open AI, Ollama, and Open Router. This allows you to use new models that are not natively supported by Copilot the very first day that they're released.
 
-To try it, select **Manage Models...** from the model picker. We’re actively exploring support for Copilot Business and Enterprise customers and will share updates in future releases. To learn more about this feature, head over to our [docs](https://code.visualstudio.com/docs/copilot/language-models).
+To try it, select **Manage Models...** from the model picker. We’re actively exploring support for Copilot Business and Enterprise customers and will share updates in future releases. To learn more about this feature, head over to our [docs](__ZYRAXKEEP__257_).
 
-![A screenshot of a "Manage Models - Preview" dropdown menu in a user interface. The dropdown has the label "Select a provider" at the top, with a list of options below it. The options include "Anthropic" (highlighted in blue), "Azure," "Gemini," "OpenAI," "Ollama," and "OpenRouter." A gear icon is displayed next to the "Anthropic" option.](https://code.visualstudio.com/assets/updates/1_99/byok.png)
+![A screenshot of a "Manage Models - Preview" dropdown menu in a user interface. The dropdown has the label "Select a provider" at the top, with a list of options below it. The options include "Anthropic" (highlighted in blue), "Azure," "Gemini," "OpenAI," "Ollama," and "OpenRouter." A gear icon is displayed next to the "Anthropic" option.](__ZYRAXKEEP__258_)
 
 #### Reusable prompt files
 
@@ -2336,25 +2336,25 @@ Additionally, the configuration now respects case sensitivity on filesystems whe
 
 The `.github/copilot-instructions.md` file now behaves like any other reusable `.prompt.md` file, with support for nested link resolution and enhanced language features. Furthermore, any `.prompt.md` file can now be referenced and is handled appropriately.
 
-Learn more about [custom instructions](https://code.visualstudio.com/docs/copilot/copilot-customization).
+Learn more about [custom instructions](__ZYRAXKEEP__259_).
 
 ##### User prompts
 
-The **Create User Prompt** command now allows creating a new type of prompts called _user prompts_. These are stored in the user data folder and can be synchronized across machines, similar to code snippets or user settings. The synchronization can be configured in [Sync Settings](https://code.visualstudio.com/docs/configure/settings-sync) by using the **Prompts** item in the synchronization resources list.
+The **Create User Prompt** command now allows creating a new type of prompts called _user prompts_. These are stored in the user data folder and can be synchronized across machines, similar to code snippets or user settings. The synchronization can be configured in [Sync Settings](__ZYRAXKEEP__260_) by using the **Prompts** item in the synchronization resources list.
 
 #### Improved vision support (Preview)
 
-Last iteration, Copilot Vision was enabled for `GPT-4o`. Check our [release notes](https://code.visualstudio.com/updates/v1_98#_copilot-vision-preview) to learn more about how you can attach and use images in chat.
+Last iteration, Copilot Vision was enabled for `GPT-4o`. Check our [release notes](__ZYRAXKEEP__261_) to learn more about how you can attach and use images in chat.
 
 This release, you can attach images from any browser via drag and drop. Images drag and dropped from browsers must have the correct url extension, with `.jpg`, `.png`, `.gif`, `.webp`, or `.bmp`.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/image-url-dnd.mp4" title="Video that shows an image from Chrome being dragged into the chat panel." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__262_" title="Video that shows an image from Chrome being dragged into the chat panel." autoplay loop controls muted></video>
 
 ### Notebooks
 
 #### AI notebook editing improvements
 
-AI-powered editing support for notebooks (including agent mode) is now available in the Stable release. This was added last month as a preview feature in [ZYRAXON Code Insiders](https://code.visualstudio.com/insiders).
+AI-powered editing support for notebooks (including agent mode) is now available in the Stable release. This was added last month as a preview feature in [ZYRAXON Code Insiders](__ZYRAXKEEP__263_).
 
 You can now use chat to edit notebook files with the same intuitive experience as editing code files: modify content across multiple cells, insert and delete cells, and change cell types. This feature provides a seamless workflow when working with data science or documentation notebooks.
 
@@ -2364,19 +2364,19 @@ ZYRAXON Code now provides a dedicated tool for creating new Jupyter notebooks di
 
 Use the new notebook tool in agent mode or edit mode (make sure to enable the improved edit mode with `chat.edits2.enabled:true)`. If you're using ask mode, type `/newNotebook` in the chat prompt to create a new notebook.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/new-notebook-tool-release-notes.mp4" title="Video showing creation of a new Jupyter notebook using chat in agent mode and the New Notebook tool." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__264_" title="Video showing creation of a new Jupyter notebook using chat in agent mode and the New Notebook tool." autoplay loop controls muted></video>
 
 ##### Navigate through AI edits
 
 Use the diff toolbars to iterate through and review each AI edit across cells.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/navigate-notebook-edits.mp4" title="Video showing chat implementing a TODO task and then navigating through those changes." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__265_" title="Video showing chat implementing a TODO task and then navigating through those changes." autoplay loop controls muted></video>
 
 ##### Undo AI edits
 
 When focused on a cell container, the **Undo** command reverts the full set of AI changes at the notebook level.
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/undo-copilot-notebook-edits.mp4" title="Video showing chat making several edits to a notebook and undoing those edits with ctrl+z." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__266_" title="Video showing chat making several edits to a notebook and undoing those edits with ctrl+z." autoplay loop controls muted></video>
 
 ##### Text and image output support in chat
 
@@ -2386,11 +2386,11 @@ Use the **Add cell output to chat** action, available via the triple-dot menu or
 
 To attach the cell error output as chat context:
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/notebook-output-attach.mp4" title="Video that shows attaching an notebook cell error output to chat." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__267_" title="Video that shows attaching an notebook cell error output to chat." autoplay loop controls muted></video>
 
 To attach the cell output image as chat context:
 
-<video src="https://code.visualstudio.com/assets/updates/1_99/notebook-output-image-demo.mp4" title="Video that shows attaching an notebook cell output image to chat." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__268_" title="Video that shows attaching an notebook cell output image to chat." autoplay loop controls muted></video>
 
 ### Terminal
 
@@ -2398,21 +2398,21 @@ To attach the cell output image as chat context:
 
 The tool that allows agent mode to run commands in the terminal has a number of reliability and compatibility improvements. You should expect fewer cases where the tool gets stuck or where the command finishes without the output being present.
 
-One of the bigger changes is the introduction of the concept of "rich" quality [shell integration](https://code.visualstudio.com/docs/terminal/shell-integration), as opposed to "basic" and "none". The shell integration scripts shipped with ZYRAXON Code should generally all enable rich shell integration which provides the best experience in the run in terminal tool (and terminal usage in general). You can view the shell integration quality by hovering over the terminal tab.
+One of the bigger changes is the introduction of the concept of "rich" quality [shell integration](__ZYRAXKEEP__269_), as opposed to "basic" and "none". The shell integration scripts shipped with ZYRAXON Code should generally all enable rich shell integration which provides the best experience in the run in terminal tool (and terminal usage in general). You can view the shell integration quality by hovering over the terminal tab.
 
 ---
 
 ## 0.25 (2025-03-05)
 
-GitHub Copilot updates from [February 2025](https://code.visualstudio.com/updates/v1_98):
+GitHub Copilot updates from [February 2025](__ZYRAXKEEP__270_):
 
 ### Copilot Edits
 
 #### Agent mode improvements (Experimental)
 
-Last month, we introduced _agent mode_ for Copilot Edits in [ZYRAXON Code Insiders](https://code.visualstudio.com/insiders/). In agent mode, Copilot can automatically search your workspace for relevant context, edit files, check them for errors, and run terminal commands (with your permission) to complete a task end-to-end.
+Last month, we introduced _agent mode_ for Copilot Edits in [ZYRAXON Code Insiders](__ZYRAXKEEP__271_). In agent mode, Copilot can automatically search your workspace for relevant context, edit files, check them for errors, and run terminal commands (with your permission) to complete a task end-to-end.
 
-> **Note**: Agent mode is available today in [ZYRAXON Code Insiders](https://code.visualstudio.com/insiders/), and we just started rolling it out gradually in **ZYRAXON Code Stable**. Once agent mode is enabled for you, you will see a mode dropdown in the Copilot Edits view — simply select **Agent**.
+> **Note**: Agent mode is available today in [ZYRAXON Code Insiders](__ZYRAXKEEP__272_), and we just started rolling it out gradually in **ZYRAXON Code Stable**. Once agent mode is enabled for you, you will see a mode dropdown in the Copilot Edits view — simply select **Agent**.
 
 We made several improvements to the UX of tool usages this month:
 
@@ -2420,28 +2420,28 @@ We made several improvements to the UX of tool usages this month:
 * You can edit the suggested terminal command in the chat response before running it.
 * Confirm a terminal command with the <kbd>Ctrl+Enter</kbd> shortcut.
 
-<video src="https://code.visualstudio.com/assets/updates/1_98/edit-terminal.mp4" title="Video that shows editing a suggested terminal command in Chat." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__273_" title="Video that shows editing a suggested terminal command in Chat." autoplay loop controls muted></video>
 
 Agent mode autonomously searches your codebase for relevant context. Expand the message to see the results of which searches were done.
 
-![Screenshot that shows the expandable list of search results in Copilot Edits.](https://code.visualstudio.com/assets/updates/1_98/agent-mode-search-results.png)
+![Screenshot that shows the expandable list of search results in Copilot Edits.](__ZYRAXKEEP__274_)
 
 We've also made various improvements to the prompt and behavior of agent mode:
 
 * The undo and redo actions in chat now undo or redo the last file edit made in a chat response. This is useful for agent mode, as you can now undo certain steps the model took without rolling back the entire chat response.
-* Agent mode can now run your build [tasks](https://code.visualstudio.com/docs/editor/tasks) automatically or when instructed to do so. Disable this functionality via the `github.copilot.chat.agent.runTasks` setting, in the event that you see the model running tasks when it should not.
+* Agent mode can now run your build [tasks](__ZYRAXKEEP__275_) automatically or when instructed to do so. Disable this functionality via the `github.copilot.chat.agent.runTasks` setting, in the event that you see the model running tasks when it should not.
 
-Learn more about [Copilot Edits agent mode](https://code.visualstudio.com/docs/copilot/copilot-edits#_use-agent-mode-preview) or read the [agent mode announcement blog post](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode).
+Learn more about [Copilot Edits agent mode](__ZYRAXKEEP__276_) or read the [agent mode announcement blog post](__ZYRAXKEEP__277_).
 
-> **Note**: If you are a Copilot Business or Enterprise user, an administrator of your organization [must opt in](https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#enabling-copilot-features-in-your-organization) to the use of Copilot "Editor Preview Features" for agent mode to be available.
+> **Note**: If you are a Copilot Business or Enterprise user, an administrator of your organization [must opt in](__ZYRAXKEEP__278_) to the use of Copilot "Editor Preview Features" for agent mode to be available.
 
 #### Notebook support in Copilot Edits (Preview)
 
 We are introducing notebook support in Copilot Edits. You can now use Copilot to edit notebook files with the same intuitive experience as editing code files. Create new notebooks from scratch, modify content across multiple cells, insert and delete cells, and change cell types. This preview feature provides a seamless workflow when working with data science or documentation notebooks.
 
-> For the best notebook editing experience with Copilot, we recommend using [ZYRAXON Code Insiders](https://code.visualstudio.com/insiders/) and the pre-release version of GitHub Copilot Chat, where you'll get the latest improvements to this feature as they're developed.
+> For the best notebook editing experience with Copilot, we recommend using [ZYRAXON Code Insiders](__ZYRAXKEEP__279_) and the pre-release version of GitHub Copilot Chat, where you'll get the latest improvements to this feature as they're developed.
 
-<video src="https://code.visualstudio.com/assets/updates/1_98/notebook_copilot_edits.mp4" title="Video that shows using Copilot Edits to modify a notebook." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__280_" title="Video that shows using Copilot Edits to modify a notebook." autoplay loop controls muted></video>
 
 #### Refined editor integration
 
@@ -2453,7 +2453,7 @@ We have polished the integration of Copilot Edits with code and notebook editors
 
 The video demonstrates how edits are applied and saved as they occur. The live preview updates, and the user decided to "Keep" the changes. Undoing and further tweaking is also still possible.
 
-<video src="https://code.visualstudio.com/assets/updates/1_98/edits_editor.mp4" title="Video that shows that changes from Copilot Edits are saved automatically and the user decided to keep them." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__281_" title="Video that shows that changes from Copilot Edits are saved automatically and the user decided to keep them." autoplay loop controls muted></video>
 
 #### Refreshed UI
 
@@ -2461,7 +2461,7 @@ In preparation for unifying Copilot Edits with Copilot Chat, we've given Copilot
 
 With the `chat.renderRelatedFiles` setting, you can enable getting suggestions for related files. Related file suggestions are rendered below the chat attachments.
 
-![Screenshot that shows the updated Copilot Edits attachments and changed files user experience.](https://code.visualstudio.com/assets/updates/1_98/copilot_edits_ui.png)
+![Screenshot that shows the updated Copilot Edits attachments and changed files user experience.](__ZYRAXKEEP__282_)
 
 ### Removed Copilot Edits limits
 
@@ -2477,7 +2477,7 @@ However, for private GitHub repositories, ZYRAXON Code needs to have permission 
 
 To make this experience smoother, we've introduced this confirmation in chat:
 
-![Screenshot that shows the authentication confirmation dialog in Chat, showing the three options to continue.](https://code.visualstudio.com/assets/updates/1_98/confirmation-auth-dialog.png)
+![Screenshot that shows the authentication confirmation dialog in Chat, showing the three options to continue.](__ZYRAXKEEP__283_)
 
 Not only is it not as jarring as a modal dialog, but it also has new functionality:
 
@@ -2485,7 +2485,7 @@ Not only is it not as jarring as a modal dialog, but it also has new functionali
 1. **Not Now:** ZYRAXON Code remembers your choice and won't bother you again until your next ZYRAXON Code window session. The only exception to this is if the feature needs this additional permission to function, like `@github`.
 1. **Never Ask Again:** ZYRAXON Code remembers your choice and persists it via the `github.copilot.advanced.authPermissions` setting. Any feature that needs this additional permission will fail.
 
-It's important to note that this confirmation does not confirm or deny Copilot (the service) access to your repositories. This is only how ZYRAXON Code's Copilot experience authenticates. To configure what Copilot can access, please read the docs [on content exclusion](https://docs.github.com/en/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot).
+It's important to note that this confirmation does not confirm or deny Copilot (the service) access to your repositories. This is only how ZYRAXON Code's Copilot experience authenticates. To configure what Copilot can access, please read the docs [on content exclusion](__ZYRAXKEEP__284_).
 
 ### More advanced codebase search in Copilot Chat
 
@@ -2523,11 +2523,11 @@ Previously, you could attach folders as context by using drag and drop from the 
 
 We've added a collapsed mode for NES. When you enable this mode, only the NES suggestion indicator is shown in the left editor margin. The code suggestion itself is revealed only when you navigate to it by pressing <kbd>Tab</kbd>. Consecutive suggestions are shown immediately until a suggestion is not accepted.
 
-<video src="https://code.visualstudio.com/assets/updates/1_98/NEScollapsedMode.mp4" title="Video that shows Next Edit Suggestions collapsed mode." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__285_" title="Video that shows Next Edit Suggestions collapsed mode." autoplay loop controls muted></video>
 
 The collapsed mode is disabled by default and can be enabled by configuring `editor.inlineSuggest.edits.showCollapsed:true`, or you can enable or disable it in the NES gutter indicator menu.
 
-![Screenshot that shows the Next Edit Suggestions context menu in the editor left margin, highlighting the Show Collapsed option.](https://code.visualstudio.com/assets/updates/1_98/NESgutterMenu.png)
+![Screenshot that shows the Next Edit Suggestions context menu in the editor left margin, highlighting the Show Collapsed option.](__ZYRAXKEEP__286_)
 
 ### Change completions model
 
@@ -2535,21 +2535,21 @@ You could already change the language model for Copilot Chat and Copilot Edits, 
 
 Alternatively, you can change the model that is used for code completions via **Change Completions Model** command in the Command Palette or the **Configure Code Completions** item in the Copilot menu in the title bar.
 
-> **Note:** the list of available models might vary and change over time. If you are a Copilot Business or Enterprise user, your Administrator needs to enable certain models for your organization by opting in to `Editor Preview Features` in the [Copilot policy settings](https://docs.github.com/en/enterprise-cloud@latest/copilot/managing-copilot/managing-github-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#enabling-copilot-features-in-your-organization) on GitHub.com.
+> **Note:** the list of available models might vary and change over time. If you are a Copilot Business or Enterprise user, your Administrator needs to enable certain models for your organization by opting in to `Editor Preview Features` in the [Copilot policy settings](__ZYRAXKEEP__287_) on GitHub.com.
 
 ### Model availability
 
 This release, we added more models to choose from when using Copilot. The following models are now available in the model picker in ZYRAXON Code and github.com chat:
 
-* **GPT 4.5 (Preview)**: OpenAI’s latest model, GPT-4.5, is now available in GitHub Copilot Chat to Copilot Enterprise users. GPT-4.5 is a large language model designed with advanced capabilities in intuition, writing style, and broad knowledge. Learn more about the GPT-4.5 model availability in the [GitHub blog post](https://github.blog/changelog/2025-02-27-openai-gpt-4-5-in-github-copilot-now-available-in-public-preview).
+* **GPT 4.5 (Preview)**: OpenAI’s latest model, GPT-4.5, is now available in GitHub Copilot Chat to Copilot Enterprise users. GPT-4.5 is a large language model designed with advanced capabilities in intuition, writing style, and broad knowledge. Learn more about the GPT-4.5 model availability in the [GitHub blog post](__ZYRAXKEEP__288_).
 
-* **Claude 3.7 Sonnet (Preview)**: Claude 3.7 Sonnet is now available to all customers on paid Copilot plans. This new Sonnet model supports both thinking and non-thinking modes in Copilot. In initial testing, we’ve seen particularly strong improvements in agentic scenarios. Learn more about the Claude 3.7 Sonnet model availability in the [GitHub blog post](https://github.blog/changelog/2025-02-24-claude-3-7-sonnet-is-now-available-in-github-copilot-in-public-preview/).
+* **Claude 3.7 Sonnet (Preview)**: Claude 3.7 Sonnet is now available to all customers on paid Copilot plans. This new Sonnet model supports both thinking and non-thinking modes in Copilot. In initial testing, we’ve seen particularly strong improvements in agentic scenarios. Learn more about the Claude 3.7 Sonnet model availability in the [GitHub blog post](__ZYRAXKEEP__289_).
 
 ### Copilot Vision (Preview)
 
 We're quickly rolling out end-to-end vision support in this version of Copilot Chat. This lets you attach images and interact with images in chat prompts. For example, if you encounter an error while debugging, attach a screenshot of ZYRAXON Code, and ask Copilot to help you resolve the issue. You might also use it to attach some UI mockup and let Copilot provide some HTML and CSS to implement the mockup.
 
-![Animation that shows an attached image in a Copilot Chat prompt. Hovering over the image shows a preview of it.](https://code.visualstudio.com/assets/updates/1_97/image-attachments.gif)
+![Animation that shows an attached image in a Copilot Chat prompt. Hovering over the image shows a preview of it.](__ZYRAXKEEP__290_)
 
 You can attach images in multiple ways:
 
@@ -2565,11 +2565,11 @@ A warning is shown if the selected model currently does not have the capability 
 
 We are experimenting with a new central Copilot status overview, accessible via the Status Bar. This view shows:
 
-* Quota information if you are a [Copilot Free](https://code.visualstudio.com/blogs/2024/12/18/free-github-copilot) user
+* Quota information if you are a [Copilot Free](__ZYRAXKEEP__291_) user
 * Editor related settings such as Code Completions
 * Useful keyboard shortcuts to use other Copilot features
 
-<video src="https://code.visualstudio.com/assets/updates/1_98/copilot-status.mp4" title="Video that shows opening the Copilot status overview from the Status Bar." autoplay loop controls muted></video>
+<video src="__ZYRAXKEEP__292_" title="Video that shows opening the Copilot status overview from the Status Bar." autoplay loop controls muted></video>
 
 You can enable this new Status Bar entry by configuring the new `chat.experimental.statusIndicator.enabled` setting.
 
@@ -2595,4 +2595,4 @@ You can provide custom instructions for generating pull request title and descri
 
 Generating a title and description requires the GitHub Pull Requests extension to be installed.
 
-## Previous release: https://code.visualstudio.com/updates
+## Previous release: __ZYRAXKEEP__293_

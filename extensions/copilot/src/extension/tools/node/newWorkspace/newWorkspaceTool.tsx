@@ -2,19 +2,19 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import type { CancellationToken, LanguageModelToolInvocationOptions, LanguageModelToolInvocationPrepareOptions, PreparedToolInvocation, Uri } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type { CancellationToken, LanguageModelToolInvocationOptions, LanguageModelToolInvocationPrepareOptions, PreparedToolInvocation, Uri } from 'zyraxoncode';
 import { IRunCommandExecutionService } from '../../../../platform/commands/common/runCommandExecutionService';
 import { IDialogService } from '../../../../platform/dialog/common/dialogService';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { IInteractiveSessionService } from '../../../../platform/interactive/common/interactiveSessionService';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { CancellationError } from '../../../../util/vs/base/common/errors';
 import { extUri } from '../../../../util/vs/base/common/resources';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult } from '../../../../vscodeTypes';
+import { LanguageModelPromptTsxPart, LanguageModelTextPart, LanguageModelToolResult } from '../../../../zyraxoncodeTypes';
 import { saveNewWorkspaceContext } from '../../../getting-started/common/newWorkspaceContext';
 import { renderPromptElementJSON } from '../../../prompts/node/base/promptRenderer';
 import { UnsafeCodeBlock } from '../../../prompts/node/panel/unsafeElements';
@@ -34,7 +34,7 @@ export class GetNewWorkspaceTool implements ICopilotTool<INewWorkspaceToolParams
 		@IFileSystemService private readonly fileSystemService: IFileSystemService,
 		@IInstantiationService private readonly instantiationService: IInstantiationService,
 		@IDialogService private readonly dialogService: IDialogService,
-		@IVSCodeExtensionContext private readonly _extensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext private readonly _extensionContext: IZyraxonCodeExtensionContext,
 		@IInteractiveSessionService private readonly interactiveSession: IInteractiveSessionService,
 		@IRunCommandExecutionService private readonly commandService: IRunCommandExecutionService,
 	) { }
@@ -42,7 +42,7 @@ export class GetNewWorkspaceTool implements ICopilotTool<INewWorkspaceToolParams
 	/**
 	 * Used as a softer "empty" check for the case where the user re-selects the
 	 * already-open workspace folder. Treats a folder as empty if every top-level
-	 * entry name starts with `.` (e.g. `.git`, `.gitignore`, `.vscode`,
+	 * entry name starts with `.` (e.g. `.git`, `.gitignore`, `.zyraxoncode`,
 	 * `.editorconfig`), so that newly cloned/initialized repos and folders that
 	 * only contain dotfile config can be used in place without reopening.
 	 */
@@ -118,7 +118,7 @@ export class GetNewWorkspaceTool implements ICopilotTool<INewWorkspaceToolParams
 				workspaceUri = newWorkspaceUri;
 				this.commandService.executeCommand('setContext', 'chatSkipRequestInProgressMessage', true);
 				await this.interactiveSession.transferActiveChat(newWorkspaceUri);
-				this.commandService.executeCommand('vscode.openFolder', newWorkspaceUri, { forceReuseWindow: true });
+				this.commandService.executeCommand('zyraxoncode.openFolder', newWorkspaceUri, { forceReuseWindow: true });
 
 				return new LanguageModelToolResult([
 					new LanguageModelTextPart(`The user is opening the folder ${newWorkspaceUri.toString()}. Do not proceed with project generation till the user has confirmed opening the folder.`)
@@ -158,7 +158,7 @@ export class NewWorkspaceCreationResult extends PromptElement<NewWorkspaceElemen
 			</TextChunk>;
 		}
 
-		// For https://github.com/microsoft/vscode/issues/258252
+		// For __ZYRAXKEEP__0_
 		this.commandService.executeCommand('workbench.action.terminal.focus');
 
 		return <>
@@ -167,7 +167,7 @@ export class NewWorkspaceCreationResult extends PromptElement<NewWorkspaceElemen
 				<br />
 			</TextChunk>
 			<UnsafeCodeBlock code={`
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
+<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit __ZYRAXKEEP__1_ -->
 - [ ] Verify that the copilot-instructions.md file in the .github directory is created.
 
 - [ ] Clarify Project Requirements
@@ -205,7 +205,7 @@ export class NewWorkspaceCreationResult extends PromptElement<NewWorkspaceElemen
 - [ ] Create and Run Task
 	<!--
 	Verify that all previous steps have been completed.
-	Check https://code.visualstudio.com/docs/debugtest/tasks to determine if the project needs a task. If so, use the ${ToolName.CoreCreateAndRunTask} to create and launch a task based on package.json, README.md, and project structure.
+	Check __ZYRAXKEEP__2_ to determine if the project needs a task. If so, use the ${ToolName.CoreCreateAndRunTask} to create and launch a task based on package.json, README.md, and project structure.
 	Skip this step otherwise.
 	 -->
 
@@ -240,14 +240,14 @@ DEVELOPMENT RULES:
 - Avoid adding media or external links unless explicitly requested.
 - Use placeholders only with a note that they should be replaced.
 - Use ZYRAXON Code API tool only for ZYRAXON Code extension projects.
-- Once the project is created, it is already opened in ZYRAXON Code—do not suggest commands to open this project in Visual Studio again.
+- Once the project is created, it is already opened in ZYRAXON Code—do not suggest commands to open this project in ZYRAXON again.
 - If the project setup information has additional rules, follow them strictly.
 
 FOLDER CREATION RULES:
 - Always use the current directory as the project root.
 - If you are running any terminal commands, use the '.' argument to ensure that the current working directory is used ALWAYS.
-- Do not create a new folder unless the user explicitly requests it besides a .vscode folder for a tasks.json file.
-- If any of the scaffolding commands mention that the folder name is not correct, let the user know to create a new folder with the correct name and then reopen it again in vscode.
+- Do not create a new folder unless the user explicitly requests it besides a .zyraxoncode folder for a tasks.json file.
+- If any of the scaffolding commands mention that the folder name is not correct, let the user know to create a new folder with the correct name and then reopen it again in zyraxoncode.
 
 EXTENSION INSTALLATION RULES:
 - Only install extensions specified by the project setup information. DO NOT INSTALL any other extensions.

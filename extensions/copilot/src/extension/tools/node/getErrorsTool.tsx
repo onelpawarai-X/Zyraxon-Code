@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptElementProps } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptElementProps } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILanguageDiagnosticsService } from '../../../platform/languages/common/languageDiagnosticsService';
 import { ILogService } from '../../../platform/log/common/logService';
 import { INotebookService } from '../../../platform/notebook/common/notebookService';
@@ -21,7 +21,7 @@ import { ResourceSet } from '../../../util/vs/base/common/map';
 import { isEqualOrParent } from '../../../util/vs/base/common/resources';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { DiagnosticSeverity, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString, Range } from '../../../vscodeTypes';
+import { DiagnosticSeverity, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, MarkdownString, Range } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { Tag } from '../../prompts/node/base/tag';
@@ -59,8 +59,8 @@ export class GetErrorsTool extends Disposable implements ICopilotTool<IGetErrors
 	 * Get diagnostics for the given paths and optional ranges.
 	 * Note - This is made public for testing purposes only.
 	 */
-	public getDiagnostics(paths: { uri: URI; range: Range | undefined }[]): Array<{ uri: URI; diagnostics: vscode.Diagnostic[]; inputUri?: URI }> {
-		const results: Array<{ uri: URI; diagnostics: vscode.Diagnostic[]; inputUri?: URI }> = [];
+	public getDiagnostics(paths: { uri: URI; range: Range | undefined }[]): Array<{ uri: URI; diagnostics: zyraxoncode.Diagnostic[]; inputUri?: URI }> {
+		const results: Array<{ uri: URI; diagnostics: zyraxoncode.Diagnostic[]; inputUri?: URI }> = [];
 
 		// for notebooks, we need to find the cell matching the range and get diagnostics for that cell
 		const nonNotebookPaths = paths.filter(p => {
@@ -146,7 +146,7 @@ export class GetErrorsTool extends Disposable implements ICopilotTool<IGetErrors
 		return results;
 	}
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IGetErrorsParams>, token: CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IGetErrorsParams>, token: CancellationToken) {
 		const getAll = () => this.languageDiagnosticsService.getAllDiagnostics()
 			.map(d => ({ uri: d[0], diagnostics: d[1].filter(e => e.severity <= DiagnosticSeverity.Warning), inputUri: undefined }))
 			// filter any documents w/o warnings or errors
@@ -217,7 +217,7 @@ export class GetErrorsTool extends Disposable implements ICopilotTool<IGetErrors
 		return result;
 	}
 
-	prepareInvocation(options: vscode.LanguageModelToolInvocationPrepareOptions<IGetErrorsParams>, token: vscode.CancellationToken): vscode.ProviderResult<vscode.PreparedToolInvocation> {
+	prepareInvocation(options: zyraxoncode.LanguageModelToolInvocationPrepareOptions<IGetErrorsParams>, token: zyraxoncode.CancellationToken): zyraxoncode.ProviderResult<zyraxoncode.PreparedToolInvocation> {
 		if (!options.input.filePaths?.length) {
 			// When no file paths provided, check all files with diagnostics
 			return {
@@ -261,7 +261,7 @@ export class GetErrorsTool extends Disposable implements ICopilotTool<IGetErrors
 		const filePaths: string[] = [];
 		const ranges: ([a: number, b: number, c: number, d: number] | undefined)[] = [];
 
-		function addPath(path: string, range: vscode.Range | undefined) {
+		function addPath(path: string, range: zyraxoncode.Range | undefined) {
 			if (!seen.has(path)) {
 				seen.add(path);
 				filePaths.push(path);
@@ -306,7 +306,7 @@ export class GetErrorsTool extends Disposable implements ICopilotTool<IGetErrors
 ToolRegistry.registerTool(GetErrorsTool);
 
 interface IDiagnosticToolOutputProps extends BasePromptElementProps {
-	diagnosticsGroups: { context: DiagnosticContext; uri: URI; diagnostics: vscode.Diagnostic[] }[];
+	diagnosticsGroups: { context: DiagnosticContext; uri: URI; diagnostics: zyraxoncode.Diagnostic[] }[];
 	maxDiagnostics?: number;
 }
 

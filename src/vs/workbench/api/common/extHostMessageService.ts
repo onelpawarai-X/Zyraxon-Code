@@ -4,13 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import Severity from '../../../base/common/severity.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { MainContext, MainThreadMessageServiceShape, MainThreadMessageOptions, IMainContext } from './extHost.protocol.js';
 import { IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { ILogService } from '../../../platform/log/common/log.js';
 import { checkProposedApiEnabled } from '../../services/extensions/common/extensions.js';
 
-function isMessageItem(item: any): item is vscode.MessageItem {
+function isMessageItem(item: any): item is zyraxoncode.MessageItem {
 	return item && item.title;
 }
 
@@ -26,15 +26,15 @@ export class ExtHostMessageService {
 	}
 
 
-	showMessage(extension: IExtensionDescription, severity: Severity, message: string, optionsOrFirstItem: vscode.MessageOptions | string | undefined, rest: string[]): Promise<string | undefined>;
-	showMessage(extension: IExtensionDescription, severity: Severity, message: string, optionsOrFirstItem: vscode.MessageOptions | vscode.MessageItem | undefined, rest: vscode.MessageItem[]): Promise<vscode.MessageItem | undefined>;
-	showMessage(extension: IExtensionDescription, severity: Severity, message: string, optionsOrFirstItem: vscode.MessageOptions | vscode.MessageItem | string | undefined, rest: Array<vscode.MessageItem | string>): Promise<string | vscode.MessageItem | undefined>;
-	showMessage(extension: IExtensionDescription, severity: Severity, message: string, optionsOrFirstItem: vscode.MessageOptions | string | vscode.MessageItem | undefined, rest: Array<string | vscode.MessageItem>): Promise<string | vscode.MessageItem | undefined> {
+	showMessage(extension: IExtensionDescription, severity: Severity, message: string, optionsOrFirstItem: zyraxoncode.MessageOptions | string | undefined, rest: string[]): Promise<string | undefined>;
+	showMessage(extension: IExtensionDescription, severity: Severity, message: string, optionsOrFirstItem: zyraxoncode.MessageOptions | zyraxoncode.MessageItem | undefined, rest: zyraxoncode.MessageItem[]): Promise<zyraxoncode.MessageItem | undefined>;
+	showMessage(extension: IExtensionDescription, severity: Severity, message: string, optionsOrFirstItem: zyraxoncode.MessageOptions | zyraxoncode.MessageItem | string | undefined, rest: Array<zyraxoncode.MessageItem | string>): Promise<string | zyraxoncode.MessageItem | undefined>;
+	showMessage(extension: IExtensionDescription, severity: Severity, message: string, optionsOrFirstItem: zyraxoncode.MessageOptions | string | zyraxoncode.MessageItem | undefined, rest: Array<string | zyraxoncode.MessageItem>): Promise<string | zyraxoncode.MessageItem | undefined> {
 
 		const options: MainThreadMessageOptions = {
 			source: { identifier: extension.identifier, label: extension.displayName || extension.name }
 		};
-		let items: (string | vscode.MessageItem)[];
+		let items: (string | zyraxoncode.MessageItem)[];
 
 		if (typeof optionsOrFirstItem === 'string' || isMessageItem(optionsOrFirstItem)) {
 			items = [optionsOrFirstItem, ...rest];

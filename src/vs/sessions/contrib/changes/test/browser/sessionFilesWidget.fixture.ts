@@ -32,7 +32,7 @@ const SAMPLE_FILES: readonly ISessionFile[] = [
 function renderWidget(ctx: ComponentFixtureContext, options?: { files?: readonly ISessionFile[]; height?: number }): void {
 	ctx.container.style.width = '360px';
 	ctx.container.style.height = `${options?.height ?? 160}px`;
-	ctx.container.style.backgroundColor = 'var(--vscode-sideBar-background)';
+	ctx.container.style.backgroundColor = 'var(--zyraxoncode-sideBar-background)';
 
 	const instantiationService = createEditorServices(ctx.disposableStore, {
 		colorTheme: ctx.theme,

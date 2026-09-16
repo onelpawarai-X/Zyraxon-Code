@@ -25,7 +25,7 @@ import { TerminalExplainIntent } from './terminalExplainIntent';
 import { TerminalIntent } from './terminalIntent';
 import { TestsIntent } from './testIntent/testIntent';
 import { UnknownIntent } from './unknownIntent';
-import { VscodeIntent } from './vscodeIntent';
+import { VscodeIntent } from './zyraxoncodeIntent';
 
 IntentRegistry.setIntents([
 	new SyncDescriptor(EditCodeIntent),

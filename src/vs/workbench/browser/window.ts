@@ -52,7 +52,7 @@ export abstract class BaseWindow extends Disposable {
 		this.enableWindowFocusOnElementFocus(targetWindow);
 		this.enableMultiWindowAwareTimeout(targetWindow, dom);
 
-		this.registerFullScreenListeners(targetWindow.vscodeWindowId);
+		this.registerFullScreenListeners(targetWindow.zyraxoncodeWindowId);
 		this.registerContextMenuListeners(targetWindow);
 	}
 
@@ -115,10 +115,10 @@ export abstract class BaseWindow extends Disposable {
 		// timeout is scheduled without being throttled (unless all windows are minimized).
 
 		const originalSetTimeout = targetWindow.setTimeout;
-		Object.defineProperty(targetWindow, 'vscodeOriginalSetTimeout', { get: () => originalSetTimeout });
+		Object.defineProperty(targetWindow, 'zyraxoncodeOriginalSetTimeout', { get: () => originalSetTimeout });
 
 		const originalClearTimeout = targetWindow.clearTimeout;
-		Object.defineProperty(targetWindow, 'vscodeOriginalClearTimeout', { get: () => originalClearTimeout });
+		Object.defineProperty(targetWindow, 'zyraxoncodeOriginalClearTimeout', { get: () => originalClearTimeout });
 
 		targetWindow.setTimeout = function (this: unknown, handler: TimerHandler, timeout = 0, ...args: unknown[]): number {
 			if (dom.getWindowsCount() === 1 || typeof handler === 'string' || timeout === 0 /* immediates are never throttled */) {
@@ -143,7 +143,7 @@ export abstract class BaseWindow extends Disposable {
 				// this can happen for timeouts on unfocused windows
 				let didClear = false;
 
-				const handle = (window as { vscodeOriginalSetTimeout?: typeof window.setTimeout }).vscodeOriginalSetTimeout?.apply(this, [(...args: unknown[]) => {
+				const handle = (window as { zyraxoncodeOriginalSetTimeout?: typeof window.setTimeout }).zyraxoncodeOriginalSetTimeout?.apply(this, [(...args: unknown[]) => {
 					if (didClear) {
 						return;
 					}
@@ -152,7 +152,7 @@ export abstract class BaseWindow extends Disposable {
 
 				const timeoutDisposable = toDisposable(() => {
 					didClear = true;
-					(window as { vscodeOriginalClearTimeout?: typeof window.clearTimeout }).vscodeOriginalClearTimeout?.apply(this, [handle]);
+					(window as { zyraxoncodeOriginalClearTimeout?: typeof window.clearTimeout }).zyraxoncodeOriginalClearTimeout?.apply(this, [handle]);
 					timeoutDisposables.delete(timeoutDisposable);
 					// Remove from the window's DisposableStore without re-disposing (we're already inside dispose)
 					disposables.deleteAndLeak(timeoutDisposable);
@@ -337,7 +337,7 @@ export class BrowserWindow extends BaseWindow {
 		// We need to ignore the `beforeunload` event while
 		// we handle external links to open specifically for
 		// the case of application protocols that e.g. invoke
-		// vscode itself. We do not want to open these links
+		// zyraxoncode itself. We do not want to open these links
 		// in a new window because that would leave a blank
 		// window to the user, but using `window.location.href`
 		// will trigger the `beforeunload`.
@@ -362,7 +362,7 @@ export class BrowserWindow extends BaseWindow {
 								type: Severity.Warning,
 								message: localize('unableToOpenExternal', "The browser blocked opening a new tab or window. Press 'Retry' to try again."),
 								custom: {
-									markdownDetails: [{ markdown: new MarkdownString(localize('unableToOpenWindowDetail', "Please allow pop-ups for this website in your [browser settings]({0}).", 'https://aka.ms/allow-vscode-popup'), true) }]
+									markdownDetails: [{ markdown: new MarkdownString(localize('unableToOpenWindowDetail', "Please allow pop-ups for this website in your [browser settings]({0}).", '__ZYRAXKEEP__0_'), true) }]
 								},
 								buttons: [
 									{
@@ -454,7 +454,7 @@ export class BrowserWindow extends BaseWindow {
 
 	private registerLabelFormatters(): void {
 		this._register(this.labelService.registerFormatter({
-			scheme: Schemas.vscodeUserData,
+			scheme: Schemas.zyraxoncodeUserData,
 			priority: true,
 			formatting: {
 				label: '(Settings) ${path}',

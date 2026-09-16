@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 export const IChatHookService = createServiceIdentifier<IChatHookService>('IChatHookService');
@@ -17,7 +17,7 @@ export interface IChatHookService {
 	 *
 	 * @param hooks The resolved hook commands for the session (from request.hooks).
 	 */
-	logConfiguredHooks(hooks: vscode.ChatRequestHooks | undefined): void;
+	logConfiguredHooks(hooks: zyraxoncode.ChatRequestHooks | undefined): void;
 
 	/**
 	 * Execute all hooks of the specified type for the current chat session.
@@ -33,7 +33,7 @@ export interface IChatHookService {
 	 * @param token Optional cancellation token.
 	 * @returns A promise that resolves to an array of hook execution results.
 	 */
-	executeHook(hookType: vscode.ChatHookType, hooks: vscode.ChatRequestHooks | undefined, input: unknown, sessionId?: string, token?: vscode.CancellationToken): Promise<vscode.ChatHookResult[]>;
+	executeHook(hookType: zyraxoncode.ChatHookType, hooks: zyraxoncode.ChatRequestHooks | undefined, input: unknown, sessionId?: string, token?: zyraxoncode.CancellationToken): Promise<zyraxoncode.ChatHookResult[]>;
 
 	/**
 	 * Execute the preToolUse hook and collapse results from all hooks into a single result.
@@ -50,7 +50,7 @@ export interface IChatHookService {
 	 * @param outputStream Optional output stream for displaying hook warnings/errors.
 	 * @returns The collapsed hook result, or undefined if no hooks are registered or none returned a result.
 	 */
-	executePreToolUseHook(toolName: string, toolInput: unknown, toolCallId: string, hooks: vscode.ChatRequestHooks | undefined, sessionId?: string, token?: vscode.CancellationToken, outputStream?: vscode.ChatResponseStream): Promise<IPreToolUseHookResult | undefined>;
+	executePreToolUseHook(toolName: string, toolInput: unknown, toolCallId: string, hooks: zyraxoncode.ChatRequestHooks | undefined, sessionId?: string, token?: zyraxoncode.CancellationToken, outputStream?: zyraxoncode.ChatResponseStream): Promise<IPreToolUseHookResult | undefined>;
 
 	/**
 	 * Execute the postToolUse hook and collapse results from all hooks into a single result.
@@ -68,7 +68,7 @@ export interface IChatHookService {
 	 * @param outputStream Optional output stream for displaying hook warnings/errors.
 	 * @returns The collapsed hook result, or undefined if no hooks are registered or none returned a result.
 	 */
-	executePostToolUseHook(toolName: string, toolInput: unknown, toolResponseText: string, toolCallId: string, hooks: vscode.ChatRequestHooks | undefined, sessionId?: string, token?: vscode.CancellationToken, outputStream?: vscode.ChatResponseStream): Promise<IPostToolUseHookResult | undefined>;
+	executePostToolUseHook(toolName: string, toolInput: unknown, toolResponseText: string, toolCallId: string, hooks: zyraxoncode.ChatRequestHooks | undefined, sessionId?: string, token?: zyraxoncode.CancellationToken, outputStream?: zyraxoncode.ChatResponseStream): Promise<IPostToolUseHookResult | undefined>;
 }
 
 /**

@@ -5,7 +5,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { TypeScriptServiceConfiguration } from '../configuration/configuration';
 import { RelativeWorkspacePathResolver } from '../utils/relativePathResolver';
 import { API } from './api';
@@ -63,22 +63,22 @@ export class DiskTypeScriptVersionProvider implements ITypeScriptVersionProvider
 	}
 
 	public get bundledVersion(): TypeScriptVersion {
-		const version = this.getContributedVersion(TypeScriptVersionSource.Bundled, 'vscode.typescript-language-features', ['..', 'node_modules']);
+		const version = this.getContributedVersion(TypeScriptVersionSource.Bundled, 'zyraxoncode.typescript-language-features', ['..', 'node_modules']);
 		if (version) {
 			return version;
 		}
 
-		vscode.window.showErrorMessage(vscode.l10n.t("ZYRAXON Code\'s tsserver was deleted by another application such as a misbehaving virus detection tool. Please reinstall ZYRAXON Code."));
+		zyraxoncode.window.showErrorMessage(zyraxoncode.l10n.t("ZYRAXON Code\'s tsserver was deleted by another application such as a misbehaving virus detection tool. Please reinstall ZYRAXON Code."));
 		throw new Error('Could not find bundled tsserver.js');
 	}
 
 	private get contributedTsNextVersion(): TypeScriptVersion | undefined {
-		return this.getContributedVersion(TypeScriptVersionSource.TsNightlyExtension, 'ms-vscode.vscode-typescript-next', ['node_modules']);
+		return this.getContributedVersion(TypeScriptVersionSource.TsNightlyExtension, 'ms-zyraxoncode.zyraxoncode-typescript-next', ['node_modules']);
 	}
 
 	private getContributedVersion(source: TypeScriptVersionSource, extensionId: string, pathToTs: readonly string[]): TypeScriptVersion | undefined {
 		try {
-			const extension = vscode.extensions.getExtension(extensionId);
+			const extension = zyraxoncode.extensions.getExtension(extensionId);
 			if (extension) {
 				const serverPath = path.join(extension.extensionPath, ...pathToTs, 'typescript', 'lib', 'tsserver.js');
 				const bundledVersion = new TypeScriptVersion(source, serverPath, DiskTypeScriptVersionProvider.getApiVersion(serverPath), '');
@@ -128,14 +128,14 @@ export class DiskTypeScriptVersionProvider implements ITypeScriptVersionProvider
 	}
 
 	private loadTypeScriptVersionsFromPath(source: TypeScriptVersionSource, relativePath: string): TypeScriptVersion[] {
-		if (!vscode.workspace.workspaceFolders) {
+		if (!zyraxoncode.workspace.workspaceFolders) {
 			return [];
 		}
 
 		const versions: TypeScriptVersion[] = [];
-		for (const root of vscode.workspace.workspaceFolders) {
+		for (const root of zyraxoncode.workspace.workspaceFolders) {
 			let label: string = relativePath;
-			if (vscode.workspace.workspaceFolders.length > 1) {
+			if (zyraxoncode.workspace.workspaceFolders.length > 1) {
 				label = path.join(root.name, relativePath);
 			}
 
@@ -152,7 +152,7 @@ export class DiskTypeScriptVersionProvider implements ITypeScriptVersionProvider
 		}
 
 		// Allow TS developers to provide custom version
-		const tsdkVersion = vscode.workspace.getConfiguration().get<string | undefined>('typescript.tsdk_version', undefined);
+		const tsdkVersion = zyraxoncode.workspace.getConfiguration().get<string | undefined>('typescript.tsdk_version', undefined);
 		if (tsdkVersion) {
 			return API.fromVersionString(tsdkVersion);
 		}

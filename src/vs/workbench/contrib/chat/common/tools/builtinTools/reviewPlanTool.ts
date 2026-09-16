@@ -20,7 +20,7 @@ import { IChatRequestModel } from '../../model/chatModel.js';
 import { ChatPlanReviewData } from '../../model/chatProgressTypes/chatPlanReviewData.js';
 import { CountTokensCallback, IPreparedToolInvocation, IToolData, IToolImpl, IToolInvocation, IToolInvocationPreparationContext, IToolResult, ToolDataSource, ToolProgress } from '../languageModelToolsService.js';
 
-export const ReviewPlanToolId = 'vscode_reviewPlan';
+export const ReviewPlanToolId = 'zyraxoncode_reviewPlan';
 
 export interface IReviewPlanParams {
 	readonly title?: string;

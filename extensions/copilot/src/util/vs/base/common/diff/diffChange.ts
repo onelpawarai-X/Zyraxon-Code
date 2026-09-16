@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -39,7 +39,7 @@ export class DiffChange {
 	 * and content.
 	 */
 	constructor(originalStart: number, originalLength: number, modifiedStart: number, modifiedLength: number) {
-		//Debug.Assert(originalLength > 0 || modifiedLength > 0, "originalLength and modifiedLength cannot both be <= 0");
+		__ZYRAXKEEP__0_(originalLength > 0 || modifiedLength > 0, "originalLength and modifiedLength cannot both be <= 0");
 		this.originalStart = originalStart;
 		this.originalLength = originalLength;
 		this.modifiedStart = modifiedStart;

@@ -44,7 +44,7 @@ export const {
 
 	ensureCodeWindow(mainWindow, 1);
 	const mainWindowRegistration = { window: mainWindow, disposables: new DisposableStore() };
-	windows.set(mainWindow.vscodeWindowId, mainWindowRegistration);
+	windows.set(mainWindow.zyraxoncodeWindowId, mainWindowRegistration);
 
 	const onDidRegisterWindow = new event.Emitter<IRegisteredCodeWindow>();
 	const onDidUnregisterWindow = new event.Emitter<CodeWindow>();
@@ -63,7 +63,7 @@ export const {
 		onWillUnregisterWindow: onWillUnregisterWindow.event,
 		onDidUnregisterWindow: onDidUnregisterWindow.event,
 		registerWindow(window: CodeWindow): IDisposable {
-			if (windows.has(window.vscodeWindowId)) {
+			if (windows.has(window.zyraxoncodeWindowId)) {
 				return Disposable.None;
 			}
 
@@ -73,10 +73,10 @@ export const {
 				window,
 				disposables: disposables.add(new DisposableStore())
 			};
-			windows.set(window.vscodeWindowId, registeredWindow);
+			windows.set(window.zyraxoncodeWindowId, registeredWindow);
 
 			disposables.add(toDisposable(() => {
-				windows.delete(window.vscodeWindowId);
+				windows.delete(window.zyraxoncodeWindowId);
 				onDidUnregisterWindow.fire(window);
 			}));
 
@@ -95,7 +95,7 @@ export const {
 			return windows.size;
 		},
 		getWindowId(targetWindow: Window): number {
-			return (targetWindow as CodeWindow).vscodeWindowId;
+			return (targetWindow as CodeWindow).zyraxoncodeWindowId;
 		},
 		hasWindow(windowId: number): boolean {
 			return windows.has(windowId);
@@ -328,9 +328,9 @@ export function addDisposableGenericMouseUpListener(node: EventTarget, handler: 
  * callback but queue it on the regular event loop (like setTimeout). Typically
  * this should not be used.
  *
- * [IdleDeadline]: https://developer.mozilla.org/en-US/docs/Web/API/IdleDeadline
- * [requestIdleCallback]: https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
- * [setTimeout]: https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
+ * [IdleDeadline]: __ZYRAXKEEP__0_
+ * [requestIdleCallback]: __ZYRAXKEEP__1_
+ * [setTimeout]: __ZYRAXKEEP__2_
  */
 export function runWhenWindowIdle(targetWindow: Window | typeof globalThis, callback: (idle: IdleDeadline) => void, timeout?: number): IDisposable {
 	return _runWhenIdle(targetWindow, callback, timeout);
@@ -338,7 +338,7 @@ export function runWhenWindowIdle(targetWindow: Window | typeof globalThis, call
 
 /**
  * An implementation of the "idle-until-urgent"-strategy as introduced
- * here: https://philipwalton.com/articles/idle-until-urgent/
+ * here: __ZYRAXKEEP__3_
  */
 export class WindowIdleValue<T> extends AbstractIdleValue<T> {
 	constructor(targetWindow: Window | typeof globalThis, executor: () => T) {
@@ -1428,8 +1428,8 @@ export function reset(parent: HTMLElement, ...children: Array<Node | string>): v
 const SELECTOR_REGEX = /([\w\-]+)?(#([\w\-]+))?((\.([\w\-]+))*)/;
 
 export enum Namespace {
-	HTML = 'http://www.w3.org/1999/xhtml',
-	SVG = 'http://www.w3.org/2000/svg'
+	HTML = '__ZYRAXKEEP__4_',
+	SVG = '__ZYRAXKEEP__5_'
 }
 
 function _$<T extends Element>(namespace: Namespace, description: string, attrs?: { [key: string]: any }, ...children: Array<Node | string>): T {
@@ -1599,17 +1599,17 @@ export function computeScreenAwareSize(window: Window, cssPx: number): number {
  * if the window was opened or if it was blocked by the browser's popup blocker.
  * If you want to tell if the browser blocked the new window, use {@link windowOpenWithSuccess}.
  *
- * See https://github.com/microsoft/monaco-editor/issues/601
+ * See __ZYRAXKEEP__6_
  * To protect against malicious code in the linked site, particularly phishing attempts,
  * the window.opener should be set to null to prevent the linked site from having access
  * to change the location of the current page.
- * See https://mathiasbynens.github.io/rel-noopener/
+ * See __ZYRAXKEEP__7_
  */
 export function windowOpenNoOpener(url: string): void {
 	// By using 'noopener' in the `windowFeatures` argument, the newly created window will
 	// not be able to use `window.opener` to reach back to the current page.
-	// See https://stackoverflow.com/a/46958731
-	// See https://developer.mozilla.org/en-US/docs/Web/API/Window/open#noopener
+	// See __ZYRAXKEEP__8_
+	// See __ZYRAXKEEP__9_
 	// However, this also doesn't allow us to realize if the browser blocked
 	// the creation of the window.
 	mainWindow.open(url, '_blank', 'noopener');
@@ -1643,9 +1643,9 @@ export function windowOpenPopup(url: string): void {
  * executing inside a sandboxed iframe. If it is not necessary to know if the
  * browser blocked the new window, use {@link windowOpenNoOpener}.
  *
- * See https://github.com/microsoft/monaco-editor/issues/601
- * See https://github.com/microsoft/monaco-editor/issues/2474
- * See https://mathiasbynens.github.io/rel-noopener/
+ * See __ZYRAXKEEP__10_
+ * See __ZYRAXKEEP__11_
+ * See __ZYRAXKEEP__12_
  *
  * @param url the url to open
  * @param noOpener whether or not to set the {@link window.opener} to null. You should leave the default
@@ -1696,7 +1696,7 @@ export function triggerDownload(dataOrUri: Uint8Array | URI, name: string): void
 	// In order to download from the browser, the only way seems
 	// to be creating a <a> element with download attribute that
 	// points to the file to download.
-	// See also https://developers.google.com/web/updates/2011/08/Downloading-resources-in-HTML5-a-download
+	// See also __ZYRAXKEEP__13_
 	const activeWindow = getActiveWindow();
 	const anchor = document.createElement('a');
 	activeWindow.document.body.appendChild(anchor);
@@ -1963,7 +1963,7 @@ export class ModifierKeyEmitter extends event.Emitter<IModifierKeyStatus> {
 }
 
 export function getCookieValue(name: string): string | undefined {
-	const match = document.cookie.match('(^|[^;]+)\\s*' + name + '\\s*=\\s*([^;]+)'); // See https://stackoverflow.com/a/25490531
+	const match = document.cookie.match('(^|[^;]+)\\s*' + name + '\\s*=\\s*([^;]+)'); // See __ZYRAXKEEP__14_
 
 	return match ? match.pop() : undefined;
 }
@@ -1981,7 +1981,7 @@ export interface IDragAndDropObserverCallbacks {
 export class DragAndDropObserver extends Disposable {
 
 	// A helper to fix issues with repeated DRAG_ENTER / DRAG_LEAVE
-	// calls see https://github.com/microsoft/vscode/issues/14470
+	// calls see __ZYRAXKEEP__15_
 	// when the element has child elements where the events are fired
 	// repeadedly.
 	private counter: number = 0;
@@ -2016,7 +2016,7 @@ export class DragAndDropObserver extends Disposable {
 		}));
 
 		this._register(addDisposableListener(this.element, EventType.DRAG_OVER, (e: DragEvent) => {
-			e.preventDefault(); // needed so that the drop event fires (https://stackoverflow.com/questions/21339924/drop-event-not-firing-in-chrome)
+			e.preventDefault(); // needed so that the drop event fires (__ZYRAXKEEP__16_)
 
 			this.callbacks.onDragOver?.(e, e.timeStamp - this.dragStartTime);
 		}));
@@ -2370,7 +2370,7 @@ export function svgElem(tag: string, ...args: [] | [attributes: { $: string } & 
 
 	const tagName = match.groups['tag'] || 'div';
 	// eslint-disable-next-line local/code-no-any-casts
-	const el = document.createElementNS('http://www.w3.org/2000/svg', tagName) as any as HTMLElement;
+	const el = document.createElementNS('__ZYRAXKEEP__17_', tagName) as any as HTMLElement;
 
 	if (match.groups['id']) {
 		el.id = match.groups['id'];
@@ -2479,7 +2479,7 @@ export function isEditableElement(element: Element): boolean {
 
 /**
  * Helper for calculating the "safe triangle" occluded by hovers to avoid early dismissal.
- * @see https://www.smashingmagazine.com/2023/08/better-context-menus-safe-triangles/ for example
+ * @see __ZYRAXKEEP__18_ for example
  */
 export class SafeTriangle {
 	// 4 points (x, y), 8 length
@@ -2549,9 +2549,9 @@ export namespace n {
 
 	export const elem = nodeNs<HTMLElementTagNameMap>(undefined);
 
-	export const svg: DomCreateFn<SVGElementTagNameMap2['svg'], SVGElement> = node<SVGElementTagNameMap2, 'svg'>('svg', 'http://www.w3.org/2000/svg');
+	export const svg: DomCreateFn<SVGElementTagNameMap2['svg'], SVGElement> = node<SVGElementTagNameMap2, 'svg'>('svg', '__ZYRAXKEEP__19_');
 
-	export const svgElem = nodeNs<SVGElementTagNameMap2>('http://www.w3.org/2000/svg');
+	export const svgElem = nodeNs<SVGElementTagNameMap2>('__ZYRAXKEEP__20_');
 
 	export function ref<T = HTMLOrSVGElement>(): IRefWithVal<T> {
 		let value: T | undefined = undefined;

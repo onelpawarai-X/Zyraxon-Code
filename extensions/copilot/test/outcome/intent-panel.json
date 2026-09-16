@@ -420,7 +420,7 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [relaxed] [builtin] how do i add env var to a test execution of jest in vscode?",
+		"name": "intent [panel] - [relaxed] [builtin] how do i add env var to a test execution of jest in zyraxoncode?",
 		"requests": [
 			"65326ae5b6e618ce2a3cecaa6eda1d72ef5bd5da106bfb30455fcf3eba8187ce"
 		]
@@ -516,7 +516,7 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [relaxed] [builtin] Latest updated features in vscode",
+		"name": "intent [panel] - [relaxed] [builtin] Latest updated features in zyraxoncode",
 		"requests": [
 			"32742552a1dd8e2a523c82d37df95d55d6217e78c75a5029494dcfaf1fbef346"
 		]
@@ -744,13 +744,13 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [relaxed] [builtin] vscode extension for chat participants, the extension should be updated to use c…",
+		"name": "intent [panel] - [relaxed] [builtin] zyraxoncode extension for chat participants, the extension should be updated to use c…",
 		"requests": [
 			"1eb02b48c0c3ca6d7d1de95863f301d76fbfa43dba0ba3ed411776561d125644"
 		]
 	},
 	{
-		"name": "intent [panel] - [relaxed] [builtin] vscode extension for chat participants, the extension will be for accessing inte…",
+		"name": "intent [panel] - [relaxed] [builtin] zyraxoncode extension for chat participants, the extension will be for accessing inte…",
 		"requests": [
 			"c6b78c83afc46ed08af2e8f5dd91eeb365c3b6879463a9b211212ccc2c2254ad"
 		]
@@ -780,7 +780,7 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [relaxed] [builtin] What is a good vscode extensions starting point if I want to contribute to the c…",
+		"name": "intent [panel] - [relaxed] [builtin] What is a good zyraxoncode extensions starting point if I want to contribute to the c…",
 		"requests": [
 			"7a96061182bf70aad6b1f0ab56251fe024da5c89cf5e4db4fc6773b7da2a1771"
 		]
@@ -804,7 +804,7 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [relaxed] [builtin] What is the name of that setting when vscode fake opens a file and how to disabl…",
+		"name": "intent [panel] - [relaxed] [builtin] What is the name of that setting when zyraxoncode fake opens a file and how to disabl…",
 		"requests": [
 			"2dcc6f05c09021bfe0ddaffa0fde93f0c97f1a84a09d96fe86277a2a3a90d46a"
 		]
@@ -1272,7 +1272,7 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [strict] [builtin] how do i add env var to a test execution of jest in vscode?",
+		"name": "intent [panel] - [strict] [builtin] how do i add env var to a test execution of jest in zyraxoncode?",
 		"requests": [
 			"65326ae5b6e618ce2a3cecaa6eda1d72ef5bd5da106bfb30455fcf3eba8187ce"
 		]
@@ -1368,7 +1368,7 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [strict] [builtin] Latest updated features in vscode",
+		"name": "intent [panel] - [strict] [builtin] Latest updated features in zyraxoncode",
 		"requests": [
 			"32742552a1dd8e2a523c82d37df95d55d6217e78c75a5029494dcfaf1fbef346"
 		]
@@ -1596,13 +1596,13 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [strict] [builtin] vscode extension for chat participants, the extension should be updated to use ca…",
+		"name": "intent [panel] - [strict] [builtin] zyraxoncode extension for chat participants, the extension should be updated to use ca…",
 		"requests": [
 			"1eb02b48c0c3ca6d7d1de95863f301d76fbfa43dba0ba3ed411776561d125644"
 		]
 	},
 	{
-		"name": "intent [panel] - [strict] [builtin] vscode extension for chat participants, the extension will be for accessing inter…",
+		"name": "intent [panel] - [strict] [builtin] zyraxoncode extension for chat participants, the extension will be for accessing inter…",
 		"requests": [
 			"c6b78c83afc46ed08af2e8f5dd91eeb365c3b6879463a9b211212ccc2c2254ad"
 		]
@@ -1632,7 +1632,7 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [strict] [builtin] What is a good vscode extensions starting point if I want to contribute to the ch…",
+		"name": "intent [panel] - [strict] [builtin] What is a good zyraxoncode extensions starting point if I want to contribute to the ch…",
 		"requests": [
 			"7a96061182bf70aad6b1f0ab56251fe024da5c89cf5e4db4fc6773b7da2a1771"
 		]
@@ -1656,7 +1656,7 @@
 		]
 	},
 	{
-		"name": "intent [panel] - [strict] [builtin] What is the name of that setting when vscode fake opens a file and how to disable…",
+		"name": "intent [panel] - [strict] [builtin] What is the name of that setting when zyraxoncode fake opens a file and how to disable…",
 		"requests": [
 			"2dcc6f05c09021bfe0ddaffa0fde93f0c97f1a84a09d96fe86277a2a3a90d46a"
 		]

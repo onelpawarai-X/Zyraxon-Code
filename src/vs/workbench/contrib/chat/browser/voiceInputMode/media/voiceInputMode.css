@@ -16,13 +16,13 @@
  * poking square corners through them. */
 .monaco-segmented-icon-toggle-container.chat-voice-input-mode-item {
 	--segmented-icon-toggle-height: 22px;
-	--segmented-icon-toggle-radius: var(--vscode-cornerRadius-circle);
-	--segmented-icon-toggle-cell-radius: var(--vscode-cornerRadius-circle);
+	--segmented-icon-toggle-radius: var(--zyraxoncode-cornerRadius-circle);
+	--segmented-icon-toggle-cell-radius: var(--zyraxoncode-cornerRadius-circle);
 }
 
 /* Walkthrough-only simulated hover mirrors the real :hover preview from the generic chrome. */
 .chat-voice-input-mode-cell.sim-hover::before {
-	background: var(--vscode-toolbar-hoverBackground, transparent);
+	background: var(--zyraxoncode-toolbar-hoverBackground, transparent);
 }
 
 /* ZYRAXON Code gates motion with `.monaco-enable-motion`; disable the cell slide/fade when it's off. */
@@ -33,22 +33,22 @@
 /* Voice Mode color by state — driven from the same theme-derived accents as the input-box glow
  * (see `resolveVoiceGlowColors`), so the pill, the waveform and the glow always agree. */
 .chat-voice-input-mode-cell.voice {
-	color: var(--vscode-icon-foreground);
+	color: var(--zyraxoncode-icon-foreground);
 }
 
 .chat-voice-input-mode-cell.voice.listening {
-	color: var(--voice-color-listening, var(--vscode-charts-blue, #58a6ff));
+	color: var(--voice-color-listening, var(--zyraxoncode-charts-blue, #58a6ff));
 }
 
 .chat-voice-input-mode-cell.voice.speaking {
-	color: var(--voice-color-speaking, var(--vscode-charts-purple, #a371f7));
+	color: var(--voice-color-speaking, var(--zyraxoncode-charts-purple, #a371f7));
 }
 
 /* Compact glyph size, matching the agent / model picker icons that sit beside the pill.
  * Needs to outrank the `font` shorthand on `.codicon[class*='codicon-']`, and to drop the
  * fixed 16px box the action bar puts on every codicon so the glyph sizes to its font. */
 .monaco-workbench .chat-voice-input-mode-icon.codicon[class*='codicon-'] {
-	font-size: var(--vscode-codiconFontSize-compact);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 	width: auto;
 	height: auto;
 }
@@ -78,7 +78,7 @@
 
 .chat-voice-input-mode-cell.dictation > .dictation-download-ring .dictation-download-ring-track {
 	fill: none;
-	stroke: var(--vscode-progressBar-background);
+	stroke: var(--zyraxoncode-progressBar-background);
 	stroke-width: 1.5;
 	opacity: 0.25;
 }
@@ -90,7 +90,7 @@
 
 .chat-voice-input-mode-cell.dictation > .dictation-download-ring .dictation-download-ring-progress {
 	fill: none;
-	stroke: var(--vscode-progressBar-background);
+	stroke: var(--zyraxoncode-progressBar-background);
 	stroke-width: 1.5;
 	stroke-linecap: round;
 }

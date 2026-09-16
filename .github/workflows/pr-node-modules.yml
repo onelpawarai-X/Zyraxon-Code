@@ -10,9 +10,9 @@ permissions: {}
 jobs:
   compile:
     name: Compile
-    runs-on: [ self-hosted, 1ES.Pool=1es-vscode-oss-ubuntu-22.04-x64, "JobId=compile-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
+    runs-on: [ self-hosted, 1ES.Pool=1es-zyraxoncode-oss-ubuntu-22.04-x64, "JobId=compile-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
 
       - name: Setup Node.js
@@ -75,12 +75,12 @@ jobs:
 
   linux:
     name: Linux
-    runs-on: [ self-hosted, 1ES.Pool=1es-vscode-oss-ubuntu-22.04-x64, "JobId=linux-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
+    runs-on: [ self-hosted, 1ES.Pool=1es-zyraxoncode-oss-ubuntu-22.04-x64, "JobId=linux-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
     env:
       NPM_ARCH: x64
       VSCODE_ARCH: x64
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
 
       - name: Setup Node.js
@@ -150,7 +150,7 @@ jobs:
       NPM_ARCH: arm64
       VSCODE_ARCH: arm64
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
 
       - name: Setup Node.js
@@ -189,7 +189,7 @@ jobs:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
           GITHUB_TOKEN: ${{ secrets.VSCODE_OSS }}
           # Avoid using dlopen to load Kerberos on macOS which can cause missing libraries
-          # https://github.com/mongodb-js/kerberos/commit/04044d2814ad1d01e77f1ce87f26b03d86692cf2
+          # __ZYRAXKEEP__0_
           # flipped the default to support legacy linux distros which shouldn't happen
           # on macOS.
           GYP_DEFINES: "kerberos_use_rtld=false"
@@ -204,12 +204,12 @@ jobs:
 
   windows:
     name: Windows
-    runs-on: [ self-hosted, 1ES.Pool=1es-vscode-oss-windows-2022-x64, "JobId=windows-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
+    runs-on: [ self-hosted, 1ES.Pool=1es-zyraxoncode-oss-windows-2022-x64, "JobId=windows-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
     env:
       NPM_ARCH: x64
       VSCODE_ARCH: x64
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
 
       - name: Setup Node.js
@@ -263,9 +263,9 @@ jobs:
 
   copilot-linux:
     name: Copilot (Linux)
-    runs-on: [ self-hosted, 1ES.Pool=1es-vscode-oss-ubuntu-22.04-x64, "JobId=copilot-linux-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
+    runs-on: [ self-hosted, 1ES.Pool=1es-zyraxoncode-oss-ubuntu-22.04-x64, "JobId=copilot-linux-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
 
       - name: Setup Node.js
@@ -296,9 +296,9 @@ jobs:
 
   copilot-windows:
     name: Copilot (Windows)
-    runs-on: [ self-hosted, 1ES.Pool=1es-vscode-oss-windows-2022-x64, "JobId=copilot-windows-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
+    runs-on: [ self-hosted, 1ES.Pool=1es-zyraxoncode-oss-windows-2022-x64, "JobId=copilot-windows-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
 
       - name: Setup Node.js

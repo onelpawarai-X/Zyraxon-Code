@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { sessionResourceToId } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { URI } from '../../../util/vs/base/common/uri';
 import { basename } from '../../../util/vs/base/common/resources';
 
 export interface PromptVariable {
-	readonly reference: vscode.ChatPromptReference;
+	readonly reference: zyraxoncode.ChatPromptReference;
 	readonly originalName: string;
 	readonly uniqueName: string;
-	readonly value: string | vscode.Uri | vscode.Location | unknown;
+	readonly value: string | zyraxoncode.Uri | zyraxoncode.Location | unknown;
 	readonly range?: [start: number, end: number];
 	readonly isMarkedReadonly: boolean | undefined;
 }
@@ -21,7 +21,7 @@ export class ChatVariablesCollection {
 	private _variables: PromptVariable[] | null = null;
 
 	static mergeAndDedup(...collections: ChatVariablesCollection[]): ChatVariablesCollection {
-		const allReferences: vscode.ChatPromptReference[] = [];
+		const allReferences: zyraxoncode.ChatPromptReference[] = [];
 		const seen = new Set<string>();
 		for (const collection of collections) {
 			for (const variable of collection) {
@@ -46,7 +46,7 @@ export class ChatVariablesCollection {
 	}
 
 	static merge(...collections: ChatVariablesCollection[]): ChatVariablesCollection {
-		const allReferences: vscode.ChatPromptReference[] = [];
+		const allReferences: zyraxoncode.ChatPromptReference[] = [];
 		for (const collection of collections) {
 			for (const variable of collection) {
 				allReferences.push(variable.reference);
@@ -56,7 +56,7 @@ export class ChatVariablesCollection {
 	}
 
 	constructor(
-		private readonly _source: readonly vscode.ChatPromptReference[] = []
+		private readonly _source: readonly zyraxoncode.ChatPromptReference[] = []
 	) { }
 
 	private _getVariables(): PromptVariable[] {
@@ -75,7 +75,7 @@ export class ChatVariablesCollection {
 		return this._variables;
 	}
 
-	public get references(): readonly vscode.ChatPromptReference[] {
+	public get references(): readonly zyraxoncode.ChatPromptReference[] {
 		return this._getVariables().map(v => v.reference);
 	}
 
@@ -90,7 +90,7 @@ export class ChatVariablesCollection {
 	}
 
 	public filter(predicate: (v: PromptVariable) => boolean): ChatVariablesCollection {
-		const resultingReferences: vscode.ChatPromptReference[] = [];
+		const resultingReferences: zyraxoncode.ChatPromptReference[] = [];
 		for (const variable of this._getVariables()) {
 			if (predicate(variable)) {
 				resultingReferences.push(variable.reference);
@@ -112,7 +112,7 @@ export class ChatVariablesCollection {
 		return this._getVariables().length > 0;
 	}
 
-	private uniqueFileName(name: string, variables: vscode.ChatPromptReference[]): string {
+	private uniqueFileName(name: string, variables: zyraxoncode.ChatPromptReference[]): string {
 		const count = variables.filter(v => v.name === name).length;
 		return count === 0 ? name : `${name}-${count}`;
 	}
@@ -122,34 +122,34 @@ export class ChatVariablesCollection {
 /**
  * Check if provided variable is a "prompt file".
  */
-export function isPromptFile(reference: vscode.ChatPromptReference): reference is vscode.ChatPromptReference & { value: vscode.Uri } {
+export function isPromptFile(reference: zyraxoncode.ChatPromptReference): reference is zyraxoncode.ChatPromptReference & { value: zyraxoncode.Uri } {
 	return reference.id.startsWith(PromptFileIdPrefix);
 }
 
-export const PromptFileIdPrefix = 'vscode.prompt.file';
+export const PromptFileIdPrefix = 'zyraxoncode.prompt.file';
 
 /**
  * Check if provided variable is an "instruction file".
  */
-export function isInstructionFile(reference: vscode.ChatPromptReference): reference is vscode.ChatPromptReference & { value: vscode.Uri } {
+export function isInstructionFile(reference: zyraxoncode.ChatPromptReference): reference is zyraxoncode.ChatPromptReference & { value: zyraxoncode.Uri } {
 	return reference.id.startsWith(InstructionFileIdPrefix);
 }
 
-export const InstructionFileIdPrefix = 'vscode.instructions.file';
+export const InstructionFileIdPrefix = 'zyraxoncode.instructions.file';
 
 /**
  * Check if provided variable is the workspace "customizations index" file.
  */
-export function isCustomizationsIndex(reference: vscode.ChatPromptReference): reference is vscode.ChatPromptReference & { value: string } {
+export function isCustomizationsIndex(reference: zyraxoncode.ChatPromptReference): reference is zyraxoncode.ChatPromptReference & { value: string } {
 	return reference.id === CustomizationsIndexId;
 }
 
 /**
- * Builds a `vscode.ChatPromptReference` whose shape is recognised by
+ * Builds a `zyraxoncode.ChatPromptReference` whose shape is recognised by
  * `isInstructionFile` (see `chatVariablesCollection.ts`). Mirrors core's
  * `toPromptFileVariableEntry`.
  */
-export function toInstructionFileReference(uri: URI, isRoot: boolean, originLabel: string | undefined): vscode.ChatPromptReference {
+export function toInstructionFileReference(uri: URI, isRoot: boolean, originLabel: string | undefined): zyraxoncode.ChatPromptReference {
 	const idSuffix = isRoot ? 'root' : 'reference';
 	return {
 		id: `${InstructionFileIdPrefix}.${idSuffix}__${uri.toString()}`,
@@ -159,14 +159,14 @@ export function toInstructionFileReference(uri: URI, isRoot: boolean, originLabe
 	};
 }
 
-export const CustomizationsIndexId = 'vscode.customizations.index';
+export const CustomizationsIndexId = 'zyraxoncode.customizations.index';
 
 
 /**
- * Builds a `vscode.ChatPromptReference` for the customizations index text.
+ * Builds a `zyraxoncode.ChatPromptReference` for the customizations index text.
  * Recognised by `isCustomizationsIndex` on the consumer side.
  */
-export function toCustomizationsIndexReference(content: string): vscode.ChatPromptReference {
+export function toCustomizationsIndexReference(content: string): zyraxoncode.ChatPromptReference {
 	return {
 		id: CustomizationsIndexId,
 		name: 'prompt:customizationsIndex',
@@ -178,7 +178,7 @@ export function toCustomizationsIndexReference(content: string): vscode.ChatProm
 /**
  * URI schemes used for chat session references.
  */
-export const SessionReferenceSchemes: ReadonlySet<string> = new Set(['vscode-chat-session', 'copilotcli', 'claude-code']);
+export const SessionReferenceSchemes: ReadonlySet<string> = new Set(['zyraxoncode-chat-session', 'copilotcli', 'claude-code']);
 
 /**
  * Check if a URI scheme identifies a chat session reference.
@@ -190,7 +190,7 @@ export function isSessionReferenceScheme(scheme: string): boolean {
 /**
  * Check if provided variable is a session reference.
  */
-export function isSessionReference(variable: PromptVariable): variable is PromptVariable & { value: vscode.Uri } {
+export function isSessionReference(variable: PromptVariable): variable is PromptVariable & { value: zyraxoncode.Uri } {
 	return URI.isUri(variable.value) && isSessionReferenceScheme(variable.value.scheme);
 }
 
@@ -198,7 +198,7 @@ export function isSessionReference(variable: PromptVariable): variable is Prompt
  * Build the attributes for rendering a session reference as an `<attachment>` tag.
  * Callers can pass the result to `<Tag name='attachment' attrs={...} />`.
  */
-export function sessionReferenceAttachmentAttrs(variable: PromptVariable & { value: vscode.Uri }): Record<string, string> {
+export function sessionReferenceAttachmentAttrs(variable: PromptVariable & { value: zyraxoncode.Uri }): Record<string, string> {
 	const attrs: Record<string, string> = {};
 	if (variable.uniqueName) {
 		attrs.id = `${variable.uniqueName} (${sessionResourceToId(variable.value)})`;
@@ -211,7 +211,7 @@ export function sessionReferenceAttachmentAttrs(variable: PromptVariable & { val
  * Extract debug-target session IDs from chat prompt references.
  * Returns `undefined` when no session references are present.
  */
-export function extractDebugTargetSessionIds(references: readonly vscode.ChatPromptReference[]): readonly string[] | undefined {
+export function extractDebugTargetSessionIds(references: readonly zyraxoncode.ChatPromptReference[]): readonly string[] | undefined {
 	const sessionRefs = references.filter(ref => URI.isUri(ref.value) && isSessionReferenceScheme(ref.value.scheme));
 	return sessionRefs.length > 0 ? sessionRefs.map(ref => sessionResourceToId(ref.value as URI)) : undefined;
 }

@@ -24,8 +24,8 @@ import { ComponentFixtureContext, createEditorServices, createTextModel, defineC
 import '../../../../../base/browser/ui/codicons/codiconStyles.js';
 import '../../browser/media/agentFeedbackEditorInput.css';
 
-const sessionResource = URI.parse('vscode-agent-session://fixture/session-1');
-const fileResource = URI.parse('inmemory://model/agent-feedback-input.ts');
+const sessionResource = URI.parse('__ZYRAXKEEP__0_');
+const fileResource = URI.parse('__ZYRAXKEEP__1_');
 
 const sampleCode = [
 	'function alpha() {',
@@ -86,7 +86,7 @@ function renderInputWidget(context: ComponentFixtureContext, options: IInputFixt
 	context.container.style.position = 'relative';
 	context.container.style.width = '520px';
 	context.container.style.padding = '24px';
-	context.container.style.background = 'var(--vscode-editor-background)';
+	context.container.style.background = 'var(--zyraxoncode-editor-background)';
 
 	const widget = context.disposableStore.add(new AgentFeedbackInputWidget(createFakeEditor()));
 	const domNode = widget.getDomNode();
@@ -134,8 +134,8 @@ function renderInEditor(context: ComponentFixtureContext): Promise<void> {
 	const scopedDisposables = context.disposableStore.add(new DisposableStore());
 	context.container.style.width = '760px';
 	context.container.style.height = '260px';
-	context.container.style.border = '1px solid var(--vscode-editorWidget-border)';
-	context.container.style.background = 'var(--vscode-editor-background)';
+	context.container.style.border = '1px solid var(--zyraxoncode-editorWidget-border)';
+	context.container.style.background = 'var(--zyraxoncode-editor-background)';
 
 	ensureTokenColorMap();
 

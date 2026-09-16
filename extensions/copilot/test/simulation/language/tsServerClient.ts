@@ -7,9 +7,9 @@ import * as cp from 'child_process';
 import * as fs from 'fs';
 import path from 'path';
 import ts from 'typescript/lib/tsserverlibrary';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { DeferredPromise } from '../../../src/util/vs/base/common/async';
-import { Range } from '../../../src/vscodeTypes';
+import { Range } from '../../../src/zyraxoncodeTypes';
 import { REPO_ROOT } from '../../base/stest';
 import { doRunNpmInstall } from '../diagnosticProviders/tsc';
 import { setupTemporaryWorkspace } from '../diagnosticProviders/utils';
@@ -187,18 +187,18 @@ export class TSServerClient {
 		await cleanTempDirWithRetry(this._state.workspacePath);
 	}
 
-	async findDefinitions(fileName: string, position: vscode.Position): Promise<{ fileName: string; range: vscode.Range }[]> {
+	async findDefinitions(fileName: string, position: zyraxoncode.Position): Promise<{ fileName: string; range: zyraxoncode.Range }[]> {
 		return this.find(ts.server.protocol.CommandTypes.DefinitionAndBoundSpan, fileName, position);
 	}
 
-	async findReferences(fileName: string, position: vscode.Position): Promise<{ fileName: string; range: vscode.Range }[]> {
+	async findReferences(fileName: string, position: zyraxoncode.Position): Promise<{ fileName: string; range: zyraxoncode.Range }[]> {
 		return this.find(ts.server.protocol.CommandTypes.References, fileName, position);
 	}
 
 	async find(
 		command: ts.server.protocol.CommandTypes.References | ts.server.protocol.CommandTypes.DefinitionAndBoundSpan,
-		fileName: string, position: vscode.Position
-	): Promise<{ fileName: string; range: vscode.Range }[]> {
+		fileName: string, position: zyraxoncode.Position
+	): Promise<{ fileName: string; range: zyraxoncode.Range }[]> {
 		await this._init();
 		assert(this._state.k === 'initialized');
 

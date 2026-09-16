@@ -8,7 +8,7 @@ import type { PreloadOptions, RenderOptions } from './webviewPreloads.js';
 import { NotebookCellMetadata } from '../../../common/notebookCommon.js';
 
 interface BaseToWebviewMessage {
-	readonly __vscode_notebook_message: true;
+	readonly __zyraxoncode_notebook_message: true;
 }
 
 export interface WebviewInitialized extends BaseToWebviewMessage {

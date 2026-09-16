@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { SnippetString } from './snippetString.js';
 import { Position } from './position.js';
 import { Range } from './range.js';
 
-export class SnippetTextEdit implements vscode.SnippetTextEdit {
+export class SnippetTextEdit implements zyraxoncode.SnippetTextEdit {
 
 	static isSnippetTextEdit(thing: unknown): thing is SnippetTextEdit {
 		if (thing instanceof SnippetTextEdit) {

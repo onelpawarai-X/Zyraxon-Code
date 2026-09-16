@@ -261,7 +261,7 @@ export function projectManagedSettings(values: ManagedSettingsData, definitions:
 export type ManagedSettingsChannel =
 	/** GitHub `/copilot_internal/managed_settings` endpoint (server-delivered). */
 	| 'server'
-	/** Native MDM: OS registry (Windows) / managed preferences (macOS) via `@vscode/policy-watcher`. */
+	/** Native MDM: OS registry (Windows) / managed preferences (macOS) via `@zyraxoncode/policy-watcher`. */
 	| 'nativeMdm'
 	/** File on a well-known disk path (`managed-settings.json`). */
 	| 'file';

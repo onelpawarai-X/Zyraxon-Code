@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptReference } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptReference } from '@zyraxoncode/prompt-tsx';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { formatHexdump, isBinaryContent } from '../../../../util/common/hexdump';
 import { Schemas } from '../../../../util/vs/base/common/network';
-import { Uri } from '../../../../vscodeTypes';
+import { Uri } from '../../../../zyraxoncodeTypes';
 import { Tag } from '../base/tag';
 import { CodeBlock } from './safeElements';
 
@@ -31,7 +31,7 @@ const knownBinaryFileExtensions = new Set([
  * as text documents, so callers can fall through to normal text handling.
  */
 export async function hexdumpIfBinary(fileService: IFileSystemService, uri: Uri, options?: HexdumpIfBinaryOptions): Promise<BinaryFileData | undefined> {
-	if (uri.scheme === Schemas.vscodeNotebookCell || uri.scheme === Schemas.vscodeNotebookCellOutput) {
+	if (uri.scheme === Schemas.zyraxoncodeNotebookCell || uri.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 		return undefined;
 	}
 

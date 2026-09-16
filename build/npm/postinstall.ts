@@ -256,7 +256,7 @@ function fixBrokenPackages() {
 		'extensions/git',
 		'extensions/github',
 		'extensions/github-authentication',
-		'extensions/microsoft-authentication',
+		'extensions/zyraxon-authentication',
 		'extensions/html-language-features',
 		'extensions/json-language-features',
 		'extensions/css-language-features',
@@ -502,7 +502,7 @@ async function _main() {
 		const addonNeedle = `    const platformKey = \`\${platform}-\${arch}\`;\n    // The prebuilt addon ships inside the SDK package under prebuilds/<platform>/\n    const sdkRoot = path.resolve(__dirname, '..', '..');`;
 		const addonReplacement = `    const platformKey = \`\${platform}-\${arch}\`;\n    ${addonMarker}: prefer the on-demand native runtime cache when present.\n    const overrideDir = process.env.VSCODE_FOUNDRY_LOCAL_NATIVE_DIR;\n    if (overrideDir) {\n        const overridePath = path.join(overrideDir, 'prebuilds', platformKey, 'foundry_local_napi.node');\n        if (fs.existsSync(overridePath)) {\n            return require(overridePath);\n        }\n    }\n    // The prebuilt addon ships inside the SDK package under prebuilds/<platform>/\n    const sdkRoot = path.resolve(__dirname, '..', '..');`;
 		const coreNeedle = `        const platformKey = \`\${platform}-\${arch}\`;\n        // Resolve the native binary directory at foundry-local-core/<platform>,`;
-		const coreReplacement = `        const platformKey = \`\${platform}-\${arch}\`;\n        ${coreMarker}: prefer the on-demand native runtime cache when present.\n        const overrideDir = process.env.VSCODE_FOUNDRY_LOCAL_NATIVE_DIR;\n        if (overrideDir) {\n            const overrideExt = CoreInterop._getLibraryExtension();\n            const overrideCorePath = path.join(overrideDir, 'foundry-local-core', platformKey, \`Microsoft.AI.Foundry.Local.Core\${overrideExt}\`);\n            if (fs.existsSync(overrideCorePath)) {\n                config.params['FoundryLocalCorePath'] = overrideCorePath;\n                return overrideCorePath;\n            }\n        }\n        // Resolve the native binary directory at foundry-local-core/<platform>,`;
+		const coreReplacement = `        const platformKey = \`\${platform}-\${arch}\`;\n        ${coreMarker}: prefer the on-demand native runtime cache when present.\n        const overrideDir = process.env.VSCODE_FOUNDRY_LOCAL_NATIVE_DIR;\n        if (overrideDir) {\n            const overrideExt = CoreInterop._getLibraryExtension();\n            const overrideCorePath = path.join(overrideDir, 'foundry-local-core', platformKey, \`Zyraxon.AI.Foundry.Local.Core\${overrideExt}\`);\n            if (fs.existsSync(overrideCorePath)) {\n                config.params['FoundryLocalCorePath'] = overrideCorePath;\n                return overrideCorePath;\n            }\n        }\n        // Resolve the native binary directory at foundry-local-core/<platform>,`;
 		let patched = content;
 		if (!patched.includes(addonMarker)) {
 			if (patched.includes(addonNeedle)) {

@@ -103,7 +103,7 @@ class WorkbenchHostService extends Disposable implements IHostService {
 			disposables.add(disposableWindowInterval(window, () => {
 				const hasFocus = window.document.hasFocus();
 				if (hasFocus) {
-					emitter.fire(window.vscodeWindowId);
+					emitter.fire(window.zyraxoncodeWindowId);
 				}
 
 				return hasFocus;
@@ -132,7 +132,7 @@ class WorkbenchHostService extends Disposable implements IHostService {
 
 			if (options?.remoteAuthority === undefined) {
 				// set the remoteAuthority of the window the request came from.
-				// It will be used when the input is neither file nor vscode-remote.
+				// It will be used when the input is neither file nor zyraxoncode-remote.
 				options = options ? { ...options, remoteAuthority } : { remoteAuthority };
 			}
 		}
@@ -162,7 +162,7 @@ class WorkbenchHostService extends Disposable implements IHostService {
 	}
 
 	toggleFullScreen(targetWindow: Window): Promise<void> {
-		return this.nativeHostService.toggleFullScreen({ targetWindowId: isAuxiliaryWindow(targetWindow) ? targetWindow.vscodeWindowId : undefined });
+		return this.nativeHostService.toggleFullScreen({ targetWindowId: isAuxiliaryWindow(targetWindow) ? targetWindow.zyraxoncodeWindowId : undefined });
 	}
 
 	async moveTop(targetWindow: Window): Promise<void> {
@@ -170,7 +170,7 @@ class WorkbenchHostService extends Disposable implements IHostService {
 			return; // does not apply when only one window is opened
 		}
 
-		return this.nativeHostService.moveWindowTop(isAuxiliaryWindow(targetWindow) ? { targetWindowId: targetWindow.vscodeWindowId } : undefined);
+		return this.nativeHostService.moveWindowTop(isAuxiliaryWindow(targetWindow) ? { targetWindowId: targetWindow.zyraxoncodeWindowId } : undefined);
 	}
 
 	async setWindowDimmed(targetWindow: Window, dimmed: boolean): Promise<void> {

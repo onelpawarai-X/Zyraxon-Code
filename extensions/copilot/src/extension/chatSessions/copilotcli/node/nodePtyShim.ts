@@ -31,14 +31,14 @@ const MATERIALIZATION_POLL_INTERVAL_MS = 100;
  * `loadNativeModule` succeeds.
  *
  * @param extensionPath The extension's path (where to create the shim)
- * @param vscodeAppRoot ZYRAXON Code's installation path (where node-pty is located)
+ * @param zyraxoncodeAppRoot ZYRAXON Code's installation path (where node-pty is located)
  */
-export async function ensureNodePtyShim(extensionPath: string, vscodeAppRoot: string, logService: ILogService): Promise<void> {
+export async function ensureNodePtyShim(extensionPath: string, zyraxoncodeAppRoot: string, logService: ILogService): Promise<void> {
 	if (shimCreated) {
 		return shimCreated;
 	}
 
-	const creation = _ensureNodePtyShim(extensionPath, vscodeAppRoot, logService);
+	const creation = _ensureNodePtyShim(extensionPath, zyraxoncodeAppRoot, logService);
 	shimCreated = creation.catch(error => {
 		shimCreated = undefined;
 		throw error;
@@ -46,20 +46,20 @@ export async function ensureNodePtyShim(extensionPath: string, vscodeAppRoot: st
 	return shimCreated;
 }
 
-async function _ensureNodePtyShim(extensionPath: string, vscodeAppRoot: string, logService: ILogService): Promise<void> {
-	const vscodeNodePtyPath = await resolveNodePtySourcePath(vscodeAppRoot, logService);
+async function _ensureNodePtyShim(extensionPath: string, zyraxoncodeAppRoot: string, logService: ILogService): Promise<void> {
+	const zyraxoncodeNodePtyPath = await resolveNodePtySourcePath(zyraxoncodeAppRoot, logService);
 
-	await copyNodePtyFiles(extensionPath, vscodeNodePtyPath, logService);
+	await copyNodePtyFiles(extensionPath, zyraxoncodeNodePtyPath, logService);
 }
 
-export async function resolveNodePtySourcePath(vscodeAppRoot: string, logService: ILogService): Promise<string> {
+export async function resolveNodePtySourcePath(zyraxoncodeAppRoot: string, logService: ILogService): Promise<string> {
 	// In a packaged build ZYRAXON Code's `node_modules` is bundled into a
 	// `node_modules.asar` archive and native binaries are extracted alongside it
 	// into `node_modules.asar.unpacked`. Check both roots so the shim works in
 	// development (plain `node_modules`) and in a packaged install
 	// (`node_modules.asar.unpacked`).
 	const candidatePaths = APP_NODE_MODULES_ROOTS.flatMap(root => {
-		const nodePtyRoot = path.join(vscodeAppRoot, root, 'node-pty');
+		const nodePtyRoot = path.join(zyraxoncodeAppRoot, root, 'node-pty');
 		return [
 			path.join(nodePtyRoot, 'build', 'Release'),
 			path.join(nodePtyRoot, 'prebuilds', process.platform + '-' + process.arch),

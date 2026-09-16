@@ -105,7 +105,7 @@ export class ChatSetupContribution extends Disposable implements IWorkbenchContr
 
 	private registerSetupAgents(context: ChatEntitlementContext, controller: Lazy<ChatSetupController>): void {
 		const defaultAgentDisposables = markAsSingleton(new MutableDisposable()); // prevents flicker on window reload
-		const vscodeAgentDisposables = markAsSingleton(new MutableDisposable());
+		const zyraxoncodeAgentDisposables = markAsSingleton(new MutableDisposable());
 
 		const renameProviderDisposables = markAsSingleton(new MutableDisposable());
 		const codeActionsProviderDisposables = markAsSingleton(new MutableDisposable());
@@ -146,17 +146,17 @@ export class ChatSetupContribution extends Disposable implements IWorkbenchContr
 					}
 
 					// Built-In Agent + Tool (unless completed, signed-in and enabled)
-					if ((!context.state.completed || context.state.entitlement === ChatEntitlement.Unknown || context.state.entitlement === ChatEntitlement.Unresolved) && !vscodeAgentDisposables.value) {
-						const disposables = vscodeAgentDisposables.value = new DisposableStore();
+					if ((!context.state.completed || context.state.entitlement === ChatEntitlement.Unknown || context.state.entitlement === ChatEntitlement.Unresolved) && !zyraxoncodeAgentDisposables.value) {
+						const disposables = zyraxoncodeAgentDisposables.value = new DisposableStore();
 						disposables.add(SetupAgent.registerBuiltInAgents(this.instantiationService, context, controller));
 					}
 				} else {
 					defaultAgentDisposables.clear();
-					vscodeAgentDisposables.clear();
+					zyraxoncodeAgentDisposables.clear();
 				}
 
 				if (context.state.completed) {
-					vscodeAgentDisposables.clear(); // we need to do this to prevent showing duplicate agent/tool entries in the list
+					zyraxoncodeAgentDisposables.clear(); // we need to do this to prevent showing duplicate agent/tool entries in the list
 				}
 			}
 

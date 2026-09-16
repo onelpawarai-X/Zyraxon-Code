@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { URI } from '../../../../base/common/uri.js';
 import { es5ClassCompat } from './es5ClassCompat.js';
 import { Position } from './position.js';
@@ -12,7 +12,7 @@ import { Range } from './range.js';
 @es5ClassCompat
 export class Location {
 
-	static isLocation(thing: unknown): thing is vscode.Location {
+	static isLocation(thing: unknown): thing is zyraxoncode.Location {
 		if (thing instanceof Location) {
 			return true;
 		}

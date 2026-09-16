@@ -1,4 +1,4 @@
-<VSCode.Cell id="<CELL_ID_0>" language="python">
+<ZyraxonCode.Cell id="<CELL_ID_0>" language="python">
 import matplotlib.pyplot as plt
 
 # Generate sample data
@@ -10,4 +10,4 @@ plt.plot(x, y, label='Linear Growth')
 plt.scatter(x, y, color='red', label='Data Points')
 plt.legend()
 plt.show()
-</VSCode.Cell>
+</ZyraxonCode.Cell>

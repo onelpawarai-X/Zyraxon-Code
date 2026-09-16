@@ -7,7 +7,7 @@ import { Lazy } from '../../../util/vs/base/common/lazy';
 import { Position as CorePos } from '../../../util/vs/editor/common/core/position';
 import { OffsetRange } from '../../../util/vs/editor/common/core/ranges/offsetRange';
 import { PositionOffsetTransformer } from '../../../util/vs/editor/common/core/text/positionToOffset';
-import { Range, Position as VSCodePos } from '../../../vscodeTypes';
+import { Range, Position as ZyraxonCodePos } from '../../../zyraxoncodeTypes';
 import { TextDocumentSnapshot } from './textDocumentSnapshot';
 
 /**
@@ -19,9 +19,9 @@ export abstract class AbstractDocument {
 
 	abstract getTextInOffsetRange(offsetRange: OffsetRange): string;
 
-	abstract getPositionAtOffset(offset: number): VSCodePos;
+	abstract getPositionAtOffset(offset: number): ZyraxonCodePos;
 
-	abstract getOffsetAtPosition(position: VSCodePos): number;
+	abstract getOffsetAtPosition(position: ZyraxonCodePos): number;
 
 	abstract getLineText(lineIndex: number): string;
 
@@ -80,11 +80,11 @@ export class VsCodeTextDocument extends AbstractDocument implements AbstractDocu
 		return offsetRange.substring(this.document.getText());
 	}
 
-	getPositionAtOffset(offset: number): VSCodePos {
+	getPositionAtOffset(offset: number): ZyraxonCodePos {
 		return this.document.positionAt(offset);
 	}
 
-	getOffsetAtPosition(position: VSCodePos): number {
+	getOffsetAtPosition(position: ZyraxonCodePos): number {
 		return this.document.offsetAt(position);
 	}
 
@@ -126,30 +126,30 @@ export class StringTextDocument extends AbstractDocument {
 		return offsetRange.substring(this.value);
 	}
 
-	override getPositionAtOffset(offset: number): VSCodePos {
-		return corePositionToVSCodePosition(this._transformer.getPosition(offset));
+	override getPositionAtOffset(offset: number): ZyraxonCodePos {
+		return corePositionToZyraxonCodePosition(this._transformer.getPosition(offset));
 	}
 
-	override getOffsetAtPosition(position: VSCodePos): number {
+	override getOffsetAtPosition(position: ZyraxonCodePos): number {
 		position = this._validatePosition(position);
 		return this._transformer.getOffset(vsCodePositionToCorePosition(position));
 	}
 
-	private _validatePosition(position: VSCodePos): VSCodePos {
+	private _validatePosition(position: ZyraxonCodePos): ZyraxonCodePos {
 		if (position.line < 0) {
-			return new VSCodePos(0, 0);
+			return new ZyraxonCodePos(0, 0);
 		}
 		const lineCount = this._transformer.textLength.lineCount + 1;
 		if (position.line >= lineCount) {
 			const lineLength = this._transformer.getLineLength(lineCount);
-			return new VSCodePos(lineCount - 1, lineLength);
+			return new ZyraxonCodePos(lineCount - 1, lineLength);
 		}
 		if (position.character < 0) {
-			return new VSCodePos(position.line, 0);
+			return new ZyraxonCodePos(position.line, 0);
 		}
 		const lineLength = this._transformer.getLineLength(position.line + 1);
 		if (position.character > lineLength) {
-			return new VSCodePos(position.line, lineLength);
+			return new ZyraxonCodePos(position.line, lineLength);
 		}
 		return position;
 	}
@@ -168,10 +168,10 @@ export class StringTextDocumentWithLanguageId extends StringTextDocument impleme
 	}
 }
 
-function corePositionToVSCodePosition(position: CorePos): VSCodePos {
-	return new VSCodePos(position.lineNumber - 1, position.column - 1);
+function corePositionToZyraxonCodePosition(position: CorePos): ZyraxonCodePos {
+	return new ZyraxonCodePos(position.lineNumber - 1, position.column - 1);
 }
 
-function vsCodePositionToCorePosition(position: VSCodePos): CorePos {
+function vsCodePositionToCorePosition(position: ZyraxonCodePos): CorePos {
 	return new CorePos(position.line + 1, position.character + 1);
 }

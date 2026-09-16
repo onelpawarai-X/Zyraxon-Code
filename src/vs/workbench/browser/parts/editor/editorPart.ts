@@ -42,7 +42,7 @@ import { mainWindow } from '../../../../base/browser/window.js';
  * Modern UI Update experiment is enabled (`styleOverrides/media/editorBorder.css`).
  * The editor reserves this thickness when laying out its contents so they sit
  * inside the frame instead of overflowing (and being clipped by) the border.
- * Keep in sync with the `--vscode-strokeThickness` (1px) token used there.
+ * Keep in sync with the `--zyraxoncode-strokeThickness` (1px) token used there.
  */
 const EDITOR_FRAME_BORDER_WIDTH = 1;
 
@@ -551,7 +551,7 @@ export class EditorPart extends Part<IEditorPartMemento> implements IEditorPart,
 				layout.orientation,
 				this.isTwoDimensionalGrid() ?
 					this.gridWidget.orientation :			// preserve original orientation for 2-dimensional grids
-					orthogonal(this.gridWidget.orientation) // otherwise flip (fix https://github.com/microsoft/vscode/issues/52975)
+					orthogonal(this.gridWidget.orientation) // otherwise flip (fix __ZYRAXKEEP__0_)
 			),
 			groups: layout.groups
 		});
@@ -955,7 +955,7 @@ export class EditorPart extends Part<IEditorPartMemento> implements IEditorPart,
 					// Do not configure an `index` for editors that are sticky in
 					// the target, otherwise there is a chance of losing that state
 					// when the editor is moved.
-					// See https://github.com/microsoft/vscode/issues/239549
+					// See __ZYRAXKEEP__1_
 					targetView.isSticky(editor) ||
 					// Do not configure an `index` when we are explicitly instructed
 					options?.preserveExistingIndex
@@ -1061,7 +1061,7 @@ export class EditorPart extends Part<IEditorPartMemento> implements IEditorPart,
 
 		// Container
 		this.element = parent;
-		if (this.windowId !== mainWindow.vscodeWindowId) {
+		if (this.windowId !== mainWindow.zyraxoncodeWindowId) {
 			this.container.classList.add('auxiliary');
 		}
 		parent.appendChild(this.container);
@@ -1428,7 +1428,7 @@ export class EditorPart extends Part<IEditorPartMemento> implements IEditorPart,
 		// no top margin (it stays flush with the title bar). Scope to the main window
 		// (auxiliary editor windows do not apply the matching CSS). The matching
 		// `margin` is applied in CSS (`.floating-panels .part.editor`).
-		if (this.windowId === mainWindow.vscodeWindowId && this.layoutService.isFloatingPanelsEnabled()) {
+		if (this.windowId === mainWindow.zyraxoncodeWindowId && this.layoutService.isFloatingPanelsEnabled()) {
 
 			// When the editor becomes the outermost card on a side (no floating part
 			// sits between it and the window edge) it adopts the same doubled gutter the
@@ -1686,6 +1686,6 @@ export class MainEditorPart extends EditorPart {
 		@IHostService hostService: IHostService,
 		@IContextKeyService contextKeyService: IContextKeyService
 	) {
-		super(editorPartsView, Parts.EDITOR_PART, '', mainWindow.vscodeWindowId, instantiationService, themeService, configurationService, storageService, layoutService, hostService, contextKeyService);
+		super(editorPartsView, Parts.EDITOR_PART, '', mainWindow.zyraxoncodeWindowId, instantiationService, themeService, configurationService, storageService, layoutService, hostService, contextKeyService);
 	}
 }

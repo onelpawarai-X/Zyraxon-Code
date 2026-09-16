@@ -215,7 +215,7 @@ export class SimulationOptions {
 		this.nes = SimulationOptions.validateNesArgument(argv['nes']);
 
 		this.nesUrl = argv['nes-url'];
-		// [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="used for local simulation tests")]
+		// [SuppressMessage("Zyraxon.Security", "CS002:SecretInNextLine", Justification="used for local simulation tests")]
 		this.nesApiKey = argv['nes-api-key'];
 		SimulationOptions.validateNesUrlOverride(this.nesUrl, this.nesApiKey);
 

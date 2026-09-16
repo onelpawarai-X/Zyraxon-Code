@@ -76,7 +76,7 @@ export class ChatImplicitContextContribution extends Disposable implements IWork
 					activeEditorDisposables.add(notebookEditor.onDidChangeActiveCell(() => {
 						activeCellDisposables.clear();
 						const codeEditor = this.codeEditorService.getActiveCodeEditor();
-						if (codeEditor && codeEditor.getModel()?.uri.scheme === Schemas.vscodeNotebookCell) {
+						if (codeEditor && codeEditor.getModel()?.uri.scheme === Schemas.zyraxoncodeNotebookCell) {
 							activeCellDisposables.add(Event.debounce(
 								Event.any(
 									codeEditor.onDidChangeModel,
@@ -132,7 +132,7 @@ export class ChatImplicitContextContribution extends Disposable implements IWork
 		const codeEditor = this.codeEditorService.getActiveCodeEditor();
 		if (codeEditor) {
 			const model = codeEditor.getModel();
-			if (model?.uri.scheme === Schemas.vscodeNotebookCell) {
+			if (model?.uri.scheme === Schemas.zyraxoncodeNotebookCell) {
 				return undefined;
 			}
 
@@ -385,23 +385,23 @@ export class ChatImplicitContexts extends Disposable {
 export class ChatImplicitContext extends Disposable implements IChatRequestImplicitVariableEntry {
 	get id() {
 		if (URI.isUri(this.value)) {
-			return 'vscode.implicit.file';
+			return 'zyraxoncode.implicit.file';
 		} else if (isStringImplicitContextValue(this.value)) {
-			return 'vscode.implicit.string';
+			return 'zyraxoncode.implicit.string';
 		} else if (this.value) {
 			if (this._isSelection) {
-				return 'vscode.implicit.selection';
+				return 'zyraxoncode.implicit.selection';
 			} else {
-				return 'vscode.implicit.viewport';
+				return 'zyraxoncode.implicit.viewport';
 			}
 		} else {
-			return 'vscode.implicit';
+			return 'zyraxoncode.implicit';
 		}
 	}
 
 	get name(): string {
 		if (URI.isUri(this.value)) {
-			if (this.value.scheme === Schemas.vscodeBrowser) {
+			if (this.value.scheme === Schemas.zyraxoncodeBrowser) {
 				return `browser`;
 			}
 			return `file:${basename(this.value)}`;
@@ -492,7 +492,7 @@ export class ChatImplicitContext extends Disposable implements IChatRequestImpli
 			return [];
 		}
 
-		if (URI.isUri(this.value) && this.value.scheme === Schemas.vscodeBrowser) {
+		if (URI.isUri(this.value) && this.value.scheme === Schemas.zyraxoncodeBrowser) {
 			return [];
 		}
 

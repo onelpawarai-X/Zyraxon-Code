@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken, ChatRequest, LanguageModelTool, LanguageModelToolInformation, LanguageModelToolInvocationOptions, LanguageModelToolResult } from 'vscode';
+import type { CancellationToken, ChatRequest, LanguageModelTool, LanguageModelToolInformation, LanguageModelToolInvocationOptions, LanguageModelToolResult } from 'zyraxoncode';
 import { getToolName, ToolName } from '../../../src/extension/tools/common/toolNames';
 import { ICopilotTool } from '../../../src/extension/tools/common/toolsRegistry';
 import { BaseToolsService, IToolsService } from '../../../src/extension/tools/common/toolsService';
 import { getPackagejsonToolsForTest } from '../../../src/extension/tools/node/test/testToolsService';
-import { ToolsContribution } from '../../../src/extension/tools/vscode-node/tools';
-import { ToolsService } from '../../../src/extension/tools/vscode-node/toolsService';
+import { ToolsContribution } from '../../../src/extension/tools/zyraxoncode-node/tools';
+import { ToolsService } from '../../../src/extension/tools/zyraxoncode-node/toolsService';
 import { packageJson } from '../../../src/platform/env/common/packagejson';
 import { ILogService } from '../../../src/platform/log/common/logService';
 import { IChatEndpoint } from '../../../src/platform/networking/common/networking';
@@ -58,7 +58,7 @@ export class SimulationExtHostToolsService extends BaseToolsService implements I
 		super(logService);
 		this._inner = instantiationService.createInstance(ToolsService);
 
-		// register the contribution so that our tools are on vscode.lm.tools
+		// register the contribution so that our tools are on zyraxoncode.lm.tools
 		setImmediate(() => this.ensureToolsRegistered());
 	}
 

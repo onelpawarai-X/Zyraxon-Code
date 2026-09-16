@@ -49,7 +49,7 @@ export class AgentPluginRecommendations extends Disposable implements IWorkbench
 
 		// Only count recommendations that resolve to a known marketplace
 		// plugin. Otherwise the @recommended search would land on an empty
-		// list (see microsoft/vscode#315347). Fall back to a fresh fetch
+		// list (see zyraxon/zyraxoncode#315347). Fall back to a fresh fetch
 		// when the cache hasn't been populated yet so first-run sessions
 		// with valid recommendations still notify.
 		let fetched: readonly IMarketplacePlugin[] = this._pluginMarketplaceService.lastFetchedPlugins.get();

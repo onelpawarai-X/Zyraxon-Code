@@ -210,7 +210,7 @@ abstract class AbstractChatAttachmentWidget extends Disposable {
 			return;
 		}
 
-		if (resource.scheme === Schemas.vscodeTerminal) {
+		if (resource.scheme === Schemas.zyraxoncodeTerminal) {
 			this.terminalService?.openResource(resource);
 			return;
 		}

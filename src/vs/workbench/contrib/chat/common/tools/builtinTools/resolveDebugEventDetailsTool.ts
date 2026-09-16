@@ -8,7 +8,7 @@ import { localize } from '../../../../../../nls.js';
 import { ChatDebugHookResult, IChatDebugEvent, IChatDebugResolvedEventContent, IChatDebugService } from '../../chatDebugService.js';
 import { CountTokensCallback, IPreparedToolInvocation, IToolData, IToolImpl, IToolInvocation, IToolInvocationPreparationContext, IToolResult, ToolDataSource, ToolProgress } from '../languageModelToolsService.js';
 
-export const ResolveDebugEventDetailsToolId = 'vscode_resolveDebugEventDetails_internal';
+export const ResolveDebugEventDetailsToolId = 'zyraxoncode_resolveDebugEventDetails_internal';
 
 export const ResolveDebugEventDetailsToolData: IToolData = {
 	id: ResolveDebugEventDetailsToolId,

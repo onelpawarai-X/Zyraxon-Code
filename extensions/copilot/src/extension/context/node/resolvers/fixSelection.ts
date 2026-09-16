@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ILanguageDiagnosticsService } from '../../../../platform/languages/common/languageDiagnosticsService';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
-import { TreeSitterAST, treeSitterToVSCodeRange, vscodeToTreeSitterRange } from '../../../../platform/parser/node/parserService';
+import { TreeSitterAST, treeSitterToZyraxonCodeRange, zyraxoncodeToTreeSitterRange } from '../../../../platform/parser/node/parserService';
 import { ILanguage } from '../../../../util/common/languages';
-import { Range } from '../../../../vscodeTypes';
+import { Range } from '../../../../zyraxoncodeTypes';
 import { CodeContextRegion, CodeContextTracker } from '../../../inlineChat/node/codeContextRegion';
 import { IDocumentContext } from '../../../prompt/node/documentContext';
 import { processCodeAroundSelection } from './inlineChatSelection';
@@ -96,7 +96,7 @@ function processFixSelection(range: CodeContextRegion, diagnosticsRange: Range, 
 /**
  * This function finds the diagnostics at the given selection and filtered by the actual prompt
  */
-export function findDiagnosticForSelectionAndPrompt(diagnosticService: ILanguageDiagnosticsService, resource: vscode.Uri, selection: vscode.Selection | vscode.Range, prompt: string | undefined): vscode.Diagnostic[] {
+export function findDiagnosticForSelectionAndPrompt(diagnosticService: ILanguageDiagnosticsService, resource: zyraxoncode.Uri, selection: zyraxoncode.Selection | zyraxoncode.Range, prompt: string | undefined): zyraxoncode.Diagnostic[] {
 	const diagnostics = diagnosticService.getDiagnostics(resource).filter(d => !!d.range.intersection(selection));
 	if (prompt) {
 		const diagnosticsForPrompt = diagnostics.filter(d => prompt.includes(d.message));
@@ -112,8 +112,8 @@ export function findDiagnosticForSelectionAndPrompt(diagnosticService: ILanguage
  * @param maximumNumberOfLines the maximum number of lines in the range of interest
  */
 export async function findFixRangeOfInterest(treeSitterAST: TreeSitterAST, range: Range, maximumNumberOfLines: number): Promise<Range> {
-	const treeSitterRange = vscodeToTreeSitterRange(range);
+	const treeSitterRange = zyraxoncodeToTreeSitterRange(range);
 	const maxNumberOfAdditionalLinesInRangeOfInterest = Math.max(maximumNumberOfLines, range.end.line - range.start.line + maximumNumberOfLines);
 	const treeSitterRangeOfInterest = await treeSitterAST.getFixSelectionOfInterest(treeSitterRange, maxNumberOfAdditionalLinesInRangeOfInterest);
-	return treeSitterToVSCodeRange(treeSitterRangeOfInterest);
+	return treeSitterToZyraxonCodeRange(treeSitterRangeOfInterest);
 }

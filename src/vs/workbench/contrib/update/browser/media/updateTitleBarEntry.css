@@ -6,7 +6,7 @@
 .monaco-action-bar .update-indicator {
 	display: flex;
 	align-items: center;
-	border-radius: var(--vscode-cornerRadius-medium);
+	border-radius: var(--zyraxoncode-cornerRadius-medium);
 	white-space: nowrap;
 	padding: 0px 8px;
 	height: 22px;
@@ -16,29 +16,29 @@
 }
 
 .monaco-action-bar .update-indicator:hover {
-	background-color: var(--vscode-toolbar-hoverBackground);
+	background-color: var(--zyraxoncode-toolbar-hoverBackground);
 }
 
 .monaco-action-bar .update-indicator .indicator-label {
-	font-size: var(--vscode-bodyFontSize-small);
+	font-size: var(--zyraxoncode-bodyFontSize-small);
 	position: relative;
 }
 
 /* Prominent state (action required) — primary button style */
 .monaco-action-bar .update-indicator.prominent {
-	background-color: var(--vscode-button-background);
-	color: var(--vscode-button-foreground);
-	border-color: var(--vscode-button-background);
+	background-color: var(--zyraxoncode-button-background);
+	color: var(--zyraxoncode-button-foreground);
+	border-color: var(--zyraxoncode-button-background);
 }
 
 .monaco-action-bar .update-indicator.prominent:hover {
-	background-color: var(--vscode-button-hoverBackground);
-	border-color: var(--vscode-button-hoverBackground);
+	background-color: var(--zyraxoncode-button-hoverBackground);
+	border-color: var(--zyraxoncode-button-hoverBackground);
 }
 
 /* Disabled state */
 .monaco-action-bar .update-indicator.update-disabled .indicator-label {
-	color: var(--vscode-disabledForeground);
+	color: var(--zyraxoncode-disabledForeground);
 }
 
 /* Progress underline bar (shared base) */
@@ -58,7 +58,7 @@
 	background: linear-gradient(
 		90deg,
 		transparent 0%,
-		var(--vscode-progressBar-background) 80%,
+		var(--zyraxoncode-progressBar-background) 80%,
 		transparent 100%
 	);
 	background-size: 200% 100%;
@@ -75,8 +75,8 @@
 	width: 100%;
 	background: linear-gradient(
 		90deg,
-		var(--vscode-progressBar-background) var(--update-progress, 0%),
-		color-mix(in srgb, var(--vscode-progressBar-background) 25%, transparent) var(--update-progress, 0%)
+		var(--zyraxoncode-progressBar-background) var(--update-progress, 0%),
+		color-mix(in srgb, var(--zyraxoncode-progressBar-background) 25%, transparent) var(--update-progress, 0%)
 	);
 	transition: background 0.3s ease;
 }

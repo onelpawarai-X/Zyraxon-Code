@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { RunOnceScheduler } from '../../../base/common/async.js';
 import { VSBuffer } from '../../../base/common/buffer.js';
 import { CancellationToken, CancellationTokenSource } from '../../../base/common/cancellation.js';
@@ -33,11 +33,11 @@ import * as Convert from './extHostTypeConverters.js';
 import { FileCoverage, TestRunProfileBase, TestRunRequest } from './extHostTypes.js';
 
 interface ControllerInfo {
-	controller: vscode.TestController;
-	profiles: Map<number, vscode.TestRunProfile>;
+	controller: zyraxoncode.TestController;
+	profiles: Map<number, zyraxoncode.TestRunProfile>;
 	collection: ExtHostTestItemCollection;
 	extension: IExtensionDescription;
-	relatedCodeProvider?: vscode.TestRelatedCodeProvider;
+	relatedCodeProvider?: zyraxoncode.TestRelatedCodeProvider;
 	activeProfiles: Set<number>;
 }
 
@@ -45,7 +45,7 @@ type DefaultProfileChangeEvent = Map</* controllerId */ string, Map< /* profileI
 
 let followupCounter = 0;
 
-const testResultInternalIDs = new WeakMap<vscode.TestRunResult, string>();
+const testResultInternalIDs = new WeakMap<zyraxoncode.TestRunResult, string>();
 
 export const IExtHostTesting = createDecorator<IExtHostTesting>('IExtHostTesting');
 export interface IExtHostTesting extends ExtHostTesting {
@@ -61,11 +61,11 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 	private readonly runTracker: TestRunCoordinator;
 	private readonly observer: TestObservers;
 	private readonly defaultProfilesChangedEmitter = this._register(new Emitter<DefaultProfileChangeEvent>());
-	private readonly followupProviders = new Set<vscode.TestFollowupProvider>();
-	private readonly testFollowups = new Map<number, vscode.Command>();
+	private readonly followupProviders = new Set<zyraxoncode.TestFollowupProvider>();
+	private readonly testFollowups = new Map<number, zyraxoncode.Command>();
 
 	public onResultsChanged = this.resultsChangedEmitter.event;
-	public results: ReadonlyArray<vscode.TestRunResult> = [];
+	public results: ReadonlyArray<zyraxoncode.TestRunResult> = [];
 
 	constructor(
 		@IExtHostRpcService rpc: IExtHostRpcService,
@@ -123,9 +123,9 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 	//#region public API
 
 	/**
-	 * Implements vscode.test.registerTestProvider
+	 * Implements zyraxoncode.test.registerTestProvider
 	 */
-	public createTestController(extension: IExtensionDescription, controllerId: string, label: string, refreshHandler?: (token: CancellationToken) => Thenable<void> | void): vscode.TestController {
+	public createTestController(extension: IExtensionDescription, controllerId: string, label: string, refreshHandler?: (token: CancellationToken) => Thenable<void> | void): zyraxoncode.TestController {
 		if (this.controllers.has(controllerId)) {
 			throw new Error(`Attempt to insert a duplicate controller with ID "${controllerId}"`);
 		}
@@ -134,7 +134,7 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 		const collection = disposable.add(new ExtHostTestItemCollection(controllerId, label, this.editors));
 		collection.root.label = label;
 
-		const profiles = new Map<number, vscode.TestRunProfile>();
+		const profiles = new Map<number, zyraxoncode.TestRunProfile>();
 		const activeProfiles = new Set<number>();
 		const proxy = this.proxy;
 
@@ -155,7 +155,7 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 			return cap as TestControllerCapability;
 		};
 
-		const controller: vscode.TestController = {
+		const controller: zyraxoncode.TestController = {
 			items: collection.root.children,
 			get label() {
 				return label;
@@ -178,12 +178,12 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 			get relatedCodeProvider() {
 				return info.relatedCodeProvider;
 			},
-			set relatedCodeProvider(value: vscode.TestRelatedCodeProvider | undefined) {
+			set relatedCodeProvider(value: zyraxoncode.TestRelatedCodeProvider | undefined) {
 				checkProposedApiEnabled(extension, 'testRelatedCode');
 				info.relatedCodeProvider = value;
 				proxy.$updateController(controllerId, { capabilities: getCapability() });
 			},
-			createRunProfile: (label, group, runHandler, isDefault, tag?: vscode.TestTag | undefined, supportsContinuousRun?: boolean) => {
+			createRunProfile: (label, group, runHandler, isDefault, tag?: zyraxoncode.TestTag | undefined, supportsContinuousRun?: boolean) => {
 				// Derive the profile ID from a hash so that the same profile will tend
 				// to have the same hashes, allowing re-run requests to work across reloads.
 				let profileId = hash(label);
@@ -211,7 +211,7 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 				collection.resolveHandler = fn;
 			},
 			get resolveHandler() {
-				return collection.resolveHandler as undefined | ((item?: vscode.TestItem) => void);
+				return collection.resolveHandler as undefined | ((item?: zyraxoncode.TestItem) => void);
 			},
 			dispose: () => {
 				disposable.dispose();
@@ -231,7 +231,7 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 	}
 
 	/**
-	 * Implements vscode.test.createTestObserver
+	 * Implements zyraxoncode.test.createTestObserver
 	 */
 	public createTestObserver() {
 		return this.observer.checkout();
@@ -239,12 +239,12 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 
 
 	/**
-	 * Implements vscode.test.runTests
+	 * Implements zyraxoncode.test.runTests
 	 */
-	public async runTests(req: vscode.TestRunRequest, token = CancellationToken.None) {
+	public async runTests(req: zyraxoncode.TestRunRequest, token = CancellationToken.None) {
 		const profile = tryGetProfileFromTestRunReq(req);
 		if (!profile) {
-			throw new Error('The request passed to `vscode.test.runTests` must include a profile');
+			throw new Error('The request passed to `zyraxoncode.test.runTests` must include a profile');
 		}
 
 		const controller = this.controllers.get(profile.controllerId);
@@ -265,9 +265,9 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 	}
 
 	/**
-	 * Implements vscode.test.registerTestFollowupProvider
+	 * Implements zyraxoncode.test.registerTestFollowupProvider
 	 */
-	public registerTestFollowupProvider(provider: vscode.TestFollowupProvider): vscode.Disposable {
+	public registerTestFollowupProvider(provider: zyraxoncode.TestFollowupProvider): zyraxoncode.Disposable {
 		this.followupProviders.add(provider);
 		return { dispose: () => { this.followupProviders.delete(provider); } };
 	}
@@ -287,7 +287,7 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 		const position = Convert.Position.to(_position);
 		const related: string[] = [];
 		await Promise.all([...this.controllers.values()].map(async (c) => {
-			let tests: vscode.TestItem[] | undefined | null;
+			let tests: zyraxoncode.TestItem[] | undefined | null;
 			try {
 				tests = await c.relatedCodeProvider?.provideRelatedTests?.(doc.document, position, token);
 			} catch (e) {
@@ -469,7 +469,7 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 			return [];
 		}
 
-		let followups: vscode.Command[] = [];
+		let followups: zyraxoncode.Command[] = [];
 		await Promise.all([...this.followupProviders].map(async provider => {
 			try {
 				const r = await provider.provideFollowup(results, test, req.taskIndex, req.messageIndex, token);
@@ -520,7 +520,7 @@ export class ExtHostTesting extends Disposable implements ExtHostTestingShape {
 
 	//#endregion
 
-	public getMetadataForRun(run: vscode.TestRun) {
+	public getMetadataForRun(run: zyraxoncode.TestRun) {
 		for (const tracker of this.runTracker.trackers) {
 			const taskId = tracker.getTaskIdForRun(run);
 			if (taskId) {
@@ -603,12 +603,12 @@ const enum TestRunTrackerState {
 class TestRunTracker extends Disposable {
 	private state = TestRunTrackerState.Running;
 	private running = 0;
-	private readonly tasks = new Map</* task ID */string, { cts: CancellationTokenSource; run: vscode.TestRun }>();
+	private readonly tasks = new Map</* task ID */string, { cts: CancellationTokenSource; run: zyraxoncode.TestRun }>();
 	private readonly sharedTestIds = new Set<string>();
 	private readonly cts: CancellationTokenSource;
 	private readonly endEmitter = this._register(new Emitter<void>());
 	private readonly onDidDispose: Event<void>;
-	private readonly publishedCoverage = new Map<string, { report: vscode.FileCoverage; extIds: string[] }>();
+	private readonly publishedCoverage = new Map<string, { report: zyraxoncode.FileCoverage; extIds: string[] }>();
 
 	/**
 	 * Fires when a test ends, and no more tests are left running.
@@ -633,7 +633,7 @@ class TestRunTracker extends Disposable {
 		private readonly dto: TestRunDto,
 		private readonly proxy: MainThreadTestingShape,
 		private readonly logService: ILogService,
-		private readonly profile: vscode.TestRunProfile | undefined,
+		private readonly profile: zyraxoncode.TestRunProfile | undefined,
 		private readonly extension: IExtensionDescription,
 		parentToken?: CancellationToken,
 	) {
@@ -652,7 +652,7 @@ class TestRunTracker extends Disposable {
 	}
 
 	/** Gets the task ID from a test run object. */
-	public getTaskIdForRun(run: vscode.TestRun) {
+	public getTaskIdForRun(run: zyraxoncode.TestRun) {
 		for (const [taskId, { run: r }] of this.tasks) {
 			if (r === run) {
 				return taskId;
@@ -675,7 +675,7 @@ class TestRunTracker extends Disposable {
 	}
 
 	/** Gets details for a previously-emitted coverage object. */
-	public async getCoverageDetails(id: string, testId: string | undefined, token: CancellationToken): Promise<vscode.FileCoverageDetail[]> {
+	public async getCoverageDetails(id: string, testId: string | undefined, token: CancellationToken): Promise<zyraxoncode.FileCoverageDetail[]> {
 		const [, taskId] = TestId.fromString(id).path; /** runId, taskId, URI */
 		const coverage = this.publishedCoverage.get(id);
 		if (!coverage) {
@@ -688,7 +688,7 @@ class TestRunTracker extends Disposable {
 			throw new Error('unreachable: run task was not found');
 		}
 
-		let testItem: vscode.TestItem | undefined;
+		let testItem: zyraxoncode.TestItem | undefined;
 		if (testId && report instanceof FileCoverage) {
 			const index = extIds.indexOf(testId);
 			if (index === -1) {
@@ -705,13 +705,13 @@ class TestRunTracker extends Disposable {
 	}
 
 	/** Creates the public test run interface to give to extensions. */
-	public createRun(name: string | undefined): vscode.TestRun {
+	public createRun(name: string | undefined): zyraxoncode.TestRun {
 		const runId = this.dto.id;
 		const ctrlId = this.dto.controllerId;
 		const taskId = generateUuid();
 
-		const guardTestMutation = <Args extends unknown[]>(fn: (test: vscode.TestItem, ...args: Args) => void) =>
-			(test: vscode.TestItem, ...args: Args) => {
+		const guardTestMutation = <Args extends unknown[]>(fn: (test: zyraxoncode.TestItem, ...args: Args) => void) =>
+			(test: zyraxoncode.TestItem, ...args: Args) => {
 				if (ended) {
 					this.logService.warn(`Setting the state of test "${test.id}" is a no-op after the run ends.`);
 					return;
@@ -721,7 +721,7 @@ class TestRunTracker extends Disposable {
 				fn(test, ...args);
 			};
 
-		const appendMessages = (test: vscode.TestItem, messages: vscode.TestMessage | readonly vscode.TestMessage[]) => {
+		const appendMessages = (test: zyraxoncode.TestItem, messages: zyraxoncode.TestMessage | readonly zyraxoncode.TestMessage[]) => {
 			const converted = messages instanceof Array
 				? messages.map(Convert.TestMessage.from)
 				: [Convert.TestMessage.from(messages)];
@@ -743,7 +743,7 @@ class TestRunTracker extends Disposable {
 		// one-off map used to associate test items with incrementing IDs in `addCoverage`.
 		// There's no need to include their entire ID, we just want to make sure they're
 		// stable and unique. Normal map is okay since TestRun lifetimes are limited.
-		const run: vscode.TestRun = {
+		const run: zyraxoncode.TestRun = {
 			isPersisted: this.dto.isPersisted,
 			token: cts.token,
 			name,
@@ -791,7 +791,7 @@ class TestRunTracker extends Disposable {
 				this.proxy.$updateTestStateInRun(runId, taskId, TestId.fromExtHostTestItem(test, this.dto.controllerId).toString(), TestResultState.Passed, duration);
 			}),
 			//#endregion
-			appendOutput: (output, location?: vscode.Location, test?: vscode.TestItem) => {
+			appendOutput: (output, location?: zyraxoncode.Location, test?: zyraxoncode.TestItem) => {
 				if (ended) {
 					return;
 				}
@@ -846,7 +846,7 @@ class TestRunTracker extends Disposable {
 		}
 	}
 
-	private ensureTestIsKnown(test: vscode.TestItem) {
+	private ensureTestIsKnown(test: zyraxoncode.TestItem) {
 		if (!(test instanceof TestItemImpl)) {
 			throw new InvalidTestItemError(test.id);
 		}
@@ -887,7 +887,7 @@ class TestRunTracker extends Disposable {
  * run so that `createTestRun` can be properly correlated.
  */
 export class TestRunCoordinator {
-	private readonly tracked = new Map<vscode.TestRunRequest, TestRunTracker>();
+	private readonly tracked = new Map<zyraxoncode.TestRunRequest, TestRunTracker>();
 	private readonly trackedById = new Map<string, TestRunTracker>();
 
 	public get trackers() {
@@ -902,7 +902,7 @@ export class TestRunCoordinator {
 	/**
 	 * Gets a coverage report for a given run and task ID.
 	 */
-	public getCoverageDetails(id: string, testId: string | undefined, token: vscode.CancellationToken) {
+	public getCoverageDetails(id: string, testId: string | undefined, token: zyraxoncode.CancellationToken) {
 		const runId = TestId.root(id);
 		return this.trackedById.get(runId)?.getCoverageDetails(id, testId, token) || [];
 	}
@@ -926,7 +926,7 @@ export class TestRunCoordinator {
 	 * `$startedExtensionTestRun` is not invoked. The run must eventually
 	 * be cancelled manually.
 	 */
-	public prepareForMainThreadTestRun(extension: IExtensionDescription, req: vscode.TestRunRequest, dto: TestRunDto, profile: vscode.TestRunProfile, token: CancellationToken) {
+	public prepareForMainThreadTestRun(extension: IExtensionDescription, req: zyraxoncode.TestRunRequest, dto: TestRunDto, profile: zyraxoncode.TestRunProfile, token: CancellationToken) {
 		return this.getTracker(req, dto, profile, extension, token);
 	}
 
@@ -949,7 +949,7 @@ export class TestRunCoordinator {
 	/**
 	 * Implements the public `createTestRun` API.
 	 */
-	public createTestRun(extension: IExtensionDescription, controllerId: string, collection: ExtHostTestItemCollection, request: vscode.TestRunRequest, name: string | undefined, persist: boolean): vscode.TestRun {
+	public createTestRun(extension: IExtensionDescription, controllerId: string, collection: ExtHostTestItemCollection, request: zyraxoncode.TestRunRequest, name: string | undefined, persist: boolean): zyraxoncode.TestRun {
 		const existing = this.tracked.get(request);
 		if (existing) {
 			return existing.createRun(name);
@@ -978,7 +978,7 @@ export class TestRunCoordinator {
 		return tracker.createRun(name);
 	}
 
-	private getTracker(req: vscode.TestRunRequest, dto: TestRunDto, profile: vscode.TestRunProfile | undefined, extension: IExtensionDescription, token?: CancellationToken) {
+	private getTracker(req: zyraxoncode.TestRunRequest, dto: TestRunDto, profile: zyraxoncode.TestRunProfile | undefined, extension: IExtensionDescription, token?: CancellationToken) {
 		const tracker = new TestRunTracker(dto, this.proxy, this.logService, profile, extension, token);
 		this.tracked.set(req, tracker);
 		this.trackedById.set(tracker.id, tracker);
@@ -986,7 +986,7 @@ export class TestRunCoordinator {
 	}
 }
 
-const tryGetProfileFromTestRunReq = (request: vscode.TestRunRequest) => {
+const tryGetProfileFromTestRunReq = (request: zyraxoncode.TestRunRequest) => {
 	if (!request.profile) {
 		return undefined;
 	}
@@ -999,7 +999,7 @@ const tryGetProfileFromTestRunReq = (request: vscode.TestRunRequest) => {
 };
 
 export class TestRunDto {
-	public static fromPublic(controllerId: string, collection: ExtHostTestItemCollection, request: vscode.TestRunRequest, persist: boolean) {
+	public static fromPublic(controllerId: string, collection: ExtHostTestItemCollection, request: zyraxoncode.TestRunRequest, persist: boolean) {
 		return new TestRunDto(
 			controllerId,
 			generateUuid(),
@@ -1030,7 +1030,7 @@ export class TestRunDto {
  * @private
  */
 interface MirroredCollectionTestItem extends IncrementalTestCollectionItem {
-	revived: vscode.TestItem;
+	revived: zyraxoncode.TestItem;
 	depth: number;
 }
 
@@ -1045,7 +1045,7 @@ class MirroredChangeCollector implements IncrementalChangeCollector<MirroredColl
 		return this.added.size === 0 && this.removed.size === 0 && this.updated.size === 0;
 	}
 
-	constructor(private readonly emitter: Emitter<vscode.TestsChangeEvent>) {
+	constructor(private readonly emitter: Emitter<zyraxoncode.TestsChangeEvent>) {
 	}
 
 	/**
@@ -1087,7 +1087,7 @@ class MirroredChangeCollector implements IncrementalChangeCollector<MirroredColl
 	/**
 	 * @inheritdoc
 	 */
-	public getChangeEvent(): vscode.TestsChangeEvent {
+	public getChangeEvent(): zyraxoncode.TestsChangeEvent {
 		const { added, updated, removed } = this;
 		return {
 			get added() { return [...added].map(n => n.revived); },
@@ -1108,7 +1108,7 @@ class MirroredChangeCollector implements IncrementalChangeCollector<MirroredColl
  * @private
  */
 class MirroredTestCollection extends AbstractIncrementalTestCollection<MirroredCollectionTestItem> {
-	private changeEmitter = new Emitter<vscode.TestsChangeEvent>();
+	private changeEmitter = new Emitter<zyraxoncode.TestsChangeEvent>();
 
 	/**
 	 * Change emitter that fires with the same semantics as `TestObserver.onDidChangeTests`.
@@ -1133,7 +1133,7 @@ class MirroredTestCollection extends AbstractIncrementalTestCollection<MirroredC
 	/**
 	 * If the test item is a mirrored test item, returns its underlying ID.
 	 */
-	public getMirroredTestDataByReference(item: vscode.TestItem) {
+	public getMirroredTestDataByReference(item: zyraxoncode.TestItem) {
 		return this.items.get(item.id);
 	}
 
@@ -1144,7 +1144,7 @@ class MirroredTestCollection extends AbstractIncrementalTestCollection<MirroredC
 		return {
 			...item,
 			// todo@connor4312: make this work well again with children
-			revived: Convert.TestItem.toPlain(item.item) as vscode.TestItem,
+			revived: Convert.TestItem.toPlain(item.item) as zyraxoncode.TestItem,
 			depth: parent ? parent.depth + 1 : 0,
 			children: new Set(),
 		};
@@ -1169,7 +1169,7 @@ class TestObservers {
 	) {
 	}
 
-	public checkout(): vscode.TestObserver {
+	public checkout(): zyraxoncode.TestObserver {
 		if (!this.current) {
 			this.current = this.createObserverData();
 		}
@@ -1192,7 +1192,7 @@ class TestObservers {
 	/**
 	 * Gets the internal test data by its reference.
 	 */
-	public getMirroredTestDataByReference(ref: vscode.TestItem) {
+	public getMirroredTestDataByReference(ref: zyraxoncode.TestItem) {
 		return this.current?.tests.getMirroredTestDataByReference(ref);
 	}
 
@@ -1218,12 +1218,12 @@ const updateProfile = (impl: TestRunProfileImpl, proxy: MainThreadTestingShape, 
 	}
 };
 
-export class TestRunProfileImpl extends TestRunProfileBase implements vscode.TestRunProfile {
+export class TestRunProfileImpl extends TestRunProfileBase implements zyraxoncode.TestRunProfile {
 	readonly #proxy: MainThreadTestingShape;
 	readonly #activeProfiles: Set<number>;
 	readonly #onDidChangeDefaultProfiles: Event<DefaultProfileChangeEvent>;
 	#initialPublish?: ITestRunProfile;
-	#profiles?: Map<number, vscode.TestRunProfile>;
+	#profiles?: Map<number, zyraxoncode.TestRunProfile>;
 	private _configureHandler?: (() => void);
 
 	public get label() {
@@ -1270,7 +1270,7 @@ export class TestRunProfileImpl extends TestRunProfileBase implements vscode.Tes
 		return this._tag;
 	}
 
-	public set tag(tag: vscode.TestTag | undefined) {
+	public set tag(tag: zyraxoncode.TestTag | undefined) {
 		if (tag?.id !== this._tag?.id) {
 			this._tag = tag;
 			updateProfile(this, this.#proxy, this.#initialPublish, {
@@ -1299,16 +1299,16 @@ export class TestRunProfileImpl extends TestRunProfileBase implements vscode.Tes
 
 	constructor(
 		proxy: MainThreadTestingShape,
-		profiles: Map<number, vscode.TestRunProfile>,
+		profiles: Map<number, zyraxoncode.TestRunProfile>,
 		activeProfiles: Set<number>,
 		onDidChangeActiveProfiles: Event<DefaultProfileChangeEvent>,
 		controllerId: string,
 		profileId: number,
 		private _label: string,
-		kind: vscode.TestRunProfileKind,
-		public runHandler: (request: vscode.TestRunRequest, token: vscode.CancellationToken) => Thenable<void> | void,
+		kind: zyraxoncode.TestRunProfileKind,
+		public runHandler: (request: zyraxoncode.TestRunRequest, token: zyraxoncode.CancellationToken) => Thenable<void> | void,
 		_isDefault = false,
-		public _tag: vscode.TestTag | undefined = undefined,
+		public _tag: zyraxoncode.TestTag | undefined = undefined,
 		private _supportsContinuousRun = false,
 	) {
 		super(controllerId, profileId, kind);
@@ -1354,7 +1354,7 @@ export class TestRunProfileImpl extends TestRunProfileBase implements vscode.Tes
 	}
 }
 
-function findTestInResultSnapshot(extId: TestId, snapshot: readonly Readonly<vscode.TestResultSnapshot>[]) {
+function findTestInResultSnapshot(extId: TestId, snapshot: readonly Readonly<zyraxoncode.TestResultSnapshot>[]) {
 	for (let i = 0; i < extId.path.length; i++) {
 		const item = snapshot.find(s => s.id === extId.path[i]);
 		if (!item) {

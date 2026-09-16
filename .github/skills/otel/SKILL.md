@@ -66,13 +66,13 @@ extensions/copilot/src/extension/
 │       └── node/
 │           ├── claudeOTelTracker.ts          # invoke_agent claude span + per-session token/cost rollup
 │           └── claudeLanguageModelServer.ts  # Local HTTP proxy → chatMLFetcher (chat spans)
-├── chat/vscode-node/
+├── chat/zyraxoncode-node/
 │   └── chatHookService.ts                    # execute_hook spans for foreground agent hooks
 ├── intents/node/toolCallingLoop.ts           # invoke_agent spans for foreground agent
-├── tools/vscode-node/toolsService.ts         # execute_tool spans for foreground tools
+├── tools/zyraxoncode-node/toolsService.ts         # execute_tool spans for foreground tools
 ├── prompt/node/chatMLFetcher.ts              # chat spans for all LLM calls
-├── byok/vscode-node/                         # BYOK provider chat spans (anthropicProvider, geminiNativeProvider, …)
-└── trajectory/vscode-node/
+├── byok/zyraxoncode-node/                         # BYOK provider chat spans (anthropicProvider, geminiNativeProvider, …)
+└── trajectory/zyraxoncode-node/
     ├── otelChatDebugLogProvider.ts           # Debug panel data provider
     ├── otelSpanToChatDebugEvent.ts           # Span → ChatDebugEvent conversion
     └── otlpFormatConversion.ts               # OTLP ↔ in-memory span format
@@ -105,11 +105,11 @@ Three namespaces coexist on extension-emitted spans:
 | `NodeOTelService` | OTel enabled — full SDK, OTLP/file/console export, optional SQLite span exporter |
 | `InMemoryOTelService` | Registered when OTel is **disabled** — no SDK is loaded, but spans/metrics/logs are still captured in-memory so the Agent Debug Log panel keeps working |
 
-Selection happens in [`src/extension/extension/vscode-node/services.ts`](../../../extensions/copilot/src/extension/extension/vscode-node/services.ts): exactly one of `NodeOTelService` or `InMemoryOTelService` is bound to `IOTelService` per extension host based on `resolveOTelConfig().enabled`.
+Selection happens in [`src/extension/extension/zyraxoncode-node/services.ts`](../../../extensions/copilot/src/extension/extension/zyraxoncode-node/services.ts): exactly one of `NodeOTelService` or `InMemoryOTelService` is bound to `IOTelService` per extension host based on `resolveOTelConfig().enabled`.
 
 ## 5. Span / Metric / Event Conventions
 
-Follow the [OTel GenAI semantic conventions](https://github.com/open-telemetry/semantic-conventions/blob/main/docs/gen-ai/). **Always use the constants from [`genAiAttributes.ts`](../../../extensions/copilot/src/platform/otel/common/genAiAttributes.ts) — never raw string literals.**
+Follow the [OTel GenAI semantic conventions](__ZYRAXKEEP__0_). **Always use the constants from [`genAiAttributes.ts`](../../../extensions/copilot/src/platform/otel/common/genAiAttributes.ts) — never raw string literals.**
 
 | Operation | Span Name | Kind | Constant |
 |---|---|---|---|
@@ -170,7 +170,7 @@ return this._otelService.startActiveSpan('invoke_agent child', { parentTraceCont
 
 The extension uses two conventions side-by-side; pick the right one for the attribute you're adding.
 
-1. **Always emit (truncated)** — used for inputs/outputs that the Agent Debug Log panel needs to be useful even when OTel export is off (e.g. `gen_ai.tool.call.arguments` in [`toolsService.ts`](../../../extensions/copilot/src/extension/tools/vscode-node/toolsService.ts), and `copilot_chat.hook_input` / `hook_output` in [`chatHookService.ts`](../../../extensions/copilot/src/extension/chat/vscode-node/chatHookService.ts)). The attribute is captured unconditionally but always passed through `truncateForOTel`. Use this for moderate-sized, generally-non-secret arguments / results.
+1. **Always emit (truncated)** — used for inputs/outputs that the Agent Debug Log panel needs to be useful even when OTel export is off (e.g. `gen_ai.tool.call.arguments` in [`toolsService.ts`](../../../extensions/copilot/src/extension/tools/zyraxoncode-node/toolsService.ts), and `copilot_chat.hook_input` / `hook_output` in [`chatHookService.ts`](../../../extensions/copilot/src/extension/chat/zyraxoncode-node/chatHookService.ts)). The attribute is captured unconditionally but always passed through `truncateForOTel`. Use this for moderate-sized, generally-non-secret arguments / results.
 2. **Gate on `config.captureContent`** — used for full prompt / response / system-instruction bodies (e.g. `gen_ai.input.messages`, `gen_ai.output.messages`, `gen_ai.system_instructions`, `gen_ai.tool.definitions` in [`chatMLFetcher.ts`](../../../extensions/copilot/src/extension/prompt/node/chatMLFetcher.ts) and the BYOK providers). These are larger and more likely to contain user secrets.
 
 ```ts
@@ -247,7 +247,7 @@ npm test -- --grep "OTel\|Bridge"
 
 Manual sanity checks:
 
-- The Aspire Dashboard quick-start in `agent_monitoring.md` still works end-to-end (one agent message → `invoke_agent` + `chat` + `execute_tool` spans visible at <http://localhost:18888>).
+- The Aspire Dashboard quick-start in `agent_monitoring.md` still works end-to-end (one agent message → `invoke_agent` + `chat` + `execute_tool` spans visible at <__ZYRAXKEEP__1_>).
 - The Agent Debug Log panel in ZYRAXON Code still shows the full span tree for foreground, Copilot CLI, and Claude sessions.
 
 ## 9. Known Risks & Limitations

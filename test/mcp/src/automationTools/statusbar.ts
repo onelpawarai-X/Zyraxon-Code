@@ -14,7 +14,7 @@ export function applyStatusBarTools(server: McpServer, appService: ApplicationSe
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_statusbar_wait_for_element',
+	// 	'zyraxoncode_automation_statusbar_wait_for_element',
 	// 	'Wait for a specific status bar element to appear',
 	// 	{
 	// 		element: z.enum([
@@ -54,7 +54,7 @@ export function applyStatusBarTools(server: McpServer, appService: ApplicationSe
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_statusbar_click',
+	// 	'zyraxoncode_automation_statusbar_click',
 	// 	'Click on a specific status bar element',
 	// 	{
 	// 		element: z.enum([
@@ -94,7 +94,7 @@ export function applyStatusBarTools(server: McpServer, appService: ApplicationSe
 
 	// Seems too niche
 	// server.tool(
-	// 	'vscode_automation_statusbar_wait_for_eol',
+	// 	'zyraxoncode_automation_statusbar_wait_for_eol',
 	// 	'Wait for a specific End of Line (EOL) type in the status bar',
 	// 	{
 	// 		eol: z.string().describe('EOL type to wait for (e.g., "LF", "CRLF")')
@@ -113,7 +113,7 @@ export function applyStatusBarTools(server: McpServer, appService: ApplicationSe
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_statusbar_wait_for_text',
+	// 	'zyraxoncode_automation_statusbar_wait_for_text',
 	// 	'Wait for specific text to appear in a status bar element',
 	// 	{
 	// 		title: z.string().describe('Title/identifier of the status bar element'),

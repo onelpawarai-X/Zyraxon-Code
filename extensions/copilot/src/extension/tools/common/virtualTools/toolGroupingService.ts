@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'vscode';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IExperimentationService } from '../../../../platform/telemetry/common/nullExperimentationService';
 import { LRUCache } from '../../../../util/vs/base/common/map';

@@ -1,7 +1,7 @@
 ---
 agent: agent
 description: 'Help author a component specification for an agent.'
-tools: ['edit', 'search', 'usages', 'vscodeAPI', 'fetch', 'extensions', 'todos']
+tools: ['edit', 'search', 'usages', 'zyraxoncodeAPI', 'fetch', 'extensions', 'todos']
 ---
 
 <overview>

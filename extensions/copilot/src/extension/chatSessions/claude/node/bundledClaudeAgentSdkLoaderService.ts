@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type * as AgentSdk from '@anthropic-ai/claude-agent-sdk';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IClaudeAgentSdkLoaderService } from '../common/claudeAgentSdkLoaderService';
 
 /**
@@ -18,7 +18,7 @@ export class BundledClaudeAgentSdkLoaderService implements IClaudeAgentSdkLoader
 		return true;
 	}
 
-	async install(_token: vscode.CancellationToken): Promise<boolean> {
+	async install(_token: zyraxoncode.CancellationToken): Promise<boolean> {
 		return true;
 	}
 

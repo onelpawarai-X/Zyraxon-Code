@@ -599,7 +599,7 @@ export interface INotebookContributionData {
 }
 
 export namespace NotebookMetadataUri {
-	export const scheme = Schemas.vscodeNotebookMetadata;
+	export const scheme = Schemas.zyraxoncodeNotebookMetadata;
 	export function generate(notebook: URI): URI {
 		return generateMetadataUri(notebook);
 	}
@@ -609,7 +609,7 @@ export namespace NotebookMetadataUri {
 }
 
 export namespace CellUri {
-	export const scheme = Schemas.vscodeNotebookCell;
+	export const scheme = Schemas.zyraxoncodeNotebookCell;
 	export function generate(notebook: URI, handle: number): URI {
 		return generateUri(notebook, handle);
 	}
@@ -624,7 +624,7 @@ export namespace CellUri {
 	 */
 	export function generateCellOutputUriWithId(notebook: URI, outputId?: string) {
 		return notebook.with({
-			scheme: Schemas.vscodeNotebookCellOutput,
+			scheme: Schemas.zyraxoncodeNotebookCellOutput,
 			query: new URLSearchParams({
 				openIn: 'editor',
 				outputId: outputId ?? '',
@@ -638,7 +638,7 @@ export namespace CellUri {
 	 */
 	export function generateCellOutputUriWithIndex(notebook: URI, cellUri: URI, outputIndex: number): URI {
 		return notebook.with({
-			scheme: Schemas.vscodeNotebookCellOutput,
+			scheme: Schemas.zyraxoncodeNotebookCellOutput,
 			fragment: cellUri.fragment,
 			query: new URLSearchParams({
 				openIn: 'notebook',
@@ -649,7 +649,7 @@ export namespace CellUri {
 
 	export function generateOutputEditorUri(notebook: URI, cellId: string, cellIndex: number, outputId: string, outputIndex: number): URI {
 		return notebook.with({
-			scheme: Schemas.vscodeNotebookCellOutput,
+			scheme: Schemas.zyraxoncodeNotebookCellOutput,
 			query: new URLSearchParams({
 				openIn: 'notebookOutputEditor',
 				notebook: notebook.toString(),
@@ -1147,7 +1147,7 @@ function compressStreamBuffer(streams: Uint8Array[]) {
 
 /**
  * Took this from jupyter/notebook
- * https://github.com/jupyter/notebook/blob/b8b66332e2023e83d2ee04f83d8814f567e01a4e/notebook/static/base/js/utils.js
+ * __ZYRAXKEEP__0_
  * Remove characters that are overridden by backspace characters
  */
 function fixBackspace(txt: string) {
@@ -1162,7 +1162,7 @@ function fixBackspace(txt: string) {
 
 /**
  * Remove chunks that should be overridden by the effect of carriage return characters
- * From https://github.com/jupyter/notebook/blob/master/notebook/static/base/js/utils.js
+ * From __ZYRAXKEEP__1_
  */
 function fixCarriageReturn(txt: string) {
 	txt = txt.replace(/\r+\n/gm, '\n'); // \r followed by \n --> newline

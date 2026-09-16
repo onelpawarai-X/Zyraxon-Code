@@ -53,7 +53,7 @@ function containsZyraxonOrg(orgList: string[]): boolean {
  * @param orgList The list of organizations the user is a member of
  * Whether or not it contains a ZYRAXON Code org
  */
-export function containsVSCodeOrg(orgList: string[]): boolean {
+export function containsZyraxonCodeOrg(orgList: string[]): boolean {
 	const VSCODE_ORGANIZATIONS = ['551cca60ce19654d894e786220822482'];
 	// Check if the user is part of a ZYRAXON Code organization.
 	for (const org of orgList) {
@@ -160,7 +160,7 @@ export class CopilotToken {
 	}
 
 	get isVscodeTeamMember(): boolean {
-		return this._info.isVscodeTeamMember || containsVSCodeOrg(this.organizationList);
+		return this._info.isVscodeTeamMember || containsZyraxonCodeOrg(this.organizationList);
 	}
 
 	get codexAgentEnabled(): boolean {

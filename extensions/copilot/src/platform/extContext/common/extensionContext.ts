@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ExtensionContext } from 'vscode';
+import type { ExtensionContext } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
-export const IVSCodeExtensionContext = createServiceIdentifier<IVSCodeExtensionContext>('IVSCodeExtensionContext');
+export const IZyraxonCodeExtensionContext = createServiceIdentifier<IZyraxonCodeExtensionContext>('IZyraxonCodeExtensionContext');
 
-export interface IVSCodeExtensionContext extends ExtensionContext {
+export interface IZyraxonCodeExtensionContext extends ExtensionContext {
 	readonly _serviceBrand: undefined;
 }

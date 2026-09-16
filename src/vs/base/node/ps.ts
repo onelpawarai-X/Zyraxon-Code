@@ -111,7 +111,7 @@ export function listProcesses(rootPid: number): Promise<ProcessItem> {
 				}
 			};
 
-			(import('@vscode/windows-process-tree')).then(windowsProcessTree => {
+			(import('@zyraxoncode/windows-process-tree')).then(windowsProcessTree => {
 				windowsProcessTree.getProcessList(rootPid, (processList) => {
 					if (!processList) {
 						reject(new Error(`Root process ${rootPid} not found`));
@@ -161,7 +161,7 @@ export function listProcesses(rootPid: number): Promise<ProcessItem> {
 		else {
 			function calculateLinuxCpuUsage() {
 
-				// Flatten rootItem to get a list of all VSCode processes
+				// Flatten rootItem to get a list of all ZyraxonCode processes
 				let processes = [rootItem];
 				const pids: number[] = [];
 				while (processes.length) {
@@ -176,7 +176,7 @@ export function listProcesses(rootPid: number): Promise<ProcessItem> {
 
 				// The cpu usage value reported on Linux is the average over the process lifetime,
 				// recalculate the usage over a one second interval
-				// JSON.stringify is needed to escape spaces, https://github.com/nodejs/node/issues/6803
+				// JSON.stringify is needed to escape spaces, __ZYRAXKEEP__0_
 				let cmd = JSON.stringify(FileAccess.asFileUri('vs/base/node/cpuUsage.sh').fsPath);
 				cmd += ' ' + pids.join(' ');
 
@@ -221,7 +221,7 @@ export function listProcesses(rootPid: number): Promise<ProcessItem> {
 
 					// Set numeric locale to ensure '.' is used as the decimal separator
 					exec(`${ps} ${args}`, { maxBuffer: 1000 * 1024, env: { LC_NUMERIC: 'en_US.UTF-8' } }, (err, stdout, stderr) => {
-						// Silently ignoring the screen size is bogus error. See https://github.com/microsoft/vscode/issues/98590
+						// Silently ignoring the screen size is bogus error. See __ZYRAXKEEP__1_
 						if (err || (stderr && !stderr.includes('screen size is bogus'))) {
 							reject(err || new Error(stderr.toString()));
 						} else {

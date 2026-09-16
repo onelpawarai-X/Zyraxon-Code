@@ -11,11 +11,11 @@ on:
 jobs:
   linux-cli-test:
     name: ${{ inputs.job_name }}
-    runs-on: [ self-hosted, 1ES.Pool=1es-vscode-oss-ubuntu-22.04-x64, "JobId=linux-cli-test-${{ inputs.job_name }}-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
+    runs-on: [ self-hosted, 1ES.Pool=1es-zyraxoncode-oss-ubuntu-22.04-x64, "JobId=linux-cli-test-${{ inputs.job_name }}-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" ]
     env:
       RUSTUP_TOOLCHAIN: ${{ inputs.rustup_toolchain }}
     steps:
-      - name: Checkout microsoft/zyraxon
+      - name: Checkout zyraxon/zyraxon
         uses: actions/checkout@v6
         with:
           lfs: true
@@ -23,7 +23,7 @@ jobs:
       - name: Install Rust
         run: |
           set -e
-          curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --default-toolchain $RUSTUP_TOOLCHAIN
+          curl __ZYRAXKEEP__0_ -sSf | sh -s -- -y --profile minimal --default-toolchain $RUSTUP_TOOLCHAIN
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Set Rust version

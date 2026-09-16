@@ -486,9 +486,9 @@ export class ModelService extends Disposable implements IModelService {
 	protected _schemaShouldMaintainUndoRedoElements(resource: URI) {
 		return (
 			resource.scheme === Schemas.file
-			|| resource.scheme === Schemas.vscodeRemote
-			|| resource.scheme === Schemas.vscodeUserData
-			|| resource.scheme === Schemas.vscodeNotebookCell
+			|| resource.scheme === Schemas.zyraxoncodeRemote
+			|| resource.scheme === Schemas.zyraxoncodeUserData
+			|| resource.scheme === Schemas.zyraxoncodeNotebookCell
 			|| resource.scheme === 'fake-fs' // for tests
 		);
 	}

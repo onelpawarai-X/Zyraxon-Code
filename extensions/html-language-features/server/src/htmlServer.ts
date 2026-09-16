@@ -12,7 +12,7 @@ import {
 	TextDocumentContentParams,
 	CancellationToken,
 	TextDocumentContentResult
-} from 'vscode-languageserver';
+} from 'zyraxoncode-languageserver';
 import {
 	getLanguageModes, LanguageModes, Settings, TextDocument, Position, Diagnostic, WorkspaceFolder, ColorInformation,
 	Range, DocumentLink, SymbolInformation, TextDocumentIdentifier, isCompletionItemData, FILE_PROTOCOL
@@ -21,7 +21,7 @@ import {
 import { format } from './modes/formatting.js';
 import { pushAll } from './utils/arrays.js';
 import { getDocumentContext } from './utils/documentContext.js';
-import { URI } from 'vscode-uri';
+import { URI } from 'zyraxoncode-uri';
 import { formatError, runSafe } from './utils/runner.js';
 import { DiagnosticsSupport, registerDiagnosticsPullSupport, registerDiagnosticsPushSupport } from './utils/validation.js';
 
@@ -545,7 +545,7 @@ export function startServer(connection: Connection, runtime: RuntimeEnvironment)
 
 	connection.languages.onLinkedEditingRange((params, token) => {
 		// eslint-disable-next-line local/code-no-any-casts
-		return <any> /* todo remove when microsoft/vscode-languageserver-node#700 fixed */ runSafe(runtime, async () => {
+		return <any> /* todo remove when zyraxon/zyraxoncode-languageserver-node#700 fixed */ runSafe(runtime, async () => {
 			const document = documents.get(params.textDocument.uri);
 			if (document) {
 				const pos = params.position;

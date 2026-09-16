@@ -3,7 +3,7 @@ set -e
 
 CONTAINER=""
 ARCH="amd64"
-REGISTRY="vscodehub.azurecr.io/vscode-linux-build-agent/sanity-tests"
+REGISTRY="zyraxoncodehub.azurecr.io/zyraxoncode-linux-build-agent/sanity-tests"
 ARGS=""
 
 while [ $# -gt 0 ]; do

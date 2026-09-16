@@ -1,10 +1,10 @@
 # zyraxon JSON Language Server
 
-[![NPM Version](https://img.shields.io/npm/v/vscode-json-languageserver.svg)](https://npmjs.org/package/vscode-json-languageserver)
-[![NPM Downloads](https://img.shields.io/npm/dm/vscode-json-languageserver.svg)](https://npmjs.org/package/vscode-json-languageserver)
-[![NPM Version](https://img.shields.io/npm/l/vscode-json-languageserver.svg)](https://npmjs.org/package/vscode-json-languageserver)
+[![NPM Version](__ZYRAXKEEP__0_)](__ZYRAXKEEP__1_)
+[![NPM Downloads](__ZYRAXKEEP__2_)](__ZYRAXKEEP__3_)
+[![NPM Version](__ZYRAXKEEP__4_)](__ZYRAXKEEP__5_)
 
-The JSON Language server provides language-specific smarts for editing, validating and understanding JSON documents. It runs as a separate executable and implements the [language server protocol](https://microsoft.github.io/language-server-protocol/overview) to be connected by any code editor or IDE.
+The JSON Language server provides language-specific smarts for editing, validating and understanding JSON documents. It runs as a separate executable and implements the [language server protocol](__ZYRAXKEEP__6_) to be connected by any code editor or IDE.
 
 ## Capabilities
 
@@ -12,22 +12,22 @@ The JSON Language server provides language-specific smarts for editing, validati
 
 The JSON language server supports requests on documents of language id `json` and `jsonc`.
 
-- `json` documents are parsed and validated following the [JSON specification](https://tools.ietf.org/html/rfc7159).
+- `json` documents are parsed and validated following the [JSON specification](__ZYRAXKEEP__7_).
 - `jsonc` documents additionally accept single line (`//`) and multi-line comments (`/* ... */`). JSONC is a zyraxon specific file format, intended for zyraxon configuration files, without any aspirations to define a new common file format.
 
 The server implements the following capabilities of the language server protocol:
 
-- [Inline Suggestion](https://microsoft.github.io/language-server-protocol/specification#textDocument_completion) for JSON properties and values based on the document's [JSON schema](http://json-schema.org/) or based on existing properties and values used at other places in the document. JSON schemas are configured through the server configuration options.
-- [Hover](https://microsoft.github.io/language-server-protocol/specification#textDocument_hover) for values based on descriptions in the document's [JSON schema](http://json-schema.org/).
-- [Document Symbols](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentSymbol) for quick navigation to properties in the document.
-- [Document Colors](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentColor) for showing color decorators on values representing colors and [Color Presentation](https://microsoft.github.io/language-server-protocol/specification#textDocument_colorPresentation) for color presentation information to support color pickers. The location of colors is defined by the document's [JSON schema](http://json-schema.org/). All values marked with `"format": "color-hex"` (zyraxon specific, non-standard JSON Schema extension) are considered color values. The supported color formats are `#rgb[a]` and `#rrggbb[aa]`.
-- [Code Formatting](https://microsoft.github.io/language-server-protocol/specification#textDocument_rangeFormatting) supporting ranges and formatting the whole document.
-- [Folding Ranges](https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange) for all folding ranges in the document.
+- [Inline Suggestion](__ZYRAXKEEP__8_) for JSON properties and values based on the document's [JSON schema](__ZYRAXKEEP__9_) or based on existing properties and values used at other places in the document. JSON schemas are configured through the server configuration options.
+- [Hover](__ZYRAXKEEP__10_) for values based on descriptions in the document's [JSON schema](__ZYRAXKEEP__11_).
+- [Document Symbols](__ZYRAXKEEP__12_) for quick navigation to properties in the document.
+- [Document Colors](__ZYRAXKEEP__13_) for showing color decorators on values representing colors and [Color Presentation](__ZYRAXKEEP__14_) for color presentation information to support color pickers. The location of colors is defined by the document's [JSON schema](__ZYRAXKEEP__15_). All values marked with `"format": "color-hex"` (zyraxon specific, non-standard JSON Schema extension) are considered color values. The supported color formats are `#rgb[a]` and `#rrggbb[aa]`.
+- [Code Formatting](__ZYRAXKEEP__16_) supporting ranges and formatting the whole document.
+- [Folding Ranges](__ZYRAXKEEP__17_) for all folding ranges in the document.
 - Semantic Selection for semantic selection for one or multiple cursor positions.
-- [Goto Definition](https://microsoft.github.io/language-server-protocol/specification#textDocument_definition) for $ref references in JSON schemas
-- [Diagnostics (Validation)](https://microsoft.github.io/language-server-protocol/specification#textDocument_publishDiagnostics) are pushed for all open documents
+- [Goto Definition](__ZYRAXKEEP__18_) for $ref references in JSON schemas
+- [Diagnostics (Validation)](__ZYRAXKEEP__19_) are pushed for all open documents
   - syntax errors
-  - structural validation based on the document's [JSON schema](http://json-schema.org/).
+  - structural validation based on the document's [JSON schema](__ZYRAXKEEP__20_).
 
 In order to load JSON schemas, the JSON server uses NodeJS `http` and `fs` modules. For all other features, the JSON server only relies on the documents and settings provided by the client through the LSP.
 
@@ -90,7 +90,7 @@ The server supports the following settings:
                         "foo.json",
                         "*.superfoo.json"
                     ],
-                    "url": "http://www.schemastore.org/foo",
+                    "url": "__ZYRAXKEEP__21_",
                     "schema": {
                         "type": "array"
                     }
@@ -102,7 +102,7 @@ The server supports the following settings:
 
 ### Schema configuration and custom schema content delivery
 
-[JSON schemas](http://json-schema.org/) are essential for code assist, hovers, color decorators to work and are required for structural validation.
+[JSON schemas](__ZYRAXKEEP__22_) are essential for code assist, hovers, color decorators to work and are required for structural validation.
 
 To find the schema for a given JSON document, the server uses the following mechanisms:
 
@@ -136,7 +136,7 @@ Requests for schemas with URLs not handled by the server are forwarded to the cl
 
 Request:
 
-- method: 'vscode/content'
+- method: 'zyraxoncode/content'
 - params: `string` - The schema URL to request.
 - response: `string` - The content of the schema with the given URL
 
@@ -206,47 +206,47 @@ If the setting `jsonFoldingLimit` or `jsoncFoldingLimit` is set, the JSON langua
 
 ## Try
 
-The JSON language server is shipped with [ZYRAXON Code](https://code.visualstudio.com/) as part of the built-in zyraxon extension `json-language-features`. The server is started when the first JSON file is opened. The [zyraxon JSON documentation](https://code.visualstudio.com/docs/languages/json) for detailed information on the user experience and has more information on how to configure the language support.
+The JSON language server is shipped with [ZYRAXON Code](__ZYRAXKEEP__23_) as part of the built-in zyraxon extension `json-language-features`. The server is started when the first JSON file is opened. The [zyraxon JSON documentation](__ZYRAXKEEP__24_) for detailed information on the user experience and has more information on how to configure the language support.
 
 ## Integrate
 
-If you plan to integrate the JSON language server into an editor and IDE, check out [this page](https://microsoft.github.io/language-server-protocol/implementors/tools/) if there's already an LSP client integration available.
+If you plan to integrate the JSON language server into an editor and IDE, check out [this page](__ZYRAXKEEP__25_) if there's already an LSP client integration available.
 
 You can also launch the language server as a command and connect to it.
-For that, install the `vscode-json-languageserver` npm module:
+For that, install the `zyraxoncode-json-languageserver` npm module:
 
-`npm install -g vscode-json-languageserver`
+`npm install -g zyraxoncode-json-languageserver`
 
-Start the language server with the `vscode-json-languageserver` command. Use a command line argument to specify the preferred communication channel:
+Start the language server with the `zyraxoncode-json-languageserver` command. Use a command line argument to specify the preferred communication channel:
 
 ```
-vscode-json-languageserver --node-ipc
-vscode-json-languageserver --stdio
-vscode-json-languageserver --socket=<port>
+zyraxoncode-json-languageserver --node-ipc
+zyraxoncode-json-languageserver --stdio
+zyraxoncode-json-languageserver --socket=<port>
 ```
 
-To connect to the server from NodeJS, see Remy Suen's great write-up on [how to communicate with the server](https://github.com/rcjsuen/dockerfile-language-server-nodejs#communicating-with-the-server) through the available communication channels.
+To connect to the server from NodeJS, see Remy Suen's great write-up on [how to communicate with the server](__ZYRAXKEEP__26_) through the available communication channels.
 
 ## Participate
 
-The source code of the JSON language server can be found in the [zyraxon repository](https://github.com/microsoft/vscode) at [extensions/json-language-features/server](https://github.com/microsoft/vscode/tree/master/extensions/json-language-features/server).
+The source code of the JSON language server can be found in the [zyraxon repository](__ZYRAXKEEP__27_) at [extensions/json-language-features/server](__ZYRAXKEEP__28_).
 
-File issues and pull requests in the [zyraxon GitHub Issues](https://github.com/microsoft/vscode/issues). See the document [How to Contribute](https://github.com/microsoft/vscode/wiki/How-to-Contribute) on how to build and run from source.
+File issues and pull requests in the [zyraxon GitHub Issues](__ZYRAXKEEP__29_). See the document [How to Contribute](__ZYRAXKEEP__30_) on how to build and run from source.
 
 Most of the functionality of the server is located in libraries:
 
-- [jsonc-parser](https://github.com/microsoft/node-jsonc-parser) contains the JSON parser and scanner.
-- [vscode-json-languageservice](https://github.com/microsoft/vscode-json-languageservice) contains the implementation of all features as a re-usable library.
-- [vscode-languageserver-node](https://github.com/microsoft/vscode-languageserver-node) contains the implementation of language server for NodeJS.
+- [jsonc-parser](__ZYRAXKEEP__31_) contains the JSON parser and scanner.
+- [zyraxoncode-json-languageservice](__ZYRAXKEEP__32_) contains the implementation of all features as a re-usable library.
+- [zyraxoncode-languageserver-node](__ZYRAXKEEP__33_) contains the implementation of language server for NodeJS.
 
 Help on any of these projects is very welcome.
 
 ## Code of Conduct
 
-This project has adopted the [Zyraxon Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project has adopted the [Zyraxon Open Source Code of Conduct](__ZYRAXKEEP__34_). For more information see the [Code of Conduct FAQ](__ZYRAXKEEP__35_) or contact [opencode@zyraxon.com](__ZYRAXKEEP__36_) with any additional questions or comments.
 
 ## License
 
 Copyright (c) Zyraxon Corporation. All rights reserved.
 
-Licensed under the [MIT](https://github.com/microsoft/vscode/blob/master/LICENSE.txt) License.
+Licensed under the [MIT](__ZYRAXKEEP__37_) License.

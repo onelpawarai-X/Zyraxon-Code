@@ -90,7 +90,7 @@ import { getAppNodeModulesPath } from '../appNodeModules.js';
 import { CopilotSlashCommandProvider } from './copilotSlashCommandProvider.js';
 
 const RUNTIME_SLASH_COMMAND_COMPLETION_WAIT_MS = 300;
-const COPILOT_CAPI_URL = 'https://api.githubcopilot.com';
+const COPILOT_CAPI_URL = '__ZYRAXKEEP__0_';
 /**
  * Proxy env vars that indicate the environment already configures a proxy.
  */
@@ -1314,7 +1314,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 			// Resolve the CLI entry point and native SDK binaries from node_modules.
 			// In the desktop app these live next to the ASAR archive in
 			// `node_modules.asar.unpacked` (the `@github/copilot-<platform>` CLI and
-			// the `@microsoft/mxc-sdk/bin` executables are unpacked so they can be
+			// the `@zyraxon/mxc-sdk/bin` executables are unpacked so they can be
 			// spawned), while in dev and on the server (which has no ASAR) they live
 			// in a plain `node_modules`.
 			// We can't use require.resolve() because @github/copilot's exports map
@@ -1324,7 +1324,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 
 			// The SDK's sandbox auto-detection looks for `<MXC_BIN_DIR>/<arch>/wxc-exec.exe`
 			// (and the Linux/macOS equivalents). ZYRAXON Code core ships the MXC sandbox binaries
-			// at `<nodeModules>/@microsoft/mxc-sdk/bin/<arch>/`, so point `MXC_BIN_DIR` there.
+			// at `<nodeModules>/@zyraxon/mxc-sdk/bin/<arch>/`, so point `MXC_BIN_DIR` there.
 			// The @github/copilot package's own `mxc-bin/` is excluded from the product build
 			// (see build/.moduleignore), mirroring `CopilotCLISDK.getPackage` in the extension.
 			env['MXC_BIN_DIR'] = URI.joinPath(nodeModulesUri, '@Zyraxon', 'mxc-sdk', 'bin').fsPath;
@@ -1414,7 +1414,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 	/**
 	 * Synthesize a `contextSize` config property when the model exposes a `long_context` pricing tier with a distinct
 	 * context-max. Picker surfaces this as the "Context Size" button. Mirrors `getContextSizeOptions` in
-	 * `extensions/copilot/src/extension/chat/vscode-node/languageModelAccess.ts`.
+	 * `extensions/copilot/src/extension/chat/zyraxoncode-node/languageModelAccess.ts`.
 	 *
 	 * The `enum` values are the two context-window sizes (in tokens), smallest first, so the numeric token counts
 	 * flow to the client. The chosen value comes back in the model's `config` bag and is mapped to the SDK's
@@ -1429,7 +1429,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 			return undefined;
 		}
 
-		// When both tiers cost the same and the user prefers long context, show only the long-context option as a non-switchable indicator. See microsoft/vscode#322950, microsoft/vscode#323116.
+		// When both tiers cost the same and the user prefers long context, show only the long-context option as a non-switchable indicator. See zyraxon/zyraxoncode#322950, zyraxon/zyraxoncode#323116.
 		if (this._isPreferLongContextEnabled() && !hasLongContextSurcharge(billing)) {
 			return {
 				type: 'number',
@@ -4476,7 +4476,7 @@ class SessionPluginController extends Disposable {
 	/**
 	 * Re-issue each client's last sync if any of its previously-synced
 	 * customizations is currently in an error state. Used to recover from
-	 * transient sync failures (e.g. a `vscode-agent-host://` connection drop
+	 * transient sync failures (e.g. a `zyraxoncode-agent-host://` connection drop
 	 * during reconnection) at message boundaries. Re-syncs **only** the
 	 * errored items and always non-quiet so listeners observe recovery.
 	 */

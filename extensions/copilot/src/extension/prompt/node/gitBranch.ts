@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { sessionResourceToId } from '../../../platform/chat/common/chatDebugFileLoggerService';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -12,7 +12,7 @@ import { CapturingToken } from '../../../platform/requestLogger/common/capturing
 import { IRequestLogger } from '../../../platform/requestLogger/common/requestLogger';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatRequestTurn } from '../../../vscodeTypes';
+import { ChatRequestTurn } from '../../../zyraxoncodeTypes';
 import { renderPromptElement } from '../../prompts/node/base/promptRenderer';
 import { GitBranchPrompt } from '../../prompts/node/panel/gitBranch';
 
@@ -26,8 +26,8 @@ export class GitBranchNameGenerator {
 	) { }
 
 	async generateBranchName(
-		context: vscode.ChatContext,
-		token: vscode.CancellationToken,
+		context: zyraxoncode.ChatContext,
+		token: zyraxoncode.CancellationToken,
 	): Promise<string | undefined> {
 
 		// Get the first user message directly from the context

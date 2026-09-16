@@ -40,20 +40,20 @@ Colors are injected as CSS custom properties on `.monaco-workbench`:
 
 ```
 Color ID: editor.background
-CSS variable: --vscode-editor-background
-Usage: var(--vscode-editor-background)
+CSS variable: --zyraxoncode-editor-background
+Usage: var(--zyraxoncode-editor-background)
 ```
 
 Conversion functions in `colorUtils.ts`:
-- `asCssVariable(colorId)` → `'var(--vscode-editor-background)'`
-- `asCssVariableName(colorId)` → `'--vscode-editor-background'`
+- `asCssVariable(colorId)` → `'var(--zyraxoncode-editor-background)'`
+- `asCssVariableName(colorId)` → `'--zyraxoncode-editor-background'`
 
 **In CSS files**, reference directly:
 ```css
 .my-widget {
-    background-color: var(--vscode-editor-background);
-    color: var(--vscode-foreground);
-    border: 1px solid var(--vscode-contrastBorder);
+    background-color: var(--zyraxoncode-editor-background);
+    color: var(--zyraxoncode-foreground);
+    border: 1px solid var(--zyraxoncode-contrastBorder);
 }
 ```
 
@@ -84,16 +84,16 @@ Defined in `src/vs/workbench/browser/media/style.css`:
     outline-width: 1px;
     outline-style: solid;
     outline-offset: -1px;
-    outline-color: var(--vscode-focusBorder);
+    outline-color: var(--zyraxoncode-focusBorder);
 }
 ```
 
 **Rules**:
-- Use `var(--vscode-focusBorder)` — never hardcode a focus color.
+- Use `var(--zyraxoncode-focusBorder)` — never hardcode a focus color.
 - Default `outline-offset: -1px` (inset). Exception: checkboxes use `2px`.
 - Active elements suppress focus ring: `.my-widget:active { outline: 0 !important; }`
 - Use `.synthetic-focus` class for programmatic focus indication.
-- Toggle buttons use `border: 1px dashed var(--vscode-focusBorder)` instead of outline.
+- Toggle buttons use `border: 1px dashed var(--zyraxoncode-focusBorder)` instead of outline.
 
 ### Focus Trapping
 
@@ -107,17 +107,17 @@ Modal dialogs must trap focus within the dialog until dismissed. Use `dom.trackF
 - HC focus: use `activeContrastBorder` (derived from `focusBorder`).
 - In CSS, use `.hc-black` / `.hc-light` class selectors for HC-specific overrides:
   ```css
-  .hc-black .my-widget { border: 1px solid var(--vscode-contrastBorder); }
+  .hc-black .my-widget { border: 1px solid var(--zyraxoncode-contrastBorder); }
   ```
 - In TypeScript, check `isHighContrast(theme.type)` for runtime behavior changes.
 - **Box shadows** must be removed or replaced in HC mode (shadows are invisible/distracting with high contrast borders):
   ```css
   .my-widget {
-      box-shadow: 0 1px 3px var(--vscode-widget-shadow);
+      box-shadow: 0 1px 3px var(--zyraxoncode-widget-shadow);
   }
-  .vscode-high-contrast .my-widget {
+  .zyraxoncode-high-contrast .my-widget {
       box-shadow: none;
-      border: 1px solid var(--vscode-contrastBorder);
+      border: 1px solid var(--zyraxoncode-contrastBorder);
   }
   ```
 
@@ -127,16 +127,16 @@ Reviewers will always flag hardcoded colors, shadows, sizes that should use them
 
 | Hardcoded (flagged) | Correct |
 |---------------------|---------|
-| `rgba(0, 0, 0, 0.12)` | `var(--vscode-widget-shadow)` or theme-aware variable |
-| `#252526` | `var(--vscode-editor-background)` |
-| `color: white` | `var(--vscode-button-foreground)` |
-| `border: 1px solid #ccc` | `var(--vscode-editorWidget-border)` |
-| `border: 1px solid …` (width) | `var(--vscode-strokeThickness)` for the 1px width |
-| `border-radius: 6px` | `var(--vscode-cornerRadius-medium)` (radius ramp) |
-| `padding: 8px 12px` (off-scale) | spacing ramp (`--vscode-spacing-size*`) |
-| `font-size: 14px` (arbitrary) | size ramp (`--vscode-fontSize-*`, agents `--vscode-agents-fontSize-*`) |
-| `font-weight: 500` | `--vscode-fontWeight-semiBold` (agents `--vscode-agents-fontWeight-semiBold`; no 500) |
-| codicon `font-size: 14px` | `--vscode-codiconFontSize` (16) / `-compact` (12) |
+| `rgba(0, 0, 0, 0.12)` | `var(--zyraxoncode-widget-shadow)` or theme-aware variable |
+| `#252526` | `var(--zyraxoncode-editor-background)` |
+| `color: white` | `var(--zyraxoncode-button-foreground)` |
+| `border: 1px solid #ccc` | `var(--zyraxoncode-editorWidget-border)` |
+| `border: 1px solid …` (width) | `var(--zyraxoncode-strokeThickness)` for the 1px width |
+| `border-radius: 6px` | `var(--zyraxoncode-cornerRadius-medium)` (radius ramp) |
+| `padding: 8px 12px` (off-scale) | spacing ramp (`--zyraxoncode-spacing-size*`) |
+| `font-size: 14px` (arbitrary) | size ramp (`--zyraxoncode-fontSize-*`, agents `--zyraxoncode-agents-fontSize-*`) |
+| `font-weight: 500` | `--zyraxoncode-fontWeight-semiBold` (agents `--zyraxoncode-agents-fontWeight-semiBold`; no 500) |
+| codicon `font-size: 14px` | `--zyraxoncode-codiconFontSize` (16) / `-compact` (12) |
 
 **Rule:** If a value relates to color, shadow, or border — it must come from a CSS variable or registered color token. The only exception is `0` (zero) values and purely structural measurements like `100%`.
 

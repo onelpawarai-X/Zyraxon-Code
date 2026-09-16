@@ -14,8 +14,8 @@
 	gap: 4px;
 	padding: 6px 8px;
 	line-height: 1.5;
-	color: var(--vscode-foreground);
-	border-top: 1px solid var(--vscode-chat-requestBorder);
+	color: var(--zyraxoncode-foreground);
+	border-top: 1px solid var(--zyraxoncode-chat-requestBorder);
 	background: transparent;
 	user-select: none;
 }
@@ -27,14 +27,14 @@
 	justify-content: center;
 	min-width: 12px;
 	line-height: 1;
-	color: var(--tool-risk-accent, var(--vscode-descriptionForeground));
+	color: var(--tool-risk-accent, var(--zyraxoncode-descriptionForeground));
 }
 
 /* Outrank `.monaco-workbench .codicon[class*='codicon-']` so these compact
  * badge icons are not promoted to the workbench's base codicon size. */
 .chat-confirmation-widget2 > .tool-risk-badge .tool-risk-icon.codicon,
 .chat-confirmation-widget2 > .tool-risk-badge .tool-risk-details-icon.codicon {
-	font-size: var(--vscode-codiconFontSize-compact);
+	font-size: var(--zyraxoncode-codiconFontSize-compact);
 }
 
 .chat-confirmation-widget2 > .tool-risk-badge .tool-risk-text {
@@ -49,13 +49,13 @@
 	align-items: center;
 	justify-content: center;
 	line-height: 1;
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	cursor: pointer;
 	border-radius: 3px;
 }
 
 .chat-confirmation-widget2 > .tool-risk-badge .tool-risk-details-icon:focus {
-	outline: 1px solid var(--vscode-focusBorder);
+	outline: 1px solid var(--zyraxoncode-focusBorder);
 	outline-offset: 1px;
 }
 
@@ -64,13 +64,13 @@
 }
 
 .chat-confirmation-widget2 > .tool-risk-badge.green {
-	--tool-risk-accent: var(--vscode-charts-green, #388a34);
+	--tool-risk-accent: var(--zyraxoncode-charts-green, #388a34);
 }
 
 .chat-confirmation-widget2 > .tool-risk-badge.orange {
-	--tool-risk-accent: var(--vscode-editorWarning-foreground, #cca700);
+	--tool-risk-accent: var(--zyraxoncode-editorWarning-foreground, #cca700);
 }
 
 .chat-confirmation-widget2 > .tool-risk-badge.red {
-	--tool-risk-accent: var(--vscode-editorError-foreground, #f14c4c);
+	--tool-risk-accent: var(--zyraxoncode-editorError-foreground, #f14c4c);
 }

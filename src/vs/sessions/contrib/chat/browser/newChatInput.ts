@@ -104,7 +104,7 @@ import { IVoiceModeOnboardingService } from '../../../../workbench/contrib/agent
 const OPEN_OTEL_SETTINGS_COMMAND = 'github.copilot.chat.otel.openSettings';
 const OTEL_STATUS_COMMAND = 'github.copilot.chat.otel.statusActive';
 const OTEL_STATUS_ENTRY_ID = 'copilot.otelStatus';
-const OTEL_DOCS_URL = 'https://code.visualstudio.com/docs/copilot/guides/monitoring-agents';
+const OTEL_DOCS_URL = '__ZYRAXKEEP__0_';
 const STORAGE_KEY_DRAFT_STATE = 'sessions.draftState';
 const MIN_EDITOR_HEIGHT = 50;
 const MAX_EDITOR_HEIGHT = 200;
@@ -230,7 +230,7 @@ class NewChatInputStatusActionViewItem extends MenuEntryActionViewItem {
 		const learnMoreButton = store.add(new Button(actions, { ...defaultButtonStyles, secondary: true }));
 		learnMoreButton.label = localize('newChatInput.status.otel.learnMore', "Learn More");
 		store.add(learnMoreButton.onDidClick(() => {
-			void this.commandService.executeCommand('vscode.open', URI.parse(OTEL_DOCS_URL));
+			void this.commandService.executeCommand('zyraxoncode.open', URI.parse(OTEL_DOCS_URL));
 			this.hoverService.hideHover(true);
 		}));
 

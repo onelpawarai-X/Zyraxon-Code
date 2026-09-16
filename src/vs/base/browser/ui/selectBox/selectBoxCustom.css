@@ -6,8 +6,8 @@
 .monaco-select-box-dropdown-container {
 	display: none;
 	box-sizing: border-box;
-	border-radius: var(--vscode-cornerRadius-large);
-	box-shadow: var(--vscode-shadow-lg);
+	border-radius: var(--zyraxoncode-cornerRadius-large);
+	box-shadow: var(--zyraxoncode-shadow-lg);
 }
 
 .monaco-select-box-dropdown-container > .select-box-details-pane > .select-box-description-markdown * {
@@ -99,7 +99,7 @@
 }
 
 .monaco-select-box-dropdown-container > .select-box-dropdown-list-container .monaco-list .monaco-list-row.option-separator > .option-decorator-right {
-	color: var(--vscode-descriptionForeground);
+	color: var(--zyraxoncode-descriptionForeground);
 	font-size: 12px;
 }
 
@@ -110,11 +110,11 @@
 	right: 0;
 	top: 50%;
 	height: 1px;
-	background-color: var(--vscode-menu-separatorBackground);
+	background-color: var(--zyraxoncode-menu-separatorBackground);
 }
 
 /* Accepted CSS hiding technique for accessibility reader text  */
-/* https://webaim.org/techniques/css/invisiblecontent/ */
+/* __ZYRAXKEEP__0_ */
 
 .monaco-select-box-dropdown-container > .select-box-dropdown-list-container .monaco-list .monaco-list-row > .visually-hidden {
 	position: absolute;

@@ -5,13 +5,13 @@
 
 .agent-plugin-editor {
 	& .marketplace-link {
-		color: var(--vscode-textLink-foreground);
+		color: var(--zyraxoncode-textLink-foreground);
 		text-decoration: none;
 		cursor: pointer;
 
 		&:hover {
 			text-decoration: underline;
-			color: var(--vscode-textLink-activeForeground);
+			color: var(--zyraxoncode-textLink-activeForeground);
 		}
 	}
 

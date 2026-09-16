@@ -3,23 +3,23 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptReference, TextChunk } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptReference, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { isScenarioAutomation } from '../../../../platform/env/common/envService';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IPromptPathRepresentationService } from '../../../../platform/prompts/common/promptPathRepresentationService';
 import { ITelemetryService } from '../../../../platform/telemetry/common/telemetry';
 import { createFencedCodeBlock } from '../../../../util/common/markdown';
 import { basename } from '../../../../util/vs/base/common/resources';
-import { ExtensionMode } from '../../../../vscodeTypes';
+import { ExtensionMode } from '../../../../zyraxoncodeTypes';
 
 
 export abstract class SafePromptElement<P extends BasePromptElementProps, S = void> extends PromptElement<P, S> {
 
 	constructor(props: P,
-		@IVSCodeExtensionContext protected readonly _contextService: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext protected readonly _contextService: IZyraxonCodeExtensionContext,
 		@ITelemetryService protected readonly _telemetryService: ITelemetryService,
 		@ILogService protected readonly _logService: ILogService,
 		@IIgnoreService protected readonly _ignoreService: IIgnoreService,
@@ -51,7 +51,7 @@ export abstract class SafePromptElement<P extends BasePromptElementProps, S = vo
 
 export type CodeBlockProps = PromptElementProps<{
 	readonly includeFilepath?: boolean;
-	readonly uri: vscode.Uri;
+	readonly uri: zyraxoncode.Uri;
 	readonly code: string;
 	readonly languageId?: string;
 	readonly references?: PromptReference[];
@@ -78,7 +78,7 @@ export type CodeBlockProps = PromptElementProps<{
 export class CodeBlock extends SafePromptElement<CodeBlockProps> {
 
 	constructor(props: CodeBlockProps,
-		@IVSCodeExtensionContext _contextService: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext _contextService: IZyraxonCodeExtensionContext,
 		@ITelemetryService _telemetryService: ITelemetryService,
 		@ILogService _logService: ILogService,
 		@IIgnoreService _ignoreService: IIgnoreService,
@@ -115,7 +115,7 @@ export type ExampleCodeBlockProps = PromptElementProps<{
 	readonly examplePath?: string;
 	readonly isSummarized?: boolean;
 	readonly includeFilepath?: boolean;
-	readonly range?: vscode.Range;
+	readonly range?: zyraxoncode.Range;
 	readonly code: string;
 	readonly languageId?: string;
 	readonly shouldTrim?: boolean;
@@ -125,7 +125,7 @@ export type ExampleCodeBlockProps = PromptElementProps<{
 
 export class ExampleCodeBlock extends SafePromptElement<ExampleCodeBlockProps> {
 	constructor(props: ExampleCodeBlockProps,
-		@IVSCodeExtensionContext _contextService: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext _contextService: IZyraxonCodeExtensionContext,
 		@ITelemetryService _telemetryService: ITelemetryService,
 		@ILogService _logService: ILogService,
 		@IIgnoreService _ignoreService: IIgnoreService,
@@ -150,7 +150,7 @@ export const enum UriMode {
 }
 
 export type UriProps = PromptElementProps<{
-	value: vscode.Uri;
+	value: zyraxoncode.Uri;
 	mode?: UriMode;
 }>;
 

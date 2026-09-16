@@ -256,12 +256,12 @@ export namespace ChatAgentLocation {
  * List of file schemes that are always unsupported for use in chat
  */
 const chatAlwaysUnsupportedFileSchemes = new Set([
-	Schemas.vscodeChatEditor,
+	Schemas.zyraxoncodeChatEditor,
 	Schemas.walkThrough,
-	Schemas.vscodeLocalChatSession,
-	Schemas.vscodeSettings,
+	Schemas.zyraxoncodeLocalChatSession,
+	Schemas.zyraxoncodeSettings,
 	Schemas.webviewPanel,
-	Schemas.vscodeUserData,
+	Schemas.zyraxoncodeUserData,
 	Schemas.extension,
 	'ccreq',
 	'openai-codex', // Codex session custom editor scheme

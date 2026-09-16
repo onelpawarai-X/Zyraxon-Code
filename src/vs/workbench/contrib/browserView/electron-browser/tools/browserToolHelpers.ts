@@ -114,7 +114,7 @@ export function createBrowserPageLink(pageId: string | URI): string {
 	if (typeof pageId === 'string') {
 		pageId = BrowserViewUri.forId(pageId);
 	}
-	return `[${BrowserEditorInput.DEFAULT_LABEL}](${pageId.toString()}?vscodeLinkType=browser)`;
+	return `[${BrowserEditorInput.DEFAULT_LABEL}](${pageId.toString()}?zyraxoncodeLinkType=browser)`;
 }
 
 /**
@@ -214,7 +214,7 @@ export function rewriteRemoteLocalhostUrl(
 	let uri = URI.parse(url);
 
 	// Hostnames are case-insensitive, but the localhost port-mapping matcher is
-	// case-sensitive. Normalize the authority so e.g. `http://LOCALHOST:3000` matches.
+	// case-sensitive. Normalize the authority so e.g. `__ZYRAXKEEP__0_` matches.
 	if (uri.authority) {
 		uri = uri.with({ authority: uri.authority.toLowerCase() });
 	}

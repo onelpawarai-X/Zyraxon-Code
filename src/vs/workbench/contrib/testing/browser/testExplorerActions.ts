@@ -222,7 +222,7 @@ export class RunUsingProfileAction extends Action2 {
 	public override async run(acessor: ServicesAccessor, ...elements: TestItemTreeElement[]): Promise<void> {
 		const commandService = acessor.get(ICommandService);
 		const testService = acessor.get(ITestService);
-		const profile: ITestRunProfile | undefined = await commandService.executeCommand('vscode.pickTestProfile', {
+		const profile: ITestRunProfile | undefined = await commandService.executeCommand('zyraxoncode.pickTestProfile', {
 			onlyForTest: elements[0].test,
 		});
 		if (!profile) {
@@ -264,7 +264,7 @@ export class SelectDefaultTestProfiles extends Action2 {
 	public override async run(acessor: ServicesAccessor, onlyGroup: TestRunProfileBitset) {
 		const commands = acessor.get(ICommandService);
 		const testProfileService = acessor.get(ITestProfileService);
-		const profiles = await commands.executeCommand<ITestRunProfile[]>('vscode.pickMultipleTestProfiles', {
+		const profiles = await commands.executeCommand<ITestRunProfile[]>('zyraxoncode.pickMultipleTestProfiles', {
 			showConfigureButtons: false,
 			selected: testProfileService.getGroupDefaultProfiles(onlyGroup),
 			onlyGroup,
@@ -364,7 +364,7 @@ export class ConfigureTestProfilesAction extends Action2 {
 	public override async run(acessor: ServicesAccessor, onlyGroup?: TestRunProfileBitset) {
 		const commands = acessor.get(ICommandService);
 		const testProfileService = acessor.get(ITestProfileService);
-		const profile = await commands.executeCommand<ITestRunProfile>('vscode.pickTestProfile', {
+		const profile = await commands.executeCommand<ITestRunProfile>('zyraxoncode.pickTestProfile', {
 			placeholder: localize('configureProfile', 'Select a profile to update'),
 			showConfigureButtons: false,
 			onlyConfigurable: true,
@@ -985,7 +985,7 @@ export class GoToTest extends Action2 {
 		}
 
 		if (element && element instanceof TestItemTreeElement) {
-			accessor.get(ICommandService).executeCommand('vscode.revealTest', element.test.item.extId, preserveFocus);
+			accessor.get(ICommandService).executeCommand('zyraxoncode.revealTest', element.test.item.extId, preserveFocus);
 		}
 	}
 }

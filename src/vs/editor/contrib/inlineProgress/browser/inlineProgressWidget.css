@@ -25,6 +25,6 @@
 }
 
 .inline-progress-widget:hover .icon::before {
-	content: var(--vscode-icon-x-content);
-	font-family: var(--vscode-icon-x-font-family);
+	content: var(--zyraxoncode-icon-x-content);
+	font-family: var(--zyraxoncode-icon-x-font-family);
 }

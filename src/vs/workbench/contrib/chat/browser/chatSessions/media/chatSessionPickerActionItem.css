@@ -45,12 +45,12 @@
 
 /* Locked state styling - matches disabled action item styling */
 .monaco-action-bar .action-item.locked .chat-session-option-picker {
-	color: var(--vscode-disabledForeground);
+	color: var(--zyraxoncode-disabledForeground);
 	cursor: default;
 }
 
 .monaco-action-bar .action-item.locked .chat-session-option-picker .codicon {
-	color: var(--vscode-disabledForeground);
+	color: var(--zyraxoncode-disabledForeground);
 }
 
 .monaco-action-bar .action-item.locked {

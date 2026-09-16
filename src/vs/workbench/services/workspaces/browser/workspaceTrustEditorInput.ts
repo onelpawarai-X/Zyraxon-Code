@@ -26,7 +26,7 @@ export class WorkspaceTrustEditorInput extends EditorInput {
 	}
 
 	readonly resource: URI = URI.from({
-		scheme: Schemas.vscodeWorkspaceTrust,
+		scheme: Schemas.zyraxoncodeWorkspaceTrust,
 		path: `workspaceTrustEditor`
 	});
 

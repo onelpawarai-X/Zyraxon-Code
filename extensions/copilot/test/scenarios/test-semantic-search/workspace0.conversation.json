@@ -144,7 +144,7 @@
       "question": "image output context menu",
       "stateFile": "./workspaceState.state.json",
       "keywords":[
-        "data-vscode-context",
+        "data-zyraxoncode-context",
         "preventDefaultContextMenuItems"
       ]
     },

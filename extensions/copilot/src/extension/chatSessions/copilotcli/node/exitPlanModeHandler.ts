@@ -4,14 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { SessionOptions } from '@github/copilot/sdk';
-import * as l10n from '@vscode/l10n';
-import type { CancellationToken, ChatParticipantToolToken, TextDocument } from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type { CancellationToken, ChatParticipantToolToken, TextDocument } from 'zyraxoncode';
 import { ILogService } from '../../../../platform/log/common/logService';
 import { IWorkspaceService } from '../../../../platform/workspace/common/workspaceService';
 import { Delayer } from '../../../../util/vs/base/common/async';
 import { DisposableStore } from '../../../../util/vs/base/common/lifecycle';
 import { isEqual } from '../../../../util/vs/base/common/resources';
-import { LanguageModelTextPart, Uri } from '../../../../vscodeTypes';
+import { LanguageModelTextPart, Uri } from '../../../../zyraxoncodeTypes';
 import { IToolsService } from '../../../tools/common/toolsService';
 import { Session } from '../common/utils';
 
@@ -161,7 +161,7 @@ async function resolveInteractive(
 			...(a === 'autopilot' || a === 'autopilot_fleet' ? { permissionLevel: 'autopilot' as const } : {}),
 		}));
 
-		const result = await toolService.invokeTool('vscode_reviewPlan', {
+		const result = await toolService.invokeTool('zyraxoncode_reviewPlan', {
 			input: {
 				title: l10n.t('Plan summary'),
 				plan: planPath ? Uri.file(planPath).toString() : undefined,

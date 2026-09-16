@@ -40,11 +40,11 @@ interface ITerminalSandboxFileSystemAccessPaths {
 
 /** Runtime information needed to launch the sandbox-runtime CLI. */
 export interface ITerminalSandboxRuntimeInfo {
-	/** Directory that contains `node_modules/@vscode/sandbox-runtime` and `node_modules/@vscode/ripgrep`. */
+	/** Directory that contains `node_modules/@zyraxoncode/sandbox-runtime` and `node_modules/@zyraxoncode/ripgrep`. */
 	appRoot: string;
 	/**
 	 * Name of the directory (relative to {@link appRoot}) that holds the native
-	 * binaries `ripgrep-universal` and `@microsoft/mxc-sdk`. In a packaged desktop
+	 * binaries `ripgrep-universal` and `@zyraxon/mxc-sdk`. In a packaged desktop
 	 * build these are unpacked from the archive into `node_modules.asar.unpacked`;
 	 * in dev and on remote they live in plain `node_modules`. Defaults to
 	 * `node_modules`. Note the sandbox-runtime CLI itself is always resolved from
@@ -378,7 +378,7 @@ export class TerminalSandboxEngine extends Disposable {
 			await this._initTempDir();
 		}
 
-		const configFilePath = this._tempDir ? this._getUriPath(URI.joinPath(this._tempDir, `vscode-sandbox-settings-${this._sandboxSettingsId}.json`)) : undefined;
+		const configFilePath = this._tempDir ? this._getUriPath(URI.joinPath(this._tempDir, `zyraxoncode-sandbox-settings-${this._sandboxSettingsId}.json`)) : undefined;
 		const accessPaths = await this._getFileSystemAccessPaths(configFilePath);
 		const denied: string[] = [];
 		for (const path of paths) {
@@ -624,11 +624,11 @@ export class TerminalSandboxEngine extends Disposable {
 		this._execPath = runtimeInfo.execPath;
 		this._runAsNode = runtimeInfo.runAsNode ?? false;
 		this._userHome = await this._host.getUserHome();
-		this._srtPath = this._pathJoin(this._appRoot, 'node_modules', '@vscode', 'sandbox-runtime', 'dist', 'cli.js');
+		this._srtPath = this._pathJoin(this._appRoot, 'node_modules', '@zyraxoncode', 'sandbox-runtime', 'dist', 'cli.js');
 		const nativeModulesDir = runtimeInfo.nativeModulesDir ?? 'node_modules';
 		const rgPlatform = this._os === OperatingSystem.Windows ? 'win32' : this._os === OperatingSystem.Macintosh ? 'darwin' : 'linux';
 		const rgBinary = this._os === OperatingSystem.Windows ? 'rg.exe' : 'rg';
-		this._rgPath = this._pathJoin(this._appRoot, nativeModulesDir, '@vscode', 'ripgrep-universal', 'bin', `${rgPlatform}-${arch}`, rgBinary);
+		this._rgPath = this._pathJoin(this._appRoot, nativeModulesDir, '@zyraxoncode', 'ripgrep-universal', 'bin', `${rgPlatform}-${arch}`, rgBinary);
 		this._mxcPath = this._windowsMxcRuntime.getExecutablePath(this._appRoot, nativeModulesDir, runtimeInfo.arch);
 	}
 
@@ -660,7 +660,7 @@ export class TerminalSandboxEngine extends Disposable {
 		const commandRuntimeSetting = getTerminalSandboxRuntimeConfigurationForCommands(this._os, this._commandAllowListCommandDetails);
 		const commandRuntimeAllowReadPaths = this._getCommandRuntimeFileSystemPaths(commandRuntimeSetting, 'allowRead');
 		const commandRuntimeAllowWritePaths = this._getCommandRuntimeFileSystemPaths(commandRuntimeSetting, 'allowWrite');
-		const configFileUri = URI.joinPath(this._tempDir, `vscode-sandbox-settings-${this._sandboxSettingsId}.json`);
+		const configFileUri = URI.joinPath(this._tempDir, `zyraxoncode-sandbox-settings-${this._sandboxSettingsId}.json`);
 		const configFilePath = this._getUriPath(configFileUri);
 		let allowWritePaths: string[] = [];
 		let allowReadPaths: string[] = [];
@@ -996,7 +996,7 @@ export class TerminalSandboxEngine extends Disposable {
 	private _toWindowsFileSystemResource(path: string): URI {
 		// Normalize Windows separators for URI parsing, e.g. `C:\Users\me` becomes `C:/Users/me`.
 		const normalizedPath = path.replace(/\\/g, '/');
-		// Match UNC paths, e.g. `//server/share/folder` becomes `file://server/share/folder`.
+		// Match UNC paths, e.g. `//server/share/folder` becomes `__ZYRAXKEEP__0_`.
 		if (/^\/\/[^/]/.test(normalizedPath)) {
 			const firstPathSeparator = normalizedPath.indexOf('/', 2);
 			if (firstPathSeparator === -1) {
@@ -1004,11 +1004,11 @@ export class TerminalSandboxEngine extends Disposable {
 			}
 			return URI.from({ scheme: 'file', authority: normalizedPath.slice(2, firstPathSeparator), path: normalizedPath.slice(firstPathSeparator) || '/' });
 		}
-		// Match drive-letter paths, e.g. `C:/Users/me` becomes `file:///c:/Users/me`.
+		// Match drive-letter paths, e.g. `C:/Users/me` becomes `__ZYRAXKEEP__1_`.
 		if (/^[a-zA-Z]:($|\/)/.test(normalizedPath)) {
 			return URI.from({ scheme: 'file', path: `/${normalizedPath[0].toLowerCase()}${normalizedPath.slice(1)}` });
 		}
-		// Match URI-shaped drive paths, e.g. `/C:/Users/me` becomes `file:///c:/Users/me`.
+		// Match URI-shaped drive paths, e.g. `/C:/Users/me` becomes `__ZYRAXKEEP__2_`.
 		if (/^\/[a-zA-Z]:($|\/)/.test(normalizedPath)) {
 			return URI.from({ scheme: 'file', path: `/${normalizedPath[1].toLowerCase()}${normalizedPath.slice(2)}` });
 		}

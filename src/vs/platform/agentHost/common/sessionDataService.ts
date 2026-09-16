@@ -101,7 +101,7 @@ export interface ILocalTurnRecord {
 
 /**
  * A disposable handle to a per-session SQLite database backed by
- * `@vscode/sqlite3`.
+ * `@zyraxoncode/sqlite3`.
  *
  * Callers obtain an instance via {@link ISessionDataService.openDatabase} and
  * **must** dispose it when finished to close the underlying database connection.

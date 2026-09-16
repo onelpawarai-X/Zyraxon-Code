@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { createConnection, Connection, Disposable } from 'vscode-languageserver/node';
+import { createConnection, Connection, Disposable } from 'zyraxoncode-languageserver/node';
 import { formatError } from '../utils/runner.js';
 import { RuntimeEnvironment, startServer } from '../cssServer.js';
 import { getNodeFSRequestService } from './nodeFs.js';

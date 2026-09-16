@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, UserMessage } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, UserMessage } from '@zyraxoncode/prompt-tsx';
 import { expect, suite, test } from 'vitest';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { MockEndpoint } from '../../../../../platform/endpoint/test/node/mockEndpoint';
 import { IIgnoreService, NullIgnoreService } from '../../../../../platform/ignore/common/ignoreService';
 import { messageToMarkdown } from '../../../../../platform/log/common/messageStringify';
@@ -20,7 +20,7 @@ import { renderPromptElement } from '../../base/promptRenderer';
 import { AgentTasksInstructions } from '../agentPrompt';
 
 interface TaskPromptProps extends BasePromptElementProps {
-	readonly availableTools: readonly vscode.LanguageModelToolInformation[];
+	readonly availableTools: readonly zyraxoncode.LanguageModelToolInformation[];
 }
 
 class TaskPrompt extends PromptElement<TaskPromptProps> {
@@ -34,7 +34,7 @@ class TaskPrompt extends PromptElement<TaskPromptProps> {
 }
 
 class StaticTasksService extends TestTasksService {
-	constructor(private readonly taskGroups: [URI, vscode.TaskDefinition[]][]) {
+	constructor(private readonly taskGroups: [URI, zyraxoncode.TaskDefinition[]][]) {
 		super();
 	}
 
@@ -62,8 +62,8 @@ class TestIgnoreService extends NullIgnoreService {
 
 suite('AgentTasksInstructions', () => {
 	const workspaceFolder = URI.file('/workspace');
-	const tasksFile = URI.joinPath(workspaceFolder, '.vscode', 'tasks.json');
-	const taskDefinition: vscode.TaskDefinition = {
+	const tasksFile = URI.joinPath(workspaceFolder, '.zyraxoncode', 'tasks.json');
+	const taskDefinition: zyraxoncode.TaskDefinition = {
 		type: 'shell',
 		label: 'Build',
 		command: 'npm',
@@ -77,7 +77,7 @@ suite('AgentTasksInstructions', () => {
 		const accessor = services.createTestingAccessor();
 		const instantiationService = accessor.get(IInstantiationService);
 		const endpoint = instantiationService.createInstance(MockEndpoint, undefined);
-		const taskTool: vscode.LanguageModelToolInformation = {
+		const taskTool: zyraxoncode.LanguageModelToolInformation = {
 			name: ToolName.CoreRunTask,
 			description: 'Run a workspace task',
 			source: undefined,

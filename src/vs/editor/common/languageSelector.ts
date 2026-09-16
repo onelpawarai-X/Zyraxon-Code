@@ -61,7 +61,7 @@ export function score(selector: LanguageSelector | undefined, candidateUri: URI,
 
 	} else if (selector) {
 		// filter -> select accordingly, use defaults for scheme
-		const { language, pattern, scheme, hasAccessToAllModels, notebookType } = selector as LanguageFilter; // TODO: microsoft/TypeScript#42768
+		const { language, pattern, scheme, hasAccessToAllModels, notebookType } = selector as LanguageFilter; // TODO: zyraxon/TypeScript#42768
 
 		if (!candidateIsSynchronized && !hasAccessToAllModels) {
 			return 0;
@@ -114,7 +114,7 @@ export function score(selector: LanguageSelector | undefined, candidateUri: URI,
 				// to normalize this path first before passing it on
 				// because we will compare it against `Uri.fsPath`
 				// which uses platform specific separators.
-				// Refs: https://github.com/microsoft/vscode/issues/99938
+				// Refs: __ZYRAXKEEP__0_
 				normalizedPattern = { ...pattern, base: normalize(pattern.base) };
 			}
 

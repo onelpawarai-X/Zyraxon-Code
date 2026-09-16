@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -18,7 +18,7 @@ import { CancellationToken } from '../../../util/vs/base/common/cancellation';
 import { Iterable } from '../../../util/vs/base/common/iterator';
 import { URI } from '../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { Range } from '../../../vscodeTypes';
+import { Range } from '../../../zyraxoncodeTypes';
 import { applyEdits } from '../../prompt/node/intents';
 import { CopilotIdentityRules } from '../../prompts/node/base/copilotIdentity';
 import { PromptRenderer } from '../../prompts/node/base/promptRenderer';
@@ -92,7 +92,7 @@ class WorkspaceMutation implements IWorkspaceMutation {
 	}
 
 	/** @inheritdoc */
-	public async apply(progress: undefined | vscode.Progress<{ message: string }>, token: CancellationToken): Promise<void> {
+	public async apply(progress: undefined | zyraxoncode.Progress<{ message: string }>, token: CancellationToken): Promise<void> {
 		if (this.applied) {
 			throw new Error(l10n.t('Edits have already been applied'));
 		}

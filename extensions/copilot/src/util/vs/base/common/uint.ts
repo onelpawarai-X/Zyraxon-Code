@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -10,7 +10,7 @@ export const enum Constants {
 	 * MAX SMI (SMall Integer) as defined in v8.
 	 * one bit is lost for boxing/unboxing flag.
 	 * one bit is lost for sign flag.
-	 * See https://thibaultlaurens.github.io/javascript/2013/04/29/how-the-v8-engine-works/#tagged-values
+	 * See __ZYRAXKEEP__0_
 	 */
 	MAX_SAFE_SMALL_INTEGER = 1 << 30,
 
@@ -18,7 +18,7 @@ export const enum Constants {
 	 * MIN SMI (SMall Integer) as defined in v8.
 	 * one bit is lost for boxing/unboxing flag.
 	 * one bit is lost for sign flag.
-	 * See https://thibaultlaurens.github.io/javascript/2013/04/29/how-the-v8-engine-works/#tagged-values
+	 * See __ZYRAXKEEP__1_
 	 */
 	MIN_SAFE_SMALL_INTEGER = -(1 << 30),
 

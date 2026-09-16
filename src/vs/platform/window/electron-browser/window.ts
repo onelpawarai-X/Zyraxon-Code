@@ -47,9 +47,9 @@ function getGlobals(win: Window): ISandboxGlobals | undefined {
 		return { ipcRenderer, webFrame };
 	} else {
 		// auxiliary window
-		const auxiliaryWindow = win as unknown as { vscode: ISandboxGlobals };
-		if (auxiliaryWindow?.vscode?.ipcRenderer && auxiliaryWindow?.vscode?.webFrame) {
-			return auxiliaryWindow.vscode;
+		const auxiliaryWindow = win as unknown as { zyraxoncode: ISandboxGlobals };
+		if (auxiliaryWindow?.zyraxoncode?.ipcRenderer && auxiliaryWindow?.zyraxoncode?.webFrame) {
+			return auxiliaryWindow.zyraxoncode;
 		}
 	}
 

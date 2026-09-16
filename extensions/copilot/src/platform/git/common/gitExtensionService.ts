@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
-import { API } from '../vscode/git';
+import { API } from '../zyraxoncode/git';
 
 export const IGitExtensionService = createServiceIdentifier<IGitExtensionService>('IGitExtensionService');
 
@@ -13,7 +13,7 @@ export interface IGitExtensionService {
 
 	readonly _serviceBrand: undefined;
 
-	onDidChange: vscode.Event<{ enabled: boolean }>;
+	onDidChange: zyraxoncode.Event<{ enabled: boolean }>;
 
 	readonly extensionAvailable: boolean;
 

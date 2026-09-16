@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 
@@ -11,36 +11,36 @@ export const ILanguageFeaturesService = createServiceIdentifier<ILanguageFeature
 
 export interface ILanguageFeaturesService {
 	_serviceBrand: undefined;
-	getDefinitions(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.LocationLink | vscode.Location)[]>;
-	getImplementations(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.LocationLink | vscode.Location)[]>;
-	getReferences(uri: vscode.Uri, position: vscode.Position): Promise<vscode.Location[]>;
-	getWorkspaceSymbols(query: string): Promise<vscode.SymbolInformation[]>;
-	getDocumentSymbols(uri: vscode.Uri): Promise<vscode.DocumentSymbol[]>;
-	getDiagnostics(uri: vscode.Uri): vscode.Diagnostic[];
+	getDefinitions(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.LocationLink | zyraxoncode.Location)[]>;
+	getImplementations(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.LocationLink | zyraxoncode.Location)[]>;
+	getReferences(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<zyraxoncode.Location[]>;
+	getWorkspaceSymbols(query: string): Promise<zyraxoncode.SymbolInformation[]>;
+	getDocumentSymbols(uri: zyraxoncode.Uri): Promise<zyraxoncode.DocumentSymbol[]>;
+	getDiagnostics(uri: zyraxoncode.Uri): zyraxoncode.Diagnostic[];
 }
 
 export class NoopLanguageFeaturesService implements ILanguageFeaturesService {
 	_serviceBrand: undefined;
-	getDocumentSymbols(uri: vscode.Uri): Promise<vscode.DocumentSymbol[]> {
+	getDocumentSymbols(uri: zyraxoncode.Uri): Promise<zyraxoncode.DocumentSymbol[]> {
 		return Promise.resolve([]);
 	}
-	getDefinitions(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.LocationLink | vscode.Location)[]> {
+	getDefinitions(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.LocationLink | zyraxoncode.Location)[]> {
 		return Promise.resolve([]);
 	}
-	getImplementations(uri: vscode.Uri, position: vscode.Position): Promise<(vscode.LocationLink | vscode.Location)[]> {
+	getImplementations(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<(zyraxoncode.LocationLink | zyraxoncode.Location)[]> {
 		return Promise.resolve([]);
 	}
-	getReferences(uri: vscode.Uri, position: vscode.Position): Promise<vscode.Location[]> {
+	getReferences(uri: zyraxoncode.Uri, position: zyraxoncode.Position): Promise<zyraxoncode.Location[]> {
 		return Promise.resolve([]);
 	}
-	getWorkspaceSymbols(query: string): Promise<vscode.SymbolInformation[]> {
+	getWorkspaceSymbols(query: string): Promise<zyraxoncode.SymbolInformation[]> {
 		return Promise.resolve([]);
 	}
-	getDiagnostics(uri: vscode.Uri): vscode.Diagnostic[] {
+	getDiagnostics(uri: zyraxoncode.Uri): zyraxoncode.Diagnostic[] {
 		return [];
 	}
 }
 
-export function isLocationLink(thing: unknown): thing is vscode.LocationLink {
+export function isLocationLink(thing: unknown): thing is zyraxoncode.LocationLink {
 	return typeof thing === 'object' && thing !== null && 'targetUri' in thing;
 }

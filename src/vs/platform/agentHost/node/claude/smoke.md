@@ -31,7 +31,7 @@ refs that change between runs.
 - `@playwright/cli` available (`npx @playwright/cli --version` should work).
 - A real GitHub Copilot login. Models only populate after authenticate, and
   the Anthropic catalog is only visible to authenticated Copilot accounts.
-  The `~/.vscode-oss-sessions-dev` user-data-dir caches login state across
+  The `~/.zyraxoncode-oss-sessions-dev` user-data-dir caches login state across
   runs, so you only need to sign in once.
 - `ClaudeAgent` registration is opt-in. Pick **either**:
   - Set `chat.agentHost.claudeAgent.enabled: true` in user settings (the
@@ -66,7 +66,7 @@ Exits non-zero if any invariant fails. Always-on checks (any phase ≥ 4):
 2. `[Claude] Auth token updated` appears (proves `agentService.authenticate`
    fans out to every provider that owns the resource — see §3 of
    `phase4-plan.md` for why this matters).
-3. `[ClaudeProxyService] listening on http://127.0.0.1:<port>`.
+3. `[ClaudeProxyService] listening on __ZYRAXKEEP__0_<port>`.
 4. The root-state IPC log carries a `"provider": "claude"` block.
 5. ≥ 1 Claude-family model id (`claude-opus-*`, `claude-sonnet-*`, …)
    surfaces in the IPC log — verifies the §3.5 model filter and
@@ -102,7 +102,7 @@ Attach playwright:
 
 ```bash
 for i in 1 2 3 4 5; do
-    npx @playwright/cli attach --cdp=http://127.0.0.1:9224 2>/dev/null && break
+    npx @playwright/cli attach --cdp=__ZYRAXKEEP__1_ 2>/dev/null && break
     sleep 3
 done
 npx @playwright/cli tab-list
@@ -274,7 +274,7 @@ The session URI is observable in the IPC log, **not** as a
 already captures these to `claude-session-uris.log`, but you can re-grep:
 
 ```bash
-LOG=$(ls -td ~/.vscode-oss-sessions-dev/logs/*/ | head -1)
+LOG=$(ls -td ~/.zyraxoncode-oss-sessions-dev/logs/*/ | head -1)
 WIN=$(ls -td "$LOG"window1/output_*/ | head -1)
 grep -oE '"session":\s*"claude:[^"]+"' "$WIN"agenthost.*.log | sort -u
 ```
@@ -282,7 +282,7 @@ grep -oE '"session":\s*"claude:[^"]+"' "$WIN"agenthost.*.log | sort -u
 Expected: at least one `"session": "claude:/<uuid>"` line. The scheme is
 `claude:` (the provider id, fed straight to `AgentSession.uri`); the
 synced-customization namespace uses the longer `agent-host-claude` form,
-which appears in the IPC log as `"uri": "vscode-synced-customization:/agent-host-claude"`.
+which appears in the IPC log as `"uri": "zyraxoncode-synced-customization:/agent-host-claude"`.
 
 ## 6. Tear down
 
@@ -290,7 +290,7 @@ which appears in the IPC log as `"uri": "vscode-synced-customization:/agent-host
 lsof -t -i :9224 | xargs -r kill
 ```
 
-The `~/.vscode-oss-sessions-dev` data dir is intentionally preserved so
+The `~/.zyraxoncode-oss-sessions-dev` data dir is intentionally preserved so
 the next run skips GitHub login.
 
 ## 7. Attach to the PR

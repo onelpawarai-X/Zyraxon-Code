@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, RenderPromptResult, SystemMessage, UserMessage } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import { BasePromptElementProps, PromptElement, PromptPiece, PromptSizing, RenderPromptResult, SystemMessage, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { FetchStreamSource, IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { IRunCommandExecutionService } from '../../../../platform/commands/common/runCommandExecutionService';
@@ -21,7 +21,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { Lazy } from '../../../../util/vs/base/common/lazy';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { ChatResponseExtensionsPart } from '../../../../vscodeTypes';
+import { ChatResponseExtensionsPart } from '../../../../zyraxoncodeTypes';
 import { convertFileTreeToChatResponseFileTree, listFilesInResponseFileTree } from '../../../prompt/common/fileTreeParser';
 import { IBuildPromptContext } from '../../../prompt/common/intents';
 import { IToken, StreamingGrammar } from '../../../prompt/common/streamingGrammar';
@@ -56,7 +56,7 @@ export class SetupTestsInvocation implements IIntentInvocation {
 	) {
 	}
 
-	async buildPrompt(context: IBuildPromptContext, progress: vscode.Progress<vscode.ChatResponseReferencePart | vscode.ChatResponseProgressPart>, token: vscode.CancellationToken): Promise<RenderPromptResult> {
+	async buildPrompt(context: IBuildPromptContext, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart>, token: zyraxoncode.CancellationToken): Promise<RenderPromptResult> {
 		this.buildPromptContext = context;
 
 		this.delegatedSetup = await this.delegateHandling();
@@ -75,7 +75,7 @@ export class SetupTestsInvocation implements IIntentInvocation {
 		return renderer.render(progress, token);
 	}
 
-	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		const enum State {
 			LookingForTree,
 			FileTree,
@@ -126,7 +126,7 @@ export class SetupTestsInvocation implements IIntentInvocation {
 		}
 	}
 
-	private async doFrameworkQuery(context: IResponseProcessorContext, outputStream: vscode.ChatResponseStream, token: CancellationToken) {
+	private async doFrameworkQuery(context: IResponseProcessorContext, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken) {
 		const invocation = this.instantiationService.createInstance(SetupTestsFrameworkQueryInvocationRaw, this.endpoint, undefined);
 		const prompt = await invocation.buildPrompt(this.buildPromptContext, undefined, token);
 		const inputStream = new FetchStreamSource();
@@ -172,7 +172,7 @@ export class SetupTestsInvocation implements IIntentInvocation {
 
 	private recommendedExtension = new Lazy(() => getKnownExtensionInText(this.prompt));
 
-	private async recommendExtension(outputText: string, outputStream: vscode.ChatResponseStream, token: CancellationToken) {
+	private async recommendExtension(outputText: string, outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken) {
 		let searchText: string;
 		let extensionInfo: ISetupTestExtension | undefined;
 		if (this.recommendedExtension.value) {
@@ -222,7 +222,7 @@ export class SetupTestsInvocation implements IIntentInvocation {
 		return fetchResult.value.replaceAll('`', '');
 	}
 
-	private handleFileTree(requestId: string, tree: string, outputStream: vscode.ChatResponseStream) {
+	private handleFileTree(requestId: string, tree: string, outputStream: zyraxoncode.ChatResponseStream) {
 		const workspaceFolder = this.workspaceService.getWorkspaceFolders().at(0);
 		if (!workspaceFolder) {
 			return;

@@ -95,7 +95,7 @@ Registry.as<IDragAndDropContributionRegistry>(DragAndDropExtensions.DragAndDropC
 		return editors;
 	},
 	setData(resources, event) {
-		const terminalResources = resources.filter(({ resource }) => resource.scheme === Schemas.vscodeTerminal);
+		const terminalResources = resources.filter(({ resource }) => resource.scheme === Schemas.zyraxoncodeTerminal);
 		if (terminalResources.length) {
 			event.dataTransfer?.setData(TerminalDataTransfers.Terminals, JSON.stringify(terminalResources.map(({ resource }) => resource.toString())));
 		}

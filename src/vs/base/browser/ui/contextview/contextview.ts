@@ -69,10 +69,10 @@ export const CONTEXT_VIEW_MENU_MOTION_CLASS = 'context-view-menu-motion';
 export const CONTEXT_VIEW_MENU_MOTION_CLOSING_CLASS = 'context-view-menu-motion-closing';
 export const CONTEXT_VIEW_MENU_MOTION_CLOSE_ANIMATION_DURATION = 150;
 export const CONTEXT_VIEW_MENU_MOTION_ANCESTOR_CLASSES = ['style-override', 'monaco-enable-motion'] as const;
-export const CONTEXT_VIEW_CLOSE_ANIMATION_DURATION_VARIABLE = '--vscode-context-view-close-animation-duration';
-export const CONTEXT_VIEW_MENU_MOTION_SHADOW_VARIABLE = '--vscode-context-view-menu-motion-shadow';
-const CONTEXT_VIEW_MENU_MOTION_CLOSE_START_OPACITY_VARIABLE = '--vscode-context-view-menu-motion-close-start-opacity';
-const CONTEXT_VIEW_MENU_MOTION_CLOSE_START_TRANSFORM_VARIABLE = '--vscode-context-view-menu-motion-close-start-transform';
+export const CONTEXT_VIEW_CLOSE_ANIMATION_DURATION_VARIABLE = '--zyraxoncode-context-view-close-animation-duration';
+export const CONTEXT_VIEW_MENU_MOTION_SHADOW_VARIABLE = '--zyraxoncode-context-view-menu-motion-shadow';
+const CONTEXT_VIEW_MENU_MOTION_CLOSE_START_OPACITY_VARIABLE = '--zyraxoncode-context-view-menu-motion-close-start-opacity';
+const CONTEXT_VIEW_MENU_MOTION_CLOSE_START_TRANSFORM_VARIABLE = '--zyraxoncode-context-view-menu-motion-close-start-transform';
 
 const CONTEXT_VIEW_MENU_MOTION_OPEN_DURATION_MS = 250;
 const CONTEXT_VIEW_MENU_MOTION_EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';

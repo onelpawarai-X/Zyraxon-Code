@@ -21,7 +21,7 @@ import { ExtHostWorkspace, IExtHostWorkspace } from './extHostWorkspace.js';
 import { MissingExtensionDependency, ActivationKind, checkProposedApiEnabled, isProposedApiEnabled, ExtensionActivationReason, IProposedApiUsage, setProposedApiUsageReporter, setEnabledApiProposalsFallbackExperiment } from '../../services/extensions/common/extensions.js';
 import { ExtensionDescriptionRegistry, IActivationEventsReader } from '../../services/extensions/common/extensionDescriptionRegistry.js';
 import * as errors from '../../../base/common/errors.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtensionIdentifier, ExtensionIdentifierMap, ExtensionIdentifierSet, IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 import { VSBuffer } from '../../../base/common/buffer.js';
 import { ExtensionGlobalMemento, ExtensionMemento } from './extHostMemento.js';
@@ -48,7 +48,7 @@ import { IExtHostManagedSockets } from './extHostManagedSockets.js';
 import { Dto } from '../../services/extensions/common/proxyIdentifier.js';
 
 interface ITestRunner {
-	/** Old test runner API, as exported from `vscode/lib/testrunner` */
+	/** Old test runner API, as exported from `zyraxoncode/lib/testrunner` */
 	run(testsRoot: string, clb: (error: Error, failures?: number) => void): void;
 }
 
@@ -117,7 +117,7 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 	private _extensionPathIndex: Promise<ExtensionPaths> | null;
 	private _realPathCache = new Map<string, Promise<string>>();
 
-	private readonly _resolvers: { [authorityPrefix: string]: vscode.RemoteAuthorityResolver };
+	private readonly _resolvers: { [authorityPrefix: string]: zyraxoncode.RemoteAuthorityResolver };
 
 	private _started: boolean;
 	private _isTerminating: boolean = false;
@@ -522,7 +522,7 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 		});
 	}
 
-	private _loadExtensionContext(extensionDescription: IExtensionDescription, extensionInternalStore: DisposableStore): Promise<vscode.ExtensionContext> {
+	private _loadExtensionContext(extensionDescription: IExtensionDescription, extensionInternalStore: DisposableStore): Promise<zyraxoncode.ExtensionContext> {
 
 		const languageModelAccessInformation = this._extHostLanguageModels.createLanguageModelAccessInformation(extensionDescription);
 		const globalState = extensionInternalStore.add(new ExtensionGlobalMemento(extensionDescription, this._storage));
@@ -541,14 +541,14 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 			this._storagePath.whenReady
 		]).then(() => {
 			const that = this;
-			let extension: vscode.Extension<any> | undefined;
+			let extension: zyraxoncode.Extension<any> | undefined;
 
-			let messagePassingProtocol: vscode.MessagePassingProtocol | undefined;
+			let messagePassingProtocol: zyraxoncode.MessagePassingProtocol | undefined;
 			const messagePort = isProposedApiEnabled(extensionDescription, 'ipc')
 				? this._initData.messagePorts?.get(ExtensionIdentifier.toKey(extensionDescription.identifier))
 				: undefined;
 
-			return Object.freeze<vscode.ExtensionContext>({
+			return Object.freeze<zyraxoncode.ExtensionContext>({
 				globalState,
 				workspaceState,
 				secrets,
@@ -596,7 +596,7 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 		});
 	}
 
-	private static _callActivate(logService: ILogService, extensionId: ExtensionIdentifier, extensionModule: IExtensionModule, context: vscode.ExtensionContext, extensionInternalStore: IDisposable, activationTimesBuilder: ExtensionActivationTimesBuilder): Promise<ActivatedExtension> {
+	private static _callActivate(logService: ILogService, extensionId: ExtensionIdentifier, extensionModule: IExtensionModule, context: zyraxoncode.ExtensionContext, extensionInternalStore: IDisposable, activationTimesBuilder: ExtensionActivationTimesBuilder): Promise<ActivatedExtension> {
 		// Make sure the extension's surface is not undefined
 		extensionModule = extensionModule || {
 			activate: undefined,
@@ -611,7 +611,7 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 		});
 	}
 
-	private static _callActivateOptional(logService: ILogService, extensionId: ExtensionIdentifier, extensionModule: IExtensionModule, context: vscode.ExtensionContext, activationTimesBuilder: ExtensionActivationTimesBuilder): Promise<IExtensionAPI> {
+	private static _callActivateOptional(logService: ILogService, extensionId: ExtensionIdentifier, extensionModule: IExtensionModule, context: zyraxoncode.ExtensionContext, activationTimesBuilder: ExtensionActivationTimesBuilder): Promise<IExtensionAPI> {
 		if (typeof extensionModule.activate === 'function') {
 			try {
 				activationTimesBuilder.activateCallStart();
@@ -710,7 +710,7 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 		return eagerExtensionsActivation;
 	}
 
-	private _handleWorkspaceContainsEagerExtensions(folders: ReadonlyArray<vscode.WorkspaceFolder>): Promise<void> {
+	private _handleWorkspaceContainsEagerExtensions(folders: ReadonlyArray<zyraxoncode.WorkspaceFolder>): Promise<void> {
 		if (folders.length === 0) {
 			return Promise.resolve(undefined);
 		}
@@ -722,7 +722,7 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 		).then(() => { });
 	}
 
-	private async _handleWorkspaceContainsEagerExtension(folders: ReadonlyArray<vscode.WorkspaceFolder>, desc: IExtensionDescription): Promise<void> {
+	private async _handleWorkspaceContainsEagerExtension(folders: ReadonlyArray<zyraxoncode.WorkspaceFolder>, desc: IExtensionDescription): Promise<void> {
 		if (this.isActivated(desc.identifier)) {
 			return;
 		}
@@ -845,21 +845,21 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 
 	// -- called by extensions
 
-	public registerRemoteAuthorityResolver(authorityPrefix: string, resolver: vscode.RemoteAuthorityResolver): vscode.Disposable {
+	public registerRemoteAuthorityResolver(authorityPrefix: string, resolver: zyraxoncode.RemoteAuthorityResolver): zyraxoncode.Disposable {
 		this._resolvers[authorityPrefix] = resolver;
 		return toDisposable(() => {
 			delete this._resolvers[authorityPrefix];
 		});
 	}
 
-	public async getRemoteExecServer(remoteAuthority: string): Promise<vscode.ExecServer | undefined> {
+	public async getRemoteExecServer(remoteAuthority: string): Promise<zyraxoncode.ExecServer | undefined> {
 		const { resolver } = await this._activateAndGetResolver(remoteAuthority);
 		return resolver?.resolveExecServer?.(remoteAuthority, { resolveAttempt: 0 });
 	}
 
 	// -- called by main thread
 
-	private async _activateAndGetResolver(remoteAuthority: string): Promise<{ authorityPrefix: string; resolver: vscode.RemoteAuthorityResolver | undefined }> {
+	private async _activateAndGetResolver(remoteAuthority: string): Promise<{ authorityPrefix: string; resolver: zyraxoncode.RemoteAuthorityResolver | undefined }> {
 		const authorityPlusIndex = remoteAuthority.indexOf('+');
 		if (authorityPlusIndex === -1) {
 			throw new RemoteAuthorityResolverError(`Not an authority that can be resolved!`, RemoteAuthorityResolverErrorCode.InvalidAuthority);
@@ -919,8 +919,8 @@ export abstract class AbstractExtHostExtensionService extends Disposable impleme
 		const intervalLogger = new IntervalTimer();
 		intervalLogger.cancelAndSet(() => logInfo('waiting...'), 1000);
 
-		let result!: vscode.ResolverResult;
-		let execServer: vscode.ExecServer | undefined;
+		let result!: zyraxoncode.ResolverResult;
+		let execServer: zyraxoncode.ExecServer | undefined;
 		for (const [i, { authorityPrefix, resolver, remoteAuthority }] of resolvers.entries()) {
 			try {
 				if (i === resolvers.length - 1) {
@@ -1181,14 +1181,14 @@ export interface IExtHostExtensionService extends AbstractExtHostExtensionServic
 	getExtensionExports(extensionId: ExtensionIdentifier): IExtensionAPI | null | undefined;
 	getExtensionRegistry(): Promise<ExtensionDescriptionRegistry>;
 	getExtensionPathIndex(): Promise<ExtensionPaths>;
-	registerRemoteAuthorityResolver(authorityPrefix: string, resolver: vscode.RemoteAuthorityResolver): vscode.Disposable;
-	getRemoteExecServer(authority: string): Promise<vscode.ExecServer | undefined>;
+	registerRemoteAuthorityResolver(authorityPrefix: string, resolver: zyraxoncode.RemoteAuthorityResolver): zyraxoncode.Disposable;
+	getRemoteExecServer(authority: string): Promise<zyraxoncode.ExecServer | undefined>;
 
 	readonly onDidChangeRemoteConnectionData: Event<void>;
 	getRemoteConnectionData(): IRemoteConnectionData | null;
 }
 
-export class Extension<T extends object | null | undefined> implements vscode.Extension<T> {
+export class Extension<T extends object | null | undefined> implements zyraxoncode.Extension<T> {
 
 	#extensionService: IExtHostExtensionService;
 	#originExtensionId: ExtensionIdentifier;
@@ -1198,7 +1198,7 @@ export class Extension<T extends object | null | undefined> implements vscode.Ex
 	readonly extensionUri: URI;
 	readonly extensionPath: string;
 	readonly packageJSON: IExtensionDescription;
-	readonly extensionKind: vscode.ExtensionKind;
+	readonly extensionKind: zyraxoncode.ExtensionKind;
 	readonly isFromDifferentExtensionHost: boolean;
 
 	constructor(extensionService: IExtHostExtensionService, originExtensionId: ExtensionIdentifier, description: IExtensionDescription, kind: ExtensionKind, isFromDifferentExtensionHost: boolean) {

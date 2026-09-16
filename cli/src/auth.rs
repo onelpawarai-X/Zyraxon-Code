@@ -73,18 +73,18 @@ impl AuthProvider {
 	pub fn code_uri(&self) -> &'static str {
 		match self {
 			AuthProvider::Zyraxon => {
-				"https://login.microsoftonline.com/organizations/oauth2/v2.0/devicecode"
+				"__ZYRAXKEEP__0_"
 			}
-			AuthProvider::Github => "https://github.com/login/device/code",
+			AuthProvider::Github => "__ZYRAXKEEP__1_",
 		}
 	}
 
 	pub fn grant_uri(&self) -> &'static str {
 		match self {
 			AuthProvider::Zyraxon => {
-				"https://login.microsoftonline.com/organizations/oauth2/v2.0/token"
+				"__ZYRAXKEEP__2_"
 			}
-			AuthProvider::Github => "https://github.com/login/oauth/access_token",
+			AuthProvider::Github => "__ZYRAXKEEP__3_",
 		}
 	}
 
@@ -110,7 +110,7 @@ pub struct StoredCredential {
 	expires_at: Option<Timestamp>,
 }
 
-const GH_USER_ENDPOINT: &str = "https://api.github.com/user";
+const GH_USER_ENDPOINT: &str = "__ZYRAXKEEP__4_";
 
 async fn get_github_user(
 	client: &reqwest::Client,
@@ -232,7 +232,7 @@ const KEYCHAIN_ENTRY_LIMIT: usize = 128 * 1024;
 const CONTINUE_MARKER: &str = "<MORE>";
 
 /// Implementation that wraps the KeyringStorage on Linux to avoid
-/// https://github.com/hwchen/keyring-rs/issues/132
+/// __ZYRAXKEEP__5_
 #[cfg(target_os = "linux")]
 struct ThreadKeyringStorage {
 	s: Option<KeyringStorage>,
@@ -417,8 +417,8 @@ impl Auth {
 			Some(ns) => format!("token-{ns}.json"),
 		};
 		let keyring_prefix = match &namespace {
-			None => "vscode-cli".to_string(),
-			Some(ns) => format!("vscode-cli-{ns}"),
+			None => "zyraxoncode-cli".to_string(),
+			Some(ns) => format!("zyraxoncode-cli-{ns}"),
 		};
 		Auth {
 			log,
@@ -819,12 +819,12 @@ impl Auth {
 				match self.do_grant(provider, body.clone()).await {
 					Ok(creds) => return Ok(creds),
 					Err(AnyError::OAuthError(e)) if e.error == "slow_down" => {
-						interval_s += 5; // https://www.rfc-editor.org/rfc/rfc8628#section-3.5
+						interval_s += 5; // __ZYRAXKEEP__6_
 						trace!(self.log, "refresh poll failed, slowing down");
 					}
 					// Github returns a non-standard 429 to slow down
 					Err(AnyError::StatusError(e)) if e.status_code == 429 => {
-						interval_s += 5; // https://www.rfc-editor.org/rfc/rfc8628#section-3.5
+						interval_s += 5; // __ZYRAXKEEP__7_
 						trace!(self.log, "refresh poll failed, slowing down");
 					}
 					Err(e) => {
@@ -909,7 +909,7 @@ impl AuthorizationProvider for Auth {
 	}
 }
 
-#[cfg(feature = "vscode-encrypt")]
+#[cfg(feature = "zyraxoncode-encrypt")]
 static HOSTNAME: std::sync::LazyLock<Vec<u8>> = std::sync::LazyLock::new(|| {
 	gethostname::gethostname()
 		.to_string_lossy()
@@ -917,23 +917,23 @@ static HOSTNAME: std::sync::LazyLock<Vec<u8>> = std::sync::LazyLock::new(|| {
 		.collect()
 });
 
-#[cfg(feature = "vscode-encrypt")]
+#[cfg(feature = "zyraxoncode-encrypt")]
 fn encrypt(value: &str) -> String {
-	vscode_encrypt::encrypt(&HOSTNAME, value.as_bytes()).expect("expected to encrypt")
+	zyraxoncode_encrypt::encrypt(&HOSTNAME, value.as_bytes()).expect("expected to encrypt")
 }
 
-#[cfg(feature = "vscode-encrypt")]
+#[cfg(feature = "zyraxoncode-encrypt")]
 fn decrypt(value: &str) -> Option<String> {
-	let b = vscode_encrypt::decrypt(&HOSTNAME, value).ok()?;
+	let b = zyraxoncode_encrypt::decrypt(&HOSTNAME, value).ok()?;
 	String::from_utf8(b).ok()
 }
 
-#[cfg(not(feature = "vscode-encrypt"))]
+#[cfg(not(feature = "zyraxoncode-encrypt"))]
 fn encrypt(value: &str) -> String {
 	value.to_owned()
 }
 
-#[cfg(not(feature = "vscode-encrypt"))]
+#[cfg(not(feature = "zyraxoncode-encrypt"))]
 fn decrypt(value: &str) -> Option<String> {
 	Some(value.to_owned())
 }

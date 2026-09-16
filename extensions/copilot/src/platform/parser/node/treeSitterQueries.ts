@@ -10,14 +10,14 @@ import { WASMLanguage } from './treeSitterLanguages';
  * IF YOU WANT LINTING FOR YOUR TREE-SITTER QUERIES:
  *
  * Annotating a query template string with `treeSitterQuery.<WASMLanguage>` (see example below)
- * will allow the vscode-tree-sitter-query extension to provide linting (diagnostics) for this query.
+ * will allow the zyraxoncode-tree-sitter-query extension to provide linting (diagnostics) for this query.
  *
  * @example
  * ```ts
  * 	treeSitterQuery.typescript`(function_declaration) @function`
  * ```
  *
- * @remark don't forget to install the `vscode-tree-sitter-query` extension (and activate it, e.g., by opening a .scm file)
+ * @remark don't forget to install the `zyraxoncode-tree-sitter-query` extension (and activate it, e.g., by opening a .scm file)
  */
 const treeSitterQuery =
 	(() => {
@@ -313,7 +313,7 @@ export const classReferenceQuery: LanguageQueryMap = q({
 export const functionQuery: LanguageQueryMap = q({
 	python: [
 		// `(function_definition)` is defined in python grammar:
-		// https://github.com/tree-sitter/tree-sitter-python/blob/c4282ba411d990d313c5f8e7850bcaaf46fbf7da/grammar.js#L325-L338
+		// __ZYRAXKEEP__0_
 		// docstring is represented in grammar as an optional `(initial expression_statement (string))`
 		// at the start of the body block
 		`[
@@ -331,7 +331,7 @@ export const functionQuery: LanguageQueryMap = q({
 	],
 	...forLanguages([WASMLanguage.JavaScript, WASMLanguage.TypeScript, WASMLanguage.TypeScriptTsx], [
 		// function patterns defined in javascript grammar which is shared by ts
-		// https://github.com/tree-sitter/tree-sitter-javascript/blob/3d9fe9786ee74fa5067577f138e1a7129f80fb41/grammar.js#L595-L629
+		// __ZYRAXKEEP__1_
 		// include `arrow_function` as well
 		`[
 			(function_expression
@@ -355,7 +355,7 @@ export const functionQuery: LanguageQueryMap = q({
 	]),
 	go: [
 		// function patterns defined in go grammar:
-		// https://github.com/tree-sitter/tree-sitter-go/blob/b0c78230146705e867034e49a5ece20245b33490/grammar.js#L194-L209
+		// __ZYRAXKEEP__2_
 		`[
 			(function_declaration
 				name: (identifier) @identifier
@@ -367,7 +367,7 @@ export const functionQuery: LanguageQueryMap = q({
 	],
 	ruby: [
 		// function patterns defined in ruby grammar:
-		// https://github.com/tree-sitter/tree-sitter-ruby/blob/master/grammar.js
+		// __ZYRAXKEEP__3_
 		// NOTE: Use a @params label for optional parameters to avoid capturing as
 		// 	part of @body if parameters are present.
 		`[
@@ -383,7 +383,7 @@ export const functionQuery: LanguageQueryMap = q({
 	],
 	csharp: [
 		// function patterns defined in csharp grammar:
-		// https://github.com/tree-sitter/tree-sitter-c-sharp/blob/master/grammar.js
+		// __ZYRAXKEEP__4_
 		`[
 			(constructor_declaration
 				(identifier) @identifier
@@ -403,7 +403,7 @@ export const functionQuery: LanguageQueryMap = q({
 	],
 	cpp: [
 		// function patterns defined in cpp grammar:
-		// https://github.com/tree-sitter/tree-sitter-cpp/blob/master/grammar.js
+		// __ZYRAXKEEP__5_
 		`[
 			(function_definition
 				(_

@@ -22,7 +22,7 @@ export function registerRemoteContributions() {
 			const nativeEnvironmentService = accessor.get(INativeEnvironmentService);
 			let cwd: URI | undefined;
 			try {
-				const activeWorkspaceRootUri = historyService.getLastActiveWorkspaceRoot(Schemas.vscodeRemote);
+				const activeWorkspaceRootUri = historyService.getLastActiveWorkspaceRoot(Schemas.zyraxoncodeRemote);
 				if (activeWorkspaceRootUri) {
 					const canonicalUri = await remoteAuthorityResolverService.getCanonicalURI(activeWorkspaceRootUri);
 					if (canonicalUri.scheme === Schemas.file) {

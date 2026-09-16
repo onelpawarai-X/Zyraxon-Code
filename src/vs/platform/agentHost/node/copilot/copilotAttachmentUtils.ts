@@ -5,8 +5,8 @@
 
 import type { SimpleMessageAttachment } from '../../common/state/protocol/state.js';
 
-const attachmentDisplayKindParameter = 'x-vscode-display-kind=';
-const simpleAttachmentMimeType = 'text/x-vscode-simple-attachment';
+const attachmentDisplayKindParameter = 'x-zyraxoncode-display-kind=';
+const simpleAttachmentMimeType = 'text/x-zyraxoncode-simple-attachment';
 
 export function addSimpleAttachmentDisplayKindToMimeType(attachment: SimpleMessageAttachment): string {
 	if (attachment.displayKind === undefined) {

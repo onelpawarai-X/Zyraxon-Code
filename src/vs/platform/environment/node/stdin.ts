@@ -11,9 +11,9 @@ import { resolveTerminalEncoding } from '../../../base/node/terminalEncoding.js'
 
 export function hasStdinWithoutTty() {
 	try {
-		return !process.stdin.isTTY; // Via https://twitter.com/MylesBorins/status/782009479382626304
+		return !process.stdin.isTTY; // Via __ZYRAXKEEP__0_
 	} catch {
-		// Windows workaround for https://github.com/nodejs/node/issues/11656
+		// Windows workaround for __ZYRAXKEEP__1_
 	}
 	return false;
 }
@@ -40,15 +40,15 @@ export function getStdinFilePath(): string {
 
 async function createStdInFile(targetPath: string) {
 	await fs.promises.appendFile(targetPath, '');
-	await fs.promises.chmod(targetPath, 0o600); // Ensure the file is only read/writable by the user: https://github.com/microsoft/vscode-remote-release/issues/9048
+	await fs.promises.chmod(targetPath, 0o600); // Ensure the file is only read/writable by the user: __ZYRAXKEEP__2_
 }
 
 export async function readFromStdin(targetPath: string, verbose: boolean, onEnd?: Function): Promise<void> {
 
 	let [encoding, iconv] = await Promise.all([
 		resolveTerminalEncoding(verbose),		// respect terminal encoding when piping into file
-		import('@vscode/iconv-lite-umd'),		// lazy load encoding module for usage
-		createStdInFile(targetPath) 			// make sure file exists right away (https://github.com/microsoft/vscode/issues/155341)
+		import('@zyraxoncode/iconv-lite-umd'),		// lazy load encoding module for usage
+		createStdInFile(targetPath) 			// make sure file exists right away (__ZYRAXKEEP__3_)
 	]);
 
 	if (!iconv.default.encodingExists(encoding)) {
@@ -60,7 +60,7 @@ export async function readFromStdin(targetPath: string, verbose: boolean, onEnd?
 	// which helps file watchers to be aware of the
 	// changes because each append closes the underlying
 	// file descriptor.
-	// (https://github.com/microsoft/vscode/issues/148952)
+	// (__ZYRAXKEEP__4_)
 
 	const appendFileQueue = new Queue();
 

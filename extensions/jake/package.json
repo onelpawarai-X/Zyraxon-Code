@@ -1,13 +1,13 @@
 {
   "name": "jake",
-  "publisher": "vscode",
+  "publisher": "zyraxoncode",
   "description": "%description%",
   "displayName": "%displayName%",
   "icon": "images/cowboy_hat.png",
   "version": "10.0.0",
   "license": "MIT",
   "engines": {
-    "vscode": "*"
+    "zyraxoncode": "*"
   },
   "categories": [
     "Other"
@@ -70,6 +70,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/vscode.git"
+    "url": "__ZYRAXKEEP__0_"
   }
 }

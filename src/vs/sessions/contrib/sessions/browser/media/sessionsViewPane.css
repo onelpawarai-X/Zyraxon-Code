@@ -19,21 +19,21 @@
 	}
 
 	.agent-sessions-sidebar-splitview-container .monaco-split-view2.separator-border.vertical > .monaco-scrollable-element > .split-view-container > .split-view-view:not(:first-child)::before {
-		left: var(--vscode-spacing-size40, 4px);
-		width: calc(100% - (2 * var(--vscode-spacing-size40, 4px)));
+		left: var(--zyraxoncode-spacing-size40, 4px);
+		width: calc(100% - (2 * var(--zyraxoncode-spacing-size40, 4px)));
 	}
 
 	.agent-sessions-sidebar-splitview-container .monaco-split-view2.vertical > .sash-container > .monaco-sash.horizontal {
-		left: var(--vscode-spacing-size40, 4px) !important;
-		width: calc(100% - (2 * var(--vscode-spacing-size40, 4px))) !important;
+		left: var(--zyraxoncode-spacing-size40, 4px) !important;
+		width: calc(100% - (2 * var(--zyraxoncode-spacing-size40, 4px))) !important;
 	}
 
 	/* Section headers - more prominent than time-based groupings */
 	.agent-sessions-header {
-		font-size: var(--vscode-agents-fontSize-body2);
-		font-weight: var(--vscode-agents-fontWeight-semiBold);
+		font-size: var(--zyraxoncode-agents-fontSize-body2);
+		font-weight: var(--zyraxoncode-agents-fontWeight-semiBold);
 		text-transform: uppercase;
-		color: var(--vscode-sideBarSectionHeader-foreground, var(--vscode-foreground));
+		color: var(--zyraxoncode-sideBarSectionHeader-foreground, var(--zyraxoncode-foreground));
 		padding: 6px 20px 6px 12px;
 		letter-spacing: 0.05em;
 	}
@@ -73,7 +73,7 @@
 	}
 
 	.agent-sessions-header:focus {
-		outline: 1px solid var(--vscode-focusBorder);
+		outline: 1px solid var(--zyraxoncode-focusBorder);
 		outline-offset: -1px;
 	}
 
@@ -102,9 +102,9 @@
 	.agent-sessions-header-label {
 		flex: 1;
 		min-width: 0;
-		font-size: var(--vscode-agents-fontSize-label1, 12px);
-		font-weight: var(--vscode-agents-fontWeight-semiBold, 600);
-		color: var(--vscode-sideBar-foreground, var(--vscode-foreground));
+		font-size: var(--zyraxoncode-agents-fontSize-label1, 12px);
+		font-weight: var(--zyraxoncode-agents-fontWeight-semiBold, 600);
+		color: var(--zyraxoncode-sideBar-foreground, var(--zyraxoncode-foreground));
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -205,8 +205,8 @@
 		justify-content: center;
 		align-items: center;
 		padding: 0 6px;
-		font-size: var(--vscode-agents-fontSize-label2, 11px);
-		color: var(--vscode-descriptionForeground);
+		font-size: var(--zyraxoncode-agents-fontSize-label2, 11px);
+		color: var(--zyraxoncode-descriptionForeground);
 		min-height: 26px;
 
 		.agent-session-show-more-label {
@@ -221,12 +221,12 @@
 			content: '';
 			flex: 1;
 			height: 1px;
-			background: var(--vscode-widget-border, var(--vscode-contrastBorder));
+			background: var(--zyraxoncode-widget-border, var(--zyraxoncode-contrastBorder));
 		}
 	}
 
 	/* Brighter text on direct hover */
 	.monaco-list-row:hover .agent-session-show-more:hover {
-		color: var(--vscode-foreground);
+		color: var(--zyraxoncode-foreground);
 	}
 }

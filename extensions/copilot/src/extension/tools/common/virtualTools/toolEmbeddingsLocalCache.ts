@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { LanguageModelToolInformation } from 'vscode';
+import type { LanguageModelToolInformation } from 'zyraxoncode';
 import { Embedding, EmbeddingType } from '../../../../platform/embeddings/common/embeddingsComputer';
 import { packEmbedding, unpackEmbedding } from '../../../../platform/embeddings/common/embeddingsStorage';
-import { IVSCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../../../platform/extContext/common/extensionContext';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { readVariableLengthQuantity, writeVariableLengthQuantity } from '../../../../util/common/variableLengthQuantity';
 import { RunOnceScheduler } from '../../../../util/vs/base/common/async';
@@ -42,7 +42,7 @@ export class ToolEmbeddingLocalCache extends Disposable implements IToolEmbeddin
 	constructor(
 		embeddingType: EmbeddingType,
 		@IFileSystemService private readonly _fileSystemService: IFileSystemService,
-		@IVSCodeExtensionContext _context: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext _context: IZyraxonCodeExtensionContext,
 	) {
 		super();
 		this._embeddingType = embeddingType;

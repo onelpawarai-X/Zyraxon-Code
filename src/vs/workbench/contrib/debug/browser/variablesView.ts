@@ -733,7 +733,7 @@ CommandsRegistry.registerCommand({
 
 export const VIEW_MEMORY_ID = 'workbench.debug.viewlet.action.viewMemory';
 
-const HEX_EDITOR_EXTENSION_ID = 'ms-vscode.hexeditor';
+const HEX_EDITOR_EXTENSION_ID = 'ms-zyraxoncode.hexeditor';
 const HEX_EDITOR_EDITOR_ID = 'hexEditor.hexedit';
 
 CommandsRegistry.registerCommand({

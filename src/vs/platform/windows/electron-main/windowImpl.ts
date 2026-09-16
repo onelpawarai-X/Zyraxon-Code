@@ -207,7 +207,7 @@ export abstract class BaseWindow extends Disposable implements IBaseWindow {
 				const cx = Math.floor(cursorPos.x) - x;
 				const cy = Math.floor(cursorPos.y) - y;
 
-				// TODO@deepak1556 workaround for https://github.com/microsoft/vscode/issues/250632
+				// TODO@deepak1556 workaround for __ZYRAXKEEP__0_
 				// where showing the custom menu seems broken on Windows
 				if (isLinux) {
 					if (cx > 35 /* Cursor is beyond app icon in title bar */) {
@@ -238,7 +238,7 @@ export abstract class BaseWindow extends Disposable implements IBaseWindow {
 		if (isWindows && this.environmentMainService.enableRDPDisplayTracking) {
 			// Handles the display-added event on Windows RDP multi-monitor scenarios.
 			// This helps restore maximized windows to their correct monitor after RDP reconnection.
-			// Refs https://github.com/electron/electron/issues/47016
+			// Refs __ZYRAXKEEP__1_
 			this._register(Event.fromNodeEventEmitter(screen, 'display-added', (event: Electron.Event, display: Display) => ({ event, display }))((e) => {
 				this.onDisplayAdded(e.display);
 			}));
@@ -267,13 +267,13 @@ export abstract class BaseWindow extends Disposable implements IBaseWindow {
 
 		// TODO@electron (Electron 4 regression): when running on multiple displays where the target display
 		// to open the window has a larger resolution than the primary display, the window will not size
-		// correctly unless we set the bounds again (https://github.com/microsoft/vscode/issues/74872)
+		// correctly unless we set the bounds again (__ZYRAXKEEP__2_)
 		//
-		// Extended to cover Windows as well as Mac (https://github.com/microsoft/vscode/issues/146499)
+		// Extended to cover Windows as well as Mac (__ZYRAXKEEP__3_)
 		//
 		// However, when running with native tabs with multiple windows we cannot use this workaround
 		// because there is a potential that the new window will be added as native tab instead of being
-		// a window on its own. In that case calling setBounds() would cause https://github.com/microsoft/vscode/issues/75830
+		// a window on its own. In that case calling setBounds() would cause __ZYRAXKEEP__4_
 
 		const windowSettings = this.configurationService.getValue<IWindowSettings | undefined>('window');
 		const useNativeTabs = isMacintosh && windowSettings?.nativeTabs === true;
@@ -527,7 +527,7 @@ export abstract class BaseWindow extends Disposable implements IBaseWindow {
 			// as the fullscreen transition animation takes place. As such, we need to
 			// listen to the transition events and carry around an intermediate state
 			// for knowing if we are in fullscreen or not
-			// Refs: https://github.com/electron/electron/issues/35360
+			// Refs: __ZYRAXKEEP__5_
 
 			this.transientIsNativeFullScreen = fullscreen;
 
@@ -705,7 +705,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 
 			const webPreferences: electron.WebPreferences = {
 				preload: FileAccess.asFileUri('vs/base/parts/sandbox/electron-browser/preload.js').fsPath,
-				additionalArguments: [`--vscode-window-config=${this.configObjectUrl.resource.toString()}`],
+				additionalArguments: [`--zyraxoncode-window-config=${this.configObjectUrl.resource.toString()}`],
 				v8CacheOptions: this.environmentMainService.useCodeCache ? 'bypassHeatCheck' : 'none'
 			};
 			if (config.isSessionsWindow) {
@@ -816,7 +816,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 		// through DOM events. We have our own logic for
 		// unloading a window that should not be confused
 		// with the DOM way.
-		// (https://github.com/microsoft/vscode/issues/122736)
+		// (__ZYRAXKEEP__6_)
 		this._register(Event.fromNodeEventEmitter<electron.Event>(this._win.webContents, 'will-prevent-unload')(event => event.preventDefault()));
 
 		// Remember that we loaded
@@ -845,11 +845,11 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 
 		// Window Fullscreen
 		this._register(this.onDidEnterFullScreen(() => {
-			this.sendWhenReady('vscode:enterFullScreen', CancellationToken.None);
+			this.sendWhenReady('zyraxoncode:enterFullScreen', CancellationToken.None);
 		}));
 
 		this._register(this.onDidLeaveFullScreen(() => {
-			this.sendWhenReady('vscode:leaveFullScreen', CancellationToken.None);
+			this.sendWhenReady('zyraxoncode:leaveFullScreen', CancellationToken.None);
 		}));
 
 		// Handle configuration changes
@@ -859,7 +859,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 		this._register(this.workspacesManagementMainService.onDidDeleteUntitledWorkspace(e => this.onDidDeleteUntitledWorkspace(e)));
 
 		// Inject headers when requests are incoming
-		const urls = ['https://*.vsassets.io/*'];
+		const urls = ['__ZYRAXKEEP__7_'];
 		if (this.productService.extensionsGallery?.serviceUrl) {
 			const serviceUrl = URI.parse(this.productService.extensionsGallery.serviceUrl);
 			urls.push(`${serviceUrl.scheme}://${serviceUrl.authority}/*`);
@@ -914,7 +914,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 			reason: { classification: 'SystemMetaData'; purpose: 'PerformanceAndHealth'; comment: 'The reason of the window error to understand the nature of the error better.' };
 			code: { classification: 'SystemMetaData'; purpose: 'PerformanceAndHealth'; comment: 'The exit code of the window process to understand the nature of the error better' };
 			owner: 'bpasero';
-			comment: 'Provides insight into reasons the vscode window had an error.';
+			comment: 'Provides insight into reasons the zyraxoncode window had an error.';
 		};
 		type WindowErrorEvent = {
 			type: WindowError;
@@ -952,7 +952,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 				// Unresponsive
 				if (type === WindowError.UNRESPONSIVE) {
 					if (this.isExtensionDevelopmentHost || this.isExtensionTestHost || this._win?.webContents?.isDevToolsOpened()) {
-						// TODO@electron Workaround for https://github.com/microsoft/vscode/issues/56994
+						// TODO@electron Workaround for __ZYRAXKEEP__8_
 						// In certain cases the window can report unresponsiveness because a breakpoint was hit
 						// and the process is stopped executing. The most typical cases are:
 						// - devtools are opened and debugging happens
@@ -1153,9 +1153,9 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 			}
 
 			if (cmd === 'left') {
-				this.send('vscode:runAction', { id: 'workbench.action.openPreviousRecentlyUsedEditor', from: 'mouse' });
+				this.send('zyraxoncode:runAction', { id: 'workbench.action.openPreviousRecentlyUsedEditor', from: 'mouse' });
 			} else if (cmd === 'right') {
-				this.send('vscode:runAction', { id: 'workbench.action.openNextRecentlyUsedEditor', from: 'mouse' });
+				this.send('zyraxoncode:runAction', { id: 'workbench.action.openNextRecentlyUsedEditor', from: 'mouse' });
 			}
 		});
 	}
@@ -1243,10 +1243,10 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 		// (as indicated by VSCODE_CLI environment), make sure to
 		// preserve that user environment in subsequent loads,
 		// unless the new configuration context was also a CLI
-		// (for https://github.com/microsoft/vscode/issues/108571)
+		// (for __ZYRAXKEEP__9_)
 		// Also, preserve the environment if we're loading from an
 		// extension development host that had its environment set
-		// (for https://github.com/microsoft/vscode/issues/123508)
+		// (for __ZYRAXKEEP__10_)
 		const currentUserEnv = (this._config ?? this.pendingLoadConfig)?.userEnv;
 		if (currentUserEnv) {
 			const shouldPreserveLaunchCliEnvironment = isLaunchedFromCli(currentUserEnv) && !isLaunchedFromCli(configuration.userEnv);
@@ -1258,7 +1258,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 
 		// If named pipe was instantiated for the crashpad_handler process, reuse the same
 		// pipe for new app instances connecting to the original app instance.
-		// Ref: https://github.com/microsoft/vscode/issues/115874
+		// Ref: __ZYRAXKEEP__11_
 		if (process.env['CHROME_CRASHPAD_PIPE_NAME']) {
 			Object.assign(configuration.userEnv, {
 				CHROME_CRASHPAD_PIPE_NAME: process.env['CHROME_CRASHPAD_PIPE_NAME']
@@ -1375,7 +1375,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 				display = electron.screen.getDisplayMatching(this.getBounds());
 			} catch (error) {
 				// Electron has weird conditions under which it throws errors
-				// e.g. https://github.com/microsoft/vscode/issues/100334 when
+				// e.g. __ZYRAXKEEP__12_ when
 				// large numbers are passed in
 			}
 
@@ -1388,7 +1388,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 				// Still carry over window dimensions from previous sessions
 				// if we can compute it in fullscreen state.
 				// does not seem possible in all cases on Linux for example
-				// (https://github.com/microsoft/vscode/issues/58218) so we
+				// (__ZYRAXKEEP__13_) so we
 				// fallback to the defaults in that case.
 				width: this.windowState.width || defaultState.width,
 				height: this.windowState.height || defaultState.height,
@@ -1471,7 +1471,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 		super.setFullScreen(fullscreen, fromRestore);
 
 		// Events
-		this.sendWhenReady(fullscreen ? 'vscode:enterFullScreen' : 'vscode:leaveFullScreen', CancellationToken.None);
+		this.sendWhenReady(fullscreen ? 'zyraxoncode:enterFullScreen' : 'zyraxoncode:leaveFullScreen', CancellationToken.None);
 
 		// Respect configured menu bar visibility or default to toggle if not set
 		if (this.currentMenuBarVisibility) {
@@ -1495,13 +1495,13 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 
 		if (visibility === 'toggle') {
 			if (notify) {
-				this.send('vscode:showInfoMessage', localize('hiddenMenuBar', "You can still access the menu bar by pressing the Alt-key."));
+				this.send('zyraxoncode:showInfoMessage', localize('hiddenMenuBar', "You can still access the menu bar by pressing the Alt-key."));
 			}
 		}
 
 		if (visibility === 'hidden') {
 			// for some weird reason that I have no explanation for, the menu bar is not hiding when calling
-			// this without timeout (see https://github.com/microsoft/vscode/issues/19777). there seems to be
+			// this without timeout (see __ZYRAXKEEP__14_). there seems to be
 			// a timing issue with us opening the first window and the menu bar getting created. somehow the
 			// fact that we want to hide the menu without being able to bring it back via Alt key makes Electron
 			// still show the menu. Unable to reproduce from a simple Hello World application though...
@@ -1623,7 +1623,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 			mode: 'buttons',
 			segmentStyle: 'automatic',
 			change: (selectedIndex) => {
-				this.sendWhenReady('vscode:runAction', CancellationToken.None, { id: (control.segments[selectedIndex] as ITouchBarSegment).id, from: 'touchbar' });
+				this.sendWhenReady('zyraxoncode:runAction', CancellationToken.None, { id: (control.segments[selectedIndex] as ITouchBarSegment).id, from: 'touchbar' });
 			}
 		});
 
@@ -1694,7 +1694,7 @@ export class CodeWindow extends BaseWindow implements ICodeWindow {
 			}
 
 			logMessage += `Total Samples: ${samples}\n`;
-			logMessage += 'For full overview of the unresponsive period, capture cpu profile via https://aka.ms/vscode-tracing-cpu-profile';
+			logMessage += 'For full overview of the unresponsive period, capture cpu profile via __ZYRAXKEEP__15_';
 			this.logService.error(logMessage);
 		}
 

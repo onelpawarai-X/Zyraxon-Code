@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import { ChatResponseAnchorPart, ChatResponseCommandButtonPart, ChatResponseConfirmationPart, ChatResponseExternalEditPart, ChatResponseFileTreePart, ChatResponseMarkdownPart } from '../../../vscodeTypes';
+import type * as zyraxoncode from 'zyraxoncode';
+import { ChatResponseAnchorPart, ChatResponseCommandButtonPart, ChatResponseConfirmationPart, ChatResponseExternalEditPart, ChatResponseFileTreePart, ChatResponseMarkdownPart } from '../../../zyraxoncodeTypes';
 import { coalesce } from '../../vs/base/common/arrays';
 import { ChatResponseStreamImpl } from '../chatResponseStreamImpl';
 import { isLocation, isSymbolInformation, isUri } from '../types';
 
 export class SpyChatResponseStream extends ChatResponseStreamImpl {
 
-	items: vscode.ExtendedChatResponsePart[] = [];
+	items: zyraxoncode.ExtendedChatResponsePart[] = [];
 
 	get currentProgress(): string {
 		return coalesce(this.items
@@ -34,19 +34,19 @@ export class SpyChatResponseStream extends ChatResponseStreamImpl {
 			})).join('');
 	}
 
-	get confirmations(): vscode.ChatResponseConfirmationPart[] {
+	get confirmations(): zyraxoncode.ChatResponseConfirmationPart[] {
 		return this.items.filter((part) => part instanceof ChatResponseConfirmationPart);
 	}
 
-	get fileTrees(): vscode.ChatResponseFileTreePart[] {
+	get fileTrees(): zyraxoncode.ChatResponseFileTreePart[] {
 		return this.items.filter((part) => part instanceof ChatResponseFileTreePart);
 	}
 
-	get commandButtons(): vscode.Command[] {
+	get commandButtons(): zyraxoncode.Command[] {
 		return this.items.filter((part): part is ChatResponseCommandButtonPart => part instanceof ChatResponseCommandButtonPart).map(part => part.value);
 	}
 
-	get externalEditUris(): vscode.Uri[] {
+	get externalEditUris(): zyraxoncode.Uri[] {
 		return this.items
 			.filter((part): part is ChatResponseExternalEditPart => part instanceof ChatResponseExternalEditPart)
 			.flatMap(part => part.uris);
@@ -56,7 +56,7 @@ export class SpyChatResponseStream extends ChatResponseStreamImpl {
 		super((part) => this.items.push(part), () => { }, undefined, undefined, undefined, () => Promise.resolve(undefined));
 	}
 
-	override async externalEdit(target: vscode.Uri | vscode.Uri[], callback: () => Thenable<unknown>): Promise<string> {
+	override async externalEdit(target: zyraxoncode.Uri | zyraxoncode.Uri[], callback: () => Thenable<unknown>): Promise<string> {
 		const uris = Array.isArray(target) ? target : [target];
 		this.items.push(new ChatResponseExternalEditPart(uris, callback));
 		await callback();

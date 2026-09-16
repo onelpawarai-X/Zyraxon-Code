@@ -5,7 +5,7 @@
 
 import { PublicClientApplication, AccountInfo, SilentFlowRequest, AuthenticationResult, InteractiveRequest, LogLevel, RefreshTokenRequest, BrokerOptions, DeviceCodeRequest } from '@azure/msal-node';
 import { NativeBrokerPlugin } from '@azure/msal-node-extensions';
-import { Disposable, SecretStorage, LogOutputChannel, window, ProgressLocation, l10n, EventEmitter, workspace, env, Uri, UIKind } from 'vscode';
+import { Disposable, SecretStorage, LogOutputChannel, window, ProgressLocation, l10n, EventEmitter, workspace, env, Uri, UIKind } from 'zyraxoncode';
 import { DeferredPromise, raceCancellationAndTimeoutError } from '../common/async';
 import { SecretStorageCachePlugin } from '../common/cachePlugin';
 import { MsalLoggerOptions } from '../common/loggerOptions';
@@ -53,7 +53,7 @@ export class CachedPublicClientApplication implements ICachedPublicClientApplica
 		let broker: BrokerOptions | undefined;
 		if (env.uiKind === UIKind.Web) {
 			this._logger.info(`[${this._clientId}] Native Broker is not available in web UI`);
-		} else if (workspace.getConfiguration('microsoft-authentication').get<'msal' | 'msal-no-broker'>('implementation') === 'msal-no-broker') {
+		} else if (workspace.getConfiguration('zyraxon-authentication').get<'msal' | 'msal-no-broker'>('implementation') === 'msal-no-broker') {
 			this._logger.info(`[${this._clientId}] Native Broker disabled via settings`);
 		} else {
 			const nativeBrokerPlugin = new NativeBrokerPlugin();

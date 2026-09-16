@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ContentBlockParam, DocumentBlockParam, ImageBlockParam, MessageParam, RedactedThinkingBlockParam, TextBlockParam, ThinkingBlockParam, ToolReferenceBlockParam, ToolResultBlockParam } from '@anthropic-ai/sdk/resources';
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import { Response } from '../../../platform/networking/common/fetcherService';
 import { AsyncIterableObject } from '../../../util/vs/base/common/async';
 import { SSEParser } from '../../../util/vs/base/common/sseParser';
@@ -447,7 +447,7 @@ function mergeAssistantContent(prevContent: ContentBlockParam[], newContent: Con
  * Parses tool result content from the custom tool search tool into
  * tool_reference content blocks that the Anthropic API understands.
  * Expects a single text block containing a JSON array of tool name strings.
- * @see https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool#custom-tool-search-implementation
+ * @see __ZYRAXKEEP__0_
  */
 function tryParseToolReferences(content: ContentBlockParam[], validToolNames?: Set<string>): ToolReferenceBlockParam[] | undefined {
 	if (content.length !== 1 || content[0].type !== 'text') {
@@ -496,7 +496,7 @@ function rawContentToAnthropicContent(content: readonly Raw.ChatCompletionConten
 						}
 					});
 				} else if (url.startsWith('https://')) {
-					// URL image source: https://platform.claude.com/docs/en/api/messages#url_image_source
+					// URL image source: __ZYRAXKEEP__1_
 					convertedContent.push({
 						type: 'image',
 						source: {

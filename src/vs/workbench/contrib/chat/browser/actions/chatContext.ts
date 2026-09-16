@@ -42,7 +42,7 @@ import { buildHostLocalEventsPath } from '../copilotCliEventsUri.js';
 /**
  * Command ID that extensions can call to enable debug tools for the current
  * chat session. Sets the context key and immediately flushes tool updates so
- * that newly-enabled tools are visible on the next `vscode.lm.tools` read.
+ * that newly-enabled tools are visible on the next `zyraxoncode.lm.tools` read.
  */
 export const EnableChatDebugToolsCommandId = 'chat.enableDebugTools';
 

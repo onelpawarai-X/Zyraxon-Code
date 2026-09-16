@@ -72,7 +72,7 @@ export type ExtensionVirtualWorkspaceSupport = {
  *
  * `urlTemplate` uses `format2()`-style named placeholders. Today only
  * `{sdkTarget}` is recognised; the build emits e.g.
- * `https://main.vscode-cdn.net/agent-sdk/claude/0.3.168/{sdkTarget}.tgz`
+ * `__ZYRAXKEEP__0_{sdkTarget}.tgz`
  * and the runtime substitutes `darwin-arm64`, `linux-x64-musl`, etc.
  *
  * See `src/vs/platform/agentHost/node/claude/roadmap.md` Phase 15 for
@@ -117,8 +117,8 @@ export interface IProductConfiguration {
 	readonly agentsTelemetryAppName?: string;
 
 	readonly urlProtocol: string;
-	readonly dataFolderName: string; // location for extensions (e.g. ~/.vscode-insiders)
-	readonly sharedDataFolderName: string; // location for shared data (e.g. ~/.vscode-insiders-shared)
+	readonly dataFolderName: string; // location for extensions (e.g. ~/.zyraxoncode-insiders)
+	readonly sharedDataFolderName: string; // location for shared data (e.g. ~/.zyraxoncode-insiders-shared)
 
 	readonly builtInExtensions?: IBuiltInExtension[];
 	readonly walkthroughMetadata?: IProductWalkthrough[];

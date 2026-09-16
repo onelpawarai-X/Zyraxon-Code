@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AssistantMessage, PromptElement, PromptElementProps, PromptReference, PromptSizing, SystemMessage, ToolMessage, useKeepWith, UserMessage } from '@vscode/prompt-tsx';
-import { ChatResponsePart } from '@vscode/prompt-tsx/dist/base/vscodeTypes';
-import type { CancellationToken, ExtendedLanguageModelToolResult, Position, Progress } from 'vscode';
+import { AssistantMessage, PromptElement, PromptElementProps, PromptReference, PromptSizing, SystemMessage, ToolMessage, useKeepWith, UserMessage } from '@zyraxoncode/prompt-tsx';
+import { ChatResponsePart } from '@zyraxoncode/prompt-tsx/dist/base/zyraxoncodeTypes';
+import type { CancellationToken, ExtendedLanguageModelToolResult, Position, Progress } from 'zyraxoncode';
 import { TextDocumentSnapshot } from '../../../platform/editing/common/textDocumentSnapshot';
 import { CacheType } from '../../../platform/endpoint/common/endpointTypes';
 import { IPromptPathRepresentationService } from '../../../platform/prompts/common/promptPathRepresentationService';
-import { ChatRequest, ChatRequestEditorData, Range } from '../../../vscodeTypes';
+import { ChatRequest, ChatRequestEditorData, Range } from '../../../zyraxoncodeTypes';
 import { ChatVariablesCollection } from '../../prompt/common/chatVariablesCollection';
 import { IToolCall } from '../../prompt/common/intents';
 import { CopilotIdentityRules } from '../../prompts/node/base/copilotIdentity';

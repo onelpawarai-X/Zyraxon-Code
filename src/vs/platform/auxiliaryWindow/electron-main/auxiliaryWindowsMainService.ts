@@ -80,10 +80,10 @@ export class AuxiliaryWindowsMainService extends Disposable implements IAuxiliar
 			}
 		});
 
-		validatedIpcMain.handle('vscode:registerAuxiliaryWindow', async (event, mainWindowId: number) => {
+		validatedIpcMain.handle('zyraxoncode:registerAuxiliaryWindow', async (event, mainWindowId: number) => {
 			const auxiliaryWindow = this.getWindowByWebContents(event.sender);
 			if (auxiliaryWindow) {
-				this.logService.trace('[aux window] vscode:registerAuxiliaryWindow: Registering auxiliary window to main window');
+				this.logService.trace('[aux window] zyraxoncode:registerAuxiliaryWindow: Registering auxiliary window to main window');
 
 				auxiliaryWindow.parentId = mainWindowId;
 			}

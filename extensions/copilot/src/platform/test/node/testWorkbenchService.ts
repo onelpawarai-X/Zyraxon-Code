@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Extension, Memento, Uri } from 'vscode';
-import { sanitizeVSCodeVersion } from '../../../util/common/vscodeVersion';
+import type { Extension, Memento, Uri } from 'zyraxoncode';
+import { sanitizeZyraxonCodeVersion } from '../../../util/common/zyraxoncodeVersion';
 import { isCI } from '../../../util/vs/base/common/platform';
 import { URI } from '../../../util/vs/base/common/uri';
 import { RemoteCacheType } from '../../embeddings/common/embeddingsIndex';
-import { SettingListItem } from '../../embeddings/common/vscodeIndex';
+import { SettingListItem } from '../../embeddings/common/zyraxoncodeIndex';
 import { IEnvService } from '../../env/common/envService';
-import { IVSCodeExtensionContext } from '../../extContext/common/extensionContext';
+import { IZyraxonCodeExtensionContext } from '../../extContext/common/extensionContext';
 import { IFileSystemService } from '../../filesystem/common/fileSystemService';
 import { IFetcherService } from '../../networking/common/fetcherService';
 import { IWorkbenchService } from '../../workbench/common/workbenchService';
@@ -35,12 +35,12 @@ export class TestWorkbenchService implements IWorkbenchService {
 
 	constructor(@IFetcherService fetcherService: IFetcherService,
 		@IFileSystemService fileSystemService: IFileSystemService,
-		@IVSCodeExtensionContext vscodeExtensionContext: IVSCodeExtensionContext,
+		@IZyraxonCodeExtensionContext zyraxoncodeExtensionContext: IZyraxonCodeExtensionContext,
 		@IEnvService envService: IEnvService) {
-		const cacheVersion = sanitizeVSCodeVersion(envService.getEditorInfo().version);
+		const cacheVersion = sanitizeZyraxonCodeVersion(envService.getEditorInfo().version);
 
-		this.commandsTestData = new RemoteTestDataCache(vscodeExtensionContext, fileSystemService, fetcherService, 'allCoreCommands', cacheVersion, RemoteCacheType.Commands);
-		this.settingsTestData = new RemoteTestDataCache(vscodeExtensionContext, fileSystemService, fetcherService, 'allCoreSettings', cacheVersion, RemoteCacheType.Settings);
+		this.commandsTestData = new RemoteTestDataCache(zyraxoncodeExtensionContext, fileSystemService, fetcherService, 'allCoreCommands', cacheVersion, RemoteCacheType.Commands);
+		this.settingsTestData = new RemoteTestDataCache(zyraxoncodeExtensionContext, fileSystemService, fetcherService, 'allCoreSettings', cacheVersion, RemoteCacheType.Settings);
 	}
 
 	getAllExtensions(): readonly Extension<any>[] {
@@ -77,7 +77,7 @@ class RemoteTestDataCache<T extends Command[] | Settings | string[]> {
 	private readonly remoteCacheURL: string;
 
 	constructor(
-		private readonly vscodeExtensionContext: IVSCodeExtensionContext,
+		private readonly zyraxoncodeExtensionContext: IZyraxonCodeExtensionContext,
 		private readonly fileSystem: IFileSystemService,
 		private readonly fetcher: IFetcherService,
 		private readonly cacheKey: string,
@@ -85,7 +85,7 @@ class RemoteTestDataCache<T extends Command[] | Settings | string[]> {
 		remoteCacheType: RemoteCacheType
 	) {
 		this.cacheVersionKey = `${cacheKey}-version`;
-		this.remoteCacheURL = `https://embeddings.vscode-cdn.net/test-artifacts/v${cacheVersion}/${remoteCacheType}/core.json`;
+		this.remoteCacheURL = `__ZYRAXKEEP__0_{cacheVersion}/${remoteCacheType}/core.json`;
 	}
 
 	public async getCache(): Promise<T | undefined> {
@@ -128,11 +128,11 @@ class RemoteTestDataCache<T extends Command[] | Settings | string[]> {
 	}
 
 	private get cacheStorageUri(): Uri | undefined {
-		return this.vscodeExtensionContext.globalStorageUri;
+		return this.zyraxoncodeExtensionContext.globalStorageUri;
 	}
 
 	private get cacheVersionMementoStorage(): Memento {
-		return this.vscodeExtensionContext.globalState;
+		return this.zyraxoncodeExtensionContext.globalState;
 	}
 
 	private async getLocalCache(): Promise<T | undefined> {

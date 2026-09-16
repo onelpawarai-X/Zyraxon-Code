@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, PromptSizing, Raw } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, PromptSizing, Raw } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { VsCodeTextDocument } from '../../../../platform/editing/common/abstractText';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IIgnoreService } from '../../../../platform/ignore/common/ignoreService';
@@ -50,8 +50,8 @@ export class SummarizedDocumentData {
 	static async create(
 		parserService: IParserService | ServicesAccessor,
 		document: TextDocumentSnapshot,
-		formattingOptions: vscode.FormattingOptions | undefined,
-		selection: vscode.Range,
+		formattingOptions: zyraxoncode.FormattingOptions | undefined,
+		selection: zyraxoncode.Range,
 		selectionSplitKind: SelectionSplitKind,
 	): Promise<SummarizedDocumentData> {
 
@@ -71,9 +71,9 @@ export class SummarizedDocumentData {
 
 	private constructor(
 		readonly document: TextDocumentSnapshot,
-		private readonly formattingOptions: vscode.FormattingOptions | undefined,
+		private readonly formattingOptions: zyraxoncode.FormattingOptions | undefined,
 		private readonly structure: OverlayNode,
-		private readonly selection: vscode.Range,
+		private readonly selection: zyraxoncode.Range,
 		readonly offsetSelections: { adjusted: OffsetRange; original: OffsetRange },
 		private readonly kind: SelectionSplitKind,
 	) {

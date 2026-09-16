@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { EndOfLine, TextDocument, TextLine, Uri } from 'vscode';
+import type { EndOfLine, TextDocument, TextLine, Uri } from 'zyraxoncode';
 import { isNumber, isString } from '../../../util/vs/base/common/types';
 import { isUriComponents, URI, UriComponents } from '../../../util/vs/base/common/uri';
 import { DEFAULT_WORD_REGEXP, getWordAtText } from '../../../util/vs/editor/common/core/wordHelper';
-import { Position, Range } from '../../../vscodeTypes';
+import { Position, Range } from '../../../zyraxoncodeTypes';
 import { PositionOffsetTransformer } from './positionOffsetTransformer';
 
 export interface ITextDocumentSnapshotJSON {

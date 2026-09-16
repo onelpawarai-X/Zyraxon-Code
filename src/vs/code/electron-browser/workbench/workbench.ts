@@ -17,7 +17,7 @@
 	type IMainWindowSandboxGlobals = import('../../../base/parts/sandbox/electron-browser/globals.js').IMainWindowSandboxGlobals;
 	type IDesktopMain = import('../../../workbench/electron-browser/desktop.main.js').IDesktopMain;
 
-	const preloadGlobals = (window as unknown as { vscode: IMainWindowSandboxGlobals }).vscode; // defined by preload.ts
+	const preloadGlobals = (window as unknown as { zyraxoncode: IMainWindowSandboxGlobals }).zyraxoncode; // defined by preload.ts
 	const safeProcess = preloadGlobals.process;
 
 	//#region Splash Screen Helpers
@@ -386,7 +386,7 @@
 		setupNLS<T>(configuration);
 
 		// Compute base URL and set as global
-		const baseUrl = new URL(`${fileUriFromPath(configuration.appRoot, { isWindows: safeProcess.platform === 'win32', scheme: 'vscode-file', fallbackAuthority: 'vscode-app' })}/out/`);
+		const baseUrl = new URL(`${fileUriFromPath(configuration.appRoot, { isWindows: safeProcess.platform === 'win32', scheme: 'zyraxoncode-file', fallbackAuthority: 'zyraxoncode-app' })}/out/`);
 		globalThis._VSCODE_FILE_ROOT = baseUrl.toString();
 
 		// Set product configuration as global (used e.g. to select the ASAR path in `amdX`)
@@ -479,9 +479,9 @@
 		let listener: ((e: KeyboardEvent) => void) | undefined = function (e) {
 			const key = extractKey(e);
 			if (key === TOGGLE_DEV_TOOLS_KB || key === TOGGLE_DEV_TOOLS_KB_ALT) {
-				ipcRenderer.send('vscode:toggleDevTools');
+				ipcRenderer.send('zyraxoncode:toggleDevTools');
 			} else if (key === RELOAD_KB && !disallowReloadKeybinding) {
-				ipcRenderer.send('vscode:reloadWindow');
+				ipcRenderer.send('zyraxoncode:reloadWindow');
 			}
 		};
 
@@ -512,7 +512,7 @@
 	function onUnexpectedError(error: string | Error, showDevtoolsOnError: boolean): void {
 		if (showDevtoolsOnError) {
 			const ipcRenderer = preloadGlobals.ipcRenderer;
-			ipcRenderer.send('vscode:openDevTools');
+			ipcRenderer.send('zyraxoncode:openDevTools');
 		}
 
 		console.error(`[uncaught exception]: ${error}`);
@@ -580,7 +580,7 @@
 				importMap.imports[cssUrl] = URL.createObjectURL(blob);
 			}
 
-			const ttp = window.trustedTypes?.createPolicy('vscode-bootstrapImportMap', { createScript(value) { return value; }, });
+			const ttp = window.trustedTypes?.createPolicy('zyraxoncode-bootstrapImportMap', { createScript(value) { return value; }, });
 			const importMapSrc = JSON.stringify(importMap, undefined, 2);
 			const importMapScript = document.createElement('script');
 			importMapScript.type = 'importmap';
@@ -612,8 +612,8 @@
 				// Show our splash as early as possible
 				showSplash(windowConfig);
 
-				// Code windows have a `vscodeWindowId` property to identify them
-				Object.defineProperty(window, 'vscodeWindowId', {
+				// Code windows have a `zyraxoncodeWindowId` property to identify them
+				Object.defineProperty(window, 'zyraxoncodeWindowId', {
 					get: () => windowConfig.windowId
 				});
 

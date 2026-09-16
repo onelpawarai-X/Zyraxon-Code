@@ -152,7 +152,7 @@ export class LocalAgentHostServiceClient extends Disposable implements IAgentHos
 
 		this._logService.info(`${LOG_PREFIX} Acquiring MessagePort to agent host...`);
 		ipcRenderer.send(AgentHostOTelPolicyIpcChannel, readAgentHostOTelPolicySettings(this._configurationService));
-		const port = await acquirePort('vscode:createAgentHostMessageChannel', 'vscode:createAgentHostMessageChannelResult');
+		const port = await acquirePort('zyraxoncode:createAgentHostMessageChannel', 'zyraxoncode:createAgentHostMessageChannelResult');
 		mark('code/agentHost/didAcquireMessagePort');
 		this._logService.info(`${LOG_PREFIX} MessagePort acquired, creating client...`);
 

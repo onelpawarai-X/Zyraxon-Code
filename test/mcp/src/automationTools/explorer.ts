@@ -14,7 +14,7 @@ export function applyExplorerTools(server: McpServer, appService: ApplicationSer
 
 	// Playwright can probably figure this out
 	// server.tool(
-	// 	'vscode_automation_explorer_open',
+	// 	'zyraxoncode_automation_explorer_open',
 	// 	'Open the file explorer viewlet',
 	// 	async () => {
 	// 		await app.workbench.explorer.openExplorerView();

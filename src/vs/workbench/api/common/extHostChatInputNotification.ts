@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import * as extHostProtocol from './extHost.protocol.js';
 import { ExtensionIdentifier, IExtensionDescription } from '../../../platform/extensions/common/extensions.js';
 
@@ -11,7 +11,7 @@ export class ExtHostChatInputNotification {
 
 	private readonly _proxy: extHostProtocol.MainThreadChatInputNotificationShape;
 
-	private readonly _items = new Map<string, vscode.ChatInputNotification>();
+	private readonly _items = new Map<string, zyraxoncode.ChatInputNotification>();
 
 	constructor(
 		mainContext: extHostProtocol.IMainContext
@@ -19,7 +19,7 @@ export class ExtHostChatInputNotification {
 		this._proxy = mainContext.getProxy(extHostProtocol.MainContext.MainThreadChatInputNotification);
 	}
 
-	createInputNotification(extension: IExtensionDescription, id: string): vscode.ChatInputNotification {
+	createInputNotification(extension: IExtensionDescription, id: string): zyraxoncode.ChatInputNotification {
 		const internalId = asNotificationIdentifier(extension.identifier, id);
 		if (this._items.has(internalId)) {
 			throw new Error(`Chat input notification '${id}' already exists`);
@@ -49,13 +49,13 @@ export class ExtHostChatInputNotification {
 			this._proxy.$setNotification({ ...state });
 		};
 
-		const item = Object.freeze<vscode.ChatInputNotification>({
+		const item = Object.freeze<zyraxoncode.ChatInputNotification>({
 			id,
 
-			get severity(): vscode.ChatInputNotificationSeverity {
-				return state.severity as number as vscode.ChatInputNotificationSeverity;
+			get severity(): zyraxoncode.ChatInputNotificationSeverity {
+				return state.severity as number as zyraxoncode.ChatInputNotificationSeverity;
 			},
-			set severity(value: vscode.ChatInputNotificationSeverity) {
+			set severity(value: zyraxoncode.ChatInputNotificationSeverity) {
 				state.severity = value as number as extHostProtocol.ChatInputNotificationSeverityDto;
 				syncState();
 			},
@@ -76,10 +76,10 @@ export class ExtHostChatInputNotification {
 				syncState();
 			},
 
-			get actions(): vscode.ChatInputNotificationAction[] {
+			get actions(): zyraxoncode.ChatInputNotificationAction[] {
 				return state.actions;
 			},
-			set actions(value: vscode.ChatInputNotificationAction[]) {
+			set actions(value: zyraxoncode.ChatInputNotificationAction[]) {
 				state.actions = value.map(a => ({ label: a.label, commandId: a.commandId, commandArgs: a.commandArgs }));
 				syncState();
 			},

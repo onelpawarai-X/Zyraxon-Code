@@ -4,7 +4,7 @@
 # ---------------------------------------------------------------------------------------------
 
 # Prevent installing more than once per session
-if (Test-Path variable:global:__VSCodeOriginalPrompt) {
+if (Test-Path variable:global:__ZyraxonCodeOriginalPrompt) {
 	return;
 }
 
@@ -13,7 +13,7 @@ if ($ExecutionContext.SessionState.LanguageMode -ne "FullLanguage") {
 	return;
 }
 
-$Global:__VSCodeOriginalPrompt = $function:Prompt
+$Global:__ZyraxonCodeOriginalPrompt = $function:Prompt
 
 $Global:__LastHistoryId = -1
 
@@ -52,7 +52,7 @@ if ($env:VSCODE_ENV_APPEND) {
 	$env:VSCODE_ENV_APPEND = $null
 }
 
-function Global:__VSCode-Escape-Value([string]$value) {
+function Global:__ZyraxonCode-Escape-Value([string]$value) {
 	# NOTE: In PowerShell v6.1+, this can be written `$value -replace '…', { … }` instead of `[regex]::Replace`.
 	# Replace any non-alphanumeric characters.
 	[regex]::Replace($value, "[$([char]0x00)-$([char]0x1f)\\\n;]", { param($match)
@@ -87,19 +87,19 @@ function Global:Prompt() {
 	$Result += "$([char]0x1b)]633;A`a"
 	# Current working directory
 	# OSC 633 ; <Property>=<Value> ST
-	$Result += if ($pwd.Provider.Name -eq 'FileSystem') { "$([char]0x1b)]633;P;Cwd=$(__VSCode-Escape-Value $pwd.ProviderPath)`a" }
+	$Result += if ($pwd.Provider.Name -eq 'FileSystem') { "$([char]0x1b)]633;P;Cwd=$(__ZyraxonCode-Escape-Value $pwd.ProviderPath)`a" }
 	# Before running the original prompt, put $? back to what it was:
 	if ($FakeCode -ne 0) {
 		Write-Error "failure" -ea ignore
 	}
 	# Run the original prompt
-	$OriginalPrompt += $Global:__VSCodeOriginalPrompt.Invoke()
+	$OriginalPrompt += $Global:__ZyraxonCodeOriginalPrompt.Invoke()
 	$Result += $OriginalPrompt
 
 	# Prompt
 	# OSC 633 ; <Property>=<Value> ST
 	if ($isStable -eq "0") {
-		$Result += "$([char]0x1b)]633;P;Prompt=$(__VSCode-Escape-Value $OriginalPrompt)`a"
+		$Result += "$([char]0x1b)]633;P;Prompt=$(__ZyraxonCode-Escape-Value $OriginalPrompt)`a"
 	}
 
 	# Write command started
@@ -111,14 +111,14 @@ function Global:Prompt() {
 # Only send the command executed sequence when PSReadLine is loaded, if not shell integration should
 # still work thanks to the command line sequence
 if (Get-Module -Name PSReadLine) {
-	$__VSCodeOriginalPSConsoleHostReadLine = $function:PSConsoleHostReadLine
+	$__ZyraxonCodeOriginalPSConsoleHostReadLine = $function:PSConsoleHostReadLine
 	function Global:PSConsoleHostReadLine {
-		$CommandLine = $__VSCodeOriginalPSConsoleHostReadLine.Invoke()
+		$CommandLine = $__ZyraxonCodeOriginalPSConsoleHostReadLine.Invoke()
 
 		# Command line
 		# OSC 633 ; E ; <CommandLine?> ; <Nonce?> ST
 		$Result = "$([char]0x1b)]633;E;"
-		$Result += $(__VSCode-Escape-Value $CommandLine)
+		$Result += $(__ZyraxonCode-Escape-Value $CommandLine)
 		# Only send the nonce if the OS is not Windows 10 as it seems to echo to the terminal
 		# sometimes
 		if ($IsWindows10 -eq $false) {
@@ -150,7 +150,7 @@ else {
 if ($isStable -eq "0") {
 	$ContinuationPrompt = (Get-PSReadLineOption).ContinuationPrompt
 	if ($ContinuationPrompt) {
-		[Console]::Write("$([char]0x1b)]633;P;ContinuationPrompt=$(__VSCode-Escape-Value $ContinuationPrompt)`a")
+		[Console]::Write("$([char]0x1b)]633;P;ContinuationPrompt=$(__ZyraxonCode-Escape-Value $ContinuationPrompt)`a")
 	}
 }
 
@@ -327,7 +327,7 @@ function Send-Completions {
 	$commandLine = ""
 	$cursorIndex = 0
 	$prefixCursorDelta = 0
-	[Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$commandLine, [ref]$cursorIndex)
+	[Zyraxon.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$commandLine, [ref]$cursorIndex)
 	$completionPrefix = $commandLine
 
 	# Start completions sequence

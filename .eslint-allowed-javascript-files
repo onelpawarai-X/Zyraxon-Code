@@ -9,7 +9,7 @@
 # Lines starting with `#` are comments. Blank lines are ignored.
 
 .github/skills/heap-snapshot-analysis/helpers/streamSnapshot.mjs
-.vscode-test.js
+.zyraxoncode-test.js
 build/azure-pipelines/common/installPlaywright.js
 build/azure-pipelines/github-check-run.js
 build/builtin/browser-main.js
@@ -19,10 +19,10 @@ build/codex/generate-protocol.mjs
 eslint.config.js
 extensions/copilot/.mocha-multi-reporters.js
 extensions/copilot/.mocharc.js
-extensions/copilot/.vscode-test.mjs
-extensions/copilot/.vscode/extensions/visualization-runner/entry.js
+extensions/copilot/.zyraxoncode-test.mjs
+extensions/copilot/.zyraxoncode/extensions/visualization-runner/entry.js
 extensions/copilot/script/electron/simulationWorkbenchMain.js
-extensions/copilot/src/extension/completions-core/vscode-node/extension/test/run.js
+extensions/copilot/src/extension/completions-core/zyraxoncode-node/extension/test/run.js
 extensions/copilot/src/extension/test/node/fixtures/gitdiff/generate-diffs.js
 extensions/copilot/src/platform/parser/test/node/fixtures/test.js
 extensions/copilot/test/scenarios/test-cli/wkspc1/sample.js
@@ -66,8 +66,8 @@ extensions/less/build/update-grammar.js
 extensions/media-preview/media/audioPreview.js
 extensions/media-preview/media/imagePreview.js
 extensions/media-preview/media/videoPreview.js
-extensions/microsoft-authentication/packageMocks/dpapi/dpapi.js
-extensions/microsoft-authentication/packageMocks/keytar/index.js
+extensions/zyraxon-authentication/packageMocks/dpapi/dpapi.js
+extensions/zyraxon-authentication/packageMocks/keytar/index.js
 extensions/objective-c/build/update-grammars.js
 extensions/php/build/update-grammar.mjs
 extensions/postinstall.mjs
@@ -79,11 +79,11 @@ extensions/terminal-suggest/scripts/update-specs.js
 extensions/theme-seti/build/update-icon-theme.js
 extensions/typescript-basics/build/update-grammars.mjs
 extensions/typescript-language-features/test-workspace/foojs.js
-extensions/vscode-api-tests/testWorkspace/debug.js
-extensions/vscode-api-tests/testWorkspace/far.js
-extensions/vscode-api-tests/testWorkspace/worker.js
-extensions/vscode-colorize-tests/test/colorize-fixtures/test.js
-extensions/vscode-colorize-tests/test/colorize-fixtures/test6916.js
+extensions/zyraxoncode-api-tests/testWorkspace/debug.js
+extensions/zyraxoncode-api-tests/testWorkspace/far.js
+extensions/zyraxoncode-api-tests/testWorkspace/worker.js
+extensions/zyraxoncode-colorize-tests/test/colorize-fixtures/test.js
+extensions/zyraxoncode-colorize-tests/test/colorize-fixtures/test6916.js
 extensions/yaml/build/update-grammar.js
 gulpfile.mjs
 scripts/chat-simulation/common/perf-scenarios.js
@@ -146,7 +146,7 @@ test/monaco/esm-check/esm-check.js
 test/monaco/esm-check/index.js
 test/monaco/runner.js
 test/monaco/webpack.config.js
-test/smoke/extensions/vscode-smoketest-ext-host/extension.js
+test/smoke/extensions/zyraxoncode-smoketest-ext-host/extension.js
 test/smoke/test/index.js
 test/unit/analyzeSnapshot.js
 test/unit/assert.js

@@ -103,7 +103,7 @@ export class VoiceTranscriptsViewPane extends ViewPane {
 		this.emptyState.style.display = 'none';
 		this.emptyState.style.padding = '24px 16px';
 		this.emptyState.style.textAlign = 'center';
-		this.emptyState.style.color = 'var(--vscode-descriptionForeground)';
+		this.emptyState.style.color = 'var(--zyraxoncode-descriptionForeground)';
 		this.emptyState.style.fontSize = '13px';
 		this.emptyState.textContent = localize(
 			'voiceTranscripts.empty',
@@ -225,7 +225,7 @@ export class VoiceTranscriptsViewPane extends ViewPane {
 			const archived = DOM.append(this.contentContainer, $('.voice-transcripts-archived-note'));
 			archived.style.marginTop = '12px';
 			archived.style.fontSize = '11px';
-			archived.style.color = 'var(--vscode-descriptionForeground)';
+			archived.style.color = 'var(--zyraxoncode-descriptionForeground)';
 			archived.style.fontStyle = 'italic';
 			archived.textContent = localize(
 				'voiceTranscripts.archivedNote',
@@ -247,9 +247,9 @@ export class VoiceTranscriptsViewPane extends ViewPane {
 		heading.style.fontWeight = '600';
 		heading.style.textTransform = 'uppercase';
 		heading.style.letterSpacing = '0.5px';
-		heading.style.color = 'var(--vscode-descriptionForeground)';
+		heading.style.color = 'var(--zyraxoncode-descriptionForeground)';
 		heading.style.padding = '4px 0 6px';
-		heading.style.borderBottom = '1px solid var(--vscode-editorWhitespace-foreground)';
+		heading.style.borderBottom = '1px solid var(--zyraxoncode-editorWhitespace-foreground)';
 		heading.style.marginBottom = '4px';
 
 		for (const pair of group.pairs) {
@@ -260,12 +260,12 @@ export class VoiceTranscriptsViewPane extends ViewPane {
 	private renderPair(parent: HTMLElement, pair: Pair): void {
 		const pairEl = DOM.append(parent, $('.voice-transcripts-pair'));
 		pairEl.style.padding = '6px 0';
-		pairEl.style.borderBottom = '1px solid var(--vscode-editorWhitespace-foreground)';
+		pairEl.style.borderBottom = '1px solid var(--zyraxoncode-editorWhitespace-foreground)';
 
 		const time = DOM.append(pairEl, $('.voice-transcripts-time'));
 		time.textContent = formatTime(pair.timestamp);
 		time.style.fontSize = '10px';
-		time.style.color = 'var(--vscode-descriptionForeground)';
+		time.style.color = 'var(--zyraxoncode-descriptionForeground)';
 		time.style.marginBottom = '4px';
 
 		if (pair.user) {
@@ -288,14 +288,14 @@ export class VoiceTranscriptsViewPane extends ViewPane {
 		labelEl.textContent = `${label}:`;
 		labelEl.style.fontSize = '11px';
 		labelEl.style.fontWeight = '600';
-		labelEl.style.color = 'var(--vscode-descriptionForeground)';
+		labelEl.style.color = 'var(--zyraxoncode-descriptionForeground)';
 		labelEl.style.flex = '0 0 auto';
 		labelEl.style.minWidth = '32px';
 
 		const textEl = DOM.append(row, $('span'));
 		textEl.textContent = text;
 		textEl.style.fontSize = '13px';
-		textEl.style.color = 'var(--vscode-foreground)';
+		textEl.style.color = 'var(--zyraxoncode-foreground)';
 		textEl.style.whiteSpace = 'pre-wrap';
 		textEl.style.wordBreak = 'break-word';
 	}

@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type * as TreeSitter from '@vscode/tree-sitter-wasm';
+import type * as TreeSitter from '@zyraxoncode/tree-sitter-wasm';
 import { TaskQueue } from '../../../../../base/common/async.js';
 import { Disposable, toDisposable } from '../../../../../base/common/lifecycle.js';
 import { IObservable, observableValue, transaction, IObservableWithChange } from '../../../../../base/common/observable.js';

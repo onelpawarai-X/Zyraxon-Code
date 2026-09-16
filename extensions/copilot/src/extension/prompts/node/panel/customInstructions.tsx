@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptReference, PromptSizing, TextChunk } from '@vscode/prompt-tsx';
-import type { ChatLanguageModelToolReference } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptReference, PromptSizing, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type { ChatLanguageModelToolReference } from 'zyraxoncode';
 import { ConfigKey } from '../../../../platform/configuration/common/configurationService';
 import { CustomInstructionsKind, ICustomInstructions, ICustomInstructionsService } from '../../../../platform/customInstructions/common/customInstructionsService';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';

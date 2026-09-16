@@ -9,19 +9,19 @@
 #
 #   (1) Add the following to the end of `$__fish_config_dir/config.fish`:
 #
-#         string match -q "$TERM_PROGRAM" "vscode"
+#         string match -q "$TERM_PROGRAM" "zyraxoncode"
 #         and . (code --locate-shell-integration-path fish)
 #
 #   (2) Restart fish.
 
 # Don't run in scripts, other terminals, or more than once per session.
 status is-interactive
-and string match --quiet "$TERM_PROGRAM" "vscode"
+and string match --quiet "$TERM_PROGRAM" "zyraxoncode"
 and ! set --query VSCODE_SHELL_INTEGRATION
 or exit
 
 set --global VSCODE_SHELL_INTEGRATION 1
-set --global __vscode_shell_env_reporting $VSCODE_SHELL_ENV_REPORTING
+set --global __zyraxoncode_shell_env_reporting $VSCODE_SHELL_ENV_REPORTING
 set -e VSCODE_SHELL_ENV_REPORTING
 
 # Prevent AI-executed commands from polluting shell history
@@ -31,8 +31,8 @@ if test "$VSCODE_PREVENT_SHELL_HISTORY" = "1"
 end
 
 set -g envVarsToReport
-if test -n "$__vscode_shell_env_reporting"
-	set envVarsToReport (string split "," "$__vscode_shell_env_reporting")
+if test -n "$__zyraxoncode_shell_env_reporting"
+	set envVarsToReport (string split "," "$__zyraxoncode_shell_env_reporting")
 end
 
 # Apply any explicit path prefix (see #99878)
@@ -86,7 +86,7 @@ end
 # Prevent multiple activation with guard
 if not set -q VSCODE_PYTHON_AUTOACTIVATE_GUARD
 	set -gx VSCODE_PYTHON_AUTOACTIVATE_GUARD 1
-	if test -n "$VSCODE_PYTHON_FISH_ACTIVATE"; and test "$TERM_PROGRAM" = "vscode"
+	if test -n "$VSCODE_PYTHON_FISH_ACTIVATE"; and test "$TERM_PROGRAM" = "zyraxoncode"
 		# Fish does not crash on eval failure, so don't need negation.
 		eval $VSCODE_PYTHON_FISH_ACTIVATE
 		set __vsc_activation_status $status
@@ -157,11 +157,11 @@ function __preserve_fish_prompt --on-event fish_prompt
 		functions --copy fish_prompt __vsc_fish_prompt
 		functions --erase __preserve_fish_prompt
 		# Now __vsc_fish_prompt is guaranteed to be defined
-		__init_vscode_shell_integration
+		__init_zyraxoncode_shell_integration
 	else
 		if functions --query __vsc_fish_prompt
 			functions --erase __preserve_fish_prompt
-			__init_vscode_shell_integration
+			__init_zyraxoncode_shell_integration
 		else
 			# There is no fish_prompt set, so stick with the default
 			# Now __vsc_fish_prompt is guaranteed to be defined
@@ -186,7 +186,7 @@ function __vsc_update_cwd --on-event fish_prompt
 	end
 end
 
-if test -n "$__vscode_shell_env_reporting"
+if test -n "$__zyraxoncode_shell_env_reporting"
 	function __vsc_update_env --on-event fish_prompt
 		if test (count $envVarsToReport) -gt 0
 			__vsc_esc EnvSingleStart 1
@@ -226,7 +226,7 @@ end
 # Preserve and wrap fish_mode_prompt (which appears to the left of the regular
 # prompt), but only if it's not defined as an empty function (which is the
 # officially documented way to disable that feature).
-function __init_vscode_shell_integration
+function __init_zyraxoncode_shell_integration
 	if __vsc_fish_has_mode_prompt
 		functions --copy fish_mode_prompt __vsc_fish_mode_prompt
 

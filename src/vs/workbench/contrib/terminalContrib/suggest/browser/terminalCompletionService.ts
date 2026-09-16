@@ -547,7 +547,7 @@ export class TerminalCompletionService extends Disposable implements ITerminalCo
 
 		// Support $CDPATH specially for the `cd` command only
 		//
-		// - (relative) `|` -> `/foo/vscode` (CDPATH has /foo which contains vscode folder)
+		// - (relative) `|` -> `/foo/zyraxoncode` (CDPATH has /foo which contains zyraxoncode folder)
 		this._logService.trace(`TerminalCompletionService#resolveResources CDPATH`);
 		if (type === 'relative' && showDirectories) {
 			if (promptValue.startsWith('cd ')) {
@@ -698,7 +698,7 @@ function getIsAbsolutePath(shellType: TerminalShellType | undefined, pathSeparat
 /**
  * Creates a URI from an absolute path, preserving the scheme and authority from the cwd.
  * For local file:// URIs, uses URI.file() which handles Windows path normalization.
- * For remote URIs (e.g., vscode-remote://wsl+Ubuntu), preserves the remote context.
+ * For remote URIs (e.g., __ZYRAXKEEP__0_), preserves the remote context.
  */
 function createUriFromLocalPath(cwd: URI, absolutePath: string): URI {
 	if (cwd.scheme === 'file') {

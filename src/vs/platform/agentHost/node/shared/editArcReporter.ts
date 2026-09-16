@@ -340,7 +340,7 @@ class EditArcReporter extends Disposable {
 		if (provider === 'copilotcli' && isAgentHostTelemetryService(this._telemetryService)) {
 			const { didBranchChange, timeDelayMs: delay, originalCharCount, originalLineCount, originalDeletedLineCount, arc, currentLineCount, currentDeletedLineCount, ...properties } = event;
 			const telemetry = this._telemetryService as IAgentHostTelemetryService;
-			telemetry.sendGHTelemetryEvent('vscode.editTelemetry.reportEditArc', withoutUndefined(properties), {
+			telemetry.sendGHTelemetryEvent('zyraxoncode.editTelemetry.reportEditArc', withoutUndefined(properties), {
 				didBranchChange,
 				timeDelayMs: delay,
 				originalCharCount,

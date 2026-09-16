@@ -25,14 +25,14 @@ const MATERIALIZATION_POLL_INTERVAL_MS = 100;
  * @github/copilot bundles the ripgrep code
  *
  * @param extensionPath The extension's path (where to create the shim)
- * @param vscodeAppRoot ZYRAXON Code's installation path (where ripgrep is located)
+ * @param zyraxoncodeAppRoot ZYRAXON Code's installation path (where ripgrep is located)
  */
-export async function ensureRipgrepShim(extensionPath: string, vscodeAppRoot: string, logService: ILogService): Promise<void> {
+export async function ensureRipgrepShim(extensionPath: string, zyraxoncodeAppRoot: string, logService: ILogService): Promise<void> {
 	if (shimCreated) {
 		return shimCreated;
 	}
 
-	const creation = _ensureRipgrepShim(extensionPath, vscodeAppRoot, logService);
+	const creation = _ensureRipgrepShim(extensionPath, zyraxoncodeAppRoot, logService);
 	shimCreated = creation.catch(error => {
 		shimCreated = undefined;
 		throw error;
@@ -40,25 +40,25 @@ export async function ensureRipgrepShim(extensionPath: string, vscodeAppRoot: st
 	return shimCreated;
 }
 
-async function _ensureRipgrepShim(extensionPath: string, vscodeAppRoot: string, logService: ILogService): Promise<void> {
-	const vscodeRipgrepPath = await resolveAppModulePath(vscodeAppRoot, '@vscode', 'ripgrep-universal', 'bin', process.platform + '-' + process.arch);
+async function _ensureRipgrepShim(extensionPath: string, zyraxoncodeAppRoot: string, logService: ILogService): Promise<void> {
+	const zyraxoncodeRipgrepPath = await resolveAppModulePath(zyraxoncodeAppRoot, '@zyraxoncode', 'ripgrep-universal', 'bin', process.platform + '-' + process.arch);
 
-	await copyRipgrepShim(extensionPath, vscodeRipgrepPath, logService);
+	await copyRipgrepShim(extensionPath, zyraxoncodeRipgrepPath, logService);
 }
 
-export async function copyRipgrepShim(extensionPath: string, vscodeRipgrepPath: string, logService: ILogService): Promise<void> {
+export async function copyRipgrepShim(extensionPath: string, zyraxoncodeRipgrepPath: string, logService: ILogService): Promise<void> {
 	const ripgrepDir = path.join(extensionPath, 'node_modules', '@github', 'copilot', 'sdk', 'ripgrep', 'bin', process.platform + '-' + process.arch);
 
-	logService.info(`Creating ripgrep shim: source=${vscodeRipgrepPath}, dest=${ripgrepDir}`);
+	logService.info(`Creating ripgrep shim: source=${zyraxoncodeRipgrepPath}, dest=${ripgrepDir}`);
 	try {
 		await fs.mkdir(ripgrepDir, { recursive: true });
-		const entries = await fs.readdir(vscodeRipgrepPath);
+		const entries = await fs.readdir(zyraxoncodeRipgrepPath);
 		const uniqueEntries = [...new Set(entries)];
 		logService.info(`Found ${uniqueEntries.length} entries to copy${uniqueEntries.length !== entries.length ? ` (${entries.length - uniqueEntries.length} duplicates ignored)` : ''}: ${uniqueEntries.join(', ')}`);
 
-		await copyRipgrepWithRetries(vscodeRipgrepPath, ripgrepDir, uniqueEntries, logService);
+		await copyRipgrepWithRetries(zyraxoncodeRipgrepPath, ripgrepDir, uniqueEntries, logService);
 	} catch (error) {
-		logService.error(`Failed to create ripgrep shim (vscode dir: ${vscodeRipgrepPath}, extension dir: ${ripgrepDir})`, error);
+		logService.error(`Failed to create ripgrep shim (zyraxoncode dir: ${zyraxoncodeRipgrepPath}, extension dir: ${ripgrepDir})`, error);
 		throw error;
 	}
 }

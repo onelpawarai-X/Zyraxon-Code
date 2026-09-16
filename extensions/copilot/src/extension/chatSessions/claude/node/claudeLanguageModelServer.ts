@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { MessageParam } from '@anthropic-ai/sdk/resources';
-import { RequestMetadata, RequestType } from '@vscode/copilot-api';
-import { Raw } from '@vscode/prompt-tsx';
+import { RequestMetadata, RequestType } from '@zyraxoncode/copilot-api';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import * as http from 'http';
 import { IChatMLFetcher, Source } from '../../../../platform/chat/common/chatMLFetcher';
 import { ChatFetchResponseType, ChatLocation, ChatResponse } from '../../../../platform/chat/common/commonTypes';
@@ -87,7 +87,7 @@ export class ClaudeLanguageModelServer extends Disposable {
 		super();
 		this.config = {
 			port: 0, // Will be set to random available port
-			nonce: 'vscode-lm-' + generateUuid()
+			nonce: 'zyraxoncode-lm-' + generateUuid()
 		};
 
 		this.server = this.createServer();
@@ -106,7 +106,7 @@ export class ClaudeLanguageModelServer extends Disposable {
 
 			// Handle /v1/messages endpoint (also //messages if base URL ends in /)
 			// Use URL to properly parse and extract pathname, ignoring query string
-			const pathname = new URL(req.url ?? '/', 'http://localhost').pathname;
+			const pathname = new URL(req.url ?? '/', '__ZYRAXKEEP__0_').pathname;
 			if (req.method === 'POST' && (pathname === '/v1/messages' || pathname === '/messages' || pathname === '//messages')) {
 				await this.handleMessagesRequest(req, res);
 				return;
@@ -198,7 +198,7 @@ export class ClaudeLanguageModelServer extends Disposable {
 				res,
 				endpointRequestBody,
 				headers,
-				'vscode_claude_code',
+				'zyraxoncode_claude_code',
 				{
 					modelMaxPromptTokens: DEFAULT_MAX_TOKENS - DEFAULT_MAX_OUTPUT_TOKENS,
 					maxOutputTokens: DEFAULT_MAX_OUTPUT_TOKENS
@@ -323,7 +323,7 @@ export class ClaudeLanguageModelServer extends Disposable {
 						...this.config,
 						port: address.port
 					};
-					this.info(`Claude Language Model Server started on http://localhost:${this.config.port}`);
+					this.info(`Claude Language Model Server started on __ZYRAXKEEP__1_{this.config.port}`);
 					resolve();
 					return;
 				}

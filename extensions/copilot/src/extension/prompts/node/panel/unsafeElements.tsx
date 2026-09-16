@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptElementProps, TextChunk } from '@vscode/prompt-tsx';
-import type * as vscode from 'vscode';
+import { PromptElement, PromptElementProps, TextChunk } from '@zyraxoncode/prompt-tsx';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IPromptPathRepresentationService } from '../../../../platform/prompts/common/promptPathRepresentationService';
 import { createFencedCodeBlock } from '../../../../util/common/markdown';
 
@@ -18,11 +18,11 @@ export type UnsafeCodeBlockProps = PromptElementProps<{
 	 */
 	shouldTrim?: boolean;
 	includeFilepath?: boolean;
-	uri?: vscode.Uri;
+	uri?: zyraxoncode.Uri;
 }>;
 
 /**
- * !!! WARNING: Do not use this element for text from user's code files, instead use `SafeCodeBlock` from {@link file://./safeElements.tsx} !!!
+ * !!! WARNING: Do not use this element for text from user's code files, instead use `SafeCodeBlock` from {@link __ZYRAXKEEP__0_} !!!
  */
 export class UnsafeCodeBlock extends PromptElement<UnsafeCodeBlockProps> {
 	constructor(props: UnsafeCodeBlockProps,

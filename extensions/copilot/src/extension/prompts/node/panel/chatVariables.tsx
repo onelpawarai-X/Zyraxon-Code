@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing, TextChunk, UserMessage } from '@vscode/prompt-tsx';
-import type { Diagnostic, LanguageModelToolInformation } from 'vscode';
+import { BasePromptElementProps, PromptElement, PromptElementProps, PromptPiece, PromptReference, PromptSizing, TextChunk, UserMessage } from '@zyraxoncode/prompt-tsx';
+import type { Diagnostic, LanguageModelToolInformation } from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../../platform/configuration/common/configurationService';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
@@ -28,7 +28,7 @@ import { isEqual } from '../../../../util/vs/base/common/resources';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
 import { DiagnosticSeverity } from '../../../../util/vs/workbench/api/common/extHostTypes/diagnostic';
-import { ChatReferenceBinaryData, ChatReferenceDiagnostic, LanguageModelToolResult2, Range, Uri } from '../../../../vscodeTypes';
+import { ChatReferenceBinaryData, ChatReferenceDiagnostic, LanguageModelToolResult2, Range, Uri } from '../../../../zyraxoncodeTypes';
 import { GenericBasePromptElementProps } from '../../../context/node/resolvers/genericPanelIntentInvocation';
 import { ChatVariablesCollection, isCustomizationsIndex, isInstructionFile, isPromptFile, isSessionReference, parseSlashCommand, sessionReferenceAttachmentAttrs } from '../../../prompt/common/chatVariablesCollection';
 import { InternalToolReference } from '../../../prompt/common/intents';
@@ -237,12 +237,12 @@ export async function renderChatVariables(chatVariables: ChatVariablesCollection
 					omitContents={omitFileContents}
 				/>;
 
-				if (!isAgent || (!URI.isUri(variableValue) || variableValue.scheme !== Schemas.vscodeNotebookCellOutput)) {
+				if (!isAgent || (!URI.isUri(variableValue) || variableValue.scheme !== Schemas.zyraxoncodeNotebookCellOutput)) {
 					// When attaching outupts, there's no need to add the entire notebook file again, as model can request the notebook file.
 					// In non agent mode, we need to add the file for context.
 					elements.push(file);
 				}
-				if (URI.isUri(variableValue) && variableValue.scheme === Schemas.vscodeNotebookCellOutput) {
+				if (URI.isUri(variableValue) && variableValue.scheme === Schemas.zyraxoncodeNotebookCellOutput) {
 					elements.push(<NotebookCellOutputVariable outputUri={variableValue} />);
 				}
 			}
@@ -316,7 +316,7 @@ class DiagnosticVariable extends PromptElement<IDiagnosticVariableProps> {
 		</>;
 	}
 	private translateNotebookUri(uri: Uri, range: Range): [Uri, Range] {
-		if (uri.scheme !== Schemas.vscodeNotebookCell) {
+		if (uri.scheme !== Schemas.zyraxoncodeNotebookCell) {
 			return [uri, range];
 		}
 		const [notebook, cell] = getNotebookAndCellFromUri(uri, this.workspaceService.notebookDocuments);

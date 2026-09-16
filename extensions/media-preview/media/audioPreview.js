@@ -7,7 +7,7 @@
 
 (function () {
 	// @ts-ignore
-	const vscode = acquireVsCodeApi();
+	const zyraxoncode = acquireVsCodeApi();
 
 	function getSettings() {
 		const element = document.getElementById('settings');
@@ -69,7 +69,7 @@
 
 	document.querySelector('.open-file-link')?.addEventListener('click', (e) => {
 		e.preventDefault();
-		vscode.postMessage({
+		zyraxoncode.postMessage({
 			type: 'reopen-as-text',
 		});
 	});

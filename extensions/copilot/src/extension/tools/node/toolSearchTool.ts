@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
-import * as l10n from '@vscode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
+import * as l10n from '@zyraxoncode/l10n';
 import { ILogService } from '../../../platform/log/common/logService';
 import { CUSTOM_TOOL_SEARCH_NAME } from '../../../platform/networking/common/anthropic';
 import { IToolDeferralService } from '../../../platform/networking/common/toolDeferralService';
-import { LanguageModelTextPart, LanguageModelToolResult } from '../../../vscodeTypes';
+import { LanguageModelTextPart, LanguageModelToolResult } from '../../../zyraxoncodeTypes';
 import { ICopilotModelSpecificTool, ToolRegistry } from '../common/toolsRegistry';
 import { IToolsService } from '../common/toolsService';
 import { IToolEmbeddingsComputer } from '../common/virtualTools/toolEmbeddingsComputer';
@@ -35,7 +35,7 @@ export class ToolSearchTool implements ICopilotModelSpecificTool<IToolSearchPara
 		@ILogService private readonly _logService: ILogService,
 	) { }
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<IToolSearchParams>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<IToolSearchParams>, token: zyraxoncode.CancellationToken) {
 		const { query, limit, candidateTools } = options.input;
 
 		if (!query) {
@@ -44,7 +44,7 @@ export class ToolSearchTool implements ICopilotModelSpecificTool<IToolSearchPara
 			]);
 		}
 
-		const availableTools: readonly vscode.LanguageModelToolInformation[] = candidateTools !== undefined
+		const availableTools: readonly zyraxoncode.LanguageModelToolInformation[] = candidateTools !== undefined
 			? candidateTools.map(tool => ({
 				name: tool.name,
 				description: tool.description,
@@ -82,7 +82,7 @@ ToolRegistry.registerModelSpecificTool(
 		description: 'Search for relevant tools by describing what you need. Returns tool references for tools matching your query. Use this when you need to find a tool but aren\'t sure of its exact name. Check the deferred tools list in your instructions for the full set of deferred tools, and include relevant tool names from that list in your query for more accurate results. Use broad queries to find all related tools in a single call rather than making multiple narrow searches.',
 		tags: [],
 		source: undefined,
-		toolSet: 'vscode',
+		toolSet: 'zyraxoncode',
 		inputSchema: {
 			type: 'object',
 			properties: {
@@ -93,7 +93,7 @@ ToolRegistry.registerModelSpecificTool(
 			},
 			required: ['query'],
 		},
-		fullReferenceName: `vscode/toolSearch`,
+		fullReferenceName: `zyraxoncode/toolSearch`,
 		models: [
 			{ family: 'gpt-5.4' },
 			{ family: 'gpt-5.5' },

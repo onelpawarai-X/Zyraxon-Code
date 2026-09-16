@@ -2,7 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { BasePromptElementProps, PromptElement, Raw } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, Raw } from '@zyraxoncode/prompt-tsx';
 import { ThinkingData } from '../../thinking/common/thinking';
 import { CustomDataPartMimeTypes } from './endpointTypes';
 

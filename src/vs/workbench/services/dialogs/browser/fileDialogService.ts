@@ -44,7 +44,7 @@ export class FileDialogService extends AbstractFileDialogService implements IFil
 
 	protected override addFileSchemaIfNeeded(schema: string, isFolder: boolean): string[] {
 		return (schema === Schemas.untitled) ? [Schemas.file]
-			: (((schema !== Schemas.file) && (!isFolder || (schema !== Schemas.vscodeRemote))) ? [schema, Schemas.file] : [schema]);
+			: (((schema !== Schemas.file) && (!isFolder || (schema !== Schemas.zyraxoncodeRemote))) ? [schema, Schemas.file] : [schema]);
 	}
 
 	async pickFileAndOpen(options: IPickAndOpenOptions): Promise<void> {
@@ -237,7 +237,7 @@ export class FileDialogService extends AbstractFileDialogService implements IFil
 			},
 			{
 				label: localize({ key: 'learnMore', comment: ['&& denotes a mnemonic'] }, "&&Learn More"),
-				run: async () => { await this.openerService.open('https://aka.ms/VSCodeWebLocalFileSystemAccess'); }
+				run: async () => { await this.openerService.open('__ZYRAXKEEP__0_'); }
 			}
 		];
 		if (context === 'open') {
@@ -272,7 +272,7 @@ export class FileDialogService extends AbstractFileDialogService implements IFil
 	}
 
 	private shouldUseSimplified(scheme: string): boolean {
-		return ![Schemas.file, Schemas.vscodeUserData, Schemas.tmp].includes(scheme);
+		return ![Schemas.file, Schemas.zyraxoncodeUserData, Schemas.tmp].includes(scheme);
 	}
 }
 

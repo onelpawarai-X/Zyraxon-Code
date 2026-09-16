@@ -1,11 +1,11 @@
-# @vscode/chat-lib
+# @zyraxoncode/chat-lib
 
 Chat SDK extracted from ZYRAXON Code Copilot Chat.
 
 ## Installation
 
 ```bash
-npm install @vscode/chat-lib
+npm install @zyraxoncode/chat-lib
 ```
 
 ## License

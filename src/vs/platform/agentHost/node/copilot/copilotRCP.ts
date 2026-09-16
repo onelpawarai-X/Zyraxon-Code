@@ -139,7 +139,7 @@ export type InstructionSourceType =
 	/** Instructions loaded from model-specific files. */
 	| 'model'
 	/** Instructions loaded from ZYRAXON Code instruction files. */
-	| 'vscode'
+	| 'zyraxoncode'
 	/** Instructions discovered from nested agent files. */
 	| 'nested-agents'
 	/** Instructions inherited from child instruction files. */

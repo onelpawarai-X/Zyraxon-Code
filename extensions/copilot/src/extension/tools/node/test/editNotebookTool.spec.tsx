@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { afterAll, describe, expect, test } from 'vitest';
-import type { ChatResponseStream, LanguageModelToolInvocationOptions, NotebookDocument } from 'vscode';
+import type { ChatResponseStream, LanguageModelToolInvocationOptions, NotebookDocument } from 'zyraxoncode';
 import { IEndpointProvider } from '../../../../platform/endpoint/common/endpointProvider';
 import { IFileSystemService } from '../../../../platform/filesystem/common/fileSystemService';
 import { ILogService } from '../../../../platform/log/common/logService';
@@ -18,7 +18,7 @@ import { CancellationToken } from '../../../../util/vs/base/common/cancellation'
 import { DisposableStore } from '../../../../util/vs/base/common/lifecycle';
 import { URI } from '../../../../util/vs/base/common/uri';
 import { IInstantiationService } from '../../../../util/vs/platform/instantiation/common/instantiation';
-import { NotebookCellData, NotebookCellKind, NotebookData, NotebookEdit, NotebookRange, Range, TextEdit, Uri } from '../../../../vscodeTypes';
+import { NotebookCellData, NotebookCellKind, NotebookData, NotebookEdit, NotebookRange, Range, TextEdit, Uri } from '../../../../zyraxoncodeTypes';
 import { createExtensionUnitTestingServices } from '../../../test/node/services';
 import { EditNotebookTool, IEditNotebookToolParams } from '../editNotebookTool';
 

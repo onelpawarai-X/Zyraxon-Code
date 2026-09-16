@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 /**
- * Minimal version of {@link vscode.TextDocument}.
+ * Minimal version of {@link zyraxoncode.TextDocument}.
  */
 export interface ITextDocument {
-	readonly uri: vscode.Uri;
+	readonly uri: zyraxoncode.Uri;
 	readonly version: number;
 
-	getText(range?: vscode.Range): string;
+	getText(range?: zyraxoncode.Range): string;
 
-	positionAt(offset: number): vscode.Position;
+	positionAt(offset: number): zyraxoncode.Position;
 }
 

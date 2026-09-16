@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Raw } from '@vscode/prompt-tsx';
+import { Raw } from '@zyraxoncode/prompt-tsx';
 import type { OpenAI } from 'openai';
 import { Response } from '../../../platform/networking/common/fetcherService';
 import { coalesce } from '../../../util/vs/base/common/arrays';
@@ -217,7 +217,7 @@ interface ResponseOutputItemWithPhase {
 }
 
 // ── Responses API tool search types ──────────────────────────────────
-// These match the shapes from https://developers.openai.com/api/docs/guides/tools-tool-search
+// These match the shapes from __ZYRAXKEEP__0_
 
 /** Client-executed tool_search tool definition for the Responses API */
 interface ClientToolSearchTool {
@@ -625,7 +625,7 @@ function rawContentToResponsesContentList(parts: readonly Raw.ChatCompletionCont
  * produced by the Responses API always carry an id beginning with `rs`. Thinking blocks
  * that originated from a different API (e.g. the Anthropic Messages API, whose accumulator
  * generates `thinking_<index>` ids) can leak into a Responses request — most notably via the
- * `vscode.lm` access path, which has no model gate — and their `encrypted_content` is not a
+ * `zyraxoncode.lm` access path, which has no model gate — and their `encrypted_content` is not a
  * valid Responses reasoning blob anyway. Such foreign reasoning items must be dropped, not sent.
  */
 function isResponsesReasoningId(id: string | undefined): boolean {
@@ -998,7 +998,7 @@ interface CapiResponseCompletedEvent extends OpenAI.Responses.ResponseCompletedE
  *
  * Two shapes are observed on the wire and we handle both:
  *  - `content_filter_results` is the per-category structured map defined by the
- *    Azure REST spec ({@link https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter | docs});
+ *    Azure REST spec ({@link __ZYRAXKEEP__1_ | docs});
  *    e.g. `{ hate: { filtered: true, severity: 'high' }, protected_material_text: { filtered: true } }`.
  *  - `content_filter_raw` is a CAPI-internal/legacy passthrough that carries the
  *    raw RAI rule decisions (`{ action: 'BLOCK', label: 'TextCopyright', result: true }`)

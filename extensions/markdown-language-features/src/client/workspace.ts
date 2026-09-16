@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { ITextDocument } from '../types/textDocument';
 import { Disposable } from '../util/dispose';
 import { isMarkdownFile, looksLikeMarkdownPath } from '../util/file';
@@ -17,7 +17,7 @@ import { ResourceMap } from '../util/resourceMap';
  */
 export class VsCodeMdWorkspace extends Disposable {
 
-	readonly #watcher: vscode.FileSystemWatcher | undefined;
+	readonly #watcher: zyraxoncode.FileSystemWatcher | undefined;
 
 	readonly #documentCache = new ResourceMap<ITextDocument>();
 
@@ -26,7 +26,7 @@ export class VsCodeMdWorkspace extends Disposable {
 	constructor() {
 		super();
 
-		this.#watcher = this._register(vscode.workspace.createFileSystemWatcher('**/*.md'));
+		this.#watcher = this._register(zyraxoncode.workspace.createFileSystemWatcher('**/*.md'));
 
 		this._register(this.#watcher.onDidChange(async resource => {
 			this.#documentCache.delete(resource);
@@ -36,26 +36,26 @@ export class VsCodeMdWorkspace extends Disposable {
 			this.#documentCache.delete(resource);
 		}));
 
-		this._register(vscode.workspace.onDidOpenTextDocument(e => {
+		this._register(zyraxoncode.workspace.onDidOpenTextDocument(e => {
 			this.#documentCache.delete(e.uri);
 		}));
 
-		this._register(vscode.workspace.onDidCloseTextDocument(e => {
+		this._register(zyraxoncode.workspace.onDidCloseTextDocument(e => {
 			this.#documentCache.delete(e.uri);
 		}));
 	}
 
-	#isRelevantMarkdownDocument(doc: vscode.TextDocument) {
-		return isMarkdownFile(doc) && doc.uri.scheme !== 'vscode-bulkeditpreview';
+	#isRelevantMarkdownDocument(doc: zyraxoncode.TextDocument) {
+		return isMarkdownFile(doc) && doc.uri.scheme !== 'zyraxoncode-bulkeditpreview';
 	}
 
-	public async getOrLoadMarkdownDocument(resource: vscode.Uri): Promise<ITextDocument | undefined> {
+	public async getOrLoadMarkdownDocument(resource: zyraxoncode.Uri): Promise<ITextDocument | undefined> {
 		const existing = this.#documentCache.get(resource);
 		if (existing) {
 			return existing;
 		}
 
-		const matchingDocument = vscode.workspace.textDocuments.find((doc) => this.#isRelevantMarkdownDocument(doc) && doc.uri.toString() === resource.toString());
+		const matchingDocument = zyraxoncode.workspace.textDocuments.find((doc) => this.#isRelevantMarkdownDocument(doc) && doc.uri.toString() === resource.toString());
 		if (matchingDocument) {
 			this.#documentCache.set(resource, matchingDocument);
 			return matchingDocument;
@@ -66,7 +66,7 @@ export class VsCodeMdWorkspace extends Disposable {
 		}
 
 		try {
-			const bytes = await vscode.workspace.fs.readFile(resource);
+			const bytes = await zyraxoncode.workspace.fs.readFile(resource);
 
 			// We assume that markdown is in UTF-8
 			const text = this.#utf8Decoder.decode(bytes);

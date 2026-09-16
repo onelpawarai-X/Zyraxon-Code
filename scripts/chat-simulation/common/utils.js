@@ -100,7 +100,7 @@ function getBuiltinExtensionsDir(exePath) {
 
 /**
  * Resolve a build arg to an executable path.
- * Version strings are downloaded via @vscode/test-electron.
+ * Version strings are downloaded via @zyraxoncode/test-electron.
  * @param {string | undefined} buildArg
  * @returns {Promise<string>}
  */
@@ -110,8 +110,8 @@ async function resolveBuild(buildArg) {
 	}
 	if (isVersionString(buildArg)) {
 		console.log(`[chat-simulation] Downloading ZYRAXON Code ${buildArg}...`);
-		const { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath } = require('@vscode/test-electron');
-		const exePath = await downloadAndUnzipVSCode(buildArg);
+		const { downloadAndUnzipZyraxonCode, resolveCliArgsFromZyraxonCodeExecutablePath } = require('@zyraxoncode/test-electron');
+		const exePath = await downloadAndUnzipZyraxonCode(buildArg);
 		console.log(`[chat-simulation] Downloaded: ${exePath}`);
 
 		// Check if copilot is already bundled as a built-in extension
@@ -128,7 +128,7 @@ async function resolveBuild(buildArg) {
 			// --extensions-dir=DATA_DIR/extensions.
 			const extDir = path.join(DATA_DIR, 'extensions');
 			fs.mkdirSync(extDir, { recursive: true });
-			const [cli, ...cliArgs] = resolveCliArgsFromVSCodeExecutablePath(exePath);
+			const [cli, ...cliArgs] = resolveCliArgsFromZyraxonCodeExecutablePath(exePath);
 			const extId = 'GitHub.copilot-chat';
 			console.log(`[chat-simulation] Installing ${extId} into ${extDir}...`);
 			const { spawnSync } = require('child_process');
@@ -251,9 +251,9 @@ function buildArgs(userDataDir, extDir, logsDir, { isDevBuild = true, extHostIns
 		'--enable-smoke-test-driver',
 		'--disable-extensions',
 	];
-	// vscode-api-tests only exists in the dev build
+	// zyraxoncode-api-tests only exists in the dev build
 	if (isDevBuild) {
-		args.push('--disable-extension=vscode.vscode-api-tests');
+		args.push('--disable-extension=zyraxoncode.zyraxoncode-api-tests');
 	}
 	if (process.platform !== 'darwin') {
 		args.push('--disable-gpu');
@@ -302,7 +302,7 @@ function writeSettings(userDataDir, mockServer, overrides) {
  * @returns {{ userDataDir: string, extDir: string, logsDir: string }}
  */
 function prepareRunDir(runId, mockServer, settingsOverrides) {
-	const tmpBase = path.join(os.tmpdir(), 'vscode-chat-simulation');
+	const tmpBase = path.join(os.tmpdir(), 'zyraxoncode-chat-simulation');
 	const userDataDir = path.join(tmpBase, `run-${runId}`);
 	const extDir = path.join(DATA_DIR, 'extensions');
 	const logsDir = path.join(tmpBase, 'logs', `run-${runId}`);
@@ -357,7 +357,7 @@ async function connectToExtHostInspector(port, opts = {}) {
 	let wsUrl;
 	while (Date.now() < deadline) {
 		try {
-			const targets = await getJson(`http://127.0.0.1:${port}/json`);
+			const targets = await getJson(`__ZYRAXKEEP__0_{port}/json`);
 			if (targets.length > 0 && targets[0].webSocketDebuggerUrl) {
 				wsUrl = targets[0].webSocketDebuggerUrl;
 				break;
@@ -464,7 +464,7 @@ async function waitForCDP(port, timeoutMs = 60_000) {
 	const deadline = Date.now() + timeoutMs;
 	while (Date.now() < deadline) {
 		try {
-			await getJson(`http://127.0.0.1:${port}/json/version`);
+			await getJson(`__ZYRAXKEEP__1_{port}/json/version`);
 			return;
 		} catch {
 			await new Promise(r => setTimeout(r, 500));
@@ -512,7 +512,7 @@ let nextPort = 19222;
  * @param {{ verbose?: boolean }} [opts]
  * @returns {Promise<{ page: import('playwright').Page, browser: import('playwright').Browser, close: () => Promise<void> }>}
  */
-async function launchVSCode(executable, launchArgs, env, opts = {}) {
+async function launchZyraxonCode(executable, launchArgs, env, opts = {}) {
 	const { chromium } = require('playwright');
 	const port = nextPort++;
 
@@ -546,7 +546,7 @@ async function launchVSCode(executable, launchArgs, env, opts = {}) {
 		throw e;
 	}
 
-	const browser = await chromium.connectOverCDP(`http://127.0.0.1:${port}`);
+	const browser = await chromium.connectOverCDP(`__ZYRAXKEEP__2_{port}`);
 	const page = await findWorkbenchPage(browser);
 
 	return {
@@ -582,7 +582,7 @@ async function launchVSCode(executable, launchArgs, env, opts = {}) {
 			// Kill crashpad handler — it self-daemonizes and outlives the
 			// parent. Wait briefly for it to detach, then kill by pattern.
 			await new Promise(r => setTimeout(r, 500));
-			try { execSync('pkill -9 -f crashpad_handler.*vscode-chat-simulation', { stdio: 'ignore' }); }
+			try { execSync('pkill -9 -f crashpad_handler.*zyraxoncode-chat-simulation', { stdio: 'ignore' }); }
 			catch { }
 		},
 	};
@@ -840,7 +840,7 @@ module.exports = {
 	linearRegressionSlope,
 	summarize,
 	markDuration,
-	launchVSCode,
+	launchZyraxonCode,
 	getNextExtHostInspectPort,
 	connectToExtHostInspector,
 };

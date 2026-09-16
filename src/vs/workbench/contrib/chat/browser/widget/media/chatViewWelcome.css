@@ -57,7 +57,7 @@ div.chat-welcome-view {
 	}
 
 	& > .chat-welcome-view-icon .codicon {
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 		font-size: 40px;
 		margin-bottom: 24px;
 	}
@@ -88,7 +88,7 @@ div.chat-welcome-view {
 	& > .chat-welcome-view-title {
 		font-size: 13px;
 		font-weight: 600;
-		color: var(--vscode-foreground);
+		color: var(--zyraxoncode-foreground);
 		margin-top: 5px;
 		text-align: center;
 		line-height: normal;
@@ -101,17 +101,17 @@ div.chat-welcome-view {
 		max-width: 280px;
 		padding: 0 20px;
 		margin: 8px auto 0;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 		font-size: 12px;
 
 		a {
-			color: var(--vscode-textLink-foreground);
+			color: var(--zyraxoncode-textLink-foreground);
 		}
 
 		a:hover,
 		a:focus {
 			text-decoration: underline;
-			outline: 1px solid var(--vscode-focusBorder);
+			outline: 1px solid var(--zyraxoncode-focusBorder);
 		}
 
 		p {
@@ -129,13 +129,13 @@ div.chat-welcome-view {
 		margin: 10px 5px 0px;
 
 		a {
-			color: var(--vscode-textLink-foreground);
+			color: var(--zyraxoncode-textLink-foreground);
 		}
 
 		a:hover,
 		a:focus {
 			text-decoration: underline;
-			outline: 1px solid var(--vscode-focusBorder);
+			outline: 1px solid var(--zyraxoncode-focusBorder);
 		}
 
 		.rendered-markdown {
@@ -157,7 +157,7 @@ div.chat-welcome-view {
 	}
 
 	& > .chat-welcome-view-disclaimer {
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 		text-align: center;
 		margin: 0;
 		max-width: 256px;
@@ -169,13 +169,13 @@ div.chat-welcome-view {
 		}
 
 		a {
-			color: var(--vscode-textLink-foreground);
+			color: var(--zyraxoncode-textLink-foreground);
 		}
 
 		a:hover,
 		a:focus {
 			text-decoration: underline;
-			outline: 1px solid var(--vscode-focusBorder);
+			outline: 1px solid var(--zyraxoncode-focusBorder);
 		}
 	}
 }
@@ -193,14 +193,14 @@ div.chat-welcome-view {
 	/* Extra top padding for title */
 	padding: 32px 16px 8px 16px;
 	/* Avoids bleeding into other content since we use absolute positioning */
-	background: var(--vscode-chat-list-background);
+	background: var(--zyraxoncode-chat-list-background);
 
 	.chat-welcome-view-suggested-prompts-title {
 		position: absolute;
 		top: 8px;
 		left: 16px;
 		font-size: 12px;
-		color: var(--vscode-descriptionForeground);
+		color: var(--zyraxoncode-descriptionForeground);
 		margin: 0;
 		text-align: left;
 	}
@@ -212,9 +212,9 @@ div.chat-welcome-view {
 		height: 20px;
 		padding: 0 6px;
 		border-radius: 4px;
-		background-color: var(--vscode-editorWidget-background);
+		background-color: var(--zyraxoncode-editorWidget-background);
 		cursor: pointer;
-		border: 1px solid var(--vscode-chat-requestBorder, var(--vscode-input-background, transparent));
+		border: 1px solid var(--zyraxoncode-chat-requestBorder, var(--zyraxoncode-input-background, transparent));
 		width: fit-content;
 		margin: 0;
 		box-sizing: border-box;
@@ -222,12 +222,12 @@ div.chat-welcome-view {
 
 		& > .chat-welcome-view-suggested-prompt-title {
 			font-size: 12px;
-			color: var(--vscode-editorWidget-foreground);
+			color: var(--zyraxoncode-editorWidget-foreground);
 			white-space: nowrap;
 		}
 	}
 
 	> .chat-welcome-view-suggested-prompt:hover {
-		background-color: var(--vscode-list-hoverBackground);
+		background-color: var(--zyraxoncode-list-hoverBackground);
 	}
 }

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 import { TelemetryCorrelationId } from '../../../util/common/telemetryCorrelationId';
 

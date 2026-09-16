@@ -20,7 +20,7 @@ import type { Annotation } from '../state/protocol/state.js';
  */
 
 /** Namespaced key under {@link Annotation._meta} carrying feedback semantics. */
-export const FEEDBACK_ANNOTATION_META_KEY = 'vscode.agentFeedback';
+export const FEEDBACK_ANNOTATION_META_KEY = 'zyraxoncode.agentFeedback';
 
 /**
  * Name of the agent host server tool that reveals review comments the user has

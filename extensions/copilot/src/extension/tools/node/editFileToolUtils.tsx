@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { t } from '@vscode/l10n';
+import { t } from '@zyraxoncode/l10n';
 import { realpath } from 'fs/promises';
 import { homedir } from 'os';
 import * as path from 'path';
-import type { LanguageModelChat, PreparedToolInvocation } from 'vscode';
+import type { LanguageModelChat, PreparedToolInvocation } from 'zyraxoncode';
 import { ToolName } from '../common/toolNames';
 import { IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { ICustomInstructionsService } from '../../../platform/customInstructions/common/customInstructionsService';
@@ -34,7 +34,7 @@ import { isDefined } from '../../../util/vs/base/common/types';
 import { URI } from '../../../util/vs/base/common/uri';
 import { Position as EditorPosition } from '../../../util/vs/editor/common/core/position';
 import { ServicesAccessor } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { EndOfLine, Position, Range, TextEdit } from '../../../vscodeTypes';
+import { EndOfLine, Position, Range, TextEdit } from '../../../zyraxoncodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { formatUriForFileWidget } from '../common/toolUtils';
 
@@ -119,7 +119,7 @@ export async function formatDiffAsUnified(accessor: ServicesAccessor, uri: URI, 
 
 	const result: string[] = [
 		'```diff:' + getLanguageId(uri),
-		`<vscode_codeblock_uri>${uri.toString()}</vscode_codeblock_uri>`
+		`<zyraxoncode_codeblock_uri>${uri.toString()}</zyraxoncode_codeblock_uri>`
 	];
 	const oldLines = oldContent.split('\n');
 	const newLines = newContent.split('\n');
@@ -710,7 +710,7 @@ export async function applyEdit(
 }
 
 const ALWAYS_CHECKED_EDIT_PATTERNS: Readonly<Record<string, boolean>> = {
-	'**/.vscode/*.json': false,
+	'**/.zyraxoncode/*.json': false,
 	// Markdown files in these folders are loaded as custom agents; their
 	// frontmatter can declare a `hooks:` block that runs shell commands during
 	// the agent lifecycle, so writing them must always be confirmed.

@@ -61,9 +61,9 @@ export class DynamicEditorConfigurations extends Disposable implements IWorkbenc
 		// List some editor types that the above `AUTO_LOCK_EXTRA_EDITORS`
 		// already covers to avoid duplicates.
 
-		'vscode-interactive-input',
+		'zyraxoncode-interactive-input',
 		'interactive',
-		'vscode.markdown.preview.editor'
+		'zyraxoncode.markdown.preview.editor'
 	]);
 
 	private readonly configurationRegistry = Registry.as<IConfigurationRegistry>(ConfigurationExtensions.Configuration);
@@ -165,7 +165,7 @@ export class DynamicEditorConfigurations extends Disposable implements IWorkbenc
 			properties: {
 				[editorsAssociationsSettingId]: {
 					type: 'object',
-					markdownDescription: localize('editor.editorAssociations', "Configure [glob patterns](https://aka.ms/vscode-glob-patterns) to editors (for example `\"*.hex\": \"hexEditor.hexedit\"`). These have precedence over the default behavior."),
+					markdownDescription: localize('editor.editorAssociations', "Configure [glob patterns](__ZYRAXKEEP__0_) to editors (for example `\"*.hex\": \"hexEditor.hexedit\"`). These have precedence over the default behavior."),
 					patternProperties: {
 						'.*': {
 							type: 'string',
@@ -186,7 +186,7 @@ export class DynamicEditorConfigurations extends Disposable implements IWorkbenc
 			properties: {
 				[diffEditorsAssociationsSettingId]: {
 					type: 'object',
-					markdownDescription: localize('editor.diffEditorAssociations', "Configure [glob patterns](https://aka.ms/vscode-glob-patterns) to editors for diff views (for example `\"*.md\": \"vscode.markdown.preview.editor\"`). These override `workbench.editorAssociations` for diffs."),
+					markdownDescription: localize('editor.diffEditorAssociations', "Configure [glob patterns](__ZYRAXKEEP__1_) to editors for diff views (for example `\"*.md\": \"zyraxoncode.markdown.preview.editor\"`). These override `workbench.editorAssociations` for diffs."),
 					patternProperties: {
 						'.*': {
 							type: 'string',

@@ -51,7 +51,7 @@ type ReasoningEffort = NonNullable<SessionConfig['reasoningEffort']>;
 
 const ContextTiers = ['default', 'long_context'] as const;
 type ContextTier = NonNullable<SessionConfig['contextTier']>;
-const AGENT_HOST_COPILOT_CLIENT_NAME = 'vscode-agent-host';
+const AGENT_HOST_COPILOT_CLIENT_NAME = 'zyraxoncode-agent-host';
 
 type UserInputHandler = NonNullable<SessionConfig['onUserInputRequest']>;
 type UserInputRequest = Parameters<UserInputHandler>[0];

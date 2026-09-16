@@ -14,7 +14,7 @@ import { TextDocumentSaveReason, WorkspaceEdit as WorksapceEditConverter } from 
 import { WorkspaceEdit } from './extHostTypes.js';
 import { SaveReason } from '../../common/editor.js';
 import { SerializableObjectWithBuffers } from '../../services/extensions/common/proxyIdentifier.js';
-import { NotebookDocumentWillSaveEvent } from 'vscode';
+import { NotebookDocumentWillSaveEvent } from 'zyraxoncode';
 
 interface IExtensionListener<E> {
 	extension: IExtensionDescription;

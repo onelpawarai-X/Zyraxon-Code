@@ -73,7 +73,7 @@ export const terminalSendSequenceCommand = async (accessor: ServicesAccessor, ar
 			text = processedText;
 		}
 
-		const activeWorkspaceRootUri = historyService.getLastActiveWorkspaceRoot(instance.hasRemoteAuthority ? Schemas.vscodeRemote : Schemas.file);
+		const activeWorkspaceRootUri = historyService.getLastActiveWorkspaceRoot(instance.hasRemoteAuthority ? Schemas.zyraxoncodeRemote : Schemas.file);
 		const lastActiveWorkspaceRoot = activeWorkspaceRootUri ? workspaceContextService.getWorkspaceFolder(activeWorkspaceRootUri) ?? undefined : undefined;
 		const resolvedText = await configurationResolverService.resolveAsync(lastActiveWorkspaceRoot, text);
 		instance.sendText(resolvedText, false);
@@ -153,7 +153,7 @@ if (isWindows) {
 
 // Map certain keybindings in pwsh to unused keys which get handled by PSReadLine handlers in the
 // shell integration script. This allows keystrokes that cannot be sent via VT sequences to work.
-// See https://github.com/microsoft/terminal/issues/879#issuecomment-497775007
+// See __ZYRAXKEEP__0_
 registerSendSequenceKeybinding('\x1b[24~a', { // F12,a -> ctrl+space (MenuComplete)
 	when: ContextKeyExpr.and(TerminalContextKeys.focus, ContextKeyExpr.equals(TerminalContextKeyStrings.ShellType, GeneralShellType.PowerShell), TerminalContextKeys.terminalShellIntegrationEnabled, ContextKeyExpr.equals(`config.${TerminalSettingId.EnableWin32InputMode}`, true), CONTEXT_ACCESSIBILITY_MODE_ENABLED.negate()),
 	primary: KeyMod.CtrlCmd | KeyCode.Space,
@@ -180,7 +180,7 @@ registerSendSequenceKeybinding('\x1b[1;2H', { // Shift+home
 
 // Map alt+arrow to ctrl+arrow to allow word navigation in most shells to just work with alt. This
 // is non-standard behavior, but a lot of terminals act like this (see
-// https://github.com/microsoft/vscode/issues/190629). Note that macOS uses different sequences here
+// __ZYRAXKEEP__1_). Note that macOS uses different sequences here
 // to get the desired behavior.
 registerSendSequenceKeybinding('\x1b[1;5A', {
 	when: ContextKeyExpr.and(TerminalContextKeys.focus),

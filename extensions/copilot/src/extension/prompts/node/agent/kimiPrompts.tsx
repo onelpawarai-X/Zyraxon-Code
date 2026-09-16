@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { isKimiFamily } from '../../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../../platform/networking/common/networking';
 import { agenticBrowserTools, ToolName } from '../../../tools/common/toolNames';
@@ -73,11 +73,11 @@ class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				{tools[ToolName.Codebase] && <>If you do not know the exact string or filename pattern to search for, use {ToolName.Codebase} for semantic search across the workspace.<br /></>}
 				{tools[ToolName.CoreRunInTerminal] && <>Do not call {ToolName.CoreRunInTerminal} multiple times in parallel. Run one command and wait for the output before running the next command.<br /></>}
 				{tools[ToolName.ExecutionSubagent] && <>Do not call {ToolName.ExecutionSubagent} multiple times in parallel. Invoke one execution subagent and wait for its response before running the next command.<br /></>}
-				When invoking a tool that takes a file path, always use the absolute file path. If the file has a scheme like untitled: or vscode-userdata:, use a URI with the scheme.<br />
+				When invoking a tool that takes a file path, always use the absolute file path. If the file has a scheme like untitled: or zyraxoncode-userdata:, use a URI with the scheme.<br />
 				{tools[ToolName.CoreRunInTerminal] && <>NEVER try to edit a file by running terminal commands unless the user specifically asks for it.<br /></>}
 				{!tools.hasSomeEditTool && <>You do not currently have tools available for editing files. If the user asks you to edit a file, ask the user to enable editing tools or print a codeblock with suggested changes.<br /></>}
 				{!tools[ToolName.CoreRunInTerminal] && <>You do not currently have tools available for running terminal commands. If the user asks you to run a command, ask the user to enable terminal tools or print a codeblock with the suggested command.<br /></>}
-				{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Microsoft Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).<br /></>}
+				{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as visualizing or validating UI changes. ALWAYS use Google Chrome — NEVER use Zyraxon Edge. For account-related browser work, open real Chrome and ask the user which profile to use; then use Screen Vision as the primary interaction method. For general browsing tasks, use Playwright Chromium (built-in headless browser).<br /></>}
 				Tools can be disabled by the user. You may see tools used previously in the conversation that are not currently available. Only use tools that are currently available.
 			</Tag>
 

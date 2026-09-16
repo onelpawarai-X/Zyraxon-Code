@@ -15,7 +15,7 @@ export function applySCMTools(server: McpServer, appService: ApplicationService)
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_scm_open',
+	// 	'zyraxoncode_automation_scm_open',
 	// 	'Open the Source Control Management viewlet',
 	// 	async () => {
 	// 		await app.workbench.scm.openSCMViewlet();
@@ -30,7 +30,7 @@ export function applySCMTools(server: McpServer, appService: ApplicationService)
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_scm_wait_for_change',
+	// 	'zyraxoncode_automation_scm_wait_for_change',
 	// 	'Wait for a specific change to appear in SCM',
 	// 	{
 	// 		name: z.string().describe('Name of the file change to wait for'),
@@ -50,7 +50,7 @@ export function applySCMTools(server: McpServer, appService: ApplicationService)
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_scm_refresh',
+	// 	'zyraxoncode_automation_scm_refresh',
 	// 	'Refresh the SCM viewlet',
 	// 	async () => {
 	// 		await app.workbench.scm.refreshSCMViewlet();
@@ -65,7 +65,7 @@ export function applySCMTools(server: McpServer, appService: ApplicationService)
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_scm_open_change',
+	// 	'zyraxoncode_automation_scm_open_change',
 	// 	'Open a specific change in the SCM viewlet',
 	// 	{
 	// 		name: z.string().describe('Name of the file change to open')
@@ -84,7 +84,7 @@ export function applySCMTools(server: McpServer, appService: ApplicationService)
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_scm_stage',
+	// 	'zyraxoncode_automation_scm_stage',
 	// 	'Stage a specific file change',
 	// 	{
 	// 		name: z.string().describe('Name of the file to stage')
@@ -103,7 +103,7 @@ export function applySCMTools(server: McpServer, appService: ApplicationService)
 
 	// Playwright can probably figure this one out
 	// server.tool(
-	// 	'vscode_automation_scm_unstage',
+	// 	'zyraxoncode_automation_scm_unstage',
 	// 	'Unstage a specific file change',
 	// 	{
 	// 		name: z.string().describe('Name of the file to unstage')
@@ -121,7 +121,7 @@ export function applySCMTools(server: McpServer, appService: ApplicationService)
 	// );
 
 	tools.push(server.tool(
-		'vscode_automation_scm_commit',
+		'zyraxoncode_automation_scm_commit',
 		'Commit staged changes with a message',
 		{
 			message: z.string().describe('Commit message')

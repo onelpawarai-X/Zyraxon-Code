@@ -49,7 +49,7 @@ Sync the current session branch with its upstream branch, or publish the current
 4. If the current session branch does not have an upstream branch:
    4.1. Determine the remote to publish to.
       - If there is only one remote, use it.
-      - If there are multiple remotes, use the #tool:vscode/askQuestions tool to ask which remote to use.
+      - If there are multiple remotes, use the #tool:zyraxoncode/askQuestions tool to ask which remote to use.
    4.2. Publish the current branch and set upstream in one step.
       ```
       git push -u <remote> HEAD

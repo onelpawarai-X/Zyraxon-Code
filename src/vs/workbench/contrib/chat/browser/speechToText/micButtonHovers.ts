@@ -30,7 +30,7 @@ function asHoverContent(title: string, description: string): IManagedHoverConten
 
 /**
  * Names the model dictation actually uses, so it is obvious that `dictation.model`
- * governs this button and not Voice Mode (see microsoft/vscode-internalbacklog#8600).
+ * governs this button and not Voice Mode (see zyraxon/zyraxoncode-internalbacklog#8600).
  */
 function getDictationDescription(configurationService: IConfigurationService): string {
 	const modelId = configurationService.getValue<string>(DICTATION_MODEL_SETTING)?.trim();

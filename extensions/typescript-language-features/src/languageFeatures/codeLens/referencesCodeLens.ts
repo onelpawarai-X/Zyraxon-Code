@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { DocumentSelector } from '../../configuration/documentSelector';
 import { LanguageDescription } from '../../configuration/languageDescription';
 import { CachedResponse } from '../../tsServer/cachedResponse';
@@ -39,7 +39,7 @@ export class TypeScriptReferencesCodeLensProvider extends TypeScriptBaseCodeLens
 		this._register(this._showOnAllFunctions.onDidChange(() => this.changeEmitter.fire()));
 	}
 
-	override async provideCodeLenses(document: vscode.TextDocument, token: vscode.CancellationToken): Promise<ReferencesCodeLens[]> {
+	override async provideCodeLenses(document: zyraxoncode.TextDocument, token: zyraxoncode.CancellationToken): Promise<ReferencesCodeLens[]> {
 		const enabled = this._enabled.getValue(document);
 		if (!enabled) {
 			return [];
@@ -48,7 +48,7 @@ export class TypeScriptReferencesCodeLensProvider extends TypeScriptBaseCodeLens
 		return super.provideCodeLenses(document, token);
 	}
 
-	public async resolveCodeLens(codeLens: ReferencesCodeLens, token: vscode.CancellationToken): Promise<vscode.CodeLens> {
+	public async resolveCodeLens(codeLens: ReferencesCodeLens, token: zyraxoncode.CancellationToken): Promise<zyraxoncode.CodeLens> {
 		const args = typeConverters.Position.toFileLocationRequestArgs(codeLens.file, codeLens.range.start);
 		const response = await this.client.execute('references', args, token, {
 			lowPriority: true,
@@ -75,17 +75,17 @@ export class TypeScriptReferencesCodeLensProvider extends TypeScriptBaseCodeLens
 		return codeLens;
 	}
 
-	private getCodeLensLabel(locations: ReadonlyArray<vscode.Location>): string {
+	private getCodeLensLabel(locations: ReadonlyArray<zyraxoncode.Location>): string {
 		return locations.length === 1
-			? vscode.l10n.t("1 reference")
-			: vscode.l10n.t("{0} references", locations.length);
+			? zyraxoncode.l10n.t("1 reference")
+			: zyraxoncode.l10n.t("{0} references", locations.length);
 	}
 
 	protected extractSymbol(
-		document: vscode.TextDocument,
+		document: zyraxoncode.TextDocument,
 		item: Proto.NavigationTree,
 		parent: Proto.NavigationTree | undefined
-	): vscode.Range | undefined {
+	): zyraxoncode.Range | undefined {
 		if (parent && parent.kind === PConst.Kind.enum) {
 			return getSymbolRange(document, item);
 		}
@@ -125,7 +125,7 @@ export class TypeScriptReferencesCodeLensProvider extends TypeScriptBaseCodeLens
 			case PConst.Kind.constructorImplementation:
 			case PConst.Kind.memberVariable:
 				// Don't show if child and parent have same start
-				// For https://github.com/microsoft/vscode/issues/90396
+				// For __ZYRAXKEEP__0_
 				if (parent &&
 					typeConverters.Position.fromLocation(parent.spans[0].start).isEqual(typeConverters.Position.fromLocation(item.spans[0].start))
 				) {
@@ -156,7 +156,7 @@ export function register(
 		requireHasModifiedUnifiedConfig(Config.enabled, language.id),
 		requireSomeCapability(client, ClientCapability.Semantic),
 	], () => {
-		return vscode.languages.registerCodeLensProvider(selector.semantic,
+		return zyraxoncode.languages.registerCodeLensProvider(selector.semantic,
 			new TypeScriptReferencesCodeLensProvider(client, cachedResponse));
 	});
 }

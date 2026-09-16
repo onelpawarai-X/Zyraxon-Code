@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IInteractionService } from '../../../platform/chat/common/interactionService';
@@ -17,7 +17,7 @@ import { ISimulationTestContext } from '../../../platform/simulationTestContext/
 import { ITelemetryService } from '../../../platform/telemetry/common/telemetry';
 import { StopWatch } from '../../../util/vs/base/common/stopwatch';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { NewSymbolName, NewSymbolNameTag, NewSymbolNameTriggerKind } from '../../../vscodeTypes';
+import { NewSymbolName, NewSymbolNameTag, NewSymbolNameTriggerKind } from '../../../zyraxoncodeTypes';
 import { PromptRenderer } from '../../prompts/node/base/promptRenderer';
 import { enforceNamingConvention, guessNamingConvention, NamingConvention } from '../common/namingConvention';
 import { RenameSuggestionsPrompt } from './renameSuggestionsPrompt';
@@ -48,7 +48,7 @@ enum ProvideCallCancellationReason {
 	AfterFetchStarted = 'afterFetchStarted',
 }
 
-export class RenameSuggestionsProvider implements vscode.NewSymbolNamesProvider {
+export class RenameSuggestionsProvider implements zyraxoncode.NewSymbolNamesProvider {
 
 	public readonly supportsAutomaticTriggerKind: Promise<boolean>;
 
@@ -81,7 +81,7 @@ export class RenameSuggestionsProvider implements vscode.NewSymbolNamesProvider 
 	 * @throws {Error} with `message = 'CopilotFeatureUnavailableOrDisabled' if the feature is not available
 	 * @throws {Error} with `message = 'CopilotIgnoredDocument' if the document is Copilot-ignored
 	 */
-	async provideNewSymbolNames(_document: vscode.TextDocument, range: vscode.Range, triggerKind: NewSymbolNameTriggerKind, token: vscode.CancellationToken): Promise<NewSymbolName[] | null> {
+	async provideNewSymbolNames(_document: zyraxoncode.TextDocument, range: zyraxoncode.Range, triggerKind: NewSymbolNameTriggerKind, token: zyraxoncode.CancellationToken): Promise<NewSymbolName[] | null> {
 		const document = TextDocumentSnapshot.create(_document);
 
 		let cancellationReason: ProvideCallCancellationReason = ProvideCallCancellationReason.None;
@@ -157,7 +157,7 @@ export class RenameSuggestionsProvider implements vscode.NewSymbolNamesProvider 
 
 						// @ulugbekna: only show the quota exceeded dialog when the user manually invoked rename suggestions.
 						// For automatic triggers (e.g., when pressing F2), showing a modal dialog steals focus from the
-						// rename widget and cancels the user's rename action - see https://github.com/microsoft/vscode/issues/319414
+						// rename widget and cancels the user's rename action - see __ZYRAXKEEP__0_
 						if (RenameSuggestionsProvider.shouldShowQuotaExceededDialog(triggerKind, fetchResult.type, this._authService.copilotToken?.isNoAuthUser ?? false)) {
 							await this._notificationService.showQuotaExceededDialog({ isNoAuthUser: this._authService.copilotToken?.isNoAuthUser ?? false });
 						}
@@ -241,7 +241,7 @@ export class RenameSuggestionsProvider implements vscode.NewSymbolNamesProvider 
 	// - idea: include hover info (i.e., usually type info & corresponding document) of the symbol being renamed in the prompt
 	// - idea: include usages of the symbol being renamed in the prompt
 	// - idea: include peer symbols (e.g., other methods in the same class) in the prompt for copilot to see conventions in the code
-	private _computePrompt(document: TextDocumentSnapshot, range: vscode.Range, chatEndpoint: IChatEndpoint, token: vscode.CancellationToken) {
+	private _computePrompt(document: TextDocumentSnapshot, range: zyraxoncode.Range, chatEndpoint: IChatEndpoint, token: zyraxoncode.CancellationToken) {
 		const promptRenderer = PromptRenderer.create(
 			this._instaService,
 			chatEndpoint,
@@ -296,7 +296,7 @@ export class RenameSuggestionsProvider implements vscode.NewSymbolNamesProvider 
 	 *
 	 * The dialog is only shown for manually-invoked rename suggestions ({@link NewSymbolNameTriggerKind.Invoke}).
 	 * For automatic triggers (e.g., when pressing F2), showing a modal dialog steals focus from the rename
-	 * widget and cancels the user's rename action - see https://github.com/microsoft/vscode/issues/319414
+	 * widget and cancels the user's rename action - see __ZYRAXKEEP__1_
 	 */
 	public static shouldShowQuotaExceededDialog(triggerKind: NewSymbolNameTriggerKind, fetchResultType: ChatFetchResponseType, isNoAuthUser: boolean): boolean {
 		if (triggerKind !== NewSymbolNameTriggerKind.Invoke) {

@@ -5,13 +5,13 @@
 
 import { registerAction2 } from '../../platform/actions/common/actions.js';
 import { registerWorkbenchContribution2, WorkbenchPhase } from '../../workbench/common/contributions.js';
-import { OpenInVSCodeAction, OpenInVSCodeWidgetContribution } from './actions/vscodeActions.js';
+import { OpenInZyraxonCodeAction, OpenInZyraxonCodeWidgetContribution } from './actions/zyraxoncodeActions.js';
 
 // Actions
 (function registerActions(): void {
-	registerAction2(OpenInVSCodeAction);
+	registerAction2(OpenInZyraxonCodeAction);
 })();
 
 (function registerWorkbenchContributions(): void {
-	registerWorkbenchContribution2(OpenInVSCodeWidgetContribution.ID, OpenInVSCodeWidgetContribution, WorkbenchPhase.BlockRestore);
+	registerWorkbenchContribution2(OpenInZyraxonCodeWidgetContribution.ID, OpenInZyraxonCodeWidgetContribution, WorkbenchPhase.BlockRestore);
 })();

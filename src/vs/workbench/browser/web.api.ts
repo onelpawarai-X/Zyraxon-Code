@@ -200,7 +200,7 @@ export interface IWorkbenchConstructionOptions {
 	/**
 	 * A provider for discovering and connecting to dev tunnel agent hosts.
 	 *
-	 * The embedder (e.g. vscode.dev) implements this to handle tunnel listing
+	 * The embedder (e.g. zyraxoncode.dev) implements this to handle tunnel listing
 	 * and relay WebSocket proxying. If not provided, the sessions workbench
 	 * will not be able to discover tunnel-based agent hosts.
 	 */
@@ -446,7 +446,7 @@ export interface IResourceUriProvider {
 }
 
 /**
- * The identifier of an extension in the format: `PUBLISHER.NAME`. For example: `vscode.csharp`
+ * The identifier of an extension in the format: `PUBLISHER.NAME`. For example: `zyraxoncode.csharp`
  */
 export type ExtensionId = string;
 
@@ -624,7 +624,7 @@ export interface ICommand {
 
 	/**
 	 * An identifier for the command. Commands can be executed from extensions
-	 * using the `vscode.commands.executeCommand` API using that command ID.
+	 * using the `zyraxoncode.commands.executeCommand` API using that command ID.
 	 */
 	id: string;
 

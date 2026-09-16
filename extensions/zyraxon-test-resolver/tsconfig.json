@@ -1,0 +1,22 @@
+{
+	"extends": "../tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "./src",
+		"outDir": "./out",
+		"typeRoots": [
+			"./node_modules/@types"
+		],
+		"types": [
+			"node"
+		],
+		"lib": [
+			"WebWorker"
+		]
+	},
+	"include": [
+		"src/**/*",
+		"../../src/zyraxoncode-dts/zyraxoncode.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.tunnels.d.ts",
+		"../../src/zyraxoncode-dts/zyraxoncode.proposed.resolvers.d.ts"
+	]
+}

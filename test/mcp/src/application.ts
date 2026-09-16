@@ -7,14 +7,14 @@ import { getDevElectronPath, Quality, ConsoleLogger, FileLogger, Logger, MultiLo
 import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
-import * as vscodetest from '@vscode/test-electron';
+import * as zyraxoncodetest from '@zyraxoncode/test-electron';
 import { createApp, retry, parseVersion } from './utils';
 import { opts } from './options';
 
 const rootPath = path.join(__dirname, '..', '..', '..');
-const logsRootPath = path.join(rootPath, '.build', 'vscode-playwright-mcp', 'logs');
-const crashesRootPath = path.join(rootPath, '.build', 'vscode-playwright-mcp', 'crashes');
-const videoRootPath = path.join(rootPath, '.build', 'vscode-playwright-mcp', 'videos');
+const logsRootPath = path.join(rootPath, '.build', 'zyraxoncode-playwright-mcp', 'logs');
+const crashesRootPath = path.join(rootPath, '.build', 'zyraxoncode-playwright-mcp', 'crashes');
+const videoRootPath = path.join(rootPath, '.build', 'zyraxoncode-playwright-mcp', 'videos');
 
 const logger = createLogger();
 
@@ -100,7 +100,7 @@ if (!opts.web) {
 	}
 
 	if (!fs.existsSync(electronPath || '')) {
-		fail(`Cannot find VSCode at ${electronPath}. Please run VSCode once first (scripts/code.sh, scripts\\code.bat) and try again.`);
+		fail(`Cannot find ZyraxonCode at ${electronPath}. Please run ZyraxonCode once first (scripts/code.sh, scripts\\code.bat) and try again.`);
 	}
 
 	quality = parseQuality();
@@ -143,7 +143,7 @@ async function ensureStableCode(): Promise<void> {
 	let stableCodePath = opts['stable-build'];
 	if (!stableCodePath) {
 		const current = parseVersion(version!);
-		const versionsReq = await retry(() => measureAndLog(() => fetch('https://update.code.visualstudio.com/api/releases/stable'), 'versionReq', logger), 1000, 20);
+		const versionsReq = await retry(() => measureAndLog(() => fetch('__ZYRAXKEEP__0_'), 'versionReq', logger), 1000, 20);
 
 		if (!versionsReq.ok) {
 			throw new Error('Could not fetch releases from update server');
@@ -164,7 +164,7 @@ async function ensureStableCode(): Promise<void> {
 		let lastProgressMessage: string | undefined = undefined;
 		let lastProgressReportedAt = 0;
 		const stableCodeDestination = path.join(testDataPath, 's');
-		const stableCodeExecutable = await retry(() => measureAndLog(() => vscodetest.download({
+		const stableCodeExecutable = await retry(() => measureAndLog(() => zyraxoncodetest.download({
 			cachePath: stableCodeDestination,
 			version: stableVersion,
 			extractSync: true,
@@ -199,7 +199,7 @@ async function ensureStableCode(): Promise<void> {
 			// ZYRAXON Code.app/Contents/MacOS/Code
 			stableCodePath = path.dirname(path.dirname(path.dirname(stableCodeExecutable)));
 		} else {
-			// VSCode/Code.exe (Windows) | VSCode/code (Linux)
+			// ZyraxonCode/Code.exe (Windows) | ZyraxonCode/code (Linux)
 			stableCodePath = path.dirname(stableCodeExecutable);
 		}
 
@@ -207,7 +207,7 @@ async function ensureStableCode(): Promise<void> {
 	}
 
 	if (!fs.existsSync(stableCodePath)) {
-		throw new Error(`Cannot find Stable VSCode at ${stableCodePath}.`);
+		throw new Error(`Cannot find Stable ZyraxonCode at ${stableCodePath}.`);
 	}
 
 	logger.log(`Using stable build ${stableCodePath} for migration tests`);
@@ -230,7 +230,7 @@ export async function getApplication({ recordVideo, workspacePath }: { recordVid
 	const testCodePath = getDevElectronPath();
 	const electronPath = testCodePath;
 	if (!fs.existsSync(electronPath || '')) {
-		throw new Error(`Cannot find VSCode at ${electronPath}. Please run VSCode once first (scripts/code.sh, scripts\\code.bat) and try again.`);
+		throw new Error(`Cannot find ZyraxonCode at ${electronPath}. Please run ZyraxonCode once first (scripts/code.sh, scripts\\code.bat) and try again.`);
 	}
 	process.env.VSCODE_REPOSITORY = rootPath;
 	process.env.VSCODE_DEV = '1';

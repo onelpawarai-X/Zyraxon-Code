@@ -3,29 +3,29 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
-import { Utils } from 'vscode-uri';
+import * as zyraxoncode from 'zyraxoncode';
+import { Utils } from 'zyraxoncode-uri';
 import { BinarySizeStatusBarEntry } from './binarySizeStatusBarEntry';
 import { Disposable } from './util/dispose';
 
-export async function reopenAsText(resource: vscode.Uri, viewColumn: vscode.ViewColumn | undefined): Promise<void> {
-	await vscode.commands.executeCommand('vscode.openWith', resource, 'default', viewColumn);
+export async function reopenAsText(resource: zyraxoncode.Uri, viewColumn: zyraxoncode.ViewColumn | undefined): Promise<void> {
+	await zyraxoncode.commands.executeCommand('zyraxoncode.openWith', resource, 'default', viewColumn);
 }
 
-const gitLfsPointerPrefix = 'version https://git-lfs.github.com/spec/v1';
+const gitLfsPointerPrefix = 'version __ZYRAXKEEP__0_';
 
-export async function isGitLfsPointer(resource: vscode.Uri): Promise<boolean> {
+export async function isGitLfsPointer(resource: zyraxoncode.Uri): Promise<boolean> {
 	if (resource.scheme !== 'git') {
 		return false;
 	}
 
 	try {
-		const stat = await vscode.workspace.fs.stat(resource);
+		const stat = await zyraxoncode.workspace.fs.stat(resource);
 		if (stat.size === 0 || stat.size > 1024) {
 			return false;
 		}
 
-		const data = await vscode.workspace.fs.readFile(resource);
+		const data = await zyraxoncode.workspace.fs.readFile(resource);
 		const text = new TextDecoder().decode(data);
 		return text.startsWith(gitLfsPointerPrefix);
 	} catch {
@@ -45,9 +45,9 @@ export abstract class MediaPreview extends Disposable {
 	private _binarySize: number | undefined;
 
 	constructor(
-		extensionRoot: vscode.Uri,
-		protected readonly _resource: vscode.Uri,
-		protected readonly _webviewEditor: vscode.WebviewPanel,
+		extensionRoot: zyraxoncode.Uri,
+		protected readonly _resource: zyraxoncode.Uri,
+		protected readonly _webviewEditor: zyraxoncode.WebviewPanel,
 		private readonly _binarySizeStatusBarEntry: BinarySizeStatusBarEntry,
 	) {
 		super();
@@ -72,7 +72,7 @@ export abstract class MediaPreview extends Disposable {
 			this.dispose();
 		}));
 
-		const watcher = this._register(vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(_resource, '*')));
+		const watcher = this._register(zyraxoncode.workspace.createFileSystemWatcher(new zyraxoncode.RelativePattern(_resource, '*')));
 		this._register(watcher.onDidChange(e => {
 			if (e.toString() === this._resource.toString()) {
 				this.updateBinarySize();
@@ -97,7 +97,7 @@ export abstract class MediaPreview extends Disposable {
 	}
 
 	protected updateBinarySize() {
-		vscode.workspace.fs.stat(this._resource).then(({ size }) => {
+		zyraxoncode.workspace.fs.stat(this._resource).then(({ size }) => {
 			this._binarySize = size;
 			this.updateState();
 		});

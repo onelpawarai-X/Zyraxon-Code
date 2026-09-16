@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
-export function disposeAll(disposables: Iterable<vscode.Disposable>): void {
+export function disposeAll(disposables: Iterable<zyraxoncode.Disposable>): void {
 	const errors: unknown[] = [];
 
 	for (const disposable of disposables) {
@@ -30,7 +30,7 @@ export interface IDisposable {
 export abstract class Disposable {
 	#isDisposed = false;
 
-	protected _disposables: vscode.Disposable[] = [];
+	protected _disposables: zyraxoncode.Disposable[] = [];
 
 	public dispose(): void {
 		if (this.#isDisposed) {

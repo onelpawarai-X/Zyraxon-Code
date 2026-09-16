@@ -46,10 +46,10 @@ export async function buildTelemetryMessage(appRoot: string, extensionsPath?: st
 	}
 
 	let contents = (await fs.promises.readFile(join(appRoot, 'telemetry-core.json'))).toString();
-	mergeTelemetry(contents, 'vscode-core');
+	mergeTelemetry(contents, 'zyraxoncode-core');
 
 	contents = (await fs.promises.readFile(join(appRoot, 'telemetry-extensions.json'))).toString();
-	mergeTelemetry(contents, 'vscode-extensions');
+	mergeTelemetry(contents, 'zyraxoncode-extensions');
 
 	return JSON.stringify(mergedTelemetry, null, 4);
 }

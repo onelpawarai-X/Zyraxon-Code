@@ -26,7 +26,7 @@ const fs = require('fs');
 const {
 	ROOT, DATA_DIR, METRIC_DEFS, loadConfig,
 	resolveBuild, isVersionString, buildEnv, buildArgs, prepareRunDir,
-	robustStats, welchTTest, summarize, markDuration, launchVSCode,
+	robustStats, welchTTest, summarize, markDuration, launchZyraxonCode,
 	getNextExtHostInspectPort, connectToExtHostInspector, getRepoRoot,
 } = require('./common/utils');
 const { getUserTurns, getScenarioIds } = require('./common/mock-llm-server.ts');
@@ -121,7 +121,7 @@ function parseArgs() {
 					'  --resume <path>     Resume a previous run, adding more iterations to increase',
 					'                       confidence. Merges new runs with existing rawRuns data',
 					'  --threshold <frac>  Regression threshold fraction (default: 0.2 = 20%)',
-					'  --production-build  Build a local bundled package (via gulp vscode) for',
+					'  --production-build  Build a local bundled package (via gulp zyraxoncode) for',
 					'                       apples-to-apples comparison against a release baseline',
 					'  --setting <k=v>     Set a ZYRAXON Code setting override for all builds (repeatable)',
 					'  --test-setting <k=v> Set a ZYRAXON Code setting override for test build only',
@@ -161,10 +161,10 @@ function parseArgs() {
  * @returns {'dev' | 'production' | 'release'}
  */
 function detectBuildMode(electronPath) {
-	if (electronPath.includes('.vscode-test')) {
+	if (electronPath.includes('.zyraxoncode-test')) {
 		return 'release';
 	}
-	if (electronPath.includes('VSCode-')) {
+	if (electronPath.includes('ZyraxonCode-')) {
 		return 'production';
 	}
 	return 'dev';
@@ -186,25 +186,25 @@ function buildModeLabel(mode) {
 // -- Production build --------------------------------------------------------
 
 /**
- * Build a local production (bundled) ZYRAXON Code package using `gulp vscode`.
+ * Build a local production (bundled) ZYRAXON Code package using `gulp zyraxoncode`.
  * Returns the path to the Electron executable in the packaged output.
  *
  * The gulp task compiles TypeScript, bundles JS, and packages with Electron
- * into `../VSCode-<platform>-<arch>/`.  This is the same process used for
+ * into `../ZyraxonCode-<platform>-<arch>/`.  This is the same process used for
  * release builds, minus minification and mangling.
  */
 function buildProductionBuild() {
 	const product = require(path.join(ROOT, 'product.json'));
 	const platform = process.platform;
 	const arch = process.arch;
-	const destDir = path.join(ROOT, '..', `VSCode-${platform}-${arch}`);
+	const destDir = path.join(ROOT, '..', `ZyraxonCode-${platform}-${arch}`);
 
-	console.log('[chat-simulation] Building local production package (gulp vscode)...');
+	console.log('[chat-simulation] Building local production package (gulp zyraxoncode)...');
 	console.log('[chat-simulation] This may take a few minutes on the first run.');
 
 	const { execSync } = require('child_process');
 	try {
-		execSync('npm run gulp -- vscode', {
+		execSync('npm run gulp -- zyraxoncode', {
 			cwd: ROOT,
 			stdio: 'inherit',
 			timeout: 10 * 60 * 1000, // 10 minute timeout
@@ -213,7 +213,7 @@ function buildProductionBuild() {
 		// The copilot shim step may fail locally when the copilot SDK is not
 		// fully packaged (it is normally supplied via CI).  As long as the
 		// Electron executable was produced we can still benchmark.
-		console.warn('[chat-simulation] gulp vscode exited with errors (see above). Checking if executable was still produced...');
+		console.warn('[chat-simulation] gulp zyraxoncode exited with errors (see above). Checking if executable was still produced...');
 	}
 
 	/** @type {string} */
@@ -370,17 +370,17 @@ function exceedsThreshold(threshold, change, absoluteDelta) {
 async function runOnce(electronPath, scenario, mockServer, verbose, runIndex, runDir, role, settingsOverrides, runOpts) {
 	const takeHeapSnapshots = runOpts?.heapSnapshots ?? false;
 	const { userDataDir, extDir, logsDir } = prepareRunDir(runIndex, mockServer, settingsOverrides);
-	const isDevBuild = !electronPath.includes('.vscode-test') && !electronPath.includes('VSCode-');
+	const isDevBuild = !electronPath.includes('.zyraxoncode-test') && !electronPath.includes('ZyraxonCode-');
 	// Extract a clean build label from the path.
 	// Dev:          .build/electron/ZYRAXON Code.app/.../ZYRAXON Code → "dev"
-	// Stable:       .vscode-test/vscode-darwin-arm64-1.115.0/ZYRAXON Code.app/.../Electron → "1.115.0"
-	// Production:   ../VSCode-darwin-arm64/ZYRAXON Code.app/.../ZYRAXON Code → "production"
+	// Stable:       .zyraxoncode-test/zyraxoncode-darwin-arm64-1.115.0/ZYRAXON Code.app/.../Electron → "1.115.0"
+	// Production:   ../ZyraxonCode-darwin-arm64/ZYRAXON Code.app/.../ZYRAXON Code → "production"
 	let buildLabel = 'dev';
 	if (!isDevBuild) {
-		const vscodeTestMatch = electronPath.match(/vscode-test\/vscode-[^/]*?-(\d+\.\d+\.\d+)/);
-		if (vscodeTestMatch) {
-			buildLabel = vscodeTestMatch[1];
-		} else if (electronPath.includes('VSCode-')) {
+		const zyraxoncodeTestMatch = electronPath.match(/zyraxoncode-test\/zyraxoncode-[^/]*?-(\d+\.\d+\.\d+)/);
+		if (zyraxoncodeTestMatch) {
+			buildLabel = zyraxoncodeTestMatch[1];
+		} else if (electronPath.includes('ZyraxonCode-')) {
 			buildLabel = 'production';
 		} else {
 			buildLabel = path.basename(electronPath);
@@ -402,14 +402,14 @@ async function runOnce(electronPath, scenario, mockServer, verbose, runIndex, ru
 
 	const tracePath = path.join(runDiagDir, 'trace.json');
 	const extHostInspectPort = getNextExtHostInspectPort();
-	const vscode = await launchVSCode(
+	const zyraxoncode = await launchZyraxonCode(
 		electronPath,
 		buildArgs(userDataDir, extDir, logsDir, { isDevBuild, extHostInspectPort, traceFile: tracePath, appRoot, gcObjectStats: runOpts?.gcObjectStats }),
 		buildEnv(mockServer, { isDevBuild }),
 		{ verbose },
 	);
-	activeVSCode = vscode;
-	const window = vscode.page;
+	activeZyraxonCode = zyraxoncode;
+	const window = zyraxoncode.page;
 
 	// Declared outside try so the finally block can clean up
 	/** @type {{ send: (method: string, params?: any) => Promise<any>, on: (event: string, listener: (params: any) => void) => void, close: () => void } | null} */
@@ -841,8 +841,8 @@ async function runOnce(electronPath, scenario, mockServer, verbose, runIndex, ru
 		if (extHostInspector) {
 			try { extHostInspector.close(); } catch { }
 		}
-		activeVSCode = null;
-		await vscode.close();
+		activeZyraxonCode = null;
+		await zyraxoncode.close();
 	}
 
 	// Read the trace file written by ZYRAXON Code on exit via --trace-startup-file
@@ -949,7 +949,7 @@ async function runOnce(electronPath, scenario, mockServer, verbose, runIndex, ru
 
 // -- CI summary generation ---------------------------------------------------
 
-const GITHUB_REPO = 'https://github.com/microsoft/vscode';
+const GITHUB_REPO = '__ZYRAXKEEP__0_';
 
 /**
  * Format a build identifier as a Markdown link when possible.
@@ -1278,14 +1278,14 @@ function generateCISummary(jsonReport, baseline, opts) {
 // -- Cleanup on SIGINT/SIGTERM -----------------------------------------------
 
 /** @type {{ close: () => Promise<void> } | null} */
-let activeVSCode = null;
+let activeZyraxonCode = null;
 /** @type {{ close: () => Promise<void> } | null} */
 let activeMockServer = null;
 
 function installSignalHandlers() {
 	const cleanup = async () => {
 		console.log('\n[chat-simulation] Caught interrupt, cleaning up...');
-		try { await activeVSCode?.close(); } catch { }
+		try { await activeZyraxonCode?.close(); } catch { }
 		try { await activeMockServer?.close(); } catch { }
 		process.exit(130);
 	};
@@ -1465,7 +1465,7 @@ async function main() {
 
 	// -- Normal (non-resume) flow -------------------------------------------
 	// --production-build: build a local bundled (non-dev) package from the
-	// current source tree using `gulp vscode`.  This produces the same
+	// current source tree using `gulp zyraxoncode`.  This produces the same
 	// packaging as a release build (bundled JS, no VSCODE_DEV) while still
 	// testing your local changes.
 	if (opts.productionBuild && !opts.build) {

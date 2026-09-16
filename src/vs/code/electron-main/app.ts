@@ -208,7 +208,7 @@ export class CodeApplication extends Disposable {
 
 	private static readonly SECURITY_PROTOCOL_HANDLING_CONFIRMATION_SETTING_KEY = {
 		[Schemas.file]: 'security.promptForLocalFileProtocolHandling' as const,
-		[Schemas.vscodeRemote]: 'security.promptForRemoteFileProtocolHandling' as const
+		[Schemas.zyraxoncodeRemote]: 'security.promptForRemoteFileProtocolHandling' as const
 	};
 
 	private windowsMainService: IWindowsMainService | undefined;
@@ -237,13 +237,13 @@ export class CodeApplication extends Disposable {
 
 	private configureSession(): void {
 
-		//#region Security related measures (https://electronjs.org/docs/tutorial/security)
+		//#region Security related measures (__ZYRAXKEEP__0_)
 		//
 		// !!! DO NOT CHANGE without consulting the documentation !!!
 		//
 
-		const isUrlFromWindow = (requestingUrl?: string | undefined) => requestingUrl?.startsWith(`${Schemas.vscodeFileResource}://${VSCODE_AUTHORITY}`);
-		const isUrlFromWebview = (requestingUrl: string | undefined) => requestingUrl?.startsWith(`${Schemas.vscodeWebview}://`);
+		const isUrlFromWindow = (requestingUrl?: string | undefined) => requestingUrl?.startsWith(`${Schemas.zyraxoncodeFileResource}://${VSCODE_AUTHORITY}`);
+		const isUrlFromWebview = (requestingUrl: string | undefined) => requestingUrl?.startsWith(`${Schemas.zyraxoncodeWebview}://`);
 
 		const alwaysAllowedPermissions = new Set(['pointerLock', 'notifications']);
 
@@ -252,7 +252,7 @@ export class CodeApplication extends Disposable {
 			'clipboard-read',
 			'clipboard-sanitized-write',
 			// TODO(deepak1556): Should be removed once migration is complete
-			// https://github.com/microsoft/vscode/issues/239228
+			// __ZYRAXKEEP__1_
 			'deprecated-sync-clipboard-read',
 		]);
 
@@ -261,7 +261,7 @@ export class CodeApplication extends Disposable {
 			'media',
 			'local-fonts',
 			// TODO(deepak1556): Should be removed once migration is complete
-			// https://github.com/microsoft/vscode/issues/239228
+			// __ZYRAXKEEP__2_
 			'deprecated-sync-clipboard-read',
 		]);
 
@@ -346,7 +346,7 @@ export class CodeApplication extends Disposable {
 		//#region Request filtering
 
 		// Block all SVG requests from unsupported origins
-		const supportedSvgSchemes = new Set([Schemas.file, Schemas.vscodeFileResource, Schemas.vscodeRemoteResource, Schemas.vscodeManagedRemoteResource, 'devtools']);
+		const supportedSvgSchemes = new Set([Schemas.file, Schemas.zyraxoncodeFileResource, Schemas.zyraxoncodeRemoteResource, Schemas.zyraxoncodeManagedRemoteResource, 'devtools']);
 
 		// But allow them if they are made from inside an webview
 		const isSafeFrame = (requestFrame: WebFrameMain | null | undefined): boolean => {
@@ -359,7 +359,7 @@ export class CodeApplication extends Disposable {
 				if (frame.isDestroyed()) {
 					return false;
 				}
-				if (frame.url.startsWith(`${Schemas.vscodeWebview}://`)) {
+				if (frame.url.startsWith(`${Schemas.zyraxoncodeWebview}://`)) {
 					return true;
 				}
 			}
@@ -411,16 +411,16 @@ export class CodeApplication extends Disposable {
 
 		session.defaultSession.webRequest.onBeforeRequest((details, callback) => {
 			const uri = URI.parse(details.url);
-			if (uri.scheme === Schemas.vscodeWebview) {
+			if (uri.scheme === Schemas.zyraxoncodeWebview) {
 				if (!isAllowedWebviewRequest(uri, details)) {
-					this.logService.error('Blocked vscode-webview request', details.url);
+					this.logService.error('Blocked zyraxoncode-webview request', details.url);
 					return callback({ cancel: true });
 				}
 			}
 
-			if (uri.scheme === Schemas.vscodeFileResource) {
+			if (uri.scheme === Schemas.zyraxoncodeFileResource) {
 				if (!isAllowedVsCodeFileRequest(details)) {
-					this.logService.error('Blocked vscode-file request', details.url);
+					this.logService.error('Blocked zyraxoncode-file request', details.url);
 					return callback({ cancel: true });
 				}
 			}
@@ -437,7 +437,7 @@ export class CodeApplication extends Disposable {
 		});
 
 		// Configure SVG header content type properly
-		// https://github.com/microsoft/vscode/issues/97564
+		// __ZYRAXKEEP__3_
 		session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
 			const responseHeaders = details.responseHeaders as Record<string, (string) | (string[])>;
 			const contentTypes = (responseHeaders['content-type'] || responseHeaders['Content-Type']);
@@ -453,8 +453,8 @@ export class CodeApplication extends Disposable {
 				}
 
 				// remote extension schemes have the following format
-				// http://127.0.0.1:<port>/vscode-remote-resource?path=
-				if (!uri.path.endsWith(Schemas.vscodeRemoteResource) && contentTypes.some(contentType => contentType.toLowerCase().includes('image/svg'))) {
+				// __ZYRAXKEEP__4_<port>/zyraxoncode-remote-resource?path=
+				if (!uri.path.endsWith(Schemas.zyraxoncodeRemoteResource) && contentTypes.some(contentType => contentType.toLowerCase().includes('image/svg'))) {
 					return callback({ cancel: !isSvgRequestFromSafeContext(details) });
 				}
 			}
@@ -466,9 +466,9 @@ export class CodeApplication extends Disposable {
 
 		//#region Allow CORS for the PRSS CDN
 
-		// https://github.com/microsoft/vscode-remote-release/issues/9246
+		// __ZYRAXKEEP__5_
 		session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-			if (details.url.startsWith('https://vscode.download.prss.microsoft.com/')) {
+			if (details.url.startsWith('__ZYRAXKEEP__6_')) {
 				const responseHeaders = details.responseHeaders ?? Object.create(null);
 
 				if (responseHeaders['Access-Control-Allow-Origin'] === undefined) {
@@ -497,7 +497,7 @@ export class CodeApplication extends Disposable {
 			// Make sure to partition Chrome's code cache folder
 			// in the same way as our code cache path to help
 			// invalidate caches that we know are invalid
-			// (https://github.com/microsoft/vscode/issues/120655)
+			// (__ZYRAXKEEP__7_)
 			defaultSession.setCodeCachePath(join(this.environmentMainService.codeCachePath, 'chrome'));
 		}
 
@@ -526,7 +526,7 @@ export class CodeApplication extends Disposable {
 
 		// Accessibility change event
 		app.on('accessibility-support-changed', (event, accessibilitySupportEnabled) => {
-			this.windowsMainService?.sendToAll('vscode:accessibilitySupportChanged', accessibilitySupportEnabled);
+			this.windowsMainService?.sendToAll('zyraxoncode:accessibilitySupportChanged', accessibilitySupportEnabled);
 		});
 
 		// macOS dock activate
@@ -539,14 +539,14 @@ export class CodeApplication extends Disposable {
 			}
 		});
 
-		//#region Security related measures (https://electronjs.org/docs/tutorial/security)
+		//#region Security related measures (__ZYRAXKEEP__8_)
 		//
 		// !!! DO NOT CHANGE without consulting the documentation !!!
 		//
 		app.on('web-contents-created', (event, contents) => {
 
 			// Auxiliary Window: delegate to `AuxiliaryWindow` class
-			if (contents?.opener?.url.startsWith(`${Schemas.vscodeFileResource}://${VSCODE_AUTHORITY}/`)) {
+			if (contents?.opener?.url.startsWith(`${Schemas.zyraxoncodeFileResource}://${VSCODE_AUTHORITY}/`)) {
 				this.logService.trace('[aux window]  app.on("web-contents-created"): Registering auxiliary window');
 
 				this.auxiliaryWindowsMainService?.registerWindow(contents);
@@ -628,7 +628,7 @@ export class CodeApplication extends Disposable {
 
 		//#region Bootstrap IPC Handlers
 
-		validatedIpcMain.handle('vscode:fetchShellEnv', event => {
+		validatedIpcMain.handle('zyraxoncode:fetchShellEnv', event => {
 
 			// Prefer to use the args and env from the target window
 			// when resolving the shell env. It is possible that
@@ -653,12 +653,12 @@ export class CodeApplication extends Disposable {
 			return this.resolveShellEnvironment(args, env, false);
 		});
 
-		validatedIpcMain.on('vscode:toggleDevTools', event => event.sender.toggleDevTools());
-		validatedIpcMain.on('vscode:openDevTools', event => event.sender.openDevTools());
+		validatedIpcMain.on('zyraxoncode:toggleDevTools', event => event.sender.toggleDevTools());
+		validatedIpcMain.on('zyraxoncode:openDevTools', event => event.sender.openDevTools());
 
-		validatedIpcMain.on('vscode:reloadWindow', event => event.sender.reload());
+		validatedIpcMain.on('zyraxoncode:reloadWindow', event => event.sender.reload());
 
-		validatedIpcMain.handle('vscode:notifyZoomLevel', async (event, zoomLevel: number | undefined) => {
+		validatedIpcMain.handle('zyraxoncode:notifyZoomLevel', async (event, zoomLevel: number | undefined) => {
 			const window = this.windowsMainService?.getWindowByWebContents(event.sender);
 			if (window) {
 				window.notifyZoomLevel(zoomLevel);
@@ -687,7 +687,7 @@ export class CodeApplication extends Disposable {
 		// "com.Zyraxon.", which breaks native tabs for ZYRAXON Code when using this
 		// identifier (from the official build).
 		// Explicitly opt out of the patch here before creating any windows.
-		// See: https://github.com/microsoft/vscode/issues/35361#issuecomment-399794085
+		// See: __ZYRAXKEEP__9_
 		try {
 			if (isMacintosh && this.configurationService.getValue('window.nativeTabs') === true && !systemPreferences.getUserDefault('NSUseImprovedLayoutPass', 'boolean')) {
 				systemPreferences.setUserDefault('NSUseImprovedLayoutPass', 'boolean', true);
@@ -753,7 +753,7 @@ export class CodeApplication extends Disposable {
 		// Setup Protocol URL Handlers
 		const initialProtocolUrls = await appInstantiationService.invokeFunction(accessor => this.setupProtocolUrlHandlers(accessor, mainProcessElectronServer));
 
-		// Setup vscode-remote-resource protocol handler
+		// Setup zyraxoncode-remote-resource protocol handler
 		this.setupManagedRemoteResourceUrlHandler(mainProcessElectronServer);
 
 		// Signal phase: ready - before opening first window
@@ -822,7 +822,7 @@ export class CodeApplication extends Disposable {
 			new NodeRemoteResourceRouter(),
 		));
 
-		protocol.registerBufferProtocol(Schemas.vscodeManagedRemoteResource, (request, callback) => {
+		protocol.registerBufferProtocol(Schemas.zyraxoncodeManagedRemoteResource, (request, callback) => {
 			const url = URI.parse(request.url);
 			if (!url.authority.startsWith('window:')) {
 				return callback(notFound());
@@ -916,11 +916,11 @@ export class CodeApplication extends Disposable {
 			message = localize('confirmOpenMessageFileOrFolder', "An external application wants to open '{0}' in {1}. Do you want to open this file or folder?", openableUri.scheme === Schemas.file ? getPathLabel(openableUri, { os: OS, tildify: this.environmentMainService }) : openableUri.toString(true), this.productService.nameShort);
 		}
 
-		if (openableUri.scheme !== Schemas.file && openableUri.scheme !== Schemas.vscodeRemote) {
+		if (openableUri.scheme !== Schemas.file && openableUri.scheme !== Schemas.zyraxoncodeRemote) {
 
 			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			//
-			// NOTE: we currently only ask for confirmation for `file` and `vscode-remote`
+			// NOTE: we currently only ask for confirmation for `file` and `zyraxoncode-remote`
 			// authorities here. There is an additional confirmation for `extension.id`
 			// authorities from within the window.
 			//
@@ -954,11 +954,11 @@ export class CodeApplication extends Disposable {
 		}
 
 		if (checkboxChecked) {
-			// Due to https://github.com/microsoft/vscode/issues/195436, we can only
+			// Due to __ZYRAXKEEP__10_ we can only
 			// update settings from within a window. But we do not know if a window
 			// is about to open or can already handle the request, so we have to send
 			// to any current window and any newly opening window.
-			const request = { channel: 'vscode:disablePromptForProtocolHandling', args: openableUri.scheme === Schemas.file ? 'local' : 'remote' };
+			const request = { channel: 'zyraxoncode:disablePromptForProtocolHandling', args: openableUri.scheme === Schemas.file ? 'local' : 'remote' };
 			windowsMainService.sendToFocused(request.channel, request.args);
 			windowsMainService.sendToOpeningWindow(request.channel, request.args);
 		}
@@ -983,11 +983,11 @@ export class CodeApplication extends Disposable {
 		}
 
 		// Remote path
-		else if (uri.authority === Schemas.vscodeRemote) {
+		else if (uri.authority === Schemas.zyraxoncodeRemote) {
 
 			// Example conversion:
-			// From: vscode://vscode-remote/wsl+ubuntu/mnt/c/GitDevelopment/monaco
-			//   To: vscode-remote://wsl+ubuntu/mnt/c/GitDevelopment/monaco
+			// From: __ZYRAXKEEP__11_
+			//   To: __ZYRAXKEEP__12_
 
 			const secondSlash = uri.path.indexOf(posix.sep, 1 /* skip over the leading slash */);
 			let authority: string;
@@ -1004,12 +1004,12 @@ export class CodeApplication extends Disposable {
 			const params = new URLSearchParams(uri.query);
 			if (params.get('windowId') === '_blank') {
 				// Make sure to unset any `windowId=_blank` here
-				// https://github.com/microsoft/vscode/issues/191902
+				// __ZYRAXKEEP__13_
 				params.delete('windowId');
 				query = params.toString();
 			}
 
-			const remoteUri = URI.from({ scheme: Schemas.vscodeRemote, authority, path, query, fragment: uri.fragment });
+			const remoteUri = URI.from({ scheme: Schemas.zyraxoncodeRemote, authority, path, query, fragment: uri.fragment });
 
 			if (hasWorkspaceFileExtension(path)) {
 				return { workspaceUri: remoteUri };
@@ -1028,7 +1028,7 @@ export class CodeApplication extends Disposable {
 	private async handleProtocolUrl(windowsMainService: IWindowsMainService, dialogMainService: IDialogMainService, urlService: IURLService, uri: URI, options?: IOpenURLOptions): Promise<boolean> {
 		this.logService.trace('app#handleProtocolUrl():', uri.toString(true), options);
 
-		// Support 'workspace' URLs (https://github.com/microsoft/vscode/issues/124263)
+		// Support 'workspace' URLs (__ZYRAXKEEP__14_)
 		if (uri.scheme === this.productService.urlProtocol && uri.path === 'workspace') {
 			uri = uri.with({
 				authority: Schemas.file,
@@ -1100,7 +1100,7 @@ export class CodeApplication extends Disposable {
 
 				// Open chat session in the target window if requested
 				if (window && session) {
-					window.sendWhenReady('vscode:openChatSession', CancellationToken.None, session);
+					window.sendWhenReady('zyraxoncode:openChatSession', CancellationToken.None, session);
 				}
 
 				return true;
@@ -1133,7 +1133,7 @@ export class CodeApplication extends Disposable {
 	private setupSharedProcess(machineId: string, sqmId: string, devDeviceId: string): { sharedProcessReady: Promise<MessagePortClient>; sharedProcessClient: Promise<MessagePortClient> } {
 		const sharedProcess = this._register(this.mainInstantiationService.createInstance(SharedProcess, machineId, sqmId, devDeviceId));
 
-		this._register(sharedProcess.onDidCrash(() => this.windowsMainService?.sendToFocused('vscode:reportSharedProcessCrash')));
+		this._register(sharedProcess.onDidCrash(() => this.windowsMainService?.sendToFocused('zyraxoncode:reportSharedProcessCrash')));
 
 		const sharedProcessClient = (async () => {
 			this.logService.trace('Main->SharedProcess#connect');
@@ -1597,9 +1597,9 @@ export class CodeApplication extends Disposable {
 		this.installMutex();
 
 		// Remote Authorities
-		protocol.registerHttpProtocol(Schemas.vscodeRemoteResource, (request, callback) => {
+		protocol.registerHttpProtocol(Schemas.zyraxoncodeRemoteResource, (request, callback) => {
 			callback({
-				url: request.url.replace(/^vscode-remote-resource:/, 'http:'),
+				url: request.url.replace(/^zyraxoncode-remote-resource:/, 'http:'),
 				method: request.method
 			});
 		});
@@ -1615,7 +1615,7 @@ export class CodeApplication extends Disposable {
 
 		// macOS: rosetta translation warning
 		if (isMacintosh && app.runningUnderARM64Translation) {
-			this.windowsMainService?.sendToFocused('vscode:showTranslatedBuildWarning');
+			this.windowsMainService?.sendToFocused('zyraxoncode:showTranslatedBuildWarning');
 		}
 
 		// Power telemetry
@@ -1654,7 +1654,7 @@ export class CodeApplication extends Disposable {
 		});
 
 		// GPU crash telemetry for skia graphite out of order recording failures
-		// Refs https://github.com/microsoft/vscode/issues/284162
+		// Refs __ZYRAXKEEP__15_
 		if (isMacintosh) {
 			instantiationService.invokeFunction(accessor => {
 				const telemetryService = accessor.get(ITelemetryService);
@@ -1767,7 +1767,7 @@ export class CodeApplication extends Disposable {
 		const win32MutexName = this.productService.win32MutexName;
 		if (isWindows && win32MutexName && isInnoSetupInstall()) {
 			try {
-				const WindowsMutex = await import('@vscode/windows-mutex');
+				const WindowsMutex = await import('@zyraxoncode/windows-mutex');
 				const mutex = new WindowsMutex.Mutex(win32MutexName);
 				Event.once(this.lifecycleMainService.onWillShutdown)(() => mutex.release());
 			} catch (error) {
@@ -1782,7 +1782,7 @@ export class CodeApplication extends Disposable {
 		} catch (error) {
 			const errorMessage = toErrorMessage(error);
 			if (notifyOnError) {
-				this.windowsMainService?.sendToFocused('vscode:showResolveShellEnvError', errorMessage);
+				this.windowsMainService?.sendToFocused('zyraxoncode:showResolveShellEnvError', errorMessage);
 			} else {
 				this.logService.error(errorMessage);
 			}
@@ -1833,14 +1833,14 @@ export class CodeApplication extends Disposable {
 			this.logService.error(error);
 
 			// Inform the user via notification
-			this.windowsMainService?.sendToFocused('vscode:showArgvParseWarning');
+			this.windowsMainService?.sendToFocused('zyraxoncode:showArgvParseWarning');
 		}
 	}
 
 	private eventuallyAfterWindowOpen(instantiationService: IInstantiationService): void {
 
 		// Validate Device ID is up to date (delay this as it has shown significant perf impact)
-		// Refs: https://github.com/microsoft/vscode/issues/234064
+		// Refs: __ZYRAXKEEP__16_
 		validateDevDeviceId(this.stateService, this.logService);
 
 		instantiationService.invokeFunction(accessor => {

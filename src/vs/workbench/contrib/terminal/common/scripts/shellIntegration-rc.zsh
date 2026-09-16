@@ -72,7 +72,7 @@ fi
 # Prevent multiple activation with guard
 if [ -z "${VSCODE_PYTHON_AUTOACTIVATE_GUARD:-}" ]; then
 	export VSCODE_PYTHON_AUTOACTIVATE_GUARD=1
-	if [ -n "${VSCODE_PYTHON_ZSH_ACTIVATE:-}" ] && [ "$TERM_PROGRAM" = "vscode" ]; then
+	if [ -n "${VSCODE_PYTHON_ZSH_ACTIVATE:-}" ] && [ "$TERM_PROGRAM" = "zyraxoncode" ]; then
 		# Prevent crashing by negating exit code
 		if ! builtin eval "$VSCODE_PYTHON_ZSH_ACTIVATE"; then
 			__vsc_activation_status=$?
@@ -151,11 +151,11 @@ __vsc_current_command=""
 __vsc_nonce="$VSCODE_NONCE"
 unset VSCODE_NONCE
 
-__vscode_shell_env_reporting="${VSCODE_SHELL_ENV_REPORTING:-}"
+__zyraxoncode_shell_env_reporting="${VSCODE_SHELL_ENV_REPORTING:-}"
 unset VSCODE_SHELL_ENV_REPORTING
 
 envVarsToReport=()
-IFS=',' read -rA envVarsToReport <<< "$__vscode_shell_env_reporting"
+IFS=',' read -rA envVarsToReport <<< "$__zyraxoncode_shell_env_reporting"
 
 builtin printf "\e]633;P;ContinuationPrompt=%s\a" "$(echo "$PS2" | sed 's/\x1b/\\\\x1b/g')"
 

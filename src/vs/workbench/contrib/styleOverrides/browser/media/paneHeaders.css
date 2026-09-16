@@ -44,7 +44,7 @@
 	right: 4px;
 	height: 1px;
 	pointer-events: none;
-	background-color: var(--vscode-sideBarSectionHeader-border, var(--vscode-panelSectionHeader-border, var(--vscode-panel-border)));
+	background-color: var(--zyraxoncode-sideBarSectionHeader-border, var(--zyraxoncode-panelSectionHeader-border, var(--zyraxoncode-panel-border)));
 }
 
 /* The first section in a pane has no separator above it. */
@@ -55,7 +55,7 @@
 .style-override .monaco-pane-view .pane,
 .style-override.floating-panels .part.sidebar,
 .style-override.floating-panels .part.auxiliarybar {
-	background-color: var(--vscode-sideBar-background, var(--vscode-panel-background)) !important;
+	background-color: var(--zyraxoncode-sideBar-background, var(--zyraxoncode-panel-background)) !important;
 }
 
 /* Round the header corners and let the header match its surface at rest so it
@@ -63,8 +63,8 @@
  * inline header background from the PaneView is overridden here; the hover tint
  * below still wins via its higher specificity. */
 .style-override .monaco-pane-view .pane > .pane-header {
-	border-radius: var(--vscode-cornerRadius-small);
-	background-color: var(--vscode-sideBar-background, var(--vscode-panel-background)) !important;
+	border-radius: var(--zyraxoncode-cornerRadius-small);
+	background-color: var(--zyraxoncode-sideBar-background, var(--zyraxoncode-panel-background)) !important;
 }
 
 /*
@@ -77,7 +77,7 @@
 
 /* Tint the header background on hover (overrides the inline header background). */
 .style-override .monaco-pane-view .pane > .pane-header:hover {
-	background-color: var(--vscode-list-hoverBackground) !important;
+	background-color: var(--zyraxoncode-list-hoverBackground) !important;
 }
 
 /*

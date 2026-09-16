@@ -13,7 +13,7 @@ import { IModelContentChangedEvent, IModelTokensChangedEvent } from '../../../te
 import { findLikelyRelevantLines } from '../../textModelTokens.js';
 import { TokenStore, TokenUpdate, TokenQuality } from './tokenStore.js';
 import { TreeSitterTree, RangeChange, RangeWithOffsets } from './treeSitterTree.js';
-import type * as TreeSitter from '@vscode/tree-sitter-wasm';
+import type * as TreeSitter from '@zyraxoncode/tree-sitter-wasm';
 import { autorun, autorunHandleChanges, IObservable, recordChanges, runOnChange } from '../../../../../base/common/observable.js';
 import { LineRange } from '../../../core/ranges/lineRange.js';
 import { LineTokens } from '../../../tokens/lineTokens.js';

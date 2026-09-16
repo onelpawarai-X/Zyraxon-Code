@@ -504,7 +504,7 @@ export class SessionsTasksService extends Disposable implements ISessionsTasksSe
 	}
 
 	private _getWorkspaceTasksJsonUri(folder: URI | undefined): URI | undefined {
-		return folder?.path ? joinPath(folder, '.vscode', 'tasks.json') : undefined;
+		return folder?.path ? joinPath(folder, '.zyraxoncode', 'tasks.json') : undefined;
 	}
 
 	private _getUserTasksJsonUri(): URI | undefined {

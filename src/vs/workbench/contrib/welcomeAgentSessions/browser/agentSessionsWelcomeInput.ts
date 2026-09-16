@@ -23,7 +23,7 @@ export interface AgentSessionsWelcomeEditorOptions extends IEditorOptions {
 export class AgentSessionsWelcomeInput extends EditorInput {
 
 	static readonly ID = agentSessionsWelcomeInputTypeId;
-	static readonly RESOURCE = URI.from({ scheme: Schemas.walkThrough, authority: 'vscode_agent_sessions_welcome' });
+	static readonly RESOURCE = URI.from({ scheme: Schemas.walkThrough, authority: 'zyraxoncode_agent_sessions_welcome' });
 
 	private _showTelemetryNotice: boolean;
 	private _initiator: AgentSessionsWelcomeInitiator;

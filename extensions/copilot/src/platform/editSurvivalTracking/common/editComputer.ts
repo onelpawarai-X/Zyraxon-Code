@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { BugIndicatingError } from '../../../util/vs/base/common/errors';
 import { Disposable } from '../../../util/vs/base/common/lifecycle';
 import { StringEdit } from '../../../util/vs/editor/common/core/edits/stringEdit';
@@ -26,7 +26,7 @@ export class EditComputer extends Disposable {
 
 	constructor(
 		private readonly _baseText: string,
-		private readonly _document: vscode.TextDocument,
+		private readonly _document: zyraxoncode.TextDocument,
 		@IWorkspaceService private readonly _workspaceService: IWorkspaceService,
 		@IDiffService private readonly _diffService: IDiffService,
 	) {
@@ -58,7 +58,7 @@ export class EditComputer extends Disposable {
 
 export interface ISyncEditProvider {
 	readonly baseText: string;
-	readonly document: vscode.TextDocument;
+	readonly document: zyraxoncode.TextDocument;
 	/**
 	 * ```
 	 * baseText ----getEditsSinceInitial()----> document.getText()
@@ -73,7 +73,7 @@ export class DocumentEditRecorder extends Disposable {
 	public readonly initialTextVersion = this.textDocument.version;
 
 	constructor(
-		public readonly textDocument: vscode.TextDocument,
+		public readonly textDocument: zyraxoncode.TextDocument,
 		@IWorkspaceService private readonly _workspaceService: IWorkspaceService,
 	) {
 		super();

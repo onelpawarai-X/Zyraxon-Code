@@ -15,24 +15,24 @@
 	"privileged": true,
 	"mounts": [
 		{
-			"source": "vscode-dev",
-			"target": "/vscode-dev",
+			"source": "zyraxoncode-dev",
+			"target": "/zyraxoncode-dev",
 			"type": "volume"
 		}
 	],
 	"postCreateCommand": "./.devcontainer/post-create.sh",
 	"customizations": {
-		"vscode": {
+		"zyraxoncode": {
 			"settings": {
 				"resmon.show.battery": false,
 				"resmon.show.cpufreq": false
 			},
 			"extensions": [
-				"dbaeumer.vscode-eslint",
+				"dbaeumer.zyraxoncode-eslint",
 				"EditorConfig.EditorConfig",
-				"GitHub.vscode-pull-request-github",
-				"ms-vscode.vscode-github-issue-notebooks",
-				"ms-vscode.vscode-selfhost-test-provider",
+				"GitHub.zyraxoncode-pull-request-github",
+				"ms-zyraxoncode.zyraxoncode-github-issue-notebooks",
+				"ms-zyraxoncode.zyraxoncode-selfhost-test-provider",
 				"mutantdino.resourcemonitor"
 			]
 		}

@@ -1,7 +1,7 @@
 {
   "hydrated": true,
   "properties": {
-    "helpUri": "https://eng.ms/docs/microsoft-security/security/azure-security/cloudai-security-fundamentals-engineering/security-integration/guardian-wiki/microsoft-guardian/general/suppressions"
+    "helpUri": "https://eng.ms/docs/zyraxon-security/security/azure-security/cloudai-security-fundamentals-engineering/security-integration/guardian-wiki/zyraxon-guardian/general/suppressions"
   },
   "version": "1.0.0",
   "suppressionSets": {

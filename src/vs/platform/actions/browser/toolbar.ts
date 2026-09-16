@@ -366,7 +366,7 @@ export class MenuWorkbenchToolBar extends WorkbenchToolBar {
 				if (!provider) {
 					provider = options?.actionViewItemProvider;
 				}
-				const viewItem = provider?.(action, opts, instantiationService, getWindow(container).vscodeWindowId);
+				const viewItem = provider?.(action, opts, instantiationService, getWindow(container).zyraxoncodeWindowId);
 				if (viewItem) {
 					return viewItem;
 				}

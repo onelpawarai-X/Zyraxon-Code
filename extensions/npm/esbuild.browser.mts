@@ -18,7 +18,7 @@ run({
 	additionalOptions: {
 		tsconfig: path.join(import.meta.dirname, 'tsconfig.browser.json'),
 		external: [
-			'vscode',
+			'zyraxoncode',
 			'child_process',
 		]
 	},

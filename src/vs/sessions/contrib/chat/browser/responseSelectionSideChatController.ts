@@ -28,7 +28,7 @@ import { createAndSendSideChat } from './sideChatOrchestration.js';
 const selectionHighlightName = 'chat-response-selection';
 
 // Highlight pseudo-elements inherit custom properties from the root element
-// only, so they cannot see the `--vscode-*` theme variables (which are scoped
+// only, so they cannot see the `--zyraxoncode-*` theme variables (which are scoped
 // to `.monaco-workbench`); the color has to be baked into the rule instead.
 registerThemingParticipant((theme, collector) => {
 	const background = theme.getColor(editorSelectionBackground);

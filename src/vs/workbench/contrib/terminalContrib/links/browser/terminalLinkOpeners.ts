@@ -102,7 +102,7 @@ export class TerminalSearchLinkOpener implements ITerminalLinkOpener {
 		const osPath = osPathModule(this._getOS());
 		const pathSeparator = osPath.sep;
 
-		// Remove file:/// and any leading ./ or ../ since quick access doesn't understand that format
+		// Remove __ZYRAXKEEP__0_ and any leading ./ or ../ since quick access doesn't understand that format
 		let text = link.text.replace(/^file:\/\/\/?/, '');
 		text = osPath.normalize(text).replace(/^(\.+[\\/])+/, '');
 
@@ -200,7 +200,7 @@ export class TerminalSearchLinkOpener implements ITerminalLinkOpener {
 			let uri: URI;
 			if (this._workbenchEnvironmentService.remoteAuthority) {
 				uri = URI.from({
-					scheme: Schemas.vscodeRemote,
+					scheme: Schemas.zyraxoncodeRemote,
 					authority: this._workbenchEnvironmentService.remoteAuthority,
 					path: normalizedAbsolutePath
 				});

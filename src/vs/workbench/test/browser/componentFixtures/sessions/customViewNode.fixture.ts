@@ -76,8 +76,8 @@ function renderNode(ctx: ComponentFixtureContext, options: IFixtureOptions): voi
 	// The node reads the session-view surface colors that the hosting part sets.
 	container.style.width = `${NODE_WIDTH}px`;
 	container.style.height = `${NODE_HEIGHT}px`;
-	container.style.setProperty('--session-view-background', 'var(--vscode-agentsPanel-background, var(--vscode-sideBar-background))');
-	container.style.setProperty('--session-view-foreground', 'var(--vscode-agentsPanel-foreground, var(--vscode-sideBar-foreground))');
+	container.style.setProperty('--session-view-background', 'var(--zyraxoncode-agentsPanel-background, var(--zyraxoncode-sideBar-background))');
+	container.style.setProperty('--session-view-foreground', 'var(--zyraxoncode-agentsPanel-foreground, var(--zyraxoncode-sideBar-foreground))');
 	container.style.backgroundColor = 'var(--session-view-background)';
 
 	const descriptor: ICustomViewDescriptor = {

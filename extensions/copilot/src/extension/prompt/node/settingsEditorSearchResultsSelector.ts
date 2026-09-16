@@ -2,10 +2,10 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import type { CancellationToken } from 'vscode';
+import type { CancellationToken } from 'zyraxoncode';
 import { ChatFetchResponseType, ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { IInteractionService } from '../../../platform/chat/common/interactionService';
-import { SettingListItem } from '../../../platform/embeddings/common/vscodeIndex';
+import { SettingListItem } from '../../../platform/embeddings/common/zyraxoncodeIndex';
 import { IChatEndpoint } from '../../../platform/networking/common/networking';
 import { raceTimeout } from '../../../util/vs/base/common/async';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';

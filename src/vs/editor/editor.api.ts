@@ -17,7 +17,7 @@ EditorOptions.autoIndent.defaultValue = EditorAutoIndentStrategy.Advanced;
 EditorOptions.overviewRulerLanes.defaultValue = 2;
 
 // We need to register a formatter selector which simply picks the first available formatter.
-// See https://github.com/microsoft/monaco-editor/issues/2327
+// See __ZYRAXKEEP__0_
 FormattingConflicts.setFormatterSelector((formatter, document, mode) => Promise.resolve(formatter[0]));
 
 const api = createMonacoBaseAPI();
@@ -57,16 +57,16 @@ if (monacoEnvironment?.globalAPI || (typeof globalWithAMD.define === 'function' 
 if (typeof globalWithAMD.require !== 'undefined' && typeof globalWithAMD.require.config === 'function') {
 	globalWithAMD.require.config({
 		ignoreDuplicateModules: [
-			'vscode-languageserver-types',
-			'vscode-languageserver-types/main',
-			'vscode-languageserver-textdocument',
-			'vscode-languageserver-textdocument/main',
-			'vscode-nls',
-			'vscode-nls/vscode-nls',
+			'zyraxoncode-languageserver-types',
+			'zyraxoncode-languageserver-types/main',
+			'zyraxoncode-languageserver-textdocument',
+			'zyraxoncode-languageserver-textdocument/main',
+			'zyraxoncode-nls',
+			'zyraxoncode-nls/zyraxoncode-nls',
 			'jsonc-parser',
 			'jsonc-parser/main',
-			'vscode-uri',
-			'vscode-uri/index',
+			'zyraxoncode-uri',
+			'zyraxoncode-uri/index',
 			'vs/basic-languages/typescript/typescript'
 		]
 	});

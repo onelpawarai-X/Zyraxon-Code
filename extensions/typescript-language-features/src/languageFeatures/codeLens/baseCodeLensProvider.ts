@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { CachedResponse } from '../../tsServer/cachedResponse';
 import type * as Proto from '../../tsServer/protocol/protocol';
 import * as typeConverters from '../../typeConverters';
@@ -12,28 +12,28 @@ import { escapeRegExp } from '../../utils/regexp';
 import { Disposable } from '../../utils/dispose';
 
 
-export class ReferencesCodeLens extends vscode.CodeLens {
+export class ReferencesCodeLens extends zyraxoncode.CodeLens {
 	constructor(
-		public document: vscode.Uri,
+		public document: zyraxoncode.Uri,
 		public file: string,
-		range: vscode.Range
+		range: zyraxoncode.Range
 	) {
 		super(range);
 	}
 }
 
-export abstract class TypeScriptBaseCodeLensProvider extends Disposable implements vscode.CodeLensProvider<ReferencesCodeLens> {
-	protected changeEmitter = this._register(new vscode.EventEmitter<void>());
+export abstract class TypeScriptBaseCodeLensProvider extends Disposable implements zyraxoncode.CodeLensProvider<ReferencesCodeLens> {
+	protected changeEmitter = this._register(new zyraxoncode.EventEmitter<void>());
 	public onDidChangeCodeLenses = this.changeEmitter.event;
 
-	public static readonly cancelledCommand: vscode.Command = {
+	public static readonly cancelledCommand: zyraxoncode.Command = {
 		// Cancellation is not an error. Just show nothing until we can properly re-compute the code lens
 		title: '',
 		command: ''
 	};
 
-	public static readonly errorCommand: vscode.Command = {
-		title: vscode.l10n.t("Could not determine references"),
+	public static readonly errorCommand: zyraxoncode.Command = {
+		title: zyraxoncode.l10n.t("Could not determine references"),
 		command: ''
 	};
 
@@ -44,7 +44,7 @@ export abstract class TypeScriptBaseCodeLensProvider extends Disposable implemen
 		super();
 	}
 
-	async provideCodeLenses(document: vscode.TextDocument, token: vscode.CancellationToken): Promise<ReferencesCodeLens[]> {
+	async provideCodeLenses(document: zyraxoncode.TextDocument, token: zyraxoncode.CancellationToken): Promise<ReferencesCodeLens[]> {
 		const filepath = this.client.toOpenTsFilePath(document);
 		if (!filepath) {
 			return [];
@@ -55,22 +55,22 @@ export abstract class TypeScriptBaseCodeLensProvider extends Disposable implemen
 			return [];
 		}
 
-		const referenceableSpans: vscode.Range[] = [];
+		const referenceableSpans: zyraxoncode.Range[] = [];
 		response.body?.childItems?.forEach(item => this.walkNavTree(document, item, undefined, referenceableSpans));
 		return referenceableSpans.map(span => new ReferencesCodeLens(document.uri, filepath, span));
 	}
 
 	protected abstract extractSymbol(
-		document: vscode.TextDocument,
+		document: zyraxoncode.TextDocument,
 		item: Proto.NavigationTree,
 		parent: Proto.NavigationTree | undefined
-	): vscode.Range | undefined;
+	): zyraxoncode.Range | undefined;
 
 	private walkNavTree(
-		document: vscode.TextDocument,
+		document: zyraxoncode.TextDocument,
 		item: Proto.NavigationTree,
 		parent: Proto.NavigationTree | undefined,
-		results: vscode.Range[]
+		results: zyraxoncode.Range[]
 	): void {
 		const range = this.extractSymbol(document, item, parent);
 		if (range) {
@@ -82,9 +82,9 @@ export abstract class TypeScriptBaseCodeLensProvider extends Disposable implemen
 }
 
 export function getSymbolRange(
-	document: vscode.TextDocument,
+	document: zyraxoncode.TextDocument,
 	item: Proto.NavigationTree
-): vscode.Range | undefined {
+): zyraxoncode.Range | undefined {
 	if (item.nameSpan) {
 		return typeConverters.Range.fromTextSpan(item.nameSpan);
 	}
@@ -101,8 +101,8 @@ export function getSymbolRange(
 	const identifierMatch = new RegExp(`^(.*?(\\b|\\W))${escapeRegExp(item.text || '')}(\\b|\\W)`, 'gm');
 	const match = identifierMatch.exec(text);
 	const prefixLength = match ? match.index + match[1].length : 0;
-	const startOffset = document.offsetAt(new vscode.Position(range.start.line, range.start.character)) + prefixLength;
-	return new vscode.Range(
+	const startOffset = document.offsetAt(new zyraxoncode.Position(range.start.line, range.start.character)) + prefixLength;
+	return new zyraxoncode.Range(
 		document.positionAt(startOffset),
 		document.positionAt(startOffset + item.text.length));
 }

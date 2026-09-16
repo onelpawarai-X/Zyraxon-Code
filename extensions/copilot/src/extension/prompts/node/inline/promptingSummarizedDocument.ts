@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { IResponsePart } from '../../../../platform/chat/common/chatMLFetcher';
 import { TextDocumentSnapshot } from '../../../../platform/editing/common/textDocumentSnapshot';
 import { IParserService } from '../../../../platform/parser/node/parserService';
 import { findLastIdx } from '../../../../util/vs/base/common/arraysFind';
 import { CancellationToken } from '../../../../util/vs/base/common/cancellation';
 import { OffsetRange } from '../../../../util/vs/editor/common/core/ranges/offsetRange';
-import { Range, TextEdit } from '../../../../vscodeTypes';
+import { Range, TextEdit } from '../../../../zyraxoncodeTypes';
 import { ISessionTurnStorage, OutcomeAnnotationLabel } from '../../../inlineChat/node/promptCraftingTypes';
 import { isImportStatement } from '../../../prompt/common/importStatement';
 import { EditStrategy, trimLeadingWhitespace } from '../../../prompt/node/editGeneration';
@@ -23,7 +23,7 @@ import { DocumentSnapshot, WorkingCopyDerivedDocument } from './workingCopies';
 export async function createPromptingSummarizedDocument(
 	parserService: IParserService,
 	document: TextDocumentSnapshot,
-	formattingOptions: vscode.FormattingOptions | undefined,
+	formattingOptions: zyraxoncode.FormattingOptions | undefined,
 	userSelection: Range,
 	tokensBudget: number,
 ): Promise<PromptingSummarizedDocument> {
@@ -39,7 +39,7 @@ export async function createPromptingSummarizedDocument(
 
 export class PromptingSummarizedDocument {
 
-	public get uri(): vscode.Uri {
+	public get uri(): zyraxoncode.Uri {
 		return this._document.uri;
 	}
 
@@ -52,7 +52,7 @@ export class PromptingSummarizedDocument {
 		private readonly _adjustedSelection: OffsetRange,
 		private readonly _projectedDocument: ProjectedDocument,
 		private readonly _document: TextDocumentSnapshot,
-		private readonly _formattingOptions: vscode.FormattingOptions | undefined,
+		private readonly _formattingOptions: zyraxoncode.FormattingOptions | undefined,
 	) { }
 
 	public splitAroundAdjustedSelection(): SummarizedDocumentSplit {
@@ -82,7 +82,7 @@ export class SummarizedDocumentSplit {
 	public readonly codeAbove: string;
 	public readonly codeSelected: string;
 	public readonly codeBelow: string;
-	private readonly _selection: vscode.Range;
+	private readonly _selection: zyraxoncode.Range;
 
 	public get hasCodeWithoutSelection(): boolean {
 		return (
@@ -101,8 +101,8 @@ export class SummarizedDocumentSplit {
 
 	constructor(
 		private readonly _projectedDocument: ProjectedDocument,
-		private readonly _uri: vscode.Uri,
-		private readonly _formattingOptions: vscode.FormattingOptions | undefined,
+		private readonly _uri: zyraxoncode.Uri,
+		private readonly _formattingOptions: zyraxoncode.FormattingOptions | undefined,
 		offsetSelection: OffsetRange
 	) {
 		this._selection = this._projectedDocument.positionOffsetTransformer.toRange(offsetSelection);
@@ -165,9 +165,9 @@ export class InlineReplyInterpreter implements ReplyInterpreter {
 	private _lastText: string = '';
 
 	constructor(
-		private readonly _uri: vscode.Uri,
+		private readonly _uri: zyraxoncode.Uri,
 		summarizedDoc: ProjectedDocument,
-		private readonly _fileIndentInfo: vscode.FormattingOptions | undefined,
+		private readonly _fileIndentInfo: zyraxoncode.FormattingOptions | undefined,
 		private readonly _leadingMarkdownStreaming: LeadingMarkdownStreaming,
 		private readonly _earlyStopping: EarlyStopping,
 		private readonly _streamingStrategyFactory: IStreamingEditsStrategyFactory,
@@ -178,7 +178,7 @@ export class InlineReplyInterpreter implements ReplyInterpreter {
 		this._workingCopySummarizedDoc = new WorkingCopyDerivedDocument(summarizedDoc);
 	}
 
-	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, _outputStream: vscode.ChatResponseStream, token: CancellationToken): Promise<void> {
+	async processResponse(context: IResponseProcessorContext, inputStream: AsyncIterable<IResponsePart>, _outputStream: zyraxoncode.ChatResponseStream, token: CancellationToken): Promise<void> {
 		const outputStream = this._workingCopySummarizedDoc.createDerivedDocumentChatResponseStream(_outputStream);
 		const streamingWorkingCopyDocument = new StreamingWorkingCopyDocument(
 			outputStream,
@@ -242,7 +242,7 @@ export class InlineReplyInterpreter implements ReplyInterpreter {
 		outputStream.markdown(this._lastText);
 	}
 
-	private _generateAdditionalImportsEdits(additionalImports: string[]): vscode.TextEdit[] {
+	private _generateAdditionalImportsEdits(additionalImports: string[]): zyraxoncode.TextEdit[] {
 		if (additionalImports.length === 0) {
 			return [];
 		}

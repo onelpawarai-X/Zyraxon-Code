@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BasePromptElementProps, PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { BasePromptElementProps, PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { TelemetryCorrelationId } from '../../../../util/common/telemetryCorrelationId';
-import { Diagnostic } from '../../../../vscodeTypes';
+import { Diagnostic } from '../../../../zyraxoncodeTypes';
 import { IDocumentContext } from '../../../prompt/node/documentContext';
 import { ChunksToolProps, WorkspaceChunks } from '../panel/workspace/workspaceContext';
 

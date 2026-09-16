@@ -3,10 +3,10 @@
   "displayName": "%displayName%",
   "description": "%description%",
   "version": "30.0.0",
-  "publisher": "vscode",
+  "publisher": "zyraxoncode",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.20.0"
+    "zyraxoncode": "^1.20.0"
   },
   "categories": [
     "Programming Languages"
@@ -129,10 +129,10 @@
     }
   },
   "scripts": {
-    "update-grammar": "node ../node_modules/vscode-grammar-updater/bin microsoft/vscode-markdown-tm-grammar syntaxes/markdown.tmLanguage ./syntaxes/markdown.tmLanguage.json"
+    "update-grammar": "node ../node_modules/zyraxoncode-grammar-updater/bin zyraxon/zyraxoncode-markdown-tm-grammar syntaxes/markdown.tmLanguage ./syntaxes/markdown.tmLanguage.json"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/vscode.git"
+    "url": "__ZYRAXKEEP__0_"
   }
 }

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { NotebookCell, Uri } from 'vscode';
+import type { NotebookCell, Uri } from 'zyraxoncode';
 import { createServiceIdentifier } from '../../../util/common/services';
 
 

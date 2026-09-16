@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { LanguageModelCache, getLanguageModelCache } from '../languageModelCache.js';
-import { Stylesheet, LanguageService as CSSLanguageService } from 'vscode-css-languageservice';
+import { Stylesheet, LanguageService as CSSLanguageService } from 'zyraxoncode-css-languageservice';
 import { LanguageMode, Workspace, Color, TextDocument, Position, Range, CompletionList, DocumentContext, Diagnostic } from './languageModes.js';
 import { HTMLDocumentRegions, CSS_STYLE_RULE } from './embeddedSupport.js';
 

@@ -6,7 +6,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import * as cp from 'child_process';
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 
 type AutoDetect = 'on' | 'off';
 
@@ -49,21 +49,21 @@ function isTestTask(name: string): boolean {
 	return false;
 }
 
-let _channel: vscode.OutputChannel;
-function getOutputChannel(): vscode.OutputChannel {
+let _channel: zyraxoncode.OutputChannel;
+function getOutputChannel(): zyraxoncode.OutputChannel {
 	if (!_channel) {
-		_channel = vscode.window.createOutputChannel('Grunt Auto Detection');
+		_channel = zyraxoncode.window.createOutputChannel('Grunt Auto Detection');
 	}
 	return _channel;
 }
 
 function showError() {
-	vscode.window.showWarningMessage(vscode.l10n.t("Problem finding grunt tasks. See the output for more information."),
-		vscode.l10n.t("Go to output")).then(() => {
+	zyraxoncode.window.showWarningMessage(zyraxoncode.l10n.t("Problem finding grunt tasks. See the output for more information."),
+		zyraxoncode.l10n.t("Go to output")).then(() => {
 			getOutputChannel().show(true);
 		});
 }
-interface GruntTaskDefinition extends vscode.TaskDefinition {
+interface GruntTaskDefinition extends zyraxoncode.TaskDefinition {
 	task: string;
 	args?: string[];
 	file?: string;
@@ -84,31 +84,31 @@ async function findGruntCommand(rootPath: string): Promise<string> {
 
 class FolderDetector {
 
-	private fileWatcher: vscode.FileSystemWatcher | undefined;
-	private promise: Thenable<vscode.Task[]> | undefined;
+	private fileWatcher: zyraxoncode.FileSystemWatcher | undefined;
+	private promise: Thenable<zyraxoncode.Task[]> | undefined;
 
 	constructor(
-		private _workspaceFolder: vscode.WorkspaceFolder,
+		private _workspaceFolder: zyraxoncode.WorkspaceFolder,
 		private _gruntCommand: Promise<string>) {
 	}
 
-	public get workspaceFolder(): vscode.WorkspaceFolder {
+	public get workspaceFolder(): zyraxoncode.WorkspaceFolder {
 		return this._workspaceFolder;
 	}
 
 	public isEnabled(): boolean {
-		return vscode.workspace.getConfiguration('grunt', this._workspaceFolder.uri).get<AutoDetect>('autoDetect') === 'on';
+		return zyraxoncode.workspace.getConfiguration('grunt', this._workspaceFolder.uri).get<AutoDetect>('autoDetect') === 'on';
 	}
 
 	public start(): void {
 		const pattern = path.join(this._workspaceFolder.uri.fsPath, '{node_modules,[Gg]runtfile.js}');
-		this.fileWatcher = vscode.workspace.createFileSystemWatcher(pattern);
+		this.fileWatcher = zyraxoncode.workspace.createFileSystemWatcher(pattern);
 		this.fileWatcher.onDidChange(() => this.promise = undefined);
 		this.fileWatcher.onDidCreate(() => this.promise = undefined);
 		this.fileWatcher.onDidDelete(() => this.promise = undefined);
 	}
 
-	public async getTasks(): Promise<vscode.Task[]> {
+	public async getTasks(): Promise<zyraxoncode.Task[]> {
 		if (this.isEnabled()) {
 			if (!this.promise) {
 				this.promise = this.computeTasks();
@@ -119,23 +119,23 @@ class FolderDetector {
 		}
 	}
 
-	public async getTask(_task: vscode.Task): Promise<vscode.Task | undefined> {
+	public async getTask(_task: zyraxoncode.Task): Promise<zyraxoncode.Task | undefined> {
 		const taskDefinition = _task.definition;
 		const gruntTask = taskDefinition.task;
 		if (gruntTask) {
-			const options: vscode.ShellExecutionOptions = { cwd: this.workspaceFolder.uri.fsPath };
+			const options: zyraxoncode.ShellExecutionOptions = { cwd: this.workspaceFolder.uri.fsPath };
 			const source = 'grunt';
 			const task = gruntTask.indexOf(' ') === -1
-				? new vscode.Task(taskDefinition, this.workspaceFolder, gruntTask, source, new vscode.ShellExecution(`${await this._gruntCommand}`, [gruntTask, ...taskDefinition.args], options))
-				: new vscode.Task(taskDefinition, this.workspaceFolder, gruntTask, source, new vscode.ShellExecution(`${await this._gruntCommand}`, [`"${gruntTask}"`, ...taskDefinition.args], options));
+				? new zyraxoncode.Task(taskDefinition, this.workspaceFolder, gruntTask, source, new zyraxoncode.ShellExecution(`${await this._gruntCommand}`, [gruntTask, ...taskDefinition.args], options))
+				: new zyraxoncode.Task(taskDefinition, this.workspaceFolder, gruntTask, source, new zyraxoncode.ShellExecution(`${await this._gruntCommand}`, [`"${gruntTask}"`, ...taskDefinition.args], options));
 			return task;
 		}
 		return undefined;
 	}
 
-	private async computeTasks(): Promise<vscode.Task[]> {
+	private async computeTasks(): Promise<zyraxoncode.Task[]> {
 		const rootPath = this._workspaceFolder.uri.scheme === 'file' ? this._workspaceFolder.uri.fsPath : undefined;
-		const emptyTasks: vscode.Task[] = [];
+		const emptyTasks: zyraxoncode.Task[] = [];
 		if (!rootPath) {
 			return emptyTasks;
 		}
@@ -150,7 +150,7 @@ class FolderDetector {
 				getOutputChannel().appendLine(stderr);
 				showError();
 			}
-			const result: vscode.Task[] = [];
+			const result: zyraxoncode.Task[] = [];
 			if (stdout) {
 				// grunt lists tasks as follows (description is wrapped into a new line if too long):
 				// ...
@@ -188,16 +188,16 @@ class FolderDetector {
 									task: name
 								};
 								const source = 'grunt';
-								const options: vscode.ShellExecutionOptions = { cwd: this.workspaceFolder.uri.fsPath };
+								const options: zyraxoncode.ShellExecutionOptions = { cwd: this.workspaceFolder.uri.fsPath };
 								const task = name.indexOf(' ') === -1
-									? new vscode.Task(kind, this.workspaceFolder, name, source, new vscode.ShellExecution(`${await this._gruntCommand} ${name}`, options))
-									: new vscode.Task(kind, this.workspaceFolder, name, source, new vscode.ShellExecution(`${await this._gruntCommand} "${name}"`, options));
+									? new zyraxoncode.Task(kind, this.workspaceFolder, name, source, new zyraxoncode.ShellExecution(`${await this._gruntCommand} ${name}`, options))
+									: new zyraxoncode.Task(kind, this.workspaceFolder, name, source, new zyraxoncode.ShellExecution(`${await this._gruntCommand} "${name}"`, options));
 								result.push(task);
 								const lowerCaseTaskName = name.toLowerCase();
 								if (isBuildTask(lowerCaseTaskName)) {
-									task.group = vscode.TaskGroup.Build;
+									task.group = zyraxoncode.TaskGroup.Build;
 								} else if (isTestTask(lowerCaseTaskName)) {
-									task.group = vscode.TaskGroup.Test;
+									task.group = zyraxoncode.TaskGroup.Test;
 								}
 							}
 						}
@@ -213,7 +213,7 @@ class FolderDetector {
 			if (err.stdout) {
 				channel.appendLine(err.stdout);
 			}
-			channel.appendLine(vscode.l10n.t("Auto detecting Grunt for folder {0} failed with error: {1}', this.workspaceFolder.name, err.error ? err.error.toString() : 'unknown"));
+			channel.appendLine(zyraxoncode.l10n.t("Auto detecting Grunt for folder {0} failed with error: {1}', this.workspaceFolder.name, err.error ? err.error.toString() : 'unknown"));
 			showError();
 			return emptyTasks;
 		}
@@ -229,19 +229,19 @@ class FolderDetector {
 
 class TaskDetector {
 
-	private taskProvider: vscode.Disposable | undefined;
+	private taskProvider: zyraxoncode.Disposable | undefined;
 	private detectors: Map<string, FolderDetector> = new Map();
 
 	constructor() {
 	}
 
 	public start(): void {
-		const folders = vscode.workspace.workspaceFolders;
+		const folders = zyraxoncode.workspace.workspaceFolders;
 		if (folders) {
 			this.updateWorkspaceFolders(folders, []);
 		}
-		vscode.workspace.onDidChangeWorkspaceFolders((event) => this.updateWorkspaceFolders(event.added, event.removed));
-		vscode.workspace.onDidChangeConfiguration(this.updateConfiguration, this);
+		zyraxoncode.workspace.onDidChangeWorkspaceFolders((event) => this.updateWorkspaceFolders(event.added, event.removed));
+		zyraxoncode.workspace.onDidChangeConfiguration(this.updateConfiguration, this);
 	}
 
 	public dispose(): void {
@@ -252,7 +252,7 @@ class TaskDetector {
 		this.detectors.clear();
 	}
 
-	private updateWorkspaceFolders(added: readonly vscode.WorkspaceFolder[], removed: readonly vscode.WorkspaceFolder[]): void {
+	private updateWorkspaceFolders(added: readonly zyraxoncode.WorkspaceFolder[], removed: readonly zyraxoncode.WorkspaceFolder[]): void {
 		for (const remove of removed) {
 			const detector = this.detectors.get(remove.uri.toString());
 			if (detector) {
@@ -275,7 +275,7 @@ class TaskDetector {
 			detector.dispose();
 			this.detectors.delete(detector.workspaceFolder.uri.toString());
 		}
-		const folders = vscode.workspace.workspaceFolders;
+		const folders = zyraxoncode.workspace.workspaceFolders;
 		if (folders) {
 			for (const folder of folders) {
 				if (!this.detectors.has(folder.uri.toString())) {
@@ -293,11 +293,11 @@ class TaskDetector {
 	private updateProvider(): void {
 		if (!this.taskProvider && this.detectors.size > 0) {
 			const thisCapture = this;
-			this.taskProvider = vscode.tasks.registerTaskProvider('grunt', {
-				provideTasks: (): Promise<vscode.Task[]> => {
+			this.taskProvider = zyraxoncode.tasks.registerTaskProvider('grunt', {
+				provideTasks: (): Promise<zyraxoncode.Task[]> => {
 					return thisCapture.getTasks();
 				},
-				resolveTask(_task: vscode.Task): Promise<vscode.Task | undefined> {
+				resolveTask(_task: zyraxoncode.Task): Promise<zyraxoncode.Task | undefined> {
 					return thisCapture.getTask(_task);
 				}
 			});
@@ -308,22 +308,22 @@ class TaskDetector {
 		}
 	}
 
-	public getTasks(): Promise<vscode.Task[]> {
+	public getTasks(): Promise<zyraxoncode.Task[]> {
 		return this.computeTasks();
 	}
 
-	private computeTasks(): Promise<vscode.Task[]> {
+	private computeTasks(): Promise<zyraxoncode.Task[]> {
 		if (this.detectors.size === 0) {
 			return Promise.resolve([]);
 		} else if (this.detectors.size === 1) {
 			return this.detectors.values().next().value!.getTasks();
 		} else {
-			const promises: Promise<vscode.Task[]>[] = [];
+			const promises: Promise<zyraxoncode.Task[]>[] = [];
 			for (const detector of this.detectors.values()) {
 				promises.push(detector.getTasks().then((value) => value, () => []));
 			}
 			return Promise.all(promises).then((values) => {
-				const result: vscode.Task[] = [];
+				const result: zyraxoncode.Task[] = [];
 				for (const tasks of values) {
 					if (tasks && tasks.length > 0) {
 						result.push(...tasks);
@@ -334,13 +334,13 @@ class TaskDetector {
 		}
 	}
 
-	public async getTask(task: vscode.Task): Promise<vscode.Task | undefined> {
+	public async getTask(task: zyraxoncode.Task): Promise<zyraxoncode.Task | undefined> {
 		if (this.detectors.size === 0) {
 			return undefined;
 		} else if (this.detectors.size === 1) {
 			return this.detectors.values().next().value!.getTask(task);
 		} else {
-			if ((task.scope === vscode.TaskScope.Workspace) || (task.scope === vscode.TaskScope.Global)) {
+			if ((task.scope === zyraxoncode.TaskScope.Workspace) || (task.scope === zyraxoncode.TaskScope.Global)) {
 				return undefined;
 			} else if (task.scope) {
 				const detector = this.detectors.get(task.scope.uri.toString());
@@ -354,7 +354,7 @@ class TaskDetector {
 }
 
 let detector: TaskDetector;
-export function activate(_context: vscode.ExtensionContext): void {
+export function activate(_context: zyraxoncode.ExtensionContext): void {
 	detector = new TaskDetector();
 	detector.start();
 }

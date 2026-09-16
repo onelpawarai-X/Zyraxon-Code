@@ -245,7 +245,7 @@ const TRUNCATION_MARKER_TOTAL = `${TRUNCATION_MARKER_PREFIX}; entry exceeded siz
  * Wraps `JSON.stringify(entry)` with a safety net for the V8 max-string-length
  * limit. The common path is a single `JSON.stringify` with zero overhead. If
  * stringification throws `RangeError` (the resulting JSON would exceed V8's
- * ~512 MiB max string length — see microsoft/vscode#308843), retry with a
+ * ~512 MiB max string length — see zyraxon/zyraxoncode#308843), retry with a
  * replacer that truncates oversized strings. Extensions sometimes put very
  * large content (browser dumps, command output, …) into chat result metadata;
  * losing the tail of one such value is dramatically better than losing the

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PromptElement, PromptSizing } from '@vscode/prompt-tsx';
+import { PromptElement, PromptSizing } from '@zyraxoncode/prompt-tsx';
 import { ConfigKey, IConfigurationService } from '../../../../../platform/configuration/common/configurationService';
 import { isGpt53Codex } from '../../../../../platform/endpoint/common/chatModelCapabilities';
 import { IChatEndpoint } from '../../../../../platform/networking/common/networking';
@@ -112,7 +112,7 @@ class Gpt53CodexPrompt extends PromptElement<DefaultAgentPromptProps> {
 					* Each reference should have a stand alone path. Even if it's the same file.<br />
 					* Accepted: absolute, workspace‑relative, a/ or b/ diff prefixes, or bare filename/suffix.<br />
 					* Optionally include line/column (1‑based): :line[:column] or #Lline[Ccolumn] (column defaults to 1).<br />
-					* Do not use URIs like file://, vscode://, or https://.<br />
+					* Do not use URIs like __ZYRAXKEEP__0_ __ZYRAXKEEP__1_ or __ZYRAXKEEP__2_<br />
 					* Do not provide range of lines<br />
 					* Examples: src/app.ts, src/app.ts:42, b/server/index.js#L10, C:\repo\project\main.rs:12:5<br />
 					- Don’t use emojis or em dashes unless explicitly instructed.

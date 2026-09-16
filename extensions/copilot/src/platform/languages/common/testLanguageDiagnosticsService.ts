@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type { Diagnostic, DiagnosticChangeEvent, Uri } from 'vscode';
+import type { Diagnostic, DiagnosticChangeEvent, Uri } from 'zyraxoncode';
 import { Emitter } from '../../../util/vs/base/common/event';
 import { ResourceMap } from '../../../util/vs/base/common/map';
 import { AbstractLanguageDiagnosticsService } from './languageDiagnosticsService';

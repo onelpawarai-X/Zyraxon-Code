@@ -19,7 +19,7 @@ export interface ILspTerminalModelContentProvider extends ITextModelContentProvi
 }
 
 export class LspTerminalModelContentProvider extends Disposable implements ILspTerminalModelContentProvider, ITextModelContentProvider {
-	static readonly scheme = Schemas.vscodeTerminal;
+	static readonly scheme = Schemas.zyraxoncodeTerminal;
 	private _commandDetection: ICommandDetectionCapability | undefined;
 	private _capabilitiesStore: ITerminalCapabilityStore;
 	private readonly _virtualTerminalDocumentUri: URI;
@@ -149,10 +149,10 @@ export class LspTerminalModelContentProvider extends Disposable implements ILspT
 /**
  * Creates a terminal language virtual URI.
  */
-// TODO: Make this [OS generic](https://github.com/microsoft/vscode/issues/249477)
+// TODO: Make this [OS generic](__ZYRAXKEEP__0_)
 export function createTerminalLanguageVirtualUri(terminalId: number, languageExtension: string): URI {
 	return URI.from({
-		scheme: Schemas.vscodeTerminal,
+		scheme: Schemas.zyraxoncodeTerminal,
 		path: `/terminal${terminalId}.${languageExtension}`,
 	});
 }

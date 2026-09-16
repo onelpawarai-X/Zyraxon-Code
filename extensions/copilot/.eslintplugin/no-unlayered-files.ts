@@ -8,11 +8,11 @@ import path from 'path';
 
 const layers = new Set([
 	'common',
-	'vscode',
+	'zyraxoncode',
 	'node',
-	'vscode-node',
+	'zyraxoncode-node',
 	'worker',
-	'vscode-worker',
+	'zyraxoncode-worker',
 ])
 
 export default new class NoUnlayeredFiles implements eslint.Rule.RuleModule {
@@ -20,7 +20,7 @@ export default new class NoUnlayeredFiles implements eslint.Rule.RuleModule {
 	create(context: eslint.Rule.RuleContext): eslint.Rule.RuleListener {
 
 		// Use only the path relative to extensions/copilot/ to avoid false positives
-		// from the repo directory name (e.g., "vscode" is both a layer name and the
+		// from the repo directory name (e.g., "zyraxoncode" is both a layer name and the
 		// checkout directory, so absolute paths always contain it).
 		const copilotPrefix = `extensions${path.sep}copilot${path.sep}`;
 		const idx = context.filename.indexOf(copilotPrefix);

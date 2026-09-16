@@ -442,10 +442,10 @@ function captureLocation(fn: Function): ITestLocation | undefined {
 			throw new Error();
 		} catch (e) {
 			// Error:
-			//     at captureLocationUsingClassicalWay (/Users/alex/src/vscode-copilot/test/base/stest.ts:398:10)
-			//     at captureLocation (/Users/alex/src/vscode-copilot/test/base/stest.ts:374:11)
-			//     at stest (/Users/alex/src/vscode-copilot/test/base/stest.ts:467:84)
-			//     at /Users/alex/src/vscode-copilot/test/codeMapper/codeMapper.stest.ts:22:2
+			//     at captureLocationUsingClassicalWay (/Users/alex/src/zyraxoncode-copilot/test/base/stest.ts:398:10)
+			//     at captureLocation (/Users/alex/src/zyraxoncode-copilot/test/base/stest.ts:374:11)
+			//     at stest (/Users/alex/src/zyraxoncode-copilot/test/base/stest.ts:467:84)
+			//     at /Users/alex/src/zyraxoncode-copilot/test/codeMapper/codeMapper.stest.ts:22:2
 			const stack = (<string[]>e.stack.split('\n')).at(4);
 			if (!stack) {
 				console.log(`No stack in captureLocation`);

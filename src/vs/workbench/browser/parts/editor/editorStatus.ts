@@ -501,7 +501,7 @@ class EditorStatus extends Disposable {
 		}
 
 		const editorURI = getCodeEditor(this.editorService.activeTextEditorControl)?.getModel()?.uri;
-		if (editorURI?.scheme === Schemas.vscodeNotebookCell) {
+		if (editorURI?.scheme === Schemas.zyraxoncodeNotebookCell) {
 			this.selectionElement.clear();
 			return;
 		}
@@ -524,7 +524,7 @@ class EditorStatus extends Disposable {
 		}
 
 		const editorURI = getCodeEditor(this.editorService.activeTextEditorControl)?.getModel()?.uri;
-		if (editorURI?.scheme === Schemas.vscodeNotebookCell) {
+		if (editorURI?.scheme === Schemas.zyraxoncodeNotebookCell) {
 			this.indentationElement.clear();
 			return;
 		}

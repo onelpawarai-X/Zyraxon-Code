@@ -1,6 +1,6 @@
 {
     "name": "Python 3-test",
-    "image": "mcr.microsoft.com/devcontainers/python:1.1.9-3.11-bookworm",
+    "image": "mcr.zyraxon.com/devcontainers/python:1.1.9-3.11-bookworm",
     "postCreateCommand": "zsh -l .devcontainer/post-install.sh",
     "remoteUser": "root",
     "customizations": {

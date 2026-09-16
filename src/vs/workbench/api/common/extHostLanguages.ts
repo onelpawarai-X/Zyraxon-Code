@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { MainContext, MainThreadLanguagesShape, IMainContext, ExtHostLanguagesShape } from './extHost.protocol.js';
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ExtHostDocuments } from './extHostDocuments.js';
 import * as typeConvert from './extHostTypeConverters.js';
 import { StandardTokenType, Range, Position, LanguageStatusSeverity } from './extHostTypes.js';
@@ -43,16 +43,16 @@ export class ExtHostLanguages implements ExtHostLanguagesShape {
 		this._onDidChangeSyntaxHighlighting.fire();
 	}
 
-	async computeFullSyntaxHighlighting(source: string, languageId: string): Promise<vscode.SyntaxHighlightingResult> {
+	async computeFullSyntaxHighlighting(source: string, languageId: string): Promise<zyraxoncode.SyntaxHighlightingResult> {
 		const result = await this._proxy.$computeFullSyntaxHighlighting(source, languageId);
-		return result as vscode.SyntaxHighlightingResult;
+		return result as zyraxoncode.SyntaxHighlightingResult;
 	}
 
 	async getLanguages(): Promise<string[]> {
 		return this._languageIds.slice(0);
 	}
 
-	async changeLanguage(uri: vscode.Uri, languageId: string): Promise<vscode.TextDocument> {
+	async changeLanguage(uri: zyraxoncode.Uri, languageId: string): Promise<zyraxoncode.TextDocument> {
 		await this._proxy.$changeLanguage(uri, languageId);
 		const data = this._documents.getDocumentData(uri);
 		if (!data) {
@@ -61,7 +61,7 @@ export class ExtHostLanguages implements ExtHostLanguagesShape {
 		return data.document;
 	}
 
-	async tokenAtPosition(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.TokenInformation> {
+	async tokenAtPosition(document: zyraxoncode.TextDocument, position: zyraxoncode.Position): Promise<zyraxoncode.TokenInformation> {
 		const versionNow = document.version;
 		const pos = typeConvert.Position.from(position);
 		const info = await this._proxy.$tokensAtPosition(document.uri, pos);
@@ -91,7 +91,7 @@ export class ExtHostLanguages implements ExtHostLanguagesShape {
 	private _handlePool: number = 0;
 	private _ids = new Set<string>();
 
-	createLanguageStatusItem(extension: IExtensionDescription, id: string, selector: vscode.DocumentSelector): vscode.LanguageStatusItem {
+	createLanguageStatusItem(extension: IExtensionDescription, id: string, selector: zyraxoncode.DocumentSelector): zyraxoncode.LanguageStatusItem {
 
 		const handle = this._handlePool++;
 		const proxy = this._proxy;
@@ -104,7 +104,7 @@ export class ExtHostLanguages implements ExtHostLanguagesShape {
 		}
 		ids.add(fullyQualifiedId);
 
-		const data: Omit<vscode.LanguageStatusItem, 'dispose' | 'text2'> = {
+		const data: Omit<zyraxoncode.LanguageStatusItem, 'dispose' | 'text2'> = {
 			selector,
 			id,
 			name: extension.displayName ?? extension.name,
@@ -143,7 +143,7 @@ export class ExtHostLanguages implements ExtHostLanguagesShape {
 			}, 0);
 		};
 
-		const result: vscode.LanguageStatusItem = {
+		const result: zyraxoncode.LanguageStatusItem = {
 			dispose() {
 				commandDisposables.dispose();
 				soonHandle?.dispose();

@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as l10n from '@vscode/l10n';
-import type * as vscode from 'vscode';
+import * as l10n from '@zyraxoncode/l10n';
+import type * as zyraxoncode from 'zyraxoncode';
 import { count } from '../../../util/vs/base/common/strings';
-import { MarkdownString } from '../../../vscodeTypes';
+import { MarkdownString } from '../../../zyraxoncodeTypes';
 import { ToolName } from '../common/toolNames';
 import { ToolRegistry } from '../common/toolsRegistry';
 import { formatUriForFileWidget } from '../common/toolUtils';
@@ -34,7 +34,7 @@ export class ReplaceStringTool<T extends IReplaceStringToolParams = IReplaceStri
 		}];
 	}
 
-	async handleToolStream(options: vscode.LanguageModelToolInvocationStreamOptions<IReplaceStringToolParams>, _token: vscode.CancellationToken): Promise<vscode.LanguageModelToolStreamResult> {
+	async handleToolStream(options: zyraxoncode.LanguageModelToolInvocationStreamOptions<IReplaceStringToolParams>, _token: zyraxoncode.CancellationToken): Promise<zyraxoncode.LanguageModelToolStreamResult> {
 		const partialInput = options.rawInput as Partial<IReplaceStringToolParams> | undefined;
 
 		let invocationMessage: MarkdownString;
@@ -74,7 +74,7 @@ export class ReplaceStringTool<T extends IReplaceStringToolParams = IReplaceStri
 	}
 
 
-	async invoke(options: vscode.LanguageModelToolInvocationOptions<T>, token: vscode.CancellationToken) {
+	async invoke(options: zyraxoncode.LanguageModelToolInvocationOptions<T>, token: zyraxoncode.CancellationToken) {
 		const prepared = await this.prepareEdits(options, token);
 		return this.applyAllEdits(options, prepared, token);
 	}

@@ -655,7 +655,7 @@ export class AgentHostTelemetryReporter {
 		const candidateModels = report.candidateModels ?? [];
 		const properties = {
 			conversationId: AgentSession.id(report.session),
-			vscodeRequestId: report.turnId,
+			zyraxoncodeRequestId: report.turnId,
 			initiatorClientType: report.clientType,
 			...(report.predictedLabel !== undefined ? { predictedLabel: report.predictedLabel } : {}),
 			...(report.routingMethod !== undefined ? { routingMethod: report.routingMethod } : {}),

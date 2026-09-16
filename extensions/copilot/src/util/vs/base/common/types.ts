@@ -1,4 +1,4 @@
-//!!! DO NOT modify, this file was COPIED from 'microsoft/vscode'
+//!!! DO NOT modify, this file was COPIED from 'zyraxon/zyraxoncode'
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
@@ -149,7 +149,7 @@ export function assertReturnsDefined<T>(arg: T | null | undefined): NonNullable<
  * ```
  *
  * @see {@link assertReturnsDefined} for a similar utility but without assertion.
- * @see {@link https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#assertion-functions typescript-3-7.html#assertion-functions}
+ * @see {@link __ZYRAXKEEP__0_ typescript-3-7.html#assertion-functions}
  */
 export function assertDefined<T>(value: T, error: string | NonNullable<Error>): asserts value is NonNullable<T> {
 	if (value === null || value === undefined) {

@@ -9,7 +9,7 @@ import { binarySearch2, equals } from '../../../../util/vs/base/common/arrays';
 import { CharCode } from '../../../../util/vs/base/common/charCode';
 import { BugIndicatingError } from '../../../../util/vs/base/common/errors';
 import { OffsetRange } from '../../../../util/vs/editor/common/core/ranges/offsetRange';
-import { Range } from '../../../../vscodeTypes';
+import { Range } from '../../../../zyraxoncodeTypes';
 
 export function getAdjustedSelection<TDocument extends AbstractDocument>(
 	ast: OverlayNode,

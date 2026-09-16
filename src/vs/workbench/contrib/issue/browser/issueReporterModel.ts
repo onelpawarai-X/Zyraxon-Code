@@ -8,7 +8,7 @@ import { isRemoteDiagnosticError, SystemInfo } from '../../../../platform/diagno
 import { ISettingSearchResult, IssueReporterExtensionData, IssueSource, IssueType } from '../common/issue.js';
 
 interface VersionInfo {
-	vscodeVersion: string;
+	zyraxoncodeVersion: string;
 	os: string;
 }
 
@@ -67,10 +67,10 @@ export class IssueReporterModel {
 		this._data = initialData ? Object.assign(defaultData, initialData) : defaultData;
 
 		mainWindow.addEventListener('message', async (event) => {
-			if (event.data && event.data.sendChannel === 'vscode:triggerIssueData') {
+			if (event.data && event.data.sendChannel === 'zyraxoncode:triggerIssueData') {
 				mainWindow.postMessage({
 					data: { issueBody: this._data.issueDescription, issueTitle: this._data.issueTitle },
-					replyChannel: 'vscode:triggerIssueDataResponse'
+					replyChannel: 'zyraxoncode:triggerIssueDataResponse'
 				}, '*');
 			}
 		});
@@ -97,7 +97,7 @@ Type: <b>${this.getIssueTypeTitle()}</b>
 ${this._data.isSessionsWindow ? '\nWindow: Agents\n' : ''}
 ${this._data.issueDescription}
 ${this.getExtensionVersion()}
-ZYRAXON Code version: ${this._data.versionInfo && this._data.versionInfo.vscodeVersion}
+ZYRAXON Code version: ${this._data.versionInfo && this._data.versionInfo.zyraxoncodeVersion}
 OS version: ${this._data.versionInfo && this._data.versionInfo.os}
 Modes:${modes.length ? ' ' + modes.join(', ') : ''}
 ${this.getRemoteOSes()}

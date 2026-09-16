@@ -151,7 +151,7 @@ export class ParcelWatcher extends BaseWatcher implements IRecursiveWatcherWithS
 	private static readonly PREDEFINED_EXCLUDES: { [platform: string]: string[] } = {
 		'win32': [],
 		'darwin': [
-			join(homedir(), 'Library', 'Containers') // Triggers access dialog from macOS 14 (https://github.com/microsoft/vscode/issues/208105)
+			join(homedir(), 'Library', 'Containers') // Triggers access dialog from macOS 14 (__ZYRAXKEEP__0_)
 		],
 		'linux': []
 	};
@@ -177,7 +177,7 @@ export class ParcelWatcher extends BaseWatcher implements IRecursiveWatcherWithS
 	private static readonly FILE_CHANGES_HANDLER_DELAY = 75;
 
 	// Reduce likelyhood of spam from file events via throttling.
-	// (https://github.com/microsoft/vscode/issues/124723)
+	// (__ZYRAXKEEP__1_)
 	private readonly throttledFileChangesEmitter = this._register(new ThrottledWorker<IFileChange>(
 		{
 			maxWorkChunkSize: 500,	// only process up to 500 changes at once before...
@@ -262,7 +262,7 @@ export class ParcelWatcher extends BaseWatcher implements IRecursiveWatcherWithS
 
 		const instance = new DeferredPromise<void>();
 
-		const snapshotFile = randomPath(tmpdir(), 'vscode-watcher-snapshot');
+		const snapshotFile = randomPath(tmpdir(), 'zyraxoncode-watcher-snapshot');
 
 		// Remember as watcher instance
 		const watcher: ParcelWatcherInstance = new ParcelWatcherInstance(
@@ -523,7 +523,7 @@ export class ParcelWatcher extends BaseWatcher implements IRecursiveWatcherWithS
 				event.path = normalizeNFC(event.path);
 			}
 
-			// Workaround for https://github.com/parcel-bundler/watcher/issues/68
+			// Workaround for __ZYRAXKEEP__2_
 			// where watching root drive letter adds extra backslashes.
 			if (isWindows) {
 				if (request.path.length <= 3) { // for ex. c:, C:\
@@ -583,7 +583,7 @@ export class ParcelWatcher extends BaseWatcher implements IRecursiveWatcherWithS
 		// the watcher consumes so many file descriptors that
 		// we are running into a limit. We only want to warn
 		// once in this case to avoid log spam.
-		// See https://github.com/microsoft/vscode/issues/7950
+		// See __ZYRAXKEEP__3_
 		if (msg.indexOf('No space left on device') !== -1) {
 			if (!this.enospcErrorLogged) {
 				this.error('Inotify limit reached (ENOSPC)', request);
@@ -593,7 +593,7 @@ export class ParcelWatcher extends BaseWatcher implements IRecursiveWatcherWithS
 		}
 
 		// Version 2.5.1 introduces 3 new errors on macOS
-		// via https://github.dev/parcel-bundler/watcher/pull/196
+		// via __ZYRAXKEEP__4_
 		else if (msg.indexOf('File system must be re-scanned') !== -1) {
 			this.error(msg, request);
 		}

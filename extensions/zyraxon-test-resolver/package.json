@@ -1,0 +1,192 @@
+{
+  "name": "zyraxoncode-test-resolver",
+  "description": "Test resolver for ZYRAXON Code",
+  "version": "0.0.1",
+  "publisher": "zyraxoncode",
+  "license": "MIT",
+  "enabledApiProposals": [
+    "resolvers",
+    "tunnels"
+  ],
+  "private": true,
+  "engines": {
+    "zyraxoncode": "^1.25.0"
+  },
+  "icon": "media/icon.png",
+  "extensionKind": [
+    "ui"
+  ],
+  "scripts": {
+    "compile": "node ./node_modules/zyraxoncode/bin/compile -watch -p ./",
+    "zyraxoncode:prepublish": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../../build/gulpfile.extensions.mjs compile-extension:zyraxoncode-test-resolver"
+  },
+  "activationEvents": [
+    "onResolveRemoteAuthority:test",
+    "onCommand:zyraxoncode-testresolver.newWindow",
+    "onCommand:zyraxoncode-testresolver.currentWindow",
+    "onCommand:zyraxoncode-testresolver.newWindowWithError",
+    "onCommand:zyraxoncode-testresolver.showLog",
+    "onCommand:zyraxoncode-testresolver.openTunnel",
+    "onCommand:zyraxoncode-testresolver.startRemoteServer",
+    "onCommand:zyraxoncode-testresolver.toggleConnectionPause"
+  ],
+  "main": "./out/extension",
+  "browser": "./dist/browser/testResolverMain",
+  "devDependencies": {
+    "@types/node": "24.x"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "resourceLabelFormatters": [
+      {
+        "scheme": "zyraxoncode-remote",
+        "authority": "test+*",
+        "formatting": {
+          "label": "${path}",
+          "separator": "/",
+          "tildify": true,
+          "workspaceSuffix": "TestResolver",
+          "workspaceTooltip": "Remote running on the same machine"
+        }
+      }
+    ],
+    "commands": [
+      {
+        "title": "New TestResolver Window",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.newWindow"
+      },
+      {
+        "title": "Connect to TestResolver in Current Window",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.currentWindow"
+      },
+      {
+        "title": "Connect to TestResolver in Current Window with Managed Connection",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.currentWindowManaged"
+      },
+      {
+        "title": "Show TestResolver Log",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.showLog"
+      },
+      {
+        "title": "Kill Remote Server and Trigger Handled Error",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.killServerAndTriggerHandledError"
+      },
+      {
+        "title": "Open Tunnel...",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.openTunnel"
+      },
+      {
+        "title": "Open a Remote Port...",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.startRemoteServer"
+      },
+      {
+        "title": "Pause Connection (Test Reconnect)",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.toggleConnectionPause"
+      },
+      {
+        "title": "Slowdown Connection (Test Slow Down Indicator)",
+        "category": "Remote-TestResolver",
+        "command": "zyraxoncode-testresolver.toggleConnectionSlowdown"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "zyraxoncode-testresolver.openTunnel",
+          "when": "remoteName == test"
+        },
+        {
+          "command": "zyraxoncode-testresolver.startRemoteServer",
+          "when": "remoteName == test"
+        },
+        {
+          "command": "zyraxoncode-testresolver.toggleConnectionPause",
+          "when": "remoteName == test"
+        }
+      ],
+      "statusBar/remoteIndicator": [
+        {
+          "command": "zyraxoncode-testresolver.newWindow",
+          "when": "!remoteName && !virtualWorkspace",
+          "group": "remote_90_test_1_local@2"
+        },
+        {
+          "command": "zyraxoncode-testresolver.showLog",
+          "when": "remoteName == test",
+          "group": "remote_90_test_1_open@3"
+        },
+        {
+          "command": "zyraxoncode-testresolver.newWindow",
+          "when": "remoteName == test",
+          "group": "remote_90_test_1_open@1"
+        },
+        {
+          "command": "zyraxoncode-testresolver.openTunnel",
+          "when": "remoteName == test",
+          "group": "remote_90_test_2_more@4"
+        },
+        {
+          "command": "zyraxoncode-testresolver.startRemoteServer",
+          "when": "remoteName == test",
+          "group": "remote_90_test_2_more@5"
+        },
+        {
+          "command": "zyraxoncode-testresolver.toggleConnectionPause",
+          "when": "remoteName == test",
+          "group": "remote_90_test_2_more@6"
+        }
+      ]
+    },
+    "configuration": {
+      "properties": {
+        "testresolver.startupDelay": {
+          "description": "If set, the resolver will delay for the given amount of seconds. Use ths setting for testing a slow resolver",
+          "type": "number",
+          "default": 0
+        },
+        "testresolver.agentHostPort": {
+          "description": "If set, the resolver will spawn an agent host inside the test server on this port (`--agent-host-port`). Use this for testing the spawn-and-bridge flow.",
+          "type": "number",
+          "default": 0
+        },
+        "testresolver.agentHostBridgePort": {
+          "description": "If set, the resolver will bridge the renderer to an externally-running agent host on this port (`--agent-host-bridge-port`). Use this when the agent host is already running outside the test server.",
+          "type": "number",
+          "default": 0
+        },
+        "testresolver.agentHostBridgeConnectionToken": {
+          "description": "Connection token required by the externally-running agent host when using `testresolver.agentHostBridgePort`.",
+          "type": "string",
+          "default": ""
+        },
+        "testresolver.startupError": {
+          "description": "If set, the resolver will fail. Use ths setting for testing the failure of a resolver.",
+          "type": "boolean",
+          "default": false
+        },
+        "testresolver.supportPublicPorts": {
+          "description": "If set, the test resolver tunnel factory will support mock public ports. Forwarded ports will not actually be public. Requires reload.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "__ZYRAXKEEP__0_"
+  }
+}

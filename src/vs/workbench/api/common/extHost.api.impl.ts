@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { CancellationTokenSource } from '../../../base/common/cancellation.js';
 import { AsyncIterableObject, raceCancellationError } from '../../../base/common/async.js';
 import * as errors from '../../../base/common/errors.js';
@@ -133,7 +133,7 @@ export interface IExtensionRegistries {
 }
 
 export interface IExtensionApiFactory {
-	(extension: IExtensionDescription, extensionInfo: IExtensionRegistries, configProvider: ExtHostConfigProvider): typeof vscode;
+	(extension: IExtensionDescription, extensionInfo: IExtensionRegistries, configProvider: ExtHostConfigProvider): typeof zyraxoncode;
 }
 
 /**
@@ -276,12 +276,12 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 	// Register API-ish commands
 	ExtHostApiCommands.register(extHostCommands);
 
-	return function (extension: IExtensionDescription, extensionInfo: IExtensionRegistries, configProvider: ExtHostConfigProvider): typeof vscode {
+	return function (extension: IExtensionDescription, extensionInfo: IExtensionRegistries, configProvider: ExtHostConfigProvider): typeof zyraxoncode {
 
 		// Wraps an event with error handling and telemetry so that we know what extension fails
 		// handling events. This will prevent us from reporting this as "our" error-telemetry and
 		// allows for better blaming
-		function _asExtensionEvent<T>(actual: vscode.Event<T>): vscode.Event<T> {
+		function _asExtensionEvent<T>(actual: zyraxoncode.Event<T>): zyraxoncode.Event<T> {
 			return (listener, thisArgs, disposables) => {
 				const handle = actual(e => {
 					try {
@@ -305,17 +305,17 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			let done = !extension.isUnderDevelopment;
 			function informOnce() {
 				if (!done) {
-					extHostLogService.info(`Extension '${extension.identifier.value}' uses a document selector without scheme. Learn more about this: https://go.microsoft.com/fwlink/?linkid=872305`);
+					extHostLogService.info(`Extension '${extension.identifier.value}' uses a document selector without scheme. Learn more about this: __ZYRAXKEEP__0_`);
 					done = true;
 				}
 			}
-			return function perform(selector: vscode.DocumentSelector): vscode.DocumentSelector {
+			return function perform(selector: zyraxoncode.DocumentSelector): zyraxoncode.DocumentSelector {
 				if (Array.isArray(selector)) {
 					selector.forEach(perform);
 				} else if (typeof selector === 'string') {
 					informOnce();
 				} else {
-					const filter = selector as vscode.DocumentFilter; // TODO: microsoft/TypeScript#42768
+					const filter = selector as zyraxoncode.DocumentFilter; // TODO: zyraxon/TypeScript#42768
 					if (typeof filter.scheme === 'undefined') {
 						informOnce();
 					}
@@ -327,8 +327,8 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			};
 		})();
 
-		const authentication: typeof vscode.authentication = {
-			getSession(providerId: string, scopesOrChallenge: readonly string[] | vscode.AuthenticationWwwAuthenticateRequest, options?: vscode.AuthenticationGetSessionOptions) {
+		const authentication: typeof zyraxoncode.authentication = {
+			getSession(providerId: string, scopesOrChallenge: readonly string[] | zyraxoncode.AuthenticationWwwAuthenticateRequest, options?: zyraxoncode.AuthenticationGetSessionOptions) {
 				if (
 					(typeof options?.forceNewSession === 'object' && options.forceNewSession.learnMore) ||
 					(typeof options?.createIfNone === 'object' && options.createIfNone.learnMore)
@@ -350,10 +350,10 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				// eslint-disable-next-line local/code-no-any-casts
 				return !!(await extHostAuthentication.getSession(extension, providerId, scopes, { silent: true } as any));
 			},
-			get onDidChangeSessions(): vscode.Event<vscode.AuthenticationSessionsChangeEvent> {
+			get onDidChangeSessions(): zyraxoncode.Event<zyraxoncode.AuthenticationSessionsChangeEvent> {
 				return _asExtensionEvent(extHostAuthentication.getExtensionScopedSessionsEvent(extension.identifier.value));
 			},
-			registerAuthenticationProvider(id: string, label: string, provider: vscode.AuthenticationProvider, options?: vscode.AuthenticationProviderOptions): vscode.Disposable {
+			registerAuthenticationProvider(id: string, label: string, provider: zyraxoncode.AuthenticationProvider, options?: zyraxoncode.AuthenticationProviderOptions): zyraxoncode.Disposable {
 				if (options?.supportedAuthorizationServers) {
 					checkProposedApiEnabled(extension, 'authIssuers');
 				}
@@ -362,11 +362,11 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 		};
 
 		// namespace: commands
-		const commands: typeof vscode.commands = {
-			registerCommand(id: string, command: <T>(...args: unknown[]) => T | Thenable<T>, thisArgs?: unknown): vscode.Disposable {
+		const commands: typeof zyraxoncode.commands = {
+			registerCommand(id: string, command: <T>(...args: unknown[]) => T | Thenable<T>, thisArgs?: unknown): zyraxoncode.Disposable {
 				return extHostCommands.registerCommand(true, id, command, thisArgs, undefined, extension);
 			},
-			registerTextEditorCommand(id: string, callback: (textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit, ...args: unknown[]) => void, thisArg?: unknown): vscode.Disposable {
+			registerTextEditorCommand(id: string, callback: (textEditor: zyraxoncode.TextEditor, edit: zyraxoncode.TextEditorEdit, ...args: unknown[]) => void, thisArg?: unknown): zyraxoncode.Disposable {
 				return extHostCommands.registerCommand(true, id, (...args: unknown[]): any => {
 					const activeTextEditor = extHostEditors.getActiveTextEditor();
 					if (!activeTextEditor) {
@@ -374,7 +374,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 						return undefined;
 					}
 
-					return activeTextEditor.edit((edit: vscode.TextEditorEdit) => {
+					return activeTextEditor.edit((edit: zyraxoncode.TextEditorEdit) => {
 						callback.apply(thisArg, [activeTextEditor, edit, ...args]);
 					}).then((result) => {
 						if (!result) {
@@ -385,7 +385,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 					});
 				}, undefined, undefined, extension);
 			},
-			registerDiffInformationCommand: (id: string, callback: (diff: vscode.LineChange[], ...args: unknown[]) => any, thisArg?: unknown): vscode.Disposable => {
+			registerDiffInformationCommand: (id: string, callback: (diff: zyraxoncode.LineChange[], ...args: unknown[]) => any, thisArg?: unknown): zyraxoncode.Disposable => {
 				checkProposedApiEnabled(extension, 'diffCommand');
 				return extHostCommands.registerCommand(true, id, async (...args: unknown[]): Promise<any> => {
 					const activeTextEditor = extHostDocumentsAndEditors.activeEditor(true);
@@ -407,7 +407,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 		};
 
 		// namespace: env
-		const env: typeof vscode.env = {
+		const env: typeof zyraxoncode.env = {
 			get machineId() { return initData.telemetryInfo.machineId; },
 			get devDeviceId() {
 				checkProposedApiEnabled(extension, 'devDeviceId');
@@ -420,7 +420,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			get appRoot() { return initData.environment.appRoot?.fsPath ?? ''; },
 			get appHost() { return initData.environment.appHost; },
 			get uriScheme() { return initData.environment.appUriScheme; },
-			get clipboard(): vscode.Clipboard { return extHostClipboard.value; },
+			get clipboard(): zyraxoncode.Clipboard { return extHostClipboard.value; },
 			get shell() {
 				return extHostTerminalService.getDefaultShell(false);
 			},
@@ -430,14 +430,14 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			get isTelemetryEnabled() {
 				return extHostTelemetry.getTelemetryConfiguration();
 			},
-			get onDidChangeTelemetryEnabled(): vscode.Event<boolean> {
+			get onDidChangeTelemetryEnabled(): zyraxoncode.Event<boolean> {
 				return _asExtensionEvent(extHostTelemetry.onDidChangeTelemetryEnabled);
 			},
-			get telemetryConfiguration(): vscode.TelemetryConfiguration {
+			get telemetryConfiguration(): zyraxoncode.TelemetryConfiguration {
 				checkProposedApiEnabled(extension, 'telemetry');
 				return extHostTelemetry.getTelemetryDetails();
 			},
-			get onDidChangeTelemetryConfiguration(): vscode.Event<vscode.TelemetryConfiguration> {
+			get onDidChangeTelemetryConfiguration(): zyraxoncode.Event<zyraxoncode.TelemetryConfiguration> {
 				checkProposedApiEnabled(extension, 'telemetry');
 				return _asExtensionEvent(extHostTelemetry.onDidChangeTelemetryConfiguration);
 			},
@@ -445,14 +445,14 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'envIsConnectionMetered');
 				return extHostMeteredConnection.isConnectionMetered;
 			},
-			get onDidChangeMeteredConnection(): vscode.Event<boolean> {
+			get onDidChangeMeteredConnection(): zyraxoncode.Event<boolean> {
 				checkProposedApiEnabled(extension, 'envIsConnectionMetered');
 				return _asExtensionEvent(extHostMeteredConnection.onDidChangeIsConnectionMetered);
 			},
 			get isNewAppInstall() {
 				return isNewAppInstall(initData.telemetryInfo.firstSessionDate);
 			},
-			createTelemetryLogger(sender: vscode.TelemetrySender, options?: vscode.TelemetryLoggerOptions): vscode.TelemetryLogger {
+			createTelemetryLogger(sender: zyraxoncode.TelemetrySender, options?: zyraxoncode.TelemetryLoggerOptions): zyraxoncode.TelemetryLogger {
 				ExtHostTelemetryLogger.validateSender(sender);
 				return extHostTelemetry.instantiateLogger(extension, sender, options);
 			},
@@ -501,11 +501,11 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'resolvers');
 				return initData.commit;
 			},
-			getDataChannel<T>(channelId: string): vscode.DataChannel<T> {
+			getDataChannel<T>(channelId: string): zyraxoncode.DataChannel<T> {
 				checkProposedApiEnabled(extension, 'dataChannels');
 				return extHostDataChannels.createDataChannel(extension, channelId);
 			},
-			get power(): typeof vscode.env.power {
+			get power(): typeof zyraxoncode.env.power {
 				checkProposedApiEnabled(extension, 'environmentPower');
 				return {
 					get onDidSuspend() {
@@ -544,7 +544,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 					isOnBatteryPower() {
 						return extHostPower.isOnBatteryPower();
 					},
-					async startPowerSaveBlocker(type: vscode.env.power.PowerSaveBlockerType): Promise<vscode.env.power.PowerSaveBlocker> {
+					async startPowerSaveBlocker(type: zyraxoncode.env.power.PowerSaveBlockerType): Promise<zyraxoncode.env.power.PowerSaveBlocker> {
 						const blocker = await extHostPower.startPowerSaveBlocker(type);
 						return {
 							id: blocker.id,
@@ -565,8 +565,8 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 		}
 
 		// namespace: tests
-		const tests: typeof vscode.tests = {
-			createTestController(provider, label, refreshHandler?: (token: vscode.CancellationToken) => Thenable<void> | void) {
+		const tests: typeof zyraxoncode.tests = {
+			createTestController(provider, label, refreshHandler?: (token: zyraxoncode.CancellationToken) => Thenable<void> | void) {
 				return extHostTesting.createTestController(extension, provider, label, refreshHandler);
 			},
 			createTestObserver() {
@@ -596,8 +596,8 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			? extHostTypes.ExtensionKind.Workspace
 			: extHostTypes.ExtensionKind.UI;
 
-		const extensions: typeof vscode.extensions = {
-			getExtension(extensionId: string, includeFromDifferentExtensionHosts?: boolean): vscode.Extension<any> | undefined {
+		const extensions: typeof zyraxoncode.extensions = {
+			getExtension(extensionId: string, includeFromDifferentExtensionHosts?: boolean): zyraxoncode.Extension<any> | undefined {
 				if (!isProposedApiEnabled(extension, 'extensionsAny')) {
 					includeFromDifferentExtensionHosts = false;
 				}
@@ -613,17 +613,17 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				}
 				return undefined;
 			},
-			get all(): vscode.Extension<any>[] {
-				const result: vscode.Extension<any>[] = [];
+			get all(): zyraxoncode.Extension<any>[] {
+				const result: zyraxoncode.Extension<any>[] = [];
 				for (const desc of extensionInfo.mine.getAllExtensionDescriptions()) {
 					result.push(new Extension(extensionService, extension.identifier, desc, extensionKind, false));
 				}
 				return result;
 			},
-			get allAcrossExtensionHosts(): vscode.Extension<any>[] {
+			get allAcrossExtensionHosts(): zyraxoncode.Extension<any>[] {
 				checkProposedApiEnabled(extension, 'extensionsAny');
 				const local = new ExtensionIdentifierSet(extensionInfo.mine.getAllExtensionDescriptions().map(desc => desc.identifier));
-				const result: vscode.Extension<any>[] = [];
+				const result: zyraxoncode.Extension<any>[] = [];
 				for (const desc of extensionInfo.all.getAllExtensionDescriptions()) {
 					const isFromDifferentExtensionHost = !local.has(desc.identifier);
 					result.push(new Extension(extensionService, extension.identifier, desc, extensionKind /* TODO@alexdima THIS IS WRONG */, isFromDifferentExtensionHost));
@@ -639,111 +639,111 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 		};
 
 		// namespace: languages
-		const languages: typeof vscode.languages = {
-			createDiagnosticCollection(name?: string): vscode.DiagnosticCollection {
+		const languages: typeof zyraxoncode.languages = {
+			createDiagnosticCollection(name?: string): zyraxoncode.DiagnosticCollection {
 				return extHostDiagnostics.createDiagnosticCollection(extension.identifier, name);
 			},
 			get onDidChangeDiagnostics() {
 				return _asExtensionEvent(extHostDiagnostics.onDidChangeDiagnostics);
 			},
-			getDiagnostics: (resource?: vscode.Uri) => {
+			getDiagnostics: (resource?: zyraxoncode.Uri) => {
 				// eslint-disable-next-line local/code-no-any-casts
 				return <any>extHostDiagnostics.getDiagnostics(resource);
 			},
 			getLanguages(): Thenable<string[]> {
 				return extHostLanguages.getLanguages();
 			},
-			setTextDocumentLanguage(document: vscode.TextDocument, languageId: string): Thenable<vscode.TextDocument> {
+			setTextDocumentLanguage(document: zyraxoncode.TextDocument, languageId: string): Thenable<zyraxoncode.TextDocument> {
 				return extHostLanguages.changeLanguage(document.uri, languageId);
 			},
-			match(selector: vscode.DocumentSelector, document: vscode.TextDocument): number {
+			match(selector: zyraxoncode.DocumentSelector, document: zyraxoncode.TextDocument): number {
 				const interalSelector = typeConverters.LanguageSelector.from(selector);
-				let notebook: vscode.NotebookDocument | undefined;
+				let notebook: zyraxoncode.NotebookDocument | undefined;
 				if (targetsNotebooks(interalSelector)) {
 					notebook = extHostNotebook.notebookDocuments.find(value => value.apiNotebook.getCells().find(c => c.document === document))?.apiNotebook;
 				}
 				return score(interalSelector, document.uri, document.languageId, true, notebook?.uri, notebook?.notebookType);
 			},
-			registerCodeActionsProvider(selector: vscode.DocumentSelector, provider: vscode.CodeActionProvider, metadata?: vscode.CodeActionProviderMetadata): vscode.Disposable {
+			registerCodeActionsProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.CodeActionProvider, metadata?: zyraxoncode.CodeActionProviderMetadata): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerCodeActionProvider(extension, checkSelector(selector), provider, metadata);
 			},
-			registerDocumentPasteEditProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentPasteEditProvider, metadata: vscode.DocumentPasteProviderMetadata): vscode.Disposable {
+			registerDocumentPasteEditProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentPasteEditProvider, metadata: zyraxoncode.DocumentPasteProviderMetadata): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentPasteEditProvider(extension, checkSelector(selector), provider, metadata);
 			},
-			registerCodeLensProvider(selector: vscode.DocumentSelector, provider: vscode.CodeLensProvider): vscode.Disposable {
+			registerCodeLensProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.CodeLensProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerCodeLensProvider(extension, checkSelector(selector), provider);
 			},
-			registerDefinitionProvider(selector: vscode.DocumentSelector, provider: vscode.DefinitionProvider): vscode.Disposable {
+			registerDefinitionProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DefinitionProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDefinitionProvider(extension, checkSelector(selector), provider);
 			},
-			registerDeclarationProvider(selector: vscode.DocumentSelector, provider: vscode.DeclarationProvider): vscode.Disposable {
+			registerDeclarationProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DeclarationProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDeclarationProvider(extension, checkSelector(selector), provider);
 			},
-			registerImplementationProvider(selector: vscode.DocumentSelector, provider: vscode.ImplementationProvider): vscode.Disposable {
+			registerImplementationProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.ImplementationProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerImplementationProvider(extension, checkSelector(selector), provider);
 			},
-			registerTypeDefinitionProvider(selector: vscode.DocumentSelector, provider: vscode.TypeDefinitionProvider): vscode.Disposable {
+			registerTypeDefinitionProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.TypeDefinitionProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerTypeDefinitionProvider(extension, checkSelector(selector), provider);
 			},
-			registerHoverProvider(selector: vscode.DocumentSelector, provider: vscode.HoverProvider): vscode.Disposable {
+			registerHoverProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.HoverProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerHoverProvider(extension, checkSelector(selector), provider, extension.identifier);
 			},
-			registerEvaluatableExpressionProvider(selector: vscode.DocumentSelector, provider: vscode.EvaluatableExpressionProvider): vscode.Disposable {
+			registerEvaluatableExpressionProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.EvaluatableExpressionProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerEvaluatableExpressionProvider(extension, checkSelector(selector), provider, extension.identifier);
 			},
-			registerInlineValuesProvider(selector: vscode.DocumentSelector, provider: vscode.InlineValuesProvider): vscode.Disposable {
+			registerInlineValuesProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.InlineValuesProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerInlineValuesProvider(extension, checkSelector(selector), provider, extension.identifier);
 			},
-			registerDocumentHighlightProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentHighlightProvider): vscode.Disposable {
+			registerDocumentHighlightProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentHighlightProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentHighlightProvider(extension, checkSelector(selector), provider);
 			},
-			registerMultiDocumentHighlightProvider(selector: vscode.DocumentSelector, provider: vscode.MultiDocumentHighlightProvider): vscode.Disposable {
+			registerMultiDocumentHighlightProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.MultiDocumentHighlightProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerMultiDocumentHighlightProvider(extension, checkSelector(selector), provider);
 			},
-			registerLinkedEditingRangeProvider(selector: vscode.DocumentSelector, provider: vscode.LinkedEditingRangeProvider): vscode.Disposable {
+			registerLinkedEditingRangeProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.LinkedEditingRangeProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerLinkedEditingRangeProvider(extension, checkSelector(selector), provider);
 			},
-			registerReferenceProvider(selector: vscode.DocumentSelector, provider: vscode.ReferenceProvider): vscode.Disposable {
+			registerReferenceProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.ReferenceProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerReferenceProvider(extension, checkSelector(selector), provider);
 			},
-			registerRenameProvider(selector: vscode.DocumentSelector, provider: vscode.RenameProvider): vscode.Disposable {
+			registerRenameProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.RenameProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerRenameProvider(extension, checkSelector(selector), provider);
 			},
-			registerNewSymbolNamesProvider(selector: vscode.DocumentSelector, provider: vscode.NewSymbolNamesProvider): vscode.Disposable {
+			registerNewSymbolNamesProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.NewSymbolNamesProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'newSymbolNamesProvider');
 				return extHostLanguageFeatures.registerNewSymbolNamesProvider(extension, checkSelector(selector), provider);
 			},
-			registerDocumentSymbolProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentSymbolProvider, metadata?: vscode.DocumentSymbolProviderMetadata): vscode.Disposable {
+			registerDocumentSymbolProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentSymbolProvider, metadata?: zyraxoncode.DocumentSymbolProviderMetadata): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentSymbolProvider(extension, checkSelector(selector), provider, metadata);
 			},
-			registerWorkspaceSymbolProvider(provider: vscode.WorkspaceSymbolProvider): vscode.Disposable {
+			registerWorkspaceSymbolProvider(provider: zyraxoncode.WorkspaceSymbolProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerWorkspaceSymbolProvider(extension, provider);
 			},
-			registerDocumentFormattingEditProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentFormattingEditProvider): vscode.Disposable {
+			registerDocumentFormattingEditProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentFormattingEditProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentFormattingEditProvider(extension, checkSelector(selector), provider);
 			},
-			registerDocumentRangeFormattingEditProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentRangeFormattingEditProvider): vscode.Disposable {
+			registerDocumentRangeFormattingEditProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentRangeFormattingEditProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentRangeFormattingEditProvider(extension, checkSelector(selector), provider);
 			},
-			registerOnTypeFormattingEditProvider(selector: vscode.DocumentSelector, provider: vscode.OnTypeFormattingEditProvider, firstTriggerCharacter: string, ...moreTriggerCharacters: string[]): vscode.Disposable {
+			registerOnTypeFormattingEditProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.OnTypeFormattingEditProvider, firstTriggerCharacter: string, ...moreTriggerCharacters: string[]): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerOnTypeFormattingEditProvider(extension, checkSelector(selector), provider, [firstTriggerCharacter].concat(moreTriggerCharacters));
 			},
-			registerDocumentSemanticTokensProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentSemanticTokensProvider, legend: vscode.SemanticTokensLegend): vscode.Disposable {
+			registerDocumentSemanticTokensProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentSemanticTokensProvider, legend: zyraxoncode.SemanticTokensLegend): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentSemanticTokensProvider(extension, checkSelector(selector), provider, legend);
 			},
-			registerDocumentRangeSemanticTokensProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentRangeSemanticTokensProvider, legend: vscode.SemanticTokensLegend): vscode.Disposable {
+			registerDocumentRangeSemanticTokensProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentRangeSemanticTokensProvider, legend: zyraxoncode.SemanticTokensLegend): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentRangeSemanticTokensProvider(extension, checkSelector(selector), provider, legend);
 			},
-			registerSignatureHelpProvider(selector: vscode.DocumentSelector, provider: vscode.SignatureHelpProvider, firstItem?: string | vscode.SignatureHelpProviderMetadata, ...remaining: string[]): vscode.Disposable {
+			registerSignatureHelpProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.SignatureHelpProvider, firstItem?: string | zyraxoncode.SignatureHelpProviderMetadata, ...remaining: string[]): zyraxoncode.Disposable {
 				if (typeof firstItem === 'object') {
 					return extHostLanguageFeatures.registerSignatureHelpProvider(extension, checkSelector(selector), provider, firstItem);
 				}
 				return extHostLanguageFeatures.registerSignatureHelpProvider(extension, checkSelector(selector), provider, typeof firstItem === 'undefined' ? [] : [firstItem, ...remaining]);
 			},
-			registerCompletionItemProvider(selector: vscode.DocumentSelector, provider: vscode.CompletionItemProvider, ...triggerCharacters: string[]): vscode.Disposable {
+			registerCompletionItemProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.CompletionItemProvider, ...triggerCharacters: string[]): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerCompletionItemProvider(extension, checkSelector(selector), provider, triggerCharacters);
 			},
-			registerInlineCompletionItemProvider(selector: vscode.DocumentSelector, provider: vscode.InlineCompletionItemProvider, metadata?: vscode.InlineCompletionItemProviderMetadata): vscode.Disposable {
+			registerInlineCompletionItemProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.InlineCompletionItemProvider, metadata?: zyraxoncode.InlineCompletionItemProviderMetadata): zyraxoncode.Disposable {
 				if (provider.handleDidShowCompletionItem) {
 					checkProposedApiEnabled(extension, 'inlineCompletionsAdditions');
 				}
@@ -763,28 +763,28 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'inlineCompletionsAdditions');
 				return _asExtensionEvent(extHostLanguageFeatures.onDidChangeInlineCompletionsUnificationState)(listener, thisArg, disposables);
 			},
-			registerDocumentLinkProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentLinkProvider): vscode.Disposable {
+			registerDocumentLinkProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentLinkProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentLinkProvider(extension, checkSelector(selector), provider);
 			},
-			registerColorProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentColorProvider): vscode.Disposable {
+			registerColorProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentColorProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerColorProvider(extension, checkSelector(selector), provider);
 			},
-			registerFoldingRangeProvider(selector: vscode.DocumentSelector, provider: vscode.FoldingRangeProvider): vscode.Disposable {
+			registerFoldingRangeProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.FoldingRangeProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerFoldingRangeProvider(extension, checkSelector(selector), provider);
 			},
-			registerSelectionRangeProvider(selector: vscode.DocumentSelector, provider: vscode.SelectionRangeProvider): vscode.Disposable {
+			registerSelectionRangeProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.SelectionRangeProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerSelectionRangeProvider(extension, selector, provider);
 			},
-			registerCallHierarchyProvider(selector: vscode.DocumentSelector, provider: vscode.CallHierarchyProvider): vscode.Disposable {
+			registerCallHierarchyProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.CallHierarchyProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerCallHierarchyProvider(extension, selector, provider);
 			},
-			registerTypeHierarchyProvider(selector: vscode.DocumentSelector, provider: vscode.TypeHierarchyProvider): vscode.Disposable {
+			registerTypeHierarchyProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.TypeHierarchyProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerTypeHierarchyProvider(extension, selector, provider);
 			},
-			setLanguageConfiguration: (language: string, configuration: vscode.LanguageConfiguration): vscode.Disposable => {
+			setLanguageConfiguration: (language: string, configuration: zyraxoncode.LanguageConfiguration): zyraxoncode.Disposable => {
 				return extHostLanguageFeatures.setLanguageConfiguration(extension, language, configuration);
 			},
-			getTokenInformationAtPosition(doc: vscode.TextDocument, pos: vscode.Position) {
+			getTokenInformationAtPosition(doc: zyraxoncode.TextDocument, pos: zyraxoncode.Position) {
 				checkProposedApiEnabled(extension, 'tokenInformation');
 				return extHostLanguages.tokenAtPosition(doc, pos);
 			},
@@ -796,19 +796,19 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'documentSyntaxHighlighting');
 				return extHostLanguages.onDidChangeSyntaxHighlighting;
 			},
-			registerInlayHintsProvider(selector: vscode.DocumentSelector, provider: vscode.InlayHintsProvider): vscode.Disposable {
+			registerInlayHintsProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.InlayHintsProvider): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerInlayHintsProvider(extension, selector, provider);
 			},
-			createLanguageStatusItem(id: string, selector: vscode.DocumentSelector): vscode.LanguageStatusItem {
+			createLanguageStatusItem(id: string, selector: zyraxoncode.DocumentSelector): zyraxoncode.LanguageStatusItem {
 				return extHostLanguages.createLanguageStatusItem(extension, id, selector);
 			},
-			registerDocumentDropEditProvider(selector: vscode.DocumentSelector, provider: vscode.DocumentDropEditProvider, metadata?: vscode.DocumentDropEditProviderMetadata): vscode.Disposable {
+			registerDocumentDropEditProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.DocumentDropEditProvider, metadata?: zyraxoncode.DocumentDropEditProviderMetadata): zyraxoncode.Disposable {
 				return extHostLanguageFeatures.registerDocumentOnDropEditProvider(extension, selector, provider, metadata);
 			}
 		};
 
 		// namespace: window
-		const window: typeof vscode.window = {
+		const window: typeof zyraxoncode.window = {
 			get activeTextEditor() {
 				return extHostEditors.getActiveTextEditor();
 			},
@@ -821,17 +821,17 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			get terminals() {
 				return extHostTerminalService.terminals;
 			},
-			async showTextDocument(documentOrUri: vscode.TextDocument | vscode.Uri, columnOrOptions?: vscode.ViewColumn | vscode.TextDocumentShowOptions, preserveFocus?: boolean): Promise<vscode.TextEditor> {
-				if (URI.isUri(documentOrUri) && documentOrUri.scheme === Schemas.vscodeRemote && !documentOrUri.authority) {
-					extHostApiDeprecation.report('workspace.showTextDocument', extension, `A URI of 'vscode-remote' scheme requires an authority.`);
+			async showTextDocument(documentOrUri: zyraxoncode.TextDocument | zyraxoncode.Uri, columnOrOptions?: zyraxoncode.ViewColumn | zyraxoncode.TextDocumentShowOptions, preserveFocus?: boolean): Promise<zyraxoncode.TextEditor> {
+				if (URI.isUri(documentOrUri) && documentOrUri.scheme === Schemas.zyraxoncodeRemote && !documentOrUri.authority) {
+					extHostApiDeprecation.report('workspace.showTextDocument', extension, `A URI of 'zyraxoncode-remote' scheme requires an authority.`);
 				}
 				const document = await (URI.isUri(documentOrUri)
 					? Promise.resolve(workspace.openTextDocument(documentOrUri))
-					: Promise.resolve(<vscode.TextDocument>documentOrUri));
+					: Promise.resolve(<zyraxoncode.TextDocument>documentOrUri));
 
 				return extHostEditors.showTextDocument(document, columnOrOptions, preserveFocus);
 			},
-			createTextEditorDecorationType(options: vscode.DecorationRenderOptions): vscode.TextEditorDecorationType {
+			createTextEditorDecorationType(options: zyraxoncode.DecorationRenderOptions): zyraxoncode.TextEditorDecorationType {
 				return extHostEditors.createTextEditorDecorationType(extension, options);
 			},
 			onDidChangeActiveTextEditor(listener, thisArg?, disposables?) {
@@ -840,13 +840,13 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			onDidChangeVisibleTextEditors(listener, thisArg, disposables) {
 				return _asExtensionEvent(extHostEditors.onDidChangeVisibleTextEditors)(listener, thisArg, disposables);
 			},
-			onDidChangeTextEditorSelection(listener: (e: vscode.TextEditorSelectionChangeEvent) => any, thisArgs?: any, disposables?: extHostTypes.Disposable[]) {
+			onDidChangeTextEditorSelection(listener: (e: zyraxoncode.TextEditorSelectionChangeEvent) => any, thisArgs?: any, disposables?: extHostTypes.Disposable[]) {
 				return _asExtensionEvent(extHostEditors.onDidChangeTextEditorSelection)(listener, thisArgs, disposables);
 			},
-			onDidChangeTextEditorOptions(listener: (e: vscode.TextEditorOptionsChangeEvent) => any, thisArgs?: any, disposables?: extHostTypes.Disposable[]) {
+			onDidChangeTextEditorOptions(listener: (e: zyraxoncode.TextEditorOptionsChangeEvent) => any, thisArgs?: any, disposables?: extHostTypes.Disposable[]) {
 				return _asExtensionEvent(extHostEditors.onDidChangeTextEditorOptions)(listener, thisArgs, disposables);
 			},
-			onDidChangeTextEditorVisibleRanges(listener: (e: vscode.TextEditorVisibleRangesChangeEvent) => any, thisArgs?: any, disposables?: extHostTypes.Disposable[]) {
+			onDidChangeTextEditorVisibleRanges(listener: (e: zyraxoncode.TextEditorVisibleRangesChangeEvent) => any, thisArgs?: any, disposables?: extHostTypes.Disposable[]) {
 				return _asExtensionEvent(extHostEditors.onDidChangeTextEditorVisibleRanges)(listener, thisArgs, disposables);
 			},
 			onDidChangeTextEditorViewColumn(listener, thisArg?, disposables?) {
@@ -895,22 +895,22 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			onDidChangeWindowState(listener, thisArg?, disposables?) {
 				return _asExtensionEvent(extHostWindow.onDidChangeWindowState)(listener, thisArg, disposables);
 			},
-			showInformationMessage(message: string, ...rest: Array<vscode.MessageOptions | string | vscode.MessageItem>) {
-				return <Thenable<any>>extHostMessageService.showMessage(extension, Severity.Info, message, rest[0], <Array<string | vscode.MessageItem>>rest.slice(1));
+			showInformationMessage(message: string, ...rest: Array<zyraxoncode.MessageOptions | string | zyraxoncode.MessageItem>) {
+				return <Thenable<any>>extHostMessageService.showMessage(extension, Severity.Info, message, rest[0], <Array<string | zyraxoncode.MessageItem>>rest.slice(1));
 			},
-			showWarningMessage(message: string, ...rest: Array<vscode.MessageOptions | string | vscode.MessageItem>) {
-				return <Thenable<any>>extHostMessageService.showMessage(extension, Severity.Warning, message, rest[0], <Array<string | vscode.MessageItem>>rest.slice(1));
+			showWarningMessage(message: string, ...rest: Array<zyraxoncode.MessageOptions | string | zyraxoncode.MessageItem>) {
+				return <Thenable<any>>extHostMessageService.showMessage(extension, Severity.Warning, message, rest[0], <Array<string | zyraxoncode.MessageItem>>rest.slice(1));
 			},
-			showErrorMessage(message: string, ...rest: Array<vscode.MessageOptions | string | vscode.MessageItem>) {
-				return <Thenable<any>>extHostMessageService.showMessage(extension, Severity.Error, message, rest[0], <Array<string | vscode.MessageItem>>rest.slice(1));
+			showErrorMessage(message: string, ...rest: Array<zyraxoncode.MessageOptions | string | zyraxoncode.MessageItem>) {
+				return <Thenable<any>>extHostMessageService.showMessage(extension, Severity.Error, message, rest[0], <Array<string | zyraxoncode.MessageItem>>rest.slice(1));
 			},
-			showQuickPick(items: any, options?: vscode.QuickPickOptions, token?: vscode.CancellationToken): any {
+			showQuickPick(items: any, options?: zyraxoncode.QuickPickOptions, token?: zyraxoncode.CancellationToken): any {
 				return extHostQuickOpen.showQuickPick(extension, items, options, token);
 			},
-			showWorkspaceFolderPick(options?: vscode.WorkspaceFolderPickOptions) {
+			showWorkspaceFolderPick(options?: zyraxoncode.WorkspaceFolderPickOptions) {
 				return extHostQuickOpen.showWorkspaceFolderPick(options);
 			},
-			showInputBox(options?: vscode.InputBoxOptions, token?: vscode.CancellationToken) {
+			showInputBox(options?: zyraxoncode.InputBoxOptions, token?: zyraxoncode.CancellationToken) {
 				return extHostQuickOpen.showInput(options, token);
 			},
 			showOpenDialog(options) {
@@ -919,7 +919,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			showSaveDialog(options) {
 				return extHostDialogs.showSaveDialog(options);
 			},
-			createStatusBarItem(alignmentOrId?: vscode.StatusBarAlignment | string, priorityOrAlignment?: number | vscode.StatusBarAlignment, priorityArg?: number): vscode.StatusBarItem {
+			createStatusBarItem(alignmentOrId?: zyraxoncode.StatusBarAlignment | string, priorityOrAlignment?: number | zyraxoncode.StatusBarAlignment, priorityArg?: number): zyraxoncode.StatusBarItem {
 				let id: string | undefined;
 				let alignment: number | undefined;
 				let priority: number | undefined;
@@ -935,29 +935,29 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 
 				return extHostStatusBar.createStatusBarEntry(extension, id, alignment, priority);
 			},
-			setStatusBarMessage(text: string, timeoutOrThenable?: number | Thenable<any>): vscode.Disposable {
+			setStatusBarMessage(text: string, timeoutOrThenable?: number | Thenable<any>): zyraxoncode.Disposable {
 				return extHostStatusBar.setStatusBarMessage(text, timeoutOrThenable);
 			},
-			withScmProgress<R>(task: (progress: vscode.Progress<number>) => Thenable<R>) {
+			withScmProgress<R>(task: (progress: zyraxoncode.Progress<number>) => Thenable<R>) {
 				extHostApiDeprecation.report('window.withScmProgress', extension,
 					`Use 'withProgress' instead.`);
 
 				return extHostProgress.withProgress(extension, { location: extHostTypes.ProgressLocation.SourceControl }, (progress, token) => task({ report(n: number) { /*noop*/ } }));
 			},
-			withProgress<R>(options: vscode.ProgressOptions, task: (progress: vscode.Progress<{ message?: string; worked?: number }>, token: vscode.CancellationToken) => Thenable<R>) {
+			withProgress<R>(options: zyraxoncode.ProgressOptions, task: (progress: zyraxoncode.Progress<{ message?: string; worked?: number }>, token: zyraxoncode.CancellationToken) => Thenable<R>) {
 				return extHostProgress.withProgress(extension, options, task);
 			},
 			createOutputChannel(name: string, options: string | { log: true } | undefined): any {
 				return extHostOutputService.createOutputChannel(name, options, extension);
 			},
-			createWebviewPanel(viewType: string, title: string, showOptions: vscode.ViewColumn | { viewColumn: vscode.ViewColumn; preserveFocus?: boolean }, options?: vscode.WebviewPanelOptions & vscode.WebviewOptions): vscode.WebviewPanel {
+			createWebviewPanel(viewType: string, title: string, showOptions: zyraxoncode.ViewColumn | { viewColumn: zyraxoncode.ViewColumn; preserveFocus?: boolean }, options?: zyraxoncode.WebviewPanelOptions & zyraxoncode.WebviewOptions): zyraxoncode.WebviewPanel {
 				return extHostWebviewPanels.createWebviewPanel(extension, viewType, title, showOptions, options);
 			},
-			createWebviewTextEditorInset(editor: vscode.TextEditor, line: number, height: number, options?: vscode.WebviewOptions): vscode.WebviewEditorInset {
+			createWebviewTextEditorInset(editor: zyraxoncode.TextEditor, line: number, height: number, options?: zyraxoncode.WebviewOptions): zyraxoncode.WebviewEditorInset {
 				checkProposedApiEnabled(extension, 'editorInsets');
 				return extHostEditorInsets.createWebviewEditorInset(editor, line, height, options, extension);
 			},
-			createTerminal(nameOrOptions?: vscode.TerminalOptions | vscode.ExtensionTerminalOptions | string, shellPath?: string, shellArgs?: readonly string[] | string): vscode.Terminal {
+			createTerminal(nameOrOptions?: zyraxoncode.TerminalOptions | zyraxoncode.ExtensionTerminalOptions | string, shellPath?: string, shellArgs?: readonly string[] | string): zyraxoncode.Terminal {
 				if (typeof nameOrOptions === 'object') {
 					let options = nameOrOptions;
 					if (!isProposedApiEnabled(extension, 'terminalTitle') && 'titleTemplate' in nameOrOptions && nameOrOptions.titleTemplate !== undefined) {
@@ -971,58 +971,58 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				}
 				return extHostTerminalService.createTerminal(nameOrOptions, shellPath, shellArgs);
 			},
-			registerTerminalLinkProvider(provider: vscode.TerminalLinkProvider): vscode.Disposable {
+			registerTerminalLinkProvider(provider: zyraxoncode.TerminalLinkProvider): zyraxoncode.Disposable {
 				return extHostTerminalService.registerLinkProvider(provider);
 			},
-			registerTerminalProfileProvider(id: string, provider: vscode.TerminalProfileProvider): vscode.Disposable {
+			registerTerminalProfileProvider(id: string, provider: zyraxoncode.TerminalProfileProvider): zyraxoncode.Disposable {
 				return extHostTerminalService.registerProfileProvider(extension, id, provider);
 			},
-			registerTerminalCompletionProvider(provider: vscode.TerminalCompletionProvider<vscode.TerminalCompletionItem>, ...triggerCharacters: string[]): vscode.Disposable {
+			registerTerminalCompletionProvider(provider: zyraxoncode.TerminalCompletionProvider<zyraxoncode.TerminalCompletionItem>, ...triggerCharacters: string[]): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'terminalCompletionProvider');
 				return extHostTerminalService.registerTerminalCompletionProvider(extension, provider, ...triggerCharacters);
 			},
-			registerTerminalQuickFixProvider(id: string, provider: vscode.TerminalQuickFixProvider): vscode.Disposable {
+			registerTerminalQuickFixProvider(id: string, provider: zyraxoncode.TerminalQuickFixProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'terminalQuickFixProvider');
 				return extHostTerminalService.registerTerminalQuickFixProvider(id, extension.identifier.value, provider);
 			},
-			registerTreeDataProvider(viewId: string, treeDataProvider: vscode.TreeDataProvider<any>): vscode.Disposable {
+			registerTreeDataProvider(viewId: string, treeDataProvider: zyraxoncode.TreeDataProvider<any>): zyraxoncode.Disposable {
 				return extHostTreeViews.registerTreeDataProvider(viewId, treeDataProvider, extension);
 			},
-			createTreeView(viewId: string, options: { treeDataProvider: vscode.TreeDataProvider<any> }): vscode.TreeView<any> {
+			createTreeView(viewId: string, options: { treeDataProvider: zyraxoncode.TreeDataProvider<any> }): zyraxoncode.TreeView<any> {
 				return extHostTreeViews.createTreeView(viewId, options, extension);
 			},
-			registerWebviewPanelSerializer: (viewType: string, serializer: vscode.WebviewPanelSerializer) => {
+			registerWebviewPanelSerializer: (viewType: string, serializer: zyraxoncode.WebviewPanelSerializer) => {
 				return extHostWebviewPanels.registerWebviewPanelSerializer(extension, viewType, serializer);
 			},
-			registerCustomEditorProvider: (viewType: string, provider: vscode.CustomTextEditorProvider | vscode.CustomReadonlyEditorProvider, options: { webviewOptions?: vscode.WebviewPanelOptions; supportsMultipleEditorsPerDocument?: boolean } = {}) => {
+			registerCustomEditorProvider: (viewType: string, provider: zyraxoncode.CustomTextEditorProvider | zyraxoncode.CustomReadonlyEditorProvider, options: { webviewOptions?: zyraxoncode.WebviewPanelOptions; supportsMultipleEditorsPerDocument?: boolean } = {}) => {
 				return extHostCustomEditors.registerCustomEditorProvider(extension, viewType, provider, options);
 			},
-			registerFileDecorationProvider(provider: vscode.FileDecorationProvider) {
+			registerFileDecorationProvider(provider: zyraxoncode.FileDecorationProvider) {
 				return extHostDecorations.registerFileDecorationProvider(provider, extension);
 			},
-			registerUriHandler(handler: vscode.UriHandler) {
+			registerUriHandler(handler: zyraxoncode.UriHandler) {
 				return extHostUrls.registerUriHandler(extension, handler);
 			},
-			createQuickPick<T extends vscode.QuickPickItem>(): vscode.QuickPick<T> {
+			createQuickPick<T extends zyraxoncode.QuickPickItem>(): zyraxoncode.QuickPick<T> {
 				return extHostQuickOpen.createQuickPick(extension);
 			},
-			createInputBox(): vscode.InputBox {
+			createInputBox(): zyraxoncode.InputBox {
 				return extHostQuickOpen.createInputBox(extension);
 			},
-			get activeColorTheme(): vscode.ColorTheme {
+			get activeColorTheme(): zyraxoncode.ColorTheme {
 				return extHostTheming.activeColorTheme;
 			},
 			onDidChangeActiveColorTheme(listener, thisArg?, disposables?) {
 				return _asExtensionEvent(extHostTheming.onDidChangeActiveColorTheme)(listener, thisArg, disposables);
 			},
-			registerWebviewViewProvider(viewId: string, provider: vscode.WebviewViewProvider, options?: {
+			registerWebviewViewProvider(viewId: string, provider: zyraxoncode.WebviewViewProvider, options?: {
 				webviewOptions?: {
 					retainContextWhenHidden?: boolean;
 				};
 			}) {
 				return extHostWebviewViews.registerWebviewViewProvider(extension, viewId, provider, options?.webviewOptions);
 			},
-			get activeNotebookEditor(): vscode.NotebookEditor | undefined {
+			get activeNotebookEditor(): zyraxoncode.NotebookEditor | undefined {
 				return extHostNotebook.activeNotebookEditor;
 			},
 			onDidChangeActiveNotebookEditor(listener, thisArgs?, disposables?) {
@@ -1043,30 +1043,30 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			showNotebookDocument(document, options?) {
 				return extHostNotebook.showNotebookDocument(document, options);
 			},
-			registerExternalUriOpener(id: string, opener: vscode.ExternalUriOpener, metadata: vscode.ExternalUriOpenerMetadata) {
+			registerExternalUriOpener(id: string, opener: zyraxoncode.ExternalUriOpener, metadata: zyraxoncode.ExternalUriOpenerMetadata) {
 				checkProposedApiEnabled(extension, 'externalUriOpener');
 				return extHostUriOpeners.registerExternalUriOpener(extension.identifier, id, opener, metadata);
 			},
-			registerProfileContentHandler(id: string, handler: vscode.ProfileContentHandler) {
+			registerProfileContentHandler(id: string, handler: zyraxoncode.ProfileContentHandler) {
 				checkProposedApiEnabled(extension, 'profileContentHandlers');
 				return extHostProfileContentHandlers.registerProfileContentHandler(extension, id, handler);
 			},
-			registerQuickDiffProvider(selector: vscode.DocumentSelector, quickDiffProvider: vscode.QuickDiffProvider, id: string, label: string, rootUri?: vscode.Uri): vscode.Disposable {
+			registerQuickDiffProvider(selector: zyraxoncode.DocumentSelector, quickDiffProvider: zyraxoncode.QuickDiffProvider, id: string, label: string, rootUri?: zyraxoncode.Uri): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'quickDiffProvider');
 				return extHostQuickDiff.registerQuickDiffProvider(extension, checkSelector(selector), quickDiffProvider, id, label, rootUri);
 			},
-			createSourceControlDiffInformation(uri: vscode.Uri): vscode.SourceControlDiffInformationProvider {
+			createSourceControlDiffInformation(uri: zyraxoncode.Uri): zyraxoncode.SourceControlDiffInformationProvider {
 				checkProposedApiEnabled(extension, 'textEditorDiffInformation');
 				return extHostQuickDiff.createSourceControlDiffInformation(uri);
 			},
-			createAgentEditorComments(uri: vscode.Uri): vscode.AgentEditorCommentsProvider {
+			createAgentEditorComments(uri: zyraxoncode.Uri): zyraxoncode.AgentEditorCommentsProvider {
 				checkProposedApiEnabled(extension, 'agentEditorComments');
 				return extHostAgentEditorComments.createAgentEditorComments(uri);
 			},
-			get tabGroups(): vscode.TabGroups {
+			get tabGroups(): zyraxoncode.TabGroups {
 				return extHostEditorTabs.tabGroups;
 			},
-			registerShareProvider(selector: vscode.DocumentSelector, provider: vscode.ShareProvider): vscode.Disposable {
+			registerShareProvider(selector: zyraxoncode.DocumentSelector, provider: zyraxoncode.ShareProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'shareProvider');
 				return extHostShare.registerShareProvider(checkSelector(selector), provider);
 			},
@@ -1110,7 +1110,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'browser');
 				return _asExtensionEvent(extHostBrowsers.onDidChangeBrowserTabState)(listener, thisArg, disposables);
 			},
-			openBrowserTab(url: string, options?: vscode.BrowserTabShowOptions) {
+			openBrowserTab(url: string, options?: zyraxoncode.BrowserTabShowOptions) {
 				checkProposedApiEnabled(extension, 'browser');
 				return extHostBrowsers.openBrowserTab(url, options);
 			},
@@ -1118,10 +1118,10 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 
 		// namespace: workspace
 
-		const workspace: typeof vscode.workspace = {
+		const workspace: typeof zyraxoncode.workspace = {
 			get rootPath() {
 				extHostApiDeprecation.report('workspace.rootPath', extension,
-					`Please use 'workspace.workspaceFolders' instead. More details: https://aka.ms/vscode-eliminating-rootpath`);
+					`Please use 'workspace.workspaceFolders' instead. More details: __ZYRAXKEEP__1_`);
 
 				return extHostWorkspace.getPath();
 			},
@@ -1163,32 +1163,32 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				// Note, undefined/null have different meanings on "exclude"
 				return extHostWorkspace.findFiles(include, exclude, maxResults, extension.identifier, token);
 			},
-			findFiles2: (filePattern: vscode.GlobPattern[], options?: vscode.FindFiles2Options, token?: vscode.CancellationToken): Thenable<vscode.Uri[]> => {
+			findFiles2: (filePattern: zyraxoncode.GlobPattern[], options?: zyraxoncode.FindFiles2Options, token?: zyraxoncode.CancellationToken): Thenable<zyraxoncode.Uri[]> => {
 				checkProposedApiEnabled(extension, 'findFiles2');
 				return extHostWorkspace.findFiles2(filePattern, options, extension.identifier, token);
 			},
-			findTextInFiles: (query: vscode.TextSearchQuery, optionsOrCallback: vscode.FindTextInFilesOptions | ((result: vscode.TextSearchResult) => void), callbackOrToken?: vscode.CancellationToken | ((result: vscode.TextSearchResult) => void), token?: vscode.CancellationToken) => {
+			findTextInFiles: (query: zyraxoncode.TextSearchQuery, optionsOrCallback: zyraxoncode.FindTextInFilesOptions | ((result: zyraxoncode.TextSearchResult) => void), callbackOrToken?: zyraxoncode.CancellationToken | ((result: zyraxoncode.TextSearchResult) => void), token?: zyraxoncode.CancellationToken) => {
 				checkProposedApiEnabled(extension, 'findTextInFiles');
-				let options: vscode.FindTextInFilesOptions;
-				let callback: (result: vscode.TextSearchResult) => void;
+				let options: zyraxoncode.FindTextInFilesOptions;
+				let callback: (result: zyraxoncode.TextSearchResult) => void;
 
 				if (typeof optionsOrCallback === 'object') {
 					options = optionsOrCallback;
-					callback = callbackOrToken as (result: vscode.TextSearchResult) => void;
+					callback = callbackOrToken as (result: zyraxoncode.TextSearchResult) => void;
 				} else {
 					options = {};
 					callback = optionsOrCallback;
-					token = callbackOrToken as vscode.CancellationToken;
+					token = callbackOrToken as zyraxoncode.CancellationToken;
 				}
 
 				return extHostWorkspace.findTextInFiles(query, options || {}, callback, extension.identifier, token);
 			},
-			findTextInFiles2: (query: vscode.TextSearchQuery2, options?: vscode.FindTextInFilesOptions2, token?: vscode.CancellationToken): vscode.FindTextInFilesResponse => {
+			findTextInFiles2: (query: zyraxoncode.TextSearchQuery2, options?: zyraxoncode.FindTextInFilesOptions2, token?: zyraxoncode.CancellationToken): zyraxoncode.FindTextInFilesResponse => {
 				checkProposedApiEnabled(extension, 'findTextInFiles2');
 				checkProposedApiEnabled(extension, 'textSearchProvider2');
 				return extHostWorkspace.findTextInFiles2(query, options, extension.identifier, token);
 			},
-			getTextDiff(originalDocument: vscode.TextDocument, modifiedDocument: vscode.TextDocument, options?: vscode.TextDiffOptions, token?: vscode.CancellationToken): vscode.TextDiffResponse {
+			getTextDiff(originalDocument: zyraxoncode.TextDocument, modifiedDocument: zyraxoncode.TextDocument, options?: zyraxoncode.TextDiffOptions, token?: zyraxoncode.CancellationToken): zyraxoncode.TextDiffResponse {
 				checkProposedApiEnabled(extension, 'documentDiff');
 				const proxy = rpcProtocol.getProxy(MainContext.MainThreadDocumentDiff);
 				if (token?.isCancellationRequested) {
@@ -1226,7 +1226,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				// In the future, we may want to stream changes incrementally as they are computed
 				// (e.g. by having the worker yield partial results).
 				return {
-					changes: new AsyncIterableObject<vscode.TextDiffChange>(async emitter => {
+					changes: new AsyncIterableObject<zyraxoncode.TextDiffChange>(async emitter => {
 						const result = await mappedPromise;
 						emitter.emitMany(result.changes.map(mapChange));
 					}),
@@ -1250,10 +1250,10 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			saveAll: (includeUntitled?) => {
 				return extHostWorkspace.saveAll(includeUntitled);
 			},
-			applyEdit(edit: vscode.WorkspaceEdit, metadata?: vscode.WorkspaceEditMetadata): Thenable<boolean> {
+			applyEdit(edit: zyraxoncode.WorkspaceEdit, metadata?: zyraxoncode.WorkspaceEditMetadata): Thenable<boolean> {
 				return extHostBulkEdits.applyWorkspaceEdit(edit, extension, metadata);
 			},
-			createFileSystemWatcher: (pattern, optionsOrIgnoreCreate, ignoreChange?, ignoreDelete?): vscode.FileSystemWatcher => {
+			createFileSystemWatcher: (pattern, optionsOrIgnoreCreate, ignoreChange?, ignoreDelete?): zyraxoncode.FileSystemWatcher => {
 				const options: FileSystemWatcherCreateOptions = {
 					ignoreCreateEvents: Boolean(optionsOrIgnoreCreate),
 					ignoreChangeEvents: Boolean(ignoreChange),
@@ -1268,7 +1268,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			set textDocuments(value) {
 				throw new errors.ReadonlyError('textDocuments');
 			},
-			openTextDocument(uriOrFileNameOrOptions?: vscode.Uri | string | { language?: string; content?: string; encoding?: string }, options?: { encoding?: string }) {
+			openTextDocument(uriOrFileNameOrOptions?: zyraxoncode.Uri | string | { language?: string; content?: string; encoding?: string }, options?: { encoding?: string }) {
 				let uriPromise: Thenable<URI>;
 
 				options = (options ?? uriOrFileNameOrOptions) as ({ language?: string; content?: string; encoding?: string } | undefined);
@@ -1285,8 +1285,8 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 
 				return uriPromise.then(uri => {
 					extHostLogService.trace(`openTextDocument from ${extension.identifier}`);
-					if (uri.scheme === Schemas.vscodeRemote && !uri.authority) {
-						extHostApiDeprecation.report('workspace.openTextDocument', extension, `A URI of 'vscode-remote' scheme requires an authority.`);
+					if (uri.scheme === Schemas.zyraxoncodeRemote && !uri.authority) {
+						extHostApiDeprecation.report('workspace.openTextDocument', extension, `A URI of 'zyraxoncode-remote' scheme requires an authority.`);
 					}
 					return extHostDocuments.ensureDocumentData(uri, options).then(documentData => {
 						return documentData.document;
@@ -1311,10 +1311,10 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			onWillSaveTextDocument: (listener, thisArgs?, disposables?) => {
 				return _asExtensionEvent(extHostDocumentSaveParticipant.getOnWillSaveTextDocumentEvent(extension))(listener, thisArgs, disposables);
 			},
-			get notebookDocuments(): vscode.NotebookDocument[] {
+			get notebookDocuments(): zyraxoncode.NotebookDocument[] {
 				return extHostNotebook.notebookDocuments.map(d => d.apiNotebook);
 			},
-			async openNotebookDocument(uriOrType?: URI | string, content?: vscode.NotebookData) {
+			async openNotebookDocument(uriOrType?: URI | string, content?: zyraxoncode.NotebookData) {
 				let uri: URI;
 				if (URI.isUri(uriOrType)) {
 					uri = uriOrType;
@@ -1341,20 +1341,20 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			get onDidCloseNotebookDocument() {
 				return _asExtensionEvent(extHostNotebook.onDidCloseNotebookDocument);
 			},
-			registerNotebookSerializer(viewType: string, serializer: vscode.NotebookSerializer, options?: vscode.NotebookDocumentContentOptions, registration?: vscode.NotebookRegistrationData) {
+			registerNotebookSerializer(viewType: string, serializer: zyraxoncode.NotebookSerializer, options?: zyraxoncode.NotebookDocumentContentOptions, registration?: zyraxoncode.NotebookRegistrationData) {
 				return extHostNotebook.registerNotebookSerializer(extension, viewType, serializer, options, isProposedApiEnabled(extension, 'notebookLiveShare') ? registration : undefined);
 			},
 			onDidChangeConfiguration: (listener: (_: any) => any, thisArgs?: any, disposables?: extHostTypes.Disposable[]) => {
 				return _asExtensionEvent(configProvider.onDidChangeConfiguration)(listener, thisArgs, disposables);
 			},
-			getConfiguration(section?: string, scope?: vscode.ConfigurationScope | null): vscode.WorkspaceConfiguration {
+			getConfiguration(section?: string, scope?: zyraxoncode.ConfigurationScope | null): zyraxoncode.WorkspaceConfiguration {
 				scope = arguments.length === 1 ? undefined : scope;
 				return configProvider.getConfiguration(section, scope, extension);
 			},
-			registerTextDocumentContentProvider(scheme: string, provider: vscode.TextDocumentContentProvider) {
+			registerTextDocumentContentProvider(scheme: string, provider: zyraxoncode.TextDocumentContentProvider) {
 				return extHostDocumentContentProviders.registerTextDocumentContentProvider(scheme, provider);
 			},
-			registerTaskProvider: (type: string, provider: vscode.TaskProvider) => {
+			registerTaskProvider: (type: string, provider: zyraxoncode.TaskProvider) => {
 				extHostApiDeprecation.report('window.registerTaskProvider', extension,
 					`Use the corresponding function on the 'tasks' namespace instead`);
 
@@ -1369,33 +1369,33 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			get fs() {
 				return extHostConsumerFileSystem.value;
 			},
-			registerFileSearchProvider: (scheme: string, provider: vscode.FileSearchProvider) => {
+			registerFileSearchProvider: (scheme: string, provider: zyraxoncode.FileSearchProvider) => {
 				checkProposedApiEnabled(extension, 'fileSearchProvider');
 				return extHostSearch.registerFileSearchProviderOld(scheme, provider);
 			},
-			registerTextSearchProvider: (scheme: string, provider: vscode.TextSearchProvider) => {
+			registerTextSearchProvider: (scheme: string, provider: zyraxoncode.TextSearchProvider) => {
 				checkProposedApiEnabled(extension, 'textSearchProvider');
 				return extHostSearch.registerTextSearchProviderOld(scheme, provider);
 			},
-			registerAITextSearchProvider: (scheme: string, provider: vscode.AITextSearchProvider) => {
+			registerAITextSearchProvider: (scheme: string, provider: zyraxoncode.AITextSearchProvider) => {
 				// there are some dependencies on textSearchProvider, so we need to check for both
 				checkProposedApiEnabled(extension, 'aiTextSearchProvider');
 				checkProposedApiEnabled(extension, 'textSearchProvider2');
 				return extHostSearch.registerAITextSearchProvider(scheme, provider);
 			},
-			registerFileSearchProvider2: (scheme: string, provider: vscode.FileSearchProvider2) => {
+			registerFileSearchProvider2: (scheme: string, provider: zyraxoncode.FileSearchProvider2) => {
 				checkProposedApiEnabled(extension, 'fileSearchProvider2');
 				return extHostSearch.registerFileSearchProvider(scheme, provider);
 			},
-			registerTextSearchProvider2: (scheme: string, provider: vscode.TextSearchProvider2) => {
+			registerTextSearchProvider2: (scheme: string, provider: zyraxoncode.TextSearchProvider2) => {
 				checkProposedApiEnabled(extension, 'textSearchProvider2');
 				return extHostSearch.registerTextSearchProvider(scheme, provider);
 			},
-			registerRemoteAuthorityResolver: (authorityPrefix: string, resolver: vscode.RemoteAuthorityResolver) => {
+			registerRemoteAuthorityResolver: (authorityPrefix: string, resolver: zyraxoncode.RemoteAuthorityResolver) => {
 				checkProposedApiEnabled(extension, 'resolvers');
 				return extensionService.registerRemoteAuthorityResolver(authorityPrefix, resolver);
 			},
-			registerResourceLabelFormatter: (formatter: vscode.ResourceLabelFormatter) => {
+			registerResourceLabelFormatter: (formatter: zyraxoncode.ResourceLabelFormatter) => {
 				checkProposedApiEnabled(extension, 'resolvers');
 				return extHostLabelService.$registerResourceLabelFormatter(formatter);
 			},
@@ -1412,16 +1412,16 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			onDidRenameFiles: (listener, thisArg, disposables) => {
 				return _asExtensionEvent(extHostFileSystemEvent.onDidRenameFile)(listener, thisArg, disposables);
 			},
-			onWillCreateFiles: (listener: (e: vscode.FileWillCreateEvent) => any, thisArg?: unknown, disposables?: vscode.Disposable[]) => {
+			onWillCreateFiles: (listener: (e: zyraxoncode.FileWillCreateEvent) => any, thisArg?: unknown, disposables?: zyraxoncode.Disposable[]) => {
 				return _asExtensionEvent(extHostFileSystemEvent.getOnWillCreateFileEvent(extension))(listener, thisArg, disposables);
 			},
-			onWillDeleteFiles: (listener: (e: vscode.FileWillDeleteEvent) => any, thisArg?: unknown, disposables?: vscode.Disposable[]) => {
+			onWillDeleteFiles: (listener: (e: zyraxoncode.FileWillDeleteEvent) => any, thisArg?: unknown, disposables?: zyraxoncode.Disposable[]) => {
 				return _asExtensionEvent(extHostFileSystemEvent.getOnWillDeleteFileEvent(extension))(listener, thisArg, disposables);
 			},
-			onWillRenameFiles: (listener: (e: vscode.FileWillRenameEvent) => any, thisArg?: unknown, disposables?: vscode.Disposable[]) => {
+			onWillRenameFiles: (listener: (e: zyraxoncode.FileWillRenameEvent) => any, thisArg?: unknown, disposables?: zyraxoncode.Disposable[]) => {
 				return _asExtensionEvent(extHostFileSystemEvent.getOnWillRenameFileEvent(extension))(listener, thisArg, disposables);
 			},
-			openTunnel: (forward: vscode.TunnelOptions) => {
+			openTunnel: (forward: zyraxoncode.TunnelOptions) => {
 				checkProposedApiEnabled(extension, 'tunnels');
 				return extHostTunnelService.openTunnel(extension, forward).then(value => {
 					if (!value) {
@@ -1438,30 +1438,30 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'tunnels');
 				return _asExtensionEvent(extHostTunnelService.onDidChangeTunnels)(listener, thisArg, disposables);
 			},
-			registerPortAttributesProvider: (portSelector: vscode.PortAttributesSelector, provider: vscode.PortAttributesProvider) => {
+			registerPortAttributesProvider: (portSelector: zyraxoncode.PortAttributesSelector, provider: zyraxoncode.PortAttributesProvider) => {
 				checkProposedApiEnabled(extension, 'portsAttributes');
 				return extHostTunnelService.registerPortsAttributesProvider(portSelector, provider);
 			},
-			registerTunnelProvider: (tunnelProvider: vscode.TunnelProvider, information: vscode.TunnelInformation) => {
+			registerTunnelProvider: (tunnelProvider: zyraxoncode.TunnelProvider, information: zyraxoncode.TunnelInformation) => {
 				checkProposedApiEnabled(extension, 'tunnelFactory');
 				return extHostTunnelService.registerTunnelProvider(tunnelProvider, information);
 			},
-			registerTimelineProvider: (scheme: string | string[], provider: vscode.TimelineProvider) => {
+			registerTimelineProvider: (scheme: string | string[], provider: zyraxoncode.TimelineProvider) => {
 				checkProposedApiEnabled(extension, 'timeline');
 				return extHostTimeline.registerTimelineProvider(scheme, provider, extension.identifier, extHostCommands.converter);
 			},
 			get isTrusted() {
 				return extHostWorkspace.trusted;
 			},
-			requestResourceTrust: (options: vscode.ResourceTrustRequestOptions) => {
+			requestResourceTrust: (options: zyraxoncode.ResourceTrustRequestOptions) => {
 				checkProposedApiEnabled(extension, 'workspaceTrust');
 				return extHostWorkspace.requestResourceTrust(options);
 			},
-			requestWorkspaceTrust: (options?: vscode.WorkspaceTrustRequestOptions) => {
+			requestWorkspaceTrust: (options?: zyraxoncode.WorkspaceTrustRequestOptions) => {
 				checkProposedApiEnabled(extension, 'workspaceTrust');
 				return extHostWorkspace.requestWorkspaceTrust(options);
 			},
-			isResourceTrusted: (resource: vscode.Uri) => {
+			isResourceTrusted: (resource: zyraxoncode.Uri) => {
 				checkProposedApiEnabled(extension, 'workspaceTrust');
 				return extHostWorkspace.isResourceTrusted(resource);
 			},
@@ -1472,7 +1472,7 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			onDidGrantWorkspaceTrust: (listener, thisArgs?, disposables?) => {
 				return _asExtensionEvent(extHostWorkspace.onDidGrantWorkspaceTrust)(listener, thisArgs, disposables);
 			},
-			registerEditSessionIdentityProvider: (scheme: string, provider: vscode.EditSessionIdentityProvider) => {
+			registerEditSessionIdentityProvider: (scheme: string, provider: zyraxoncode.EditSessionIdentityProvider) => {
 				checkProposedApiEnabled(extension, 'editSessionIdentityProvider');
 				return extHostWorkspace.registerEditSessionIdentityProvider(scheme, provider);
 			},
@@ -1480,31 +1480,31 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'editSessionIdentityProvider');
 				return _asExtensionEvent(extHostWorkspace.getOnWillCreateEditSessionIdentityEvent(extension))(listener, thisArgs, disposables);
 			},
-			registerCanonicalUriProvider: (scheme: string, provider: vscode.CanonicalUriProvider) => {
+			registerCanonicalUriProvider: (scheme: string, provider: zyraxoncode.CanonicalUriProvider) => {
 				checkProposedApiEnabled(extension, 'canonicalUriProvider');
 				return extHostWorkspace.registerCanonicalUriProvider(scheme, provider);
 			},
-			getCanonicalUri: (uri: vscode.Uri, options: vscode.CanonicalUriRequestOptions, token: vscode.CancellationToken) => {
+			getCanonicalUri: (uri: zyraxoncode.Uri, options: zyraxoncode.CanonicalUriRequestOptions, token: zyraxoncode.CancellationToken) => {
 				checkProposedApiEnabled(extension, 'canonicalUriProvider');
 				return extHostWorkspace.provideCanonicalUri(uri, options, token);
 			},
-			decode(content: Uint8Array, options?: { uri?: vscode.Uri; encoding?: string }) {
+			decode(content: Uint8Array, options?: { uri?: zyraxoncode.Uri; encoding?: string }) {
 				return extHostWorkspace.decode(content, options);
 			},
-			encode(content: string, options?: { uri?: vscode.Uri; encoding?: string }) {
+			encode(content: string, options?: { uri?: zyraxoncode.Uri; encoding?: string }) {
 				return extHostWorkspace.encode(content, options);
 			},
 		};
 
 		// namespace: scm
-		const scm: typeof vscode.scm = {
+		const scm: typeof zyraxoncode.scm = {
 			get inputBox() {
 				extHostApiDeprecation.report('scm.inputBox', extension,
 					`Use 'SourceControl.inputBox' instead`);
 
 				return extHostSCM.getLastInputBox(extension)!; // Strict null override - Deprecated api
 			},
-			createSourceControl(id: string, label: string, rootUri?: vscode.Uri, iconPath?: vscode.IconPath, isHidden?: boolean, parent?: vscode.SourceControl): vscode.SourceControl {
+			createSourceControl(id: string, label: string, rootUri?: zyraxoncode.Uri, iconPath?: zyraxoncode.IconPath, isHidden?: boolean, parent?: zyraxoncode.SourceControl): zyraxoncode.SourceControl {
 				if (iconPath || isHidden || parent) {
 					checkProposedApiEnabled(extension, 'scmProviderOptions');
 				}
@@ -1513,14 +1513,14 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 		};
 
 		// namespace: comments
-		const comments: typeof vscode.comments = {
+		const comments: typeof zyraxoncode.comments = {
 			createCommentController(id: string, label: string) {
 				return extHostComment.createCommentController(extension, id, label);
 			}
 		};
 
 		// namespace: debug
-		const debug: typeof vscode.debug = {
+		const debug: typeof zyraxoncode.debug = {
 			get activeDebugSession() {
 				return extHostDebugService.activeDebugSession;
 			},
@@ -1559,50 +1559,50 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			onDidChangeActiveStackItem(listener, thisArg?, disposables?) {
 				return _asExtensionEvent(extHostDebugService.onDidChangeActiveStackItem)(listener, thisArg, disposables);
 			},
-			registerDebugConfigurationProvider(debugType: string, provider: vscode.DebugConfigurationProvider, triggerKind?: vscode.DebugConfigurationProviderTriggerKind) {
+			registerDebugConfigurationProvider(debugType: string, provider: zyraxoncode.DebugConfigurationProvider, triggerKind?: zyraxoncode.DebugConfigurationProviderTriggerKind) {
 				return extHostDebugService.registerDebugConfigurationProvider(debugType, provider, triggerKind || DebugConfigurationProviderTriggerKind.Initial);
 			},
-			registerDebugAdapterDescriptorFactory(debugType: string, factory: vscode.DebugAdapterDescriptorFactory) {
+			registerDebugAdapterDescriptorFactory(debugType: string, factory: zyraxoncode.DebugAdapterDescriptorFactory) {
 				return extHostDebugService.registerDebugAdapterDescriptorFactory(extension, debugType, factory);
 			},
-			registerDebugAdapterTrackerFactory(debugType: string, factory: vscode.DebugAdapterTrackerFactory) {
+			registerDebugAdapterTrackerFactory(debugType: string, factory: zyraxoncode.DebugAdapterTrackerFactory) {
 				return extHostDebugService.registerDebugAdapterTrackerFactory(debugType, factory);
 			},
-			startDebugging(folder: vscode.WorkspaceFolder | undefined, nameOrConfig: string | vscode.DebugConfiguration, parentSessionOrOptions?: vscode.DebugSession | vscode.DebugSessionOptions) {
+			startDebugging(folder: zyraxoncode.WorkspaceFolder | undefined, nameOrConfig: string | zyraxoncode.DebugConfiguration, parentSessionOrOptions?: zyraxoncode.DebugSession | zyraxoncode.DebugSessionOptions) {
 				if (!parentSessionOrOptions || (typeof parentSessionOrOptions === 'object' && 'configuration' in parentSessionOrOptions)) {
 					return extHostDebugService.startDebugging(folder, nameOrConfig, { parentSession: parentSessionOrOptions });
 				}
 				return extHostDebugService.startDebugging(folder, nameOrConfig, parentSessionOrOptions || {});
 			},
-			stopDebugging(session?: vscode.DebugSession) {
+			stopDebugging(session?: zyraxoncode.DebugSession) {
 				return extHostDebugService.stopDebugging(session);
 			},
-			addBreakpoints(breakpoints: readonly vscode.Breakpoint[]) {
+			addBreakpoints(breakpoints: readonly zyraxoncode.Breakpoint[]) {
 				return extHostDebugService.addBreakpoints(breakpoints);
 			},
-			removeBreakpoints(breakpoints: readonly vscode.Breakpoint[]) {
+			removeBreakpoints(breakpoints: readonly zyraxoncode.Breakpoint[]) {
 				return extHostDebugService.removeBreakpoints(breakpoints);
 			},
-			asDebugSourceUri(source: vscode.DebugProtocolSource, session?: vscode.DebugSession): vscode.Uri {
+			asDebugSourceUri(source: zyraxoncode.DebugProtocolSource, session?: zyraxoncode.DebugSession): zyraxoncode.Uri {
 				return extHostDebugService.asDebugSourceUri(source, session);
 			}
 		};
 
-		const tasks: typeof vscode.tasks = {
-			registerTaskProvider: (type: string, provider: vscode.TaskProvider) => {
+		const tasks: typeof zyraxoncode.tasks = {
+			registerTaskProvider: (type: string, provider: zyraxoncode.TaskProvider) => {
 				return extHostTask.registerTaskProvider(extension, type, provider);
 			},
-			fetchTasks: (filter?: vscode.TaskFilter): Thenable<vscode.Task[]> => {
+			fetchTasks: (filter?: zyraxoncode.TaskFilter): Thenable<zyraxoncode.Task[]> => {
 				return extHostTask.fetchTasks(filter);
 			},
-			executeTask: (task: vscode.Task): Thenable<vscode.TaskExecution> => {
+			executeTask: (task: zyraxoncode.Task): Thenable<zyraxoncode.TaskExecution> => {
 				return extHostTask.executeTask(extension, task);
 			},
-			get taskExecutions(): vscode.TaskExecution[] {
+			get taskExecutions(): zyraxoncode.TaskExecution[] {
 				return extHostTask.taskExecutions;
 			},
-			onDidStartTask: (listener: (e: vscode.TaskStartEvent) => any, thisArgs?: any, disposables?) => {
-				const wrappedListener = (event: vscode.TaskStartEvent) => {
+			onDidStartTask: (listener: (e: zyraxoncode.TaskStartEvent) => any, thisArgs?: any, disposables?) => {
+				const wrappedListener = (event: zyraxoncode.TaskStartEvent) => {
 					if (!isProposedApiEnabled(extension, 'taskExecutionTerminal')) {
 						if (event?.execution?.terminal !== undefined) {
 							event.execution.terminal = undefined;
@@ -1636,11 +1636,11 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 		};
 
 		// namespace: notebook
-		const notebooks: typeof vscode.notebooks = {
-			createNotebookController(id: string, notebookType: string, label: string, handler?, rendererScripts?: vscode.NotebookRendererScript[]) {
+		const notebooks: typeof zyraxoncode.notebooks = {
+			createNotebookController(id: string, notebookType: string, label: string, handler?, rendererScripts?: zyraxoncode.NotebookRendererScript[]) {
 				return extHostNotebookKernels.createNotebookController(extension, id, notebookType, label, handler, isProposedApiEnabled(extension, 'notebookMessaging') ? rendererScripts : undefined);
 			},
-			registerNotebookCellStatusBarItemProvider: (notebookType: string, provider: vscode.NotebookCellStatusBarItemProvider) => {
+			registerNotebookCellStatusBarItemProvider: (notebookType: string, provider: zyraxoncode.NotebookCellStatusBarItemProvider) => {
 				return extHostNotebook.registerNotebookCellStatusBarItemProvider(extension, notebookType, provider);
 			},
 			createRendererMessaging(rendererId) {
@@ -1650,14 +1650,14 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'notebookKernelSource');
 				return extHostNotebookKernels.createNotebookControllerDetectionTask(extension, notebookType);
 			},
-			registerKernelSourceActionProvider(notebookType: string, provider: vscode.NotebookKernelSourceActionProvider) {
+			registerKernelSourceActionProvider(notebookType: string, provider: zyraxoncode.NotebookKernelSourceActionProvider) {
 				checkProposedApiEnabled(extension, 'notebookKernelSource');
 				return extHostNotebookKernels.registerKernelSourceActionProvider(extension, notebookType, provider);
 			},
 		};
 
 		// namespace: l10n
-		const l10n: typeof vscode.l10n = {
+		const l10n: typeof zyraxoncode.l10n = {
 			t(...params: [message: string, ...args: Array<string | number | boolean>] | [message: string, args: Record<string, any>] | [{ message: string; args?: Array<string | number | boolean> | Record<string, any>; comment: string | string[] }]): string {
 				if (typeof params[0] === 'string') {
 					const key = params.shift() as string;
@@ -1679,52 +1679,52 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 		};
 
 		// namespace: interactive
-		const interactive: typeof vscode.interactive = {
-			transferActiveChat(toWorkspace: vscode.Uri): Thenable<void> {
+		const interactive: typeof zyraxoncode.interactive = {
+			transferActiveChat(toWorkspace: zyraxoncode.Uri): Thenable<void> {
 				checkProposedApiEnabled(extension, 'interactive');
 				return extHostChatAgents2.transferActiveChat(toWorkspace);
 			}
 		};
 
 		// namespace: ai
-		const ai: typeof vscode.ai = {
-			getRelatedInformation(query: string, types: vscode.RelatedInformationType[]): Thenable<vscode.RelatedInformationResult[]> {
+		const ai: typeof zyraxoncode.ai = {
+			getRelatedInformation(query: string, types: zyraxoncode.RelatedInformationType[]): Thenable<zyraxoncode.RelatedInformationResult[]> {
 				checkProposedApiEnabled(extension, 'aiRelatedInformation');
 				return extHostAiRelatedInformation.getRelatedInformation(extension, query, types);
 			},
-			registerRelatedInformationProvider(type: vscode.RelatedInformationType, provider: vscode.RelatedInformationProvider) {
+			registerRelatedInformationProvider(type: zyraxoncode.RelatedInformationType, provider: zyraxoncode.RelatedInformationProvider) {
 				checkProposedApiEnabled(extension, 'aiRelatedInformation');
 				return extHostAiRelatedInformation.registerRelatedInformationProvider(extension, type, provider);
 			},
-			registerEmbeddingVectorProvider(model: string, provider: vscode.EmbeddingVectorProvider) {
+			registerEmbeddingVectorProvider(model: string, provider: zyraxoncode.EmbeddingVectorProvider) {
 				checkProposedApiEnabled(extension, 'aiRelatedInformation');
 				return extHostAiEmbeddingVector.registerEmbeddingVectorProvider(extension, model, provider);
 			},
-			registerSettingsSearchProvider(provider: vscode.SettingsSearchProvider) {
+			registerSettingsSearchProvider(provider: zyraxoncode.SettingsSearchProvider) {
 				checkProposedApiEnabled(extension, 'aiSettingsSearch');
 				return extHostAiSettingsSearch.registerSettingsSearchProvider(extension, provider);
 			}
 		};
 
 		// namespace: chatregisterMcpServerDefinitionProvider
-		const chat: typeof vscode.chat = {
-			registerMappedEditsProvider(_selector: vscode.DocumentSelector, _provider: vscode.MappedEditsProvider) {
+		const chat: typeof zyraxoncode.chat = {
+			registerMappedEditsProvider(_selector: zyraxoncode.DocumentSelector, _provider: zyraxoncode.MappedEditsProvider) {
 				checkProposedApiEnabled(extension, 'mappedEditsProvider');
 				// no longer supported
 				return { dispose() { } };
 			},
-			registerMappedEditsProvider2(provider: vscode.MappedEditsProvider2) {
+			registerMappedEditsProvider2(provider: zyraxoncode.MappedEditsProvider2) {
 				checkProposedApiEnabled(extension, 'mappedEditsProvider');
 				return extHostCodeMapper.registerMappedEditsProvider(extension, provider);
 			},
-			createChatParticipant(id: string, handler: vscode.ChatExtendedRequestHandler) {
+			createChatParticipant(id: string, handler: zyraxoncode.ChatExtendedRequestHandler) {
 				return extHostChatAgents2.createChatAgent(extension, id, handler);
 			},
-			createDynamicChatParticipant(id: string, dynamicProps: vscode.DynamicChatParticipantProps, handler: vscode.ChatExtendedRequestHandler): vscode.ChatParticipant {
+			createDynamicChatParticipant(id: string, dynamicProps: zyraxoncode.DynamicChatParticipantProps, handler: zyraxoncode.ChatExtendedRequestHandler): zyraxoncode.ChatParticipant {
 				checkProposedApiEnabled(extension, 'chatParticipantPrivate');
 				return extHostChatAgents2.createDynamicChatAgent(extension, id, dynamicProps, handler);
 			},
-			registerChatParticipantDetectionProvider(provider: vscode.ChatParticipantDetectionProvider) {
+			registerChatParticipantDetectionProvider(provider: zyraxoncode.ChatParticipantDetectionProvider) {
 				checkProposedApiEnabled(extension, 'chatParticipantPrivate');
 				return extHostChatAgents2.registerChatParticipantDetectionProvider(extension, provider);
 			},
@@ -1732,70 +1732,70 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'chatParticipantPrivate');
 				return _asExtensionEvent(extHostChatAgents2.onDidDisposeChatSession)(listeners, thisArgs, disposables);
 			},
-			updateQuotas: (quotas: vscode.ChatQuotaSnapshots) => {
+			updateQuotas: (quotas: zyraxoncode.ChatQuotaSnapshots) => {
 				checkProposedApiEnabled(extension, 'chatParticipantPrivate');
 				extHostChatQuota.updateQuotas(quotas);
 			},
-			registerChatSessionItemProvider: (chatSessionType: string, provider: vscode.ChatSessionItemProvider) => {
+			registerChatSessionItemProvider: (chatSessionType: string, provider: zyraxoncode.ChatSessionItemProvider) => {
 				checkProposedApiEnabled(extension, 'chatSessionsProvider');
 				extHostApiDeprecation.report('chat.registerChatSessionItemProvider', extension, `Please migrate to the new chat session controller API`, {
 					usageId: chatSessionType
 				});
 				return extHostChatSessions.registerChatSessionItemProvider(extension, chatSessionType, provider);
 			},
-			createChatSessionItemController: (chatSessionType: string, refreshHandler: (token: vscode.CancellationToken) => Thenable<void>) => {
+			createChatSessionItemController: (chatSessionType: string, refreshHandler: (token: zyraxoncode.CancellationToken) => Thenable<void>) => {
 				checkProposedApiEnabled(extension, 'chatSessionsProvider');
 				return extHostChatSessions.createChatSessionItemController(extension, chatSessionType, refreshHandler);
 			},
-			registerChatSessionContentProvider(scheme: string, provider: vscode.ChatSessionContentProvider, chatParticipant: vscode.ChatParticipant, capabilities?: vscode.ChatSessionCapabilities) {
+			registerChatSessionContentProvider(scheme: string, provider: zyraxoncode.ChatSessionContentProvider, chatParticipant: zyraxoncode.ChatParticipant, capabilities?: zyraxoncode.ChatSessionCapabilities) {
 				checkProposedApiEnabled(extension, 'chatSessionsProvider');
 				return extHostChatSessions.registerChatSessionContentProvider(extension, scheme, chatParticipant, provider, capabilities);
 			},
-			registerChatOutputRenderer: (viewType: string, renderer: vscode.ChatOutputRenderer) => {
+			registerChatOutputRenderer: (viewType: string, renderer: zyraxoncode.ChatOutputRenderer) => {
 				checkProposedApiEnabled(extension, 'chatOutputRenderer');
 				return extHostChatOutputRenderer.registerChatOutputRenderer(extension, viewType, renderer);
 			},
-			registerChatWorkspaceContextProvider(id: string, provider: vscode.ChatWorkspaceContextProvider): vscode.Disposable {
+			registerChatWorkspaceContextProvider(id: string, provider: zyraxoncode.ChatWorkspaceContextProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatContextProvider');
 				return extHostChatContext.registerChatWorkspaceContextProvider(`${extension.id}-${id}`, provider);
 			},
-			registerChatAttachContextProvider(id: string, provider: vscode.ChatAttachContextProvider): vscode.Disposable {
+			registerChatAttachContextProvider(id: string, provider: zyraxoncode.ChatAttachContextProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatContextProvider');
 				return extHostChatContext.registerChatAttachContextProvider(`${extension.id}-${id}`, provider);
 			},
-			registerChatTabContextProvider(selector: vscode.TabSelector, id: string, provider: vscode.ChatTabContextProvider): vscode.Disposable {
+			registerChatTabContextProvider(selector: zyraxoncode.TabSelector, id: string, provider: zyraxoncode.ChatTabContextProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatContextProvider');
 				return extHostChatContext.registerChatTabContextProvider(selector, `${extension.id}-${id}`, provider);
 			},
-			registerChatExplicitContextProvider(_id: string, _provider: vscode.ChatAttachContextProvider): vscode.Disposable {
+			registerChatExplicitContextProvider(_id: string, _provider: zyraxoncode.ChatAttachContextProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatContextProvider');
 				return { dispose: () => { } };
 			},
-			registerChatResourceContextProvider(_selector: vscode.DocumentSelector, _id: string, _provider: vscode.ChatTabContextProvider): vscode.Disposable {
+			registerChatResourceContextProvider(_selector: zyraxoncode.DocumentSelector, _id: string, _provider: zyraxoncode.ChatTabContextProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatContextProvider');
 				return { dispose: () => { } };
 			},
-			registerCustomAgentProvider(provider: vscode.ChatCustomAgentProvider): vscode.Disposable {
+			registerCustomAgentProvider(provider: zyraxoncode.ChatCustomAgentProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.registerPromptFileProvider(extension, PromptsType.agent, provider);
 			},
-			registerInstructionsProvider(provider: vscode.ChatInstructionsProvider): vscode.Disposable {
+			registerInstructionsProvider(provider: zyraxoncode.ChatInstructionsProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.registerPromptFileProvider(extension, PromptsType.instructions, provider);
 			},
-			registerPromptFileProvider(provider: vscode.ChatPromptFileProvider): vscode.Disposable {
+			registerPromptFileProvider(provider: zyraxoncode.ChatPromptFileProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.registerPromptFileProvider(extension, PromptsType.prompt, provider);
 			},
-			registerSkillProvider(provider: vscode.ChatSkillProvider): vscode.Disposable {
+			registerSkillProvider(provider: zyraxoncode.ChatSkillProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.registerPromptFileProvider(extension, PromptsType.skill, provider);
 			},
-			registerHookProvider(provider: vscode.ChatHookProvider): vscode.Disposable {
+			registerHookProvider(provider: zyraxoncode.ChatHookProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.registerPromptFileProvider(extension, PromptsType.hook, provider);
 			},
-			registerChatDebugLogProvider(provider: vscode.ChatDebugLogProvider): vscode.Disposable {
+			registerChatDebugLogProvider(provider: zyraxoncode.ChatDebugLogProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatDebug');
 				return extHostChatDebug.registerChatDebugLogProvider(provider);
 			},
@@ -1803,66 +1803,66 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 				checkProposedApiEnabled(extension, 'chatDebug');
 				return extHostChatDebug.onDidAddCoreEvent(listener, thisArgs, disposables);
 			},
-			getCustomAgents(token: vscode.CancellationToken) {
+			getCustomAgents(token: zyraxoncode.CancellationToken) {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
-				return extHostChatAgents2.provideCustomAgents(token) as Thenable<readonly vscode.ChatCustomAgent[]>;
+				return extHostChatAgents2.provideCustomAgents(token) as Thenable<readonly zyraxoncode.ChatCustomAgent[]>;
 			},
 			onDidChangeCustomAgents: (listener, thisArgs?, disposables?) => {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.onDidChangeCustomAgents(listener, thisArgs, disposables);
 			},
-			getInstructions(token: vscode.CancellationToken) {
+			getInstructions(token: zyraxoncode.CancellationToken) {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
-				return extHostChatAgents2.provideInstructions(token) as Thenable<readonly vscode.ChatInstruction[]>;
+				return extHostChatAgents2.provideInstructions(token) as Thenable<readonly zyraxoncode.ChatInstruction[]>;
 			},
 			onDidChangeInstructions: (listener, thisArgs?, disposables?) => {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.onDidChangeInstructions(listener, thisArgs, disposables);
 			},
-			getSkills(token: vscode.CancellationToken) {
+			getSkills(token: zyraxoncode.CancellationToken) {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
-				return extHostChatAgents2.provideSkills(token) as Thenable<readonly vscode.ChatSkill[]>;
+				return extHostChatAgents2.provideSkills(token) as Thenable<readonly zyraxoncode.ChatSkill[]>;
 			},
 			onDidChangeSkills: (listener, thisArgs?, disposables?) => {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.onDidChangeSkills(listener, thisArgs, disposables);
 			},
-			getSlashCommands(token: vscode.CancellationToken) {
+			getSlashCommands(token: zyraxoncode.CancellationToken) {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
-				return extHostChatAgents2.provideSlashCommands(token) as Thenable<readonly vscode.ChatSlashCommand[]>;
+				return extHostChatAgents2.provideSlashCommands(token) as Thenable<readonly zyraxoncode.ChatSlashCommand[]>;
 			},
 			onDidChangeSlashCommands: (listener, thisArgs?, disposables?) => {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.onDidChangeSlashCommands(listener, thisArgs, disposables);
 			},
-			getHooks(token: vscode.CancellationToken) {
+			getHooks(token: zyraxoncode.CancellationToken) {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
-				return extHostChatAgents2.provideHooks(token) as Thenable<readonly vscode.ChatHook[]>;
+				return extHostChatAgents2.provideHooks(token) as Thenable<readonly zyraxoncode.ChatHook[]>;
 			},
 			onDidChangeHooks: (listener, thisArgs?, disposables?) => {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.onDidChangeHooks(listener, thisArgs, disposables);
 			},
-			getPlugins(token: vscode.CancellationToken) {
+			getPlugins(token: zyraxoncode.CancellationToken) {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
-				return extHostChatAgents2.providePlugins(token) as Thenable<readonly vscode.ChatPlugin[]>;
+				return extHostChatAgents2.providePlugins(token) as Thenable<readonly zyraxoncode.ChatPlugin[]>;
 			},
 			onDidChangePlugins: (listener, thisArgs?, disposables?) => {
 				checkProposedApiEnabled(extension, 'chatPromptFiles');
 				return extHostChatAgents2.onDidChangePlugins(listener, thisArgs, disposables);
 			},
-			registerChatSessionCustomizationProvider(chatSessionType: string, metadata: vscode.ChatSessionCustomizationProviderMetadata, provider: vscode.ChatSessionCustomizationProvider): vscode.Disposable {
+			registerChatSessionCustomizationProvider(chatSessionType: string, metadata: zyraxoncode.ChatSessionCustomizationProviderMetadata, provider: zyraxoncode.ChatSessionCustomizationProvider): zyraxoncode.Disposable {
 				checkProposedApiEnabled(extension, 'chatSessionCustomizationProvider');
 				return extHostChatAgents2.registerChatSessionCustomizationProvider(extension, chatSessionType, metadata, provider);
 			},
-			createInputNotification(id: string): vscode.ChatInputNotification {
+			createInputNotification(id: string): zyraxoncode.ChatInputNotification {
 				checkProposedApiEnabled(extension, 'chatInputNotification');
 				return extHostChatInputNotification.createInputNotification(extension, id);
 			},
 		};
 
 		// namespace: lm
-		const lm: typeof vscode.lm = {
+		const lm: typeof zyraxoncode.lm = {
 			selectChatModels: (selector) => {
 				return extHostLanguageModels.selectLanguageModels(extension, selector ?? {});
 			},
@@ -1909,13 +1909,13 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 					return extHostEmbeddings.computeEmbeddings(embeddingsModel, input, token);
 				}
 			},
-			registerTool<T>(name: string, tool: vscode.LanguageModelTool<T>) {
+			registerTool<T>(name: string, tool: zyraxoncode.LanguageModelTool<T>) {
 				return extHostLanguageModelTools.registerTool(extension, name, tool);
 			},
-			registerToolDefinition<T>(definition: vscode.LanguageModelToolDefinition, tool: vscode.LanguageModelTool<T>) {
+			registerToolDefinition<T>(definition: zyraxoncode.LanguageModelToolDefinition, tool: zyraxoncode.LanguageModelTool<T>) {
 				return extHostLanguageModelTools.registerToolDefinition(extension, definition, tool);
 			},
-			invokeTool<T>(nameOrInfo: string | vscode.LanguageModelToolInformation, parameters: vscode.LanguageModelToolInvocationOptions<T>, token?: vscode.CancellationToken) {
+			invokeTool<T>(nameOrInfo: string | zyraxoncode.LanguageModelToolInformation, parameters: zyraxoncode.LanguageModelToolInvocationOptions<T>, token?: zyraxoncode.CancellationToken) {
 				if (typeof nameOrInfo !== 'string') {
 					checkProposedApiEnabled(extension, 'chatParticipantAdditions');
 				}
@@ -1924,10 +1924,10 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 			get tools() {
 				return extHostLanguageModelTools.getTools(extension);
 			},
-			fileIsIgnored(uri: vscode.Uri, token?: vscode.CancellationToken) {
+			fileIsIgnored(uri: zyraxoncode.Uri, token?: zyraxoncode.CancellationToken) {
 				return extHostLanguageModels.fileIsIgnored(extension, uri, token);
 			},
-			registerIgnoredFileProvider(provider: vscode.LanguageModelIgnoredFileProvider) {
+			registerIgnoredFileProvider(provider: zyraxoncode.LanguageModelIgnoredFileProvider) {
 				return extHostLanguageModels.registerIgnoredFileProvider(extension, provider);
 			},
 			registerMcpServerDefinitionProvider(id, provider) {
@@ -1952,15 +1952,15 @@ export function createApiFactoryAndRegisterActors(accessor: ServicesAccessor): I
 		};
 
 		// namespace: speech
-		const speech: typeof vscode.speech = {
-			registerSpeechProvider(id: string, provider: vscode.SpeechProvider) {
+		const speech: typeof zyraxoncode.speech = {
+			registerSpeechProvider(id: string, provider: zyraxoncode.SpeechProvider) {
 				checkProposedApiEnabled(extension, 'speech');
 				return extHostSpeech.registerProvider(extension.identifier, id, provider);
 			}
 		};
 
 		// eslint-disable-next-line local/code-no-dangerous-type-assertions
-		return <typeof vscode>{
+		return <typeof zyraxoncode>{
 			version: initData.version,
 			// namespaces
 			ai,

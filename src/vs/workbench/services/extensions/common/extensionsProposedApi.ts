@@ -45,7 +45,7 @@ export class ExtensionsProposedApi {
 				const key = ExtensionIdentifier.toKey(k);
 				const proposalNames = value.filter(name => {
 					if (!allApiProposals[<ApiProposalName>name]) {
-						_logService.warn(`Via 'product.json#extensionEnabledApiProposals' extension '${key}' wants API proposal '${name}' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.`);
+						_logService.warn(`Via 'product.json#extensionEnabledApiProposals' extension '${key}' wants API proposal '${name}' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'zyraxoncode.d.ts') or was abandoned.`);
 						return false;
 					}
 					return true;
@@ -70,7 +70,7 @@ export class ExtensionsProposedApi {
 			extension.enabledApiProposals = extension.enabledApiProposals.filter(name => {
 				const result = Boolean(allApiProposals[<ApiProposalName>name]);
 				if (!result) {
-					this._logService.error(`Extension '${key}' wants API proposal '${name}' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.`);
+					this._logService.error(`Extension '${key}' wants API proposal '${name}' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'zyraxoncode.d.ts') or was abandoned.`);
 				}
 				return result;
 			});

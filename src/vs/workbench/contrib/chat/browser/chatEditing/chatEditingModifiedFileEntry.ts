@@ -118,7 +118,7 @@ export abstract class AbstractChatEditingModifiedFileEntry extends Disposable im
 			this.createdInRequestId = this._telemetryInfo.requestId;
 		}
 
-		if (this.modifiedURI.scheme !== Schemas.untitled && this.modifiedURI.scheme !== Schemas.vscodeNotebookCell) {
+		if (this.modifiedURI.scheme !== Schemas.untitled && this.modifiedURI.scheme !== Schemas.zyraxoncodeNotebookCell) {
 			this._register(this._fileService.watch(this.modifiedURI));
 			this._register(this._fileService.onDidFilesChange(e => {
 				if (e.affects(this.modifiedURI) && kind === ChatEditKind.Created && e.gotDeleted()) {

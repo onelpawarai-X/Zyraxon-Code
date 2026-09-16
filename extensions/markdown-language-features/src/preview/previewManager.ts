@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as vscode from 'vscode';
+import * as zyraxoncode from 'zyraxoncode';
 import { ILogger } from '../logging';
 import { MarkdownContributionProvider } from '../markdownExtensions';
 import { Disposable, disposeAll } from '../util/dispose';
@@ -21,8 +21,8 @@ import type { DiffScrollSyncData, MarkdownPreviewLineChanges } from '../../types
 
 
 export interface DynamicPreviewSettings {
-	readonly resourceColumn: vscode.ViewColumn;
-	readonly previewColumn: vscode.ViewColumn;
+	readonly resourceColumn: zyraxoncode.ViewColumn;
+	readonly previewColumn: zyraxoncode.ViewColumn;
 	readonly locked: boolean;
 }
 
@@ -42,7 +42,7 @@ class PreviewStore<T extends IManagedMarkdownPreview> extends Disposable {
 		return this.#previews[Symbol.iterator]();
 	}
 
-	public get(resource: vscode.Uri, previewSettings: DynamicPreviewSettings): T | undefined {
+	public get(resource: zyraxoncode.Uri, previewSettings: DynamicPreviewSettings): T | undefined {
 		const previewColumn = this.#resolvePreviewColumn(previewSettings);
 		for (const preview of this.#previews) {
 			if (preview.matchesResource(resource, previewColumn, previewSettings.locked)) {
@@ -60,20 +60,20 @@ class PreviewStore<T extends IManagedMarkdownPreview> extends Disposable {
 		this.#previews.delete(preview);
 	}
 
-	#resolvePreviewColumn(previewSettings: DynamicPreviewSettings): vscode.ViewColumn | undefined {
-		if (previewSettings.previewColumn === vscode.ViewColumn.Active) {
-			return vscode.window.tabGroups.activeTabGroup.viewColumn;
+	#resolvePreviewColumn(previewSettings: DynamicPreviewSettings): zyraxoncode.ViewColumn | undefined {
+		if (previewSettings.previewColumn === zyraxoncode.ViewColumn.Active) {
+			return zyraxoncode.window.tabGroups.activeTabGroup.viewColumn;
 		}
 
-		if (previewSettings.previewColumn === vscode.ViewColumn.Beside) {
-			return vscode.window.tabGroups.activeTabGroup.viewColumn + 1;
+		if (previewSettings.previewColumn === zyraxoncode.ViewColumn.Beside) {
+			return zyraxoncode.window.tabGroups.activeTabGroup.viewColumn + 1;
 		}
 
 		return previewSettings.previewColumn;
 	}
 }
 
-export class MarkdownPreviewManager extends Disposable implements vscode.WebviewPanelSerializer, vscode.CustomTextEditorProvider {
+export class MarkdownPreviewManager extends Disposable implements zyraxoncode.WebviewPanelSerializer, zyraxoncode.CustomTextEditorProvider {
 
 	readonly #topmostLineMonitor = new TopmostLineMonitor();
 	readonly #previewConfigurations = new MarkdownPreviewConfigurationManager();
@@ -94,7 +94,7 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 		logger: ILogger,
 		contributions: MarkdownContributionProvider,
 		opener: MdLinkOpener,
-		workspaceState: vscode.Memento,
+		workspaceState: zyraxoncode.Memento,
 	) {
 		super();
 
@@ -104,13 +104,13 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 		this.#opener = opener;
 		this.#renderedDiffWarning = this._register(new RenderedDiffWarningManager(workspaceState));
 
-		this._register(vscode.window.registerWebviewPanelSerializer(DynamicMarkdownPreview.viewType, this));
+		this._register(zyraxoncode.window.registerWebviewPanelSerializer(DynamicMarkdownPreview.viewType, this));
 
-		this._register(vscode.window.registerCustomEditorProvider(StaticMarkdownPreview.customEditorViewType, this, {
+		this._register(zyraxoncode.window.registerCustomEditorProvider(StaticMarkdownPreview.customEditorViewType, this, {
 			webviewOptions: { enableFindWidget: true }
 		}));
 
-		this._register(vscode.window.onDidChangeActiveTextEditor(textEditor => {
+		this._register(zyraxoncode.window.onDidChangeActiveTextEditor(textEditor => {
 			// When at a markdown file, apply existing scroll settings
 			if (textEditor?.document && isMarkdownFile(textEditor.document)) {
 				const line = this.#topmostLineMonitor.getPreviousStaticEditorLineByUri(textEditor.document.uri);
@@ -140,7 +140,7 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 	}
 
 	public openDynamicPreview(
-		resource: vscode.Uri,
+		resource: zyraxoncode.Uri,
 		settings: DynamicPreviewSettings
 	): void {
 		const scrollLocation = resource.fragment ? new StartingScrollFragment(resource.fragment) : this.#getActiveTextEditorScrollLocation(resource);
@@ -165,7 +165,7 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 		return this.#activePreview?.resourceColumn;
 	}
 
-	public findPreview(resource: vscode.Uri): IManagedMarkdownPreview | undefined {
+	public findPreview(resource: zyraxoncode.Uri): IManagedMarkdownPreview | undefined {
 		for (const preview of [...this.#dynamicPreviews, ...this.#staticPreviews]) {
 			if (preview.resource.fsPath === resource.fsPath) {
 				return preview;
@@ -188,17 +188,17 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 		}
 	}
 
-	public openDocumentLink(linkText: string, fromResource: vscode.Uri) {
+	public openDocumentLink(linkText: string, fromResource: zyraxoncode.Uri) {
 		const viewColumn = this.findPreview(fromResource)?.resourceColumn;
 		return this.#opener.openDocumentLink(linkText, fromResource, viewColumn);
 	}
 
 	public async deserializeWebviewPanel(
-		webview: vscode.WebviewPanel,
+		webview: zyraxoncode.WebviewPanel,
 		state: any
 	): Promise<void> {
 		try {
-			const resource = vscode.Uri.parse(state.resource);
+			const resource = zyraxoncode.Uri.parse(state.resource);
 			const locked = state.locked;
 			const line = state.line;
 			const resourceColumn = state.resourceColumn;
@@ -245,22 +245,22 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 				<meta http-equiv="Content-Security-Policy" content="default-src 'none';">
 			</head>
 			<body class="error-container">
-				<p>${vscode.l10n.t("An unexpected error occurred while restoring the Markdown preview.")}</p>
+				<p>${zyraxoncode.l10n.t("An unexpected error occurred while restoring the Markdown preview.")}</p>
 			</body>
 			</html>`;
 		}
 	}
 
 	public async resolveCustomTextEditor(
-		document: vscode.TextDocument,
-		webview: vscode.WebviewPanel
+		document: zyraxoncode.TextDocument,
+		webview: zyraxoncode.WebviewPanel
 	): Promise<void> {
 		this.#resolveCustomTextEditor(document, webview);
 	}
 
 	public async resolveCustomTextEditorInlineDiff(
-		documents: vscode.CustomEditorDiffDocuments<vscode.TextDocument>,
-		webview: vscode.WebviewPanel
+		documents: zyraxoncode.CustomEditorDiffDocuments<zyraxoncode.TextDocument>,
+		webview: zyraxoncode.WebviewPanel
 	): Promise<void> {
 		const lineDiffProvider = new MarkdownPreviewLineDiffProvider(documents.original, documents.modified);
 		const preview = this.#resolveCustomTextEditor(documents.modified, webview, () => lineDiffProvider.getModifiedLineChanges());
@@ -268,8 +268,8 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 	}
 
 	public async resolveCustomTextEditorSideBySideDiff(
-		documents: vscode.CustomEditorDiffDocuments<vscode.TextDocument>,
-		webviewPanels: vscode.CustomEditorSideBySideDiffWebviewPanels
+		documents: zyraxoncode.CustomEditorDiffDocuments<zyraxoncode.TextDocument>,
+		webviewPanels: zyraxoncode.CustomEditorSideBySideDiffWebviewPanels
 	): Promise<void> {
 		const lineDiffProvider = new MarkdownPreviewLineDiffProvider(documents.original, documents.modified);
 		const channelName = `md-diff-scroll-${generateUuid()}`;
@@ -294,8 +294,8 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 	}
 
 	#resolveCustomTextEditor(
-		document: vscode.TextDocument,
-		webview: vscode.WebviewPanel,
+		document: zyraxoncode.TextDocument,
+		webview: zyraxoncode.WebviewPanel,
 		getLineChanges?: () => MarkdownPreviewLineChanges | Promise<MarkdownPreviewLineChanges | undefined> | undefined,
 		getDiffScrollSync?: () => DiffScrollSyncData | Promise<DiffScrollSyncData | undefined> | undefined,
 	): StaticMarkdownPreview {
@@ -318,8 +318,8 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 		return preview;
 	}
 
-	#refreshPreviewWhenDocumentChanges(preview: StaticMarkdownPreview, document: vscode.TextDocument): void {
-		const listener = vscode.workspace.onDidChangeTextDocument(event => {
+	#refreshPreviewWhenDocumentChanges(preview: StaticMarkdownPreview, document: zyraxoncode.TextDocument): void {
+		const listener = zyraxoncode.workspace.onDidChangeTextDocument(event => {
 			if (event.document.uri.toString() === document.uri.toString()) {
 				preview.refresh();
 			}
@@ -328,7 +328,7 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 	}
 
 	#createNewDynamicPreview(
-		resource: vscode.Uri,
+		resource: zyraxoncode.Uri,
 		previewSettings: DynamicPreviewSettings,
 		scrollLocation: StartingScrollLocation | undefined,
 	): DynamicMarkdownPreview {
@@ -351,8 +351,8 @@ export class MarkdownPreviewManager extends Disposable implements vscode.Webview
 		return this.#registerDynamicPreview(preview);
 	}
 
-	#getActiveTextEditorScrollLocation(resource: vscode.Uri): StartingScrollLine | undefined {
-		const editor = vscode.window.activeTextEditor;
+	#getActiveTextEditorScrollLocation(resource: zyraxoncode.Uri): StartingScrollLine | undefined {
+		const editor = zyraxoncode.window.activeTextEditor;
 		if (editor?.document.uri.toString() !== resource.toString()) {
 			return undefined;
 		}

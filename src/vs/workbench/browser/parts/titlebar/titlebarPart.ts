@@ -328,7 +328,7 @@ export class BrowserTitlebarPart extends Part implements ITitlebarPart {
 			[IEditorService, scopedEditorService]
 		)));
 
-		this.isAuxiliary = targetWindow.vscodeWindowId !== mainWindow.vscodeWindowId;
+		this.isAuxiliary = targetWindow.zyraxoncodeWindowId !== mainWindow.zyraxoncodeWindowId;
 
 		this.isCompactContextKey = IsCompactTitleBarContext.bindTo(this.contextKeyService);
 
@@ -530,7 +530,7 @@ export class BrowserTitlebarPart extends Part implements ITitlebarPart {
 			if (isMacintosh && isNative) {
 
 				// Check if the locale is RTL, macOS will move traffic lights in RTL locales
-				// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/textInfo
+				// __ZYRAXKEEP__0_
 
 				const localeInfo = safeIntl.Locale(platformLocale).value;
 				const textInfo = (localeInfo as { textInfo?: unknown }).textInfo;

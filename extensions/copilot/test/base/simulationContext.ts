@@ -22,15 +22,15 @@ import { DefaultsOnlyConfigurationService } from '../../src/platform/configurati
 import { InMemoryConfigurationService } from '../../src/platform/configuration/test/common/inMemoryConfigurationService';
 import { IEmbeddingsComputer } from '../../src/platform/embeddings/common/embeddingsComputer';
 import { RemoteEmbeddingsComputer } from '../../src/platform/embeddings/common/remoteEmbeddingsComputer';
-import { ICombinedEmbeddingIndex, VSCodeCombinedIndexImpl } from '../../src/platform/embeddings/common/vscodeIndex';
-import { IVSCodeExtensionContext } from '../../src/platform/extContext/common/extensionContext';
+import { ICombinedEmbeddingIndex, ZyraxonCodeCombinedIndexImpl } from '../../src/platform/embeddings/common/zyraxoncodeIndex';
+import { IZyraxonCodeExtensionContext } from '../../src/platform/extContext/common/extensionContext';
 import { IGitExtensionService } from '../../src/platform/git/common/gitExtensionService';
 import { NullGitExtensionService } from '../../src/platform/git/common/nullGitExtensionService';
 import { ICompletionsFetchService } from '../../src/platform/nesFetch/common/completionsFetchService';
 import { CompletionsFetchService } from '../../src/platform/nesFetch/node/completionsFetchServiceImpl';
 import { IProjectTemplatesIndex, ProjectTemplatesIndex } from '../../src/platform/projectTemplatesIndex/common/projectTemplatesIndex';
 import { IReleaseNotesService } from '../../src/platform/releaseNotes/common/releaseNotesService';
-import { ReleaseNotesService } from '../../src/platform/releaseNotes/vscode/releaseNotesServiceImpl';
+import { ReleaseNotesService } from '../../src/platform/releaseNotes/zyraxoncode/releaseNotesServiceImpl';
 import { IDocsSearchClient } from '../../src/platform/remoteSearch/common/codeOrDocsSearchClient';
 import { DocsSearchClient } from '../../src/platform/remoteSearch/node/codeOrDocsSearchClientImpl';
 import { IReviewService } from '../../src/platform/review/common/reviewService';
@@ -217,7 +217,7 @@ export async function createSimulationAccessor(
 	testingServiceCollection.define(ISimulationEndpointHealth, new SyncDescriptor(SimulationEndpointHealthImpl));
 	testingServiceCollection.define(IJSONOutputPrinter, new SyncDescriptor(NoopJSONOutputPrinter));
 	testingServiceCollection.define(ICachingResourceFetcher, new SyncDescriptor(CachingResourceFetcher, [currentTestRunInfo, opts.resourcesCacheMode]));
-	testingServiceCollection.define(IVSCodeExtensionContext, new SyncDescriptor(MockExtensionContext, [globalStoragePath, constructGlobalStateMemento(globalStatePath)]));
+	testingServiceCollection.define(IZyraxonCodeExtensionContext, new SyncDescriptor(MockExtensionContext, [globalStoragePath, constructGlobalStateMemento(globalStatePath)]));
 	testingServiceCollection.define(IIntentService, new SyncDescriptor(IntentService));
 
 	testingServiceCollection.define(IAIEvaluationService, new SyncDescriptor(AIEvaluationService));
@@ -268,7 +268,7 @@ export async function createSimulationAccessor(
 		testingServiceCollection.define(IEmbeddingsComputer, new SyncDescriptor(RemoteEmbeddingsComputer));
 		testingServiceCollection.define(IDocsSearchClient, docsSearchClient);
 		testingServiceCollection.define(IChunkingEndpointClient, new SyncDescriptor(ChunkingEndpointClientImpl));
-		testingServiceCollection.define(ICombinedEmbeddingIndex, new SyncDescriptor(VSCodeCombinedIndexImpl, [/*useRemoteCache*/ true]));
+		testingServiceCollection.define(ICombinedEmbeddingIndex, new SyncDescriptor(ZyraxonCodeCombinedIndexImpl, [/*useRemoteCache*/ true]));
 		testingServiceCollection.define(IApiEmbeddingsIndex, new SyncDescriptor(ApiEmbeddingsIndex, [/*useRemoteCache*/ true]));
 		testingServiceCollection.define(IProjectTemplatesIndex, new SyncDescriptor(ProjectTemplatesIndex, [/*useRemoteCache*/ true]));
 	} else {
@@ -278,7 +278,7 @@ export async function createSimulationAccessor(
 		const codeOrDocSearchCache = new CodeOrDocSearchSQLiteCache(TestingCacheSalts.codeSearchCacheSalt, currentTestRunInfo);
 		const chunksEndpointCache = new ChunkingEndpointClientSQLiteCache(TestingCacheSalts.chunksEndpointCacheSalt, currentTestRunInfo);
 		testingServiceCollection.define(IDocsSearchClient, new SyncDescriptor(CachingCodeOrDocSearchClient, [docsSearchClient, codeOrDocSearchCache]));
-		testingServiceCollection.define(ICombinedEmbeddingIndex, new SyncDescriptor(VSCodeCombinedIndexImpl, [/*useRemoteCache*/ false]));
+		testingServiceCollection.define(ICombinedEmbeddingIndex, new SyncDescriptor(ZyraxonCodeCombinedIndexImpl, [/*useRemoteCache*/ false]));
 		testingServiceCollection.define(IApiEmbeddingsIndex, new SyncDescriptor(ApiEmbeddingsIndex, [/*useRemoteCache*/ false]));
 		testingServiceCollection.define(IProjectTemplatesIndex, new SyncDescriptor(ProjectTemplatesIndex, [/*useRemoteCache*/ false]));
 		testingServiceCollection.define(IChunkingEndpointClient, new SyncDescriptor(CachingChunkingEndpointClient, [chunksEndpointCache]));
@@ -306,7 +306,7 @@ export async function createSimulationAccessor(
 function lookupConfigKey(key: string): ExperimentBasedConfig<ExperimentBasedConfigType> | Config<any> {
 	const config = globalConfigRegistry.configs.get(key);
 	if (!config) {
-		throw new Error(`Configuration '${key}' provided does not exist in product. Double check if the configuration key exists by using it in vscode settings.json.`);
+		throw new Error(`Configuration '${key}' provided does not exist in product. Double check if the configuration key exists by using it in zyraxoncode settings.json.`);
 	}
 	return config;
 }

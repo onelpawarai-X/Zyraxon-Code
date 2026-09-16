@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Uri } from 'vscode';
+import { Uri } from 'zyraxoncode';
 
 /**
  * Check whether a URL matches the list of trusted domains or URIs.
  *
  * trustedDomains is an object where:
- * - Keys are full domains (https://www.microsoft.com) or full URIs (https://www.test.com/schemas/mySchema.json)
- * - Keys can include wildcards (https://*.microsoft.com) or glob patterns
+ * - Keys are full domains (__ZYRAXKEEP__0_) or full URIs (__ZYRAXKEEP__1_)
+ * - Keys can include wildcards (__ZYRAXKEEP__2_) or glob patterns
  * - Values are booleans indicating if the domain/URI is trusted (true) or blocked (false)
  *
  * @param url The URL to check

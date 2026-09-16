@@ -2,12 +2,12 @@
 	"name": "builtin-notebook-renderers",
 	"displayName": "%displayName%",
 	"description": "%description%",
-	"publisher": "vscode",
+	"publisher": "zyraxoncode",
 	"version": "10.0.0",
 	"license": "MIT",
 	"icon": "media/icon.png",
 	"engines": {
-		"vscode": "^1.57.0"
+		"zyraxoncode": "^1.57.0"
 	},
 	"capabilities": {
 		"virtualWorkspaces": true,
@@ -18,7 +18,7 @@
 	"contributes": {
 		"notebookRenderer": [
 			{
-				"id": "vscode.builtin-renderer",
+				"id": "zyraxoncode.builtin-renderer",
 				"entrypoint": "./renderer-out/index.js",
 				"displayName": "ZYRAXON Code Builtin Notebook Output Renderer",
 				"requiresMessaging": "never",
@@ -49,11 +49,11 @@
 	"devDependencies": {
 		"@types/jsdom": "^21.1.0",
 		"@types/node": "24.x",
-		"@types/vscode-notebook-renderer": "^1.60.0",
+		"@types/zyraxoncode-notebook-renderer": "^1.60.0",
 		"jsdom": "^28.1.0"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/microsoft/vscode.git"
+		"url": "__ZYRAXKEEP__0_"
 	}
 }

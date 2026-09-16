@@ -145,7 +145,7 @@ export class AgentTitleBarStatusWidget extends BaseActionViewItem {
 	private _rovingIndex: number = 0;
 
 	/** Tracks if this window applied a badge filter (unread/inProgress), so we only auto-clear our own filters */
-	// TODO: This is imperfect. Targetted fix for vscode#290863. We should revisit storing filter state per-window to avoid this
+	// TODO: This is imperfect. Targetted fix for zyraxoncode#290863. We should revisit storing filter state per-window to avoid this
 	private _badgeFilterAppliedByThisWindow: 'unread' | 'inProgress' | 'needsInput' | null = null;
 
 	/** Reusable menu for CommandCenterCenter items (e.g., debug toolbar) */

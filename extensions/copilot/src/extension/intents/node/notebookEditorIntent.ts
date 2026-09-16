@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import type * as vscode from 'vscode';
+import type * as zyraxoncode from 'zyraxoncode';
 import { ChatLocation } from '../../../platform/chat/common/commonTypes';
 import { ConfigKey, IConfigurationService } from '../../../platform/configuration/common/configurationService';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
@@ -41,7 +41,7 @@ import { EditCode2IntentInvocation } from './editCodeIntent2';
 import { IAuthenticationService } from '../../../platform/authentication/common/authentication';
 import { IAutomaticInstructionsCollector } from '../../../platform/promptFiles/node/automaticInstructionsCollector';
 
-const getTools = (instaService: IInstantiationService, request: vscode.ChatRequest): Promise<vscode.LanguageModelToolInformation[]> =>
+const getTools = (instaService: IInstantiationService, request: zyraxoncode.ChatRequest): Promise<zyraxoncode.LanguageModelToolInformation[]> =>
 	instaService.invokeFunction(async accessor => {
 		const toolsService = accessor.get<IToolsService>(IToolsService);
 		const endpointProvider = accessor.get<IEndpointProvider>(IEndpointProvider);
@@ -75,7 +75,7 @@ export class NotebookEditorIntent extends EditCodeIntent {
 		super(instantiationService, endpointProvider, configurationService, expService, codeMapperService, workspaceService, { processCodeblocks: false, intentInvocation: NotebookEditorIntentInvocation });
 	}
 
-	protected override getIntentHandlerOptions(request: vscode.ChatRequest): IDefaultIntentRequestHandlerOptions | undefined {
+	protected override getIntentHandlerOptions(request: zyraxoncode.ChatRequest): IDefaultIntentRequestHandlerOptions | undefined {
 		return {
 			maxToolCallIterations: getRequestedToolCallIterationLimit(request) ?? this.instantiationService.invokeFunction(getAgentMaxRequests),
 			temperature: this.configurationService.getConfig(ConfigKey.Advanced.AgentTemperature) ?? 0,
@@ -90,7 +90,7 @@ export class NotebookEditorIntentInvocation extends EditCode2IntentInvocation {
 		intent: IIntent,
 		location: ChatLocation,
 		endpoint: IChatEndpoint,
-		request: vscode.ChatRequest,
+		request: zyraxoncode.ChatRequest,
 		intentOptions: EditCodeIntentOptions,
 		@ITabsAndEditorsService private readonly tabsAndEditorsService: ITabsAndEditorsService,
 		@IAlternativeNotebookContentService private readonly alternativeNotebookContentService: IAlternativeNotebookContentService,
@@ -119,11 +119,11 @@ export class NotebookEditorIntentInvocation extends EditCode2IntentInvocation {
 
 	protected override prompt = NotebookInlinePrompt;
 
-	public override async getAvailableTools(): Promise<vscode.LanguageModelToolInformation[]> {
+	public override async getAvailableTools(): Promise<zyraxoncode.LanguageModelToolInformation[]> {
 		return getTools(this.instantiationService, this.request);
 	}
 
-	public override buildPrompt(promptContext: IBuildPromptContext, progress: vscode.Progress<vscode.ChatResponseReferencePart | vscode.ChatResponseProgressPart>, token: vscode.CancellationToken): Promise<IBuildPromptResult> {
+	public override buildPrompt(promptContext: IBuildPromptContext, progress: zyraxoncode.Progress<zyraxoncode.ChatResponseReferencePart | zyraxoncode.ChatResponseProgressPart>, token: zyraxoncode.CancellationToken): Promise<IBuildPromptResult> {
 		const variables = this.createReferencesForActiveEditor() ?? promptContext.chatVariables;
 
 		const { query, commandToolReferences } = this.processSlashCommand(promptContext.query);
@@ -160,7 +160,7 @@ export class NotebookEditorIntentInvocation extends EditCode2IntentInvocation {
 				selectedText = lines.slice(startLine, endLine + 1).join('\n');
 			}
 
-			const refsForActiveEditor: vscode.ChatPromptReference[] = [
+			const refsForActiveEditor: zyraxoncode.ChatPromptReference[] = [
 				{
 					id: editor.notebook.uri.toString(),
 					name: 'Active notebook editor: ' + editor.notebook.uri.toString(),
