@@ -1,0 +1,530 @@
+ZYRAXON SOVEREIGN LICENSE — X EDITION
+Version 1.0.0
+
+Copyright (c) 2026 onelpawarai ("Licensor")
+
+Tagline: "Build Without Limits. Respect the Origin."
+
+========================================================================
+NOTICE
+========================================================================
+
+This software, ZYRAXON AI, is distributed under the Zyraxon Sovereign
+License — X Edition ("ZSL-X"). By using, copying, modifying, or
+distributing this software, you agree to be bound by the terms of this
+license. This license is an original grant of rights and does not
+incorporate or reference any third-party open-source license unless
+explicitly stated in an accompanying NOTICE file.
+
+========================================================================
+DEFINITIONS
+========================================================================
+
+1.1 "Software" means the original works of authorship comprising
+    ZYRAXON AI, including but not limited to source code, object code,
+    documentation, scripts, configurations, and related assets.
+
+1.2 "Licensor" means onelpawarai, the original author and owner of the
+    Software.
+
+1.3 "Licensee" means any individual or legal entity that exercises any
+    right granted under this license.
+
+1.4 "Contribution" means any work of authorship that a Licensee
+    intentionally submits to the Licensor for inclusion in the Software.
+
+1.5 "Derivative Work" means any work that is based on or derived from
+    the Software, including but not limited to modifications,
+    extensions, plugins, integrations, and adaptations.
+
+1.6 "Official Release" means any release of the Software published or
+    authorized by the Licensor under the official project repository or
+    branding.
+
+1.7 "Effective Date" means January 1, 2026.
+
+1.8 "Transition Date" means January 1, 2028.
+
+========================================================================
+GRANT OF RIGHTS
+========================================================================
+
+Subject to the terms and conditions of this license, the Licensor
+hereby grants to each Licensee a worldwide, royalty-free,
+non-exclusive, irrevocable (except as stated in Section 14) license
+to exercise the rights enumerated in Sections 3 through 8 of this
+license.
+
+========================================================================
+COMMERCIAL RIGHTS
+========================================================================
+
+The Licensor grants each Licensee the right to use, deploy, and
+commercialize the Software and any Derivative Works for any
+commercial purpose, including but not limited to:
+
+    (a) Personal use;
+    (b) Commercial use;
+    (c) Company use;
+    (d) Enterprise use;
+    (e) Startup use;
+    (f) Government use;
+    (g) Educational use;
+    (h) Research use;
+    (i) Internal business use;
+    (j) Production deployment;
+    (k) Software-as-a-Service (SaaS) offerings;
+    (l) Hosting and cloud deployment;
+    (m) API services and integrations;
+    (n) Selling products built using the Software;
+    (o) Offering consulting or professional services using the Software.
+
+No separate commercial permission is required from the Licensor.
+No mandatory royalties, fees, or recurring payments are required.
+
+========================================================================
+MODIFICATION RIGHTS
+========================================================================
+
+Each Licensee is permitted to:
+
+    (a) Study the source code and behavior of the Software;
+    (b) Modify, adapt, refactor, or rewrite any portion of the Software;
+    (c) Add new features, modules, or capabilities to the Software;
+    (d) Create Derivative Works based on the Software;
+    (e) Combine the Software with other works;
+    (f) Publish modified versions of the Software.
+
+Licensees may publish and distribute modified versions provided that
+the requirements of Section 9 (Attribution) are met.
+
+========================================================================
+REDISTRIBUTION RIGHTS
+========================================================================
+
+Each Licensee is permitted to redistribute the Software, in whole or
+in part, in source or binary form, with or without modifications,
+provided that:
+
+    (a) Any copy of the Software or Derivative Work distributed or
+        made available includes a complete copy of this license;
+
+    (b) The requirements of Section 9 (Attribution) are satisfied;
+
+    (c) The Software is not distributed in a manner that intentionally
+        misrepresents its origin or authorship.
+
+========================================================================
+ATTRIBUTION
+========================================================================
+
+Any redistribution, public display, public performance, or marketing
+of the Software or a Derivative Work must include:
+
+    (a) A prominent notice that the Software was originally created by
+        onelpawarai;
+
+    (b) A reference to the original project repository or URL;
+
+    (c) A statement that modifications have been made, if applicable.
+
+Example attribution:
+
+    "This software is based on ZYRAXON AI, originally created by
+    onelpawarai. Modifications have been made."
+
+========================================================================
+PROJECT IDENTITY
+========================================================================
+
+Licensees shall not use the official "ZYRAXON" name, logo, trademarks,
+or branding in a manner that:
+
+    (a) Implies that a modified or derivative version is the Official
+        Release of ZYRAXON AI unless authorized by the Licensor;
+
+    (b) Misleads users into believing the derivative work is endorsed,
+        sponsored, or maintained by the Licensor;
+
+    (c) Uses the official branding to impersonate the Licensor or the
+        original project.
+
+Licensees may use descriptive references such as "Based on ZYRAXON AI"
+or "A fork of ZYRAXON AI" provided such references are truthful and
+non-misleading.
+
+========================================================================
+CONTRIBUTIONS
+========================================================================
+
+10.1 By submitting a Contribution to the Software, a Contributor
+     grants to the Licensor a perpetual, worldwide, non-exclusive,
+     royalty-free license to use, reproduce, modify, display, distribute,
+     and sublicense the Contribution as part of the Software and any
+     Derivative Works.
+
+10.2 Contributors retain ownership of their Contributions, subject to
+     the license grant in Section 10.1.
+
+10.3 The Licensor may include or exclude Contributions at the Licensor's
+     sole discretion.
+
+10.4 Contributors shall not submit Contributions that they know to be
+     subject to third-party restrictions, patents, or encumbrances that
+     would conflict with this license.
+
+========================================================================
+PATENT GRANT
+========================================================================
+
+11.1 Each Contributor hereby grants to each Licensee a worldwide,
+     royalty-free, non-exclusive, irrevocable patent license to make,
+     have made, use, sell, offer for sale, import, and otherwise transfer
+     the Software and Derivative Works, where such license applies only
+     to those patent claims necessarily infringed by the Contributor's
+     Contribution alone or in combination with its Contribution to the
+     Software.
+
+11.2 If any Licensee initiates patent litigation against any party
+     alleging that the Software constitutes patent infringement, then
+     any patent licenses granted to such Licensee under this license
+     shall terminate as of the date such litigation is initiated.
+
+========================================================================
+SECURITY DISCLOSURE
+========================================================================
+
+If a Licensee discovers a security vulnerability in the Software, the
+Licensee is encouraged to report it privately to the Licensor before
+any public disclosure. The Licensor will make reasonable efforts to
+address the vulnerability in a timely manner. Public disclosure of
+vulnerabilities before a fix is available is discouraged but not
+prohibited by this license.
+
+========================================================================
+DISCLAIMER OF WARRANTY
+========================================================================
+
+THE SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, TITLE, NON-INFRINGEMENT, OR THAT THE SOFTWARE WILL BE
+ERROR-FREE OR UNINTERRUPTED. THE LICENSOR DISCLAIMS ALL WARRANTIES
+WITH RESPECT TO THE SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND
+NON-INFRINGEMENT.
+
+========================================================================
+LIMITATION OF LIABILITY
+========================================================================
+
+IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING
+BUT NOT LIMITED TO PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, LOSS
+OF USE, DATA, OR PROFITS, BUSINESS INTERRUPTION, OR COST OF SUBSTITUTE
+SERVICES) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OR INABILITY TO USE THE SOFTWARE,
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+========================================================================
+TERMINATION
+========================================================================
+
+14.1 The rights granted under this license automatically terminate if
+     the Licensee fails to comply with any of its terms.
+
+14.2 Upon termination, the Licensee must cease all use, distribution,
+     and modification of the Software and destroy all copies in the
+     Licensee's possession or control.
+
+14.3 Sections 7 (Disclaimer of Warranty), 8 (Limitation of Liability),
+     11 (Patent Grant), and 15 (Entire Agreement) shall survive
+     termination.
+
+========================================================================
+AUTOMATIC LICENSE TRANSITION
+========================================================================
+
+15.1 On the Transition Date (January 1, 2028), this ZSL-X License
+     shall automatically transition to the MEKRA-X License v1.0.0,
+     as published by the Licensor.
+
+15.2 No manual relicensing, re-acceptance, or affirmative action is
+     required by Licensees. The transition occurs automatically by
+     operation of this license.
+
+15.3 Licensees who wish to continue under the terms of ZSL-X after
+     the Transition Date may do so for Software copies obtained before
+     the Transition Date.
+
+========================================================================
+ENTIRE AGREEMENT
+========================================================================
+
+16.1 This license constitutes the entire agreement between the Licensor
+     and the Licensee with respect to the Software and supersedes all
+     prior or contemporaneous agreements, representations, warranties,
+     and understandings, whether written or oral.
+
+16.2 If any provision of this license is held to be invalid or
+     unenforceable, the remaining provisions shall continue in full
+     force and effect.
+
+16.3 This license may not be modified except by a written instrument
+     signed by the Licensor.
+
+========================================================================
+
+END OF ZSL-X LICENSE v1.0.0
+
+========================================================================
+========================================================================
+
+MEKRA-X LICENSE v1.0.0
+(Zyraxon Next-Generation Sovereign License)
+
+Version 1.0.0
+
+Copyright (c) 2028 onelpawarai ("Licensor")
+
+========================================================================
+PREAMBLE
+========================================================================
+
+This MEKRA-X License ("MEKRA-X") is the successor to the Zyraxon
+Sovereign License — X Edition (ZSL-X v1.0.0). It governs the use,
+modification, and distribution of software originally licensed under
+ZSL-X after the Automatic License Transition Date of January 1, 2028.
+
+MEKRA-X continues to uphold the principles of open collaboration,
+commercial freedom, and origin protection while providing cleaner
+wording, stronger governance, improved contributor protection, and
+clearer enterprise documentation.
+
+========================================================================
+DEFINITIONS
+========================================================================
+
+1.1 "Software" means the original works of authorship comprising
+    software licensed under this license, including source code,
+    object code, documentation, scripts, configurations, and assets.
+
+1.2 "Licensor" means onelpawarai, the original author and rights
+    holder of the Software.
+
+1.3 "Licensee" means any individual or legal entity that exercises
+    any right granted under this license.
+
+1.4 "Contribution" means any work of authorship intentionally
+    submitted by a Licensee to the Licensor for inclusion in the
+    Software, including code, documentation, tests, and configurations.
+
+1.5 "Derivative Work" means any work based on, derived from, or
+    incorporating the Software, including modifications, extensions,
+    plugins, integrations, adaptations, and compilations.
+
+1.6 "Official Release" means any release of the Software published or
+    authorized by the Licensor under official project channels.
+
+1.7 "Enterprise Use" means use by any organization with more than 50
+    employees or annual revenue exceeding $10,000,000 USD.
+
+1.8 "Effective Date" means January 1, 2028.
+
+========================================================================
+GRANT OF RIGHTS
+========================================================================
+
+Subject to the terms and conditions of this license, the Licensor
+grants to each Licensee a worldwide, royalty-free, non-exclusive,
+irrevocable (except as stated in Section 13) license to exercise the
+rights enumerated in Sections 3 through 8.
+
+========================================================================
+COMMERCIAL AND ENTERPRISE RIGHTS
+========================================================================
+
+The Licensor grants each Licensee the unrestricted right to use,
+deploy, and commercialize the Software and any Derivative Works for
+any purpose, including but not limited to:
+
+    (a) Personal, educational, and research use;
+    (b) Commercial, business, and enterprise use;
+    (c) Government and public sector use;
+    (d) Startup and incubator use;
+    (e) Production deployment and mission-critical systems;
+    (f) Software-as-a-Service (SaaS) and Platform-as-a-Service (PaaS);
+    (g) Hosting, cloud, and edge deployment;
+    (h) API services, integrations, and middleware;
+    (i) Products, tools, and services built using the Software;
+    (j) Consulting, training, and professional services;
+    (k) Internal tooling and automation.
+
+No separate commercial license is required.
+No royalties, fees, or revenue-sharing is required.
+Enterprise Use is explicitly permitted without additional terms.
+
+========================================================================
+MODIFICATION RIGHTS
+========================================================================
+
+Each Licensee is permitted to:
+
+    (a) Study, analyze, and reverse-engineer the Software;
+    (b) Modify, refactor, rewrite, or optimize any portion;
+    (c) Add, remove, or replace features, modules, and capabilities;
+    (d) Create Derivative Works in whole or in part;
+    (e) Combine the Software with proprietary or third-party works;
+    (f) Fork, branch, and independently develop the Software;
+    (g) Publish modified versions under this or any compatible license.
+
+========================================================================
+REDISTRIBUTION RIGHTS
+========================================================================
+
+Each Licensee may redistribute the Software, in whole or in part,
+in source or binary form, with or without modifications, provided
+that:
+
+    (a) A complete copy of this license accompanies the distribution;
+    (b) The Attribution requirements of Section 9 are satisfied;
+    (c) Redistribution does not falsely imply official endorsement;
+    (d) Derivative works clearly indicate they are modified versions.
+
+========================================================================
+ATTRIBUTION
+========================================================================
+
+All redistributions, public displays, and commercial offerings must
+include:
+
+    (a) A credit to onelpawarai as the original creator;
+    (b) A reference to the original project repository;
+    (c) A clear statement that modifications have been made, if any;
+    (d) A link to this license or a summary of its terms.
+
+Acceptable attribution:
+
+    "Based on ZYRAXON AI by onelpawarai.
+     Modified and distributed under the MEKRA-X License."
+
+========================================================================
+PROJECT IDENTITY AND TRADEMARKS
+========================================================================
+
+Licensees shall not use the Licensor's trademarks, logos, service
+marks, or trade dress ("Marks") in a manner that:
+
+    (a) Creates confusion regarding the source or endorsement of a
+        product or service;
+    (b) Implies that a Derivative Work is an Official Release;
+    (c) Uses the Marks in a defamatory or disparaging manner;
+    (d) Registers or attempts to register the Marks as trademarks.
+
+Licensees may use accurate descriptive references to the Software,
+such as "Based on ZYRAXON AI" or "Fork of ZYRAXON AI."
+
+========================================================================
+CONTRIBUTOR PROTECTION
+========================================================================
+
+10.1 Grant. By submitting a Contribution, a Contributor grants to the
+     Licensor a perpetual, worldwide, non-exclusive, royalty-free
+     license to use, reproduce, modify, display, distribute,
+     sublicense, and prepare Derivative Works from the Contribution.
+
+10.2 Ownership. Contributors retain ownership of their Contributions,
+     subject to the license grant in Section 10.1.
+
+10.3 Warranty. Contributors represent that they have the right to
+     submit the Contribution and that it does not violate any
+     third-party rights.
+
+10.4 Attribution. The Licensor shall attribute Contributors in
+     release notes, documentation, or other reasonable manner when
+     incorporating their Contributions.
+
+10.5 Withdrawal. Contributors may request removal of their
+     Contributions from future releases. The Licensor shall make
+     reasonable efforts to comply, but is not obligated to remove
+     Contributions from existing distributions.
+
+========================================================================
+PATENT GRANT
+========================================================================
+
+11.1 Each Contributor grants to each Licensee a worldwide,
+     royalty-free, non-exclusive, irrevocable patent license to make,
+     use, sell, offer for sale, import, and transfer the Software
+     and Derivative Works, limited to patent claims necessarily
+     infringed by the Contribution alone or combined with the Software.
+
+11.2 Patent retaliation. If a Licensee initiates patent litigation
+     claiming the Software infringes a patent, any patent licenses
+     granted under this license terminate immediately.
+
+========================================================================
+SECURITY AND VULNERABILITY DISCLOSURE
+========================================================================
+
+12.1 Responsible Disclosure. Licensees discovering security
+     vulnerabilities are encouraged to report them privately to the
+     Licensor before public disclosure.
+
+12.2 Timeline. The Licensor will acknowledge receipt within 72 hours
+     and provide a remediation timeline within 14 days.
+
+12.3 Public Disclosure. Licensees may publicly disclose vulnerabilities
+     90 days after private notification, or after a fix is released,
+     whichever comes first.
+
+12.4 Safe Harbor. The Licensor will not pursue legal action against
+     Licensees who discover and report vulnerabilities in good faith.
+
+========================================================================
+TERMINATION
+========================================================================
+
+13.1 Automatic Termination. Rights under this license terminate if
+     the Licensee materially breaches any term.
+
+13.2 Cure Period. Licensees have 30 days from notification of breach
+     to cure the breach and reinstate compliance.
+
+13.3 Effect. Upon termination, the Licensee must cease all use,
+     distribution, and modification of the Software and destroy or
+     return all copies.
+
+13.4 Survival. Sections 7 (Disclaimer), 8 (Liability), 11 (Patent),
+     14 (Entire Agreement), and this Section 13 survive termination.
+
+========================================================================
+ENTIRE AGREEMENT
+========================================================================
+
+14.1 This license is the entire agreement between the Licensor and
+     the Licensee regarding the Software.
+
+14.2 Severability. If any provision is found unenforceable, the
+     remaining provisions remain in full force.
+
+14.3 Amendments. This license may only be amended by a written
+     instrument signed by the Licensor.
+
+14.4 Governing. This license is governed by the laws of the Licensor's
+     jurisdiction, without regard to conflict-of-law principles.
+
+========================================================================
+FUTURE TRANSITION
+========================================================================
+
+The Licensor reserves the right to transition this license to a
+successor license (designated as "NEXUS-X" or similar) with 180 days'
+notice published on the official project repository. Licensees may
+elect to remain under MEKRA-X for copies obtained prior to the
+transition.
+
+========================================================================
+
+END OF MEKRA-X LICENSE v1.0.0
