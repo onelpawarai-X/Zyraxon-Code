@@ -186,5 +186,13 @@ export const BUILTIN_PROVIDERS: ProviderInfo[] = [
 			{ id: 'anthropic/claude-3.5-sonnet', name: 'Claude 3.5 Sonnet (via OpenRouter)', providerId: 'openrouter', capabilities: { chat: true, completion: true, embedding: false, vision: true, tools: true, streaming: true }, maxTokens: 8192, contextWindow: 200000 },
 			{ id: 'google/gemini-pro-1.5', name: 'Gemini Pro 1.5 (via OpenRouter)', providerId: 'openrouter', capabilities: { chat: true, completion: true, embedding: false, vision: true, tools: true, streaming: true }, maxTokens: 8192, contextWindow: 2000000 }
 		]
+	},
+	{
+		id: 'opencode',
+		name: 'OpenCode',
+		description: 'OpenCode free models (server-side loaded)',
+		authType: 'none',
+		configSchema: {},
+		models: []
 	}
 ];

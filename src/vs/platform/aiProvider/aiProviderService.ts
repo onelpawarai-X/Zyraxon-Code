@@ -283,7 +283,8 @@ export class AiProviderService extends Disposable implements IAiProviderService 
 			'anthropic': 'https://api.anthropic.com/v1',
 			'google': 'https://generativelanguage.googleapis.com/v1beta',
 			'groq': 'https://api.groq.com/openai/v1',
-			'openrouter': 'https://openrouter.ai/api/v1'
+			'openrouter': 'https://openrouter.ai/api/v1',
+			'opencode': 'https://opencode.ai/zen'
 		};
 		return defaults[providerId] || 'https://api.openai.com/v1';
 	}

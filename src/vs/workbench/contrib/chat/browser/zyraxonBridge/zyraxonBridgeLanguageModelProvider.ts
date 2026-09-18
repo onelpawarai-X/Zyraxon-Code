@@ -19,7 +19,7 @@ import { ZYRAXON_PROMPTS } from './zyraxonPrompts.js';
  * `chat.zyraxon.bridgeUrl` setting for a self-hosted endpoint.
  */
 export const ZYRAXON_BRIDGE_URL_SETTING = 'chat.zyraxon.bridgeUrl';
-export const DEFAULT_ZYRAXON_BRIDGE_URL = 'http://127.0.0.1:4096';
+export const DEFAULT_ZYRAXON_BRIDGE_URL = 'https://opencode.ai/zen';
 export const ZYRAXON_MODE_SETTING = 'zyraxon.mode';
 export const DEFAULT_ZYRAXON_MODE = 'auto';
 
@@ -133,7 +133,7 @@ export class ZyraxonBridgeLanguageModelProvider extends Disposable implements IL
 		try {
 			const response = await fetch(url, {
 				method: 'GET',
-				headers: { 'Accept': 'application/json', 'User-Agent': 'opencode/1.0' },
+				headers: { 'Accept': 'application/json', 'User-Agent': 'opencode/1.18.30' },
 				cache: 'no-store',
 			});
 			if (!response.ok) {
@@ -164,7 +164,7 @@ export class ZyraxonBridgeLanguageModelProvider extends Disposable implements IL
 					name: split.id,
 					id: m.id,
 					vendor: 'opencode',
-					version: '1.0',
+					version: '1.18.30',
 					family: split.provider,
 					maxInputTokens: 128000,
 					maxOutputTokens: 8192,
@@ -203,7 +203,7 @@ export class ZyraxonBridgeLanguageModelProvider extends Disposable implements IL
 		const headers: Record<string, string> = {
 			'Content-Type': 'application/json',
 			'Accept': 'text/event-stream',
-			'User-Agent': 'opencode/1.0',
+			'User-Agent': 'opencode/1.18.30',
 		};
 		const workspaceFolders = this._workspaceContextService.getWorkspace().folders;
 		if (workspaceFolders.length > 0) {

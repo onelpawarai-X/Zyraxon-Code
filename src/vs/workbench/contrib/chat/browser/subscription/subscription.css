@@ -1,0 +1,122 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Zyraxon Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.zyraxon-subscription-view {
+	padding: 16px;
+}
+
+.subscription-header {
+	margin-bottom: 16px;
+}
+
+.subscription-title {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.subscription-current {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.tier-badge {
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.tier-badge.tier-free {
+	background: var(--vscode-badge-background);
+	color: var(--vscode-badge-foreground);
+}
+
+.tier-badge.tier-pro {
+	background: #4caf50;
+	color: white;
+}
+
+.tier-badge.tier-max {
+	background: #2196f3;
+	color: white;
+}
+
+.tier-badge.tier-ultra {
+	background: #9c27b0;
+	color: white;
+}
+
+.tier-tools {
+	font-size: 12px;
+	color: var(--vscode-descriptionForeground);
+}
+
+.subscription-tiers {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.tier-card {
+	padding: 12px;
+	border: 1px solid var(--vscode-widget-border);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.tier-card:hover {
+	border-color: var(--vscode-focusBorder);
+}
+
+.tier-card.current {
+	border-color: var(--vscode-focusBorder);
+	background: var(--vscode-list-activeSelectionBackground);
+}
+
+.tier-card.accessible {
+	opacity: 1;
+}
+
+.tier-card:not(.accessible) {
+	opacity: 0.6;
+}
+
+.tier-name {
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.tier-price {
+	font-size: 14px;
+	color: var(--vscode-descriptionForeground);
+	margin-bottom: 8px;
+}
+
+.tier-agents {
+	font-size: 12px;
+	color: var(--vscode-descriptionForeground);
+	margin-bottom: 4px;
+}
+
+.tier-features {
+	font-size: 11px;
+	color: var(--vscode-descriptionForeground);
+	line-height: 1.4;
+}
+
+.tier-current-badge {
+	margin-top: 8px;
+	padding: 4px 8px;
+	background: var(--vscode-focusBorder);
+	color: white;
+	border-radius: 4px;
+	font-size: 11px;
+	text-align: center;
+}
