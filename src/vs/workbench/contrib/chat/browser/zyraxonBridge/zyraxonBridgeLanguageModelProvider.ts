@@ -2,6 +2,7 @@
  *  Copyright (c) Zyraxon Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+// OpenCode Zen integration v1.18.31
 
 import { CancellationToken } from '../../../../../base/common/cancellation.js';
 import { Emitter } from '../../../../../base/common/event.js';
