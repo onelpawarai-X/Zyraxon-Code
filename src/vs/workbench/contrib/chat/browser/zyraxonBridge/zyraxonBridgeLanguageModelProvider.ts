@@ -133,7 +133,7 @@ export class ZyraxonBridgeLanguageModelProvider extends Disposable implements IL
 		try {
 			const response = await fetch(url, {
 				method: 'GET',
-				headers: { 'Accept': 'application/json', 'User-Agent': 'opencode/1.18.30' },
+				headers: { 'Accept': 'application/json', 'User-Agent': 'opencode/1.18.31' },
 				cache: 'no-store',
 			});
 			if (!response.ok) {
@@ -164,7 +164,7 @@ export class ZyraxonBridgeLanguageModelProvider extends Disposable implements IL
 					name: split.id,
 					id: m.id,
 					vendor: 'opencode',
-					version: '1.18.30',
+					version: '1.18.31',
 					family: split.provider,
 					maxInputTokens: 128000,
 					maxOutputTokens: 8192,
@@ -203,7 +203,7 @@ export class ZyraxonBridgeLanguageModelProvider extends Disposable implements IL
 		const headers: Record<string, string> = {
 			'Content-Type': 'application/json',
 			'Accept': 'text/event-stream',
-			'User-Agent': 'opencode/1.18.30',
+			'User-Agent': 'opencode/1.18.31',
 		};
 		const workspaceFolders = this._workspaceContextService.getWorkspace().folders;
 		if (workspaceFolders.length > 0) {
